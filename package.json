@@ -27,6 +27,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
+    "glob": "^7.1.2",
     "jest": "^21.2.1",
     "lerna": "^2.9.0",
     "node-sass": "^4.7.2",

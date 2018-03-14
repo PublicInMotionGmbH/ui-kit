@@ -1,6 +1,10 @@
 const path = require('path')
+const glob = require('glob')
 
 module.exports = wallaby => {
+  const innerDependencies = [ 'node_modules/' ].concat(glob.sync('packages/*/node_modules/'))
+  process.env.NODE_PATH = innerDependencies.map(x => path.join(__dirname, x).replace(/.$/, '')).join(':')
+
   return {
     files: [
         { pattern: 'tests/*.js', instrument: false },
@@ -55,6 +59,8 @@ module.exports = wallaby => {
           ]
         })
     },
+
+    workers: {recycle: true},
 
     testFramework: 'jest'
   }

@@ -6,6 +6,6 @@ const config = require('./config')
  * @param {string} module
  * @returns {string}
  */
-export function prefix (module) {
+exports.prefix = function prefix (module) {
   return config.prefix + '-' + module
 }
