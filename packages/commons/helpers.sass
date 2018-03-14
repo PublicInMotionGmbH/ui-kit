@@ -1,0 +1,11 @@
+/**
+ * Join list with specified glue
+ */
+@function toString($list, $glue: '')
+  $result: null
+
+  @for $i from 1 through length($list)
+    $e: nth($list, $i)
+    $result: if($i != length($list), $result#{$e}#{$glue}, $result#{$e})
+
+  @return $result

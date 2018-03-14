@@ -1,0 +1,26 @@
+{
+  "name": "@talixo/switcher",
+  "version": "1.0.0",
+  "description": "UI component for Yes/No switcher",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "jest --config ../../tests/config.js --rootDir .",
+    "build": "NODE_ENV=production rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "rollup": "^0.56.5"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.1"
+  },
+  "dependencies": {
+    "@talixo/commons": "file:../commons"
+  }
+}

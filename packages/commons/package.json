@@ -1,0 +1,11 @@
+{
+  "name": "@talixo/commons",
+  "version": "1.0.0",
+  "description": "Talixo common configuration",
+  "author": "",
+  "main": "index.js",
+  "license": "ISC",
+  "dependencies": {
+    "rollup": "^0.56.5"
+  }
+}
