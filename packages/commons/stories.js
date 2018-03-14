@@ -47,10 +47,13 @@ export function createStoriesFactory (name, module) {
 }
 
 /**
+ * Get description from README file
  *
- * @param content
- * @returns {*|string|void}
+ * @param {string} content
+ * @returns {string}
  */
 export function getReadmeDescription (content) {
-    return content.replace(/^<p><h1[^>]*>.*<\/h1><\/p>/g, '')
+    return content
+        .replace(/^<p><h1[^>]*>.*<\/h1><\/p>/g, '')
+        .replace(/(<p>)?<h[1-6][> ][^]*$/i, '')
 }
