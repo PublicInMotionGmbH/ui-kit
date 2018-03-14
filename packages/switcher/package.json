@@ -6,7 +6,7 @@
   "module": "index.js",
   "scripts": {
     "test": "jest --config ../../tests/config.js --rootDir .",
-    "build": "NODE_ENV=production rollup -c"
+    "build": "rollup -c"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +15,12 @@
     "rollup": "^0.56.5"
   },
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "classnames": "^2.2.5",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/commons": "file:../commons"
+    "@talixo/commons": "^1.0.0"
   }
 }

@@ -51,6 +51,7 @@ function buildRollupConfiguration (config) {
     const input = path.isAbsolute(config.input) ? config.input : path.join(rootDir, config.input)
     const output = path.isAbsolute(config.output) ? config.output : path.join(rootDir, config.output)
 
+    // Load list of external dependencies
     const dependencies = Object.keys(Object.assign({}, pkg.dependencies, pkg.peerDependencies))
 
     // Build basic result
@@ -70,9 +71,13 @@ function buildRollupConfiguration (config) {
         external: dependencies
     }
 
+    // Minify result if it's required
     if (minify) {
         result.plugins.push(uglify())
     }
+
+    // Set up NODE_ENV
+    process.env.NODE_ENV = environment
 
     return result
 }
