@@ -1,5 +1,20 @@
 {
   "extends": [
-    "prettier-standard"
-  ]
+    "prettier",
+    "prettier/react",
+    "prettier/standard",
+    "standard",
+    "standard-jsx"
+  ],
+  "plugins": [
+    "react",
+    "import",
+    "promise",
+    "standard"
+  ],
+  "globals": {
+    "it": true,
+    "describe": true,
+    "expect": true
+  }
 }

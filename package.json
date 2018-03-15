@@ -12,7 +12,7 @@
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
     "prepublish": "npm test",
     "postpublish": "npm run gh-pages",
-    "lint": "prettier-standard '**/*.js' --ignore '**/node_modules/**/*.js' --ignore '**/storybook-static/**/*.js'"
+    "lint": "prettier-standard '**/*.js' --ignore '**/dist/**/*.js' --ignore '**/node_modules/**/*.js' --ignore '**/storybook-static/**/*.js'"
   },
   "author": "Public in Motion GmbH",
   "license": "MIT",
@@ -35,10 +35,12 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-prettier-standard": "^1.0.1",
     "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-jsx": "^5.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
