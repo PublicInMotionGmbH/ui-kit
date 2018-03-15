@@ -1,7 +1,7 @@
 if (typeof requestAnimationFrame === 'undefined') {
-    global.requestAnimationFrame = function (callback) {
-        setTimeout(callback, 0)
-    };
+  global.requestAnimationFrame = function (callback) {
+    setTimeout(callback, 0)
+  }
 }
 
 const configure = require('enzyme').configure

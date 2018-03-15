@@ -16,40 +16,40 @@ const name = prefix('switcher')
  * @returns {React.Element}
  */
 function Switcher (props) {
-    const { className, noLabel, yesLabel, ...passedProps } = props
+  const { className, noLabel, yesLabel, ...passedProps } = props
 
-    const clsName = cls(name, className, {
-        [`${name}--disabled`]: props.disabled
-    })
+  const clsName = cls(name, className, {
+    [`${name}--disabled`]: props.disabled
+  })
 
-    return (
-        <label className={clsName}>
-            <input type='checkbox' {...passedProps} />
-            <span>
-                <span className={prefix('switcher__yes')}>{yesLabel}</span>
-                <span className={prefix('switcher__no')}>{noLabel}</span>
-            </span>
-        </label>
-    )
+  return (
+    <label className={clsName}>
+      <input type='checkbox' {...passedProps} />
+      <span>
+        <span className={prefix('switcher__yes')}>{yesLabel}</span>
+        <span className={prefix('switcher__no')}>{noLabel}</span>
+      </span>
+    </label>
+  )
 }
 
 Switcher.propTypes = {
-    /** Additional class name */
-    className: PropTypes.string,
+  /** Additional class name */
+  className: PropTypes.string,
 
-    /** Label for "No" */
-    noLabel: PropTypes.string,
+  /** Label for "No" */
+  noLabel: PropTypes.string,
 
-    /** Label for "Yes" */
-    yesLabel: PropTypes.string,
+  /** Label for "Yes" */
+  yesLabel: PropTypes.string,
 
-    /** Callback for change event */
-    onChange: PropTypes.func
+  /** Callback for change event */
+  onChange: PropTypes.func
 }
 
 Switcher.defaultProps = {
-    yesLabel: 'Yes',
-    noLabel: 'No'
+  yesLabel: 'Yes',
+  noLabel: 'No'
 }
 
 export default Switcher

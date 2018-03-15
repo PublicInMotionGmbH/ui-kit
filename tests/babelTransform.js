@@ -1,5 +1,5 @@
-'use strict';
+'use strict'
 
-const babelJest = require('babel-jest');
+const babelJest = require('babel-jest')
 
-module.exports = babelJest.createTransformer();
+module.exports = babelJest.createTransformer()

@@ -18,68 +18,74 @@ const uglify = require('rollup-plugin-uglify')
  * @param {bool} [config.minify]  default: true
  */
 function buildRollupConfiguration (config) {
-    // Check if configuration has been passed
-    if (!config || typeof config !== 'object') {
-        throw new Error('You have to pass simple configuration')
-    }
+  // Check if configuration has been passed
+  if (!config || typeof config !== 'object') {
+    throw new Error('You have to pass simple configuration')
+  }
 
-    // Check if we have package.json to detect dependencies
-    if (!config.pkg || typeof config.pkg !== 'object') {
-        throw new Error('You have to pass package.json contents')
-    }
+  // Check if we have package.json to detect dependencies
+  if (!config.pkg || typeof config.pkg !== 'object') {
+    throw new Error('You have to pass package.json contents')
+  }
 
-    // Check if we have root directory for component/module
-    if (!config.rootDir || typeof config.rootDir !== 'string') {
-        throw new Error('You have to pass root directory')
-    }
+  // Check if we have root directory for component/module
+  if (!config.rootDir || typeof config.rootDir !== 'string') {
+    throw new Error('You have to pass root directory')
+  }
 
-    // Check if we have input file for module
-    if (!config.input || typeof config.input !== 'string') {
-        throw new Error('You have to pass input file path')
-    }
+  // Check if we have input file for module
+  if (!config.input || typeof config.input !== 'string') {
+    throw new Error('You have to pass input file path')
+  }
 
-    // Check if we have output file path
-    if (!config.output || typeof config.output !== 'string') {
-        throw new Error('You have to pass output file path')
-    }
+  // Check if we have output file path
+  if (!config.output || typeof config.output !== 'string') {
+    throw new Error('You have to pass output file path')
+  }
 
-    // Extract required data from arguments
-    const pkg = config.pkg
-    const rootDir = config.rootDir
-    const environment = config.environment || process.env.NODE_ENV || 'production'
-    const minify = config.minify || config.minify === void 0
-    const input = path.isAbsolute(config.input) ? config.input : path.join(rootDir, config.input)
-    const output = path.isAbsolute(config.output) ? config.output : path.join(rootDir, config.output)
+  // Extract required data from arguments
+  const pkg = config.pkg
+  const rootDir = config.rootDir
+  const environment = config.environment || process.env.NODE_ENV || 'production'
+  const minify = config.minify || config.minify === void 0
+  const input = path.isAbsolute(config.input)
+    ? config.input
+    : path.join(rootDir, config.input)
+  const output = path.isAbsolute(config.output)
+    ? config.output
+    : path.join(rootDir, config.output)
 
-    // Load list of external dependencies
-    const dependencies = Object.keys(Object.assign({}, pkg.dependencies, pkg.peerDependencies))
+  // Load list of external dependencies
+  const dependencies = Object.keys(
+    Object.assign({}, pkg.dependencies, pkg.peerDependencies)
+  )
 
-    // Build basic result
-    const result = {
-        input: input,
-        output: {
-            file: output,
-            exports: 'named',
-            format: 'cjs'
-        },
-        plugins: [
-            resolve(),
-            babel({ babelrc: true }),
-            commonjs(),
-            replace({ 'process.env.NODE_ENV': JSON.stringify(environment) })
-        ],
-        external: dependencies
-    }
+  // Build basic result
+  const result = {
+    input: input,
+    output: {
+      file: output,
+      exports: 'named',
+      format: 'cjs'
+    },
+    plugins: [
+      resolve(),
+      babel({ babelrc: true }),
+      commonjs(),
+      replace({ 'process.env.NODE_ENV': JSON.stringify(environment) })
+    ],
+    external: dependencies
+  }
 
-    // Minify result if it's required
-    if (minify) {
-        result.plugins.push(uglify())
-    }
+  // Minify result if it's required
+  if (minify) {
+    result.plugins.push(uglify())
+  }
 
-    // Set up NODE_ENV
-    process.env.NODE_ENV = environment
+  // Set up NODE_ENV
+  process.env.NODE_ENV = environment
 
-    return result
+  return result
 }
 
 module.exports = buildRollupConfiguration

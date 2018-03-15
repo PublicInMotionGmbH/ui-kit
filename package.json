@@ -11,7 +11,8 @@
     "build-storybook": "build-storybook",
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
     "prepublish": "npm test",
-    "postpublish": "npm run gh-pages"
+    "postpublish": "npm run gh-pages",
+    "lint": "prettier-standard '**/*.js' --ignore '**/node_modules/**/*.js' --ignore '**/storybook-static/**/*.js'"
   },
   "author": "Public in Motion GmbH",
   "license": "MIT",
@@ -36,6 +37,7 @@
     "lerna": "^2.9.0",
     "node-sass": "^4.7.2",
     "prettier": "^1.11.1",
+    "prettier-standard": "^8.0.0",
     "prop-types": "^15.6.1",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^9.1.0",

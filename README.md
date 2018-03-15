@@ -48,6 +48,10 @@ Additionally, it's worth to note that using Lerna you can run your tests in para
 There is also configuration setup for [Wallaby](http://wallabyjs.com/) test runner,
 and it just works out of the box.
 
+### Code style
+
+We are using [Prettier](https://prettier.io/) with [StandardJS](https://standardjs.com/) rules ([look here](https://github.com/sheerun/prettier-standard)).
+
 ### Packages
 
 Each package is available in `packages` directory. Simplest structure:
