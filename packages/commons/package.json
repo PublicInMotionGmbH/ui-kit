@@ -2,9 +2,9 @@
   "name": "@talixo/commons",
   "version": "1.0.0",
   "description": "Talixo common configuration",
-  "author": "",
+  "author": "Public in Motion GmbH",
   "main": "index.js",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "rollup": "^0.56.5"
   }

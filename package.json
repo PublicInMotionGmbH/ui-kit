@@ -1,6 +1,6 @@
 {
   "name": "@talixo/ui-kit",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "UI Kit for Talixo",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Public in Motion GmbH",
+  "license": "MIT",
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",
     "@storybook/addon-info": "^3.3.15",

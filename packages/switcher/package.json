@@ -8,8 +8,8 @@
     "test": "jest --config ../../tests/config.js --rootDir .",
     "build": "rollup -c"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Public in Motion GmbH",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^21.2.1",
     "rollup": "^0.56.5"
