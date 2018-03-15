@@ -1,0 +1,10 @@
+version: "2"
+services:
+  storybook:
+    container_name: talixo_ui-kit
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 3001:80
