@@ -8,7 +8,10 @@
     "init": "npm install && lerna bootstrap",
     "test": "lerna run --parallel test",
     "storybook": "start-storybook -p 9009",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
+    "prepublish": "npm test",
+    "postpublish": "npm run gh-pages"
   },
   "author": "Public in Motion GmbH",
   "license": "MIT",
@@ -27,6 +30,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
+    "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
     "jest": "^21.2.1",
     "lerna": "^2.9.0",
