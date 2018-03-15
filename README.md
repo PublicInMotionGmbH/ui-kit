@@ -1,6 +1,6 @@
 # Talixo UI Kit
 
-It's UI Kit used through all Talixo front-end projects
+It's UI Kit used through all Talixo front-end projects. You can see storybook [here](https://publicinmotiongmbh.github.io/ui-kit).
 
 ## Getting started
 

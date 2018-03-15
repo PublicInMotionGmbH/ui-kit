@@ -2,7 +2,7 @@ import React from 'react'
 
 import Switcher from './src/Switcher'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/stories'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/story'
 import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
