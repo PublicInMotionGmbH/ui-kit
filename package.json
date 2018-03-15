@@ -15,6 +15,13 @@
     "lint": "prettier-standard '**/*.js' --ignore '**/dist/**/*.js' --ignore '**/node_modules/**/*.js' --ignore '**/storybook-static/**/*.js'"
   },
   "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",

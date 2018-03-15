@@ -4,8 +4,16 @@
   "description": "Talixo common configuration",
   "author": "Public in Motion GmbH",
   "main": "index.js",
+  "module": "index.js",
   "license": "MIT",
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "devDependencies": {
     "rollup": "^0.56.5"
   }
 }

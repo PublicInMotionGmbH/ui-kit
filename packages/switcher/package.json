@@ -9,6 +9,13 @@
     "build": "rollup -c"
   },
   "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "jest": "^21.2.1",

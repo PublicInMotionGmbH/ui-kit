@@ -54,7 +54,7 @@ We are using [Prettier](https://prettier.io/) with [StandardJS](https://standard
 
 ### Packages
 
-Each package is available in `packages` directory. Simplest structure:
+Each package is available in `packages` directory. Typical structure:
 
 ```
 ├── .npmignore
