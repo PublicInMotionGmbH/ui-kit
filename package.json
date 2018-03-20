@@ -12,7 +12,7 @@
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
     "prepublishOnly": "npm test",
     "postpublish": "npm run gh-pages",
-    "lint": "eslint '**/*.js' --ignore '**/dist/**/*.js' --ignore '**/node_modules/**/*.js' --ignore '**/storybook-static/**/*.js'"
+    "lint": "eslint ."
   },
   "husky": {
     "hooks": {
@@ -25,6 +25,7 @@
     "type": "git",
     "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
   },
+
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
