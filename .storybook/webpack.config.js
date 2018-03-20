@@ -9,26 +9,24 @@ const _buildConfig = process.env.NODE_ENV === 'production'
 
 const env = process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'DEVELOPMENT'
 
+// Build default Webpack configuration for Storybook
 const _config = _buildConfig(configDir)
 const config = buildConfig(env, _config, configDir)
 
-config.plugins.splice(6, 1)
-
+// Parse JavaScript files from @talixo/ packages
 config.module.rules[0].include.push(/\/@talixo\//)
 
+// Fix loader of Markdown files
 config.module.rules.pop()
-
 config.module.rules.push({
   test: /\.md$/,
-  use: [{
-    loader: 'markdown-loader'
-  }]
+  use: [ { loader: 'markdown-loader' } ]
 })
 
+// Add loader for SASS files
 config.module.rules.push({
   test: /\.sass$/,
-  loaders: [ "style-loader", "css-loader", "sass-loader" ],
-  exclude: /node_modules/
+  loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
 })
 
 module.exports = config

@@ -1,19 +1,19 @@
 import { configure } from '@storybook/react'
 
-function importAll(r) {
-  r.keys().forEach(r)
-}
-
 function loadStyles() {
-    const context = require.context('../packages/', true, /main\.sass$/)
+  require('../packages/switcher/styles/main.sass')
 
-    importAll(context)
+  // Loading by context is too slow, as it goes into all packages of packages as well
+  // const context = require.context('../packages/', true, /main\.sass$/)
+  // context.keys().forEach(context)
 }
 
 function loadStories() {
-    const context = require.context('../packages/', true, /^.\/[^/]+\/stories\.js$/)
+  require('../packages/switcher/stories.js')
 
-    importAll(context)
+  // Loading by context is too slow, as it goes into all packages of packages as well
+  // const context = require.context('../packages/', true, /^.\/[^/]+\/stories\.js$/)
+  // context.keys().forEach(context)
 }
 
 configure(loadStories, module)

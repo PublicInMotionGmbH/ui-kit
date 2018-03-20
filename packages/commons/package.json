@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "rollup": "^0.56.5"
+  },
+  "dependencies": {
+    "jest-cli": "^21.2.1"
   }
 }
