@@ -1,8 +1,5 @@
 {
   "extends": [
-    "prettier",
-    "prettier/react",
-    "prettier/standard",
     "standard",
     "standard-jsx"
   ],
