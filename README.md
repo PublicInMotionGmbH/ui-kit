@@ -50,7 +50,15 @@ and it just works out of the box.
 
 ### Code style
 
-We are using [Prettier](https://prettier.io/) with [StandardJS](https://standardjs.com/) rules ([look here](https://github.com/sheerun/prettier-standard)).
+We are using [ESLint](https://eslint.org/) with [StandardJS](https://standardjs.com/) rules.
+It is validated on `pre-commit` hook as well.
+
+### Hooks
+
+There is set up [Husky](https://github.com/typicode/husky) for Git hooks.
+
+- Before push: **tests are passing**
+- Before commit: **code style is correct**
 
 ### Packages
 
@@ -71,7 +79,7 @@ Each package is available in `packages` directory. Typical structure:
 ├── styles                           <-- Sass styles
 │   ├── config.sass                  <-- Styles configuration for components 
 │   ├── geometry.sass                <-- Geometry (basic behavior) styles
-│   ├── theming.sass                 <-- Theming (make it beautiful and matching Talixo) styles
+│   ├── theminŃg.sass                 <-- Theming (make it beautiful and matching Talixo) styles
 │   └── main.sass                    <-- Used in storybook, includes both geometry and theming
 └── tests                            <-- Directory for Jest tests
     ├── Switcher.test.js
