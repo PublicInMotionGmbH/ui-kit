@@ -4,6 +4,7 @@
   "description": "UI Kit for Talixo",
   "main": "index.js",
   "scripts": {
+	"create": "node scripts/generatePackage.js",
     "init:yarn": "yarn install && lerna bootstrap --hoist",
     "init": "npm install && lerna bootstrap --hoist",
     "test": "lerna run --parallel test",
@@ -26,7 +27,6 @@
     "type": "git",
     "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
   },
-
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
@@ -58,6 +58,8 @@
     "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
     "husky": "^0.15.0-rc.9",
+    "inquirer": "^5.1.0",
+    "isbinaryfile": "^3.0.2",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
     "lerna": "^2.9.0",

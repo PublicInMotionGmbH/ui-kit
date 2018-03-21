@@ -1,0 +1,35 @@
+{
+  "name": "@talixo/__id__",
+  "version": "1.0.0",
+  "description": "__description__",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "jest --config ../../tests/config.js --rootDir .",
+    "prepublishOnly": "rollup -c",
+    "build": "rollup -c"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
+    "rollup": "^0.56.5"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/commons": "^1.0.0"
+  }
+}

@@ -89,6 +89,4 @@ Each package is available in `packages` directory. Typical structure:
 
 #### Creating new package
 
-Probably easiest way is to copy existing package and replace or names inside.
-After creating new package remember to run `npm run bootstrap` (or equivalent: `lerna bootstrap --hoist`),
-to install packages dependencies and resolve links between our packages.
+There is straight-forward wizard available after `npm run create` command.
