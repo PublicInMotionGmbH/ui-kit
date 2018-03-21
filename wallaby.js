@@ -2,7 +2,7 @@ const path = require('path')
 const glob = require('glob')
 
 module.exports = wallaby => {
-  const innerDependencies = ['node_modules/'].concat(
+  const innerDependencies = [ 'node_modules/' ].concat(
     glob.sync('packages/*/node_modules/')
   )
 
@@ -36,22 +36,20 @@ module.exports = wallaby => {
       const path = require('path')
 
       wallaby.testFramework.configure({
-        collectCoverageFrom: ['packages/*/src/**/*.{js,jsx}'],
-        setupFiles: [path.resolve('./tests/polyfills.js')],
+        collectCoverageFrom: [ 'packages/*/src/**/*.{js,jsx}' ],
+        setupFiles: [ path.resolve('./tests/polyfills.js') ],
         setupTestFrameworkScriptFile: path.resolve('./tests/setupTests'),
-        testMatch: [path.resolve('packages/*/tests/**/?(*.)test.{js,jsx}')],
+        testMatch: [ path.resolve('packages/*/tests/**/?(*.)test.{js,jsx}') ],
         testEnvironment: 'jsdom',
         testURL: 'http://localhost',
         transform: {
           '^.+\\.css$': path.resolve('./tests/cssTransform'),
           '^(?!.*\\.(js|jsx|css|json)$)': path.resolve('./tests/fileTransform')
         },
-        transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
-        moduleFileExtensions: ['js', 'json', 'jsx']
+        transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$' ],
+        moduleFileExtensions: [ 'js', 'json', 'jsx' ]
       })
     },
-
-    workers: { recycle: true },
 
     testFramework: 'jest'
   }
