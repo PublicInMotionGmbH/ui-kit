@@ -19,6 +19,12 @@ const codepointsPath = path.join(cachePath, 'codepoints.txt')
 const iconsUrl = 'http://github.com/google/material-design-icons/archive/master.zip'
 const codepointsUrl = 'https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints'
 
+/**
+ * Build icons list from simple codepoints file
+ *
+ * @param {string} codepointsPath
+ * @returns {object[]|Array<{ name: string, character: string }>}
+ */
 function readCodepoints (codepointsPath) {
   const file = fs.readFileSync(codepointsPath, 'utf8')
   const entries = file.split('\n').filter(x => x).map(x => x.split(' '))
@@ -29,6 +35,12 @@ function readCodepoints (codepointsPath) {
   }))
 }
 
+/**
+ * Build map of codepoints (name -> character) from icons list
+ *
+ * @param {object[]|Array<{ name: string, character: string }>} iconsList
+ * @returns {object}
+ */
 function buildCodepointsMap (iconsList) {
   const map = {}
 
@@ -39,6 +51,13 @@ function buildCodepointsMap (iconsList) {
   return map
 }
 
+/**
+ * Build information for icons overview (for Storybook)
+ * Result object has pairs of {groupName: string} -> {names: string[]}
+ *
+ * @param {object} iconsMap
+ * @returns {object}
+ */
 function buildOverview (iconsMap) {
   const overview = {
     custom: customIcons
@@ -59,6 +78,11 @@ function buildOverview (iconsMap) {
   return overview
 }
 
+/**
+ * Procedure to load Material Design and custom data
+ *
+ * @returns {Promise}
+ */
 async function main () {
   // Download icon code points
   await utils.download('codepoints', codepointsUrl, codepointsPath)
@@ -76,7 +100,7 @@ async function main () {
   // Create progress bar for analyzing icons
   const progress = utils.createProgressBar('Finding icons         ', iconsAmount)
 
-  // Initialize number of ignored icons from repository
+  // Initialize map of ignored (not included in icon font) icons from repository
   const ignored = {}
 
   // Analyze icons in archive
@@ -89,14 +113,15 @@ async function main () {
       return
     }
 
+    // Add missing types for icon which we have already
     if (icons[icon.name]) {
-      // Add missing types for icon
       const newTypes = icon.types.filter(type => icons[icon.name].types.indexOf(type) === -1)
       icons[icon.name].types = icons[icon.name].types.concat(newTypes)
 
       return
     }
 
+    // Ignore icon if it's not included in font
     if (!iconsList.find(x => x.name === icon.name)) {
       ignored[icon.name] = icon
       return
@@ -109,6 +134,7 @@ async function main () {
     progress.update(Object.keys(icons).length / iconsAmount)
   })
 
+  // Find number of ignored icons (which are not included in icon font)
   const ignoredAmount = Object.keys(ignored).length
 
   // Write information about icons found
@@ -124,8 +150,9 @@ async function main () {
   console.log('\nSuccessfully loaded Material Design icons!')
 }
 
-main()
-
+/**
+ * Clean up temporary files
+ */
 function cleanUp () {
   utils.removeFile(iconsPath)
   utils.removeFile(codepointsPath)
@@ -133,3 +160,6 @@ function cleanUp () {
 
 // Clean up cache files when process is finished
 process.on('exit', cleanUp)
+
+// Run procedure
+main()
