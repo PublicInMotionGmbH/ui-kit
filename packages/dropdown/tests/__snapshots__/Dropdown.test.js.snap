@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
+<div
+  className="talixo-dropdown-wrapper"
+>
+  <button
+    aria-expanded={true}
+    aria-haspopup={true}
+    aria-label="close menu"
+    className="talixo-select-button talixo-select-open"
+    data-toggle={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    type="button"
+  >
+    <span
+      className="talixo-select-value"
+    >
+      Choose number
+    </span>
+    <div
+      className="talixo-select-arrow"
+    >
+      <i
+        className="material-icons"
+      >
+        arrow_drop_down
+      </i>
+    </div>
+  </button>
+  <div
+    className="talixo-select-options"
+  >
+    <div
+      className="talixo-select-item"
+      id="downshift-1-item-0"
+      key="1"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseMove={[Function]}
+    >
+      1
+    </div>
+    <div
+      className="talixo-select-item"
+      id="downshift-1-item-1"
+      key="3"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseMove={[Function]}
+    >
+      3
+    </div>
+    <div
+      className="talixo-select-item"
+      id="downshift-1-item-2"
+      key="5"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseMove={[Function]}
+    >
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Dropdown /> renders correctly 1`] = `
+<div
+  className="talixo-dropdown-wrapper"
+>
+  <button
+    aria-expanded={false}
+    aria-haspopup={true}
+    aria-label="open menu"
+    className="talixo-select-button"
+    data-toggle={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    type="button"
+  >
+    <span
+      className="talixo-select-value"
+    >
+      1
+    </span>
+    <div
+      className="talixo-select-arrow"
+    >
+      <i
+        className="material-icons"
+      >
+        arrow_drop_down
+      </i>
+    </div>
+  </button>
+</div>
+`;

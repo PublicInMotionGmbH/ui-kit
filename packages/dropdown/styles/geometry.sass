@@ -1,0 +1,84 @@
+@import './config'
+
+@include module('dropdown')
+  &-wrapper
+    display: inline-block
+    position: relative
+    width: 100%
+    cursor: pointer
+
+@include module('select')
+  &-button
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    outline: none
+    border: $border-width solid
+    border-radius: $border-radius-m
+    border-color: $color-placeholder-text
+    background-color: $color-white
+    color: #000000
+    line-height: grid-unit(3)
+    cursor: pointer
+    > *
+      display: inline-block
+      padding: grid-unit(1.5)
+
+  button::-moz-focus-inner, input[type='button']::-moz-focus-inner
+    padding: 0 !important
+    border: 0 none !important
+
+  &-open
+    border-radius: $border-radius-m $border-radius-m 0 0
+    border-bottom-width: 0
+
+  &-value
+    font-size: $font-size-m
+    font-weight: $font-weight-normal
+    border: none
+    outline: none
+
+  &-arrow
+    box-sizing: content-box
+    padding: 0
+    margin: 0 grid-unit(0.5)
+    display: inline-block
+    outline: none
+    i
+      color: $color-talixo-gray
+      font-size: $font-size-xl
+      font-weight: $font-weight-semibold
+      text-align: center
+      display: block
+
+  &-options
+    position: absolute
+    z-index: 100
+    width: 100%
+    border: $border-width solid $color-placeholder-text
+    border-top-width: 0
+    border-radius: 0 0 $border-radius-m $border-radius-m
+    background-color: $color-white
+    box-sizing: border-box
+
+  &-item
+    background-color: $color-talixo-white
+    font-size: $font-size-m
+    font-weight: $font-weight-normal
+    padding: grid-unit(2)
+
+  &-item-overflow-truncate
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+  &-item-overflow-break
+    word-wrap: break-word
+
+  &-item-highlighted
+    background-color: $color-talixo-lighter-gray
+
+  &-item-selected
+    font-weight: $font-weight-semibold

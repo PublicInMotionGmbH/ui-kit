@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DropdownButton /> renders correctly 1`] = `
+<button
+  className="talixo-select-button"
+>
+  <span
+    className="talixo-select-value"
+  />
+  <div
+    className="talixo-select-arrow"
+  >
+    <i
+      className="material-icons"
+    >
+      arrow_drop_down
+    </i>
+  </div>
+</button>
+`;
