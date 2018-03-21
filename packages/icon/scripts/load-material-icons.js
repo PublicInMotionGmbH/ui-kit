@@ -66,7 +66,9 @@ function buildOverview (iconsMap) {
   for (const name of Object.keys(iconsMap)) {
     const icon = iconsMap[name]
 
-    for (const type of icon.types) {
+    for (const _type of icon.types) {
+      const type = `material/${_type}`
+
       if (!overview[type]) {
         overview[type] = []
       }

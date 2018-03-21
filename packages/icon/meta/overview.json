@@ -17,7 +17,7 @@
     "whitelabel",
     "widget"
   ],
-  "action": [
+  "material/action": [
     "3d_rotation",
     "accessibility",
     "accessible",
@@ -234,13 +234,13 @@
     "zoom_in",
     "zoom_out"
   ],
-  "alert": [
+  "material/alert": [
     "add_alert",
     "error",
     "error_outline",
     "warning"
   ],
-  "av": [
+  "material/av": [
     "add_to_queue",
     "airplay",
     "album",
@@ -322,7 +322,7 @@
     "web",
     "web_asset"
   ],
-  "communication": [
+  "material/communication": [
     "business",
     "call",
     "call_end",
@@ -374,7 +374,7 @@
     "voicemail",
     "vpn_key"
   ],
-  "content": [
+  "material/content": [
     "add",
     "add_box",
     "add_circle",
@@ -417,7 +417,7 @@
     "undo",
     "weekend"
   ],
-  "device": [
+  "material/device": [
     "access_alarm",
     "access_alarms",
     "access_time",
@@ -471,7 +471,7 @@
     "wifi_lock",
     "wifi_tethering"
   ],
-  "editor": [
+  "material/editor": [
     "attach_file",
     "attach_money",
     "border_all",
@@ -541,7 +541,7 @@
     "vertical_align_top",
     "wrap_text"
   ],
-  "file": [
+  "material/file": [
     "attachment",
     "cloud",
     "cloud_circle",
@@ -557,7 +557,7 @@
     "folder_open",
     "folder_shared"
   ],
-  "hardware": [
+  "material/hardware": [
     "cast",
     "cast_connected",
     "computer",
@@ -607,7 +607,7 @@
     "videogame_asset",
     "watch"
   ],
-  "image": [
+  "material/image": [
     "add_a_photo",
     "add_to_photos",
     "adjust",
@@ -764,7 +764,7 @@
     "wb_iridescent",
     "wb_sunny"
   ],
-  "maps": [
+  "material/maps": [
     "add_location",
     "beenhere",
     "directions",
@@ -834,7 +834,7 @@
     "transfer_within_a_station",
     "zoom_out_map"
   ],
-  "navigation": [
+  "material/navigation": [
     "apps",
     "arrow_back",
     "arrow_downward",
@@ -863,7 +863,7 @@
     "unfold_less",
     "unfold_more"
   ],
-  "notification": [
+  "material/notification": [
     "adb",
     "airline_seat_flat",
     "airline_seat_flat_angled",
@@ -919,7 +919,7 @@
     "wc",
     "wifi"
   ],
-  "places": [
+  "material/places": [
     "rv_hookup",
     "ac_unit",
     "airport_shuttle",
@@ -940,7 +940,7 @@
     "smoking_rooms",
     "spa"
   ],
-  "social": [
+  "material/social": [
     "cake",
     "domain",
     "group",
@@ -972,7 +972,7 @@
     "share",
     "whatshot"
   ],
-  "toggle": [
+  "material/toggle": [
     "check_box",
     "check_box_outline_blank",
     "indeterminate_check_box",

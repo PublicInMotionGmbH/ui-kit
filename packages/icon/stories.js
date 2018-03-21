@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Icon from './src/Icon'
+import StorybookIcons from './src/storybook/StorybookIcons'
 
 import {
   createStoriesFactory,
@@ -27,4 +28,8 @@ addStory('simple', readme, () => (
     <Icon name='account_circle' style={{ color: '#f03a1f', fontSize: '48px' }} />
     <Icon name='account_circle' style={{ color: '#f03a1f', fontSize: '64px' }} />
   </div>
+))
+
+addStory('overview', readme, () => (
+  <StorybookIcons />
 ))
