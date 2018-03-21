@@ -86,3 +86,9 @@ Each package is available in `packages` directory. Typical structure:
     └── __snapshots__                <-- Automatically generated snapshots
         └── Switcher.test.js.snap
 ```
+
+#### Creating new package
+
+Probably easiest way is to copy existing package and replace or names inside.
+After creating new package remember to run `npm run bootstrap` (or equivalent: `lerna bootstrap --hoist`),
+to install packages dependencies and resolve links between our packages.
