@@ -1,12 +1,27 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import MaterialIcon from '../src/MaterialIcon'
+import Icon from '../src/MaterialIcon'
 
-describe('<MaterialIcon />', () => {
-  it('renders children correctly', () => {
-    const wrapper = shallow(<MaterialIcon name='account_circle' />)
+const EXAMPLE = 'account_circle'
+
+describe('<Icon />', () => {
+  it('renders Material icon correctly', () => {
+    const wrapper = shallow(<Icon name={EXAMPLE} />)
 
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('handles properly additional classes for Material icon', () => {
+    const wrapper = shallow(<Icon name={EXAMPLE} className='abc' />)
+
+    expect(wrapper.props().className).toMatch(/(^| )abc( |$)/)
+    expect(wrapper.props().className).not.toEqual('abc')
+  })
+
+  it('handles properly additional properties for Material icon', () => {
+    const wrapper = shallow(<Icon name={EXAMPLE} id='def' className='abc' />)
+
+    expect(wrapper.props().id).toEqual('def')
   })
 })
