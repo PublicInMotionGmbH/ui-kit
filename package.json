@@ -4,7 +4,7 @@
   "description": "UI Kit for Talixo",
   "main": "index.js",
   "scripts": {
-	"create": "node scripts/generatePackage.js",
+    "create": "node scripts/generatePackage.js",
     "init:yarn": "yarn install && lerna bootstrap --hoist",
     "init": "npm install && lerna bootstrap --hoist",
     "test": "lerna run --parallel test",
