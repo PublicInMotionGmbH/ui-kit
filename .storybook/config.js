@@ -2,6 +2,7 @@ import { configure } from '@storybook/react'
 
 function loadStyles() {
   require('../packages/switcher/styles/main.sass')
+  require('../packages/checkbox/styles/main.sass')
 
   // Loading by context is too slow, as it goes into all packages of packages as well
   // const context = require.context('../packages/', true, /main\.sass$/)
@@ -10,6 +11,7 @@ function loadStyles() {
 
 function loadStories() {
   require('../packages/switcher/stories.js')
+  require('../packages/checkbox/stories.js')
 
   // Loading by context is too slow, as it goes into all packages of packages as well
   // const context = require.context('../packages/', true, /^.\/[^/]+\/stories\.js$/)
