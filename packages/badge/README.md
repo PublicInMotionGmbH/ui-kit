@@ -1,4 +1,4 @@
-# Talixo badge
+# Talixo Badge
 
 Simple badge component
 
