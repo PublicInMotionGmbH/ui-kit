@@ -73,14 +73,14 @@ function copyFile (from, to) {
  */
 function validateTitle (title) {
   if (title.length === 0) {
-    return `Title can't be empty`
+    return 'Title can\'t be empty'
   }
 
   if (titleRegex.test(title)) {
     return true
   }
 
-  return `Title can contain only letters, dashes, spaces and numbers`
+  return 'Title can contain only letters, dashes, spaces and numbers'
 }
 
 /**
@@ -91,14 +91,14 @@ function validateTitle (title) {
  */
 function validateName (name) {
   if (name.length === 0) {
-    return `Name can't be empty`
+    return 'Name can\'t be empty'
   }
 
   if (nameRegex.test(name)) {
     return true
   }
 
-  return `Name can contain only letters, dashes and numbers`
+  return 'Name can contain only letters, dashes and numbers'
 }
 
 /**
@@ -109,14 +109,14 @@ function validateName (name) {
  */
 function validateId (id) {
   if (id.length === 0) {
-    return `ID can't be empty`
+    return 'ID can\'t be empty'
   }
 
   if (idRegex.test(id)) {
     return true
   }
 
-  return `ID can contain only lower case letters, dashes and numbers`
+  return 'ID can contain only lower case letters, dashes and numbers'
 }
 
 /**
