@@ -58,7 +58,6 @@ class Modal extends React.Component {
 
   render () {
     const { children, className, size, style } = this.props
-    console.log('modal render')
     return (
       <div>
         <ModalPortal>
