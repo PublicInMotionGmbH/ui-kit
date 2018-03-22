@@ -1,6 +1,8 @@
 import { storiesOf } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 
+import createController from './story/createController'
+
 /**
  * Build styles for story
  *
@@ -33,13 +35,13 @@ const styles = stylesheet => ({
  * @param {string} name
  * @param {object} module
  *
- * @returns {function(name: string, description: string, render: function)}
+ * @returns {function(name: string, description: string, render: function)|{ controlled: function(name: string, description: string, render: function, getInitialState: function) }}
  */
 export function createStoriesFactory (name, module) {
   const stories = storiesOf(name, module)
 
-  return (name, description, render) =>
-    stories.add(
+  function addStory (name, description, render) {
+    return stories.add(
       name,
       withInfo({
         styles: styles,
@@ -48,6 +50,14 @@ export function createStoriesFactory (name, module) {
         text: description
       })(render)
     )
+  }
+
+  // Create helper for controlled stories
+  addStory.controlled = function addControlledStory (name, description, render, getInitialState) {
+    return addStory(name, description, createController(render, getInitialState))
+  }
+
+  return addStory
 }
 
 /**
