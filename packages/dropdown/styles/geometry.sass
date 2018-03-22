@@ -1,4 +1,5 @@
 @import './config'
+@import './theming'
 
 @include module('dropdown')
   &-wrapper
@@ -14,12 +15,9 @@
     justify-content: space-between
     align-items: center
     width: 100%
+    border: $dropdown-border-width solid
+    border-radius: $dropdown-border-radius
     outline: none
-    border: $border-width solid
-    border-radius: $border-radius-m
-    border-color: $color-placeholder-text
-    background-color: $color-white
-    color: #000000
     line-height: grid-unit(3)
     cursor: pointer
     > *
@@ -31,7 +29,7 @@
     border: 0 none !important
 
   &-open
-    border-radius: $border-radius-m $border-radius-m 0 0
+    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0
     border-bottom-width: 0
 
   &-value
@@ -57,14 +55,12 @@
     position: absolute
     z-index: 100
     width: 100%
-    border: $border-width solid $color-placeholder-text
+    border: $dropdown-border-width solid $color-placeholder-text
     border-top-width: 0
-    border-radius: 0 0 $border-radius-m $border-radius-m
-    background-color: $color-white
+    border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius
     box-sizing: border-box
 
   &-item
-    background-color: $color-talixo-white
     font-size: $font-size-m
     font-weight: $font-weight-normal
     padding: grid-unit(2)
@@ -77,8 +73,19 @@
   &-item-overflow-break
     word-wrap: break-word
 
-  &-item-highlighted
-    background-color: $color-talixo-lighter-gray
-
   &-item-selected
     font-weight: $font-weight-semibold
+
+@include module('item-address')
+  display: inline-block
+  width: 100%
+  font-size: $font-size-m
+
+  >
+    *
+      margin: 0 4px
+      vertical-align: middle
+
+  &-address
+    font-size: $font-size-s
+    color: $color-talixo-gray

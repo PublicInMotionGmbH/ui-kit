@@ -12,7 +12,7 @@ const name = prefix('select')
  * @param {object} props
  * @param {string} [props.className]
  * @param {string} [props.firstItem]
- * @param {string} [props.getButtonProps]
+ * @param {string} [props.getToggleButtonProps]
  * @param {string} [props.id]
  * @param {string} [props.isOpen]
  * @param {string} [props.itemComponent]
@@ -27,24 +27,26 @@ const DropdownButton = props => {
   const {
     className,
     firstItem,
-    getButtonProps,
+    getToggleButtonProps,
     id,
     isOpen,
     itemComponent: ItemComponent,
     onClick,
     overflow,
     placeholder,
+    style,
     value
   } = props
   return (
     <button
-      {...getButtonProps({
+      {...getToggleButtonProps({
         onClick: onClick
       })}
       className={cls(`${name}-button`, className, {
         [`${name}-open`]: isOpen
       })}
       id={id}
+      style={style}
     >
       <span
         className={cls(`${name}-value`, {
@@ -64,20 +66,43 @@ const DropdownButton = props => {
 }
 
 DropdownButton.propTypes = {
+
+  /** Additional class name */
   className: PropTypes.string,
+
+  /** First item in array */
   firstItem: PropTypes.any,
-  getButtonProps: PropTypes.func,
+
+  /** Returns the props applied to menu button */
+  getToggleButtonProps: PropTypes.func,
+
+  /** Additional id */
   id: PropTypes.string,
+
+  /** Controls whether the menu should be open */
   isOpen: PropTypes.bool,
+
+  /** Optional item component */
   itemComponent: PropTypes.func,
+
+  /** Called on click */
   onClick: PropTypes.func,
+
+  /** Item text overflow type */
   overflow: PropTypes.oneOf(['truncate', 'break']),
+
+  /** Placeholder text */
   placeholder: PropTypes.string,
+
+  /** Style object */
+  style: PropTypes.object,
+
+  /** The currently selected item */
   value: PropTypes.any
 }
 
 DropdownButton.defaultProps = {
-  getButtonProps: props => props
+  getToggleButtonProps: props => props
 }
 
 export default DropdownButton

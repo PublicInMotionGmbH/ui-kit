@@ -1,1 +1,25 @@
 @import './config'
+
+$dropdown-border-color: $color-placeholder-text
+$dropdown-border-radius: $border-radius-m
+$dropdown-border-width: $border-width
+
+@include module('select')
+  &-button
+    border-color: $dropdown-border-color
+    background-color: $color-white
+    color: #000000
+
+  &-options
+    background-color: $color-white
+    border-color: $dropdown-border-color
+
+  &-item
+    background-color: $color-talixo-white
+
+  &-item-highlighted
+    background-color: $color-talixo-lighter-gray
+
+  &-arrow
+    i
+      color: $color-talixo-gray

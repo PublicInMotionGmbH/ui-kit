@@ -17,6 +17,7 @@ const name = prefix('select')
  * @param {string} [props.maxHeight]
  * @param {string} [props.overflow]
  * @param {string} [props.selectedItem]
+ * @param {string} [props.style]
  * @returns {React.Element}
  */
 
@@ -28,10 +29,12 @@ const DropdownMenu = props => {
     itemComponent: ItemComponent,
     maxHeight,
     overflow,
-    selectedItem
+    selectedItem,
+    style
   } = props
+  let maxHeightStyle = { maxHeight: maxHeight, overflowY: 'auto', ...style }
   return (
-    <div className={`${name}-options`} style={maxHeight && { maxHeight: maxHeight, overflowY: 'auto' }}>
+    <div className={`${name}-options`} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
           {...getItemProps({ item: item })}
@@ -51,13 +54,30 @@ const DropdownMenu = props => {
 }
 
 DropdownMenu.propTypes = {
+
+  /** Returns the props applied to menu item */
   getItemProps: PropTypes.func,
+
+  /** The currently highlighted item */
   highlightedIndex: PropTypes.number,
+
+  /** Optional item component */
   itemComponent: PropTypes.func,
+
+  /** Items array */
   items: PropTypes.array,
+
+  /** Maximum toggle menu height */
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /** Item text overflow type */
   overflow: PropTypes.oneOf(['truncate', 'break']),
-  selectedItem: PropTypes.any
+
+  /** The currently selected item */
+  selectedItem: PropTypes.any,
+
+  /** The currently selected item */
+  style: PropTypes.object
 }
 
 DropdownMenu.defaultProps = {

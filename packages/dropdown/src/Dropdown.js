@@ -2,6 +2,9 @@ import React from 'react'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 
+import DropdownButtonRenderer from './DropdownButtonRenderer'
+import DropdownMenu from './DropdownMenu'
+
 const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : String(i))
 
 /**
@@ -43,7 +46,7 @@ const Dropdown = props => {
       itemToString={itemToStringOrObject}
       render={({
         closeMenu,
-        getButtonProps,
+        getToggleButtonProps,
         getItemProps,
         getRootProps,
         inputValue,
@@ -59,7 +62,7 @@ const Dropdown = props => {
             closeMenu: closeMenu,
             menuComponent: menuComponent,
             defaultSelectedItem: defaultSelectedItem,
-            getButtonProps: getButtonProps,
+            getToggleButtonProps: getToggleButtonProps,
             getItemProps: getItemProps,
             getRootProps: getRootProps,
             maxHeight: maxHeight,
@@ -116,6 +119,9 @@ Dropdown.propTypes = {
   toggleComponent: PropTypes.func
 }
 
-Dropdown.defaultProps = {}
+Dropdown.defaultProps = {
+  menuComponent: DropdownMenu,
+  toggleComponent: DropdownButtonRenderer
+}
 
 export default Dropdown
