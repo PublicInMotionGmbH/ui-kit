@@ -56,6 +56,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
+    "glob-loader": "^0.3.0",
     "husky": "^0.15.0-rc.9",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
