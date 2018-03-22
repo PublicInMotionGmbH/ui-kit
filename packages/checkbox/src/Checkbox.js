@@ -7,7 +7,7 @@ import { prefix } from '@talixo/commons'
 const clsName = prefix('checkbox')
 
 /**
- * Component which represents Yes/No switcher.
+ * Component which represents checkbox.
  *
  * @param {object} props
  * @param {string} [props.className]
