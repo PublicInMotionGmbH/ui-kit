@@ -86,3 +86,29 @@ Each package is available in `packages` directory. Typical structure:
     └── __snapshots__                <-- Automatically generated snapshots
         └── Switcher.test.js.snap
 ```
+
+#### Creating new package
+
+Probably easiest way is to copy existing package and replace or names inside.
+After creating new package remember to run `npm run bootstrap` (or equivalent: `lerna bootstrap --hoist`),
+to install packages dependencies and resolve links between our packages.
+
+### Development commands & troubleshooting
+
+Description                                                  | Example
+-------------------------------------------------------------|------------------------------------------------------------
+Install all required packages through whole monorepo         | `npm run init`
+Install development dependency for all packages or storybook | `npm install babel --save-dev`
+Install dependencies of all subpackages                      | `lerna bootstrap --hoist`
+Resolve cross-dependencies between our packages              | `lerna bootstrap --hoist` or `lerna link`
+Install dependency inside single package                     | `lerna add jquery --scope @talixo/switcher`
+Run all tests                                                | `npm test` in main directory
+Create new package                                           | `npm run create` in main directory
+Publish all changed packages to NPM                          | `lerna publish`
+Publish single package                                       | `lerna publish --scope @talixo/switcher`
+Lint whole code                                              | `npm run lint`
+Starting Storybook for development at port `9009`            | `npm run storybook`
+Starting Storybook for development at different port         | `npm run storybook -- -p 5555`
+Build static code for Storybook into `storybook-static`      | `npm run build-storybook`
+Remove all `node_modules`                                    | `find . -name "node_modules" -exec rm -rf '{}' +` in main directory
+Reinitializing everything                                    | `find . -name "node_modules" -exec rm -rf '{}' + && npm run init` in main directory
