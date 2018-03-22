@@ -1,10 +1,11 @@
 {
-  "name": "@talixo/switcher",
+  "name": "@talixo/icon",
   "version": "1.0.0",
-  "description": "UI component for Yes/No switcher",
+  "description": "UI component for icons",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
+    "load": "node scripts/load-material-icons.js",
     "test": "jest --config ../../tests/config.js --rootDir .",
     "prepublishOnly": "rollup -c",
     "build": "rollup -c"
@@ -19,8 +20,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "fs-extra": "^5.0.0",
     "jest": "^21.2.1",
-    "rollup": "^0.57.1"
+    "progress": "^2.0.0",
+    "rollup": "^0.57.1",
+    "stream-to-string": "^1.1.0",
+    "unzip-stream": "^0.3.0",
+    "wget-improved": "^1.5.0"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
@@ -29,6 +35,7 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/commons": "^1.0.0"
+    "@talixo/commons": "^1.0.0",
+    "@talixo/icon-pack": "^1.2.1"
   }
 }
