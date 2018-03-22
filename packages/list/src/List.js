@@ -25,7 +25,7 @@ function List (props) {
     )
   })
   return (
-    <ul className={cls(name, className)} style={style}>
+    <ul className={cls(name, className)} {...passedProps} style={style}>
       {mappedChildren}
     </ul>
   )

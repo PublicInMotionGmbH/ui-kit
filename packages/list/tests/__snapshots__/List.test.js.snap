@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<List /> renders children correctly 1`] = `
+<ul
+  className="talixo-list"
+>
+  <li
+    key=".0"
+  >
+    <span>
+      #
+    </span>
+    <span>
+      Home
+    </span>
+  </li>
+  <li
+    key=".1"
+  >
+    <span>
+      #
+    </span>
+    <span>
+      Help
+    </span>
+  </li>
+  <li
+    key=".2"
+  >
+    <span>
+      #
+    </span>
+    <span>
+      Issues
+    </span>
+  </li>
+  <li
+    key=".3"
+  >
+    <span>
+      #
+    </span>
+    <span>
+      Log In
+    </span>
+  </li>
+</ul>
+`;
