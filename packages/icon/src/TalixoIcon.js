@@ -7,6 +7,7 @@ import icons from '@talixo/icon-pack'
 
 const cName = prefix('icon')
 const iconPrefix = icons.classPrefix
+const iconsMap = icons.icons
 
 /**
  * Component which represents icon from Talixo set
@@ -19,10 +20,10 @@ const iconPrefix = icons.classPrefix
 function TalixoIcon (props) {
   const { className, name, ...passedProps } = props
 
-  const clsName = cls(cName, className, iconPrefix, `${iconPrefix}-${name}`)
+  const clsName = cls(cName, className, iconPrefix)
 
   return (
-    <span className={clsName} {...passedProps} aria-hidden='true' />
+    <span className={clsName} {...passedProps} aria-hidden='true'>{iconsMap[name]}</span>
   )
 }
 

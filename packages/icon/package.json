@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "@talixo/commons": "^1.0.0",
-    "@talixo/icon-pack": "^1.0.0"
+    "@talixo/icon-pack": "^1.2.1"
   }
 }

@@ -18,11 +18,11 @@ function Icon (props) {
   const { name } = props
 
   // Use Material Design icon, if we do not have it
-  if (icons.indexOf(name) === -1) {
-    return <MaterialIcon {...props} />
+  if (icons[name]) {
+    return <TalixoIcon {...props} />
   }
 
-  return <TalixoIcon {...props} />
+  return <MaterialIcon {...props} />
 }
 
 Icon.propTypes = {
