@@ -1,0 +1,11 @@
+@import './config'
+
+@include module('list')
+  list-style-type: none
+
+  > li > *
+    display: inline-block
+
+    &:first-child
+      vertical-align: top
+      margin-right: grid-unit(1)
