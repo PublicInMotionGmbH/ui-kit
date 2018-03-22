@@ -9,10 +9,12 @@ import {
   createStoriesFactory,
   getReadmeDescription
 } from '@talixo/commons/story'
+import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Dropdown', module)
+const change = action('change')
 
 const items = [
   'apple',
@@ -48,6 +50,7 @@ addStory('default', readme, () => (
   <Dropdown
     items={items}
     maxHeight='250px'
+    onChange={change}
     overflow='truncate'
     placeholder='Select item'
     style={{ maxWidth: '500px' }}
@@ -58,6 +61,7 @@ addStory('custom item component', readme, () => (
     itemComponent={ItemAddress}
     items={itemsCustom}
     maxHeight='250px'
+    onChange={change}
     overflow='break'
     placeholder='Select accomodation'
     style={{ maxWidth: '500px' }}

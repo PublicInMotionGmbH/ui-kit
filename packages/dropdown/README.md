@@ -1,4 +1,4 @@
-# Talixo Switcher
+# Talixo Dropdown
 
 It's a dropdown built with Downshift component.
 
@@ -21,21 +21,21 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name       | Type                       | Default | Description
---------------------|----------------------------|:-------:|--------------------------------
-className           | string	                   | n/a     |	Additional class name
-defaultSelectedItem | node	                     | n/a     |	Default selected Item
-itemComponent       | func	                     | n/a     |	Optional item component
-items               | array	                     | n/a     |	Items array
-maxHeight           | string | number	           | n/a     |	Maximum toggle menu height
-menuComponent       | func	                     | n/a     |	Toggle menu component
-onChange            | func	                     | n/a     |	Additional onChange function
-overflow            | oneOf 'truncate' | 'break' | n/a     |	Item text overflow type
-placeholder         | string	                   | n/a     |	Placeholder text
-style               |  	                         | n/a     |	Style object
-toggleComponent     | func	                     | n/a     |	Toggle component
+Property name       | Type                  | Default | Description
+--------------------|-----------------------|:-------:|--------------------------------
+className           | string	              | n/a     |	Additional class name
+defaultSelectedItem | node	                | n/a     |	Default selected Item
+itemComponent       | func	                | n/a     |	Optional item component
+items               | array	                | n/a     |	Items array
+maxHeight           | string or number	    | n/a     |	Maximum toggle menu height
+menuComponent       | func	                | n/a     |	Toggle menu component
+onChange            | func	                | n/a     |	Additional onChange function
+overflow            | 'truncate' or 'break' | n/a     |	Item text overflow type
+placeholder         | string	              | n/a     |	Placeholder text
+style               |  	                    | n/a     |	Style object
+toggleComponent     | func	                | n/a     |	Toggle component
 
 ## Changelog
 

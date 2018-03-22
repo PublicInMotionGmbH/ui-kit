@@ -15,36 +15,30 @@ describe('<DropdownMenu />', () => {
 
   it('renders highlighted item correctly', () => {
     const wrapper = mount(<DropdownMenu highlightedIndex={1} items={[1, 3, 5]} />)
+    const otherItem = wrapper
+      .find(`.${name}-item`)
+      .at(0)
+    const highlitedItem = wrapper
+      .find(`.${name}-item`)
+      .at(1)
 
-    expect(
-      wrapper
-        .find(`.${name}-item`)
-        .at(0)
-        .hasClass(`${name}-item-highlighted`)
-    ).toEqual(false)
-    expect(
-      wrapper
-        .find(`.${name}-item`)
-        .at(1)
-        .hasClass(`${name}-item-highlighted`)
-    ).toEqual(true)
+    expect(otherItem.hasClass(`${name}-item-highlighted`)).toEqual(false)
+    expect(highlitedItem.hasClass(`${name}-item-highlighted`)).toEqual(true)
     wrapper.unmount()
   })
 
   it('renders selected item correctly', () => {
     const wrapper = mount(<DropdownMenu selectedItem={3} items={[1, 3, 5]} />)
+    const otherItem = wrapper
+      .find(`.${name}-item`)
+      .at(0)
+    const highlitedItem = wrapper
+      .find(`.${name}-item`)
+      .at(1)
 
-    expect(
-      wrapper
-        .find(`.${name}-item`)
-        .at(0)
-        .hasClass(`${name}-item-selected`)
+    expect(otherItem.hasClass(`${name}-item-selected`)
     ).toEqual(false)
-    expect(
-      wrapper
-        .find(`.${name}-item`)
-        .at(1)
-        .hasClass(`${name}-item-selected`)
+    expect(highlitedItem.hasClass(`${name}-item-selected`)
     ).toEqual(true)
     wrapper.unmount()
   })
