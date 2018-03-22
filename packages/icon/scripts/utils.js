@@ -1,7 +1,6 @@
 const path = require('path')
 const stream = require('stream')
 const fs = require('fs-extra')
-const readline = require('readline')
 const wget = require('wget-improved')
 const ProgressBar = require('progress')
 const unzip = require('unzip-stream')
@@ -11,20 +10,6 @@ const promisify = require('util').promisify
 // Build promisified functions
 const mkdir = promisify(fs.mkdirp)
 const writeFile = promisify(fs.writeFile)
-
-/**
- * Clear line and display new text
- *
- * @param {string} str
- */
-function writeLine (str) {
-  // Clear line and go to beginning
-  readline.clearLine(process.stdout, 0)
-  readline.cursorTo(process.stdout, 0, null)
-
-  // Display new text
-  process.stdout.write(str)
-}
 
 /**
  * Create progress bar instance
