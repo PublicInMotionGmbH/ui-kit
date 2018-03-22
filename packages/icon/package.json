@@ -22,7 +22,6 @@
   "devDependencies": {
     "fs-extra": "^5.0.0",
     "jest": "^21.2.1",
-    "jest-cli": "^21.2.1",
     "progress": "^2.0.0",
     "rollup": "^0.57.1",
     "stream-to-string": "^1.1.0",

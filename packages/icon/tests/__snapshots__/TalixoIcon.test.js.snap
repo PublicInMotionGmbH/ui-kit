@@ -3,6 +3,8 @@
 exports[`<Icon /> renders Material icon correctly 1`] = `
 <span
   aria-hidden="true"
-  className="talixo-icon tai tai-affiliate"
-/>
+  className="talixo-icon tai"
+>
+  
+</span>
 `;
