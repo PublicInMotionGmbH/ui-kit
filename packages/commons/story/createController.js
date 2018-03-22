@@ -59,11 +59,18 @@ function createController (func, getInitialState = () => ({})) {
   }
 
   // Return a function required by addon-info
-  return () => (
-    <Control initialState={state}>
-      {render()}
-    </Control>
-  )
+  function build () {
+    return (
+      <Control initialState={state}>
+        {render()}
+      </Control>
+    )
+  }
+
+  // And extract also Controller to ignore it in propTypes
+  build.Controller = Control
+
+  return build
 }
 
 export default createController

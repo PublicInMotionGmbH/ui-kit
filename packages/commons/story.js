@@ -35,26 +35,34 @@ const styles = stylesheet => ({
  * @param {string} name
  * @param {object} module
  *
- * @returns {function(name: string, description: string, render: function)|{ controlled: function(name: string, description: string, render: function, getInitialState: function) }}
+ * @returns {function(name: string, description: string, render: function)|function(name: string, description: string, render: function, infoOptions: object)|{ controlled: function(name: string, description: string, render: function, getInitialState: function, infoOptions: object)|function(name: string, description: string, render: function, getInitialState: function, infoOptions: object) }}
  */
 export function createStoriesFactory (name, module) {
   const stories = storiesOf(name, module)
 
-  function addStory (name, description, render) {
+  function addStory (name, description, render, infoOptions = {}) {
     return stories.add(
       name,
       withInfo({
         styles: styles,
         header: true,
         inline: true,
-        text: description
+        text: description,
+        ...infoOptions
       })(render)
     )
   }
 
   // Create helper for controlled stories
-  addStory.controlled = function addControlledStory (name, description, render, getInitialState) {
-    return addStory(name, description, createController(render, getInitialState))
+  addStory.controlled = function addControlledStory (name, description, render, getInitialState, infoOptions = {}) {
+    // Build controller renderer
+    const controller = createController(render, getInitialState)
+
+    // Exclude controller from prop types list
+    return addStory(name, description, controller, {
+      propTablesExclude: [ controller.Controller ],
+      ...infoOptions
+    })
   }
 
   return addStory
