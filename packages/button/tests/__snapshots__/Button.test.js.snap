@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> renders children correctly 1`] = `
+<button
+  className="talixo-button"
+  disabled={false}
+>
+  <span
+    key=".0"
+  >
+    Button
+  </span>
+</button>
+`;
