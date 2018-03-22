@@ -1,7 +1,6 @@
 import { configure } from '@storybook/react'
 
 function loadStyles() {
-  require('../packages/switcher/styles/main.sass')
   require('../packages/breadcrumbs/styles/main.sass')
 
   // Loading by context is too slow, as it goes into all packages of packages as well
@@ -10,7 +9,6 @@ function loadStyles() {
 }
 
 function loadStories() {
-  require('../packages/switcher/stories.js')
   require('../packages/breadcrumbs/stories.js')
 
   // Loading by context is too slow, as it goes into all packages of packages as well
