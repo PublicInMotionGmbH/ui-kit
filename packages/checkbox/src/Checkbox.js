@@ -19,7 +19,7 @@ const clsName = prefix('checkbox')
 const Checkbox = ({ children, className, size, style, ...props }) => (
   <label
     className={cls(clsName, className, {
-      [prefix(`checkbox__${size}`)]: size !== undefined
+      [prefix(`checkbox--${size}`)]: size !== undefined
     })}
     style={style}
   >

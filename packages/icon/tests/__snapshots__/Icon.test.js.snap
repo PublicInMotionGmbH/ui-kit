@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Icon /> renders Material icon correctly 1`] = `
+<MaterialIcon
+  name="account_circle"
+/>
+`;
+
+exports[`<Icon /> renders Talixo icon correctly 1`] = `
+<TalixoIcon
+  name="affiliate"
+/>
+`;
