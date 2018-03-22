@@ -58,9 +58,15 @@ export function createStoriesFactory (name, module) {
     // Build controller renderer
     const controller = createController(render, getInitialState)
 
+    // Build list of excluded components from propTypes table
+    const excludedControllers = [
+      controller.Controller,
+      ...(infoOptions.propTablesExclude || [])
+    ]
+
     // Exclude controller from prop types list
     return addStory(name, description, controller, {
-      propTablesExclude: [ controller.Controller ],
+      propTablesExclude: excludedControllers,
       ...infoOptions
     })
   }
