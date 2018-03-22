@@ -6,7 +6,7 @@ import StorybookIcons from './src/storybook/StorybookIcons'
 import {
   createStoriesFactory,
   getReadmeDescription
-} from '@talixo/commons/story'
+} from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
