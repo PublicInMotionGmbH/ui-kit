@@ -57,6 +57,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
+    "glob-loader": "^0.3.0",
     "husky": "^0.15.0-rc.9",
     "inquirer": "^5.1.0",
     "isbinaryfile": "^3.0.2",
