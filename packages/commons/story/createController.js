@@ -2,7 +2,13 @@ import React from 'react'
 
 import { action } from '@storybook/addon-actions'
 
+/**
+ * Wrapping React component to handle state changes
+ */
 class Controller extends React.Component {
+  /**
+   * @param {object|{ register: function, initialState: object, render: function }} props
+   */
   constructor (props) {
     super(props)
     this.state = props.initialState
@@ -14,30 +20,45 @@ class Controller extends React.Component {
   }
 }
 
+// Prepare Storybook action to emit 'setState' event on change
 const emitSetStateAction = action('setState')
 
-function createController (func, getInitialState = () => {}) {
-  const state = getInitialState()
+/**
+ * Helper to create controlled components,
+ * which will have its source code shown properly in Storybook
+ *
+ * @param {function} func
+ * @param {function} [getInitialState]
+ * @returns {function(): function(): React.Element}
+ */
+function createController (func, getInitialState = () => ({})) {
+  const state = getInitialState() || {}
 
+  // Create list of register controllers to update
   const components = []
 
+  // Build some required functions
   const register = e => components.push(e)
   const update = () => components.forEach(c => c.forceUpdate())
   const render = () => func(setState, state)
 
+  // Build function to set new state
   function setState (nextState) {
     Object.assign(state, nextState)
     emitSetStateAction(nextState)
     update()
   }
 
+  // Create wrapper to show it better way in source code (without register/render fields)
   const Control = class extends Controller {}
 
+  // Set these default properties
   Control.defaultProps = {
     register: register,
     render: render
   }
 
+  // Return a function required by addon-info
   return () => (
     <Control initialState={state}>
       {render()}
