@@ -1,16 +1,14 @@
 import React from 'react'
 
-import Breadcrumbs from '../src/Breadcrumbs'
+import Button from '../src/Button'
 import { shallow } from 'enzyme'
 
-describe('<Breadcrumbs />', () => {
+describe('<Button />', () => {
   it('renders children correctly', () => {
     const wrapper = shallow(
-      <Breadcrumbs divider='/'>
-        <span>Home</span>
-        <span>Issues</span>
-        <span>Major</span>
-      </Breadcrumbs>
+      <Button>
+        Button
+      </Button>
     )
     expect(wrapper).toMatchSnapshot()
   })
