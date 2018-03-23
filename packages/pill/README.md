@@ -1,11 +1,11 @@
-# Talixo Switcher
+# Talixo Pill
 
-It's just simple wrapper for checkbox, which behaves more like switcher with Yes/No options.
+It's just simple wrapper for Pill.
 
 ## How to install
 
-Package is available as `@talixo/switcher` in NPM registry, so you can use it in your project
-using `npm install @talixo/switcher --save` or `yarn add @talixo/switcher`.
+Package is available as `@talixo/pill` in NPM registry, so you can use it in your project
+using `npm install @talixo/pill --save` or `yarn add @talixo/pill`.
 
 ## Requirements
 
@@ -16,18 +16,20 @@ Your package should additionally have some extra dependencies:
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 
-These packages are required by `@talixo/switcher`, but you have to install them manually,
+These packages are required by `@talixo/pill`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
+Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-noLabel       | string    | `"No"`  | label for unchecked switcher
-yesLabel      | string    | `"Yes"` | label for checked switcher
+color         | string    | n/a     | color of text
+style         | object    | n/a     | object with styles
+variant       | string    | n/a     | different variants
+
 
 ## Changelog
 

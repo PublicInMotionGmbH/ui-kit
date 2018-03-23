@@ -1,41 +1,41 @@
 @import './config'
 
 @include module('pill')
-.pill--blue
-  background-color: $color-pill-blue
-  border-color: $color-pill-blue
-
-.pill--gray
-  background-color: $color-pill-gray
-  border-color: $color-pill-gray
-
-.pill--green
-  background-color: $color-pill-green
-  border-color: $color-pill-green
-
-.pill--red
-  background-color: $color-orange-talixo
-  border-color: $color-orange-talixo
-
-.pill--yellow
-  background-color: $color-pill-yellow
-  border-color: $color-pill-yellow
-
-.pill--ghost
-  background-color: $color-ghost
-  border-color: $color-ghost-border
-
-  &.pill--blue
+  &--blue
+    background-color: $color-pill-blue
     border-color: $color-pill-blue
 
-  &.pill--gray
+  &--gray
+    background-color: $color-pill-gray
     border-color: $color-pill-gray
 
-  &.pill--green
+  &--green
+    background-color: $color-pill-green
     border-color: $color-pill-green
 
-  &.pill--red
+  &--red
+    background-color: $color-orange-talixo
     border-color: $color-orange-talixo
 
-  &.pill--yellow
+  &--yellow
+    background-color: $color-pill-yellow
     border-color: $color-pill-yellow
+
+  &--ghost
+    background-color: $color-ghost
+    border-color: $color-ghost-border
+
+    &#{prefix('pill')}--blue
+      border-color: $color-pill-blue
+
+    &#{prefix('pill')}--gray
+      border-color: $color-pill-gray
+
+    &#{prefix('pill')}--green
+      border-color: $color-pill-green
+
+    &#{prefix('pill')}--red
+      border-color: $color-orange-talixo
+
+    &#{prefix('pill')}--yellow
+      border-color: $color-pill-yellow

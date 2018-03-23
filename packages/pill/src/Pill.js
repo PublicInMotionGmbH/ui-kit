@@ -37,7 +37,7 @@ Pill.propTypes = {
   /** Children */
   children: PropTypes.node,
 
-  /** Color */
+  /** Color of text */
   color: PropTypes.string,
 
   /** CSS Styles */
