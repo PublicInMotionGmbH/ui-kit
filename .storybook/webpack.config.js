@@ -1,3 +1,5 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+
 const commander = require('commander')
 const configDir = commander.configDir || './.storybook'
 
@@ -14,7 +16,13 @@ const _config = _buildConfig(configDir)
 const config = buildConfig(env, _config, configDir)
 
 // Parse JavaScript files from @talixo/ packages
-config.module.rules[0].include.push(/\/@talixo\//)
+config.module.rules = config.module.rules.map(rule => {
+  if (rule.test.toString() !== '/\\.jsx?$/') {
+    rule.include = [ /\/@talixo\// ]
+  }
+
+  return rule
+})
 
 // Fix loader of Markdown files
 config.module.rules = config.module.rules .filter(rule => rule.test.toString() !== '/\\.md$/')
@@ -40,5 +48,8 @@ config.module.rules.push({
 config.plugins = config.plugins.filter(plugin => {
   return plugin.constructor.name !== 'HotModuleReplacementPlugin'
 })
+
+// Add HardSourceWebpackPlugin for caching
+config.plugins.push(new HardSourceWebpackPlugin())
 
 module.exports = config
