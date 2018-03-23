@@ -24,20 +24,11 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * @param {string} [props.toggleComponent]
  * @returns {React.Element}
  */
-
 const Dropdown = props => {
   const {
-    className,
-    menuComponent,
-    defaultSelectedItem,
-    itemComponent,
-    items,
-    maxHeight,
-    onChange,
-    overflow,
-    placeholder,
-    style,
-    toggleComponent: ToggleComponent
+    className, menuComponent, defaultSelectedItem,
+    itemComponent, items, maxHeight, onChange, overflow,
+    placeholder, style, toggleComponent: ToggleComponent
   } = props
   return (
     <Downshift
@@ -84,7 +75,6 @@ const Dropdown = props => {
 }
 
 Dropdown.propTypes = {
-
   /** Additional class name */
   className: PropTypes.string,
 

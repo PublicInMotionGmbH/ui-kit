@@ -15,7 +15,6 @@ const name = prefix('item-address')
  * @param {string} [props.style]
  * @returns {React.Element}
  */
-
 const ItemAddress = props => {
   const { item, className, style } = props
   return (
@@ -30,7 +29,6 @@ const ItemAddress = props => {
 }
 
 ItemAddress.propTypes = {
-
   /** Additional class name */
   className: PropTypes.string,
 
@@ -39,7 +37,6 @@ ItemAddress.propTypes = {
 
   /** Style object */
   style: PropTypes.object
-
 }
 
 ItemAddress.defaultProps = {}

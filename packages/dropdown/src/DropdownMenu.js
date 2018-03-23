@@ -20,17 +20,11 @@ const name = prefix('select')
  * @param {string} [props.style]
  * @returns {React.Element}
  */
-
 const DropdownMenu = props => {
   const {
-    getItemProps,
-    highlightedIndex,
-    items,
-    itemComponent: ItemComponent,
-    maxHeight,
-    overflow,
-    selectedItem,
-    style
+    getItemProps, highlightedIndex, items,
+    itemComponent: ItemComponent, maxHeight,
+    overflow, selectedItem, style
   } = props
   let maxHeightStyle = { maxHeight: maxHeight, overflowY: 'auto', ...style }
   return (
@@ -54,7 +48,6 @@ const DropdownMenu = props => {
 }
 
 DropdownMenu.propTypes = {
-
   /** Returns the props applied to menu item */
   getItemProps: PropTypes.func,
 

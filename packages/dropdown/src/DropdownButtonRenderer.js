@@ -34,25 +34,12 @@ const name = prefix('dropdown')
  * @param {string} [props.style]
  * @returns {React.Element}
  */
-
 const DropdownButtonRenderer = props => {
   const {
-    className,
-    closeMenu,
-    menuComponent: MenuComponent,
-    defaultSelectedItem,
-    getToggleButtonProps,
-    getItemProps,
-    overflow,
-    highlightedIndex,
-    isOpen,
-    innerRef,
-    itemComponent,
-    items,
-    maxHeight,
-    placeholder,
-    selectedItem,
-    style
+    className, closeMenu, menuComponent: MenuComponent,
+    defaultSelectedItem, getToggleButtonProps, getItemProps,
+    overflow, highlightedIndex, isOpen, innerRef, itemComponent,
+    items, maxHeight, placeholder, selectedItem, style
   } = props
   return (
     <div className={cls(`${name}-wrapper`, className)} ref={innerRef} style={style}>
@@ -82,7 +69,6 @@ const DropdownButtonRenderer = props => {
 }
 
 DropdownButtonRenderer.propTypes = {
-
   /** Additional class name */
   className: PropTypes.string,
 

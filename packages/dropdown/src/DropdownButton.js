@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from 'classnames'
 import PropTypes from 'prop-types'
+import Icon from '@talixo/icon'
 
 import { prefix } from '@talixo/commons'
 
@@ -22,20 +23,11 @@ const name = prefix('select')
  * @param {string} [props.value]
  * @returns {React.Element}
  */
-
 const DropdownButton = props => {
   const {
-    className,
-    firstItem,
-    getToggleButtonProps,
-    id,
-    isOpen,
-    itemComponent: ItemComponent,
-    onClick,
-    overflow,
-    placeholder,
-    style,
-    value
+    className, firstItem, getToggleButtonProps, id,
+    isOpen, itemComponent: ItemComponent,
+    onClick, overflow, placeholder, style, value
   } = props
   return (
     <button
@@ -54,19 +46,20 @@ const DropdownButton = props => {
           [`${name}-item-overflow-break`]: overflow === 'break'
         })}
       >
-        {value ? ItemComponent ? <ItemComponent item={value} /> : value : placeholder || firstItem}
+        {value
+          ? ItemComponent
+            ? <ItemComponent item={value} />
+            : value
+          : placeholder || firstItem}
       </span>
       <div className={`${name}-arrow`}>
-        <i className='material-icons'>
-         arrow_drop_down
-        </i>
+        <Icon name='arrow_drop_down' />
       </div>
     </button>
   )
 }
 
 DropdownButton.propTypes = {
-
   /** Additional class name */
   className: PropTypes.string,
 
