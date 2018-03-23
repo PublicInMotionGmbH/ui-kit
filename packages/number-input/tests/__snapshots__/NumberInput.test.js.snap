@@ -1,8 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<NumberInput /> renders .name correctly 1`] = `
+<div
+  className="talixo-number-input name"
+>
+  <input
+    type="number"
+  />
+  <div
+    className="talixo-number-input-stepper"
+  >
+    <button
+      className="talixo-number-input-button"
+      onClick={[Function]}
+    >
+      <span
+        className="material-icons"
+      >
+        add
+      </span>
+    </button>
+    <button
+      className="talixo-number-input-button"
+      onClick={[Function]}
+    >
+      <span
+        className="material-icons"
+      >
+        remove
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
 exports[`<NumberInput /> renders children correctly 1`] = `
 <div
   className="talixo-number-input"
+>
+  <input
+    type="number"
+  />
+  <div
+    className="talixo-number-input-stepper"
+  >
+    <button
+      className="talixo-number-input-button"
+      onClick={[Function]}
+    >
+      <span
+        className="material-icons"
+      >
+        add
+      </span>
+    </button>
+    <button
+      className="talixo-number-input-button"
+      onClick={[Function]}
+    >
+      <span
+        className="material-icons"
+      >
+        remove
+      </span>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`<NumberInput /> renders errors correctly 1`] = `
+<div
+  className="talixo-number-input errors"
 >
   <input
     type="number"
