@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/switcher",
+  "name": "@talixo/breadcrumbs",
   "version": "1.0.0",
-  "description": "UI component for Yes/No switcher",
+  "description": "UI component for Breadcrumbs",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
     "rollup": "^0.57.1"
   },
   "peerDependencies": {

@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/switcher",
+  "name": "@talixo/__id__",
   "version": "1.0.0",
-  "description": "UI component for Yes/No switcher",
+  "description": "__description__",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
