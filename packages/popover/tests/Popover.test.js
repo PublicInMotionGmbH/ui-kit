@@ -1,10 +1,10 @@
 import React from 'react'
-import Switcher from '../src/Switcher'
+import Popover from '../src/Popover'
 import { shallow } from 'enzyme'
 
-describe('<Switcher />', () => {
+describe('<Popover />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Switcher />)
+    const wrapper = shallow(<Popover />)
 
     expect(wrapper).toMatchSnapshot()
   })
