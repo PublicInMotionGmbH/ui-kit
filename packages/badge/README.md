@@ -26,8 +26,7 @@ It allows any props which are allowed for `span`. Additionally, it handles some 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | node element to display inside bage
-style         | object    | n/a     | additional styles
+children      | node      | n/a     | node element to display inside badge
 
 ## Changelog
 

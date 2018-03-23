@@ -14,14 +14,13 @@ const name = prefix('badge')
  * @param {node} [props.children]
  * @param {object} [props.style]
  */
-const Badge = ({ children, className, style }) => {
+function Badge (props) {
+  const { children, className, ...passedProps } = props
+
   const clsName = cls(name, className)
 
   return (
-    <span
-      className={clsName}
-      style={style}
-    >
+    <span className={clsName} {...passedProps}>
       {children}
     </span>
   )
@@ -31,14 +30,8 @@ Badge.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Node element to display inside bage */
-  children: PropTypes.node,
-
-  /** Additional styles */
-  style: PropTypes.object
-}
-
-Badge.defaultProps = {
+  /** Node element to display inside badge */
+  children: PropTypes.node
 }
 
 export default Badge
