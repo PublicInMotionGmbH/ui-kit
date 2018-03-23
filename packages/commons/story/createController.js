@@ -39,7 +39,7 @@ function createController (func, getInitialState = () => ({})) {
 
   // Build some required functions
   const register = e => components.push(e)
-  const update = () => components.forEach(c => c.forceUpdate())
+  const update = () => components.filter(c => c.isMounted()).forEach(c => c.forceUpdate())
   const render = () => func(setState, state)
 
   // Build function to set new state
