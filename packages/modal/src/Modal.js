@@ -57,7 +57,7 @@ class Modal extends React.Component {
   }
 
   render () {
-    const { children, className, size, style } = this.props
+    const { children, className, size, style, isOpen, ...rest } = this.props
     return (
       <div>
         <ModalPortal>
@@ -67,6 +67,7 @@ class Modal extends React.Component {
                 [prefix(`modal--${size}`)]: size !== undefined
               })}
               style={style}
+              {...rest}
             >
               {children}
             </div>

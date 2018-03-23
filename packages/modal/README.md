@@ -1,6 +1,6 @@
 # Talixo Modal
 
-UI kit modal component
+UI Kit modal component. It can be used as a wrapper that shows provided content above the rest of a page
 
 ## How to install
 
@@ -21,7 +21,7 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
