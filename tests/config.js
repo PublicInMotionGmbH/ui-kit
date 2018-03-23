@@ -10,6 +10,6 @@ module.exports = {
     '^.+\\.css$': '<rootDir>/../../tests/cssTransform',
     '^(?!.*\\.(js|jsx|css|json)$)': '<rootDir>/../../tests/fileTransform'
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.(js|jsx)$' ],
   moduleFileExtensions: ['js', 'json', 'jsx']
 }
