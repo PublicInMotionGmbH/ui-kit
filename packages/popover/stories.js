@@ -2,12 +2,8 @@ import React from 'react'
 
 import Popover from './src/Popover'
 import Button from '../../packages/button/src/Button'
-import { storiesOf } from '@storybook/react'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/commons/story'
 
 const addStory = createStoriesFactory('Popover', module)
 
