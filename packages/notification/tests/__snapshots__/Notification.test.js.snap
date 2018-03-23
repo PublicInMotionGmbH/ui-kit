@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notification /> renders .big correctly 1`] = `
+<div
+  className="talixo-notification big"
+>
+  <span
+    key=".0"
+  >
+    Notification
+  </span>
+  <Icon
+    className="close"
+    name="close"
+  />
+</div>
+`;
+
+exports[`<Notification /> renders children correctly 1`] = `
+<div
+  className="talixo-notification"
+>
+  <span
+    key=".0"
+  >
+    Notification
+  </span>
+  <Icon
+    className="close"
+    name="close"
+  />
+</div>
+`;
+
+exports[`<Notification /> renders variant correctly 1`] = `
+<div
+  className="talixo-notification talixo-notification--error"
+>
+  <span
+    key=".0"
+  >
+    Notification
+  </span>
+  <Icon
+    className="close"
+    name="close"
+  />
+</div>
+`;
