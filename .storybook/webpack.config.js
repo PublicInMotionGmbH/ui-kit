@@ -17,11 +17,12 @@ const config = buildConfig(env, _config, configDir)
 config.module.rules[0].include.push(/\/@talixo\//)
 
 // Fix loader of Markdown files
-config.module.rules.pop()
+config.module.rules = config.module.rules .filter(rule => rule.test.toString() !== '/\\.md$/')
 config.module.rules.push({
   test: /\.md$/,
   use: [ { loader: 'markdown-loader' } ]
 })
+
 
 // Add loader for fonts
 config.module.rules.push({
@@ -33,6 +34,11 @@ config.module.rules.push({
 config.module.rules.push({
   test: /\.sass$/,
   loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+})
+
+// Remove HotModuleReplacementPlugin, which causes errors in Storybook hot reloading
+config.plugins = config.plugins.filter(plugin => {
+  return plugin.constructor.name !== 'HotModuleReplacementPlugin'
 })
 
 module.exports = config
