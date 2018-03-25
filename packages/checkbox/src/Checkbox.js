@@ -36,7 +36,7 @@ Checkbox.propTypes = {
   children: PropTypes.node,
 
   /** Checkbox label size ('small', 'large') */
-  size: PropTypes.string,
+  size: PropTypes.oneOf('small', 'large'),
 
   /** Additional styles */
   style: PropTypes.object

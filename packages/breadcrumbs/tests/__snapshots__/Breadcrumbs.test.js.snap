@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Breadcrumbs /> renders children correctly 1`] = `
+<ul
+  className="talixo-breadcrumbs"
+>
+  <span
+    key="0/.0"
+  >
+    <span>
+      Home
+    </span>
+    <div
+      className="divider"
+    >
+      /
+    </div>
+  </span>
+  <span
+    key="1/.1"
+  >
+    <span>
+      Issues
+    </span>
+    <div
+      className="divider"
+    >
+      /
+    </div>
+  </span>
+  <span
+    key="2/.2"
+  >
+    <span>
+      Major
+    </span>
+  </span>
+</ul>
+`;
