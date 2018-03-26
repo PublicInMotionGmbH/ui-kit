@@ -37,15 +37,18 @@ describe('<TextInput />', () => {
     })
 
     it('should render placeholder correctly', () => {
-      expect(wrapper.instance().props.placeholder).toMatch(/^test$/)
+      const label = wrapper.find(`.${moduleName}__label`)
+      expect(label.text()).toMatch(/^test$/)
     })
 
-    it('should render .test correctly', () => {
-      expect(wrapper.instance().props.className).toMatch(/(^| )test( |$)/)
+    it('should render additional className correctly', () => {
+      const input = wrapper.find(`.${moduleName}`)
+      expect(input.props().className).toMatch(/(^| )test( |$)/)
     })
 
     it('should have hasError prop set to true', () => {
-      expect(wrapper.instance().props.hasError).toBe(true)
+      const input = wrapper.find(`.${moduleName}`)
+      expect(input.props().className).toMatch(/(^| )talixo-text-input--error( |$)/)
     })
   })
 
