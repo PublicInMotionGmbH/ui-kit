@@ -6,6 +6,7 @@ exports[`<NumberInput /> renders children correctly 1`] = `
 >
   <input
     type="number"
+    value={0}
   />
   <div
     className="talixo-number-input__stepper"
@@ -13,11 +14,19 @@ exports[`<NumberInput /> renders children correctly 1`] = `
     <button
       className="talixo-number-input__button"
       onClick={[Function]}
-    />
+    >
+      <Icon
+        name="add"
+      />
+    </button>
     <button
       className="talixo-number-input__button"
       onClick={[Function]}
-    />
+    >
+      <Icon
+        name="remove"
+      />
+    </button>
   </div>
 </div>
 `;
