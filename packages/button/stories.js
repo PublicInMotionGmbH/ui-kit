@@ -86,6 +86,6 @@ addStory('black-disabled-full-width', readme, () => (
 
 addStory('with icon', readme, () => (
   <Button color='primary'>
-    <Icon name='settings' /> <span>Settings</span>
+    <Icon name='settings' /> Settings
   </Button>
 ))

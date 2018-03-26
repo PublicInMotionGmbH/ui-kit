@@ -2,7 +2,6 @@
 
 @include module('button')
 
-  display: inline-block
   padding: grid-unit(1) grid-unit(1.5)
   border: $border-width solid
   border-radius: $border-radius-m
@@ -14,9 +13,11 @@
   box-shadow: $shadow-m rgba(0, 0, 0, 0.25)
   color: $color-white
   outline: inherit !important
+  display: flex
+  align-items: center
 
   > *
-    vertical-align: middle
+    margin: 0 grid-unit(0.5)
 
   &--small
     padding: grid-unit(0.5) grid-unit(1.5)
