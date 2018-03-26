@@ -4,7 +4,7 @@ import { mount } from 'enzyme'
 
 describe('<Popover />', () => {
   beforeEach(() => {
-    window.element.prototype.getBoundingClientRect = jest.fn(() => {
+    window.Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
         width: 100,
         height: 50,
