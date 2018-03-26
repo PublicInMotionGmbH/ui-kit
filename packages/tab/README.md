@@ -23,13 +23,13 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
+Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 active        |	bool      |	"false"	| Active state
 children      |	node      | n/a     | Tab content
 className     |	string    | n/a     | Additional class name
 id            |	string    | n/a     | Id passed to tab
-onClick       |	func      | n/a     | Function that runs whe tab is clicked
+onClick       |	func      | n/a     | Function that runs when tab is clicked
 style         |		        | n/a     | Additional styles passed to the tab
 
 ## Changelog

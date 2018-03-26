@@ -1,7 +1,7 @@
 @import './config'
 
 @include module('tab')
-  display: inline-block
+  // display: inline-block
   padding: grid-unit(1) grid-unit(1.5)
   border-width: $border-width $border-width 0 $border-width
   border-style: solid
@@ -9,10 +9,11 @@
   box-shadow: $shadow-m rgba(0, 0, 0, 0.25)
   font-size: $font-size-s
   cursor: pointer
+  display: inline-flex
+  align-items: center
 
   > *
-    margin: 0 0.5 * $base-size
-    vertical-align: middle
+    margin: 0 grid-unit(0.5)
 
   &:active
     font-weight: $font-weight-semibold

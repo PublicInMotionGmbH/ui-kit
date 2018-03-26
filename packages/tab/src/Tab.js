@@ -10,17 +10,14 @@ const name = prefix('tab')
  *
  * @param {object} props
  * @param {string} [props.active]
- * @param {string} [props.children]
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @param {string} [props.id]
- * @param {string} [props.onClick]
- * @param {string} [props.style]
+ * @param {*} [props.onClick]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 const Tab = ({ active, children, className, id, onClick, style }) => {
-  const mappedChildren = React.Children.map(children, child => {
-    return typeof child === 'string' ? <span>{child}</span> : child
-  })
   return (
     <div
       className={cls(name, className, {
@@ -30,7 +27,7 @@ const Tab = ({ active, children, className, id, onClick, style }) => {
       id={id}
       onClick={onClick}
     >
-      {mappedChildren}
+      {children}
     </div>
   )
 }
@@ -48,7 +45,7 @@ Tab.propTypes = {
   /** Id passed to tab */
   id: PropTypes.string,
 
-  /** Function that runs whe tab is clicked */
+  /** Function that runs when tab is clicked */
   onClick: PropTypes.func,
 
   /** Additional styles passed to the tab */

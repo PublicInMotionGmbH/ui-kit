@@ -4,11 +4,7 @@ exports[`<Tab /> renders .action correctly 1`] = `
 <div
   className="talixo-tab action"
 >
-  <span
-    key=".0"
-  >
-    Tab
-  </span>
+  Tab
 </div>
 `;
 
@@ -16,11 +12,7 @@ exports[`<Tab /> renders active correctly 1`] = `
 <div
   className="talixo-tab active"
 >
-  <span
-    key=".0"
-  >
-    Tab
-  </span>
+  Tab
 </div>
 `;
 
@@ -28,10 +20,6 @@ exports[`<Tab /> renders children correctly 1`] = `
 <div
   className="talixo-tab"
 >
-  <span
-    key=".0"
-  >
-    Tab
-  </span>
+  Tab
 </div>
 `;
