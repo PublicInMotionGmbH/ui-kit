@@ -13,16 +13,29 @@ const name = prefix('tooltip')
 class Portal extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      root: this.props.root || document.querySelector('body')
+    }
     this.el = document.createElement(this.props.element || 'div')
-    this.root = this.props.root || document.querySelector('body')
   }
 
   componentDidMount () {
-    this.root.appendChild(this.el)
+    this.state.root.appendChild(this.el)
+  }
+
+  componentDidUpdate () {
+    this.state.root.appendChild(this.el)
   }
 
   componentWillUnmount () {
-    this.root.removeChild(this.el)
+    this.state.root.removeChild(this.el)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.root !== nextProps.root) {
+      this.state.root.removeChild(this.el)
+      this.setState({ root: nextProps.root })
+    }
   }
 
   render () {
@@ -32,20 +45,21 @@ class Portal extends React.Component {
 
 /**
  * Component which represents Tooltip.
- *
- * @param {object} props
- * @param {string} [props.children]
- * @param {string} [props.className]
- * @param {string} [props.color]
- * @param {string} [props.fade]
- * @param {string} [props.fadeTime]
- * @param {string} [props.isOpen]
- * @param {string} [props.style]
- * @param {string} [props.position]
- * @param {string} [props.render]
- * @returns {React.Element}
  */
 class Tooltip extends React.Component {
+  /**
+  * @param {object} props
+  * @param {*} [props.children]
+  * @param {string} [props.className]
+  * @param {string} [props.color]
+  * @param {boolean} [props.fade]
+  * @param {number} [props.fadeTime]
+  * @param {boolean} [props.isOpen]
+  * @param {string} [props.position]
+  * @param {function} [props.render]
+  * @param {string} [props.rootNode]
+  * @param {object} [props.style]
+  */
   constructor (props) {
     super(props)
     this.state = {
@@ -55,11 +69,11 @@ class Tooltip extends React.Component {
       top: null
     }
     this.updatePosition = _.throttle(this.updatePosition, 10)
-    this.updatePosition = this.updatePosition.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseOver = this.handleMouseOver.bind(this)
     this.handleMouseClick = this.handleMouseClick.bind(this)
+    this.setRef = this.setRef.bind(this)
   }
 
   componentDidMount () {
@@ -72,11 +86,12 @@ class Tooltip extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (this.props.position !== nextProps.position) this.updatePosition(nextProps)
     if (this.props.isOpen !== nextProps.isOpen) this.setState({ isOpen: nextProps.isOpen })
   }
 
-  updatePosition () {
-    const { top, left } = getPositionNearElement(this.el, this.props.position)
+  updatePosition (nextProps) {
+    const { top, left } = getPositionNearElement(this.el, (nextProps && nextProps.position) || this.props.position)
     this.setState({ top, left })
   }
 
@@ -100,17 +115,21 @@ class Tooltip extends React.Component {
     this.setState({ clicked: true, isOpen: false })
   }
 
+  setRef (node, child) {
+    this.el = node
+    const {ref} = child
+    if (typeof ref === 'function') {
+      ref(node)
+    }
+  }
+
+  /**
+  * @returns {React.Element}
+  */
   render () {
     const {
-      children,
-      className,
-      color,
-      fade,
-      fadeTime,
-      position,
-      render,
-      rootNode,
-      style
+      className, color, fade, fadeTime,
+      position, render, rootNode, style
     } = this.props
 
     const defaultFadeTime = 600
@@ -124,9 +143,11 @@ class Tooltip extends React.Component {
         onMouseLeave={this.handleMouseLeave}
         onMouseOver={this.handleMouseOver}
       >
-        <div ref={node => (this.el = node)} style={{ display: 'inline-block' }} className={`${name}-wrapper`}>
-          {children}
-        </div>
+        {React.Children.map(this.props.children, child =>
+          React.cloneElement(React.Children.only(child), {
+            ref: node => this.setRef(node, child)
+          })
+        )}
         <TransitionGroup>
           {this.state.isOpen ? (
             <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${name}-fade`}>
@@ -176,8 +197,8 @@ Tooltip.propTypes = {
   /** Tooltip position */
   position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
 
-  /** Renders toolyip content */
-  render: PropTypes.func,
+  /** Renders tooltip content */
+  render: PropTypes.func.isRequired,
 
   /** Root element of tooltip portal */
   rootNode: PropTypes.string,

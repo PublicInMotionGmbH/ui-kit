@@ -21,18 +21,18 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type                               | Default | Description                    
+Property name | Type                               | Default | Description
 --------------|------------------------------------|:-------:|-----------------------
 children      |	node	                             | n/a     | Tooltipped elements
-className     |	string	                           | n/a     | Additional class name passed to the tooltip
-color         |	string	                           | n/a     | Color of the tooltip
-fade          |	bool	                             | "false" | Fade in / out animation
-fadeTime      |	number	                           | n/a     | Fade time
-isOpen        |	bool	                             | n/a     | Controls whether tooltip is open
+className     |	string                             | n/a     | Additional class name passed to the tooltip
+color         |	string                             | n/a     | Color of the tooltip
+fade          |	bool                               | "false" | Fade in / out animation
+fadeTime      |	number                             | n/a     | Fade time
+isOpen        |	bool                               | n/a     | Controls whether tooltip is open
 position      |	'left', 'right', 'top' or 'bottom' | n/a     | Tooltip position
 rootNode      |	string                             | 'body'  | Root element of tooltip portal
-render        |	func	                             | n/a     | Renders toolyip content
-style         |		                                 | n/a     | Additional styles passed to the tooltip
+render        |	func                               | n/a     | Renders toolyip content
+style         |                                    | n/a     | Additional styles passed to the tooltip
 
 ## Changelog
 

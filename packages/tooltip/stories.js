@@ -9,6 +9,55 @@ const readme = getReadmeDescription(require('./README.md'))
 // Create factories for story
 const addStory = createStoriesFactory('Tooltip', module)
 
+// Helper component
+
+class ControlledTooltip extends React.Component {
+  constructor (props) {
+    super()
+    this.state = {
+      isOpen: false
+    }
+    this.keyPressListener = this.keyPressListener.bind(this)
+    this.toggleTooltip = this.toggleTooltip.bind(this)
+  }
+
+  componentDidMount () {
+    window.addEventListener('keydown', this.keyPressListener)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('keydown', this.keyPressListener)
+  }
+
+  keyPressListener (e) { return (e.keyCode === 72 ? this.toggleTooltip() : null) }
+
+  toggleTooltip () {
+    this.setState(state => ({ isOpen: !state.isOpen }))
+  }
+
+  render () {
+    return (
+      <Tooltip
+        color='primary'
+        isOpen={this.state.isOpen}
+        position='right'
+        render={() => <span>I am controlled</span>}
+      >
+        <span
+          style={{
+            display: 'inline-block',
+            backgroundColor: '#eee',
+            padding: '1rem',
+            cursor: 'pointer'
+          }}
+        >
+          Press 'h' key
+        </span>
+      </Tooltip>
+    )
+  }
+}
+
 // Stories
 
 addStory('default', readme, () => (
@@ -53,3 +102,4 @@ addStory('custom fade time', readme, () => (
     </span>
   </Tooltip>
 ))
+addStory('controlled', readme, () => <ControlledTooltip />)

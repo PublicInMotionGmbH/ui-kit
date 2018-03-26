@@ -8,16 +8,12 @@ exports[`<Tooltip /> renders children correctly 1`] = `
   onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
-  <div
-    className="talixo-tooltip-wrapper"
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
+  <span
+    className="talixo-tooltip-target"
+    key=".0"
   >
     Tooltip
-  </div>
+  </span>
   <div />
 </div>
 `;

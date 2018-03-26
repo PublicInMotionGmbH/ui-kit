@@ -7,7 +7,11 @@ const name = prefix('tooltip')
 
 describe('<Tooltip />', () => {
   it('renders children correctly', () => {
-    const wrapper = mount(<Tooltip position='left'>Tooltip</Tooltip>)
+    const wrapper = mount(
+      <Tooltip position='left' render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
 
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
@@ -16,10 +20,10 @@ describe('<Tooltip />', () => {
   it('renders render when hovered', () => {
     const wrapper = mount(
       <Tooltip position='left' render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-wrapper`).simulate('mouseOver')
+    wrapper.find(`.${name}-target`).simulate('mouseOver')
 
     expect(wrapper.contains(<span>Left</span>)).toEqual(true)
     wrapper.unmount()
@@ -28,11 +32,11 @@ describe('<Tooltip />', () => {
   it('renders position correctly', () => {
     const wrapper = mount(
       <Tooltip position='top' render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
 
-    wrapper.find(`.${name}-wrapper`).simulate('mouseOver')
+    wrapper.find(`.${name}-target`).simulate('mouseOver')
     expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toEqual(true)
     wrapper.unmount()
   })
@@ -40,11 +44,11 @@ describe('<Tooltip />', () => {
   it('renders .big correctly', () => {
     const wrapper = mount(
       <Tooltip position='left' className='big' render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
 
-    wrapper.find(`.${name}-wrapper`).simulate('mouseOver')
+    wrapper.find(`.${name}-target`).simulate('mouseOver')
     expect(wrapper.find(`.${name}`).hasClass('big')).toEqual(true)
     wrapper.unmount()
   })
@@ -52,10 +56,10 @@ describe('<Tooltip />', () => {
   it('renders fade correctly', () => {
     const wrapper = mount(
       <Tooltip position='left' fade render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-wrapper`).simulate('mouseOver')
+    wrapper.find(`.${name}-target`).simulate('mouseOver')
     expect(wrapper.find(`.${name}`).prop('style').transition).toBeDefined()
     wrapper.unmount()
   })
@@ -63,10 +67,10 @@ describe('<Tooltip />', () => {
   it('renders fadeTime correctly', () => {
     const wrapper = mount(
       <Tooltip position='left' fade fadeTime={1200} render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-wrapper`).simulate('mouseOver')
+    wrapper.find(`.${name}-target`).simulate('mouseOver')
     expect(wrapper.find(`.${name}`).prop('style').transition).toContain('opacity 1200ms')
     wrapper.unmount()
   })
@@ -74,7 +78,7 @@ describe('<Tooltip />', () => {
   it('renders render when isOpen is set to true', () => {
     const wrapper = mount(
       <Tooltip position='left' isOpen render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
     expect(wrapper.contains(<span>Left</span>)).toEqual(true)
@@ -84,10 +88,10 @@ describe('<Tooltip />', () => {
   it('disables event handlers when isOpen is set to true', () => {
     const wrapper = mount(
       <Tooltip position='left' isOpen render={() => <span>Left</span>}>
-        Tooltip
+        <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-wrapper`).simulate('click')
+    wrapper.find(`.${name}-target`).simulate('click')
     expect(wrapper.contains(<span>Left</span>)).toEqual(true)
     wrapper.unmount()
   })
