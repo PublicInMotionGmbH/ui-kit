@@ -1,0 +1,65 @@
+@import '../../commons/config.sass'
+
+@include module('card')
+  display: inline-block
+  flex: 0 1 grid-unit(45)
+  position: relative
+  border: $border-width solid
+  border-color: $color-tab-border
+  background-color: $color-white
+  color: #8c8c8c
+  font-size: $font-size-m
+  margin-left: grid-unit(2)
+  margin-right: grid-unit(2)
+  transition: box-shadow 0.2s ease
+  margin-bottom: grid-unit(4)
+
+  > *
+    vertical-align: middle
+
+  &:hover
+    box-shadow: 0 grid-unit(2) grid-unit(2.5) 0 rgba(0, 0, 0, 0.3)
+
+  &-content
+    margin-top: grid-unit(2)
+    margin-bottom: grid-unit(4)
+    padding: grid-unit(2)
+  
+  &-footer
+    margin-bottom: 0
+    padding: 0 grid-unit(2)
+    position: absolute
+    bottom: grid-unit(2)
+    left: 0
+    right: 0
+
+    *
+      margin: 0 grid-unit(0.5)
+
+  &-header
+    margin-bottom: grid-unit(-2)
+    overflow: hidden
+
+  > img
+    vertical-align: middle
+    object-fit: cover
+    width: 100%
+    height: grid-unit(20)
+    padding-top: 0 !important
+
+  &-title
+    position: absolute
+    width: 100%
+    height: grid-unit(16.5)
+    border-width: 0 0 $border-width 0
+    border-style: solid
+    border-color: $color-tab-border
+
+    h2
+      color: $color-white
+      font-size: $font-size-l
+      position: absolute
+      bottom: grid-unit(0.5)
+      left: 0
+      padding: 0 grid-unit(2)
+      z-index: 1
