@@ -48,7 +48,7 @@ class Notifications extends React.Component {
                 {React.cloneElement(child, {
                   className,
                   style,
-                  onClick: () => this.handleRemove(i)
+                  handleRemove: () => this.handleRemove(i)
                 })}
               </Fade>
             ))}

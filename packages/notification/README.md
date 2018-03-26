@@ -21,14 +21,14 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
+Property name | Type      | Default | Description
 --------------|-----------|:-------:|------------------------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-children      |	node	    | n/a     |	Notification content
-className     |	string	  | n/a     | Additional class name passed to notification
-onClick       |	func	    | n/a     |	Function that runs when close button is clicked
-style         |		      	| n/a     | Additional styles passed to notification
-variant       |	string	  | n/a     | Notification variant
+children      |	node      | n/a     |	Notification content
+className     |	string    | n/a     | Additional class name passed to notification
+handleRemove  |	func      | n/a     |	Function that runs when close button is clicked
+style         |           | n/a     | Additional styles passed to notification
+variant       |	string    | n/a     | Notification variant
 
 
 ## Changelog

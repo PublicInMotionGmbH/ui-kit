@@ -12,13 +12,13 @@ const name = prefix('notification')
  * @param {object} props
  * @param {string} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.onClick]
+ * @param {string} [props.handleRemove]
  * @param {string} [props.style]
  * @param {string} [props.variant]
  * @returns {React.Element}
  */
 const Notification = props => {
-  const { children, className, onClick, style, variant } = props
+  const { children, className, handleRemove, style, variant } = props
   const mappedChildren = React.Children.map(children, child => {
     return typeof child === 'string' ? <span>{child}</span> : child
   })
@@ -30,7 +30,7 @@ const Notification = props => {
       style={style}
     >
       {mappedChildren}
-      <Icon name='close' className='close' onClick={onClick} />
+      <Icon name='close' className='close' onClick={handleRemove} />
     </div>
   )
 }
@@ -43,7 +43,7 @@ Notification.propTypes = {
   className: PropTypes.string,
 
   /** Function that runs when close button is clicked */
-  onClick: PropTypes.func,
+  handleRemove: PropTypes.func,
 
   /** Additional styles passed to notifications */
   style: PropTypes.object,

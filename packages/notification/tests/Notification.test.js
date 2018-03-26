@@ -22,9 +22,9 @@ describe('<Notification />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('calls onClick when clicked', () => {
+  it('calls handleRemove when clicked', () => {
     const onClick = jest.fn()
-    const wrapper = mount(<Notification onClick={onClick}>Notification</Notification>)
+    const wrapper = mount(<Notification handleRemove={onClick}>Notification</Notification>)
 
     wrapper.find('span.close').simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
