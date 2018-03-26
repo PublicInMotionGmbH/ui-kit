@@ -4,7 +4,7 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const clsName = prefix('checkbox')
+const moduleName = prefix('checkbox')
 
 /**
  * Component which represents checkbox.
@@ -16,17 +16,19 @@ const clsName = prefix('checkbox')
  * @param {object} [props.style]
  * @returns {React.Element}
  */
-const Checkbox = ({ children, className, size, style, ...props }) => (
-  <label
-    className={cls(clsName, className, {
-      [prefix(`checkbox--${size}`)]: size !== undefined
-    })}
-    style={style}
-  >
-    <input type='checkbox' {...props} />
-    <span>{children}</span>
-  </label>
-)
+function Checkbox (props) {
+  const { children, className, size, style, ...passedProps } = props
+  const clsName = cls(moduleName, className, {
+    [prefix(`checkbox--${size}`)]: size != null
+  })
+
+  return (
+    <label className={clsName} style={style}>
+      <input type='checkbox' {...passedProps} />
+      <span>{children}</span>
+    </label>
+  )
+}
 
 Checkbox.propTypes = {
   /** Additional class name */
@@ -36,13 +38,10 @@ Checkbox.propTypes = {
   children: PropTypes.node,
 
   /** Checkbox label size ('small', 'large') */
-  size: PropTypes.string,
+  size: PropTypes.oneOf([ 'small', 'large' ]),
 
-  /** Additional styles */
+  /** Additional styles for wrapper */
   style: PropTypes.object
-}
-
-Checkbox.defaultProps = {
 }
 
 export default Checkbox

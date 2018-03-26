@@ -28,7 +28,7 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | Checkbox description
 size          | string    | n/a     | checkbox label size (e.g. 'small')
-style         | object    | n/a     | additional styles
+style         | object    | n/a     | additional styles for wrapper
 
 
 ## Changelog
