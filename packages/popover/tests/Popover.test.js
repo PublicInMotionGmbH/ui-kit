@@ -1,11 +1,10 @@
-import { React, Element } from 'react'
+import React from 'react'
 import Popover from '../src/Popover'
 import { mount } from 'enzyme'
-import { jest, beforeEach } from 'jest'
 
 describe('<Popover />', () => {
   beforeEach(() => {
-    Element.prototype.getBoundingClientRect = jest.fn(() => {
+    window.element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
         width: 100,
         height: 50,
