@@ -1,5 +1,9 @@
 @import './config'
 
+$marginY: grid-unit(1)
+$marginX: grid-unit(2)
+$visibleNextNotificationHeight: grid-unit(4)
+
 @include module('notifications')
   position: relative
   width: grid-unit(50)
@@ -7,8 +11,8 @@
   flex-wrap: wrap
   flex-direction: column
 
-  > *
-    margin: grid-unit(1) grid-unit(2)
+  @include module('notification')
+    margin: $marginY $marginX
 
   &-container
     position: fixed
@@ -19,30 +23,46 @@
 
   &-wrapper
     position: absolute
-    height: grid-unit(19)
     width: 100%
-    bottom: 0
+    top: 100%
+    transform: translateY(-1 * ($marginY + $visibleNextNotificationHeight))
     left: 0
-    overflow: hidden
 
-  .fade-enter
+    @include module('notification')
+      transform: translateY(0) translateX(0)
+      transition: opacity 300ms ease-in, transform 300ms
+
+      &:first-child
+        position: absolute
+        z-index: 2
+        transform: translateY(-100%) translateY(-1 * $marginY)
+
+  #{prefix('notification')}.fade-enter
     opacity: 0.01
     transform: translateY(100%)
+
     &.fade-enter-active
       opacity: 1
       transform: translateY(0)
       transition: opacity 300ms ease-in, transform 300ms
 
+      &:first-child
+        transform: translateY(-100%) translateY(-1 * $marginY)
+
   .fade-exit
     opacity: 1
     transform: translateX(0)
+
+    &:first-child
+      transform: translateY(-100%) translateY(-1 * $marginY) translateX(0)
+
     &.fade-exit-active
       opacity: 0.01
       transform: translateX(100%)
-      height: 0
-      margin: 0
-      padding: 0
       transition: opacity 300ms ease-in, transform 300ms, height 300ms ease 300ms, margin 300ms ease 300ms, padding 300ms ease 300ms, line-height 300ms ease 300ms, border-width 300ms ease 300ms
+
+      &:first-child
+        transform: translateX(100%) translateY(-100%) translateY(-1 * $marginY)
 
 
 @include module('notification')
@@ -51,8 +71,6 @@
   flex-direction: column
   justify-content: center
   align-items: flex-start
-  // TODO Fix height
-  height: grid-unit(9)
   width: 100%
   padding: grid-unit(2) grid-unit(4)
   border: $border-width solid
