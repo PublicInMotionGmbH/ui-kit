@@ -14,7 +14,7 @@ const addStory = createStoriesFactory('Radio Input', module)
 addStory('initial', readme, () => (
   <div>
     <h3>Test radio</h3>
-    <RadioInput name='test' checked>Option 1</RadioInput>
+    <RadioInput name='test' defaultChecked>Option 1</RadioInput>
     <RadioInput name='test'>Option 2</RadioInput>
   </div>
 ))

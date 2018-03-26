@@ -17,12 +17,13 @@ const moduleName = prefix('radio-input')
  */
 function RadioInput (props) {
   const { children, className, size, style, ...passedProps } = props
+  const wrapperClass = cls(moduleName, className, {
+    [`${moduleName}-${size}`]: size !== undefined
+  })
 
   return (
     <label
-      className={cls(moduleName, className, {
-        [`${moduleName}-${size}`]: size !== undefined
-      })}
+      className={wrapperClass}
       style={style}
     >
       <input type='radio' {...passedProps} />
@@ -39,10 +40,7 @@ RadioInput.propTypes = {
   className: PropTypes.string,
 
   /** Size of input (can be 'small') */
-  size: PropTypes.string,
-
-  /** Additional wrapper style object */
-  style: PropTypes.object
+  size: PropTypes.string
 }
 
 RadioInput.defaultProps = {
