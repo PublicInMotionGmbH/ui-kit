@@ -4,7 +4,7 @@ exports[`<Modal /> renders children correctly 1`] = `
 <div>
   <ModalPortal>
     <div
-      className="talixo-modal--backdrop exiting"
+      className="talixo-modal-backdrop talixo-modal-backdrop--exiting"
     >
       <div
         className="talixo-modal"
