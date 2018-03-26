@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{js,jsx}'],
+  collectCoverageFrom: ['packages/**/*.{js,jsx}'],
   setupFiles: ['<rootDir>/../../tests/polyfills.js'],
   setupTestFrameworkScriptFile: '<rootDir>/../../tests/setupTests',
   testMatch: ['<rootDir>/tests/**/?(*.)test.{js,jsx}'],
@@ -10,6 +10,6 @@ module.exports = {
     '^.+\\.css$': '<rootDir>/../../tests/cssTransform',
     '^(?!.*\\.(js|jsx|css|json)$)': '<rootDir>/../../tests/fileTransform'
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.(js|jsx)$' ],
   moduleFileExtensions: ['js', 'json', 'jsx']
 }
