@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import { React, Element } from 'react'
 import Popover from '../src/Popover'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
+import { jest, beforeEach } from 'jest'
 
 describe('<Popover />', () => {
   beforeEach(() => {
