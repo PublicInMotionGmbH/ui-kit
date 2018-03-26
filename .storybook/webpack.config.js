@@ -1,55 +1,56 @@
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+/**
+ * Build Webpack configuration for Storybook
+ *
+ * @param {object} config
+ * @returns {object}
+ */
+function buildWebpackConfiguration (config) {
+  // Set 'cache' property
+  config.cache = true
 
-const commander = require('commander')
-const configDir = commander.configDir || './.storybook'
+  // Resolve only .js(on)? files
+  config.resolve.extensions = [ '.js', '.json' ]
 
-const buildConfig = require('@storybook/react/dist/server/config').default
+  // Parse JavaScript files from @talixo/ packages
+  config.module.rules = config.module.rules.map(rule => {
+    if (rule.test.toString() === '/\\.jsx?$/') {
+      rule.test = /\.js$/
+    }
 
-const _buildConfig = process.env.NODE_ENV === 'production'
-    ? require('@storybook/react/dist/server/config/webpack.config.prod').default
-    : require('@storybook/react/dist/server/config/webpack.config').default
+    return rule
+  })
 
-const env = process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'DEVELOPMENT'
-
-// Build default Webpack configuration for Storybook
-const _config = _buildConfig(configDir)
-const config = buildConfig(env, _config, configDir)
-
-// Parse JavaScript files from @talixo/ packages
-config.module.rules = config.module.rules.map(rule => {
-  if (rule.test.toString() !== '/\\.jsx?$/') {
-    rule.include = [ /\/@talixo\// ]
-  }
-
-  return rule
-})
-
-// Fix loader of Markdown files
-config.module.rules = config.module.rules .filter(rule => rule.test.toString() !== '/\\.md$/')
-config.module.rules.push({
-  test: /\.md$/,
-  use: [ { loader: 'markdown-loader' } ]
-})
+  // Fix loader of Markdown files
+  config.module.rules = config.module.rules.filter(rule => rule.test.toString() !== '/\\.md$/')
+  config.module.rules.push({
+    test: /\.md$/,
+    use: [ 'html-loader', 'markdown-loader' ]
+  })
 
 
-// Add loader for fonts
-config.module.rules.push({
-  test: /\.(eot|ttf|svg|woff|woff2)$/,
-  loader: 'url-loader?limit=10000'
-})
+  // Add loader for fonts
+  config.module.rules.push({
+    test: /\.(eot|ttf|svg|woff|woff2)$/,
+    loader: 'url-loader'
+  })
 
-// Add loader for SASS files
-config.module.rules.push({
-  test: /\.sass$/,
-  loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
-})
+  // Add loader for SASS files
+  config.module.rules.push({
+    test: /\.sass$/,
+    loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+  })
 
-// Remove HotModuleReplacementPlugin, which causes errors in Storybook hot reloading
-config.plugins = config.plugins.filter(plugin => {
-  return plugin.constructor.name !== 'HotModuleReplacementPlugin'
-})
+  const DISABLED_PLUGINS = [
+    'ProgressPlugin',
+    'CaseSensitivePathsPlugin'
+  ]
 
-// Add HardSourceWebpackPlugin for caching
-config.plugins.push(new HardSourceWebpackPlugin())
+  // Remove HotModuleReplacementPlugin, which causes errors in Storybook hot reloading
+  config.plugins = config.plugins.filter(plugin => {
+    return DISABLED_PLUGINS.indexOf(plugin.constructor.name) === -1
+  })
 
-module.exports = config
+  return config
+}
+
+module.exports = buildWebpackConfiguration
