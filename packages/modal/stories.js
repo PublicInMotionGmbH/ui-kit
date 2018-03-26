@@ -28,7 +28,8 @@ const render = (setState, state) => {
 }
 const getInitialStateDefault = () => {
   return {
-    isOpen: false
+    isOpen: false,
+    state: ''
   }
 }
 

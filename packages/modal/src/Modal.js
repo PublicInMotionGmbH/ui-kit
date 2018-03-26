@@ -5,19 +5,15 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('modal')
+const moduleName = prefix('modal')
 
 const modalRoot = document.querySelector('body')
 
 /**
- * Component which represents modal.
+ * Component which represents modal portal.
  *
  * @param {object} props
- * @param {string} [props.className]
- * @param {node} [props.children]
- * @param {boolean} [props.isOpen]
- * @param {string} [props.size]
- * @param {object} [props.style]
+ * @param {*} [props.children]
  * @returns {React.Element}
  */
 class ModalPortal extends React.Component {
@@ -39,6 +35,17 @@ class ModalPortal extends React.Component {
   }
 }
 
+/**
+ * Component which represents modal.
+ *
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {*} [props.children]
+ * @param {boolean} [props.isOpen]
+ * @param {string} [props.size]
+ * @param {object} [props.style]
+ * @returns {React.Element}
+ */
 class Modal extends React.Component {
   constructor (props) {
     super(props)
@@ -58,15 +65,21 @@ class Modal extends React.Component {
 
   render () {
     const { children, className, size, style, isOpen, ...rest } = this.props
+    const backdropClasses = cls(prefix('modal-backdrop'), {
+      [`${prefix('modal-backdrop')}--entered`]: this.state.isOpen,
+      [`${prefix('modal-backdrop')}--exiting`]: !this.state.isOpen
+    })
+    const modalClasses = cls(moduleName, className, {
+      [prefix(`modal--${size}`)]: size.length > 0
+    })
+
     return (
       <div>
         <ModalPortal>
-          <div className={cls(prefix('modal--backdrop'), { entered: this.state.isOpen, exiting: !this.state.isOpen })}>
+          <div className={backdropClasses}
+          >
             <div
-              className={cls(name, className, {
-                [prefix(`modal--${size}`)]: size !== undefined
-              })}
-              style={style}
+              className={modalClasses}
               {...rest}
             >
               {children}
@@ -89,14 +102,17 @@ Modal.propTypes = {
   isOpen: PropTypes.bool,
 
   /** Size of the modal ('small', 'medium', 'large') */
-  size: PropTypes.string,
-
-  /** Additional styles */
-  style: PropTypes.object
+  size: PropTypes.oneOf([
+    '',
+    'small',
+    'medium',
+    'large'
+  ])
 }
 
 Modal.defaultProps = {
-  isOpen: false
+  isOpen: false,
+  size: ''
 }
 
 export default Modal
