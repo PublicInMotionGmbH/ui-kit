@@ -6,7 +6,7 @@
   color: $color-black
 
 
-  #{prefix('number-input-stepper')} #{prefix('number-input-button')}
+  #{prefix('number-input', 'stepper')} #{prefix('number-input', 'button')}
     border-color: $color-placeholder-text
     background-color: $color-white
     cursor: pointer
@@ -19,7 +19,7 @@
   > input::placeholder
     color: $color-placeholder-text
 
-  &.errors
+  &--error
     border-color: $color-talixo-error-red
 
     > input, &::placeholder > input

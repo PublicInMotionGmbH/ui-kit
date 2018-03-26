@@ -7,13 +7,17 @@ describe('<NumberInput />', () => {
     const wrapper = shallow(<NumberInput />)
     expect(wrapper).toMatchSnapshot()
   })
-  it('renders .name correctly', () => {
-    const wrapper = shallow(<NumberInput className='name' />)
-    expect(wrapper).toMatchSnapshot()
-  })
+  describe('adding props', () => {
+    let wrapper
+    beforeAll(() => { // eslint-disable-line
+      wrapper = shallow(<NumberInput className='name' hasError />)
+    })
+    it('should set className', () => {
+      expect(wrapper.instance().props.className).toMatch(/(^| )name( |$)/)
+    })
 
-  it('renders errors correctly', () => {
-    const wrapper = shallow(<NumberInput errors={['error1']} />)
-    expect(wrapper).toMatchSnapshot()
+    it('should set hasError', () => {
+      expect(wrapper.instance().props.hasError).toBe(true)
+    })
   })
 })

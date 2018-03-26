@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
+import Icon from '@talixo/icon'
 
 const moduleName = prefix('number-input')
 
@@ -20,7 +21,7 @@ const moduleName = prefix('number-input')
  * @returns {React.Element}
  */
 function NumberInput (props) {
-  const { className, errors, name, onChange, placeholder, size, style, ...passedProps } = props
+  const { className, hasError, name, onChange, placeholder, size, style, ...passedProps } = props
   let input
   const increment = () => {
     input.value++
@@ -31,9 +32,9 @@ function NumberInput (props) {
 
   return (
     <div
-      className={cls(moduleName, className, {
-        [`${moduleName}-${size}`]: size !== undefined,
-        'errors': errors.length > 0
+      className={cls(moduleName, {
+        [`${moduleName}--${size}`]: size !== undefined,
+        [`${moduleName}--error`]: hasError
       })}
       style={style}
     >
@@ -41,15 +42,16 @@ function NumberInput (props) {
         ref={node => {
           input = node
         }}
+        className={className}
         type='number'
         {...passedProps}
       />
-      <div className={prefix('number-input-stepper')}>
-        <button className={prefix('number-input-button')} onClick={increment}>
-          <span className='material-icons'>add</span>
+      <div className={`${moduleName}__stepper`}>
+        <button className={`${moduleName}__button`} onClick={increment}>
+          <Icon name='add' />
         </button>
-        <button className={prefix('number-input-button')} onClick={decrement}>
-          <span className='material-icons'>remove</span>
+        <button className={`${moduleName}__button`} onClick={decrement}>
+          <Icon name='remove' />
         </button>
       </div>
     </div>
@@ -57,11 +59,11 @@ function NumberInput (props) {
 }
 
 NumberInput.propTypes = {
-  /** Additional class name */
+  /** Additional class name passed to input */
   className: PropTypes.string,
 
-  /** List of errors */
-  errors: PropTypes.arrayOf(PropTypes.string),
+  /** Indicates that input has error */
+  hasError: PropTypes.bool,
 
   /** Size of input (can be 'small') */
   size: PropTypes.string,
@@ -71,7 +73,7 @@ NumberInput.propTypes = {
 }
 
 NumberInput.defaultProps = {
-  errors: []
+  hasError: false
 }
 
 export default NumberInput

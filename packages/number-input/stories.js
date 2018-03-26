@@ -20,5 +20,5 @@ addStory('small', readme, () => (
 ))
 
 addStory('with error', readme, () => (
-  <NumberInput errors={['No input']} />
+  <NumberInput hasError />
 ))

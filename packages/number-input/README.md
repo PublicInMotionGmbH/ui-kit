@@ -25,10 +25,10 @@ It allows any props which are allowed for `input[type="number"]`. Additionally, 
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-errors        | string[]  | `[]`    | list of errors
+className     | string    | n/a     | additional class name passed to 
+hasError      | boolean   | `false` | indicates that input has error
 size          | string    | n/a     | size of input (can be 'small')
-style         | object    | n/a     | Additional styling
+style         | object    | n/a     | additional styling of wrapper
 
 ## Changelog
 
