@@ -4,29 +4,98 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('text-input')
+const moduleName = prefix('text-input')
 
 /**
  * Component which represents Text Input.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {boolean} [props.hasError]
+ * @param {function} [props.onChange]
+ * @param {string} [props.placeholder]
+ * @param {string} [props.size]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
-function TextInput (props) {
-  const { className, ...passedProps } = props
+class TextInput extends React.Component {
+  constructor () {
+    super()
+    this.state = { inputValue: '' }
+    this.onInputChange = this.onInputChange.bind(this)
+  }
 
-  return (
-    <span className={cls(className, name)} {...passedProps} />
-  )
+  onInputChange (e) {
+    const { onChange } = this.props
+    this.setState({ inputValue: e.target.value })
+    if (onChange) { onChange(e) }
+  }
+
+  render () {
+    const {
+      props: { className, hasError, onChange, placeholder, size, style, ...restProps },
+      state: { inputValue },
+      onInputChange
+    } = this
+
+    const inputClasses = cls(moduleName, className, {
+      [`${moduleName}--${size}`]: size.length > 0,
+      [`${moduleName}--error`]: hasError
+    })
+    const wrapperClasses = cls(`${moduleName}__wrapper`, {
+      [[`${moduleName}__wrapper--${size}`]]: size.length > 0
+    })
+    const labelClasses = cls(`${moduleName}__label`, {
+      [`${moduleName}__label--${size}`]: size.length > 0,
+      [`${moduleName}__label--error`]: hasError,
+      [`${moduleName}__label--not-empty`]: !!inputValue
+    })
+
+    return (
+      <div
+        className={wrapperClasses}
+        style={style}
+      >
+        <input
+          type='text'
+          className={inputClasses}
+          onChange={onInputChange}
+          {...restProps}
+        />
+        <label
+          className={labelClasses}
+        >
+          {placeholder}
+        </label>
+      </div>
+    )
+  }
 }
 
 TextInput.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string
+  /** Additional class name for text input */
+  className: PropTypes.string,
+
+  /** Indicates that input has error */
+  hasError: PropTypes.bool,
+
+  /** Callback for change event */
+  onChange: PropTypes.func,
+
+  /** Input floating label text */
+  placeholder: PropTypes.node,
+
+  /** Size of text input (can be 'small') */
+  size: PropTypes.oneOf(['', 'small']),
+
+  /** Additional input wrapper styling */
+  style: PropTypes.object
 }
 
 TextInput.defaultProps = {
+  hasError: false,
+  onChange: () => {},
+  size: ''
 }
 
 export default TextInput

@@ -20,10 +20,16 @@ These packages are required by `@talixo/text-input`, but you have to install the
 to avoid having different versions of these in your application.
 
 ## Supported props
+It allows any props which are allowed for `input[type=text]`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
+hasError      | boolean   | `false` | indicates that input has error
+onChange      | function  | `() => {}`  | callback for change event
+placeholder   | string    | n/a     | Input floating label text 
+size          | string    | `''`    | size of text input (can be 'small')
+style         | object    | n/a     | additional input wrapper styling
 
 ## Changelog
 

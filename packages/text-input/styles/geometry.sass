@@ -1,4 +1,31 @@
 @import './config'
 
 @include module('text-input')
-  display: block
+  padding: dp(3) dp(2) dp(.8)
+  border: 1px solid
+  border-radius: $border-radius-m
+
+  &--small
+    padding: dp(2) dp(2) dp(.4)
+
+  &:focus ~ #{prefix('text-input', 'label')},
+  ~ #{prefix('text-input', 'label')}#{prefix('text-input', 'label--not-empty')}
+    top: dp(.6)
+    font-size: dp(1.4)
+
+#{prefix('text-input', 'wrapper')}
+  display: inline-block
+  position: relative
+  font-size: $font-size-m
+
+  &--small
+    font-size: $font-size-s
+
+#{prefix('text-input', 'label')}
+  position: absolute
+  left: dp(2)
+  top: calc(50% - (.5 * #{$font-size-m}))
+  transition: .3s ease all
+
+  &--small
+    top: calc(50% - (.5 * #{$font-size-s}))
