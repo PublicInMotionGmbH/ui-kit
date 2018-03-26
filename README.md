@@ -91,6 +91,63 @@ Each package is available in `packages` directory. Typical structure:
 
 There is straight-forward wizard available after `npm run create` command.
 
+### Writing stories for storybook
+
+Stories are automatically loaded into storybook from `stories.js` file directly in package directory.
+The same thing is with stylesheets, Storybook is automatically loading `styles/main.sass` file.
+
+#### Creating story
+
+You can use standard storybook options or use our helpers for that.
+
+##### Simple story
+
+```js
+import React from 'react'
+
+import Something from './src/Something'
+
+import { createStoriesFactory } from '@talixo/commons/story'
+
+const addStory = createStoriesFactory('Something', module)
+
+addStory('initial', 'some description', () => <Something />)
+addStory('disabled', 'some description', () => <Something disabled />)
+```
+
+##### Controlled story
+
+If you need to show component which needs to keep state somewhere,
+Storybook info addon by default will show source only of Controller.
+Because of that, there is additional helper which will show source code correctly:
+
+```js
+import React from 'react'
+
+import FancyButton from './src/FancyButton'
+
+import { createStoriesFactory } from '@talixo/commons/story'
+
+const addStory = createStoriesFactory('FancyButton', module)
+
+function render (setState, state) {
+  return (
+    <div style={{ fontSize: state.size }}>
+      Text
+      <FancyButton onClick={() => setState({ size: state.size + 1 })}>Increase</FancyButton>
+    </div>
+  )
+}
+
+function getInitialState () {
+  return {
+    size: 10
+  }
+}
+
+addStory.controlled('initial', 'some description', render, getInitialState)
+```
+
 ### Development commands & troubleshooting
 
 Description                                                  | Example
