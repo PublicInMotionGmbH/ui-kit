@@ -4,27 +4,26 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('pill')
+const moduleName = prefix('pill')
 
 /**
  * Component which represents Pill.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {string} [props.color]
+ * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Pill (props) {
-  const { children, className, color, style, variant, ...passedProps } = props
+  const { children, className, color, ...passedProps } = props
+
+  const clsName = cls(moduleName, className, {
+    [`${moduleName}--${color}`]: color !== undefined
+  })
 
   return (
-    <span
-      className={cls(name, className, {
-        [`${name}--${color}`]: color !== undefined,
-        [`${name}--${variant}`]: variant !== undefined
-      })}
-      {...passedProps}
-      style={style}
-    >
+    <span className={clsName} {...passedProps}>
       {children}
     </span>
   )
@@ -37,14 +36,8 @@ Pill.propTypes = {
   /** Children */
   children: PropTypes.node,
 
-  /** Color of text */
-  color: PropTypes.string,
-
-  /** CSS Styles */
-  style: PropTypes.object,
-
-  /** Variants */
-  variant: PropTypes.string
+  /** Pill color */
+  color: PropTypes.string
 }
 
 export default Pill

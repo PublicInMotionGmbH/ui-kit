@@ -21,15 +21,12 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Additionally, it handles some differently:
+It allows any property which can be passed to `span`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-color         | string    | n/a     | color of text
-style         | object    | n/a     | object with styles
-variant       | string    | n/a     | different variants
-
+color         | string    | n/a     | pill color
 
 ## Changelog
 
