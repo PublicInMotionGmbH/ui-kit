@@ -2,10 +2,12 @@
 
 @include module('list')
   list-style-type: none
+  padding: 0
 
-  > li > *
+  > li
+    display: flex
+
+  &__bullet
     display: inline-block
-
-    &:first-child
-      vertical-align: top
-      margin-right: grid-unit(1)
+    margin-right: grid-unit(1)
+    user-select: none

@@ -1,19 +1,17 @@
 import React from 'react'
 
-import List from './src/List'
-import Icon from '../icon/src/Icon'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/story'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import Icon from '@talixo/icon'
+
+import List from './src/List'
 
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('List', module)
 
 addStory('icon bullet', readme, () => (
-  <List bullet={<Icon name='done' />}>
+  <List bullet={<Icon name='done' style={{ color: 'green' }} />}>
     <span>
       Live ride info, price estimation and flight number <br />tracking
     </span>
@@ -26,6 +24,7 @@ addStory('icon bullet', readme, () => (
     </span>
   </List>
 ))
+
 addStory('~ bullet', readme, () => (
   <List bullet='~'>
     <span>

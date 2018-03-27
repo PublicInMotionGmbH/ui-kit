@@ -23,12 +23,11 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `ul`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-bullet        | node      | n/a     | bullet type 
-children      | node      | n/a     | children of list
-style         | object    | n/a     | style CSS
+Property name | Required |Type      | Default | Description
+--------------|----------|-----------|:-------:|--------------------------------
+className     | no       | string    | n/a     | additional class name passed to wrapper
+bullet        | yes      | node      | n/a     | bullet element
+children      | no       | node      | n/a     | list of points
 
 ## Changelog
 

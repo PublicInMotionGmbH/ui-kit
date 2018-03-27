@@ -7,41 +7,65 @@ exports[`<List /> renders children correctly 1`] = `
   <li
     key=".0"
   >
-    <span>
+    <span
+      className="talixo-list__bullet"
+    >
       #
     </span>
-    <span>
-      Home
+    <span
+      className="talixo-list__content"
+    >
+      <span>
+        Home
+      </span>
     </span>
   </li>
   <li
     key=".1"
   >
-    <span>
+    <span
+      className="talixo-list__bullet"
+    >
       #
     </span>
-    <span>
-      Help
+    <span
+      className="talixo-list__content"
+    >
+      <span>
+        Help
+      </span>
     </span>
   </li>
   <li
     key=".2"
   >
-    <span>
+    <span
+      className="talixo-list__bullet"
+    >
       #
     </span>
-    <span>
-      Issues
+    <span
+      className="talixo-list__content"
+    >
+      <span>
+        Issues
+      </span>
     </span>
   </li>
   <li
     key=".3"
   >
-    <span>
+    <span
+      className="talixo-list__bullet"
+    >
       #
     </span>
-    <span>
-      Log In
+    <span
+      className="talixo-list__content"
+    >
+      <span>
+        Log In
+      </span>
     </span>
   </li>
 </ul>
