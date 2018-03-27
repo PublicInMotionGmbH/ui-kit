@@ -15,6 +15,14 @@ class Controller extends React.Component {
     props.register(this)
   }
 
+  componentDidMount () {
+    this.props.register(this)
+  }
+
+  componentWillUnmount () {
+    this.props.unregister(this)
+  }
+
   render () {
     return this.props.render()
   }
@@ -41,6 +49,13 @@ function createController (func, getInitialState = () => ({})) {
   const register = e => components.push(e)
   const update = () => components.forEach(c => c.forceUpdate())
   const render = () => func(setState, state)
+  const unregister = e => {
+    const index = components.indexOf(e)
+
+    if (index !== -1) {
+      components.splice(index, 1)
+    }
+  }
 
   // Build function to set new state
   function setState (nextState) {
@@ -54,6 +69,7 @@ function createController (func, getInitialState = () => ({})) {
 
   // Set these default properties
   Control.defaultProps = {
+    unregister: unregister,
     register: register,
     render: render
   }
