@@ -16,16 +16,15 @@ const name = prefix('list')
 function List (props) {
   const { bullet, children, className, style, ...passedProps } = props
 
-  const mappedChildren = React.Children.map(children, child => {
-    return (
-      <li>
-        <span>{bullet}</span>
-        {child}
-      </li>
-    )
-  })
+  const mappedChildren = React.Children.map(children, child => (
+    <li>
+      <span>{bullet}</span>
+      {child}
+    </li>
+  ))
+
   return (
-    <ul className={cls(name, className)} {...passedProps} style={style}>
+    <ul className={cls(name, className)} {...passedProps}>
       {mappedChildren}
     </ul>
   )
