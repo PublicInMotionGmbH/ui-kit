@@ -1,6 +1,8 @@
 import { storiesOf } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 
+import createController from './story/createController'
+
 /**
  * Build styles for story
  *
@@ -33,21 +35,43 @@ const styles = stylesheet => ({
  * @param {string} name
  * @param {object} module
  *
- * @returns {function(name: string, description: string, render: function)}
+ * @returns {function(name: string, description: string, render: function)|function(name: string, description: string, render: function, infoOptions: object)|{ controlled: function(name: string, description: string, render: function, getInitialState: function, infoOptions: object)|function(name: string, description: string, render: function, getInitialState: function, infoOptions: object) }}
  */
 export function createStoriesFactory (name, module) {
   const stories = storiesOf(name, module)
 
-  return (name, description, render) =>
-    stories.add(
+  function addStory (name, description, render, infoOptions = {}) {
+    return stories.add(
       name,
       withInfo({
         styles: styles,
         header: true,
         inline: true,
-        text: description
+        text: description,
+        ...infoOptions
       })(render)
     )
+  }
+
+  // Create helper for controlled stories
+  addStory.controlled = function addControlledStory (name, description, render, getInitialState, infoOptions = {}) {
+    // Build controller renderer
+    const controller = createController(render, getInitialState)
+
+    // Build list of excluded components from propTypes table
+    const excludedControllers = [
+      controller.Controller,
+      ...(infoOptions.propTablesExclude || [])
+    ]
+
+    // Exclude controller from prop types list
+    return addStory(name, description, controller, {
+      propTablesExclude: excludedControllers,
+      ...infoOptions
+    })
+  }
+
+  return addStory
 }
 
 /**
