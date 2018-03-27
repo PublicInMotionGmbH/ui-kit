@@ -5,10 +5,6 @@ exports[`<Button /> renders children correctly 1`] = `
   className="talixo-button"
   disabled={false}
 >
-  <span
-    key=".0"
-  >
-    Button
-  </span>
+  Button
 </button>
 `;
