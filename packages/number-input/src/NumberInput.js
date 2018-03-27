@@ -12,41 +12,51 @@ const moduleName = prefix('number-input')
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {string} [props.className]
- * @param {string} [props.className]
- * @param {string} [props.className]
- * @param {string} [props.className]
- * @param {string} [props.className]
- * @param {string} [props.className]
+ * @param {boolean} [props.hasError]
+ * @param {string} [props.size]
+ * @param {object} [props.style]
+ * @param {number} [props.value]
  * @returns {React.Element}
  */
 function NumberInput (props) {
-  const { className, hasError, placeholder, size, style, value, ...passedProps } = props
+  const { className, hasError, size, style, ...passedProps } = props
+
   let input
-  const increment = () => {
-    input.value++
+
+  /**
+   * Change input value, if it's a number
+   *
+   * @param {number} delta
+   */
+  function change (delta) {
+    const value = parseFloat(input.value)
+
+    // Do not change value if it's not correct
+    if (isNaN(value)) {
+      return
+    }
+
+    input.value = value + delta
   }
-  const decrement = () => {
-    input.value--
-  }
+
+  const increment = () => change(1)
+  const decrement = () => change(-1)
   const inputRef = node => { input = node }
+
   const wrapperClass = cls(moduleName, {
     [`${moduleName}--${size}`]: size !== undefined,
     [`${moduleName}--error`]: hasError
   })
 
   return (
-    <div
-      className={wrapperClass}
-      style={style}
-    >
+    <div className={wrapperClass} style={style}>
       <input
         ref={inputRef}
         className={className}
         type='number'
-        value={value}
         {...passedProps}
       />
+
       <div className={`${moduleName}__stepper`}>
         <button
           className={`${moduleName}__button`}
@@ -78,7 +88,7 @@ NumberInput.propTypes = {
   /** Additional styling of wrapper */
   style: PropTypes.object,
 
-  /** Default input value */
+  /** Input value */
   value: PropTypes.number
 }
 
