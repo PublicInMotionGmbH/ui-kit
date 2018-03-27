@@ -1,11 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Sidebar from '../src/Sidebar'
+import SidebarPanel from '../src/Panel'
 
-describe('<Sidebar />', () => {
+describe('<SidebarPanel />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Sidebar />)
+    const wrapper = shallow(<SidebarPanel />)
 
     expect(wrapper).toMatchSnapshot()
   })
