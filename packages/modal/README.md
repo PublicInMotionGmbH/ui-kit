@@ -28,8 +28,6 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | additional class name passed to wrapper
 children      | string    | n/a     | content of modal
 isOpen        | string    | `true`  | controls whether modal is open
-size          | string    | n/a     | size of the modal ('small', 'medium', 'large')
-style         | object    | n/a     | additional styles passed to wrapper
 
 ## Changelog
 

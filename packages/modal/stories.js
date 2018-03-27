@@ -17,8 +17,8 @@ const render = (setState, state) => {
       <button onClick={() => { setState({ isOpen: !state.isOpen }) }}>
         Open Modal
       </button>
-      <Modal isOpen={state.isOpen} size={state.size}>
-        <h1>Modal {state.size}</h1>
+      <Modal isOpen={state.isOpen}>
+        <h1>Modal</h1>
         <button onClick={() => { setState({ isOpen: false }) }}>
           Close Modal
         </button>
@@ -26,33 +26,10 @@ const render = (setState, state) => {
     </div>
   )
 }
-const getInitialStateDefault = () => {
+const getInitialState = () => {
   return {
-    isOpen: false,
-    state: ''
+    isOpen: false
   }
 }
 
-const getInitialStateSmall = () => {
-  return {
-    isOpen: false,
-    size: 'small'
-  }
-}
-const getInitialStateMedium = () => {
-  return {
-    isOpen: false,
-    size: 'medium'
-  }
-}
-const getInitialStateLarge = () => {
-  return {
-    isOpen: false,
-    size: 'large'
-  }
-}
-
-addStory.controlled('initial', readme, render, getInitialStateDefault)
-addStory.controlled('small', readme, render, getInitialStateSmall)
-addStory.controlled('medium', readme, render, getInitialStateMedium)
-addStory.controlled('large', readme, render, getInitialStateLarge)
+addStory.controlled('initial', readme, render, getInitialState)

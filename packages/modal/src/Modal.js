@@ -42,8 +42,6 @@ class ModalPortal extends React.Component {
  * @param {string} [props.className]
  * @param {*} [props.children]
  * @param {boolean} [props.isOpen]
- * @param {string} [props.size]
- * @param {object} [props.style]
  * @returns {React.Element}
  */
 class Modal extends React.Component {
@@ -64,14 +62,12 @@ class Modal extends React.Component {
   }
 
   render () {
-    const { children, className, size, style, isOpen, ...rest } = this.props
-    const backdropClasses = cls(prefix('modal-backdrop'), {
-      [`${prefix('modal-backdrop')}--entered`]: this.state.isOpen,
-      [`${prefix('modal-backdrop')}--exiting`]: !this.state.isOpen
+    const { children, className, isOpen, ...rest } = this.props
+    const backdropClasses = cls(`${moduleName}-backdrop`, {
+      [`${moduleName}-backdrop--entered`]: this.state.isOpen,
+      [`${moduleName}-backdrop--exiting`]: !this.state.isOpen
     })
-    const modalClasses = cls(moduleName, className, {
-      [prefix(`modal--${size}`)]: size.length > 0
-    })
+    const modalClasses = cls(moduleName, className)
 
     return (
       <div>
@@ -99,20 +95,11 @@ Modal.propTypes = {
   children: PropTypes.node,
 
   /** Controls whether modal is open */
-  isOpen: PropTypes.bool,
-
-  /** Size of the modal ('small', 'medium', 'large') */
-  size: PropTypes.oneOf([
-    '',
-    'small',
-    'medium',
-    'large'
-  ])
+  isOpen: PropTypes.bool
 }
 
 Modal.defaultProps = {
-  isOpen: false,
-  size: ''
+  isOpen: false
 }
 
 export default Modal
