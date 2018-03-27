@@ -21,9 +21,32 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### Sidebar
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
+children      | nodes     | n/a     | Sidebar elements
+
+### Panel
+
+Property name | Type           | Default | Description
+--------------|----------------|:-------:|--------------------------------
+className     | string         | n/a     | additional class name passed to wrapper
+name          | string or node | n/a     | name to show in panel header
+icon          | string         | n/a     | icon name to show next to panel header
+children      | nodes          | n/a     | any elements which should be shown in Panel (including Elements)
+
+### Element
+
+Property name | Required | Type           | Default | Description
+--------------|----------|----------------|:-------:|--------------------------------
+className     | no       | string         | n/a     | additional class name passed to wrapper
+label         | yes      | string or node | n/a     | label to show in sidebar or panel
+icon          | yes      | string         | n/a     | icon name to show next to label in sidebar or panel
+active        | no       | boolean        | false   | is element already active?
+children      | no       | nodes          | none    | Sidebar or Panel, if you want to make it nested and open on click
+
 
 ## Changelog
 
