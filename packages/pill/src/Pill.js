@@ -12,14 +12,16 @@ const moduleName = prefix('pill')
  * @param {object} props
  * @param {string} [props.className]
  * @param {string} [props.color]
+ * @param {string} [props.variant]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Pill (props) {
-  const { children, className, color, ...passedProps } = props
+  const { children, className, color, variant, ...passedProps } = props
 
   const clsName = cls(moduleName, className, {
-    [`${moduleName}--${color}`]: color !== undefined
+    [`${moduleName}--${color}`]: color !== undefined,
+    [`${moduleName}--${variant}`]: variant !== undefined
   })
 
   return (
@@ -37,7 +39,10 @@ Pill.propTypes = {
   children: PropTypes.node,
 
   /** Pill color */
-  color: PropTypes.string
+  color: PropTypes.string,
+
+  /** Pill variant */
+  variant: PropTypes.string
 }
 
 export default Pill

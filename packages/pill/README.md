@@ -27,6 +27,7 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 color         | string    | n/a     | pill color
+variant       | string    | n/a     | pill variant (ghost)
 
 ## Changelog
 
