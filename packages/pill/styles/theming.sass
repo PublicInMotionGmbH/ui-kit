@@ -1,6 +1,9 @@
 @import './config'
 
 @include module('pill')
+  &--ghost
+    border-color: $color-ghost-border
+
   &--blue
     background-color: $color-pill-blue
     border-color: $color-pill-blue
@@ -23,19 +26,3 @@
 
   &--ghost
     background-color: $color-ghost
-    border-color: $color-ghost-border
-
-    &#{prefix('pill')}--blue
-      border-color: $color-pill-blue
-
-    &#{prefix('pill')}--gray
-      border-color: $color-pill-gray
-
-    &#{prefix('pill')}--green
-      border-color: $color-pill-green
-
-    &#{prefix('pill')}--red
-      border-color: $color-orange-talixo
-
-    &#{prefix('pill')}--yellow
-      border-color: $color-pill-yellow
