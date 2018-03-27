@@ -11,8 +11,8 @@ const name = prefix('item-address')
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {string} [props.item]
- * @param {string} [props.style]
+ * @param {object} [props.item]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 const ItemAddress = props => {

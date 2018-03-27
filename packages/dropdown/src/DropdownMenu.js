@@ -10,14 +10,14 @@ const name = prefix('select')
  * Dropdown menu component.
  *
  * @param {object} props
- * @param {string} [props.getItemProps]
- * @param {string} [props.highlightedIndex]
- * @param {string} [props.itemComponent]
- * @param {string} [props.items]
- * @param {string} [props.maxHeight]
+ * @param {*} [props.getItemProps]
+ * @param {number} [props.highlightedIndex]
+ * @param {*} [props.itemComponent]
+ * @param {array} [props.items]
+ * @param {string || number} [props.maxHeight]
  * @param {string} [props.overflow]
- * @param {string} [props.selectedItem]
- * @param {string} [props.style]
+ * @param {*} [props.selectedItem]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 const DropdownMenu = props => {

@@ -12,16 +12,16 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {string} [props.defaultSelectedItem]
- * @param {string} [props.itemComponent]
- * @param {string} [props.items]
- * @param {string} [props.maxHeight]
- * @param {string} [props.menuComponent]
- * @param {string} [props.onChange]
+ * @param {*} [props.defaultSelectedItem]
+ * @param {*} [props.itemComponent]
+ * @param {array} [props.items]
+ * @param {string || number} [props.maxHeight]
+ * @param {*} [props.menuComponent]
+ * @param {*} [props.onChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
- * @param {string} [props.style]
- * @param {string} [props.toggleComponent]
+ * @param {object} [props.style]
+ * @param {*} [props.toggleComponent]
  * @returns {React.Element}
  */
 const Dropdown = props => {

@@ -12,15 +12,16 @@ const name = prefix('select')
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {string} [props.firstItem]
- * @param {string} [props.getToggleButtonProps]
+ * @param {*} [props.firstItem]
+ * @param {*} [props.getToggleButtonProps]
  * @param {string} [props.id]
- * @param {string} [props.isOpen]
- * @param {string} [props.itemComponent]
- * @param {string} [props.onClick]
+ * @param {boolean} [props.isOpen]
+ * @param {*} [props.itemComponent]
+ * @param {*} [props.onClick]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
- * @param {string} [props.value]
+ * @param {object} [props.style]
+ * @param {*} [props.value]
  * @returns {React.Element}
  */
 const DropdownButton = props => {
