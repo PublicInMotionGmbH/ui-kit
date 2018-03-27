@@ -3,5 +3,7 @@
 exports[`<Pill /> renders children correctly 1`] = `
 <span
   className="talixo-pill"
-/>
+>
+  label
+</span>
 `;

@@ -5,7 +5,7 @@ import Pill from '../src/Pill'
 
 describe('<Pill />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Pill />)
+    const wrapper = shallow(<Pill>label</Pill>)
 
     expect(wrapper).toMatchSnapshot()
   })
