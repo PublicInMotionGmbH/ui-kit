@@ -10,7 +10,10 @@ import Element from './src/Element'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Sidebar', module)
+const addStory = createStoriesFactory('Sidebar', module, {
+  inline: false,
+  propTypes: [ Sidebar, Element, Panel ]
+})
 
 // Stories
 
@@ -19,32 +22,32 @@ addStory('simple navigation', readme, () => (
     <Element icon='home' label='HOME' onClick={action('click home')} />
     <Element icon='list' label='ISSUES' onClick={action('click issues')} />
   </Sidebar>
-))
+), {
+  inline: true
+})
 
 addStory('simple navigation with activated element', readme, () => (
   <Sidebar>
     <Element icon='home' label='HOME' onClick={action('click home')} active />
     <Element icon='list' label='ISSUES' onClick={action('click issues')} />
   </Sidebar>
-))
+), {
+  inline: true
+})
 
 addStory('fixed navigation', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
     <Element icon='home' label='HOME' onClick={action('click home')} />
     <Element icon='list' label='ISSUES' onClick={action('click issues')} />
   </Sidebar>
-), {
-  inline: false
-})
+))
 
 addStory('fixed navigation with activated element', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
     <Element icon='home' label='HOME' onClick={action('click home')} active />
     <Element icon='list' label='ISSUES' onClick={action('click issues')} />
   </Sidebar>
-), {
-  inline: false
-})
+))
 
 addStory('fixed navigation with panel', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
@@ -56,9 +59,7 @@ addStory('fixed navigation with panel', readme, () => (
       </Panel>
     </Element>
   </Sidebar>
-), {
-  inline: false
-})
+))
 
 addStory('fixed navigation with sidebar', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
@@ -70,9 +71,7 @@ addStory('fixed navigation with sidebar', readme, () => (
       </Sidebar>
     </Element>
   </Sidebar>
-), {
-  inline: false
-})
+))
 
 addStory('fixed multi-level navigation', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
@@ -92,9 +91,7 @@ addStory('fixed multi-level navigation', readme, () => (
       </Sidebar>
     </Element>
   </Sidebar>
-), {
-  inline: false
-})
+))
 
 addStory('fixed multi-level panels', readme, () => (
   <Sidebar style={{ borderLeft: '1px solid #eee', position: 'fixed', left: 0, top: 0, height: '100%' }}>
@@ -110,6 +107,4 @@ addStory('fixed multi-level panels', readme, () => (
       </Panel>
     </Element>
   </Sidebar>
-), {
-  inline: false
-})
+))
