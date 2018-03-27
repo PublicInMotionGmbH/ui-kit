@@ -1,11 +1,11 @@
-# Talixo Switcher
+# Talixo Popover
 
-It's just simple wrapper for checkbox, which behaves more like switcher with Yes/No options.
+It's just simple wrapper for popover.
 
 ## How to install
 
-Package is available as `@talixo/switcher` in NPM registry, so you can use it in your project
-using `npm install @talixo/switcher --save` or `yarn add @talixo/switcher`.
+Package is available as `@talixo/popover` in NPM registry, so you can use it in your project
+using `npm install @talixo/popover --save` or `yarn add @talixo/popover`.
 
 ## Requirements
 
@@ -16,18 +16,25 @@ Your package should additionally have some extra dependencies:
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 
-These packages are required by `@talixo/switcher`, but you have to install them manually,
+These packages are required by `@talixo/popover`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
+It allows any props which are allowed for `span`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-noLabel       | string    | `"No"`  | label for unchecked switcher
-yesLabel      | string    | `"Yes"` | label for checked switcher
+children      | node      | n/a     | children node in popover
+color         | string    | n/a     | color of text in popover
+fade          | bool      | n/a     | popover is faidng
+fadeTime      | number    | n/a     | time od fading
+isOpen        | bool      | n/a     | popover is visible
+layer         | number    | n/a     | quantity of popover layer
+rootNode      | string    | n/a     | root node of popover
+position      | oneOf 'left', 'right', 'top', 'bottom' | n/a    | position of popover
+style         | object    | n/a     | Styles CSS
 
 ## Changelog
 

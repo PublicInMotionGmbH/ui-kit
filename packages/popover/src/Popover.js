@@ -39,8 +39,8 @@ class Portal extends React.Component {
 }
 
 class Popover extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       left: null,
       top: null
@@ -122,16 +122,16 @@ Popover.propTypes = {
   /** Fade time */
   fadeTime: PropTypes.number,
 
-  /** isOpen */
+  /** Popover is visible */
   isOpen: PropTypes.bool,
 
-  /** Layer */
+  /** Quantity of popover layer */
   layer: PropTypes.number,
 
-  /** rootNode */
+  /** Root node of popover */
   rootNode: PropTypes.string,
 
-  /** position */
+  /** Position of popover */
   position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
 
   /** Style CSS */
