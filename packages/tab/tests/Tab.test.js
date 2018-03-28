@@ -1,7 +1,7 @@
 import React from 'react'
 import Tab from '../src/Tab'
 import { shallow, mount } from 'enzyme'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('tab')
 
