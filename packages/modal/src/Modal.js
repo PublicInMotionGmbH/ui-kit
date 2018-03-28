@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('modal')
 

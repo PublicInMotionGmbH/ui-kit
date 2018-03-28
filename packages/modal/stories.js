@@ -5,7 +5,7 @@ import Modal from './src/Modal'
 import {
   createStoriesFactory,
   getReadmeDescription
-} from '@talixo/commons/story'
+} from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
