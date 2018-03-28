@@ -2,7 +2,7 @@ import React from 'react'
 import NumberInput from '../src/NumberInput'
 import { shallow } from 'enzyme'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('number-input')
 

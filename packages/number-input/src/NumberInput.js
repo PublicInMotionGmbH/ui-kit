@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cls from 'classnames'
 
 import Icon from '@talixo/icon'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('number-input')
 
