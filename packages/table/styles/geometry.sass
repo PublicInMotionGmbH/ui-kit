@@ -1,0 +1,107 @@
+@import './config'
+
+@include module('table')
+  width: 100%
+  border-spacing: 0
+  border: 1px solid $table-border-color
+
+  &, td, th
+    box-sizing: border-box
+
+  td, th
+    text-align: left
+    padding: dp(1) dp(1.5)
+
+  th
+    font-weight: $table-head-text-weight
+    color: $table-head-text-color
+    border-bottom: dp(0.5) solid $table-border-color
+
+  td
+    color: $table-row-text-color
+    background: $table-row-background-color
+
+  tfoot td
+    border-top: dp(0.5) solid $table-border-color
+
+  &--fixed
+    table-layout: fixed
+
+    #{prefix('table', 'actions')}
+      width: auto
+      white-space: normal
+
+  &--condensed
+    td, th
+      padding: dp(0.5) dp(1)
+
+    #{prefix('table', 'action')}
+      flex-direction: row
+      padding: dp(0.5) dp(1.5)
+
+      > .tai
+        margin-right: dp(0.5)
+
+@include module('table', 'action')
+  box-sizing: border-box
+  display: inline-flex
+  height: 100%
+  outline: none
+  background: transparent
+  align-items: center
+  flex-direction: column
+  text-align: center
+  text-decoration: none
+  cursor: pointer
+  color: $table-action-color
+  padding: dp(1) dp(2)
+  border: 0 solid $table-action-border-color
+  border-left-width: 1px
+
+  > .tai
+    font-size: dp(2.5)
+
+  > span
+    display: block
+    font-size: dp(1.5)
+
+@include module('table', 'actions')
+  width: 1px
+  white-space: nowrap
+
+  &:last-child
+    padding-right: 0
+
+  &--vertical
+    white-space: normal
+
+    #{prefix('table', 'action')}
+      flex-direction: row
+      width: 100%
+      border-bottom-width: 1px
+
+      > .tai
+        margin-right: dp(0.5)
+
+      &:last-child
+        border-bottom-width: 0
+
+
+[dir=rtl]
+  @include module('table')
+    td, th
+      text-align: right
+
+  @include module('table', 'action')
+    border-left-width: 0
+    border-right-width: 1px
+
+  @include module('table', 'actions')
+    &:last-child
+      padding-left: 0
+      padding-right: dp(1.5)
+
+  #{prefix('table')}--condensed #{prefix('table', 'action')} > .tai,
+  #{prefix('table', 'actions')}--vertical #{prefix('table', 'action')} > .tai
+    margin-right: 0
+    margin-left: dp(0.5)
