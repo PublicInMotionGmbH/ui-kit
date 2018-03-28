@@ -21,18 +21,14 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Additionally, it handles some differently:
+
+It allows any properties which are allowed in `button`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | all button below
 color         | string    | n/a     | button color
-disabled      | boolean   | n/a     | enabled or disabled button
-id            | string    | n/a     | button id
-onClick       | function  | n/a     | action on click event
 size          | string    | n/a     | button size
-style         | object    | n/a     | button style
 variant       | string    | n/a     | button variant
 
 ## Changelog

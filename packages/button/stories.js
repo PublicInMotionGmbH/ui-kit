@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Icon from '@talixo/icon'
+
 import Button from './src/Button'
 
 import {
@@ -13,62 +15,77 @@ const addStory = createStoriesFactory('Button', module)
 
 addStory('primary-default', readme, () => (
   <Button color='primary'>
-    <span>Default</span>
+    Default
   </Button>
 ))
+
 addStory('primary-small', readme, () => (
   <Button color='primary' size='small'>
-    <span>Small</span>
+    Small
   </Button>
 ))
+
 addStory('primary-full-width', readme, () => (
   <Button color='primary' variant='full-width'>
-    <span>Full width</span>
+    Full width
   </Button>
 ))
+
 addStory('primary-ghost', readme, () => (
   <Button color='primary' variant='ghost'>
-    <span>Ghost</span>
+    Ghost
   </Button>
 ))
+
 addStory('primary-disabled', readme, () => (
   <Button color='primary' disabled>
-    <span>Disabled</span>
+    Disabled
   </Button>
 ))
 addStory('primary-disabled-full-width', readme, () => (
   <Button color='primary' variant='full-width' disabled>
-    <span>Disabled Full Width</span>
+    Disabled full-width
   </Button>
 ))
 
 addStory('black-default', readme, () => (
   <Button color='black'>
-    <span>Black</span>
+    Black
   </Button>
 ))
+
 addStory('black-small', readme, () => (
   <Button color='black' size='small'>
-    <span>Black</span>
+    Black
   </Button>
 ))
+
 addStory('black-full-width', readme, () => (
   <Button color='black' variant='full-width'>
-    <span>Full width</span>
+    Full width
   </Button>
 ))
+
 addStory('black-ghost', readme, () => (
   <Button color='black' variant='ghost'>
-    <span>Black</span>
+    Black
   </Button>
 ))
+
 addStory('black-disabled', readme, () => (
   <Button color='black' disabled>
-    <span>Disabled</span>
+    Disabled
   </Button>
 ))
+
 addStory('black-disabled-full-width', readme, () => (
   <Button color='black' variant='full-width' disabled>
-    <span>Disabled Full Width</span>
+    Disabled Full Width
+  </Button>
+))
+
+addStory('with icon', readme, () => (
+  <Button color='primary'>
+    <Icon name='settings' /> Settings
   </Button>
 ))
