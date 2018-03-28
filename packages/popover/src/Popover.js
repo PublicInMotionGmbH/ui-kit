@@ -11,10 +11,19 @@ import { prefix } from '@talixo/commons'
 const name = prefix('popover')
 
 /**
- * Component which represents Yes/No switcher.
+ * Component which represents Popover.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {node} [props.children]
+ * @param {string} [props.color]
+ * @param {bool} [props.fade]
+ * @param {number} [props.fadeTime]
+ * @param {bool} [props.isOpen]
+ * @param {number} [props.layer]
+ * @param {string} [props.rootNode]
+ * @param {oneOf(['left', 'right', 'top', 'bottom'])} [props.position]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 
@@ -73,35 +82,38 @@ class Popover extends React.Component {
     const { children, className, color, fade, fadeTime, layer, style, position, rootNode } = this.props
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
+
+    const clsName = cls(name, className, {
+      [`${name}--${color}`]: color !== undefined,
+      [`${name}--${position}`]: position !== undefined,
+      [`Layer-${layer}`]: layer !== undefined
+    })
+
+    const styles = {
+      top: this.state.top,
+      left: this.state.left,
+      ...transition,
+      ...style
+    }
+
+    const element = (
+      <span className={clsName} style={styles}>
+        {children}
+      </span>
+    )
+
+    const timeout = { enter: 0, exit: fade ? fadeTime || defaultFadeTime : 0 }
+
     return (
-      <div>
-        <TransitionGroup>
-          {this.state.isOpen ? (
-            <CSSTransition
-              timeout={{ enter: 0, exit: fade ? fadeTime || defaultFadeTime : 0 }}
-              classNames={`${name}-fade`}
-            >
-              <Portal root={document.querySelector(rootNode)}>
-                <span
-                  className={cls(name, className, {
-                    [`${name}--${color}`]: color !== undefined,
-                    [`${name}--${position}`]: position !== undefined,
-                    [`Layer-${layer}`]: layer !== undefined
-                  })}
-                  style={{
-                    top: this.state.top,
-                    left: this.state.left,
-                    ...transition,
-                    ...style
-                  }}
-                >
-                  {children}
-                </span>
-              </Portal>
-            </CSSTransition>
-          ) : null}
-        </TransitionGroup>
-      </div>
+      <TransitionGroup>
+        {this.state.isOpen ? (
+          <CSSTransition timeout={timeout} classNames={`${name}-fade`}>
+            <Portal root={document.querySelector(rootNode)}>
+              {element}
+            </Portal>
+          </CSSTransition>
+        ) : null }
+      </TransitionGroup>
     )
   }
 }
@@ -141,7 +153,8 @@ Popover.propTypes = {
 Popover.defaultProps = {
   fade: false,
   isOpen: false,
-  rootNode: 'body'
+  rootNode: 'body',
+  position: 'right'
 }
 
 export default Popover
