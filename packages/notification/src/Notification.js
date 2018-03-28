@@ -1,7 +1,7 @@
 import React from 'react'
 import cls from 'classnames'
 import PropTypes from 'prop-types'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 import Icon from '@talixo/icon'
 
 const name = prefix('notification')
@@ -18,18 +18,14 @@ const name = prefix('notification')
  * @returns {React.Element}
  */
 const Notification = props => {
-  const { children, className, handleRemove, style, variant } = props
-  const mappedChildren = React.Children.map(children, child => {
-    return typeof child === 'string' ? <span>{child}</span> : child
+  const { children, className, handleRemove, style, variant, ...passedProps } = props
+  const classNames = cls(name, className, {
+    [`${name}--${variant}`]: variant !== undefined
   })
+
   return (
-    <div
-      className={cls(name, className, {
-        [`${name}--${variant}`]: variant !== undefined
-      })}
-      style={style}
-    >
-      {mappedChildren}
+    <div className={classNames} style={style} {...passedProps}>
+      {children}
       <Icon name='close' className='close' onClick={handleRemove} />
     </div>
   )
@@ -39,13 +35,13 @@ Notification.propTypes = {
   /** Notification content */
   children: PropTypes.node,
 
-  /** Additional class name passed to notifications */
+  /** Additional class name passed to notification */
   className: PropTypes.string,
 
   /** Function that runs when close button is clicked */
   handleRemove: PropTypes.func,
 
-  /** Additional styles passed to notifications */
+  /** Additional styles passed to notification */
   style: PropTypes.object,
 
   /** Notification variant */

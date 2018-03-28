@@ -4,11 +4,7 @@ exports[`<Notification /> renders .big correctly 1`] = `
 <div
   className="talixo-notification big"
 >
-  <span
-    key=".0"
-  >
-    Notification
-  </span>
+  Notification
   <Icon
     className="close"
     name="close"
@@ -20,11 +16,7 @@ exports[`<Notification /> renders children correctly 1`] = `
 <div
   className="talixo-notification"
 >
-  <span
-    key=".0"
-  >
-    Notification
-  </span>
+  Notification
   <Icon
     className="close"
     name="close"
@@ -36,11 +28,7 @@ exports[`<Notification /> renders variant correctly 1`] = `
 <div
   className="talixo-notification talixo-notification--error"
 >
-  <span
-    key=".0"
-  >
-    Notification
-  </span>
+  Notification
   <Icon
     className="close"
     name="close"

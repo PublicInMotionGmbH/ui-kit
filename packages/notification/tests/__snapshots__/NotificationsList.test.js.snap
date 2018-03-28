@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Notifications /> renders .left correctly 1`] = `
+exports[`<NotificationsList /> renders .left correctly 1`] = `
 <div
   className="talixo-notifications-container"
 >
@@ -16,7 +16,7 @@ exports[`<Notifications /> renders .left correctly 1`] = `
 </div>
 `;
 
-exports[`<Notifications /> renders correctly children 1`] = `
+exports[`<NotificationsList /> renders correctly children 1`] = `
 <div
   className="talixo-notifications-container"
 >
@@ -32,7 +32,7 @@ exports[`<Notifications /> renders correctly children 1`] = `
 </div>
 `;
 
-exports[`<Notifications /> renders correctly one child 1`] = `
+exports[`<NotificationsList /> renders correctly one child 1`] = `
 <div
   className="talixo-notifications-container"
 >

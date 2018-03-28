@@ -1,12 +1,12 @@
 @import './config'
 
-$marginY: grid-unit(1)
-$marginX: grid-unit(2)
-$visibleNextNotificationHeight: grid-unit(4)
+$marginY: dp(1)
+$marginX: dp(2)
+$visibleNextNotificationHeight: dp(4)
 
 @include module('notifications')
   position: relative
-  width: grid-unit(50)
+  width: dp(50)
   display: flex
   flex-wrap: wrap
   flex-direction: column
@@ -72,23 +72,19 @@ $visibleNextNotificationHeight: grid-unit(4)
   justify-content: center
   align-items: flex-start
   width: 100%
-  padding: grid-unit(2) grid-unit(4)
+  padding: dp(2) dp(4)
   border: $border-width solid
   border-radius: $border-radius-m
   box-shadow: $shadow-l rgba(0, 0, 0, 0.25)
   font-size: $font-size-m
   overflow: hidden
 
-  > *
-    margin: 0 grid-unit(0.5)
-    vertical-align: middle
-
   & .close
     cursor: pointer
     position: absolute
     margin: 0
-    top: grid-unit(1)
-    right: grid-unit(1)
+    top: dp(1)
+    right: dp(1)
     opacity: 0.7
     -webkit-transition: opacity 0.1s ease
     transition: opacity 0.1s ease

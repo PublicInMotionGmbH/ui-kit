@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('notifications')
 
@@ -12,14 +12,14 @@ const Fade = ({ children, ...props }) => (
 )
 
 /**
- * Component which represents Notifications.
+ * Component which represents list of notifications.
  *
  * @param {object} props
  * @param {string} [props.className]
  * @param {string} [props.style]
  * @returns {React.Element}
  */
-class Notifications extends React.Component {
+class NotificationsList extends React.Component {
   constructor () {
     super()
     this.state = {
@@ -59,7 +59,7 @@ class Notifications extends React.Component {
   }
 }
 
-Notifications.propTypes = {
+NotificationsList.propTypes = {
   /** Additional class name passed to notifications */
   className: PropTypes.string,
 
@@ -67,7 +67,7 @@ Notifications.propTypes = {
   style: PropTypes.object
 }
 
-Notifications.defaultProps = {
+NotificationsList.defaultProps = {
 }
 
-export default Notifications
+export default NotificationsList
