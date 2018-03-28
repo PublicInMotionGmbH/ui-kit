@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import RadioInput from './src/RadioInput'
 
