@@ -32,18 +32,21 @@ You can install it globally for easier use. There are few most important command
 
 ### Running tests
 
-There are two runners available:
+There are two test runners available:
 
 #### Jest
 
 You can either run `npm test` or `yarn test` in each directory,
 or you can use `lerna run test` to run them in all packages.
 
-When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
-
 Additionally, it's worth to note that using Lerna you can run your tests in parallel as well: `lerna run --parallel test`
 
-#### Wallaby
+##### Watchers
+
+When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
+Remember, that you can do it only in single package. If you would like to watch in every package same time, you can use WallabyJS.
+
+#### WallabyJS
 
 There is also configuration setup for [Wallaby](http://wallabyjs.com/) test runner,
 and it just works out of the box.
