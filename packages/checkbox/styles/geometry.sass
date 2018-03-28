@@ -4,7 +4,7 @@
   display: inline-flex
   flex-flow: row nowrap
   align-items: center
-  padding: grid-unit(0.5)
+  padding: dp(0.5)
   font-weight: initial
 
   >
@@ -14,8 +14,8 @@
       border: $border-width solid
       border-radius: $border-radius-m
       font-size: $font-size-m
-      width: grid-unit(3)
-      height: grid-unit(3)
+      width: dp(3)
+      height: dp(3)
       margin: 0
 
       &[type='checkbox']
@@ -23,7 +23,7 @@
 
     span:first-of-type
       flex: 1 1 auto
-      margin: 0 grid-unit(1.6)
+      margin: 0 dp(1.6)
       font-size: $font-size-m
 
   &#{prefix('checkbox--small')} > span:first-of-type
