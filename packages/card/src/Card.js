@@ -4,7 +4,7 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('card')
+const moduleName = prefix('card')
 
 /**
  * Component which card.
@@ -16,7 +16,7 @@ const name = prefix('card')
 function Card (props) {
   const { children, className, ...passedProps } = props
   return (
-    <div className={cls(name, className)} {...passedProps}>
+    <div className={cls(moduleName, className)} {...passedProps}>
       {children}
     </div>
   )
@@ -27,10 +27,7 @@ Card.propTypes = {
   children: PropTypes.node,
 
   /** Additional class name */
-  className: PropTypes.string,
-
-  /** Style CSS */
-  style: PropTypes.object
+  className: PropTypes.string
 }
 
 export default Card

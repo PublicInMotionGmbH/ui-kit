@@ -3,7 +3,7 @@ import Card from '../src/Card'
 import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/commons'
-const name = prefix('card')
+const moduleName = prefix('card')
 
 describe('<Card />', () => {
   it('renders children correctly', () => {
@@ -26,7 +26,7 @@ describe('<Card />', () => {
         <div>Footer</div>
       </Card>
     )
-    wrapper.find(`div.${name}`).simulate('click')
+    wrapper.find(`div.${moduleName}`).simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })

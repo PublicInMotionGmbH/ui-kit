@@ -21,14 +21,34 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any property which can be passed to `div`. Additionally, it handles some differently:
+### Card
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | Children
-style         | object    | n/a     | Style CSS
-to            | string    | n/a     | to
+children      | node      | n/a     | any elements which should be shown in Card (CardHeader, CardContent or CardFooter)
+
+### CardHeader
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardHeader
+title         | string    | n/a     | title of CardHeader
+
+### CardContent
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardContent
+
+### CardFooter
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardContent
 
 
 ## Changelog

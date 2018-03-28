@@ -4,7 +4,7 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('card-header')
+const moduleName = prefix('card-header')
 
 /**
  * Component which card header.
@@ -20,7 +20,7 @@ function CardHeader (props) {
     return typeof child === 'string' ? <span>{child}</span> : child
   })
   return (
-    <div className={cls(name, className)} {...passedProps}>
+    <div className={cls(moduleName, className)} {...passedProps}>
       {title ? (
         <div className='card-title'>
           <div>{title}</div>
@@ -32,16 +32,13 @@ function CardHeader (props) {
 }
 
 CardHeader.propTypes = {
-  /** All children   */
+  /** All children inside CardHeader */
   children: PropTypes.node,
 
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Style CSS */
-  style: PropTypes.object,
-
-  /** Title */
+  /** Title of CardHeader */
   title: PropTypes.string
 }
 

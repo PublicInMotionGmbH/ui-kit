@@ -4,7 +4,7 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/commons'
 
-const name = prefix('card-content')
+const moduleName = prefix('card-content')
 
 /**
  * Component which card footer.
@@ -16,21 +16,18 @@ const name = prefix('card-content')
 function CardFooter (props) {
   const { children, className, ...passedProps } = props
   return (
-    <div className={cls(name, className)} {...passedProps}>
+    <div className={cls(moduleName, className)} {...passedProps}>
       {children}
     </div>
   )
 }
 
 CardFooter.propTypes = {
-  /** All nodes inside button */
+  /** All nodes inside CardFooter */
   children: PropTypes.node,
 
   /** Additional class name */
-  className: PropTypes.string,
-
-  /** Style CSS */
-  style: PropTypes.object
+  className: PropTypes.string
 }
 
 export default CardFooter
