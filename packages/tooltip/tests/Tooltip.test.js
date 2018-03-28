@@ -1,6 +1,6 @@
 import React from 'react'
 import Tooltip from '../src/Tooltip'
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import { prefix } from '@talixo/commons'
 
 const name = prefix('tooltip')
@@ -35,8 +35,8 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-
     wrapper.find(`.${name}-target`).simulate('mouseOver')
+
     expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toEqual(true)
     wrapper.unmount()
   })
@@ -47,8 +47,8 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-
     wrapper.find(`.${name}-target`).simulate('mouseOver')
+
     expect(wrapper.find(`.${name}`).hasClass('big')).toEqual(true)
     wrapper.unmount()
   })
@@ -60,6 +60,7 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
+
     expect(wrapper.find(`.${name}`).prop('style').transition).toBeDefined()
     wrapper.unmount()
   })
@@ -71,6 +72,7 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
+
     expect(wrapper.find(`.${name}`).prop('style').transition).toContain('opacity 1200ms')
     wrapper.unmount()
   })
@@ -81,6 +83,7 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
+
     expect(wrapper.contains(<span>Left</span>)).toEqual(true)
     wrapper.unmount()
   })
@@ -92,7 +95,19 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
     wrapper.find(`.${name}-target`).simulate('click')
+
     expect(wrapper.contains(<span>Left</span>)).toEqual(true)
     wrapper.unmount()
+  })
+
+  it('throws error when multiple children are proivided', () => {
+    const wrapper = () => shallow(
+      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    expect(wrapper).toThrow()
   })
 })

@@ -29,7 +29,7 @@ color         |	string                             | n/a     | Color of the tool
 fade          |	bool                               | "false" | Fade in / out animation
 fadeTime      |	number                             | n/a     | Fade time
 isOpen        |	bool                               | n/a     | Controls whether tooltip is open
-position      |	'left', 'right', 'top' or 'bottom' | n/a     | Tooltip position
+position      |	'left', 'right', 'top' or 'bottom' | 'right' | Tooltip position
 rootNode      |	string                             | 'body'  | Root element of tooltip portal
 render        |	func                               | n/a     | Renders toolyip content
 style         |                                    | n/a     | Additional styles passed to the tooltip

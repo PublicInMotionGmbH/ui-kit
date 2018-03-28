@@ -4,10 +4,9 @@
   position: absolute
   display: inline-block
   padding: grid-unit(1) grid-unit(1.5)
-  border: $border-width solid
+  border: $border-width solid $color-orange-talixo
   border-radius: $border-radius-m
   background-color: $color-orange-talixo
-  border-color: $color-orange-talixo
   font-size: $font-size-m
   line-height: 1.5em
   color: $color-white
@@ -20,11 +19,9 @@
   &:before
     position: absolute
     content: ''
-    background-color: inherit
+    width: 0
+    height: 0
     border-style: solid
-    border-color: $color-orange-talixo
-    width: grid-unit(1)
-    height: grid-unit(1)
     z-index: -1
 
   &-fade-enter
@@ -43,37 +40,41 @@
     transform: translateY(-50%) translateX(grid-unit(1))
 
     &:before
-      transform: translateY(-50%) translateX(50%) rotate(-45deg) skew(20deg, 20deg)
       top: 50%
-      right: 100%
-      border-width: $border-width 0 0 $border-width
+      left: 0
+      border-width: grid-unit(0.5) grid-unit(1.25) grid-unit(0.5) 0
+      border-color: transparent $color-orange-talixo transparent transparent
+      transform: translateX(-100%) translateY(grid-unit(-0.5))
 
   &--left
     transform: translateY(-50%) translateX(-100%) translateX(grid-unit(-1))
 
     &:before
-      transform: translateY(-50%) translateX(50%) rotate(-45deg) skew(20deg, 20deg)
       top: 50%
-      right: 0%
-      border-width: 0 $border-width $border-width 0
+      left: 100%
+      border-width: grid-unit(0.5) 0 grid-unit(0.5) grid-unit(1.25)
+      border-color: transparent transparent transparent $color-orange-talixo
+      transform: translateY(grid-unit(-0.5))
 
   &--bottom
     transform: translateY(grid-unit(1)) translateX(-50%)
 
     &:before
-      transform: translateY(-50%) translateX(50%) rotate(45deg) skew(20deg, 20deg)
-      top: 0%
-      right: 50%
-      border-width: $border-width 0 0 $border-width
+      top: 0
+      left: 50%
+      border-width: 0 grid-unit(0.5) grid-unit(1.25) grid-unit(0.5)
+      border-color: transparent transparent $color-orange-talixo transparent
+      transform: translateY(-100%) translateX(grid-unit(-0.5))
 
   &--top
     transform: translateY(-100%) translateY(grid-unit(-1)) translateX(-50%)
 
     &:before
-      transform: translateY(-50%) translateX(50%) rotate(45deg) skew(20deg, 20deg)
       top: 100%
-      right: 50%
-      border-width: 0 $border-width $border-width 0
+      left: 50%
+      border-width: grid-unit(1.25) grid-unit(0.5) 0 grid-unit(0.5)
+      border-color: $color-orange-talixo transparent transparent transparent
+      transform: translateX(grid-unit(-0.5))
 
   &--black:before
     border-color: $color-black

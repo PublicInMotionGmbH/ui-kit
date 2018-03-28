@@ -13,28 +13,26 @@ const name = prefix('tooltip')
 class Portal extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      root: this.props.root || document.querySelector('body')
-    }
+    this.root = this.props.root || document.querySelector('body')
     this.el = document.createElement(this.props.element || 'div')
   }
 
   componentDidMount () {
-    this.state.root.appendChild(this.el)
+    this.root.appendChild(this.el)
   }
 
   componentDidUpdate () {
-    this.state.root.appendChild(this.el)
+    this.root.appendChild(this.el)
   }
 
   componentWillUnmount () {
-    this.state.root.removeChild(this.el)
+    this.root.removeChild(this.el)
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.root !== nextProps.root) {
-      this.state.root.removeChild(this.el)
-      this.setState({ root: nextProps.root })
+      this.root.removeChild(this.el)
+      this.root = nextProps.root
     }
   }
 
@@ -117,10 +115,6 @@ class Tooltip extends React.Component {
 
   setRef (node, child) {
     this.el = node
-    const {ref} = child
-    if (typeof ref === 'function') {
-      ref(node)
-    }
   }
 
   /**
@@ -128,12 +122,19 @@ class Tooltip extends React.Component {
   */
   render () {
     const {
-      className, color, fade, fadeTime,
+      children, className, color, fade, fadeTime,
       position, render, rootNode, style
     } = this.props
 
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
+
+    const childWithRef = React.Children.only(children)
+      ? React.Children.map(children, child =>
+        React.cloneElement(child, {
+          ref: node => this.setRef(node, child)
+        }))
+      : null
 
     return (
       <div
@@ -143,11 +144,7 @@ class Tooltip extends React.Component {
         onMouseLeave={this.handleMouseLeave}
         onMouseOver={this.handleMouseOver}
       >
-        {React.Children.map(this.props.children, child =>
-          React.cloneElement(React.Children.only(child), {
-            ref: node => this.setRef(node, child)
-          })
-        )}
+        {childWithRef}
         <TransitionGroup>
           {this.state.isOpen ? (
             <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${name}-fade`}>
@@ -209,6 +206,7 @@ Tooltip.propTypes = {
 
 Tooltip.defaultProps = {
   fade: false,
+  position: 'right',
   rootNode: 'body'
 }
 
