@@ -87,7 +87,17 @@ addStory('Text styling', readme, () => (
       I would recommend this company to anyone. Thank you for such fabulous service!
 
       <footer>
-        <cite>R.M.</cite>
+        <cite>John Doe</cite>
+      </footer>
+    </blockquote>
+
+    <blockquote>
+      This was one of the best experiences I have ever had with a cab company.
+      I had problems at the airport and the driver stayed with me for over an hour and helped me sort everything out.
+      I would recommend this company to anyone. Thank you for such fabulous service!
+
+      <footer>
+        Reporter at <cite>Washington Post</cite>
       </footer>
     </blockquote>
   </div>

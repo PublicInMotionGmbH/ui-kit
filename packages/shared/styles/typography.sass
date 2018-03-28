@@ -112,7 +112,7 @@ blockquote
     margin-top: dp(2)
     color: $color-quote-footer
 
-    cite:before
+    &:before
       content: '—'
       margin-right: dp(1)
 
@@ -121,9 +121,9 @@ blockquote
   border-right-width: dp(1)
 
   > footer
-    cite:before
-      content: ''
+    &:before
+      display: none
 
-    cite:after
+    &:after
       content: '—'
       margin-right: dp(1)
