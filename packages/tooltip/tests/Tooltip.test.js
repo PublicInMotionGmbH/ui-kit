@@ -1,7 +1,7 @@
 import React from 'react'
 import Tooltip from '../src/Tooltip'
 import { mount, shallow } from 'enzyme'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('tooltip')
 

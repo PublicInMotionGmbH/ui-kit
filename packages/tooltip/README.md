@@ -26,7 +26,7 @@ Property name | Type                               | Default | Description
 children      |	node	                             | n/a     | Tooltipped elements
 className     |	string                             | n/a     | Additional class name passed to the tooltip
 color         |	string                             | n/a     | Color of the tooltip
-fade          |	bool                               | "false" | Fade in / out animation
+fade          |	bool                               | 'false' | Fade in / out animation
 fadeTime      |	number                             | n/a     | Fade time
 isOpen        |	bool                               | n/a     | Controls whether tooltip is open
 position      |	'left', 'right', 'top' or 'bottom' | 'right' | Tooltip position
