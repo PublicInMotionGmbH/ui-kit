@@ -7,13 +7,12 @@ import { prefix } from '@talixo/commons'
 
 const moduleName = prefix('modal')
 
-const modalRoot = document.querySelector('body')
-
 /**
  * Component which represents modal portal.
  *
  * @param {object} props
  * @param {*} [props.children]
+ * @param {object} [props.root]
  * @returns {React.Element}
  */
 class ModalPortal extends React.Component {
@@ -23,16 +22,26 @@ class ModalPortal extends React.Component {
   }
 
   componentDidMount () {
-    modalRoot.appendChild(this.el)
+    const { root } = this.props
+    root.appendChild(this.el)
   }
 
   componentWillUnmount () {
-    modalRoot.removeChild(this.el)
+    const { root } = this.props
+    root.removeChild(this.el)
   }
 
   render () {
     return ReactDOM.createPortal(this.props.children, this.el)
   }
+}
+
+ModalPortal.propTypes = {
+  /** Anything that can be displayed inside a portal */
+  children: PropTypes.node,
+
+  /** Portal root node */
+  root: PropTypes.object
 }
 
 /**
@@ -62,7 +71,7 @@ class Modal extends React.Component {
   }
 
   render () {
-    const { children, className, isOpen, ...rest } = this.props
+    const { children, className, isOpen, root, ...rest } = this.props
     const backdropClasses = cls(`${moduleName}-backdrop`, {
       [`${moduleName}-backdrop--entered`]: this.state.isOpen,
       [`${moduleName}-backdrop--exiting`]: !this.state.isOpen
@@ -71,7 +80,7 @@ class Modal extends React.Component {
 
     return (
       <div>
-        <ModalPortal>
+        <ModalPortal root={root}>
           <div className={backdropClasses}
           >
             <div
@@ -95,7 +104,10 @@ Modal.propTypes = {
   children: PropTypes.node,
 
   /** Controls whether modal is open */
-  isOpen: PropTypes.bool
+  isOpen: PropTypes.bool,
+
+  /** Root element of modal */
+  root: PropTypes.object
 }
 
 Modal.defaultProps = {
