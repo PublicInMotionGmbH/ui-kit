@@ -179,7 +179,6 @@ function saveJson (filePath, data) {
 }
 
 exports.createProgressBar = createProgressBar
-exports.writeLine = writeLine
 exports.download = download
 exports.removeFile = removeFile
 exports.getIconInfo = getIconInfo
