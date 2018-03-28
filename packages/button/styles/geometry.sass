@@ -2,13 +2,13 @@
 
 @include module('button')
 
-  padding: grid-unit(1) grid-unit(1.5)
+  padding: dp(1) dp(1.5)
   border: $border-width solid
   border-radius: $border-radius-m
   background-color: $color-orange-talixo
   border-color: $color-orange-talixo
   font-size: $font-size-m
-  line-height: grid-unit(3)
+  line-height: dp(3)
   cursor: pointer
   box-shadow: $shadow-m rgba(0, 0, 0, 0.25)
   color: $color-white
@@ -17,10 +17,10 @@
   align-items: center
 
   > *
-    margin: 0 grid-unit(0.5)
+    margin: 0 dp(0.5)
 
   &--small
-    padding: grid-unit(0.5) grid-unit(1.5)
+    padding: dp(0.5) dp(1.5)
     font-size: $font-size-s
 
   &--ghost

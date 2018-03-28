@@ -2,7 +2,7 @@ import React from 'react'
 import TextInput from '../src/TextInput'
 import { shallow } from 'enzyme'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('text-input')
 
