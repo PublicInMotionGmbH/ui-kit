@@ -28,9 +28,6 @@ Property name | Type      | Default | Description
 active        |	bool      |	"false"	| Active state
 children      |	node      | n/a     | Tab content
 className     |	string    | n/a     | Additional class name
-id            |	string    | n/a     | Id passed to tab
-onClick       |	func      | n/a     | Function that runs when tab is clicked
-style         |		        | n/a     | Additional styles passed to the tab
 
 ## Changelog
 

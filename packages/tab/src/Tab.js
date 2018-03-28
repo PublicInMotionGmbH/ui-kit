@@ -17,15 +17,13 @@ const name = prefix('tab')
  * @param {object} [props.style]
  * @returns {React.Element}
  */
-const Tab = ({ active, children, className, id, onClick, style }) => {
+const Tab = ({ active, children, className, ...passedProps }) => {
   return (
     <div
       className={cls(name, className, {
         active: active !== false
       })}
-      style={style}
-      id={id}
-      onClick={onClick}
+      {...passedProps}
     >
       {children}
     </div>
@@ -40,16 +38,7 @@ Tab.propTypes = {
   children: PropTypes.node,
 
   /** Additional class name */
-  className: PropTypes.string,
-
-  /** Id passed to tab */
-  id: PropTypes.string,
-
-  /** Function that runs when tab is clicked */
-  onClick: PropTypes.func,
-
-  /** Additional styles passed to the tab */
-  style: PropTypes.object
+  className: PropTypes.string
 }
 
 Tab.defaultProps = {
