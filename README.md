@@ -107,7 +107,7 @@ import React from 'react'
 
 import Something from './src/Something'
 
-import { createStoriesFactory } from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('Something', module)
 
@@ -126,7 +126,7 @@ import React from 'react'
 
 import FancyButton from './src/FancyButton'
 
-import { createStoriesFactory } from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('FancyButton', module)
 

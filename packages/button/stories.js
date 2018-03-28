@@ -4,10 +4,7 @@ import Icon from '@talixo/icon'
 
 import Button from './src/Button'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 

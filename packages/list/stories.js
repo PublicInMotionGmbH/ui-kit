@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Icon from '@talixo/icon'
 

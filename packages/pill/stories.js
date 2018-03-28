@@ -2,10 +2,7 @@ import React from 'react'
 
 import Pill from './src/Pill'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
