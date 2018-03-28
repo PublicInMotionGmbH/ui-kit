@@ -5,11 +5,11 @@ import { createStoriesFactory } from './story'
 const readme = ''
 
 // Create factories for story
-const addStory = createStoriesFactory('Typography', module)
+const addStory = createStoriesFactory('Typography and basics', module)
 
 // Stories
 
-addStory('headers', readme, () => (
+addStory('Headers', readme, () => (
   <div>
     <h1>h1. Header</h1>
     <h2>h2. Header</h2>
@@ -27,7 +27,7 @@ addStory('headers', readme, () => (
   </div>
 ))
 
-addStory('text', readme, () => (
+addStory('Text styling', readme, () => (
   <div>
     <h2>Paragraphs</h2>
 
@@ -93,7 +93,7 @@ addStory('text', readme, () => (
   </div>
 ))
 
-addStory('headers RTL', readme, () => (
+addStory('RTL: Headers', readme, () => (
   <div dir='rtl'>
     <h1>h1. כּוֹתֶרֶת</h1>
     <h2>h2. כּוֹתֶרֶת</h2>
@@ -111,7 +111,7 @@ addStory('headers RTL', readme, () => (
   </div>
 ))
 
-addStory('text RTL', readme, () => (
+addStory('RTL: Text styling', readme, () => (
   <div dir='rtl'>
     <h2>פסקאות</h2>
 
