@@ -1,0 +1,16 @@
+@import './helpers'
+
+/**
+ * Build selector for specific path
+ *
+ * i.e. .talixo-module__element from prefix('module', 'element')
+ */
+@function prefix($name...)
+  @return unquote('.#{$prefix}-#{toString($name, '__')}')
+
+/**
+ * Build block for specific module
+ */
+@mixin module ($name)
+  #{prefix($name)}
+    @content
