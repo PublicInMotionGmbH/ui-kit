@@ -1,7 +1,9 @@
-
 import React from 'react'
 import Card from '../src/Card'
 import { shallow, mount } from 'enzyme'
+
+import { prefix } from '@talixo/commons'
+const name = prefix('card')
 
 describe('<Card />', () => {
   it('renders children correctly', () => {
@@ -24,7 +26,7 @@ describe('<Card />', () => {
         <div>Footer</div>
       </Card>
     )
-    wrapper.find('div.talixo-card').simulate('click')
+    wrapper.find(`div.${name}`).simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })

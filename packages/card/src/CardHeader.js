@@ -13,7 +13,6 @@ const name = prefix('card-header')
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-
 function CardHeader (props) {
   const { children, className, title, ...passedProps } = props
 

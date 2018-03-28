@@ -13,7 +13,6 @@ const name = prefix('card-content')
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-
 function CardFooter (props) {
   const { children, className, ...passedProps } = props
   return (

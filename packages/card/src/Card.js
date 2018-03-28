@@ -13,7 +13,6 @@ const name = prefix('card')
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-
 function Card (props) {
   const { children, className, ...passedProps } = props
   return (
@@ -30,14 +29,8 @@ Card.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Action on event */
-  onClick: PropTypes.func,
-
   /** Style CSS */
-  style: PropTypes.object,
-
-  /** to */
-  to: PropTypes.string
+  style: PropTypes.object
 }
 
 export default Card
