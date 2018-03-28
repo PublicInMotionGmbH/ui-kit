@@ -2,10 +2,7 @@ import React from 'react'
 
 import Badge from './src/Badge'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
