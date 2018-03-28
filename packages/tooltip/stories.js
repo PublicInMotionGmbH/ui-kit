@@ -13,26 +13,13 @@ const tooltipStyle = {
   display: 'inline-block',
   backgroundColor: '#eee',
   padding: '1rem',
-  margin: '25px 100px',
+  margin: '25px 0',
   cursor: 'pointer'
 }
 
 function render (setState, state) {
   return (
-    <div>
-      <span
-        onClick={() => setState({ isOpen: !state.isOpen })}
-        style={{
-          display: 'inline-block',
-          backgroundColor: '#e00',
-          color: '#fff',
-          padding: '1rem',
-          marginBottom: '2rem',
-          cursor: 'pointer'
-        }}
-      >
-        Press me
-      </span>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       <Tooltip
         color='primary'
         isOpen={state.isOpen}
@@ -40,15 +27,22 @@ function render (setState, state) {
         render={() => <span>I am controlled</span>}
       >
         <span
-          style={{
-            display: 'inline-block',
-            backgroundColor: '#eee',
-            padding: '1rem'
-          }}
+          style={{ ...tooltipStyle, cursor: 'default' }}
         >
           Tooltip right
         </span>
       </Tooltip>
+      <span
+        onClick={() => setState({ isOpen: !state.isOpen })}
+        style={{
+          ...tooltipStyle,
+          backgroundColor: '#e00',
+          color: '#fff',
+          marginLeft: '150px'
+        }}
+      >
+        Press me
+      </span>
     </div>
   )
 }
@@ -62,45 +56,43 @@ function getInitialState () {
 // Stories
 
 addStory('default', readme, () => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-    <Tooltip color='primary' position='top' render={() => <span>Default</span>}>
-      <span
-        style={tooltipStyle}
-      >
-        Tooltip top
-      </span>
-    </Tooltip>
-    <Tooltip color='primary' position='bottom' render={() => <span>Default</span>}>
-      <span
-        style={{
-          display: 'inline-block',
-          backgroundColor: '#eee',
-          padding: '1rem',
-          margin: '25px 100px',
-          cursor: 'pointer'
-        }}
-      >
-        Tooltip bottom
-      </span>
-    </Tooltip>
-    <Tooltip color='primary' position='right' render={() => <span>Default</span>}>
-      <span
-        style={tooltipStyle}
-      >
-        Tooltip right
-      </span>
-    </Tooltip>
-    <Tooltip color='primary' position='left' render={() => <span>Default</span>}>
-      <span
-        style={tooltipStyle}
-      >
-        Tooltip left
-      </span>
-    </Tooltip>
-  </div>
+  <Tooltip color='primary' render={() => <span>Default</span>}>
+    <span
+      style={tooltipStyle}
+    >
+      Tooltip right
+    </span>
+  </Tooltip>
+))
+addStory('left', readme, () => (
+  <Tooltip color='primary' position='left' render={() => <span>Default</span>}>
+    <span
+      style={{ ...tooltipStyle, marginLeft: '100px' }}
+    >
+      Tooltip left
+    </span>
+  </Tooltip>
+))
+addStory('top', readme, () => (
+  <Tooltip color='primary' position='top' render={() => <span>Default</span>}>
+    <span
+      style={tooltipStyle}
+    >
+      Tooltip top
+    </span>
+  </Tooltip>
+))
+addStory('bottom', readme, () => (
+  <Tooltip color='primary' position='bottom' render={() => <span>Default</span>}>
+    <span
+      style={tooltipStyle}
+    >
+      Tooltip bottom
+    </span>
+  </Tooltip>
 ))
 addStory('fade', readme, () => (
-  <Tooltip color='primary' fade position='right' render={() => <span>Fade</span>}>
+  <Tooltip color='primary' fade render={() => <span>Fade</span>}>
     <span
       style={tooltipStyle}
     >
@@ -109,14 +101,9 @@ addStory('fade', readme, () => (
   </Tooltip>
 ))
 addStory('custom fade time', readme, () => (
-  <Tooltip color='primary' fade fadeTime={4000} position='right' render={() => <span>Fade 4s</span>}>
+  <Tooltip color='primary' fade fadeTime={4000} render={() => <span>Fade 4s</span>}>
     <span
-      style={{
-        display: 'inline-block',
-        backgroundColor: '#eee',
-        padding: '1rem',
-        cursor: 'pointer'
-      }}
+      style={tooltipStyle}
     >
       Tooltip right
     </span>

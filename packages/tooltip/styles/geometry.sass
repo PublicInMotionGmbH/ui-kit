@@ -3,7 +3,7 @@
 @include module('tooltip')
   position: absolute
   display: inline-block
-  padding: grid-unit(1) grid-unit(1.5)
+  padding: dp(1) dp(1.5)
   border: $border-width solid $color-orange-talixo
   border-radius: $border-radius-m
   background-color: $color-orange-talixo
@@ -14,7 +14,7 @@
   left: 0
 
   > *
-    margin: 0 grid-unit(0.5)
+    margin: 0 dp(0.5)
 
   &:before
     position: absolute
@@ -37,44 +37,44 @@
     opacity: 0.01
 
   &--right
-    transform: translateY(-50%) translateX(grid-unit(1))
+    transform: translateY(-50%) translateX(dp(1))
 
     &:before
       top: 50%
       left: 0
-      border-width: grid-unit(0.5) grid-unit(1.25) grid-unit(0.5) 0
+      border-width: dp(0.5) dp(1.25) dp(0.5) 0
       border-color: transparent $color-orange-talixo transparent transparent
-      transform: translateX(-100%) translateY(grid-unit(-0.5))
+      transform: translateX(-100%) translateY(dp(-0.5))
 
   &--left
-    transform: translateY(-50%) translateX(-100%) translateX(grid-unit(-1))
+    transform: translateY(-50%) translateX(-100%) translateX(dp(-1))
 
     &:before
       top: 50%
       left: 100%
-      border-width: grid-unit(0.5) 0 grid-unit(0.5) grid-unit(1.25)
+      border-width: dp(0.5) 0 dp(0.5) dp(1.25)
       border-color: transparent transparent transparent $color-orange-talixo
-      transform: translateY(grid-unit(-0.5))
+      transform: translateY(dp(-0.5))
 
   &--bottom
-    transform: translateY(grid-unit(1)) translateX(-50%)
+    transform: translateY(dp(1)) translateX(-50%)
 
     &:before
       top: 0
       left: 50%
-      border-width: 0 grid-unit(0.5) grid-unit(1.25) grid-unit(0.5)
+      border-width: 0 dp(0.5) dp(1.25) dp(0.5)
       border-color: transparent transparent $color-orange-talixo transparent
-      transform: translateY(-100%) translateX(grid-unit(-0.5))
+      transform: translateY(-100%) translateX(dp(-0.5))
 
   &--top
-    transform: translateY(-100%) translateY(grid-unit(-1)) translateX(-50%)
+    transform: translateY(-100%) translateY(dp(-1)) translateX(-50%)
 
     &:before
       top: 100%
       left: 50%
-      border-width: grid-unit(1.25) grid-unit(0.5) 0 grid-unit(0.5)
+      border-width: dp(1.25) dp(0.5) 0 dp(0.5)
       border-color: $color-orange-talixo transparent transparent transparent
-      transform: translateX(grid-unit(-0.5))
+      transform: translateX(dp(-0.5))
 
   &--black:before
     border-color: $color-black
