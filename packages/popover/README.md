@@ -28,13 +28,16 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | children node in popover
 color         | string    | n/a     | color of text in popover
-fade          | bool      | n/a     | popover is faidng
+fade          | bool      | n/a     | popover is fading
 fadeTime      | number    | n/a     | time od fading
 isOpen        | bool      | n/a     | popover is visible
 layer         | number    | n/a     | quantity of popover layer
 rootNode      | string    | n/a     | root node of popover
-position      | oneOf 'left', 'right', 'top', 'bottom' | n/a    | position of popover
-style         | object    | n/a     | Styles CSS
+position      | Position  | n/a     | position of popover
+
+Type name | Enum types 
+----------|-------------------------------------- 
+Position  | 'left', 'right', 'top', 'bottom' 
 
 ## Changelog
 

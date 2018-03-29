@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { getPositionNearElement, getTarget } from '../../../utils/position'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('popover')
 

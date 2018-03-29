@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/switcher",
+  "name": "@talixo/popover",
   "version": "1.0.0",
-  "description": "UI component for Yes/No switcher",
+  "description": "UI component for popover",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/commons": "^1.0.0",
+    "@talixo/shared": "^1.0.0",
     "lodash": "4.17.4",
     "react-transition-group": "2.2.1",
     "fbjs": "0.8.16"

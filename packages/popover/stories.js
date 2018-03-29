@@ -3,7 +3,7 @@ import React from 'react'
 import Popover from './src/Popover'
 import Button from '../../packages/button/src/Button'
 
-import { createStoriesFactory } from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('Popover', module)
 

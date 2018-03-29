@@ -3,7 +3,8 @@ import Popover from '../src/Popover'
 import { mount } from 'enzyme'
 
 describe('<Popover />', () => {
-  beforeEach(() => {
+  const rectElement = { ...window.Element.prototype.getBoundingClientRect }
+  beforeAll(() => {
     window.Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
         width: 100,
@@ -15,11 +16,14 @@ describe('<Popover />', () => {
       }
     })
   })
+  afterAll(() => {
+    console.log(rectElement)
+    window.Element.prototype.getBoundingClientRect = rectElement
+  })
 
   it('renders children correctly', () => {
     const div = global.document.createElement('div')
     global.document.body.appendChild(div)
-
     const wrapper = mount(
       <div>
         <button id='popover-id'>click me</button>
