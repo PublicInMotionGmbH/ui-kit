@@ -27,7 +27,6 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 children      | node      | n/a     | radio button description 
 className     | string    | n/a     | additional class name passed to wrapper
-size          | string    | n/a     | size of input (can be 'small')
 style         | object    | n/a     | styles passed to wrapper
 
 ## Changelog
