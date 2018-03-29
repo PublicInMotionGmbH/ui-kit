@@ -44,7 +44,7 @@ function NumberInput (props) {
   const inputRef = node => { input = node }
 
   const wrapperClass = cls(moduleName, {
-    [`${moduleName}--${size}`]: size !== undefined,
+    [`${moduleName}--${size}`]: size && size.length > 0,
     [`${moduleName}--error`]: hasError
   })
 
@@ -83,7 +83,7 @@ NumberInput.propTypes = {
   hasError: PropTypes.bool,
 
   /** Size of input (can be 'small') */
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['small']),
 
   /** Additional styling of wrapper */
   style: PropTypes.object,
