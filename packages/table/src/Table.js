@@ -35,10 +35,13 @@ Table.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Should table be condensed (more content visible)? */
   condensed: PropTypes.bool,
 
+  /** Should table have fixed layout? */
   fixed: PropTypes.bool,
 
+  /** `Head`, `Body` and `Footer` components */
   children: PropTypes.node
 }
 

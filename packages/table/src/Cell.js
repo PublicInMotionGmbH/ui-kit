@@ -5,24 +5,21 @@ import PropTypes from 'prop-types'
  * Component which represents simple Table row cell.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Cell (props) {
-  const { className, children, ...passedProps } = props
+  const { children, ...passedProps } = props
 
   return (
-    <td className={className} {...passedProps}>
+    <td {...passedProps}>
       {children}
     </td>
   )
 }
 
 Cell.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
+  /** Nodes to include inside cell */
   children: PropTypes.node
 }
 

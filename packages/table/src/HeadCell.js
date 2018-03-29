@@ -5,24 +5,21 @@ import PropTypes from 'prop-types'
  * Component which represents Table Head column.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function HeadCell (props) {
-  const { className, children, ...passedProps } = props
+  const { children, ...passedProps } = props
 
   return (
-    <th className={className} {...passedProps}>
+    <th {...passedProps}>
       {children}
     </th>
   )
 }
 
 HeadCell.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
+  /** Head cell content */
   children: PropTypes.node
 }
 

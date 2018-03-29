@@ -15,6 +15,7 @@ const moduleName = prefix('table__action')
  * @param {string} [props.className]
  * @param {string} [props.icon]
  * @param {string|*} [props.label]
+ * @param {boolean} [props.warn]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
@@ -37,15 +38,17 @@ Action.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  icon: PropTypes.string,
+  /** Icon name to represent action */
+  icon: PropTypes.string.isRequired,
 
-  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]),
+  /** Label to represent action */
+  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]).isRequired,
 
+  /** Should be handled carefully? Color change and maybe confirmation. */
   warn: PropTypes.bool
 }
 
 Action.defaultProps = {
-  vertical: false,
   warn: false
 }
 

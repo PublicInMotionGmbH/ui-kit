@@ -4,6 +4,8 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/shared'
 
+import Cell from './Cell'
+
 const moduleName = prefix('table__actions')
 
 /**
@@ -23,9 +25,9 @@ function ActionsCell (props) {
   })
 
   return (
-    <td className={clsName} {...passedProps}>
+    <Cell className={clsName} {...passedProps}>
       {children}
-    </td>
+    </Cell>
   )
 }
 
@@ -33,8 +35,10 @@ ActionsCell.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Actions which should be shown inside */
   children: PropTypes.node,
 
+  /** Should actions be aligned vertically? */
   vertical: PropTypes.bool
 }
 

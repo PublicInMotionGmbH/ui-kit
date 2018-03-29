@@ -5,15 +5,14 @@ import PropTypes from 'prop-types'
  * Component which represents Table Footer.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Footer (props) {
-  const { className, children, ...passedProps } = props
+  const { children, ...passedProps } = props
 
   return (
-    <tfoot className={className} {...passedProps}>
+    <tfoot {...passedProps}>
       <tr>
         {children}
       </tr>
@@ -22,9 +21,7 @@ function Footer (props) {
 }
 
 Footer.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
+  /** Cells which should be included in table footer */
   children: PropTypes.node
 }
 

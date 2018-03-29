@@ -5,24 +5,21 @@ import PropTypes from 'prop-types'
  * Component which represents Table Body.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Body (props) {
-  const { className, children, ...passedProps } = props
+  const { children, ...passedProps } = props
 
   return (
-    <tbody className={className} {...passedProps}>
+    <tbody{...passedProps}>
       {children}
     </tbody>
   )
 }
 
 Body.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
+  /** Rows to put inside */
   children: PropTypes.node
 }
 

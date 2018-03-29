@@ -2,18 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
- * Component which represents Table Head.
+ * Component which represents Table Head with single row.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {*} [props.children]
  * @returns {React.Element}
  */
 function Head (props) {
-  const { className, children, ...passedProps } = props
+  const { children, ...passedProps } = props
 
   return (
-    <thead className={className} {...passedProps}>
+    <thead {...passedProps}>
       <tr>
         {children}
       </tr>
@@ -22,9 +21,7 @@ function Head (props) {
 }
 
 Head.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
+  /** HeadCells to put inside */
   children: PropTypes.node
 }
 
