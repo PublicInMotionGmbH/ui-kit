@@ -1,11 +1,11 @@
 import React from 'react'
-import { createStoriesFactory } from './story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 // Load first paragraph from README file
 const readme = ''
 
 // Create factories for story
-const addStory = createStoriesFactory('Typography and basics', module)
+const addStory = createStoriesFactory('Typography', module)
 
 // Stories
 
@@ -71,6 +71,10 @@ addStory('Text styling', readme, () => (
 
     <p>
       When we use some shortcuts like <abbr title='Looks good to me'>LGTM</abbr>, we can show such information for user.
+    </p>
+
+    <p>
+      We can also see a difference between <a href='#'>a link</a> and any other text.
     </p>
 
     <h2>Quotes and testimonials</h2>
@@ -150,7 +154,7 @@ addStory('RTL: Text styling', readme, () => (
 
     <p>
       אולי יש לנו<strong> כמה אלמנטים חזקים בתוך הטקסט </strong>שלנו, כמו גם כמה מדגיש.
-      ב במקרים מסוימים, בעיקר לתאר את ה- API שלנו או דברים אחרים אנו עשויים<code> גם לנסות להציג קטע קוד קצר. זה קורה</code>כי אנו יכולים גם >להשתמ
+      ב במקרים מסוימים, בעיקר לתאר את ה- API שלנו או דברים אחרים אנו עשויים<code> גם לנסות להציג קטע קוד קצר. זה קורה</code>כי אנו יכולים גם להשתמ
       <kbd>Ctrl+C</kbd> לרמז למשתמש עם קיצורי מקשים.
     </p>
 

@@ -1,3 +1,6 @@
+// Normalize CSS
+@import '~normalize.css/normalize.css'
+
 @import './config'
 
 // Setting up dp
@@ -8,11 +11,28 @@ html
 html, body
   margin: 0
   padding: 0
+  -webkit-font-smoothing: antialiased
 
 body, input
   font: #{$font-size-m}/1.5em 'Open Sans', Arial, Tahoma, sans-serif
   font-weight: $font-weight-content
   color: $color-black
+
+// Simple stuff
+
+img
+  max-width: 100%
+
+// Anchors
+
+a
+  color: $color-ghost-text
+  text-decoration: none
+  border-bottom: 1px dotted $color-ghost-text
+
+  &:hover
+    color: $navy
+    border-bottom-style: solid
 
 // Headers
 
