@@ -32,18 +32,21 @@ You can install it globally for easier use. There are few most important command
 
 ### Running tests
 
-There are two runners available:
+There are two test runners available:
 
 #### Jest
 
 You can either run `npm test` or `yarn test` in each directory,
 or you can use `lerna run test` to run them in all packages.
 
-When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
-
 Additionally, it's worth to note that using Lerna you can run your tests in parallel as well: `lerna run --parallel test`
 
-#### Wallaby
+##### Watchers
+
+When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
+Remember, that you can do it only in single package. If you would like to watch in every package same time, you can use WallabyJS.
+
+#### WallabyJS
 
 There is also configuration setup for [Wallaby](http://wallabyjs.com/) test runner,
 and it just works out of the box.
@@ -79,7 +82,7 @@ Each package is available in `packages` directory. Typical structure:
 ├── styles                           <-- Sass styles
 │   ├── config.sass                  <-- Styles configuration for components 
 │   ├── geometry.sass                <-- Geometry (basic behavior) styles
-│   ├── theminŃg.sass                 <-- Theming (make it beautiful and matching Talixo) styles
+│   ├── theming.sass                 <-- Theming (make it beautiful and matching Talixo) styles
 │   └── main.sass                    <-- Used in storybook, includes both geometry and theming
 └── tests                            <-- Directory for Jest tests
     ├── Switcher.test.js
@@ -107,7 +110,7 @@ import React from 'react'
 
 import Something from './src/Something'
 
-import { createStoriesFactory } from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('Something', module)
 
@@ -126,7 +129,7 @@ import React from 'react'
 
 import FancyButton from './src/FancyButton'
 
-import { createStoriesFactory } from '@talixo/commons/story'
+import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('FancyButton', module)
 

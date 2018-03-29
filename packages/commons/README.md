@@ -1,3 +1,0 @@
-# Commons
-
-Some commons info.
