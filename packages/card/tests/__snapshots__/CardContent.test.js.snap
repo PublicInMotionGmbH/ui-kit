@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CardContent /> renders .blue correctly 1`] = `
-<div
-  className="talixo-card-content blue"
->
-  <div>
-    Content
-  </div>
-</div>
-`;
-
 exports[`<CardContent /> renders children correctly 1`] = `
 <div
   className="talixo-card-content"

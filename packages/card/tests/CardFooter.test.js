@@ -18,6 +18,6 @@ describe('<CardFooter />', () => {
         <div>Icon</div>
       </CardFooter>
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.props().className).toMatch(/(^| )small( |$)/)
   })
 })

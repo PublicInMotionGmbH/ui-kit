@@ -14,10 +14,8 @@ describe('<CardContent />', () => {
 
   it('renders .blue correctly', () => {
     const wrapper = shallow(
-      <CardContent className='blue'>
-        <div>Content</div>
-      </CardContent>
+      <CardContent className='blue' />
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.props().className).toMatch(/(^| )blue( |$)/)
   })
 })

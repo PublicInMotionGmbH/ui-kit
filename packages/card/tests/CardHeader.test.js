@@ -18,6 +18,17 @@ describe('<CardFooter />', () => {
         <div>Icon</div>
       </CardFooter>
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.props().className).toMatch(/(^| )small( |$)/)
+  })
+
+  it('renders title correctly', () => {
+    const wrapper = shallow(
+      <CardFooter className='small'>
+        <div className='card-title'>
+          <div>Title</div>
+        </div>
+      </CardFooter>
+    )
+    expect(wrapper.find('.card-title').exists()).toBe(true)
   })
 })

@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CardFooter /> renders .small correctly 1`] = `
-<div
-  className="talixo-card-header small"
->
-  <div
-    key=".0"
-  >
-    Icon
-  </div>
-</div>
-`;
-
 exports[`<CardFooter /> renders children correctly 1`] = `
 <div
   className="talixo-card-header"
