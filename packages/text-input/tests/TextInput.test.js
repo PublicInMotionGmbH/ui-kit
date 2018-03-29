@@ -8,9 +8,7 @@ const moduleName = prefix('text-input')
 
 const createProps = (props = {}) => ({
   hasError: false,
-  size: '',
   onChange: () => {},
-  placeholder: 'Test',
   ...props
 })
 const defaultProps = createProps()
@@ -54,16 +52,16 @@ describe('<TextInput />', () => {
 
   describe('when user types inside input', () => {
     let input
-    const onChange = jest.fn()
 
     beforeEach(() => {
-      wrapper = shallow(<TextInput placeholder='Test' onChange={onChange} />)
+      props = createProps({ onChange: jest.fn() })
+      wrapper = createWrapper(props)
       input = wrapper.find(`.${moduleName}`)
       input.simulate('change', { target: { value: 'Test' } })
     })
 
     it('should call onChange', () => {
-      expect(onChange).toHaveBeenCalled()
+      expect(props.onChange).toHaveBeenCalled()
     })
 
     it('should update state', () => {

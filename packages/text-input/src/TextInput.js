@@ -39,14 +39,14 @@ class TextInput extends React.Component {
     } = this
 
     const inputClasses = cls(moduleName, className, {
-      [`${moduleName}--${size}`]: size.length > 0,
+      [`${moduleName}--${size}`]: size && size.length > 0,
       [`${moduleName}--error`]: hasError
     })
     const wrapperClasses = cls(`${moduleName}__wrapper`, {
-      [[`${moduleName}__wrapper--${size}`]]: size.length > 0
+      [[`${moduleName}__wrapper--${size}`]]: size && size.length > 0
     })
     const labelClasses = cls(`${moduleName}__label`, {
-      [`${moduleName}__label--${size}`]: size.length > 0,
+      [`${moduleName}__label--${size}`]: size && size.length > 0,
       [`${moduleName}__label--error`]: hasError,
       [`${moduleName}__label--not-empty`]: !!inputValue
     })
@@ -86,7 +86,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.node,
 
   /** Size of text input (can be 'small') */
-  size: PropTypes.oneOf(['', 'small']),
+  size: PropTypes.oneOf(['small']),
 
   /** Additional input wrapper styling */
   style: PropTypes.object
@@ -94,8 +94,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
   hasError: false,
-  onChange: () => {},
-  size: ''
+  onChange: () => {}
 }
 
 export default TextInput

@@ -11,8 +11,6 @@ exports[`<TextInput /> when rendered should render properly 1`] = `
   />
   <label
     className="talixo-text-input__label talixo-text-input__label--error"
-  >
-    Test
-  </label>
+  />
 </div>
 `;

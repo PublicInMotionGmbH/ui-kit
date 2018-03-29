@@ -11,7 +11,7 @@ const addStory = createStoriesFactory('Text Input', module)
 
 // Stories
 
-const additinalStyling = {
+const additionalStyling = {
   display: 'block',
   marginTop: '10px'
 }
@@ -20,11 +20,11 @@ addStory('default', readme, () => (
   <div>
     <TextInput
       placeholder='Default input'
-      style={additinalStyling}
+      style={additionalStyling}
     />
     <TextInput
       placeholder='Default input with errors'
-      style={additinalStyling}
+      style={additionalStyling}
       hasError
     />
   </div>
@@ -34,12 +34,12 @@ addStory('small', readme, () => (
     <TextInput
       placeholder='Small text input'
       size='small'
-      style={additinalStyling}
+      style={additionalStyling}
     />
     <TextInput
       placeholder='Small text input with errors'
       size='small'
-      style={additinalStyling}
+      style={additionalStyling}
       hasError
     />
   </div>
