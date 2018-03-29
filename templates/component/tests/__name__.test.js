@@ -1,6 +1,7 @@
 import React from 'react'
-import __name__ from '../src/__name__'
 import { shallow } from 'enzyme'
+
+import __name__ from '../src/__name__'
 
 describe('<__name__ />', () => {
   it('renders children correctly', () => {

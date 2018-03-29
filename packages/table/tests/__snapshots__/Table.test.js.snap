@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Table /> renders empty table correctly 1`] = `
+<table
+  className="talixo-table"
+/>
+`;
+
+exports[`<Table /> renders simple table with children correctly 1`] = `
+<table
+  className="talixo-table"
+>
+  <thead>
+    <tr>
+      <th>
+        ID
+      </th>
+      <th>
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        John Doe
+      </td>
+    </tr>
+    <tr>
+      <td>
+        2
+      </td>
+      <td>
+        Johnny Doe
+      </td>
+    </tr>
+    <tr>
+      <td>
+        3
+      </td>
+      <td>
+        John Doee
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td
+        colSpan={2}
+      >
+        Showing 10 of 20 entries.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+`;
+
+exports[`<Table /> renders table with children (and actions) correctly 1`] = `
+<table
+  className="talixo-table"
+>
+  <thead>
+    <tr>
+      <th>
+        ID
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Manage
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        1
+      </td>
+      <td>
+        John Doe
+      </td>
+      <td
+        className="talixo-table__actions"
+      >
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Done
+          </span>
+        </button>
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Settings
+          </span>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        2
+      </td>
+      <td>
+        Johnny Doe
+      </td>
+      <td
+        className="talixo-table__actions"
+      >
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Done
+          </span>
+        </button>
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Settings
+          </span>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        3
+      </td>
+      <td>
+        John Doee
+      </td>
+      <td
+        className="talixo-table__actions"
+      >
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Done
+          </span>
+        </button>
+        <button
+          className="talixo-table__action"
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+          <span>
+            Settings
+          </span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td
+        colSpan={3}
+      >
+        Showing 10 of 20 entries.
+      </td>
+    </tr>
+  </tfoot>
+</table>
+`;
+
+exports[`<Table /> renders table with children correctly 1`] = `
+<table
+  className="talixo-table"
+>
+  <Head />
+  <Body />
+  <Footer />
+</table>
+`;
+
+exports[`<Table /> renders table with special properties properly 1`] = `
+<table
+  className="talixo-table tablet talixo-table--condensed talixo-table--fixed"
+>
+  <Head
+    className="head"
+  >
+    <HeadCell
+      className="head-cell"
+    >
+      ID
+    </HeadCell>
+    <HeadCell
+      className="head-cell"
+    >
+      Name
+    </HeadCell>
+    <HeadCell
+      className="head-cell"
+    >
+      Manage
+    </HeadCell>
+  </Head>
+  <Body
+    className="t-body"
+  >
+    <Row
+      className="t-row"
+    >
+      <Cell
+        className="t-cell"
+      >
+        1
+      </Cell>
+      <Cell>
+        John Doe
+      </Cell>
+      <ActionsCell
+        className="head-cell"
+        vertical={true}
+      >
+        <Action
+          className="special-action"
+          icon="done"
+          label="Done"
+          warn={false}
+        />
+        <Action
+          icon="settings"
+          label="Settings"
+          warn={false}
+        />
+      </ActionsCell>
+    </Row>
+    <Row>
+      <Cell>
+        2
+      </Cell>
+      <Cell>
+        Johnny Doe
+      </Cell>
+      <ActionsCell
+        vertical={true}
+      >
+        <Action
+          icon="done"
+          label="Done"
+          warn={false}
+        />
+        <Action
+          icon="settings"
+          label="Settings"
+          warn={false}
+        />
+      </ActionsCell>
+    </Row>
+    <Row>
+      <Cell>
+        3
+      </Cell>
+      <Cell>
+        John Doee
+      </Cell>
+      <ActionsCell
+        vertical={true}
+      >
+        <Action
+          icon="done"
+          label="Done"
+          warn={false}
+        />
+        <Action
+          icon="settings"
+          label="Settings"
+          warn={false}
+        />
+      </ActionsCell>
+    </Row>
+  </Body>
+  <Footer>
+    <Cell
+      colSpan={3}
+    >
+      Showing 10 of 20 entries.
+    </Cell>
+  </Footer>
+</table>
+`;
