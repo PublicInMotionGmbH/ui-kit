@@ -10,7 +10,7 @@ exports[`<NotificationsList /> renders correctly children 1`] = `
     <TransitionGroup
       childFactory={[Function]}
       className="talixo-notifications"
-      component="div"
+      component="span"
     />
   </div>
 </div>
@@ -26,7 +26,7 @@ exports[`<NotificationsList /> renders correctly one child 1`] = `
     <TransitionGroup
       childFactory={[Function]}
       className="talixo-notifications"
-      component="div"
+      component="span"
     />
   </div>
 </div>
