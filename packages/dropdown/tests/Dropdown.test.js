@@ -3,7 +3,7 @@ import Dropdown from '../src/Dropdown'
 import DropdownButtonRenderer from '../src/DropdownButtonRenderer'
 import DropdownMenu from '../src/DropdownMenu'
 import { mount } from 'enzyme'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import DropdownButton from './DropdownButton'
 import DropdownMenu from './DropdownMenu'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('dropdown')
 
@@ -55,7 +55,7 @@ const DropdownButtonRenderer = props => {
     style
   } = props
   return (
-    <div className={cls(`${name}-wrapper`, className)} ref={innerRef} style={style}>
+    <div className={cls(`${name}__wrapper`, className)} ref={innerRef} style={style}>
       <DropdownButton
         onOuterClick={() => closeMenu()}
         firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}

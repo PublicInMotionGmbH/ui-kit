@@ -2,7 +2,8 @@ import React from 'react'
 import cls from 'classnames'
 import PropTypes from 'prop-types'
 
-import { prefix } from '@talixo/commons'
+import Icon from '@talixo/icon'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 
@@ -42,24 +43,22 @@ const DropdownButton = props => {
       {...getToggleButtonProps({
         onClick: onClick
       })}
-      className={cls(`${name}-button`, className, {
-        [`${name}-open`]: isOpen
+      className={cls(`${name}__button`, className, {
+        [`${name}--open`]: isOpen
       })}
       id={id}
       style={style}
     >
       <span
-        className={cls(`${name}-value`, {
-          [`${name}-item-overflow-truncate`]: overflow === 'truncate',
-          [`${name}-item-overflow-break`]: overflow === 'break'
+        className={cls(`${name}__value`, {
+          [`${name}__item--overflow-truncate`]: overflow === 'truncate',
+          [`${name}__item--overflow-break`]: overflow === 'break'
         })}
       >
         {value ? ItemComponent ? <ItemComponent item={value} /> : value : placeholder || firstItem}
       </span>
-      <div className={`${name}-arrow`}>
-        <i className='material-icons'>
-         arrow_drop_down
-        </i>
+      <div className={`${name}__arrow`}>
+        <Icon name={'arrow_drop_down'} className={`${name}__arrow--down`} />
       </div>
     </button>
   )

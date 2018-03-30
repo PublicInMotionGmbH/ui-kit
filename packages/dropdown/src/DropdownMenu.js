@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 
@@ -34,16 +34,16 @@ const DropdownMenu = props => {
   } = props
   let maxHeightStyle = { maxHeight: maxHeight, overflowY: 'auto', ...style }
   return (
-    <div className={`${name}-options`} style={maxHeight ? maxHeightStyle : style}>
+    <div className={`${name}__options`} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
           {...getItemProps({ item: item })}
           key={ItemComponent ? index : item}
-          className={cls(`${name}-item`, {
-            [`${name}-item-highlighted`]: highlightedIndex === index,
-            [`${name}-item-selected`]: selectedItem === item,
-            [`${name}-item-overflow-truncate`]: overflow === 'truncate',
-            [`${name}-item-overflow-break`]: overflow === 'break'
+          className={cls(`${name}__item`, {
+            [`${name}__item--highlighted`]: highlightedIndex === index,
+            [`${name}__item--selected`]: selectedItem === item,
+            [`${name}__item--overflow-truncate`]: overflow === 'truncate',
+            [`${name}__item--overflow-break`]: overflow === 'break'
           })}
         >
           {ItemComponent ? <ItemComponent item={item} /> : item}

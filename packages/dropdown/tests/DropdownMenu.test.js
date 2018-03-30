@@ -1,7 +1,7 @@
 import React from 'react'
 import DropdownMenu from '../src/DropdownMenu'
 import { mount } from 'enzyme'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 
