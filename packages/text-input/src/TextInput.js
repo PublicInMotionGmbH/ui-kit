@@ -39,16 +39,16 @@ class TextInput extends React.Component {
     } = this
 
     const inputClasses = cls(moduleName, className, {
-      [`${moduleName}--${size}`]: size && size.length > 0,
+      [`${moduleName}--${size}`]: size,
       [`${moduleName}--error`]: hasError
     })
     const wrapperClasses = cls(`${moduleName}__wrapper`, {
-      [[`${moduleName}__wrapper--${size}`]]: size && size.length > 0
+      [[`${moduleName}__wrapper--${size}`]]: size
     })
     const labelClasses = cls(`${moduleName}__label`, {
-      [`${moduleName}__label--${size}`]: size && size.length > 0,
+      [`${moduleName}__label--${size}`]: size,
       [`${moduleName}__label--error`]: hasError,
-      [`${moduleName}__label--not-empty`]: !!inputValue
+      [`${moduleName}__label--not-empty`]: inputValue
     })
 
     return (
