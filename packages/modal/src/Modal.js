@@ -51,6 +51,10 @@ ModalPortal.propTypes = {
  * @property {string} [props.className]
  * @property {*} [props.children]
  * @property {boolean} [props.isOpen]
+ *
+ * @property {object} state
+ * @property {boolean} state.isOpen
+ *
  * @class
  */
 class Modal extends React.Component {
