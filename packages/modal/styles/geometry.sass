@@ -2,10 +2,10 @@
 
 @include module('modal')
   width: 90%
-  max-width: 500px
+  max-width: dp(63)
   padding: dp(2)
 
-#{prefix('modal-backdrop')}
+@include module('modal-backdrop')
   box-sizing: border-box
   position: absolute
   display: flex
@@ -13,9 +13,10 @@
   left: 0
   width: 100%
   height: 100%
+  padding: dp(2)
   text-align: center
   vertical-align: middle
-  padding: dp(2)
+  user-select: none
   flex-direction: column
   align-items: center
   justify-content: center

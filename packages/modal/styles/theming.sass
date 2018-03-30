@@ -3,10 +3,8 @@
 @include module('modal')
   background-color: $color-white
 
-#{prefix('modal-backdrop')}
+@include module('modal-backdrop')
   background-color: rgba(0, 0, 0, 0.3)
-  user-select: none
-
 
   &--entered
     opacity: 1

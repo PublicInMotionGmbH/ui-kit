@@ -10,9 +10,9 @@ const moduleName = prefix('modal')
 /**
  * Component which represents modal portal.
  *
- * @param {object} props
- * @param {*} [props.children]
- * @param {object} [props.root]
+ * @property {object} props
+ * @property {Element} [props.root]
+ * @property {*} [props.children]
  * @class
  */
 class ModalPortal extends React.Component {
@@ -47,11 +47,11 @@ ModalPortal.propTypes = {
 /**
  * Component which represents modal.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {*} [props.children]
- * @param {boolean} [props.isOpen]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {*} [props.children]
+ * @property {boolean} [props.isOpen]
+ * @class
  */
 class Modal extends React.Component {
   constructor (props) {
