@@ -2,10 +2,7 @@ import React from 'react'
 
 import Checkbox from './src/Checkbox'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
