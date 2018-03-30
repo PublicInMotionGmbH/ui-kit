@@ -1,6 +1,6 @@
 # Talixo Sidebar
 
-UI component which represents sidebar
+UI component which represents sidebar for dashboards.
 
 ## How to install
 

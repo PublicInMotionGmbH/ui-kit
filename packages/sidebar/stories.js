@@ -1,6 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { createStoriesFactory, getReadmeDescription } from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Sidebar from './src/Sidebar'
 import Panel from './src/Panel'
