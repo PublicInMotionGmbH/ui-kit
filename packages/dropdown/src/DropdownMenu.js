@@ -4,7 +4,7 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('select')
+const moduleName = prefix('select')
 
 /**
  * Dropdown menu component.
@@ -23,28 +23,33 @@ const name = prefix('select')
 
 const DropdownMenu = props => {
   const {
-    getItemProps,
-    highlightedIndex,
-    items,
-    itemComponent: ItemComponent,
-    maxHeight,
-    overflow,
-    selectedItem,
-    style
+    getItemProps, highlightedIndex, items,
+    itemComponent: ItemComponent, maxHeight,
+    overflow, selectedItem, style
   } = props
-  let maxHeightStyle = { maxHeight: maxHeight, overflowY: 'auto', ...style }
+
+  const maxHeightStyle = {
+    overflowY: 'auto',
+    maxHeight,
+    ...style
+  }
+
+  const clsName = (item, index) => (
+    cls(`${moduleName}__item`, {
+      [`${moduleName}__item--highlighted`]: highlightedIndex === index,
+      [`${moduleName}__item--selected`]: selectedItem === item,
+      [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
+      [`${moduleName}__item--overflow-break`]: overflow === 'break'
+    })
+  )
+
   return (
-    <div className={`${name}__options`} style={maxHeight ? maxHeightStyle : style}>
+    <div className={`${moduleName}__options`} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
           {...getItemProps({ item: item })}
           key={ItemComponent ? index : item}
-          className={cls(`${name}__item`, {
-            [`${name}__item--highlighted`]: highlightedIndex === index,
-            [`${name}__item--selected`]: selectedItem === item,
-            [`${name}__item--overflow-truncate`]: overflow === 'truncate',
-            [`${name}__item--overflow-break`]: overflow === 'break'
-          })}
+          className={clsName(item, index)}
         >
           {ItemComponent ? <ItemComponent item={item} /> : item}
         </div>

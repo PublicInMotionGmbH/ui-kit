@@ -27,18 +27,12 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
 
 const Dropdown = props => {
   const {
-    className,
-    menuComponent,
-    defaultSelectedItem,
-    itemComponent,
-    items,
-    maxHeight,
-    onChange,
-    overflow,
-    placeholder,
-    style,
+    className, menuComponent, defaultSelectedItem,
+    itemComponent, items, maxHeight, onChange,
+    overflow, placeholder, style,
     toggleComponent: ToggleComponent
   } = props
+
   return (
     <Downshift
       onChange={onChange}

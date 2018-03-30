@@ -7,7 +7,7 @@ import DropdownMenu from './DropdownMenu'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('dropdown')
+const moduleName = prefix('dropdown')
 
 /**
  * Dropdown renderer.
@@ -37,25 +37,15 @@ const name = prefix('dropdown')
 
 const DropdownButtonRenderer = props => {
   const {
-    className,
-    closeMenu,
-    menuComponent: MenuComponent,
-    defaultSelectedItem,
-    getToggleButtonProps,
-    getItemProps,
-    overflow,
-    highlightedIndex,
-    isOpen,
-    innerRef,
-    itemComponent,
-    items,
-    maxHeight,
-    placeholder,
-    selectedItem,
-    style
+    className, closeMenu, menuComponent: MenuComponent,
+    defaultSelectedItem, getToggleButtonProps, getItemProps,
+    overflow, highlightedIndex, isOpen, innerRef,
+    itemComponent, items, maxHeight, placeholder,
+    selectedItem, style
   } = props
+
   return (
-    <div className={cls(`${name}__wrapper`, className)} ref={innerRef} style={style}>
+    <div className={cls(`${moduleName}__wrapper`, className)} ref={innerRef} style={style}>
       <DropdownButton
         onOuterClick={() => closeMenu()}
         firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}

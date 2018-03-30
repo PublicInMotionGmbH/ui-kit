@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Icon from '@talixo/icon'
 import { prefix } from '@talixo/shared'
 
-const name = prefix('select')
+const moduleName = prefix('select')
 
 /**
  * Dropdown button component.
@@ -26,39 +26,36 @@ const name = prefix('select')
 
 const DropdownButton = props => {
   const {
-    className,
-    firstItem,
-    getToggleButtonProps,
-    id,
-    isOpen,
-    itemComponent: ItemComponent,
-    onClick,
-    overflow,
-    placeholder,
-    style,
-    value
+    className, firstItem, getToggleButtonProps,
+    id, isOpen, itemComponent: ItemComponent,
+    onClick, overflow, placeholder, style, value
   } = props
+
+  const buttonClsName = cls(className, `${moduleName}__button`, {
+    [`${moduleName}--open`]: isOpen
+  })
+
+  const spanClsName = cls(`${moduleName}__value`, {
+    [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
+    [`${moduleName}__item--overflow-break`]: overflow === 'break'
+  })
+
   return (
     <button
       {...getToggleButtonProps({
         onClick: onClick
       })}
-      className={cls(`${name}__button`, className, {
-        [`${name}--open`]: isOpen
-      })}
+      className={buttonClsName}
       id={id}
       style={style}
     >
       <span
-        className={cls(`${name}__value`, {
-          [`${name}__item--overflow-truncate`]: overflow === 'truncate',
-          [`${name}__item--overflow-break`]: overflow === 'break'
-        })}
+        className={spanClsName}
       >
         {value ? ItemComponent ? <ItemComponent item={value} /> : value : placeholder || firstItem}
       </span>
-      <div className={`${name}__arrow`}>
-        <Icon name={'arrow_drop_down'} className={`${name}__arrow--down`} />
+      <div className={`${moduleName}__arrow`}>
+        <Icon name={'arrow_drop_down'} className={`${moduleName}__arrow--down`} />
       </div>
     </button>
   )

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('item-address')
+const moduleName = prefix('item-address')
 
 /**
  * Component which represents dropdown.
@@ -19,12 +19,12 @@ const name = prefix('item-address')
 const ItemAddress = props => {
   const { item, className, style } = props
   return (
-    <div className={cls(name, className)} style={style}>
-      <i className={`material-icons ${name}__icon`}>
+    <div className={cls(moduleName, className)} style={style}>
+      <i className={`material-icons ${moduleName}__icon`}>
         {item.icon}
       </i>
-      <span className={`${name}__place`}>{item.place}</span>
-      <span className={`${name}__address`}>{item.address}</span>
+      <span className={`${moduleName}__place`}>{item.place}</span>
+      <span className={`${moduleName}__address`}>{item.address}</span>
     </div>
   )
 }
