@@ -23,16 +23,16 @@ to avoid having different versions of these in your application.
 
 Property name | Type                               | Default | Description
 --------------|------------------------------------|:-------:|-----------------------
-children      |	node	                             | n/a     | Tooltipped elements
-className     |	string                             | n/a     | Additional class name passed to the tooltip
-color         |	string                             | n/a     | Color of the tooltip
-fade          |	bool                               | 'false' | Fade in / out animation
-fadeTime      |	number                             | n/a     | Fade time
-isOpen        |	bool                               | n/a     | Controls whether tooltip is open
-position      |	'left', 'right', 'top' or 'bottom' | 'right' | Tooltip position
-rootNode      |	string                             | 'body'  | Root element of tooltip portal
-render        |	func                               | n/a     | Renders toolyip content
-style         |                                    | n/a     | Additional styles passed to the tooltip
+children      | nodes                              | n/a     | Tooltipped elements
+className     | string                             | n/a     | Additional class name passed to the tooltip
+color         | string                             | n/a     | Color of the tooltip
+fade          | bool                               | 'false' | Fade in / out animation
+fadeTime      | number                             | n/a     | Fade time
+isOpen        | bool                               | n/a     | Controls whether tooltip is open
+position      | 'left', 'right', 'top' or 'bottom' | 'right' | Tooltip position
+rootNode      | string                             | 'body'  | Root element of tooltip portal
+render        | func                               | n/a     | Renders toolyip content
+style         | object                             | n/a     | Additional styles passed to the tooltip
 
 ## Changelog
 
