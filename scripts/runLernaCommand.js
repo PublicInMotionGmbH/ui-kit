@@ -5,13 +5,13 @@ const nodePath = process.argv[0]
 const lernaCliPath = path.join(__dirname, '..', 'node_modules', '.bin', 'lerna')
 
 /**
- * Run bootstrapping command in Lerna
+ * Run any command in Lerna
  *
  * @returns {Promise<int, int>}
  */
-function bootstrap () {
+function runLernaCommand (...args) {
   // Spawn Node.js process
-  const bt = spawn(nodePath, [ lernaCliPath, 'bootstrap', '--hoist' ])
+  const bt = spawn(nodePath, [ lernaCliPath, ...args ])
 
   // Redirect all streams from Lerna into current process
   bt.stdout.pipe(process.stdout)
@@ -29,4 +29,4 @@ function bootstrap () {
   })
 }
 
-module.exports = bootstrap
+module.exports = runLernaCommand
