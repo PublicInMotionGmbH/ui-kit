@@ -1,0 +1,28 @@
+@import './config'
+
+@include module('notifications')
+
+@include module('notification')
+  background-color: $color-orange-talixo
+  border-color: $color-orange-talixo
+  color: $color-black
+
+  &--primary
+    background-color: $color-white
+    border-color: $color-orange-talixo
+
+  &--success
+    background-color: $color-white
+    border-color: $color-talixo-success-green
+
+  &--error
+    background-color: $color-white
+    border-color: $color-talixo-error-red
+
+  &--warning
+    background-color: $color-white
+    border-color: $color-talixo-warning-yellow
+
+  &--information
+    background-color: $color-white
+    border-color: #0404e1
