@@ -4,6 +4,7 @@ import { mount } from 'enzyme'
 
 describe('<Popover />', () => {
   const rectElement = { ...window.Element.prototype.getBoundingClientRect }
+
   beforeAll(() => {
     window.Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
@@ -16,8 +17,8 @@ describe('<Popover />', () => {
       }
     })
   })
+
   afterAll(() => {
-    console.log(rectElement)
     window.Element.prototype.getBoundingClientRect = rectElement
   })
 

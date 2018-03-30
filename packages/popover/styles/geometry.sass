@@ -3,7 +3,7 @@
 @include module('popover')
   position: absolute
   display: inline-block
-  padding: grid-unit(1)  grid-unit(1.5)
+  padding: dp(1)  dp(1.5)
   border: $border-width solid
   border-radius: $border-radius-m
   font-size: $font-size-m
@@ -12,7 +12,7 @@
   left: 0
 
   > *
-    margin: 0 grid-unit(0.5)
+    margin: 0 dp(0.5)
 
   &-fade-enter
     opacity: 0.01
@@ -27,16 +27,16 @@
       opacity: 0.01
 
   &--right
-    transform: translateY(-50%) translateX(grid-unit(2))
+    transform: translateY(-50%) translateX(dp(2))
 
   &--left
-    transform: translateY(-50%) translateX(-100%) translateX(grid-unit(-2))
+    transform: translateY(-50%) translateX(-100%) translateX(dp(-2))
 
   &--bottom
-    transform: translateY(grid-unit(2)) translateX(-50%)
+    transform: translateY(dp(2)) translateX(-50%)
 
   &--top
-    transform: translateY(-100%) translateY(grid-unit(-2)) translateX(-50%)
+    transform: translateY(-100%) translateY(dp(-2)) translateX(-50%)
 
   &-click
     position: relative
