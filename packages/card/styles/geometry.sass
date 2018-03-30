@@ -1,61 +1,61 @@
-@import '../../commons/config.sass'
+@import './config'
 
 @include module('card')
   display: inline-block
-  flex: 0 1 grid-unit(45)
+  flex: 0 1 dp(45)
   position: relative
   border: $border-width solid
   font-size: $font-size-m
-  margin-left: grid-unit(2)
-  margin-right: grid-unit(2)
+  margin-left: dp(2)
+  margin-right: dp(2)
   transition: box-shadow 0.2s ease
-  margin-bottom: grid-unit(4)
+  margin-bottom: dp(4)
   max-width: 100%
 
   > *
     vertical-align: middle
 
   &:hover
-    box-shadow: 0 grid-unit(2) grid-unit(2.5) 0 rgba(0, 0, 0, 0.3)
+    box-shadow: 0 dp(2) dp(2.5) 0 rgba(0, 0, 0, 0.3)
 
   &-content
-    margin-top: grid-unit(2)
-    margin-bottom: grid-unit(4)
-    padding: grid-unit(2)
-  
+    margin-top: dp(2)
+    margin-bottom: dp(4)
+    padding: dp(2)
+
   &-footer
     margin-bottom: 0
-    padding: 0 grid-unit(2)
+    padding: 0 dp(2)
     position: absolute
-    bottom: grid-unit(2)
+    bottom: dp(2)
     left: 0
     right: 0
 
     *
-      margin: 0 grid-unit(0.5)
+      margin: 0 dp(0.5)
 
   &-header
-    margin-bottom: grid-unit(-2)
+    margin-bottom: dp(-2)
     overflow: hidden
 
   > img
     vertical-align: middle
     object-fit: cover
     width: 100%
-    height: grid-unit(20)
+    height: dp(20)
     padding-top: 0 !important
 
   &-title
     position: absolute
     width: 100%
-    height: grid-unit(16.5)
+    height: dp(16.5)
     border-width: 0 0 $border-width 0
     border-style: solid
 
     h2
       font-size: $font-size-l
       position: absolute
-      bottom: grid-unit(0.5)
+      bottom: dp(0.5)
       left: 0
-      padding: 0 grid-unit(2)
+      padding: 0 dp(2)
       z-index: 1

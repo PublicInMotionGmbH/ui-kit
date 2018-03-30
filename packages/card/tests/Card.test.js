@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../src/Card'
 import { shallow, mount } from 'enzyme'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 const moduleName = prefix('card')
 
 describe('<Card />', () => {
