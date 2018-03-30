@@ -8,7 +8,7 @@ import { getPositionNearElement, getTarget } from '../../../utils/position'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('popover')
+const moduleName = prefix('popover')
 
 /**
  * Component which represents Popover.
@@ -83,9 +83,9 @@ class Popover extends React.Component {
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
 
-    const clsName = cls(name, className, {
-      [`${name}--${color}`]: color !== undefined,
-      [`${name}--${position}`]: position !== undefined,
+    const clsName = cls(moduleName, className, {
+      [`${moduleName}--${color}`]: color !== undefined,
+      [`${moduleName}--${position}`]: position !== undefined,
       [`Layer-${layer}`]: layer !== undefined
     })
 
@@ -107,7 +107,7 @@ class Popover extends React.Component {
     return (
       <TransitionGroup>
         {this.state.isOpen ? (
-          <CSSTransition timeout={timeout} classNames={`${name}-fade`}>
+          <CSSTransition timeout={timeout} classNames={`${moduleName}-fade`}>
             <Portal root={document.querySelector(rootNode)}>
               {element}
             </Portal>
