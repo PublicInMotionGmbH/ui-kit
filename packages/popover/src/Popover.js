@@ -10,26 +10,6 @@ import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('popover')
 
-/**
- * Component which represents Popover.
- *
- * @property {object} props
- * @property {string} [props.className]
- * @property {*} [props.children]
- * @property {string} [props.color]
- * @property {boolean} [props.fade]
- * @property {number} [props.fadeTime]
- * @property {boolean} [props.isOpen]
- * @property {number} [props.layer]
- * @property {string} [props.rootNode]
- * @property {string} [props.position]
- * @property {object} [props.style]
- * @property {object} state
- * @property {object} [state.left]
- * @property {object} [state.top]
- * @class
- */
-
 class Portal extends React.Component {
   constructor (props) {
     super(props)
@@ -50,6 +30,26 @@ class Portal extends React.Component {
   }
 }
 
+/**
+ * Component which represents Popover.
+ *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {*} [props.children]
+ * @property {string} [props.color]
+ * @property {boolean} [props.fade]
+ * @property {number} [props.fadeTime]
+ * @property {boolean} [props.isOpen]
+ * @property {number} [props.layer]
+ * @property {string} [props.rootNode]
+ * @property {string} [props.position]
+ * @property {object} [props.style]
+ *
+ * @property {object} state
+ * @property {object} [state.left]
+ * @property {object} [state.top]
+ * @class
+ */
 class Popover extends React.Component {
   constructor (props) {
     super(props)
@@ -147,7 +147,7 @@ Popover.propTypes = {
   rootNode: PropTypes.string,
 
   /** Position of popover */
-  position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+  position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
 
   /** Style CSS */
   style: PropTypes.object

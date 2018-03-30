@@ -33,7 +33,7 @@ layer         | number    | n/a     | quantity of popover layer
 rootNode      | string    | n/a     | root node of popover
 position      | Position  | n/a     | position of popover
 
-Type name | Enum types 
+Type name | Enum options
 ----------|-------------------------------------- 
 Position  | 'left', 'right', 'top', 'bottom' 
 
