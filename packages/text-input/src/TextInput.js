@@ -16,7 +16,7 @@ const moduleName = prefix('text-input')
  * @param {string} [props.placeholder]
  * @param {string} [props.size]
  * @param {object} [props.style]
- * @returns {React.Element}
+ * @class
  */
 class TextInput extends React.Component {
   constructor () {
