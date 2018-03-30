@@ -1,0 +1,56 @@
+# Talixo Card
+
+It's just simple wrapper for Card component.
+
+## How to install
+
+Package is available as `@talixo/card` in NPM registry, so you can use it in your project
+using `npm install @talixo/card --save` or `yarn add @talixo/card`.
+
+## Requirements
+
+Your package should additionally have some extra dependencies:
+
+- `classnames: ^2.2.5`
+- `prop-types: ^15.6.1`
+- `react: ^16.2.0`
+- `react-dom: ^16.2.0`
+
+These packages are required by `@talixo/card`, but you have to install them manually,
+to avoid having different versions of these in your application.
+
+## Supported props
+
+### Card
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | any elements which should be shown in Card (CardHeader, CardContent or CardFooter)
+
+### CardHeader
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardHeader
+title         | string    | n/a     | title of CardHeader
+
+### CardContent
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardContent
+
+### CardFooter
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+children      | node      | n/a     | node element to display inside CardContent
+
+
+## Changelog
+
+- **1.0.0** - initial version

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CardFooter /> renders children correctly 1`] = `
+<div
+  className="talixo-card-header"
+>
+  <div
+    key=".0"
+  >
+    Icon
+  </div>
+</div>
+`;
