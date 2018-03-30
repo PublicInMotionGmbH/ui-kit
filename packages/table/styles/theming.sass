@@ -1,0 +1,30 @@
+@import './config'
+
+@include module('table')
+  tbody > tr
+    &:hover td
+      background: $table-row-background-hover-color
+
+    &:nth-child(even)
+      td
+        color: $table-even-row-text-color
+        background: $table-even-row-background-color
+
+      &:hover td
+        background: $table-even-row-background-hover-color
+
+  tfoot td
+    border-top: dp(0.5) solid $table-border-color
+
+@include module('table', 'action')
+  > .tai
+    transition: 100ms transform ease-in
+
+  &:hover
+    color: $table-action-hover-color
+
+    > .tai
+      transform: scale(1.2)
+
+  &--warn:hover
+    color: $table-action-warn-color
