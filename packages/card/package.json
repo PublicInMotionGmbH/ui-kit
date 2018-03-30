@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@talixo/commons": "^1.0.0",
-    "@talixo/icon": "^1.0.0"
-
+    "@talixo/shared": "^1.0.0"
   }
 }

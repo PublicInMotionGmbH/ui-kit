@@ -23,6 +23,8 @@ to avoid having different versions of these in your application.
 
 ### Card
 
+It allows any props which are allowed for 'div'. Additionally, it handles some differently:
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
@@ -49,7 +51,6 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | node element to display inside CardContent
-
 
 ## Changelog
 
