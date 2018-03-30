@@ -4,29 +4,28 @@ import PropTypes from 'prop-types'
 import { prefix } from '@talixo/shared'
 import Icon from '@talixo/icon'
 
-const name = prefix('notification')
+const moduleName = prefix('notification')
 
 /**
  * Component which represents Notification.
  *
  * @param {object} props
- * @param {string} [props.children]
+ * @param {*} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.handleRemove]
- * @param {string} [props.style]
+ * @param {function} [props.handleRemove]
  * @param {string} [props.variant]
  * @returns {React.Element}
  */
 const Notification = props => {
-  const { children, className, handleRemove, style, variant, ...passedProps } = props
-  const classNames = cls(name, className, {
-    [`${name}--${variant}`]: variant !== undefined
+  const { children, className, handleRemove, variant, ...passedProps } = props
+  const classNames = cls(moduleName, className, {
+    [`${moduleName}--${variant}`]: variant
   })
 
   return (
-    <div className={classNames} style={style} {...passedProps}>
+    <div className={classNames} {...passedProps}>
       {children}
-      <Icon name='close' className='close' onClick={handleRemove} />
+      <Icon name='close' className={`${moduleName}--close`} onClick={handleRemove} />
     </div>
   )
 }
@@ -41,11 +40,8 @@ Notification.propTypes = {
   /** Function that runs when close button is clicked */
   handleRemove: PropTypes.func,
 
-  /** Additional styles passed to notification */
-  style: PropTypes.object,
-
   /** Notification variant */
-  variant: PropTypes.string
+  variant: PropTypes.oneOf(['primary', 'success', 'error', 'warning', 'information'])
 }
 
 Notification.defaultProps = {

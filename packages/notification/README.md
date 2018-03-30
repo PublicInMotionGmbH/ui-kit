@@ -4,7 +4,8 @@ UI Component which represents Notification
 
 ## How to install
 
-Package is available as `@talixo/notification` in NPM registry, so you can use it in your project
+Package is available as `@talixo/notification` in NPM registry
+so you can use it in your project
 using `npm install @talixo/notification --save` or `yarn add @talixo/notification`.
 
 ## Requirements
@@ -21,15 +22,37 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description
---------------|-----------|:-------:|------------------------------------------------
-className     | string    | n/a     | Additional class name passed to wrapper
-children      | node      | n/a     | Notification content
-className     | string    | n/a     | Additional class name passed to notification
-handleRemove  | func      | n/a     | Function that runs when close button is clicked
-style         |           | n/a     | Additional styles passed to notification
-variant       | string    | n/a     | Notification variant
+### Notification
 
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
+
+Property name | Type    | Default | Description
+--------------|---------|:-------:|------------------------------------------------
+className     | string  | n/a     | Additional class name passed to wrapper
+children      | node    | n/a     | Notification content
+className     | string  | n/a     | Additional class name passed to notification
+handleRemove  | func    | n/a     | Function that runs when close button is clicked
+variant       | variant | n/a     | Notification variant
+
+#### Types
+
+variant       |
+--------------|
+'primary'     |
+'success'     |
+'error'       |
+'warning'     |
+'information' |
+
+### NotificationsList
+
+It allows any props which are allowed for `div`.
+
+Additionally, it handles some differently:
+
+Property name | Type    | Default | Description
+--------------|---------|:-------:|------------------------------------------------
+className     | string  | n/a     | Additional class name passed to wrapper
 
 ## Changelog
 

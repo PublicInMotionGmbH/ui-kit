@@ -1,10 +1,18 @@
 import React from 'react'
+import cls from 'classnames'
 import PropTypes from 'prop-types'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { prefix } from '@talixo/shared'
 
-const name = prefix('notifications')
+const moduleName = prefix('notifications')
 
+/**
+* Component which handles fading in CSSTransition.
+*
+* @property {object} props
+* @property {*} [props.children]
+* @returns {React.Element}
+*/
 const Fade = ({ children, ...props }) => (
   <CSSTransition {...props} timeout={600} classNames='fade'>
     {children}
@@ -14,40 +22,54 @@ const Fade = ({ children, ...props }) => (
 /**
  * Component which represents list of notifications.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {string} [props.style]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {string} [props.style]
+ * @class
+ *
+ * @property {object} state
+ * @property {array} [state.items]
  */
 class NotificationsList extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       items: []
     }
   }
 
   componentDidMount () {
-    setTimeout(() => this.setState({items: Array.isArray(this.props.children) ? this.props.children : [this.props.children]}), 1000)
+    this.timeout = setTimeout(() => this.setState({
+      items: [].concat(this.props.children)
+    }))
   }
 
+  componentWillUnmount () {
+    clearTimeout(this.timeout)
+  }
+
+  /**
+  * Remove notification by the index
+  *
+  * @param {number} i
+  */
   handleRemove (i) {
-    let newItems = this.state.items.slice()
-    newItems.splice(i, 1)
-    this.setState({ items: newItems })
+    const { items } = this.state
+
+    this.setState({
+      items: items.filter((x, index) => index !== i)
+    })
   }
 
   render () {
-    const { className, style } = this.props
+    const { className, ...passedProps } = this.props
     return (
-      <div className={`${name}-container`}>
-        <div className={`${name}-wrapper`}>
-          <TransitionGroup className={name}>
+      <div className={`${moduleName}__container`}>
+        <div className={cls(`${moduleName}__wrapper`, className)} {...passedProps}>
+          <TransitionGroup className={moduleName}>
             {this.state.items.map((child, i) => (
               <Fade key={child.props.id}>
                 {React.cloneElement(child, {
-                  className,
-                  style,
                   handleRemove: () => this.handleRemove(i)
                 })}
               </Fade>
@@ -61,10 +83,7 @@ class NotificationsList extends React.Component {
 
 NotificationsList.propTypes = {
   /** Additional class name passed to notifications */
-  className: PropTypes.string,
-
-  /** Additional styles passed to notifications */
-  style: PropTypes.object
+  className: PropTypes.string
 }
 
 NotificationsList.defaultProps = {

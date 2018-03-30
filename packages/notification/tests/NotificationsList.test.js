@@ -9,6 +9,7 @@ describe('<NotificationsList />', () => {
         <div id={0}>Notification</div>
       </NotificationsList>
     )
+
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -20,6 +21,7 @@ describe('<NotificationsList />', () => {
         <div id={2}>Notification 3</div>
       </NotificationsList>
     )
+
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -29,6 +31,8 @@ describe('<NotificationsList />', () => {
         <div id={0}>Notification</div>
       </NotificationsList>
     )
-    expect(wrapper).toMatchSnapshot()
+
+    const className = wrapper.props().children.props.className
+    expect(className).toContain('left')
   })
 })

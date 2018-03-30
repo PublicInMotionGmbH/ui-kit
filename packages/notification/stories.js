@@ -40,7 +40,7 @@ const notifications = [
 // Stories
 
 addStory('success notification', readme, () => (
-  <Notification style={{ width: '300px' }} variant='success'>
+  <Notification style={{ width: '300px' }} variant='information'>
     <strong>Your user registration was successful.</strong>
     <br />
     <span>You may now log-in with the username you have chosen</span>
@@ -70,7 +70,7 @@ addStory('information notification', readme, () => (
 addStory('notifications group', readme, () => (
   <NotificationsList>
     {notifications.map(notification => (
-      <Notification id={notification.id} variant={notification.variant}>
+      <Notification key={notification.id} id={notification.id} variant={notification.variant}>
         <strong>{notification.title}</strong>
         <br />
         <span>{notification.message}</span>
