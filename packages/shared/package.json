@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "rollup": "^0.57.1"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.0"
   }
 }

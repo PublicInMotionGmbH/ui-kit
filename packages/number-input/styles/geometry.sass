@@ -1,0 +1,47 @@
+@import './config'
+
+@include module('number-input')
+  display: inline-block
+  position: relative
+  display: inline-block
+  border: $border-width solid
+  border-radius: $border-radius-m
+  padding: dp(1.5)
+  line-height: dp(3)
+
+  >
+    input, #{prefix('number-input', 'stepper')}
+      display: inline-block
+      vertical-align: middle
+
+    input
+      font-size: $font-size-m
+      font-weight: $font-weight-semibold
+      border: none
+      outline: inherit !important
+
+  &__stepper &__button
+    box-sizing: content-box
+    width: dp(2.5)
+    height: dp(2.5)
+    padding: 0
+    margin: 0 dp(0.5)
+    border: $border-width solid
+    border-radius: dp(2.5)
+    display: inline-block
+
+    span
+      font-size: $font-size-m
+      font-weight: $font-weight-semibold
+      text-align: center
+      display: block
+
+  &--small
+    padding: dp(0.5) dp(1.5)
+
+    > input
+      font-size: $font-size-s
+
+input[type='number']::-webkit-inner-spin-button
+  -webkit-appearance: none
+
