@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/breadcrumbs",
+  "name": "@talixo/radio-input",
   "version": "1.0.0",
-  "description": "UI component for Breadcrumbs",
+  "description": "UI Component which represents Radio Input",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
