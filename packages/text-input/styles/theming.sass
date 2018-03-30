@@ -1,0 +1,22 @@
+@import './config'
+
+@include module('text-input')
+  background-color: $color-white
+  border-color: $color-placeholder-text
+  color: $color-black
+  outline: inherit !important
+
+  &--error
+    border-color: $color-talixo-error-red
+    color: $color-talixo-error-red
+
+  &--error::placeholder
+    color: $color-talixo-error-red
+
+#{prefix('text-input', 'label')}
+  color: $color-placeholder-text
+  pointer-events: none
+  user-select: none
+
+  &--error
+    color: $color-talixo-error-red

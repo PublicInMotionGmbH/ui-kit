@@ -1,0 +1,42 @@
+@import '../config'
+
+/*
+ Given:
+  - X - width of „1 of 4” column
+  - Y - width of „2 of 4” column
+  - G - gutter
+  - C - number of all columns
+
+  100% = 4X + 4G
+  100% = 2Y + 2G
+
+  2Y + 2G = 4X + 4G
+  2Y = 4X + 2G
+  Y = 2X + G
+
+  and:
+
+  4X = 100% - 4G
+  X = 25% - G
+
+  then:
+
+  Y = 2 * (25% - G) + G
+  Y = 50% - 2G + G
+  Y = 50% - G
+
+  so assumption is that for „N of C” column width is:
+
+  W = 100% * N/C - G
+ */
+
+@mixin masonry($cols, $gutter, $prefix: '')
+  @function width($i)
+    @return '#{percentage($i/$cols)} - #{$gutter}'
+
+  @for $i from 1 to $cols + 1
+    $width: calc(#{width($i)})
+
+    .masonry > #{$group-class-name}--spaced > .#{$prefix}#{$i}
+      min-width: $width
+      max-width: $width

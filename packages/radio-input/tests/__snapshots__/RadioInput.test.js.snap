@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioInput /> renders children correctly 1`] = `
+<label
+  className="talixo-radio-input"
+>
+  <input
+    type="radio"
+  />
+  <span />
+</label>
+`;
