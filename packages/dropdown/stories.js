@@ -2,8 +2,6 @@ import React from 'react'
 
 import ItemAddress from './src/ItemAddress'
 import Dropdown from './src/Dropdown'
-import DropdownButton from './src/DropdownButton'
-import DropdownMenu from './src/DropdownMenu'
 
 import {
   createStoriesFactory,
