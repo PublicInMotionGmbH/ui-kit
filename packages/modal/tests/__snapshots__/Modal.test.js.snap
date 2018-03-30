@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Modal /> renders children correctly 1`] = `
+<div>
+  <ModalPortal>
+    <div
+      className="talixo-modal-backdrop talixo-modal-backdrop--exiting"
+    >
+      <div
+        className="talixo-modal"
+      >
+        <h2>
+          Modal
+        </h2>
+      </div>
+    </div>
+  </ModalPortal>
+</div>
+`;

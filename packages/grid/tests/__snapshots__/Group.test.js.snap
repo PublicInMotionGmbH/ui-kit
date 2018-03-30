@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Group /> handles \`spaced \`prop\` 1`] = `
+<Segment
+  className="__ __--spaced"
+  size={12}
+>
+  <Segment
+    size={12}
+  >
+    3
+  </Segment>
+  <Segment
+    size={12}
+  >
+    9
+  </Segment>
+</Segment>
+`;
+
+exports[`<Group /> renders correctly 1`] = `
+<Segment
+  className="__"
+  size={12}
+>
+  <Segment
+    size={12}
+  >
+    12
+  </Segment>
+</Segment>
+`;
+
+exports[`<Group /> turns into Segment properly 1`] = `
+<Segment
+  className="__"
+  size={12}
+>
+  <Group
+    size={3}
+    spaced={false}
+  >
+    <Segment
+      size={12}
+    >
+      3
+    </Segment>
+  </Group>
+  <Group
+    size={9}
+    spaced={false}
+  >
+    <Segment
+      size={12}
+    >
+      9
+    </Segment>
+  </Group>
+</Segment>
+`;
+
+exports[`<Group /> turns into Segment properly with any props 1`] = `
+<Segment
+  className="__"
+  size={12}
+>
+  <Group
+    large={3}
+    medium={6}
+    size={12}
+    spaced={false}
+    xlarge={3}
+  >
+    <Segment
+      size={12}
+    >
+      12/6/3
+    </Segment>
+  </Group>
+  <Group
+    large={9}
+    medium={6}
+    size={12}
+    spaced={false}
+    xlarge={9}
+  >
+    <Segment
+      size={12}
+    >
+      12/6/9
+    </Segment>
+  </Group>
+</Segment>
+`;

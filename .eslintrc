@@ -15,6 +15,7 @@
     "expect": true,
     "jest": true,
     "beforeAll": true,
-    "afterAll": true
+    "afterAll": true,
+    "beforeEach": true
   }
 }

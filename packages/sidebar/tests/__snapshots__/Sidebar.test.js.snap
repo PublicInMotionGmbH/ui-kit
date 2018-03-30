@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar /> renders children correctly 1`] = `
+<nav
+  className="talixo-sidebar"
+>
+  <div
+    className="talixo-sidebar__content"
+  />
+</nav>
+`;
