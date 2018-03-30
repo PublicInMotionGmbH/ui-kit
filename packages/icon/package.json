@@ -1,0 +1,41 @@
+{
+  "name": "@talixo/icon",
+  "version": "1.0.0",
+  "description": "UI component for icons",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "scripts": {
+    "load": "node scripts/load-material-icons.js",
+    "test": "jest --config ../../tests/config.js --rootDir .",
+    "prepublishOnly": "rollup -c",
+    "build": "rollup -c"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "fs-extra": "^5.0.0",
+    "jest": "^21.2.1",
+    "progress": "^2.0.0",
+    "rollup": "^0.57.1",
+    "stream-to-string": "^1.1.0",
+    "unzip-stream": "^0.3.0",
+    "wget-improved": "^1.5.0"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0",
+    "@talixo/icon-pack": "^1.2.1"
+  }
+}

@@ -1,5 +1,8 @@
 # Talixo UI Kit
 
+[![Build status](https://circleci.com/gh/PublicInMotionGmbH/ui-kit/tree/master.png)](https://circleci.com/gh/PublicInMotionGmbH/ui-kit)
+[![Maintainability](https://api.codeclimate.com/v1/badges/99c10cd7f5d7705d7eaa/maintainability)](https://codeclimate.com/github/PublicInMotionGmbH/ui-kit/maintainability)
+
 It's UI Kit used through all Talixo front-end projects. You can see storybook [here](https://publicinmotiongmbh.github.io/ui-kit).
 
 ## Getting started
@@ -32,18 +35,21 @@ You can install it globally for easier use. There are few most important command
 
 ### Running tests
 
-There are two runners available:
+There are two test runners available:
 
 #### Jest
 
 You can either run `npm test` or `yarn test` in each directory,
 or you can use `lerna run test` to run them in all packages.
 
-When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
-
 Additionally, it's worth to note that using Lerna you can run your tests in parallel as well: `lerna run --parallel test`
 
-#### Wallaby
+##### Watchers
+
+When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
+Remember, that you can do it only in single package. If you would like to watch in every package same time, you can use WallabyJS.
+
+#### WallabyJS
 
 There is also configuration setup for [Wallaby](http://wallabyjs.com/) test runner,
 and it just works out of the box.
@@ -79,10 +85,91 @@ Each package is available in `packages` directory. Typical structure:
 ├── styles                           <-- Sass styles
 │   ├── config.sass                  <-- Styles configuration for components 
 │   ├── geometry.sass                <-- Geometry (basic behavior) styles
-│   ├── theminŃg.sass                 <-- Theming (make it beautiful and matching Talixo) styles
+│   ├── theming.sass                 <-- Theming (make it beautiful and matching Talixo) styles
 │   └── main.sass                    <-- Used in storybook, includes both geometry and theming
 └── tests                            <-- Directory for Jest tests
     ├── Switcher.test.js
     └── __snapshots__                <-- Automatically generated snapshots
         └── Switcher.test.js.snap
 ```
+
+#### Creating new package
+
+There is straight-forward wizard available after `npm run create` command.
+
+### Writing stories for storybook
+
+Stories are automatically loaded into storybook from `stories.js` file directly in package directory.
+The same thing is with stylesheets, Storybook is automatically loading `styles/main.sass` file.
+
+#### Creating story
+
+You can use standard storybook options or use our helpers for that.
+
+##### Simple story
+
+```js
+import React from 'react'
+
+import Something from './src/Something'
+
+import { createStoriesFactory } from '@talixo/shared/story'
+
+const addStory = createStoriesFactory('Something', module)
+
+addStory('initial', 'some description', () => <Something />)
+addStory('disabled', 'some description', () => <Something disabled />)
+```
+
+##### Controlled story
+
+If you need to show component which needs to keep state somewhere,
+Storybook info addon by default will show source only of Controller.
+Because of that, there is additional helper which will show source code correctly:
+
+```js
+import React from 'react'
+
+import FancyButton from './src/FancyButton'
+
+import { createStoriesFactory } from '@talixo/shared/story'
+
+const addStory = createStoriesFactory('FancyButton', module)
+
+function render (setState, state) {
+  return (
+    <div style={{ fontSize: state.size }}>
+      Text
+      <FancyButton onClick={() => setState({ size: state.size + 1 })}>Increase</FancyButton>
+    </div>
+  )
+}
+
+function getInitialState () {
+  return {
+    size: 10
+  }
+}
+
+addStory.controlled('initial', 'some description', render, getInitialState)
+```
+
+### Development commands & troubleshooting
+
+Description                                                  | Example
+-------------------------------------------------------------|------------------------------------------------------------
+Install all required packages through whole monorepo         | `npm run init`
+Install development dependency for all packages or storybook | `npm install babel --save-dev`
+Install dependencies of all subpackages                      | `lerna bootstrap --hoist`
+Resolve cross-dependencies between our packages              | `lerna bootstrap --hoist` or `lerna link`
+Install dependency inside single package                     | `lerna add jquery --scope @talixo/switcher`
+Run all tests                                                | `npm test` in main directory
+Create new package                                           | `npm run create` in main directory
+Publish all changed packages to NPM                          | `lerna publish`
+Publish single package                                       | `lerna publish --scope @talixo/switcher`
+Lint whole code                                              | `npm run lint`
+Starting Storybook for development at port `9009`            | `npm run storybook`
+Starting Storybook for development at different port         | `npm run storybook -- -p 5555`
+Build static code for Storybook into `storybook-static`      | `npm run build-storybook`
+Remove all `node_modules`                                    | `find . -name "node_modules" -exec rm -rf '{}' +` in main directory
+Reinitializing everything                                    | `find . -name "node_modules" -exec rm -rf '{}' + && npm run init` in main directory

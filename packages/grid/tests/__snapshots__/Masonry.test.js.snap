@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Group /> renders correctly 1`] = `
+<Segment
+  className="masonry"
+  size={12}
+>
+  <Group
+    spaced={false}
+  >
+    <Segment
+      size={12}
+    >
+      12
+    </Segment>
+  </Group>
+</Segment>
+`;
+
+exports[`<Group /> turns into Segment properly 1`] = `
+<Segment
+  className="__"
+  size={12}
+>
+  <Masonry
+    size={3}
+  >
+    <Group
+      spaced={false}
+    >
+      <Segment
+        size={3}
+      >
+        3 of 3/12
+      </Segment>
+      <Segment
+        size={9}
+      >
+        9 of 3/12
+      </Segment>
+    </Group>
+  </Masonry>
+</Segment>
+`;
+
+exports[`<Group /> turns into Segment properly with any props 1`] = `
+<Segment
+  className="__"
+  size={12}
+>
+  <Masonry
+    large={3}
+    medium={6}
+    size={12}
+    xlarge={3}
+  >
+    <Group
+      spaced={false}
+    >
+      <Segment
+        size={12}
+      >
+        12/6/3
+      </Segment>
+    </Group>
+  </Masonry>
+  <Masonry
+    large={9}
+    medium={6}
+    size={12}
+    xlarge={9}
+  >
+    <Group
+      spaced={false}
+    >
+      <Segment
+        size={12}
+      >
+        12/6/9
+      </Segment>
+    </Group>
+  </Masonry>
+</Segment>
+`;
