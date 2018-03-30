@@ -9,7 +9,8 @@
     box-sizing: border-box
 
   td, th
-    text-align: left
+    text-align: inherit // fallback for IE <10
+    text-align: start
     padding: dp(1) dp(1.5)
 
   th
@@ -86,12 +87,7 @@
       &:last-child
         border-bottom-width: 0
 
-
 [dir=rtl]
-  @include module('table')
-    td, th
-      text-align: right
-
   @include module('table', 'action')
     border-left-width: 0
     border-right-width: 1px
