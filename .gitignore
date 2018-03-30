@@ -23,3 +23,6 @@ lerna-debug.log
 storybook-static
 dist
 _gh-pages
+
+# Npm & Yarn Logs
+packages/card/yarn-error.log
