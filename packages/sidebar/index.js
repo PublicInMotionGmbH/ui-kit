@@ -1,9 +1,9 @@
 import Sidebar from './src/Sidebar'
-import Element from './src/Element'
-import Panel from './src/Panel'
+import SidebarElement from './src/SidebarElement'
+import SidebarPanel from './src/SidebarPanel'
 
 export {
   Sidebar,
-  Element,
-  Panel
+  SidebarElement,
+  SidebarPanel
 }

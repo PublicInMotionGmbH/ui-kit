@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Sidebar from './src/Sidebar'
-import Panel from './src/Panel'
-import Element from './src/Element'
+import Panel from './src/SidebarPanel'
+import Element from './src/SidebarElement'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))

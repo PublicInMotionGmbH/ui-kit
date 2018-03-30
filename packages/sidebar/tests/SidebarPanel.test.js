@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import SidebarPanel from '../src/Panel'
+import SidebarPanel from '../src/SidebarPanel'
 
 describe('<SidebarPanel />', () => {
   it('renders children correctly', () => {
