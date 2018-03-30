@@ -1,0 +1,14 @@
+@import './config'
+
+@include module('modal')
+  background-color: $color-white
+
+@include module('modal-backdrop')
+  background-color: rgba(0, 0, 0, 0.3)
+
+  &--entered
+    opacity: 1
+
+  &--exiting
+    opacity: 0
+    z-index: -100
