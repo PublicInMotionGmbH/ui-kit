@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStoriesFactory, getReadmeDescription, styles } from '@talixo/commons/story'
+import { createStoriesFactory, getReadmeDescription, styles } from '@talixo/shared/story'
 
 import Masonry from './src/Masonry'
 import Group from './src/Group'
@@ -221,4 +221,27 @@ addStory('extended masonry', readme, () => (
       <Segment style={style} size={6}>6</Segment>
     </Group>
   </Masonry>
+), options)
+
+addStory('responsive', readme, () => (
+  <div>
+    <Group>
+      <Segment style={style} size={12}>12</Segment>
+    </Group>
+    <Group>
+      <Segment style={style} size={12} medium={6}>6 (12 on small)</Segment>
+      <Segment style={style} size={12} medium={6}>6 (12 on small)</Segment>
+    </Group>
+    <Group>
+      <Segment style={style} size={4}>4</Segment>
+      <Segment style={style} size={4}>4</Segment>
+      <Segment style={style} size={4}>4</Segment>
+    </Group>
+    <Group>
+      <Segment style={style} size={12} medium={6} large={3}>3 (6 on mid, 12 on small)</Segment>
+      <Segment style={style} size={12} medium={6} large={3}>3 (6 on mid, 12 on small)</Segment>
+      <Segment style={style} size={12} medium={6} large={3}>3 (6 on mid, 12 on small)</Segment>
+      <Segment style={style} size={12} medium={6} large={3}>3 (6 on mid, 12 on small)</Segment>
+    </Group>
+  </div>
 ), options)
