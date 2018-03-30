@@ -147,7 +147,7 @@ Popover.propTypes = {
   rootNode: PropTypes.string,
 
   /** Position of popover */
-  position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
+  position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
 
   /** Style CSS */
   style: PropTypes.object
