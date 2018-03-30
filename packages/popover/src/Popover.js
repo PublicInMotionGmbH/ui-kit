@@ -13,18 +13,21 @@ const moduleName = prefix('popover')
 /**
  * Component which represents Popover.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {node} [props.children]
- * @param {string} [props.color]
- * @param {bool} [props.fade]
- * @param {number} [props.fadeTime]
- * @param {bool} [props.isOpen]
- * @param {number} [props.layer]
- * @param {string} [props.rootNode]
- * @param {oneOf(['left', 'right', 'top', 'bottom'])} [props.position]
- * @param {object} [props.style]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {*} [props.children]
+ * @property {string} [props.color]
+ * @property {boolean} [props.fade]
+ * @property {number} [props.fadeTime]
+ * @property {boolean} [props.isOpen]
+ * @property {number} [props.layer]
+ * @property {string} [props.rootNode]
+ * @property {string} [props.position]
+ * @property {object} [props.style]
+ * @property {object} state
+ * @property {object} [state.left]
+ * @property {object} [state.top]
+ * @class
  */
 
 class Portal extends React.Component {
