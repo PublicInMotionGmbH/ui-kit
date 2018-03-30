@@ -82,7 +82,7 @@ Each package is available in `packages` directory. Typical structure:
 ├── styles                           <-- Sass styles
 │   ├── config.sass                  <-- Styles configuration for components 
 │   ├── geometry.sass                <-- Geometry (basic behavior) styles
-│   ├── theminŃg.sass                 <-- Theming (make it beautiful and matching Talixo) styles
+│   ├── theming.sass                 <-- Theming (make it beautiful and matching Talixo) styles
 │   └── main.sass                    <-- Used in storybook, includes both geometry and theming
 └── tests                            <-- Directory for Jest tests
     ├── Switcher.test.js

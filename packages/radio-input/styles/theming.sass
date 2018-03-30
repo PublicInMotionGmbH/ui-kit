@@ -1,0 +1,13 @@
+@import './config'
+
+@include module('radio-input')
+  >
+  input
+    display: none
+
+  span:before
+    border: $border-width solid $color-ghost-border
+    transform: rotate(360deg)
+
+  input:checked + span:before
+    border: dp(0.7) solid $color-orange-talixo

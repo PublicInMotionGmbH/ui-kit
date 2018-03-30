@@ -7,9 +7,10 @@ import createController from './story/createController'
  * Build styles for story
  *
  * @param {object} stylesheet
+ * @param {object} options
  * @returns {object}
  */
-const styles = stylesheet => ({
+export const styles = (stylesheet, options) => ({
   ...stylesheet,
   infoBody: {
     ...stylesheet.infoBody,
@@ -17,7 +18,9 @@ const styles = stylesheet => ({
     border: 0,
     padding: 0
   },
-  propTableHead: {
+  propTableHead: options.propTypes && options.propTypes.length > 1 ? {
+
+  } : {
     display: 'none'
   },
   source: {
@@ -34,23 +37,30 @@ const styles = stylesheet => ({
  *
  * @param {string} name
  * @param {object} module
+ * @param {object} defaultOptions
  *
  * @returns {function(name: string, description: string, render: function)|function(name: string, description: string, render: function, infoOptions: object)|{ controlled: function(name: string, description: string, render: function, getInitialState: function, infoOptions: object)|function(name: string, description: string, render: function, getInitialState: function, infoOptions: object) }}
  */
-export function createStoriesFactory (name, module) {
+export function createStoriesFactory (name, module, defaultOptions = {}) {
   const stories = storiesOf(name, module)
 
   function addStory (name, description, render, infoOptions = {}) {
-    return stories.add(
-      name,
-      withInfo({
-        styles: styles,
-        header: true,
-        inline: true,
-        text: description,
-        ...infoOptions
-      })(render)
-    )
+    const options = {
+      header: true,
+      inline: true,
+      text: description,
+      ...defaultOptions,
+      ...infoOptions
+    }
+
+    const stylesFunction = options.styles
+      ? stylesheet => options.styles(styles(stylesheet, options), options)
+      : stylesheet => styles(stylesheet, options)
+
+    return stories.add(name, withInfo({
+      ...options,
+      styles: stylesFunction
+    })(render))
   }
 
   // Create helper for controlled stories
