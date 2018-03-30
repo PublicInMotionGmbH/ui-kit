@@ -44,7 +44,7 @@ variant       |
 'warning'     |
 'information' |
 
-### NotificationsList
+### NotificationList
 
 It allows any props which are allowed for `div`.
 

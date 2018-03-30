@@ -2,7 +2,7 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Notification from './src/Notification'
-import NotificationsList from './src/NotificationsList'
+import NotificationList from './src/NotificationList'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -68,7 +68,7 @@ addStory('information notification', readme, () => (
   </Notification>
 ))
 addStory('notifications group', readme, () => (
-  <NotificationsList>
+  <NotificationList>
     {notifications.map(notification => (
       <Notification key={notification.id} id={notification.id} variant={notification.variant}>
         <strong>{notification.title}</strong>
@@ -76,5 +76,5 @@ addStory('notifications group', readme, () => (
         <span>{notification.message}</span>
       </Notification>
     ))}
-  </NotificationsList>
+  </NotificationList>
 ))

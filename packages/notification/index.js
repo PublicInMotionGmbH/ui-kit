@@ -1,4 +1,4 @@
 import Notification from './src/Notification'
-import NotificationsList from './src/NotificationsList'
+import NotificationList from './src/NotificationList'
 
-export { Notification, NotificationsList }
+export { Notification, NotificationList }

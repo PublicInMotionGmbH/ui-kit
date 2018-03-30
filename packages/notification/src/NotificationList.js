@@ -30,7 +30,7 @@ const Fade = ({ children, ...props }) => (
  * @property {object} state
  * @property {array} [state.items]
  */
-class NotificationsList extends React.Component {
+class NotificationList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -81,12 +81,12 @@ class NotificationsList extends React.Component {
   }
 }
 
-NotificationsList.propTypes = {
+NotificationList.propTypes = {
   /** Additional class name passed to notifications */
   className: PropTypes.string
 }
 
-NotificationsList.defaultProps = {
+NotificationList.defaultProps = {
 }
 
-export default NotificationsList
+export default NotificationList
