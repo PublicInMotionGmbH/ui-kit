@@ -10,7 +10,7 @@ exports[`<Tab /> renders .action correctly 1`] = `
 
 exports[`<Tab /> renders active correctly 1`] = `
 <div
-  className="talixo-tab active"
+  className="talixo-tab talixo-tab--active"
 >
   Tab
 </div>

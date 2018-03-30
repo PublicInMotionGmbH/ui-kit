@@ -14,14 +14,15 @@ const moduleName = prefix('tab')
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-const Tab = ({ active, children, className, ...passedProps }) => {
+function Tab (props) {
+  const { active, children, className, ...passedProps } = props
+
+  const clsName = cls(moduleName, className, {
+    [`${moduleName}--active`]: active
+  })
+
   return (
-    <div
-      className={cls(moduleName, className, {
-        active: active !== false
-      })}
-      {...passedProps}
-    >
+    <div className={clsName} {...passedProps}>
       {children}
     </div>
   )
