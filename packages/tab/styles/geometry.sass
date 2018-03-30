@@ -1,16 +1,17 @@
 @import './config'
 
 @include module('tab')
-  // display: inline-block
   padding: dp(1) dp(1.5)
-  border-width: $border-width $border-width 0 $border-width
-  border-style: solid
+  border: 0 solid $color-tab-border
+  border-width: 1px 1px 0 1px
   border-radius: $border-radius-m $border-radius-m 0 0
-  box-shadow: $shadow-m rgba(0, 0, 0, 0.25)
   font-size: $font-size-s
   cursor: pointer
   display: inline-flex
   align-items: center
+
+  & + &
+    margin-left: 1px
 
   > *
     margin: 0 dp(0.5)

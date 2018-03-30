@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cls from 'classnames'
 import { prefix } from '@talixo/shared'
 
-const name = prefix('tab')
+const moduleName = prefix('tab')
 
 /**
  * Component which represents Tab.
@@ -12,15 +12,12 @@ const name = prefix('tab')
  * @param {string} [props.active]
  * @param {*} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.id]
- * @param {*} [props.onClick]
- * @param {object} [props.style]
  * @returns {React.Element}
  */
 const Tab = ({ active, children, className, ...passedProps }) => {
   return (
     <div
-      className={cls(name, className, {
+      className={cls(moduleName, className, {
         active: active !== false
       })}
       {...passedProps}
