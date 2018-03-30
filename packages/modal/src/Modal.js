@@ -13,7 +13,7 @@ const moduleName = prefix('modal')
  * @param {object} props
  * @param {*} [props.children]
  * @param {object} [props.root]
- * @returns {React.Element}
+ * @class
  */
 class ModalPortal extends React.Component {
   constructor (props) {
