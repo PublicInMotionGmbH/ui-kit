@@ -2,24 +2,24 @@
 
 exports[`<DropdownMenu /> renders correctly 1`] = `
 <div
-  className="talixo-select-options"
+  className="talixo-select__options"
 >
   <div
-    className="talixo-select-item"
+    className="talixo-select__item"
     item={1}
     key="1"
   >
     1
   </div>
   <div
-    className="talixo-select-item"
+    className="talixo-select__item"
     item={3}
     key="3"
   >
     3
   </div>
   <div
-    className="talixo-select-item"
+    className="talixo-select__item"
     item={5}
     key="5"
   >
@@ -30,10 +30,10 @@ exports[`<DropdownMenu /> renders correctly 1`] = `
 
 exports[`<DropdownMenu /> renders item component correctly 1`] = `
 <div
-  className="talixo-select-options"
+  className="talixo-select__options"
 >
   <div
-    className="talixo-select-item talixo-select-item-overflow-break"
+    className="talixo-select__item talixo-select__item--overflow-break"
     item={
       Object {
         "value": 1,
@@ -48,7 +48,7 @@ exports[`<DropdownMenu /> renders item component correctly 1`] = `
     </div>
   </div>
   <div
-    className="talixo-select-item talixo-select-item-overflow-break"
+    className="talixo-select__item talixo-select__item--overflow-break"
     item={
       Object {
         "value": 3,
@@ -63,7 +63,7 @@ exports[`<DropdownMenu /> renders item component correctly 1`] = `
     </div>
   </div>
   <div
-    className="talixo-select-item talixo-select-item-overflow-break"
+    className="talixo-select__item talixo-select__item--overflow-break"
     item={
       Object {
         "value": 5,

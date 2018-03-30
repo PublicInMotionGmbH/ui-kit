@@ -26,7 +26,7 @@ describe('<Dropdown />', () => {
         items={[1, 3, 5]}
       />
     )
-    wrapper.find(`.${name}-button`).simulate('click')
+    wrapper.find(`.${name}__button`).simulate('click')
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
   })
