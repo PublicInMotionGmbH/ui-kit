@@ -32,17 +32,11 @@ className     | string  | n/a     | Additional class name passed to wrapper
 children      | node    | n/a     | Notification content
 className     | string  | n/a     | Additional class name passed to notification
 handleRemove  | func    | n/a     | Function that runs when close button is clicked
-variant       | variant | n/a     | Notification variant
+variant       | Variant | n/a     | Notification variant
 
-#### Types
-
-variant       |
---------------|
-'primary'     |
-'success'     |
-'error'       |
-'warning'     |
-'information' |
+Type name | Enum options
+----------|--------------------------------------
+Variant   | 'left', 'right', 'top', 'bottom'
 
 ### NotificationList
 

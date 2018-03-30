@@ -52,28 +52,36 @@ class NotificationList extends React.Component {
   * Remove notification by the index
   *
   * @param {number} i
+  * @param {function} [nextCallback]
   */
-  handleRemove (i) {
+  onClose (i, nextCallback) {
     const { items } = this.state
 
     this.setState({
       items: items.filter((x, index) => index !== i)
     })
+
+    if (nextCallback) {
+      nextCallback()
+    }
   }
 
   render () {
     const { className, ...passedProps } = this.props
+
+    const elements = this.state.items.map((child, i) => (
+      <Fade key={child.props.id}>
+        {React.cloneElement(child, {
+          handleRemove: () => this.onClose(i, child.props.handleRemove)
+        })}
+      </Fade>
+    ))
+
     return (
       <div className={`${moduleName}__container`}>
         <div className={cls(`${moduleName}__wrapper`, className)} {...passedProps}>
           <TransitionGroup className={moduleName}>
-            {this.state.items.map((child, i) => (
-              <Fade key={child.props.id}>
-                {React.cloneElement(child, {
-                  handleRemove: () => this.handleRemove(i)
-                })}
-              </Fade>
-            ))}
+            {elements}
           </TransitionGroup>
         </div>
       </div>

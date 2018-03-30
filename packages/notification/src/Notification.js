@@ -18,12 +18,13 @@ const moduleName = prefix('notification')
  */
 const Notification = props => {
   const { children, className, handleRemove, variant, ...passedProps } = props
-  const classNames = cls(moduleName, className, {
+
+  const clsNames = cls(moduleName, className, {
     [`${moduleName}--${variant}`]: variant
   })
 
   return (
-    <div className={classNames} {...passedProps}>
+    <div className={clsNames} {...passedProps}>
       {children}
       <Icon name='close' className={`${moduleName}--close`} onClick={handleRemove} />
     </div>
@@ -41,10 +42,7 @@ Notification.propTypes = {
   handleRemove: PropTypes.func,
 
   /** Notification variant */
-  variant: PropTypes.oneOf(['primary', 'success', 'error', 'warning', 'information'])
-}
-
-Notification.defaultProps = {
+  variant: PropTypes.oneOf([ 'primary', 'success', 'error', 'warning', 'information' ])
 }
 
 export default Notification
