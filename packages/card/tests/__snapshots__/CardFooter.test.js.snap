@@ -2,7 +2,7 @@
 
 exports[`<CardFooter /> renders children correctly 1`] = `
 <div
-  className="talixo-card-content"
+  className="talixo-card--footer"
 >
   <div>
     Icon

@@ -2,7 +2,7 @@
 
 exports[`<CardFooter /> renders children correctly 1`] = `
 <div
-  className="talixo-card-header"
+  className="talixo-card--header"
 >
   <div
     key=".0"

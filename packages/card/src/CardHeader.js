@@ -4,13 +4,15 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('card-header')
+const moduleName = prefix('card')
 
 /**
  * Component which card header.
  *
  * @param {object} props
+ * @param {*} [props.children]
  * @param {string} [props.className]
+ * @param {string} [props.title]
  * @returns {React.Element}
  */
 function CardHeader (props) {
@@ -20,9 +22,9 @@ function CardHeader (props) {
     return typeof child === 'string' ? <span>{child}</span> : child
   })
   return (
-    <div className={cls(moduleName, className)} {...passedProps}>
+    <div className={cls(`${moduleName}--header`, className)} {...passedProps}>
       {title ? (
-        <div className='card-title'>
+        <div className={`${moduleName}--title`}>
           <div>{title}</div>
         </div>
       ) : null}

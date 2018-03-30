@@ -4,19 +4,20 @@ import cls from 'classnames'
 
 import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('card-content')
+const moduleName = prefix('card')
 
 /**
  * Component which card footer.
  *
  * @param {object} props
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @returns {React.Element}
  */
 function CardFooter (props) {
   const { children, className, ...passedProps } = props
   return (
-    <div className={cls(moduleName, className)} {...passedProps}>
+    <div className={cls(`${moduleName}--footer`, className)} {...passedProps}>
       {children}
     </div>
   )
