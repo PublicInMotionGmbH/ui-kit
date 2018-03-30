@@ -1,6 +1,10 @@
 import React from 'react'
 import { createStoriesFactory } from '@talixo/shared/story'
 
+import Heading from './src/Heading'
+import Lead from './src/Lead'
+import Code from './src/Code'
+
 // Load first paragraph from README file
 const readme = ''
 
@@ -11,25 +15,139 @@ const addStory = createStoriesFactory('Typography', module)
 
 addStory('Headers', readme, () => (
   <div>
-    <h1>h1. Header</h1>
-    <h2>h2. Header</h2>
-    <h3>h3. Header</h3>
-    <h4>h4. Header</h4>
-    <h5>h5. Header</h5>
-    <h6>h6. Header</h6>
+    <Heading level={1}>h1. Header</Heading>
+    <Heading level={2}>h2. Header</Heading>
+    <Heading level={3}>h3. Header</Heading>
+    <Heading level={4}>h4. Header</Heading>
+    <Heading level={5}>h5. Header</Heading>
+    <Heading level={6}>h6. Header</Heading>
 
-    <h1>h1. Header <small>Secondary text</small></h1>
-    <h2>h2. Header <small>Secondary text</small></h2>
-    <h3>h3. Header <small>Secondary text</small></h3>
-    <h4>h4. Header <small>Secondary text</small></h4>
-    <h5>h5. Header <small>Secondary text</small></h5>
-    <h6>h6. Header <small>Secondary text</small></h6>
+    <Heading level={1} secondary='Secondary text'>h1. Header</Heading>
+    <Heading level={2} secondary='Secondary text'>h2. Header</Heading>
+    <Heading level={3} secondary='Secondary text'>h3. Header</Heading>
+    <Heading level={4} secondary='Secondary text'>h4. Header</Heading>
+    <Heading level={5} secondary='Secondary text'>h5. Header</Heading>
+    <Heading level={6} secondary='Secondary text'>h6. Header</Heading>
+
+    <Heading level={1}>h1. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
+
+    <Heading level={2}>h2. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
+
+    <Heading level={3}>h3. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
+
+    <Heading level={4}>h4. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
+
+    <Heading level={5}>h5. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
+
+    <Heading level={6}>h6. Header</Heading>
+    <Lead>
+      Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
+      Maecenas malesuada elit lectus felis, malesuada ultricies.
+      Curabitur et ligula. Ut molestie a, ultricies porta urna.
+      Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor.
+    </Lead>
+
+    <p>
+      Cum sociis natoque penatibus et ultrices volutpat. Nullam wisi ultricies a, gravida vitae,
+      dapibus risus ante sodales lectus blandit eu, tempor diam pede cursus vitae, ultricies eu,
+      faucibus quis, porttitor eros cursus lectus, pellentesque eget, bibendum a, gravida ullamcorper quam.
+      Nullam viverra consectetuer. Quisque cursus et, porttitor risus.
+    </p>
+
+    <p>
+      Aliquam sem. In hendrerit nulla quam nunc, accumsan congue. Lorem ipsum primis in nibh vel risus. Sed vel lectus. Ut sagittis, ipsum dolor quam.
+    </p>
   </div>
 ))
 
 addStory('Text styling', readme, () => (
   <div>
-    <h2>Paragraphs</h2>
+    <Heading>Paragraphs</Heading>
 
     <p>
       Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
@@ -51,13 +169,13 @@ addStory('Text styling', readme, () => (
       Cum sociis natoque penatibus et ultrices volutpat.
     </p>
 
-    <h2>Inline styling</h2>
+    <Heading>Inline styling</Heading>
 
     <p>
       We may have some <strong>strong elements</strong> inside our text, as well as some <em>emphasises</em>.
       When we want to calculate 2<sup>3</sup> + x<sub>1</sub>, we may have problems, but it's easy to show it.
       <br />
-      In some circumstances, mostly describing our API or other stuff we may also try to show some <code>short code snippet</code>.
+      In some circumstances, mostly describing our API or other stuff we may also try to show some <Code>short code snippet</Code>.
       It happens that we may also use <kbd>Ctrl+C</kbd> to hint user with keyboard shortcuts.
     </p>
 
@@ -77,7 +195,7 @@ addStory('Text styling', readme, () => (
       We can also see a difference between <a href='#'>a link</a> and any other text.
     </p>
 
-    <h2>Quotes and testimonials</h2>
+    <Heading>Quotes and testimonials</Heading>
 
     <blockquote>
       This was one of the best experiences I have ever had with a cab company.
@@ -109,25 +227,25 @@ addStory('Text styling', readme, () => (
 
 addStory('RTL: Headers', readme, () => (
   <div dir='rtl'>
-    <h1>h1. כּוֹתֶרֶת</h1>
-    <h2>h2. כּוֹתֶרֶת</h2>
-    <h3>h3. כּוֹתֶרֶת</h3>
-    <h4>h4. כּוֹתֶרֶת</h4>
-    <h5>h5. כּוֹתֶרֶת</h5>
-    <h6>h6. כּוֹתֶרֶת</h6>
+    <Heading level={1}>h1. כּוֹתֶרֶת</Heading>
+    <Heading level={2}>h2. כּוֹתֶרֶת</Heading>
+    <Heading level={3}>h3. כּוֹתֶרֶת</Heading>
+    <Heading level={4}>h4. כּוֹתֶרֶת</Heading>
+    <Heading level={5}>h5. כּוֹתֶרֶת</Heading>
+    <Heading level={6}>h6. כּוֹתֶרֶת</Heading>
 
-    <h1>h1. כּוֹתֶרֶת <small>טקסט משני</small></h1>
-    <h2>h2. כּוֹתֶרֶת <small>טקסט משני</small></h2>
-    <h3>h3. כּוֹתֶרֶת <small>טקסט משני</small></h3>
-    <h4>h4. כּוֹתֶרֶת <small>טקסט משני</small></h4>
-    <h5>h5. כּוֹתֶרֶת <small>טקסט משני</small></h5>
-    <h6>h6. כּוֹתֶרֶת <small>טקסט משני</small></h6>
+    <Heading level={1}>h1. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
+    <Heading level={2}>h2. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
+    <Heading level={3}>h3. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
+    <Heading level={4}>h4. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
+    <Heading level={5}>h5. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
+    <Heading level={6}>h6. כּוֹתֶרֶת <small>טקסט משני</small></Heading>
   </div>
 ))
 
 addStory('RTL: Text styling', readme, () => (
   <div dir='rtl'>
-    <h2>פסקאות</h2>
+    <Heading level={2}>פסקאות</Heading>
 
     <p>
       אחד אל בדפים חרטומים, או פיסול צרפתית ויקיפדיה היא, אם מדריכים הגולשות כתב. ב עוד המחשב ברוכים עקרונות. ספינות מדריכים אקטואליה אחר על.
@@ -150,7 +268,7 @@ addStory('RTL: Text styling', readme, () => (
       חופשית מועמדים מדע של. מדע עזרה אחרות המלצת של, דת יוני אנגלית כתב.
     </p>
 
-    <h2>עיצוב מוטבע</h2>
+    <Heading level={2}>עיצוב מוטבע</Heading>
 
     <p>
       אולי יש לנו<strong> כמה אלמנטים חזקים בתוך הטקסט </strong>שלנו, כמו גם כמה מדגיש.
@@ -170,7 +288,7 @@ addStory('RTL: Text styling', readme, () => (
       כאשר אנו משתמשים בקיצורי דרך מסוימים כמו <abbr title='נראה לי טוב'>LGTM</abbr>, אנו יכולים להציג מידע כזה עבור המשתמש.
     </p>
 
-    <h2>ציטוטים ועדויות</h2>
+    <Heading level={2}>ציטוטים ועדויות</Heading>
 
     <blockquote>
       זה היה אחד החוויות הטובות ביותר שהיו לי אי פעם עם חברת מוניות.

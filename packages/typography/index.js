@@ -1,3 +1,7 @@
-import Typography from './src/Typography'
+import Heading from './src/Heading'
+import Code from './src/Code'
 
-export default Typography
+export {
+  Heading,
+  Code
+}
