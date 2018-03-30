@@ -1,0 +1,50 @@
+@import './config'
+
+@include module('button')
+  &--primary
+    background-color: $color-orange-talixo
+    border-color: $color-orange-talixo
+
+    &:hover:not(:disabled):not(:active)
+      background-color: $color-orange-hover
+      border-color: $color-orange-hover
+
+    &:active:not(:disabled)
+      background-color: $color-orange-active
+      border-color: $color-orange-active
+
+    &#{prefix('button')}--ghost
+      color: $color-orange-talixo
+      border-color: $color-orange-talixo
+      background-color: $color-white
+
+      &:hover
+        background-color: $color-orange-hover
+        border-color: $color-orange-hover
+        color: $color-white
+
+  &--black
+    background-color: $color-black
+    border-color: $color-black
+
+    &:hover:not(:disabled):not(:active)
+      background-color: $color-black-hover
+      border-color: $color-black-hover
+
+    &:active:not(:disabled)
+      background-color: $color-black-active
+      border-color: $color-black-active
+
+    &#{prefix('button')}--ghost
+      color: $color-black
+      border-color: $color-black
+      background-color: $color-white
+
+      &:hover
+        background-color: $color-black-hover
+        border-color: $color-black-hover
+        color: $color-white
+
+      &:active
+        background-color: $color-black-active
+        border-color: $color-black-active

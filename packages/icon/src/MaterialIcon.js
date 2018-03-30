@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 import icons from '@talixo/icon-pack'
 
 import codepoints from '../meta/codepoints'
