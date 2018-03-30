@@ -25,7 +25,7 @@
       > .tai
         font-size: $sidebar-icon-size
 
-    &--opened > #{$sel-sidebar-button},
+    &--open > #{$sel-sidebar-button},
     &--active > #{$sel-sidebar-button},
     > #{$sel-sidebar-button}:hover
       background-color: $sidebar-active-button-background
@@ -44,14 +44,14 @@
     overflow: hidden
 
   // Styles after opening them
-  &--opened > #{$sel-sidebar}
+  &--open > #{$sel-sidebar}
     width: $sidebar-size
 
-  &--opened > #{$sel-sidebar},
-  &--opened > #{$sel-sidebar-panel}
+  &--open > #{$sel-sidebar},
+  &--open > #{$sel-sidebar-panel}
     overflow: visible
 
-  &--opened > #{$sel-sidebar-panel}
+  &--open > #{$sel-sidebar-panel}
     width: $sidebar-panel-width
 
 // Handle styles for SidebarPanel

@@ -20,9 +20,11 @@ const moduleName = prefix('sidebar-element')
  * @property {boolean} props.active
  *
  * @property {object} state
- * @property {boolean} state.opened
+ * @property {boolean} state.isOpen
  *
  * @property {Element} node  reference to DOM element of Sidebar
+ *
+ * @class
  */
 class SidebarElement extends React.PureComponent {
   constructor (props) {
@@ -34,7 +36,7 @@ class SidebarElement extends React.PureComponent {
 
     this.node = null
     this.state = {
-      opened: false
+      isOpen: false
     }
   }
 
@@ -84,7 +86,7 @@ class SidebarElement extends React.PureComponent {
     }
 
     // Close current sidebar if it was clicked outside
-    this.setState({ opened: false })
+    this.setState({ isOpen: false })
 
     // Detach events to not listen on it without reason
     this.detachListener()
@@ -99,13 +101,13 @@ class SidebarElement extends React.PureComponent {
   handleClick (e) {
     const { children, onClick } = this.props
 
-    // Toggle opening status when it could be opened
+    // Toggle opening status when it could be isOpen
     if (children) {
-      const opened = !this.state.opened
+      const isOpen = !this.state.isOpen
 
-      this.setState({ opened: opened })
+      this.setState({ isOpen: isOpen })
 
-      if (opened) {
+      if (isOpen) {
         this.attachListener()
       } else {
         this.detachListener()
@@ -151,12 +153,12 @@ class SidebarElement extends React.PureComponent {
 
   render () {
     const { className, icon, label, active, children, onClick, ...passedProps } = this.props
-    const { opened } = this.state
+    const { isOpen } = this.state
 
     // Build class name with modifiers according to current state
     const clsName = cls(moduleName, className, {
       [`${moduleName}--active`]: active,
-      [`${moduleName}--opened`]: opened
+      [`${moduleName}--open`]: isOpen
     })
 
     // Check if we do have single children inside

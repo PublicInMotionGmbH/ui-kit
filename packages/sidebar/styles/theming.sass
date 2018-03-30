@@ -28,11 +28,11 @@
     transform: translateX(-100%)
     transition: transform $sidebar-transition-time ease-out
 
-  &--opened > #{$sel-sidebar},
-  &--opened > #{$sel-sidebar-panel}
+  &--open > #{$sel-sidebar},
+  &--open > #{$sel-sidebar-panel}
     animation: $sidebar-transition-time show-overflow 1
 
-  &--opened > #{$sel-sidebar-panel} > #{$sel-sidebar-panel-content}
+  &--open > #{$sel-sidebar-panel} > #{$sel-sidebar-panel-content}
     transform: translateX(0)
 
 // Handle styles for SidebarPanel
