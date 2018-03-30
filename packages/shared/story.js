@@ -9,7 +9,7 @@ import createController from './story/createController'
  * @param {object} stylesheet
  * @returns {object}
  */
-const styles = stylesheet => ({
+export const styles = stylesheet => ({
   ...stylesheet,
   infoBody: {
     ...stylesheet.infoBody,
