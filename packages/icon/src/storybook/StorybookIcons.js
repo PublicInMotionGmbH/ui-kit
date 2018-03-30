@@ -7,17 +7,14 @@ const icons = require('../../meta/overview.json')
 
 // Prepare styles for Storybook
 const style = `
-.storybook-icons-list {
-  font-family: 'Open Sans', Arial, Tahoma, Sans;
-}
-
 .storybook-icons {
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
   width: 100%;
   max-width: 100%;
-  font-family: 'Open Sans', Arial, Tahoma, Sans;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 120px);
+  grid-gap: 10px;
+  justify-content: space-between;
 }
 .storybook-icons__icon {
   position: relative;
@@ -29,7 +26,6 @@ const style = `
   font-size: 48px;
   text-align: center;
   color: #999;
-  margin: 5px;
   border: 1px solid #eee;
 }
 .storybook-icons__label {

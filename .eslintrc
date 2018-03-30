@@ -13,9 +13,10 @@
     "it": true,
     "describe": true,
     "expect": true,
-    "jest": true,
+    "beforeEach": true,
     "beforeAll": true,
+    "afterEach": true,
     "afterAll": true,
-    "beforeEach": true
+    "jest": true
   }
 }
