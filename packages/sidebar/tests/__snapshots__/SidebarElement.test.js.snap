@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SidebarElement /> renders children correctly 1`] = `
+<div
+  className="talixo-sidebar-element"
+>
+  <div
+    className="talixo-sidebar-element__button"
+    onClick={[Function]}
+  >
+    <Icon
+      name="home"
+    />
+    See more
+  </div>
+</div>
+`;
