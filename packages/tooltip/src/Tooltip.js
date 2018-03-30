@@ -43,29 +43,51 @@ class Portal extends React.Component {
 
 /**
  * Component which represents Tooltip.
+ *
+ * @property {object} props
+ * @property {boolean} props.fade
+ * @property {string} props.position
+ * @property {string} [props.rootNode]
+ * @property {boolean} [props.isOpen]
+ * @property {*} [props.children]
+ * @property {string} [props.className]
+ * @property {string} [props.color]
+ * @property {number} [props.fadeTime]
+ * @property {function} [props.render]
+ * @property {object} [props.style]
+ *
+ * @property {object} state
+ * @property {boolean} state.clicked
+ * @property {boolean} state.isOpen
+ * @property {null|number} state.top
+ * @property {null|number} state.left
+ *
+ * @property {Element} [el]
  */
 class Tooltip extends React.Component {
   /**
   * @param {object} props
-  * @param {*} [props.children]
-  * @param {string} [props.className]
-  * @param {string} [props.color]
-  * @param {boolean} [props.fade]
-  * @param {number} [props.fadeTime]
-  * @param {boolean} [props.isOpen]
-  * @param {string} [props.position]
-  * @param {function} [props.render]
-  * @param {string} [props.rootNode]
-  * @param {object} [props.style]
+  * @property {boolean} props.fade
+  * @property {string} props.position
+  * @property {string} [props.rootNode]
+  * @property {boolean} [props.isOpen]
+  * @property {*} [props.children]
+  * @property {string} [props.className]
+  * @property {string} [props.color]
+  * @property {number} [props.fadeTime]
+  * @property {function} [props.render]
+  * @property {object} [props.style]
   */
   constructor (props) {
     super(props)
+
     this.state = {
       clicked: false,
-      isOpen: !!this.props.isOpen,
+      isOpen: this.props.isOpen,
       left: null,
       top: null
     }
+
     this.updatePosition = _.throttle(this.updatePosition, 10)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
@@ -136,6 +158,18 @@ class Tooltip extends React.Component {
         }))
       : null
 
+    const clsName = cls(name, className, {
+      [`${name}--${color}`]: color !== undefined,
+      [`${name}--${position}`]: position !== undefined
+    })
+
+    const tooltipStyle = {
+      top: this.state.top,
+      left: this.state.left,
+      ...transition,
+      ...style
+    }
+
     return (
       <div
         className={`${name}-hover`}
@@ -148,19 +182,8 @@ class Tooltip extends React.Component {
         <TransitionGroup>
           {this.state.isOpen ? (
             <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${name}-fade`}>
-              <Portal root={document.querySelector(rootNode)}>
-                <span
-                  className={cls(name, className, {
-                    [`${name}--${color}`]: color !== undefined,
-                    [`${name}--${position}`]: position !== undefined
-                  })}
-                  style={{
-                    top: this.state.top,
-                    left: this.state.left,
-                    ...transition,
-                    ...style
-                  }}
-                >
+              <Portal root={rootNode}>
+                <span className={clsName} style={tooltipStyle}>
                   {render(this.state)}
                 </span>
               </Portal>
@@ -192,7 +215,7 @@ Tooltip.propTypes = {
   isOpen: PropTypes.bool,
 
   /** Tooltip position */
-  position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).isRequired,
+  position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
 
   /** Renders tooltip content */
   render: PropTypes.func.isRequired,
@@ -206,8 +229,7 @@ Tooltip.propTypes = {
 
 Tooltip.defaultProps = {
   fade: false,
-  position: 'right',
-  rootNode: 'body'
+  position: 'right'
 }
 
 export default Tooltip
