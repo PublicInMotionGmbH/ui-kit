@@ -39,6 +39,13 @@ const DropdownButton = props => {
     [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
     [`${moduleName}__item--overflow-break`]: overflow === 'break'
   })
+  const displayedValue = value != null
+    ? value
+    : placeholder || firstItem
+
+  const displayedItem = (ItemComponent && value != null) || (ItemComponent && !placeholder)
+    ? <ItemComponent item={displayedValue} />
+    : displayedValue
 
   return (
     <button
@@ -52,7 +59,7 @@ const DropdownButton = props => {
       <span
         className={spanClsName}
       >
-        {value ? ItemComponent ? <ItemComponent item={value} /> : value : placeholder || firstItem}
+        {displayedItem}
       </span>
       <div className={`${moduleName}__arrow`}>
         <Icon name={'arrow_drop_down'} className={`${moduleName}__arrow--down`} />

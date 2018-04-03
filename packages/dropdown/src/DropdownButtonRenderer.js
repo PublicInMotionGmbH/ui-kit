@@ -38,14 +38,14 @@ const moduleName = prefix('dropdown')
 const DropdownButtonRenderer = props => {
   const {
     className, closeMenu, menuComponent: MenuComponent,
-    defaultSelectedItem, getToggleButtonProps, getItemProps,
+    getToggleButtonProps, getItemProps,
     overflow, highlightedIndex, isOpen, innerRef,
     itemComponent, items, maxHeight, placeholder,
     selectedItem, style
   } = props
 
   const wrapperClsName = cls(`${moduleName}__wrapper`, className)
-  const firstItem = defaultSelectedItem || (items && items.length && items[0]) || ''
+  const firstItem = items && items.length && items[0]
 
   return (
     <div className={wrapperClsName} ref={innerRef} style={style}>
@@ -84,9 +84,6 @@ DropdownButtonRenderer.propTypes = {
 
   /** Toggle menu component */
   menuComponent: PropTypes.func,
-
-  /** Item or an array of items that should be selected by default */
-  defaultSelectedItem: PropTypes.any,
 
   /** Returns the props applied to menu button */
   getToggleButtonProps: PropTypes.func,

@@ -15,6 +15,8 @@ const addStory = createStoriesFactory('Dropdown', module)
 const change = action('change')
 
 const items = [
+  0,
+  1,
   'apple',
   'orange',
   'carrot',
