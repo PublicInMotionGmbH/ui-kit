@@ -6,8 +6,8 @@
   "module": "index.js",
   "scripts": {
     "test": "jest --config ../../tests/config.js --rootDir .",
-    "prepublishOnly": "rollup -c",
-    "build": "rollup -c"
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only badge"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -19,8 +19,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.2.1",
-    "rollup": "^0.57.1"
+    "jest": "^21.2.1"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",

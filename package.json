@@ -11,6 +11,7 @@
     "bootstrap": "lerna bootstrap --hoist && lerna link",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
+    "build": "node ./scripts/buildPackages.js",
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
     "postinstall": "lerna bootstrap --hoist && lerna link",
     "prepublishOnly": "npm test",
@@ -56,6 +57,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "filesize": "^3.6.1",
     "gh-pages": "^1.1.0",
     "glob": "^7.1.2",
     "glob-loader": "^0.3.0",
@@ -76,7 +78,8 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^3.0.0",
     "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3"
+    "style-loader": "^0.20.3",
+    "yargs": "^11.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",

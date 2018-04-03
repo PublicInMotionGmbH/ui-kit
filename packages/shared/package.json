@@ -5,6 +5,7 @@
   "author": "Public in Motion GmbH",
   "main": "index.js",
   "module": "index.js",
+  "omitBuild": true,
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,9 +14,7 @@
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
-  "devDependencies": {
-    "rollup": "^0.57.1"
-  },
+  "devDependencies": {},
   "dependencies": {
     "normalize.css": "^8.0.0"
   }
