@@ -21,6 +21,7 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+
 It allows any properties which are allowed in `button`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
