@@ -12,17 +12,12 @@ Thumbs.db
 .Trashes
 
 # npm
-node_modules
 npm-debug.log
-lerna-debug.log
 
 # IDEs stuff
 .idea
 
-# Generated directories
-storybook-static
-dist
-_gh-pages
-
-# YARN & NPM LOGS
-packages/popover/yarn-error.log
+# Development tools
+tests
+rollup.config.js
+stories.js

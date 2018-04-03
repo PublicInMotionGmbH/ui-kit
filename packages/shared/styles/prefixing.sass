@@ -11,8 +11,8 @@
 /**
  * Build block for specific module
  */
-@mixin module ($name)
-  #{prefix($name)}
+@mixin module ($name...)
+  #{prefix($name...)}
     @content
 
 @function grid-unit($multiplier)

@@ -1,0 +1,93 @@
+@import './config'
+
+@include module('tooltip')
+  position: absolute
+  display: inline-block
+  padding: dp(1) dp(1.5)
+  border: $border-width solid $color-orange-talixo
+  border-radius: $border-radius-m
+  background-color: $color-orange-talixo
+  font-size: $font-size-m
+  line-height: 1.5em
+  color: $color-white
+  top: 0
+  left: 0
+
+  > *
+    margin: 0 dp(0.5)
+
+  &:before
+    position: absolute
+    content: ''
+    width: 0
+    height: 0
+    border-style: solid
+    z-index: -1
+
+  &-fade-enter
+    opacity: 0.01
+
+  &-fade-enter-active
+    opacity: 1
+
+  &-fade-exit
+    opacity: 1
+
+  &-fade-exit-active
+    opacity: 0.01
+
+  &--right
+    transform: translateY(-50%) translateX(dp(1))
+
+    &:before
+      top: 50%
+      left: 0
+      border-width: dp(0.5) dp(1.25) dp(0.5) 0
+      border-color: transparent $color-orange-talixo transparent transparent
+      transform: translateX(-100%) translateY(dp(-0.5))
+
+  &--left
+    transform: translateY(-50%) translateX(-100%) translateX(dp(-1))
+
+    &:before
+      top: 50%
+      left: 100%
+      border-width: dp(0.5) 0 dp(0.5) dp(1.25)
+      border-color: transparent transparent transparent $color-orange-talixo
+      transform: translateY(dp(-0.5))
+
+  &--bottom
+    transform: translateY(dp(1)) translateX(-50%)
+
+    &:before
+      top: 0
+      left: 50%
+      border-width: 0 dp(0.5) dp(1.25) dp(0.5)
+      border-color: transparent transparent $color-orange-talixo transparent
+      transform: translateY(-100%) translateX(dp(-0.5))
+
+  &--top
+    transform: translateY(-100%) translateY(dp(-1)) translateX(-50%)
+
+    &:before
+      top: 100%
+      left: 50%
+      border-width: dp(1.25) dp(0.5) 0 dp(0.5)
+      border-color: $color-orange-talixo transparent transparent transparent
+      transform: translateX(dp(-0.5))
+
+  &--black:before
+    border-color: $color-black
+
+  &--primary
+    background-color: $color-orange-talixo
+    border-color: $color-orange-talixo
+
+  &--black
+    background-color: $color-black
+    border-color: $color-black
+
+  &-hover
+    position: relative
+    width: auto
+    height: auto

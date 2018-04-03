@@ -7,7 +7,7 @@
     "create": "node scripts/generatePackage.js",
     "init:yarn": "yarn install",
     "init": "npm install",
-    "test": "lerna run --parallel test",
+    "test": "lerna run --concurrency 5 test",
     "bootstrap": "lerna bootstrap --hoist && lerna link",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
