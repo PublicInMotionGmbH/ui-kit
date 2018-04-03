@@ -13,9 +13,5 @@
   },
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
-  },
-  "devDependencies": {},
-  "dependencies": {
-    "normalize.css": "^8.0.0"
   }
 }
