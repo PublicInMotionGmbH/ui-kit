@@ -44,11 +44,14 @@ const DropdownButtonRenderer = props => {
     selectedItem, style
   } = props
 
+  const wrapperClsName = cls(`${moduleName}__wrapper`, className)
+  const firstItem = defaultSelectedItem || (items && items.length && items[0]) || ''
+
   return (
-    <div className={cls(`${moduleName}__wrapper`, className)} ref={innerRef} style={style}>
+    <div className={wrapperClsName} ref={innerRef} style={style}>
       <DropdownButton
         onOuterClick={() => closeMenu()}
-        firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
+        firstItem={firstItem}
         getToggleButtonProps={getToggleButtonProps}
         isOpen={isOpen}
         itemComponent={itemComponent}

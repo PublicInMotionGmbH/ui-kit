@@ -34,7 +34,7 @@ const DropdownMenu = props => {
     ...style
   }
 
-  const clsName = (item, index) => (
+  const generateClsNames = (item, index) => (
     cls(`${moduleName}__item`, {
       [`${moduleName}__item--highlighted`]: highlightedIndex === index,
       [`${moduleName}__item--selected`]: selectedItem === item,
@@ -47,9 +47,9 @@ const DropdownMenu = props => {
     <div className={`${moduleName}__options`} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
-          {...getItemProps({ item: item })}
+          {...getItemProps({ item })}
           key={ItemComponent ? index : item}
-          className={clsName(item, index)}
+          className={generateClsNames(item, index)}
         >
           {ItemComponent ? <ItemComponent item={item} /> : item}
         </div>
