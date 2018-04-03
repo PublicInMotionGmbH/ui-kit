@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
 import Icon from '@talixo/icon'
-import { prefix } from '@talixo/shared'
+import { buildClassName, prefix } from '@talixo/shared'
 
 const moduleName = prefix('number-input')
 
@@ -43,9 +42,9 @@ function NumberInput (props) {
   const decrement = () => change(-1)
   const inputRef = node => { input = node }
 
-  const wrapperClass = cls(moduleName, {
-    [`${moduleName}--${size}`]: size && size.length > 0,
-    [`${moduleName}--error`]: hasError
+  const wrapperClass = buildClassName('number-input', null, {
+    [size]: size,
+    'error': hasError
   })
 
   return (

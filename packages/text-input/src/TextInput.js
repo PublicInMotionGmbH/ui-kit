@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('text-input')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents Text Input.
@@ -27,44 +24,38 @@ class TextInput extends React.Component {
 
   onInputChange (e) {
     const { onChange } = this.props
+
     this.setState({ inputValue: e.target.value })
-    if (onChange) { onChange(e) }
+
+    if (onChange) {
+      onChange(e)
+    }
   }
 
   render () {
-    const {
-      props: { className, hasError, onChange, placeholder, size, style, ...restProps },
-      state: { inputValue },
-      onInputChange
-    } = this
+    const { className, hasError, onChange, placeholder, size, style, ...restProps } = this.props
+    const { inputValue } = this.state
 
-    const inputClasses = cls(moduleName, className, {
-      [`${moduleName}--${size}`]: size,
-      [`${moduleName}--error`]: hasError
+    const inputClasses = buildClassName('text-input', className, [ size ], {
+      error: hasError
     })
-    const wrapperClasses = cls(`${moduleName}__wrapper`, {
-      [[`${moduleName}__wrapper--${size}`]]: size
-    })
-    const labelClasses = cls(`${moduleName}__label`, {
-      [`${moduleName}__label--${size}`]: size,
-      [`${moduleName}__label--error`]: hasError,
-      [`${moduleName}__label--not-empty`]: inputValue
+
+    const wrapperClasses = buildClassName('text-input__wrapper', null, [ size ])
+
+    const labelClasses = buildClassName('text-input__label', null, [ size ], {
+      error: hasError,
+      'not-empty': inputValue
     })
 
     return (
-      <div
-        className={wrapperClasses}
-        style={style}
-      >
+      <div className={wrapperClasses} style={style}>
         <input
           type='text'
           className={inputClasses}
-          onChange={onInputChange}
+          onChange={this.onInputChange}
           {...restProps}
         />
-        <label
-          className={labelClasses}
-        >
+        <label className={labelClasses}>
           {placeholder}
         </label>
       </div>
@@ -93,8 +84,7 @@ TextInput.propTypes = {
 }
 
 TextInput.defaultProps = {
-  hasError: false,
-  onChange: () => {}
+  hasError: false
 }
 
 export default TextInput

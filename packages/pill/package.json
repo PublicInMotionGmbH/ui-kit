@@ -4,6 +4,7 @@
   "description": "UI component for Pill",
   "main": "dist/index.js",
   "module": "index.js",
+  "jsnext:main": "index.js",
   "scripts": {
     "test": "jest --config ../../tests/config.js --rootDir .",
     "prepublishOnly": "npm run build",
@@ -22,7 +23,6 @@
     "jest": "^21.2.1"
   },
   "peerDependencies": {
-    "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

@@ -13,12 +13,14 @@ module.exports = wallaby => {
   return {
     files: [
       { pattern: 'tests/*.js', instrument: false },
+      { pattern: 'packages/**/*.json', instrument: false },
       'packages/*/src/**/*.js',
+      'packages/*/utils/**/*.js',
       'config.js',
       { pattern: 'packages/*/tests/**/*.test.js.snap', instrument: false }
     ],
 
-    tests: ['packages/*/tests/**/*.test.js'],
+    tests: [ 'packages/*/tests/**/*.test.js' ],
 
     env: {
       type: 'node',

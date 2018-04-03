@@ -4,6 +4,7 @@
   "description": "UI Component which represents grid",
   "main": "dist/index.js",
   "module": "index.js",
+  "jsnext:main": "index.js",
   "scripts": {
     "test": "jest --config ../../tests/config.js --rootDir .",
     "prepublishOnly": "npm run build",

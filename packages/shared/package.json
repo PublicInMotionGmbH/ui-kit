@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Talixo common configuration",
   "author": "Public in Motion GmbH",
-  "main": "index.js",
+  "main": "dist/index.js",
   "module": "index.js",
-  "omitBuild": true,
+  "jsnext:main": "index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -13,5 +13,8 @@
   },
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5"
   }
 }

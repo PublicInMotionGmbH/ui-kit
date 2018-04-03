@@ -9,7 +9,9 @@ import Code from './src/Code'
 const readme = ''
 
 // Create factories for story
-const addStory = createStoriesFactory('Typography', module)
+const addStory = createStoriesFactory('Typography', module, {
+  propTypes: [ Heading, Lead, Code ]
+})
 
 // Stories
 

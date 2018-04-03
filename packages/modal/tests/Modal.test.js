@@ -1,6 +1,7 @@
 import React from 'react'
-import Modal from '../src/Modal'
 import { shallow } from 'enzyme'
+
+import Modal from '../src/Modal'
 
 describe('<Modal />', () => {
   it('renders children correctly', () => {
