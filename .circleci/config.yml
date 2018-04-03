@@ -38,3 +38,6 @@ jobs:
 
       # test code style
       - run: npm run lint
+
+      # check if all components are building properly
+      - run: npm run build
