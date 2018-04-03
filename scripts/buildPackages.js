@@ -11,18 +11,6 @@ const babel = require('rollup-plugin-babel')
 const resolve = require('rollup-plugin-node-resolve')
 const uglify = require('rollup-plugin-uglify')
 
-function json () {
-  return {
-    transform (contents, filePath) {
-      if (!/\.json$/.test(filePath)) {
-        return null
-      }
-
-      return `export default ${contents}`
-    }
-  }
-}
-
 // Set up environment to production (for building)
 process.env.NODE_ENV = 'production'
 
@@ -34,7 +22,22 @@ const PREFIX = `${NAMESPACE}/`
 const PACKAGES_PATH = path.join(__dirname, '..', 'packages')
 const PACKAGES_PATTERN = path.join(PACKAGES_PATH, '*/')
 
-function analyzePackage (dirPath) {
+/**
+ * Build Rollup.js plugin for loading JSON files
+ *
+ * @returns {{transform: function(string, string): string|null}}
+ */
+const json = () => ({
+  transform: (contents, filePath) => /\.json$/.test(filePath) ? `export default ${contents}` : null
+})
+
+/**
+ * Get package configuration if it's available for build
+ *
+ * @param {string} dirPath
+ * @returns {object|null}
+ */
+function getPackageConfiguration (dirPath) {
   // Get simple package name
   const name = path.basename(dirPath)
 
@@ -44,7 +47,7 @@ function analyzePackage (dirPath) {
   // Validate if there is package.json in found package
   if (!fs.existsSync(configPath)) {
     console.warn(`Omitting: Package "${name}" doesn't have package.json`)
-    return
+    return null
   }
 
   // Load package.json contents
@@ -52,7 +55,7 @@ function analyzePackage (dirPath) {
 
   // Omit building if it's directly specified that it should be omitted
   if (config.omitBuild) {
-    return
+    return null
   }
 
   // Throw error if package has incorrect name
@@ -63,12 +66,38 @@ function analyzePackage (dirPath) {
   // Omit when there is no ES6 module specified to build
   if (!config.module) {
     console.warn(`Omitting: Package "${name}" doesn't have "module" field in package.json`)
-    return
+    return null
   }
 
   // Omit when there is no main file which should be available externally
   if (!config.main) {
     console.warn(`Omitting: Package "${name}" doesn't have "main" field in package.json`)
+    return null
+  }
+
+  if (!config.main.endsWith('.js')) {
+    console.warn(`Omitting: Package "${name}" "main" field is pointing to different file than JavaScript.`)
+    return null
+  }
+
+  return config
+}
+
+/**
+ * Analyze package in specified directory
+ *
+ * @param {string} dirPath
+ * @returns {object|{id: string, name, input: string, dependencies: string[], output: {development: string, production: string}}}
+ */
+function analyzePackage (dirPath) {
+  // Get simple package name
+  const name = path.basename(dirPath)
+
+  // Get package.json for specified package
+  const config = getPackageConfiguration(dirPath)
+
+  // Stop if it should be omitted
+  if (!config) {
     return
   }
 
@@ -77,13 +106,7 @@ function analyzePackage (dirPath) {
   const absolutePath = path.join(dirPath, config.main)
 
   // Extract information from main path
-  const match = absolutePath.match(/^(.+?)(\.(?:dev|development))?\.js$/)
-
-  // Omit package if it's not pointing to JS file
-  if (!match) {
-    console.warn(`Omitting: Package "${name}" "main" field is pointing to different file than JavaScript.`)
-    return
-  }
+  const [ , fileName, dev ] = absolutePath.match(/^(.+?)(\.(?:dev|development))?\.js$/)
 
   // Equivalents for production names
   const productionNames = {
@@ -92,8 +115,8 @@ function analyzePackage (dirPath) {
   }
 
   // Build development/production output paths
-  const devPath = match[1] + (match[2] || '') + '.js'
-  const prodPath = match[1] + (productionNames[match[2]] || '') + '.min.js'
+  const devPath = fileName + (dev || '') + '.js'
+  const prodPath = fileName + (productionNames[dev] || '') + '.min.js'
 
   // Add package to list
   return {
@@ -108,6 +131,11 @@ function analyzePackage (dirPath) {
   }
 }
 
+/**
+ * Get all available packages
+ *
+ * @returns {object[]|Array<{id: string, name, input: string, dependencies: string[], output: {development: string, production: string}}>}
+ */
 function getAllPackages () {
   // Find all possible packages
   const packages = glob.sync(PACKAGES_PATTERN)
@@ -117,19 +145,23 @@ function getAllPackages () {
     .filter(Boolean)
 }
 
+/**
+ * Build package and save output to specified file
+ *
+ * @param {object|{id: string, name, input: string, dependencies: string[], output: {development: string, production: string}}} pack
+ * @param {string} environment
+ * @returns {Promise<object|{ size: int }>}
+ */
 async function buildPackage (pack, environment) {
-  const input = pack.input
-  const output = pack.output[environment]
-
+  // Create helper variable to check if it's production build
   const isProduction = environment === 'production'
 
-  const dependencies = pack.dependencies
-
-  const result = {
-    input: input,
-    external: dependencies,
+  // Build basic Rollup.js configuration
+  const config = {
+    input: pack.input,
+    external: pack.dependencies,
     output: {
-      file: output,
+      file: pack.output[environment],
       exports: 'named',
       format: 'cjs'
     },
@@ -137,52 +169,64 @@ async function buildPackage (pack, environment) {
       resolve({ extensions: [ '.js', '.json' ] }),
       json(),
       babel({ babelrc: true, externalHelpers: false, plugins: [ 'external-helpers' ] }),
-      commonjs()
+      commonjs(),
+      replace({ __DEV__: 'process.env.NODE_ENV !== "production"' })
     ]
   }
 
+  // Minify output for specified environment
   if (isProduction) {
-    result.plugins.push(replace({
-      __DEV__: isProduction ? 'false' : 'true',
+    config.plugins.push(replace({
       'process.env.NODE_ENV': JSON.stringify(environment)
     }))
 
-    result.plugins.push(uglify())
-  } else {
-    replace({
-      __DEV__: 'process.env.NODE_ENV !== "production"'
-    })
+    config.plugins.push(uglify())
   }
 
-  const b = await rollup(result)
+  // Build the package
+  const b = await rollup(config)
 
-  await b.write(result.output)
+  // Save it to output destination
+  await b.write(config.output)
 
-  return fs.statSync(result.output.file)
+  // Return information about output file
+  return fs.statSync(config.output.file)
 }
 
+/**
+ * Run building procedure for expected packages
+ *
+ * @returns {Promise}
+ */
 async function main () {
+  // Get array of packages to build (if passed through CLI)
   const { only } = yargs.array('only').argv
 
+  // Get all available packages
   const availablePackages = getAllPackages()
 
+  // Get expected packages (either selected by CLI or all)
   const packages = only
     ? availablePackages.filter(x => only.indexOf(x.name) !== -1 || only.indexOf(x.id) !== -1)
     : availablePackages
 
   process.stdout.write(`Found ${packages.length} packages to build.\n`)
 
+  // Iterate over all packages
   for (const pack of packages) {
     process.stdout.write(`Building ${pack.name}...\n  development: `)
 
+    // Build development package
     const dev = await buildPackage(pack, 'development')
 
     process.stdout.write(`${filesize(dev.size)}\n  production: `)
 
+    // Build production-ready package
     const prod = await buildPackage(pack, 'production')
 
     process.stdout.write(`${filesize(prod.size)}\n`)
   }
 }
 
+// Run procedure
 main().catch(err => setTimeout(() => { throw err }))
