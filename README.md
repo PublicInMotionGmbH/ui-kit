@@ -2,6 +2,7 @@
 
 [![Build status](https://circleci.com/gh/PublicInMotionGmbH/ui-kit/tree/master.png)](https://circleci.com/gh/PublicInMotionGmbH/ui-kit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/99c10cd7f5d7705d7eaa/maintainability)](https://codeclimate.com/github/PublicInMotionGmbH/ui-kit/maintainability)
+[![codecov](https://codecov.io/gh/PublicInMotionGmbH/ui-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/PublicInMotionGmbH/ui-kit)
 
 It's UI Kit used through all Talixo front-end projects. You can see storybook [here](https://publicinmotiongmbh.github.io/ui-kit).
 
