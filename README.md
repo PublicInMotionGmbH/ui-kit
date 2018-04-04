@@ -171,6 +171,9 @@ Install dependencies of all subpackages                      | `lerna bootstrap 
 Resolve cross-dependencies between our packages              | `lerna bootstrap --hoist` or `lerna link`
 Install dependency inside single package                     | `lerna add jquery --scope @talixo/switcher`
 Run all tests                                                | `npm test` in main directory
+Run tests for single package                                 | `npm test -- --only switcher`
+Run watcher for all tests                                    | `npm test -- -- --watch`
+Run watcher for single package                               | `npm test -- --only switcher -- --watch`
 Create new package                                           | `npm run create` in main directory
 Publish all changed packages to NPM                          | `lerna publish`
 Publish single package                                       | `lerna publish --scope @talixo/switcher`
