@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    environment:
-      CC_TEST_REPORTER_ID: b302c9dd0d0a8215326321fa36bf8fcdb7a944e54fa8f37fae855a6e53abecb5
-
     docker:
       - image: circleci/node:8.6
 
@@ -20,27 +17,27 @@ jobs:
             - v2-dependencies-
 
       - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-
-      - run:
           name: Bootstraping packages
           command: npm run init
+
+      - run:
+          name: Install CodeCov reporter
+          command: npm install codecov
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package.json" }}
 
-      # run tests and send coverage!
+      # run tests
       - run:
           name: Run tests
-          command: |
-            ./cc-test-reporter before-build
-            npm test -- -- --coverage
-            ./cc-test-reporter after-build --exit-code $?
+          command: npm test -- -- --coverage
+
+      # send coverage to CodeCov
+      - run:
+          name: Upload test coverage
+          command: node ./node_modules/.bin/codecov
 
       # test code style
       - run:
