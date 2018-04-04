@@ -11,6 +11,18 @@ const addStory = createStoriesFactory('Maps', module)
 
 // Stories
 
-addStory('initial map', readme, () => (
-  <Maps startLocation={{latLng: {location: {lat: 52.370278, lng: 13.521388}}, talixo_id: '751267062c92e398c3942214b58136f73a4b9e1ca9a214d72d6d5805'}} />
+addStory('start & end locations', readme, () => (
+  <Maps apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' startLocation={{lat: 52.370278, lng: 13.521388}}
+    endLocation={{lat: 52.937239, lng: 13.52123}}
+  />
+))
+
+addStory('center on location', readme, () => (
+  <Maps apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' initialCenter={{lat: 50.0647, lng: 19.9450}}
+  />
+))
+
+addStory('location with zoom', readme, () => (
+  <Maps apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' initialCenter={{lat: 50.0647, lng: 19.9450}} zoom={18}
+  />
 ))

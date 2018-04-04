@@ -1,10 +1,7 @@
 import {isEqual as _isEqual} from 'lodash'
 import React, {Component} from 'react'
 
-import {GoogleApiWrapper, Map} from 'google-maps-react'
-import {mapiClient} from '../utils/client'
-
-const GOOGLE_MAPS_API_KEY = 'AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc'
+import {GoogleApiWrapper, Map, Marker, InfoWindow} from 'google-maps-react'
 
 class Maps extends Component {
   constructor (props) {
@@ -33,31 +30,18 @@ class Maps extends Component {
     this.updateRoute(this.props.startLocation, this.props.endLocation)
   }
 
-  ensureGeometry (element) {
-    return new Promise((resolve, reject) => {
-      element.latLng && resolve(element.latLng)
-      if (!element.geometry && this.state.placesService && element.place_id) {
-        mapiClient.get('geo/location_by_place_id/', {
-          params: {
-            place_id: element.place_id,
-            address: element.address
-          }
-        }).then(function ({data}) {
-          resolve({lat: data.latitude, lng: data.longitude})
-        })
-      }
-    })
-  }
-
   componentWillReceiveProps (nextProps) {
     if (_isEqual(nextProps.startLocation, this.props.startLocation) && _isEqual(nextProps.endLocation, this.props.endLocation)) return
     this.updateRoute(nextProps.startLocation, nextProps.endLocation)
   }
 
   async updateRoute (startLocation, endLocation) {
+    if (endLocation == null) {
+
+    }
     if (!(this.state.directionsService && startLocation && endLocation)) return
-    const startCords = await this.ensureGeometry(startLocation)
-    const endCords = await this.ensureGeometry(endLocation)
+    const startCords = this.props.startLocation
+    const endCords = this.props.endLocation
     this.state.directionsService.route(
       {
         origin: startCords,
@@ -80,8 +64,15 @@ class Maps extends Component {
         <Map
           onReady={this.handleMapReady}
           google={this.props.google}
-          zoom={7}
-        />
+          zoom={this.props.zoom}
+          initialCenter={this.props.initialCenter} >
+          <Marker />
+          <InfoWindow visible>
+            <div>
+              <h1>THIS IS INFOBOX</h1>
+            </div>
+          </InfoWindow>
+        </Map>
       </div>
     )
   }
@@ -90,7 +81,6 @@ class Maps extends Component {
 export {Maps}
 
 export default GoogleApiWrapper({
-  apiKey: GOOGLE_MAPS_API_KEY,
   libraries: ['directions', 'places'],
   version: '3.31'
 })(Maps)
