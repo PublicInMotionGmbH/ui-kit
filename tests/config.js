@@ -5,7 +5,14 @@ if (!testsPattern) {
 }
 
 module.exports = {
-  collectCoverageFrom: [ 'packages/**/*.js' ],
+  collectCoverageFrom: [
+    'packages/**/*.js',
+    '!packages/*/index.js',
+    '!packages/*/stories.js',
+    '!packages/*/dist/**/*.js',
+    '!packages/icon/src/storybook/*.js',
+    '!packages/icon/scripts/*.js'
+  ],
   setupFiles: [ '<rootDir>/tests/polyfills.js' ],
   setupTestFrameworkScriptFile: '<rootDir>/tests/setupTests',
   testMatch: [ testsPattern ],
