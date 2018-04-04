@@ -20,6 +20,7 @@ It's UI Kit used through all Talixo front-end projects. You can see storybook [h
 You can run scripts using `npm run NAME` or `yarn run NAME` commands.
 
 - `init` / `init:yarn` - install required packages and bootstrap all subpackages.
+- `build` - build distributable version of all packages
 - `storybook` - run Storybook in development mode (available at `http://localhost:9009/`)
 - `build-storybook` - build static Storybook into `storybook-static` directory
 
@@ -175,6 +176,7 @@ Run all tests                                                | `npm test` in mai
 Run tests for single package                                 | `npm test -- --only switcher`
 Run watcher for all tests                                    | `npm test -- -- --watch`
 Run watcher for single package                               | `npm test -- --only switcher -- --watch`
+There are problems with distributable packages, rebuild them | `npm run build`
 Create new package                                           | `npm run create` in main directory
 Publish all changed packages to NPM                          | `lerna publish`
 Publish single package                                       | `lerna publish --scope @talixo/switcher`

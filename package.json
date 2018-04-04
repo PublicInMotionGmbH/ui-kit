@@ -13,7 +13,7 @@
     "build-storybook": "build-storybook",
     "build": "node ./scripts/buildPackages.js",
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
-    "postinstall": "lerna bootstrap --hoist && lerna link",
+    "postinstall": "lerna bootstrap --hoist && lerna link && npm run build",
     "prepublishOnly": "npm test",
     "postpublish": "npm run gh-pages",
     "lint": "eslint ."
