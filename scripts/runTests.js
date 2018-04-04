@@ -49,4 +49,6 @@ if (!process.env.CI) {
 }
 
 // Run tests
-spawn(nodePath, runnerArgs, runnerOptions)
+const runner = spawn(nodePath, runnerArgs, runnerOptions)
+
+runner.on('close', code => process.exit(code))
