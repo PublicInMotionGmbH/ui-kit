@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ItemAddress from './src/ItemAddress'
-import Dropdown from './src/Dropdown'
+import ComboBox from './src/ComboBox'
 
 import {
   createStoriesFactory,
@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Dropdown', module)
+const addStory = createStoriesFactory('ComboBox', module)
 const change = action('change')
 
 const items = [
@@ -46,8 +46,8 @@ const itemsCustom = [
   }
 ]
 
-addStory('default', readme, () => (
-  <Dropdown
+addStory('dropdown', readme, () => (
+  <ComboBox
     items={items}
     maxHeight='250px'
     onChange={change}
@@ -56,8 +56,8 @@ addStory('default', readme, () => (
     style={{ maxWidth: '500px' }}
   />
 ))
-addStory('custom item component', readme, () => (
-  <Dropdown
+addStory('dropdown with custom item component', readme, () => (
+  <ComboBox
     itemComponent={ItemAddress}
     items={itemsCustom}
     maxHeight='250px'

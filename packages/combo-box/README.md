@@ -1,11 +1,11 @@
-# Talixo Dropdown
+# Talixo ComboBox
 
-It's a dropdown built with Downshift component.
+It's a combo-box built with Downshift component.
 
 ## How to install
 
-Package is available as `@talixo/dropdown` in NPM registry, so you can use it in your project
-using `npm install @talixo/dropdown --save` or `yarn add @talixo/dropdown`.
+Package is available as `@talixo/combo-box` in NPM registry, so you can use it in your project
+using `npm install @talixo/combo-box --save` or `yarn add @talixo/combo-box`.
 
 ## Requirements
 
@@ -16,7 +16,7 @@ Your package should additionally have some extra dependencies:
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 
-These packages are required by `@talixo/dropdown`, but you have to install them manually,
+These packages are required by `@talixo/combo-box`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
 ## Supported props

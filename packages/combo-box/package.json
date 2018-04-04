@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/dropdown",
+  "name": "@talixo/combo-box",
   "version": "1.0.0",
-  "description": "UI component for dropdown",
+  "description": "UI component for combo-box",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {

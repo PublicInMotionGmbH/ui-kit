@@ -1,9 +1,13 @@
 import React from 'react'
+import cls from 'classnames'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 
-import DropdownButtonRenderer from './DropdownButtonRenderer'
+import DropdownButton from './DropdownButton'
 import DropdownMenu from './DropdownMenu'
+import { prefix } from '@talixo/shared'
+
+const name = prefix('combo')
 
 const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : String(i))
 
@@ -25,12 +29,11 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * @returns {React.Element}
  */
 
-const Dropdown = props => {
+const ComboBox = props => {
   const {
-    className, menuComponent, defaultSelectedItem,
-    itemComponent, items, maxHeight, onChange,
-    overflow, placeholder, style,
-    toggleComponent: ToggleComponent
+    className, menuComponent: MenuComponent, defaultSelectedItem,
+    itemComponent, items, maxHeight, onChange, overflow,
+    placeholder, style, toggleComponent: ToggleComponent
   } = props
 
   return (
@@ -43,41 +46,44 @@ const Dropdown = props => {
         getToggleButtonProps,
         getItemProps,
         getRootProps,
+        getInputProps,
         inputValue,
         isOpen,
         openMenu,
         selectedItem,
         highlightedIndex
       }) => (
-        <ToggleComponent
-          {...getRootProps({
-            refKey: 'innerRef',
-            className: className,
-            closeMenu: closeMenu,
-            menuComponent: menuComponent,
-            defaultSelectedItem: defaultSelectedItem,
-            getToggleButtonProps: getToggleButtonProps,
-            getItemProps: getItemProps,
-            getRootProps: getRootProps,
-            maxHeight: maxHeight,
-            overflow: overflow,
-            highlightedIndex: highlightedIndex,
-            isOpen: isOpen,
-            inputValue: inputValue,
-            itemComponent: itemComponent,
-            items: items,
-            openMenu: openMenu,
-            placeholder: placeholder,
-            selectedItem: selectedItem,
-            style: style
-          })}
-        />
+        <div className={cls(`${name}__wrapper`, className)} style={style}>
+          <ToggleComponent
+            onOuterClick={() => closeMenu()}
+            firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
+            getToggleButtonProps={getToggleButtonProps}
+            getInputProps={getInputProps}
+            isOpen={isOpen}
+            itemComponent={itemComponent}
+            overflow={overflow}
+            placeholder={placeholder}
+            value={selectedItem}
+          />
+          {isOpen ? (
+            <MenuComponent
+              itemComponent={itemComponent}
+              items={items}
+              getItemProps={getItemProps}
+              highlightedIndex={highlightedIndex}
+              maxHeight={maxHeight}
+              overflow={overflow}
+              selectedItem={selectedItem}
+              inputValue={inputValue}
+            />
+          ) : null}
+        </div>
       )}
     />
   )
 }
 
-Dropdown.propTypes = {
+ComboBox.propTypes = {
 
   /** Additional class name */
   className: PropTypes.string,
@@ -113,9 +119,9 @@ Dropdown.propTypes = {
   toggleComponent: PropTypes.func
 }
 
-Dropdown.defaultProps = {
+ComboBox.defaultProps = {
   menuComponent: DropdownMenu,
-  toggleComponent: DropdownButtonRenderer
+  toggleComponent: DropdownButton
 }
 
-export default Dropdown
+export default ComboBox
