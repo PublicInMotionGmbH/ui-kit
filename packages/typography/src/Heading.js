@@ -13,35 +13,23 @@ const moduleName = prefix('heading')
  * @param {number} [props.level]
  * @param {string} [props.className]
  * @param {*} [props.children]
- * @param {string|*} [props.secondary]
  * @returns {React.Element}
  */
 function Heading (props) {
-  const { className, level, secondary, children, ...passedProps } = props
+  const { className, level, children, ...passedProps } = props
 
   // Calculate heading level
   const desiredLevel = Math.max(1, Math.min(level, 6))
 
-  // Calculate children
-  const content = secondary ? (
-    <React.Fragment>
-      {children}
-      <small>{secondary}</small>
-    </React.Fragment>
-  ) : children
-
   return React.createElement(`h${desiredLevel}`, {
     className: cls(moduleName, className),
     ...passedProps
-  }, content)
+  }, children)
 }
 
 Heading.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
-
-  /** Secondary text for heading */
-  secondary: PropTypes.node,
 
   /** Heading level */
   level: PropTypes.number,

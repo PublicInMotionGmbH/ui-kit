@@ -12,6 +12,7 @@ html, body
   margin: 0
   padding: 0
   -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 body, input
   font: #{$font-size-m}/1.5em 'Open Sans', Arial, Tahoma, sans-serif
@@ -27,12 +28,11 @@ img
 
 a
   color: $color-ghost-text
-  text-decoration: none
-  border-bottom: 1px dotted $color-ghost-text
+  text-decoration: underline
 
   &:hover
     color: $navy
-    border-bottom-style: solid
+    text-decoration: none
 
 // Headers
 

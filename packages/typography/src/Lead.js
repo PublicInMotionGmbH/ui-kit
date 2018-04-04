@@ -12,7 +12,6 @@ const moduleName = prefix('lead')
  * @param {object} props
  * @param {string} [props.className]
  * @param {*} [props.children]
- * @param {string|*} [props.secondary]
  * @returns {React.Element}
  */
 function Lead (props) {

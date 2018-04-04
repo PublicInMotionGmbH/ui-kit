@@ -22,14 +22,14 @@ addStory('Headers', readme, () => (
     <Heading level={5}>h5. Header</Heading>
     <Heading level={6}>h6. Header</Heading>
 
-    <Heading level={1} secondary='Secondary text'>h1. Header</Heading>
-    <Heading level={2} secondary='Secondary text'>h2. Header</Heading>
-    <Heading level={3} secondary='Secondary text'>h3. Header</Heading>
-    <Heading level={4} secondary='Secondary text'>h4. Header</Heading>
-    <Heading level={5} secondary='Secondary text'>h5. Header</Heading>
-    <Heading level={6} secondary='Secondary text'>h6. Header</Heading>
+    <Heading level={1}>h1. Header <small>Secondary header</small></Heading>
+    <Heading level={2}>h2. Header <small>Secondary header</small></Heading>
+    <Heading level={3}>h3. Header <small>Secondary header</small></Heading>
+    <Heading level={4}>h4. Header <small>Secondary header</small></Heading>
+    <Heading level={5}>h5. Header <small>Secondary header</small></Heading>
+    <Heading level={6}>h6. Header <small>Secondary header</small></Heading>
 
-    <Heading level={1}>h1. Header</Heading>
+    <Heading level={1}>h1. Header <small>Secondary header</small></Heading>
     <Lead>
       Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.
       Maecenas malesuada elit lectus felis, malesuada ultricies.

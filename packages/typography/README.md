@@ -19,12 +19,6 @@ Your package should additionally have some extra dependencies:
 These packages are required by `@talixo/typography`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
-## Supported props
-
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-
 ## Changelog
 
 - **1.0.0** - initial version
