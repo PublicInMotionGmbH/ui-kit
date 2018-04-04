@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 import {GoogleApiWrapper, Map} from 'google-maps-react'
 import {mapiClient} from '../utils/client'
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAucFJ5VrDttG27AW1OC0ith93YqyWkv7U'
+const GOOGLE_MAPS_API_KEY = 'AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc'
 
 class Maps extends Component {
   constructor (props) {
