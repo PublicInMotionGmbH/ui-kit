@@ -11,14 +11,24 @@ const addStory = createStoriesFactory('NumberInput', module)
 
 // Stories
 
-addStory('initial', readme, () => (
-  <NumberInput />
+addStory('default', readme, () => (
+  <div>
+    <h2>Default number input</h2>
+    <NumberInput />
+    <h2>Default number input with initial value</h2>
+    <NumberInput value={15} />
+    <h2>Number input with errors</h2>
+    <NumberInput hasError />
+  </div>
 ))
 
 addStory('small', readme, () => (
-  <NumberInput size={'small'} />
-))
-
-addStory('with error', readme, () => (
-  <NumberInput hasError />
+  <div>
+    <h2>Small number input</h2>
+    <NumberInput size='small' />
+    <h2>Default number input with initial value</h2>
+    <NumberInput size='small' value={15} />
+    <h2>Small number input with errors</h2>
+    <NumberInput size='small' hasError />
+  </div>
 ))

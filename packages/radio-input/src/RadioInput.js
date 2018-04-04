@@ -12,6 +12,7 @@ const moduleName = prefix('radio-input')
  * @param {object} props
  * @param {node} [props.children]
  * @param {string} [props.className]
+ * @param {string} [props.size]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
