@@ -3,13 +3,13 @@ import axios from 'axios'
 import { getLanguage } from './locale'
 import packageJson from '../package.json'
 
-const getClient = (add_language, additional_url) => {
+const getClient = (addLanguage, additionalUrl) => {
   const version = window.navigator.platform.replace(' ', '_') + ' OnePageBooking ' + packageJson.version
   const language = getLanguage()
   let baseUrl =
     process.env.NODE_ENV === 'development' ? 'http://localhost:8000/' : '/'
-  if (add_language) baseUrl += language.concat('/')
-  if (additional_url) baseUrl += additional_url
+  if (addLanguage) baseUrl += language.concat('/')
+  if (additionalUrl) baseUrl += additionalUrl
 
   return axios.create({
     baseURL: baseUrl,
