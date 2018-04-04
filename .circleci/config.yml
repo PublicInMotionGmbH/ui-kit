@@ -20,10 +20,6 @@ jobs:
           name: Bootstraping packages
           command: npm run init
 
-      - run:
-          name: Install CodeCov reporter
-          command: npm install codecov
-
       - save_cache:
           paths:
             - node_modules
