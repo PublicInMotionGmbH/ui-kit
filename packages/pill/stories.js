@@ -8,42 +8,24 @@ const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Pill', module)
 
-addStory('blue', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='blue'>Hello Pill</Pill>
-  </div>
-))
-addStory('gray', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='gray'>Hello Pill</Pill>
-  </div>
-))
-addStory('green', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='green'>Hello Pill</Pill>
-  </div>
-))
-addStory('red', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='red'>Hello Pill</Pill>
-  </div>
-))
-addStory('yellow', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='yellow'>Hello Pill</Pill>
-  </div>
-))
-addStory('ghost/red', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill variant='ghost' color='red'>
-      Hello Pill
-    </Pill>
-  </div>
-))
-addStory('red with style prop set to padding: 20px', readme, () => (
-  <div style={{ padding: '3em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <Pill color='red' style={{ padding: '20px' }}>
-      Hello Pill
-    </Pill>
+addStory('all pills', readme, () => (
+  <div>
+    <h2>Standard Pills</h2>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Pill color='blue'>Blue Pill</Pill>
+      <Pill color='gray'>Gray Pill</Pill>
+      <Pill color='green'>Green Pill</Pill>
+      <Pill color='red'>Red Pill</Pill>
+      <Pill color='yellow'>Yellow Pill</Pill>
+    </div>
+
+    <h2>Ghost Pills</h2>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Pill color='blue' variant='ghost'>Blue Ghost Pill</Pill>
+      <Pill color='gray' variant='ghost'>Gray Ghost Pill</Pill>
+      <Pill color='green' variant='ghost'>Green Ghost Pill</Pill>
+      <Pill variant='ghost' color='red'>Red Ghost Pill</Pill>
+      <Pill color='yellow' variant='ghost'>Yellow Ghost Pill</Pill>
+    </div>
   </div>
 ))
