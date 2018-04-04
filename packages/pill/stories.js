@@ -12,6 +12,7 @@ addStory('all pills', readme, () => (
   <div>
     <h2>Standard Pills</h2>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Pill>Default Pill</Pill>
       <Pill color='blue'>Blue Pill</Pill>
       <Pill color='gray'>Gray Pill</Pill>
       <Pill color='green'>Green Pill</Pill>
@@ -21,6 +22,7 @@ addStory('all pills', readme, () => (
 
     <h2>Ghost Pills</h2>
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <Pill variant='ghost'>Default Ghost Pill</Pill>
       <Pill color='blue' variant='ghost'>Blue Ghost Pill</Pill>
       <Pill color='gray' variant='ghost'>Gray Ghost Pill</Pill>
       <Pill color='green' variant='ghost'>Green Ghost Pill</Pill>
