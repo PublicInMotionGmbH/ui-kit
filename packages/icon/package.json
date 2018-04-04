@@ -7,7 +7,7 @@
   "jsnext:main": "index.js",
   "scripts": {
     "load": "node scripts/load-material-icons.js",
-    "test": "jest --config ../../tests/config.js --rootDir .",
+    "test": "node ../../scripts/runTests.js --only icon",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only icon"
   },
@@ -22,7 +22,6 @@
   "license": "MIT",
   "devDependencies": {
     "fs-extra": "^5.0.0",
-    "jest": "^21.2.1",
     "progress": "^2.0.0",
     "stream-to-string": "^1.1.0",
     "unzip-stream": "^0.3.0",

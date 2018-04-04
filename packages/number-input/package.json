@@ -6,7 +6,7 @@
   "module": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "jest --config ../../tests/config.js --rootDir .",
+    "test": "node ../../scripts/runTests.js --only number-input",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only number-input"
   },
@@ -19,9 +19,6 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^21.2.1"
-  },
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
