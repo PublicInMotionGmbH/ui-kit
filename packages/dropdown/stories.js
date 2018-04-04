@@ -2,13 +2,11 @@ import React from 'react'
 
 import ItemAddress from './src/ItemAddress'
 import Dropdown from './src/Dropdown'
-import DropdownButton from './src/DropdownButton'
-import DropdownMenu from './src/DropdownMenu'
 
 import {
   createStoriesFactory,
   getReadmeDescription
-} from '@talixo/commons/story'
+} from '@talixo/shared/story'
 import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
@@ -17,6 +15,8 @@ const addStory = createStoriesFactory('Dropdown', module)
 const change = action('change')
 
 const items = [
+  0,
+  1,
   'apple',
   'orange',
   'carrot',
@@ -65,19 +65,5 @@ addStory('custom item component', readme, () => (
     overflow='break'
     placeholder='Select accomodation'
     style={{ maxWidth: '500px' }}
-  />
-))
-addStory('button', readme, () => (
-  <DropdownButton
-    placeholder='Select item'
-  />
-))
-addStory('menu', readme, () => (
-  <DropdownMenu
-    highlightedIndex={0}
-    itemComponent={ItemAddress}
-    items={itemsCustom}
-    overflow='break'
-    style={{ maxWidth: '500px', position: 'relative' }}
   />
 ))

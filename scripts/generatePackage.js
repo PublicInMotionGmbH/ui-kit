@@ -5,7 +5,7 @@ const glob = require('glob')
 const isBinaryFile = require('isbinaryfile')
 const promisify = require('util').promisify
 
-const bootstrap = require('./bootstrap')
+const runLernaCommand = require('./runLernaCommand')
 
 // Build promisified functions
 const mkdir = promisify(fs.mkdirp)
@@ -246,7 +246,10 @@ async function main () {
   }
 
   // Inform Lerna that it has new package available
-  await bootstrap()
+  await runLernaCommand('bootstrap', '--hoist')
+
+  // Link all packages as symbolic links instead of copies
+  await runLernaCommand('link')
 }
 
 // Run generation procedure

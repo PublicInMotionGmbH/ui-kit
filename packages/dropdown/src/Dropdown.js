@@ -12,24 +12,27 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {*} [props.defaultSelectedItem]
- * @param {*} [props.itemComponent]
- * @param {array} [props.items]
- * @param {string || number} [props.maxHeight]
- * @param {*} [props.menuComponent]
- * @param {*} [props.onChange]
+ * @param {string} [props.defaultSelectedItem]
+ * @param {string} [props.itemComponent]
+ * @param {string} [props.items]
+ * @param {string} [props.maxHeight]
+ * @param {string} [props.menuComponent]
+ * @param {string} [props.onChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
- * @param {object} [props.style]
- * @param {*} [props.toggleComponent]
+ * @param {string} [props.style]
+ * @param {string} [props.toggleComponent]
  * @returns {React.Element}
  */
+
 const Dropdown = props => {
   const {
     className, menuComponent, defaultSelectedItem,
-    itemComponent, items, maxHeight, onChange, overflow,
-    placeholder, style, toggleComponent: ToggleComponent
+    itemComponent, items, maxHeight, onChange,
+    overflow, placeholder, style,
+    toggleComponent: ToggleComponent
   } = props
+
   return (
     <Downshift
       onChange={onChange}
@@ -75,6 +78,7 @@ const Dropdown = props => {
 }
 
 Dropdown.propTypes = {
+
   /** Additional class name */
   className: PropTypes.string,
 

@@ -5,47 +5,53 @@ import PropTypes from 'prop-types'
 import DropdownButton from './DropdownButton'
 import DropdownMenu from './DropdownMenu'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
-const name = prefix('dropdown')
+const moduleName = prefix('dropdown')
 
 /**
  * Dropdown renderer.
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {*} [props.closeMenu]
- * @param {*} [props.menuComponent]
- * @param {*} [props.defaultSelectedItem]
- * @param {*} [props.getToggleButtonProps]
- * @param {*} [props.getItemProps]
- * @param {*} [props.getRootProps]
- * @param {string || number} [props.maxHeight]
+ * @param {string} [props.closeMenu]
+ * @param {string} [props.menuComponent]
+ * @param {string} [props.defaultSelectedItem]
+ * @param {string} [props.getToggleButtonProps]
+ * @param {string} [props.getItemProps]
+ * @param {string} [props.getRootProps]
+ * @param {string} [props.maxHeight]
  * @param {string} [props.overflow]
- * @param {number} [props.highlightedIndex]
- * @param {*} [props.innerRef]
- * @param {string || object} [props.inputValue]
- * @param {boolean} [props.isOpen]
- * @param {*} [props.itemComponent]
- * @param {array} [props.items]
- * @param {*} [props.openMenu]
+ * @param {string} [props.highlightedIndex]
+ * @param {string} [props.innerRef]
+ * @param {string} [props.inputValue]
+ * @param {string} [props.isOpen]
+ * @param {string} [props.itemComponent]
+ * @param {string} [props.items]
+ * @param {string} [props.openMenu]
  * @param {string} [props.placeholder]
- * @param {*} [props.selectedItem]
+ * @param {string} [props.selectedItem]
  * @param {string} [props.style]
  * @returns {React.Element}
  */
+
 const DropdownButtonRenderer = props => {
   const {
     className, closeMenu, menuComponent: MenuComponent,
-    defaultSelectedItem, getToggleButtonProps, getItemProps,
-    overflow, highlightedIndex, isOpen, innerRef, itemComponent,
-    items, maxHeight, placeholder, selectedItem, style
+    getToggleButtonProps, getItemProps,
+    overflow, highlightedIndex, isOpen, innerRef,
+    itemComponent, items, maxHeight, placeholder,
+    selectedItem, style
   } = props
+
+  const wrapperClsName = cls(`${moduleName}__wrapper`, className)
+  const firstItem = items && items.length && items[0]
+
   return (
-    <div className={cls(`${name}-wrapper`, className)} ref={innerRef} style={style}>
+    <div className={wrapperClsName} ref={innerRef} style={style}>
       <DropdownButton
         onOuterClick={() => closeMenu()}
-        firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
+        firstItem={firstItem}
         getToggleButtonProps={getToggleButtonProps}
         isOpen={isOpen}
         itemComponent={itemComponent}
@@ -69,6 +75,7 @@ const DropdownButtonRenderer = props => {
 }
 
 DropdownButtonRenderer.propTypes = {
+
   /** Additional class name */
   className: PropTypes.string,
 
@@ -77,9 +84,6 @@ DropdownButtonRenderer.propTypes = {
 
   /** Toggle menu component */
   menuComponent: PropTypes.func,
-
-  /** Item or an array of items that should be selected by default */
-  defaultSelectedItem: PropTypes.any,
 
   /** Returns the props applied to menu button */
   getToggleButtonProps: PropTypes.func,

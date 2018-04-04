@@ -3,7 +3,7 @@ import Dropdown from '../src/Dropdown'
 import DropdownButtonRenderer from '../src/DropdownButtonRenderer'
 import DropdownMenu from '../src/DropdownMenu'
 import { mount } from 'enzyme'
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 
@@ -26,7 +26,7 @@ describe('<Dropdown />', () => {
         items={[1, 3, 5]}
       />
     )
-    wrapper.find(`.${name}-button`).simulate('click')
+    wrapper.find(`.${name}__button`).simulate('click')
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
   })

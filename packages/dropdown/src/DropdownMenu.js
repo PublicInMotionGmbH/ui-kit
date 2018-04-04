@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 
-import { prefix } from '@talixo/commons'
+import { prefix } from '@talixo/shared'
 
-const name = prefix('select')
+const moduleName = prefix('select')
 
 /**
  * Dropdown menu component.
@@ -26,19 +26,29 @@ const DropdownMenu = props => {
     itemComponent: ItemComponent, maxHeight,
     overflow, selectedItem, style
   } = props
-  let maxHeightStyle = { maxHeight: maxHeight, overflowY: 'auto', ...style }
+
+  const maxHeightStyle = {
+    overflowY: 'auto',
+    maxHeight,
+    ...style
+  }
+
+  const generateClsNames = (item, index) => (
+    cls(`${moduleName}__item`, {
+      [`${moduleName}__item--highlighted`]: highlightedIndex === index,
+      [`${moduleName}__item--selected`]: selectedItem === item,
+      [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
+      [`${moduleName}__item--overflow-break`]: overflow === 'break'
+    })
+  )
+
   return (
-    <div className={`${name}-options`} style={maxHeight ? maxHeightStyle : style}>
+    <div className={`${moduleName}__options`} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
-          {...getItemProps({ item: item })}
+          {...getItemProps({ item })}
           key={ItemComponent ? index : item}
-          className={cls(`${name}-item`, {
-            [`${name}-item-highlighted`]: highlightedIndex === index,
-            [`${name}-item-selected`]: selectedItem === item,
-            [`${name}-item-overflow-truncate`]: overflow === 'truncate',
-            [`${name}-item-overflow-break`]: overflow === 'break'
-          })}
+          className={generateClsNames(item, index)}
         >
           {ItemComponent ? <ItemComponent item={item} /> : item}
         </div>

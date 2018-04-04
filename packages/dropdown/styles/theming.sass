@@ -5,21 +5,21 @@ $dropdown-border-radius: $border-radius-m
 $dropdown-border-width: $border-width
 
 @include module('select')
-  &-button
+  &__button
     border-color: $dropdown-border-color
     background-color: $color-white
     color: #000000
 
-  &-options
+  &__options
     background-color: $color-white
     border-color: $dropdown-border-color
 
-  &-item
+  &__item
     background-color: $color-talixo-white
 
-  &-item-highlighted
+  &__item--highlighted
     background-color: $color-talixo-lighter-gray
 
-  &-arrow
+  &__arrow
     i
       color: $color-talixo-gray

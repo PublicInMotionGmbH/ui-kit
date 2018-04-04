@@ -2,14 +2,14 @@
 @import './theming'
 
 @include module('dropdown')
-  &-wrapper
+  &__wrapper
     display: inline-block
     position: relative
     width: 100%
     cursor: pointer
 
 @include module('select')
-  &-button
+  &__button
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -28,30 +28,30 @@
       padding: 0 !important
       border: 0 none !important
 
-  &-open
+  &--open
     border-radius: $dropdown-border-radius $dropdown-border-radius 0 0
     border-bottom-width: 0
 
-  &-value
+  &__value
     font-size: $font-size-m
     font-weight: $font-weight-normal
     border: none
     outline: none
 
-  &-arrow
+  &__arrow
     box-sizing: content-box
     padding: 0
     margin: 0 grid-unit(0.5)
     display: inline-block
     outline: none
-    span
+    &--down
       color: $color-talixo-gray
       font-size: $font-size-xl
       font-weight: $font-weight-semibold
       text-align: center
       display: block
 
-  &-options
+  &__options
     position: absolute
     z-index: 100
     width: 100%
@@ -60,20 +60,20 @@
     border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius
     box-sizing: border-box
 
-  &-item
+  &__item
     font-size: $font-size-m
     font-weight: $font-weight-normal
     padding: grid-unit(2)
 
-  &-item-overflow-truncate
+  &__item--overflow-truncate
     text-overflow: ellipsis
     white-space: nowrap
     overflow: hidden
 
-  &-item-overflow-break
+  &__item--overflow-break
     word-wrap: break-word
 
-  &-item-selected
+  &__item--selected
     font-weight: $font-weight-semibold
 
 @include module('item-address')
@@ -86,6 +86,6 @@
       margin: 0 4px
       vertical-align: middle
 
-  &-address
+  &__address
     font-size: $font-size-s
     color: $color-talixo-gray

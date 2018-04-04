@@ -5,7 +5,7 @@ import Switcher from './src/Switcher'
 import {
   createStoriesFactory,
   getReadmeDescription
-} from '@talixo/commons/story'
+} from '@talixo/shared/story'
 import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))

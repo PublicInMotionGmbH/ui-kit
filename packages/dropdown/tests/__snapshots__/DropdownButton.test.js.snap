@@ -2,19 +2,20 @@
 
 exports[`<DropdownButton /> renders correctly 1`] = `
 <button
-  className="talixo-select-button"
+  className="talixo-select__button"
 >
   <span
-    className="talixo-select-value"
+    className="talixo-select__value"
   />
   <div
-    className="talixo-select-arrow"
+    className="talixo-select__arrow"
   >
-    <i
-      className="material-icons"
+    <span
+      aria-hidden="true"
+      className="talixo-icon talixo-select__arrow--down tai tai--material"
     >
-      arrow_drop_down
-    </i>
+      
+    </span>
   </div>
 </button>
 `;

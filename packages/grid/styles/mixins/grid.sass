@@ -1,0 +1,45 @@
+@import '../config'
+
+/*
+ Given:
+  - X - width of „1 of 4” column
+  - Y - width of „2 of 4” column
+  - G - gutter
+  - C - number of all columns
+
+  100% = 4X + 3G
+  100% = 2Y + G
+
+  2Y + G = 4X + 3G
+  2Y = 4X + 2G
+  Y = 2X + G
+
+  and:
+
+  4X = 100% - 3G
+  X = 25% - 3G/4
+
+  then:
+
+  Y = 2 * (25% - 3G/4) + G
+  Y = 50% - 3G/2 + G
+
+  so assumption is that for „N of C” column width is:
+
+  W = 100% * N/C - N * G * (C - 1)/C + (N - 1) * G
+ */
+
+@mixin grid($cols, $gutter, $prefix: '')
+  @function width($i)
+    @return '#{percentage($i/$cols)} + #{($i - 1) * $gutter - $i * $gutter * ($cols - 1) / $cols}'
+
+  @for $i from 1 to $cols + 1
+    .#{$segment-class-name}.#{$segment-class-name}-#{$prefix}#{$i}
+      min-width: percentage($i / $cols)
+      max-width: percentage($i / $cols)
+
+    $width: calc(#{width($i)})
+
+    .#{$group-class-name}--spaced > .#{$segment-class-name}-#{$prefix}#{$i}
+      min-width: $width
+      max-width: $width

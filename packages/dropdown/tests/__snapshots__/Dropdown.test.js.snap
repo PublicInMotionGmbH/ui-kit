@@ -2,13 +2,13 @@
 
 exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
 <div
-  className="talixo-dropdown-wrapper"
+  className="talixo-dropdown__wrapper"
 >
   <button
     aria-expanded={true}
     aria-haspopup={true}
     aria-label="close menu"
-    className="talixo-select-button talixo-select-open"
+    className="talixo-select__button talixo-select--open"
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -17,25 +17,26 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
     type="button"
   >
     <span
-      className="talixo-select-value"
+      className="talixo-select__value"
     >
       Choose number
     </span>
     <div
-      className="talixo-select-arrow"
+      className="talixo-select__arrow"
     >
-      <i
-        className="material-icons"
+      <span
+        aria-hidden="true"
+        className="talixo-icon talixo-select__arrow--down tai tai--material"
       >
-        arrow_drop_down
-      </i>
+        
+      </span>
     </div>
   </button>
   <div
-    className="talixo-select-options"
+    className="talixo-select__options"
   >
     <div
-      className="talixo-select-item"
+      className="talixo-select__item"
       id="downshift-1-item-0"
       key="1"
       onClick={[Function]}
@@ -45,7 +46,7 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
       1
     </div>
     <div
-      className="talixo-select-item"
+      className="talixo-select__item"
       id="downshift-1-item-1"
       key="3"
       onClick={[Function]}
@@ -55,7 +56,7 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
       3
     </div>
     <div
-      className="talixo-select-item"
+      className="talixo-select__item"
       id="downshift-1-item-2"
       key="5"
       onClick={[Function]}
@@ -70,13 +71,13 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
 
 exports[`<Dropdown /> renders correctly 1`] = `
 <div
-  className="talixo-dropdown-wrapper"
+  className="talixo-dropdown__wrapper"
 >
   <button
     aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
-    className="talixo-select-button"
+    className="talixo-select__button"
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -85,18 +86,19 @@ exports[`<Dropdown /> renders correctly 1`] = `
     type="button"
   >
     <span
-      className="talixo-select-value"
+      className="talixo-select__value"
     >
       1
     </span>
     <div
-      className="talixo-select-arrow"
+      className="talixo-select__arrow"
     >
-      <i
-        className="material-icons"
+      <span
+        aria-hidden="true"
+        className="talixo-icon talixo-select__arrow--down tai tai--material"
       >
-        arrow_drop_down
-      </i>
+        
+      </span>
     </div>
   </button>
 </div>

@@ -5,17 +5,17 @@ exports[`<ItemAddress /> renders correctly 1`] = `
   className="talixo-item-address"
 >
   <i
-    className="material-icons talixo-item-address-icon"
+    className="material-icons talixo-item-address__icon"
   >
     credit_card
   </i>
   <span
-    className="talixo-item-address-place"
+    className="talixo-item-address__place"
   >
     Hotel
   </span>
   <span
-    className="talixo-item-address-address"
+    className="talixo-item-address__address"
   >
     Berlin
   </span>

@@ -1,66 +1,75 @@
 import React from 'react'
 import cls from 'classnames'
 import PropTypes from 'prop-types'
+
 import Icon from '@talixo/icon'
+import { prefix } from '@talixo/shared'
 
-import { prefix } from '@talixo/commons'
-
-const name = prefix('select')
+const moduleName = prefix('select')
 
 /**
  * Dropdown button component.
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {*} [props.firstItem]
- * @param {*} [props.getToggleButtonProps]
+ * @param {string} [props.firstItem]
+ * @param {string} [props.getToggleButtonProps]
  * @param {string} [props.id]
- * @param {boolean} [props.isOpen]
- * @param {*} [props.itemComponent]
- * @param {*} [props.onClick]
+ * @param {string} [props.isOpen]
+ * @param {string} [props.itemComponent]
+ * @param {string} [props.onClick]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
- * @param {object} [props.style]
- * @param {*} [props.value]
+ * @param {string} [props.value]
  * @returns {React.Element}
  */
+
 const DropdownButton = props => {
   const {
-    className, firstItem, getToggleButtonProps, id,
-    isOpen, itemComponent: ItemComponent,
+    className, firstItem, getToggleButtonProps,
+    id, isOpen, itemComponent: ItemComponent,
     onClick, overflow, placeholder, style, value
   } = props
+
+  const buttonClsName = cls(className, `${moduleName}__button`, {
+    [`${moduleName}--open`]: isOpen
+  })
+
+  const spanClsName = cls(`${moduleName}__value`, {
+    [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
+    [`${moduleName}__item--overflow-break`]: overflow === 'break'
+  })
+  const displayedValue = value != null
+    ? value
+    : placeholder || firstItem
+
+  const displayedItem = (ItemComponent && value != null) || (ItemComponent && !placeholder)
+    ? <ItemComponent item={displayedValue} />
+    : displayedValue
+
   return (
     <button
       {...getToggleButtonProps({
         onClick: onClick
       })}
-      className={cls(`${name}-button`, className, {
-        [`${name}-open`]: isOpen
-      })}
+      className={buttonClsName}
       id={id}
       style={style}
     >
       <span
-        className={cls(`${name}-value`, {
-          [`${name}-item-overflow-truncate`]: overflow === 'truncate',
-          [`${name}-item-overflow-break`]: overflow === 'break'
-        })}
+        className={spanClsName}
       >
-        {value
-          ? ItemComponent
-            ? <ItemComponent item={value} />
-            : value
-          : placeholder || firstItem}
+        {displayedItem}
       </span>
-      <div className={`${name}-arrow`}>
-        <Icon name='arrow_drop_down' />
+      <div className={`${moduleName}__arrow`}>
+        <Icon name={'arrow_drop_down'} className={`${moduleName}__arrow--down`} />
       </div>
     </button>
   )
 }
 
 DropdownButton.propTypes = {
+
   /** Additional class name */
   className: PropTypes.string,
 
