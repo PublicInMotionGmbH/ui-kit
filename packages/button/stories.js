@@ -11,7 +11,7 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Button', module)
 const click = action('button-click')
 
-addStory('button-default-size', readme, () => (
+addStory('default size', readme, () => (
   <div>
     <h2>Button default</h2>
     <Button onClick={click}>
@@ -43,7 +43,7 @@ addStory('button-default-size', readme, () => (
   </div>
 ))
 
-addStory('button-small', readme, () => (
+addStory('small', readme, () => (
   <div>
     <h2>Button default</h2>
     <Button onClick={click} size='small'>
@@ -75,7 +75,7 @@ addStory('button-small', readme, () => (
   </div>
 ))
 
-addStory('button-full-width', readme, () => (
+addStory('full width', readme, () => (
   <div>
     <Button variant='full-width'>
       Default Full Width
