@@ -4,12 +4,6 @@
   display: inline-block
   list-style: none
 
-  a
-    color: #4183c4
-    text-decoration: none
-    cursor: pointer
-
-
   &--element
     display: inline-block
 
@@ -58,6 +52,15 @@
     &--element
       display: inline-block
 
+      & > a
+        color: #4183c4
+        text-decoration: none
+        cursor: pointer
+
+      &--active, &--active > a
+        color: #000000
+        font-weight: $font-weight-semibold
+
   &--tabs
     &--element
       padding: dp(1) dp(1.5)
@@ -78,10 +81,3 @@
       &:active,
       &--active
         font-weight: $font-weight-semibold
-
-  &--divider
-    display: inline-block
-    opacity: 0.7
-    margin: 0 dp(0.5) 0
-    color: rgba(0, 0, 0, 0.4)
-    vertical-align: baseline

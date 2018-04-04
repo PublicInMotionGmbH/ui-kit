@@ -1,3 +1,5 @@
+import Element from './src/Element'
 import Navigation from './src/Navigation'
+import MappedPagination from './src/MappedPagination'
 
-export default Navigation
+export { Element, Navigation, MappedPagination }

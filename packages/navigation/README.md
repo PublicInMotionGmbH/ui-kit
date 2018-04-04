@@ -25,7 +25,7 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `ul`. Additionally, it handles some differently:
 
-Property name | Type       | Default      | Description                    
+Property name | Type       | Default      | Description
 --------------|------------|:------------:|--------------------------------
 children      | node       | n/a          | Navigation items
 className     | string     | n/a          | Additional class name passed to wrapper
@@ -36,7 +36,7 @@ type          | navigation | 'navigation' | Type of navigation
 
 It allows any props which are allowed for `li`. Additionally, it handles some differently:
 
-Property name | Type       | Default      | Description                    
+Property name | Type       | Default      | Description
 --------------|------------|:------------:|--------------------------------
 active        | bool       | false        | Active state
 children      | node       | n/a          | Element items
@@ -45,6 +45,17 @@ disabled      | bool       | false        | Disabled state
 divider       | node       | '/'          | Divider
 onClick       | func       | n/a          | Function passed to element
 type          | navigation | 'navigation' | Type of navigation
+
+### MappedPagination
+
+Property name  | Type   | Required | Default | Description
+---------------|--------|----------|:-------:|--------------------------------
+activePage     | number |          | 1       | Active page
+displayedLimit | number |          | 10      | Maximum number of displayed page buttons
+nextLabel      | node   |          | 'Next'  | Next button label
+onChange       | func   |          | false   | Function passed to page buttons
+pageCount      | number | yes      | '/'     | The total number of pages
+previousLabel  | node   |          | n/a     | Previous button label
 
 #### Types
 
