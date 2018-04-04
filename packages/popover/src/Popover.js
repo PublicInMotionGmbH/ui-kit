@@ -1,47 +1,27 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { getPositionNearElement, getTarget } from '../../../utils/position'
+import Portal from './Portal'
 
 import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('popover')
 
-class Portal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.el = document.createElement(this.props.element || 'div')
-    this.root = this.props.root || document.querySelector('body')
-  }
-
-  componentDidMount () {
-    this.root.appendChild(this.el)
-  }
-
-  componentWillUnmount () {
-    this.root.removeChild(this.el)
-  }
-
-  render () {
-    return ReactDOM.createPortal(this.props.children, this.el)
-  }
-}
-
 /**
  * Component which represents Popover.
  *
  * @property {object} props
+ * @property {string} [props.attachTo]
  * @property {string} [props.className]
  * @property {*} [props.children]
  * @property {string} [props.color]
  * @property {boolean} [props.fade]
  * @property {number} [props.fadeTime]
- * @property {boolean} [props.isOpen]
+ * @property {boolean} [props.open]
  * @property {number} [props.layer]
- * @property {string} [props.rootNode]
  * @property {string} [props.position]
  * @property {object} [props.style]
  *
@@ -62,14 +42,14 @@ class Popover extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({ isOpen: this.props.isOpen })
+    this.setState({ open: this.props.open })
     this.target = getTarget(this.props.target)
     this.updatePosition()
     window.addEventListener('resize', this.updatePosition)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({ isOpen: nextProps.isOpen })
+    this.setState({ open: nextProps.open })
   }
 
   componentWillUnmount () {
@@ -82,7 +62,7 @@ class Popover extends React.Component {
   }
 
   render () {
-    const { children, className, color, fade, fadeTime, layer, style, position, rootNode } = this.props
+    const { attachTo, children, className, color, fade, fadeTime, layer, style, position } = this.props
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
 
@@ -109,9 +89,9 @@ class Popover extends React.Component {
 
     return (
       <TransitionGroup>
-        {this.state.isOpen ? (
+        {this.state.open ? (
           <CSSTransition timeout={timeout} classNames={`${moduleName}-fade`}>
-            <Portal root={document.querySelector(rootNode)}>
+            <Portal attachTo={attachTo}>
               {element}
             </Portal>
           </CSSTransition>
@@ -122,6 +102,9 @@ class Popover extends React.Component {
 }
 
 Popover.propTypes = {
+  /** Root node of popover */
+  attachTo: PropTypes.node,
+
   /** Children */
   children: PropTypes.node,
 
@@ -138,13 +121,10 @@ Popover.propTypes = {
   fadeTime: PropTypes.number,
 
   /** Popover is visible */
-  isOpen: PropTypes.bool,
+  open: PropTypes.bool,
 
   /** Quantity of popover layer */
   layer: PropTypes.number,
-
-  /** Root node of popover */
-  rootNode: PropTypes.string,
 
   /** Position of popover */
   position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
@@ -155,8 +135,7 @@ Popover.propTypes = {
 
 Popover.defaultProps = {
   fade: false,
-  isOpen: false,
-  rootNode: 'body',
+  open: false,
   position: 'right'
 }
 

@@ -77,9 +77,9 @@ describe('<Tooltip />', () => {
     wrapper.unmount()
   })
 
-  it('renders render when isOpen is set to true', () => {
+  it('renders render when open is set to true', () => {
     const wrapper = mount(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
@@ -88,9 +88,9 @@ describe('<Tooltip />', () => {
     wrapper.unmount()
   })
 
-  it('disables event handlers when isOpen is set to true', () => {
+  it('disables event handlers when open is set to true', () => {
     const wrapper = mount(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
@@ -102,7 +102,7 @@ describe('<Tooltip />', () => {
 
   it('throws error when multiple children are proivided', () => {
     const wrapper = () => shallow(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>

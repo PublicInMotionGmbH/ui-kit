@@ -15,12 +15,12 @@ const render = (setState, state) => {
   const modalRoot = document.querySelector('body')
   return (
     <div>
-      <button onClick={() => { setState({ isOpen: !state.isOpen }) }}>
+      <button onClick={() => { setState({ open: !state.open }) }}>
         Open Modal
       </button>
-      <Modal isOpen={state.isOpen} root={modalRoot}>
+      <Modal open={state.open} attachTo={modalRoot}>
         <h1>Modal</h1>
-        <button onClick={() => { setState({ isOpen: false }) }}>
+        <button onClick={() => { setState({ open: false }) }}>
           Close Modal
         </button>
       </Modal>
@@ -29,7 +29,7 @@ const render = (setState, state) => {
 }
 const getInitialState = () => {
   return {
-    isOpen: false
+    open: false
   }
 }
 

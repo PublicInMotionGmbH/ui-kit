@@ -40,7 +40,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-bottom'
-          isOpen={state.activeTarget === 'popover-bottom'}
+          open={state.activeTarget === 'popover-bottom'}
           color='primary'
           position='right'
           layer={2}
@@ -54,7 +54,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-right'
-          isOpen={state.activeTarget === 'popover-right'}
+          open={state.activeTarget === 'popover-right'}
           color='primary'
           position='right'
           fade='true'
@@ -70,7 +70,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-menu-right'
-          isOpen={state.activeTarget === 'popover-menu-right'}
+          open={state.activeTarget === 'popover-menu-right'}
           color='primary'
           position='right'
           fade='true'
@@ -85,7 +85,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-menu-bottom'
-          isOpen={state.activeTarget === 'popover-menu-bottom'}
+          open={state.activeTarget === 'popover-menu-bottom'}
           color='primary'
           position='bottom'
           fade='true'
