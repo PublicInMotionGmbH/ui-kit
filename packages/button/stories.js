@@ -20,27 +20,27 @@ addStory('default size', readme, () => (
     <Button onClick={click}>
       Default
     </Button>
-    <Button disabled>
+    <Button onClick={click} disabled>
       Default Disabled
     </Button>
     <h2>Button primary</h2>
-    <Button color='primary' onClick={click}>
+    <Button onClick={click} color='primary'>
       Primary
     </Button>
-    <Button color='primary' variant='ghost'>
+    <Button onClick={click} color='primary' variant='ghost'>
       Primary Ghost
     </Button>
-    <Button color='primary' disabled>
+    <Button onClick={click} color='primary' disabled>
       Primary Disabled
     </Button>
     <h2>Button black</h2>
-    <Button color='black'>
+    <Button onClick={click} color='black'>
       Black
     </Button>
-    <Button color='black' variant='ghost'>
+    <Button onClick={click} color='black' variant='ghost'>
       Black Ghost
     </Button>
-    <Button color='black' disabled>
+    <Button onClick={click} color='black' disabled>
       Black Disabled
     </Button>
   </div>
@@ -52,27 +52,27 @@ addStory('small', readme, () => (
     <Button onClick={click} size='small'>
       Default
     </Button>
-    <Button size='small' disabled>
+    <Button onClick={click} size='small' disabled>
       Default Disabled
     </Button>
     <h2>Button primary</h2>
-    <Button color='primary' onClick={click} size='small'>
+    <Button onClick={click} color='primary' size='small'>
       Primary
     </Button>
-    <Button color='primary' variant='ghost' size='small'>
+    <Button onClick={click} color='primary' variant='ghost' size='small'>
       Primary Ghost
     </Button>
-    <Button color='primary' size='small' disabled>
+    <Button onClick={click} color='primary' size='small' disabled>
       Primary Disabled
     </Button>
     <h2>Button black</h2>
-    <Button color='black' size='small'>
+    <Button onClick={click} color='black' size='small'>
       Black
     </Button>
-    <Button color='black' variant='ghost' size='small'>
+    <Button onClick={click} color='black' variant='ghost' size='small'>
       Black Ghost
     </Button>
-    <Button color='black' size='small' disabled>
+    <Button onClick={click} color='black' size='small' disabled>
       Black Disabled
     </Button>
   </div>
@@ -80,16 +80,16 @@ addStory('small', readme, () => (
 
 addStory('full width', readme, () => (
   <div>
-    <Button variant='full-width'>
+    <Button onClick={click} variant='full-width'>
       Default Full Width
     </Button>
-    <Button color='primary' variant='full-width'>
+    <Button onClick={click} color='primary' variant='full-width'>
       Primary Full Width
     </Button>
-    <Button color='black' variant='full-width'>
+    <Button onClick={click} color='black' variant='full-width'>
       Black Full Width
     </Button>
-    <Button color='primary' variant='full-width' disabled>
+    <Button onClick={click} color='primary' variant='full-width' disabled>
       Disabled Full Width
     </Button>
   </div>
@@ -98,45 +98,45 @@ addStory('full width', readme, () => (
 addStory('with icon', readme, () => (
   <div>
     <h2>Default size button with icon</h2>
-    <Button>
+    <Button onClick={click}>
       <Icon name='home' /> Home
     </Button>
-    <Button color='primary'>
+    <Button onClick={click} color='primary'>
       <Icon name='settings' /> Settings
     </Button>
-    <Button color='black'>
+    <Button onClick={click} color='black'>
       <Icon name='cancel' /> Cancel
     </Button>
-    <Button disabled>
-      <Icon name='location_disabled' /> Disabled
+    <Button onClick={click} disabled>
+      <Icon name='do_not_disturb' /> Disabled
     </Button>
 
     <h2>Small button with icon</h2>
-    <Button size='small'>
+    <Button onClick={click} size='small'>
       <Icon name='home' /> Home
     </Button>
-    <Button color='primary' size='small'>
+    <Button onClick={click} color='primary' size='small'>
       <Icon name='settings' /> Settings
     </Button>
-    <Button color='black' size='small'>
+    <Button onClick={click} color='black' size='small'>
       <Icon name='cancel' /> Cancel
     </Button>
-    <Button size='small' disabled>
-      <Icon name='location_disabled' /> Disabled
+    <Button onClick={click} size='small' disabled>
+      <Icon name='do_not_disturb' /> Disabled
     </Button>
 
     <h2>Full width size butoon with icon</h2>
-    <Button variant='full-width'>
+    <Button onClick={click} variant='full-width'>
       <Icon name='home' /> Home
     </Button>
-    <Button color='primary' variant='full-width'>
+    <Button onClick={click} color='primary' variant='full-width'>
       <Icon name='settings' /> Settings
     </Button>
-    <Button color='black' variant='full-width'>
+    <Button onClick={click} color='black' variant='full-width'>
       <Icon name='cancel' /> Cancel
     </Button>
-    <Button variant='full-width' disabled>
-      <Icon name='location_disabled' /> Disabled
+    <Button onClick={click} variant='full-width' disabled>
+      <Icon name='do_not_disturb' /> Disabled
     </Button>
   </div>
 ))
