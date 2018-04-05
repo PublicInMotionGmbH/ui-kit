@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Autocomplete from './src/Autocomplete'
 import ItemAddress from './src/ItemAddress'
 import Dropdown from './src/Dropdown'
 
@@ -57,6 +58,18 @@ addStory('dropdown', readme, () => (
   />
 ))
 
+addStory('dropdown separated', readme, () => (
+  <Dropdown
+    items={items}
+    maxHeight='250px'
+    onChange={change}
+    overflow='truncate'
+    placeholder='Select item'
+    separated
+    style={{ maxWidth: '500px' }}
+  />
+))
+
 addStory('dropdown with custom item component', readme, () => (
   <Dropdown
     itemComponent={ItemAddress}
@@ -65,6 +78,29 @@ addStory('dropdown with custom item component', readme, () => (
     onChange={change}
     overflow='break'
     placeholder='Select accomodation'
+    style={{ maxWidth: '500px' }}
+  />
+))
+
+addStory('autocomplete', readme, () => (
+  <Autocomplete
+    items={items}
+    maxHeight='250px'
+    onChange={change}
+    overflow='break'
+    placeholder='Select item'
+    style={{ maxWidth: '500px' }}
+  />
+))
+
+addStory('autocomplete separated', readme, () => (
+  <Autocomplete
+    items={items}
+    maxHeight='250px'
+    onChange={change}
+    overflow='break'
+    placeholder='Select item'
+    separated
     style={{ maxWidth: '500px' }}
   />
 ))

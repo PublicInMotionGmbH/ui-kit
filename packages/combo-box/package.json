@@ -32,6 +32,7 @@
   "dependencies": {
     "@talixo/shared": "^1.0.0",
     "@talixo/icon": "^1.0.0",
+    "@talixo/text-input": "^1.0.0",
     "downshift": "^1.31.2"
   }
 }

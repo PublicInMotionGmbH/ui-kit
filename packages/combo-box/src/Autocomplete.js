@@ -2,16 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ComboBox from './ComboBox'
-import DropdownButton from './DropdownButton'
-import DropdownMenu from './DropdownMenu'
+import AutocompleteInput from './AutocompleteInput'
+import AutocompleteMenu from './AutocompleteMenu'
 
 /**
  * Component which represents dropdown.
  *
  * @param {object} props
  * @param {string} [props.defaultSelectedItem]
- * @param {string} [props.itemComponent]
  * @param {string} [props.items]
+ * @param {boolean} [props.loading]
+ * @param {string} [props.inputComponent]
  * @param {string} [props.maxHeight]
  * @param {string} [props.onChange]
  * @param {string} [props.overflow]
@@ -21,22 +22,24 @@ import DropdownMenu from './DropdownMenu'
  */
 const Dropdown = props => {
   const {
-    className, defaultSelectedItem, itemComponent, items,
-    maxHeight, onChange, overflow, placeholder, separated, ...passedProps
+    className, defaultSelectedItem, inputComponent, itemComponent,
+    items, loading, maxHeight, onChange, overflow, placeholder,
+    separated, ...passedProps
   } = props
 
   return (
     <ComboBox
       defaultSelectedItem={defaultSelectedItem}
-      itemComponent={itemComponent}
       items={items}
+      loading={loading}
       maxHeight={maxHeight}
-      menuComponent={DropdownMenu}
+      menuComponent={AutocompleteMenu}
       onChange={onChange}
       overflow={overflow}
       placeholder={placeholder}
       separated={separated}
-      toggleComponent={DropdownButton}
+      toggleComponent={AutocompleteInput}
+      inputComponent={inputComponent}
       {...passedProps}
     />
   )
@@ -46,11 +49,14 @@ Dropdown.propTypes = {
   /** Default selected Item */
   defaultSelectedItem: PropTypes.node,
 
-  /** Optional item component */
-  itemComponent: PropTypes.func,
-
   /** Items array */
   items: PropTypes.array,
+
+  /** Loading state */
+  loading: PropTypes.bool,
+
+  /** Input component */
+  inputComponent: PropTypes.func,
 
   /** Maximum toggle menu height */
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -64,7 +70,7 @@ Dropdown.propTypes = {
   /** Placeholder text */
   placeholder: PropTypes.string,
 
-  /** Displays button and menu components as separated elements */
+  /** Displays input and menu components as separated elements */
   separated: PropTypes.bool
 }
 

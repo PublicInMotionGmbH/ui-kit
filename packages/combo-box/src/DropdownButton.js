@@ -20,6 +20,7 @@ const moduleName = prefix('select')
  * @param {string} [props.onClick]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
+ * @param {boolean} [props.separated]
  * @param {string} [props.value]
  * @returns {React.Element}
  */
@@ -28,11 +29,12 @@ const DropdownButton = props => {
   const {
     className, firstItem, getToggleButtonProps,
     id, isOpen, itemComponent: ItemComponent,
-    onClick, overflow, placeholder, style, value
+    onClick, overflow, placeholder, separated, style, value
   } = props
 
   const buttonClsName = cls(className, `${moduleName}__button`, {
-    [`${moduleName}--open`]: isOpen
+    [`${moduleName}--open`]: isOpen,
+    [`${moduleName}__button--separated`]: isOpen && separated
   })
 
   const spanClsName = cls(`${moduleName}__value`, {
@@ -96,6 +98,9 @@ DropdownButton.propTypes = {
 
   /** Placeholder text */
   placeholder: PropTypes.string,
+
+  /** Displays button as separated element */
+  separated: PropTypes.bool,
 
   /** Style object */
   style: PropTypes.object,

@@ -3,13 +3,14 @@
 
 @include module('combo')
   &__wrapper
-    display: inline-block
+    display: flex
+    flex-direction: column
     position: relative
     width: 100%
     cursor: pointer
 
 @include module('select')
-  &__button
+  &__button, &__input
     display: flex
     flex-direction: row
     justify-content: space-between
@@ -28,9 +29,9 @@
       padding: 0 !important
       border: 0 none !important
 
-  &--open
-    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0
-    border-bottom-width: 0
+  &--open:not(#{prefix('select')}__input--separated):not(#{prefix('select')}__button--separated)
+    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
+    border-bottom-width: 0 !important
 
   &__value
     font-size: $font-size-m
@@ -53,12 +54,19 @@
 
   &__options
     position: absolute
+    top: 100%
     z-index: 100
     width: 100%
     border: $dropdown-border-width solid $color-placeholder-text
+    border-radius: $dropdown-border-radius
+    box-sizing: border-box
     border-top-width: 0
     border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius
-    box-sizing: border-box
+
+    &--separated
+      margin-top: $dropdown-border-width
+      border-top-width: $dropdown-border-width
+      border-radius: $dropdown-border-radius
 
   &__item
     font-size: $font-size-m

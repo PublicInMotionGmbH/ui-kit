@@ -12,20 +12,18 @@ const moduleName = prefix('select')
  * @param {object} props
  * @param {*} [props.getItemProps]
  * @param {number} [props.highlightedIndex]
- * @param {*} [props.itemComponent]
  * @param {array} [props.items]
+ * @param {boolean} [props.loading]
  * @param {string || number} [props.maxHeight]
  * @param {string} [props.overflow]
- * @param {*} [props.selectedItem]
  * @param {boolean} [props.separated]
+ * @param {*} [props.selectedItem]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
-const DropdownMenu = props => {
+const AutocompleteMenu = props => {
   const {
-    getItemProps, highlightedIndex, items,
-    itemComponent: ItemComponent, maxHeight,
-    overflow, selectedItem, separated, style
+    getItemProps, highlightedIndex, items, loading, maxHeight, overflow, selectedItem, separated, style
   } = props
 
   const maxHeightStyle = {
@@ -47,33 +45,45 @@ const DropdownMenu = props => {
     })
   )
 
+  if (loading) {
+    return (
+      <div className={wrapperClsNames} style={maxHeight ? maxHeightStyle : style}>
+        <div
+          className={`${moduleName}__item`}
+        >
+          Loading...
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={wrapperClsNames} style={maxHeight ? maxHeightStyle : style}>
       {items.map((item, index) => (
         <div
           {...getItemProps({ item })}
-          key={ItemComponent ? index : item}
+          key={item}
           className={generateClsNames(item, index)}
         >
-          {ItemComponent ? <ItemComponent item={item} /> : item}
+          {item}
         </div>
       ))}
     </div>
   )
 }
 
-DropdownMenu.propTypes = {
+AutocompleteMenu.propTypes = {
   /** Returns the props applied to menu item */
   getItemProps: PropTypes.func,
 
   /** The currently highlighted item */
   highlightedIndex: PropTypes.number,
 
-  /** Optional item component */
-  itemComponent: PropTypes.func,
-
   /** Items array */
   items: PropTypes.array,
+
+  /** Loading state */
+  loading: PropTypes.bool,
 
   /** Maximum toggle menu height */
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -91,10 +101,10 @@ DropdownMenu.propTypes = {
   style: PropTypes.object
 }
 
-DropdownMenu.defaultProps = {
+AutocompleteMenu.defaultProps = {
   items: [],
   separated: false,
   getItemProps: props => props
 }
 
-export default DropdownMenu
+export default AutocompleteMenu

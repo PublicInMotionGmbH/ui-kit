@@ -14,6 +14,7 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  *
  * @param {object} props
  * @param {string} [props.defaultSelectedItem]
+ * @param {string} [props.inputComponent]
  * @param {string} [props.itemComponent]
  * @param {string} [props.items]
  * @param {string} [props.maxHeight]
@@ -21,13 +22,15 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * @param {string} [props.onChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
+ * @param {boolean} [props.separated]
  * @param {string} [props.toggleComponent]
  * @returns {React.Element}
  */
 const ComboBox = props => {
   const {
-    className, menuComponent: MenuComponent, defaultSelectedItem,
-    itemComponent, items, maxHeight, onChange, overflow, placeholder, toggleComponent: ToggleComponent, ...passedProps
+    className, menuComponent: MenuComponent, defaultSelectedItem, inputComponent,
+    itemComponent, items, maxHeight, onChange, overflow, placeholder, separated,
+    toggleComponent: ToggleComponent, ...passedProps
   } = props
 
   return (
@@ -53,10 +56,12 @@ const ComboBox = props => {
             firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
             getToggleButtonProps={getToggleButtonProps}
             getInputProps={getInputProps}
+            inputComponent={inputComponent}
             isOpen={isOpen}
             itemComponent={itemComponent}
             overflow={overflow}
             placeholder={placeholder}
+            separated={separated}
             value={selectedItem}
           />
           {isOpen ? (
@@ -67,6 +72,7 @@ const ComboBox = props => {
               highlightedIndex={highlightedIndex}
               maxHeight={maxHeight}
               overflow={overflow}
+              separated={separated}
               selectedItem={selectedItem}
               inputValue={inputValue}
             />
@@ -80,6 +86,9 @@ const ComboBox = props => {
 ComboBox.propTypes = {
   /** Default selected Item */
   defaultSelectedItem: PropTypes.node,
+
+  /** Input component */
+  inputComponent: PropTypes.func,
 
   /** Optional item component */
   itemComponent: PropTypes.func,
@@ -101,6 +110,9 @@ ComboBox.propTypes = {
 
   /** Placeholder text */
   placeholder: PropTypes.string,
+
+  /** Displays toggle and menu components as separated elements */
+  separated: PropTypes.bool,
 
   /** Toggle component */
   toggleComponent: PropTypes.func
