@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Map /> renders children correctly 1`] = `
+<withProps(withStateHandlers(withScriptjs(withGoogleMap(lifecycle(Component)))))
+  className="talixo-map"
+  isMarkerShown={true}
+  zoom={6}
+/>
+`;
