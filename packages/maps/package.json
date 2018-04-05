@@ -30,7 +30,6 @@
   },
   "dependencies": {
     "@talixo/shared": "^1.0.0",
-    "axios": "^0.18.0",
     "google-maps-react": "^1.1.11"
   }
 }
