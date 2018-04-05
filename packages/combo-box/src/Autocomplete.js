@@ -15,6 +15,7 @@ import AutocompleteMenu from './AutocompleteMenu'
  * @param {string} [props.inputComponent]
  * @param {string} [props.maxHeight]
  * @param {string} [props.onChange]
+ * @param {string} [props.onInputValueChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
  * @param {boolean} [props.separated]
@@ -23,8 +24,8 @@ import AutocompleteMenu from './AutocompleteMenu'
 const Dropdown = props => {
   const {
     className, defaultSelectedItem, inputComponent, itemComponent,
-    items, loading, maxHeight, onChange, overflow, placeholder,
-    separated, ...passedProps
+    items, loading, maxHeight, onChange, onInputValueChange, overflow,
+    placeholder, separated, ...passedProps
   } = props
 
   return (
@@ -35,6 +36,7 @@ const Dropdown = props => {
       maxHeight={maxHeight}
       menuComponent={AutocompleteMenu}
       onChange={onChange}
+      onInputValueChange={onInputValueChange}
       overflow={overflow}
       placeholder={placeholder}
       separated={separated}
@@ -63,6 +65,9 @@ Dropdown.propTypes = {
 
   /** Additional onChange function */
   onChange: PropTypes.func,
+
+  /** Called whenever the input value changes */
+  onInputValueChange: PropTypes.func,
 
   /** Item text overflow type */
   overflow: PropTypes.oneOf(['truncate', 'break']),

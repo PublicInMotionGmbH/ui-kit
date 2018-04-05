@@ -47,6 +47,42 @@ const itemsCustom = [
   }
 ]
 
+const filter = (inputValue, state, setState) => {
+  let filteredItems = items.filter(i => i.toString().toLowerCase().includes(inputValue.toString().toLowerCase()))
+  setState({ items: filteredItems })
+}
+
+// simple solution to prevent race conditions
+let lazyCounter = 0
+
+const getLazilyFilteredItems = ({ inputValue, requestId }) => {
+  const delay = 1000 + Math.random() * 2000
+
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log(`RESOLVING ${requestId}`)
+      resolve({
+        requestId: requestId,
+        items: items.filter(i => i.toString().toLowerCase().includes(inputValue.toString().toLowerCase()))
+      })
+    }, delay)
+    console.log(`WAITING ${delay}ms for ${requestId}`)
+  })
+}
+
+const lazyFilter = async (inputValue, state, setState) => {
+  const requestId = lazyCounter++
+  setState({ requestId: requestId, loading: true })
+
+  const response = await getLazilyFilteredItems({ inputValue, requestId })
+
+  if (response.requestId === state.requestId) {
+    setState({ items: response.items, loading: false, requestId: null })
+  } else {
+    console.warn('RACE CONDITION PREVENTED', response.requestId)
+  }
+}
+
 addStory('dropdown', readme, () => (
   <Dropdown
     items={items}
@@ -104,3 +140,34 @@ addStory('autocomplete separated', readme, () => (
     style={{ maxWidth: '500px' }}
   />
 ))
+
+addStory.controlled('autocomplete with filtering', readme, (setState, state) => (
+  <Autocomplete
+    items={state.items}
+    maxHeight='250px'
+    onChange={change}
+    onInputValueChange={inputValue => filter(inputValue, state, setState)}
+    overflow='break'
+    placeholder='Select item'
+    style={{ maxWidth: '500px' }}
+  />
+), () => ({
+  items: items
+}))
+
+addStory.controlled('autocomplete with lazy filtering', readme, (setState, state) => (
+  <Autocomplete
+    items={state.items}
+    loading={state.loading}
+    maxHeight='250px'
+    onChange={change}
+    onInputValueChange={inputValue => lazyFilter(inputValue, state, setState)}
+    overflow='break'
+    placeholder='Select item'
+    style={{ maxWidth: '500px' }}
+  />
+), () => ({
+  items: [],
+  loading: false,
+  requestId: null
+}))

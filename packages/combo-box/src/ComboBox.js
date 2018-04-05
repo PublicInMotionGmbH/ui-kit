@@ -20,6 +20,7 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * @param {string} [props.maxHeight]
  * @param {string} [props.menuComponent]
  * @param {string} [props.onChange]
+ * @param {string} [props.onInputValueChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
  * @param {boolean} [props.separated]
@@ -29,13 +30,14 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
 const ComboBox = props => {
   const {
     className, menuComponent: MenuComponent, defaultSelectedItem, inputComponent,
-    itemComponent, items, maxHeight, onChange, overflow, placeholder, separated,
-    toggleComponent: ToggleComponent, ...passedProps
+    itemComponent, items, loading, maxHeight, onChange, onInputValueChange, overflow, placeholder,
+    separated, toggleComponent: ToggleComponent, ...passedProps
   } = props
 
   return (
     <Downshift
       onChange={onChange}
+      onInputValueChange={onInputValueChange}
       defaultSelectedItem={defaultSelectedItem}
       itemToString={itemToStringOrObject}
       render={({
@@ -70,6 +72,7 @@ const ComboBox = props => {
               items={items}
               getItemProps={getItemProps}
               highlightedIndex={highlightedIndex}
+              loading={loading}
               maxHeight={maxHeight}
               overflow={overflow}
               separated={separated}
@@ -96,6 +99,9 @@ ComboBox.propTypes = {
   /** Items array */
   items: PropTypes.array,
 
+  /** Loading state */
+  loading: PropTypes.bool,
+
   /** Maximum toggle menu height */
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -104,6 +110,9 @@ ComboBox.propTypes = {
 
   /** Additional onChange function */
   onChange: PropTypes.func,
+
+  /** Called whenever the input value changes */
+  onInputValueChange: PropTypes.func,
 
   /** Item text overflow type */
   overflow: PropTypes.oneOf(['truncate', 'break']),
