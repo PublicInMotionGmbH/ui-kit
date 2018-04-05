@@ -21,6 +21,10 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### ComboBox
+
+It handles all `div` properties, and additionally:
+
 Property name       | Type                  | Default | Description
 --------------------|-----------------------|:-------:|--------------------------------
 className           | string                | n/a     | Additional class name
@@ -32,8 +36,21 @@ menuComponent       | func                  | n/a     | Toggle menu component
 onChange            | func                  | n/a     | Additional onChange function
 overflow            | 'truncate' or 'break' | n/a     | Item text overflow type
 placeholder         | string                | n/a     | Placeholder text
-style               | object                | n/a     | Style object
 toggleComponent     | func                  | n/a     | Toggle component
+
+### Dropdown
+
+It handles all `div` properties, and additionally:
+
+Property name       | Type                  | Default | Description
+--------------------|-----------------------|:-------:|--------------------------------
+defaultSelectedItem | node                  | n/a     | Default selected Item
+itemComponent       | func                  | n/a     | Optional item component
+items               | array                 | n/a     | Items array
+maxHeight           | string or number      | n/a     | Maximum toggle menu height
+onChange            | func                  | n/a     | Additional onChange function
+overflow            | 'truncate' or 'break' | n/a     | Item text overflow type
+placeholder         | string                | n/a     | Placeholder text
 
 ## Changelog
 

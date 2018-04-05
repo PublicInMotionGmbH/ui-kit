@@ -3,8 +3,6 @@ import cls from 'classnames'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 
-import DropdownButton from './DropdownButton'
-import DropdownMenu from './DropdownMenu'
 import { prefix } from '@talixo/shared'
 
 const name = prefix('combo')
@@ -15,7 +13,6 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * Component which represents dropdown.
  *
  * @param {object} props
- * @param {string} [props.className]
  * @param {string} [props.defaultSelectedItem]
  * @param {string} [props.itemComponent]
  * @param {string} [props.items]
@@ -24,16 +21,13 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * @param {string} [props.onChange]
  * @param {string} [props.overflow]
  * @param {string} [props.placeholder]
- * @param {string} [props.style]
  * @param {string} [props.toggleComponent]
  * @returns {React.Element}
  */
-
 const ComboBox = props => {
   const {
     className, menuComponent: MenuComponent, defaultSelectedItem,
-    itemComponent, items, maxHeight, onChange, overflow,
-    placeholder, style, toggleComponent: ToggleComponent
+    itemComponent, items, maxHeight, onChange, overflow, placeholder, toggleComponent: ToggleComponent, ...passedProps
   } = props
 
   return (
@@ -53,7 +47,7 @@ const ComboBox = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div className={cls(`${name}__wrapper`, className)} style={style}>
+        <div className={cls(`${name}__wrapper`, className)} {...passedProps}>
           <ToggleComponent
             onOuterClick={() => closeMenu()}
             firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
@@ -84,10 +78,6 @@ const ComboBox = props => {
 }
 
 ComboBox.propTypes = {
-
-  /** Additional class name */
-  className: PropTypes.string,
-
   /** Default selected Item */
   defaultSelectedItem: PropTypes.node,
 
@@ -112,16 +102,8 @@ ComboBox.propTypes = {
   /** Placeholder text */
   placeholder: PropTypes.string,
 
-  /** Style object */
-  style: PropTypes.object,
-
   /** Toggle component */
   toggleComponent: PropTypes.func
-}
-
-ComboBox.defaultProps = {
-  menuComponent: DropdownMenu,
-  toggleComponent: DropdownButton
 }
 
 export default ComboBox

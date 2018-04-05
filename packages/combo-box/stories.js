@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ItemAddress from './src/ItemAddress'
-import ComboBox from './src/ComboBox'
+import Dropdown from './src/Dropdown'
 
 import {
   createStoriesFactory,
@@ -47,7 +47,7 @@ const itemsCustom = [
 ]
 
 addStory('dropdown', readme, () => (
-  <ComboBox
+  <Dropdown
     items={items}
     maxHeight='250px'
     onChange={change}
@@ -56,8 +56,9 @@ addStory('dropdown', readme, () => (
     style={{ maxWidth: '500px' }}
   />
 ))
+
 addStory('dropdown with custom item component', readme, () => (
-  <ComboBox
+  <Dropdown
     itemComponent={ItemAddress}
     items={itemsCustom}
     maxHeight='250px'

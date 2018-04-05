@@ -1,16 +1,14 @@
 import React from 'react'
-import ComboBox from '../src/ComboBox'
-import DropdownButton from '../src/DropdownButton'
-import DropdownMenu from '../src/DropdownMenu'
+import Dropdown from '../src/Dropdown'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
 
 const name = prefix('select')
 
-describe('<ComboBox />', () => {
+describe('<Dropdown />', () => {
   it('renders correctly', () => {
     const wrapper = mount(
-      <ComboBox menuComponent={DropdownMenu} toggleComponent={DropdownButton} items={[1, 3, 5]} />
+      <Dropdown items={[1, 3, 5]} />
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -19,9 +17,7 @@ describe('<ComboBox />', () => {
 
   it('opens dropdown menu when clicked', () => {
     const wrapper = mount(
-      <ComboBox
-        menuComponent={DropdownMenu}
-        toggleComponent={DropdownButton}
+      <Dropdown
         placeholder='Choose number'
         items={[1, 3, 5]}
       />
