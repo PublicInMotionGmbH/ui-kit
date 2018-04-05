@@ -8,7 +8,10 @@ import Tab from './src/Tab'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Tab', module)
+const addStory = createStoriesFactory('Tab', module, {
+  propTables: [ Tab ],
+  propTablesExclude: [ Badge ]
+})
 
 // Stories
 

@@ -8,7 +8,10 @@ import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Button', module)
+const addStory = createStoriesFactory('Button', module, {
+  propTables: [ Button ],
+  propTablesExclude: [ Icon ]
+})
 const click = action('button-click')
 
 addStory('default size', readme, () => (

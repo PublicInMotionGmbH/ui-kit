@@ -33,5 +33,9 @@ const getInitialState = () => {
     isOpen: false
   }
 }
+const options = {
+  propTypes: [ Modal, Button ],
+  propTablesExclude: [ Button ]
+}
 
-addStory.controlled('default', readme, render, getInitialState)
+addStory.controlled('default', readme, render, getInitialState, options)

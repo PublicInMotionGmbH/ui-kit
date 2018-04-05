@@ -8,7 +8,10 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Badge', module)
+const addStory = createStoriesFactory('Badge', module, {
+  propTables: [ Badge ],
+  propTablesExclude: [ Button, Tab ]
+})
 
 addStory('default', readme, () =>
   <div>

@@ -8,7 +8,9 @@ import NotificationList from './src/NotificationList'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Notification', module)
+const addStory = createStoriesFactory('Notification', module, {
+  propTypes: [ Notification, NotificationList ]
+})
 
 const notifications = [
   {
