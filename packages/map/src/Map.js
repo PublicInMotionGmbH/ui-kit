@@ -24,7 +24,7 @@ const MapComponent = compose(
     return {
       googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${props.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
       loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ height: `400px` }} />,
+      containerElement: <div style={{ height: `100vh` }} />,
       mapElement: <div style={{ height: `100%` }} />
     }
   }),
@@ -86,9 +86,9 @@ class Map extends React.PureComponent {
     return (
       <MapComponent
         className={moduleName}
-        isMarkerShown={this.state.isMarkerShown}
         apiKey={this.props.apiKey}
         zoom={this.props.zoom}
+        isMarkerShown={this.state.isMarkerShown}
         markerPosition={this.props.markerPosition}
         startPoint={this.props.startPoint}
         endPoint={this.props.endPoint}
@@ -103,7 +103,7 @@ Map.propTypes = {
   className: PropTypes.string,
 
   /** Your Api Key from GoogleMaps */
-  apiKey: PropTypes.string,
+  apiKey: PropTypes.string.isRequired,
 
   /** Zoom */
   zoom: PropTypes.number,
@@ -117,12 +117,12 @@ Map.propTypes = {
   /** End point */
   endPoint: PropTypes.object,
 
-  /* Text in InfoWindow */
+  /** Text in InfoWindow */
   infoText: PropTypes.string
 }
 
 Map.defaultProps = {
-  zoom: 6
+  zoom: 10
 }
 
 export default Map

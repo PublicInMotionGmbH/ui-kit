@@ -10,12 +10,12 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Map', module)
 
 // Stories
-addStory('default with no props', readme, () => (
+addStory('default', readme, () => (
   <Map apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' />
 ))
 
-addStory('marker point', readme, () => (
-  <Map apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' zoom={8} markerPosition={{lat: -30.397, lng: 150.644}} />
+addStory('marker point with zoom', readme, () => (
+  <Map apiKey='AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc' zoom={14} markerPosition={{lat: -27.5598, lng: 151.9507}} />
 ))
 
 addStory('marker point with info window', readme, () => (
