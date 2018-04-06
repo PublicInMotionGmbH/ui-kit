@@ -65,23 +65,11 @@ class Portal extends React.Component {
  * @property {Element} [el]
  */
 class Tooltip extends React.Component {
-  /**
-  * @param {object} props
-  * @property {boolean} props.fade
-  * @property {string} props.position
-  * @property {string} [props.rootNode]
-  * @property {boolean} [props.isOpen]
-  * @property {*} [props.children]
-  * @property {string} [props.className]
-  * @property {string} [props.color]
-  * @property {number} [props.fadeTime]
-  * @property {function} [props.render]
-  * @property {object} [props.style]
-  */
   constructor (props) {
     super(props)
 
     this.state = {
+      isPopover: this.props.isPopover,
       clicked: false,
       isOpen: this.props.isOpen,
       left: null,
@@ -130,7 +118,18 @@ class Tooltip extends React.Component {
     if (!this.state.clicked && !this.state.isOpen) this.setState({ isOpen: true })
   }
 
-  handleMouseClick () {
+  handleMouseClick (e) {
+    if (this.props.isPopover) {
+      if (this.state.isOpen) {
+        // if (e.target === 'popover') {
+        //   return
+        // }
+        this.setState({ isOpen: false })
+        return
+      }
+      this.setState({ isOpen: true })
+      return
+    }
     if (!_.isUndefined(this.props.isOpen)) return
     this.setState({ clicked: true, isOpen: false })
   }
@@ -145,7 +144,7 @@ class Tooltip extends React.Component {
   render () {
     const {
       children, className, color, fade, fadeTime,
-      position, render, rootNode, style
+      position, render, rootNode, style, isPopover
     } = this.props
 
     const defaultFadeTime = 600
@@ -160,7 +159,8 @@ class Tooltip extends React.Component {
 
     const clsName = cls(name, className, {
       [`${name}--${color}`]: color !== undefined,
-      [`${name}--${position}`]: position !== undefined
+      [`${name}--${position}`]: position !== undefined,
+      [`${name}--popover`]: isPopover === true
     })
 
     const tooltipStyle = {
@@ -173,10 +173,10 @@ class Tooltip extends React.Component {
     return (
       <div
         className={`${name}-hover`}
-        onClick={this.handleMouseClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onMouseOver={this.handleMouseOver}
+        onClick={(e) => this.handleMouseClick(e)}
+        onMouseEnter={this.props.isPopover ? null : this.handleMouseEnter}
+        onMouseLeave={this.props.isPopover ? null : this.handleMouseLeave}
+        onMouseOver={this.props.isPopover ? null : this.handleMouseOver}
       >
         {childWithRef}
         <TransitionGroup>

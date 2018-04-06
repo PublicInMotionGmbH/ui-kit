@@ -109,4 +109,18 @@ addStory('custom fade time', readme, () => (
     </span>
   </Tooltip>
 ))
+addStory('POPOVER', readme, () => (
+  <Tooltip isPopover color='primary' render={() => <div> <ul>
+    <li>MENU 1</li>
+    <li>MENU 2</li>
+    <li>MENU 3</li>
+  </ul> </div>}>
+    <span
+      style={tooltipStyle}
+    >
+      Tooltip POPOVER
+    </span>
+  </Tooltip>
+))
+
 addStory.controlled('controlled', readme, render, getInitialState)
