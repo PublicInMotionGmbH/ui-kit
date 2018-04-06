@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ControlGroup /> renders children correctly 1`] = `
+<div
+  className="talixo-control-group talixo-control-group--horizontal talixo-control-group--horizontal--left"
+>
+  <button>
+    1
+  </button>
+  <button>
+    2
+  </button>
+  <button>
+    3
+  </button>
+</div>
+`;

@@ -1,0 +1,49 @@
+@import './config'
+
+$gutter: $grid-gutter/4
+
+@include module('control-group')
+  display: flex
+  width: 100%
+
+  &--horizontal
+    flex-direction: row
+
+    > *
+      margin: 0 $gutter
+
+    > *:first-child,
+      margin: 0 $gutter 0 0
+
+    > *:last-child
+      margin: 0 0 0 $gutter
+
+  &--vertical
+    flex-direction: column
+
+    > *
+      margin: $gutter 0
+
+    > *:first-child,
+      margin: 0 0 $gutter 0
+
+    > *:last-child
+      margin: $gutter 0 0 0
+
+  &--horizontal--left
+    justify-content: flex-start
+
+  &--horizontal--center
+    justify-content: center
+
+  &--horizontal--right
+    justify-content: flex-end
+
+  &--vertical--left
+    align-items: flex-start
+
+  &--vertical--center
+    align-items: center
+
+  &--vertical--right
+    align-items: flex-end
