@@ -13,7 +13,7 @@ exports[`<Autocomplete /> opens dropdown menu when input value changes 1`] = `
     }
   >
     <input
-      aria-activedescendant={null}
+      aria-activedescendant="downshift-1-item-0"
       aria-autocomplete="list"
       aria-expanded={true}
       autoComplete="off"
@@ -36,7 +36,7 @@ exports[`<Autocomplete /> opens dropdown menu when input value changes 1`] = `
     className="talixo-select__options"
   >
     <div
-      className="talixo-select__item"
+      className="talixo-select__item talixo-select__item--highlighted"
       id="downshift-1-item-0"
       key="1"
       onClick={[Function]}
