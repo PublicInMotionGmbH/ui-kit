@@ -25,18 +25,20 @@ to avoid having different versions of these in your application.
 
 It handles all `div` properties, and additionally:
 
-Property name       | Type                  | Default | Description
---------------------|-----------------------|:-------:|--------------------------------
-defaultSelectedItem | node                  | n/a     | Default selected Item
-itemComponent       | func                  | n/a     | Optional item component
-items               | array                 | n/a     | Items array
-maxHeight           | string or number      | n/a     | Maximum toggle menu height
-menuComponent       | func                  | n/a     | Toggle menu component
-onChange            | func                  | n/a     | Additional onChange function
-overflow            | 'truncate' or 'break' | n/a     | Item text overflow type
-placeholder         | string                | n/a     | Placeholder text
-separated           | bool                  | n/a     | Displays toggle and menu components as separated elements
-toggleComponent     | func                  | n/a     | Toggle component
+Property name           | Type                  | Default | Description
+------------------------|-----------------------|:-------:|--------------------------------
+defaultHighlightedIndex | number                | n/a     | Initial index to highlight when the menu first opens
+defaultSelectedItem     | node                  | n/a     | Default selected Item
+itemComponent           | func                  | n/a     | Optional item component
+items                   | array                 | n/a     | Items array
+maxHeight               | string or number      | n/a     | Maximum toggle menu height
+menuComponent           | func                  | n/a     | Toggle menu component
+onChange                | func                  | n/a     | Additional onChange function
+onInputValueChange      | func                  | n/a     | Called whenever the input value changes
+overflow                | 'truncate' or 'break' | n/a     | Item text overflow type
+placeholder             | string                | n/a     | Placeholder text
+separated               | bool                  | n/a     | Displays toggle and menu components as separated elements
+toggleComponent         | func                  | n/a     | Toggle component
 
 ### Dropdown
 
@@ -57,17 +59,20 @@ separated           | bool                  | n/a     | Displays button and menu
 
 It handles all `div` properties, and additionally:
 
-Property name       | Type                  | Default | Description
---------------------|-----------------------|:-------:|--------------------------------
-defaultSelectedItem | node                  | n/a     | Default selected Item
-items               | array                 | n/a     | Items array
-loading             | bool                  | n/a     | Loading state
-inputComponent      | func                  | n/a     | Input component
-maxHeight           | string or number      | n/a     | Maximum toggle menu height
-onChange            | func                  | n/a     | Additional onChange function
-overflow            | 'truncate' or 'break' | n/a     | Item text overflow type
-placeholder         | string                | n/a     | Placeholder text
-separated           | bool                  | n/a     | Displays input and menu components as separated elements
+Property name           | Type                  | Default | Description
+------------------------|-----------------------|:-------:|--------------------------------
+defaultHighlightedIndex | number                | n/a     | Initial index to highlight when the menu first opens
+defaultSelectedItem     | node                  | n/a     | Default selected Item
+items                   | array                 | n/a     | Items array
+loading                 | bool                  | n/a     | Loading state
+inputComponent          | func                  | n/a     | Input component
+maxHeight               | string or number      | n/a     | Maximum toggle menu height
+menuComponent           | func                  | n/a     | Toggle menu component
+onChange                | func                  | n/a     | Additional onChange function
+onInputValueChange      | func                  | n/a     | Called whenever the input value changes
+overflow                | 'truncate' or 'break' | n/a     | Item text overflow type
+placeholder             | string                | n/a     | Placeholder text
+separated               | bool                  | n/a     | Displays input and menu components as separated elements
 
 ## Changelog
 

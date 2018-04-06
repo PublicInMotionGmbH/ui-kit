@@ -9,11 +9,13 @@ import AutocompleteMenu from './AutocompleteMenu'
  * Component which represents dropdown.
  *
  * @param {object} props
+ * @param {string} [props.defaultHighlightedIndex]
  * @param {string} [props.defaultSelectedItem]
  * @param {string} [props.items]
  * @param {boolean} [props.loading]
  * @param {string} [props.inputComponent]
  * @param {string} [props.maxHeight]
+ * @param {string} [props.menuComponent]
  * @param {string} [props.onChange]
  * @param {string} [props.onInputValueChange]
  * @param {string} [props.overflow]
@@ -21,20 +23,21 @@ import AutocompleteMenu from './AutocompleteMenu'
  * @param {boolean} [props.separated]
  * @returns {React.Element}
  */
-const Dropdown = props => {
+const Autocomplete = props => {
   const {
-    className, defaultSelectedItem, inputComponent, itemComponent,
-    items, loading, maxHeight, onChange, onInputValueChange, overflow,
-    placeholder, separated, ...passedProps
+    className, defaultHighlightedIndex, defaultSelectedItem, inputComponent,
+    itemComponent, items, loading, maxHeight, menuComponent, onChange,
+    onInputValueChange, overflow, placeholder, separated, ...passedProps
   } = props
 
   return (
     <ComboBox
+      defaultHighlightedIndex={defaultHighlightedIndex}
       defaultSelectedItem={defaultSelectedItem}
       items={items}
       loading={loading}
       maxHeight={maxHeight}
-      menuComponent={AutocompleteMenu}
+      menuComponent={menuComponent}
       onChange={onChange}
       onInputValueChange={onInputValueChange}
       overflow={overflow}
@@ -47,7 +50,10 @@ const Dropdown = props => {
   )
 }
 
-Dropdown.propTypes = {
+Autocomplete.propTypes = {
+  /** Initial index to highlight when the menu first opens */
+  defaultHighlightedIndex: PropTypes.number,
+
   /** Default selected Item */
   defaultSelectedItem: PropTypes.node,
 
@@ -62,6 +68,9 @@ Dropdown.propTypes = {
 
   /** Maximum toggle menu height */
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /** Toggle menu component */
+  menuComponent: PropTypes.func,
 
   /** Additional onChange function */
   onChange: PropTypes.func,
@@ -79,4 +88,9 @@ Dropdown.propTypes = {
   separated: PropTypes.bool
 }
 
-export default Dropdown
+Autocomplete.defaultProps = {
+  defaultHighlightedIndex: 0,
+  menuComponent: AutocompleteMenu
+}
+
+export default Autocomplete

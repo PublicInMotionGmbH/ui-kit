@@ -13,6 +13,7 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  * Component which represents dropdown.
  *
  * @param {object} props
+ * @param {string} [props.defaultHighlightedIndex]
  * @param {string} [props.defaultSelectedItem]
  * @param {string} [props.inputComponent]
  * @param {string} [props.itemComponent]
@@ -29,17 +30,19 @@ const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : 
  */
 const ComboBox = props => {
   const {
-    className, menuComponent: MenuComponent, defaultSelectedItem, inputComponent,
-    itemComponent, items, loading, maxHeight, onChange, onInputValueChange, overflow, placeholder,
-    separated, toggleComponent: ToggleComponent, ...passedProps
+    className, defaultHighlightedIndex, defaultSelectedItem, inputComponent,
+    itemComponent, items, loading, maxHeight, menuComponent: MenuComponent,
+    onChange, onInputValueChange, overflow, placeholder, separated,
+    toggleComponent: ToggleComponent, ...passedProps
   } = props
 
   return (
     <Downshift
-      onChange={onChange}
-      onInputValueChange={onInputValueChange}
+      defaultHighlightedIndex={defaultHighlightedIndex}
       defaultSelectedItem={defaultSelectedItem}
       itemToString={itemToStringOrObject}
+      onChange={onChange}
+      onInputValueChange={onInputValueChange}
       render={({
         closeMenu,
         getToggleButtonProps,
@@ -87,6 +90,9 @@ const ComboBox = props => {
 }
 
 ComboBox.propTypes = {
+  /** Initial index to highlight when the menu first opens */
+  defaultHighlightedIndex: PropTypes.number,
+
   /** Default selected Item */
   defaultSelectedItem: PropTypes.node,
 
@@ -125,6 +131,10 @@ ComboBox.propTypes = {
 
   /** Toggle component */
   toggleComponent: PropTypes.func
+}
+
+ComboBox.defaultProps = {
+  defaultHighlightedIndex: null
 }
 
 export default ComboBox

@@ -164,6 +164,7 @@ addStory.controlled('autocomplete with lazy filtering', readme, (setState, state
     onInputValueChange={inputValue => lazyFilter(inputValue, state, setState)}
     overflow='break'
     placeholder='Select item'
+    separated
     style={{ maxWidth: '500px' }}
   />
 ), () => ({
