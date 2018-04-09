@@ -24,7 +24,7 @@ addStory('default', readme, () =>
 addStory('inside button', readme, () =>
   <div>
     <Button>
-      Mail <Badge>10 unreaded</Badge>
+      Mail <Badge>10 unread</Badge>
     </Button>
     <Button color='primary'>
       Warnings <Badge>10 problems</Badge>
@@ -38,7 +38,7 @@ addStory('inside tab', readme, () =>
   <div>
     <Tab>
       Mail
-      <Badge>10 unreaded</Badge>
+      <Badge>10 unread</Badge>
     </Tab>
     <Tab>
       info
