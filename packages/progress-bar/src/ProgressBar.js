@@ -16,7 +16,7 @@ import { prefix, buildClassName } from '@talixo/shared'
  * @returns {React.Element}
  */
 function ProgressBar (props) {
-  const { className, value, type, size, striped, smooth, ...passedProps } = props
+  const { className, value, type, size, striped, smooth, children, ...passedProps } = props
 
   // Build a number value
   const v = parseFloat(value)
@@ -36,12 +36,25 @@ function ProgressBar (props) {
     [ type, size ]
   )
 
+  const label = children ? (
+    <div className={prefix('progress-bar', 'label')}>
+      {children}
+    </div>
+  ) : null
+
+  const shadow = children ? (
+    <div className={prefix('progress-bar', 'shadow')} aria-hidden='true'>
+      {children}
+    </div>
+  ) : null
+
   // Build class name for progress bar itself
   const innerClsName = prefix('progress-bar', 'inner')
 
   return (
-    <div className={clsName} {...passedProps}>
-      <div className={innerClsName} style={style} />
+    <div className={clsName} {...passedProps} role='progressbar'>
+      <div className={innerClsName} style={style}>{label}</div>
+      {shadow}
     </div>
   )
 }
@@ -63,7 +76,10 @@ ProgressBar.propTypes = {
   smooth: PropTypes.bool,
 
   /** Progress bar size */
-  size: PropTypes.oneOf([ 'small' ])
+  size: PropTypes.oneOf([ 'small' ]),
+
+  /** Label */
+  children: PropTypes.node
 }
 
 ProgressBar.defaultProps = {

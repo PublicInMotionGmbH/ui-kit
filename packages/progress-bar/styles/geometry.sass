@@ -7,24 +7,10 @@ $progress-indeterminate-stripes-size: $progress-height * $progress-indeterminate
 
 $progress-stripes-time: $progress-stripes-speed * $progress-indeterminate-stripes-scale
 
-// Build mixins for progress bar variations
-
-@mixin progress-bar-color ($type, $color)
-  @include module('progress-bar')
-    &--#{$type}
-      background: mix($progress-base-color, $color, 85%)
-
-    &--#{$type} &__inner
-      background: $color
-
-@mixin progress-bar-height ($type, $height)
-  @include module('progress-bar')
-    &--#{$type}
-      height: $height
-
 // Set up styles for progress bar
 
 @include module('progress-bar')
+  position: relative
   display: block
   height: $progress-height
   background: $progress-base-color
@@ -36,6 +22,24 @@ $progress-stripes-time: $progress-stripes-speed * $progress-indeterminate-stripe
     height: 100%
     background: #ddd
     min-width: 3px
+    z-index: 1
+    overflow: hidden
+
+  &__label
+    z-index: 2
+
+  &__label,
+  &__shadow
+    position: absolute
+    left: dp(1)
+    right: dp(1)
+    top: 0
+    bottom: 0
+    height: 100%
+    white-space: nowrap
+    font-size: $progress-height * 0.6
+    line-height: $progress-height
+    text-overflow: ellipsis
 
   &--striped &__inner:after,
   &--indeterminate &__inner:after
@@ -62,6 +66,34 @@ $progress-stripes-time: $progress-stripes-speed * $progress-indeterminate-stripe
 
   &--smooth &__inner
     transition: 400ms width linear
+
+// Build mixins for progress bar variations
+
+@mixin progress-bar-color ($type, $color)
+  $bg-color: mix($progress-base-color, $color, 85%)
+
+  @include module('progress-bar')
+    &--#{$type}
+      background: $bg-color
+
+    &--#{$type} &__inner
+      background: $color
+
+    &--#{$type} &__label
+      color: text-contrast($color)
+
+    &--#{$type} &__shadow
+      color: text-contrast($bg-color)
+
+@mixin progress-bar-height ($type, $height)
+  @include module('progress-bar')
+    &--#{$type}
+      height: $height
+
+    &--#{$type} &__label,
+    &--#{$type} &__shadow
+      font-size: $height * 0.6
+      line-height: $height
 
 // Build styles for some progress bar variations
 
