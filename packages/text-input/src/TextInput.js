@@ -40,9 +40,9 @@ class TextInput extends React.Component {
       error: hasError
     })
 
-    const wrapperClasses = buildClassName('text-input__wrapper', null, [ size ])
+    const wrapperClasses = buildClassName([ 'text-input', 'wrapper' ], null, [ size ])
 
-    const labelClasses = buildClassName('text-input__label', null, [ size ], {
+    const labelClasses = buildClassName([ 'text-input', 'label' ], null, [ size ], {
       error: hasError,
       'not-empty': inputValue
     })

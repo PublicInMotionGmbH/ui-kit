@@ -15,7 +15,7 @@ export function prefix (...modules) {
 /**
  * Build class name for component with specified modifiers
  *
- * @param {string} moduleName
+ * @param {string|string[]} moduleName
  * @param {string|string[]|null} modifiers
  * @returns {string}
  */
@@ -32,7 +32,7 @@ export function applyClassNameModifiers (moduleName, modifiers) {
     .filter(Boolean)
 
   // Build prefixed module name
-  const prefixed = prefix(moduleName)
+  const prefixed = prefix(...[].concat(moduleName))
 
   // Build class name
   return modifiersList.map(modifier => `${prefixed}--${modifier}`).join(' ')
@@ -45,7 +45,7 @@ export function applyClassNameModifiers (moduleName, modifiers) {
  * - null/undefined - none
  * - object - map of entries (modifier => boolean)
  *
- * @param {string} moduleName
+ * @param {string|string[]} moduleName
  * @param {string|string[]|object|null} modifiers
  * @returns {string}
  */
@@ -65,14 +65,14 @@ export function applyAnyClassNameModifiers (moduleName, modifiers) {
 /**
  * Build class name for component
  *
- * @param {string} moduleName
+ * @param {string|string[]} moduleName
  * @param {string|string[]|null} additionalClassName
  * @param {string|string[]|object|null} [modifiers]
  * @returns {string}
  */
 export function buildClassName (moduleName, additionalClassName, ...modifiers) {
   // Prefix main module
-  const prefixedModule = prefix(moduleName)
+  const prefixedModule = prefix(...[].concat(moduleName))
 
   // Build class names
   const classNames = [ prefixedModule, additionalClassName ]
