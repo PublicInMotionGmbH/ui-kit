@@ -20,7 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^21.2.1",
-    "rollup": "^0.57.1"
+    "rollup": "^0.57.1",
+    "@talixo/button": "^1.0.0"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
@@ -29,7 +30,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/button": "^1.0.0",
     "@talixo/shared": "^1.0.0"
   }
 }
