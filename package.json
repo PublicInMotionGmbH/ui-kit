@@ -8,6 +8,7 @@
     "init:yarn": "yarn install",
     "init": "npm install",
     "test": "node ./scripts/runTests.js",
+    "test:watch": "npm test -- --watch",
     "bootstrap": "lerna bootstrap --hoist && lerna link",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",
