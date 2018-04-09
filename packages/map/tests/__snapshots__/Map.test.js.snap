@@ -2,9 +2,10 @@
 
 exports[`<Map /> renders children correctly 1`] = `
 <withProps(withStateHandlers(withScriptjs(withGoogleMap(lifecycle(Component)))))
-  apiKey="this is api key"
+  apiKey="this_is_api_key"
   className="talixo-map"
-  isMarkerShown={true}
-  zoom={10}
+  interactive={true}
+  isMarkerShown={false}
+  zoom={6}
 />
 `;
