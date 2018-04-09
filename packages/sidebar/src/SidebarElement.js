@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { prefix, buildClassName } from '@talixo/shared'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 const moduleName = prefix('sidebar-element')
 

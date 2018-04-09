@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 import { buildClassName } from '@talixo/shared'
 

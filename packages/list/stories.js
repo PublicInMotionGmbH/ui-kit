@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 import List from './src/List'
 

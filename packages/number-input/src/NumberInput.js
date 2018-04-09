@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 import { buildClassName, prefix } from '@talixo/shared'
 
 const moduleName = prefix('number-input')

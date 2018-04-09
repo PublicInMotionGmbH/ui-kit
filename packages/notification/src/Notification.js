@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName, prefix } from '@talixo/shared'
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 /**
  * Component which represents Notification.
