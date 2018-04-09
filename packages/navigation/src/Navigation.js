@@ -26,20 +26,19 @@ function Navigation (props) {
    * @param {number} i
    * @returns {object}
    */
-  const setChildProps = (children, i) => {
-    const newProps = { type }
+  const buildChildProps = (children, i) => {
+    const typeClassName = `${moduleName}_element--${type}`
+    const newProps = { typeClassName }
 
     if (type === 'breadcrumbs') {
-      return Object.assign(newProps, {
-        divider: i < children.length - 1 ? divider : null
-      })
+      return { ...newProps, divider: children.length <= 1 ? divider : i > children.length - 2 ? null : divider }
     }
 
     return newProps
   }
 
   const mappedChildren = React.Children.map(children, (child, i) => {
-    return React.cloneElement(child, setChildProps(children, i))
+    return React.cloneElement(child, buildChildProps(children, i))
   })
 
   return (

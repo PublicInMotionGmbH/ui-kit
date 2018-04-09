@@ -18,13 +18,13 @@ const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divi
  * @param {number} numbers
  * @returns {array}
  */
-const renderedNumbers = (numbers, activePage, onChange) => {
+const renderedNumbers = (numbers, activePage, onChange, passedProps) => {
   return numbers.map(page => (
     <Element
       key={page}
       active={activePage === page + 1}
       onClick={() => onChange(page + 1)}
-      type='pagination'
+      {...passedProps}
     >
       {page + 1}
     </Element>
@@ -38,12 +38,12 @@ const renderedNumbers = (numbers, activePage, onChange) => {
  * @param {number} page
  * @returns {array}
  */
-const renderedMargin = (prefix, page, onChange) => {
+const renderedMargin = (prefix, page, onChange, passedProps) => {
   let marginItems = [(
     <Element
       key={`${prefix}-ellispis`}
-      type='pagination'
       disabled
+      {...passedProps}
     >
       ...
     </Element>
@@ -53,7 +53,7 @@ const renderedMargin = (prefix, page, onChange) => {
     <Element
       key={prefix}
       onClick={() => onChange(page)}
-      type='pagination'
+      {...passedProps}
     >
       {page}
     </Element>
@@ -66,7 +66,7 @@ const renderedMargin = (prefix, page, onChange) => {
 }
 
 /**
- * Component which represents MappedPagination.
+ * Component which represents Pagination.
  *
  * @param {object} props
  * @param {number} [props.activePage]
@@ -77,9 +77,9 @@ const renderedMargin = (prefix, page, onChange) => {
  * @param {*} [props.previousLabel]
  * @returns {React.Element}
  */
-function MappedPagination (props) {
+function Pagination (props) {
   const { activePage, displayedLimit, nextLabel, onChange,
-    pageCount, previousLabel } = props
+    pageCount, previousLabel, ...passedProps } = props
 
   const change = delta => onChange(activePage + delta)
 
@@ -116,7 +116,7 @@ function MappedPagination (props) {
       <Element
         key='previous'
         onClick={() => { if (activePage > 1) change(-1) }}
-        type='pagination'
+        {...passedProps}
       >
         {previousLabel}
       </Element>
@@ -124,15 +124,15 @@ function MappedPagination (props) {
 
     // Add margin number buttons if needed
     if (isLong && !_.includes(pageArray, 1)) {
-      items.push(...renderedMargin('first', 1, onChange))
+      items.push(...renderedMargin('first', 1, onChange, passedProps))
     }
 
     // Add page buttons
-    items.push(...renderedNumbers(pageArray, activePage, onChange))
+    items.push(...renderedNumbers(pageArray, activePage, onChange, passedProps))
 
     // Add margin numbers buttons if needed
     if (isLong && !_.includes(pageArray, pageCount - 1)) {
-      items.push(...renderedMargin('last', pageCount, onChange))
+      items.push(...renderedMargin('last', pageCount, onChange, passedProps))
     }
 
     // Add next button
@@ -140,7 +140,7 @@ function MappedPagination (props) {
       <Element
         key='next'
         onClick={() => { if (activePage < pageCount) change(1) }}
-        type='pagination'
+        {...passedProps}
       >
         {nextLabel}
       </Element>
@@ -152,7 +152,7 @@ function MappedPagination (props) {
   return createPagination()
 }
 
-MappedPagination.propTypes = {
+Pagination.propTypes = {
   /** Active page */
   activePage: PropTypes.number,
 
@@ -172,11 +172,11 @@ MappedPagination.propTypes = {
   previousLabel: PropTypes.node
 }
 
-MappedPagination.defaultProps = {
+Pagination.defaultProps = {
   activePage: 1,
   displayedLimit: 10,
   nextLabel: 'Next',
   previousLabel: 'Previous'
 }
 
-export default MappedPagination
+export default Pagination

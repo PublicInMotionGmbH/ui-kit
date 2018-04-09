@@ -19,10 +19,10 @@ const moduleName = prefix('navigation')
  * @returns {React.Element}
  */
 function Element (props) {
-  const { active, children, className, disabled, divider, onClick, type, ...passedProps } = props
-  const classNames = cls(className, `${moduleName}--${type}--element`, {
-    [`${moduleName}--${type}--element--active`]: active,
-    [`${moduleName}--${type}--element--disabled`]: disabled
+  const { active, children, className, disabled, divider, onClick, type, typeClassName, ...passedProps } = props
+  const classNames = cls(className, typeClassName, {
+    [`${moduleName}--active`]: active,
+    [`${moduleName}--disabled`]: disabled
   })
 
   return (
@@ -53,16 +53,12 @@ Element.propTypes = {
   divider: PropTypes.node,
 
   /** Function passed to element */
-  onClick: PropTypes.func,
-
-  /** Type of navigation */
-  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'tabs'])
+  onClick: PropTypes.func
 }
 
 Element.defaultProps = {
   active: false,
-  disabled: false,
-  type: 'navigation'
+  disabled: false
 }
 
 export default Element

@@ -14,17 +14,7 @@ describe('<Element />', () => {
       </Element>
     )
 
-    expect(wrapper.hasClass(`${moduleName}--navigation--element`)).toEqual(true)
-  })
-
-  it('renders type correctly', () => {
-    const wrapper = shallow(
-      <Element type='pagination'>
-        1
-      </Element>
-    )
-
-    expect(wrapper.hasClass(`${moduleName}--pagination--element`)).toEqual(true)
+    expect(wrapper).toMatchSnapshot()
   })
 
   it('renders active correctly', () => {
@@ -34,7 +24,7 @@ describe('<Element />', () => {
       </Element>
     )
 
-    expect(wrapper.hasClass(`${moduleName}--navigation--element--active`)).toEqual(true)
+    expect(wrapper.hasClass(`${moduleName}--active`)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
@@ -44,7 +34,7 @@ describe('<Element />', () => {
       </Element>
     )
 
-    expect(wrapper.hasClass(`${moduleName}--navigation--element--disabled`)).toEqual(true)
+    expect(wrapper.hasClass(`${moduleName}--disabled`)).toEqual(true)
   })
 
   it('renders divider correctly', () => {
@@ -60,13 +50,13 @@ describe('<Element />', () => {
   it('calls onClick when clicked', () => {
     const onClick = jest.fn()
     const wrapper = shallow(
-      <Element onClick={onClick}>
+      <Element className='red' onClick={onClick}>
         Home
       </Element>
     )
 
     wrapper
-      .find(`.${moduleName}--navigation--element`)
+      .find('.red')
       .simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
   })

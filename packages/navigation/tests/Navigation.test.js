@@ -14,7 +14,7 @@ describe('<Navigation />', () => {
     )
 
     wrapper.children().forEach(node => {
-      expect(node.props().type).toEqual('navigation')
+      expect(node.props().typeClassName.includes('navigation')).toEqual(true)
     })
   })
 
@@ -28,7 +28,7 @@ describe('<Navigation />', () => {
     )
 
     wrapper.children().forEach(node => {
-      expect(node.props().type).toEqual('pagination')
+      expect(node.props().typeClassName.includes('pagination')).toEqual(true)
     })
   })
 
@@ -42,7 +42,7 @@ describe('<Navigation />', () => {
     )
 
     wrapper.children().forEach(node => {
-      expect(node.props().type).toEqual('breadcrumbs')
+      expect(node.props().typeClassName.includes('breadcrumbs')).toEqual(true)
     })
     expect(wrapper.children().first().props().divider).toEqual('/')
     expect(wrapper.children().last().props().divider).toEqual(null)
@@ -58,7 +58,7 @@ describe('<Navigation />', () => {
     )
 
     wrapper.children().forEach(node => {
-      expect(node.props().type).toEqual('tabs')
+      expect(node.props().typeClassName.includes('tabs')).toEqual(true)
     })
   })
 })

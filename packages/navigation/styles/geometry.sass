@@ -1,31 +1,15 @@
 @import './config'
 
 @include module('navigation')
+  $n: &
   display: inline-block
   list-style: none
 
   &--element
     display: inline-block
 
-  &--divider
-    display: inline-block
-    opacity: 0.7
-    margin: 0 dp(0.5) 0
-    color: rgba(0, 0, 0, 0.4)
-    vertical-align: baseline
-
-  &--navigation
-    &--element
-      display: inline-block
-      margin: 0 dp(0.5) 0
-
-  &--pagination
-    display: inline-flex
-    flex-direction: row
-    justify-content: center
-    align-items: flex-start
-
-    &--element
+  &_element
+    &--pagination
       display: inline-flex
       padding: dp(0.5) dp(1.5)
       border: $border-width solid
@@ -45,24 +29,10 @@
       &:hover
         font-weight: $font-weight-light
 
-      &--disabled
+      &#{$n}--disabled
         cursor: default
 
-  &--breadcrumbs
-    &--element
-      display: inline-block
-
-      & > a
-        color: #4183c4
-        text-decoration: none
-        cursor: pointer
-
-      &--active, &--active > a
-        color: #000000
-        font-weight: $font-weight-semibold
-
-  &--tabs
-    &--element
+    &--tabs
       padding: dp(1) dp(1.5)
       border: 0 solid $color-tab-border
       border-width: $border-width $border-width 0 $border-width
@@ -78,6 +48,34 @@
       > *
         margin: 0 dp(0.5)
 
-      &:active,
-      &--active
+      &:active
         font-weight: $font-weight-semibold
+
+      & > a
+        text-decoration: none
+
+      &#{$n}--active
+        font-weight: $font-weight-semibold
+
+    &--breadcrumbs
+      display: inline-block
+
+      & > a
+        color: #4183c4
+        text-decoration: none
+        cursor: pointer
+
+      &#{$n}--active, &#{$n}--active > a
+        color: #000000
+        font-weight: $font-weight-semibold
+
+    &--navigation
+      display: inline-block
+      margin: 0 dp(0.5) 0
+
+  &--divider
+    display: inline-block
+    opacity: 0.7
+    margin: 0 dp(0.5) 0
+    color: rgba(0, 0, 0, 0.4)
+    vertical-align: baseline

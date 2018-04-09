@@ -2,8 +2,10 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
+import Badge from '@talixo/badge'
+import ControlledPagination from './src/ControlledPagination'
+import ControlledTabs from './src/ControlledTabs'
 import Element from './src/Element'
-import MappedPagination from './src/MappedPagination'
 import Navigation from './src/Navigation'
 
 // Load first paragraph from README file
@@ -11,12 +13,6 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Navigation', module)
-
-function getInitialState () {
-  return {
-    page: 1
-  }
-}
 
 // Stories
 
@@ -39,37 +35,63 @@ addStory('pagination', readme, () => (
   </Navigation>
 ))
 
-addStory.controlled('mapped pagination', readme, (setState, state) => (
+addStory.controlled('controlled pagination', readme, (setState, state) => (
   <Navigation type='pagination'>
-    <MappedPagination
+    <ControlledPagination
       activePage={state.page}
       displayedLimit={8}
       onChange={i => setState({ page: i })}
       pageCount={47}
     />
   </Navigation>
-), getInitialState)
+), () => {
+  return {
+    page: 1
+  }
+})
 
 addStory('breadcrumbs', readme, () => (
   <Navigation type='breadcrumbs'>
-    <Element onClick={action('click home')}><a>Home</a></Element>
-    <Element onClick={action('click issues')}><a>Isuues</a></Element>
-    <Element active onClick={action('click minor')}><a>Minor</a></Element>
+    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
 
 addStory('breadcrumbs with custom divider', readme, () => (
   <Navigation type='breadcrumbs' divider='>'>
-    <Element onClick={action('click home')}><a>Home</a></Element>
-    <Element onClick={action('click issues')}><a>Isuues</a></Element>
-    <Element active onClick={action('click minor')}><a>Minor</a></Element>
+    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
 
 addStory('tabs', readme, () => (
   <Navigation type='tabs'>
-    <Element onClick={action('click home')}><a>Home</a></Element>
-    <Element onClick={action('click issues')}><a>Isuues</a></Element>
-    <Element onClick={action('click minor')}><a>Minor</a></Element>
+    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
+
+addStory('tabs with badges', readme, () => (
+  <Navigation type='tabs'>
+    <Element onClick={action('click home')}>Home</Element>
+    <Element onClick={action('click issues')}>Isuues <Badge>12</Badge></Element>
+    <Element onClick={action('click minor')}>Minor <Badge>7</Badge></Element>
+  </Navigation>
+))
+
+addStory.controlled('controlled tabs', readme, (setState, state) => (
+  <Navigation type='tabs'>
+    <ControlledTabs
+      activeTab={state.tab}
+      onChange={i => setState({ tab: i })}
+      labels={['Home', 'Issues', 'Minor']}
+    />
+  </Navigation>
+), () => {
+  return {
+    tab: 0
+  }
+})

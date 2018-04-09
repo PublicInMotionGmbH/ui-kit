@@ -1,8 +1,14 @@
 @import './config'
 
+%active
+  background-color: $color-orange-talixo
+  border-color: $color-orange-talixo
+  color: $color-white
+
 @include module('navigation')
-  &--pagination
-    &--element
+  $n: &
+  &_element
+    &--pagination
       background-color: $color-white
       border-color: $color-white
       color: $color-ghost-text
@@ -11,16 +17,34 @@
         background-color: $color-tab-inactive
         border-color: $color-tab-inactive
 
-      &:active, &--active
+      &:active
         background-color: $color-orange-talixo
         border-color: $color-orange-talixo
         color: $color-white
 
-      &--disabled
-        &:hover
+      &#{$n}--active
+        background-color: $color-orange-talixo
+        border-color: $color-orange-talixo
+        color: $color-white
+
+      &#{$n}:hover
           background-color: $color-white
           border-color: $color-white
           color: $color-ghost-text
+
+    &--tabs
+      background-color: $color-tab-inactive
+      color: #000
+
+      &:hover
+        background-color: $color-white
+
+      &:active
+        background-color: $color-white
+
+      &#{$n}--active
+        background-color: $color-white
+
 
   &--tabs
     &--element
@@ -33,5 +57,5 @@
       &:active
         background-color: $color-white
 
-      &--active
+      &#{$n}--active
         background-color: $color-white
