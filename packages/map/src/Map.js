@@ -6,8 +6,71 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsR
 import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('map')
+
+const mapProps = withProps(props => {
+  return {
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${props.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `100vh` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }
+})
+
+const stateHandlers = withStateHandlers(() => ({
+  isOpen: false
+}), {
+  onToggleOpen: ({ isOpen }) => () => ({
+    isOpen: !isOpen
+  })
+})
+
+const lifeCycle = lifecycle({
+  componentDidMount () {
+    if ((this.props.startPoint || this.props.endPoint) == null) { return }
+    const google = window.google
+    const DirectionsService = new google.maps.DirectionsService()
+    DirectionsService.route({
+      origin: new google.maps.LatLng(this.props.startPoint.lat, this.props.startPoint.lng),
+      destination: new google.maps.LatLng(this.props.endPoint.lat, this.props.endPoint.lng),
+      travelMode: google.maps.TravelMode.DRIVING
+    }, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.setState({
+          directions: result
+        })
+      } else {
+        console.error(`error fetching directions ${result}`)
+      }
+    })
+  }
+})
+
+const MapComponent = compose(
+  mapProps,
+  stateHandlers,
+  withScriptjs,
+  withGoogleMap,
+  lifeCycle
+)((props) =>
+  <GoogleMap
+    defaultZoom={props.zoom}
+    defaultCenter={props.markerPosition || {lat: 37.774929, lng: -122.419416}}
+    defaultOptions={{
+      draggable: props.interactive || false,
+      scrollwheel: props.interactive || false,
+      zoomControl: props.interactive || false
+    }}
+  >
+    {props.isMarkerShown && <Marker position={props.markerPosition} onClick={props.onToggleOpen}>
+      {(props.isOpen && props.infoText) && <InfoWindow>
+        <span>{props.infoText}</span>
+      </InfoWindow>} </Marker>}
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
+  </GoogleMap>
+)
+
 /**
- * Component which represents Maps.
+ * Component which represents Map.
  *
  * @param {object} props
  * @param {string} [props.className]
@@ -19,57 +82,6 @@ const moduleName = prefix('map')
  * @param {string} [props.infoText]
  * @returns {React.Element}
  */
-const MapComponent = compose(
-  withProps(props => {
-    return {
-      googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${props.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
-      loadingElement: <div style={{ height: `100%` }} />,
-      containerElement: <div style={{ height: `100vh` }} />,
-      mapElement: <div style={{ height: `100%` }} />
-    }
-  }),
-  withStateHandlers(() => ({
-    isOpen: false
-  }), {
-    onToggleOpen: ({ isOpen }) => () => ({
-      isOpen: !isOpen
-    })
-  }),
-  withScriptjs,
-  withGoogleMap,
-  lifecycle({
-    componentDidMount () {
-      if ((this.props.startPoint || this.props.endPoint) == null) { return }
-      const google = window.google
-      const DirectionsService = new google.maps.DirectionsService()
-      DirectionsService.route({
-        origin: new google.maps.LatLng(this.props.startPoint.lat, this.props.startPoint.lng),
-        destination: new google.maps.LatLng(this.props.endPoint.lat, this.props.endPoint.lng),
-        travelMode: google.maps.TravelMode.DRIVING
-      }, (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          this.setState({
-            directions: result
-          })
-        } else {
-          console.error(`error fetching directions ${result}`)
-        }
-      })
-    }
-  })
-)((props) =>
-  <GoogleMap
-    defaultZoom={props.zoom}
-    defaultCenter={props.markerPosition || {lat: 37.774929, lng: -122.419416}}
-  >
-    {props.isMarkerShown && <Marker position={props.markerPosition} onClick={props.onToggleOpen}>
-      {(props.isOpen && props.infoText) && <InfoWindow>
-        <span>{props.infoText}</span>
-      </InfoWindow>} </Marker>}
-    {props.directions && <DirectionsRenderer directions={props.directions} />}
-  </GoogleMap>
-)
-
 class Map extends React.PureComponent {
   constructor (props) {
     super(props)
@@ -78,21 +90,25 @@ class Map extends React.PureComponent {
     }
   }
 
-  componentDidMount () {
-    this.setState({ isMarkerShown: true })
+  componentDidMount (props) {
+    this.setState({ isMarkerShown: !!this.props.markerPosition })
   }
 
   render () {
+    const { apiKey, zoom, markerPosition, startPoint, endPoint, infoText, interactive, ...passedProps } = this.props
+    const { isMarkerShown } = this.state
     return (
       <MapComponent
         className={moduleName}
-        apiKey={this.props.apiKey}
-        zoom={this.props.zoom}
-        isMarkerShown={this.state.isMarkerShown}
-        markerPosition={this.props.markerPosition}
-        startPoint={this.props.startPoint}
-        endPoint={this.props.endPoint}
-        infoText={this.props.infoText}
+        apiKey={apiKey}
+        zoom={zoom}
+        isMarkerShown={isMarkerShown}
+        markerPosition={markerPosition}
+        startPoint={startPoint}
+        endPoint={endPoint}
+        infoText={infoText}
+        interactive={interactive}
+        {...passedProps}
       />
     )
   }
@@ -118,11 +134,15 @@ Map.propTypes = {
   endPoint: PropTypes.object,
 
   /** Text in InfoWindow */
-  infoText: PropTypes.string
+  infoText: PropTypes.string,
+
+  /** Map is interactive */
+  interactive: PropTypes.bool
 }
 
 Map.defaultProps = {
-  zoom: 10
+  zoom: 6,
+  interactive: true
 }
 
 export default Map

@@ -1,5 +1,5 @@
 {
-  "name": "@talixo/map",
+  "name": "@talixo/maps",
   "version": "1.0.0",
   "description": "UI Component which represents Map",
   "main": "dist/index.js",
@@ -25,12 +25,11 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.2.0"
   },
   "dependencies": {
     "@talixo/shared": "^1.0.0",
-    "react-google-maps": "^9.4.5",
-    "recompose": "^0.26.0"
+    "react-google-maps": "9.4.5",
+    "recompose": "0.26.0"
   }
 }
