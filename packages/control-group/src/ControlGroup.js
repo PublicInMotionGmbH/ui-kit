@@ -21,7 +21,7 @@ function ControlGroup (props) {
 
   const classNames = cls(className, moduleName, {
     [`${moduleName}--${orientation}`]: true,
-    [`${moduleName}--${orientation}--${position}`]: true
+    [`${moduleName}--${orientation}-${position}`]: true
   })
 
   return (

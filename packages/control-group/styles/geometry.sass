@@ -1,6 +1,6 @@
 @import './config'
 
-$gutter: $grid-gutter/4
+$gutter: dp(0.25)
 
 @include module('control-group')
   display: flex
@@ -12,10 +12,10 @@ $gutter: $grid-gutter/4
     > *
       margin: 0 $gutter
 
-    > *:first-child,
+    > :first-child
       margin: 0 $gutter 0 0
 
-    > *:last-child
+    > :last-child
       margin: 0 0 0 $gutter
 
   &--vertical
@@ -24,26 +24,26 @@ $gutter: $grid-gutter/4
     > *
       margin: $gutter 0
 
-    > *:first-child,
+    > :first-child
       margin: 0 0 $gutter 0
 
-    > *:last-child
+    > :last-child
       margin: $gutter 0 0 0
 
-  &--horizontal--left
+  &--horizontal-left
     justify-content: flex-start
 
-  &--horizontal--center
+  &--horizontal-center
     justify-content: center
 
-  &--horizontal--right
+  &--horizontal-right
     justify-content: flex-end
 
-  &--vertical--left
+  &--vertical-left
     align-items: flex-start
 
-  &--vertical--center
+  &--vertical-center
     align-items: center
 
-  &--vertical--right
+  &--vertical-right
     align-items: flex-end

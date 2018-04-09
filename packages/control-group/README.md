@@ -14,7 +14,6 @@ Your package should additionally have some extra dependencies:
 - `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `react-dom: ^16.2.0`
 
 These packages are required by `@talixo/control-group`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -23,12 +22,12 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type                   | Default        | Description   
---------------|------------------------|:--------------:|----------------------------------------
-children      | string                 | n/a            | Grouped elements
-className     | string                 | n/a            | Additional class name
-orientation   | oneOf(OrientationType) | `'horizontal'` | Orientation of grouped elements
-position      | oneOf(PositionType)    | `'left'`       | Position of the group
+Property name | Type            | Default        | Description   
+--------------|-----------------|:--------------:|----------------------------------------
+children      | string          | n/a            | Grouped elements
+className     | string          | n/a            | Additional class name
+orientation   | OrientationType | `'horizontal'` | Orientation of grouped elements
+position      | PositionType    | `'left'`       | Position of the group
 
 ### Types
 
