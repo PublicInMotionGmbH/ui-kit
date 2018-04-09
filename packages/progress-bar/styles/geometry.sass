@@ -1,18 +1,18 @@
 @import './config'
 
-$base-color: #e9ecef
-$stripes-color: rgba(255, 255, 255, .15)
-$progress-height: dp(2)
-$stripes-scale: 2
-$indeterminate-stripes-scale: 8
-$error-color: #f01414 // or $color-talixo-error-red?
-$stripes-movement-time: 0.1s
-$border-radius: 2px
+// Calculate helping variables
+
+$progress-stripes-size: $progress-height * $progress-stripes-scale
+$progress-indeterminate-stripes-size: $progress-height * $progress-indeterminate-stripes-scale
+
+$progress-stripes-time: $progress-stripes-speed * $progress-indeterminate-stripes-scale
+
+// Build mixins for progress bar variations
 
 @mixin progress-bar-color ($type, $color)
   @include module('progress-bar')
     &--#{$type}
-      background: mix($base-color, $color, 85%)
+      background: mix($progress-base-color, $color, 85%)
 
     &--#{$type} &__inner
       background: $color
@@ -22,11 +22,13 @@ $border-radius: 2px
     &--#{$type}
       height: $height
 
+// Set up styles for progress bar
+
 @include module('progress-bar')
   display: block
   height: $progress-height
-  background: $base-color
-  border-radius: $border-radius
+  background: $progress-base-color
+  border-radius: $progress-border-radius
   overflow: hidden
 
   &__inner
@@ -45,9 +47,9 @@ $border-radius: 2px
     bottom: 0
     user-select: none
     pointer-events: none
-    background-size: #{$progress-height * $stripes-scale} #{$progress-height * $stripes-scale}
+    background-size: $progress-stripes-size $progress-stripes-size
     background-repeat: repeat
-    background-image: linear-gradient(45deg, $stripes-color 25%, transparent 0, transparent 50%, $stripes-color 0, $stripes-color 75%, transparent 0, transparent)
+    background-image: linear-gradient(45deg, $progress-stripes-color 25%, transparent 0, transparent 50%, $progress-stripes-color 0, $progress-stripes-color 75%, transparent 0, transparent)
 
   &--indeterminate &__inner
     width: 100%
@@ -55,37 +57,25 @@ $border-radius: 2px
     animation: none
 
     &:after
-      background-size: #{$progress-height * $indeterminate-stripes-scale} #{$progress-height * $indeterminate-stripes-scale}
-      animation: #{$stripes-movement-time * $indeterminate-stripes-scale} unknownProgressStripes infinite linear
+      background-size: $progress-indeterminate-stripes-size $progress-indeterminate-stripes-size
+      animation: $progress-stripes-time indeterminateProgressStripes infinite linear
 
   &--smooth &__inner
     transition: 400ms width linear
 
-  &--sticky-top,
-  &--sticky-bottom
-    position: absolute
-    left: 0
-    right: 0
+// Build styles for some progress bar variations
 
-  &--sticky-top
-    bottom: 100%
-    margin-bottom: -1px
-    border-radius: $border-radius $border-radius 0 0
+@include progress-bar-color('error', $progress-error-color)
+@include progress-bar-color('success', $progress-success-color)
+@include progress-bar-color('info', $progress-info-color)
+@include progress-bar-color('warning', $progress-warn-color)
 
-  &--sticky-bottom
-    top: 100%
-    margin-top: -1px
-    border-radius: 0 0 $border-radius $border-radius
+@include progress-bar-height('small', $progress-small-height)
 
-@include progress-bar-color('error', $error-color)
-@include progress-bar-color('success', $color-talixo-success-green)
-@include progress-bar-color('info', $color-pill-blue)
-@include progress-bar-color('warning', $color-talixo-warning-yellow)
+// Build animation for indeterminate progress
 
-@include progress-bar-height('small', dp(1.25))
-
-@keyframes unknownProgressStripes
+@keyframes indeterminateProgressStripes
   0%
     background-position: 0 0
   100%
-    background-position: #{$progress-height * $indeterminate-stripes-scale} 0
+    background-position: $progress-indeterminate-stripes-size 0
