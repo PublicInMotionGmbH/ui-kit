@@ -123,4 +123,20 @@ addStory('POPOVER', readme, () => (
   </Tooltip>
 ))
 
+addStory('POPOVER with tooltip', readme, () => (
+  <Tooltip isPopover color='primary' render={() => <Tooltip color='primary' render={() => <div> Tooltip</div>}>
+    <span
+      style={tooltipStyle}
+    >
+      POPOVER WITH TOOLTIP
+    </span>
+  </Tooltip>}>
+    <span
+      style={tooltipStyle}
+    >
+      POPOVER
+    </span>
+  </Tooltip>
+))
+
 addStory.controlled('controlled', readme, render, getInitialState)
