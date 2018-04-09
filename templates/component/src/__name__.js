@@ -14,7 +14,7 @@ function __name__ (props) {
   const { className, ...passedProps } = props
 
   return (
-    <span className={buildClassName('__name__', className)} {...passedProps} />
+    <span className={buildClassName('__id__', className)} {...passedProps} />
   )
 }
 
