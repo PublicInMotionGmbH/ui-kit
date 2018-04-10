@@ -11,6 +11,8 @@ exports[`<Collapse /> renders children correctly 1`] = `
 >
   <div
     className="talixo-collapse__content"
-  />
+  >
+    There is some content inside
+  </div>
 </div>
 `;
