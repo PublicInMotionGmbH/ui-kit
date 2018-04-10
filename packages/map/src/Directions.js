@@ -46,10 +46,10 @@ class Directions extends React.PureComponent {
   }
 
   render () {
+    const {directions} = this.state
+    if (!directions) return null
     return (
-      <div>
-        {this.state.directions && <DirectionsRenderer directions={this.state.directions} /> }
-      </div>
+      <DirectionsRenderer directions={directions} />
     )
   }
 }
