@@ -69,13 +69,30 @@ addStory.controlled('not smooth', readme, (setState, state) => (
   </div>
 ), () => ({ collapsed: true, small: true }))
 
+addStory.controlled('different animation time', readme, (setState, state) => (
+  <div>
+    <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
+
+    <Collapse collapsed={state.collapsed} animationTime={100}>
+      <div style={{ border: '2px solid #eee', padding: 20 }}>
+        There is also some text<br />
+        As the example, that it can be long,<br />
+        Long and even longer, we are not keeping static CSS there.<br />
+        Instead we are calculating current height and assume that it will be not bigger than 1.5x of that.<br />
+        Xtremely big container should work, despite fact that we are using `max-height`.<br />
+        Of course it may happen often in software.
+      </div>
+    </Collapse>
+  </div>
+), () => ({ collapsed: true }))
+
 addStory.controlled('accessible', readme, (setState, state) => (
   <div>
     <button aria-expanded={!state.collapsed} aria-controls='element' onClick={() => setState({ collapsed: !state.collapsed })}>
       Toggle
     </button>
 
-    <Collapse id='element' collapsed={state.collapsed}>
+    <Collapse id='element' collapsed={state.collapsed} aria-hidden={state.collapsed}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
       </div>

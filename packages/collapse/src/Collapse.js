@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { findDOMNode } from 'react-dom'
 
-import { buildClassName, prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 const TRANSFORM_END = [
   'webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend',
@@ -163,15 +163,27 @@ class Collapse extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, collapsed, smooth, children, style, ...passedProps } = this.props
+    const { className, collapsed, smooth, children, style, animationTime, ...passedProps } = this.props
     const { height } = this.state
 
+    // Calculate animation time
+    const time = parseInt(animationTime, 10) || null
+
     // Build styles for collapsible container
-    const collapseStyle = { ...style, maxHeight: height }
+    const collapseStyle = {
+      ...style,
+      maxHeight: height
+    }
+
+    // Apply animation time
+    if (smooth && time) {
+      collapseStyle.transitionDuration = time + 'ms'
+      collapseStyle.animationDuration = time + 'ms'
+    }
 
     // Build correct class names
     const clsName = buildClassName('collapse', className, { collapsed, smooth })
-    const innerClsName = buildClassName(prefix('collapse', 'content'), null)
+    const innerClsName = buildClassName([ 'collapse', 'content' ], null)
 
     return (
       <div className={clsName} style={collapseStyle} {...passedProps} ref={this.saveRef}>
@@ -194,7 +206,13 @@ Collapse.propTypes = {
   smooth: PropTypes.bool,
 
   /** Is it collapsed? */
-  collapsed: PropTypes.bool
+  collapsed: PropTypes.bool,
+
+  /** Animation time (in ms), requires geometry CSS */
+  animationTime: PropTypes.number,
+
+  /** Content for collapsed container */
+  children: PropTypes.node
 }
 
 Collapse.defaultProps = {

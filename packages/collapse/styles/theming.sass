@@ -1,15 +1,11 @@
 @import './config'
 
 @include module('collapse')
-  display: block
-
   &--smooth
-    transition: 600ms max-height linear
-    animation: 600ms show-collapse 1
+    transition: $collapse-time max-height linear
+    animation: $collapse-time show-collapse 1
 
   &--collapsed
-    max-height: 0 !important
-    overflow: hidden
     animation: none
 
 @keyframes show-collapse

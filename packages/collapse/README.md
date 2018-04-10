@@ -23,6 +23,11 @@ to avoid having different versions of these in your application.
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
+style         | object    | n/a     | additional styles passed to wrapper
+collapsed     | bool      | n/a     | should it be collapsed?
+smooth        | bool      | n/a     | should it collapse and open smoothly?
+animationTime | number    | n/a     | smooth animation time (in ms)
+children      | nodes     | n/a     | content of collapsible container
 
 ## Changelog
 
