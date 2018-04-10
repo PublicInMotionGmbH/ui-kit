@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { DirectionsRenderer } from 'react-google-maps'
+import _ from 'lodash'
 
 /**
  * Component which represents Directions.
@@ -9,7 +10,7 @@ import { DirectionsRenderer } from 'react-google-maps'
  * @param {object} [props.directions]
  * @returns {React.Element}
  */
-export class Directions extends React.PureComponent {
+class Directions extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -17,13 +18,13 @@ export class Directions extends React.PureComponent {
     }
   }
 
-  handleDirections () {
-    if ((this.props.startPoint || this.props.endPoint) == null) { return }
+  handleDirections (nextProps) {
+    if ((nextProps.startPoint || nextProps.endPoint) == null) { return }
     const google = window.google
     const DirectionsService = new google.maps.DirectionsService()
     DirectionsService.route({
-      origin: new google.maps.LatLng(this.props.startPoint.lat, this.props.startPoint.lng),
-      destination: new google.maps.LatLng(this.props.endPoint.lat, this.props.endPoint.lng),
+      origin: new google.maps.LatLng(nextProps.startPoint.lat, nextProps.startPoint.lng),
+      destination: new google.maps.LatLng(nextProps.endPoint.lat, nextProps.endPoint.lng),
       travelMode: google.maps.TravelMode.DRIVING
     }, (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
@@ -37,11 +38,11 @@ export class Directions extends React.PureComponent {
   }
 
   componentDidMount () {
-    this.handleDirections()
+    this.handleDirections(this.props)
   }
 
-  componentWillReceiveProps () {
-    this.handleDirections()
+  componentWillReceiveProps (nextProps) {
+    if (!_.isEqual(this.props.startPoint, nextProps.startPoint) || !_.isEqual(this.props.endPoint, nextProps.endPoint)) this.handleDirections(nextProps)
   }
 
   render () {
