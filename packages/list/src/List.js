@@ -37,10 +37,14 @@ List.propTypes = {
   className: PropTypes.string,
 
   /** Bullet to put before */
-  bullet: PropTypes.node.isRequired,
+  bullet: PropTypes.node,
 
   /** List of elements */
   children: PropTypes.node
+}
+
+List.defaultProps = {
+  bullet: '-'
 }
 
 export default List

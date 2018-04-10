@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/modal",
+  "name": "@talixo/control-group",
   "version": "1.0.0",
-  "description": "UI component for Modal",
+  "description": "UI Component which represents ControlGroup",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
