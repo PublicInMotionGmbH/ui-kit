@@ -20,8 +20,10 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### Maps
+
 Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
+--------------|-----------|:-------:|----------------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 apiKey        | string    | n/a     | your Api Key from GoogleMaps
 zoom          | number    | 6       | zoom
@@ -29,6 +31,14 @@ markerPosition| object    | n/a     | position of marker
 startPoint    | object    | n/a     | start point
 endPoint      | object    | n/a     | end point
 infoText      | string    | n/a     | text in InfoWindow
+interactive   | boolean   | true    | enable to move and zoom map
+
+### Directions
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|------------------------------------------------
+directions    | object    | n/a     | object with data to render start and end points
+
 
 ## Changelog
 

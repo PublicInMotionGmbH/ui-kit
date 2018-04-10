@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose, withProps, withStateHandlers, lifecycle } from 'recompose'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from 'react-google-maps'
+import { compose, withProps, withStateHandlers } from 'recompose'
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 
 import { prefix } from '@talixo/shared'
 
@@ -24,33 +24,11 @@ const stateHandlers = withStateHandlers(() => ({
   })
 })
 
-const lifeCycle = lifecycle({
-  componentDidMount () {
-    if ((this.props.startPoint || this.props.endPoint) == null) { return }
-    const google = window.google
-    const DirectionsService = new google.maps.DirectionsService()
-    DirectionsService.route({
-      origin: new google.maps.LatLng(this.props.startPoint.lat, this.props.startPoint.lng),
-      destination: new google.maps.LatLng(this.props.endPoint.lat, this.props.endPoint.lng),
-      travelMode: google.maps.TravelMode.DRIVING
-    }, (result, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        this.setState({
-          directions: result
-        })
-      } else {
-        console.error(`error fetching directions ${result}`)
-      }
-    })
-  }
-})
-
 const MapComponent = compose(
   mapProps,
   stateHandlers,
   withScriptjs,
-  withGoogleMap,
-  lifeCycle
+  withGoogleMap
 )((props) =>
   <GoogleMap
     defaultZoom={props.zoom}
@@ -65,7 +43,7 @@ const MapComponent = compose(
       {(props.isOpen && props.infoText) && <InfoWindow>
         <span>{props.infoText}</span>
       </InfoWindow>} </Marker>}
-    {props.directions && <DirectionsRenderer directions={props.directions} />}
+    { props.children }
   </GoogleMap>
 )
 
@@ -95,7 +73,7 @@ class Map extends React.PureComponent {
   }
 
   render () {
-    const { apiKey, zoom, markerPosition, startPoint, endPoint, infoText, interactive, ...passedProps } = this.props
+    const { children, apiKey, zoom, markerPosition, startPoint, endPoint, infoText, interactive, ...passedProps } = this.props
     const { isMarkerShown } = this.state
     return (
       <MapComponent
@@ -108,8 +86,9 @@ class Map extends React.PureComponent {
         endPoint={endPoint}
         infoText={infoText}
         interactive={interactive}
-        {...passedProps}
-      />
+        {...passedProps} >
+        {children}
+      </MapComponent>
     )
   }
 }

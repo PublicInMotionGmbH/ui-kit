@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Map /> renders children correctly 1`] = `
-<withProps(withStateHandlers(withScriptjs(withGoogleMap(lifecycle(Component)))))
+<withProps(withStateHandlers(withScriptjs(withGoogleMap(Component))))
   apiKey="this_is_api_key"
   className="talixo-map"
   interactive={true}
