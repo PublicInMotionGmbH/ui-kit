@@ -10,7 +10,7 @@
 
   &:focus ~ #{prefix('text-input', 'label')},
   ~ #{prefix('text-input', 'label')}#{prefix('text-input', 'label--not-empty')}
-    top: dp(.6)
+    top: dp(.3)
     font-size: dp(1.4)
 
 #{prefix('text-input', 'wrapper')}
@@ -24,8 +24,8 @@
 #{prefix('text-input', 'label')}
   position: absolute
   left: dp(2)
-  top: calc(50% - (.5 * #{$font-size-m}))
+  top: calc(50% - (.7 * #{$font-size-m}))
   transition: .3s ease all
 
   &--small
-    top: calc(50% - (.5 * #{$font-size-s}))
+    top: calc(50% - (.8 * #{$font-size-s}))

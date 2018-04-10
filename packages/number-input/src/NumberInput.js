@@ -88,7 +88,7 @@ NumberInput.propTypes = {
   /** Additional styling of wrapper */
   style: PropTypes.object,
 
-  /** Input value */
+  /** initial input value */
   value: PropTypes.number
 }
 
