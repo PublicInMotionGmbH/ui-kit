@@ -109,32 +109,28 @@ addStory('custom fade time', readme, () => (
     </span>
   </Tooltip>
 ))
-addStory('POPOVER', readme, () => (
-  <Tooltip isPopover color='primary' render={() => <div> <ul>
-    <li>MENU 1</li>
-    <li>MENU 2</li>
-    <li>MENU 3</li>
-  </ul> </div>}>
+addStory('Popover', readme, () => (
+  <Tooltip isPopover color='primary' render={() => <div><h3>Popover</h3></div>}>
     <span
       style={tooltipStyle}
     >
-      Tooltip POPOVER
+      Popover
     </span>
   </Tooltip>
 ))
 
-addStory('POPOVER with tooltip', readme, () => (
-  <Tooltip isPopover color='primary' render={() => <Tooltip color='primary' render={() => <div> Tooltip</div>}>
+addStory('Popover with tooltip', readme, () => (
+  <Tooltip isPopover color='primary' render={() => <Tooltip color='primary' render={() => <div>Tooltip</div>}>
     <span
       style={tooltipStyle}
     >
-      POPOVER WITH TOOLTIP
+      Popover with Tooltip
     </span>
   </Tooltip>}>
     <span
       style={tooltipStyle}
     >
-      POPOVER
+      Popover
     </span>
   </Tooltip>
 ))
