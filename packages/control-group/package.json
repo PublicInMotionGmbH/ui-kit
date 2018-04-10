@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/tab",
+  "name": "@talixo/control-group",
   "version": "1.0.0",
-  "description": "UI Component which represents Tab",
+  "description": "UI Component which represents ControlGroup",
   "main": "dist/index.js",
   "module": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "devDependencies": {
     "jest": "^21.2.1",
     "rollup": "^0.57.1",
-    "@talixo/badge": "^1.0.0"
+    "@talixo/button": "^1.0.0"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",

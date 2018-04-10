@@ -20,7 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^21.2.1",
-    "rollup": "^0.57.1"
+    "rollup": "^0.57.1",
+    "@talixo/button": "^1.0.0"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
