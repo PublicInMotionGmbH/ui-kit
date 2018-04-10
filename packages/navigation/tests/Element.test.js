@@ -37,16 +37,6 @@ describe('<Element />', () => {
     expect(wrapper.hasClass(`${moduleName}--disabled`)).toEqual(true)
   })
 
-  it('renders divider correctly', () => {
-    const wrapper = shallow(
-      <Element divider='|'>
-        Home
-      </Element>
-    )
-
-    expect(wrapper.find(`.${moduleName}--divider`).exists()).toEqual(true)
-  })
-
   it('calls onClick when clicked', () => {
     const onClick = jest.fn()
     const wrapper = shallow(

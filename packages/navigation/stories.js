@@ -87,7 +87,18 @@ addStory.controlled('controlled tabs', readme, (setState, state) => (
     <ControlledTabs
       activeTab={state.tab}
       onChange={i => setState({ tab: i })}
-      labels={['Home', 'Issues', 'Minor']}
+      labels={[
+        {
+          id: 0,
+          name: 'Home'
+        }, {
+          id: 1,
+          name: 'Issues'
+        }, {
+          id: 2,
+          name: 'Minor'
+        }
+      ]}
     />
   </Navigation>
 ), () => {

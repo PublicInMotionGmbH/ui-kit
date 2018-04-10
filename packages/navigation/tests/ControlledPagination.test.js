@@ -28,14 +28,14 @@ describe('<ControlledPagination />', () => {
   it('renders previousLabel correctly', () => {
     const wrapper = mount(<ControlledPagination pageCount={5} previousLabel='Previous page' />)
 
-    expect(wrapper.find('li').first().props('children').children[0]).toEqual('Previous page')
+    expect(wrapper.find('li').first().props('children').children).toEqual('Previous page')
     wrapper.unmount()
   })
 
   it('renders nextLabel correctly', () => {
     const wrapper = mount(<ControlledPagination pageCount={5} nextLabel='Next page' />)
 
-    expect(wrapper.find('li').last().props('children').children[0]).toEqual('Next page')
+    expect(wrapper.find('li').last().props('children').children).toEqual('Next page')
     wrapper.unmount()
   })
 })

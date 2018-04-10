@@ -41,11 +41,10 @@ describe('<Navigation />', () => {
       </Navigation>
     )
 
-    wrapper.children().forEach(node => {
-      expect(node.props().typeClassName.includes('breadcrumbs')).toEqual(true)
-    })
-    expect(wrapper.children().first().props().divider).toEqual('/')
-    expect(wrapper.children().last().props().divider).toEqual(null)
+    const firstChild = wrapper.childAt(0)
+    const secondChild = wrapper.childAt(1)
+    expect(firstChild.props().typeClassName.includes('breadcrumbs')).toEqual(true)
+    expect(secondChild.props().className.includes('divider')).toEqual(true)
   })
 
   it('renders type tabs correctly', () => {

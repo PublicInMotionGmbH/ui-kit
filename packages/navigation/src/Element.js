@@ -13,13 +13,12 @@ const moduleName = prefix('navigation')
  * @param {*} [props.children]
  * @param {string} [props.className]
  * @param {boolean} [props.disabled]
- * @param {*} [props.divider]
  * @param {function} [props.onClick]
  * @param {string} [props.type]
  * @returns {React.Element}
  */
 function Element (props) {
-  const { active, children, className, disabled, divider, onClick, type, typeClassName, ...passedProps } = props
+  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
   const classNames = cls(className, typeClassName, {
     [`${moduleName}--active`]: active,
     [`${moduleName}--disabled`]: disabled
@@ -28,10 +27,6 @@ function Element (props) {
   return (
     <li className={classNames} onClick={onClick} {...passedProps}>
       {children}
-      {!divider
-        ? null
-        : <div className={`${moduleName}--divider`}>{divider}</div>
-      }
     </li>
   )
 }
@@ -48,9 +43,6 @@ Element.propTypes = {
 
   /** Disabled state */
   disabled: PropTypes.bool,
-
-  /** Divider */
-  divider: PropTypes.node,
 
   /** Function passed to element */
   onClick: PropTypes.func

@@ -14,14 +14,14 @@ import Element from './Element'
 function ControlledTabs (props) {
   const { activeTab, labels, onChange, ...passedProps } = props
 
-  return labels.map((tab, i) => (
+  return labels.map(tab => (
     <Element
-      key={i}
-      onClick={() => { onChange(i) }}
-      active={activeTab === i}
+      key={tab.id}
+      onClick={() => { onChange(tab.id) }}
+      active={activeTab === tab.id}
       {...passedProps}
     >
-      {tab}
+      {tab.name}
     </Element>
   ))
 }
@@ -31,7 +31,7 @@ ControlledTabs.propTypes = {
   activeTab: PropTypes.number,
 
   /** List of tab labels */
-  labels: PropTypes.array,
+  labels: PropTypes.arrayOf(PropTypes.object),
 
   /** Function passed to page buttons */
   onChange: PropTypes.func
@@ -39,7 +39,7 @@ ControlledTabs.propTypes = {
 
 ControlledTabs.defaultProps = {
   activeTab: 0,
-  labels: []
+  labels: [{}]
 }
 
 export default ControlledTabs

@@ -1,10 +1,40 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
+import _ from 'lodash'
 
 import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('navigation')
+
+/**
+* Method that inserts divider between children.
+*
+* @param {*} children
+* @param {*} divider
+* @returns {array}
+*/
+const childrenWithDividers = (children, divider) => {
+  const arrayOfChildren = React.Children.toArray(children)
+
+  /**
+  * Method that inserts element between array of elements.
+  *
+  * @param {*} value
+  * @param {number} index
+  * @param {array} array
+  * @returns {*}
+  */
+  const insertDivider = (value, index, array) => {
+    const dividerElement = (<div key={`divider--${index}`} className={`${moduleName}--divider`}>{divider}</div>)
+
+    return array.length - 1 !== index
+      ? [value, dividerElement]
+      : value
+  }
+
+  return _.flatMap(arrayOfChildren, insertDivider)
+}
 
 /**
  * Component which represents Navigation.
@@ -23,23 +53,18 @@ function Navigation (props) {
    * Method that return object with passed props.
    *
    * @param {array} children
-   * @param {number} i
    * @returns {object}
    */
-  const buildChildProps = (children, i) => {
+  const buildChildProps = children => {
     const typeClassName = `${moduleName}_element--${type}`
-    const newProps = { typeClassName }
-
-    if (type === 'breadcrumbs') {
-      return { ...newProps, divider: children.length <= 1 ? divider : i > children.length - 2 ? null : divider }
-    }
-
-    return newProps
+    return { typeClassName }
   }
 
-  const mappedChildren = React.Children.map(children, (child, i) => {
-    return React.cloneElement(child, buildChildProps(children, i))
+  const childrenWithBuiltProps = React.Children.map(children, (child, i) => {
+    return React.cloneElement(child, buildChildProps(children))
   })
+
+  const mappedChildren = type === 'breadcrumbs' ? childrenWithDividers(childrenWithBuiltProps, divider) : childrenWithBuiltProps
 
   return (
     <ul className={cls(className, moduleName, `${moduleName}--${type}`)} {...passedProps}>
