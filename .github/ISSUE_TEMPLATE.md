@@ -2,7 +2,7 @@
 
 - **Feature Request or Bug:** Bug
 - **Components and versions affected:** Notifications 1.0.0
-- **Environment:** Mac OS X 11.0, Node 9.6
+- **Environment:** Mac OS X 11.0, Node 9.11, Chrome Canary 67.0.3383.0
 
 You should describe what is this feature or bug about here.
 
