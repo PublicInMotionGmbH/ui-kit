@@ -76,8 +76,8 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
 
     // Exclude controller from prop types list
     return addStory(name, description, controller, {
-      propTablesExclude: excludedControllers,
-      ...infoOptions
+      ...infoOptions,
+      propTablesExclude: excludedControllers
     })
   }
 
