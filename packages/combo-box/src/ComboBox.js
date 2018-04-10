@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('combo')
+const name = prefix('combo-box')
 
 const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : String(i))
 

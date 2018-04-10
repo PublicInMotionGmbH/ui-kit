@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import TextInput from '@talixo/text-input'
 import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('select')
+const moduleName = prefix('combo-box')
 
 /**
  * Dropdown button component.

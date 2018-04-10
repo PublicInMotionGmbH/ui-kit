@@ -3,7 +3,7 @@ import Autocomplete from '../src/Autocomplete'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
 
-const name = prefix('select')
+const name = prefix('combo-box')
 
 describe('<Autocomplete />', () => {
   it('renders correctly', () => {

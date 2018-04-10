@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ComboBox from './ComboBox'
 import DropdownButton from './DropdownButton'
-import DropdownMenu from './DropdownMenu'
+import Menu from './Menu'
 
 /**
  * Component which represents dropdown.
@@ -31,7 +31,7 @@ const Dropdown = props => {
       itemComponent={itemComponent}
       items={items}
       maxHeight={maxHeight}
-      menuComponent={DropdownMenu}
+      menuComponent={Menu}
       onChange={onChange}
       overflow={overflow}
       placeholder={placeholder}

@@ -3,7 +3,7 @@ import Dropdown from '../src/Dropdown'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
 
-const name = prefix('select')
+const name = prefix('combo-box')
 
 describe('<Dropdown />', () => {
   it('renders correctly', () => {

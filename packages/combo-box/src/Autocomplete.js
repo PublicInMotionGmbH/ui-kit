@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ComboBox from './ComboBox'
 import AutocompleteInput from './AutocompleteInput'
-import AutocompleteMenu from './AutocompleteMenu'
+import Menu from './Menu'
 
 /**
  * Component which represents dropdown.
@@ -90,7 +90,7 @@ Autocomplete.propTypes = {
 
 Autocomplete.defaultProps = {
   defaultHighlightedIndex: 0,
-  menuComponent: AutocompleteMenu
+  menuComponent: Menu
 }
 
 export default Autocomplete

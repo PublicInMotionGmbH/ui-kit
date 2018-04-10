@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DropdownMenu /> renders correctly 1`] = `
+exports[`<Menu /> renders correctly 1`] = `
 <div
-  className="talixo-select__options"
+  className="talixo-combo-box__options"
 >
   <div
-    className="talixo-select__item"
+    className="talixo-combo-box__item"
     item={1}
     key="1"
   >
     1
   </div>
   <div
-    className="talixo-select__item"
+    className="talixo-combo-box__item"
     item={3}
     key="3"
   >
     3
   </div>
   <div
-    className="talixo-select__item"
+    className="talixo-combo-box__item"
     item={5}
     key="5"
   >
@@ -28,12 +28,12 @@ exports[`<DropdownMenu /> renders correctly 1`] = `
 </div>
 `;
 
-exports[`<DropdownMenu /> renders item component correctly 1`] = `
+exports[`<Menu /> renders item component correctly 1`] = `
 <div
-  className="talixo-select__options"
+  className="talixo-combo-box__options"
 >
   <div
-    className="talixo-select__item talixo-select__item--overflow-break"
+    className="talixo-combo-box__item talixo-combo-box__item--overflow-break"
     item={
       Object {
         "value": 1,
@@ -48,7 +48,7 @@ exports[`<DropdownMenu /> renders item component correctly 1`] = `
     </div>
   </div>
   <div
-    className="talixo-select__item talixo-select__item--overflow-break"
+    className="talixo-combo-box__item talixo-combo-box__item--overflow-break"
     item={
       Object {
         "value": 3,
@@ -63,7 +63,7 @@ exports[`<DropdownMenu /> renders item component correctly 1`] = `
     </div>
   </div>
   <div
-    className="talixo-select__item talixo-select__item--overflow-break"
+    className="talixo-combo-box__item talixo-combo-box__item--overflow-break"
     item={
       Object {
         "value": 5,
