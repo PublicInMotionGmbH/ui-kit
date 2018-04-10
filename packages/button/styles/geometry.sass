@@ -2,17 +2,14 @@
 
 @include module('button')
   padding: dp(1) dp(1.5)
-  border: $border-width solid
+  margin: 0 dp(.2)
+  border: $border-width solid transparent
   border-radius: $border-radius-m
-  background-color: $color-orange-talixo
-  border-color: $color-orange-talixo
   font-size: $font-size-m
   line-height: dp(3)
   cursor: pointer
-  box-shadow: $shadow-m rgba(0, 0, 0, 0.25)
-  color: $color-white
   outline: inherit !important
-  display: flex
+  display: inline-flex
   align-items: center
 
   > *
@@ -22,24 +19,9 @@
     padding: dp(0.5) dp(1.5)
     font-size: $font-size-s
 
-  &--ghost
-    background-color: $color-ghost
-    color: $color-ghost-text
-    border-color: $color-ghost-border
-
-    &:hover
-      color: $color-white
-      background-color: $color-ghost-border
-      border-color: $color-ghost-border
-
-  &:disabled
-    background-color: $color-white
-    border-color: $color-white
-    color: $color-disabled-text
-    cursor: not-allowed
-
   &--full-width
     width: 100%
     border-top-left-radius: 0
     border-top-right-radius: 0
+    margin: 0
     text-align: center

@@ -1,14 +1,13 @@
 {
-  "name": "@talixo/tab",
+  "name": "@talixo/control-group",
   "version": "1.0.0",
-  "description": "UI Component which represents Tab",
+  "description": "UI Component which represents ControlGroup",
   "main": "dist/index.js",
   "module": "index.js",
-  "jsnext:main": "index.js",
   "scripts": {
-    "test": "node ../../scripts/runTests.js --only tab",
-    "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/buildPackages.js --only tab"
+    "test": "jest --config ../../tests/config.js --rootDir .",
+    "prepublishOnly": "rollup -c",
+    "build": "rollup -c"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -20,9 +19,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/badge": "^1.0.0"
+    "jest": "^21.2.1",
+    "rollup": "^0.57.1",
+    "@talixo/button": "^1.0.0"
   },
   "peerDependencies": {
+    "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
