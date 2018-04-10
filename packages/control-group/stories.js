@@ -1,7 +1,8 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import Button from '@talixo/button'
+import { Button } from '@talixo/button'
+
 import ControlGroup from './src/ControlGroup'
 
 // Load first paragraph from README file

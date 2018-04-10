@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-import { Badge } from '@talixo/badge'
 
 import Tab from './src/Tab'
 
@@ -9,8 +8,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Tab', module, {
-  propTables: [ Tab ],
-  propTablesExclude: [ Badge ]
+  propTables: [ Tab ]
 })
 
 // Stories
@@ -18,9 +16,7 @@ const addStory = createStoriesFactory('Tab', module, {
 addStory('default', readme, () => (
   <Tab>Home</Tab>
 ))
-addStory('with badge', readme, () => (
-  <Tab>Issues<Badge>21</Badge></Tab>
-))
+
 addStory('group', readme, () => (
   <div>
     <Tab active>Home</Tab>
