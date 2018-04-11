@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('card')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which card footer.
@@ -16,8 +13,11 @@ const moduleName = prefix('card')
  */
 function CardFooter (props) {
   const { children, className, ...passedProps } = props
+
+  const clsName = buildClassName([ 'card', 'footer' ], className)
+
   return (
-    <div className={cls(`${moduleName}--footer`, className)} {...passedProps}>
+    <div className={clsName} {...passedProps}>
       {children}
     </div>
   )

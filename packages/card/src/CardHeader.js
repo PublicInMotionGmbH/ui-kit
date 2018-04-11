@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('card')
+import { prefix, buildClassName } from '@talixo/shared'
 
 /**
  * Component which card header.
@@ -18,13 +15,16 @@ const moduleName = prefix('card')
 function CardHeader (props) {
   const { children, className, title, ...passedProps } = props
 
+  const clsName = buildClassName([ 'card', 'header' ], className)
+  const titleClsName = prefix('card', 'title')
+
   const mappedChildren = React.Children.map(children, child => {
     return typeof child === 'string' ? <span>{child}</span> : child
   })
   return (
-    <div className={cls(`${moduleName}--header`, className)} {...passedProps}>
+    <div className={clsName} {...passedProps}>
       {title ? (
-        <div className={`${moduleName}--title`}>
+        <div className={titleClsName}>
           <div>{title}</div>
         </div>
       ) : null}

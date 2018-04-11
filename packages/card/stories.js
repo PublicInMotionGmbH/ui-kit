@@ -1,10 +1,11 @@
 import React from 'react'
 
+import { Icon } from '@talixo/icon'
+
 import Card from './src/Card'
 import CardHeader from './src/CardHeader'
 import CardContent from './src/CardContent'
 import CardFooter from './src/CardFooter'
-import Icon from '@talixo/icon'
 
 import {
   createStoriesFactory,
