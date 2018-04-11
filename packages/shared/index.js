@@ -1,11 +1,11 @@
-const config = require('./config')
+import applyAnyClassNameModifiers from './src/applyAnyClassNameModifiers'
+import applyClassNameModifiers from './src/applyClassNameModifiers'
+import buildClassName from './src/buildClassName'
+import prefix from './src/prefix'
 
-/**
- * Prefix module with global name
- *
- * @param {string} module
- * @returns {string}
- */
-exports.prefix = function prefix (module) {
-  return config.prefix + '-' + module
+export {
+  applyAnyClassNameModifiers,
+  applyClassNameModifiers,
+  buildClassName,
+  prefix
 }

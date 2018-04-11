@@ -1,16 +1,17 @@
 import React from 'react'
 
-import Modal from './src/Modal'
-import Button from '@talixo/button'
+import { Button } from '@talixo/button'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/shared/story'
+import Modal from './src/Modal'
+
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Modal', module)
+const addStory = createStoriesFactory('Modal', module, {
+  propTypes: [ Modal ],
+  propTablesExclude: [ Button ]
+})
 
 const render = (setState, state) => {
   const modalRoot = document.querySelector('body')
@@ -28,6 +29,7 @@ const render = (setState, state) => {
     </div>
   )
 }
+
 const getInitialState = () => {
   return {
     isOpen: false

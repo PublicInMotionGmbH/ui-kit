@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('heading')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents heading in typography.
@@ -22,7 +19,7 @@ function Heading (props) {
   const desiredLevel = Math.max(1, Math.min(level, 6))
 
   return React.createElement(`h${desiredLevel}`, {
-    className: cls(moduleName, className),
+    className: buildClassName('heading', className),
     ...passedProps
   }, children)
 }

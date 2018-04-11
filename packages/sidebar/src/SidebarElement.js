@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { prefix, buildClassName } from '@talixo/shared'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 const moduleName = prefix('sidebar-element')
 
@@ -156,9 +155,9 @@ class SidebarElement extends React.PureComponent {
     const { isOpen } = this.state
 
     // Build class name with modifiers according to current state
-    const clsName = cls(moduleName, className, {
-      [`${moduleName}--active`]: active,
-      [`${moduleName}--open`]: isOpen
+    const clsName = buildClassName('sidebar-element', className, {
+      active: active,
+      open: isOpen
     })
 
     // Check if we do have single children inside

@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('lead')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents article/page lead.
@@ -18,7 +15,7 @@ function Lead (props) {
   const { className, children, ...passedProps } = props
 
   return (
-    <p className={cls(moduleName, className)} {...passedProps}>
+    <p className={buildClassName('lead', className)} {...passedProps}>
       {children}
     </p>
   )

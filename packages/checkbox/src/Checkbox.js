@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('checkbox')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents checkbox.
@@ -18,9 +15,8 @@ const moduleName = prefix('checkbox')
  */
 function Checkbox (props) {
   const { children, className, size, style, ...passedProps } = props
-  const clsName = cls(moduleName, className, {
-    [prefix(`checkbox--${size}`)]: size != null
-  })
+
+  const clsName = buildClassName('checkbox', className, [ size ])
 
   return (
     <label className={clsName} style={style}>

@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('button')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents button.
@@ -19,11 +16,7 @@ const moduleName = prefix('button')
 function Button (props) {
   const { children, className, color, size, variant, ...passedProps } = props
 
-  const clsName = cls(moduleName, className, {
-    [`${moduleName}--${color}`]: color !== undefined,
-    [`${moduleName}--${size}`]: size !== undefined,
-    [`${moduleName}--${variant}`]: variant !== undefined
-  })
+  const clsName = buildClassName('button', className, [ color, size, variant ])
 
   return (
     <button className={clsName} {...passedProps}>
