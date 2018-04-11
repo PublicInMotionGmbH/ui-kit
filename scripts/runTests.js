@@ -1,18 +1,30 @@
 const path = require('path')
 const spawn = require('child_process').spawn
-const yargs = require('yargs')
-
 const getPackages = require('../utils/getPackages')
 
 // Find 'jest' & 'node' paths
 const nodePath = process.argv[0]
 const jestPath = path.join(__dirname, '..', 'node_modules', '.bin', 'jest')
 
-// Find package names which should be ran
-const { only } = yargs.array('only').argv
+const args = process.argv.slice(2)
 
-// Find additional arguments for Jest
-const args = yargs.argv._
+// Find --only flag
+const onlyIndex = args.indexOf('--only')
+
+// Find package names which should be ran
+const only = []
+
+if (onlyIndex !== -1) {
+  args.splice(onlyIndex, 1)
+
+  while (onlyIndex !== args.length) {
+    if (args[onlyIndex].startsWith('-')) {
+      break
+    }
+
+    only.push(args.splice(onlyIndex, 1)[0])
+  }
+}
 
 // Get all packages which should be running
 const packages = getPackages(only)

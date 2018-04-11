@@ -48,14 +48,17 @@ If you would like to run tests for specified packages only you can use `--only` 
 $ npm test -- --only icon sidebar
 ```
 
-Also if you would like to pass additional parameters for Jest (i.e. `--watch`), you can do it this way:
+Also if you would like to pass additional parameters for Jest (i.e. `--watch`), you can do it just inside:
 
 ```sh
 # Run watcher for Sidebar and Icon
-$ npm test -- --only icon sidebar -- --watch
+$ npm test -- --only icon sidebar --watch
 
 # Run watcher for all packages
-$ npm test -- -- --watch
+$ npm test -- --watch
+
+# Or alternatively you can use second task
+$ npm run test:watch
 ```
 
 #### WallabyJS
@@ -174,8 +177,8 @@ Resolve cross-dependencies between our packages              | `lerna bootstrap 
 Install dependency inside single package                     | `lerna add jquery --scope @talixo/switcher`
 Run all tests                                                | `npm test` in main directory
 Run tests for single package                                 | `npm test -- --only switcher`
-Run watcher for all tests                                    | `npm test -- -- --watch`
-Run watcher for single package                               | `npm test -- --only switcher -- --watch`
+Run watcher for all tests                                    | `npm test -- --watch`
+Run watcher for single package                               | `npm test -- --only switcher --watch`
 There are problems with distributable packages, rebuild them | `npm run build`
 Create new package                                           | `npm run create` in main directory
 Publish all changed packages to NPM                          | `lerna publish`
