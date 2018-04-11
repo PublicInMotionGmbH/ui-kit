@@ -1,11 +1,8 @@
 import React from 'react'
-import cls from 'classnames'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 
-import { prefix } from '@talixo/shared'
-
-const name = prefix('combo-box')
+import { buildClassName } from '@talixo/shared'
 
 const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : String(i))
 
@@ -55,7 +52,7 @@ const ComboBox = props => {
         selectedItem,
         highlightedIndex
       }) => (
-        <div className={cls(`${name}__wrapper`, className)} {...passedProps}>
+        <div className={buildClassName([ 'combo-box', 'wrapper' ], className)} {...passedProps}>
           <ToggleComponent
             onOuterClick={() => closeMenu()}
             firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}

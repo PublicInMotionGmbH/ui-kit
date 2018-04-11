@@ -5,7 +5,7 @@ exports[`<ItemAddress /> renders correctly 1`] = `
   className="talixo-item-address"
 >
   <i
-    className="material-icons talixo-item-address__icon"
+    className="talixo-item-address__icon material-icons"
   >
     credit_card
   </i>

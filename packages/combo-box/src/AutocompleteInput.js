@@ -1,11 +1,8 @@
 import React from 'react'
-import cls from 'classnames'
 import PropTypes from 'prop-types'
 
-import TextInput from '@talixo/text-input'
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('combo-box')
+import { TextInput } from '@talixo/text-input'
+import { buildClassName, applyAnyClassNameModifiers } from '@talixo/shared'
 
 /**
  * Dropdown button component.
@@ -28,10 +25,15 @@ const AutocompleteInput = props => {
     isOpen, placeholder, separated, style
   } = props
 
-  const inputClsName = cls(className, `${moduleName}__input`, {
-    [`${moduleName}--open`]: isOpen,
-    [`${moduleName}__input--separated`]: isOpen && separated
-  })
+  // We've got modifier here of the combo-box directly, but probably it should be `input` modifier
+  const openClsName = applyAnyClassNameModifiers('combo-box', { open: isOpen })
+
+  // Build class name for `input`
+  const inputClsName = buildClassName(
+    [ 'combo-box', 'input' ],
+    [ className, openClsName ],
+    { separated: isOpen && separated }
+  )
 
   const inputStyle = { ...style, width: '100%' }
 

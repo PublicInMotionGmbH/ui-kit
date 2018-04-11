@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('combo-box')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Dropdown menu component.
@@ -34,16 +31,15 @@ const AutocompleteMenu = props => {
     ...style
   }
 
-  const wrapperClsNames = cls(`${moduleName}__options`, {
-    [`${moduleName}__options--separated`]: separated
-  })
+  const wrapperClsNames = buildClassName([ 'combo-box', 'options' ], null, { separated })
+  const loadingClsName = buildClassName([ 'combo-box', 'item' ])
 
   const generateClsNames = (item, index) => (
-    cls(`${moduleName}__item`, {
-      [`${moduleName}__item--highlighted`]: highlightedIndex === index,
-      [`${moduleName}__item--selected`]: selectedItem === item,
-      [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
-      [`${moduleName}__item--overflow-break`]: overflow === 'break'
+    buildClassName([ 'combo-box', 'item' ], null, {
+      highlighted: highlightedIndex === index,
+      selected: selectedItem === item,
+      'overflow-truncate': overflow === 'truncate',
+      'overflow-break': overflow === 'break'
     })
   )
 
@@ -51,7 +47,7 @@ const AutocompleteMenu = props => {
     return (
       <div className={wrapperClsNames} style={maxHeight ? maxHeightStyle : style}>
         <div
-          className={`${moduleName}__item`}
+          className={loadingClsName}
         >
           Loading...
         </div>

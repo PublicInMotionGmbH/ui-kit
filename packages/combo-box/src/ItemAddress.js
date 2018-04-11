@@ -1,10 +1,7 @@
 import React from 'react'
-import cls from 'classnames'
 import PropTypes from 'prop-types'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('item-address')
+import { buildClassName, prefix } from '@talixo/shared'
 
 /**
  * Component which represents dropdown.
@@ -17,13 +14,17 @@ const moduleName = prefix('item-address')
  */
 const ItemAddress = props => {
   const { item, className, style } = props
+
+  const clsName = buildClassName('item-address', className)
+  const iconClsName = buildClassName([ 'item-address', 'icon' ], 'material-icons')
+
   return (
-    <div className={cls(moduleName, className)} style={style}>
-      <i className={`material-icons ${moduleName}__icon`}>
+    <div className={clsName} style={style}>
+      <i className={iconClsName}>
         {item.icon}
       </i>
-      <span className={`${moduleName}__place`}>{item.place}</span>
-      <span className={`${moduleName}__address`}>{item.address}</span>
+      <span className={prefix('item-address', 'place')}>{item.place}</span>
+      <span className={prefix('item-address', 'address')}>{item.address}</span>
     </div>
   )
 }

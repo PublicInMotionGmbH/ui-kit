@@ -1,11 +1,8 @@
 import React from 'react'
-import cls from 'classnames'
 import PropTypes from 'prop-types'
 
-import Icon from '@talixo/icon'
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('combo-box')
+import { Icon } from '@talixo/icon'
+import { buildClassName, applyAnyClassNameModifiers } from '@talixo/shared'
 
 /**
  * Dropdown button component.
@@ -32,15 +29,31 @@ const DropdownButton = props => {
     onClick, overflow, placeholder, separated, style, value
   } = props
 
-  const buttonClsName = cls(className, `${moduleName}__button`, {
-    [`${moduleName}--open`]: isOpen,
-    [`${moduleName}__button--separated`]: isOpen && separated
+  // We've got modifier here of the combo-box directly, but probably it should be `input` modifier
+  const openClsName = applyAnyClassNameModifiers('combo-box', { open: isOpen })
+
+  // Build class name for button
+  const buttonClsName = buildClassName(
+    [ 'combo-box', 'button' ],
+    [ className, openClsName ],
+    { separated: isOpen && separated }
+  )
+
+  // We've got modifier here of the combo-box item, but we are attaching to to combo-box value
+  const itemClsName = applyAnyClassNameModifiers([ 'combo-box', 'item' ], {
+    'overflow-truncate': overflow === 'truncate',
+    'overflow-break': overflow === 'break'
   })
 
-  const spanClsName = cls(`${moduleName}__value`, {
-    [`${moduleName}__item--overflow-truncate`]: overflow === 'truncate',
-    [`${moduleName}__item--overflow-break`]: overflow === 'break'
-  })
+  // Build class name for value `span`
+  const spanClsName = buildClassName([ 'combo-box', 'value' ], itemClsName)
+
+  // Build class name for arrow
+  const arrowClsName = buildClassName([ 'combo-box', 'arrow' ])
+
+  // Build class name for arrow
+  const arrowIconClsName = applyAnyClassNameModifiers([ 'combo-box', 'arrow' ], 'down')
+
   const displayedValue = value != null
     ? value
     : placeholder || firstItem
@@ -63,8 +76,8 @@ const DropdownButton = props => {
       >
         {displayedItem}
       </span>
-      <div className={`${moduleName}__arrow`}>
-        <Icon name={'arrow_drop_down'} className={`${moduleName}__arrow--down`} />
+      <div className={arrowClsName}>
+        <Icon name='arrow_drop_down' className={arrowIconClsName} />
       </div>
     </button>
   )
