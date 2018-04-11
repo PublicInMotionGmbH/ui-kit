@@ -12,6 +12,7 @@ const addStory = createStoriesFactory('Calendar', module)
 // Styles for stories
 const styles = {
   position: 'relative',
+  display: 'inline-block',
   left: '1px'
 }
 
@@ -23,4 +24,11 @@ addStory('default', readme, () => (
 
 addStory('custom date format', readme, () => (
   <Calendar style={styles} displayFormat='YYYY/MM/D' />
+))
+
+addStory('two calendars', readme, () => (
+  <div>
+    <Calendar style={styles} />
+    <Calendar style={styles} />
+  </div>
 ))

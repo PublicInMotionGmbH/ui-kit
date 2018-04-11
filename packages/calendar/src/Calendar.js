@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cls from 'classnames'
 import 'react-dates/initialize'
+import momentPropTypes from 'react-moment-proptypes'
+import moment from 'moment'
 
 import { SingleDatePicker } from 'react-dates'
 
@@ -38,7 +40,6 @@ class Calendar extends React.PureComponent {
   render () {
     const { className, displayFormat, isRTL, ...passedProps } = this.props
     const { date, focused } = this.state
-
     return (
       <div className={cls(className, name)} {...passedProps} >
         <SingleDatePicker
