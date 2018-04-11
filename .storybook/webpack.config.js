@@ -37,7 +37,7 @@ function buildWebpackConfiguration (config) {
   // Add loader for SASS files
   config.module.rules.push({
     test: /\.sass$/,
-    loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+    loaders: [ 'style-loader', 'css-loader', 'postcss-loader', 'sass-loader' ]
   })
 
   const DISABLED_PLUGINS = [
@@ -45,7 +45,7 @@ function buildWebpackConfiguration (config) {
     'CaseSensitivePathsPlugin'
   ]
 
-  // Remove HotModuleReplacementPlugin, which causes errors in Storybook hot reloading
+  // Remove default plugins, which makes building much slower
   config.plugins = config.plugins.filter(plugin => {
     return DISABLED_PLUGINS.indexOf(plugin.constructor.name) === -1
   })

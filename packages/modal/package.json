@@ -4,10 +4,11 @@
   "description": "UI component for Modal",
   "main": "dist/index.js",
   "module": "index.js",
+  "jsnext:main": "index.js",
   "scripts": {
-    "test": "jest --config ../../tests/config.js --rootDir .",
-    "prepublishOnly": "rollup -c",
-    "build": "rollup -c"
+    "test": "node ../../scripts/runTests.js --only modal",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only modal"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -19,12 +20,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "^21.2.1",
-    "rollup": "^0.57.1",
     "@talixo/button": "^1.0.0"
   },
   "peerDependencies": {
-    "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

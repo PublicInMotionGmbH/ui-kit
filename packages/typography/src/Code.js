@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('code')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents code in typography.
@@ -20,7 +17,7 @@ function Code (props) {
   const { className, children, ...passedProps } = props
 
   return (
-    <code className={cls(moduleName, className)} {...passedProps}>
+    <code className={buildClassName('code', className)} {...passedProps}>
       {children}
     </code>
   )

@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { prefix, buildClassName } from '@talixo/shared'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 const moduleName = prefix('sidebar-panel')
 
@@ -22,7 +21,7 @@ function SidebarPanel (props) {
   const { className, children, name, icon, ...passedProps } = props
 
   // Build class name for panel
-  const clsName = cls(moduleName, className)
+  const clsName = buildClassName('sidebar-panel', className)
 
   // Build header if panel has its name
   const header = name ? (

@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 import icons from '@talixo/icon-pack'
 
-const cName = prefix('icon')
 const iconPrefix = icons.classPrefix
 const iconsMap = icons.icons
 
@@ -20,7 +18,7 @@ const iconsMap = icons.icons
 function TalixoIcon (props) {
   const { className, name, ...passedProps } = props
 
-  const clsName = cls(cName, className, iconPrefix)
+  const clsName = buildClassName('icon', [ className, iconPrefix ])
 
   return (
     <span className={clsName} {...passedProps} aria-hidden='true'>{iconsMap[name]}</span>
