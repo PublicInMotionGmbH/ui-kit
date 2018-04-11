@@ -1,3 +1,5 @@
 import __name__ from './src/__name__'
 
-export default __name__
+export {
+  __name__
+}

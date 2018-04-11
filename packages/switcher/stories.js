@@ -13,9 +13,17 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Switcher', module)
 const change = action('change')
 
-addStory('not controlled', readme, () => <Switcher onChange={change} />)
-addStory('selected', readme, () => <Switcher onChange={change} checked />)
-addStory('disabled', readme, () => <Switcher onChange={change} disabled />)
-addStory('disabled & selected', readme, () => (
-  <Switcher onChange={change} disabled checked />
-))
+addStory('all options', readme, () =>
+  <div>
+    <h2>Default</h2>
+    <Switcher onChange={change} />
+    <h2>Default checked</h2>
+    <Switcher onChange={change} defaultChecked />
+    <h2>Always checked</h2>
+    <Switcher onChange={change} checked />
+    <h2>Disabled</h2>
+    <Switcher onChange={change} disabled />
+    <h2>Disabled and checked</h2>
+    <Switcher onChange={change} disabled checked />
+  </div>
+)
