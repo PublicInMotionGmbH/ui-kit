@@ -10,10 +10,35 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Checkbox', module)
 const change = action('change')
 
-addStory('simple', readme, () => (
+addStory('default', readme, () => (
   <div>
-    <div><Checkbox onChange={change}>simple</Checkbox></div>
-    <div><Checkbox size='large' onChange={change}>large label</Checkbox></div>
-    <div><Checkbox size='small' onChange={change}>small label</Checkbox></div>
+    <Checkbox onChange={change}>Default</Checkbox>
+    <Checkbox onChange={change} defaultChecked>Default checked</Checkbox>
+    <Checkbox onChange={change} disabled>Default disabled</Checkbox>
+    <Checkbox onChange={change} defaultChecked disabled>
+      Default checked and disabled
+    </Checkbox>
+  </div>
+))
+
+addStory('small label', readme, () => (
+  <div>
+    <Checkbox onChange={change} size='small'>Default</Checkbox>
+    <Checkbox onChange={change} size='small' defaultChecked>Default checked</Checkbox>
+    <Checkbox onChange={change} size='small' disabled>Default disabled</Checkbox>
+    <Checkbox onChange={change} size='small' defaultChecked disabled>
+      Default checked and disabled
+    </Checkbox>
+  </div>
+))
+
+addStory('large label', readme, () => (
+  <div>
+    <Checkbox onChange={change} size='large'>Default</Checkbox>
+    <Checkbox onChange={change} size='large' defaultChecked>Default checked</Checkbox>
+    <Checkbox onChange={change} size='large' disabled>Default disabled</Checkbox>
+    <Checkbox onChange={change} size='large' defaultChecked disabled>
+      Default checked and disabled
+    </Checkbox>
   </div>
 ))
