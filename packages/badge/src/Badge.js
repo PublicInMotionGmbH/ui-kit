@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const name = prefix('badge')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents badge
@@ -17,7 +14,7 @@ const name = prefix('badge')
 function Badge (props) {
   const { children, className, ...passedProps } = props
 
-  const clsName = cls(name, className)
+  const clsName = buildClassName('badge', className)
 
   return (
     <span className={clsName} {...passedProps}>

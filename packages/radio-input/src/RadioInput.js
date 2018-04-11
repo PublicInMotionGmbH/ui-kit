@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('radio-input')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents Radio Input.
@@ -12,13 +9,14 @@ const moduleName = prefix('radio-input')
  * @param {object} props
  * @param {node} [props.children]
  * @param {string} [props.className]
+ * @param {string} [props.size]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
 function RadioInput (props) {
-  const { children, className, style, ...passedProps } = props
+  const { children, className, size, style, ...passedProps } = props
 
-  const wrapperClass = cls(moduleName, className)
+  const wrapperClass = buildClassName('radio-input', className, [ size ])
 
   return (
     <label className={wrapperClass} style={style}>
@@ -34,6 +32,9 @@ RadioInput.propTypes = {
 
   /** Additional wrapper class name */
   className: PropTypes.string,
+
+  /** Radio input label size ('small', 'large') */
+  size: PropTypes.oneOf([ 'small', 'large' ]),
 
   /** Styles passed to radio button wrapper */
   style: PropTypes.object

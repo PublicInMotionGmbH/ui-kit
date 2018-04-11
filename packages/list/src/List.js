@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('list')
+import { buildClassName, prefix } from '@talixo/shared'
 
 /**
  * Component which represents List.
@@ -20,13 +17,13 @@ function List (props) {
 
   const mappedChildren = React.Children.map(children, child => (
     <li>
-      <span className={`${moduleName}__bullet`}>{bullet}</span>
-      <span className={`${moduleName}__content`}>{child}</span>
+      <span className={prefix('list', 'bullet')}>{bullet}</span>
+      <span className={prefix('list', 'content')}>{child}</span>
     </li>
   ))
 
   return (
-    <ul className={cls(moduleName, className)} {...passedProps}>
+    <ul className={buildClassName('list', className)} {...passedProps}>
       {mappedChildren}
     </ul>
   )
@@ -37,10 +34,14 @@ List.propTypes = {
   className: PropTypes.string,
 
   /** Bullet to put before */
-  bullet: PropTypes.node.isRequired,
+  bullet: PropTypes.node,
 
   /** List of elements */
   children: PropTypes.node
+}
+
+List.defaultProps = {
+  bullet: '-'
 }
 
 export default List

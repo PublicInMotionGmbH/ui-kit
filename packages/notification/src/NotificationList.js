@@ -1,10 +1,8 @@
 import React from 'react'
-import cls from 'classnames'
 import PropTypes from 'prop-types'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('notifications')
+import { buildClassName, prefix } from '@talixo/shared'
 
 /**
 * Component which handles fading in CSSTransition.
@@ -78,9 +76,9 @@ class NotificationList extends React.Component {
     ))
 
     return (
-      <div className={`${moduleName}__container`}>
-        <div className={cls(`${moduleName}__wrapper`, className)} {...passedProps}>
-          <TransitionGroup className={moduleName}>
+      <div className={prefix('notifications', 'container')}>
+        <div className={buildClassName('notifications__wrapper', className)} {...passedProps}>
+          <TransitionGroup className={prefix('notifications')}>
             {elements}
           </TransitionGroup>
         </div>

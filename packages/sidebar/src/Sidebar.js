@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { prefix, buildClassName } from '@talixo/shared'
 
 const moduleName = prefix('sidebar')
 
@@ -18,7 +17,7 @@ function Sidebar (props) {
   const { className, children, ...passedProps } = props
 
   return (
-    <nav className={cls(className, moduleName)} {...passedProps}>
+    <nav className={buildClassName('sidebar', className)} {...passedProps}>
       <div className={`${moduleName}__content`}>
         {children}
       </div>

@@ -1,0 +1,169 @@
+// Normalize CSS
+@import '~normalize.css/normalize.css'
+
+@import './config'
+
+// Setting up dp
+
+html
+  font-size: $base-px * 2
+
+html, body
+  margin: 0
+  padding: 0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+body, input
+  font: #{$font-size-m}/1.5em 'Open Sans', Arial, Tahoma, sans-serif
+  font-weight: $font-weight-content
+  color: $color-black
+
+// Simple stuff
+
+img
+  max-width: 100%
+
+// Anchors
+
+a
+  color: $color-ghost-text
+  text-decoration: underline
+
+  &:hover
+    color: $navy
+    text-decoration: none
+
+// Headers
+
+h1
+  font-size: $font-size-h1
+  font-weight: $font-weight-h1
+
+h2
+  font-size: $font-size-h2
+  font-weight: $font-weight-h2
+
+h3
+  font-size: $font-size-h3
+  font-weight: $font-weight-h3
+
+h4
+  font-size: $font-size-h4
+  font-weight: $font-weight-h4
+
+h5
+  font-size: $font-size-h5
+  font-weight: $font-weight-h5
+
+h6
+  font-size: $font-size-h6
+  font-weight: $font-weight-h6
+
+h1, h2, h3, h4, h5, h6
+  margin: 0.7em 0 0.8em
+  line-height: 1.5em
+
+  > small
+    display: block
+    margin-top: -0.7em
+    font-size: 0.6em
+    color: #aaa
+
+@include module('lead')
+  font-size: $font-size-l
+  line-height: 1.75em
+  color: #555
+  margin-bottom: dp(1)
+
+  h1 + &
+    margin-top: dp(-2)
+
+  h2 + &
+    margin-top: dp(-1.7)
+
+  h3 + &
+    margin-top: dp(-1)
+
+  h4 + &
+    margin-top: dp(-0.6)
+
+  h5 + &
+
+// Text
+
+b, strong
+  font-weight: $font-weight-bold
+
+small
+  font-size: $font-size-s
+
+em, i
+  font-style: italic
+
+p
+  margin: dp(1.5) 0
+
+mark
+  display: inline
+  padding: dp(0.25) dp(0.75)
+  margin: 0 dp(0.25)
+  border-radius: dp(0.5)
+  background: $color-mark-background
+  color: $color-mark-text
+
+// Special text
+
+code
+  display: inline
+  padding: dp(0.5) dp(0.75)
+  margin: 0 dp(0.5)
+  border-radius: dp(0.5)
+  background: $color-code-background
+  color: $color-code-text
+
+kbd
+  display: inline
+  padding: dp(0.5) dp(0.75)
+  margin: 0 dp(0.5)
+  border-radius: dp(0.5)
+  box-shadow: 1px 2px rgba(0, 0, 0, .1)
+  background: #fff
+  border: 1px solid #eee
+
+del, s
+  text-decoration: line-through
+
+abbr
+  cursor: help
+
+// Blocks
+
+blockquote
+  display: block
+  margin: 0 0 dp(2)
+  padding: dp(2)
+  border: 0 solid $color-quote-border
+  border-left-width: dp(1)
+  background: $color-quote-background
+  font-style: italic
+
+  > footer
+    margin-top: dp(2)
+    color: $color-quote-footer
+
+    &:before
+      content: '—'
+      margin-right: dp(1)
+
+[dir=rtl] blockquote
+  border-left-width: 0
+  border-right-width: dp(1)
+
+  > footer
+    &:before
+      display: none
+
+    &:after
+      content: '—'
+      margin-right: dp(1)

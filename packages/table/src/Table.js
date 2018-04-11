@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('table')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents Table.
@@ -19,10 +16,7 @@ const moduleName = prefix('table')
 function Table (props) {
   const { className, condensed, fixed, children, ...passedProps } = props
 
-  const clsName = cls(moduleName, className, {
-    [`${moduleName}--condensed`]: condensed,
-    [`${moduleName}--fixed`]: fixed
-  })
+  const clsName = buildClassName('table', className, { condensed, fixed })
 
   return (
     <table className={clsName} {...passedProps}>

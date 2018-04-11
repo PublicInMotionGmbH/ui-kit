@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 import Cell from './Cell'
-
-const moduleName = prefix('table__actions')
 
 /**
  * Component which represents Table row cell with actions.
@@ -20,9 +17,7 @@ const moduleName = prefix('table__actions')
 function ActionsCell (props) {
   const { className, vertical, children, ...passedProps } = props
 
-  const clsName = cls(moduleName, className, {
-    [`${moduleName}--vertical`]: vertical
-  })
+  const clsName = buildClassName('table__actions', className, { vertical })
 
   return (
     <Cell className={clsName} {...passedProps}>
