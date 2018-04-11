@@ -1,3 +1,5 @@
 import Map from './src/Map'
 
-export default Map
+export {
+  Map
+}
