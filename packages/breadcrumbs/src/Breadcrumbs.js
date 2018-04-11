@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const name = prefix('breadcrumbs')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents breadcrumbs list.
@@ -28,7 +25,7 @@ function Breadcrumbs (props) {
   })
 
   return (
-    <ul className={cls(name, className)} {...passedProps}>
+    <ul className={buildClassName('breadcrumbs', className)} {...passedProps}>
       {mappedChildren}
     </ul>
   )

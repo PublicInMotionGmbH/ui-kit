@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const name = prefix('__id__')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents __title__.
@@ -17,7 +14,7 @@ function __name__ (props) {
   const { className, ...passedProps } = props
 
   return (
-    <span className={cls(className, name)} {...passedProps} />
+    <span className={buildClassName('__id__', className)} {...passedProps} />
   )
 }
 

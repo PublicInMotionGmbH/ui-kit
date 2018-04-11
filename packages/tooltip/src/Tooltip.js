@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { getPositionNearElement } from '../utils/position'
-import { prefix } from '@talixo/shared'
+import { buildClassName, prefix } from '@talixo/shared'
 
-const name = prefix('tooltip')
+const moduleName = prefix('tooltip')
 
 class Portal extends React.Component {
   constructor (props) {
@@ -158,10 +157,7 @@ class Tooltip extends React.Component {
         }))
       : null
 
-    const clsName = cls(name, className, {
-      [`${name}--${color}`]: color !== undefined,
-      [`${name}--${position}`]: position !== undefined
-    })
+    const clsName = buildClassName('tooltip', className, [ color, position ])
 
     const tooltipStyle = {
       top: this.state.top,
@@ -172,7 +168,7 @@ class Tooltip extends React.Component {
 
     return (
       <div
-        className={`${name}-hover`}
+        className={`${moduleName}-hover`}
         onClick={this.handleMouseClick}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
@@ -181,7 +177,7 @@ class Tooltip extends React.Component {
         {childWithRef}
         <TransitionGroup>
           {this.state.isOpen ? (
-            <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${name}-fade`}>
+            <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${moduleName}-fade`}>
               <Portal root={rootNode}>
                 <span className={clsName} style={tooltipStyle}>
                   {render(this.state)}

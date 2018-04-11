@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('pill')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents Pill.
@@ -19,10 +16,7 @@ const moduleName = prefix('pill')
 function Pill (props) {
   const { children, className, color, variant, ...passedProps } = props
 
-  const clsName = cls(moduleName, className, {
-    [`${moduleName}--${color}`]: color !== undefined,
-    [`${moduleName}--${variant}`]: variant !== undefined
-  })
+  const clsName = buildClassName('pill', className, [ color, variant ])
 
   return (
     <span className={clsName} {...passedProps}>

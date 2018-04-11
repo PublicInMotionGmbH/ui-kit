@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
+
 import Button from './src/Button'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'

@@ -1,10 +1,8 @@
 import React from 'react'
-import cls from 'classnames'
 import PropTypes from 'prop-types'
-import { prefix } from '@talixo/shared'
-import Icon from '@talixo/icon'
 
-const moduleName = prefix('notification')
+import { buildClassName, prefix } from '@talixo/shared'
+import { Icon } from '@talixo/icon'
 
 /**
  * Component which represents Notification.
@@ -19,14 +17,12 @@ const moduleName = prefix('notification')
 const Notification = props => {
   const { children, className, handleRemove, variant, ...passedProps } = props
 
-  const clsNames = cls(moduleName, className, {
-    [`${moduleName}--${variant}`]: variant
-  })
+  const clsNames = buildClassName('notification', className, [ variant ])
 
   return (
     <div className={clsNames} {...passedProps}>
       {children}
-      <Icon name='close' className={`${moduleName}--close`} onClick={handleRemove} />
+      <Icon name='close' className={prefix('notification', 'close')} onClick={handleRemove} />
     </div>
   )
 }
