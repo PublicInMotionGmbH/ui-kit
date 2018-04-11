@@ -1,0 +1,30 @@
+{
+  "name": "@talixo/text-input",
+  "version": "1.0.0",
+  "description": "UI Component which represents Text Input",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only text-input",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only text-input"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0"
+  }
+}

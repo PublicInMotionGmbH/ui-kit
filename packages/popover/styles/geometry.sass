@@ -1,0 +1,45 @@
+@import './config'
+
+@include module('popover')
+  position: absolute
+  display: inline-block
+  padding: dp(1) dp(1.5)
+  border: $border-width solid
+  border-radius: $border-radius-m
+  font-size: $font-size-m
+  line-height: 1.5em
+  top: 0
+  left: 0
+
+  > *
+    margin: 0 dp(0.5)
+
+  &-fade-enter
+    opacity: 0.01
+
+    &#{prefix('popover')}-fade-enter-active
+      opacity: 1
+
+  &-fade-exit
+    opacity: 1
+
+    &#{prefix('popover')}-fade-exit-active
+      opacity: 0.01
+
+  &--right
+    transform: translateY(-50%) translateX(dp(2))
+
+  &--left
+    transform: translateY(-50%) translateX(-100%) translateX(dp(-2))
+
+  &--bottom
+    transform: translateY(dp(2)) translateX(-50%)
+
+  &--top
+    transform: translateY(-100%) translateY(dp(-2)) translateX(-50%)
+
+  &-click
+    position: relative
+    width: auto
+    height: auto
+    

@@ -1,0 +1,10 @@
+// Simple function to calculate accessible text color on background
+
+@function text-contrast($n)
+  $brightness: round((red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000)
+  $light: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000)
+
+  @if abs($brightness) < ($light / 2)
+    @return #fff
+  @else
+    @return #000

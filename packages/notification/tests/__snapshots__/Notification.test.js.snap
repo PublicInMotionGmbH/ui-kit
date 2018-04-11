@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Notification /> renders children correctly 1`] = `
+<div
+  className="talixo-notification"
+>
+  Notification
+  <Icon
+    className="talixo-notification__close"
+    name="close"
+  />
+</div>
+`;

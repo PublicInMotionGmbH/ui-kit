@@ -1,0 +1,98 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
+import { buildClassName, prefix } from '@talixo/shared'
+
+/**
+* Component which handles fading in CSSTransition.
+*
+* @property {object} props
+* @property {*} [props.children]
+* @returns {React.Element}
+*/
+const Fade = ({ children, ...props }) => (
+  <CSSTransition {...props} timeout={600} classNames='fade'>
+    {children}
+  </CSSTransition>
+)
+
+/**
+ * Component which represents list of notifications.
+ *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {string} [props.style]
+ * @class
+ *
+ * @property {object} state
+ * @property {array} [state.items]
+ */
+class NotificationList extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      items: []
+    }
+  }
+
+  componentDidMount () {
+    this.timeout = setTimeout(() => this.setState({
+      items: [].concat(this.props.children)
+    }))
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timeout)
+  }
+
+  /**
+  * Remove notification by the index
+  *
+  * @param {number} i
+  * @param {function} [nextCallback]
+  */
+  onClose (i, nextCallback) {
+    const { items } = this.state
+
+    this.setState({
+      items: items.filter((x, index) => index !== i)
+    })
+
+    if (nextCallback) {
+      nextCallback()
+    }
+  }
+
+  render () {
+    const { className, ...passedProps } = this.props
+
+    const elements = this.state.items.map((child, i) => (
+      <Fade key={child.props.id}>
+        {React.cloneElement(child, {
+          handleRemove: () => this.onClose(i, child.props.handleRemove)
+        })}
+      </Fade>
+    ))
+
+    return (
+      <div className={prefix('notifications', 'container')}>
+        <div className={buildClassName('notifications__wrapper', className)} {...passedProps}>
+          <TransitionGroup className={prefix('notifications')}>
+            {elements}
+          </TransitionGroup>
+        </div>
+      </div>
+    )
+  }
+}
+
+NotificationList.propTypes = {
+  /** Additional class name passed to notifications */
+  className: PropTypes.string
+}
+
+NotificationList.defaultProps = {
+}
+
+export default NotificationList

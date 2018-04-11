@@ -32,6 +32,8 @@ children      | node      | n/a     | any elements which should be shown in Card
 
 ### CardHeader
 
+It allows any props which are allowed for 'div'. Additionally, it handles some differently:
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
@@ -40,12 +42,16 @@ title         | string    | n/a     | title of CardHeader
 
 ### CardContent
 
+It allows any props which are allowed for 'div'. Additionally, it handles some differently:
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | node element to display inside CardContent
 
 ### CardFooter
+
+It allows any props which are allowed for 'div'. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------

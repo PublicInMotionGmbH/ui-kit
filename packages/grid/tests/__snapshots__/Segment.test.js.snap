@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Segment /> renders correctly 1`] = `
+<div
+  className="_ _-12"
+>
+  12
+</div>
+`;
+
+exports[`<Segment /> renders properly with any props 1`] = `
+<div
+  className="_ _-12 _-md-6 _-lg-3 _-xl-3"
+>
+  12/6/3
+</div>
+`;

@@ -1,0 +1,33 @@
+{
+  "name": "@talixo/popover",
+  "version": "1.0.0",
+  "description": "UI component for popover",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only popover",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only popover"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0",
+    "lodash": "^4.17.5",
+    "react-transition-group": "^2.2.1",
+    "fbjs": "0.8.16"
+  }
+}

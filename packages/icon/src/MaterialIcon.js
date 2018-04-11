@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 import icons from '@talixo/icon-pack'
 
 import codepoints from '../meta/codepoints'
 
-const cName = prefix('icon')
 const iconPrefix = icons.classPrefix
 
 /**
@@ -21,7 +19,11 @@ const iconPrefix = icons.classPrefix
 function MaterialIcon (props) {
   const { className, name, ...passedProps } = props
 
-  const clsName = cls(cName, className, iconPrefix, `${iconPrefix}--material`)
+  const clsName = buildClassName('icon', [
+    className,
+    iconPrefix,
+    `${iconPrefix}--material`
+  ])
 
   return (
     <span className={clsName} {...passedProps} aria-hidden='true'>{codepoints[name]}</span>

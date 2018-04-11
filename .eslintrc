@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "standard",
     "standard-jsx"
@@ -13,6 +14,10 @@
     "it": true,
     "describe": true,
     "expect": true,
+    "beforeEach": true,
+    "beforeAll": true,
+    "afterEach": true,
+    "afterAll": true,
     "jest": true
   }
 }

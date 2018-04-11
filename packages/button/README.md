@@ -11,7 +11,6 @@ using `npm install @talixo/button --save` or `yarn add @talixo/button`.
 
 Your package should additionally have some extra dependencies:
 
-- `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -20,6 +19,7 @@ These packages are required by `@talixo/button`, but you have to install them ma
 to avoid having different versions of these in your application.
 
 ## Supported props
+
 
 It allows any properties which are allowed in `button`. Additionally, it handles some differently:
 
