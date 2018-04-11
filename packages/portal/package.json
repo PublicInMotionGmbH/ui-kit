@@ -1,14 +1,14 @@
 {
-  "name": "@talixo/tooltip",
+  "name": "@talixo/portal",
   "version": "1.0.0",
-  "description": "UI Component which represents Tooltip",
+  "description": "UI component which wraps Portals",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "node ../../scripts/runTests.js --only tooltip",
+    "test": "node ../../scripts/runTests.js --only portal",
     "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/buildPackages.js --only tooltip"
+    "build": "node ../../scripts/buildPackages.js --only portal"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -25,9 +25,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0",
-    "@talixo/portal": "^1.0.0",
-    "lodash": "^4.17.5",
-    "react-transition-group": "^2.2.1"
+    "@talixo/shared": "^1.0.0"
   }
 }

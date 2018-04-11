@@ -4,9 +4,9 @@ import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { buildClassName, prefix } from '@talixo/shared'
+import { Portal } from '@talixo/portal'
 
 import { getPositionNearElement } from '../utils/position'
-import Portal from './Portal'
 
 const moduleName = prefix('tooltip')
 

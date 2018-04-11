@@ -8,22 +8,25 @@ import PropTypes from 'prop-types'
 * @property {object} props
 * @property {string} [props.attachTo]
 * @property {*} [props.children]
-* @property {string} [props.elementType]
 * @class
 */
 class Portal extends React.Component {
   constructor (props) {
     super(props)
-    this.el = document.createElement(this.props.tagName || 'div')
-    this.attachTo = this.props.attachTo || document.querySelector('body')
+
+    this.el = document.createElement('div')
   }
 
   componentDidMount () {
-    this.attachTo.appendChild(this.el)
+    this.getParentContainer().appendChild(this.el)
   }
 
   componentWillUnmount () {
-    this.attachTo.removeChild(this.el)
+    this.getParentContainer().removeChild(this.el)
+  }
+
+  getParentContainer () {
+    return this.props.attachTo || document.body
   }
 
   render () {
@@ -33,13 +36,10 @@ class Portal extends React.Component {
 
 Portal.propTypes = {
   /** Root node of portal */
-  attachTo: PropTypes.node,
+  attachTo: PropTypes.object,
 
   /** Children */
-  children: PropTypes.node,
-
-  /** A string that specifies the type of parent element */
-  tagName: PropTypes.string
+  children: PropTypes.node
 }
 
 export default Portal

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import { getPositionNearElement, getTarget } from '../utils/position'
-import Portal from './Portal'
-
 import { buildClassName, prefix } from '@talixo/shared'
+import { Portal } from '@talixo/portal'
+
+import { getPositionNearElement, getTarget } from '../utils/position'
 
 const moduleName = prefix('popover')
 

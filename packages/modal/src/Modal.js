@@ -3,60 +3,38 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import Portal from './Portal'
+import { Portal } from '@talixo/portal'
 
 /**
  * Component which represents modal.
  *
- * @property {object} props
- * @property {string} [props.className]
- * @property {*} [props.children]
- * @property {boolean} [props.open]
- *
- * @property {object} state
- * @property {boolean} state.open
- *
- * @class
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {*} [props.children]
+ * @param {boolean} [props.open]
+ * @returns {React.Element}
  */
-class Modal extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: props.open
-    }
-    this.toggleOpen = this.toggleOpen.bind(this)
-  }
+function Modal (props) {
+  const { children, className, open, attachTo, ...rest } = props
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({ open: nextProps.open })
-  }
+  const backdropClasses = buildClassName('modal-backdrop', null, {
+    entered: open,
+    exiting: !open
+  })
 
-  toggleOpen () {
-    this.setState({ open: !this.state.open })
-  }
+  const modalClasses = buildClassName('modal', className)
 
-  render () {
-    const { children, className, open, attachTo, ...rest } = this.props
-
-    const backdropClasses = buildClassName(`modal-backdrop`, null, {
-      entered: this.state.isOpen,
-      exiting: !this.state.isOpen
-    })
-
-    const modalClasses = buildClassName('modal', className)
-
-    return (
-      <div>
-        <Portal attachTo={attachTo}>
-          <div className={backdropClasses}>
-            <div className={modalClasses} {...rest}>
-              {children}
-            </div>
+  return (
+    <div>
+      <Portal attachTo={attachTo}>
+        <div className={backdropClasses}>
+          <div className={modalClasses} {...rest}>
+            {children}
           </div>
-        </Portal>
-      </div>
-    )
-  }
+        </div>
+      </Portal>
+    </div>
+  )
 }
 
 Modal.propTypes = {
