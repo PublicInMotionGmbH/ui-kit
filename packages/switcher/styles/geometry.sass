@@ -2,8 +2,9 @@
 
 @include module('switcher')
   display: inline-block
-  width: 5rem
-  height: 2rem
+  width: dp(10)
+  height: dp(4)
+  font-size: dp(1.75)
   cursor: pointer
 
   > input
@@ -13,17 +14,17 @@
     position: relative
     display: inline-block
     box-shadow: inset 0 0 0 1px #eee
-    width: 5rem
-    height: 2rem
+    width: dp(10)
+    height: dp(4)
 
   > span > span
     position: absolute
     left: 0
     top: 0
     display: inline-block
-    line-height: 2em
-    width: 2.5rem
-    height: 2rem
+    line-height: dp(4)
+    width: dp(5)
+    height: dp(4)
     text-align: center
     background: #eee
     color: #2b2b2b
@@ -34,7 +35,7 @@
     opacity: 0
 
   > input:checked + span > span
-    left: 2.5rem
+    left: dp(5)
 
   > input:checked + span > #{prefix('switcher', 'yes')}
     opacity: 1
