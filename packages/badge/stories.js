@@ -1,8 +1,9 @@
 import React from 'react'
 
-import Badge from './src/Badge'
-import Button from '@talixo/button'
+import { Button } from '@talixo/button'
 import { Navigation, Element } from '@talixo/navigation'
+
+import Badge from './src/Badge'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 

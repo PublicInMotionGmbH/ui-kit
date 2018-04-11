@@ -1,15 +1,28 @@
+const testsPattern = process.env.TESTS_PATTERN
+
+if (!testsPattern) {
+  throw new Error('Tests running without TESTS_PATTERN environment variable!')
+}
+
 module.exports = {
-  collectCoverageFrom: ['packages/**/*.{js,jsx}'],
-  setupFiles: ['<rootDir>/../../tests/polyfills.js'],
-  setupTestFrameworkScriptFile: '<rootDir>/../../tests/setupTests',
-  testMatch: ['<rootDir>/tests/**/?(*.)test.{js,jsx}'],
+  collectCoverageFrom: [
+    'packages/**/*.js',
+    '!packages/*/index.js',
+    '!packages/*/stories.js',
+    '!packages/*/dist/**/*.js',
+    '!packages/icon/src/storybook/*.js',
+    '!packages/icon/scripts/*.js'
+  ],
+  setupFiles: [ '<rootDir>/tests/polyfills.js' ],
+  setupTestFrameworkScriptFile: '<rootDir>/tests/setupTests',
+  testMatch: [ testsPattern ],
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
   transform: {
-    '^.+\\.(js|jsx)$': '<rootDir>/../../tests/babelTransform',
-    '^.+\\.css$': '<rootDir>/../../tests/cssTransform',
-    '^(?!.*\\.(js|jsx|css|json)$)': '<rootDir>/../../tests/fileTransform'
+    '^.+\\.js$': '<rootDir>tests/babelTransform',
+    '^.+\\.css$': '<rootDir>/tests/cssTransform',
+    '^(?!.*\\.(js|css|json)$)': '<rootDir>/tests/fileTransform'
   },
-  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.(js|jsx)$' ],
-  moduleFileExtensions: ['js', 'json', 'jsx']
+  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.js$' ],
+  moduleFileExtensions: [ 'js', 'json' ]
 }

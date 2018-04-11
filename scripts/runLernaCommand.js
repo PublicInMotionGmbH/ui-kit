@@ -11,11 +11,7 @@ const lernaCliPath = path.join(__dirname, '..', 'node_modules', '.bin', 'lerna')
  */
 function runLernaCommand (...args) {
   // Spawn Node.js process
-  const bt = spawn(nodePath, [ lernaCliPath, ...args ])
-
-  // Redirect all streams from Lerna into current process
-  bt.stdout.pipe(process.stdout)
-  bt.stderr.pipe(process.stderr)
+  const bt = spawn(nodePath, [ lernaCliPath, ...args ], { stdio: 'inherit' })
 
   // Resolve
   return new Promise((resolve, reject) => {

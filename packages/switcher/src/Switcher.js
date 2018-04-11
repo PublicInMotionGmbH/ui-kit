@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const name = prefix('switcher')
+import { prefix, buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents Yes/No switcher.
@@ -18,8 +15,8 @@ const name = prefix('switcher')
 function Switcher (props) {
   const { className, noLabel, yesLabel, ...passedProps } = props
 
-  const clsName = cls(name, className, {
-    [`${name}--disabled`]: props.disabled
+  const clsName = buildClassName('switcher', className, {
+    disabled: props.disabled
   })
 
   return (

@@ -1,11 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('modal')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents modal portal.
@@ -76,21 +73,19 @@ class Modal extends React.Component {
 
   render () {
     const { children, className, isOpen, root, ...rest } = this.props
-    const backdropClasses = cls(`${moduleName}-backdrop`, {
-      [`${moduleName}-backdrop--entered`]: this.state.isOpen,
-      [`${moduleName}-backdrop--exiting`]: !this.state.isOpen
+
+    const backdropClasses = buildClassName(`modal-backdrop`, null, {
+      entered: this.state.isOpen,
+      exiting: !this.state.isOpen
     })
-    const modalClasses = cls(moduleName, className)
+
+    const modalClasses = buildClassName('modal', className)
 
     return (
       <div>
         <ModalPortal root={root}>
-          <div className={backdropClasses}
-          >
-            <div
-              className={modalClasses}
-              {...rest}
-            >
+          <div className={backdropClasses}>
+            <div className={modalClasses} {...rest}>
               {children}
             </div>
           </div>
