@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
-import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('navigation')
+import { applyAnyClassNameModifiers } from '@talixo/shared'
 
 /**
  * Component which represents Element.
@@ -19,10 +17,12 @@ const moduleName = prefix('navigation')
  */
 function Element (props) {
   const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
-  const classNames = cls(className, typeClassName, {
-    [`${moduleName}--active`]: active,
-    [`${moduleName}--disabled`]: disabled
-  })
+
+  // Build modifiers
+  const modifierClassNames = applyAnyClassNameModifiers('navigation', { active, disabled })
+
+  // Build element class name
+  const classNames = [ typeClassName, modifierClassNames, className ].filter(Boolean).join(' ')
 
   return (
     <li className={classNames} onClick={onClick} {...passedProps}>

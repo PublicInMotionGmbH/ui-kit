@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import Element from './Element'
 
 /**
@@ -7,7 +8,7 @@ import Element from './Element'
  *
  * @param {object} props
  * @param {number} [props.activeTab]
- * @param {array} [props.labels]
+ * @param {object[]} [props.labels]
  * @param {function} [props.onChange]
  * @returns {React.Element}
  */

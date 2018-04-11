@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+
 import Element from './Element'
 
 /**
@@ -15,8 +16,11 @@ const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divi
 /**
  * Method that maps numbers to elements.
  *
- * @param {number} numbers
- * @returns {array}
+ * @param {number[]} numbers
+ * @param {number} activePage
+ * @param {function} onChange
+ * @param {object} passedProps
+ * @returns {React.Element[]}
  */
 const renderedNumbers = (numbers, activePage, onChange, passedProps) => {
   return numbers.map(page => (
@@ -36,7 +40,9 @@ const renderedNumbers = (numbers, activePage, onChange, passedProps) => {
  *
  * @param {string} prefix
  * @param {number} page
- * @returns {array}
+ * @param {function} onChange
+ * @param {object} passedProps
+ * @returns {React.Element[]}
  */
 const renderedMargin = (prefix, page, onChange, passedProps) => {
   let marginItems = [(

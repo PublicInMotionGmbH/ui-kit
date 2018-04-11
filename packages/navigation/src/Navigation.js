@@ -1,11 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 import _ from 'lodash'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('navigation')
+import { prefix, buildClassName } from '@talixo/shared'
 
 /**
 * Method that inserts divider between children.
@@ -26,7 +23,7 @@ const childrenWithDividers = (children, divider) => {
   * @returns {*}
   */
   const insertDivider = (value, index, array) => {
-    const dividerElement = (<div key={`divider--${index}`} className={`${moduleName}--divider`}>{divider}</div>)
+    const dividerElement = (<div key={`divider--${index}`} className={prefix('navigation', 'divider')}>{divider}</div>)
 
     return array.length - 1 !== index
       ? [value, dividerElement]
@@ -55,10 +52,9 @@ function Navigation (props) {
    * @param {array} children
    * @returns {object}
    */
-  const buildChildProps = children => {
-    const typeClassName = `${moduleName}_element--${type}`
-    return { typeClassName }
-  }
+  const buildChildProps = children => ({
+    typeClassName: buildClassName([ 'navigation', 'element' ], null, type)
+  })
 
   const childrenWithBuiltProps = React.Children.map(children, (child, i) => {
     return React.cloneElement(child, buildChildProps(children))
@@ -66,8 +62,10 @@ function Navigation (props) {
 
   const mappedChildren = type === 'breadcrumbs' ? childrenWithDividers(childrenWithBuiltProps, divider) : childrenWithBuiltProps
 
+  const clsName = buildClassName('navigation', className, type)
+
   return (
-    <ul className={cls(className, moduleName, `${moduleName}--${type}`)} {...passedProps}>
+    <ul className={clsName} {...passedProps}>
       {mappedChildren}
     </ul>
   )
