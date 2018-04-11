@@ -1,72 +1,8 @@
 import React from 'react'
 import IconsOverview from './IconsOverview'
-import { classPrefix } from '@talixo/icon-pack/metadata'
 
 // Gather all available icons
 const icons = require('../../meta/overview.json')
-
-// Prepare styles for Storybook
-const style = `
-.storybook-icons {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 120px);
-  grid-gap: 10px;
-  justify-content: space-between;
-}
-.storybook-icons__icon {
-  position: relative;
-  box-sizing: border-box;
-  display: block;
-  width: 120px;
-  height: 90px;
-  line-height: 60px;
-  font-size: 48px;
-  text-align: center;
-  color: #999;
-  border: 1px solid #eee;
-}
-.storybook-icons__label {
-  position: absolute;
-  width: 100%;
-  box-sizing: border-box;
-  display: block;
-  height: 22px;
-  line-height: 20px;
-  font-size: 10px;
-  padding: 0 10px;
-  text-align: center;
-  color: #666;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 1px 0;
-  bottom: -1px;
-  background: #eee;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.storybook-icons__icon:hover .${classPrefix} {
-  color: #f03a1f;
-}
-.storybook-icons__icon:hover .storybook-icons__label {
-  width: auto;
-  min-width: 100%;
-  min-width: calc(100% + 2px);
-  left: 50%;
-  border: 1px solid #ccc;
-  transform: translateX(-50%);
-  text-overflow: none;
-  overflow: visible;
-  z-index: 2;
-}
-`
-
-// Prepare React element for styling
-const styleElement = (
-  <style dangerouslySetInnerHTML={{ __html: style }} />
-)
 
 /**
  * Component to show all icons in story book
@@ -106,7 +42,6 @@ class StorybookIcons extends React.Component {
         <div>
           Search: <input type='text' value={query} onChange={this.onQueryChange} />
         </div>
-        {styleElement}
         {groups}
       </div>
     )
