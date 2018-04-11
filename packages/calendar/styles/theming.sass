@@ -1,0 +1,13 @@
+@import './config'
+
+@include module('calendar')
+  
+  .DateInput_input__focused
+    border-bottom-color: $color-orange-talixo
+
+  .DayPickerKeyboardShortcuts_show__bottomRight
+    border-right-color: $color-orange-talixo
+
+  .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover
+    background-color: $color-orange-talixo
+    border-color: $color-orange-talixo
