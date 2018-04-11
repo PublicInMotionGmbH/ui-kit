@@ -10,19 +10,31 @@ import PropTypes from 'prop-types'
 * @property {*} [props.children]
 * @class
 */
-class Portal extends React.Component {
+class Portal extends React.PureComponent {
   constructor (props) {
     super(props)
 
     this.el = document.createElement('div')
   }
 
+  componentWillReceiveProps (props) {
+    // When Portal is already mounted and root node has changed,
+    // Immediately move it to another container
+    if (this.mounted && props.attachTo !== this.props.attachTo) {
+      const attachTo = props.attachTo || document.body
+
+      attachTo.appendChild(this.el)
+    }
+  }
+
   componentDidMount () {
     this.getParentContainer().appendChild(this.el)
+    this.mounted = true
   }
 
   componentWillUnmount () {
     this.getParentContainer().removeChild(this.el)
+    this.mounted = false
   }
 
   getParentContainer () {
