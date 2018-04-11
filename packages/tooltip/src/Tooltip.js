@@ -106,35 +106,34 @@ class Tooltip extends React.Component {
   handleMouseEnter () {
     if (!_.isUndefined(this.props.isOpen)) return
     this.setState({ clicked: false, isOpen: true })
+    this.updatePosition()
   }
 
   handleMouseLeave () {
     if (!_.isUndefined(this.props.isOpen)) return
     this.setState({ isOpen: false })
+    this.updatePosition()
   }
 
   handleMouseOver () {
     if (!_.isUndefined(this.props.isOpen)) return
     if (!this.state.clicked && !this.state.isOpen) this.setState({ isOpen: true })
+    this.updatePosition()
   }
 
   handleMouseClick (e) {
     if (this.props.isPopover) {
       if (this.state.isOpen) {
-        // if (e.target === 'popover') {
-        //   return
-        // }
         this.setState({ isOpen: false })
         return
       }
       this.setState({ isOpen: true })
       return
     }
-    if (!_.isUndefined(this.props.isOpen)) return
-    this.setState({ clicked: true, isOpen: false })
+    this.updatePosition()
   }
 
-  setRef (node, child) {
+  setRef (node) {
     this.el = node
   }
 
@@ -153,7 +152,7 @@ class Tooltip extends React.Component {
     const childWithRef = React.Children.only(children)
       ? React.Children.map(children, child =>
         React.cloneElement(child, {
-          ref: node => this.setRef(node, child)
+          ref: node => this.setRef(node)
         }))
       : null
 
