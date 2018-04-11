@@ -64,11 +64,16 @@ addStory('map is not interactive', readme, () => (
 ))
 
 addStory('directions', readme, () => (
-  <Map apiKey={apiKey} > <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} /> </Map>
+  <Map apiKey={apiKey} >
+    <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} />
+  </Map>
 ))
 
 addStory('two directions', readme, () => (
-  <Map apiKey={apiKey} > <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} /> <Directions startPoint={{lat: -29.397, lng: 145.644}} endPoint={{lat: -33.397, lng: 145.644}} /></Map>
+  <Map apiKey={apiKey} >
+    <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} />
+    <Directions startPoint={{lat: -29.397, lng: 145.644}} endPoint={{lat: -33.397, lng: 145.644}} />
+  </Map>
 ))
 
 addStory.controlled('change directions', readme, render, getInitialState)
