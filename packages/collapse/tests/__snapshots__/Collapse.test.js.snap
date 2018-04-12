@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Collapse /> renders children correctly 1`] = `
+<div
+  className="talixo-collapse talixo-collapse--collapsed talixo-collapse--smooth"
+  style={Object {}}
+>
+  <div
+    className="talixo-collapse__content"
+  >
+    There is some content inside
+  </div>
+</div>
+`;
