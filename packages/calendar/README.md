@@ -24,6 +24,10 @@ to avoid having different versions of these in your application.
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
+displayFormat | string    | `'D MMM YYYY'` | date display format
+lang          | string    | `'en'`  | language of date
+placeholder   | string    | n/a     | placeholder text
+isRTL         | bool      | `false` | display text from right to left
 
 ## Changelog
 
