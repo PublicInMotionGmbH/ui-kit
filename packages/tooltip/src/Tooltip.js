@@ -7,7 +7,7 @@ import cls from 'classnames'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { getPositionNearElement } from '../utils/position'
-import { buildClassName, prefix } from '@talixo/shared'
+import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('tooltip')
 
