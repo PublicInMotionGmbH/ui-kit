@@ -33,7 +33,7 @@ describe('<Notification />', () => {
     const onClick = jest.fn()
     const wrapper = mount(<Notification handleRemove={onClick}>Notification</Notification>)
 
-    wrapper.find(`span.${moduleName}--close`).simulate('click')
+    wrapper.find(`span.${moduleName}__close`).simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })

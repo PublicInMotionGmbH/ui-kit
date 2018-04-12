@@ -1,88 +1,143 @@
 import React from 'react'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
 import Button from './src/Button'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
 
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Button', module)
+const addStory = createStoriesFactory('Button', module, {
+  propTables: [ Button ],
+  propTablesExclude: [ Icon ]
+})
+const click = action('button-click')
 
-addStory('primary-default', readme, () => (
-  <Button color='primary'>
-    Default
-  </Button>
+addStory('default size', readme, () => (
+  <div>
+    <h2>Button default</h2>
+    <Button onClick={click}>
+      Default
+    </Button>
+    <Button onClick={click} disabled>
+      Default Disabled
+    </Button>
+    <h2>Button primary</h2>
+    <Button onClick={click} color='primary'>
+      Primary
+    </Button>
+    <Button onClick={click} color='primary' variant='ghost'>
+      Primary Ghost
+    </Button>
+    <Button onClick={click} color='primary' disabled>
+      Primary Disabled
+    </Button>
+    <h2>Button black</h2>
+    <Button onClick={click} color='black'>
+      Black
+    </Button>
+    <Button onClick={click} color='black' variant='ghost'>
+      Black Ghost
+    </Button>
+    <Button onClick={click} color='black' disabled>
+      Black Disabled
+    </Button>
+  </div>
 ))
 
-addStory('primary-small', readme, () => (
-  <Button color='primary' size='small'>
-    Small
-  </Button>
+addStory('small', readme, () => (
+  <div>
+    <h2>Button default</h2>
+    <Button onClick={click} size='small'>
+      Default
+    </Button>
+    <Button onClick={click} size='small' disabled>
+      Default Disabled
+    </Button>
+    <h2>Button primary</h2>
+    <Button onClick={click} color='primary' size='small'>
+      Primary
+    </Button>
+    <Button onClick={click} color='primary' variant='ghost' size='small'>
+      Primary Ghost
+    </Button>
+    <Button onClick={click} color='primary' size='small' disabled>
+      Primary Disabled
+    </Button>
+    <h2>Button black</h2>
+    <Button onClick={click} color='black' size='small'>
+      Black
+    </Button>
+    <Button onClick={click} color='black' variant='ghost' size='small'>
+      Black Ghost
+    </Button>
+    <Button onClick={click} color='black' size='small' disabled>
+      Black Disabled
+    </Button>
+  </div>
 ))
 
-addStory('primary-full-width', readme, () => (
-  <Button color='primary' variant='full-width'>
-    Full width
-  </Button>
-))
-
-addStory('primary-ghost', readme, () => (
-  <Button color='primary' variant='ghost'>
-    Ghost
-  </Button>
-))
-
-addStory('primary-disabled', readme, () => (
-  <Button color='primary' disabled>
-    Disabled
-  </Button>
-))
-addStory('primary-disabled-full-width', readme, () => (
-  <Button color='primary' variant='full-width' disabled>
-    Disabled full-width
-  </Button>
-))
-
-addStory('black-default', readme, () => (
-  <Button color='black'>
-    Black
-  </Button>
-))
-
-addStory('black-small', readme, () => (
-  <Button color='black' size='small'>
-    Black
-  </Button>
-))
-
-addStory('black-full-width', readme, () => (
-  <Button color='black' variant='full-width'>
-    Full width
-  </Button>
-))
-
-addStory('black-ghost', readme, () => (
-  <Button color='black' variant='ghost'>
-    Black
-  </Button>
-))
-
-addStory('black-disabled', readme, () => (
-  <Button color='black' disabled>
-    Disabled
-  </Button>
-))
-
-addStory('black-disabled-full-width', readme, () => (
-  <Button color='black' variant='full-width' disabled>
-    Disabled Full Width
-  </Button>
+addStory('full width', readme, () => (
+  <div>
+    <Button onClick={click} variant='full-width'>
+      Default Full Width
+    </Button>
+    <Button onClick={click} color='primary' variant='full-width'>
+      Primary Full Width
+    </Button>
+    <Button onClick={click} color='black' variant='full-width'>
+      Black Full Width
+    </Button>
+    <Button onClick={click} color='primary' variant='full-width' disabled>
+      Disabled Full Width
+    </Button>
+  </div>
 ))
 
 addStory('with icon', readme, () => (
-  <Button color='primary'>
-    <Icon name='settings' /> Settings
-  </Button>
+  <div>
+    <h2>Default size button with icon</h2>
+    <Button onClick={click}>
+      <Icon name='home' /> Home
+    </Button>
+    <Button onClick={click} color='primary'>
+      <Icon name='settings' /> Settings
+    </Button>
+    <Button onClick={click} color='black'>
+      <Icon name='cancel' /> Cancel
+    </Button>
+    <Button onClick={click} disabled>
+      <Icon name='do_not_disturb' /> Disabled
+    </Button>
+
+    <h2>Small button with icon</h2>
+    <Button onClick={click} size='small'>
+      <Icon name='home' /> Home
+    </Button>
+    <Button onClick={click} color='primary' size='small'>
+      <Icon name='settings' /> Settings
+    </Button>
+    <Button onClick={click} color='black' size='small'>
+      <Icon name='cancel' /> Cancel
+    </Button>
+    <Button onClick={click} size='small' disabled>
+      <Icon name='do_not_disturb' /> Disabled
+    </Button>
+
+    <h2>Full width size butoon with icon</h2>
+    <Button onClick={click} variant='full-width'>
+      <Icon name='home' /> Home
+    </Button>
+    <Button onClick={click} color='primary' variant='full-width'>
+      <Icon name='settings' /> Settings
+    </Button>
+    <Button onClick={click} color='black' variant='full-width'>
+      <Icon name='cancel' /> Cancel
+    </Button>
+    <Button onClick={click} variant='full-width' disabled>
+      <Icon name='do_not_disturb' /> Disabled
+    </Button>
+  </div>
 ))

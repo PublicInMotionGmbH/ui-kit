@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 import _ from 'lodash'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { getPositionNearElement, getTarget } from '../../../utils/position'
+import { getPositionNearElement, getTarget } from '../utils/position'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName, prefix } from '@talixo/shared'
 
 const moduleName = prefix('popover')
 
@@ -86,9 +85,7 @@ class Popover extends React.Component {
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
 
-    const clsName = cls(moduleName, className, {
-      [`${moduleName}--${color}`]: color !== undefined,
-      [`${moduleName}--${position}`]: position !== undefined,
+    const clsName = buildClassName('popover', className, [ color, position ], {
       [`Layer-${layer}`]: layer !== undefined
     })
 

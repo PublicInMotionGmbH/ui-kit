@@ -6,7 +6,7 @@ exports[`<Notification /> renders children correctly 1`] = `
 >
   Notification
   <Icon
-    className="talixo-notification--close"
+    className="talixo-notification__close"
     name="close"
   />
 </div>
