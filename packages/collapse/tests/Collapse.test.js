@@ -115,6 +115,8 @@ describe('<Collapse />', () => {
 
     expect(instance.state.height).toEqual(null)
     expect(wrapper.getDOMNode().style.maxHeight).toEqual('')
+
+    wrapper.unmount()
   })
 
   it('should start transition with height', () => {
@@ -268,6 +270,19 @@ describe('<Collapse />', () => {
 
     expect(instance.state.height).toEqual(height)
     expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
+
+    wrapper.unmount()
+  })
+
+  it('should allow changing transition animation time', () => {
+    const wrapper = mount(
+      <Collapse collapsed animationTime={1000}>
+        There is some content inside
+      </Collapse>
+    )
+
+    expect(wrapper.getDOMNode().style.transitionDuration).toEqual('1000ms')
+    expect(wrapper.getDOMNode().style.animationDuration).toEqual('1000ms')
 
     wrapper.unmount()
   })
