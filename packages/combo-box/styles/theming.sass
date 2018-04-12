@@ -1,0 +1,25 @@
+@import './config'
+
+$dropdown-border-color: $color-placeholder-text
+$dropdown-border-radius: $border-radius-m
+$dropdown-border-width: $border-width
+
+@include module('combo-box')
+  &__button, &__input
+    border-color: $dropdown-border-color
+    background-color: $color-white
+    color: #000000
+
+  &__options
+    background-color: $color-white
+    border-color: $dropdown-border-color
+
+  &__item
+    background-color: $color-white
+
+  &__item--highlighted
+    background-color: $color-talixo-lighter-gray
+
+  &__arrow
+    i
+      color: $color-talixo-gray
