@@ -28,7 +28,7 @@ describe('<Popover />', () => {
     const wrapper = mount(
       <div>
         <button id='popover-id'>click me</button>
-        <Popover target='#popover-id' isOpen position='left'>
+        <Popover target='#popover-id' open position='left'>
           <span>Popover</span>
         </Popover>
       </div>,
@@ -47,7 +47,7 @@ describe('<Popover />', () => {
     const wrapper = mount(
       <div>
         <button id='popover-id'>click me</button>
-        <Popover target='#popover-id' isOpen position='left' className='big'>
+        <Popover target='#popover-id' open position='left' className='big'>
           <span>Popover</span>
         </Popover>
       </div>,
@@ -66,7 +66,7 @@ describe('<Popover />', () => {
     const wrapper = mount(
       <div>
         <button id='popover-id'>click me</button>
-        <Popover target='#popover-id' isOpen position='left' fade>
+        <Popover target='#popover-id' open position='left' fade>
           <span>Popover</span>
         </Popover>
       </div>,
@@ -85,7 +85,7 @@ describe('<Popover />', () => {
     const wrapper = mount(
       <div>
         <button id='popover-id'>click me</button>
-        <Popover target='#popover-id' isOpen position='left' fade fadeTime={1200}>
+        <Popover target='#popover-id' open position='left' fade fadeTime={1200}>
           <span>Popover</span>
         </Popover>
       </div>,

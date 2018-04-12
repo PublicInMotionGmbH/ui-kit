@@ -1,0 +1,35 @@
+@import './config'
+
+@include module('accordion')
+  display: block
+  border: 1px solid $accordion-border-color
+  border-radius: $accordion-border-radius
+
+  &__element
+    &__toggle
+      display: block
+      appearance: none
+      width: 100%
+      border: 0
+      outline: none
+      text-align: left
+      padding: 10px
+      color: $accordion-button-text-color
+      background: $color-pill-gray
+      border-bottom: 1px solid $accordion-border-color
+      cursor: pointer
+
+      &:hover
+        background: $accordion-button-background-hover
+
+    & > #{prefix('collapse')} > #{prefix('collapse', 'content')}
+      padding: 10px
+
+    &:first-child > &__toggle
+       border-top-left-radius: $accordion-border-radius
+       border-top-right-radius: $accordion-border-radius
+
+    &:last-child > &__toggle
+       border-bottom-left-radius: $accordion-border-radius
+       border-bottom-right-radius: $accordion-border-radius
+       border-bottom-width: 0

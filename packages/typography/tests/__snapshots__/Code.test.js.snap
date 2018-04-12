@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Code /> renders children correctly 1`] = `
+<code
+  className="talixo-code"
+>
+  const x = 10
+</code>
+`;
+
+exports[`<Code /> renders empty correctly 1`] = `
+<code
+  className="talixo-code"
+/>
+`;

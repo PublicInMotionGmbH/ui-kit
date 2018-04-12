@@ -46,8 +46,7 @@ describe('<ProgressBar />', () => {
       finished: shallow(<ProgressBar value={1} />),
       normal: shallow(<ProgressBar value={0.3} />),
       bigger: shallow(<ProgressBar value={1.5} />),
-      lower: shallow(<ProgressBar value={-0.3} />),
-      string: shallow(<ProgressBar value={'0.3'} />)
+      lower: shallow(<ProgressBar value={-0.3} />)
     }
 
     expect(wrappers.zero).toMatchSnapshot()
@@ -55,19 +54,16 @@ describe('<ProgressBar />', () => {
     expect(wrappers.normal).toMatchSnapshot()
     expect(wrappers.bigger).toMatchSnapshot()
     expect(wrappers.lower).toMatchSnapshot()
-    expect(wrappers.string).toMatchSnapshot()
   })
 
   it('should handle indeterminate value', () => {
     const wrappers = {
       nan: shallow(<ProgressBar value={NaN} />),
-      empty: shallow(<ProgressBar />),
-      string: shallow(<ProgressBar value={'foobar'} />)
+      empty: shallow(<ProgressBar />)
     }
 
     expect(wrappers.nan).toMatchSnapshot()
     expect(wrappers.empty).toMatchSnapshot()
-    expect(wrappers.string).toMatchSnapshot()
   })
 
   it('should allow passing unknown properties', () => {

@@ -1,0 +1,84 @@
+@import './config'
+@import './theming'
+
+@include module('combo-box')
+  &__wrapper
+    display: flex
+    flex-direction: column
+    position: relative
+    width: 100%
+    cursor: pointer
+
+  &__button, &__input
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    border: $dropdown-border-width solid
+    border-radius: $dropdown-border-radius
+    outline: none
+    line-height: dp(3)
+    cursor: pointer
+    > *
+      display: inline-block
+      padding: dp(1.5)
+
+    button::-moz-focus-inner, input[type='button']::-moz-focus-inner
+      padding: 0 !important
+      border: 0 none !important
+
+    &--open:not(#{prefix('combo-box')}__input--separated):not(#{prefix('combo-box')}__button--separated)
+      border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
+      border-bottom-width: 0 !important
+
+  &__value
+    font-size: $font-size-m
+    font-weight: $font-weight-normal
+    border: none
+    outline: none
+
+  &__arrow
+    box-sizing: content-box
+    padding: 0
+    margin: 0 dp(0.5)
+    display: inline-block
+    outline: none
+    > *
+      color: $color-talixo-gray
+      font-size: $font-size-xl
+      font-weight: $font-weight-semibold
+      text-align: center
+      display: block
+
+  &__options
+    position: absolute
+    top: 100%
+    z-index: 100
+    width: 100%
+    border: $dropdown-border-width solid $color-placeholder-text
+    border-radius: $dropdown-border-radius
+    box-sizing: border-box
+    border-top-width: 0
+    border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius
+
+    &--separated
+      margin-top: $dropdown-border-width
+      border-top-width: $dropdown-border-width
+      border-radius: $dropdown-border-radius
+
+  &__item
+    font-size: $font-size-m
+    font-weight: $font-weight-normal
+    padding: dp(2)
+
+  &__item--overflow-truncate
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+  &__item--overflow-break
+    word-wrap: break-word
+
+  &__item--selected
+    font-weight: $font-weight-semibold

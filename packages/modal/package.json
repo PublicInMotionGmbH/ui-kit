@@ -28,6 +28,7 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0"
+    "@talixo/shared": "^1.0.0",
+    "@talixo/portal": "^1.0.0"
   }
 }
