@@ -22,7 +22,7 @@ function render (setState, state) {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <Tooltip
         color='primary'
-        isOpen={state.isOpen}
+        open={state.open}
         position='right'
         render={() => <span>I am controlled</span>}
       >
@@ -33,7 +33,7 @@ function render (setState, state) {
         </span>
       </Tooltip>
       <span
-        onClick={() => setState({ isOpen: !state.isOpen })}
+        onClick={() => setState({ open: !state.open })}
         style={{
           ...tooltipStyle,
           backgroundColor: '#e00',
@@ -49,7 +49,7 @@ function render (setState, state) {
 
 function getInitialState () {
   return {
-    isOpen: false
+    open: false
   }
 }
 
