@@ -1,51 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { compose, withProps, withStateHandlers } from 'recompose'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
+import { compose, withProps } from 'recompose'
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const moduleName = prefix('map')
-
+/**
+ * Map properties into understandable by react-google-maps
+ *
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {string} [props.apiKey]
+ * @param {number} [props.zoom]
+ * @param {object} [props.center]
+ * @returns {React.Element}
+ */
 const mapProps = withProps(props => {
+  const { zoom, center, interactive, apiKey, className, ...passedProps } = props
+
+  const clsName = buildClassName('map', className, {
+    'non-interactive': !interactive
+  })
+  const loadingClsName = buildClassName([ 'map', 'element' ], className, 'loading')
+  const readyClsName = buildClassName([ 'map', 'element' ], className)
+
   return {
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${props.apiKey}&v=3.exp&libraries=geometry,drawing,places`,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `100vh` }} />,
-    mapElement: <div style={{ height: `100%` }} />
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`,
+    loadingElement: <div className={loadingClsName} />,
+    containerElement: <div className={clsName} {...passedProps} />,
+    mapElement: <div className={readyClsName} />
   }
 })
 
-const stateHandlers = withStateHandlers(() => ({
-  isOpen: false
-}), {
-  onToggleOpen: ({ isOpen }) => () => ({
-    isOpen: !isOpen
-  })
-})
-
-const MapComponent = compose(
-  mapProps,
-  stateHandlers,
-  withScriptjs,
-  withGoogleMap
-)((props) =>
-  <GoogleMap
-    defaultZoom={props.zoom}
-    defaultCenter={props.markerPosition || {lat: 37.774929, lng: -122.419416}}
-    defaultOptions={{
-      draggable: props.interactive || false,
-      scrollwheel: props.interactive || false,
-      zoomControl: props.interactive || false
-    }}
-  >
-    {props.isMarkerShown && <Marker position={props.markerPosition} onClick={props.onToggleOpen}>
-      {(props.isOpen && props.infoText) && <InfoWindow>
-        <span>{props.infoText}</span>
-      </InfoWindow>} </Marker>}
-    { props.children }
-  </GoogleMap>
-)
+const decorate = compose(mapProps, withScriptjs, withGoogleMap)
 
 /**
  * Component which represents Map.
@@ -54,44 +41,34 @@ const MapComponent = compose(
  * @param {string} [props.className]
  * @param {string} [props.apiKey]
  * @param {number} [props.zoom]
- * @param {object} [props.markerPosition]
- * @param {object} [props.startPoint]
- * @param {object} [props.endPoint]
- * @param {string} [props.infoText]
+ * @param {object} [props.center]
  * @returns {React.Element}
  */
-class Map extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isMarkerShown: false
-    }
+const Map = decorate(props => {
+  const options = props.interactive ? {} : {
+    draggable: false,
+    scrollwheel: false,
+    zoomControl: false,
+    disableDefaultUI: false,
+    fullscreenControl: false,
+    keyboardShortcuts: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false
   }
 
-  componentDidMount (props) {
-    this.setState({ isMarkerShown: !!this.props.markerPosition })
-  }
+  return (
+    <GoogleMap
+      defaultZoom={props.zoom}
+      defaultCenter={props.center}
+      defaultOptions={options}
+    >
+      {props.children}
+    </GoogleMap>
+  )
+})
 
-  render () {
-    const { children, apiKey, zoom, markerPosition, startPoint, endPoint, infoText, interactive, ...passedProps } = this.props
-    const { isMarkerShown } = this.state
-    return (
-      <MapComponent
-        className={moduleName}
-        apiKey={apiKey}
-        zoom={zoom}
-        isMarkerShown={isMarkerShown}
-        markerPosition={markerPosition}
-        startPoint={startPoint}
-        endPoint={endPoint}
-        infoText={infoText}
-        interactive={interactive}
-        {...passedProps} >
-        {children}
-      </MapComponent>
-    )
-  }
-}
+Map.displayName = 'Map'
 
 Map.propTypes = {
   /** Additional class name */
@@ -103,25 +80,17 @@ Map.propTypes = {
   /** Zoom */
   zoom: PropTypes.number,
 
-  /** Position of Marker */
-  markerPosition: PropTypes.object,
+  /** Map center */
+  center: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
 
-  /** Start point */
-  startPoint: PropTypes.object,
-
-  /** End point */
-  endPoint: PropTypes.object,
-
-  /** Text in InfoWindow */
-  infoText: PropTypes.string,
-
-  /** Map is interactive */
+  /** Is map interactive? */
   interactive: PropTypes.bool
 }
 
 Map.defaultProps = {
   zoom: 6,
-  interactive: true
+  interactive: true,
+  center: { lat: 52.5169974, lng: 13.2882608 }
 }
 
 export default Map

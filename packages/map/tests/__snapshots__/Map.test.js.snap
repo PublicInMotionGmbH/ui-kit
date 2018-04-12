@@ -1,11 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Map /> renders children correctly 1`] = `
-<withProps(withStateHandlers(withScriptjs(withGoogleMap(Component))))
+<withScriptjs(withGoogleMap(Component))
   apiKey="this_is_api_key"
-  className="talixo-map"
+  center={
+    Object {
+      "lat": 52.5169974,
+      "lng": 13.2882608,
+    }
+  }
+  containerElement={
+    <div
+      className="talixo-map"
+    />
+  }
+  googleMapURL="https://maps.googleapis.com/maps/api/js?key=this_is_api_key&v=3.exp&libraries=geometry,drawing,places"
   interactive={true}
-  isMarkerShown={false}
+  loadingElement={
+    <div
+      className="talixo-map__element talixo-map__element--loading"
+    />
+  }
+  mapElement={
+    <div
+      className="talixo-map__element"
+    />
+  }
   zoom={6}
 />
 `;
