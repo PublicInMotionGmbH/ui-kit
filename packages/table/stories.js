@@ -16,7 +16,10 @@ import Action from './src/Action'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Table', module)
+const addStory = createStoriesFactory('Table', module, {
+  inline: false,
+  propTypes: [ Table, Head, Body, Footer, HeadCell, Row, Cell, ActionsCell, Action ]
+})
 
 // Build default actions
 const assign = action('Assign')

@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStoriesFactory, getReadmeDescription, styles } from '@talixo/shared/story'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Masonry from './src/Masonry'
 import Group from './src/Group'
@@ -9,15 +9,9 @@ import Segment from './src/Segment'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Grid', module)
-
-// Build options to show header of prop types
-const options = {
-  styles: stylesheet => ({
-    ...styles(stylesheet),
-    propTableHead: stylesheet.propTableHead
-  })
-}
+const addStory = createStoriesFactory('Grid', module, {
+  propTypes: [ Masonry, Group, Segment ]
+})
 
 // Stories
 
@@ -71,7 +65,7 @@ addStory('default', readme, () => (
       <Segment style={style} size={3}>3</Segment>
     </Group>
   </div>
-), options)
+))
 
 addStory('spaced', readme, () => (
   <div>
@@ -121,7 +115,7 @@ addStory('spaced', readme, () => (
       <Segment style={style} size={3}>3</Segment>
     </Group>
   </div>
-), options)
+))
 
 addStory('masonry', readme, () => (
   <Masonry>
@@ -171,7 +165,7 @@ addStory('masonry', readme, () => (
       <Segment style={style} size={3}>3</Segment>
     </Group>
   </Masonry>
-), options)
+))
 
 addStory('extended masonry', readme, () => (
   <Masonry>
@@ -221,7 +215,7 @@ addStory('extended masonry', readme, () => (
       <Segment style={style} size={6}>6</Segment>
     </Group>
   </Masonry>
-), options)
+))
 
 addStory('responsive', readme, () => (
   <div>
@@ -244,4 +238,4 @@ addStory('responsive', readme, () => (
       <Segment style={style} size={12} medium={6} large={3}>3 (6 on mid, 12 on small)</Segment>
     </Group>
   </div>
-), options)
+))

@@ -23,6 +23,7 @@ lerna-debug.log
 storybook-static
 dist
 _gh-pages
+coverage
 
-# YARN & NPM LOGS
-packages/popover/yarn-error.log
+# Npm & Yarn Logs
+packages/card/yarn-error.log

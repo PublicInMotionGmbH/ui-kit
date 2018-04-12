@@ -10,7 +10,7 @@ import createController from './story/createController'
  * @param {object} options
  * @returns {object}
  */
-export const styles = (stylesheet, options) => ({
+const styles = (stylesheet, options) => ({
   ...stylesheet,
   infoBody: {
     ...stylesheet.infoBody,
@@ -76,8 +76,8 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
 
     // Exclude controller from prop types list
     return addStory(name, description, controller, {
-      propTablesExclude: excludedControllers,
-      ...infoOptions
+      ...infoOptions,
+      propTablesExclude: excludedControllers
     })
   }
 

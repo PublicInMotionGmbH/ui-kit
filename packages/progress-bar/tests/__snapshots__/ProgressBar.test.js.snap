@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProgressBar /> renders children correctly 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should allow passing unknown properties 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+  style={
+    Object {
+      "margin": 20,
+    }
+  }
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle \`size\` property 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth talixo-progress-bar--small"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle \`smooth\` property 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle \`striped\` property 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--striped talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle \`type\` property 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth talixo-progress-bar--error"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle all properties together 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--striped talixo-progress-bar--error talixo-progress-bar--small"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "30%",
+      }
+    }
+  >
+    <div
+      className="talixo-progress-bar__label"
+    >
+      Loading tests...
+    </div>
+  </div>
+  <div
+    aria-hidden="true"
+    className="talixo-progress-bar__shadow"
+  >
+    Loading tests...
+  </div>
+</div>
+`;
+
+exports[`<ProgressBar /> should handle correct \`value\` property 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle correct \`value\` property 2`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle correct \`value\` property 3`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "30%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle correct \`value\` property 4`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle correct \`value\` property 5`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle indeterminate value 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle indeterminate value 2`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  />
+</div>
+`;
+
+exports[`<ProgressBar /> should handle labels properly 1`] = `
+<div
+  className="talixo-progress-bar talixo-progress-bar--indeterminate talixo-progress-bar--smooth"
+  role="progressbar"
+>
+  <div
+    className="talixo-progress-bar__inner"
+    style={null}
+  >
+    <div
+      className="talixo-progress-bar__label"
+    >
+      loading something...
+    </div>
+  </div>
+  <div
+    aria-hidden="true"
+    className="talixo-progress-bar__shadow"
+  >
+    loading something...
+  </div>
+</div>
+`;

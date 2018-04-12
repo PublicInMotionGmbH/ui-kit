@@ -11,7 +11,6 @@ using `npm install @talixo/popover --save` or `yarn add @talixo/popover`.
 
 Your package should additionally have some extra dependencies:
 
-- `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -21,21 +20,32 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | children node in popover
-color         | string    | n/a     | color of text in popover
-fade          | bool      | n/a     | popover is fading
-fadeTime      | number    | n/a     | time od fading
-isOpen        | bool      | n/a     | popover is visible
-layer         | number    | n/a     | quantity of popover layer
-rootNode      | string    | n/a     | root node of popover
-position      | Position  | n/a     | position of popover
+### Popover
 
-Type name | Enum options
-----------|-------------------------------------- 
-Position  | 'left', 'right', 'top', 'bottom' 
+Property name | Type         | Default | Description
+--------------|--------------|:-------:|--------------------------------
+attachTo      | node         | n/a     | root node of popover
+className     | string       | n/a     | additional class name passed to wrapper
+children      | node         | n/a     | children node in popover
+color         | string       | n/a     | color of text in popover
+fade          | bool         | n/a     | popover is fading
+fadeTime      | number       | n/a     | time of fading
+open          | bool         | n/a     | popover is visible
+layer         | number       | n/a     | quantity of popover layer
+position      | PositionType | n/a     | position of popover
+
+### Portal
+
+Property name | Type      | Default | Description
+--------------|-----------|:-------:|--------------------------------
+attachTo      | node      | n/a     | root node of portal
+children      | node      | n/a     | children node in portal
+tagName       | string    | n/a     | type of parent element
+
+
+Type name    | Enum options
+-------------|--------------------------------------
+PositionType | 'left', 'right', 'top', 'bottom'
 
 ## Changelog
 

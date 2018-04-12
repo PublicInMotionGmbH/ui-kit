@@ -11,7 +11,6 @@ using `npm install @talixo/modal --save` or `yarn add @talixo/modal`.
 
 Your package should additionally have some extra dependencies:
 
-- `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -27,7 +26,7 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | string    | n/a     | content of modal
-isOpen        | bool      | `true`  | controls whether modal is open
+open          | bool      | `true`  | controls whether modal is open
 
 ## Changelog
 
