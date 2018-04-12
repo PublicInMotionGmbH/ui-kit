@@ -29,14 +29,4 @@ describe('<Heading />', () => {
 
     expect(wrapper).toMatchSnapshot()
   })
-
-  it('should not allow bigger level than 6', () => {
-    const wrapper = shallow(
-      <Heading level={8}>
-        Primary information
-      </Heading>
-    )
-
-    expect(wrapper).toMatchSnapshot()
-  })
 })

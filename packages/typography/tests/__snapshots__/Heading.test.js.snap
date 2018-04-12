@@ -21,11 +21,3 @@ exports[`<Heading /> should allow different heading levels 1`] = `
   Primary information
 </h3>
 `;
-
-exports[`<Heading /> should not allow bigger level than 6 1`] = `
-<h6
-  className="talixo-heading"
->
-  Primary information
-</h6>
-`;
