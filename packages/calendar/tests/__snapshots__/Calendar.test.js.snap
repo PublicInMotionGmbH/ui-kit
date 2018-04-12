@@ -3,6 +3,7 @@
 exports[`<Calendar /> renders children correctly 1`] = `
 <div
   className="talixo-calendar"
+  lang="en"
 >
   <withStyles(SingleDatePicker)
     anchorDirection="left"
@@ -71,7 +72,7 @@ exports[`<Calendar /> renders children correctly 1`] = `
         "upArrowDownArrow": "up and down arrow keys",
       }
     }
-    placeholder="Date"
+    placeholder={null}
     readOnly={false}
     regular={false}
     renderCalendarInfo={null}
