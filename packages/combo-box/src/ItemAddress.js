@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { Icon } from '@talixo/icon'
 import { buildClassName, prefix } from '@talixo/shared'
 
 /**
@@ -20,9 +21,7 @@ const ItemAddress = props => {
 
   return (
     <div className={clsName} style={style}>
-      <i className={iconClsName}>
-        {item.icon}
-      </i>
+      <Icon className={iconClsName} name={item.icon} />
       <span className={prefix('item-address', 'place')}>{item.place}</span>
       <span className={prefix('item-address', 'address')}>{item.address}</span>
     </div>

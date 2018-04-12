@@ -28,9 +28,9 @@
       padding: 0 !important
       border: 0 none !important
 
-  &--open:not(#{prefix('combo-box')}__input--separated):not(#{prefix('combo-box')}__button--separated)
-    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
-    border-bottom-width: 0 !important
+    &--open:not(#{prefix('combo-box')}__input--separated):not(#{prefix('combo-box')}__button--separated)
+      border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
+      border-bottom-width: 0 !important
 
   &__value
     font-size: $font-size-m
@@ -44,7 +44,7 @@
     margin: 0 dp(0.5)
     display: inline-block
     outline: none
-    &--down
+    > *
       color: $color-talixo-gray
       font-size: $font-size-xl
       font-weight: $font-weight-semibold
@@ -82,17 +82,3 @@
 
   &__item--selected
     font-weight: $font-weight-semibold
-
-@include module('item-address')
-  display: inline-block
-  width: 100%
-  font-size: $font-size-m
-
-  >
-    *
-      margin: 0 4px
-      vertical-align: middle
-
-  &__address
-    font-size: $font-size-s
-    color: $color-talixo-gray

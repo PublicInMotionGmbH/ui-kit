@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Icon } from '@talixo/icon'
-import { buildClassName, applyAnyClassNameModifiers } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Dropdown button component.
@@ -29,30 +29,20 @@ const DropdownButton = props => {
     onClick, overflow, placeholder, separated, style, value
   } = props
 
-  // We've got modifier here of the combo-box directly, but probably it should be `input` modifier
-  const openClsName = applyAnyClassNameModifiers('combo-box', { open: isOpen })
-
   // Build class name for button
-  const buttonClsName = buildClassName(
-    [ 'combo-box', 'button' ],
-    [ className, openClsName ],
-    { separated: isOpen && separated }
-  )
+  const buttonClsName = buildClassName([ 'combo-box', 'button' ], className, {
+    open: isOpen,
+    separated: isOpen && separated
+  })
 
-  // We've got modifier here of the combo-box item, but we are attaching to to combo-box value
-  const itemClsName = applyAnyClassNameModifiers([ 'combo-box', 'item' ], {
+  // Build class name for item
+  const spanClsName = buildClassName([ 'combo-box', 'item' ], null, {
     'overflow-truncate': overflow === 'truncate',
     'overflow-break': overflow === 'break'
   })
 
-  // Build class name for value `span`
-  const spanClsName = buildClassName([ 'combo-box', 'value' ], itemClsName)
-
   // Build class name for arrow
   const arrowClsName = buildClassName([ 'combo-box', 'arrow' ])
-
-  // Build class name for arrow
-  const arrowIconClsName = applyAnyClassNameModifiers([ 'combo-box', 'arrow' ], 'down')
 
   const displayedValue = value != null
     ? value
@@ -77,7 +67,7 @@ const DropdownButton = props => {
         {displayedItem}
       </span>
       <div className={arrowClsName}>
-        <Icon name='arrow_drop_down' className={arrowIconClsName} />
+        <Icon name='arrow_drop_down' />
       </div>
     </button>
   )

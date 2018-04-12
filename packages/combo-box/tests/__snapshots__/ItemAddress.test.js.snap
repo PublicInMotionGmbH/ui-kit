@@ -4,11 +4,10 @@ exports[`<ItemAddress /> renders correctly 1`] = `
 <div
   className="talixo-item-address"
 >
-  <i
+  <Icon
     className="talixo-item-address__icon material-icons"
-  >
-    credit_card
-  </i>
+    name="credit_card"
+  />
   <span
     className="talixo-item-address__place"
   >

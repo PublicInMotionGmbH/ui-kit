@@ -2,17 +2,17 @@
 
 exports[`<DropdownButton /> renders correctly 1`] = `
 <button
-  className="talixo-combo-box__button "
+  className="talixo-combo-box__button"
 >
   <span
-    className="talixo-combo-box__value"
+    className="talixo-combo-box__item"
   />
   <div
     className="talixo-combo-box__arrow"
   >
     <span
       aria-hidden="true"
-      className="talixo-icon talixo-combo-box__arrow--down tai tai--material"
+      className="talixo-icon tai tai--material"
     >
       
     </span>
