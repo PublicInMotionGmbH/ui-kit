@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Heading /> renders children correctly 1`] = `
+<h2
+  className="talixo-heading"
+>
+  Primary information
+</h2>
+`;
+
+exports[`<Heading /> renders empty correctly 1`] = `
+<h2
+  className="talixo-heading"
+/>
+`;
+
+exports[`<Heading /> should allow different heading levels 1`] = `
+<h3
+  className="talixo-heading"
+>
+  Primary information
+</h3>
+`;
+
+exports[`<Heading /> should not allow bigger level than 6 1`] = `
+<h6
+  className="talixo-heading"
+>
+  Primary information
+</h6>
+`;
