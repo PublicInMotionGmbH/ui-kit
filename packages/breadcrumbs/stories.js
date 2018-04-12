@@ -1,8 +1,7 @@
 import React from 'react'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Breadcrumbs from './src/Breadcrumbs'
-
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 

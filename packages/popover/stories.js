@@ -1,11 +1,13 @@
 import React from 'react'
-
-import Popover from './src/Popover'
-import Button from '../../packages/button/src/Button'
-
 import { createStoriesFactory } from '@talixo/shared/story'
 
-const addStory = createStoriesFactory('Popover', module)
+import { Button } from '@talixo/button'
+
+import Popover from './src/Popover'
+
+const addStory = createStoriesFactory('Popover', module, {
+  propTables: [ Popover ]
+})
 
 const Menu = () => (
   <div>

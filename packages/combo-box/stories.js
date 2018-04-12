@@ -1,18 +1,16 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Autocomplete from './src/Autocomplete'
 import ItemAddress from './src/ItemAddress'
 import Dropdown from './src/Dropdown'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/shared/story'
-import { action } from '@storybook/addon-actions'
-
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('ComboBox', module)
+const addStory = createStoriesFactory('ComboBox', module, {
+  propTables: [ Dropdown, Autocomplete, ItemAddress ]
+})
 const change = action('change')
 
 const items = [

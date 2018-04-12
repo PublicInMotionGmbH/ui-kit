@@ -10,7 +10,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Grid', module, {
-  propTypes: [ Masonry, Group, Segment ]
+  propTables: [ Masonry, Group, Segment ]
 })
 
 // Stories

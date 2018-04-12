@@ -9,7 +9,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Notification', module, {
-  propTypes: [ Notification, NotificationList ]
+  propTables: [ Notification, NotificationList ]
 })
 
 const notifications = [
