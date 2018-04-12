@@ -1,61 +1,38 @@
 @import './config'
 
-%active
-  background-color: $color-orange-talixo
-  border-color: $color-orange-talixo
-  color: $color-white
-
 @include module('navigation')
   $n: &
-  &_element
-    &--pagination
-      background-color: $color-white
-      border-color: $color-white
-      color: $color-ghost-text
+  &--pagination
+    > #{$n}__element
+      background-color: $pagination-element-background
+      border-color: $pagination-element-border-color
+      color: $pagination-element-text-color
 
       &:hover
-        background-color: $color-tab-inactive
-        border-color: $color-tab-inactive
+        background-color: $pagination-hover-element-background-color
+        border-color: $pagination-hover-element-border-color
+        color: $pagination-element-text-color
 
       &:active
-        background-color: $color-orange-talixo
-        border-color: $color-orange-talixo
-        color: $color-white
+        background-color: $pagination-active-element-background
+        border-color: $pagination-active-element-border-color
+        color: $pagination-active-element-text-color
 
-      &#{$n}--active
-        background-color: $color-orange-talixo
-        border-color: $color-orange-talixo
-        color: $color-white
-
-      &#{$n}:hover
-          background-color: $color-white
-          border-color: $color-white
-          color: $color-ghost-text
-
-    &--tabs
-      background-color: $color-tab-inactive
-      color: #000
-
-      &:hover
-        background-color: $color-white
-
-      &:active
-        background-color: $color-white
-
-      &#{$n}--active
-        background-color: $color-white
-
+      &--active
+        background-color: $pagination-active-element-background
+        border-color: $pagination-active-element-border-color
+        color: $pagination-active-element-text-color
 
   &--tabs
-    &--element
-      background-color: $color-tab-inactive
-      color: #000
+    > #{$n}__element
+      background-color: $tabs-element-background
+      color: $tabs-element-text-color
 
       &:hover
-        background-color: $color-white
+        background-color: $tabs-hover-element-background
 
       &:active
-        background-color: $color-white
+        background-color: $tabs-active-element-background
 
-      &#{$n}--active
-        background-color: $color-white
+      &--active
+        background-color: $tabs-active-element-background

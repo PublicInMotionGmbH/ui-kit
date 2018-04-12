@@ -46,21 +46,7 @@ const childrenWithDividers = (children, divider) => {
 function Navigation (props) {
   const { children, className, divider, type, ...passedProps } = props
 
-  /**
-   * Method that return object with passed props.
-   *
-   * @param {array} children
-   * @returns {object}
-   */
-  const buildChildProps = children => ({
-    typeClassName: buildClassName([ 'navigation', 'element' ], null, type)
-  })
-
-  const childrenWithBuiltProps = React.Children.map(children, (child, i) => {
-    return React.cloneElement(child, buildChildProps(children))
-  })
-
-  const mappedChildren = type === 'breadcrumbs' ? childrenWithDividers(childrenWithBuiltProps, divider) : childrenWithBuiltProps
+  const mappedChildren = divider ? childrenWithDividers(children, divider) : children
 
   const clsName = buildClassName('navigation', className, type)
 
@@ -86,7 +72,6 @@ Navigation.propTypes = {
 }
 
 Navigation.defaultProps = {
-  divider: '/',
   type: 'navigation'
 }
 

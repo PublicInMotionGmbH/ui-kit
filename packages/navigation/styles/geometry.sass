@@ -5,11 +5,8 @@
   display: inline-block
   list-style: none
 
-  &--element
-    display: inline-block
-
-  &_element
-    &--pagination
+  &--pagination
+    > #{$n}__element
       display: inline-flex
       padding: dp(0.5) dp(1.5)
       border: $border-width solid
@@ -29,10 +26,11 @@
       &:hover
         font-weight: $font-weight-light
 
-      &#{$n}--disabled
+      &--disabled
         cursor: default
 
-    &--tabs
+  &--tabs
+    > #{$n}__element
       padding: dp(1) dp(1.5)
       border: 0 solid $color-tab-border
       border-width: $border-width $border-width 0 $border-width
@@ -54,22 +52,25 @@
       & > a
         text-decoration: none
 
-      &#{$n}--active
+      &--active
         font-weight: $font-weight-semibold
 
-    &--breadcrumbs
+  &--breadcrumbs
+    > #{$n}__element
       display: inline-block
+      margin: 0 dp(0.5) 0
 
       & > a
         color: #4183c4
         text-decoration: none
         cursor: pointer
 
-      &#{$n}--active, &#{$n}--active > a
+      &--active, &--active > a
         color: #000000
         font-weight: $font-weight-semibold
 
-    &--navigation
+  &--navigation
+    > #{$n}__element
       display: inline-block
       margin: 0 dp(0.5) 0
 

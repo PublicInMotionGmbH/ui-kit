@@ -2,7 +2,7 @@
 
 exports[`<Element /> renders correctly 1`] = `
 <li
-  className=""
+  className="talixo-navigation__element"
 >
   Home
 </li>

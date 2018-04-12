@@ -24,7 +24,7 @@ describe('<Element />', () => {
       </Element>
     )
 
-    expect(wrapper.hasClass(`${moduleName}--active`)).toEqual(true)
+    expect(wrapper.hasClass(`${moduleName}__element--active`)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
@@ -34,7 +34,7 @@ describe('<Element />', () => {
       </Element>
     )
 
-    expect(wrapper.hasClass(`${moduleName}--disabled`)).toEqual(true)
+    expect(wrapper.hasClass(`${moduleName}__element--disabled`)).toEqual(true)
   })
 
   it('calls onClick when clicked', () => {
