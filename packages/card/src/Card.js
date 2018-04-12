@@ -7,6 +7,7 @@ import { buildClassName } from '@talixo/shared'
  * Component which card.
  *
  * @param {object} props
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @returns {React.Element}
  */

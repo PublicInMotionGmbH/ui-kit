@@ -24,8 +24,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
+  "devDependencies" : {
     "@talixo/icon": "^1.0.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0"
   }
 }
