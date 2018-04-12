@@ -10,12 +10,14 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Map', module, {
-  propTypes: [ Map, Marker, Directions ]
+  propTables: [ Map, Marker, Directions ]
 })
 
+// Set up Google Maps API key for UI Kit only
 const apiKey = 'AIzaSyDwOkFSSCfh-3zjsjc4_JS5z-ETVZT3yCc'
 
-// CONTROLLED
+// Build styles for button
+
 const buttonStyle = {
   display: 'inline-block',
   padding: '1rem',
@@ -27,13 +29,126 @@ const buttonStyle = {
   color: '#fff'
 }
 
-const destinations = {
-  0: { lat: -31.397, lng: 148.644 },
-  1: { lat: -33.397, lng: 150.644 }
+// Set up all positions used by stories
+
+const config = {
+  zoom: { lat: -27.5598, lng: 151.9507 },
+  interactive: { lat: 39.0392, lng: 121.7625 },
+  markers: [
+    { lat: -33.8688, lng: 151.2093 },
+    { lat: -32.8688, lng: 150.2093 },
+    { lat: -34.8688, lng: 151.2093 }
+  ],
+  path: {
+    from: { lat: -30.397, lng: 140.644 },
+    via: [
+      { lat: -33.397, lng: 145.644 },
+      { lat: -35.397, lng: 145.644 }
+    ],
+    to: { lat: -31.397, lng: 150.644 }
+  },
+  changing: {
+    start: { lat: -33.397, lng: 140.644 },
+    end: [
+      { lat: -31.397, lng: 148.644 },
+      { lat: -33.397, lng: 150.644 }
+    ]
+  },
+  crossing: {
+    from: { lat: -29.397, lng: 145.644 },
+    to: { lat: -33.397, lng: 145.644 }
+  }
 }
 
-function render (setState, state) {
-  const nextDestination = state.destination === destinations[0] ? destinations[1] : destinations[0]
+// Stories
+
+addStory('default', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey} />
+))
+
+addStory('marker with zoom', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey} zoom={14} center={config.zoom}>
+    <Marker position={config.zoom} />
+  </Map>
+))
+
+addStory('marker with info window', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey} center={config.markers[0]}>
+    <Marker
+      position={config.markers[0]}
+      info='This is Info Window'
+    />
+  </Map>
+))
+
+addStory('many markers', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey} center={config.markers[0]}>
+    <Marker position={config.markers[0]} />
+    <Marker position={config.markers[1]} />
+    <Marker position={config.markers[2]} />
+  </Map>
+))
+
+addStory.controlled('controlled marker with info window', readme, (setState, state) => (
+  <div style={{ display: 'block', textAlign: 'center' }}>
+    <button onClick={() => setState({ open: !state.open })} style={buttonStyle}>
+      Toggle info
+    </button>
+
+    <Map style={{ height: '70vh' }} apiKey={apiKey} center={config.markers[0]}>
+      <Marker
+        position={config.markers[0]}
+        info='This is Info Window'
+        open={state.open}
+        onClose={() => setState({ open: false })}
+      />
+    </Map>
+  </div>
+), () => ({
+  open: false
+}))
+
+addStory('map is not interactive', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey} zoom={10} center={config.interactive} interactive={false} />
+))
+
+addStory('directions', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions startPoint={config.path.from} endPoint={config.path.to} />
+  </Map>
+))
+
+addStory('directions with single waypoint', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions
+      startPoint={config.path.from}
+      via={config.path.via[0]}
+      endPoint={config.path.to}
+    />
+  </Map>
+))
+
+addStory('directions with many waypoints', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions
+      startPoint={config.path.from}
+      via={config.path.via}
+      endPoint={config.path.to}
+    />
+  </Map>
+))
+
+addStory('two directions', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions startPoint={config.path.from} endPoint={config.path.to} />
+    <Directions startPoint={config.crossing.from} endPoint={config.crossing.to} />
+  </Map>
+))
+
+addStory.controlled('change directions', readme, (setState, state) => {
+  const nextDestination = state.destination === config.changing.end[0]
+    ? config.changing.end[1]
+    : config.changing.end[0]
 
   const toggle = () => setState({
     destination: nextDestination
@@ -45,99 +160,12 @@ function render (setState, state) {
         Change destination<br />
         <small>to ({nextDestination.lat}, {nextDestination.lng})</small>
       </button>
+
       <Map style={{ height: '70vh' }} apiKey={apiKey}>
-        <Directions startPoint={{ lat: -33.397, lng: 140.644 }} endPoint={state.destination} />
+        <Directions startPoint={config.changing.start} endPoint={state.destination} />
       </Map>
     </div>
   )
-}
-
-function getInitialState () {
-  return {
-    destination: destinations[0]
-  }
-}
-
-// Stories
-addStory('default', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey} />
-))
-
-addStory('marker with zoom', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey} zoom={14} center={{lat: -27.5598, lng: 151.9507}}>
-    <Marker position={{lat: -27.5598, lng: 151.9507}} />
-  </Map>
-))
-
-addStory('marker with info window', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey} center={{lat: -33.8688, lng: 151.2093}}>
-    <Marker
-      position={{lat: -33.8688, lng: 151.2093}}
-      info='This is Info Window'
-    />
-  </Map>
-))
-
-addStory('many markers', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey} center={{lat: -33.8688, lng: 151.2093}}>
-    <Marker position={{lat: -33.8688, lng: 151.2093}} />
-    <Marker position={{lat: -32.8688, lng: 150.2093}} />
-    <Marker position={{lat: -34.8688, lng: 151.2093}} />
-  </Map>
-))
-
-addStory.controlled('controlled marker with info window', readme, (setState, state) => (
-  <div style={{ display: 'block', textAlign: 'center' }}>
-    <button onClick={() => setState({ open: !state.open })} style={buttonStyle}>
-      Toggle info
-    </button>
-
-    <Map style={{ height: '70vh' }} apiKey={apiKey} center={{lat: -33.8688, lng: 151.2093}}>
-      <Marker
-        position={{lat: -33.8688, lng: 151.2093}}
-        info='This is Info Window'
-        open={state.open}
-        onClose={() => setState({ open: false })}
-      />
-    </Map>
-  </div>
-), () => ({ open: false }))
-
-addStory('map is not interactive', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey} zoom={10} center={{lat: 39.0392, lng: 121.7625}} interactive={false} />
-))
-
-addStory('directions', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey}>
-    <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} />
-  </Map>
-))
-
-addStory('directions with single waypoint', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey}>
-    <Directions
-      startPoint={{lat: -30.397, lng: 140.644}}
-      via={{lat: -33.397, lng: 145.644}}
-      endPoint={{lat: -31.397, lng: 150.644}}
-    />
-  </Map>
-))
-
-addStory('directions with many waypoints', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey}>
-    <Directions
-      startPoint={{lat: -30.397, lng: 140.644}}
-      via={[ {lat: -33.397, lng: 145.644}, {lat: -35.397, lng: 145.644} ]}
-      endPoint={{lat: -31.397, lng: 150.644}}
-    />
-  </Map>
-))
-
-addStory('two directions', readme, () => (
-  <Map style={{ height: '70vh' }} apiKey={apiKey}>
-    <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} />
-    <Directions startPoint={{lat: -29.397, lng: 145.644}} endPoint={{lat: -33.397, lng: 145.644}} />
-  </Map>
-))
-
-addStory.controlled('change directions', readme, render, getInitialState)
+}, () => ({
+  destination: config.changing.end[0]
+}))
