@@ -2,6 +2,7 @@
 
 [![Build status](https://circleci.com/gh/PublicInMotionGmbH/ui-kit/tree/master.png)](https://circleci.com/gh/PublicInMotionGmbH/ui-kit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/99c10cd7f5d7705d7eaa/maintainability)](https://codeclimate.com/github/PublicInMotionGmbH/ui-kit/maintainability)
+[![codecov](https://codecov.io/gh/PublicInMotionGmbH/ui-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/PublicInMotionGmbH/ui-kit)
 
 It's UI Kit used through all Talixo front-end projects. You can see storybook [here](https://publicinmotiongmbh.github.io/ui-kit).
 
@@ -19,6 +20,7 @@ It's UI Kit used through all Talixo front-end projects. You can see storybook [h
 You can run scripts using `npm run NAME` or `yarn run NAME` commands.
 
 - `init` / `init:yarn` - install required packages and bootstrap all subpackages.
+- `build` - build distributable version of all packages
 - `storybook` - run Storybook in development mode (available at `http://localhost:9009/`)
 - `build-storybook` - build static Storybook into `storybook-static` directory
 
@@ -39,15 +41,25 @@ There are two test runners available:
 
 #### Jest
 
-You can either run `npm test` or `yarn test` in each directory,
-or you can use `lerna run test` to run them in all packages.
+You can either run `npm test` or `yarn test` to run all tests.
+If you would like to run tests for specified packages only you can use `--only` parameter:
 
-Additionally, it's worth to note that using Lerna you can run your tests in parallel as well: `lerna run --parallel test`
+```sh
+$ npm test -- --only icon sidebar
+```
 
-##### Watchers
+Also if you would like to pass additional parameters for Jest (i.e. `--watch`), you can do it just inside:
 
-When you would like to run it in watching mode, just pass `--watch` parameter, i.e. `npm test -- --watch`.
-Remember, that you can do it only in single package. If you would like to watch in every package same time, you can use WallabyJS.
+```sh
+# Run watcher for Sidebar and Icon
+$ npm test -- --only icon sidebar --watch
+
+# Run watcher for all packages
+$ npm test -- --watch
+
+# Or alternatively you can use second task
+$ npm run test:watch
+```
 
 #### WallabyJS
 
@@ -164,6 +176,10 @@ Install dependencies of all subpackages                      | `lerna bootstrap 
 Resolve cross-dependencies between our packages              | `lerna bootstrap --hoist` or `lerna link`
 Install dependency inside single package                     | `lerna add jquery --scope @talixo/switcher`
 Run all tests                                                | `npm test` in main directory
+Run tests for single package                                 | `npm test -- --only switcher`
+Run watcher for all tests                                    | `npm test -- --watch`
+Run watcher for single package                               | `npm test -- --only switcher --watch`
+There are problems with distributable packages, rebuild them | `npm run build`
 Create new package                                           | `npm run create` in main directory
 Publish all changed packages to NPM                          | `lerna publish`
 Publish single package                                       | `lerna publish --scope @talixo/switcher`

@@ -1,0 +1,31 @@
+{
+  "name": "@talixo/typography",
+  "version": "1.0.0",
+  "description": "UI components and styles which represents typography",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only typography",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only typography"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0",
+    "normalize.css": "^8.0.0"
+  }
+}

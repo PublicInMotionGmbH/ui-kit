@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import Icon from '@talixo/icon'
+import { Icon } from '@talixo/icon'
 
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('table__action')
+import { buildClassName } from '@talixo/shared'
 
 /**
  * Component which represents action within table
@@ -22,9 +19,7 @@ const moduleName = prefix('table__action')
 function Action (props) {
   const { className, icon, warn, label, ...passedProps } = props
 
-  const clsName = cls(moduleName, className, {
-    [`${moduleName}--warn`]: warn
-  })
+  const clsName = buildClassName('table__action', className, { warn })
 
   return (
     <button type='button' className={clsName} {...passedProps}>

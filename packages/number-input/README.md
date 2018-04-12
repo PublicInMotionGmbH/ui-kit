@@ -11,7 +11,6 @@ using `npm install @talixo/number-input --save` or `yarn add @talixo/number-inpu
 
 Your package should additionally have some extra dependencies:
 
-- `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -29,7 +28,7 @@ className     | string    | n/a     | additional class name passed of input
 hasError      | boolean   | `false` | indicates that input has error
 size          | string    | n/a     | size of input (can be 'small')
 style         | object    | n/a     | additional styling of wrapper
-value         | number    | `0`     | input value
+value         | number    | `0`     | initial input value
 
 ## Changelog
 
