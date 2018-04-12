@@ -171,8 +171,11 @@ class Collapse extends React.PureComponent {
 
     // Build styles for collapsible container
     const collapseStyle = {
-      ...style,
-      maxHeight: height
+      ...style
+    }
+
+    if (height !== null) {
+      collapseStyle.maxHeight = height
     }
 
     // Apply animation time

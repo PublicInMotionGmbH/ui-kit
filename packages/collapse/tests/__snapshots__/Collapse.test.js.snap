@@ -3,11 +3,7 @@
 exports[`<Collapse /> renders children correctly 1`] = `
 <div
   className="talixo-collapse talixo-collapse--collapsed talixo-collapse--smooth"
-  style={
-    Object {
-      "maxHeight": null,
-    }
-  }
+  style={Object {}}
 >
   <div
     className="talixo-collapse__content"
