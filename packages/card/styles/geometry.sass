@@ -1,0 +1,60 @@
+@import './config'
+
+@include module('card')
+  display: inline-block
+  position: relative
+  border: $border-width solid
+  font-size: $font-size-m
+  margin-left: dp(2)
+  margin-right: dp(2)
+  transition: box-shadow 0.2s ease
+  margin-bottom: dp(4)
+  max-width: 100%
+
+  > *
+    vertical-align: middle
+
+  &:hover
+    box-shadow: 0 dp(2) dp(2.5) 0 rgba(0, 0, 0, 0.3)
+
+  &__content
+    margin-top: dp(2)
+    margin-bottom: dp(4)
+    padding: dp(2)
+
+  &__footer
+    margin-bottom: 0
+    padding: 0 dp(2)
+    position: absolute
+    bottom: dp(2)
+    left: 0
+    right: 0
+
+    > *
+      margin: 0 dp(0.5)
+
+  &__header
+    margin-bottom: dp(-2)
+    overflow: hidden
+
+  > img
+    vertical-align: middle
+    object-fit: cover
+    width: 100%
+    height: dp(20)
+    padding-top: 0 !important
+
+  &__title
+    position: absolute
+    width: 100%
+    height: dp(16.5)
+    border-width: 0
+    border-style: solid
+
+    h2
+      font-size: $font-size-l
+      position: absolute
+      bottom: dp(0.5)
+      left: 0
+      padding: 0 dp(2)
+      z-index: 1
