@@ -61,6 +61,6 @@ describe('<Group />', () => {
     )
 
     expect(wrapper.props().className).toMatch(/(^| )abc( |$)/)
-    expect(wrapper.props().className).not.toEqual('abc')
+    expect(wrapper.props().className).not.toBe('abc')
   })
 })
