@@ -18,8 +18,8 @@ const TRANSFORM_END = [
  * @property {number} props.heightBoost
  * @property {string} [props.className]
  *
- * @property {object} state
- * @property {number|null} state.height
+ * @property {number|null} height
+ * @property {number|null} reflowHeight
  *
  * @property {Element|null} node
  * @property {Element|null} content
@@ -34,9 +34,7 @@ class Collapse extends React.PureComponent {
     this.saveContentRef = this.saveContentRef.bind(this)
     this.finishTransition = this.finishTransition.bind(this)
 
-    this.state = {
-      height: null
-    }
+    this.height = null
   }
 
   componentWillReceiveProps (props) {
@@ -49,15 +47,15 @@ class Collapse extends React.PureComponent {
     // Change `maxHeight` of element
 
     // Get desired height
-    this.state.height = this.getHeight()
+    this.height = this.getHeight()
 
     // Update element maxHeight when it's mounted
-    if (this.state.height != null) {
-      this.node.style.maxHeight = this.state.height + 'px'
+    if (this.height != null) {
+      this.node.style.maxHeight = this.height + 'px'
 
       // Trigger reflow by using 'offsetHeight',
       // otherwise transition will not happen
-      this.height = this.node.offsetHeight
+      this.reflowHeight = this.node.offsetHeight
     }
   }
 
@@ -131,10 +129,11 @@ class Collapse extends React.PureComponent {
 
     if (style && style.maxHeight != null) {
       // Render whole component if it's using `maxHeight`
-      this.setState({ height: null })
+      this.height = null
+      this.forceUpdate()
     } else {
       // Or simply change `maxHeight` style in node
-      this.state.height = null
+      this.height = null
       this.node.style.maxHeight = ''
     }
   }
@@ -164,7 +163,7 @@ class Collapse extends React.PureComponent {
    */
   render () {
     const { className, collapsed, smooth, children, style, animationTime, ...passedProps } = this.props
-    const { height } = this.state
+    const height = this.height
 
     // Calculate animation time
     const time = parseInt(animationTime, 10) || null
