@@ -52,7 +52,7 @@ class Collapse extends React.PureComponent {
     this.state.height = this.getHeight()
 
     // Update element maxHeight when it's mounted
-    if (this.state.height) {
+    if (this.state.height != null) {
       this.node.style.maxHeight = this.state.height + 'px'
 
       // Trigger reflow by using 'offsetHeight',
