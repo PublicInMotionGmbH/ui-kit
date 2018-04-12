@@ -113,6 +113,26 @@ addStory('directions', readme, () => (
   </Map>
 ))
 
+addStory('directions with single waypoint', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions
+      startPoint={{lat: -30.397, lng: 140.644}}
+      via={{lat: -33.397, lng: 145.644}}
+      endPoint={{lat: -31.397, lng: 150.644}}
+    />
+  </Map>
+))
+
+addStory('directions with many waypoints', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions
+      startPoint={{lat: -30.397, lng: 140.644}}
+      via={[ {lat: -33.397, lng: 145.644}, {lat: -35.397, lng: 145.644} ]}
+      endPoint={{lat: -31.397, lng: 150.644}}
+    />
+  </Map>
+))
+
 addStory('two directions', readme, () => (
   <Map style={{ height: '70vh' }} apiKey={apiKey}>
     <Directions startPoint={{lat: -30.397, lng: 140.644}} endPoint={{lat: -31.397, lng: 150.644}} />

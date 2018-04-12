@@ -32,10 +32,11 @@ interactive   | boolean   | no       | `true`  | enable to move and zoom map
 
 ### Directions
 
-Property name | Type      | Required | Default | Description
---------------|-----------|----------|:-------:|------------------------------------------------
-startPoint    | object    | yes      | n/a     | start point of directions
-endPoint      | object    | yes      | n/a     | end point of directions
+Property name | Type            | Required | Default | Description
+--------------|-----------------|----------|:-------:|------------------------------------------------
+startPoint    | object          | yes      | n/a     | start point of directions
+endPoint      | object          | yes      | n/a     | end point of directions
+via           | object|object[] | yes      | n/a     | either single waypoint or list of waypoints
 
 ### Marker
 

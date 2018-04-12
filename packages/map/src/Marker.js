@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Marker as GoogleMarker, InfoWindow } from 'react-google-maps'
 
+import { Location } from './PropTypes'
+
 /**
  * Component which represents Marker on map.
  *
@@ -147,10 +149,7 @@ class Marker extends React.PureComponent {
 
 Marker.propTypes = {
   /** Marker position */
-  position: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired
-  }).isRequired,
+  position: Location.isRequired,
 
   /** Marker information window */
   info: PropTypes.node,

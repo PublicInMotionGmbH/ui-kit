@@ -5,6 +5,8 @@ import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps'
 
 import { buildClassName } from '@talixo/shared'
 
+import { Location } from './PropTypes'
+
 /**
  * Map properties into understandable by react-google-maps
  *
@@ -81,7 +83,7 @@ Map.propTypes = {
   zoom: PropTypes.number,
 
   /** Map center */
-  center: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
+  center: Location,
 
   /** Is map interactive? */
   interactive: PropTypes.bool

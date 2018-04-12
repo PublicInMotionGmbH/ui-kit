@@ -3,7 +3,32 @@ import PropTypes from 'prop-types'
 import { DirectionsRenderer } from 'react-google-maps'
 import _ from 'lodash'
 
+import { Location } from './PropTypes'
+
 import getRoute from '../utils/getRoute'
+
+/**
+ * Check if Directions props has changed
+ *
+ * @param {object} props
+ * @param {object|{ lat: number, lng: number }} props.startPoint
+ * @param {object|{ lat: number, lng: number }} props.endPoint
+ * @param {object[]|Array<{ lat: number, lng: number }>} [props.via]
+ *
+ * @param {object} nextProps
+ * @param {object|{ lat: number, lng: number }} nextProps.startPoint
+ * @param {object|{ lat: number, lng: number }} nextProps.endPoint
+ * @param {object[]|Array<{ lat: number, lng: number }>} [nextProps.via]
+ *
+ * @returns {boolean}
+ */
+function hasPropsChanged (props, nextProps) {
+  return (
+    !_.isEqual(props.startPoint, nextProps.startPoint) ||
+    !_.isEqual(props.endPoint, nextProps.endPoint) ||
+    !_.isEqual(props.via || [], nextProps.via || [])
+  )
+}
 
 /**
  * Component which represents Directions.
@@ -19,6 +44,7 @@ class Directions extends React.PureComponent {
    * @param {object} props
    * @param {object|{ lat: number, lng: number }} props.startPoint
    * @param {object|{ lat: number, lng: number }} props.endPoint
+   * @param {object[]|Array<{ lat: number, lng: number }>} [props.via]
    */
   constructor (props) {
     super(props)
@@ -44,12 +70,11 @@ class Directions extends React.PureComponent {
    * @param {object} nextProps
    * @param {object|{ lat: number, lng: number }} nextProps.startPoint
    * @param {object|{ lat: number, lng: number }} nextProps.endPoint
+   * @param {object[]|Array<{ lat: number, lng: number }>} props.via
    */
   componentWillReceiveProps (nextProps) {
-    const { startPoint, endPoint } = this.props
-
     // When any point has changed, load directions again
-    if (!_.isEqual(startPoint, nextProps.startPoint) || !_.isEqual(endPoint, nextProps.endPoint)) {
+    if (hasPropsChanged(this.props, nextProps)) {
       this.loadDirections(nextProps)
     }
   }
@@ -66,8 +91,8 @@ class Directions extends React.PureComponent {
       return
     }
 
-    getRoute(nextProps.startPoint, nextProps.endPoint).then(
-      this.handleRoute.bind(this, nextProps.startPoint, nextProps.endPoint),
+    getRoute(nextProps.startPoint, nextProps.endPoint, nextProps.via).then(
+      this.handleRoute.bind(this, nextProps.startPoint, nextProps.endPoint, nextProps.via),
       this.handleError
     )
   }
@@ -77,11 +102,12 @@ class Directions extends React.PureComponent {
    *
    * @param {object|{ lat: number, lng: number }} startPoint
    * @param {object|{ lat: number, lng: number }} endPoint
+   * @param {object[]|Array<{ lat: number, lng: number }>} via
    * @param {*} directions
    */
-  handleRoute (startPoint, endPoint, directions) {
+  handleRoute (startPoint, endPoint, via, directions) {
     // Ignore route for old directions, otherwise we've got race condition
-    if (!_.isEqual(startPoint, this.props.startPoint) || !_.isEqual(endPoint, this.props.endPoint)) {
+    if (hasPropsChanged({ startPoint, endPoint, via }, this.props)) {
       return
     }
 
@@ -113,16 +139,16 @@ class Directions extends React.PureComponent {
 
 Directions.propTypes = {
   /** Start point */
-  startPoint: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired
-  }).isRequired,
+  startPoint: Location.isRequired,
 
   /** End point */
-  endPoint: PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired
-  }).isRequired
+  endPoint: Location.isRequired,
+
+  /** Waypoints */
+  via: PropTypes.oneOfType([
+    PropTypes.arrayOf(Location),
+    Location
+  ])
 }
 
 export default Directions
