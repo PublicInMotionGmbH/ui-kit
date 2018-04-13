@@ -18,7 +18,7 @@ const styles = (stylesheet, options) => ({
     border: 0,
     padding: 0
   },
-  propTableHead: options.propTypes && options.propTypes.length > 1 ? {
+  propTableHead: options.propTables && options.propTables.length > 1 ? {
 
   } : {
     display: 'none'

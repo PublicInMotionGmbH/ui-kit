@@ -1,12 +1,13 @@
 import React from 'react'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Pill from './src/Pill'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Pill', module)
+const addStory = createStoriesFactory('Pill', module, {
+  propTables: [ Pill ]
+})
 
 addStory('all pills', readme, () => (
   <div>

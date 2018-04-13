@@ -1,13 +1,15 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Checkbox from './src/Checkbox'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-import { action } from '@storybook/addon-actions'
-
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Checkbox', module)
+const addStory = createStoriesFactory('Checkbox', module, {
+  propTables: [ Checkbox ]
+})
+
 const change = action('change')
 
 addStory('default', readme, () => (

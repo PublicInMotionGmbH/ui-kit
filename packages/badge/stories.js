@@ -1,17 +1,15 @@
 import React from 'react'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Button } from '@talixo/button'
 import { Tab } from '@talixo/tab'
 
 import Badge from './src/Badge'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Badge', module, {
-  propTables: [ Badge ],
-  propTablesExclude: [ Button, Tab ]
+  propTables: [ Badge ]
 })
 
 addStory('default', readme, () =>

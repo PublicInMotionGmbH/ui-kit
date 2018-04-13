@@ -1,16 +1,15 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Switcher from './src/Switcher'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/shared/story'
-import { action } from '@storybook/addon-actions'
-
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Switcher', module)
+const addStory = createStoriesFactory('Switcher', module, {
+  propTables: [ Switcher ]
+})
+
 const change = action('change')
 
 addStory('all options', readme, () =>

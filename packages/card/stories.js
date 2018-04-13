@@ -1,4 +1,5 @@
 import React from 'react'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Icon } from '@talixo/icon'
 
@@ -7,14 +8,11 @@ import CardHeader from './src/CardHeader'
 import CardContent from './src/CardContent'
 import CardFooter from './src/CardFooter'
 
-import {
-  createStoriesFactory,
-  getReadmeDescription
-} from '@talixo/shared/story'
-
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('Card', module)
+const addStory = createStoriesFactory('Card', module, {
+  propTables: [ Card, CardHeader, CardContent, CardFooter ]
+})
 
 addStory('cards', readme, () => (
   <div style={{ width: '600px' }}>

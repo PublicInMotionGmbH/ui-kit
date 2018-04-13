@@ -1,16 +1,12 @@
 import React from 'react'
-
-import { Button } from '@talixo/button'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Modal from './src/Modal'
-
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Modal', module, {
-  propTypes: [ Modal ],
-  propTablesExclude: [ Button ]
+  propTables: [ Modal ]
 })
 
 const render = (setState, state) => {
