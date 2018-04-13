@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
 import { VictoryChart, VictoryLine } from 'victory'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const moduleName = prefix('line-chart')
+const moduleName = 'line-chart'
 
 /**
  * Component which represents LineChart.
@@ -16,14 +15,18 @@ const moduleName = prefix('line-chart')
  * @returns {React.Element}
  */
 function LineChart (props) {
-  const { className, data, label, ...passedProps } = props
+  const { className, data, lineProps, style, ...passedProps } = props
+  const wrapperCls = buildClassName(moduleName, className)
 
   return (
-    <div className={cls(className, moduleName)}>
+    <div className={wrapperCls} style={style}>
       <VictoryChart {...passedProps}>
         {
           data.map(itemData => (
-            <VictoryLine data={itemData} />
+            <VictoryLine
+              data={itemData}
+              {...lineProps}
+            />
           ))
         }
       </VictoryChart>
@@ -35,12 +38,21 @@ LineChart.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Pie chart data  */
-  data: PropTypes.array
+  /** Line chart data  */
+  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+    x: PropTypes.oneOf([ PropTypes.string, PropTypes.number ]),
+    y: PropTypes.oneOf([ PropTypes.string, PropTypes.number ])
+  }))),
+
+  /** Additional line props, accepts any VictoryLine property */
+  lineProps: PropTypes.object,
+
+  /** Additional wrapper styles */
+  style: PropTypes.object
 }
 
 LineChart.defaultProps = {
-  data: []
+  data: [[{}]]
 }
 
 export default LineChart

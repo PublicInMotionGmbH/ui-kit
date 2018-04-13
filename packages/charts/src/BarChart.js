@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { VictoryChart, VictoryBar, VictoryTheme } from 'victory'
+import { VictoryChart, VictoryBar } from 'victory'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const moduleName = prefix('bar-chart')
+const moduleName = 'bar-chart'
 
 /**
  * Component which represents BarChart.
@@ -17,11 +16,12 @@ const moduleName = prefix('bar-chart')
  * @returns {React.Element}
  */
 function BarChart (props) {
-  const { categories, className, data, ...passedProps } = props
+  const { categories, className, data, style, ...passedProps } = props
+  const wrapperCls = buildClassName(moduleName, className)
 
   return (
-    <div className={cls(className, moduleName)}>
-      <VictoryChart theme={VictoryTheme.material} {...passedProps}>
+    <div className={wrapperCls} style={style}>
+      <VictoryChart {...passedProps}>
         <VictoryBar key={data.x} data={data} categories={categories} />
       </VictoryChart>
     </div>
@@ -33,7 +33,10 @@ BarChart.propTypes = {
   className: PropTypes.string,
 
   /** Bar chart data  */
-  data: PropTypes.array
+  data: PropTypes.array,
+
+  /** Additional wrapper styles */
+  style: PropTypes.object
 }
 
 BarChart.defaultProps = {

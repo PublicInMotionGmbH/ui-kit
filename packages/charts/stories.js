@@ -15,7 +15,10 @@ const addStory = createStoriesFactory('Charts', module)
 const pieData = [
   { x: 'Cats', y: 35 },
   { x: 'Dogs', y: 40 },
-  { x: 'Birds', y: 55 }
+  { x: 'Birds', y: 55 },
+  { x: 'Lions', y: 35 },
+  { x: 'Jaguars', y: 4 },
+  { x: 'Tigers', y: 5 }
 ]
 
 const lineData = [
@@ -25,27 +28,38 @@ const lineData = [
 
 // Stories
 const wrapperStyle = {
-  width: '50%',
-  display: 'flex'
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center'
 }
+
+const labelProps = {
+  angle: 10
+}
+
+addStory('Bar Chart', readme, () => (
+  <div style={wrapperStyle}>
+    <BarChart
+      domainPadding={{x: 10}}
+      data={pieData}
+    />
+  </div>
+))
+
+addStory('Line Chart', readme, () => (
+  <div style={wrapperStyle}>
+    <LineChart
+      data={lineData}
+    />
+  </div>
+))
 
 addStory('Pie Chart', readme, () => (
   <div style={wrapperStyle}>
     <PieChart
       data={pieData}
-    />
-  </div>
-))
-addStory('Line Chart', readme, () => (
-  <div style={wrapperStyle}>
-    <LineChart data={lineData} />
-  </div>
-))
-addStory('Bar Chart', readme, () => (
-  <div style={wrapperStyle}>
-    <BarChart
-      domainPadding={{x: 30}}
-      data={pieData}
+      labelProps={labelProps}
+      padding={70}
     />
   </div>
 ))

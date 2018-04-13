@@ -6,7 +6,6 @@ import Charts from '../src/Charts'
 describe('<Charts />', () => {
   it('renders children correctly', () => {
     const wrapper = shallow(<Charts />)
-
     expect(wrapper).toMatchSnapshot()
   })
 })

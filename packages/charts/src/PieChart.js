@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 
-import { VictoryPie } from 'victory'
+import { VictoryPie, VictoryLabel } from 'victory'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const moduleName = prefix('pie-chart')
+const moduleName = 'pie-chart'
 
 /**
  * Component which represents PieChart.
@@ -16,21 +15,34 @@ const moduleName = prefix('pie-chart')
  * @returns {React.Element}
  */
 function PieChart (props) {
-  const { className, data, ...passedProps } = props
+  const { className, data, labelProps, style, ...passedProps } = props
+  const wrapperCls = buildClassName(moduleName, className)
 
   return (
-    <div className={cls(className, moduleName)}>
-      <VictoryPie data={data} {...passedProps} />
+    <div className={wrapperCls} style={style}>
+      <VictoryPie
+        data={data}
+        labelComponent={<VictoryLabel {...labelProps} />}
+        {...passedProps} />
     </div>
   )
 }
 
 PieChart.propTypes = {
-  /** Additional class name */
+  /** Additional wrapper class name */
   className: PropTypes.string,
 
   /** Pie chart data  */
-  data: PropTypes.array
+  data: PropTypes.array,
+
+  /** Additional label Props, accepts any VictoryLabel property */
+  labelProps: PropTypes.object,
+
+  /** Theme  */
+  theme: PropTypes.object,
+
+  /** Additional wrapper styles */
+  style: PropTypes.object
 }
 
 PieChart.defaultProps = {
