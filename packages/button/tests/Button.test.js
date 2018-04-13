@@ -50,6 +50,6 @@ describe('<Button />', () => {
       </Button>
     )
 
-    expect(wrapper.props().type).toEqual('button')
+    expect(wrapper.props().type).toBe('button')
   })
 })

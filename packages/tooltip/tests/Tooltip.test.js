@@ -25,7 +25,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
@@ -37,7 +37,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toEqual(true)
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toBe(true)
     wrapper.unmount()
   })
 
@@ -49,7 +49,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.find(`.${name}`).hasClass('big')).toEqual(true)
+    expect(wrapper.find(`.${name}`).hasClass('big')).toBe(true)
     wrapper.unmount()
   })
 
@@ -84,7 +84,7 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
@@ -96,7 +96,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('click')
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
