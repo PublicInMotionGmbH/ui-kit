@@ -3,7 +3,7 @@
  *
  * @param {object|{ lat: number, lng: number }} startPoint
  * @param {object|{ lat: number, lng: number }} endPoint
- * @param {object[]|Array<{ lat: number, lng: number }>|{ lat: number, lng: number }} waypoints
+ * @param {object[]|Array<{ lat: number, lng: number }>|{ lat: number, lng: number }} [waypoints]
  * @returns {Promise<object, *>}
  */
 function getRoute (startPoint, endPoint, waypoints) {

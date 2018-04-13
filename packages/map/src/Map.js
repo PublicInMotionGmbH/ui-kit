@@ -36,6 +36,20 @@ const mapProps = withProps(props => {
 
 const decorate = compose(mapProps, withScriptjs, withGoogleMap)
 
+const getOptions = (interactive) => {
+  return interactive ? {} : {
+    draggable: false,
+    scrollwheel: false,
+    zoomControl: false,
+    disableDefaultUI: false,
+    fullscreenControl: false,
+    keyboardShortcuts: false,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false
+  }
+}
+
 /**
  * Component which represents Map.
  *
@@ -47,17 +61,7 @@ const decorate = compose(mapProps, withScriptjs, withGoogleMap)
  * @returns {React.Element}
  */
 const Map = decorate(props => {
-  const options = props.interactive ? {} : {
-    draggable: false,
-    scrollwheel: false,
-    zoomControl: false,
-    disableDefaultUI: false,
-    fullscreenControl: false,
-    keyboardShortcuts: false,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false
-  }
+  const options = getOptions(props.interactive)
 
   return (
     <GoogleMap
