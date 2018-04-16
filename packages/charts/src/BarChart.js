@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { VictoryChart, VictoryBar } from 'victory'
 
 import { buildClassName } from '@talixo/shared'
+
+import { talixoTheme } from './config'
 
 const moduleName = 'bar-chart'
 
@@ -21,7 +22,7 @@ function BarChart (props) {
 
   return (
     <div className={wrapperCls} style={style}>
-      <VictoryChart {...passedProps}>
+      <VictoryChart theme={talixoTheme} {...passedProps}>
         <VictoryBar key={data.x} data={data} categories={categories} />
       </VictoryChart>
     </div>

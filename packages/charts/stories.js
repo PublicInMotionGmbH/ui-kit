@@ -13,12 +13,18 @@ const addStory = createStoriesFactory('Charts', module)
 
 // Datasets
 const pieData = [
-  { x: 'Cats', y: 35 },
-  { x: 'Dogs', y: 40 },
-  { x: 'Birds', y: 55 },
-  { x: 'Lions', y: 35 },
-  { x: 'Jaguars', y: 4 },
-  { x: 'Tigers', y: 5 }
+  { label: 'Cats', angle: 35 },
+  { label: 'Dogs', angle: 40 },
+  { label: 'Birds', angle: 55 },
+  { label: 'Cats', angle: 35 },
+  { label: 'Dogs', angle: 40 },
+  { label: 'Birds', angle: 55 },
+  { label: 'Cats2', angle: 35 },
+  { label: 'Dogs2', angle: 40 },
+  { label: 'Birds2', angle: 55 },
+  { label: 'Lions2', angle: 35 },
+  { label: 'Jaguars2', angle: 43 },
+  { label: 'Tigers2', angle: 52 }
 ]
 
 const lineData = [
@@ -60,6 +66,7 @@ addStory('Pie Chart', readme, () => (
       data={pieData}
       labelProps={labelProps}
       padding={70}
+      showLabels
     />
   </div>
 ))

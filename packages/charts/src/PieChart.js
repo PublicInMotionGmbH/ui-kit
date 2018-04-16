@@ -1,11 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import { VictoryPie, VictoryLabel } from 'victory'
+// import { VictoryPie, VictoryLabel } from 'victory'
+import { RadialChart } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
+import { colors } from './config'
+
 const moduleName = 'pie-chart'
+
+const scaleRadius = (size, scale) => {
+  return size * scale
+}
 
 /**
  * Component which represents PieChart.
@@ -15,15 +21,25 @@ const moduleName = 'pie-chart'
  * @returns {React.Element}
  */
 function PieChart (props) {
-  const { className, data, labelProps, style, ...passedProps } = props
+  const { className, data, height, width, showLabels, style, ...passedProps } = props
   const wrapperCls = buildClassName(moduleName, className)
+  const minDimension = Math.min(height, width)
+  const radius = showLabels
+    ? scaleRadius(minDimension, 0.3)
+    : minDimension
 
   return (
     <div className={wrapperCls} style={style}>
-      <VictoryPie
+      <RadialChart
         data={data}
-        labelComponent={<VictoryLabel {...labelProps} />}
-        {...passedProps} />
+        height={height}
+        width={width}
+        radius={radius}
+        colorRange={colors}
+        labelsRadiusMultiplier={1.4}
+        showLabels={showLabels}
+        {...passedProps}
+      />
     </div>
   )
 }
@@ -35,17 +51,23 @@ PieChart.propTypes = {
   /** Pie chart data  */
   data: PropTypes.array,
 
-  /** Additional label Props, accepts any VictoryLabel property */
-  labelProps: PropTypes.object,
+  /** Pie chart data  */
+  height: PropTypes.number,
 
-  /** Theme  */
-  theme: PropTypes.object,
+  /** Pie chart data  */
+  width: PropTypes.number,
+
+  /** Indicates if chart should show labels */
+  showLabels: PropTypes.bool,
 
   /** Additional wrapper styles */
   style: PropTypes.object
 }
 
 PieChart.defaultProps = {
+  height: 500,
+  width: 200,
+  showLabels: false
 }
 
 export default PieChart

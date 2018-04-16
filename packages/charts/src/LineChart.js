@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import { VictoryChart, VictoryLine } from 'victory'
 
 import { buildClassName } from '@talixo/shared'
+
+import { talixoTheme, getColorByIndex } from './config'
 
 const moduleName = 'line-chart'
 
@@ -20,11 +21,16 @@ function LineChart (props) {
 
   return (
     <div className={wrapperCls} style={style}>
-      <VictoryChart {...passedProps}>
+      <VictoryChart theme={talixoTheme} {...passedProps}>
         {
-          data.map(itemData => (
+          data.map((itemData, index) => (
             <VictoryLine
+              theme={talixoTheme}
               data={itemData}
+              style={{
+                data: {
+                  stroke: getColorByIndex(index + 3), strokeWidth: 3
+                }}}
               {...lineProps}
             />
           ))
@@ -47,12 +53,16 @@ LineChart.propTypes = {
   /** Additional line props, accepts any VictoryLine property */
   lineProps: PropTypes.object,
 
+  /** Line colors */
+  lineColors: PropTypes.array,
+
   /** Additional wrapper styles */
   style: PropTypes.object
 }
 
 LineChart.defaultProps = {
-  data: [[{}]]
+  data: [[{}]],
+  lineColors: []
 }
 
 export default LineChart
