@@ -1,7 +1,7 @@
 {
-  "name": "@talixo/tab",
+  "name": "@talixo/navigation",
   "version": "1.0.0",
-  "description": "UI Component which represents Tab",
+  "description": "UI Component which represents navigation",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
@@ -24,7 +24,11 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
+  "devDependencies": {
+    "@talixo/badge": "^1.0.0"
+  },
   "dependencies": {
-    "@talixo/shared": "^1.0.0"
+    "@talixo/shared": "^1.0.0",
+    "lodash": "^4.17.5"
   }
 }
