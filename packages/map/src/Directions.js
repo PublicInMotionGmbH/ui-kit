@@ -10,9 +10,15 @@ import hasPropsChanged from '../utils/hasPropsChanged'
 /**
  * Component which represents Directions.
  *
- * @param {object} props
- * @param {object} [props.directions]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {object|{ lat: number, lng: number }} props.startPoint
+ * @property {object|{ lat: number, lng: number }} props.endPoint
+ * @property {object[]|Array<{ lat: number, lng: number }>} [props.via]
+ *
+ * @property {object} state
+ * @property {object|null} state.directions
+ *
+ * @class
  */
 class Directions extends React.PureComponent {
   /**
@@ -101,6 +107,11 @@ class Directions extends React.PureComponent {
     console.error(`error fetching directions ${error}`)
   }
 
+  /**
+   * Build Google DirectionsRenderer
+   *
+   * @returns {React.Element|null}
+   */
   render () {
     const { directions } = this.state
 
