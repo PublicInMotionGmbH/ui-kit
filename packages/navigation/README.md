@@ -28,7 +28,7 @@ Property name | Type           | Default        | Description
 --------------|----------------|:--------------:|--------------------------------
 children      | node           | n/a            | Navigation items
 className     | string         | n/a            | Additional class name passed to wrapper
-divider       | node           | `'/'`          | Divider
+divider       | node           | n/a            | Divider
 type          | NavigationType | `'navigation'` | Type of navigation
 
 ### Element
@@ -41,30 +41,26 @@ active        | bool           | `false`        | Active state
 children      | node           | n/a            | Element items
 className     | string         | n/a            | Additional class name passed to element
 disabled      | bool           | `false`        | Disabled state
-divider       | node           | `'/'`          | Divider
 onClick       | func           | n/a            | Function passed to element
-type          | NavigationType | `'navigation'` | Type of navigation
 
 ### ControlledPagination
 
-Property name  | Type   | Required | Default  | Description
----------------|--------|----------|:--------:|--------------------------------
-activePage     | number |          | `1`      | Active page
-displayedLimit | number |          | `10`     | Maximum number of displayed page buttons
-nextLabel      | node   |          | `'Next'` | Next button label
-onChange       | func   |          | `false`  | Function passed to page buttons
-pageCount      | number | yes      | `'/'`    | The total number of pages
-previousLabel  | node   |          | n/a      | Previous button label
+Property name  | Type   | Required | Default      | Description
+---------------|--------|----------|:------------:|--------------------------------
+activePage     | number |          | `1`          | Active page
+displayedLimit | number |          | `10`         | Maximum number of displayed page buttons
+nextLabel      | node   |          | `'Next'`     | Next button label
+onChange       | func   |          | n/a          | Function passed to page buttons
+pageCount      | number | yes      | n/a          | The total number of pages
+previousLabel  | node   |          | `'Previous'` | Previous button label
 
 ### ControlledTabs
 
 Property name  | Type   | Required | Default  | Description
 ---------------|--------|----------|:--------:|--------------------------------
 activeTab      | number |          | `0`      | Active tab
-labels         | array  |          | `[]`     | List of tab labels
-onChange       | func   |          | `false`  | Function passed to page buttons
-pageCount      | number | yes      | `'/'`    | The total number of pages
-previousLabel  | node   |          | n/a      | Previous button label
+labels         | array  |          | `[{}]`   | List of tab labels
+onChange       | func   |          | n/a      | Function passed to page buttons
 
 #### Types
 

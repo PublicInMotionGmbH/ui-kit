@@ -2,7 +2,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import Badge from '@talixo/badge'
+import { Badge } from '@talixo/badge'
 import ControlledPagination from './src/ControlledPagination'
 import ControlledTabs from './src/ControlledTabs'
 import Element from './src/Element'
@@ -19,7 +19,7 @@ const addStory = createStoriesFactory('Navigation', module)
 addStory('initial', readme, () => (
   <Navigation>
     <Element>Home</Element>
-    <Element>Isuues</Element>
+    <Element>Issues</Element>
     <Element>Minor</Element>
   </Navigation>
 ))
@@ -53,7 +53,7 @@ addStory.controlled('controlled pagination', readme, (setState, state) => (
 addStory('breadcrumbs', readme, () => (
   <Navigation type='breadcrumbs'>
     <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
     <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
@@ -61,7 +61,7 @@ addStory('breadcrumbs', readme, () => (
 addStory('breadcrumbs with custom divider', readme, () => (
   <Navigation type='breadcrumbs' divider='>'>
     <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
     <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
@@ -69,7 +69,7 @@ addStory('breadcrumbs with custom divider', readme, () => (
 addStory('tabs', readme, () => (
   <Navigation type='tabs'>
     <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Isuues</a></Element>
+    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
     <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
   </Navigation>
 ))
@@ -77,7 +77,7 @@ addStory('tabs', readme, () => (
 addStory('tabs with badges', readme, () => (
   <Navigation type='tabs'>
     <Element onClick={action('click home')}>Home</Element>
-    <Element onClick={action('click issues')}>Isuues <Badge>12</Badge></Element>
+    <Element onClick={action('click issues')}>Issues <Badge>12</Badge></Element>
     <Element onClick={action('click minor')}>Minor <Badge>7</Badge></Element>
   </Navigation>
 ))
