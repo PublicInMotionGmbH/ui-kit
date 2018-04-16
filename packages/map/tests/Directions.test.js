@@ -1,50 +1,18 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
+import GoogleMapsMock from './utils/GoogleMapsMock'
+
 import Directions from '../src/Directions'
 
 const example = require('./fixtures/directions-example.json')
 const example2 = require('./fixtures/directions-example-2.json')
 
 describe('<Directions />', () => {
-  let previousGoogle
-  let routeFn
+  let mock
 
-  beforeEach(() => {
-    routeFn = jest.fn()
-    previousGoogle = global.google || window.google
-    global.google = window.google = {
-      maps: {
-        Map: function () {
-          this.setCenter = jest.fn()
-          this.setOptions = jest.fn()
-          this.setZoom = jest.fn()
-        },
-        DirectionsService: function () {
-          this.route = routeFn
-        },
-        DirectionsRenderer: function () {
-          this.setDirections = jest.fn()
-          this.setMap = jest.fn()
-        },
-        LatLng: function (lat, lng) {
-          this.lat = lat
-          this.lng = lng
-        },
-        TravelMode: {
-          DRIVING: 'driving'
-        },
-        DirectionsStatus: {
-          OK: 'ok',
-          ERROR: null
-        }
-      }
-    }
-  })
-
-  afterEach(() => {
-    global.google = window.google = previousGoogle
-  })
+  beforeEach(() => (mock = GoogleMapsMock.create()))
+  afterEach(() => mock.detach())
 
   it('should not have directions on beginning', () => {
     const wrapper = shallow(
@@ -69,6 +37,10 @@ describe('<Directions />', () => {
         endPoint={endPoint}
       />
     )
+
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // We expect routing to be caled once
     expect(routeFn.mock.calls.length).toBe(1)
 
@@ -76,7 +48,7 @@ describe('<Directions />', () => {
     const [ , callback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
-    await callback(example, global.google.maps.DirectionsStatus.OK)
+    await callback(example, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(wrapper.state('directions')).not.toBe(null)
@@ -95,6 +67,9 @@ describe('<Directions />', () => {
       />
     )
 
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // We expect routing to be called once
     expect(routeFn.mock.calls.length).toBe(1)
 
@@ -102,7 +77,7 @@ describe('<Directions />', () => {
     const [ , callback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
-    await callback(example, global.google.maps.DirectionsStatus.OK)
+    await callback(example, mock.DirectionsStatus.OK)
 
     // Update new coordinates
     wrapper.setProps({
@@ -117,7 +92,7 @@ describe('<Directions />', () => {
     const [ , callback2 ] = routeFn.mock.calls[1]
 
     // Call asynchronously callback with proper value
-    await callback2(example2, global.google.maps.DirectionsStatus.OK)
+    await callback2(example2, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(wrapper.state('directions')).toEqual(example2)
@@ -136,6 +111,9 @@ describe('<Directions />', () => {
       />
     )
 
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // We expect routing to be called once
     expect(routeFn.mock.calls.length).toBe(1)
 
@@ -152,7 +130,7 @@ describe('<Directions />', () => {
     const [ , callback2 ] = routeFn.mock.calls[1]
 
     // Call asynchronously callback with proper value
-    await callback2(example2, global.google.maps.DirectionsStatus.OK)
+    await callback2(example2, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(wrapper.state('directions')).toEqual(example2)
@@ -171,6 +149,9 @@ describe('<Directions />', () => {
       />
     )
 
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // We expect routing to be called once
     expect(routeFn.mock.calls.length).toBe(1)
 
@@ -178,7 +159,7 @@ describe('<Directions />', () => {
     const [ , callback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
-    await callback(example, global.google.maps.DirectionsStatus.OK)
+    await callback(example, mock.DirectionsStatus.OK)
 
     // Update new coordinates
     wrapper.setProps({
@@ -193,7 +174,7 @@ describe('<Directions />', () => {
     const [ , callback2 ] = routeFn.mock.calls[1]
 
     // Call asynchronously callback with proper value
-    await callback2(example2, global.google.maps.DirectionsStatus.OK)
+    await callback2(example2, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(wrapper.state('directions')).toEqual(example2)
@@ -212,8 +193,11 @@ describe('<Directions />', () => {
       />
     )
 
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // Reset call counter
-    routeFn.mockReset()
+    mock.reset()
 
     // Create spy function on `handleError` place
     const spy = jest.fn()
@@ -229,7 +213,7 @@ describe('<Directions />', () => {
     const [ , callback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
-    await callback(null, global.google.maps.DirectionsStatus.ERROR)
+    await callback(null, mock.DirectionsStatus.ERROR)
 
     // Expect directions to be put into component state
     expect(spy.mock.calls.length).toBe(1)
@@ -254,13 +238,74 @@ describe('<Directions />', () => {
       endPoint: { lat: -32.397, lng: 140.644 }
     })
 
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
     // Get information about call for routing
     const [ , previousCallback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
-    await previousCallback(example, global.google.maps.DirectionsStatus.OK)
+    await previousCallback(example, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(wrapper.state('directions')).toBe(null)
+  })
+
+  it('should not load new directions when they are empty', () => {
+    // Set up geo-points for test
+    const startPoint = { lat: -30.397, lng: 140.644 }
+    const endPoint = { lat: -31.397, lng: 150.644 }
+
+    // Build shalow component
+    const wrapper = shallow(
+      <Directions
+        startPoint={startPoint}
+        endPoint={endPoint}
+      />
+    )
+
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
+    // We expect routing to be called first time
+    expect(routeFn.mock.calls.length).toBe(1)
+
+    // Update new coordinates
+    wrapper.setProps({
+      startPoint: null,
+      endPoint: null
+    })
+
+    // We expect routing to be not called second time
+    expect(routeFn.mock.calls.length).toBe(1)
+  })
+
+  it('should not load directions on beginning when they are empty', () => {
+    // Set up geo-points for test
+    const startPoint = { lat: -30.397, lng: 140.644 }
+    const endPoint = { lat: -31.397, lng: 150.644 }
+
+    // Build shalow component
+    const wrapper = shallow(
+      <Directions
+        startPoint={null}
+        endPoint={null}
+      />
+    )
+
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
+    // We expect routing to be called first time
+    expect(routeFn.mock.calls.length).toBe(0)
+
+    // Update new coordinates
+    wrapper.setProps({
+      startPoint: startPoint,
+      endPoint: endPoint
+    })
+
+    // We expect routing to be not called second time
+    expect(routeFn.mock.calls.length).toBe(1)
   })
 })

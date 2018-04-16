@@ -1,27 +1,15 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
+import GoogleMapsMock from './utils/GoogleMapsMock'
+
 import Map from '../src/Map'
 
 describe('<Map />', () => {
-  let previousGoogle
+  let mock
 
-  beforeEach(() => {
-    previousGoogle = global.google || window.google
-    global.google = window.google = {
-      maps: {
-        Map: function () {
-          this.setCenter = () => {}
-          this.setOptions = () => {}
-          this.setZoom = () => {}
-        }
-      }
-    }
-  })
-
-  afterEach(() => {
-    global.google = window.google = previousGoogle
-  })
+  beforeEach(() => (mock = GoogleMapsMock.create()))
+  afterEach(() => mock.detach())
 
   it('renders children correctly', () => {
     const wrapper = shallow(<Map apiKey='this_is_api_key' />)

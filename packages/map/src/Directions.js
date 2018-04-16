@@ -53,7 +53,7 @@ class Directions extends React.PureComponent {
    * @param {object} nextProps
    * @param {object|{ lat: number, lng: number }} nextProps.startPoint
    * @param {object|{ lat: number, lng: number }} nextProps.endPoint
-   * @param {object[]|Array<{ lat: number, lng: number }>} props.via
+   * @param {object[]|Array<{ lat: number, lng: number }>} nextProps.via
    */
   componentWillReceiveProps (nextProps) {
     // When any point has changed, load directions again
@@ -127,10 +127,10 @@ class Directions extends React.PureComponent {
 
 Directions.propTypes = {
   /** Start point */
-  startPoint: Location.isRequired,
+  startPoint: Location,
 
   /** End point */
-  endPoint: Location.isRequired,
+  endPoint: Location,
 
   /** Waypoints */
   via: PropTypes.oneOfType([
