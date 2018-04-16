@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Icon } from '@talixo/icon'
@@ -9,8 +8,7 @@ import List from './src/List'
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('List', module, {
-  propTables: [ List ],
-  propTablesExclude: [ Icon ]
+  propTables: [ List ]
 })
 
 addStory('default', readme, () => (
@@ -27,7 +25,7 @@ addStory('default', readme, () => (
     </span>
   </List>
 ))
-// {<Icon name='done' style={{ color: 'green' }} />}
+
 addStory('custom bullet', readme, () => (
   <div>
     <h2>List with custom character bullet "~"</h2>

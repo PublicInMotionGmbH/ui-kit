@@ -14,7 +14,7 @@ describe('<Portal />', () => {
     const wrapper = mount(<Portal />)
     const instance = wrapper.instance()
 
-    expect(instance.el.parentNode).toEqual(document.body)
+    expect(instance.el.parentNode).toBe(document.body)
   })
 
   it('should correctly attach to different element', () => {
@@ -23,8 +23,8 @@ describe('<Portal />', () => {
     const wrapper = mount(<Portal attachTo={element} />)
     const instance = wrapper.instance()
 
-    expect(instance.el.parentNode).toEqual(element)
-    expect(element.childNodes.length).toEqual(1)
+    expect(instance.el.parentNode).toBe(element)
+    expect(element.childNodes.length).toBe(1)
 
     wrapper.unmount()
   })
@@ -37,12 +37,12 @@ describe('<Portal />', () => {
 
     wrapper.setProps({ attachTo: undefined })
 
-    expect(instance.el.parentNode).toEqual(document.body)
+    expect(instance.el.parentNode).toBe(document.body)
 
     wrapper.setProps({ attachTo: element })
 
-    expect(instance.el.parentNode).toEqual(element)
-    expect(element.childNodes.length).toEqual(1)
+    expect(instance.el.parentNode).toBe(element)
+    expect(element.childNodes.length).toBe(1)
 
     wrapper.unmount()
   })
@@ -55,7 +55,7 @@ describe('<Portal />', () => {
 
     wrapper.unmount()
 
-    expect(instance.el.parentNode).toEqual(null)
-    expect(element.childNodes.length).toEqual(0)
+    expect(instance.el.parentNode).toBe(null)
+    expect(element.childNodes.length).toBe(0)
   })
 })

@@ -71,7 +71,7 @@ describe('<Collapse />', () => {
       </Collapse>
     )
 
-    expect(wrapper.instance().getHeight()).toEqual(wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight)
+    expect(wrapper.instance().getHeight()).toBe(wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight)
 
     wrapper.unmount()
   })
@@ -87,7 +87,7 @@ describe('<Collapse />', () => {
 
     wrapper.unmount()
 
-    expect(instance.getHeight()).toEqual(null)
+    expect(instance.getHeight()).toBe(null)
   })
 
   it('should return no height when it\'s not mounted', () => {
@@ -101,7 +101,7 @@ describe('<Collapse />', () => {
 
     wrapper.unmount()
 
-    expect(instance.getHeight()).toEqual(null)
+    expect(instance.getHeight()).toBe(null)
   })
 
   it('should not set max-height after first initialization', () => {
@@ -113,8 +113,8 @@ describe('<Collapse />', () => {
 
     const instance = wrapper.instance()
 
-    expect(instance.height).toEqual(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('')
+    expect(instance.height).toBe(null)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
 
     wrapper.unmount()
   })
@@ -134,8 +134,8 @@ describe('<Collapse />', () => {
 
     const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
 
-    expect(instance.height).toEqual(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
+    expect(instance.height).toBe(height)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
 
     wrapper.unmount()
   })
@@ -153,8 +153,8 @@ describe('<Collapse />', () => {
 
     wrapper.setProps({ collapsed: false })
 
-    expect(instance.height).toEqual(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('')
+    expect(instance.height).toBe(null)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
 
     wrapper.unmount()
   })
@@ -174,15 +174,15 @@ describe('<Collapse />', () => {
 
     const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
 
-    expect(instance.height).toEqual(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
+    expect(instance.height).toBe(height)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
 
     // Check after finishing transition
 
     instance.finishTransition({ target: instance.node })
 
-    expect(instance.height).toEqual(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('')
+    expect(instance.height).toBe(null)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
 
     wrapper.unmount()
   })
@@ -202,19 +202,19 @@ describe('<Collapse />', () => {
 
     const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
 
-    expect(instance.height).toEqual(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
-    expect(wrapper.getDOMNode().style.background).toEqual('red')
+    expect(instance.height).toBe(height)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
+    expect(wrapper.getDOMNode().style.background).toBe('red')
 
     // Check after finishing transition
 
     instance.finishTransition({ target: instance.node })
     instance.forceUpdate()
 
-    expect(instance.height).toEqual(null)
+    expect(instance.height).toBe(null)
 
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('10px')
-    expect(wrapper.getDOMNode().style.background).toEqual('red')
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('10px')
+    expect(wrapper.getDOMNode().style.background).toBe('red')
 
     wrapper.unmount()
   })
@@ -234,17 +234,17 @@ describe('<Collapse />', () => {
 
     const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
 
-    expect(instance.height).toEqual(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
-    expect(wrapper.getDOMNode().style.background).toEqual('red')
+    expect(instance.height).toBe(height)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
+    expect(wrapper.getDOMNode().style.background).toBe('red')
 
     // Check after finishing transition
 
     instance.finishTransition({ target: instance.node })
 
-    expect(instance.height).toEqual(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('')
-    expect(wrapper.getDOMNode().style.background).toEqual('red')
+    expect(instance.height).toBe(null)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
+    expect(wrapper.getDOMNode().style.background).toBe('red')
 
     wrapper.unmount()
   })
@@ -268,8 +268,8 @@ describe('<Collapse />', () => {
 
     instance.finishTransition({ target: wrapper.find('.talixo-collapse__content').getDOMNode() })
 
-    expect(instance.height).toEqual(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toEqual('' + height)
+    expect(instance.height).toBe(height)
+    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
 
     wrapper.unmount()
   })
@@ -281,8 +281,8 @@ describe('<Collapse />', () => {
       </Collapse>
     )
 
-    expect(wrapper.getDOMNode().style.transitionDuration).toEqual('1000ms')
-    expect(wrapper.getDOMNode().style.animationDuration).toEqual('1000ms')
+    expect(wrapper.getDOMNode().style.transitionDuration).toBe('1000ms')
+    expect(wrapper.getDOMNode().style.animationDuration).toBe('1000ms')
 
     wrapper.unmount()
   })

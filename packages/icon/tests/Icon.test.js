@@ -23,25 +23,25 @@ describe('<Icon />', () => {
     const wrapper = shallow(<Icon name={TALIXO_EXAMPLE} className='abc' />).dive()
 
     expect(wrapper.props().className).toMatch(/(^| )abc( |$)/)
-    expect(wrapper.props().className).not.toEqual('abc')
+    expect(wrapper.props().className).not.toBe('abc')
   })
 
   it('handles properly additional properties for Talixo icon', () => {
     const wrapper = shallow(<Icon name={TALIXO_EXAMPLE} id='def' className='abc' />)
 
-    expect(wrapper.props().id).toEqual('def')
+    expect(wrapper.props().id).toBe('def')
   })
 
   it('handles properly additional classes for Material icon', () => {
     const wrapper = shallow(<Icon name={MATERIAL_EXAMPLE} className='abc' />).dive()
 
     expect(wrapper.props().className).toMatch(/(^| )abc( |$)/)
-    expect(wrapper.props().className).not.toEqual('abc')
+    expect(wrapper.props().className).not.toBe('abc')
   })
 
   it('handles properly additional properties for Material icon', () => {
     const wrapper = shallow(<Icon name={MATERIAL_EXAMPLE} id='def' className='abc' />)
 
-    expect(wrapper.props().id).toEqual('def')
+    expect(wrapper.props().id).toBe('def')
   })
 })
