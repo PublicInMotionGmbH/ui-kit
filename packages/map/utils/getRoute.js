@@ -28,7 +28,6 @@ function getRoute (startPoint, endPoint, waypoints) {
   return new Promise((resolve, reject) => {
     DirectionsService.route(options, (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
-        window.x = result
         resolve(result)
       } else {
         reject(result)
