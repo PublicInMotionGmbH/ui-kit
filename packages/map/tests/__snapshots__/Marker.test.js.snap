@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Marker /> renders children correctly 1`] = `
+<Marker
+  onClick={[Function]}
+  position={
+    Object {
+      "lat": -27.5598,
+      "lng": 151.9507,
+    }
+  }
+/>
+`;
