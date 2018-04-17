@@ -36,7 +36,9 @@ Property name | Type                | Required | Default | Description
 --------------|---------------------|----------|:-------:|------------------------------------------------
 startPoint    | Location            | yes      | n/a     | start point of directions
 endPoint      | Location            | yes      | n/a     | end point of directions
-via           | Location|Location[] | yes      | n/a     | either single waypoint or list of waypoints
+via           | Location|Location[] | no       | n/a     | either single waypoint or list of waypoints
+onLoad        | function            | no       | n/a     | handler after successfully loaded directions
+onError       | function            | no       | n/a     | handler after error while loading new directions
 
 ### Marker
 
