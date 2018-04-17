@@ -1,23 +1,22 @@
-const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const findNodeModules = require('find-node-modules')
 const svg = require('gulp-svg-sprite')
 const svgo = require('gulp-svgo')
 
-// Load information about prefix
-const { prefix } = require('../config')
+const resolvePath = require('./resolvePath')
 
-// Configure directory to load SVG icons from and where to output them
-const svgsPackagePath = 'flagkit-web/svgs'
-const outputPath = path.join(__dirname, '..', 'sprites', 'sprite.svg')
+// Load information about prefix
+const { prefix, paths } = require('../config')
+
+// Resolve required paths
+const outputPath = resolvePath(paths.svg)
 
 // Find package in node modules
-const sourceDirPath = findNodeModules().map(x => path.join(x, svgsPackagePath)).find(x => fs.existsSync(x))
+const sourceDirPath = resolvePath(paths.source)
 
 // Validate if package has been found
-if (!sourceDirPath) {
-  throw new Error('You need to install package dependencies (`flagkit-web` especially) first.')
+if (sourceDirPath === null) {
+  throw new Error(`You need to install package dependencies ('${paths.source}' especially) first.`)
 }
 
 // Load transformations for SVG-Sprite
@@ -30,7 +29,7 @@ const transform = require('./extractGradients')
  */
 function generateSymbolId (filePath) {
   // Get name without extension and directories
-  const iconName = filePath.match(/(?:^|[\\/])(.+?)\.[^.]+$/)[1].toLowerCase()
+  const iconName = filePath.match(/(?:^|[\\/])([^\\/]+?)\.[^.\\/]+$/)[1].toLowerCase()
 
   return `${prefix}-${iconName}`
 }

@@ -30,7 +30,7 @@ code          | string    | yes      | n/a     | [ISO 3166-1 alpha-2](https://en
 ## Updating icons
 
 To reinitialize sprites simply run `npm run update` in package - it will automatically generate sprite and component which will include it.
-When you will want to use another package with SVG icons, change `outputPath` in `scripts/buildSprite.js`.
+When you will want to use another package with SVG icons, change `paths.source` in `config.js`.
 
 ## Changelog
 

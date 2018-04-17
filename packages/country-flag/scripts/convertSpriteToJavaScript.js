@@ -1,11 +1,15 @@
 const fs = require('fs')
-const path = require('path')
+
+const resolvePath = require('./resolvePath')
+
+const { paths } = require('../config')
+
+// Build paths
+const svgPath = resolvePath(paths.svg)
+const outputPath = resolvePath(paths.js)
 
 // Load SVG sprite
-const sprite = fs.readFileSync(path.join(__dirname, '../sprites/sprite.svg'), 'utf8')
-
-// Build output path
-const outputPath = path.join(__dirname, '../sprites/sprite.js')
+const sprite = fs.readFileSync(svgPath, 'utf8')
 
 // Build JavaScript code
 const code = 'module.exports = `' + sprite.replace(/'/g, '\\\'').replace(/\n/g, '\\n') + '`\n'
