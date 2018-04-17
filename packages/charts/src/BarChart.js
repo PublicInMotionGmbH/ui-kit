@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { VictoryChart, VictoryBar } from 'victory'
+
+import {
+  FlexibleXYPlot,
+  XAxis,
+  YAxis,
+  VerticalBarSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
-
-import { talixoTheme } from './config'
 
 const moduleName = 'bar-chart'
 
@@ -17,15 +20,27 @@ const moduleName = 'bar-chart'
  * @returns {React.Element}
  */
 function BarChart (props) {
-  const { categories, className, data, style, ...passedProps } = props
+  const { className, data, ...passedProps } = props
   const wrapperCls = buildClassName(moduleName, className)
 
   return (
-    <div className={wrapperCls} style={style}>
-      <VictoryChart theme={talixoTheme} {...passedProps}>
-        <VictoryBar key={data.x} data={data} categories={categories} />
-      </VictoryChart>
-    </div>
+    <FlexibleXYPlot
+      xType='ordinal'
+      className={wrapperCls}
+      {...passedProps}
+    >
+      <XAxis />
+      <YAxis />
+      {
+        data.map(item => (
+          <VerticalBarSeries
+            data={item.dataItems}
+            color={item.color}
+            className={item.className}
+          />
+        ))
+      }
+    </FlexibleXYPlot>
   )
 }
 

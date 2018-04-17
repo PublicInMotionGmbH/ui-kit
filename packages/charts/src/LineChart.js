@@ -1,12 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { VictoryChart, VictoryLine } from 'victory'
+import {
+  FlexibleXYPlot,
+  XAxis,
+  YAxis,
+  LineSeries,
+  HorizontalGridLines,
+  VerticalGridLines
+} from 'react-vis'
 
-import { buildClassName } from '@talixo/shared'
+// import { buildClassName } from '@talixo/shared'
 
-import { talixoTheme, getColorByIndex } from './config'
+import Highligth from './Highlight'
 
-const moduleName = 'line-chart'
+// import { talixoTheme, getColorByIndex } from './config'
+
+// const moduleName = 'line-chart'
 
 /**
  * Component which represents LineChart.
@@ -15,29 +24,52 @@ const moduleName = 'line-chart'
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-function LineChart (props) {
-  const { className, data, lineProps, style, ...passedProps } = props
-  const wrapperCls = buildClassName(moduleName, className)
+class LineChart extends React.Component {
+  state = {
+    lastDrawLocation: null
+  }
+  render () {
+    const { lastDrawLocation } = this.state
+    const {
+      className,
+      data,
+      lineProps,
+      xAxisTitle,
+      yAxisTitle,
+      style,
+      ...passedProps
+    } = this.props
+    // const wrapperCls = buildClassName(moduleName, className)
 
-  return (
-    <div className={wrapperCls} style={style}>
-      <VictoryChart theme={talixoTheme} {...passedProps}>
+    return (
+      <FlexibleXYPlot
+        animation
+        xDomain={lastDrawLocation && [lastDrawLocation.left, lastDrawLocation.right]}
+        {...passedProps}
+      >
+        <HorizontalGridLines />
+        <VerticalGridLines />
+        <XAxis title={xAxisTitle} position='start' />
+        <YAxis title={yAxisTitle} />
         {
-          data.map((itemData, index) => (
-            <VictoryLine
-              theme={talixoTheme}
-              data={itemData}
-              style={{
-                data: {
-                  stroke: getColorByIndex(index + 3), strokeWidth: 3
-                }}}
-              {...lineProps}
-            />
-          ))
+          data.map((item, index) => {
+            return (
+              <LineSeries
+                data={item.dataItems}
+                color={item.color}
+                className={item.className} />
+            )
+          })
         }
-      </VictoryChart>
-    </div>
-  )
+        <Highligth
+          color={null}
+          onBrushEnd={(area) => {
+            this.setState({ lastDrawLocation: area })
+          }}
+        />
+      </FlexibleXYPlot>
+    )
+  }
 }
 
 LineChart.propTypes = {
@@ -46,15 +78,15 @@ LineChart.propTypes = {
 
   /** Line chart data  */
   data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
-    x: PropTypes.oneOf([ PropTypes.string, PropTypes.number ]),
-    y: PropTypes.oneOf([ PropTypes.string, PropTypes.number ])
+    x: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+    y: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
   }))),
 
-  /** Additional line props, accepts any VictoryLine property */
-  lineProps: PropTypes.object,
+  /** Line chart data  */
+  xAxisTitle: PropTypes.string,
 
-  /** Line colors */
-  lineColors: PropTypes.array,
+  /** Line chart data  */
+  yAxisTitle: PropTypes.string,
 
   /** Additional wrapper styles */
   style: PropTypes.object
@@ -62,7 +94,9 @@ LineChart.propTypes = {
 
 LineChart.defaultProps = {
   data: [[{}]],
-  lineColors: []
+  lineColors: [],
+  xAxisTitle: '',
+  yAxisTitle: ''
 }
 
 export default LineChart

@@ -1,1 +1,25 @@
 @import '~@talixo/shared/styles/config'
+
+$base-color: $color-talixo-red
+$border-radius: $border-radius-m
+$border-color: $color-border
+$legend-padding: dp(1)
+
+@mixin graph-color ($id, $color)
+  #{prefix('legend', 'colorbox--#{$id}')}
+    background-color: $color
+
+  #{prefix('charts','series--#{$id}')}
+    stroke: $color
+    float: $color
+
+@mixin graph-colors ($baseColor)
+  @for $i from 0 to 5
+    $multiplier: $i * 10%
+    @include graph-color($i, darken($baseColor, $multiplier))
+
+  @for $i from 0 to 5
+    $multiplier:  $i * 10%
+    @include graph-color($i + 5, lighten($baseColor, $multiplier))
+
+

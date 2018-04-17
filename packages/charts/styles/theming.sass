@@ -1,4 +1,14 @@
 @import './config'
 
-@include module('charts')
-  display: block
+@include graph-colors($base-color)
+
+@include module('legend')
+  border-color: $border-color
+
+  #{prefix('legend', 'colorbox')}
+    width: dp(3)
+    height: dp(.25)
+    padding: 0
+    margin: 0 dp(1.5)
+    display: inline-block
+    vertical-align: middle

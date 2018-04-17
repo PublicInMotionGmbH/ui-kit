@@ -26,12 +26,12 @@ function PieChart (props) {
   const minDimension = Math.min(height, width)
   const radius = showLabels
     ? scaleRadius(minDimension, 0.3)
-    : minDimension
+    : null
 
   return (
     <div className={wrapperCls} style={style}>
       <RadialChart
-        data={data}
+        data={data.dataItems}
         height={height}
         width={width}
         radius={radius}
@@ -66,7 +66,7 @@ PieChart.propTypes = {
 
 PieChart.defaultProps = {
   height: 500,
-  width: 200,
+  width: 500,
   showLabels: false
 }
 

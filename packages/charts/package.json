@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@talixo/shared": "^1.0.0",
+    "@talixo/checkbox": "^1.0.0",
     "react-vis": "^1.9.2",
     "victory": "^0.25.7"
   }

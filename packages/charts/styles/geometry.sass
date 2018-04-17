@@ -1,4 +1,9 @@
 @import './config'
 
-@include module('charts')
-  display: block
+@include module('legend')
+  display: flex
+  flex-direction: column
+  border: solid 1px
+  border-radius: $border-radius
+  padding: $legend-padding
+
