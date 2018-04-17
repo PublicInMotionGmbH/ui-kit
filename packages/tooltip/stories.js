@@ -142,7 +142,7 @@ addStory('Popover without arrow', readme, () => (
 addStory('Popover fade', readme, () => (
   <div>
     <h2>Default Popover fade time</h2>
-    <Tooltip triggerOn='click' color='primary' fade render={() => <div><h3>Popover</h3></div>}>
+    <Tooltip triggerOn='click' color='primary' fade render={() => <div><h3>Popover fade</h3></div>}>
       <span
         style={tooltipStyle}
       >
@@ -150,7 +150,7 @@ addStory('Popover fade', readme, () => (
       </span>
     </Tooltip>
     <h2>Custom Popover fade time</h2>
-    <Tooltip triggerOn='click' color='primary' fade fadeTime={3000} render={() => <div><h3>Popover</h3></div>}>
+    <Tooltip triggerOn='click' color='primary' fade fadeTime={3000} render={() => <div><h3>Popover fade 3s</h3></div>}>
       <span
         style={tooltipStyle}
       >
