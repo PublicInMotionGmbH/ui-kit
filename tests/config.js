@@ -11,6 +11,7 @@ module.exports = {
     '!packages/*/stories.js',
     '!packages/*/dist/**/*.js',
     '!packages/icon/src/storybook/*.js',
+    '!packages/*/tests/**/*.js',
     '!packages/icon/scripts/*.js'
   ],
   setupFiles: [ '<rootDir>/tests/polyfills.js' ],
