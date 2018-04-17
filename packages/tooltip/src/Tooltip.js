@@ -2,14 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import cls from 'classnames'
+import { buildClassName } from '@talixo/shared'
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import { getPositionNearElement } from '../utils/position'
-import { prefix } from '@talixo/shared'
-
-const moduleName = prefix('tooltip')
 
 class Portal extends React.Component {
   constructor (props) {
@@ -157,11 +154,10 @@ class Tooltip extends React.Component {
         }))
       : null
 
-    const clsName = cls(moduleName, className, {
-      [`${moduleName}--${color}`]: color !== undefined,
-      [`${moduleName}--${position}`]: position !== undefined,
-      [`${moduleName}--popover`]: isPopover === true
-    })
+    const wrapperClasses = buildClassName([ 'tooltip', 'wrapper' ], className)
+    const fadeClasses = buildClassName(['tooltip', 'fade'], className)
+
+    const nameClasses = buildClassName('tooltip', className, [ color, position, isPopover ? 'popover' : null ])
 
     const tooltipStyle = {
       top: this.state.top,
@@ -172,7 +168,7 @@ class Tooltip extends React.Component {
 
     return (
       <div
-        className={`${moduleName}-hover`}
+        className={wrapperClasses}
         onClick={(e) => this.handleMouseClick(e)}
         onMouseEnter={this.props.isPopover ? null : this.handleMouseEnter}
         onMouseLeave={this.props.isPopover ? null : this.handleMouseLeave}
@@ -181,9 +177,9 @@ class Tooltip extends React.Component {
         {childWithRef}
         <TransitionGroup>
           {this.state.isOpen ? (
-            <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={`${moduleName}-fade`}>
+            <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={fadeClasses}>
               <Portal root={rootNode}>
-                <span className={clsName} style={tooltipStyle}>
+                <span className={nameClasses} style={tooltipStyle}>
                   {render(this.state)}
                 </span>
               </Portal>
