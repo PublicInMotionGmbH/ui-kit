@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CardContent /> renders children correctly 1`] = `
+<div
+  className="talixo-card__content"
+>
+  <div>
+    Content
+  </div>
+</div>
+`;

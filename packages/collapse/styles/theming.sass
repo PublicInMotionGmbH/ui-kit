@@ -1,0 +1,13 @@
+@import './config'
+
+@include module('collapse')
+  &--smooth
+    transition: $collapse-time max-height linear
+    animation: $collapse-time show-collapse 1
+
+  &--collapsed
+    animation: none
+
+@keyframes show-collapse
+  0%, 100%
+    overflow: hidden

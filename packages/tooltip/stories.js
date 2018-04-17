@@ -22,7 +22,7 @@ function render (setState, state) {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <Tooltip
         color='primary'
-        isOpen={state.isOpen}
+        open={state.open}
         position='right'
         render={() => <span>I am controlled</span>}
       >
@@ -33,7 +33,7 @@ function render (setState, state) {
         </span>
       </Tooltip>
       <span
-        onClick={() => setState({ isOpen: !state.isOpen })}
+        onClick={() => setState({ open: !state.open })}
         style={{
           ...tooltipStyle,
           backgroundColor: '#e00',
@@ -49,68 +49,78 @@ function render (setState, state) {
 
 function getInitialState () {
   return {
-    isOpen: false
+    open: false
   }
 }
 
 // Stories
 
 addStory('default', readme, () => (
-  <Tooltip color='primary' render={() => <span>Default</span>}>
-    <span
-      style={tooltipStyle}
-    >
+  <div>
+    <Tooltip color='primary' render={() => <span>Default</span>}>
+      <span
+        style={tooltipStyle}
+      >
       Tooltip right
-    </span>
-  </Tooltip>
-))
-addStory('left', readme, () => (
-  <Tooltip color='primary' position='left' render={() => <span>Default</span>}>
-    <span
-      style={{ ...tooltipStyle, marginLeft: '100px' }}
-    >
+      </span>
+    </Tooltip>
+    <Tooltip color='primary' position='left' render={() => <span>Default</span>}>
+      <span
+        style={{ ...tooltipStyle, marginLeft: '100px' }}
+      >
       Tooltip left
-    </span>
-  </Tooltip>
-))
-addStory('top', readme, () => (
-  <Tooltip color='primary' position='top' render={() => <span>Default</span>}>
-    <span
-      style={tooltipStyle}
-    >
+      </span>
+    </Tooltip>
+    <Tooltip color='primary' position='top' render={() => <span>Default</span>}>
+      <span
+        style={{ ...tooltipStyle, marginLeft: '100px' }}
+      >
       Tooltip top
-    </span>
-  </Tooltip>
-))
-addStory('bottom', readme, () => (
-  <Tooltip color='primary' position='bottom' render={() => <span>Default</span>}>
-    <span
-      style={tooltipStyle}
-    >
+      </span>
+    </Tooltip>
+    <Tooltip color='primary' position='bottom' render={() => <span>Default</span>}>
+      <span
+        style={{ ...tooltipStyle, marginLeft: '100px' }}
+      >
       Tooltip bottom
+      </span>
+    </Tooltip>
+  </div>
+))
+
+addStory('without arrow', readme, () => (
+  <Tooltip isArrow={false} color='primary' render={() => <div><h3>Without arrow</h3></div>}>
+    <span
+      style={tooltipStyle}
+    >
+      Tooltip without arrow
     </span>
   </Tooltip>
 ))
+
 addStory('fade', readme, () => (
-  <Tooltip color='primary' fade render={() => <span>Fade</span>}>
-    <span
-      style={tooltipStyle}
-    >
+  <div>
+    <h2>Default fade time</h2>
+    <Tooltip color='primary' fade render={() => <span>Fade</span>}>
+      <span
+        style={tooltipStyle}
+      >
       Tooltip right
-    </span>
-  </Tooltip>
-))
-addStory('custom fade time', readme, () => (
-  <Tooltip color='primary' fade fadeTime={4000} render={() => <span>Fade 4s</span>}>
-    <span
-      style={tooltipStyle}
-    >
+      </span>
+    </Tooltip>
+    <h2>Custom fade time</h2>
+    <Tooltip color='primary' fade fadeTime={3000} render={() => <span>Fade 3s</span>}>
+      <span
+        style={tooltipStyle}
+      >
       Tooltip right
-    </span>
-  </Tooltip>
+      </span>
+    </Tooltip>
+  </div>
 ))
+
 addStory('Popover', readme, () => (
-  <Tooltip isPopover color='primary' render={() => <div><h3>Popover</h3></div>}>
+  <Tooltip triggerOn='click' color='primary' render={() => <div><h3>Popover</h3></div>}>
     <span
       style={tooltipStyle}
     >
@@ -119,11 +129,42 @@ addStory('Popover', readme, () => (
   </Tooltip>
 ))
 
-addStory('Popover with tooltip', readme, () => (
-  <Tooltip isPopover color='primary' render={() =>
-    <Tooltip color='primary' render={() => <div>Tooltip</div>}>
+addStory('Popover without arrow', readme, () => (
+  <Tooltip triggerOn='click' isArrow={false} color='primary' render={() => <div><h3>Popover</h3></div>}>
+    <span
+      style={tooltipStyle}
+    >
+      Popover without arrow
+    </span>
+  </Tooltip>
+))
+
+addStory('Popover fade', readme, () => (
+  <div>
+    <h2>Default Popover fade time</h2>
+    <Tooltip triggerOn='click' color='primary' fade render={() => <div><h3>Popover</h3></div>}>
       <span
         style={tooltipStyle}
+      >
+      Popover
+      </span>
+    </Tooltip>
+    <h2>Custom Popover fade time</h2>
+    <Tooltip triggerOn='click' color='primary' fade fadeTime={3000} render={() => <div><h3>Popover</h3></div>}>
+      <span
+        style={tooltipStyle}
+      >
+      Popover
+      </span>
+    </Tooltip>
+  </div>
+))
+
+addStory('Popover with tooltip', readme, () => (
+  <Tooltip triggerOn='click' isArrow={false} color='primary' render={() =>
+    <Tooltip color='primary' render={() => <div>Tooltip</div>}>
+      <span
+        style={{...tooltipStyle, backgroundColor: 'transparent'}}
       >
       Popover with Tooltip
       </span>

@@ -37,7 +37,7 @@ if (packages.length === 0) {
 
 // Build patterns to find tests
 const packagesPattern = packages.length === 1 ? packages[0].id : '{' + packages.map(x => x.id).join(',') + '}'
-const testsPattern = `<rootDir>/packages/${packagesPattern}/tests/**/?(*.)test.js`
+const testsPattern = `<rootDir>/packages/${packagesPattern}/tests/**/*.test.js`
 
 // Build arguments for Jest runner
 const runnerArgs = [

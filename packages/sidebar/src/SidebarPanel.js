@@ -5,8 +5,6 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
-const moduleName = prefix('sidebar-panel')
-
 /**
  * Component which represents Sidebar.
  *
@@ -25,7 +23,7 @@ function SidebarPanel (props) {
 
   // Build header if panel has its name
   const header = name ? (
-    <h2 className={`${moduleName}__header`}>
+    <h2 className={prefix('sidebar-panel', 'header')}>
       <Icon name={icon} />
       <span>{name}</span>
     </h2>
@@ -33,7 +31,7 @@ function SidebarPanel (props) {
 
   return (
     <div className={clsName} {...passedProps}>
-      <div className={`${moduleName}__content`}>
+      <div className={prefix('sidebar-panel', 'content')}>
         {header}
         {children}
       </div>

@@ -15,3 +15,22 @@ exports[`<SidebarElement /> renders children correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`<SidebarElement /> should render properly with panel inside 1`] = `
+<div
+  className="talixo-sidebar-element"
+>
+  <div
+    className="talixo-sidebar-element__button"
+    onClick={[Function]}
+  >
+    <Icon
+      name="home"
+    />
+    See more
+  </div>
+  <SidebarPanel>
+    content
+  </SidebarPanel>
+</div>
+`;

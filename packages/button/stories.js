@@ -1,17 +1,15 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Icon } from '@talixo/icon'
 
 import Button from './src/Button'
 
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-import { action } from '@storybook/addon-actions'
-
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Button', module, {
-  propTables: [ Button ],
-  propTablesExclude: [ Icon ]
+  propTables: [ Button ]
 })
 const click = action('button-click')
 

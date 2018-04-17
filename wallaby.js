@@ -17,6 +17,7 @@ module.exports = wallaby => {
       'packages/*/config.js',
       'packages/*/src/**/*.js',
       'packages/*/utils/**/*.js',
+      'packages/*/tests/utils/**/*.js',
       { pattern: 'packages/*/tests/**/*.test.js.snap', instrument: false }
     ],
 
@@ -38,18 +39,17 @@ module.exports = wallaby => {
       const path = require('path')
 
       wallaby.testFramework.configure({
-        collectCoverageFrom: [ 'packages/*/src/**/*.js' ],
         setupFiles: [ path.resolve('./tests/polyfills.js') ],
         setupTestFrameworkScriptFile: path.resolve('./tests/setupTests'),
-        testMatch: [ path.resolve('packages/*/tests/**/?(*.)test.js') ],
+        testMatch: [ path.resolve('packages/*/tests/**/*.test.js') ],
         testEnvironment: 'jsdom',
         testURL: 'http://localhost',
         transform: {
           '^.+\\.css$': path.resolve('./tests/cssTransform'),
-          '^(?!.*\\.(js|jsx|css|json)$)': path.resolve('./tests/fileTransform')
+          '^(?!.*\\.(js|css|json)$)': path.resolve('./tests/fileTransform')
         },
-        transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\].+\\.js$' ],
-        moduleFileExtensions: [ 'js', 'json', 'jsx' ]
+        transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.js$' ],
+        moduleFileExtensions: [ 'js', 'json' ]
       })
     },
 

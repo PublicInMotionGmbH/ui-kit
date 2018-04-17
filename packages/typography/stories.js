@@ -10,7 +10,7 @@ const readme = ''
 
 // Create factories for story
 const addStory = createStoriesFactory('Typography', module, {
-  propTypes: [ Heading, Lead, Code ]
+  propTables: [ Heading, Lead, Code ]
 })
 
 // Stories

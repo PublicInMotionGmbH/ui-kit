@@ -8,7 +8,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('__title__', module, {
-  propTypes: [ __name__ ]
+  propTables: [ __name__ ]
 })
 
 // Stories

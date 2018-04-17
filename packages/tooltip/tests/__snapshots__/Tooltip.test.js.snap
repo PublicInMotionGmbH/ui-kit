@@ -2,7 +2,7 @@
 
 exports[`<Tooltip /> renders children correctly 1`] = `
 <div
-  className="talixo-tooltip-hover"
+  className="talixo-tooltip__wrapper"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}

@@ -25,7 +25,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
@@ -37,7 +37,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toEqual(true)
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toBe(true)
     wrapper.unmount()
   })
 
@@ -49,7 +49,7 @@ describe('<Tooltip />', () => {
     )
     wrapper.find(`.${name}-target`).simulate('mouseOver')
 
-    expect(wrapper.find(`.${name}`).hasClass('big')).toEqual(true)
+    expect(wrapper.find(`.${name}`).hasClass('big')).toBe(true)
     wrapper.unmount()
   })
 
@@ -77,32 +77,32 @@ describe('<Tooltip />', () => {
     wrapper.unmount()
   })
 
-  it('renders render when isOpen is set to true', () => {
+  it('renders render when open is set to true', () => {
     const wrapper = mount(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
-  it('disables event handlers when isOpen is set to true', () => {
+  it('disables event handlers when open is set to true', () => {
     const wrapper = mount(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
     wrapper.find(`.${name}-target`).simulate('click')
 
-    expect(wrapper.contains(<span>Left</span>)).toEqual(true)
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
     wrapper.unmount()
   })
 
   it('throws error when multiple children are proivided', () => {
     const wrapper = () => shallow(
-      <Tooltip position='left' isOpen render={() => <span>Left</span>}>
+      <Tooltip position='left' open render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>

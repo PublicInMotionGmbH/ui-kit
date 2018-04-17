@@ -2,7 +2,7 @@
 
 exports[`<Modal /> renders children correctly 1`] = `
 <div>
-  <ModalPortal>
+  <Portal>
     <div
       className="talixo-modal-backdrop talixo-modal-backdrop--exiting"
     >
@@ -14,6 +14,6 @@ exports[`<Modal /> renders children correctly 1`] = `
         </h2>
       </div>
     </div>
-  </ModalPortal>
+  </Portal>
 </div>
 `;
