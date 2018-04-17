@@ -7,12 +7,14 @@ exports[`<Calendar /> renders children correctly 1`] = `
 >
   <withStyles(SingleDatePicker)
     anchorDirection="left"
+    appendToBody={false}
     block={false}
     calendarInfoPosition="bottom"
     customCloseIcon={null}
     customInputIcon={null}
     date={null}
     daySize={39}
+    disableScroll={false}
     disabled={false}
     displayFormat="D MMM YYYY"
     enableOutsideDays={false}

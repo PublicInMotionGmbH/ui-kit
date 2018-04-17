@@ -13,7 +13,8 @@ const addStory = createStoriesFactory('Calendar', module)
 const styles = {
   position: 'relative',
   display: 'inline-block',
-  left: '1px'
+  left: '1px',
+  marginRight: '30px'
 }
 
 // Stories
@@ -23,13 +24,10 @@ addStory('default', readme, () => (
 ))
 
 addStory('custom date format', readme, () => (
-  <Calendar style={styles} displayFormat='YYYY/MM/D' />
-))
-
-addStory('two calendars', readme, () => (
   <div>
-    <Calendar style={styles} />
-    <Calendar style={styles} />
+    <Calendar style={styles} displayFormat='YYYY/MM/D' />
+    <Calendar style={styles} displayFormat='DD-MM-YYYY' />
+    <Calendar style={styles} displayFormat='ddd MM YY' />
   </div>
 ))
 
