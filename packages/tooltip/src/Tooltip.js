@@ -194,7 +194,7 @@ Tooltip.propTypes = {
   isArrow: PropTypes.bool,
 
   /** Type of event to open tooltip  */
-  triggerOn: PropTypes.string
+  triggerOn: PropTypes.oneOf([ 'hover', 'click' ])
 }
 
 Tooltip.defaultProps = {
