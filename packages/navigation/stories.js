@@ -2,7 +2,6 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import { Badge } from '@talixo/badge'
 import ControlledPagination from './src/ControlledPagination'
 import ControlledTabs from './src/ControlledTabs'
 import Element from './src/Element'
@@ -71,14 +70,6 @@ addStory('tabs', readme, () => (
     <Element onClick={action('click home')}><a href='#'>Home</a></Element>
     <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
     <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
-  </Navigation>
-))
-
-addStory('tabs with badges', readme, () => (
-  <Navigation type='tabs'>
-    <Element onClick={action('click home')}>Home</Element>
-    <Element onClick={action('click issues')}>Issues <Badge>12</Badge></Element>
-    <Element onClick={action('click minor')}>Minor <Badge>7</Badge></Element>
   </Navigation>
 ))
 
