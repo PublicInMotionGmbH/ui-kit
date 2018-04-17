@@ -1,8 +1,8 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import RadioInput from './src/RadioInput'
-import {action} from '@storybook/addon-actions'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))

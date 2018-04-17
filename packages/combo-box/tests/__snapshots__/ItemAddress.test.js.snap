@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemAddress /> renders correctly 1`] = `
+<div
+  className="talixo-item-address"
+>
+  <Icon
+    className="talixo-item-address__icon material-icons"
+    name="credit_card"
+  />
+  <span
+    className="talixo-item-address__place"
+  >
+    Hotel
+  </span>
+  <span
+    className="talixo-item-address__address"
+  >
+    Berlin
+  </span>
+</div>
+`;

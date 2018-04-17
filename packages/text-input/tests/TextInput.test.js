@@ -65,7 +65,7 @@ describe('<TextInput />', () => {
     })
 
     it('should update state', () => {
-      expect(wrapper.state().inputValue).toEqual('Test')
+      expect(wrapper.state().inputValue).toBe('Test')
     })
 
     it(`should add .${`${moduleName}__label--not-empty`} to label`, () => {

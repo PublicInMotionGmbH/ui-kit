@@ -15,13 +15,11 @@ import { buildClassName } from '@talixo/shared'
 function Heading (props) {
   const { className, level, children, ...passedProps } = props
 
-  // Calculate heading level
-  const desiredLevel = Math.max(1, Math.min(level, 6))
-
-  return React.createElement(`h${desiredLevel}`, {
-    className: buildClassName('heading', className),
-    ...passedProps
-  }, children)
+  return React.createElement(
+    `h${level}`,
+    { className: buildClassName('heading', className), ...passedProps },
+    children
+  )
 }
 
 Heading.propTypes = {
@@ -29,7 +27,7 @@ Heading.propTypes = {
   className: PropTypes.string,
 
   /** Heading level */
-  level: PropTypes.number,
+  level: PropTypes.oneOf([ 1, 2, 3, 4, 5, 6 ]),
 
   /** Heading content */
   children: PropTypes.node

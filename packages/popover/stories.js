@@ -1,11 +1,13 @@
 import React from 'react'
-
-import Popover from './src/Popover'
-import Button from '../../packages/button/src/Button'
-
 import { createStoriesFactory } from '@talixo/shared/story'
 
-const addStory = createStoriesFactory('Popover', module)
+import { Button } from '@talixo/button'
+
+import Popover from './src/Popover'
+
+const addStory = createStoriesFactory('Popover', module, {
+  propTables: [ Popover ]
+})
 
 const Menu = () => (
   <div>
@@ -40,7 +42,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-bottom'
-          isOpen={state.activeTarget === 'popover-bottom'}
+          open={state.activeTarget === 'popover-bottom'}
           color='primary'
           position='right'
           layer={2}
@@ -54,7 +56,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-right'
-          isOpen={state.activeTarget === 'popover-right'}
+          open={state.activeTarget === 'popover-right'}
           color='primary'
           position='right'
           fade='true'
@@ -70,7 +72,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-menu-right'
-          isOpen={state.activeTarget === 'popover-menu-right'}
+          open={state.activeTarget === 'popover-menu-right'}
           color='primary'
           position='right'
           fade='true'
@@ -85,7 +87,7 @@ function render (setState, state) {
         </Button>
         <Popover
           target='#popover-menu-bottom'
-          isOpen={state.activeTarget === 'popover-menu-bottom'}
+          open={state.activeTarget === 'popover-menu-bottom'}
           color='primary'
           position='bottom'
           fade='true'

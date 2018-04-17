@@ -1,11 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SidebarPanel /> renders children correctly 1`] = `
+exports[`<SidebarPanel /> renders empty correctly 1`] = `
 <div
   className="talixo-sidebar-panel"
 >
   <div
     className="talixo-sidebar-panel__content"
   />
+</div>
+`;
+
+exports[`<SidebarPanel /> renders with header and content correctly 1`] = `
+<div
+  className="talixo-sidebar-panel"
+>
+  <div
+    className="talixo-sidebar-panel__content"
+  >
+    <h2
+      className="talixo-sidebar-panel__header"
+    >
+      <Icon
+        name="settings"
+      />
+      <span>
+        Something
+      </span>
+    </h2>
+    There is some content
+  </div>
+</div>
+`;
+
+exports[`<SidebarPanel /> renders with header and icon correctly 1`] = `
+<div
+  className="talixo-sidebar-panel"
+>
+  <div
+    className="talixo-sidebar-panel__content"
+  >
+    <h2
+      className="talixo-sidebar-panel__header"
+    >
+      <Icon
+        name="settings"
+      />
+      <span>
+        Something
+      </span>
+    </h2>
+  </div>
 </div>
 `;

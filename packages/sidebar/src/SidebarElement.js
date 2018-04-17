@@ -5,8 +5,6 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
-const moduleName = prefix('sidebar-element')
-
 /**
  * Component which represents sidebar element,
  * which can be also opened.
@@ -19,7 +17,7 @@ const moduleName = prefix('sidebar-element')
  * @property {boolean} props.active
  *
  * @property {object} state
- * @property {boolean} state.isOpen
+ * @property {boolean} state.open
  *
  * @property {Element} node  reference to DOM element of Sidebar
  *
@@ -35,7 +33,7 @@ class SidebarElement extends React.PureComponent {
 
     this.node = null
     this.state = {
-      isOpen: false
+      open: false
     }
   }
 
@@ -85,7 +83,7 @@ class SidebarElement extends React.PureComponent {
     }
 
     // Close current sidebar if it was clicked outside
-    this.setState({ isOpen: false })
+    this.setState({ open: false })
 
     // Detach events to not listen on it without reason
     this.detachListener()
@@ -100,13 +98,13 @@ class SidebarElement extends React.PureComponent {
   handleClick (e) {
     const { children, onClick } = this.props
 
-    // Toggle opening status when it could be isOpen
+    // Toggle opening status when it could be open
     if (children) {
-      const isOpen = !this.state.isOpen
+      const open = !this.state.open
 
-      this.setState({ isOpen: isOpen })
+      this.setState({ open: open })
 
-      if (isOpen) {
+      if (open) {
         this.attachListener()
       } else {
         this.detachListener()
@@ -152,20 +150,17 @@ class SidebarElement extends React.PureComponent {
 
   render () {
     const { className, icon, label, active, children, onClick, ...passedProps } = this.props
-    const { isOpen } = this.state
+    const { open } = this.state
 
     // Build class name with modifiers according to current state
-    const clsName = buildClassName('sidebar-element', className, {
-      active: active,
-      open: isOpen
-    })
+    const clsName = buildClassName('sidebar-element', className, { active, open })
 
     // Check if we do have single children inside
     const element = children ? React.Children.only(children) : null
 
     // Build button
     const button = (
-      <div className={`${moduleName}__button`} onClick={this.handleClick}>
+      <div className={prefix('sidebar-element', 'button')} onClick={this.handleClick}>
         <Icon name={icon} />
         {label}
       </div>

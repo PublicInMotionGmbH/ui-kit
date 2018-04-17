@@ -7,7 +7,7 @@ import prefix from './prefix'
  * Build class name for component
  *
  * @param {string|string[]} moduleName
- * @param {string|string[]|null} additionalClassName
+ * @param {string|string[]|null} [additionalClassName]
  * @param {string|string[]|object|null} [modifiers]
  * @returns {string}
  */

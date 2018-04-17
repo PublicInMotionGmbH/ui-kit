@@ -1,30 +1,26 @@
 import React from 'react'
-
-import { Button } from '@talixo/button'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Modal from './src/Modal'
-
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Modal', module, {
-  propTypes: [ Modal ],
-  propTablesExclude: [ Button ]
+  propTables: [ Modal ]
 })
 
 const render = (setState, state) => {
   const modalRoot = document.querySelector('body')
   return (
     <div>
-      <Button onClick={() => { setState({ isOpen: !state.isOpen }) }}>
+      <button onClick={() => { setState({ open: !state.open }) }}>
         Open Modal
-      </Button>
-      <Modal isOpen={state.isOpen} root={modalRoot}>
+      </button>
+      <Modal open={state.open} attachTo={modalRoot}>
         <h1>Modal</h1>
-        <Button onClick={() => { setState({ isOpen: false }) }}>
+        <button onClick={() => { setState({ open: false }) }}>
           Close Modal
-        </Button>
+        </button>
       </Modal>
     </div>
   )
@@ -32,8 +28,8 @@ const render = (setState, state) => {
 
 const getInitialState = () => {
   return {
-    isOpen: false
+    open: false
   }
 }
 
-addStory.controlled('default', readme, render, getInitialState)
+addStory.controlled('initial', readme, render, getInitialState)

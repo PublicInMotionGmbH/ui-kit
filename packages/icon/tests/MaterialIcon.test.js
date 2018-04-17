@@ -16,12 +16,12 @@ describe('<Icon />', () => {
     const wrapper = shallow(<Icon name={EXAMPLE} className='abc' />)
 
     expect(wrapper.props().className).toMatch(/(^| )abc( |$)/)
-    expect(wrapper.props().className).not.toEqual('abc')
+    expect(wrapper.props().className).not.toBe('abc')
   })
 
   it('handles properly additional properties for Material icon', () => {
     const wrapper = shallow(<Icon name={EXAMPLE} id='def' className='abc' />)
 
-    expect(wrapper.props().id).toEqual('def')
+    expect(wrapper.props().id).toBe('def')
   })
 })
