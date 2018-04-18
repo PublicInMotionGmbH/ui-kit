@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-import { prefix, buildClassName } from '@talixo/shared'
+import { applyAnyClassNameModifier, buildClassName } from '@talixo/shared'
+
+export const moduleName = 'navigation'
 
 /**
 * Method that inserts divider between children.
@@ -23,7 +25,8 @@ const childrenWithDividers = (children, divider) => {
   * @returns {*}
   */
   const insertDivider = (value, index, array) => {
-    const dividerElement = (<div key={`divider--${index}`} className={prefix('navigation', 'divider')}>{divider}</div>)
+    const clsName = applyAnyClassNameModifier(moduleName, 'divider')
+    const dividerElement = (<div key={`divider--${index}`} className={clsName}>{divider}</div>)
 
     return array.length - 1 !== index
       ? [value, dividerElement]
@@ -48,7 +51,7 @@ function Navigation (props) {
 
   const mappedChildren = divider ? childrenWithDividers(children, divider) : children
 
-  const clsName = buildClassName('navigation', className, type)
+  const clsName = buildClassName(moduleName, className, type)
 
   return (
     <ul className={clsName} {...passedProps}>
@@ -68,7 +71,7 @@ Navigation.propTypes = {
   divider: PropTypes.node,
 
   /** Type of navigation */
-  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'tabs'])
+  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'steps', 'tabs'])
 }
 
 Navigation.defaultProps = {

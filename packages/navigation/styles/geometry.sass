@@ -69,6 +69,43 @@
         color: #000000
         font-weight: $font-weight-semibold
 
+  &--steps
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    margin: auto
+    padding: 0 !important
+    max-width: 70%
+
+    &:before
+      content: ''
+      position: absolute
+      display: block
+      top: 50%
+      margin-top: dp(-0.125)
+      height: dp(0.25)
+      border: 0
+      width: 100%
+      box-sizing: border-box
+      z-index: -1
+
+    #{$n}__step
+      position: relative
+      padding: dp(0.5)
+      cursor: pointer
+      outline: inherit !important
+      border: dp(0.5) solid $color-white
+      border-radius: dp(1)
+
+      &--active, &:active
+        font-weight: $font-weight-semibold
+
+      &--disabled, &--disabled:active
+        cursor: default
+        font-weight: $font-weight-semibold
+
   &--navigation
     > #{$n}__element
       display: inline-block

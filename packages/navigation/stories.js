@@ -6,6 +6,7 @@ import ControlledPagination from './src/ControlledPagination'
 import ControlledTabs from './src/ControlledTabs'
 import Element from './src/Element'
 import Navigation from './src/Navigation'
+import Step from './src/Step'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -97,3 +98,11 @@ addStory.controlled('controlled tabs', readme, (setState, state) => (
     tab: 0
   }
 })
+
+addStory('steps', readme, () => (
+  <Navigation type='steps'>
+    <Step>Shipping</Step>
+    <Step active>Billing</Step>
+    <Step disabled>Confirm</Step>
+  </Navigation>
+))

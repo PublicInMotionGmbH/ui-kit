@@ -43,6 +43,18 @@ className     | string         | n/a            | Additional class name passed t
 disabled      | bool           | `false`        | Disabled state
 onClick       | func           | n/a            | Function passed to element
 
+### Step
+
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
+Property name | Type           | Default        | Description
+--------------|----------------|:--------------:|--------------------------------
+active        | bool           | `false`        | Active state
+children      | node           | n/a            | Tooltips content
+className     | string         | n/a            | Additional class name passed to element
+disabled      | bool           | `false`        | Disabled state
+onClick       | func           | n/a            | Function passed to element
+
 ### ControlledPagination
 
 Property name  | Type   | Required | Default      | Description
