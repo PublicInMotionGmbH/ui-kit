@@ -12,6 +12,7 @@ module.exports = {
     '!packages/*/dist/**/*.js',
     '!packages/country-flag/sprites/*.js',
     '!packages/country-flag/scripts/*.js',
+    '!packages/country-flag/src/storybook/*.js',
     '!packages/icon/src/storybook/*.js',
     '!packages/icon/scripts/*.js'
   ],

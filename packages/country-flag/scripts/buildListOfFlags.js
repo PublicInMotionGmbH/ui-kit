@@ -22,6 +22,6 @@ const flags = glob.sync(`${sourcePath}/*.svg`)
   // Lower case to have target format
   .map(x => x.toLowerCase())
 
-const code = 'module.exports = [\n' + flags.map(code => `  '${code}'`).join(',\n') + '\n]\n'
+const code = JSON.stringify(flags, null, 2)
 
 fs.writeFileSync(outputPath, code)

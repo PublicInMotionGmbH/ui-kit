@@ -2,7 +2,7 @@ import React from 'react'
 import FlagsOverview from './FlagsOverview'
 
 // Gather all available icons
-const icons = require('../../sprites/meta')
+const icons = require('../../sprites/meta.json')
 
 /**
  * Component to show all icons in story book

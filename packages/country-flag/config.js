@@ -8,7 +8,7 @@ module.exports = {
     js: 'sprites/sprite.js',
 
     // Output for list of icons,
-    meta: 'sprites/meta.js',
+    meta: 'sprites/meta.json',
 
     // Path to SVGs, when starts with '~' it is in node modules
     source: '~flagkit-web/svgs'
