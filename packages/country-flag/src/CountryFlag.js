@@ -29,6 +29,7 @@ CountryFlag.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Country code */
   code: PropTypes.string.isRequired
 }
 

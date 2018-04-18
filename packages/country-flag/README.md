@@ -27,6 +27,13 @@ Property name | Type      | Required | Default | Description
 className     | string    | no       | n/a     | additional class name passed to wrapper
 code          | string    | yes      | n/a     | [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code
 
+## Available flags
+
+We are using [FlagKit](https://github.com/madebybowtie/FlagKit) flags loaded through [flagkit-web](https://github.com/dfenstermaker/flagkit-web) package.
+
+You can either use one of [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes
+or use some of additional: `gb-eng`, `gb-nir`, `gb-sct`, `gb-wls`, `gb-zet`, `lgbt`
+
 ## Updating icons
 
 To reinitialize sprites simply run `npm run update` in package - it will automatically generate sprite and component which will include it.
