@@ -14,6 +14,7 @@ module.exports = {
     '!packages/country-flag/scripts/*.js',
     '!packages/country-flag/src/storybook/*.js',
     '!packages/icon/src/storybook/*.js',
+    '!packages/*/tests/**/*.js',
     '!packages/icon/scripts/*.js'
   ],
   setupFiles: [ '<rootDir>/tests/polyfills.js' ],
