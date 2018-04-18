@@ -55,3 +55,4 @@ exclude_patterns:
   - "**/vendor/"
   - "**/*.d.ts"
   - "**/stories.js"
+  - "**/packages/country-flag/sprites/sprite.js"

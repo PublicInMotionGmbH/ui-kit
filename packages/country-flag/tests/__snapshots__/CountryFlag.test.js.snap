@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CountryFlag /> renders flag correctly 1`] = `
+<svg
+  className="talixo-country-flag"
+>
+  <CountryFlagsSprite />
+  <use
+    xlinkHref="#taf-pl"
+  />
+</svg>
+`;
+
+exports[`<CountryFlag /> should allow passing other props down 1`] = `
+<svg
+  className="talixo-country-flag something"
+>
+  <CountryFlagsSprite />
+  <use
+    xlinkHref="#taf-de"
+  />
+</svg>
+`;
+
+exports[`<CountryFlag /> should lower-case country code 1`] = `
+<svg
+  className="talixo-country-flag"
+>
+  <CountryFlagsSprite />
+  <use
+    xlinkHref="#taf-pl"
+  />
+</svg>
+`;
