@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-import { applyAnyClassNameModifier, buildClassName } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 export const moduleName = 'navigation'
 
@@ -25,7 +25,8 @@ const childrenWithDividers = (children, divider) => {
   * @returns {*}
   */
   const insertDivider = (value, index, array) => {
-    const clsName = applyAnyClassNameModifier(moduleName, 'divider')
+    const clsName = buildClassName(moduleName, 'divider')
+    console.log(clsName)
     const dividerElement = (<div key={`divider--${index}`} className={clsName}>{divider}</div>)
 
     return array.length - 1 !== index
