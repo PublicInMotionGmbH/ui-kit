@@ -5,17 +5,29 @@ import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'legend'
 
+/**
+ *
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 function LegendItem (props) {
   const {
     className,
     color,
+    disabled,
     id,
     title,
     onClick
   } = props
+  const itemCls = buildClassName(`${moduleName}__item`, className, {
+    clickable: onClick,
+    disabled: disabled
+  })
   const colorboxCls = buildClassName(`${moduleName}__colorbox`)
+
   return (
-    <div onClick={onClick} className={className}>
+    <div onClick={onClick} className={itemCls}>
       <div
         style={{backgroundColor: color}}
         className={`${colorboxCls} ${colorboxCls}--${id}`}
@@ -23,6 +35,14 @@ function LegendItem (props) {
       <span>{ title }</span>
     </div>
   )
+}
+
+LegendItem.propTypes = {
+  disabled: PropTypes.bool
+}
+
+LegendItem.defaultProps = {
+  disabled: false
 }
 
 /**
@@ -33,20 +53,28 @@ function LegendItem (props) {
  * @returns {React.Element}
  */
 function Legend (props) {
-  const { className, dataItems, onClick, ...passedProps } = props
-  console.log(dataItems)
-  const wrapperCls = buildClassName(moduleName)
+  const {
+    className,
+    dataItems,
+    direction,
+    onClick,
+    style,
+    ...passedProps
+  } = props
+  const wrapperCls = buildClassName(moduleName, null, [ direction ])
 
   return (
-    <div className={wrapperCls} {...passedProps}>
+    <div className={wrapperCls} style={style} {...passedProps}>
       {
         dataItems.map(item => (
           <LegendItem
             id={item.id}
             className={item.className}
+            disabled={item.disabled}
             color={item.color}
             title={item.title || item.label}
-            onClick={e => onClick(item, e)}
+            key={item.title || item.label}
+            onClick={onClick && ((e) => onClick(item, e))}
           />
         ))
       }
@@ -58,11 +86,14 @@ Legend.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  dataItems: PropTypes.array
+  dataItems: PropTypes.array,
+  /** Horizontal or vertical. */
+  direction: PropTypes.string
 }
 
 Legend.defaultProps = {
-  dataItems: []
+  dataItems: [],
+  direction: 'vertical'
 }
 
 export default Legend

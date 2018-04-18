@@ -52,14 +52,13 @@ class LineChart extends React.Component {
         <XAxis title={xAxisTitle} position='start' />
         <YAxis title={yAxisTitle} />
         {
-          data.map((item, index) => {
-            return (
-              <LineSeries
-                data={item.dataItems}
-                color={item.color}
-                className={item.className} />
-            )
-          })
+          data.map((item, index) => (
+            <LineSeries
+              data={item.dataItems}
+              color={item.color}
+              className={item.className}
+            />
+          ))
         }
         <Highligth
           color={null}

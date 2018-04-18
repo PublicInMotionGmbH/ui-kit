@@ -1,9 +1,14 @@
 @import '~@talixo/shared/styles/config'
 
-$base-color: $color-talixo-red
-$border-radius: $border-radius-m
-$border-color: $color-border
+$color-legend-base: $color-talixo-red
+$color-legend-border: $color-border
+$color-disabled: $color-talixo-light-gray
+$color-legend-hover: lighten($color-border, 10%) !default
+
 $legend-padding: dp(1)
+$legend-border-radius: $border-radius-m
+
+$legend-transition: ease-in .1s all
 
 @mixin graph-color ($id, $color)
   #{prefix('legend', 'colorbox--#{$id}')}
@@ -11,7 +16,10 @@ $legend-padding: dp(1)
 
   #{prefix('charts','series--#{$id}')}
     stroke: $color
-    float: $color
+    fill: $color
+    > *
+      stroke: $color
+      fill: $color
 
 @mixin graph-colors ($baseColor)
   @for $i from 0 to 5

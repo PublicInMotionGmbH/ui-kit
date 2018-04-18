@@ -2,8 +2,19 @@
 
 @include module('legend')
   display: flex
-  flex-direction: column
   border: solid 1px
-  border-radius: $border-radius
+  border-radius: $legend-border-radius
+  box-sizing: border-box
+  overflow-y: auto
   padding: $legend-padding
 
+  &--horizontal
+    flex-direction: row
+
+  &--vertical
+    flex-direction: column
+
+  &__item
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
