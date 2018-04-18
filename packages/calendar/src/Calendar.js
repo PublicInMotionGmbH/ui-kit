@@ -1,14 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cls from 'classnames'
 import 'react-dates/initialize'
 import moment from 'moment'
 
 import { SingleDatePicker } from 'react-dates'
 
-import { prefix } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const name = prefix('calendar')
+const moduleName = 'calendar'
 
 /**
  * Component which represents Calendar.
@@ -60,8 +59,10 @@ class Calendar extends React.PureComponent {
     const { className, displayFormat, isRTL, lang, placeholder, ...passedProps } = this.props
     const { date, focused } = this.state
 
+    const clsName = buildClassName(moduleName, className)
+
     return (
-      <div className={cls(className, name)} {...passedProps} lang={lang}>
+      <div className={clsName} {...passedProps} lang={lang}>
         <SingleDatePicker
           date={date}
           focused={focused}
