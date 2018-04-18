@@ -180,40 +180,61 @@ describe('<Directions />', () => {
     expect(wrapper.state('directions')).toEqual(example2)
   })
 
-  it('should call `handleError` on Google Maps error', async () => {
+  it('should call `onError` callback on Google Maps error', async () => {
     // Set up geo-points for test
     const startPoint = { lat: -30.397, lng: 140.644 }
     const endPoint = { lat: -31.397, lng: 150.644 }
 
+    // Create spy for errors
+    const spy = jest.fn()
+
     // Build shalow component
-    const wrapper = shallow(
+    shallow(
       <Directions
         startPoint={startPoint}
         endPoint={endPoint}
+        onError={spy}
       />
     )
 
     // Get mock function for routing
     const routeFn = mock.DirectionsService.route
 
-    // Reset call counter
-    mock.reset()
-
-    // Create spy function on `handleError` place
-    const spy = jest.fn()
-    wrapper.instance().handleError = spy
-
-    // Update new coordinates
-    wrapper.setProps({
-      startPoint: { lat: -31.397, lng: 140.644 },
-      endPoint: { lat: -32.397, lng: 140.644 }
-    })
-
     // Get information about call for routing
     const [ , callback ] = routeFn.mock.calls[0]
 
     // Call asynchronously callback with proper value
     await callback(null, mock.DirectionsStatus.ERROR)
+
+    // Expect directions to be put into component state
+    expect(spy.mock.calls.length).toBe(1)
+  })
+
+  it('should call `onLoad` callback on Google Maps error', async () => {
+    // Set up geo-points for test
+    const startPoint = { lat: -30.397, lng: 140.644 }
+    const endPoint = { lat: -31.397, lng: 150.644 }
+
+    // Create spy for errors
+    const spy = jest.fn()
+
+    // Build shalow component
+    shallow(
+      <Directions
+        startPoint={startPoint}
+        endPoint={endPoint}
+        onLoad={spy}
+      />
+    )
+
+    // Get mock function for routing
+    const routeFn = mock.DirectionsService.route
+
+    // Get information about call for routing
+    const [ , callback ] = routeFn.mock.calls[0]
+
+    // Call asynchronously callback with proper value
+    await callback(example, mock.DirectionsStatus.OK)
 
     // Expect directions to be put into component state
     expect(spy.mock.calls.length).toBe(1)

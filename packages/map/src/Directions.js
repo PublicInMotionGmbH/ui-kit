@@ -89,9 +89,15 @@ class Directions extends React.PureComponent {
    * @param {*} directions
    */
   handleRoute (startPoint, endPoint, via, directions) {
+    const { onLoad } = this.props
+
     // Ignore route for old directions, otherwise we've got race condition
     if (hasPropsChanged({ startPoint, endPoint, via }, this.props)) {
       return
+    }
+
+    if (onLoad) {
+      onLoad()
     }
 
     // Update current directions
@@ -104,7 +110,11 @@ class Directions extends React.PureComponent {
    * @param {*} error
    */
   handleError (error) {
-    console.error(`error fetching directions ${error}`)
+    const { onError } = this.props
+
+    if (onError) {
+      onError(error)
+    }
   }
 
   /**
@@ -131,6 +141,12 @@ Directions.propTypes = {
 
   /** End point */
   endPoint: Location,
+
+  /** Function fired when direction routing is loaded */
+  onLoad: PropTypes.func,
+
+  /** Function fired when direction routing caused error */
+  onError: PropTypes.func,
 
   /** Waypoints */
   via: PropTypes.oneOfType([
