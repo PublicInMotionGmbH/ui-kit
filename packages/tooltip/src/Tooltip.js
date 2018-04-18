@@ -67,6 +67,8 @@ class Tooltip extends React.Component {
   }
 
   updatePosition (nextProps) {
+    if (!this.el) return
+
     const { top, left } = getPositionNearElement(this.el, (nextProps && nextProps.position) || this.props.position)
     this.setState({ top, left })
   }
@@ -91,12 +93,8 @@ class Tooltip extends React.Component {
 
   handleMouseClick () {
     if (!_.isUndefined(this.props.open)) return
-    if (this.props.triggerOn !== 'click') return
-    else {
-      this.setState({ open: !this.state.open })
-      this.updatePosition()
-    }
-    setTimeout(() => { if (this.props.fade) { this.setState({ open: false }) } }, 0)
+    this.setState({ open: !this.state.open })
+    this.updatePosition()
   }
 
   setRef (node) {
@@ -137,7 +135,7 @@ class Tooltip extends React.Component {
     return (
       <div
         className={wrapperClasses}
-        onClick={() => this.handleMouseClick()}
+        onClick={this.props.triggerOn === 'click' ? this.handleMouseClick : null}
         onMouseEnter={this.props.triggerOn === 'hover' ? this.handleMouseEnter : null}
         onMouseLeave={this.props.triggerOn === 'hover' ? this.handleMouseLeave : null}
         onMouseOver={this.props.triggerOn === 'hover' ? this.handleMouseOver : null}
