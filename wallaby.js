@@ -17,6 +17,7 @@ module.exports = wallaby => {
       'packages/*/config.js',
       'packages/*/src/**/*.js',
       'packages/*/utils/**/*.js',
+      'packages/*/tests/utils/**/*.js',
       { pattern: 'packages/*/tests/**/*.test.js.snap', instrument: false }
     ],
 

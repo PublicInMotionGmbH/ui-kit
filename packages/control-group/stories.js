@@ -9,7 +9,9 @@ import ControlGroup from './src/ControlGroup'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('ControlGroup', module)
+const addStory = createStoriesFactory('ControlGroup', module, {
+  propTables: [ ControlGroup ]
+})
 
 // Stories
 

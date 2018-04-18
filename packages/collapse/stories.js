@@ -8,7 +8,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Collapse', module, {
-  propTypes: [ Collapse ]
+  propTables: [ Collapse ]
 })
 
 // Stories

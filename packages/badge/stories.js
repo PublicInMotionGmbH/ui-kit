@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Button } from '@talixo/button'
-import { Tab } from '@talixo/tab'
+import { Navigation, Element } from '@talixo/navigation'
 
 import Badge from './src/Badge'
 
@@ -11,7 +11,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 const addStory = createStoriesFactory('Badge', module, {
   propTables: [ Badge ],
-  propTablesExclude: [ Button, Tab ]
+  propTablesExclude: [ Button, Navigation, Element ]
 })
 
 addStory('default', readme, () =>
@@ -36,18 +36,18 @@ addStory('inside button', readme, () =>
   </div>
 )
 addStory('inside tab', readme, () =>
-  <div>
-    <Tab>
+  <Navigation type='tabs'>
+    <Element>
       Mail
       <Badge>10 unread</Badge>
-    </Tab>
-    <Tab>
+    </Element>
+    <Element>
       info
       <Badge>1</Badge>
-    </Tab>
-    <Tab>
+    </Element>
+    <Element>
       Settings
       <Badge>200</Badge>
-    </Tab>
-  </div>
+    </Element>
+  </Navigation>
 )

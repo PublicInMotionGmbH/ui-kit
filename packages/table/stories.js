@@ -1,6 +1,6 @@
 import React from 'react'
-import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { action } from '@storybook/addon-actions'
+import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Table from './src/Table'
 import Head from './src/Head'
@@ -18,7 +18,7 @@ const readme = getReadmeDescription(require('./README.md'))
 // Create factories for story
 const addStory = createStoriesFactory('Table', module, {
   inline: false,
-  propTypes: [ Table, Head, Body, Footer, HeadCell, Row, Cell, ActionsCell, Action ]
+  propTables: [ Table, Head, Body, Footer, HeadCell, Row, Cell, ActionsCell, Action ]
 })
 
 // Build default actions

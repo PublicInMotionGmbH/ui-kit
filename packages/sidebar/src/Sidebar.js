@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 
 import { prefix, buildClassName } from '@talixo/shared'
 
-const moduleName = prefix('sidebar')
-
 /**
  * Component which represents Sidebar.
  *
@@ -18,7 +16,7 @@ function Sidebar (props) {
 
   return (
     <nav className={buildClassName('sidebar', className)} {...passedProps}>
-      <div className={`${moduleName}__content`}>
+      <div className={prefix('sidebar', 'content')}>
         {children}
       </div>
     </nav>

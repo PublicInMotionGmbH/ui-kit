@@ -10,7 +10,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Progress Bar', module, {
-  propTypes: [ ProgressBar ]
+  propTables: [ ProgressBar ]
 })
 
 // Stories

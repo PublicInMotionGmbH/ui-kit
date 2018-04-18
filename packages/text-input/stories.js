@@ -1,14 +1,17 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import TextInput from './src/TextInput'
-import {action} from '@storybook/addon-actions'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('Text Input', module)
+const addStory = createStoriesFactory('Text Input', module, {
+  propTables: [ TextInput ]
+})
+
 const change = action('change')
 
 // Stories

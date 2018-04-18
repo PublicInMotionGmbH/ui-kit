@@ -12,7 +12,7 @@ const readme = getReadmeDescription(require('./README.md'))
 // Create factories for story
 const addStory = createStoriesFactory('Sidebar', module, {
   inline: false,
-  propTypes: [ Sidebar, Element, Panel ]
+  propTables: [ Sidebar, Element, Panel ]
 })
 
 // Stories
