@@ -4,32 +4,9 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 import { Tooltip } from '@talixo/tooltip'
 
-/**
- * Component which represents Step.
- *
- * @param {object} props
- * @param {boolean} [props.active]
- * @param {*} [props.children]
- * @param {string} [props.className]
- * @param {boolean} [props.disabled]
- * @param {function} [props.onClick]
- * @param {string} [props.type]
- * @returns {React.Step}
- */
-function Step (props) {
-  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
+export const moduleName = 'navigation'
 
-  // Build element class name
-  const classNames = buildClassName([ 'navigation', 'step' ], className, { active, disabled })
-
-  return (
-    <Tooltip position='top' render={() => (<span>{children}</span>)}>
-      <li onClick={onClick} className={classNames} {...passedProps} />
-    </Tooltip>
-  )
-}
-
-Step.propTypes = {
+const propTypes = {
   /** Active state */
   active: PropTypes.bool,
 
@@ -46,9 +23,38 @@ Step.propTypes = {
   onClick: PropTypes.func
 }
 
-Step.defaultProps = {
+const defaultProps = {
   active: false,
   disabled: false
 }
+
+/**
+ * Component which represents Step.
+ *
+ * @param {object} props
+ * @param {boolean} [props.active]
+ * @param {*} [props.children]
+ * @param {string} [props.className]
+ * @param {boolean} [props.disabled]
+ * @param {function} [props.onClick]
+ * @param {string} [props.type]
+ * @returns {React.Step}
+ */
+function Step (props) {
+  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
+
+  // Build element class name
+  const classNames = buildClassName([ moduleName, 'step' ], className, { active, disabled })
+
+  return (
+    <Tooltip position='top' render={() => (<span>{children}</span>)}>
+      <li onClick={onClick} className={classNames} {...passedProps} />
+    </Tooltip>
+  )
+}
+
+Step.propTypes = propTypes
+
+Step.defaultProps = defaultProps
 
 export default Step

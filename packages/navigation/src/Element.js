@@ -3,32 +3,9 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-/**
- * Component which represents Element.
- *
- * @param {object} props
- * @param {boolean} [props.active]
- * @param {*} [props.children]
- * @param {string} [props.className]
- * @param {boolean} [props.disabled]
- * @param {function} [props.onClick]
- * @param {string} [props.type]
- * @returns {React.Element}
- */
-function Element (props) {
-  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
+export const moduleName = 'navigation'
 
-  // Build element class name
-  const classNames = buildClassName([ 'navigation', 'element' ], className, { active, disabled })
-
-  return (
-    <li className={classNames} onClick={onClick} {...passedProps}>
-      {children}
-    </li>
-  )
-}
-
-Element.propTypes = {
+const propTypes = {
   /** Active state */
   active: PropTypes.bool,
 
@@ -45,9 +22,38 @@ Element.propTypes = {
   onClick: PropTypes.func
 }
 
-Element.defaultProps = {
+const defaultProps = {
   active: false,
   disabled: false
 }
+
+/**
+ * Component which represents Element.
+ *
+ * @param {object} props
+ * @param {boolean} [props.active]
+ * @param {*} [props.children]
+ * @param {string} [props.className]
+ * @param {boolean} [props.disabled]
+ * @param {function} [props.onClick]
+ * @param {string} [props.type]
+ * @returns {React.Element}
+ */
+function Element (props) {
+  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
+
+  // Build element class name
+  const classNames = buildClassName([ moduleName, 'element' ], className, { active, disabled })
+
+  return (
+    <li className={classNames} onClick={onClick} {...passedProps}>
+      {children}
+    </li>
+  )
+}
+
+Element.propTypes = propTypes
+
+Element.defaultProps = defaultProps
 
 export default Element

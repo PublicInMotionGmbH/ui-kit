@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Element, { moduleName } from '../src/Element'
+import Step, { moduleName } from '../src/Step'
 
 const includesClassName = (wrapper, className) => {
   const clsName = wrapper.props().className
@@ -10,18 +10,18 @@ const includesClassName = (wrapper, className) => {
 
 describe('Module name', () => {
   it('is passed correctly', () => {
-    const wrapper = shallow(<Element />)
+    const wrapper = shallow(<Step />)
 
     includesClassName(wrapper.find('li'), moduleName)
   })
 })
 
-describe('<Element />', () => {
+describe('<Step />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(
-      <Element>
+      <Step>
         Home
-      </Element>
+      </Step>
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -29,9 +29,9 @@ describe('<Element />', () => {
 
   it('renders active correctly', () => {
     const wrapper = shallow(
-      <Element active>
+      <Step active>
         Home
-      </Element>
+      </Step>
     )
 
     includesClassName(wrapper.find('li'), 'active')
@@ -39,9 +39,9 @@ describe('<Element />', () => {
 
   it('renders disabled correctly', () => {
     const wrapper = shallow(
-      <Element disabled>
+      <Step disabled>
         Home
-      </Element>
+      </Step>
     )
 
     includesClassName(wrapper.find('li'), 'disabled')
@@ -50,14 +50,27 @@ describe('<Element />', () => {
   it('calls onClick when clicked', () => {
     const onClick = jest.fn()
     const wrapper = shallow(
-      <Element className='red' onClick={onClick}>
+      <Step className='red' onClick={onClick}>
         Home
-      </Element>
+      </Step>
     )
 
     wrapper
       .find('.red')
       .simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('renders tooltip', () => {
+    const wrapper = shallow(<Step />)
+
+    expect(wrapper.find('Tooltip').exists()).toEqual(true)
+  })
+
+  it('renders children in tooltip', () => {
+    const wrapper = shallow(<Step>Home</Step>)
+
+    const tooltip = wrapper.find('Tooltip')
+    expect(tooltip.props().render()).toEqual(<span>Home</span>)
   })
 })

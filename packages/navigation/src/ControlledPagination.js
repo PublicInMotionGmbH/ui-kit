@@ -4,6 +4,33 @@ import _ from 'lodash'
 
 import Element from './Element'
 
+const propTypes = {
+  /** Active page */
+  activePage: PropTypes.number,
+
+  /** Maximum number of displayed page buttons */
+  displayedLimit: PropTypes.number,
+
+  /** Next button label */
+  nextLabel: PropTypes.node,
+
+  /** Function passed to page buttons */
+  onChange: PropTypes.func,
+
+  /** The total number of pages */
+  pageCount: PropTypes.number.isRequired,
+
+  /** Previous button label */
+  previousLabel: PropTypes.node
+}
+
+const defaultProps = {
+  activePage: 1,
+  displayedLimit: 10,
+  nextLabel: 'Next',
+  previousLabel: 'Previous'
+}
+
 /**
 * Returns the largest multiple of divisor less than or equal to provided number
 *
@@ -11,7 +38,7 @@ import Element from './Element'
 * @param {number} divisor
 * @returns {number}
 */
-const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divisor
+export const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divisor
 
 /**
  * Method that maps numbers to elements.
@@ -158,31 +185,8 @@ function Pagination (props) {
   return createPagination()
 }
 
-Pagination.propTypes = {
-  /** Active page */
-  activePage: PropTypes.number,
+Pagination.propTypes = propTypes
 
-  /** Maximum number of displayed page buttons */
-  displayedLimit: PropTypes.number,
-
-  /** Next button label */
-  nextLabel: PropTypes.node,
-
-  /** Function passed to page buttons */
-  onChange: PropTypes.func,
-
-  /** The total number of pages */
-  pageCount: PropTypes.number.isRequired,
-
-  /** Previous button label */
-  previousLabel: PropTypes.node
-}
-
-Pagination.defaultProps = {
-  activePage: 1,
-  displayedLimit: 10,
-  nextLabel: 'Next',
-  previousLabel: 'Previous'
-}
+Pagination.defaultProps = defaultProps
 
 export default Pagination

@@ -6,6 +6,24 @@ import { buildClassName } from '@talixo/shared'
 
 export const moduleName = 'navigation'
 
+const propTypes = {
+  /** Navigation items */
+  children: PropTypes.node,
+
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Divider */
+  divider: PropTypes.node,
+
+  /** Type of navigation */
+  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'steps', 'tabs'])
+}
+
+const defaultProps = {
+  type: 'navigation'
+}
+
 /**
 * Method that inserts divider between children.
 *
@@ -26,7 +44,6 @@ const childrenWithDividers = (children, divider) => {
   */
   const insertDivider = (value, index, array) => {
     const clsName = buildClassName(moduleName, 'divider')
-    console.log(clsName)
     const dividerElement = (<div key={`divider--${index}`} className={clsName}>{divider}</div>)
 
     return array.length - 1 !== index
@@ -61,22 +78,8 @@ function Navigation (props) {
   )
 }
 
-Navigation.propTypes = {
-  /** Navigation items */
-  children: PropTypes.node,
+Navigation.propTypes = propTypes
 
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Divider */
-  divider: PropTypes.node,
-
-  /** Type of navigation */
-  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'steps', 'tabs'])
-}
-
-Navigation.defaultProps = {
-  type: 'navigation'
-}
+Navigation.defaultProps = defaultProps
 
 export default Navigation
