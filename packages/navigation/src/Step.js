@@ -37,11 +37,10 @@ const defaultProps = {
  * @param {string} [props.className]
  * @param {boolean} [props.disabled]
  * @param {function} [props.onClick]
- * @param {string} [props.type]
  * @returns {React.Step}
  */
 function Step (props) {
-  const { active, children, className, disabled, onClick, type, typeClassName, ...passedProps } = props
+  const { active, children, className, disabled, onClick, ...passedProps } = props
 
   // Build element class name
   const classNames = buildClassName([ moduleName, 'step' ], className, { active, disabled })
