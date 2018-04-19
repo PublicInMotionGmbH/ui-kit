@@ -24,6 +24,13 @@ const wrapperStyle = {
   width: '50%',
   height: '500px',
   display: 'flex',
+  flexDirection: 'row',
+  position: 'relative',
+  justifyContent: 'center'
+}
+const wrapperLegend = {
+  width: '25%',
+  display: 'flex',
   flexDirection: 'column',
   position: 'relative',
   justifyContent: 'center'
@@ -33,16 +40,16 @@ const pieData = {
   className: 'className',
   title: 'Pie Data',
   dataItems: [
-    { label: 'Cats', angle: 35, color: null, className: '', id: 0, disabled: false },
-    { label: 'Dogs', angle: 40, color: null, className: '', id: 1, disabled: false },
-    { label: 'Birds', angle: 55, color: null, className: '', id: 2, disabled: false },
-    { label: 'Cats1', angle: 35, color: null, className: '', id: 3, disabled: false },
-    { label: 'Dogs1', angle: 40, color: null, className: '', id: 4, disabled: false },
-    { label: 'Birds1', angle: 55, color: null, className: '', id: 5, disabled: false },
-    { label: 'Cats2', angle: 35, color: null, className: '', id: 6, disabled: false },
-    { label: 'Dogs2', angle: 40, color: null, className: '', id: 7, disabled: false },
-    { label: 'Birds2', angle: 55, color: null, className: '', id: 8, disabled: false },
-    { label: 'Lions2', angle: 35, color: null, className: '', id: 9, disabled: false }
+    { label: 'Cats', value: 35, color: ' ', className: '', id: 0, disabled: false },
+    { label: 'Dogs', value: 40, color: ' ', className: '', id: 1, disabled: false },
+    { label: 'Birds', value: 55, color: ' ', className: '', id: 2, disabled: false },
+    { label: 'Cats1', value: 35, color: ' ', className: '', id: 3, disabled: false },
+    { label: 'Dogs1', value: 40, color: ' ', className: '', id: 4, disabled: false },
+    { label: 'Birds1', value: 55, color: ' ', className: '', id: 5, disabled: false },
+    { label: 'Cats2', value: 35, color: ' ', className: '', id: 6, disabled: false },
+    { label: 'Dogs2', value: 40, color: ' ', className: '', id: 7, disabled: false },
+    { label: 'Birds2', value: 55, color: ' ', className: '', id: 8, disabled: false },
+    { label: 'Lions2', value: 35, color: ' ', className: '', id: 9, disabled: false }
   ]
 }
 
@@ -86,7 +93,7 @@ const barData = [
 // Stories
 
 const labelProps = {
-  angle: 10
+  value: 10
 }
 
 addStory('Bar Chart', readme, () => (
@@ -94,6 +101,9 @@ addStory('Bar Chart', readme, () => (
     <BarChart
       domainPadding={{x: 10}}
       data={barData}
+    />
+    <Legend
+      dataItems={barData}
     />
   </div>
 ))
@@ -105,7 +115,9 @@ addStory('Line Chart', readme, () => (
       xAxisTitle='XAxis'
       yAxisTitle='yAxis'
     />
-    <h2>Linechart</h2>
+    <Legend
+      dataItems={lineData}
+    />
   </div>
 ))
 
@@ -126,13 +138,26 @@ addStory('Pie Chart', readme, () => (
 ))
 
 addStory('Legend', readme, () => (
-  <div style={wrapperStyle}>
+  <div style={wrapperLegend}>
     <Legend
       dataItems={pieData.dataItems}
       onClick={(item, e) => console.log('console.log: ', item, e)}
+      style={{ height: '200px', position: 'static' }}
     />
     <Legend
       dataItems={pieData.dataItems}
+      style={{ position: 'static' }}
+    />
+    <Legend
+      dataItems={pieData.dataItems}
+      onClick={(item, e) => console.log('console.log: ', item, e)}
+      direction='horizontal'
+      style={{ position: 'static' }}
+    />
+    <Legend
+      dataItems={pieData.dataItems}
+      direction='horizontal'
+      style={{ position: 'static' }}
     />
   </div>
 ))

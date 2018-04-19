@@ -3,28 +3,20 @@
 @include graph-colors($color-legend-base)
 
 @include module('legend')
-  border-color: $color-legend-border
-
-  #{prefix('legend', 'colorbox')}
-    width: dp(3)
-    height: dp(.25)
-    padding: 0
-    margin: 0 dp(1.5)
-    display: inline-block
-    vertical-align: middle
+  background-color: $legend-background
 
 
-  &__item
-    line-height: dp(3.5)
+@include module('legend-item')
 
-    &--clickable
-      transition: $legend-transition
-      cursor: pointer
+  &--clickable
+    transition: $legend-transition
+    cursor: pointer
+    user-select: none
 
-    &--clickable:hover
-      background-color: $color-legend-hover
+  &--clickable:hover
+    background-color: $color-legend-hover
 
-    &--disabled
-      color: $color-disabled
-      > #{prefix('legend', 'colorbox')}
-        background-color: $color-disabled
+  &--disabled
+    color: $color-disabled
+    > #{prefix('legend-item', 'colorbox')}
+      background-color: $color-disabled

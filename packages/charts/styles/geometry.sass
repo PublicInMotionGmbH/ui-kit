@@ -2,19 +2,45 @@
 
 @include module('legend')
   display: flex
-  border: solid 1px
-  border-radius: $legend-border-radius
+  position: absolute
+  right: 0
   box-sizing: border-box
-  overflow-y: auto
   padding: $legend-padding
 
   &--horizontal
     flex-direction: row
+    overflow-x: auto
+    overflow-y: hidden
+
+    #{prefix(legend-item)}
+      text-align: center
+      padding: $legend-padding
+
+      &__colorbox
+        display: block
 
   &--vertical
     flex-direction: column
+    overflow-y: auto
 
-  &__item
-    overflow: hidden
-    white-space: nowrap
-    text-overflow: ellipsis
+    #{prefix(legend-item)}
+      padding: $legend-padding 0
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+
+      &__title
+        display: inline
+
+@include module('legend-item')
+  min-height: $legend-item-height
+  line-height: $legend-item-height
+
+  &__colorbox
+    content: ' '
+    width: dp(3)
+    height: dp(.375)
+    padding: 0
+    margin: 0 dp(1.5)
+    display: inline-block
+    vertical-align: middle

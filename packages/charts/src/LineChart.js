@@ -9,13 +9,12 @@ import {
   VerticalGridLines
 } from 'react-vis'
 
-// import { buildClassName } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 import Highligth from './Highlight'
+import { generateSeriesClassName } from './config'
 
-// import { talixoTheme, getColorByIndex } from './config'
-
-// const moduleName = 'line-chart'
+const moduleName = 'line-chart'
 
 /**
  * Component which represents LineChart.
@@ -39,24 +38,27 @@ class LineChart extends React.Component {
       style,
       ...passedProps
     } = this.props
-    // const wrapperCls = buildClassName(moduleName, className)
+    const wrapperCls = buildClassName(moduleName, className)
 
     return (
       <FlexibleXYPlot
         animation
+        className={wrapperCls}
         xDomain={lastDrawLocation && [lastDrawLocation.left, lastDrawLocation.right]}
         {...passedProps}
       >
         <HorizontalGridLines />
         <VerticalGridLines />
-        <XAxis title={xAxisTitle} position='start' />
+        <XAxis title={xAxisTitle} />
         <YAxis title={yAxisTitle} />
         {
           data.map((item, index) => (
             <LineSeries
               data={item.dataItems}
               color={item.color}
-              className={item.className}
+              className={generateSeriesClassName(item.id || index, item.className)}
+              key={generateSeriesClassName(item.id || index, item.className)}
+              style={{fill: 'none'}}
             />
           ))
         }
@@ -76,10 +78,10 @@ LineChart.propTypes = {
   className: PropTypes.string,
 
   /** Line chart data  */
-  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
-    x: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
-    y: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
-  }))),
+  // data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+  //   x: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  //   y: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
+  // }))),
 
   /** Line chart data  */
   xAxisTitle: PropTypes.string,

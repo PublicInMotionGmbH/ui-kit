@@ -3,47 +3,9 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+import LegendItem from './LegendItem'
+
 const moduleName = 'legend'
-
-/**
- *
- * @param props
- * @returns {*}
- * @constructor
- */
-function LegendItem (props) {
-  const {
-    className,
-    color,
-    disabled,
-    id,
-    title,
-    onClick
-  } = props
-  const itemCls = buildClassName(`${moduleName}__item`, className, {
-    clickable: onClick,
-    disabled: disabled
-  })
-  const colorboxCls = buildClassName(`${moduleName}__colorbox`)
-
-  return (
-    <div onClick={onClick} className={itemCls}>
-      <div
-        style={{backgroundColor: color}}
-        className={`${colorboxCls} ${colorboxCls}--${id}`}
-      />
-      <span>{ title }</span>
-    </div>
-  )
-}
-
-LegendItem.propTypes = {
-  disabled: PropTypes.bool
-}
-
-LegendItem.defaultProps = {
-  disabled: false
-}
 
 /**
  * Component which represents Legend.
@@ -66,15 +28,16 @@ function Legend (props) {
   return (
     <div className={wrapperCls} style={style} {...passedProps}>
       {
-        dataItems.map(item => (
+        dataItems.map((item, index) => (
           <LegendItem
-            id={item.id}
             className={item.className}
-            disabled={item.disabled}
             color={item.color}
-            title={item.title || item.label}
+            disabled={item.disabled}
+            id={item.id || index}
             key={item.title || item.label}
-            onClick={onClick && ((e) => onClick(item, e))}
+            onClick={onClick && ((e) => onClick(item, index, e))}
+            title={item.title || item.label}
+            value={item.y || item.angle}
           />
         ))
       }
@@ -86,9 +49,17 @@ Legend.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** TODO: add a description of dataItem */
   dataItems: PropTypes.array,
+
   /** Horizontal or vertical. */
-  direction: PropTypes.string
+  direction: PropTypes.string,
+
+  /** onClick callback, gets the clicked item, index and event as parameter */
+  onClick: PropTypes.func,
+
+  /** Additional wrapper styling */
+  style: PropTypes.object
 }
 
 Legend.defaultProps = {
