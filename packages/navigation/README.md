@@ -57,6 +57,8 @@ onClick       | func           | n/a            | Function passed to element
 
 ### ControlledPagination
 
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
 Property name  | Type   | Required | Default      | Description
 ---------------|--------|----------|:------------:|--------------------------------
 activePage     | number |          | `1`          | Active page
@@ -68,11 +70,23 @@ previousLabel  | node   |          | `'Previous'` | Previous button label
 
 ### ControlledTabs
 
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
 Property name  | Type   | Required | Default  | Description
 ---------------|--------|----------|:--------:|--------------------------------
 activeTab      | number |          | `0`      | Active tab
 labels         | array  |          | `[{}]`   | List of tab labels
 onChange       | func   |          | n/a      | Function passed to page buttons
+
+### Steps
+
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
+Property name  | Type   | Required | Default  | Description
+---------------|--------|----------|:--------:|--------------------------------
+current        | number |          | `0`      | Active step
+steps          | array  |          | `[]`     | List of steps
+onChange       | func   |          | n/a      | Function passed to step buttons
 
 #### Types
 

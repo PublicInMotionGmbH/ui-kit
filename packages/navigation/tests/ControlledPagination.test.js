@@ -72,5 +72,6 @@ describe('<ControlledPagination />', () => {
     const pageButton = wrapper.find('Element').at(1)
     pageButton.simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
   })
 })

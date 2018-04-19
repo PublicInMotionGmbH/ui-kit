@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Steps /> renders correctly 1`] = `
+Array [
+  <Step
+    active={true}
+    disabled={false}
+    key="0"
+    onClick={[Function]}
+  />,
+  <Step
+    active={false}
+    disabled={true}
+    key="1"
+    onClick={[Function]}
+  />,
+  <Step
+    active={false}
+    disabled={true}
+    key="2"
+    onClick={[Function]}
+  />,
+]
+`;
