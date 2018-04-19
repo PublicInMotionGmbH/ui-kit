@@ -12,6 +12,8 @@ describe('<Dropdown />', () => {
     )
 
     expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find(`${name}__options`).length).toBe(0)
+
     wrapper.unmount()
   })
 
@@ -22,8 +24,13 @@ describe('<Dropdown />', () => {
         items={[1, 3, 5]}
       />
     )
+
     wrapper.find(`.${name}__button`).simulate('click')
-    expect(wrapper).toMatchSnapshot()
+    wrapper.update()
+
+    expect(wrapper.find('button')).toMatchSnapshot()
+    expect(wrapper.find(`.${name}__options`).length).toBe(1)
+
     wrapper.unmount()
   })
 })
