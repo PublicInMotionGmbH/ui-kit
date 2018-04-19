@@ -6,6 +6,7 @@ import {
   YAxis,
   LineSeries,
   HorizontalGridLines,
+  VerticalBarSeries,
   VerticalGridLines
 } from 'react-vis'
 
@@ -27,19 +28,43 @@ class LineChart extends React.Component {
   state = {
     lastDrawLocation: null
   }
+
+  getSeriesProps = (item, index) => ({
+    data: item.dataItems,
+    color: item.color,
+    className: generateSeriesClassName(item.id || index),
+    key: generateSeriesClassName(item.id || index, item.className),
+    ...this.props.dataSeriesProps
+  })
+
+  getComponentByType = (type) => {
+    switch (type) {
+      case 'bar':
+        console.log(type)
+        return VerticalBarSeries
+      case 'line':
+        return LineSeries
+    }
+  }
+
   render () {
     const { lastDrawLocation } = this.state
+    const { getSeriesProps, getComponentByType } = this
     const {
       className,
       data,
+      dataSeriesProps,
       lineProps,
       xAxisTitle,
       yAxisTitle,
       style,
+      type,
       ...passedProps
     } = this.props
     const wrapperCls = buildClassName(moduleName, className)
-
+    const RenderComponet = getComponentByType(type)
+    const isLineChart = type === 'line'
+    // TODO: Zoom while oridnal data
     return (
       <FlexibleXYPlot
         animation
@@ -53,21 +78,23 @@ class LineChart extends React.Component {
         <YAxis title={yAxisTitle} />
         {
           data.map((item, index) => (
-            <LineSeries
-              data={item.dataItems}
-              color={item.color}
-              className={generateSeriesClassName(item.id || index, item.className)}
-              key={generateSeriesClassName(item.id || index, item.className)}
-              style={{fill: 'none'}}
+            <RenderComponet
+              style={isLineChart && { fill: 'none' }}
+              {...getSeriesProps(item, index)}
             />
           ))
         }
-        <Highligth
-          color={null}
-          onBrushEnd={(area) => {
-            this.setState({ lastDrawLocation: area })
-          }}
-        />
+        {
+          isLineChart &&
+          <Highligth
+            color={null}
+            onBrushEnd={(area) => {
+              this.setState({ lastDrawLocation: area })
+            }}
+          />
+        }
+        <XAxis title={xAxisTitle} />
+        <YAxis title={yAxisTitle} />
       </FlexibleXYPlot>
     )
   }
@@ -90,14 +117,18 @@ LineChart.propTypes = {
   yAxisTitle: PropTypes.string,
 
   /** Additional wrapper styles */
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  /** Type of chart (line or bar) */
+  type: PropTypes.oneOf(['line', 'bar'])
 }
 
 LineChart.defaultProps = {
   data: [[{}]],
   lineColors: [],
   xAxisTitle: '',
-  yAxisTitle: ''
+  yAxisTitle: '',
+  type: 'line'
 }
 
 export default LineChart

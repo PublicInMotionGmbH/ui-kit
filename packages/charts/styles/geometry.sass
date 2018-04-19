@@ -14,7 +14,6 @@
 
     #{prefix(legend-item)}
       text-align: center
-      padding: $legend-padding
 
       &__colorbox
         display: block
@@ -24,7 +23,6 @@
     overflow-y: auto
 
     #{prefix(legend-item)}
-      padding: $legend-padding 0
       overflow: hidden
       white-space: nowrap
       text-overflow: ellipsis
@@ -35,6 +33,7 @@
 @include module('legend-item')
   min-height: $legend-item-height
   line-height: $legend-item-height
+  padding: $legend-padding
 
   &__colorbox
     content: ' '

@@ -72,7 +72,7 @@ const lineData = [
   }
 ]
 
-const barData = [
+const data = [
   {
     className: 'className',
     color: null,
@@ -100,10 +100,10 @@ addStory('Bar Chart', readme, () => (
   <div style={wrapperStyle}>
     <BarChart
       domainPadding={{x: 10}}
-      data={barData}
+      data={data}
     />
     <Legend
-      dataItems={barData}
+      dataItems={data}
     />
   </div>
 ))
@@ -116,7 +116,8 @@ addStory('Line Chart', readme, () => (
       yAxisTitle='yAxis'
     />
     <Legend
-      dataItems={lineData}
+      dataItems={data}
+      direction='horizontal'
     />
   </div>
 ))
