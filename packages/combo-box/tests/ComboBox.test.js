@@ -8,6 +8,9 @@ import { prefix } from '@talixo/shared'
 const name = prefix('combo-box')
 
 describe('<ComboBox />', () => {
+  beforeEach(() => jest.useFakeTimers())
+  afterEach(() => jest.useRealTimers())
+
   it('renders correctly', () => {
     const wrapper = mount(
       <ComboBox menuComponent={Menu} toggleComponent={DropdownButton} items={[1, 3, 5]} />
@@ -26,8 +29,20 @@ describe('<ComboBox />', () => {
         items={[1, 3, 5]}
       />
     )
-    wrapper.find(`.${name}__button`).simulate('click')
+
+    const button = wrapper.find(`.${name}__button`)
+
+    // Simulate click
+    button.simulate('click')
+
+    // Run single setTimeout with this.toggleMenu() in Downshift
+    jest.runAllTimers()
+
+    // Update view
+    wrapper.update()
+
     expect(wrapper).toMatchSnapshot()
+
     wrapper.unmount()
   })
 })
