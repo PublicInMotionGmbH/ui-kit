@@ -4,7 +4,7 @@ import { FlexibleXYPlot, ArcSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
-import { generateSeriesClassName } from './config'
+import { generateSeriesClassName } from './common'
 
 const moduleName = 'pie-chart'
 

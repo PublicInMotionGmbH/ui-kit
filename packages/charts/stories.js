@@ -1,9 +1,8 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import BarChart from './src/BarChart'
 import Legend from './src/Legend'
-import LineChart from './src/LineChart'
+import Chart from './src/Chart'
 import PieChart from './src/PieChart'
 
 // Load first paragraph from README file
@@ -12,16 +11,8 @@ const readme = getReadmeDescription(require('./README.md'))
 // Create factories for story
 const addStory = createStoriesFactory('Charts', module)
 
-// Datasets
-// const dataStructure = {
-//   className: 'className',
-//   title: '',
-//   show: true,
-//   dataItems: []
-// }
-
 const wrapperStyle = {
-  width: '50%',
+  width: '100%',
   height: '500px',
   display: 'flex',
   flexDirection: 'row',
@@ -59,8 +50,8 @@ const lineData = [
     color: null,
     title: 'Line 1',
     id: 0,
-    disabled: false,
-    dataItems: [{ x: 1, y: 3 }, { x: 2, y: 4 }, { x: 3, y: 1 }, { x: 4, y: 2 }, { x: 5, y: 5 }]
+    disabled: true,
+    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 5 }, { x: new Date('May 29 2017').getTime(), y: 2 }, { x: new Date('May 31 2017').getTime(), y: 2 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
   },
   {
     className: 'className',
@@ -68,11 +59,11 @@ const lineData = [
     id: 1,
     title: 'Line 2',
     disabled: false,
-    dataItems: [{ x: 1, y: 2 }, { x: 2, y: 8 }, { x: 3, y: 0 }, { x: 4, y: 4 }, { x: 5, y: 5 }]
+    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 3 }, { x: new Date('May 29 2017').getTime(), y: 8 }, { x: new Date('May 31 2017').getTime(), y: 1 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
   }
 ]
 
-const data = [
+const barData = [
   {
     className: 'className',
     color: null,
@@ -98,25 +89,28 @@ const labelProps = {
 
 addStory('Bar Chart', readme, () => (
   <div style={wrapperStyle}>
-    <BarChart
+    <Chart
       domainPadding={{x: 10}}
-      data={data}
+      data={barData}
+      type='bar'
     />
     <Legend
-      dataItems={data}
+      dataItems={barData}
     />
   </div>
 ))
 
 addStory('Line Chart', readme, () => (
   <div style={wrapperStyle}>
-    <LineChart
+    <Chart
       data={lineData}
       xAxisTitle='XAxis'
       yAxisTitle='yAxis'
+      timeSeries
+      zoomable
     />
     <Legend
-      dataItems={data}
+      dataItems={lineData}
       direction='horizontal'
     />
   </div>

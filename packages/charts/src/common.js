@@ -1,9 +1,25 @@
+import PropTypes from 'prop-types'
+
 import {buildClassName} from '@talixo/shared'
 
 export function generateSeriesClassName (index, className = null) {
   const moduleName = 'chart-series'
   return buildClassName(moduleName, className, [index])
 }
+
+export const dataItemPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    className: PropTypes.string,
+    color: PropTypes.string,
+    dataitems: PropTypes.shape({
+      x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      y: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    }),
+    disabled: PropTypes.bool,
+    id: PropTypes.number,
+    title: PropTypes.string
+  })
+)
 
 // Colors
 export const colors = [
