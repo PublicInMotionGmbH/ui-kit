@@ -21,23 +21,23 @@ describe('<TextInput />', () => {
   it('should have `empty` class when it is empty', () => {
     const wrapper = shallow(<TextInput />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--empty`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--empty`)).toBe(true)
 
     wrapper.setProps({ value: null })
-    expect(wrapper.hasClass(`${name}__wrapper--empty`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--empty`)).toBe(true)
 
     wrapper.setProps({ value: '' })
-    expect(wrapper.hasClass(`${name}__wrapper--empty`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--empty`)).toBe(true)
 
     wrapper.setProps({ value: 'xyz' })
     wrapper.setProps({ value: '' })
-    expect(wrapper.hasClass(`${name}__wrapper--empty`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--empty`)).toBe(true)
   })
 
   it('should not have `empty` class when it is not empty', () => {
     const wrapper = shallow(<TextInput value='abc' />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--empty`)).toBe(false)
+    expect(wrapper.hasClass(`${name}--empty`)).toBe(false)
   })
 
   it('should render something on left', () => {
@@ -53,11 +53,11 @@ describe('<TextInput />', () => {
   it('should add class name with left icon', () => {
     const wrapper = shallow(<TextInput left='something' />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--with-left`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--with-left`)).toBe(true)
 
     wrapper.setProps({ left: null })
 
-    expect(wrapper.hasClass(`${name}__wrapper--with-left`)).toBe(false)
+    expect(wrapper.hasClass(`${name}--with-left`)).toBe(false)
   })
 
   it('should pass props to input', () => {
@@ -73,7 +73,7 @@ describe('<TextInput />', () => {
     const wrapper = mount(<TextInput className='abc' />)
     const node = wrapper.getDOMNode()
 
-    expect(node.classList.contains(`${name}__wrapper`)).toBe(true)
+    expect(node.classList.contains(name)).toBe(true)
     expect(node.classList.contains('abc')).toBe(true)
   })
 
@@ -90,17 +90,17 @@ describe('<TextInput />', () => {
   it('should add class name with right icon', () => {
     const wrapper = shallow(<TextInput right='something' />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--with-right`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--with-right`)).toBe(true)
 
     wrapper.setProps({ right: null })
 
-    expect(wrapper.hasClass(`${name}__wrapper--with-right`)).toBe(false)
+    expect(wrapper.hasClass(`${name}--with-right`)).toBe(false)
   })
 
   it('should allow `small` size to be passed', () => {
     const wrapper = shallow(<TextInput size='small' />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--small`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
   })
 
   it('should handle `onChange` event properly', () => {
@@ -120,7 +120,7 @@ describe('<TextInput />', () => {
   it('should render with error styling', () => {
     const wrapper = shallow(<TextInput error />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--error`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--error`)).toBe(true)
   })
 
   it('should render suffix when it is provided', () => {
@@ -132,7 +132,7 @@ describe('<TextInput />', () => {
   it('should add information about suffix to class name', () => {
     const wrapper = shallow(<TextInput suffix='cars' />)
 
-    expect(wrapper.hasClass(`${name}__wrapper--with-suffix`)).toBe(true)
+    expect(wrapper.hasClass(`${name}--with-suffix`)).toBe(true)
   })
 
   describe('when document is not loaded', () => {

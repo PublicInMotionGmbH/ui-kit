@@ -283,7 +283,7 @@ class TextInput extends React.PureComponent {
     const hasSuffix = suffix != null
 
     // Build classes for wrapper
-    const wrapperClasses = buildClassName([ moduleName, 'wrapper' ], className, [ size ], {
+    const wrapperClasses = buildClassName(moduleName, className, [ size ], {
       'with-left': hasLeft,
       'with-right': hasRight,
       'with-suffix': hasSuffix,
@@ -302,7 +302,7 @@ class TextInput extends React.PureComponent {
         {leftElement}
 
         <input
-          className={buildClassName(moduleName)}
+          className={buildClassName([ moduleName, 'input' ])}
           onChange={this.onInputChange}
           ref={this.inputRef}
           style={this.state.inputStyle}

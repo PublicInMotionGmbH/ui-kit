@@ -1,19 +1,19 @@
 @import './config'
 
 @include module('text-input')
-  box-sizing: border-box
-  padding: $input-padding
-  border: 1px solid $input-border-color
-  border-radius: $input-border-radius
-  background-color: $input-background-color
-  color: $input-text-color
-  outline: none
-  width: 100%
+  display: block
+  position: relative
+  font-size: $input-font-size
 
-  &__wrapper
-    display: block
-    position: relative
-    font-size: $input-font-size
+  &__input
+    box-sizing: border-box
+    padding: $input-padding
+    border: 1px solid $input-border-color
+    border-radius: $input-border-radius
+    background-color: $input-background-color
+    color: $input-text-color
+    outline: none
+    width: 100%
 
   &__suffix
     display: block
@@ -45,44 +45,44 @@
   &__right
     right: $input-padding
 
-  &__wrapper--with-left &
+  &--with-left &__input
     padding-left: 1.5 * $input-padding + $input-icon-width
 
-  &__wrapper--with-right &
+  &--with-right &__input
     padding-right: 1.5 * $input-padding + $input-icon-width
 
   // Build styling for error
 
-  &__wrapper--error &
+  &--error &__input
     border-color: $input-error-color
     color: $input-error-color
 
-  &__wrapper--error &::placeholder
+  &--error &__input::placeholder
     color: $input-error-color
 
   // Handle small size
 
-  &__wrapper--small
+  &--small
     font-size: $input-small-font-size
 
-  &__wrapper--small &
+  &--small &__input
     padding: $input-small-padding
 
-  &__wrapper--small &__left
+  &--small &__left
     left: $input-small-padding
 
-  &__wrapper--small#{&}__wrapper--with-left &
+  &--small#{&}--with-left &__input
     padding-left: 1.5 * $input-small-padding + $input-icon-width
 
-  &__wrapper--small &__right
+  &--small &__right
     right: $input-small-padding
 
-  &__wrapper--small#{&}__wrapper--with-right &
+  &--small#{&}--with-right &__input
     padding-right: 1.5 * $input-small-padding + $input-icon-width
 
   // Handle suffix correctly
 
-  &__wrapper--empty &__suffix
+  &--empty &__suffix
     display: none
 
   // Handle icons correctly on RTL
@@ -95,32 +95,32 @@
     right: auto
     left: $input-padding
 
-  [dir=rtl] &__wrapper--with-left &
+  [dir=rtl] &--with-left &__input
     padding-left: $input-padding
     padding-right: 1.5 * $input-padding + $input-icon-width
 
-  [dir=rtl] &__wrapper--with-right &
+  [dir=rtl] &--with-right &__input
     padding-right: $input-padding
     padding-left: 1.5 * $input-padding + $input-icon-width
 
-  [dir=rtl] &__wrapper--with-right#{&}__wrapper--with-left &
+  [dir=rtl] &--with-right#{&}--with-left &__input
     padding-right: 1.5 * $input-padding + $input-icon-width
     padding-left: 1.5 * $input-padding + $input-icon-width
 
-  [dir=rtl] &__wrapper--small &__left
+  [dir=rtl] &--small &__left
     right: $input-small-padding
 
-  [dir=rtl] &__wrapper--small#{&}__wrapper--with-left &
+  [dir=rtl] &--small#{&}--with-left &__input
     padding-left: $input-small-padding
     padding-right: 1.5 * $input-small-padding + $input-icon-width
 
-  [dir=rtl] &__wrapper--small &__right
+  [dir=rtl] &--small &__right
     left: $input-small-padding
 
-  [dir=rtl] &__wrapper--small#{&}__wrapper--with-right &
+  [dir=rtl] &--small#{&}--with-right &__input
     padding-right: $input-small-padding
     padding-left: 1.5 * $input-small-padding + $input-icon-width
 
-  [dir=rtl] &__wrapper--small#{&}__wrapper--with-right#{&}__wrapper--with-left &
+  [dir=rtl] &--small#{&}--with-right#{&}--with-left &__input
     padding-right: 1.5 * $input-small-padding + $input-icon-width
     padding-left: 1.5 * $input-small-padding + $input-icon-width

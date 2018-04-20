@@ -2,10 +2,10 @@
 
 exports[`<TextInput /> should render properly 1`] = `
 <div
-  className="talixo-text-input__wrapper talixo-text-input__wrapper--empty"
+  className="talixo-text-input talixo-text-input--empty"
 >
   <input
-    className="talixo-text-input"
+    className="talixo-text-input__input"
     onChange={[Function]}
     style={null}
     type="text"
