@@ -1,31 +1,86 @@
 @import './config'
 
 @include module('text-input')
-  padding: dp(3) dp(2) dp(.8)
-  border: 1px solid
-  border-radius: $border-radius-m
+  box-sizing: border-box
+  padding: $input-padding
+  border: 1px solid $input-border-color
+  border-radius: $input-border-radius
+  background-color: $input-background-color
+  color: $input-text-color
+  outline: none
+  width: 100%
 
-  &--small
-    padding: dp(2) dp(2) dp(.4)
+  &__wrapper
+    display: block
+    position: relative
+    font-size: $input-font-size
 
-  &:focus ~ #{prefix('text-input', 'label')},
-  ~ #{prefix('text-input', 'label')}#{prefix('text-input', 'label--not-empty')}
-    top: dp(.3)
-    font-size: dp(1.4)
+  &__suffix
+    display: block
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    white-space: nowrap
+    pointer-events: none
 
-#{prefix('text-input', 'wrapper')}
-  display: inline-block
-  position: relative
-  font-size: $font-size-m
+    &:before
+      content: '\00a0'
+      display: inline-block
 
-  &--small
-    font-size: $font-size-s
+  // Build left & right addons
 
-#{prefix('text-input', 'label')}
-  position: absolute
-  left: dp(2)
-  top: calc(50% - (.7 * #{$font-size-m}))
-  transition: .3s ease all
+  &__left,
+  &__right
+    position: absolute
+    font-size: $input-icon-size
+    white-space: nowrap
+    max-height: 100%
+    color: $input-icon-color
+    top: 50%
+    transform: translateY(-50%)
 
-  &--small
-    top: calc(50% - (.8 * #{$font-size-s}))
+  &__left
+    left: $input-padding
+
+  &__right
+    right: $input-padding
+
+  &__wrapper--with-left &
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  &__wrapper--with-right &
+    padding-right: 1.5 * $input-padding + $input-icon-width
+
+  // Build styling for error
+
+  &__wrapper--error &
+    border-color: $input-error-color
+    color: $input-error-color
+
+  &__wrapper--error &::placeholder
+    color: $input-error-color
+
+  // Handle small size
+
+  &__wrapper--small
+    font-size: $input-small-font-size
+
+  &__wrapper--small &
+    padding: $input-small-padding
+
+  &__wrapper--small &__left
+    left: $input-small-padding
+
+  &__wrapper--small#{&}__wrapper--with-left &
+    padding-left: 1.5 * $input-small-padding + $input-icon-width
+
+  &__wrapper--small &__right
+    right: $input-small-padding
+
+  &__wrapper--small#{&}__wrapper--with-right &
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+
+  // Handle suffix correctly
+
+  &__wrapper--empty &__suffix
+    display: none

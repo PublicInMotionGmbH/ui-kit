@@ -1,6 +1,11 @@
 # Talixo Text Input
 
-UI Component which represents Text Input
+UI Component which represents Text Input, TODO: RTL with suffix and icons
+
+## To do
+
+- [ ] RTL with suffix
+- [ ] RTL with icons
 
 ## How to install
 
@@ -24,11 +29,13 @@ It allows any props which are allowed for `input[type=text]`. Additionally, it h
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-hasError      | boolean   | `false` | indicates that input has error
-onChange      | function  | `() => {}`  | callback for change event
-placeholder   | string    | n/a     | Input floating label text 
+error         | bool      | `false` | indicates that input has error
+onChange      | function  | n/a     | callback for change event
 size          | string    | `''`    | size of text input (can be 'small')
 style         | object    | n/a     | additional input wrapper styling
+left          | node      | n/a     | icon/element to put on starting side
+right         | node      | n/a     | icon/element to put on ending side
+suffix        | node      | n/a     | element or text to show after current input value
 
 ## Changelog
 
