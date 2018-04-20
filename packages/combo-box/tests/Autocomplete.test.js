@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { prefix } from '@talixo/shared'
 
 import freezeDownshiftId from './utils/freezeDownshiftId'
 

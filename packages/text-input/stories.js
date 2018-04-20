@@ -37,7 +37,7 @@ addStory('default', readme, () => (
       placeholder='Default input with errors'
       style={additionalStyling}
       onChange={change}
-      hasError
+      error
     />
   </div>
 ))
@@ -353,7 +353,7 @@ addStory('small', readme, () => (
       size='small'
       style={additionalStyling}
       onChange={change}
-      hasError
+      error
     />
   </div>
 ))
