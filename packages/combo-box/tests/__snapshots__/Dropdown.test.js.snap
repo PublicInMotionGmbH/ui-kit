@@ -5,10 +5,10 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
   className="talixo-combo-box__wrapper"
 >
   <button
-    aria-expanded={true}
+    aria-expanded={false}
     aria-haspopup={true}
-    aria-label="close menu"
-    className="talixo-combo-box__button talixo-combo-box__button--open"
+    aria-label="open menu"
+    className="talixo-combo-box__button"
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -32,40 +32,6 @@ exports[`<Dropdown /> opens dropdown menu when clicked 1`] = `
       </span>
     </div>
   </button>
-  <div
-    className="talixo-combo-box__options"
-  >
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-1-item-0"
-      key="1"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      1
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-1-item-1"
-      key="3"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      3
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-1-item-2"
-      key="5"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      5
-    </div>
-  </div>
 </div>
 `;
 
