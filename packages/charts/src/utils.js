@@ -21,6 +21,27 @@ export const dataItemPropTypes = PropTypes.arrayOf(
   })
 )
 
+export function generateArcsData (data, sum, config = {}) {
+  const { PI } = Math
+  const { startAngle = 0, radius0 = 0, radius = 5 } = config
+
+  let angle0 = startAngle
+  const newData = data.map(item => {
+    if (item.disabled) return item
+    const arcAngle = (item.value / sum) * 2 * PI
+    const newItem = {
+      ...item,
+      angle: arcAngle + angle0,
+      angle0,
+      radius,
+      radius0
+    }
+    angle0 += arcAngle
+    return newItem
+  })
+  return newData
+}
+
 // Colors
 export const colors = [
   '#330f00',

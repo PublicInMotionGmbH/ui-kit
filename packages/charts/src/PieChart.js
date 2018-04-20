@@ -4,30 +4,9 @@ import { FlexibleXYPlot, ArcSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
-import { generateSeriesClassName } from './common'
+import { generateArcsData, generateSeriesClassName } from './utils'
 
 const moduleName = 'pie-chart'
-
-function generateArcsData (data, sum, config = {}) {
-  const { PI } = Math
-  const { startAngle = 0, radius0 = 0, radius = 5 } = config
-
-  let angle0 = startAngle
-  const newData = data.map(item => {
-    if (item.disabled) return item
-    const arcAngle = (item.value / sum) * 2 * PI
-    const newItem = {
-      ...item,
-      angle: arcAngle + angle0,
-      angle0,
-      radius,
-      radius0
-    }
-    angle0 += arcAngle
-    return newItem
-  })
-  return newData
-}
 
 /**
  * Component which represents PieChart.
@@ -48,9 +27,11 @@ function PieChart (props) {
   const wrapperCls = buildClassName(moduleName, className)
 
   const sum = dataItems
+    // TODO: test disable filtering
     .filter(item => !item.disabled)
     .map(item => item.value)
     .reduce((acc, curr) => acc + curr, 0)
+  // TODO: test arc data generating
   const displayData = generateArcsData(dataItems, sum)
 
   return (

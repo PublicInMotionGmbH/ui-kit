@@ -1,3 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PieChart> when rendered should render properly 1`] = `undefined`;
+exports[`<PieChart> when rendered should render properly 1`] = `
+<FlexibleXYPlot
+  className="talixo-pie-chart"
+  height={500}
+  showLabels={false}
+  width={500}
+  xDomain={
+    Array [
+      -5,
+      5,
+    ]
+  }
+  yDomain={
+    Array [
+      -5,
+      5,
+    ]
+  }
+/>
+`;

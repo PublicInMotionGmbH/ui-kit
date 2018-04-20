@@ -13,7 +13,7 @@ import {
 import { buildClassName } from '@talixo/shared'
 
 import Highligth from './Highlight'
-import { dataItemPropTypes, generateSeriesClassName } from './common'
+import { dataItemPropTypes, generateSeriesClassName } from './utils'
 
 const moduleName = 'chart'
 
