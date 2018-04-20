@@ -219,6 +219,90 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
   )
 }, () => ({ value: '2' }))
 
+addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
+  const suffix = (
+    <span>
+      happy <strong>users</strong> <Icon name='face' /><Icon name='favorite' /><Icon name='mobile_apps' />
+    </span>
+  )
+
+  const value = Math.max(0, Math.min(1, state.value.length / 10))
+
+  const progressType = value > 0.8
+    ? 'success'
+    : value > 0.4 ? 'warning' : 'error'
+
+  const progress = (
+    <ProgressBar
+      type={progressType}
+      value={value}
+      style={{ width: 50, display: 'inline-block' }}
+    >
+      {(100 * value) + '%'}
+    </ProgressBar>
+  )
+
+  return (
+    <div style={{ width: 300 }} dir='rtl'>
+      <TextInput
+        placeholder='Single left icon'
+        left={<Icon name='directions_car' />}
+        suffix={suffix}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+
+      <TextInput
+        placeholder='Single right icon'
+        right={<Icon name='directions_car' />}
+        suffix={suffix}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+
+      <TextInput
+        placeholder='Both icons'
+        left={<Icon name='directions_car' />}
+        right={<Icon name='warning' />}
+        suffix={suffix}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+
+      <TextInput
+        placeholder='Single left icon'
+        left={<Icon name='directions_car' />}
+        suffix={progress}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+
+      <TextInput
+        placeholder='Single right icon'
+        right={<Icon name='directions_car' />}
+        suffix={progress}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+
+      <TextInput
+        placeholder='Both icons'
+        left={<Icon name='directions_car' />}
+        right={<Icon name='warning' />}
+        suffix={progress}
+        style={additionalStyling}
+        value={state.value}
+        onChange={value => setState({value})}
+      />
+    </div>
+  )
+}, () => ({ value: '2' }))
+
 addStory.controlled('small with icon and suffix', readme, (setState, state) => (
   <div style={{ width: 300 }}>
     <TextInput

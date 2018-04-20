@@ -84,3 +84,43 @@
 
   &__wrapper--empty &__suffix
     display: none
+
+  // Handle icons correctly on RTL
+
+  [dir=rtl] &__left
+    left: auto
+    right: $input-padding
+
+  [dir=rtl] &__right
+    right: auto
+    left: $input-padding
+
+  [dir=rtl] &__wrapper--with-left &
+    padding-left: $input-padding
+    padding-right: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &__wrapper--with-right &
+    padding-right: $input-padding
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &__wrapper--with-right#{&}__wrapper--with-left &
+    padding-right: 1.5 * $input-padding + $input-icon-width
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &__wrapper--small &__left
+    right: $input-small-padding
+
+  [dir=rtl] &__wrapper--small#{&}__wrapper--with-left &
+    padding-left: $input-small-padding
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+
+  [dir=rtl] &__wrapper--small &__right
+    left: $input-small-padding
+
+  [dir=rtl] &__wrapper--small#{&}__wrapper--with-right &
+    padding-right: $input-small-padding
+    padding-left: 1.5 * $input-small-padding + $input-icon-width
+
+  [dir=rtl] &__wrapper--small#{&}__wrapper--with-right#{&}__wrapper--with-left &
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+    padding-left: 1.5 * $input-small-padding + $input-icon-width

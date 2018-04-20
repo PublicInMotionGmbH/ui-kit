@@ -3,26 +3,30 @@ import analyzeInput from './analyzeInput'
 /**
  * Calculate styles for input and suffix
  *
- * @param {HTMLElement} input
- * @param {HTMLElement} suffix
+ * @param {HTMLElement} inputEl
+ * @param {HTMLElement} suffixEl
  * @returns {object|{ hash: string, suffix: object, input: object }}
  */
-function calculateInputStyles (input, suffix) {
+function calculateInputStyles (inputEl, suffixEl) {
   // Analyze input and suffix dimensions
-  const { hash, width, styles } = analyzeInput(input, suffix)
+  const { hash, rtl, width, styles } = analyzeInput(inputEl, suffixEl)
+
+  const input = {}
+  const suffix = {
+    ...styles,
+    maxWidth: width.input - width.left - width.right
+  }
+
+  if (rtl) {
+    suffix.right = Math.min(width.right + width.value, width.input - width.suffix - width.left)
+    input.paddingLeft = width.left + width.suffix
+  } else {
+    input.paddingRight = width.right + width.suffix
+    suffix.left = Math.min(width.left + width.value, width.input - width.suffix - width.right)
+  }
 
   // Calculate styles for input and suffix
-  return {
-    hash: hash,
-    input: {
-      paddingRight: width.right + width.suffix
-    },
-    suffix: {
-      ...styles,
-      maxWidth: width.input - width.left - width.right,
-      left: Math.min(width.left + width.value, width.input - width.suffix - width.right)
-    }
-  }
+  return { hash, input, suffix }
 }
 
 export default calculateInputStyles

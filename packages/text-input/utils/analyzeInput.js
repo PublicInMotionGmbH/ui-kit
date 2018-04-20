@@ -18,11 +18,16 @@ function analyzeInput (input, suffix) {
 
   // Remove padding set to input directly
   // And save previous one to recover it
-  const previousPadding = input.style.paddingRight
+  const previousLeftPadding = input.style.paddingLeft
+  const previousRightPadding = input.style.paddingRight
+  input.style.paddingLeft = ''
   input.style.paddingRight = ''
 
   // Compute styles for input
   const computed = document.defaultView.getComputedStyle(input)
+
+  // Check if it's RTL text direction
+  const isRTL = computed.direction === 'rtl'
 
   // Initialize styles for suffix
   const styles = {}
@@ -47,10 +52,12 @@ function analyzeInput (input, suffix) {
   const rightWidth = parseInt(computed.paddingRight, 10)
 
   // Recover current padding set to input directly
-  input.style.paddingRight = previousPadding
+  input.style.paddingLeft = previousLeftPadding
+  input.style.paddingRight = previousRightPadding
 
   return {
-    hash: `${inputWidth}*${leftWidth}*${textWidth}*${suffixWidth}*${rightWidth}`,
+    hash: `${isRTL ? 'rtl' : 'ltr'}*${inputWidth}*${leftWidth}*${textWidth}*${suffixWidth}*${rightWidth}`,
+    rtl: isRTL,
     width: {
       input: inputWidth,
       left: leftWidth,
