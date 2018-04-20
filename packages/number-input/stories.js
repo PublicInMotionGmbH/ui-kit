@@ -23,9 +23,16 @@ addStory('default', readme, () => (
     <h2>Default number input with initial value</h2>
     <NumberInput onChange={change} value={15} />
     <h2>Number input with errors</h2>
-    <NumberInput onChange={change} hasError />
+    <NumberInput onChange={change} error />
   </div>
 ))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Default number input</h2>
+    <NumberInput onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
 
 addStory('small', readme, () => (
   <div>
@@ -34,6 +41,6 @@ addStory('small', readme, () => (
     <h2>Small number input with initial value</h2>
     <NumberInput onChange={change} size='small' value={15} />
     <h2>Small number input with errors</h2>
-    <NumberInput onChange={change} size='small' hasError />
+    <NumberInput onChange={change} size='small' error />
   </div>
 ))
