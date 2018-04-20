@@ -23,7 +23,7 @@ const moduleName = 'number-input-stepper'
  */
 class NumberInputStepper extends React.PureComponent {
   /**
-   * Stop automated behavior when component is unmounted
+   * Stop automated behavior when component is unmounted.
    */
   componentWillUnmount () {
     this.stop()
@@ -103,7 +103,7 @@ class NumberInputStepper extends React.PureComponent {
   }
 
   /**
-   * Save reference to container
+   * Save reference to container.
    *
    * @param {HTMLElement} el
    */
@@ -112,28 +112,37 @@ class NumberInputStepper extends React.PureComponent {
   }
 
   /**
-   * Render stepper
+   * Build element for stepper button.
+   *
+   * @param {string} icon
+   * @param {string} action
+   * @returns {React.Element}
+   */
+  buildButton (icon, action) {
+    const buttonClsName = prefix(moduleName, 'button')
+
+    return (
+      <button
+        className={buttonClsName}
+        onMouseDown={() => this.callAction(action)}
+      >
+        <Icon name={icon} />
+      </button>
+    )
+  }
+
+  /**
+   * Render stepper component.
    *
    * @returns {React.Element}
    */
   render () {
     const clsName = prefix(moduleName)
-    const buttonClsName = prefix(moduleName, 'button')
 
     return (
       <div className={clsName} ref={this.containerRef}>
-        <button
-          className={buttonClsName}
-          onMouseDown={() => this.callAction('onIncrement')}
-        >
-          <Icon name='add' />
-        </button>
-        <button
-          className={buttonClsName}
-          onMouseDown={() => this.callAction('onDecrement')}
-        >
-          <Icon name='remove' />
-        </button>
+        {this.buildButton('add', 'onIncrement')}
+        {this.buildButton('remove', 'onDecrement')}
       </div>
     )
   }
