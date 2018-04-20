@@ -1,7 +1,10 @@
 import React from 'react'
-import Autocomplete from '../src/Autocomplete'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
+
+import freezeDownshiftId from './utils/freezeDownshiftId'
+
+import Autocomplete from '../src/Autocomplete'
 
 const name = prefix('combo-box')
 
@@ -10,6 +13,8 @@ describe('<Autocomplete />', () => {
     const wrapper = mount(
       <Autocomplete items={[1, 3, 5]} />
     )
+
+    freezeDownshiftId(wrapper)
 
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
@@ -22,7 +27,11 @@ describe('<Autocomplete />', () => {
         items={[1, 3, 5]}
       />
     )
+
+    freezeDownshiftId(wrapper)
+
     wrapper.find(`.${name}__input`).last().simulate('change')
+
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
   })

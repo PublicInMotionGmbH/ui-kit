@@ -37,7 +37,7 @@ exports[`<ComboBox /> opens dropdown menu when clicked 1`] = `
   >
     <div
       className="talixo-combo-box__item"
-      id="downshift-1-item-0"
+      id="downshift-0-item-0"
       key="1"
       onClick={[Function]}
       onMouseDown={[Function]}
@@ -47,7 +47,7 @@ exports[`<ComboBox /> opens dropdown menu when clicked 1`] = `
     </div>
     <div
       className="talixo-combo-box__item"
-      id="downshift-1-item-1"
+      id="downshift-0-item-1"
       key="3"
       onClick={[Function]}
       onMouseDown={[Function]}
@@ -57,7 +57,7 @@ exports[`<ComboBox /> opens dropdown menu when clicked 1`] = `
     </div>
     <div
       className="talixo-combo-box__item"
-      id="downshift-1-item-2"
+      id="downshift-0-item-2"
       key="5"
       onClick={[Function]}
       onMouseDown={[Function]}
