@@ -32,7 +32,7 @@ position      | PositionType | `right` | Tooltip position
 rootNode      | string       | `body`  | Root element of tooltip portal
 render        | func         | n/a     | Renders toolyip content
 style         | object       | n/a     | Additional styles passed to the tooltip
-isArrow       | bool         | `true`  | Show arrow next to tooltip
+arrow         | bool         | `true`  | Show arrow next to tooltip
 triggerOn     | TriggerType  | `hover` | Type of event to open tooltip
 
 Type name    | Enum options

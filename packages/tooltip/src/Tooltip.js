@@ -25,6 +25,7 @@ import { getPositionNearElement } from '../utils/position'
  * @property {object} [props.style]
  *
  * @property {object} state
+ * @property {string} state.triggerOn
  * @property {boolean} state.clicked
  * @property {boolean} state.open
  * @property {null|number} state.top
@@ -107,7 +108,7 @@ class Tooltip extends React.Component {
   render () {
     const {
       children, className, color, fade, fadeTime,
-      position, render, attachTo, style, triggerOn, isArrow
+      position, render, attachTo, style, triggerOn, arrow
     } = this.props
 
     const defaultFadeTime = 600
@@ -123,7 +124,7 @@ class Tooltip extends React.Component {
     const wrapperClasses = buildClassName([ 'tooltip', 'wrapper' ], className)
     const fadeClasses = buildClassName(['tooltip', 'fade'], className)
 
-    const nameClasses = buildClassName('tooltip', className, [ color, position, triggerOn, isArrow ? 'arrow' : null ])
+    const nameClasses = buildClassName('tooltip', className, [ color, position, triggerOn, arrow ? 'arrow' : null ])
 
     const tooltipStyle = {
       top: this.state.top,
@@ -189,7 +190,7 @@ Tooltip.propTypes = {
   style: PropTypes.object,
 
   /* Show arrow next to tolltip */
-  isArrow: PropTypes.bool,
+  arrow: PropTypes.bool,
 
   /** Type of event to open tooltip  */
   triggerOn: PropTypes.oneOf([ 'hover', 'click' ])
@@ -198,7 +199,7 @@ Tooltip.propTypes = {
 Tooltip.defaultProps = {
   fade: false,
   position: 'right',
-  isArrow: true,
+  arrow: true,
   triggerOn: 'hover'
 }
 
