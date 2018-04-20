@@ -44,7 +44,7 @@ function PieChart (props) {
     style,
     ...passedProps
   } = props
-  const { dataItems } = data
+  const { dataItems = [] } = data
   const wrapperCls = buildClassName(moduleName, className)
 
   const sum = dataItems

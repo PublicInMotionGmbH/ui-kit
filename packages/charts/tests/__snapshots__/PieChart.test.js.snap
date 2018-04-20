@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PieChart> when rendered should render properly 1`] = `undefined`;

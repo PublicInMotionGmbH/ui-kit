@@ -2,15 +2,23 @@
 
 exports[`<LegendItem> component  rendering should render properly 1`] = `
 <div
-  className="talixo-legend-item"
+  className="talixo-legend-item test talixo-legend-item--clickable"
+  onClick={[Function]}
 >
   <div
-    className="talixo-legend-item__colorbox"
+    className="talixo-legend-item__colorbox talixo-legend-item__colorbox--0"
+    style={
+      Object {
+        "backgroundColor": "white",
+      }
+    }
   />
   <div
     className="talixo-legend-item__title"
   >
+    Title
      
+    (10)
   </div>
 </div>
 `;
