@@ -38,8 +38,12 @@ class InlineInput extends React.Component {
 
   componentDidUpdate (prevProps, prevState) {
     if (prevState.editing !== this.state.editing && !prevState.editing && !this.props.disabled) {
-      this._input.focus()
+      this.focusInput(this._input)
     }
+  }
+
+  focusInput = (obj) => {
+    obj.focus()
   }
 
   handleInputChange = (e) => {
@@ -55,6 +59,10 @@ class InlineInput extends React.Component {
     this.setState({ editing: false })
   }
 
+  setRef = (node) => {
+    this._input = node
+  }
+
   render () {
     const { className, disabled, value, ...passedProps } = this.props
     const { editing, inputValue } = this.state
@@ -68,7 +76,7 @@ class InlineInput extends React.Component {
         {editing && !disabled
           ? <input
             className={inputClsName}
-            ref={node => { this._input = node }}
+            ref={node => this.setRef(node)}
             placeholder={inputValue}
             onChange={(e) => this.handleInputChange(e)}
             onBlur={this.handleBlur}
