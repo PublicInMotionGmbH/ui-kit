@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Rating /> renders basic rating correctly 1`] = `
+<span
+  aria-valuemax="100"
+  aria-valuemin="0"
+  aria-valuenow={0}
+  className="talixo-rating"
+  role="slider"
+>
+  <Icon
+    key="0"
+    name="star"
+  />
+  <Icon
+    key="1"
+    name="star"
+  />
+  <Icon
+    key="2"
+    name="star"
+  />
+  <Icon
+    key="3"
+    name="star"
+  />
+  <Icon
+    key="4"
+    name="star"
+  />
+  <span
+    className="talixo-rating__inner"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  >
+    <Icon
+      key="0"
+      name="star"
+    />
+    <Icon
+      key="1"
+      name="star"
+    />
+    <Icon
+      key="2"
+      name="star"
+    />
+    <Icon
+      key="3"
+      name="star"
+    />
+    <Icon
+      key="4"
+      name="star"
+    />
+  </span>
+</span>
+`;

@@ -28,7 +28,17 @@ jobs:
       # run tests
       - run:
           name: Run tests
-          command: npm test -- --coverage
+          command: npm test -- --ci --coverage --testResultsProcessor="jest-junit"
+          environment:
+            JEST_JUNIT_OUTPUT: "reports/junit.xml"
+
+      - store_test_results:
+          name: Store test results
+          path: reports
+
+      - store_artifacts:
+          name: Store coverage
+          path: coverage
 
       # send coverage to CodeCov
       - run:
