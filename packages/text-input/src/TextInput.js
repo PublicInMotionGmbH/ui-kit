@@ -153,21 +153,35 @@ class TextInput extends React.PureComponent {
   }
 
   /**
-   * Update suffix & input styles
+   * Helper method to check if it should calculate styles
+   *
+   * @returns {boolean}
    */
-  updateStyles () {
+  shouldCalculateStyles () {
     // Do not try to update styles in Node.js environment
     if (!isBrowser) {
-      return
+      return false
     }
 
     // Do not update styles while document is not loaded yet
     if (document.readyState !== 'complete' && document.readyState !== 'interactive') {
-      return
+      return false
     }
 
     // Don't try to calculate styles when there is no suffix or input
     if (!this.input || !this.suffix) {
+      return false
+    }
+
+    return true
+  }
+
+  /**
+   * Update suffix & input styles
+   */
+  updateStyles () {
+    // Do not update styles if browser is not ready yet
+    if (!this.shouldCalculateStyles()) {
       return
     }
 
@@ -206,48 +220,45 @@ class TextInput extends React.PureComponent {
   }
 
   /**
-   * Render text input
+   * Check if there is any value inside
+   *
+   * @returns {boolean}
+   */
+  isEmpty () {
+    const { value } = this.props
+
+    // Validate when component is not controlled from outside
+    if (this.input && value == null) {
+      return this.input.value === ''
+    }
+
+    return value == null || value === ''
+  }
+
+  /**
+   * Build addon component (either 'left' or 'right')
+   *
+   * @param {string} which
+   * @returns {React.Element}
+   */
+  buildAddon (which) {
+    return (
+      <span className={buildClassName([ moduleName, which ])}>
+        {this.props[which]}
+      </span>
+    )
+  }
+
+  /**
+   * Build suffix component
    *
    * @returns {React.Element}
    */
-  render () {
-    const { className, error, onChange, size, style, value, suffix, left, right, ...restProps } = this.props
-    const { suffixStyle, inputStyle } = this.state
+  buildSuffix () {
+    const { suffix } = this.props
+    const { suffixStyle } = this.state
 
-    // Initialize helper variables
-    const hasLeft = left != null
-    const hasRight = right != null
-    const hasSuffix = suffix != null
-    const isEmpty = this.input && value == null ? this.input.value === '' : (value == null || value === '')
-
-    // Build classes for `input` element
-    const inputClasses = buildClassName(moduleName)
-
-    // Build classes for wrapper
-    const wrapperClasses = buildClassName([ moduleName, 'wrapper' ], className, [ size ], {
-      'with-left': hasLeft,
-      'with-right': hasRight,
-      'with-suffix': hasSuffix,
-      'empty': isEmpty,
-      'error': error
-    })
-
-    // Build 'left' element if it's available
-    const leftElement = hasLeft ? (
-      <span className={buildClassName([ moduleName, 'left' ])}>
-        {left}
-      </span>
-    ) : null
-
-    // Build 'right' element if it's available
-    const rightElement = hasRight ? (
-      <span className={buildClassName([ moduleName, 'right' ])}>
-        {right}
-      </span>
-    ) : null
-
-    // Build 'suffix' element if it's available, apply styles additionally
-    const suffixElement = hasSuffix ? (
+    return (
       <span
         ref={this.suffixRef}
         className={buildClassName([ moduleName, 'suffix' ])}
@@ -255,7 +266,35 @@ class TextInput extends React.PureComponent {
       >
         {suffix}
       </span>
-    ) : null
+    )
+  }
+
+  /**
+   * Render text input
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { className, error, onChange, size, style, value, suffix, left, right, ...restProps } = this.props
+
+    // Initialize helper variables
+    const hasLeft = left != null
+    const hasRight = right != null
+    const hasSuffix = suffix != null
+
+    // Build classes for wrapper
+    const wrapperClasses = buildClassName([ moduleName, 'wrapper' ], className, [ size ], {
+      'with-left': hasLeft,
+      'with-right': hasRight,
+      'with-suffix': hasSuffix,
+      'empty': this.isEmpty(),
+      'error': error
+    })
+
+    // Build available and required elements
+    const leftElement = hasLeft ? this.buildAddon('left') : null
+    const rightElement = hasRight ? this.buildAddon('right') : null
+    const suffixElement = hasSuffix ? this.buildSuffix() : null
 
     // Build text input component
     return (
@@ -263,10 +302,10 @@ class TextInput extends React.PureComponent {
         {leftElement}
 
         <input
-          className={inputClasses}
+          className={buildClassName(moduleName)}
           onChange={this.onInputChange}
           ref={this.inputRef}
-          style={inputStyle}
+          style={this.state.inputStyle}
           value={value}
           {...restProps}
         />

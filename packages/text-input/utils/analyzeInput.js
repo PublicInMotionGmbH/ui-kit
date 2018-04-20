@@ -8,23 +8,23 @@ const copiedStyles = [
 /**
  * Analyze dimensions of input and suffix
  *
- * @param {HTMLElement} input
- * @param {HTMLElement} suffix
+ * @param {HTMLElement} inputEl
+ * @param {HTMLElement} suffixEl
  * @returns {object|{ hash: string, width: { input: number, left: number, value: number, suffix: number, right: number}, styles: object }}
  */
-function analyzeInput (input, suffix) {
+function analyzeInput (inputEl, suffixEl) {
   // Create dummy element with preffered type
-  const element = createInvisibleElement(input.value)
+  const element = createInvisibleElement(inputEl.value)
 
   // Remove padding set to input directly
   // And save previous one to recover it
-  const previousLeftPadding = input.style.paddingLeft
-  const previousRightPadding = input.style.paddingRight
-  input.style.paddingLeft = ''
-  input.style.paddingRight = ''
+  const previousLeftPadding = inputEl.style.paddingLeft
+  const previousRightPadding = inputEl.style.paddingRight
+  inputEl.style.paddingLeft = ''
+  inputEl.style.paddingRight = ''
 
   // Compute styles for input
-  const computed = document.defaultView.getComputedStyle(input)
+  const computed = document.defaultView.getComputedStyle(inputEl)
 
   // Check if it's RTL text direction
   const isRTL = computed.direction === 'rtl'
@@ -40,31 +40,25 @@ function analyzeInput (input, suffix) {
 
   // Gather information about text width inside input
   document.body.appendChild(element)
-  const textWidth = element.offsetWidth
+  const value = element.offsetWidth
   document.body.removeChild(element)
 
   // Get width of input
-  const inputWidth = input.offsetWidth
+  const input = inputEl.offsetWidth
 
   // Calculate size of all input parts (in px)
-  const leftWidth = parseInt(computed.paddingLeft, 10)
-  const suffixWidth = suffix.offsetWidth
-  const rightWidth = parseInt(computed.paddingRight, 10)
+  const left = parseInt(computed.paddingLeft, 10)
+  const suffix = suffixEl.offsetWidth
+  const right = parseInt(computed.paddingRight, 10)
 
   // Recover current padding set to input directly
-  input.style.paddingLeft = previousLeftPadding
-  input.style.paddingRight = previousRightPadding
+  inputEl.style.paddingLeft = previousLeftPadding
+  inputEl.style.paddingRight = previousRightPadding
 
   return {
-    hash: `${isRTL ? 'rtl' : 'ltr'}*${inputWidth}*${leftWidth}*${textWidth}*${suffixWidth}*${rightWidth}`,
+    hash: `${isRTL ? 'rtl' : 'ltr'}*${input}*${left}*${value}*${suffix}*${right}`,
     rtl: isRTL,
-    width: {
-      input: inputWidth,
-      left: leftWidth,
-      value: textWidth,
-      suffix: suffixWidth,
-      right: rightWidth
-    },
+    width: { input, left, value, suffix, right },
     styles: styles
   }
 }

@@ -11,22 +11,22 @@ function calculateInputStyles (inputEl, suffixEl) {
   // Analyze input and suffix dimensions
   const { hash, rtl, width, styles } = analyzeInput(inputEl, suffixEl)
 
-  const input = {}
-  const suffix = {
-    ...styles,
-    maxWidth: width.input - width.left - width.right
-  }
+  // Build information about directions (according to RTL)
+  const start = rtl ? 'right' : 'left'
+  const end = rtl ? 'left' : 'right'
+  const paddingEnd = rtl ? 'paddingLeft' : 'paddingRight'
 
-  if (rtl) {
-    suffix.right = Math.min(width.right + width.value, width.input - width.suffix - width.left)
-    input.paddingLeft = width.left + width.suffix
-  } else {
-    input.paddingRight = width.right + width.suffix
-    suffix.left = Math.min(width.left + width.value, width.input - width.suffix - width.right)
+  return {
+    hash,
+    input: {
+      [paddingEnd]: width[end] + width.suffix
+    },
+    suffix: {
+      ...styles,
+      maxWidth: width.input - width.left - width.right,
+      [start]: Math.min(width[start] + width.value, width.input - width.suffix - width[end])
+    }
   }
-
-  // Calculate styles for input and suffix
-  return { hash, input, suffix }
 }
 
 export default calculateInputStyles

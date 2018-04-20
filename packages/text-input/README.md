@@ -1,11 +1,6 @@
 # Talixo Text Input
 
-UI Component which represents Text Input, TODO: RTL with suffix and icons
-
-## To do
-
-- [ ] RTL with suffix
-- [ ] RTL with icons
+UI Component which represents Text Input
 
 ## How to install
 
