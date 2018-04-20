@@ -6,9 +6,10 @@ import freezeDownshiftId from './utils/freezeDownshiftId'
 
 import Autocomplete from '../src/Autocomplete'
 
-const name = prefix('combo-box')
-
 describe('<Autocomplete />', () => {
+  beforeEach(() => jest.useFakeTimers())
+  afterEach(() => jest.useRealTimers())
+
   it('renders correctly', () => {
     const wrapper = mount(
       <Autocomplete items={[1, 3, 5]} />
@@ -30,7 +31,10 @@ describe('<Autocomplete />', () => {
 
     freezeDownshiftId(wrapper)
 
-    wrapper.find(`.${name}__input`).last().simulate('change')
+    wrapper.find('input').last().simulate('change')
+
+    // Run single setTimeout with this.toggleMenu() in Downshift
+    jest.runAllTimers()
 
     expect(wrapper).toMatchSnapshot()
     wrapper.unmount()
