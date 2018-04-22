@@ -29,8 +29,60 @@ addStory('default', readme, () => (
 
 addStory.controlled('controlled', readme, (setState, state) => (
   <div style={{ width: 300 }}>
-    <h2>Default number input</h2>
+    <h2>Controlled number input</h2>
     <NumberInput onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('min/max', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with min/max</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      min={0}
+      max={8}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('precision', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with 0.01 precision</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      precision={2}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('precision and step', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with 0.01 precision and step</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      step={0.01}
+      precision={2}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('faster buttons', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with faster buttons</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      step={0.01}
+      initialTime={0}
+      stepTime={30}
+    />
   </div>
 ), () => ({ value: 0 }))
 
