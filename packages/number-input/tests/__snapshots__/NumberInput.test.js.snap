@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NumberInput /> renders children correctly 1`] = `
+exports[`<NumberInput /> renders correctly 1`] = `
 <TextInput
   className="talixo-number-input"
   error={false}

@@ -34,6 +34,13 @@ addStory.controlled('controlled', readme, (setState, state) => (
   </div>
 ), () => ({ value: 0 }))
 
+addStory.controlled('RTL', readme, (setState, state) => (
+  <div style={{ width: 300 }} dir='rtl'>
+    <h2>RTL: number input</h2>
+    <NumberInput onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
+
 addStory('small', readme, () => (
   <div>
     <h2>Small number input</h2>

@@ -47,6 +47,7 @@ class NumberInputStepper extends React.PureComponent {
 
     if (this.el) {
       this.el.addEventListener('mouseup', this.stop)
+      this.el.addEventListener('click', this.stop)
     }
   }
 
@@ -84,6 +85,7 @@ class NumberInputStepper extends React.PureComponent {
 
     if (this.el) {
       this.el.removeEventListener('mouseup', this.stop)
+      this.el.removeEventListener('click', this.stop)
     }
   }
 
@@ -123,6 +125,7 @@ class NumberInputStepper extends React.PureComponent {
 
     return (
       <button
+        type='button'
         className={buttonClsName}
         onMouseDown={() => this.callAction(action)}
       >
