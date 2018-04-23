@@ -102,7 +102,7 @@ addStory.controlled('controlled tabs', readme, (setState, state) => (
 
 addStory('step', readme, () => (
   <Navigation type='steps'>
-    <Step>Cart</Step>
+    <Step completed>Cart</Step>
     <Step>Shipping</Step>
     <Step active>Billing</Step>
     <Step disabled>Confirm</Step>
@@ -112,6 +112,7 @@ addStory('step', readme, () => (
 addStory.controlled('steps', readme, (setState, state) => (
   <Navigation type='steps'>
     <Steps
+      completed={['Cart']}
       current={state.current}
       steps={['Cart', 'Shipping', 'Billing', 'Confirm']}
       onChange={i => setState({ current: i })}
@@ -119,6 +120,6 @@ addStory.controlled('steps', readme, (setState, state) => (
   </Navigation>
 ), () => {
   return {
-    current: 2
+    current: 3
   }
 })

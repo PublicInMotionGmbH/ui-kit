@@ -12,6 +12,9 @@ const propTypes = {
   /** Element items */
   children: PropTypes.node,
 
+  /** Completed state */
+  completed: PropTypes.bool,
+
   /** Additional class name */
   className: PropTypes.string,
 
@@ -33,16 +36,17 @@ const defaultProps = {
  * @param {object} props
  * @param {boolean} [props.active]
  * @param {*} [props.children]
+ * @param {boolean} [props.completed]
  * @param {string} [props.className]
  * @param {boolean} [props.disabled]
  * @param {function} [props.onClick]
  * @returns {React.Element}
  */
 function Element (props) {
-  const { active, children, className, disabled, onClick, ...passedProps } = props
+  const { active, children, completed, className, disabled, onClick, ...passedProps } = props
 
   // Build element class name
-  const classNames = buildClassName([ moduleName, 'element' ], className, { active, disabled })
+  const classNames = buildClassName([ moduleName, 'element' ], className, { active, completed, disabled })
 
   return (
     <li className={classNames} onClick={onClick} {...passedProps}>

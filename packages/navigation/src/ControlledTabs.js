@@ -16,7 +16,7 @@ const propTypes = {
 
 const defaultProps = {
   activeTab: 0,
-  labels: [{}]
+  labels: []
 }
 
 /**

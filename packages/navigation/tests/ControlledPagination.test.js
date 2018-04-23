@@ -1,18 +1,6 @@
 import React from 'react'
-import ControlledPagination, { nearestMultiple } from '../src/ControlledPagination'
+import ControlledPagination from '../src/ControlledPagination'
 import { mount } from 'enzyme'
-
-describe('nearestMultiple', () => {
-  it('returns correct number', () => {
-    expect(nearestMultiple(1, 1)).toEqual(1)
-    expect(nearestMultiple(2, 1)).toEqual(2)
-    expect(nearestMultiple(1, 2)).toEqual(0)
-    expect(nearestMultiple(2, 2)).toEqual(2)
-    expect(nearestMultiple(5, 2)).toEqual(4)
-    expect(nearestMultiple(43, 10)).toEqual(40)
-    expect(nearestMultiple(789, 100)).toEqual(700)
-  })
-})
 
 describe('<ControlledPagination />', () => {
   it('renders pageCount correctly', () => {

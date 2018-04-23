@@ -43,6 +43,7 @@
 
     #{$n}__step
       background: $step-background
+      border-color: $step-border-color
 
       &--active, &:active
         background-color: $step-active-background
@@ -51,3 +52,7 @@
       &--disabled, &--disabled:active
         background-color: $step-disabled-background-color
         border-color: $step-disabled-border-color
+
+      &--completed, &--completed:active
+        background-color: $step-completed-background-color
+        border-color: red

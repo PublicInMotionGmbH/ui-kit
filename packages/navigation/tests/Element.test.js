@@ -1,18 +1,16 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Element, { moduleName } from '../src/Element'
+import { buildClassName } from '@talixo/shared'
 
-const includesClassName = (wrapper, className) => {
-  const clsName = wrapper.props().className
-  expect(clsName.includes(className)).toEqual(true)
-}
+import Element, { moduleName } from '../src/Element'
 
 describe('Module name', () => {
   it('is passed correctly', () => {
     const wrapper = shallow(<Element />)
+    const clsName = buildClassName([moduleName, 'element'])
 
-    includesClassName(wrapper.find('li'), moduleName)
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 })
 
@@ -33,8 +31,20 @@ describe('<Element />', () => {
         Home
       </Element>
     )
+    const clsName = buildClassName([moduleName, 'element'], null, 'active')
 
-    includesClassName(wrapper.find('li'), 'active')
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
+  })
+
+  it('renders completed correctly', () => {
+    const wrapper = shallow(
+      <Element completed>
+        Home
+      </Element>
+    )
+    const clsName = buildClassName([moduleName, 'element'], null, 'completed')
+
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
@@ -43,8 +53,9 @@ describe('<Element />', () => {
         Home
       </Element>
     )
+    const clsName = buildClassName([moduleName, 'element'], null, 'disabled')
 
-    includesClassName(wrapper.find('li'), 'disabled')
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('calls onClick when clicked', () => {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 import Element from './Element'
+import calculateNearestMultiple from '../utils/calculateNearestMultiple'
 
 const propTypes = {
   /** Active page */
@@ -30,15 +31,6 @@ const defaultProps = {
   nextLabel: 'Next',
   previousLabel: 'Previous'
 }
-
-/**
-* Returns the largest multiple of divisor less than or equal to provided number
-*
-* @param {number} number
-* @param {number} divisor
-* @returns {number}
-*/
-export const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divisor
 
 /**
  * Method that maps numbers to elements.
@@ -132,7 +124,7 @@ function Pagination (props) {
     // If the active number is larger than the displayedLimit
     // set the range start to be the nearest multiple of the limit
     const start = activePage > displayedLimit
-      ? nearestMultiple(activePage - 1, displayedLimit)
+      ? calculateNearestMultiple(activePage - 1, displayedLimit)
       : null
 
     // Set the range end to be larger from start by the displayedLimit

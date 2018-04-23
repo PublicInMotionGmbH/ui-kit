@@ -4,18 +4,21 @@ exports[`<Steps /> renders correctly 1`] = `
 Array [
   <Step
     active={true}
+    completed={false}
     disabled={false}
     key="0"
     onClick={[Function]}
   />,
   <Step
     active={false}
+    completed={false}
     disabled={true}
     key="1"
     onClick={[Function]}
   />,
   <Step
     active={false}
+    completed={false}
     disabled={true}
     key="2"
     onClick={[Function]}
