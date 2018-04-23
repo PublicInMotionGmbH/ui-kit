@@ -8,7 +8,7 @@ import { buildClassName, applyAnyClassNameModifiers } from '@talixo/shared'
  * Dropdown button component.
  *
  * @param {object} props
-getInputProps* @param {string} [props.className]
+ * @param {string} [props.className]
  * @param {string} [props.firstItem]
  * @param {string} [props.getInputProps]
  * @param {string} [props.id]
@@ -36,15 +36,17 @@ const AutocompleteInput = props => {
   )
 
   const inputStyle = { ...style, width: '100%' }
+  const inputProps = getInputProps({
+    className: inputClsName,
+    id: id,
+    placeholder: placeholder,
+    style: inputStyle
+  })
 
   return (
     <InputComponent
-      {...getInputProps({
-        className: inputClsName,
-        id: id,
-        placeholder: placeholder,
-        style: inputStyle
-      })}
+      {...inputProps}
+      onChange={value => inputProps.onChange({ target: { value: value } })}
     />
   )
 }

@@ -1,4 +1,4 @@
-# Talixo NumberInput
+# Talixo Number Input
 
 UI Component which represents number input with increment and decrement buttons
 
@@ -22,13 +22,19 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `input[type="number"]`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed of input
-hasError      | boolean   | `false` | indicates that input has error
-size          | string    | n/a     | size of input (can be 'small')
-style         | object    | n/a     | additional styling of wrapper
-value         | number    | `0`     | initial input value
+Property name | Type      | Default     | Description
+--------------|-----------|:-----------:|--------------------------------
+className     | string    | n/a         | additional class name passed to wrapper
+error         | boolean   | `false`     | indicates that input has error
+size          | string    | n/a         | size of input (can be 'small')
+style         | object    | n/a         | additional styling of wrapper
+value         | number    | `0`         | input value
+min           | number    | `-Infinity` | minimum number to set inside
+max           | number    | `Infinity`  | maximum number to set inside
+step          | number    | `1`         | step value for mouse whell, keyboard and buttons
+precision     | number    | `0`         | number of decimal places
+initialTime   | number    | `700`       | initial time to automatically de/increment when button is pressed
+stepTime      | number    | `20`        | time for each automated de/increment when button is pressed
 
 ## Changelog
 

@@ -1,29 +1,3 @@
 @import './config'
 
 @include module('number-input')
-  background-color: $color-white
-  border-color: $color-placeholder-text
-  color: $color-black
-
-
-  #{prefix('number-input', 'stepper')} #{prefix('number-input', 'button')}
-    border-color: $color-placeholder-text
-    background-color: $color-white
-    cursor: pointer
-    outline: none
-
-    span
-      color: $color-orange-talixo
-      user-select: none
-
-  > input::placeholder
-    color: $color-placeholder-text
-
-  &--error
-    border-color: $color-talixo-error-red
-
-    > input
-      color: $color-talixo-error-red
-
-  input[type='number']::-webkit-inner-spin-button
-    -webkit-appearance: none
