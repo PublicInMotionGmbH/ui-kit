@@ -1,172 +1,177 @@
 import React from 'react'
-import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import Autocomplete from './src/Autocomplete'
-import ItemAddress from './src/ItemAddress'
-import Dropdown from './src/Dropdown'
+import { Icon } from '@talixo/icon'
+import { CountryFlag } from '@talixo/country-flag'
+import { ProgressRing } from '@talixo/progress-ring'
 
+import SelectBox from './src/SelectBox'
+
+// Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
-const addStory = createStoriesFactory('ComboBox', module, {
-  propTables: [ Dropdown, Autocomplete, ItemAddress ]
+// Create factories for story
+const addStory = createStoriesFactory('Combo box', module, {
+  propTables: [ SelectBox ]
 })
-const change = action('change')
 
-const items = [
-  0,
-  1,
-  'apple',
-  'orange',
-  'carrot',
-  'pineapple',
-  'veeeeeeeeeeeeeeeeeeeeeery loooooooooooooooooooooooong banananananannananananannananananana',
-  'onion',
-  'watermelon',
-  'strawberry',
-  'raspberry'
+// Build options to use in stories
+
+const optionsSimple = [
+  'Skipper',
+  'Private',
+  'Kowalski',
+  'Rico'
 ]
 
-const itemsCustom = [
-  {
-    icon: 'credit_card',
-    place: 'Motel One Berlin-Upper West',
-    address: 'Kantstraße 163-165, 10623 Berlin'
-  },
-  {
-    icon: 'card_travel',
-    place: 'Park Inn Berlin',
-    address: 'Alexanderpl. 7, 10178 Berlin'
-  },
-  {
-    icon: 'credit_card',
-    place: 'The Westin Grand Berlin',
-    address: 'Friedrichstraße 158-164, 10117 Berlin'
-  }
+const options = [
+  { id: 'pl', name: 'Poland', language: 'Polish' },
+  { id: 'gb', name: 'Great Britain', language: 'English' },
+  { id: 'de', name: 'Germany', language: 'Deutsch' },
+  { id: 'ru', name: 'Russia', language: 'Russian' },
+  { id: 'be', name: 'Belgium', language: 'Deutsch' },
+  { id: 'ca', name: 'Canada', language: 'English, French' },
+  { id: 'fr', name: 'France', language: 'French' },
+  { id: 'cz', name: 'Czech Republic', language: 'Czech' },
+  { id: 'au', name: 'Australia', language: 'English' },
+  { id: 'cn', name: 'China', language: 'Chinese' },
+  { id: 'it', name: 'Italy', language: 'Italian' },
+  { id: 'sk', name: 'Slovakia', language: 'Slovak' }
 ]
 
-const filter = (inputValue, state, setState) => {
-  let filteredItems = items.filter(i => i.toString().toLowerCase().includes(inputValue.toString().toLowerCase()))
-  setState({ items: filteredItems })
+// Stories
+
+addStory.controlled('simple select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {state.value}</div>
+    <SelectBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+    />
+  </div>
+), () => ({ value: null }))
+
+addStory.controlled('multi select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+    />
+  </div>
+), () => ({ value: [] }))
+
+function renderCountry (x) {
+  return (
+    <div style={{ display: 'flex', lineHeight: '1em' }}>
+      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10 }} />
+      <div>
+        <strong>{x.name}</strong><br />
+        <div style={{ color: '#999', fontSize: '0.8em' }}>{x.language}</div>
+      </div>
+    </div>
+  )
 }
 
-// simple solution to prevent race conditions
-let lazyCounter = 0
-
-const getLazilyFilteredItems = ({ inputValue, requestId }) => {
-  const delay = 1000 + Math.random() * 2000
-
-  return new Promise(resolve => {
-    setTimeout(() => {
-      console.log(`RESOLVING ${requestId}`)
-      resolve({
-        requestId: requestId,
-        items: items.filter(i => i.toString().toLowerCase().includes(inputValue.toString().toLowerCase()))
-      })
-    }, delay)
-    console.log(`WAITING ${delay}ms for ${requestId}`)
-  })
+function renderSimpleCountry (x) {
+  return (
+    <div style={{ display: 'flex', lineHeight: '1em' }}>
+      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10, boxShadow: '0 0 10px 2px rgba(0, 0, 0, .1)' }} />
+      {x.name}
+    </div>
+  )
 }
 
-const lazyFilter = async (inputValue, state, setState) => {
-  const requestId = lazyCounter++
-  setState({ requestId: requestId, loading: true })
+addStory.controlled('special select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: null }))
 
-  const response = await getLazilyFilteredItems({ inputValue, requestId })
+addStory.controlled('warning select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      placeholder='Select item...'
+      icon={<Icon name='warning' style={{ fontSize: 15, color: 'gold' }} />}
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: null }))
 
-  if (response.requestId === state.requestId) {
-    setState({ items: response.items, loading: false, requestId: null })
-  } else {
-    console.warn('RACE CONDITION PREVENTED', response.requestId)
-  }
-}
+addStory.controlled('loading select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      placeholder='Select item...'
+      icon={<ProgressRing type='error' />}
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: null }))
 
-addStory('dropdown', readme, () => (
-  <Dropdown
-    items={items}
-    maxHeight='250px'
-    onChange={change}
-    overflow='truncate'
-    placeholder='Select item'
-    style={{ maxWidth: '500px' }}
-  />
-))
+addStory.controlled('special multi select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: [] }))
 
-addStory('dropdown separated', readme, () => (
-  <Dropdown
-    items={items}
-    maxHeight='250px'
-    onChange={change}
-    overflow='truncate'
-    placeholder='Select item'
-    separated
-    style={{ maxWidth: '500px' }}
-  />
-))
+addStory.controlled('RTL: multi select box', readme, (setState, state) => (
+  <div dir='rtl'>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder='בחר פריטים'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: [] }))
 
-addStory('dropdown with custom item component', readme, () => (
-  <Dropdown
-    itemComponent={ItemAddress}
-    items={itemsCustom}
-    maxHeight='250px'
-    onChange={change}
-    overflow='break'
-    placeholder='Select accomodation'
-    style={{ maxWidth: '500px' }}
-  />
-))
-
-addStory('autocomplete', readme, () => (
-  <Autocomplete
-    items={items}
-    maxHeight='250px'
-    onChange={change}
-    overflow='break'
-    placeholder='Select item'
-    style={{ maxWidth: '500px' }}
-  />
-))
-
-addStory('autocomplete separated', readme, () => (
-  <Autocomplete
-    items={items}
-    maxHeight='250px'
-    onChange={change}
-    overflow='break'
-    placeholder='Select item'
-    separated
-    style={{ maxWidth: '500px' }}
-  />
-))
-
-addStory.controlled('autocomplete with filtering', readme, (setState, state) => (
-  <Autocomplete
-    items={state.items}
-    maxHeight='250px'
-    onChange={change}
-    onInputValueChange={inputValue => filter(inputValue, state, setState)}
-    overflow='break'
-    placeholder='Select item'
-    style={{ maxWidth: '500px' }}
-  />
-), () => ({
-  items: items
-}))
-
-addStory.controlled('autocomplete with lazy filtering', readme, (setState, state) => (
-  <Autocomplete
-    items={state.items}
-    loading={state.loading}
-    maxHeight='250px'
-    onChange={change}
-    onInputValueChange={inputValue => lazyFilter(inputValue, state, setState)}
-    overflow='break'
-    placeholder='Select item'
-    separated
-    style={{ maxWidth: '500px' }}
-  />
-), () => ({
-  items: [],
-  loading: false,
-  requestId: null
-}))
+addStory.controlled('RTL: select box', readme, (setState, state) => (
+  <div dir='rtl'>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      placeholder='בחר פריט'
+      icon={<ProgressRing type='error' />}
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </div>
+), () => ({ value: [] }))
