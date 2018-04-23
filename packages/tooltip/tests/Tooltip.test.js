@@ -6,7 +6,19 @@ import { prefix } from '@talixo/shared'
 const name = prefix('tooltip')
 
 describe('<Tooltip />', () => {
-  beforeEach(() => jest.useFakeTimers())
+  beforeEach(() => {
+    jest.useFakeTimers()
+    window.Element.prototype.getBoundingClientRect = jest.fn(() => {
+      return {
+        width: 100,
+        height: 50,
+        top: 50,
+        left: 50,
+        bottom: 0,
+        right: 0
+      }
+    })
+  })
   afterEach(() => jest.useRealTimers())
 
   it('renders children correctly', () => {

@@ -4,13 +4,13 @@
   position: absolute
   display: inline-block
   padding: dp(1) dp(1.5)
-  border: dp(0.07) solid $color-tab-border
+  border: dp(0.07) solid $color-border-tooltip
   border-radius: $border-radius-m
   font-size: $font-size-m
   line-height: 1.5em
   top: 0
   left: 0
-  box-shadow: 0 dp(0.2) dp(0.4) 0 $color-tab-border
+  box-shadow: 0 dp(0.2) dp(0.4) 0 $color-border-tooltip
 
   > *
     margin: 0 dp(0.5)
@@ -52,7 +52,7 @@
       top: 50%
       left: 0
       border-width: dp(0.5) dp(1.25) dp(0.5) 0
-      border-color: transparent $color-tab-border transparent transparent
+      border-color: transparent $color-border-tooltip transparent transparent
       transform: translateX(-100%) translateY(dp(-0.5))
 
     &:after
@@ -69,7 +69,7 @@
       top: 50%
       left: 100%
       border-width: dp(0.5) 0 dp(0.5) dp(1.25)
-      border-color: transparent transparent transparent $color-tab-border
+      border-color: transparent transparent transparent $color-border-tooltip
       transform: translateY(dp(-0.5))
 
     &:after
@@ -86,7 +86,7 @@
       top: 0
       left: 50%
       border-width: 0 dp(0.5) dp(1.25) dp(0.5)
-      border-color: transparent transparent $color-tab-border transparent
+      border-color: transparent transparent $color-border-tooltip transparent
       transform: translateY(-100%) translateX(dp(-0.5))
 
     &:after
@@ -103,7 +103,7 @@
       top: 100%
       left: 50%
       border-width: dp(1.25) dp(0.5) 0 dp(0.5)
-      border-color: $color-tab-border transparent transparent transparent
+      border-color: $color-border-tooltip transparent transparent transparent
       transform: translateX(dp(-0.5))
 
     &:after
@@ -120,7 +120,6 @@
     height: auto
 
   &--arrow
-    &:before
-      display: inline-block
+    &:before,
     &:after
       display: inline-block
