@@ -31,14 +31,6 @@ addStory('custom date format', readme, () => (
   </div>
 ))
 
-addStory('different language', readme, () => (
-  <Calendar style={styles} lang='pl' />
-))
-
 addStory('custom placeholder', readme, () => (
   <Calendar style={styles} placeholder='Enter date' />
-))
-
-addStory('text RTL', readme, () => (
-  <Calendar style={styles} placeholder='Enter date' isRTL />
 ))

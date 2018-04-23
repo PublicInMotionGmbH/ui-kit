@@ -3,7 +3,6 @@
 exports[`<Calendar /> renders children correctly 1`] = `
 <div
   className="talixo-calendar"
-  lang="en"
 >
   <div
     className="SingleDatePicker SingleDatePicker_1"

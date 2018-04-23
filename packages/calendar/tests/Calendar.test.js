@@ -12,7 +12,7 @@ describe('<Calendar />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('change date correctly', () => {
+  it('should change the date correctly', () => {
     const wrapper = shallow(<Calendar />)
 
     const date = moment()
@@ -20,12 +20,6 @@ describe('<Calendar />', () => {
     wrapper.props().children.props.onDateChange(date)
 
     expect(wrapper.state('date')).toEqual(date)
-  })
-
-  it('set lang correctly', () => {
-    shallow(<Calendar lang='es' />)
-
-    expect(moment.locale()).toEqual('es')
   })
 
   it('set placeholder correctly', () => {
