@@ -79,7 +79,6 @@ addStory.controlled('faster buttons', readme, (setState, state) => (
     <NumberInput
       onChange={value => setState({ value })}
       value={state.value}
-      step={0.01}
       initialTime={0}
       stepTime={30}
     />

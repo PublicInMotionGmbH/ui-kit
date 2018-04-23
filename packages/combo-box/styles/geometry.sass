@@ -20,17 +20,21 @@
     outline: none
     line-height: dp(3)
     cursor: pointer
+
+  &__button
     > *
       display: inline-block
       padding: dp(1.5)
 
-    button::-moz-focus-inner, input[type='button']::-moz-focus-inner
+    button::-moz-focus-inner,
+    input[type='button']::-moz-focus-inner
       padding: 0 !important
-      border: 0 none !important
+      border: 0 !important
 
-    &--open:not(#{prefix('combo-box')}__input--separated):not(#{prefix('combo-box')}__button--separated)
-      border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
-      border-bottom-width: 0 !important
+  &--open:not(#{&}__input--separated) input,
+  &--open:not(#{&}__button--separated)
+    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
+    border-bottom-width: 0 !important
 
   &__value
     font-size: $font-size-m
