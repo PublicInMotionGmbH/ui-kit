@@ -37,7 +37,7 @@ async function buildPackage (pack, environment) {
   // Build basic Rollup.js configuration
   const config = {
     input: pack.input,
-    external: pack.dependencies,
+    external: id => !!pack.dependencies.find(dependency => dependency === id || id.startsWith(dependency + '/')),
     output: {
       file: pack.output[environment],
       exports: 'named',

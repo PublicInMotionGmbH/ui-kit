@@ -1,0 +1,43 @@
+{
+  "name": "@talixo/country-flag",
+  "version": "1.0.0",
+  "description": "Light-weight UI component which represents country flags icons",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only flag",
+    "prepublishOnly": "npm run update && npm run build",
+    "build": "node ../../scripts/buildPackages.js --only flag",
+    "update": "npm run update:sprite && npm run update:component && npm run update:meta",
+    "update:sprite": "node scripts/buildSprite.js",
+    "update:component": "node scripts/convertSpriteToJavaScript.js",
+    "update:meta": "node scripts/buildListOfFlags.js"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0"
+  },
+  "devDependencies": {
+    "find-node-modules": "^1.0.4",
+    "flagkit-web": "0.0.3",
+    "glob": "^7.1.2",
+    "gulp": "^3.9.1",
+    "gulp-svg-sprite": "^1.4.0",
+    "gulp-svgo": "^1.4.0",
+    "xmldom": "^0.1.27"
+  }
+}

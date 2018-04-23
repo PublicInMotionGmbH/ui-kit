@@ -10,7 +10,11 @@ module.exports = {
     '!packages/*/index.js',
     '!packages/*/stories.js',
     '!packages/*/dist/**/*.js',
+    '!packages/country-flag/sprites/*.js',
+    '!packages/country-flag/scripts/*.js',
+    '!packages/country-flag/src/storybook/*.js',
     '!packages/icon/src/storybook/*.js',
+    '!packages/*/tests/**/*.js',
     '!packages/icon/scripts/*.js'
   ],
   setupFiles: [ '<rootDir>/tests/polyfills.js' ],
