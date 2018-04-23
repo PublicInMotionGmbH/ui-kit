@@ -1,26 +1,47 @@
-import PropTypes from 'prop-types'
+import { buildClassName } from '@talixo/shared'
 
-import {buildClassName} from '@talixo/shared'
+export const defaultColorMaxIndex = 9
+const seriesName = 'chart-series'
 
-export function generateSeriesClassName (index, className = null) {
-  const moduleName = 'chart-series'
-  return buildClassName(moduleName, className, [index])
+/**
+ * Returns next color in loop manner
+ * @param {number} index
+ * @returns {string}
+ */
+export function getColorIndex (index, maxIndex = defaultColorMaxIndex) {
+  return index % (maxIndex + 1)
 }
 
-export const dataItemPropTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    className: PropTypes.string,
-    color: PropTypes.string,
-    dataitems: PropTypes.shape({
-      x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      y: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    }),
-    disabled: PropTypes.bool,
-    id: PropTypes.number,
-    title: PropTypes.string
-  })
-)
+/**
+ * Generates class names for chart series with default sass colors
+ * @param {number} index
+ * @param {string} className
+ * @returns {string}
+ */
+export function generateSeriesClassName (index, className = null) {
+  const colorIndex = getColorIndex(index)
+  return buildClassName(seriesName, className, [colorIndex])
+}
 
+/**
+ * Calculates sum of pie chart values which are not disabled
+ * @param {array} dataItems
+ * @returns {number}
+ */
+export function getPieValuesSum (dataItems) {
+  return dataItems
+    .filter(item => !item.disabled)
+    .map(item => item.value)
+    .reduce((acc, curr) => acc + curr, 0)
+}
+
+/**
+ * Generates data for arc series
+ * @param {array} data
+ * @param {number} sum
+ * @param {object} config
+ * @returns {arrat}
+ */
 export function generateArcsData (data, sum, config = {}) {
   const { PI } = Math
   const { startAngle = 0, radius0 = 0, radius = 5 } = config
@@ -40,31 +61,4 @@ export function generateArcsData (data, sum, config = {}) {
     return newItem
   })
   return newData
-}
-
-// Colors
-export const colors = [
-  '#330f00',
-  '#661d00',
-  '#992c00',
-  '#cc3a00',
-  '#FF4900',
-  '#ff6d33',
-  '#ff9266',
-  '#ffb699',
-  '#ffdbcc'
-]
-export const charcoal = '#252525'
-export const talixoRed = '#FF4900'
-
-/**
- * Returns next color in loop manner
- * @param {number} index
- * @returns {string}
- */
-export function getColorByIndex (index) {
-  const colorsLength = colors.length
-  return index < colorsLength
-    ? colors[index]
-    : colors[colorsLength % index]
 }

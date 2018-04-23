@@ -31,16 +31,16 @@ const pieData = {
   className: 'className',
   title: 'Pie Data',
   dataItems: [
-    { label: 'Cats', value: 35, color: ' ', className: '', id: 0, disabled: false },
-    { label: 'Dogs', value: 40, color: ' ', className: '', id: 1, disabled: false },
-    { label: 'Birds', value: 55, color: ' ', className: '', id: 2, disabled: false },
-    { label: 'Cats1', value: 35, color: ' ', className: '', id: 3, disabled: false },
-    { label: 'Dogs1', value: 40, color: ' ', className: '', id: 4, disabled: false },
-    { label: 'Birds1', value: 55, color: ' ', className: '', id: 5, disabled: false },
-    { label: 'Cats2', value: 35, color: ' ', className: '', id: 6, disabled: false },
-    { label: 'Dogs2', value: 40, color: ' ', className: '', id: 7, disabled: false },
-    { label: 'Birds2', value: 55, color: ' ', className: '', id: 8, disabled: false },
-    { label: 'Lions2', value: 35, color: ' ', className: '', id: 9, disabled: false }
+    { label: 'Cats', value: 35, color: ' ', className: '', disabled: true },
+    { label: 'Dogs', value: 40, color: ' ', className: '', disabled: false },
+    { label: 'Birds', value: 55, color: ' ', className: '', disabled: true },
+    { label: 'Cats1', value: 35, color: ' ', className: '', disabled: true },
+    { label: 'Dogs1', value: 40, color: ' ', className: '', disabled: false },
+    { label: 'Birds1', value: 55, color: ' ', className: '', disabled: false },
+    { label: 'Cats2', value: 35, color: ' ', className: '', disabled: false },
+    { label: 'Dogs2', value: 40, color: ' ', className: '', disabled: false },
+    { label: 'Birds2', value: 55, color: ' ', className: '', disabled: false },
+    { label: 'Lions2', value: 35, color: ' ', className: '', disabled: true }
   ]
 }
 

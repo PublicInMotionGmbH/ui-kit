@@ -4,7 +4,7 @@ import { FlexibleXYPlot, ArcSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
-import { generateArcsData, generateSeriesClassName } from './utils'
+import { getPieValuesSum, generateArcsData, generateSeriesClassName } from './utils'
 
 const moduleName = 'pie-chart'
 
@@ -23,15 +23,9 @@ function PieChart (props) {
     style,
     ...passedProps
   } = props
-  const { dataItems = [] } = data
+  const { dataItems } = data
   const wrapperCls = buildClassName(moduleName, className)
-
-  const sum = dataItems
-    // TODO: test disable filtering
-    .filter(item => !item.disabled)
-    .map(item => item.value)
-    .reduce((acc, curr) => acc + curr, 0)
-  // TODO: test arc data generating
+  const sum = getPieValuesSum(dataItems)
   const displayData = generateArcsData(dataItems, sum)
 
   return (
@@ -43,15 +37,18 @@ function PieChart (props) {
       {...passedProps}
     >
       {
-        displayData.map((item, index) => (
-          <ArcSeries
-            center={{ x: 0, y: 0 }}
-            data={[item]}
-            key={generateSeriesClassName(item.id || index)}
-            className={generateSeriesClassName(item.id || index, item.className)}
-            {...arcsProps}
-          />
-        ))
+        displayData.map((item, index) => {
+          const arcCls = generateSeriesClassName(index)
+          return !item.disabled
+            ? <ArcSeries
+              center={{ x: 0, y: 0 }}
+              data={[item]}
+              key={arcCls}
+              className={arcCls}
+              {...arcsProps}
+            />
+            : null
+        })
       }
     </FlexibleXYPlot>
   )
@@ -78,6 +75,7 @@ PieChart.propTypes = {
 }
 
 PieChart.defaultProps = {
+  data: { dataItems: [] },
   height: 500,
   width: 500,
   showLabels: false

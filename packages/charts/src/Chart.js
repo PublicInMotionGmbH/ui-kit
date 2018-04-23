@@ -13,7 +13,7 @@ import {
 import { buildClassName } from '@talixo/shared'
 
 import Highligth from './Highlight'
-import { dataItemPropTypes, generateSeriesClassName } from './utils'
+import { generateSeriesClassName } from './utils'
 
 const moduleName = 'chart'
 
@@ -27,7 +27,30 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Line chart data  */
-  data: dataItemPropTypes,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** Additional data eries className */
+      className: PropTypes.string,
+
+      /** Color of the data series */
+      color: PropTypes.string,
+
+      /** Data inforamtion to be displayed in chart */
+      dataitems: PropTypes.shape({
+        x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        y: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      }),
+
+      /** Indicates if data will be shown in the chart */
+      disabled: PropTypes.bool,
+
+      /** ID of the data series */
+      id: PropTypes.number,
+
+      /** Title of data series */
+      title: PropTypes.string
+    })
+  ),
 
   /** Line chart data  */
   xAxisTitle: PropTypes.string,
@@ -49,7 +72,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  data: [[{}]],
+  data: [{ dataitems: [] }],
   lineColors: [],
   xAxisTitle: '',
   yAxisTitle: '',
@@ -88,9 +111,7 @@ class Chart extends React.Component {
   })
 
   onBrushEnd = (area) => {
-    const { onHightlightBrushEnd } = this.props
     this.setState({ lastDrawLocation: area })
-    if (onHightlightBrushEnd) onHightlightBrushEnd(area)
   }
 
   render () {
@@ -114,7 +135,6 @@ class Chart extends React.Component {
     const isLineChart = type === 'line'
     const xType = !passedProps.xType && getChartType()
 
-    // TODO: filter disabled
     return (
       <FlexibleXYPlot
         animation
@@ -129,12 +149,14 @@ class Chart extends React.Component {
         <YAxis title={yAxisTitle} />
         {
           data
-            .map((item, index) => (
-              <RenderComponet
-                style={isLineChart ? { fill: 'none' } : {}}
-                {...getSeriesProps(item, index)}
-              />
-            ))
+            .map((item, index) => {
+              return !item.disabled
+                ? <RenderComponet
+                  style={isLineChart ? {fill: 'none'} : {}}
+                  {...getSeriesProps(item, index)}
+                />
+                : null
+            })
         }
         {
           zoomable && type === 'line' &&

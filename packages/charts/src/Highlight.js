@@ -1,6 +1,20 @@
 import React from 'react'
 import { ScaleUtils, AbstractSeries } from 'react-vis'
 
+/**
+ * UI component that represents hightlighted drawing area above a Chart component
+ * This is a copy of solution provided by react-vis team
+ * https://github.com/uber/react-vis/blob/master/showcase/examples/zoomable-chart/highlight.js
+ * @property {object} [state]
+ * @property {bool} [state.drawing]
+ * @property {object} [state.drawArea]
+ * @property {number} [state.drawArea.top]
+ * @property {number} [state.drawArea.right]
+ * @property {number} [state.drawArea.bottom]
+ * @property {number} [state.drawArea.left]
+ * @property {number} [state.start.loc]
+ * @class
+ */
 class Highlight extends AbstractSeries {
   state = {
     drawing: false,
@@ -35,7 +49,6 @@ class Highlight extends AbstractSeries {
     }
     const location = offsetX - marginLeft
 
-    // TODO: Eventually support drawing as a full rectangle, if desired. Currently the code supports 'x' only
     this.setState({
       drawing: true,
       drawArea: {
@@ -50,11 +63,6 @@ class Highlight extends AbstractSeries {
     if (onBrushStart) {
       onBrushStart(e)
     }
-  }
-
-  onParentTouchStart (e) {
-    e.preventDefault()
-    this.onParentMouseDown(e)
   }
 
   stopDrawing () {
@@ -113,11 +121,6 @@ class Highlight extends AbstractSeries {
     }
   }
 
-  onParentTouchMove (e) {
-    e.preventDefault()
-    this.onParentMouseMove(e)
-  }
-
   render () {
     const {
       marginLeft,
@@ -127,7 +130,7 @@ class Highlight extends AbstractSeries {
       color,
       opacity
     } = this.props
-    const { drawArea: {left, right, top, bottom} } = this.state
+    const { drawArea: { left, right, top, bottom } } = this.state
 
     return (
       <g

@@ -27,9 +27,4 @@ describe('<LegendItem> component ', () => {
       expect(wrapper).toMatchSnapshot()
     })
   })
-  describe('handling empty props', () => {
-    beforeEach(() => {
-      createWrapper()
-    })
-  })
 })

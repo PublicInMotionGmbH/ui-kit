@@ -24,6 +24,7 @@ function Legend (props) {
     ...passedProps
   } = props
   const wrapperCls = buildClassName(moduleName, null, [ direction ])
+  console.log(dataItems)
 
   return (
     <div className={wrapperCls} style={style} {...passedProps}>

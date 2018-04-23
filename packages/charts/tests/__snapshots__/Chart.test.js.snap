@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chart> when rendered should render properly 1`] = `
+<FlexibleXYPlot
+  animation={true}
+  className="talixo-chart"
+  lineColors={Array []}
+  timeSeries={false}
+  xDomain={null}
+  xType="linear"
+>
+  <HorizontalGridLines
+    attr="y"
+    direction="horizontal"
+  />
+  <VerticalGridLines
+    attr="x"
+    direction="vertical"
+  />
+  <XAxis
+    attr="x"
+    attrAxis="y"
+    orientation="bottom"
+    title=""
+  />
+  <YAxis
+    attr="y"
+    attrAxis="x"
+    orientation="left"
+    title=""
+  />
+  <LineSeries
+    className="talixo-chart-series talixo-chart-series--0"
+    color={null}
+    curve={null}
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 5,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 2,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 2,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getNull={[Function]}
+    key="talixo-chart-series className talixo-chart-series--0"
+    opacity={1}
+    stack={false}
+    strokeStyle="solid"
+    style={
+      Object {
+        "fill": "none",
+      }
+    }
+  />
+  <LineSeries
+    className="talixo-chart-series talixo-chart-series--1"
+    color={null}
+    curve={null}
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 3,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 8,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 1,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getNull={[Function]}
+    key="talixo-chart-series className talixo-chart-series--1"
+    opacity={1}
+    stack={false}
+    strokeStyle="solid"
+    style={
+      Object {
+        "fill": "none",
+      }
+    }
+  />
+  <XAxis
+    attr="x"
+    attrAxis="y"
+    orientation="bottom"
+    title=""
+  />
+  <YAxis
+    attr="y"
+    attrAxis="x"
+    orientation="left"
+    title=""
+  />
+</FlexibleXYPlot>
+`;

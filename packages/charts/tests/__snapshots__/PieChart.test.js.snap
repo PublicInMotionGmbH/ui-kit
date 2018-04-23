@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PieChart> when rendered should render properly 1`] = `
+exports[`<PieChart> when rendered without disabled items should render properly 1`] = `
 <FlexibleXYPlot
   className="talixo-pie-chart"
   height={500}
@@ -18,5 +18,90 @@ exports[`<PieChart> when rendered should render properly 1`] = `
       5,
     ]
   }
-/>
+>
+  <ArcSeries
+    arcClassName=""
+    center={
+      Object {
+        "x": 0,
+        "y": 0,
+      }
+    }
+    className="talixo-chart-series talixo-chart-series--0"
+    data={
+      Array [
+        Object {
+          "angle": 1.691626813471427,
+          "angle0": 0,
+          "className": "",
+          "color": " ",
+          "disabled": false,
+          "label": "Cats",
+          "radius": 5,
+          "radius0": 0,
+          "value": 35,
+        },
+      ]
+    }
+    key="talixo-chart-series talixo-chart-series--0"
+    stack={false}
+    style={Object {}}
+  />
+  <ArcSeries
+    arcClassName=""
+    center={
+      Object {
+        "x": 0,
+        "y": 0,
+      }
+    }
+    className="talixo-chart-series talixo-chart-series--1"
+    data={
+      Array [
+        Object {
+          "angle": 3.624914600295915,
+          "angle0": 1.691626813471427,
+          "className": "",
+          "color": " ",
+          "disabled": false,
+          "label": "Dogs",
+          "radius": 5,
+          "radius0": 0,
+          "value": 40,
+        },
+      ]
+    }
+    key="talixo-chart-series talixo-chart-series--1"
+    stack={false}
+    style={Object {}}
+  />
+  <ArcSeries
+    arcClassName=""
+    center={
+      Object {
+        "x": 0,
+        "y": 0,
+      }
+    }
+    className="talixo-chart-series talixo-chart-series--2"
+    data={
+      Array [
+        Object {
+          "angle": 6.283185307179586,
+          "angle0": 3.624914600295915,
+          "className": "",
+          "color": " ",
+          "disabled": false,
+          "label": "Birds",
+          "radius": 5,
+          "radius0": 0,
+          "value": 55,
+        },
+      ]
+    }
+    key="talixo-chart-series talixo-chart-series--2"
+    stack={false}
+    style={Object {}}
+  />
+</FlexibleXYPlot>
 `;

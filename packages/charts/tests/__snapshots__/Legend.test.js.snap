@@ -22,7 +22,7 @@ exports[`<Legend> component  when rendered should renders piechart data properly
   <LegendItem
     className=""
     color=" "
-    disabled={false}
+    disabled={true}
     id={0}
     key="Cats"
     title="Cats"
@@ -38,7 +38,7 @@ exports[`<Legend> component  when rendered should renders piechart data properly
   <LegendItem
     className=""
     color=" "
-    disabled={false}
+    disabled={true}
     id={2}
     key="Birds"
     title="Birds"
@@ -46,7 +46,7 @@ exports[`<Legend> component  when rendered should renders piechart data properly
   <LegendItem
     className=""
     color=" "
-    disabled={false}
+    disabled={true}
     id={3}
     key="Cats1"
     title="Cats1"
@@ -94,7 +94,7 @@ exports[`<Legend> component  when rendered should renders piechart data properly
   <LegendItem
     className=""
     color=" "
-    disabled={false}
+    disabled={true}
     id={9}
     key="Lions2"
     title="Lions2"
