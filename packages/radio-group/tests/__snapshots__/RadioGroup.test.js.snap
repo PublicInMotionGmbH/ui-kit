@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioGroup /> renders children correctly 1`] = `
+<div
+  className="talixo-radio-group"
+>
+  <RadioInput
+    defaultChecked={false}
+    disabled={false}
+    key="1"
+    name="RadioGroup"
+    value={1}
+  >
+    one
+  </RadioInput>
+  <RadioInput
+    defaultChecked={false}
+    disabled={false}
+    key="2"
+    name="RadioGroup"
+    value={2}
+  >
+    two
+  </RadioInput>
+  <RadioInput
+    defaultChecked={false}
+    disabled={false}
+    key="3"
+    name="RadioGroup"
+    value={3}
+  >
+    three
+  </RadioInput>
+</div>
+`;
