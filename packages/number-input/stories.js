@@ -23,9 +23,74 @@ addStory('default', readme, () => (
     <h2>Default number input with initial value</h2>
     <NumberInput onChange={change} value={15} />
     <h2>Number input with errors</h2>
-    <NumberInput onChange={change} hasError />
+    <NumberInput onChange={change} error />
   </div>
 ))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Controlled number input</h2>
+    <NumberInput onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('min/max', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with min/max</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      min={0}
+      max={8}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('precision', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with 0.01 precision</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      precision={2}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('precision and step', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with 0.01 precision and step</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      step={0.01}
+      precision={2}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('faster buttons', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with faster buttons</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      initialTime={0}
+      stepTime={30}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('RTL', readme, (setState, state) => (
+  <div style={{ width: 300 }} dir='rtl'>
+    <h2>RTL: number input</h2>
+    <NumberInput onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
 
 addStory('small', readme, () => (
   <div>
@@ -34,6 +99,6 @@ addStory('small', readme, () => (
     <h2>Small number input with initial value</h2>
     <NumberInput onChange={change} size='small' value={15} />
     <h2>Small number input with errors</h2>
-    <NumberInput onChange={change} size='small' hasError />
+    <NumberInput onChange={change} size='small' error />
   </div>
 ))

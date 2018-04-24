@@ -1,31 +1,126 @@
 @import './config'
 
 @include module('text-input')
-  padding: dp(3) dp(2) dp(.8)
-  border: 1px solid
-  border-radius: $border-radius-m
-
-  &--small
-    padding: dp(2) dp(2) dp(.4)
-
-  &:focus ~ #{prefix('text-input', 'label')},
-  ~ #{prefix('text-input', 'label')}#{prefix('text-input', 'label--not-empty')}
-    top: dp(.3)
-    font-size: dp(1.4)
-
-#{prefix('text-input', 'wrapper')}
-  display: inline-block
+  display: block
   position: relative
-  font-size: $font-size-m
+  font-size: $input-font-size
+
+  &__input
+    box-sizing: border-box
+    padding: $input-padding
+    border: 1px solid $input-border-color
+    border-radius: $input-border-radius
+    background-color: $input-background-color
+    color: $input-text-color
+    outline: none
+    width: 100%
+
+  &__suffix
+    display: block
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    white-space: nowrap
+    pointer-events: none
+
+    &:before
+      content: '\00a0'
+      display: inline-block
+
+  // Build left & right addons
+
+  &__left,
+  &__right
+    position: absolute
+    font-size: $input-icon-size
+    white-space: nowrap
+    max-height: 100%
+    color: $input-icon-color
+    top: 50%
+    transform: translateY(-50%)
+
+  &__left
+    left: $input-padding
+
+  &__right
+    right: $input-padding
+
+  &--with-left &__input
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  &--with-right &__input
+    padding-right: 1.5 * $input-padding + $input-icon-width
+
+  // Build styling for error
+
+  &--error &__input
+    border-color: $input-error-color
+    color: $input-error-color
+
+  &--error &__input::placeholder
+    color: $input-error-color
+
+  // Handle small size
 
   &--small
-    font-size: $font-size-s
+    font-size: $input-small-font-size
 
-#{prefix('text-input', 'label')}
-  position: absolute
-  left: dp(2)
-  top: calc(50% - (.7 * #{$font-size-m}))
-  transition: .3s ease all
+  &--small &__input
+    padding: $input-small-padding
 
-  &--small
-    top: calc(50% - (.8 * #{$font-size-s}))
+  &--small &__left
+    left: $input-small-padding
+
+  &--small#{&}--with-left &__input
+    padding-left: 1.5 * $input-small-padding + $input-icon-width
+
+  &--small &__right
+    right: $input-small-padding
+
+  &--small#{&}--with-right &__input
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+
+  // Handle suffix correctly
+
+  &--empty &__suffix
+    display: none
+
+  // Handle icons correctly on RTL
+
+  [dir=rtl] &__left
+    left: auto
+    right: $input-padding
+
+  [dir=rtl] &__right
+    right: auto
+    left: $input-padding
+
+  [dir=rtl] &--with-left &__input
+    padding-left: $input-padding
+    padding-right: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &--with-right &__input
+    padding-right: $input-padding
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &--with-right#{&}--with-left &__input
+    padding-right: 1.5 * $input-padding + $input-icon-width
+    padding-left: 1.5 * $input-padding + $input-icon-width
+
+  [dir=rtl] &--small &__left
+    right: $input-small-padding
+
+  [dir=rtl] &--small#{&}--with-left &__input
+    padding-left: $input-small-padding
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+
+  [dir=rtl] &--small &__right
+    left: $input-small-padding
+
+  [dir=rtl] &--small#{&}--with-right &__input
+    padding-right: $input-small-padding
+    padding-left: 1.5 * $input-small-padding + $input-icon-width
+
+  [dir=rtl] &--small#{&}--with-right#{&}--with-left &__input
+    padding-right: 1.5 * $input-small-padding + $input-icon-width
+    padding-left: 1.5 * $input-small-padding + $input-icon-width
