@@ -10,3 +10,21 @@ exports[`<InlineInput /> renders correctly 1`] = `
   />
 </div>
 `;
+
+exports[`<InlineInput /> should change span to input when span is clicked 1`] = `
+<div
+  className="talixo-inline-input"
+>
+  <TextInput
+    className="talixo-inline-input__input"
+    hasError={false}
+    inputRef={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder=""
+    type="text"
+    value=""
+  />
+</div>
+`;

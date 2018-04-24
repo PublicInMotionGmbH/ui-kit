@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { TextInput } from '@talixo/text-input'
 
 export const moduleName = 'inline-input'
 
@@ -21,6 +22,12 @@ const defaultProps = {
   value: ''
 }
 
+// Default selection object
+const defaultSelection = {
+  start: null,
+  end: null
+}
+
 /**
  * Component which represents Inline Input.
  *
@@ -33,17 +40,34 @@ const defaultProps = {
 class InlineInput extends React.Component {
   state = {
     editing: false,
-    inputValue: this.props.value
+    inputValue: this.props.value,
+    selected: false,
+    selection: defaultSelection,
+    value: this.props.value
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.editing !== this.state.editing && !prevState.editing && !this.props.disabled) {
+    if (this._input !== undefined && prevState.editing !== this.state.editing && !prevState.editing) {
       this.focusInput(this._input)
     }
   }
 
   focusInput = (obj) => {
+    const { selection, selected } = this.state
+    const { start, end } = selection
+
+    if (selected) {
+      if (start <= end) {
+        obj.setSelectionRange(start, end)
+      } else {
+        obj.setSelectionRange(end, start, 'backwards')
+      }
+    }
     obj.focus()
+  }
+
+  handleBlur = () => {
+    this.setState({ editing: false })
   }
 
   handleInputChange = (e) => {
@@ -51,12 +75,28 @@ class InlineInput extends React.Component {
     this.setState({ inputValue })
   }
 
-  handleSpanClick = () => {
-    this.setState({ editing: true })
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') { this.setState({ editing: false }) }
   }
 
-  handleBlur = () => {
-    this.setState({ editing: false })
+  handleSpanClick = (e) => {
+    const { disabled } = this.props
+    let selected, selection
+    const editing = !disabled
+
+    if (window.getSelection) {
+      selected = true
+      const windowSelection = window.getSelection()
+      selection = {
+        start: windowSelection.anchorOffset,
+        end: windowSelection.focusOffset
+      }
+    } else {
+      selected = false
+      selection = defaultSelection
+    }
+
+    this.setState({ editing, selected, selection })
   }
 
   setRef = (node) => {
@@ -64,7 +104,7 @@ class InlineInput extends React.Component {
   }
 
   render () {
-    const { className, disabled, value, ...passedProps } = this.props
+    const { className, disabled, placeholder, value, ...passedProps } = this.props
     const { editing, inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className, { disabled })
@@ -74,17 +114,19 @@ class InlineInput extends React.Component {
     return (
       <div className={wrapperClsName} {...passedProps}>
         {editing && !disabled
-          ? <input
+          ? <TextInput
             className={inputClsName}
-            ref={node => this.setRef(node)}
-            placeholder={inputValue}
+            inputRef={node => this.setRef(node)}
+            placeholder={placeholder || inputValue}
+            value={inputValue}
             onChange={(e) => this.handleInputChange(e)}
+            onKeyPress={(e) => this.handleKeyPress(e)}
             onBlur={this.handleBlur}
             type='text'
           />
           : <span
             className={spanClsName}
-            onClick={this.handleSpanClick}
+            onClick={(e) => this.handleSpanClick(e)}
           >
             {inputValue}
           </span>

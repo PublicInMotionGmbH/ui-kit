@@ -9,6 +9,7 @@ import { buildClassName } from '@talixo/shared'
  * @param {object} props
  * @param {string} [props.className]
  * @param {boolean} [props.hasError]
+ * @param {function} [props.inputRef]
  * @param {function} [props.onChange]
  * @param {string} [props.placeholder]
  * @param {string} [props.size]
@@ -33,7 +34,7 @@ class TextInput extends React.Component {
   }
 
   render () {
-    const { className, hasError, onChange, placeholder, size, style, ...restProps } = this.props
+    const { className, hasError, inputRef, onChange, placeholder, size, style, ...restProps } = this.props
     const { inputValue } = this.state
 
     const inputClasses = buildClassName('text-input', className, [ size ], {
@@ -50,6 +51,7 @@ class TextInput extends React.Component {
     return (
       <div className={wrapperClasses} style={style}>
         <input
+          ref={inputRef}
           type='text'
           className={inputClasses}
           onChange={this.onInputChange}
@@ -69,6 +71,9 @@ TextInput.propTypes = {
 
   /** Indicates that input has error */
   hasError: PropTypes.bool,
+
+  /** Ref passed to input element */
+  inputRef: PropTypes.func,
 
   /** Callback for change event */
   onChange: PropTypes.func,
