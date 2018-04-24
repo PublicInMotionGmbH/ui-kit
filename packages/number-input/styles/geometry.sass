@@ -1,34 +1,41 @@
 @import './config'
 
 @include module('number-input')
-  display: inline-block
   position: relative
-  display: inline-block
-  border: $border-width solid
-  border-radius: $border-radius-m
-  padding: dp(1.5)
-  line-height: dp(3)
 
-  >
-    input, #{prefix('number-input', 'stepper')}
-      display: inline-block
-      vertical-align: middle
+  @include module('text-input')
+    &__wrapper--with-right #{prefix('text-input')}
+      padding-right: dp(10)
 
-    input
-      font-size: $font-size-m
-      font-weight: $font-weight-semibold
-      border: none
-      outline: inherit !important
+    &__wrapper--with-right #{prefix('text-input', 'right')}
+      white-space: nowrap
+      font-size: 0
+      height: dp(2.5)
+      line-height: dp(2.5)
+      width: dp(7)
 
-  &__stepper &__button
-    box-sizing: content-box
+  &-stepper__button
+    display: inline-block
+    box-sizing: border-box
     width: dp(2.5)
     height: dp(2.5)
     padding: 0
     margin: 0 dp(0.5)
-    border: $border-width solid
+    color: $color-orange-talixo
+    border: $border-width solid $color-placeholder-text
     border-radius: dp(2.5)
-    display: inline-block
+    background-color: $color-white
+    cursor: pointer
+    outline: none
+    vertical-align: middle
+
+    &:hover
+      border-color: $navy
+      color: $navy
+
+    &:active
+      background-color: $navy
+      color: #fff
 
     span
       font-size: $font-size-m
@@ -36,12 +43,22 @@
       text-align: center
       display: block
 
-  &--small
-    padding: dp(0.5) dp(1.5)
+    span
+      user-select: none
+
+  input[type=number]
+    appearance: none
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+    appearance: none
+    margin: 0
+
+  > input::placeholder
+    color: $color-placeholder-text
+
+  &--error
+    border-color: $color-talixo-error-red
 
     > input
-      font-size: $font-size-s
-
-input[type='number']::-webkit-inner-spin-button
-  -webkit-appearance: none
-
+      color: $color-talixo-error-red
