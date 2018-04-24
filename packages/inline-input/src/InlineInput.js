@@ -13,19 +13,35 @@ const propTypes = {
   /** Prevents editing the content. */
   disabled: PropTypes.bool,
 
-  /** Input value */
+  /** Rendered value for empty input value. */
+  emptyValue: PropTypes.string,
+
+  /** Indicates that input has error. */
+  error: PropTypes.bool,
+
+  /** Right side input icon or controls. */
+  icon: PropTypes.node,
+
+  /** Callback for change event. */
+  onInputChange: PropTypes.func,
+
+  /** Input placeholder. */
+  placeholder: PropTypes.string.isRequired,
+
+  /** Input value. */
   value: PropTypes.string
 }
 
 const defaultProps = {
   disabled: false,
+  error: false,
   value: ''
 }
 
 // Default selection object
 const defaultSelection = {
-  start: null,
-  end: null
+  end: null,
+  start: null
 }
 
 /**
@@ -34,7 +50,19 @@ const defaultSelection = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {boolean} [props.disabled]
+ * @property {boolean} [props.error]
+ * @property {string} [props.emptyValue]
+ * @property {node} [props.icon]
+ * @property {function} [props.onInputChange]
+ * @property {string} [props.placeholder]
  * @property {string} [props.value]
+ *
+ * @property {object} state
+ * @property {boolean} state.editing
+ * @property {string|null} state.inputValue
+ * @property {boolean} state.selected
+ * @property {object} state.selection
+ *
  * @class
  */
 class InlineInput extends React.Component {
@@ -42,12 +70,13 @@ class InlineInput extends React.Component {
     editing: false,
     inputValue: this.props.value,
     selected: false,
-    selection: defaultSelection,
-    value: this.props.value
+    selection: defaultSelection
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this._input !== undefined && prevState.editing !== this.state.editing && !prevState.editing) {
+    const editable = this._input !== undefined && prevState.editing !== this.state.editing && !prevState.editing
+
+    if (editable) {
       this.focusInput(this._input)
     }
   }
@@ -70,9 +99,15 @@ class InlineInput extends React.Component {
     this.setState({ editing: false })
   }
 
-  handleInputChange = (e) => {
-    const inputValue = e.target.value
+  handleInputChange = (inputValue) => {
+    const { onInputChange } = this.props
+
     this.setState({ inputValue })
+
+    // Trigger input change to parent components
+    if (onInputChange) {
+      onInputChange(inputValue)
+    }
   }
 
   handleKeyPress = (e) => {
@@ -104,31 +139,39 @@ class InlineInput extends React.Component {
   }
 
   render () {
-    const { className, disabled, placeholder, value, ...passedProps } = this.props
+    const { className, disabled, emptyValue, error, icon, placeholder, value, ...passedProps } = this.props
     const { editing, inputValue } = this.state
+
+    const spanValue = inputValue === ''
+      ? emptyValue !== undefined
+        ? emptyValue
+        : placeholder
+      : inputValue
 
     const wrapperClsName = buildClassName(moduleName, className, { disabled })
     const inputClsName = buildClassName([moduleName, 'input'])
-    const spanClsName = buildClassName([moduleName, 'span'], null, { disabled })
+    const spanClsName = buildClassName([moduleName, 'span'], null, { disabled, error })
 
     return (
       <div className={wrapperClsName} {...passedProps}>
         {editing && !disabled
           ? <TextInput
             className={inputClsName}
+            error={error}
             inputRef={node => this.setRef(node)}
             placeholder={placeholder || inputValue}
             value={inputValue}
-            onChange={(e) => this.handleInputChange(e)}
+            onChange={(value) => this.handleInputChange(value)}
             onKeyPress={(e) => this.handleKeyPress(e)}
             onBlur={this.handleBlur}
+            right={icon}
             type='text'
           />
           : <span
             className={spanClsName}
             onClick={(e) => this.handleSpanClick(e)}
           >
-            {inputValue}
+            {spanValue}
           </span>
         }
       </div>

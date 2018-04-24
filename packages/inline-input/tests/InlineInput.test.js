@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 
 import InlineInput, { moduleName } from '../src/InlineInput'
 
@@ -14,7 +14,7 @@ describe('module name', () => {
 describe('focusInput', () => {
   it('should focus', () => {
     const mock = { focus: jest.fn() }
-    const wrapper = shallow(<InlineInput />)
+    const wrapper = createWrapper({ placeholder: '' })
     wrapper.instance().focusInput(mock)
     expect(mock.focus).toHaveBeenCalled()
   })
@@ -23,7 +23,7 @@ describe('focusInput', () => {
 describe('<InlineInput />', () => {
   let span, wrapper
   beforeEach(() => {
-    wrapper = createWrapper()
+    wrapper = createWrapper({ placeholder: '' })
     span = wrapper.find('span')
   })
 
@@ -33,17 +33,17 @@ describe('<InlineInput />', () => {
 
   it('passes className to wrapper', () => {
     const className = 'new-class-name'
-    const wrapperWithProps = createWrapper({ className: className })
+    const wrapperWithProps = createWrapper({ className: className, placeholder: '' })
     expect(wrapperWithProps.props().className.includes(className)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
-    const wrapperWithProps = createWrapper({ disabled: true })
+    const wrapperWithProps = createWrapper({ disabled: true, placeholder: '' })
     expect(wrapperWithProps.props().className.includes('disabled')).toEqual(true)
   })
 
   it('should not change to input when disabled is set to true', () => {
-    const wrapper = createWrapper({ disabled: true })
+    const wrapper = createWrapper({ disabled: true, placeholder: '' })
     span.simulate('click')
     expect(wrapper.find('span').exists()).toEqual(true)
     expect(wrapper.find('TextInput').exists()).toEqual(false)
@@ -72,19 +72,18 @@ describe('<InlineInput />', () => {
   })
 
   it('should change state.selected to true if text is selected', () => {
-    global.getSelection = jest.fn(() => {
+    window.getSelection = jest.fn(() => {
       return {
         anchorOffset: 0,
         focusOffset: 0
       }
     })
-    // global.getSelection()
     span.simulate('click')
     expect(wrapper.state().selected).toEqual(true)
   })
 
   it('should change state.selection if text is selected', () => {
-    global.getSelection = jest.fn(() => {
+    window.getSelection = jest.fn(() => {
       return {
         anchorOffset: 0,
         focusOffset: 0
@@ -97,7 +96,7 @@ describe('<InlineInput />', () => {
   it('should change state.inputValue when typing inside input', () => {
     span.simulate('click')
     const input = wrapper.find('TextInput')
-    input.simulate('change', { target: { value: 'name' } })
+    input.simulate('change', 'name')
     expect(wrapper.state().inputValue).toEqual('name')
   })
 
@@ -120,7 +119,7 @@ describe('<InlineInput />', () => {
 
 describe('ref', () => {
   it('is passed correctly', () => {
-    const wrapper = createWrapper()
+    const wrapper = createWrapper({ placeholder: '' })
     const span = wrapper.find('span')
     span.simulate('click')
 
@@ -129,5 +128,59 @@ describe('ref', () => {
 
     expect(wrapper.instance()._input).toEqual(input)
     wrapper.unmount()
+  })
+})
+
+describe('componentDidUpdate', () => {
+  it('triggers input focus if state.editing is set to true', () => {
+    const wrapper = mount(<InlineInput placeholder='' />)
+    const mock = jest.spyOn(wrapper.instance(), 'focusInput')
+    const span = wrapper.find('span')
+    span.simulate('click')
+    expect(mock).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+})
+
+describe('span value', () => {
+  const expectedValue = 'Name'
+  it('should equal to empty string by default', () => {
+    let wrapper = createWrapper({ placeholder: expectedValue })
+    let span = wrapper.find('span')
+    let spanValue = span.props().children
+    expect(spanValue).toEqual(expectedValue)
+  })
+
+  it('should equal to state.inputValue if it is not an empty string', () => {
+    const wrapper = createWrapper({ placeholder: 'Placeholder', value: expectedValue })
+    const span = wrapper.find('span')
+    const spanValue = span.props().children
+    expect(spanValue).toEqual(expectedValue)
+  })
+
+  it('should equal to placeholder if input value is an empty string', () => {
+    const wrapper = createWrapper({ placeholder: expectedValue, value: '' })
+    const span = wrapper.find('span')
+    const spanValue = span.props().children
+    expect(spanValue).toEqual(expectedValue)
+  })
+
+  it('should equal to emptyValue if input value is an empty string', () => {
+    const wrapper = createWrapper({ emptyValue: expectedValue, placeholder: 'placeholder text', value: '' })
+    const span = wrapper.find('span')
+    const spanValue = span.props().children
+    expect(spanValue).toEqual(expectedValue)
+  })
+})
+
+describe('handleInputChange', () => {
+  it('should be called when typing inside input', () => {
+    const onInputChange = jest.fn()
+    const wrapper = createWrapper({ placeholder: '', onInputChange })
+    const span = wrapper.find('span')
+    span.simulate('click')
+    const input = wrapper.find('TextInput')
+    input.simulate('change', 'name')
+    expect(onInputChange).toHaveBeenCalled()
   })
 })
