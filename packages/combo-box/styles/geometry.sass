@@ -18,8 +18,21 @@
     border-radius: 2px
     outline: none
 
+  &__inner
+    flex: 1
+
+  &__inner > input,
+  &__inner > div > input
+    outline: none
+    border: 0
+    padding: 0
+    font: inherit
+
   &__value--placeholder
-    color: #bbb
+    &, input
+      color: #bbb
+
+  &__value--placeholder
     user-select: none
 
   &--open &__value
@@ -31,6 +44,7 @@
     position: absolute
     left: 0
     right: 0
+    z-index: 2
     top: 100%
     width: 100%
     max-height: 50vh
@@ -39,17 +53,27 @@
     background: #fff
     overflow: scroll
 
-  &__arrow
+  &__arrow,
+  &__clear
     display: inline-block
     font-size: 1.5rem
     line-height: 1em
-    pointer-events: none
+    border: 0
+    bacxkground: transparent
     color: #bbb
+
+  &__arrow
+    pointer-events: none
+
+  &__clear:hover
+    cursor: pointer
+    color: #000
 
   &__controls
     display: flex
     align-items: center
     margin-left: auto
+    white-space: nowrap
 
   &__icon
     display: inline-block
@@ -81,6 +105,14 @@
 
   &__tags
     margin: -0.52em -3px
+
+  &__tags
+    display: inline
+    margin-right: 0.52em
+
+  [dir=rtl] &__tags
+    margin-right: -3px
+    margin-left: 0.52em
 
   &__tag
     box-sizing: border-box

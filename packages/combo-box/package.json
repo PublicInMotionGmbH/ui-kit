@@ -21,8 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/country-flag": "^1.0.0",
-    "@talixo/text-input": "^1.0.0",
-    "@talixo/progress-ring": "^1.0.0"
+    "@talixo/progress-ring": "^1.0.0",
+    "@talixo/text-input": "^1.0.0"
   },
   "peerDependencies": {
     "prop-types": "^15.6.1",
@@ -30,8 +30,9 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0",
     "@talixo/icon": "^1.0.0",
-    "downshift": "^1.31.11"
+    "@talixo/shared": "^1.0.0",
+    "downshift": "^1.31.11",
+    "react-input-autosize": "^2.2.1"
   }
 }

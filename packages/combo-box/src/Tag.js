@@ -23,7 +23,7 @@ function Tag (props) {
 
   // Build class names for all elements
   const clsName = buildClassName([ 'combo-box', 'tag' ])
-  const innerClsName = buildClassName([ 'combo-box', 'item', 'inner' ])
+  const innerClsName = buildClassName([ 'combo-box', 'tag', 'inner' ])
   const removeClsName = buildClassName([ 'combo-box', 'remove' ])
 
   return (

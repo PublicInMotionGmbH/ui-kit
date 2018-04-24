@@ -6,13 +6,14 @@ import { CountryFlag } from '@talixo/country-flag'
 import { ProgressRing } from '@talixo/progress-ring'
 
 import SelectBox from './src/SelectBox'
+import ComboBox from './src/ComboBox'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Combo box', module, {
-  propTables: [ SelectBox ]
+  propTables: [ ComboBox, SelectBox ]
 })
 
 // Build options to use in stories
@@ -66,6 +67,19 @@ addStory.controlled('multi select box', readme, (setState, state) => (
   </div>
 ), () => ({ value: [] }))
 
+addStory.controlled('placeholder with icon', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder={<span><Icon name='my_location' /> Select penguins...</span>}
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+    />
+  </div>
+), () => ({ value: [] }))
+
 function renderCountry (x) {
   return (
     <div style={{ display: 'flex', lineHeight: '1em' }}>
@@ -85,6 +99,21 @@ function renderSimpleCountry (x) {
       {x.name}
     </div>
   )
+}
+
+function filterOptions (value, options, field) {
+  if (value == null) {
+    return options
+  }
+
+  // Right now it is on selecting element (through keyboard)
+  value = typeof value === 'object' ? value[field].toLowerCase() : value.toLowerCase()
+
+  return options.filter(x => {
+    const v = field ? x[field] : x
+
+    return v.toLowerCase().indexOf(value) !== -1
+  })
 }
 
 addStory.controlled('special select box', readme, (setState, state) => (
@@ -146,6 +175,51 @@ addStory.controlled('special multi select box', readme, (setState, state) => (
   </div>
 ), () => ({ value: [] }))
 
+addStory.controlled('filtered combo box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      options={filterOptions(state.inputValue, optionsSimple)}
+    />
+  </div>
+), () => ({ value: null, inputValue: '' }))
+
+addStory.controlled('filtered multi combo box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={filterOptions(state.inputValue, options, 'name')}
+    />
+  </div>
+), () => ({ value: [], inputValue: '' }))
+
+addStory.controlled('multi combo box with adding value', readme, (setState, state) => (
+  <div>
+    <div>Use either <strong>Tab</strong> or <strong>Comma</strong> key.</div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      onNewValue={inputValue => setState({ value: state.value.concat(inputValue) })}
+      options={filterOptions(state.inputValue, optionsSimple)}
+    />
+  </div>
+), () => ({ value: [], inputValue: '' }))
+
 addStory.controlled('RTL: multi select box', readme, (setState, state) => (
   <div dir='rtl'>
     <div>Selected value: {JSON.stringify(state.value)}</div>
@@ -175,3 +249,32 @@ addStory.controlled('RTL: select box', readme, (setState, state) => (
     />
   </div>
 ), () => ({ value: [] }))
+
+addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
+  <div dir='rtl'>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      options={filterOptions(state.inputValue, optionsSimple)}
+    />
+  </div>
+), () => ({ value: null, inputValue: '' }))
+
+addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) => (
+  <div dir='rtl'>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={filterOptions(state.inputValue, options, 'name')}
+    />
+  </div>
+), () => ({ value: [], inputValue: '' }))

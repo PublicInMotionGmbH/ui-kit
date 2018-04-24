@@ -13,17 +13,17 @@ const moduleName = 'combo-box'
 /**
  * Component which represents Combo box.
  *
- * @param {object} props
- * @param {array} props.options
- * @param {boolean} props.multi
- * @param {function} props.renderItem
- * @param {function} props.buildItemId
- * @param {function} props.itemToString
- * @param {*} [props.placeholder]
- * @param {function} [props.renderValue]
- * @param {string} [props.className]
+ * @property {object} props
+ * @property {array} props.options
+ * @property {boolean} props.multi
+ * @property {function} props.renderItem
+ * @property {function} props.buildItemId
+ * @property {function} props.itemToString
+ * @property {*} [props.placeholder]
+ * @property {function} [props.renderValue]
+ * @property {string} [props.className]
  *
- * @returns {React.Element}
+ * @class
  */
 class SelectBox extends React.PureComponent {
   /**
@@ -138,7 +138,7 @@ class SelectBox extends React.PureComponent {
     const { isOpen, options, multi, icon } = data
 
     // Check if menu should be visible
-    const open = isOpen && options.length
+    const open = isOpen && options.length > 0
 
     // Build class name for wrapper
     const clsName = buildClassName(moduleName, className, { open, multi, 'with-info': icon })
@@ -188,6 +188,9 @@ SelectBox.propTypes = {
 
   /** Is it multi-select? */
   multi: PropTypes.bool,
+
+  /** Event called after current value of select-box has been changed */
+  onChange: PropTypes.func,
 
   /** Function to render item */
   renderItem: PropTypes.func,

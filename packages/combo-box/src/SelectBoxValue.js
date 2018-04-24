@@ -52,16 +52,14 @@ function SelectBoxValue (props) {
   // Build component to show value
   const value = multi && isSelected
     ? <TagsList {...props} />
-    : (
-      <div className={innerClsName}>
-        {isSelected ? renderValue(selectedItems[0], props) : placeholder}
-      </div>
-    )
+    : isSelected ? renderValue(selectedItems[0], props) : placeholder
 
   // Render select-box value container
   return (
     <button {...passedProps} className={clsName}>
-      {value}
+      <div className={innerClsName}>
+        {value}
+      </div>
       {controls}
     </button>
   )

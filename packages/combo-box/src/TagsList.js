@@ -15,7 +15,7 @@ import Tag from './Tag'
  * @returns {React.Element}
  */
 function TagsList (props) {
-  const { buildItemId, selectedItems } = props
+  const { buildItemId, selectedItems, style } = props
 
   // Build class name for wrapper
   const clsName = buildClassName([ 'combo-box', 'tags' ])
@@ -31,13 +31,16 @@ function TagsList (props) {
   ))
 
   return (
-    <div className={clsName}>
+    <div style={style} className={clsName}>
       {elements}
     </div>
   )
 }
 
 TagsList.propTypes = {
+  /** Additional styles for wrapper */
+  style: PropTypes.object,
+
   /** Function to build item ID - used for 'key' properties */
   buildItemId: PropTypes.func.isRequired,
 
