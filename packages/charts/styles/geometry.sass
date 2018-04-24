@@ -1,19 +1,23 @@
 @import './config'
 
+@include module('pie-chart')
+  //margin: 0 auto
+
 @include module('legend')
   display: flex
-  position: absolute
   right: 0
   box-sizing: border-box
   padding: $legend-padding
 
   &--horizontal
+    max-width: 100%
     flex-direction: row
     overflow-x: auto
-    overflow-y: hidden
 
     #{prefix(legend-item)}
-      text-align: center
+      display: inline-flex
+      flex-direction: column
+      white-space: nowrap
 
       &__colorbox
         display: block
@@ -27,7 +31,7 @@
       white-space: nowrap
       text-overflow: ellipsis
 
-      &__title
+      &__label
         display: inline
 
 @include module('legend-item')
@@ -36,10 +40,32 @@
   padding: $legend-padding
 
   &__colorbox
-    content: ' '
     width: dp(3)
     height: dp(.375)
     padding: 0
     margin: 0 dp(1.5)
     display: inline-block
     vertical-align: middle
+
+@include module('filtered-chart')
+  display: flex
+
+  &--top, &--bottom
+    align-items: center
+
+  &--top
+    flex-direction: column
+
+  &--bottom
+    flex-direction: column-reverse
+
+  &--left, &--right
+    justify-content: space-between
+
+    #{prefix(filtered-chart)}__legend
+      width: 15%
+
+  &--left
+    flex-direction: row
+  &--right
+    flex-direction: row-reverse

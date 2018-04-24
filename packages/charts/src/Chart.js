@@ -12,6 +12,7 @@ import {
 
 import { buildClassName } from '@talixo/shared'
 
+import WithFilters from './WithFiltersHOC'
 import Highligth from './Highlight'
 import { generateSeriesClassName } from './utils'
 
@@ -37,15 +38,12 @@ const propTypes = {
 
       /** Data inforamtion to be displayed in chart */
       dataitems: PropTypes.shape({
-        x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        y: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        y: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
       }),
 
       /** Indicates if data will be shown in the chart */
       disabled: PropTypes.bool,
-
-      /** ID of the data series */
-      id: PropTypes.number,
 
       /** Title of data series */
       title: PropTypes.string
@@ -57,9 +55,6 @@ const propTypes = {
 
   /** Line chart data  */
   yAxisTitle: PropTypes.string,
-
-  /** Additional wrapper styles */
-  style: PropTypes.object,
 
   /** Idicates if x axis should be displayed as date */
   timeSeries: PropTypes.bool,
@@ -84,9 +79,30 @@ const defaultProps = {
 /**
  * Component which represents Chart.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} [props]
+ * @property {string} [props.className]
+ * @property {string} [props.xAxisTitle]
+ * @property {string} [props.yAxisTitle]
+ * @property {bool} [props.timeSeries]
+ * @property {string} [props.type]
+ * @property {bool} [props.zoomable]
+ *
+ * @property {object[]} [props.data]
+ * @property {string} [props.data.className]
+ * @property {string} [props.data.color]
+ * @property {object} [props.data.dataitems]
+ * @property {string|number} props.data.dataitems.x
+ * @property {string|number} props.data.dataitems.y
+ * @property {bool} [props.data.disabled]
+ * @property {string} [props.data.title]
+ *
+ * @property {object} [state]
+ * @property {number} [state.bottom]
+ * @property {number} [state.left]
+ * @property {number} [state.right]
+ * @property {number} [state.top]
+ *
+ * @class
  */
 class Chart extends React.Component {
   state = {
@@ -105,8 +121,8 @@ class Chart extends React.Component {
   getSeriesProps = (item, index) => ({
     data: item.dataItems,
     color: item.color,
-    className: generateSeriesClassName(item.id || index),
-    key: generateSeriesClassName(item.id || index, item.className),
+    className: generateSeriesClassName(index, item.className),
+    key: `${item.title}-${index}`,
     ...this.props.dataSeriesProps
   })
 
@@ -124,7 +140,6 @@ class Chart extends React.Component {
       lineProps,
       xAxisTitle,
       yAxisTitle,
-      style,
       type,
       zoomable,
       ...passedProps
@@ -152,6 +167,7 @@ class Chart extends React.Component {
             .map((item, index) => {
               return !item.disabled
                 ? <RenderComponet
+                  animate
                   style={isLineChart ? {fill: 'none'} : {}}
                   {...getSeriesProps(item, index)}
                 />
@@ -177,3 +193,4 @@ Chart.propTypes = propTypes
 Chart.defaultProps = defaultProps
 
 export default Chart
+export const ChartWithFilters = WithFilters(Chart)

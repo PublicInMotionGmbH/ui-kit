@@ -9,8 +9,7 @@ exports[`<Legend> component  when rendered should renders chart data properly 1`
     color={null}
     disabled={false}
     id={0}
-    key="Line 1"
-    title="Line 1"
+    key="undefined--0"
   />
 </div>
 `;
@@ -24,80 +23,90 @@ exports[`<Legend> component  when rendered should renders piechart data properly
     color=" "
     disabled={true}
     id={0}
-    key="Cats"
-    title="Cats"
+    key="Cats--0"
+    label="Cats"
+    value={35}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={1}
-    key="Dogs"
-    title="Dogs"
+    key="Dogs--1"
+    label="Dogs"
+    value={40}
   />
   <LegendItem
     className=""
     color=" "
     disabled={true}
     id={2}
-    key="Birds"
-    title="Birds"
+    key="Birds--2"
+    label="Birds"
+    value={55}
   />
   <LegendItem
     className=""
     color=" "
     disabled={true}
     id={3}
-    key="Cats1"
-    title="Cats1"
+    key="Cats1--3"
+    label="Cats1"
+    value={35}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={4}
-    key="Dogs1"
-    title="Dogs1"
+    key="Dogs1--4"
+    label="Dogs1"
+    value={40}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={5}
-    key="Birds1"
-    title="Birds1"
+    key="Birds1--5"
+    label="Birds1"
+    value={55}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={6}
-    key="Cats2"
-    title="Cats2"
+    key="Cats2--6"
+    label="Cats2"
+    value={35}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={7}
-    key="Dogs2"
-    title="Dogs2"
+    key="Dogs2--7"
+    label="Dogs2"
+    value={40}
   />
   <LegendItem
     className=""
     color=" "
     disabled={false}
     id={8}
-    key="Birds2"
-    title="Birds2"
+    key="Birds2--8"
+    label="Birds2"
+    value={55}
   />
   <LegendItem
     className=""
     color=" "
     disabled={true}
     id={9}
-    key="Lions2"
-    title="Lions2"
+    key="Lions2--9"
+    label="Lions2"
+    value={35}
   />
 </div>
 `;

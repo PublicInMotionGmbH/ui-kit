@@ -2,10 +2,8 @@
 
 exports[`<PieChart> when rendered without disabled items should render properly 1`] = `
 <FlexibleXYPlot
+  animation={true}
   className="talixo-pie-chart"
-  height={500}
-  showLabels={false}
-  width={500}
   xDomain={
     Array [
       -5,

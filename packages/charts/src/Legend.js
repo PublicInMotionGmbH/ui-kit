@@ -7,11 +7,54 @@ import LegendItem from './LegendItem'
 
 const moduleName = 'legend'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Data items to be displayed */
+  dataItems: PropTypes.arrayOf(PropTypes.shape({
+
+    /** Additional class name */
+    className: PropTypes.string,
+
+    /** Color of data series */
+    color: PropTypes.string,
+
+    /** Indicates if series is disabled */
+    disabled: PropTypes.bool,
+
+    /** Data series label */
+    label: PropTypes.string,
+
+    /** Data series value */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  })),
+
+  /** Horizontal or vertical. */
+  direction: PropTypes.string,
+
+  /** onClick callback, gets the clicked item, index and event as parameter */
+  onClick: PropTypes.func
+}
+
+const defaultProps = {
+  dataItems: [],
+  direction: 'vertical'
+}
+
 /**
- * Component which represents Legend.
+ * Component which represents Chart Legend.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {object[]} [props.dataItems]
+ * @param {string} [props.dataItems.className]
+ * @param {string} [props.dataItems.color]
+ * @param {bool} [props.dataItems.disabled]
+ * @param {string} [props.dataItems.label]
+ * @param {string|number} [props.dataItems.value]
+ * @param {string} [props.direction]
+ * @param {function} [props.onClick]
  * @returns {React.Element}
  */
 function Legend (props) {
@@ -20,25 +63,23 @@ function Legend (props) {
     dataItems,
     direction,
     onClick,
-    style,
     ...passedProps
   } = props
-  const wrapperCls = buildClassName(moduleName, null, [ direction ])
-  console.log(dataItems)
+  const wrapperCls = buildClassName(moduleName, className, [ direction ])
 
   return (
-    <div className={wrapperCls} style={style} {...passedProps}>
+    <div className={wrapperCls} {...passedProps}>
       {
         dataItems.map((item, index) => (
           <LegendItem
             className={item.className}
             color={item.color}
             disabled={item.disabled}
-            id={item.id || index}
-            key={item.title || item.label}
+            id={index}
+            key={`${item.label}--${index}`}
             onClick={onClick && ((e) => onClick(item, index, e))}
-            title={item.title || item.label}
-            value={item.y || item.angle}
+            label={item.label}
+            value={item.value}
           />
         ))
       }
@@ -46,26 +87,8 @@ function Legend (props) {
   )
 }
 
-Legend.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
+Legend.propTypes = propTypes
 
-  /** TODO: add a description of dataItem */
-  dataItems: PropTypes.array,
-
-  /** Horizontal or vertical. */
-  direction: PropTypes.string,
-
-  /** onClick callback, gets the clicked item, index and event as parameter */
-  onClick: PropTypes.func,
-
-  /** Additional wrapper styling */
-  style: PropTypes.object
-}
-
-Legend.defaultProps = {
-  dataItems: [],
-  direction: 'vertical'
-}
+Legend.defaultProps = defaultProps
 
 export default Legend

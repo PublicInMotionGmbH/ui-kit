@@ -4,15 +4,33 @@ import { FlexibleXYPlot, ArcSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
+import WithFilters from './WithFiltersHOC'
 import { getPieValuesSum, generateArcsData, generateSeriesClassName } from './utils'
 
 const moduleName = 'pie-chart'
+
+const propTypes = {
+  /** Additional wrapper class name */
+  className: PropTypes.string,
+
+  /** Pie chart data  */
+  data: PropTypes.object,
+
+  /** Additional wrapper styles */
+  style: PropTypes.object
+}
+
+const defaultProps = {
+  data: { dataItems: [] }
+}
 
 /**
  * Component which represents PieChart.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {string} [props.data]
+ * @param {string} [props.style]
  * @returns {React.Element}
  */
 function PieChart (props) {
@@ -30,6 +48,7 @@ function PieChart (props) {
 
   return (
     <FlexibleXYPlot
+      animation
       xDomain={[-5, 5]}
       yDomain={[-5, 5]}
       className={wrapperCls}
@@ -54,31 +73,9 @@ function PieChart (props) {
   )
 }
 
-PieChart.propTypes = {
-  /** Additional wrapper class name */
-  className: PropTypes.string,
+PieChart.propTypes = propTypes
 
-  /** Pie chart data  */
-  data: PropTypes.object,
-
-  /** Pie chart data  */
-  height: PropTypes.number,
-
-  /** Pie chart data  */
-  width: PropTypes.number,
-
-  /** Indicates if chart should show labels */
-  showLabels: PropTypes.bool,
-
-  /** Additional wrapper styles */
-  style: PropTypes.object
-}
-
-PieChart.defaultProps = {
-  data: { dataItems: [] },
-  height: 500,
-  width: 500,
-  showLabels: false
-}
+PieChart.defaultProps = defaultProps
 
 export default PieChart
+export const PieChartWithFilters = WithFilters(PieChart, ['dataItems'])

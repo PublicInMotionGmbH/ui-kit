@@ -46,7 +46,6 @@ describe('<Highlight>', () => {
     })
 
     it('should update drawing state', () => {
-      console.log(highlight.state.drawArea)
       expect(highlight.instance().state.drawing).toBe(true)
     })
     it('should change drawArea in state', () => {
@@ -61,7 +60,6 @@ describe('<Highlight>', () => {
         plot.simulate('mousemove', { nativeEvent: { offsetX: 200 } })
       })
       it('should not change drawing state', () => {
-        console.log(highlight.state.drawArea)
         expect(highlight.instance().state.drawing).toBe(true)
       })
       it('should change drawArea in state', () => {
@@ -91,7 +89,6 @@ describe('<Highlight>', () => {
           highlight.simulate('mouseleave')
         })
         it('should change state.drawing to false', () => {
-          console.log(highlight.instance().state)
           expect(highlight.instance().state.drawing).toBe(false)
         })
         it('should reset drawing area', () => {

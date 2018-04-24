@@ -14,9 +14,11 @@ exports[`<LegendItem> component  rendering should render properly 1`] = `
     }
   />
   <div
-    className="talixo-legend-item__title"
+    className="talixo-legend-item__label"
+  />
+  <div
+    className="talixo-legend-item__label"
   >
-    Title
      
     (10)
   </div>

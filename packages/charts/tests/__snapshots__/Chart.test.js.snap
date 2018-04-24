@@ -30,7 +30,8 @@ exports[`<Chart> when rendered should render properly 1`] = `
     title=""
   />
   <LineSeries
-    className="talixo-chart-series talixo-chart-series--0"
+    animate={true}
+    className="talixo-chart-series className talixo-chart-series--0"
     color={null}
     curve={null}
     data={
@@ -54,7 +55,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       ]
     }
     getNull={[Function]}
-    key="talixo-chart-series className talixo-chart-series--0"
+    key="Line 1-0"
     opacity={1}
     stack={false}
     strokeStyle="solid"
@@ -65,7 +66,8 @@ exports[`<Chart> when rendered should render properly 1`] = `
     }
   />
   <LineSeries
-    className="talixo-chart-series talixo-chart-series--1"
+    animate={true}
+    className="talixo-chart-series className talixo-chart-series--1"
     color={null}
     curve={null}
     data={
@@ -89,7 +91,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       ]
     }
     getNull={[Function]}
-    key="talixo-chart-series className talixo-chart-series--1"
+    key="Line 2-1"
     opacity={1}
     stack={false}
     strokeStyle="solid"

@@ -70,32 +70,3 @@ exports[`<Highlight> rendering should render properly 1`] = `
   </svg>
 </div>
 `;
-
-exports[`<Highlight> should render properly 1`] = `
-<g
-  className="highlight-container"
-  onMouseLeave={[Function]}
-  onMouseUp={[Function]}
-  onTouchCancel={[Function]}
-  onTouchEnd={[Function]}
-  transform="translate(undefined, undefined)"
->
-  <rect
-    className="mouse-target"
-    fill="black"
-    opacity="0"
-    x={0}
-    y={0}
-  />
-  <rect
-    className="highlight"
-    fill="rgb(77, 182, 172)"
-    height={0}
-    opacity={0.3}
-    pointerEvents="none"
-    width={0}
-    x={0}
-    y={0}
-  />
-</g>
-`;

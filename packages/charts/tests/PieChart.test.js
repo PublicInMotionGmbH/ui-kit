@@ -47,7 +47,6 @@ describe('<PieChart>', () => {
       wrapper = createWrapper(props)
     })
     it('should render only one arc', () => {
-      console.log(wrapper.find(ARC_SERIES))
       expect(wrapper.find(ARC_SERIES)).toHaveLength(1)
     })
   })
