@@ -1,9 +1,5 @@
 @import './config'
 
 @include module('fieldset')
-  border-color: $color-fieldset-border
-
-  &__info
-    border-color: $color-fieldset-border
-
-
+  &:not(:last-child):after
+    background-color: $color-fieldset-line

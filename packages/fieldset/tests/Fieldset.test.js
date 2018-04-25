@@ -9,4 +9,10 @@ describe('<Fieldset />', () => {
 
     expect(wrapper).toMatchSnapshot()
   })
+
+  it('passes prop legend correctly', () => {
+    const wrapper = shallow(<Fieldset legend='Personal info' />)
+
+    expect(wrapper.find('.talixo-fieldset__legend').text()).toBe('Personal info')
+  })
 })

@@ -5,30 +5,7 @@ import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'fieldset'
 
-/**
- * Component which represents Fieldset.
- *
- * @param {object} props
- * @param {string} [props.className]
- * @param {string} [props.legend]
- * @param {node} [props.info]
- * @returns {React.Element}
- */
-function Fieldset (props) {
-  const { className, children, legend, info, ...passedProps } = props
-
-  return (
-    <fieldset className={buildClassName(moduleName, className)} {...passedProps}>
-      <legend className={buildClassName([moduleName, 'legend'])}>
-        {legend}
-        {info ? <span className={buildClassName([moduleName, 'info'])}>{info}</span> : null}
-      </legend>
-      {children}
-    </fieldset>
-  )
-}
-
-Fieldset.propTypes = {
+const propTypes = {
   /** All nodes inside fieldset */
   children: PropTypes.node,
 
@@ -36,13 +13,30 @@ Fieldset.propTypes = {
   className: PropTypes.string,
 
   /** Legend for fieldset */
-  legend: PropTypes.string,
-
-  /** Additional info */
-  info: PropTypes.node
+  legend: PropTypes.string
 }
 
-Fieldset.defaultProps = {
+/**
+ * Component which represents Fieldset.
+ *
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {string} [props.legend]
+ * @returns {React.Element}
+ */
+function Fieldset (props) {
+  const { className, children, legend, ...passedProps } = props
+
+  return (
+    <div className={buildClassName(moduleName, className)} {...passedProps}>
+      <h3 className={buildClassName([moduleName, 'legend'])}>
+        {legend}
+      </h3>
+      {children}
+    </div>
+  )
 }
+
+Fieldset.propTypes = propTypes
 
 export default Fieldset

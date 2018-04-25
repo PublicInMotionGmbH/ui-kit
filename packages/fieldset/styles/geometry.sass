@@ -1,24 +1,11 @@
 @import './config'
 
 @include module('fieldset')
-  display: block
-  position: relative
-  padding: $fieldset-padding
-  border-radius: $fieldset-border-radius
-  border-style: solid
+  margin-bottom: $fieldset-margin
 
-  &__legend
-    font-size: 18px
-    padding: 10px
-
-  &__info
-    position: absolute
-    top: 0px
-    right: dp(1.3)
-    font-size: 17px
-    padding: dp(0.7)
-    background-color: $color-white
-    border-style: solid
-    border-width: dp(0.2)
-    border-radius: $fieldset-border-radius
-
+  &:not(:last-child):after
+    content: ''
+    display: inline-block
+    height: $fieldset-line-height
+    width: 100%
+    margin-top: $fieldset-margin

@@ -21,8 +21,10 @@ to avoid having different versions of these in your application.
 ## Supported props
 
 Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+--------------|-----------|:-------:|------------------------------------
+className     | string    | n/a     | Additional class name passed to wrapper.
+children      | node      | n/a     | Children node in fieldset like input or checkbox
+legend        | string    | n/a     | Legend of fieldset
 
 ## Changelog
 

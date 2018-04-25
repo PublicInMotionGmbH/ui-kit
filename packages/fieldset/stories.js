@@ -3,7 +3,6 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import { TextInput } from '@talixo/text-input'
 import { Checkbox } from '@talixo/checkbox'
-import { Icon } from '@talixo/icon'
 
 import Fieldset from './src/Fieldset'
 
@@ -32,12 +31,20 @@ addStory('default', readme, () => (
   </Fieldset>
 ))
 
-addStory('with additional info', readme, () => (
-  <Fieldset legend='Personal details' info={<span><Icon name='warning' /> These fields are required </span>}>
-    <TextInput placeholder='Your name' style={additionalStyling} />
-    <TextInput placeholder='Your surname' style={additionalStyling} />
-    <Checkbox>
+addStory('two fieldsets', readme, () => (
+  <div>
+    <Fieldset legend='Personal details'>
+      <TextInput placeholder='Your name' style={additionalStyling} />
+      <TextInput placeholder='Your surname' style={additionalStyling} />
+      <Checkbox>
       I'm a robot
-    </Checkbox>
-  </Fieldset>
+      </Checkbox>
+    </Fieldset>
+    <Fieldset legend='Payments details'>
+      <TextInput placeholder='Your bank name' style={additionalStyling} />
+      <Checkbox>
+      Card payment
+      </Checkbox>
+    </Fieldset>
+  </div>
 ))
