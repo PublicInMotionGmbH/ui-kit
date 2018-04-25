@@ -11,8 +11,19 @@ const addStory = createStoriesFactory('Form', module, {
   propTables: [ Form ]
 })
 
+// Test component
+
+function TestFooter (props) {
+  return (
+    <div>FOOTER</div>
+  )
+}
+
 // Stories
 
 addStory('initial', readme, () => (
-  <Form />
+  <Form footerComponent={<TestFooter />}>
+    <input type='text' />
+    <input type='button' />
+  </Form>
 ))

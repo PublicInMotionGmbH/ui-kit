@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> renders children correctly 1`] = `
+<form
+  className="talixo-form"
+>
+  <div
+    className="talixo-form__content"
+  />
+</form>
+`;

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+export const moduleName = 'form'
+
 /**
  * Component which represents Form.
  *
@@ -11,10 +13,28 @@ import { buildClassName } from '@talixo/shared'
  * @returns {React.Element}
  */
 function Form (props) {
-  const { className, ...passedProps } = props
+  const {
+    children,
+    className,
+    footerComponent,
+    ...passedProps
+  } = props
+  const formCls = buildClassName(moduleName, className)
+  const contentCls = buildClassName([moduleName, 'content'])
+  const footerCls = buildClassName([moduleName, 'footer'])
 
   return (
-    <span className={buildClassName('form', className)} {...passedProps} />
+    <form className={formCls} {...passedProps}>
+      <div className={contentCls}>
+        {children}
+      </div>
+      {
+        footerComponent &&
+        <div className={footerCls}>
+          {footerComponent}
+        </div>
+      }
+    </form>
   )
 }
 
