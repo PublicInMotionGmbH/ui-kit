@@ -5,11 +5,24 @@ import { buildClassName } from '@talixo/shared'
 
 export const moduleName = 'form'
 
+const propTypes = {
+  /** Children to be put inside form. */
+  children: PropTypes.node,
+
+  /** Additional class name. */
+  className: PropTypes.string,
+
+  /** Component to be displayed in footer. */
+  footerComponent: PropTypes.node
+}
+
 /**
  * Component which represents Form.
  *
- * @param {object} props
+ * @param {object} [props]
+ * @param {*} [props.children]
  * @param {string} [props.className]
+ * @param {*} [props.footerComponent]
  * @returns {React.Element}
  */
 function Form (props) {
@@ -38,12 +51,6 @@ function Form (props) {
   )
 }
 
-Form.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string
-}
-
-Form.defaultProps = {
-}
+Form.propTypes = propTypes
 
 export default Form

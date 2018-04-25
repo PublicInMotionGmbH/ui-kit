@@ -19,6 +19,12 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@talixo/button": "^1.0.0",
+    "@talixo/control-group": "^1.0.0",
+    "@talixo/icon": "^1.0.0",
+    "@talixo/text-input": "^1.0.0"
+  },
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

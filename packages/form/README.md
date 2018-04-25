@@ -20,9 +20,11 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name   | Type      | Default | Description                    
+----------------|-----------|:-------:|--------------------------------
+children        | node      | n/a     | Children to be put inside form.
+className       | string    | n/a     | Additional class name passed to wrapper.
+footerComponent | node      | n/a     | Component to be displayed in footer.
 
 ## Changelog
 
