@@ -1,32 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NumberInput /> renders children correctly 1`] = `
-<div
+exports[`<NumberInput /> renders correctly 1`] = `
+<TextInput
   className="talixo-number-input"
->
-  <input
-    type="number"
-    value={0}
-  />
-  <div
-    className="talixo-number-input__stepper"
-  >
-    <button
-      className="talixo-number-input__button"
-      onClick={[Function]}
-    >
-      <Icon
-        name="add"
-      />
-    </button>
-    <button
-      className="talixo-number-input__button"
-      onClick={[Function]}
-    >
-      <Icon
-        name="remove"
-      />
-    </button>
-  </div>
-</div>
+  error={false}
+  left={
+    <Icon
+      name="directions_car"
+    />
+  }
+  max={Infinity}
+  min={-Infinity}
+  onChange={[Function]}
+  right={
+    <NumberInputStepper
+      initialTime={700}
+      onDecrement={[Function]}
+      onIncrement={[Function]}
+      stepTime={20}
+    />
+  }
+  step={1}
+  suffix="cars"
+  type="number"
+  value={0}
+/>
 `;

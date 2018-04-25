@@ -1,7 +1,8 @@
 import React from 'react'
-import Menu from '../src/Menu'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
+
+import Menu from '../src/Menu'
 
 const name = prefix('combo-box')
 

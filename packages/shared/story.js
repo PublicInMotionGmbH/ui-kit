@@ -92,6 +92,7 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
  */
 export function getReadmeDescription (content) {
   return content
-    .replace(/^<p><h1[^>]*>.*<\/h1><\/p>/g, '')
+    .replace(/<p><h1([^>]*)>(.*)<\/h1><\/p>/g, '<h1$1>$2</h1>')
+    .replace(/^<h1[^>]*>.*<\/h1>/, '')
     .replace(/(<p>)?<h[1-6][> ][^]*$/i, '')
 }

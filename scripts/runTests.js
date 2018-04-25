@@ -49,9 +49,9 @@ const runnerArgs = [
 
 // Build options for runner
 const runnerOptions = {
-  env: {
+  env: Object.assign({
     TESTS_PATTERN: testsPattern
-  },
+  }, process.env),
   stdio: 'inherit'
 }
 

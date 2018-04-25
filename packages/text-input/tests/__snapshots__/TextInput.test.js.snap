@@ -1,16 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TextInput /> when rendered should render properly 1`] = `
+exports[`<TextInput /> should render properly 1`] = `
 <div
-  className="talixo-text-input__wrapper"
+  className="talixo-text-input talixo-text-input--empty"
 >
   <input
-    className="talixo-text-input test talixo-text-input--error"
+    className="talixo-text-input__input"
     onChange={[Function]}
+    style={null}
     type="text"
-  />
-  <label
-    className="talixo-text-input__label talixo-text-input__label--error"
   />
 </div>
 `;
