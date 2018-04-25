@@ -47,4 +47,26 @@ describe('<RadioGroup />', () => {
 
     expect(wrapper.find('RadioInput').at(1).find('span').text()).toEqual('two')
   })
+
+  describe('when passing props', () => {
+    const props = {
+      onChange: jest.fn(),
+      name: 'RadioGroupOne'
+    }
+    let wrapper, input
+
+    beforeAll(() => {
+      wrapper = mount(<RadioGroup options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} {...props} />)
+      input = wrapper.find('input[type="radio"]').at(0)
+      input.simulate('change', { target: { checked: true } })
+    })
+
+    it('should call onChange function', () => {
+      expect(props.onChange).toHaveBeenCalled()
+    })
+
+    it('should pass prop name to input', () => {
+      expect(input.props().name).toMatch(props.name)
+    })
+  })
 })
