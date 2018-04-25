@@ -8,17 +8,15 @@ const testArray = [
     className: 'className',
     color: null,
     title: 'Line 1',
-    id: 0,
     disabled: false,
-    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 5 }, { x: new Date('May 29 2017').getTime(), y: 2 }, { x: new Date('May 31 2017').getTime(), y: 2 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+    dataItems: [{ x: 1495490400000, y: 5 }, { x: 1496008800000, y: 2 }, { x: 1496181600000, y: 2 }, { x: 1497304800000, y: 2 }]
   },
   {
     className: 'className',
     color: null,
-    id: 1,
     title: 'Line 2',
     disabled: false,
-    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 3 }, { x: new Date('May 29 2017').getTime(), y: 8 }, { x: new Date('May 31 2017').getTime(), y: 1 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+    dataItems: [{ x: 1495490400000, y: 3 }, { x: 1496008800000, y: 8 }, { x: 1496181600000, y: 1 }, { x: 1497304800000, y: 2 }]
   }
 ]
 export const testPie = {

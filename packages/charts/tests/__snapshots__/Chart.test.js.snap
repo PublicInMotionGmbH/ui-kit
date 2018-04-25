@@ -74,15 +74,15 @@ exports[`<Chart> when rendered should render properly 1`] = `
       Array [
         Object {
           "x": 1495490400000,
-          "y": 3,
+          "y": 5,
         },
         Object {
           "x": 1496008800000,
-          "y": 8,
+          "y": 2,
         },
         Object {
           "x": 1496181600000,
-          "y": 1,
+          "y": 2,
         },
         Object {
           "x": 1497304800000,

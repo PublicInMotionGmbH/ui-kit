@@ -36,7 +36,6 @@ exports[`<WithFiltersHOC> when rendered should render properly 1`] = `
             },
           ],
           "disabled": false,
-          "id": 0,
           "title": "Line 1",
         },
         Object {
@@ -61,7 +60,6 @@ exports[`<WithFiltersHOC> when rendered should render properly 1`] = `
             },
           ],
           "disabled": false,
-          "id": 1,
           "title": "Line 2",
         },
       ]
@@ -103,7 +101,6 @@ exports[`<WithFiltersHOC> when rendered should render properly 1`] = `
               },
             ],
             "disabled": false,
-            "id": 0,
             "title": "Line 1",
           },
           Object {
@@ -128,7 +125,6 @@ exports[`<WithFiltersHOC> when rendered should render properly 1`] = `
               },
             ],
             "disabled": false,
-            "id": 1,
             "title": "Line 2",
           },
         ]
@@ -174,7 +170,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 0,
           "title": "Line 1",
         },
         Object {
@@ -199,7 +194,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 1,
           "title": "Line 2",
         },
       ]
@@ -241,7 +235,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 0,
             "title": "Line 1",
           },
           Object {
@@ -266,7 +259,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 1,
             "title": "Line 2",
           },
         ]
@@ -312,7 +304,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 0,
           "title": "Line 1",
         },
         Object {
@@ -337,7 +328,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 1,
           "title": "Line 2",
         },
       ]
@@ -379,7 +369,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 0,
             "title": "Line 1",
           },
           Object {
@@ -404,7 +393,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 1,
             "title": "Line 2",
           },
         ]
@@ -450,7 +438,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 0,
           "title": "Line 1",
         },
         Object {
@@ -475,7 +462,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
             },
           ],
           "disabled": false,
-          "id": 1,
           "title": "Line 2",
         },
       ]
@@ -517,7 +503,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 0,
             "title": "Line 1",
           },
           Object {
@@ -542,7 +527,6 @@ exports[`<WithFiltersHOC> when rendered should render properly with legend at th
               },
             ],
             "disabled": false,
-            "id": 1,
             "title": "Line 2",
           },
         ]
