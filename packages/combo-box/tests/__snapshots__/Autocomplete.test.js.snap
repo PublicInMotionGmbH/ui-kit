@@ -15,7 +15,7 @@ exports[`<Autocomplete /> opens dropdown menu when input value changes 1`] = `
     <input
       aria-activedescendant="downshift-0-item-0"
       aria-autocomplete="list"
-      aria-expanded={false}
+      aria-expanded={true}
       autoComplete="off"
       className="talixo-text-input__input"
       id="downshift-0-input"
