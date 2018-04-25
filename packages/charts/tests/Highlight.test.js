@@ -109,7 +109,7 @@ describe('<Highlight>', () => {
       wrapper = createWrapper(props)
       highlight = wrapper.find('Highlight')
       plot = wrapper.find('.rv-xy-plot__inner')
-      plot.simulate('mousedown', { nativeEvent: { pageX: 100, type: 'touchstart' } })
+      plot.simulate('mousedown', { nativeEvent: { pageX: 200, type: 'touchstart' } })
     })
 
     afterEach(() => {
@@ -120,21 +120,36 @@ describe('<Highlight>', () => {
       expect(highlight.instance().state.drawing).toBe(true)
     })
     it('should change drawArea in state', () => {
-      expect(highlight.instance().state.drawArea).toEqual({ top: 0, right: 60, bottom: 250, left: 60 })
+      expect(highlight.instance().state.drawArea).toEqual({ top: 0, right: 160, bottom: 250, left: 160 })
     })
     it('should call onBrushStart', () => {
       expect(props.onBrushStart).toHaveBeenCalledTimes(1)
     })
 
-    describe('when mouse move', () => {
+    describe('when mouse move left', () => {
       beforeEach(() => {
-        plot.simulate('mousemove', { nativeEvent: { pageX: 200, type: 'touchmove' } })
+        plot.simulate('mousemove', { nativeEvent: { pageX: 100, type: 'touchmove' } })
       })
       it('should not change drawing state', () => {
         expect(highlight.instance().state.drawing).toBe(true)
       })
       it('should change drawArea in state', () => {
         expect(highlight.instance().state.drawArea).toEqual({ top: 0, right: 160, bottom: 250, left: 60 })
+      })
+      it('should call onBrush', () => {
+        expect(props.onBrush).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    describe('when mouse move right', () => {
+      beforeEach(() => {
+        plot.simulate('mousemove', { nativeEvent: { pageX: 300, type: 'touchmove' } })
+      })
+      it('should not change drawing state', () => {
+        expect(highlight.instance().state.drawing).toBe(true)
+      })
+      it('should change drawArea in state', () => {
+        expect(highlight.instance().state.drawArea).toEqual({ top: 0, right: 250, bottom: 250, left: 160 })
       })
       it('should call onBrush', () => {
         expect(props.onBrush).toHaveBeenCalledTimes(1)

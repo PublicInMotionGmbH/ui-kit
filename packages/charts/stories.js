@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
 
 import Legend from './src/Legend'
 import Chart, { ChartWithFilters } from './src/Chart'
@@ -10,6 +11,8 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Charts', module)
+
+const click = action('click')
 
 const wrapperStyle = {
   width: '100%',
@@ -356,25 +359,36 @@ addStory('Pie Chart with filters', readme, () => (
 
 addStory('Legend', readme, () => (
   <div style={wrapperLegend}>
+    <h2>Default legend</h2>
     <Legend
       dataItems={pieData.dataItems}
-      onClick={(item, e) => console.log('console.log: ', item, e)}
-      style={{ height: '200px', position: 'static' }}
     />
-    <Legend
-      dataItems={pieData.dataItems}
-      style={{ position: 'static' }}
-    />
-    <Legend
-      dataItems={pieData.dataItems}
-      onClick={(item, e) => console.log('console.log: ', item, e)}
-      direction='horizontal'
-      style={{ position: 'static' }}
-    />
+    <h2>Horizontal legend</h2>
     <Legend
       dataItems={pieData.dataItems}
       direction='horizontal'
-      style={{ position: 'static' }}
+    />
+    <h2>Scrollable legend</h2>
+    <Legend
+      dataItems={pieData.dataItems}
+      style={{ height: '200px' }}
+    />
+    <h2>Legend with onClick handler</h2>
+    <Legend
+      dataItems={pieData.dataItems}
+      onClick={click}
+    />
+    <h2>Horizontal legend with onClick handler</h2>
+    <Legend
+      dataItems={pieData.dataItems}
+      onClick={click}
+      direction='horizontal'
+    />
+    <h2>Legend with onClick handler</h2>
+    <Legend
+      dataItems={pieData.dataItems}
+      onClick={click}
+      direction='horizontal'
     />
   </div>
 ))

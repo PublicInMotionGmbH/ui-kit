@@ -27,18 +27,20 @@ class Highlight extends AbstractSeries {
     const { drawArea, startLoc } = this.state
 
     if (loc < startLoc) {
-      return {
+      const area = {
         ...drawArea,
         left: Math.max(loc, 0),
         right: startLoc
       }
+      return area
     }
 
-    return {
+    const area = {
       ...drawArea,
       right: Math.min(loc, innerWidth),
       left: startLoc
     }
+    return area
   }
 
   onParentMouseDown (e) {
