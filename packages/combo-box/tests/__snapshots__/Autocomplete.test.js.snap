@@ -65,7 +65,6 @@ exports[`<Autocomplete /> opens dropdown menu when input value changes 1`] = `
   </div>
 </div>
 `;
-
 exports[`<Autocomplete /> renders correctly 1`] = `
 <div
   className="talixo-combo-box__wrapper"
