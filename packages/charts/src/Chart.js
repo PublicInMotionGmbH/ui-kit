@@ -24,53 +24,55 @@ const Components = {
 }
 
 const propTypes = {
-  /** Additional class name */
+  /** Additional class name. */
   className: PropTypes.string,
 
-  /** Line chart data  */
+  /** Line chart data.  */
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      /** Additional data eries className */
+      /** Additional data series className. */
       className: PropTypes.string,
 
-      /** Color of the data series */
+      /** Color of the data series. */
       color: PropTypes.string,
 
-      /** Data inforamtion to be displayed in chart */
+      /** Data inforamtion to be displayed in chart. */
       dataitems: PropTypes.shape({
+
+        /** X axis data. */
         x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+
+        /** Y axis data. */
         y: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
       }),
 
-      /** Indicates if data will be shown in the chart */
+      /** Indicates if data will be shown in the chart. */
       disabled: PropTypes.bool,
 
-      /** Title of data series */
-      title: PropTypes.string
+      /** Label of data series. */
+      label: PropTypes.string
     })
   ),
-
-  /** Line chart data  */
-  xAxisTitle: PropTypes.string,
-
-  /** Line chart data  */
-  yAxisTitle: PropTypes.string,
 
   /** Idicates if x axis should be displayed as date */
   timeSeries: PropTypes.bool,
 
-  /** Type of chart (line or bar) */
+  /** Type of chart (line or bar). */
   type: PropTypes.oneOf(['line', 'bar']),
 
-  /** indicates if chart is zoomable, can be applied to chart  */
+  /** X axis title. */
+  xAxisTitle: PropTypes.string,
+
+  /** Y axis title. */
+  yAxisTitle: PropTypes.string,
+
+  /** Indicates if chart is zoomable, can be applied to chart. */
   zoomable: PropTypes.bool
 }
 
 const defaultProps = {
   data: [{ dataitems: [] }],
   lineColors: [],
-  xAxisTitle: '',
-  yAxisTitle: '',
   timeSeries: false,
   type: 'line',
   zoomable: false
@@ -94,7 +96,7 @@ const defaultProps = {
  * @property {string|number} props.data.dataitems.x
  * @property {string|number} props.data.dataitems.y
  * @property {bool} [props.data.disabled]
- * @property {string} [props.data.title]
+ * @property {string} [props.data.label]
  *
  * @property {object} [state]
  * @property {number} [state.bottom]
@@ -109,6 +111,11 @@ class Chart extends React.Component {
     lastDrawLocation: null
   }
 
+  /**
+   * Return a string for xType property of FlexibleXYPlot
+   *
+   * @returns {string}
+   */
   getChartType = () => {
     const { timeSeries, type } = this.props
     return timeSeries
@@ -118,6 +125,13 @@ class Chart extends React.Component {
         : 'linear'
   }
 
+  /**
+   * Returns props for data series
+   *
+   * @param item
+   * @param index
+   * @returns {{data: *, color: *, className: string, key: string}}
+   */
   getSeriesProps = (item, index) => ({
     data: item.dataItems,
     color: item.color,
@@ -126,6 +140,15 @@ class Chart extends React.Component {
     ...this.props.dataSeriesProps
   })
 
+  /**
+   * Updates state when area is zoomed
+   *
+   * @param {object} area
+   * @param {number} area.top
+   * @param {number} area.right
+   * @param {number} area.bottom
+   * @param {number} area.left
+   */
   onBrushEnd = (area) => {
     this.setState({ lastDrawLocation: area })
   }
@@ -160,8 +183,6 @@ class Chart extends React.Component {
       >
         <HorizontalGridLines />
         <VerticalGridLines />
-        <XAxis title={xAxisTitle} />
-        <YAxis title={yAxisTitle} />
         {
           data
             .map((item, index) => {
@@ -191,6 +212,8 @@ class Chart extends React.Component {
 Chart.propTypes = propTypes
 
 Chart.defaultProps = defaultProps
+
+Chart.displayName = 'Chart'
 
 export default Chart
 export const ChartWithFilters = WithFilters(Chart)

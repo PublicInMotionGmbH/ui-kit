@@ -67,7 +67,7 @@ function LegendItem (props) {
   return (
     <div onClick={onClick} className={itemCls}>
       <div
-        style={color && {backgroundColor: color}}
+        style={(color && {backgroundColor: color}) || {}}
         className={colorboxCls}
       />
       <div className={labelCls}>{ label }</div>

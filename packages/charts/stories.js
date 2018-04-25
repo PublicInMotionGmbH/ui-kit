@@ -28,19 +28,18 @@ const wrapperLegend = {
 }
 
 const pieData = {
-  className: 'className',
   title: 'Pie Data',
   dataItems: [
-    { label: 'Cats', value: 35, color: ' ', className: '', disabled: false },
-    { label: 'Dogs', value: 40, color: ' ', className: '', disabled: false },
-    { label: 'Birds', value: 55, color: ' ', className: '', disabled: false },
-    { label: 'Cats1', value: 35, color: ' ', className: '', disabled: false },
-    { label: 'Dogs1', value: 40, color: ' ', className: '', disabled: false },
-    { label: 'Birds1', value: 55, color: ' ', className: '', disabled: false },
-    { label: 'Cats2', value: 35, color: ' ', className: '', disabled: false },
-    { label: 'Dogs2', value: 40, color: ' ', className: '', disabled: false },
-    { label: 'Birds2', value: 55, color: ' ', className: '', disabled: false },
-    { label: 'Lions2', value: 35, color: ' ', className: '', disabled: false }
+    { label: 'Cats', value: 35, color: '', className: '', disabled: false },
+    { label: 'Dogs', value: 40, color: '', className: '', disabled: false },
+    { label: 'Birds', value: 55, color: '', className: '', disabled: false },
+    { label: 'Cats1', value: 35, color: '', className: '', disabled: false },
+    { label: 'Dogs1', value: 40, color: '', className: '', disabled: false },
+    { label: 'Birds1', value: 55, color: '', className: '', disabled: false },
+    { label: 'Cats2', value: 35, color: '', className: '', disabled: false },
+    { label: 'Dogs2', value: 40, color: '', className: '', disabled: false },
+    { label: 'Birds2', value: 55, color: '', className: '', disabled: false },
+    { label: 'Lions2', value: 35, color: '', className: '', disabled: false }
   ]
 }
 

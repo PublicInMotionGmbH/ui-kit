@@ -18,12 +18,10 @@ const moduleName = 'filtered-chart'
  */
 function WithFiltersHOC (ChartComponent, pathToDataItems = []) {
   const propTypes = {
-    /** Position of the legend relative to chart */
+    /** Position of the legend relative to chart. */
     legendPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
-    /** Additional props to be passed to legend
-     * Acceptts any property which is allowed for Legend Component
-     */
+    /** Additional props to be passed to legend. Accepts any property which is allowed for Legend Component. */
     legendProps: PropTypes.object
   }
 
@@ -115,6 +113,8 @@ function WithFiltersHOC (ChartComponent, pathToDataItems = []) {
   WithFliters.propTypes = propTypes
 
   WithFliters.defaultProps = defaultProps
+
+  WithFliters.displayName = `${ChartComponent.displayName}WithFilters`
 
   return WithFliters
 }
