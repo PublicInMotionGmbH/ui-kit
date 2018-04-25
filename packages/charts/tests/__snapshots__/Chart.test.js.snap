@@ -17,18 +17,6 @@ exports[`<Chart> when rendered should render properly 1`] = `
     attr="x"
     direction="vertical"
   />
-  <XAxis
-    attr="x"
-    attrAxis="y"
-    orientation="bottom"
-    title=""
-  />
-  <YAxis
-    attr="y"
-    attrAxis="x"
-    orientation="left"
-    title=""
-  />
   <LineSeries
     animate={true}
     className="talixo-chart-series className talixo-chart-series--0"
@@ -105,13 +93,11 @@ exports[`<Chart> when rendered should render properly 1`] = `
     attr="x"
     attrAxis="y"
     orientation="bottom"
-    title=""
   />
   <YAxis
     attr="y"
     attrAxis="x"
     orientation="left"
-    title=""
   />
 </FlexibleXYPlot>
 `;
