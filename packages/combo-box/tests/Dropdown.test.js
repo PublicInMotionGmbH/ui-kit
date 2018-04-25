@@ -1,7 +1,8 @@
 import React from 'react'
-import Dropdown from '../src/Dropdown'
 import { mount } from 'enzyme'
 import { prefix } from '@talixo/shared'
+
+import Dropdown from '../src/Dropdown'
 
 const name = prefix('combo-box')
 
