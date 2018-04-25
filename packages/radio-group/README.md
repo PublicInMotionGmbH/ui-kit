@@ -27,7 +27,6 @@ name          | string    | n/a     | name of radio group
 options       | array     | n/a     | array of objects which represent options
 size          | string    | n/a     | checkbox label size ('small' or 'large')
 value         | number or string | n/a   | value of default option
-disabled      | array     | `[]`    | array of disabled options
 
 ## Changelog
 

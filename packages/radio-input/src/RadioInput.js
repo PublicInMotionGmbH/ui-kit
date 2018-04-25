@@ -14,13 +14,13 @@ import { buildClassName } from '@talixo/shared'
  * @returns {React.Element}
  */
 function RadioInput (props) {
-  const { children, className, size, style, ...passedProps } = props
+  const { children, className, size, style, onChange, ...passedProps } = props
 
   const wrapperClass = buildClassName('radio-input', className, [ size ])
 
   return (
     <label className={wrapperClass} style={style}>
-      <input type='radio' {...passedProps} />
+      <input type='radio' onChange={e => onChange && onChange(e.target.checked)} {...passedProps} />
       <span>{children}</span>
     </label>
   )

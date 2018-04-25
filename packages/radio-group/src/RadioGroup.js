@@ -14,15 +14,22 @@ import { buildClassName } from '@talixo/shared'
  * @param {array} [props.options]
  * @param {string} [props.size]
  * @param {string|number} [props.value]
- * @param {array} [props.disabled]
  * @returns {React.Element}
  */
 function RadioGroup (props) {
-  const { className, children, name, options, value, size, disabled, ...passedProps } = props
+  const { className, children, name, options, value, size, onChange, ...passedProps } = props
   return (
     <div className={buildClassName('radio-group', className)} {...passedProps} >
       {options.map((obj) =>
-        <RadioInput key={obj.value} name={name} value={obj.value} size={size} defaultChecked={value === obj.value} disabled={disabled.includes(obj.value)} {...passedProps} >
+        <RadioInput
+          checked={value === obj.value}
+          disabled={obj.disabled}
+          key={obj.label}
+          name={name}
+          onChange={checked => checked && onChange && onChange(obj.value)}
+          size={size}
+          value={obj.value}
+          {...passedProps}>
           {obj.label}
         </RadioInput>
       )}
@@ -47,14 +54,7 @@ RadioGroup.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]),
-
-  /** Array of disabled options */
-  disabled: PropTypes.array
-}
-
-RadioGroup.defaultProps = {
-  disabled: []
+  ])
 }
 
 export default RadioGroup
