@@ -23,7 +23,7 @@ function RadioGroup (props) {
       {options.map((obj) =>
         <RadioInput
           checked={value === obj.value}
-          disabled={obj.disabled}
+          disabled={obj.disabled || false}
           key={obj.label}
           name={name}
           onChange={checked => checked && onChange && onChange(obj.value)}

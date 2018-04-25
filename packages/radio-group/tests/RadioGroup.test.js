@@ -27,19 +27,19 @@ describe('<RadioGroup />', () => {
 
     let RadioInput = wrapper.find('RadioInput')
 
-    expect(RadioInput.at(0).prop('defaultChecked')).toBe(false)
-    expect(RadioInput.at(1).prop('defaultChecked')).toBe(true)
-    expect(RadioInput.at(2).prop('defaultChecked')).toBe(false)
+    expect(RadioInput.at(0).prop('checked')).toBe(false)
+    expect(RadioInput.at(1).prop('checked')).toBe(true)
+    expect(RadioInput.at(2).prop('checked')).toBe(false)
   })
 
   it('should set as disabled appropriate options', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup4' options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} disabled={[1, 3]} />)
+    const wrapper = mount(<RadioGroup name='RadioGroup4' options={[{value: 1, label: 'one', disabled: true}, {value: 2, label: 'two', disabled: true}, {value: 3, label: 'three'}]} />)
 
     let RadioInput = wrapper.find('RadioInput')
 
     expect(RadioInput.at(0).prop('disabled')).toBe(true)
-    expect(RadioInput.at(1).prop('disabled')).toBe(false)
-    expect(RadioInput.at(2).prop('disabled')).toBe(true)
+    expect(RadioInput.at(1).prop('disabled')).toBe(true)
+    expect(RadioInput.at(2).prop('disabled')).toBe(false)
   })
 
   it('should render label correctly', () => {

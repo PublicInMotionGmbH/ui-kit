@@ -5,76 +5,7 @@ exports[`<Autocomplete /> opens dropdown menu when input value changes 1`] = `
   className="talixo-combo-box__wrapper"
 >
   <div
-    className="talixo-text-input__wrapper"
-    style={
-      Object {
-        "width": "100%",
-      }
-    }
-  >
-    <input
-      aria-activedescendant="downshift-1-item-0"
-      aria-autocomplete="list"
-      aria-expanded={true}
-      autoComplete="off"
-      className="talixo-text-input talixo-combo-box__input talixo-combo-box--open"
-      id="downshift-1-input"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onKeyDown={[Function]}
-      role="combobox"
-      type="text"
-      value=""
-    />
-    <label
-      className="talixo-text-input__label"
-    >
-      Choose number
-    </label>
-  </div>
-  <div
-    className="talixo-combo-box__options"
-  >
-    <div
-      className="talixo-combo-box__item talixo-combo-box__item--highlighted"
-      id="downshift-1-item-0"
-      key="1"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      1
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-1-item-1"
-      key="3"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      3
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-1-item-2"
-      key="5"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      5
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<Autocomplete /> renders correctly 1`] = `
-<div
-  className="talixo-combo-box__wrapper"
->
-  <div
-    className="talixo-text-input__wrapper"
+    className="talixo-text-input talixo-combo-box__input  talixo-text-input--empty"
     style={
       Object {
         "width": "100%",
@@ -86,17 +17,47 @@ exports[`<Autocomplete /> renders correctly 1`] = `
       aria-autocomplete="list"
       aria-expanded={false}
       autoComplete="off"
-      className="talixo-text-input talixo-combo-box__input "
+      className="talixo-text-input__input"
+      id="downshift-1-input"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Choose number"
+      role="combobox"
+      style={null}
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`<Autocomplete /> renders correctly 1`] = `
+<div
+  className="talixo-combo-box__wrapper"
+>
+  <div
+    className="talixo-text-input talixo-combo-box__input  talixo-text-input--empty"
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  >
+    <input
+      aria-activedescendant={null}
+      aria-autocomplete="list"
+      aria-expanded={false}
+      autoComplete="off"
+      className="talixo-text-input__input"
       id="downshift-0-input"
       onBlur={[Function]}
       onChange={[Function]}
       onKeyDown={[Function]}
       role="combobox"
+      style={null}
       type="text"
       value=""
-    />
-    <label
-      className="talixo-text-input__label"
     />
   </div>
 </div>

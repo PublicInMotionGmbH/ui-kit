@@ -5,28 +5,31 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
   className="talixo-radio-group"
 >
   <RadioInput
-    defaultChecked={false}
+    checked={false}
     disabled={false}
-    key="1"
+    key="one"
     name="RadioGroup"
+    onChange={[Function]}
     value={1}
   >
     one
   </RadioInput>
   <RadioInput
-    defaultChecked={false}
+    checked={false}
     disabled={false}
-    key="2"
+    key="two"
     name="RadioGroup"
+    onChange={[Function]}
     value={2}
   >
     two
   </RadioInput>
   <RadioInput
-    defaultChecked={false}
+    checked={false}
     disabled={false}
-    key="3"
+    key="three"
     name="RadioGroup"
+    onChange={[Function]}
     value={3}
   >
     three
