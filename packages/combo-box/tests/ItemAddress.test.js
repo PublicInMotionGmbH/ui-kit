@@ -1,6 +1,7 @@
 import React from 'react'
-import ItemAddress from '../src/ItemAddress'
 import { shallow } from 'enzyme'
+
+import ItemAddress from '../src/ItemAddress'
 
 describe('<ItemAddress />', () => {
   it('renders correctly', () => {
