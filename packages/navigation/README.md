@@ -70,19 +70,18 @@ previousLabel  | node   |          | `'Previous'` | Previous button label
 
 ### ControlledTabs
 
-Property name  | Type   | Required | Default  | Description
----------------|--------|----------|:--------:|--------------------------------
-activeTab      | number |          | `0`      | Active tab
-labels         | Labels |          | `[]`     | List of tab labels
-onChange       | func   |          | n/a      | Function passed to page buttons
+Property name  | Type    | Required | Default  | Description
+---------------|---------|----------|:--------:|--------------------------------
+activeTab      | number  |          | `0`      | Active tab
+labels         | Label[] |          | `[]`     | List of tab labels
+onChange       | func    |          | n/a      | Function passed to page buttons
 
 ### Steps
 
 Property name  | Type   | Required | Default  | Description
 ---------------|--------|----------|:--------:|--------------------------------
-completed      | array  |          | n/a      | List of completed steps
-current        | number |          | `0`      | Active step
-steps          | array  |          | `[]`     | List of steps
+current        | object |          | n/a      | Active step
+steps          | Step[] |          | `[]`     | List of steps
 onChange       | func   |          | n/a      | Function passed to step buttons
 
 #### Types
@@ -93,12 +92,19 @@ NavigationType | 'navigation', 'pagination', 'breadcrumbs', 'tabs'
 
 ### Property shapes
 
-#### Labels
+#### Label
 
 Property name | Type      | Required | Default       | Description
 --------------|-----------|----------|:-------------:|------------------------------------------------
-id            | number    | yes      | n/a           | geo-point latitude
-name          | string    | yes      | n/a           | geo-point longitude
+id            | number    | yes      | n/a           | Label's id
+name          | string    | yes      | n/a           | Label's name
+
+#### Step
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+name          | string    | yes      | n/a           | Step's name
+disabled      | boolean   | yes      | n/a           | Disabled state
 
 ## Changelog
 

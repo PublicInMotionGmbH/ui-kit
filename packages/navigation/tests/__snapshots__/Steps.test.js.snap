@@ -12,14 +12,14 @@ Array [
   <Step
     active={false}
     completed={false}
-    disabled={true}
+    disabled={false}
     key="1"
     onClick={[Function]}
   />,
   <Step
     active={false}
     completed={false}
-    disabled={true}
+    disabled={false}
     key="2"
     onClick={[Function]}
   />,

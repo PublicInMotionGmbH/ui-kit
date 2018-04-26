@@ -112,14 +112,18 @@ addStory('step', readme, () => (
 addStory.controlled('steps', readme, (setState, state) => (
   <Navigation type='steps'>
     <Steps
-      completed={['Cart']}
       current={state.current}
-      steps={['Cart', 'Shipping', 'Billing', 'Confirm']}
-      onChange={i => setState({ current: i })}
+      steps={[
+        { name: 'Cart', disabled: false },
+        { name: 'Shipping', disabled: true },
+        { name: 'Billing', disabled: false },
+        { name: 'Confirm', disabled: false }
+      ]}
+      onChange={current => setState({ current })}
     />
   </Navigation>
 ), () => {
   return {
-    current: 3
+    current: undefined
   }
 })

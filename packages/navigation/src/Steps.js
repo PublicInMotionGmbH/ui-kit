@@ -5,21 +5,17 @@ import _ from 'lodash'
 import Step from './Step'
 
 const propTypes = {
-  /** List of completed steps */
-  completed: PropTypes.arrayOf(PropTypes.string),
-
   /** Active step */
-  current: PropTypes.number,
+  current: PropTypes.object,
 
   /** List of steps */
-  steps: PropTypes.arrayOf(PropTypes.string),
+  steps: PropTypes.arrayOf(PropTypes.object),
 
   /** Function passed to step buttons */
   onChange: PropTypes.func
 }
 
 const defaultProps = {
-  current: 1,
   steps: []
 }
 
@@ -27,25 +23,32 @@ const defaultProps = {
  * Component which represents Steps.
  *
  * @param {object} props
- * @param {object[]} [props.completed]
- * @param {number} [props.current]
+ * @param {object} [props.current]
  * @param {object[]} [props.steps]
  * @param {function} [props.onChange]
  * @returns {React.Step}
  */
 function Steps (props) {
-  const { completed, current, steps, onChange, ...passedProps } = props
+  const { current, steps, onChange, ...passedProps } = props
+
+  // Find first occuring index of current step.
+  const firstIndex = _.findIndex(steps, current)
+
+  // If index was found set it as current, if not - set it to 0.
+  const currentIndex = firstIndex === -1
+    ? 0
+    : firstIndex
 
   return steps.map((step, i) => (
     <Step
       key={i}
-      onClick={() => { onChange(i + 1) }}
-      active={current === i + 1}
-      completed={_.includes(completed, step)}
-      disabled={current < i + 1}
+      onClick={() => { onChange(steps[i]) }}
+      active={currentIndex === i && !step.disabled}
+      completed={currentIndex > i && !step.disabled}
+      disabled={step.disabled}
       {...passedProps}
     >
-      {step}
+      {step.name}
     </Step>
   ))
 }
