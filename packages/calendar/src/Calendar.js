@@ -37,7 +37,7 @@ class Calendar extends React.PureComponent {
   }
 
   render () {
-    const { className, displayFormat, placeholder, ...passedProps } = this.props
+    const { className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, placeholder, weekDayFormat, ...passedProps } = this.props
     const { date, focused } = this.state
 
     const clsName = buildClassName(moduleName, className)
@@ -46,11 +46,15 @@ class Calendar extends React.PureComponent {
       <div className={clsName} {...passedProps} >
         <SingleDatePicker
           date={date}
+          dayAriaLabelFormat={dayAriaLabelFormat}
+          displayFormat={displayFormat}
           focused={focused}
+          monthFormat={monthFormat}
           onDateChange={this.onDateChange}
           onFocusChange={this.onFocusChange}
-          displayFormat={displayFormat}
+          phrases={phrases}
           placeholder={placeholder || null}
+          weekDayFormat={weekDayFormat}
         />
       </div>
     )
@@ -64,8 +68,20 @@ Calendar.propTypes = {
   /* Dispaly date format */
   displayFormat: PropTypes.string,
 
+  /** Day aria label format */
+  dayAriaLabelFormat: PropTypes.string,
+
+  /** Month format */
+  monthFormat: PropTypes.string,
+
+  /** Phrases */
+  phrases: PropTypes.object,
+
   /** Placeholder text */
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+
+  /** Week day format */
+  weekDayFormat: PropTypes.string
 }
 
 Calendar.defaultProps = {
