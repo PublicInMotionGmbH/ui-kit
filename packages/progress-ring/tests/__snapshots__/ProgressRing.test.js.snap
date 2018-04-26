@@ -18,7 +18,11 @@ exports[`<ProgressRing /> renders correctly 1`] = `
         }
       }
       viewBox="-1 -1 2 2"
-    />
+    >
+      <path
+        d="M 1 0 A 1 1 0 0 1 -0.30901699437494734 0.9510565162951536 L 0 0"
+      />
+    </svg>
   </span>
   <span
     className="talixo-progress-ring__content"
