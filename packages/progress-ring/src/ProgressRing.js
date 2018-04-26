@@ -43,7 +43,7 @@ function ProgressRing (props) {
         aria-valuenow={valueNow}
       >
         <svg viewBox='-1 -1 2 2' style={{ width: '100%' }}>
-          {isNaN(_value) ? null : <path d={path} />}
+          <path d={path} />
         </svg>
       </span>
       <span className={buildClassName([ 'progress-ring', 'content' ])}>
