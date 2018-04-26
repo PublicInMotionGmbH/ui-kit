@@ -58,10 +58,10 @@ addStory.controlled('input change', readme, (setState, state) => (
   <div>
     <InlineInput
       placeholder='Edit me'
-      onInputChange={(value) => { setState({ value }) }}
+      onChange={(value) => { console.log(value) }}
     />
     <span style={{ display: 'inline-block', padding: '16px', fontWeight: 700 }}>
-      You typed: {state.value}
+      {/* You typed: {state.value} */}
     </span>
   </div>
 ), () => {

@@ -23,7 +23,7 @@ const propTypes = {
   icon: PropTypes.node,
 
   /** Callback for change event. */
-  onInputChange: PropTypes.func,
+  onChange: PropTypes.func,
 
   /** Input placeholder. */
   placeholder: PropTypes.string.isRequired,
@@ -53,7 +53,7 @@ const defaultSelection = {
  * @property {boolean} [props.error]
  * @property {string} [props.emptyValue]
  * @property {node} [props.icon]
- * @property {function} [props.onInputChange]
+ * @property {function} [props.onChange]
  * @property {string} [props.placeholder]
  * @property {string} [props.value]
  *
@@ -81,9 +81,8 @@ class InlineInput extends React.Component {
     }
   }
 
-  focusInput = (obj) => {
-    const { selection, selected } = this.state
-    const { start, end } = selection
+  focusInput (obj) {
+    const { selected, selection: { start, end } } = this.state
 
     if (selected) {
       if (start <= end) {
@@ -100,13 +99,13 @@ class InlineInput extends React.Component {
   }
 
   handleInputChange = (inputValue) => {
-    const { onInputChange } = this.props
+    const { onChange } = this.props
 
     this.setState({ inputValue })
 
     // Trigger input change to parent components
-    if (onInputChange) {
-      onInputChange(inputValue)
+    if (onChange) {
+      onChange(inputValue)
     }
   }
 
@@ -139,14 +138,12 @@ class InlineInput extends React.Component {
   }
 
   render () {
-    const { className, disabled, emptyValue, error, icon, placeholder, value, ...passedProps } = this.props
+    const { className, disabled, emptyValue, error, icon, onChange, placeholder, value, ...passedProps } = this.props
     const { editing, inputValue } = this.state
+    const { setRef, handleBlur, handleInputChange, handleKeyPress, handleSpanClick } = this
 
-    const spanValue = inputValue === ''
-      ? emptyValue !== undefined
-        ? emptyValue
-        : placeholder
-      : inputValue
+    const spanPlaceholder = emptyValue == null ? placeholder : emptyValue
+    const spanValue = inputValue === '' ? spanPlaceholder : inputValue
 
     const wrapperClsName = buildClassName(moduleName, className, { disabled })
     const inputClsName = buildClassName([moduleName, 'input'])
@@ -158,18 +155,18 @@ class InlineInput extends React.Component {
           ? <TextInput
             className={inputClsName}
             error={error}
-            inputRef={node => this.setRef(node)}
+            inputRef={setRef}
             placeholder={placeholder || inputValue}
             value={inputValue}
-            onChange={(value) => this.handleInputChange(value)}
-            onKeyPress={(e) => this.handleKeyPress(e)}
-            onBlur={this.handleBlur}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            onBlur={handleBlur}
             right={icon}
             type='text'
           />
           : <span
             className={spanClsName}
-            onClick={(e) => this.handleSpanClick(e)}
+            onClick={handleSpanClick}
           >
             {spanValue}
           </span>

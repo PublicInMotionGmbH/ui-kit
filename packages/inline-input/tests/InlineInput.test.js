@@ -175,12 +175,12 @@ describe('span value', () => {
 
 describe('handleInputChange', () => {
   it('should be called when typing inside input', () => {
-    const onInputChange = jest.fn()
-    const wrapper = createWrapper({ placeholder: '', onInputChange })
+    const onChange = jest.fn()
+    const wrapper = createWrapper({ placeholder: '', onChange })
     const span = wrapper.find('span')
     span.simulate('click')
     const input = wrapper.find('TextInput')
     input.simulate('change', 'name')
-    expect(onInputChange).toHaveBeenCalled()
+    expect(onChange).toHaveBeenCalled()
   })
 })

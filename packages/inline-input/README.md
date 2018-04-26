@@ -26,7 +26,7 @@ Property name   | Required | Type      | Default | Description
 ----------------|----------|-----------|:-------:|--------------------------------
 className       | no       | string    | n/a     | Additional class name passed to wrapper.
 disabled        | no       | boolean   | `false` | Prevents editing the content.
-emptyValue | no       | string    | n/a     | Rendered value for empty input value.
+emptyValue      | no       | string    | n/a     | Rendered value for empty input value.
 error           | no       | boolean   | `false` | Indicates that input has error.
 icon            | no       | node      | n/a     | Right side input icon or controls.
 onInputChange   | no       | function  | n/a     | Callback for change event.
