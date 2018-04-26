@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormField /> renders children correctly 1`] = `
+<div
+  className="talixo-form-field"
+>
+  <div
+    className="talixo-form-field__input-wrapper"
+  >
+    <TextInput
+      className="talixo-form-field__input"
+      error={false}
+      id="form_field_1"
+      key=".0"
+      type="text"
+    />
+  </div>
+</div>
+`;
