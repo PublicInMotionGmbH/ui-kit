@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NumberInputStepper /> renders correctly 1`] = `
+<div
+  className="talixo-number-input-stepper"
+>
+  <button
+    className="talixo-number-input-stepper__button"
+    onMouseDown={[Function]}
+    type="button"
+  >
+    <Icon
+      name="add"
+    />
+  </button>
+  <button
+    className="talixo-number-input-stepper__button"
+    onMouseDown={[Function]}
+    type="button"
+  >
+    <Icon
+      name="remove"
+    />
+  </button>
+</div>
+`;
