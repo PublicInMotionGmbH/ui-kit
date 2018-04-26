@@ -40,6 +40,20 @@ Property name | Type           | Default        | Description
 active        | bool           | `false`        | Active state
 children      | node           | n/a            | Element items
 className     | string         | n/a            | Additional class name passed to element
+completed     | bool           | `false`        | Completed state
+disabled      | bool           | `false`        | Disabled state
+onClick       | func           | n/a            | Function passed to element
+
+### Step
+
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
+Property name | Type           | Default        | Description
+--------------|----------------|:--------------:|--------------------------------
+active        | bool           | `false`        | Active state
+children      | node           | n/a            | Tooltips content
+className     | string         | n/a            | Additional class name passed to element
+completed     | bool           | `false`        | Completed state
 disabled      | bool           | `false`        | Disabled state
 onClick       | func           | n/a            | Function passed to element
 
@@ -59,14 +73,32 @@ previousLabel  | node   |          | `'Previous'` | Previous button label
 Property name  | Type   | Required | Default  | Description
 ---------------|--------|----------|:--------:|--------------------------------
 activeTab      | number |          | `0`      | Active tab
-labels         | array  |          | `[{}]`   | List of tab labels
+labels         | Labels |          | `[]`     | List of tab labels
 onChange       | func   |          | n/a      | Function passed to page buttons
+
+### Steps
+
+Property name  | Type   | Required | Default  | Description
+---------------|--------|----------|:--------:|--------------------------------
+completed      | array  |          | n/a      | List of completed steps
+current        | number |          | `0`      | Active step
+steps          | array  |          | `[]`     | List of steps
+onChange       | func   |          | n/a      | Function passed to step buttons
 
 #### Types
 
 Type name      | Enum options
 ---------------|---------------------------------------------------
 NavigationType | 'navigation', 'pagination', 'breadcrumbs', 'tabs'
+
+### Property shapes
+
+#### Labels
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+id            | number    | yes      | n/a           | geo-point latitude
+name          | string    | yes      | n/a           | geo-point longitude
 
 ## Changelog
 
