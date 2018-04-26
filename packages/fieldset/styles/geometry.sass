@@ -6,6 +6,14 @@
   &:not(:last-child):after
     content: ''
     display: inline-block
-    height: $fieldset-line-height
+    height: dp(0.2)
     width: 100%
     margin-top: $fieldset-margin
+
+  &__legend
+    display: inline-block
+    font-size: dp(3)
+    margin-bottom: $fieldset-margin
+
+  &__additional-legend
+    margin-left: dp(7)

@@ -25,13 +25,17 @@ const propTypes = {
  * @returns {React.Element}
  */
 function Fieldset (props) {
-  const { className, children, legend, ...passedProps } = props
+  const { className, children, legend, additionalLegend, ...passedProps } = props
 
   return (
     <div className={buildClassName(moduleName, className)} {...passedProps}>
-      <h3 className={buildClassName([moduleName, 'legend'])}>
+      {legend && <span className={buildClassName([moduleName, 'legend'])}>
         {legend}
-      </h3>
+        {additionalLegend && <span className={buildClassName([moduleName, 'additional-legend'])}>
+          {additionalLegend}
+        </span>}
+      </span>}
+
       {children}
     </div>
   )
