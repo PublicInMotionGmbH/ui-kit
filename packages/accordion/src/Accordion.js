@@ -13,7 +13,7 @@ import { Collapse } from '@talixo/collapse'
  * @param {function} props.buildId
  * @param {function} [props.renderOpenIcon]
  * @param {function} [props.renderCloseIcon]
- * @param {*} props.value
+ * @param {*} [props.value]
  * @param {boolean} props.smooth
  * @param {number|null} props.animationTime
  * @param {object|{ label: *, content: * }} option
@@ -90,10 +90,21 @@ function buildElement (props, option, index) {
 /**
  * Component which represents checkbox.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {node} [props.children]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {node} [props.children]
+ * @param {function} props.onChange
+ * @param {function} props.buildId
+ * @param {function} [props.renderOpenIcon]
+ * @param {function} [props.renderCloseIcon]
+ * @param {*} [props.value]
+ * @param {boolean} props.smooth
+ * @param {number|null} props.animationTime
+ *
+ * @property {object} state
+ * @property {*} state.value
+ *
+ * @class
  */
 class Accordion extends React.PureComponent {
   state = {
@@ -186,7 +197,7 @@ Accordion.propTypes = {
 
   /** Options to show in accordion */
   options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     content: PropTypes.node.isRequired
   })).isRequired,
 
