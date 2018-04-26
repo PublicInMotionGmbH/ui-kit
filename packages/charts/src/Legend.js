@@ -65,7 +65,7 @@ function Legend (props) {
     onClick,
     ...passedProps
   } = props
-  const wrapperCls = buildClassName(moduleName, className, [ direction ])
+  const wrapperCls = buildClassName(moduleName, className, [direction])
 
   return (
     <div className={wrapperCls} {...passedProps}>

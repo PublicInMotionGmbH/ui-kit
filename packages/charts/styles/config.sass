@@ -24,11 +24,11 @@ $legend-transition: ease-in .1s all
 
 @mixin graph-colors ($baseColor)
   @for $i from 0 to 5
-    $multiplier: $i * 10%
-    @include graph-color($i, darken($baseColor, $multiplier))
+    $multiplier: (5 - $i) * 7%
+    @include graph-color($i, lighten($baseColor, $multiplier))
 
   @for $i from 0 to 5
-    $multiplier:  $i * 10%
-    @include graph-color($i + 5, lighten($baseColor, $multiplier))
+    $multiplier:  ($i + 1) * 7%
+    @include graph-color($i + 5, darken($baseColor, $multiplier))
 
 

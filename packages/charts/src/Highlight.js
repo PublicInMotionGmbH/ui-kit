@@ -1,10 +1,59 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { ScaleUtils, AbstractSeries } from 'react-vis'
 
+const propTypes = {
+  /** Color oh hightlighted area. */
+  color: PropTypes.string,
+
+  /** Inner height of chart. */
+  innerHeight: PropTypes.number,
+
+  /** Inner width of chart. */
+  innerWidth: PropTypes.number,
+
+  /** Left margin. */
+  marginLeft: PropTypes.number,
+
+  /** Top margin. */
+  marginTop: PropTypes.number,
+
+  /** onBrush callback function. */
+  onBrush: PropTypes.func,
+
+  /** onBrushStart callback function. */
+  onBrushStart: PropTypes.func,
+
+  /** onBrushEnd callback function. */
+  onBrushEnd: PropTypes.func,
+
+  /** Opacity of highlighted area. */
+  opacity: PropTypes.number
+}
+
+const defaultProps = {
+  allow: 'x',
+  color: 'rgb(77, 182, 172)',
+  opacity: 0.3
+}
+
 /**
- * UI component that represents hightlighted drawing area above a Chart component
+ * UI component that represents highlighted drawing area above a Chart component
  * This is a copy of solution provided by react-vis team
  * https://github.com/uber/react-vis/blob/master/showcase/examples/zoomable-chart/highlight.js
+ *
+ * @property {object} [props]
+ * @property {string} [props.color]
+ * @property {nomber} [props.innerHeight]
+ * @property {nomber} [props.innerWidth]
+ * @property {nomber} [props.marginLeft]
+ * @property {nomber} [props.marginTop]
+ * @property {function} [props.onBrush]
+ * @property {function} [props.onBrushStart]
+ * @property {function} [props.onBrushEnd]
+ * @property {nomber} [props.opacity]
+ *
+ *
  * @property {object} [state]
  * @property {bool} [state.drawing]
  * @property {object} [state.drawArea]
@@ -105,8 +154,8 @@ class Highlight extends AbstractSeries {
   }
 
   onParentMouseMove (e) {
-    const {marginLeft, onBrush} = this.props
-    const {drawing} = this.state
+    const { marginLeft, onBrush } = this.props
+    const { drawing } = this.state
     let offsetX = e.nativeEvent.offsetX
     if (e.nativeEvent.type === 'touchmove') {
       offsetX = e.nativeEvent.pageX
@@ -124,14 +173,7 @@ class Highlight extends AbstractSeries {
   }
 
   render () {
-    const {
-      marginLeft,
-      marginTop,
-      innerWidth,
-      innerHeight,
-      color,
-      opacity
-    } = this.props
+    const { marginLeft, marginTop, innerWidth, innerHeight, color, opacity } = this.props
     const { drawArea: { left, right, top, bottom } } = this.state
 
     return (
@@ -176,10 +218,8 @@ class Highlight extends AbstractSeries {
 
 Highlight.displayName = 'HighlightOverlay'
 
-Highlight.defaultProps = {
-  allow: 'x',
-  color: 'rgb(77, 182, 172)',
-  opacity: 0.3
-}
+Highlight.propTypes = propTypes
+
+Highlight.defaultProps = defaultProps
 
 export default Highlight

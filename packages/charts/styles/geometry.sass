@@ -1,8 +1,5 @@
 @import './config'
 
-@include module('pie-chart')
-  //margin: 0 auto
-
 @include module('legend')
   display: flex
   right: 0
@@ -14,7 +11,7 @@
     flex-direction: row
     overflow-x: auto
 
-    #{prefix(legend-item)}
+    #{prefix('legend-item')}
       display: inline-flex
       flex-direction: column
       white-space: nowrap
@@ -26,7 +23,7 @@
     flex-direction: column
     overflow-y: auto
 
-    #{prefix(legend-item)}
+    #{prefix('legend-item')}
       overflow: hidden
       white-space: nowrap
       text-overflow: ellipsis
