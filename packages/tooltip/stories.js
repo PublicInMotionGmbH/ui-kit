@@ -89,7 +89,7 @@ addStory('default', readme, () => (
 ))
 
 addStory('without arrow', readme, () => (
-  <Tooltip isArrow={false} color='primary' render={() => <div><h3>Without arrow</h3></div>}>
+  <Tooltip arrow={false} color='primary' render={() => <div><h3>Without arrow</h3></div>}>
     <span
       style={tooltipStyle}
     >
@@ -130,7 +130,7 @@ addStory('Popover', readme, () => (
 ))
 
 addStory('Popover without arrow', readme, () => (
-  <Tooltip triggerOn='click' isArrow={false} color='primary' render={() => <div><h3>Popover</h3></div>}>
+  <Tooltip triggerOn='click' arrow={false} color='primary' render={() => <div><h3>Popover</h3></div>}>
     <span
       style={tooltipStyle}
     >
@@ -161,7 +161,7 @@ addStory('Popover fade', readme, () => (
 ))
 
 addStory('Popover with tooltip', readme, () => (
-  <Tooltip triggerOn='click' isArrow={false} color='primary' render={() =>
+  <Tooltip triggerOn='click' arrow={false} color='primary' render={() =>
     <Tooltip color='primary' render={() => <div>Tooltip</div>}>
       <span
         style={{...tooltipStyle, backgroundColor: 'transparent'}}

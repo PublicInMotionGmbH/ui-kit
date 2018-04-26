@@ -29,8 +29,8 @@ fade          | bool         | `false` | Fade in / out animation
 fadeTime      | number       | n/a     | Fadetime
 open          | bool         | n/a     | Controls whether tooltip is open
 position      | PositionType | `right` | Tooltip position
-rootNode      | string       | `body`  | Root element of tooltip portal
-render        | func         | n/a     | Renders toolyip content
+attachTo      | node         | n/a     | node of tooltip portal
+render        | func         | n/a     | Renders tooltip content
 style         | object       | n/a     | Additional styles passed to the tooltip
 arrow         | bool         | `true`  | Show arrow next to tooltip
 triggerOn     | TriggerType  | `hover` | Type of event to open tooltip

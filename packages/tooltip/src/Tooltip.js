@@ -9,6 +9,51 @@ import { Portal } from '@talixo/portal'
 
 import { getPositionNearElement } from '../utils/position'
 
+const propTypes = {
+  /** Tooltipped elements */
+  children: PropTypes.node,
+
+  /** Additional class name passed to the tooltip */
+  className: PropTypes.string,
+
+  /** Color of the tooltip */
+  color: PropTypes.string,
+
+  /** Fade in / out animation */
+  fade: PropTypes.bool,
+
+  /** Fade time */
+  fadeTime: PropTypes.number,
+
+  /** Controls whether tooltip is open */
+  open: PropTypes.bool,
+
+  /** Tooltip position */
+  position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
+
+  /** Renders tooltip content */
+  render: PropTypes.func.isRequired,
+
+  /** Root element of tooltip portal */
+  attachTo: PropTypes.string,
+
+  /** Additional styles passed to the tooltip */
+  style: PropTypes.object,
+
+  /* Show arrow next to tolltip */
+  arrow: PropTypes.bool,
+
+  /** Type of event to open tooltip  */
+  triggerOn: PropTypes.oneOf([ 'hover', 'click' ])
+}
+
+const defaultProps = {
+  fade: false,
+  position: 'right',
+  arrow: true,
+  triggerOn: 'hover'
+}
+
 /**
  * Component which represents Tooltip.
  *
@@ -32,6 +77,7 @@ import { getPositionNearElement } from '../utils/position'
  * @property {null|number} state.left
  *
  * @property {Element} [el]
+ * @class
  */
 class Tooltip extends React.Component {
   constructor (props) {
@@ -53,20 +99,34 @@ class Tooltip extends React.Component {
     this.setRef = this.setRef.bind(this)
   }
 
+  /**
+   * Add event listener when component is mount
+   */
   componentDidMount () {
     this.updatePosition()
     window.addEventListener('resize', this.updatePosition)
   }
 
+  /**
+   * Remove event listener when component is unmount
+   */
   componentWillUnmount () {
     window.removeEventListener('resize', this.updatePosition)
   }
 
+  /**
+   * Update position and state.open when props has changed
+   * @param {*} nextProps
+   */
   componentWillReceiveProps (nextProps) {
     if (this.props.position !== nextProps.position) this.updatePosition(nextProps)
     if (this.props.open !== nextProps.open) this.setState({ open: nextProps.open })
   }
 
+  /**
+   * Update position of tooltip
+   * @param {*} nextProps
+   */
   updatePosition (nextProps) {
     if (!this.el) return
 
@@ -74,24 +134,36 @@ class Tooltip extends React.Component {
     this.setState({ top, left })
   }
 
+  /**
+   * Handle mouse enter event
+   */
   handleMouseEnter () {
     if (!_.isUndefined(this.props.open)) return
     this.setState({ clicked: false, open: true })
     this.updatePosition()
   }
 
+  /**
+   * Handle mouse leave
+   */
   handleMouseLeave () {
     if (!_.isUndefined(this.props.open)) return
     this.setState({ open: false })
     this.updatePosition()
   }
 
+  /**
+   * Handle mouse over
+   */
   handleMouseOver () {
     if (!_.isUndefined(this.props.open)) return
     if (!this.state.clicked && !this.state.open) this.setState({ open: true })
     this.updatePosition()
   }
 
+  /**
+   * Handle mouse click
+   */
   handleMouseClick () {
     if (!_.isUndefined(this.props.open)) return
     this.setState({ open: !this.state.open })
@@ -158,49 +230,7 @@ class Tooltip extends React.Component {
   }
 }
 
-Tooltip.propTypes = {
-  /** Tooltipped elements */
-  children: PropTypes.node,
-
-  /** Additional class name passed to the tooltip */
-  className: PropTypes.string,
-
-  /** Color of the tooltip */
-  color: PropTypes.string,
-
-  /** Fade in / out animation */
-  fade: PropTypes.bool,
-
-  /** Fade time */
-  fadeTime: PropTypes.number,
-
-  /** Controls whether tooltip is open */
-  open: PropTypes.bool,
-
-  /** Tooltip position */
-  position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
-
-  /** Renders tooltip content */
-  render: PropTypes.func.isRequired,
-
-  /** Root element of tooltip portal */
-  attachTo: PropTypes.string,
-
-  /** Additional styles passed to the tooltip */
-  style: PropTypes.object,
-
-  /* Show arrow next to tolltip */
-  arrow: PropTypes.bool,
-
-  /** Type of event to open tooltip  */
-  triggerOn: PropTypes.oneOf([ 'hover', 'click' ])
-}
-
-Tooltip.defaultProps = {
-  fade: false,
-  position: 'right',
-  arrow: true,
-  triggerOn: 'hover'
-}
+Tooltip.propTypes = propTypes
+Tooltip.defaultProps = defaultProps
 
 export default Tooltip
