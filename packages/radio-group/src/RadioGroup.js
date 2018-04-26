@@ -5,6 +5,30 @@ import { RadioInput } from '@talixo/radio-input'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Name of radio group */
+  name: PropTypes.string.isRequired,
+
+  /** Array of objects which represent options */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.node.isRequired,
+    value: PropTypes.any.isRequired,
+    disabled: PropTypes.bool
+  })),
+
+  /** Radio input label size ('small', 'large') */
+  size: PropTypes.oneOf([ 'small', 'large' ]),
+
+  /** Value of default option */
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
+}
+
 /**
  * Component which represents RadioGroup.
  *
@@ -18,43 +42,27 @@ import { buildClassName } from '@talixo/shared'
  */
 function RadioGroup (props) {
   const { className, children, name, options, value, size, onChange, ...passedProps } = props
+
+  const optionsList = options.map((obj) => (
+    <RadioInput
+      checked={value === obj.value}
+      disabled={obj.disabled || false}
+      key={obj.label}
+      name={name}
+      onChange={checked => checked && onChange && onChange(obj.value)}
+      size={size}
+      value={obj.value}>
+      {obj.label}
+    </RadioInput>
+  ))
+
   return (
     <div className={buildClassName('radio-group', className)} {...passedProps} >
-      {options.map((obj) =>
-        <RadioInput
-          checked={value === obj.value}
-          disabled={obj.disabled || false}
-          key={obj.label}
-          name={name}
-          onChange={checked => checked && onChange && onChange(obj.value)}
-          size={size}
-          value={obj.value}
-          {...passedProps}>
-          {obj.label}
-        </RadioInput>
-      )}
+      {optionsList}
     </div>
   )
 }
 
-RadioGroup.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Name of radio group */
-  name: PropTypes.string.isRequired,
-
-  /** Array of objects which represent options */
-  options: PropTypes.array.isRequired,
-
-  /** Radio input label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
-  /** Value of default option */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
-}
+RadioGroup.propTypes = propTypes
 
 export default RadioGroup

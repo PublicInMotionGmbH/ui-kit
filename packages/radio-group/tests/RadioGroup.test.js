@@ -5,25 +5,38 @@ import RadioGroup from '../src/RadioGroup'
 
 describe('<RadioGroup />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<RadioGroup name='RadioGroup' options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} />)
+    const wrapper = shallow(<RadioGroup
+      name='RadioGroup'
+      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('should pass prop name to input', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup1' options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} />)
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup1'
+      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
 
     expect(wrapper.find('RadioInput').first().prop('name')).toBe('RadioGroup1')
   })
 
   it('should pass prop options to input', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup2' options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} />)
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup2'
+      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
 
     expect(wrapper.find('RadioInput').first().prop('value')).toBe(1)
   })
 
   it('should set default option', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup3' value={2} options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} />)
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup3'
+      value={2}
+      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
 
     let RadioInput = wrapper.find('RadioInput')
 
@@ -33,7 +46,10 @@ describe('<RadioGroup />', () => {
   })
 
   it('should set as disabled appropriate options', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup4' options={[{value: 1, label: 'one', disabled: true}, {value: 2, label: 'two', disabled: true}, {value: 3, label: 'three'}]} />)
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup4'
+      options={[{value: 1, label: 'one', disabled: true}, {value: 2, label: 'two', disabled: true}, {value: 3, label: 'three'}]}
+    />)
 
     let RadioInput = wrapper.find('RadioInput')
 
@@ -43,7 +59,10 @@ describe('<RadioGroup />', () => {
   })
 
   it('should render label correctly', () => {
-    const wrapper = mount(<RadioGroup name='RadioGroup5' options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} />)
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup5'
+      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
 
     expect(wrapper.find('RadioInput').at(1).find('span').text()).toEqual('two')
   })
@@ -56,7 +75,10 @@ describe('<RadioGroup />', () => {
     let wrapper, input
 
     beforeAll(() => {
-      wrapper = mount(<RadioGroup options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]} {...props} />)
+      wrapper = mount(<RadioGroup
+        options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+        {...props}
+      />)
       input = wrapper.find('input[type="radio"]').at(0)
       input.simulate('change', { target: { checked: true } })
     })

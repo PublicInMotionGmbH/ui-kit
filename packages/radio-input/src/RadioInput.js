@@ -18,9 +18,13 @@ function RadioInput (props) {
 
   const wrapperClass = buildClassName('radio-input', className, [ size ])
 
+  const handleOnChange = e => {
+    if (onChange) { onChange(e.target.checked) }
+  }
+
   return (
     <label className={wrapperClass} style={style}>
-      <input type='radio' onChange={e => onChange && onChange(e.target.checked)} {...passedProps} />
+      <input type='radio' onChange={handleOnChange} {...passedProps} />
       <span>{children}</span>
     </label>
   )
