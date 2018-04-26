@@ -65,7 +65,7 @@ Calendar.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /* Dispaly date format */
+  /** Display date format */
   displayFormat: PropTypes.string,
 
   /** Day aria label format */
