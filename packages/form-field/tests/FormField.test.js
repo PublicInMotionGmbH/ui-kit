@@ -168,3 +168,51 @@ describe('onChange', () => {
     expect(typedValue).toEqual(value)
   })
 })
+
+describe('onFocus', () => {
+  beforeEach(() => {
+    resetIdCounter()
+  })
+
+  it('is called', () => {
+    const onFocus = jest.fn()
+    const wrapper = createWrapper({ onFocus })
+    const input = wrapper.find('TextInput')
+    input.simulate('focus')
+
+    expect(onFocus).toHaveBeenCalled()
+  })
+
+  it('sets class correctly', () => {
+    const onFocus = jest.fn()
+    const wrapper = createWrapper({ onFocus })
+    const input = wrapper.find('TextInput')
+    input.simulate('focus')
+
+    expect(wrapper.hasClass('talixo-form-field--focus')).toEqual(true)
+  })
+})
+
+describe('onBlur', () => {
+  beforeEach(() => {
+    resetIdCounter()
+  })
+
+  it('is called', () => {
+    const onBlur = jest.fn()
+    const wrapper = createWrapper({ onBlur })
+    const input = wrapper.find('TextInput')
+    input.simulate('blur')
+
+    expect(onBlur).toHaveBeenCalled()
+  })
+
+  it('sets class correctly', () => {
+    const onBlur = jest.fn()
+    const wrapper = createWrapper({ onBlur })
+    const input = wrapper.find('TextInput')
+    input.simulate('blur')
+
+    expect(wrapper.hasClass('talixo-form-field--blur')).toEqual(true)
+  })
+})

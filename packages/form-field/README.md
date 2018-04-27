@@ -27,7 +27,9 @@ error         | node      | n/a     | Displayed error message.
 hint          | node      | n/a     | Displayed hint message.
 id            | string    | n/a     | Id for input.
 label         | node      | n/a     | Label for input.
+onBlur        | function  | n/a     | Event called after input value has lost focus.
 onChange      | function  | n/a     | Event called after input value has been changed.
+onFocus       | function  | n/a     | Event called after input value has gained focus.
 warning       | node      | n/a     | Displayed warning message.
 
 ## Changelog

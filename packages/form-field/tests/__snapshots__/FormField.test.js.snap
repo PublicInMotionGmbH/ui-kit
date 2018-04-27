@@ -2,7 +2,7 @@
 
 exports[`<FormField /> renders children correctly 1`] = `
 <div
-  className="talixo-form-field"
+  className="talixo-form-field talixo-form-field--blur"
 >
   <div
     className="talixo-form-field__input-wrapper"
@@ -12,6 +12,8 @@ exports[`<FormField /> renders children correctly 1`] = `
       error={false}
       id="form_field_1"
       key=".0"
+      onBlur={[Function]}
+      onFocus={[Function]}
       type="text"
     />
   </div>

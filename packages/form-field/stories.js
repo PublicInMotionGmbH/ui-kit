@@ -49,6 +49,17 @@ addStory.controlled('text-input', readme, (setState, state) => (
     >
       <TextInput />
     </FormField>
+    <h2>Focus state</h2>
+    <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
+      Focus status: {state.focus ? 'Focus' : 'No focus'}
+    </span>
+    <FormField
+      label='Name*'
+      onBlur={() => { setState({ focus: false }) }}
+      onFocus={() => { setState({ focus: true }) }}
+    >
+      <TextInput />
+    </FormField>
     <h2>Controlled</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       You typed: {state.value}
@@ -65,7 +76,8 @@ addStory.controlled('text-input', readme, (setState, state) => (
   </div>
 ), () => {
   return {
-    value: ''
+    value: '',
+    focus: false
   }
 })
 
@@ -98,6 +110,17 @@ addStory.controlled('number-input', readme, (setState, state) => (
       error='You have to pick at least one car'
       warning='You picked a lot of cars'
       hint='Pick as many cars as you wish'
+    >
+      <NumberInput />
+    </FormField>
+    <h2>Focus state</h2>
+    <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
+      Focus status: {state.focus ? 'Focus' : 'No focus'}
+    </span>
+    <FormField
+      label='Age*'
+      onBlur={() => { setState({ focus: false }) }}
+      onFocus={() => { setState({ focus: true }) }}
     >
       <NumberInput />
     </FormField>
@@ -150,6 +173,17 @@ addStory.controlled('checkbox', readme, (setState, state) => (
       error='You have to agree'
       warning='Remember to agree'
       hint='Agree to terms'
+    >
+      <Checkbox>Agree</Checkbox>
+    </FormField>
+    <h2>Focus state</h2>
+    <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
+      Focus status: {state.focus ? 'Focus' : 'No focus'}
+    </span>
+    <FormField
+      label='Agree*'
+      onBlur={() => { setState({ focus: false }) }}
+      onFocus={() => { setState({ focus: true }) }}
     >
       <Checkbox>Agree</Checkbox>
     </FormField>
