@@ -9,6 +9,8 @@ import { Portal } from '@talixo/portal'
 
 import { getPositionNearElement } from '../utils/position'
 
+const moduleName = 'tooltip'
+
 const propTypes = {
   /** Tooltipped elements */
   children: PropTypes.node,
@@ -52,6 +54,30 @@ const defaultProps = {
   position: 'right',
   arrow: true,
   triggerOn: 'hover'
+}
+
+function composeHandlers (...handlers) {
+  handlers = handlers.filter(handler => typeof handler === 'function')
+
+  return (...args) => handlers.forEach(handler => handler(...args))
+}
+
+function composeProps (...propsList) {
+  const props = { ...propsList.shift() }
+
+  for (let i = 0; i < propsList.length; i++) {
+    const nextProps = propsList[i]
+
+    for (const key in nextProps) {
+      if (typeof props[key] === 'function') {
+        props[key] = composeHandlers(props[key], nextProps[key])
+      } else {
+        props[key] = nextProps[key]
+      }
+    }
+  }
+
+  return props
 }
 
 /**
@@ -186,17 +212,19 @@ class Tooltip extends React.Component {
     const defaultFadeTime = 600
     const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
 
-    const childWithRef = React.Children.only(children)
-      ? React.Children.map(children, child =>
-        React.cloneElement(child, {
-          ref: node => this.setRef(node)
-        }))
-      : null
+    const element = React.Children.only(children)
 
-    const wrapperClasses = buildClassName([ 'tooltip', 'wrapper' ], className)
-    const fadeClasses = buildClassName(['tooltip', 'fade'], className)
+    const nextProps = {
+      ref: this.setRef,
+      onMouseEnter: triggerOn === 'hover' ? this.handleMouseEnter : null,
+      onMouseLeave: triggerOn === 'hover' ? this.handleMouseLeave : null,
+      onMouseOver: triggerOn === 'hover' ? this.handleMouseOver : null,
+      onClick: triggerOn === 'click' ? this.handleMouseClick : null
+    }
 
-    const nameClasses = buildClassName('tooltip', className, [ color, position, triggerOn, arrow ? 'arrow' : null ])
+    const innerElement = React.cloneElement(element, composeProps(element.props, nextProps))
+    const fadeClasses = buildClassName([moduleName, 'fade'], className)
+    const nameClasses = buildClassName(moduleName, className, [ color, position, triggerOn, arrow ? 'arrow' : null ])
 
     const tooltipStyle = {
       top: this.state.top,
@@ -205,28 +233,20 @@ class Tooltip extends React.Component {
       ...style
     }
 
-    return (
-      <div
-        className={wrapperClasses}
-        onClick={this.props.triggerOn === 'click' ? this.handleMouseClick : null}
-        onMouseEnter={this.props.triggerOn === 'hover' ? this.handleMouseEnter : null}
-        onMouseLeave={this.props.triggerOn === 'hover' ? this.handleMouseLeave : null}
-        onMouseOver={this.props.triggerOn === 'hover' ? this.handleMouseOver : null}
-      >
-        {childWithRef}
+    return <React.Fragment>
+      {innerElement}
+      <Portal attachTo={attachTo}>
         <TransitionGroup>
           {this.state.open ? (
             <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={fadeClasses}>
-              <Portal attachTo={attachTo}>
-                <span className={nameClasses} style={tooltipStyle}>
-                  {render(this.state)}
-                </span>
-              </Portal>
+              <span className={nameClasses} style={tooltipStyle}>
+                {render(this.state)}
+              </span>
             </CSSTransition>
           ) : null}
         </TransitionGroup>
-      </div>
-    )
+      </Portal>
+    </React.Fragment>
   }
 }
 
