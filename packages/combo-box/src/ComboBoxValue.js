@@ -216,7 +216,7 @@ ComboBoxValue.propTypes = {
   renderValue: PropTypes.func.isRequired,
 
   /** Value provided to input */
-  inputValue: PropTypes.string.isRequired,
+  inputValue: PropTypes.string,
 
   /** Additional icon to put in the select box */
   icon: PropTypes.node,

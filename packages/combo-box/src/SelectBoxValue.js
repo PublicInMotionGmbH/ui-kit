@@ -89,7 +89,7 @@ SelectBoxValue.propTypes = {
 }
 
 SelectBoxValue.defaultProps = {
-  multi: null,
+  multi: false,
   isOpen: false,
   selectedItems: []
 }

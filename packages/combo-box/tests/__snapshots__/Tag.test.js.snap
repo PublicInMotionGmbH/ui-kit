@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tag /> should render correctly 1`] = `
+<span
+  className="talixo-combo-box__tag"
+>
+  <span
+    className="talixo-combo-box__tag__inner"
+  >
+    abc
+  </span>
+  <span
+    aria-label="remove value"
+    className="talixo-combo-box__remove"
+    role="button"
+  >
+    <Icon
+      name="clear"
+    />
+  </span>
+</span>
+`;
