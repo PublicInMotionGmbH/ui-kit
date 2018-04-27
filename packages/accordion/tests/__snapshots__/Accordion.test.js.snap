@@ -5,368 +5,165 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
   className="talixo-accordion"
 >
   <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="0--1"
+    className="talixo-accordion-element talixo-accordion-element--collapsed"
+    key="0--0"
   >
     <button
       aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
+      className="talixo-accordion-element__toggle"
+      onClick={[Function]}
       role="tab"
       type="button"
     >
-      First one
+      <div
+        className="talixo-accordion-element__toggle__inner"
+      >
+        First one
+      </div>
     </button>
     <Collapse
       animationTime={100}
       aria-hidden={true}
+      className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
     >
-      Something is there
+      <div
+        className="talixo-accordion-element__content__inner"
+      >
+        Something is there
+      </div>
     </Collapse>
   </div>
   <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="1--another"
+    className="talixo-accordion-element talixo-accordion-element--collapsed"
+    key="1--1"
   >
     <button
       aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
+      className="talixo-accordion-element__toggle"
+      onClick={[Function]}
       role="tab"
       type="button"
     >
-      Another
+      <div
+        className="talixo-accordion-element__toggle__inner"
+      >
+        Another
+      </div>
     </button>
     <Collapse
       animationTime={100}
       aria-hidden={true}
+      className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
     >
-      <strong>
-        Also here we've got some content
-      </strong>
+      <div
+        className="talixo-accordion-element__content__inner"
+      >
+        <strong>
+          Also here we've got some content
+        </strong>
+      </div>
     </Collapse>
   </div>
   <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="2--third"
+    className="talixo-accordion-element talixo-accordion-element--collapsed"
+    key="2--2"
   >
     <button
       aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
+      className="talixo-accordion-element__toggle"
+      onClick={[Function]}
       role="tab"
       type="button"
     >
-      Third
+      <div
+        className="talixo-accordion-element__toggle__inner"
+      >
+        Third
+      </div>
     </button>
     <Collapse
       animationTime={100}
       aria-hidden={true}
+      className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
     >
-      Here we are
+      <div
+        className="talixo-accordion-element__content__inner"
+      >
+        Here we are
+      </div>
     </Collapse>
   </div>
   <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="3--multiple"
+    className="talixo-accordion-element talixo-accordion-element--collapsed"
+    key="3--3"
   >
     <button
       aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
+      className="talixo-accordion-element__toggle"
+      onClick={[Function]}
       role="tab"
       type="button"
     >
-      Multi
+      <div
+        className="talixo-accordion-element__toggle__inner"
+      >
+        Multi
+      </div>
     </button>
     <Collapse
       animationTime={100}
       aria-hidden={true}
+      className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
     >
-      And there is multiple
+      <div
+        className="talixo-accordion-element__content__inner"
+      >
+        And there is multiple
+      </div>
     </Collapse>
   </div>
   <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="4--multiple"
+    className="talixo-accordion-element talixo-accordion-element--collapsed"
+    key="4--4"
   >
     <button
       aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
+      className="talixo-accordion-element__toggle"
+      onClick={[Function]}
       role="tab"
       type="button"
     >
-      Multi 2
+      <div
+        className="talixo-accordion-element__toggle__inner"
+      >
+        Multi 2
+      </div>
     </button>
     <Collapse
       animationTime={100}
       aria-hidden={true}
+      className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
     >
-      element selected
-    </Collapse>
-  </div>
-</div>
-`;
-
-exports[`<Accordion /> renders not smooth accordion correctly 1`] = `
-<div
-  className="talixo-accordion"
->
-  <div
-    className="talixo-accordion__element"
-    key="0--1"
-  >
-    <button
-      aria-expanded={true}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      First one
-    </button>
-    <Collapse
-      animationTime={null}
-      aria-hidden={false}
-      collapsed={false}
-      role="tabpanel"
-      smooth={false}
-    >
-      Something is there
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="1--another"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Another
-    </button>
-    <Collapse
-      animationTime={null}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={false}
-    >
-      <strong>
-        Also here we've got some content
-      </strong>
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="2--third"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Third
-    </button>
-    <Collapse
-      animationTime={null}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={false}
-    >
-      Here we are
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="3--multiple"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Multi
-    </button>
-    <Collapse
-      animationTime={null}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={false}
-    >
-      And there is multiple
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="4--multiple"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Multi 2
-    </button>
-    <Collapse
-      animationTime={null}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={false}
-    >
-      element selected
-    </Collapse>
-  </div>
-</div>
-`;
-
-exports[`<Accordion /> renders opened accordion correctly 1`] = `
-<div
-  className="talixo-accordion"
->
-  <div
-    className="talixo-accordion__element"
-    key="0--1"
-  >
-    <button
-      aria-expanded={true}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      First one
-    </button>
-    <Collapse
-      animationTime={100}
-      aria-hidden={false}
-      collapsed={false}
-      role="tabpanel"
-      smooth={true}
-    >
-      Something is there
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="1--another"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Another
-    </button>
-    <Collapse
-      animationTime={100}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={true}
-    >
-      <strong>
-        Also here we've got some content
-      </strong>
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="2--third"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Third
-    </button>
-    <Collapse
-      animationTime={100}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={true}
-    >
-      Here we are
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="3--multiple"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Multi
-    </button>
-    <Collapse
-      animationTime={100}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={true}
-    >
-      And there is multiple
-    </Collapse>
-  </div>
-  <div
-    className="talixo-accordion__element talixo-accordion__element--collapsed"
-    key="4--multiple"
-  >
-    <button
-      aria-expanded={false}
-      className="talixo-accordion__element__toggle"
-      onClick={null}
-      role="tab"
-      type="button"
-    >
-      Multi 2
-    </button>
-    <Collapse
-      animationTime={100}
-      aria-hidden={true}
-      collapsed={true}
-      role="tabpanel"
-      smooth={true}
-    >
-      element selected
+      <div
+        className="talixo-accordion-element__content__inner"
+      >
+        element selected
+      </div>
     </Collapse>
   </div>
 </div>
