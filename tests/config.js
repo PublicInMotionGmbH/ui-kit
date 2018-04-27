@@ -27,6 +27,6 @@ module.exports = {
     '^.+\\.css$': '<rootDir>/tests/cssTransform',
     '^(?!.*\\.(js|css|json)$)': '<rootDir>/tests/fileTransform'
   },
-  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.js$' ],
+  transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\].+\\.js$' ],
   moduleFileExtensions: [ 'js', 'json' ]
 }

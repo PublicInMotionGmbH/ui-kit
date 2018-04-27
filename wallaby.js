@@ -51,7 +51,7 @@ module.exports = wallaby => {
           '^.+\\.css$': path.resolve('./tests/cssTransform'),
           '^(?!.*\\.(js|css|json)$)': path.resolve('./tests/fileTransform')
         },
-        transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\](?!@talixo/).+\\.js$' ],
+        transformIgnorePatterns: [ '[/\\\\]node_modules[/\\\\].+\\.js$' ],
         moduleFileExtensions: [ 'js', 'json' ]
       })
     },
