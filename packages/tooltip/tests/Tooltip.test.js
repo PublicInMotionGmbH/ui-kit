@@ -5,6 +5,12 @@ import { prefix } from '@talixo/shared'
 
 const name = prefix('tooltip')
 
+function dispatchEvent (element, eventName, mouse) {
+  const Event = mouse ? window.MouseEvent : window.Event
+
+  element.dispatchEvent(new Event(eventName))
+}
+
 describe('<Tooltip />', () => {
   beforeEach(() => {
     jest.useFakeTimers()
@@ -39,9 +45,12 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
+
     jest.runAllTimers()
     wrapper.unmount()
   })
@@ -52,9 +61,8 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    // FIXME: It should use simulate('mouseEnter') but it's not working
-    // https://github.com/airbnb/enzyme/issues/1201
-    wrapper.children().get(0).props.onMouseEnter()
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseenter', true)
     wrapper.update()
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
@@ -69,11 +77,11 @@ describe('<Tooltip />', () => {
       </Tooltip>
     )
 
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
+    jest.runAllTimers()
 
-    // FIXME: It should use simulate('mouseLeave') but it's not working
-    // https://github.com/airbnb/enzyme/issues/1201
-    wrapper.children().get(0).props.onMouseLeave()
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseleave', true)
     jest.runAllTimers()
     wrapper.update()
 
@@ -88,7 +96,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('click')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'click', true)
+    wrapper.update()
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
     jest.runAllTimers()
@@ -101,7 +111,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('click')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'click', true)
+    wrapper.update()
 
     expect(wrapper.contains(<span>Left</span>)).toBe(false)
     jest.runAllTimers()
@@ -114,7 +126,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toBe(true)
     jest.runAllTimers()
@@ -127,7 +141,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).hasClass('big')).toBe(true)
     jest.runAllTimers()
@@ -140,7 +156,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).prop('style').transition).toBeDefined()
     jest.runAllTimers()
@@ -153,7 +171,9 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).prop('style').transition).toContain('opacity 1200ms')
     jest.runAllTimers()

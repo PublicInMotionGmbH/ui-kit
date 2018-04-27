@@ -18,6 +18,10 @@ const tooltipStyle = {
   cursor: 'pointer'
 }
 
+const iconStyle = {
+  fontSize: '40px'
+}
+
 function render (setState, state) {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -90,8 +94,8 @@ addStory('default', readme, () => (
 ))
 
 addStory('with Icon component', readme, () => (
-  <Tooltip color='primary' render={() => <div>Default</div>}>
-    <Icon name='person' />
+  <Tooltip color='primary' render={() => <div>Hello world</div>}>
+    <Icon name='person' style={iconStyle} />
   </Tooltip>
 ))
 

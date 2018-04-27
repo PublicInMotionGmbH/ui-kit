@@ -1,19 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Tooltip /> renders children correctly 1`] = `
-<div
-  className="talixo-tooltip__wrapper"
-  onClick={null}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onMouseOver={[Function]}
->
+Array [
   <span
     className="talixo-tooltip-target"
-    key=".0"
   >
     Tooltip
-  </span>
-  <div />
-</div>
+  </span>,
+  <div />,
+]
 `;

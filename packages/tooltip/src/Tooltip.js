@@ -9,7 +9,7 @@ import { buildClassName } from '@talixo/shared'
 import { Portal } from '@talixo/portal'
 
 import { getPositionNearElement } from '../utils/position'
-import { createNonStatelessElement } from '../utils/createNonStatelessElement'
+import createInstantiableElement from 'react-instantiable-stateless'
 
 const moduleName = 'tooltip'
 
@@ -124,6 +124,8 @@ class Tooltip extends React.Component {
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseOver = this.handleMouseOver.bind(this)
     this.handleMouseClick = this.handleMouseClick.bind(this)
+    this.addListeners = this.addListeners.bind(this)
+    this.removeListeners = this.removeListeners.bind(this)
     this.setRef = this.setRef.bind(this)
   }
 
@@ -133,6 +135,7 @@ class Tooltip extends React.Component {
   componentDidMount () {
     this.updatePosition()
     window.addEventListener('resize', this.updatePosition)
+    this.addListeners(this.el)
   }
 
   /**
@@ -140,6 +143,7 @@ class Tooltip extends React.Component {
    */
   componentWillUnmount () {
     window.removeEventListener('resize', this.updatePosition)
+    this.removeListeners(this.el)
   }
 
   /**
@@ -149,6 +153,7 @@ class Tooltip extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.position !== nextProps.position) this.updatePosition(nextProps)
     if (this.props.open !== nextProps.open) this.setState({ open: nextProps.open })
+    this.addListeners()
   }
 
   /**
@@ -199,7 +204,36 @@ class Tooltip extends React.Component {
   }
 
   setRef (node) {
+    this.removeListeners(this.el)
     this.el = findDOMNode(node)
+    this.addListeners(this.el)
+  }
+
+  addListeners (element) {
+    if (!element) {
+      return
+    }
+
+    if (this.props.triggerOn === 'click') {
+      element.addEventListener('click', this.handleMouseClick)
+    }
+
+    if (this.props.triggerOn === 'hover') {
+      element.addEventListener('mouseleave', this.handleMouseLeave)
+      element.addEventListener('mouseenter', this.handleMouseEnter)
+      element.addEventListener('mouseover', this.handleMouseOver)
+    }
+  }
+
+  removeListeners (element) {
+    if (!element) {
+      return
+    }
+
+    element.removeEventListener('click', this.handleMouseClick)
+    element.removeEventListener('mouseleave', this.handleMouseLeave)
+    element.removeEventListener('mouseenter', this.handleMouseEnter)
+    element.removeEventListener('mouseover', this.handleMouseOver)
   }
 
   /**
@@ -217,15 +251,11 @@ class Tooltip extends React.Component {
     const element = React.Children.only(children)
 
     const nextProps = {
-      ref: this.setRef, // TODO: make it not overriding current ref
-      onMouseEnter: triggerOn === 'hover' ? this.handleMouseEnter : null,
-      onMouseLeave: triggerOn === 'hover' ? this.handleMouseLeave : null,
-      onMouseOver: triggerOn === 'hover' ? this.handleMouseOver : null,
-      onClick: triggerOn === 'click' ? this.handleMouseClick : null
+      ref: this.setRef // TODO: make it not overriding current ref
     }
 
     const innerElement = React.cloneElement(
-      createNonStatelessElement(element),
+      createInstantiableElement(element),
       composeProps(element.props, nextProps)
     )
     const fadeClasses = buildClassName([moduleName, 'fade'], className)
