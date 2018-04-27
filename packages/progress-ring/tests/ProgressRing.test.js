@@ -94,16 +94,4 @@ describe('<ProgressRing />', () => {
     wrapper.setProps({ value: -5 })
     expect(wrapper.find('path').prop('d')).toBe(buildCirclePath(0))
   })
-
-  it('should handle indeterminate value', () => {
-    const wrapper = shallow(<ProgressRing />)
-
-    expect(wrapper.find('path').length).toBe(0)
-
-    wrapper.setProps({ value: NaN })
-    expect(wrapper.find('path').length).toBe(0)
-
-    wrapper.setProps({ value: null })
-    expect(wrapper.find('path').length).toBe(0)
-  })
 })
