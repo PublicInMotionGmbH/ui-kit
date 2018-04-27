@@ -41,7 +41,6 @@ class SelectBox extends React.PureComponent {
       case Downshift.stateChangeTypes.clickItem:
         return {
           ...changes,
-          inputValue: '',
           isOpen: multi
         }
       default:
@@ -105,7 +104,9 @@ class SelectBox extends React.PureComponent {
 
     // Handle simple selection for single select-box
     if (!multi) {
-      onChange(item)
+      if (onChange) {
+        onChange(item)
+      }
       return
     }
 
