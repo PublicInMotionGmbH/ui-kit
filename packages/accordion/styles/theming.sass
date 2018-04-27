@@ -5,7 +5,7 @@
   border: 1px solid $accordion-border-color
   border-radius: $accordion-border-radius
 
-  &__element
+  &-element
     &__toggle
       display: block
       appearance: none
@@ -18,6 +18,14 @@
       background: $color-pill-gray
       border-bottom: 1px solid $accordion-border-color
       cursor: pointer
+
+      &__icon
+        display: inline-block
+        position: absolute
+        right: 10px
+        top: 50%
+        transform: translateY(-50%)
+        font-size: dp(3)
 
       &:hover
         background: $accordion-button-background-hover
