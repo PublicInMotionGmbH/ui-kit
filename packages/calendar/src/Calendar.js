@@ -32,7 +32,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  displayFormat: 'D MMM YYYY'
+  displayFormat: 'YYYY-MM-DD'
 }
 
 /**

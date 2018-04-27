@@ -10,6 +10,8 @@ describe('<Calendar />', () => {
     const wrapper = mount(<Calendar />)
 
     expect(wrapper).toMatchSnapshot()
+
+    wrapper.unmount()
   })
 
   it('should change the date correctly', () => {
@@ -26,5 +28,7 @@ describe('<Calendar />', () => {
     const wrapper = mount(<Calendar placeholder='This-is-placeholder' />)
 
     expect(wrapper.find('input').prop('placeholder')).toEqual('This-is-placeholder')
+
+    wrapper.unmount()
   })
 })
