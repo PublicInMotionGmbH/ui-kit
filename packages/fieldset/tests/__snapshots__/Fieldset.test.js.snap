@@ -3,9 +3,5 @@
 exports[`<Fieldset /> renders children correctly 1`] = `
 <div
   className="talixo-fieldset"
->
-  <h3
-    className="talixo-fieldset__legend"
-  />
-</div>
+/>
 `;
