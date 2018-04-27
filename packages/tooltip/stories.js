@@ -2,6 +2,7 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Tooltip from './src/Tooltip'
+import { Icon } from '@talixo/icon'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -86,6 +87,12 @@ addStory('default', readme, () => (
       </span>
     </Tooltip>
   </div>
+))
+
+addStory('with Icon component', readme, () => (
+  <Tooltip color='primary' render={() => <div>Default</div>}>
+    <Icon name='person' />
+  </Tooltip>
 ))
 
 addStory('without arrow', readme, () => (

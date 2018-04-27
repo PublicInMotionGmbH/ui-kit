@@ -1,4 +1,5 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -54,6 +55,39 @@ const defaultProps = {
   position: 'right',
   arrow: true,
   triggerOn: 'hover'
+}
+
+function createNonStatelessElement (element) {
+  if (!element) {
+    return element
+  }
+
+  const Component = element.type
+
+  if (typeof Component !== 'function' || Component.prototype.render) {
+    return element
+  }
+
+  if (!Component.$nonStateless) {
+    class _Component extends React.PureComponent {
+      render () {
+        return Component(this.props)
+      }
+    }
+
+    _Component.displayName = Component.displayName || Component.name
+
+    Object.defineProperty(Component, '$nonStateless', {
+      enumerable: false,
+      value: _Component
+    })
+  }
+
+  if (element.ref) {
+    return <Component.$nonStateless ref={element.ref} {...element.props} />
+  }
+
+  return <Component.$nonStateless {...element.props} />
 }
 
 function composeHandlers (...handlers) {
@@ -117,7 +151,7 @@ class Tooltip extends React.Component {
       top: null
     }
 
-    this.updatePosition = _.throttle(this.updatePosition, 10)
+    this.updatePosition = _.throttle(this.updatePosition.bind(this), 10)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseOver = this.handleMouseOver.bind(this)
@@ -197,7 +231,7 @@ class Tooltip extends React.Component {
   }
 
   setRef (node) {
-    this.el = node
+    this.el = findDOMNode(node)
   }
 
   /**
@@ -215,14 +249,17 @@ class Tooltip extends React.Component {
     const element = React.Children.only(children)
 
     const nextProps = {
-      ref: this.setRef,
+      ref: this.setRef, // TODO: make it not overriding current ref
       onMouseEnter: triggerOn === 'hover' ? this.handleMouseEnter : null,
       onMouseLeave: triggerOn === 'hover' ? this.handleMouseLeave : null,
       onMouseOver: triggerOn === 'hover' ? this.handleMouseOver : null,
       onClick: triggerOn === 'click' ? this.handleMouseClick : null
     }
 
-    const innerElement = React.cloneElement(element, composeProps(element.props, nextProps))
+    const innerElement = React.cloneElement(
+      createNonStatelessElement(element),
+      composeProps(element.props, nextProps)
+    )
     const fadeClasses = buildClassName([moduleName, 'fade'], className)
     const nameClasses = buildClassName(moduleName, className, [ color, position, triggerOn, arrow ? 'arrow' : null ])
 
