@@ -328,9 +328,10 @@ class ComboBox extends React.PureComponent {
         stateReducer={this.stateReducer.bind(this)}
         onChange={this.select.bind(this)}
         selectedItem={null}
-        render={this.renderComponent.bind(this)}
         {...passedProps}
-      />
+      >
+        {this.renderComponent.bind(this)}
+      </Downshift>
     )
   }
 }

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectBox /> should render correctly 1`] = `
+<div
+  className="talixo-combo-box"
+>
+  <button
+    aria-expanded={false}
+    aria-haspopup={true}
+    aria-label="open menu"
+    className="talixo-combo-box__value talixo-combo-box__value--placeholder"
+    data-toggle={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    type="button"
+  >
+    <div
+      className="talixo-combo-box__inner"
+    >
+      ...
+    </div>
+    <div
+      className="talixo-combo-box__controls"
+    >
+      <div
+        className="talixo-combo-box__arrow"
+      >
+        <span
+          aria-hidden="true"
+          className="talixo-icon tai tai--material"
+        >
+          
+        </span>
+      </div>
+    </div>
+  </button>
+</div>
+`;

@@ -174,9 +174,10 @@ class AutoComplete extends React.PureComponent {
       <Downshift
         onChange={this.select.bind(this)}
         selectedItem={null}
-        render={this.renderComponent.bind(this)}
         {...passedProps}
-      />
+      >
+        {this.renderComponent.bind(this)}
+      </Downshift>
     )
   }
 }
