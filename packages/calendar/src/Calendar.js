@@ -8,6 +8,33 @@ import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'calendar'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Display date format */
+  displayFormat: PropTypes.string,
+
+  /** Day aria label format */
+  dayAriaLabelFormat: PropTypes.string,
+
+  /** Month format */
+  monthFormat: PropTypes.string,
+
+  /** Phrases */
+  phrases: PropTypes.object,
+
+  /** Placeholder text */
+  placeholder: PropTypes.string,
+
+  /** Week day format */
+  weekDayFormat: PropTypes.string
+}
+
+const defaultProps = {
+  displayFormat: 'D MMM YYYY'
+}
+
 /**
  * Component which represents Calendar.
  *
@@ -27,11 +54,17 @@ class Calendar extends React.PureComponent {
     this.onDateChange = this.onDateChange.bind(this)
     this.onFocusChange = this.onFocusChange.bind(this)
   }
-
+  /**
+   * Set new date
+   * @param {*} date
+   */
   onDateChange (date) {
     this.setState({ date })
   }
-
+  /**
+   * Change property focused when focus
+   * @param {boolean} focused
+   */
   onFocusChange ({ focused }) {
     this.setState({ focused })
   }
@@ -61,31 +94,7 @@ class Calendar extends React.PureComponent {
   }
 }
 
-Calendar.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Display date format */
-  displayFormat: PropTypes.string,
-
-  /** Day aria label format */
-  dayAriaLabelFormat: PropTypes.string,
-
-  /** Month format */
-  monthFormat: PropTypes.string,
-
-  /** Phrases */
-  phrases: PropTypes.object,
-
-  /** Placeholder text */
-  placeholder: PropTypes.string,
-
-  /** Week day format */
-  weekDayFormat: PropTypes.string
-}
-
-Calendar.defaultProps = {
-  displayFormat: 'D MMM YYYY'
-}
+Calendar.propTypes = propTypes
+Calendar.defaultProps = defaultProps
 
 export default Calendar
