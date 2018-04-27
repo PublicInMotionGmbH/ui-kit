@@ -112,7 +112,10 @@ class ComboBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const {
+      value, icon, options, multi, placeholder,
+      buildItemId, renderItem, renderValue, onFocus, onBlur
+    } = this.props
 
     return {
       ...data,
@@ -122,7 +125,9 @@ class ComboBox extends React.PureComponent {
       getInputProps: props => data.getInputProps(this.getInputProps(props)),
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       getClearButtonProps: this.getClearButtonProps.bind(this),
-      selectedItems: value == null ? [] : [].concat(value)
+      selectedItems: value == null ? [] : [].concat(value),
+      onInputFocus: onFocus,
+      onInputBlur: onBlur
     }
   }
 
@@ -177,16 +182,19 @@ class ComboBox extends React.PureComponent {
   }
 
   /**
-   * Build props for input, to handle keyboard events..
+   * Build props for input, to handle keyboard events.
    *
    * @param {object} props
    * @returns {object|{ onClick: function }}
    */
   getInputProps (props) {
+    const { onFocus, onBlur } = this.props
     const onKeyDown = props ? props.onKeyDown : null
 
     return {
       ...props,
+      onFocus,
+      onBlur,
       onKeyDown: event => {
         this.handleInputKeyDown(event)
 
@@ -248,7 +256,9 @@ class ComboBox extends React.PureComponent {
 
     // Handle simple selection for single select-box
     if (!multi) {
-      onChange(item)
+      if (onChange) {
+        onChange(item)
+      }
       return
     }
 
@@ -310,7 +320,7 @@ class ComboBox extends React.PureComponent {
     const {
       icon, multi, placeholder, value, options, onChange,
       buildItemId, renderItem, renderValue, renderTag,
-      ...passedProps
+      children, ...passedProps
     } = this.props
 
     return (

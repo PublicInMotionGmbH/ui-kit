@@ -1,12 +1,15 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
 
 import { Icon } from '@talixo/icon'
 import { CountryFlag } from '@talixo/country-flag'
 import { ProgressRing } from '@talixo/progress-ring'
+import { TextInput } from '@talixo/text-input'
 
 import SelectBox from './src/SelectBox'
 import ComboBox from './src/ComboBox'
+import AutoComplete from './src/AutoComplete'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -200,6 +203,8 @@ addStory.controlled('filtered multi combo box', readme, (setState, state) => (
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={filterOptions(state.inputValue, options, 'name')}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
     />
   </div>
 ), () => ({ value: [], inputValue: '' }))
@@ -219,6 +224,20 @@ addStory.controlled('multi combo box with adding value', readme, (setState, stat
     />
   </div>
 ), () => ({ value: [], inputValue: '' }))
+
+addStory.controlled('auto complete', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({ value: '' }))
 
 addStory.controlled('RTL: multi select box', readme, (setState, state) => (
   <div dir='rtl'>
