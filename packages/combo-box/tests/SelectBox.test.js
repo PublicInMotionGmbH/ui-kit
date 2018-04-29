@@ -70,17 +70,6 @@ describe('<SelectBox />', () => {
     wrapper.unmount()
   })
 
-  // it('should open select box after click', () => {
-  //   const wrapper = mount(
-  //     <SelectBox
-  //       isOpen
-  //       options={[ 'abc', 'def' ]}
-  //     />
-  //   )
-  //
-  //   wrapper.find('MenuItem').at(0).simulate('click')
-  // })
-
   it('should open select box after click', () => {
     const wrapper = mount(
       <SelectBox options={[ 'abc', 'def' ]} />

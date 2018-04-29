@@ -11,6 +11,40 @@ import Menu from './Menu'
 const moduleName = 'combo-box'
 
 /**
+ * Compose props together
+ *
+ * @param {...object} props
+ * @returns {object}
+ */
+function composeProps (...props) {
+  const result = { ...props.shift() }
+
+  for (let i = 0; i < props.length; i++) {
+    const x = props[i]
+
+    for (const key in x) {
+      if (typeof result[key] === 'function') {
+        if (typeof x[key] !== 'function') {
+          continue
+        }
+
+        const previousHandler = result[key]
+        const nextHandler = x[key]
+
+        result[key] = (...args) => {
+          previousHandler(...args)
+          return nextHandler(...args)
+        }
+      } else {
+        result[key] = x[key]
+      }
+    }
+  }
+
+  return result
+}
+
+/**
  * Build a function to get input props.
  *
  * @param {object} downshift
@@ -20,10 +54,7 @@ const moduleName = 'combo-box'
 function composeInputProps (downshift, additionalProps) {
   return props => {
     // Copy props which are passed directly to Input
-    const inputProps = {
-      ...props,
-      ...additionalProps
-    }
+    const inputProps = composeProps(props, additionalProps)
 
     // Extract input 'change' event handler
     const onChange = inputProps.onChange
