@@ -33,7 +33,7 @@ const COMMA_KEY = 188
  */
 class ComboBox extends React.PureComponent {
   state = {
-    inputValue: ''
+    inputValue: this.props.inputValue || ''
   }
 
   /**
@@ -61,7 +61,7 @@ class ComboBox extends React.PureComponent {
   stateReducer (state, changes) {
     const nextState = this._stateReducer(state, changes)
 
-    if (nextState.inputValue !== undefined) {
+    if (this.props.inputValue == null && nextState.inputValue !== undefined) {
       const nextInputValue = nextState.inputValue == null ? '' : nextState.inputValue
 
       if (nextInputValue !== this.state.inputValue) {
