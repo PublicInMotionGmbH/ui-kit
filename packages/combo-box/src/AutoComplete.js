@@ -111,6 +111,27 @@ function composeInputProps (downshift, additionalProps) {
  */
 class AutoComplete extends React.PureComponent {
   /**
+   * Handle state changes inside of Downshift component.
+   * We need it to not close menu after element is clicked in multi-select.
+   *
+   * @param {object} state
+   * @param {object} changes
+   * @returns {object}
+   */
+  stateReducer (state, changes) {
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.blurInput:
+      case Downshift.stateChangeTypes.mouseUp:
+        return {
+          ...changes,
+          inputValue: this.props.inputValue
+        }
+      default:
+        return changes
+    }
+  }
+
+  /**
    * Get props which should be passed through our components below Downshift.
    *
    * @param {object} data
@@ -203,6 +224,7 @@ class AutoComplete extends React.PureComponent {
 
     return (
       <Downshift
+        stateReducer={this.stateReducer.bind(this)}
         onChange={this.select.bind(this)}
         selectedItem={null}
         {...passedProps}
