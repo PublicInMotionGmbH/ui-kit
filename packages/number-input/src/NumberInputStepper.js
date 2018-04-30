@@ -7,6 +7,8 @@ import { Icon } from '@talixo/icon'
 
 const moduleName = 'number-input-stepper'
 
+const SPACE_KEY = 32
+
 /**
  * Component which represents stepper buttons for number input
  *
@@ -105,6 +107,24 @@ class NumberInputStepper extends React.PureComponent {
   }
 
   /**
+   * Call increment or decrement action.
+   *
+   * @param {string} name
+   * @param {Event|SyntheticEvent} event
+   */
+  callKeyAction = (name, event) => {
+    // It should happen only on Spacebar pressed
+    if (event.which !== SPACE_KEY) {
+      return
+    }
+
+    // Call action when it's available
+    if (this.props[name]) {
+      this.props[name](false)
+    }
+  }
+
+  /**
    * Save reference to container.
    *
    * @param {HTMLElement} el
@@ -128,6 +148,7 @@ class NumberInputStepper extends React.PureComponent {
         type='button'
         className={buttonClsName}
         onMouseDown={() => this.callAction(action)}
+        onKeyDown={event => this.callKeyAction(action, event)}
       >
         <Icon name={icon} />
       </button>
