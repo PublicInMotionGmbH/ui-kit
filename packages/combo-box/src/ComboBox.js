@@ -319,8 +319,7 @@ class ComboBox extends React.PureComponent {
   render () {
     const {
       icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, renderTag,
-      children, ...passedProps
+      buildItemId, renderItem, renderValue, children, ...passedProps
     } = this.props
 
     return (
@@ -371,7 +370,10 @@ ComboBox.propTypes = {
   itemToString: PropTypes.func,
 
   /** Value for input if you want to control it by yourself */
-  inputValue: PropTypes.string
+  inputValue: PropTypes.string,
+
+  /** Value for controlled component */
+  value: PropTypes.any
 }
 
 ComboBox.defaultProps = {

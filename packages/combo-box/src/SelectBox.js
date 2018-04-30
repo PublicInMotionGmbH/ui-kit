@@ -161,8 +161,7 @@ class SelectBox extends React.PureComponent {
   render () {
     const {
       icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, renderTag,
-      ...passedProps
+      buildItemId, renderItem, renderValue, ...passedProps
     } = this.props
 
     return (
@@ -182,6 +181,9 @@ SelectBox.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Icon to show on right of select-box */
+  icon: PropTypes.node,
+
   /** List of options to show */
   options: PropTypes.array.isRequired,
 
@@ -190,6 +192,9 @@ SelectBox.propTypes = {
 
   /** Is it multi-select? */
   multi: PropTypes.bool,
+
+  /** Value for controlled component */
+  value: PropTypes.any,
 
   /** Event called after current value of select-box has been changed */
   onChange: PropTypes.func,

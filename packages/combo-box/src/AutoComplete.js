@@ -252,7 +252,10 @@ AutoComplete.propTypes = {
   buildItemId: PropTypes.func,
 
   /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
+  itemToString: PropTypes.func,
+
+  /** Input which needs auto-complete behavior */
+  children: PropTypes.node
 }
 
 AutoComplete.defaultProps = {
