@@ -3,8 +3,6 @@ import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
 
-import { SelectBox } from '@talixo/combo-box'
-
 import PhoneInput from '../src/PhoneInput'
 
 const moduleName = prefix('phone-input')

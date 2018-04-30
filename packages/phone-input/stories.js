@@ -17,6 +17,17 @@ addStory('initial', readme, () => (
   <PhoneInput />
 ))
 
+addStory('with placeholder', readme, () => (
+  <PhoneInput placeholder='Type your phone number...' />
+))
+
+addStory('controlled', readme, (setState, state) => (
+  <PhoneInput
+    value={state.value}
+    onChange={value => setState({ value })}
+  />
+), () => ({ value: '' }))
+
 addStory('RTL: initial', readme, () => (
   <div dir='rtl'>
     <PhoneInput />
