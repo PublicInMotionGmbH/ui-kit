@@ -6,7 +6,9 @@ import { buildClassName } from '@talixo/shared'
 import { SelectBox } from '@talixo/combo-box'
 import { CountryFlag } from '@talixo/country-flag'
 
-import countriesList, { detectCountry, replaceCountry } from './countriesList'
+import countriesList from '../utils/countriesList'
+import detectCountry from '../utils/detectCountry'
+import replaceCountryPrefix from '../utils/replaceCountryPrefix'
 
 export const moduleName = 'phone-input'
 
@@ -117,7 +119,7 @@ class PhoneInput extends React.PureComponent {
    * @param {object} country
    */
   changeCountry = (country) => {
-    this.change(replaceCountry(this.state.value, this.state.country, country))
+    this.change(replaceCountryPrefix(this.state.value, this.state.country, country))
 
     // Focus input when it is possible
     if (this.el) {
