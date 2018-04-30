@@ -24,18 +24,20 @@ Property name | Type         | Default | Description
 --------------|--------------|:-------:|-----------------------
 children      | nodes        | n/a     | Tooltipped elements
 className     | string       | n/a     | Additional class name passed to the tooltip
-color         | string       | n/a     | Color of the tooltip
 fade          | bool         | `false` | Fade in / out animation
 fadeTime      | number       | n/a     | Fadetime
 open          | bool         | n/a     | Controls whether tooltip is open
-position      | PositionType | `right` | Tooltip position
-rootNode      | string       | `body`  | Root element of tooltip portal
-render        | func         | n/a     | Renders toolyip content
+position      | Position     | `right` | Tooltip position
+attachTo      | node         | n/a     | node of tooltip portal
+render        | function     | n/a     | Renders tooltip content
 style         | object       | n/a     | Additional styles passed to the tooltip
+arrow         | bool         | `true`  | Show arrow next to tooltip
+triggerOn     | Trigger      | `hover` | Type of event to open tooltip
 
 Type name    | Enum options
 -------------|--------------------------------------
-PositionType | 'left', 'right', 'top', 'bottom'
+Position     | 'left', 'right', 'top', 'bottom'
+Trriger      | 'hover', 'click'
 
 ## Changelog
 
