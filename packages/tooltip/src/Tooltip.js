@@ -68,30 +68,6 @@ function composeHandlers (...handlers) {
 }
 
 /**
- * Compose props together
- *
- * @param {...object} propsList
- * @returns {object}
- */
-function composeProps (...propsList) {
-  const props = { ...propsList.shift() }
-
-  for (let i = 0; i < propsList.length; i++) {
-    const nextProps = propsList[i]
-
-    for (const key in nextProps) {
-      if (typeof props[key] === 'function') {
-        props[key] = composeHandlers(props[key], nextProps[key])
-      } else {
-        props[key] = nextProps[key]
-      }
-    }
-  }
-
-  return props
-}
-
-/**
  * Component which represents Tooltip.
  *
  * @property {object} props
@@ -258,14 +234,9 @@ class Tooltip extends React.Component {
 
     const element = React.Children.only(children)
 
-    const nextProps = {
+    const innerElement = React.cloneElement(createInstantiableElement(element), {
       ref: element.ref ? composeHandlers(this.setRef, element.ref) : this.setRef
-    }
-
-    const innerElement = React.cloneElement(
-      createInstantiableElement(element),
-      composeProps(element.props, nextProps)
-    )
+    })
 
     const fadeClasses = buildClassName([ moduleName, 'fade' ])
     const nameClasses = buildClassName(moduleName, className, [ position, triggerOn ], { arrow })
