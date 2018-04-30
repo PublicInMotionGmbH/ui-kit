@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectBoxValue /> should render correctly 1`] = `
+<button
+  className="talixo-combo-box__value talixo-combo-box__value--placeholder"
+>
+  <div
+    className="talixo-combo-box__inner"
+  />
+  <div
+    className="talixo-combo-box__controls"
+  >
+    <div
+      className="talixo-combo-box__arrow"
+    >
+      <Icon
+        name="expand_more"
+      />
+    </div>
+  </div>
+</button>
+`;

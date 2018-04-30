@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComboBoxMultiValue /> should render correctly 1`] = `
+<button
+  className="talixo-combo-box__value talixo-combo-box__value--placeholder"
+>
+  <div
+    className="talixo-combo-box__inner"
+  >
+    <AutosizeInput
+      injectStyles={true}
+      minWidth={1}
+    />
+  </div>
+  <div
+    className="talixo-combo-box__controls"
+  >
+    <span
+      className="talixo-combo-box__arrow"
+    >
+      <Icon
+        name="expand_more"
+      />
+    </span>
+  </div>
+</button>
+`;

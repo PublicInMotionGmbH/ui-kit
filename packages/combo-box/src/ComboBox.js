@@ -1,137 +1,388 @@
 import React from 'react'
-import Downshift from 'downshift'
 import PropTypes from 'prop-types'
+
+import Downshift from 'downshift'
 
 import { buildClassName } from '@talixo/shared'
 
-const itemToStringOrObject = i => (i == null ? '' : typeof i === 'object' ? i : String(i))
+import Menu from './Menu'
+import ComboBoxMultiValue from './ComboBoxMultiValue'
+import ComboBoxValue from './ComboBoxValue'
+
+const moduleName = 'combo-box'
+
+const SPACE_KEY = 32
+const BACKSPACE_KEY = 8
+const TAB_KEY = 9
+const COMMA_KEY = 188
 
 /**
- * Component which represents dropdown.
+ * Component which represents Combo box.
  *
- * @param {object} props
- * @param {string} [props.defaultHighlightedIndex]
- * @param {string} [props.defaultSelectedItem]
- * @param {string} [props.inputComponent]
- * @param {string} [props.itemComponent]
- * @param {string} [props.items]
- * @param {string} [props.maxHeight]
- * @param {string} [props.menuComponent]
- * @param {string} [props.onChange]
- * @param {string} [props.onInputValueChange]
- * @param {string} [props.overflow]
- * @param {string} [props.placeholder]
- * @param {boolean} [props.separated]
- * @param {string} [props.toggleComponent]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {array} props.options
+ * @property {boolean} props.multi
+ * @property {function} props.renderItem
+ * @property {function} props.buildItemId
+ * @property {function} props.itemToString
+ * @property {*} [props.placeholder]
+ * @property {function} [props.renderValue]
+ * @property {string} [props.className]
+ *
+ * @class
  */
-const ComboBox = props => {
-  const {
-    className, defaultHighlightedIndex, defaultSelectedItem, inputComponent,
-    itemComponent, items, loading, maxHeight, menuComponent: MenuComponent,
-    onChange, onInputValueChange, overflow, placeholder, separated,
-    toggleComponent: ToggleComponent, ...passedProps
-  } = props
+class ComboBox extends React.PureComponent {
+  state = {
+    inputValue: this.props.inputValue || ''
+  }
 
-  return (
-    <Downshift
-      defaultHighlightedIndex={defaultHighlightedIndex}
-      defaultSelectedItem={defaultSelectedItem}
-      itemToString={itemToStringOrObject}
-      onChange={onChange}
-      onInputValueChange={onInputValueChange}
-      render={({
-        closeMenu,
-        getToggleButtonProps,
-        getItemProps,
-        getRootProps,
-        getInputProps,
-        inputValue,
-        isOpen,
-        openMenu,
-        selectedItem,
-        highlightedIndex
-      }) => (
-        <div className={buildClassName([ 'combo-box', 'wrapper' ], className)} {...passedProps}>
-          <ToggleComponent
-            onOuterClick={() => closeMenu()}
-            firstItem={defaultSelectedItem || (items && items.length && items[0]) || ''}
-            getToggleButtonProps={getToggleButtonProps}
-            getInputProps={getInputProps}
-            inputComponent={inputComponent}
-            isOpen={isOpen}
-            itemComponent={itemComponent}
-            overflow={overflow}
-            placeholder={placeholder}
-            separated={separated}
-            value={selectedItem}
-          />
-          {isOpen ? (
-            <MenuComponent
-              itemComponent={itemComponent}
-              items={items}
-              getItemProps={getItemProps}
-              highlightedIndex={highlightedIndex}
-              loading={loading}
-              maxHeight={maxHeight}
-              overflow={overflow}
-              separated={separated}
-              selectedItem={selectedItem}
-              inputValue={inputValue}
-            />
-          ) : null}
-        </div>
-      )}
-    />
-  )
+  /**
+   * Update input value if it's provided from outside.
+   *
+   * @param {object} props
+   * @param {string} [props.inputValue]
+   */
+  componentWillReceiveProps (props) {
+    if (props.inputValue != null && this.state.inputValue !== props.inputValue) {
+      this.setState({
+        inputValue: props.inputValue
+      })
+    }
+  }
+
+  /**
+   * Reduce state change of Downshift.
+   * This function handles side effects of reducing state.
+   *
+   * @param {object} state
+   * @param {object} changes
+   * @returns {object}
+   */
+  stateReducer (state, changes) {
+    const nextState = this._stateReducer(state, changes)
+
+    if (this.props.inputValue == null && nextState.inputValue !== undefined) {
+      const nextInputValue = nextState.inputValue == null ? '' : nextState.inputValue
+
+      if (nextInputValue !== this.state.inputValue) {
+        this.setState({ inputValue: nextInputValue })
+      }
+    }
+
+    return nextState
+  }
+
+  /**
+   * Handle state changes inside of Downshift component.
+   * We need it to not close menu after element is clicked in multi-select.
+   *
+   * @param {object} state
+   * @param {object} changes
+   * @returns {object}
+   */
+  _stateReducer (state, changes) {
+    const { multi } = this.props
+
+    switch (changes.type) {
+      case Downshift.stateChangeTypes.clickItem:
+      case Downshift.stateChangeTypes.keyDownEnter:
+        // Remove input value when item has been selected,
+        // And keep list open if it's multi-select
+        const nextChanges = {
+          ...changes,
+          inputValue: '',
+          isOpen: multi
+        }
+
+        // Keep selected item still highlighted, when it's multi-select
+        if (multi && this.state.inputValue === '') {
+          nextChanges.highlightedIndex = state.highlightedIndex
+        }
+
+        return nextChanges
+      default:
+        return changes
+    }
+  }
+
+  /**
+   * Get props which should be passed through our components below Downshift.
+   *
+   * @param {object} data
+   * @returns {object}
+   */
+  getStateProps (data) {
+    const {
+      value, icon, options, multi, placeholder,
+      buildItemId, renderItem, renderValue, onFocus, onBlur
+    } = this.props
+
+    return {
+      ...data,
+      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      inputValue: this.state.inputValue,
+      renderValue: renderValue || renderItem,
+      getInputProps: props => data.getInputProps(this.getInputProps(props)),
+      getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
+      getClearButtonProps: this.getClearButtonProps.bind(this),
+      selectedItems: value == null ? [] : [].concat(value),
+      onInputFocus: onFocus,
+      onInputBlur: onBlur
+    }
+  }
+
+  /**
+   * Build props for 'remove' button.
+   *
+   * @param {object} props
+   * @returns {object|{ onClick: function }}
+   */
+  getRemoveButtonProps (props) {
+    const { onClick, item } = props || {}
+
+    return {
+      ...props,
+      onClick: event => {
+        // Do not propagate click on 'remove' button - it may cause strange operations on Downshift
+        event.stopPropagation()
+
+        // Select again (= unselect) current element
+        this.select(item)
+
+        if (onClick) {
+          onClick(event)
+        }
+      }
+    }
+  }
+
+  /**
+   * Build props for 'clear' button.
+   *
+   * @param {object} props
+   * @returns {object|{ onClick: function }}
+   */
+  getClearButtonProps (props) {
+    const onClick = props ? props.onClick : null
+
+    return {
+      ...props,
+      onClick: event => {
+        // Do not propagate click on 'clear' button - it may cause strange operations on Downshift
+        event.stopPropagation()
+
+        // Unselect current element
+        this.select(null)
+
+        if (onClick) {
+          onClick(event)
+        }
+      }
+    }
+  }
+
+  /**
+   * Build props for input, to handle keyboard events.
+   *
+   * @param {object} props
+   * @returns {object|{ onClick: function }}
+   */
+  getInputProps (props) {
+    const { onFocus, onBlur } = this.props
+    const onKeyDown = props ? props.onKeyDown : null
+
+    return {
+      ...props,
+      onFocus,
+      onBlur,
+      onKeyDown: event => {
+        this.handleInputKeyDown(event)
+
+        if (onKeyDown) {
+          onKeyDown(event)
+        }
+      }
+    }
+  }
+
+  /**
+   * Handle keyboard events on input.
+   *
+   * @param {SyntheticEvent|Event} event
+   */
+  handleInputKeyDown (event) {
+    const { inputValue } = this.state
+    const { value, multi, onNewValue } = this.props
+
+    // Do not propagate space in input, as it will cause removing value
+    if (event.which === SPACE_KEY) {
+      event.stopPropagation()
+      return
+    }
+
+    // Rest of handlers is for multi-select combo-boxes only
+    if (!multi) {
+      return
+    }
+
+    // Remove last value in multi-select on backspace
+    if (event.which === BACKSPACE_KEY && inputValue === '' && value.length) {
+      event.stopPropagation()
+
+      // Unselect last value
+      this.select(value[value.length - 1])
+    }
+
+    // Handle adding new value
+    if ((event.which === COMMA_KEY || event.which === TAB_KEY) && inputValue !== '') {
+      event.preventDefault()
+      event.stopPropagation()
+
+      this.setState({ inputValue: '' })
+
+      if (onNewValue) {
+        onNewValue(inputValue)
+      }
+    }
+  }
+
+  /**
+   * Handle item (un)selection.
+   *
+   * @param {object} item
+   */
+  select (item) {
+    const { onChange, multi, value } = this.props
+
+    // Handle simple selection for single select-box
+    if (!multi) {
+      if (onChange) {
+        onChange(item)
+      }
+      return
+    }
+
+    // Build array of current values
+    const _value = value == null ? [] : [].concat(value)
+
+    // Remove existing or add new item to value
+    const nextValue = _value.indexOf(item) !== -1
+      ? _value.filter(x => x !== item)
+      : _value.concat(item)
+
+    // Trigger event with new value
+    if (onChange) {
+      onChange(nextValue)
+    }
+  }
+
+  /**
+   * Render component in Downshift flow
+   *
+   * @param {object} _data
+   * @returns {React.Element}
+   */
+  renderComponent (_data) {
+    // Compose Downshift & our properties
+    const data = this.getStateProps(_data)
+
+    // Get required data to render component
+    const { className } = this.props
+    const { isOpen, options, multi, icon } = data
+
+    // Check if menu should be visible
+    const open = isOpen && options.length > 0
+
+    // Build class name for wrapper
+    const clsName = buildClassName(moduleName, className, { open, multi, 'with-info': icon })
+
+    // Build value component
+    const value = multi ? <ComboBoxMultiValue {...data} /> : <ComboBoxValue {...data} />
+
+    // Build menu component
+    const menu = open ? <Menu {...data} /> : null
+
+    // Render component
+    return (
+      <div className={clsName}>
+        {value}
+        {menu}
+      </div>
+    )
+  }
+
+  /**
+   * Render Downshift component with our wrappers.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const {
+      icon, multi, placeholder, value, options, onChange,
+      buildItemId, renderItem, renderValue, children, ...passedProps
+    } = this.props
+
+    return (
+      <Downshift
+        stateReducer={this.stateReducer.bind(this)}
+        onChange={this.select.bind(this)}
+        selectedItem={null}
+        {...passedProps}
+      >
+        {this.renderComponent.bind(this)}
+      </Downshift>
+    )
+  }
 }
 
 ComboBox.propTypes = {
-  /** Initial index to highlight when the menu first opens */
-  defaultHighlightedIndex: PropTypes.number,
+  /** Additional class name */
+  className: PropTypes.string,
 
-  /** Default selected Item */
-  defaultSelectedItem: PropTypes.node,
+  /** List of options to show */
+  options: PropTypes.array.isRequired,
 
-  /** Input component */
-  inputComponent: PropTypes.func,
+  /** Placeholder to show when there is no value selected */
+  placeholder: PropTypes.node,
 
-  /** Optional item component */
-  itemComponent: PropTypes.func,
+  /** Is it multi-select? */
+  multi: PropTypes.bool,
 
-  /** Items array */
-  items: PropTypes.array,
-
-  /** Loading state */
-  loading: PropTypes.bool,
-
-  /** Maximum toggle menu height */
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** Toggle menu component */
-  menuComponent: PropTypes.func,
-
-  /** Additional onChange function */
+  /** Event called after current value of combo-box has been changed */
   onChange: PropTypes.func,
 
-  /** Called whenever the input value changes */
+  /** Event called after input value has been changed */
   onInputValueChange: PropTypes.func,
 
-  /** Item text overflow type */
-  overflow: PropTypes.oneOf(['truncate', 'break']),
+  /** Event called after unknown value is requested to be added */
+  onNewValue: PropTypes.func,
 
-  /** Placeholder text */
-  placeholder: PropTypes.string,
+  /** Function to render item */
+  renderItem: PropTypes.func,
 
-  /** Displays toggle and menu components as separated elements */
-  separated: PropTypes.bool,
+  /** Function to render value, otherwise will use same as item */
+  renderValue: PropTypes.func,
 
-  /** Toggle component */
-  toggleComponent: PropTypes.func
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func,
+
+  /** Function passed to Downshift to make it working for objects */
+  itemToString: PropTypes.func,
+
+  /** Value for input if you want to control it by yourself */
+  inputValue: PropTypes.string,
+
+  /** Value for controlled component */
+  value: PropTypes.any
 }
 
 ComboBox.defaultProps = {
-  defaultHighlightedIndex: null
+  options: [],
+  multi: false,
+  placeholder: '...',
+  renderItem: item => item,
+  buildItemId: (item, index) => index,
+  itemToString: item => item
 }
 
 export default ComboBox

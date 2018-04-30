@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ComboBox /> should not render menu when select box is opened and has no options 1`] = `
+exports[`<SelectBox /> should not render menu when select box is opened and has no options 1`] = `
 <div
   className="talixo-combo-box"
 >
@@ -12,7 +12,6 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     role="button"
     type="button"
@@ -20,25 +19,12 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
     <div
       className="talixo-combo-box__inner"
     >
-      <input
-        aria-activedescendant={null}
-        aria-autocomplete="list"
-        aria-expanded={true}
-        autoComplete="off"
-        id="downshift-0-input"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="..."
-        role="combobox"
-        type="text"
-        value=""
-      />
+      ...
     </div>
     <div
       className="talixo-combo-box__controls"
     >
-      <span
+      <div
         className="talixo-combo-box__arrow"
       >
         <span
@@ -47,13 +33,13 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
         >
           
         </span>
-      </span>
+      </div>
     </div>
   </button>
 </div>
 `;
 
-exports[`<ComboBox /> should render correctly 1`] = `
+exports[`<SelectBox /> should render correctly 1`] = `
 <div
   className="talixo-combo-box"
 >
@@ -65,7 +51,6 @@ exports[`<ComboBox /> should render correctly 1`] = `
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     role="button"
     type="button"
@@ -73,25 +58,12 @@ exports[`<ComboBox /> should render correctly 1`] = `
     <div
       className="talixo-combo-box__inner"
     >
-      <input
-        aria-activedescendant={null}
-        aria-autocomplete="list"
-        aria-expanded={false}
-        autoComplete="off"
-        id="downshift-0-input"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="..."
-        role="combobox"
-        type="text"
-        value=""
-      />
+      ...
     </div>
     <div
       className="talixo-combo-box__controls"
     >
-      <span
+      <div
         className="talixo-combo-box__arrow"
       >
         <span
@@ -100,13 +72,13 @@ exports[`<ComboBox /> should render correctly 1`] = `
         >
           
         </span>
-      </span>
+      </div>
     </div>
   </button>
 </div>
 `;
 
-exports[`<ComboBox /> should render menu when select box is opened and has options 1`] = `
+exports[`<SelectBox /> should render menu when select box is opened and has options 1`] = `
 <div
   className="talixo-combo-box talixo-combo-box--open"
 >
@@ -118,7 +90,6 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     role="button"
     type="button"
@@ -126,25 +97,12 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
     <div
       className="talixo-combo-box__inner"
     >
-      <input
-        aria-activedescendant={null}
-        aria-autocomplete="list"
-        aria-expanded={true}
-        autoComplete="off"
-        id="downshift-0-input"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyDown={[Function]}
-        placeholder="..."
-        role="combobox"
-        type="text"
-        value=""
-      />
+      ...
     </div>
     <div
       className="talixo-combo-box__controls"
     >
-      <span
+      <div
         className="talixo-combo-box__arrow"
       >
         <span
@@ -153,7 +111,7 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
         >
           
         </span>
-      </span>
+      </div>
     </div>
   </button>
   <div
@@ -209,7 +167,7 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
 </div>
 `;
 
-exports[`<ComboBox /> should show multi-select box with many values 1`] = `
+exports[`<SelectBox /> should show multi-select box with many values 1`] = `
 <div
   className="talixo-combo-box talixo-combo-box--multi"
 >
@@ -221,7 +179,6 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     role="button"
     type="button"
@@ -243,7 +200,6 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
           <span
             aria-label="remove value"
             className="talixo-combo-box__remove"
-            item="abc"
             onClick={[Function]}
             role="button"
           >
@@ -266,7 +222,6 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
           <span
             aria-label="remove value"
             className="talixo-combo-box__remove"
-            item="def"
             onClick={[Function]}
             role="button"
           >
@@ -279,52 +234,11 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
           </span>
         </span>
       </div>
-      <div
-        style={
-          Object {
-            "display": "inline-block",
-          }
-        }
-      >
-        <input
-          aria-activedescendant={null}
-          aria-autocomplete="list"
-          aria-expanded={false}
-          autoComplete="off"
-          id="downshift-0-input"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onKeyDown={[Function]}
-          placeholder={null}
-          role="combobox"
-          style={
-            Object {
-              "boxSizing": "content-box",
-              "width": "2px",
-            }
-          }
-          type="text"
-          value=""
-        />
-        <div
-          style={
-            Object {
-              "height": 0,
-              "left": 0,
-              "overflow": "scroll",
-              "position": "absolute",
-              "top": 0,
-              "visibility": "hidden",
-              "whiteSpace": "pre",
-            }
-          }
-        />
-      </div>
     </div>
     <div
       className="talixo-combo-box__controls"
     >
-      <span
+      <div
         className="talixo-combo-box__arrow"
       >
         <span
@@ -333,13 +247,13 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
         >
           
         </span>
-      </span>
+      </div>
     </div>
   </button>
 </div>
 `;
 
-exports[`<ComboBox /> should show select box with selected value 1`] = `
+exports[`<SelectBox /> should show select box with selected value 1`] = `
 <div
   className="talixo-combo-box"
 >
@@ -351,7 +265,6 @@ exports[`<ComboBox /> should show select box with selected value 1`] = `
     data-toggle={true}
     onBlur={[Function]}
     onClick={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     role="button"
     type="button"
@@ -364,18 +277,16 @@ exports[`<ComboBox /> should show select box with selected value 1`] = `
     <div
       className="talixo-combo-box__controls"
     >
-      <span
-        className="talixo-combo-box__clear"
-        onClick={[Function]}
-        role="button"
+      <div
+        className="talixo-combo-box__arrow"
       >
         <span
           aria-hidden="true"
           className="talixo-icon tai tai--material"
         >
-          
+          
         </span>
-      </span>
+      </div>
     </div>
   </button>
 </div>
