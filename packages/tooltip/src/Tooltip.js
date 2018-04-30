@@ -20,9 +20,6 @@ const propTypes = {
   /** Additional class name passed to the tooltip */
   className: PropTypes.string,
 
-  /** Color of the tooltip */
-  color: PropTypes.string,
-
   /** Fade in / out animation */
   fade: PropTypes.bool,
 
@@ -53,17 +50,29 @@ const propTypes = {
 
 const defaultProps = {
   fade: false,
-  position: 'right',
+  position: 'top',
   arrow: true,
   triggerOn: 'hover'
 }
 
+/**
+ * Compose handlers to create single handler which fire all of them.
+ *
+ * @param {...function} handlers
+ * @returns {function}
+ */
 function composeHandlers (...handlers) {
   handlers = handlers.filter(handler => typeof handler === 'function')
 
   return (...args) => handlers.forEach(handler => handler(...args))
 }
 
+/**
+ * Compose props together
+ *
+ * @param {...object} propsList
+ * @returns {object}
+ */
 function composeProps (...propsList) {
   const props = { ...propsList.shift() }
 
@@ -92,7 +101,6 @@ function composeProps (...propsList) {
  * @property {boolean} [props.open]
  * @property {*} [props.children]
  * @property {string} [props.className]
- * @property {string} [props.color]
  * @property {number} [props.fadeTime]
  * @property {function} [props.render]
  * @property {object} [props.style]
@@ -241,7 +249,7 @@ class Tooltip extends React.Component {
   */
   render () {
     const {
-      children, className, color, fade, fadeTime,
+      children, className, fade, fadeTime,
       position, render, attachTo, style, triggerOn, arrow
     } = this.props
 
@@ -251,15 +259,16 @@ class Tooltip extends React.Component {
     const element = React.Children.only(children)
 
     const nextProps = {
-      ref: this.setRef // TODO: make it not overriding current ref
+      ref: element.ref ? composeHandlers(this.setRef, element.ref) : this.setRef
     }
 
     const innerElement = React.cloneElement(
       createInstantiableElement(element),
       composeProps(element.props, nextProps)
     )
+
     const fadeClasses = buildClassName([moduleName, 'fade'], className)
-    const nameClasses = buildClassName(moduleName, className, [ color, position, triggerOn, arrow ? 'arrow' : null ])
+    const nameClasses = buildClassName(moduleName, className, [ position, triggerOn, arrow ? 'arrow' : null ])
 
     const tooltipStyle = {
       top: this.state.top,
