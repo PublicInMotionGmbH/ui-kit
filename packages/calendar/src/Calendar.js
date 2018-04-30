@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import 'react-dates/initialize'
 
+import moment from 'moment'
+
 import { SingleDatePicker } from 'react-dates'
 
 import { buildClassName } from '@talixo/shared'
@@ -45,38 +47,64 @@ const defaultProps = {
  * @class {React.Element}
  */
 class Calendar extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      date: null,
-      focused: false
-    }
-    this.onDateChange = this.onDateChange.bind(this)
-    this.onFocusChange = this.onFocusChange.bind(this)
+  state = {
+    date: moment(this.props.value),
+    focused: false
   }
+
   /**
-   * Set new date
+   * Update state when value is provided by props.
+   *
+   * @param {object} props
+   */
+  componentWillReceiveProps (props) {
+    if (props.value != null) {
+      this.setState({ date: moment(props.value) })
+    }
+  }
+
+  /**
+   * Request changing date.
+   *
    * @param {*} date
    */
-  onDateChange (date) {
-    this.setState({ date })
+  onDateChange = (date) => {
+    const { value, onChange } = this.props
+
+    if (value == null) {
+      this.setState({ date })
+    }
+
+    if (onChange) {
+      onChange(date)
+    }
   }
   /**
-   * Change property focused when focus
+   * Call onFocus/onBlur events when calendar status is changed.
+   *
    * @param {boolean} focused
    */
-  onFocusChange ({ focused }) {
+  onFocusChange = ({ focused }) => {
     this.setState({ focused })
+
+    const handler = focused ? this.props.onFocus : this.props.onBlur
+
+    if (handler) {
+      handler()
+    }
   }
 
   render () {
-    const { className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, placeholder, weekDayFormat, ...passedProps } = this.props
+    const {
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases,
+      placeholder, weekDayFormat, onChange, onBlur, onFocus, ...passedProps
+    } = this.props
     const { date, focused } = this.state
 
     const clsName = buildClassName(moduleName, className)
 
     return (
-      <div className={clsName} {...passedProps} >
+      <div className={clsName} {...passedProps}>
         <SingleDatePicker
           date={date}
           dayAriaLabelFormat={dayAriaLabelFormat}
