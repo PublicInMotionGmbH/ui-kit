@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
 import NumberInputStepper from './NumberInputStepper'
