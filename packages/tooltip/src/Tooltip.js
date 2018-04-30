@@ -267,8 +267,8 @@ class Tooltip extends React.Component {
       composeProps(element.props, nextProps)
     )
 
-    const fadeClasses = buildClassName([moduleName, 'fade'], className)
-    const nameClasses = buildClassName(moduleName, className, [ position, triggerOn, arrow ? 'arrow' : null ])
+    const fadeClasses = buildClassName([ moduleName, 'fade' ])
+    const nameClasses = buildClassName(moduleName, className, [ position, triggerOn ], { arrow })
 
     const tooltipStyle = {
       top: this.state.top,

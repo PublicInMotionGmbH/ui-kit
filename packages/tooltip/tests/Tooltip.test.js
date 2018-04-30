@@ -257,4 +257,38 @@ describe('<Tooltip />', () => {
     jest.runAllTimers()
     wrapper.unmount()
   })
+
+  it('should render tooltip with arrow by default', () => {
+    const wrapper = shallow(
+      <Tooltip open render={() => <span id='test' />}>
+        <span>x</span>
+      </Tooltip>
+    )
+
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--arrow`)).toBe(true)
+  })
+
+  it('should render tooltip without arrow', () => {
+    const wrapper = shallow(
+      <Tooltip open render={() => <span id='test' />} arrow={false}>
+        <span>x</span>
+      </Tooltip>
+    )
+
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--arrow`)).toBe(false)
+  })
+
+  it('should allow setting ref on children', () => {
+    const spy = jest.fn()
+
+    const wrapper = mount(
+      <Tooltip>
+        <span ref={spy}>x</span>
+      </Tooltip>
+    )
+
+    expect(spy.mock.calls.length).toBeTruthy()
+
+    wrapper.unmount()
+  })
 })
