@@ -282,7 +282,7 @@ describe('<Tooltip />', () => {
     const spy = jest.fn()
 
     const wrapper = mount(
-      <Tooltip>
+      <Tooltip render={() => <span>Left</span>}>
         <span ref={spy}>x</span>
       </Tooltip>
     )
