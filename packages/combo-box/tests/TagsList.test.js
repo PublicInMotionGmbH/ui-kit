@@ -1,15 +1,15 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Menu from '../src/Menu'
+import TagsList from '../src/TagsList'
 
-describe('<Menu />', () => {
+describe('<TagsList />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
-      <Menu
+      <TagsList
         buildItemId={item => item}
-        getItemProps={() => {}}
-        renderItem={item => item}
+        getRemoveButtonProps={() => {}}
+        renderValue={item => item}
       />
     )
 
@@ -18,14 +18,14 @@ describe('<Menu />', () => {
 
   it('should render passed items', () => {
     const render = item => item
-    const getItemProps = () => ({})
+    const getRemoveButtonProps = () => ({})
 
     const wrapper = shallow(
-      <Menu
-        options={[ 'abc', 'def', 'ghi' ]}
+      <TagsList
+        selectedItems={[ 'abc', 'def', 'ghi' ]}
         buildItemId={item => item}
-        getItemProps={getItemProps}
-        renderItem={render}
+        getRemoveButtonProps={getRemoveButtonProps}
+        renderValue={render}
       />
     )
 
@@ -37,31 +37,31 @@ describe('<Menu />', () => {
 
   it('should pass correct props to items', () => {
     const render = item => item
-    const getItemProps = () => ({})
+    const getRemoveButtonProps = () => ({})
 
     const wrapper = shallow(
-      <Menu
-        options={[ 'abc', 'def', 'ghi' ]}
+      <TagsList
+        selectedItems={[ 'abc', 'def', 'ghi' ]}
         buildItemId={item => item}
-        getItemProps={getItemProps}
-        renderItem={render}
+        getRemoveButtonProps={getRemoveButtonProps}
+        renderValue={render}
       />
     )
 
-    expect(wrapper.children().at(0).prop('renderItem')).toBe(render)
-    expect(wrapper.children().at(0).prop('getItemProps')).toBe(getItemProps)
+    expect(wrapper.children().at(0).prop('renderValue')).toBe(render)
+    expect(wrapper.children().at(0).prop('getRemoveButtonProps')).toBe(getRemoveButtonProps)
   })
 
   it('should build keys for items', () => {
     const render = item => item
-    const getItemProps = () => ({})
+    const getRemoveButtonProps = () => ({})
 
     const wrapper = shallow(
-      <Menu
-        options={[ 'abc', 'def', 'ghi' ]}
+      <TagsList
+        selectedItems={[ 'abc', 'def', 'ghi' ]}
         buildItemId={(item, index) => index}
-        getItemProps={getItemProps}
-        renderItem={render}
+        getRemoveButtonProps={getRemoveButtonProps}
+        renderValue={render}
       />
     )
 

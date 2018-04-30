@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MenuItem /> should render correctly 1`] = `
+<div
+  className="talixo-combo-box__item"
+>
+  <div
+    className="talixo-combo-box__item__tick"
+  >
+    <Icon
+      name="check"
+    />
+  </div>
+  <div
+    className="talixo-combo-box__item__inner"
+  >
+    abc
+  </div>
+</div>
+`;
