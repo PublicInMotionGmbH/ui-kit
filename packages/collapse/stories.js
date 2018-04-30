@@ -13,28 +13,28 @@ const addStory = createStoriesFactory('Collapse', module, {
 
 // Stories
 
-addStory.controlled('initial', readme, (setState, state) => (
+addStory('initial', readme, ({ collapsed = true }, setState) => (
   <div>
-    <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
+    <button onClick={() => setState({ collapsed: !collapsed })}>Toggle</button>
 
-    <Collapse collapsed={state.collapsed}>
+    <Collapse collapsed={collapsed}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true }))
+))
 
-addStory.controlled('dynamic content', readme, (setState, state) => (
+addStory('dynamic content', readme, ({ collapsed = true, small = true }, setState) => (
   <div>
-    <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
-    <button onClick={() => setState({ small: !state.small })}>Toggle size</button>
+    <button onClick={() => setState({ collapsed: !collapsed })}>Toggle</button>
+    <button onClick={() => setState({ small: !small })}>Toggle size</button>
 
-    <Collapse collapsed={state.collapsed}>
+    <Collapse collapsed={collapsed}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
 
-        <Collapse collapsed={state.small}>
+        <Collapse collapsed={small}>
           There is also some text<br />
           As the example, that it can be long,<br />
           Long and even longer, we are not keeping static CSS there.<br />
@@ -45,18 +45,18 @@ addStory.controlled('dynamic content', readme, (setState, state) => (
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true, small: true }))
+))
 
-addStory.controlled('not smooth', readme, (setState, state) => (
+addStory('not smooth', readme, ({ collapsed = true, small = true }, setState) => (
   <div>
-    <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
-    <button onClick={() => setState({ small: !state.small })}>Toggle size</button>
+    <button onClick={() => setState({ collapsed: !collapsed })}>Toggle</button>
+    <button onClick={() => setState({ small: !small })}>Toggle size</button>
 
-    <Collapse collapsed={state.collapsed} smooth={false}>
+    <Collapse collapsed={collapsed} smooth={false}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
 
-        <Collapse collapsed={state.small} smooth={false}>
+        <Collapse collapsed={small} smooth={false}>
           There is also some text<br />
           As the example, that it can be long,<br />
           Long and even longer, we are not keeping static CSS there.<br />
@@ -67,13 +67,13 @@ addStory.controlled('not smooth', readme, (setState, state) => (
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true, small: true }))
+))
 
-addStory.controlled('different animation time', readme, (setState, state) => (
+addStory('different animation time', readme, ({ collapsed = true }, setState) => (
   <div>
-    <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
+    <button onClick={() => setState({ collapsed: !collapsed })}>Toggle</button>
 
-    <Collapse collapsed={state.collapsed} animationTime={100}>
+    <Collapse collapsed={collapsed} animationTime={100}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         There is also some text<br />
         As the example, that it can be long,<br />
@@ -84,18 +84,18 @@ addStory.controlled('different animation time', readme, (setState, state) => (
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true }))
+))
 
-addStory.controlled('accessible', readme, (setState, state) => (
+addStory('accessible', readme, ({ collapsed = true }, setState) => (
   <div>
-    <button aria-expanded={!state.collapsed} aria-controls='element' onClick={() => setState({ collapsed: !state.collapsed })}>
+    <button aria-expanded={!collapsed} aria-controls='element' onClick={() => setState({ collapsed: !collapsed })}>
       Toggle
     </button>
 
-    <Collapse id='element' collapsed={state.collapsed} aria-hidden={state.collapsed}>
+    <Collapse id='element' collapsed={collapsed} aria-hidden={collapsed}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true }))
+))

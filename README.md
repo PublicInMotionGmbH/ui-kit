@@ -137,7 +137,8 @@ addStory('disabled', 'some description', () => <Something disabled />)
 
 If you need to show component which needs to keep state somewhere,
 Storybook info addon by default will show source only of Controller.
-Because of that, there is additional helper which will show source code correctly:
+Because of that, there is additional helper applied which will show source code correctly.
+To use state, use arguments (`state`, `setState`) passed to render function.
 
 ```js
 import React from 'react'
@@ -148,22 +149,14 @@ import { createStoriesFactory } from '@talixo/shared/story'
 
 const addStory = createStoriesFactory('FancyButton', module)
 
-function render (setState, state) {
+addStory('initial', 'some description', ({ size = 10 }, setState) => {
   return (
-    <div style={{ fontSize: state.size }}>
+    <div style={{ fontSize: size }}>
       Text
-      <FancyButton onClick={() => setState({ size: state.size + 1 })}>Increase</FancyButton>
+      <FancyButton onClick={() => setState({ size: size + 1 })}>Increase</FancyButton>
     </div>
   )
-}
-
-function getInitialState () {
-  return {
-    size: 10
-  }
-}
-
-addStory.controlled('initial', 'some description', render, getInitialState)
+})
 ```
 
 ### Development commands & troubleshooting

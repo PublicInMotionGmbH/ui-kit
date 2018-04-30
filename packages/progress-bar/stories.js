@@ -149,23 +149,17 @@ addStory('with label', readme, () => (
   </div>
 ))
 
-function getInitialState () {
-  return {
-    value: 0.1
-  }
-}
-
 const style = { width: 150, marginLeft: 1, marginRight: 1 }
 const divider = { display: 'inline-block', width: 20 }
 
-addStory.controlled('controlled', readme, (setState, state) => {
-  const change = delta => () => setState({ value: Math.max(0, Math.min(1, state.value + delta)) })
+addStory('controlled', readme, ({ value = 0.1 }, setState) => {
+  const change = delta => () => setState({ value: Math.max(0, Math.min(1, value + delta)) })
 
   return (
     <div>
-      <ProgressBar style={margin} value={state.value} />
-      <ProgressBar style={margin} value={state.value} type='error'>
-        Loading books, {Math.round(state.value * 100)}%...
+      <ProgressBar style={margin} value={value} />
+      <ProgressBar style={margin} value={value} type='error'>
+        Loading books, {Math.round(value * 100)}%...
       </ProgressBar>
 
       <div style={{ textAlign: 'center' }}>
@@ -181,4 +175,4 @@ addStory.controlled('controlled', readme, (setState, state) => {
       </div>
     </div>
   )
-}, getInitialState)
+})

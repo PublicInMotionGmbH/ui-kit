@@ -153,11 +153,11 @@ addStory('Popover with tooltip', readme, () => (
   </Tooltip>
 ))
 
-function render (setState, state) {
+addStory('controlled', readme, ({ open = false }, setState) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <Tooltip
-        open={state.open}
+        open={open}
         position='right'
         render={() => <span>I am controlled</span>}
       >
@@ -166,7 +166,7 @@ function render (setState, state) {
         </span>
       </Tooltip>
       <span
-        onClick={() => setState({ open: !state.open })}
+        onClick={() => setState({ open: !open })}
         style={{
           ...tooltipStyle,
           backgroundColor: '#e00',
@@ -178,12 +178,4 @@ function render (setState, state) {
       </span>
     </div>
   )
-}
-
-function getInitialState () {
-  return {
-    open: false
-  }
-}
-
-addStory.controlled('controlled', readme, render, getInitialState)
+})

@@ -27,82 +27,82 @@ addStory('default', readme, () => (
   </div>
 ))
 
-addStory.controlled('controlled', readme, (setState, state) => (
+addStory('controlled', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Controlled number input</h2>
-    <NumberInput onChange={value => setState({ value })} value={state.value} />
+    <NumberInput onChange={value => setState({ value })} value={value} />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('min/max', readme, (setState, state) => (
+addStory('min/max', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Number input with min/max</h2>
 
     <NumberInput
       onChange={value => setState({ value })}
-      value={state.value}
+      value={value}
       min={0}
       max={8}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('precision', readme, (setState, state) => (
+addStory('precision', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Number input with 0.01 precision</h2>
 
     <NumberInput
       onChange={value => setState({ value })}
-      value={state.value}
+      value={value}
       precision={2}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('precision and step', readme, (setState, state) => (
+addStory('precision and step', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Number input with 0.01 precision and step</h2>
 
     <NumberInput
       onChange={value => setState({ value })}
-      value={state.value}
+      value={value}
       step={0.01}
       precision={2}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('faster buttons', readme, (setState, state) => (
+addStory('faster buttons', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Number input with faster buttons</h2>
 
     <NumberInput
       onChange={value => setState({ value })}
-      value={state.value}
+      value={value}
       initialTime={0}
       stepTime={30}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('without stepper', readme, (setState, state) => (
+addStory('without stepper', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }}>
     <h2>Number input without stepper buttons</h2>
 
     <NumberInput
       onChange={value => setState({ value })}
-      value={state.value}
+      value={value}
       switcher={false}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
-addStory.controlled('RTL', readme, (setState, state) => (
+addStory('RTL', readme, ({ value = 0 }, setState) => (
   <div style={{ width: 300 }} dir='rtl'>
     <h2>RTL: number input</h2>
-    <NumberInput onChange={value => setState({ value })} value={state.value} />
+    <NumberInput onChange={value => setState({ value })} value={value} />
   </div>
-), () => ({ value: 0 }))
+))
 
 addStory('small', readme, () => (
   <div>

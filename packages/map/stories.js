@@ -89,9 +89,9 @@ addStory('many markers', readme, () => (
   </Map>
 ))
 
-addStory.controlled('controlled marker with info window', readme, (setState, state) => (
+addStory('controlled marker with info window', readme, ({ open = false }, setState) => (
   <div style={{ display: 'block', textAlign: 'center' }}>
-    <button onClick={() => setState({ open: !state.open })} style={buttonStyle}>
+    <button onClick={() => setState({ open: !open })} style={buttonStyle}>
       Toggle info
     </button>
 
@@ -99,14 +99,12 @@ addStory.controlled('controlled marker with info window', readme, (setState, sta
       <Marker
         position={config.markers[0]}
         info='This is Info Window'
-        open={state.open}
+        open={open}
         onClose={() => setState({ open: false })}
       />
     </Map>
   </div>
-), () => ({
-  open: false
-}))
+))
 
 addStory('map is not interactive', readme, () => (
   <Map style={{ height: '70vh' }} apiKey={apiKey} zoom={10} center={config.interactive} interactive={false} />
@@ -145,8 +143,8 @@ addStory('two directions', readme, () => (
   </Map>
 ))
 
-addStory.controlled('change directions', readme, (setState, state) => {
-  const nextDestination = state.destination === config.changing.end[0]
+addStory('change directions', readme, ({ destination = config.changing.end[0] }, setState) => {
+  const nextDestination = destination === config.changing.end[0]
     ? config.changing.end[1]
     : config.changing.end[0]
 
@@ -162,10 +160,8 @@ addStory.controlled('change directions', readme, (setState, state) => {
       </button>
 
       <Map style={{ height: '70vh' }} apiKey={apiKey}>
-        <Directions startPoint={config.changing.start} endPoint={state.destination} />
+        <Directions startPoint={config.changing.start} endPoint={destination} />
       </Map>
     </div>
   )
-}, () => ({
-  destination: config.changing.end[0]
-}))
+})

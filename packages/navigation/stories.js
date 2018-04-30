@@ -34,20 +34,16 @@ addStory('pagination', readme, () => (
   </Navigation>
 ))
 
-addStory.controlled('controlled pagination', readme, (setState, state) => (
+addStory('controlled pagination', readme, ({ page = 1 }, setState) => (
   <Navigation type='pagination'>
     <ControlledPagination
-      activePage={state.page}
+      activePage={page}
       displayedLimit={8}
       onChange={i => setState({ page: i })}
       pageCount={47}
     />
   </Navigation>
-), () => {
-  return {
-    page: 1
-  }
-})
+))
 
 addStory('breadcrumbs', readme, () => (
   <Navigation type='breadcrumbs'>
@@ -73,10 +69,10 @@ addStory('tabs', readme, () => (
   </Navigation>
 ))
 
-addStory.controlled('controlled tabs', readme, (setState, state) => (
+addStory('controlled tabs', readme, ({ tab = 0 }, setState) => (
   <Navigation type='tabs'>
     <ControlledTabs
-      activeTab={state.tab}
+      activeTab={tab}
       onChange={i => setState({ tab: i })}
       labels={[
         {
@@ -92,8 +88,4 @@ addStory.controlled('controlled tabs', readme, (setState, state) => (
       ]}
     />
   </Navigation>
-), () => {
-  return {
-    tab: 0
-  }
-})
+))

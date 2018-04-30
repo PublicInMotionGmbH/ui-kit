@@ -45,43 +45,43 @@ const options = [
 
 // Stories
 
-addStory.controlled('simple select box', readme, (setState, state) => (
+addStory('simple select box', readme, ({ value = null }, setState) => (
   <div>
-    <div>Selected value: {state.value}</div>
+    <div>Selected value: {value}</div>
     <SelectBox
       placeholder='Select item...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       options={optionsSimple}
     />
   </div>
-), () => ({ value: null }))
+))
 
-addStory.controlled('multi select box', readme, (setState, state) => (
+addStory('multi select box', readme, ({ value = [] }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       multi
       placeholder='Select items...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       options={optionsSimple}
     />
   </div>
-), () => ({ value: [] }))
+))
 
-addStory.controlled('placeholder with icon', readme, (setState, state) => (
+addStory('placeholder with icon', readme, ({ value = [] }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       multi
       placeholder={<span><Icon name='my_location' /> Select penguins...</span>}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       options={optionsSimple}
     />
   </div>
-), () => ({ value: [] }))
+))
 
 function renderCountry (x) {
   return (
@@ -119,181 +119,181 @@ function filterOptions (value, options, field) {
   })
 }
 
-addStory.controlled('special select box', readme, (setState, state) => (
+addStory('special select box', readme, ({ value = null }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       placeholder='Select item...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: null }))
+))
 
-addStory.controlled('warning select box', readme, (setState, state) => (
+addStory('warning select box', readme, ({ value = null }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       placeholder='Select item...'
       icon={<Icon name='warning' style={{ fontSize: 15, color: 'gold' }} />}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: null }))
+))
 
-addStory.controlled('loading select box', readme, (setState, state) => (
+addStory('loading select box', readme, ({ value = null }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       placeholder='Select item...'
       icon={<ProgressRing type='error' />}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: null }))
+))
 
-addStory.controlled('special multi select box', readme, (setState, state) => (
+addStory('special multi select box', readme, ({ value = [] }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       multi
       placeholder='Select items...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: [] }))
+))
 
-addStory.controlled('filtered combo box', readme, (setState, state) => (
+addStory('filtered combo box', readme, ({ value = null, inputValue = '' }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <ComboBox
       placeholder='Select item...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value, inputValue: '' })}
       onInputValueChange={inputValue => setState({ inputValue })}
-      options={filterOptions(state.inputValue, optionsSimple)}
+      options={filterOptions(inputValue, optionsSimple)}
     />
   </div>
-), () => ({ value: null, inputValue: '' }))
+))
 
-addStory.controlled('filtered multi combo box', readme, (setState, state) => (
+addStory('filtered multi combo box', readme, ({ value = [], inputValue = '' }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <ComboBox
       multi
       placeholder='Select items...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value, inputValue: '' })}
       onInputValueChange={inputValue => setState({ inputValue })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
-      options={filterOptions(state.inputValue, options, 'name')}
+      options={filterOptions(inputValue, options, 'name')}
       onFocus={action('focus')}
       onBlur={action('blur')}
     />
   </div>
-), () => ({ value: [], inputValue: '' }))
+))
 
-addStory.controlled('multi combo box with adding value', readme, (setState, state) => (
+addStory('multi combo box with adding value', readme, ({ value = [], inputValue = '' }, setState) => (
   <div>
     <div>Use either <strong>Tab</strong> or <strong>Comma</strong> key.</div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <ComboBox
       multi
       placeholder='Select items...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value, inputValue: '' })}
       onInputValueChange={inputValue => setState({ inputValue })}
-      onNewValue={inputValue => setState({ value: state.value.concat(inputValue) })}
-      options={filterOptions(state.inputValue, optionsSimple)}
+      onNewValue={inputValue => setState({ value: value.concat(inputValue) })}
+      options={filterOptions(inputValue, optionsSimple)}
     />
   </div>
-), () => ({ value: [], inputValue: '' }))
+))
 
-addStory.controlled('auto complete', readme, (setState, state) => (
+addStory('auto complete', readme, ({ value = null }, setState) => (
   <div>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <AutoComplete
       onChoose={value => setState({ value: 'Penguin ' + value })}
-      options={filterOptions(state.value, optionsSimple)}
+      options={filterOptions(value, optionsSimple)}
       onFocus={action('focus')}
       onBlur={action('blur')}
     >
-      <TextInput value={state.value} onChange={value => setState({ value })} />
+      <TextInput value={value} onChange={value => setState({ value })} />
     </AutoComplete>
   </div>
-), () => ({ value: '' }))
+))
 
-addStory.controlled('RTL: multi select box', readme, (setState, state) => (
+addStory('RTL: multi select box', readme, ({ value = [] }, setState) => (
   <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       multi
       placeholder='בחר פריטים'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: [] }))
+))
 
-addStory.controlled('RTL: select box', readme, (setState, state) => (
+addStory('RTL: select box', readme, ({ value = [] }, setState) => (
   <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <SelectBox
       placeholder='בחר פריט'
       icon={<ProgressRing type='error' />}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
       options={options}
     />
   </div>
-), () => ({ value: [] }))
+))
 
-addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
+addStory('RTL: filtered combo box', readme, ({ value = null, inputValue = '' }, setState) => (
   <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <ComboBox
       placeholder='Select item...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value, inputValue: '' })}
       onInputValueChange={inputValue => setState({ inputValue })}
-      options={filterOptions(state.inputValue, optionsSimple)}
+      options={filterOptions(inputValue, optionsSimple)}
     />
   </div>
-), () => ({ value: null, inputValue: '' }))
+))
 
-addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) => (
+addStory('RTL: filtered multi combo box', readme, ({ value = [], inputValue = '' }, setState) => (
   <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <div>Selected value: {JSON.stringify(value)}</div>
     <ComboBox
       multi
       placeholder='Select items...'
-      value={state.value}
+      value={value}
       onChange={value => setState({ value, inputValue: '' })}
       onInputValueChange={inputValue => setState({ inputValue })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
-      options={filterOptions(state.inputValue, options, 'name')}
+      options={filterOptions(inputValue, options, 'name')}
     />
   </div>
-), () => ({ value: [], inputValue: '' }))
+))

@@ -48,7 +48,7 @@ function createController (func, getInitialState = () => ({})) {
   // Build some required functions
   const register = e => components.push(e)
   const update = () => components.forEach(c => c.forceUpdate())
-  const render = () => func(setState, state)
+  const render = () => func(state, setState)
   const unregister = e => {
     const index = components.indexOf(e)
 
@@ -59,6 +59,10 @@ function createController (func, getInitialState = () => ({})) {
 
   // Build function to set new state
   function setState (nextState) {
+    if (typeof nextState === 'function') {
+      nextState = nextState(state)
+    }
+
     Object.assign(state, nextState)
     emitSetStateAction(nextState)
     update()

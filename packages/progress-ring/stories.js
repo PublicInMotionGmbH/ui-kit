@@ -19,42 +19,42 @@ addStory('initial', readme, () => (
   <ProgressRing />
 ))
 
-addStory.controlled('controlled with children', readme, (setState, state) => (
+addStory('controlled with children', readme, ({ value = 30 }, setState) => (
   <div>
     <div>
-      <ProgressRing value={state.value / 100}><Icon name='done' /></ProgressRing>
-      {' '}<ProgressRing value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
-      {' '}<ProgressRing value={state.value / 100} />
+      <ProgressRing value={value / 100}><Icon name='done' /></ProgressRing>
+      {' '}<ProgressRing value={value / 100}>{Math.floor(value)}</ProgressRing>
+      {' '}<ProgressRing value={value / 100} />
     </div>
     <div>
-      <ProgressRing type='success' value={state.value / 100}><Icon name='done' /></ProgressRing>
-      {' '}<ProgressRing type='success' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
-      {' '}<ProgressRing type='success' value={state.value / 100} />
+      <ProgressRing type='success' value={value / 100}><Icon name='done' /></ProgressRing>
+      {' '}<ProgressRing type='success' value={value / 100}>{Math.floor(value)}</ProgressRing>
+      {' '}<ProgressRing type='success' value={value / 100} />
     </div>
     <div>
-      <ProgressRing type='info' value={state.value / 100}><Icon name='cloud' /></ProgressRing>
-      {' '}<ProgressRing type='info' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
-      {' '}<ProgressRing type='info' value={state.value / 100} />
+      <ProgressRing type='info' value={value / 100}><Icon name='cloud' /></ProgressRing>
+      {' '}<ProgressRing type='info' value={value / 100}>{Math.floor(value)}</ProgressRing>
+      {' '}<ProgressRing type='info' value={value / 100} />
     </div>
     <div>
-      <ProgressRing type='warning' value={state.value / 100}><Icon name='priority_high' /></ProgressRing>
-      {' '}<ProgressRing type='warning' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
-      {' '}<ProgressRing type='warning' value={state.value / 100} />
+      <ProgressRing type='warning' value={value / 100}><Icon name='priority_high' /></ProgressRing>
+      {' '}<ProgressRing type='warning' value={value / 100}>{Math.floor(value)}</ProgressRing>
+      {' '}<ProgressRing type='warning' value={value / 100} />
     </div>
     <div>
-      <ProgressRing type='error' value={state.value / 100}><Icon name='clear' /></ProgressRing>
-      {' '}<ProgressRing type='error' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
-      {' '}<ProgressRing type='error' value={state.value / 100} />
+      <ProgressRing type='error' value={value / 100}><Icon name='clear' /></ProgressRing>
+      {' '}<ProgressRing type='error' value={value / 100}>{Math.floor(value)}</ProgressRing>
+      {' '}<ProgressRing type='error' value={value / 100} />
     </div>
 
-    <input type='text' value={state.value} onChange={e => setState({ value: e.target.value })} />
+    <input type='text' value={value} onChange={e => setState({ value: e.target.value })} />
   </div>
-), () => ({ value: 30 }))
+))
 
-addStory.controlled('inside text', readme, (setState, state) => (
+addStory('inside text', readme, ({ value = 30 }, setState) => (
   <div>
-    There is already <ProgressRing type='success' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing> percent loaded<br />
-    <ProgressRing type='success' value={state.value / 100}><Icon name='done' /></ProgressRing> {Math.floor(state.value)}% loaded<br />
+    There is already <ProgressRing type='success' value={value / 100}>{Math.floor(value)}</ProgressRing> percent loaded<br />
+    <ProgressRing type='success' value={value / 100}><Icon name='done' /></ProgressRing> {Math.floor(value)}% loaded<br />
     <ProgressRing type='success' /> Loading data...<br />
 
     <div style={{ fontSize: 30 }}>
@@ -73,6 +73,6 @@ addStory.controlled('inside text', readme, (setState, state) => (
       <ProgressRing type='success' /> Loading data...
     </div>
 
-    <input type='text' value={state.value} onChange={e => setState({ value: e.target.value })} />
+    <input type='text' value={value} onChange={e => setState({ value: e.target.value })} />
   </div>
-), () => ({ value: 30 }))
+))

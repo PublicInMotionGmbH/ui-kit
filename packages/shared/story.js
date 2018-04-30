@@ -45,6 +45,21 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
   const stories = storiesOf(name, module)
 
   function addStory (name, description, render, infoOptions = {}) {
+    // When rendering function expect any arguments,
+    // It means that it's controlled
+    if (render.length > 0) {
+      render = createController(render)
+
+      infoOptions = {
+        ...infoOptions,
+        propTablesExclude: [
+          render.Controller,
+          ...(infoOptions.propTablesExclude || [])
+        ]
+      }
+    }
+
+    // Build options for story
     const options = {
       header: true,
       inline: true,
@@ -53,32 +68,16 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
       ...infoOptions
     }
 
+    // Build styles factory
     const stylesFunction = options.styles
       ? stylesheet => options.styles(styles(stylesheet, options), options)
       : stylesheet => styles(stylesheet, options)
 
+    // Create story
     return stories.add(name, withInfo({
       ...options,
       styles: stylesFunction
     })(render))
-  }
-
-  // Create helper for controlled stories
-  addStory.controlled = function addControlledStory (name, description, render, getInitialState, infoOptions = {}) {
-    // Build controller renderer
-    const controller = createController(render, getInitialState)
-
-    // Build list of excluded components from propTypes table
-    const excludedControllers = [
-      controller.Controller,
-      ...(infoOptions.propTablesExclude || [])
-    ]
-
-    // Exclude controller from prop types list
-    return addStory(name, description, controller, {
-      ...infoOptions,
-      propTablesExclude: excludedControllers
-    })
   }
 
   return addStory

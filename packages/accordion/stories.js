@@ -38,41 +38,41 @@ addStory('self-controlled', readme, () => (
   />
 ))
 
-addStory.controlled('different animation time', readme, (setState, state) => (
+addStory('different animation time', readme, ({ active = null }, setState) => (
   <Accordion
-    value={state.active}
+    value={active}
     onChange={x => setState({ active: x })}
     animationTime={100}
     options={options}
   />
-), () => ({ active: null }))
+))
 
-addStory.controlled('with special arrow', readme, (setState, state) => (
+addStory('with special arrow', readme, ({ active = null }, setState) => (
   <Accordion
-    value={state.active}
+    value={active}
     onChange={x => setState({ active: x })}
     animationTime={100}
     options={options}
     renderOpenIcon={() => <Icon name='keyboard_arrow_down' />}
     renderCloseIcon={() => <Icon name='keyboard_arrow_up' />}
   />
-), () => ({ active: null }))
+))
 
-addStory.controlled('not smooth', readme, (setState, state) => (
+addStory('not smooth', readme, ({ active = null }, setState) => (
   <Accordion
-    value={state.active}
+    value={active}
     onChange={x => setState({ active: x })}
     smooth={false}
     options={options}
   />
-), () => ({ active: null }))
+))
 
-addStory.controlled('multiple items (different IDs)', readme, (setState, state) => (
+addStory('multiple items (different IDs)', readme, ({ active = null }, setState) => (
   <Accordion
-    value={state.active}
+    value={active}
     onChange={x => setState({ active: x })}
     smooth={false}
     options={optionsById}
     buildId={option => option.id}
   />
-), () => ({ active: null }))
+))

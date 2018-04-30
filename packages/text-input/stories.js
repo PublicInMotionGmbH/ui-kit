@@ -42,24 +42,24 @@ addStory('default', readme, () => (
   </div>
 ))
 
-addStory.controlled('controlled', readme, (setState, state) => (
+addStory('controlled', readme, ({ value = '' }, setState) => (
   <div style={{ width: 300 }}>
     <TextInput
       placeholder='Some placeholder'
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
   </div>
-), () => ({ value: '' }))
+))
 
-addStory.controlled('with icon', readme, (setState, state) => (
+addStory('with icon', readme, ({ value = '' }, setState) => (
   <div style={{ width: 300 }}>
     <TextInput
       placeholder='Icon on left'
       left={<Icon name='lock' />}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
@@ -67,7 +67,7 @@ addStory.controlled('with icon', readme, (setState, state) => (
       placeholder='Icon on right'
       right={<Icon name='warning' />}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
@@ -76,31 +76,31 @@ addStory.controlled('with icon', readme, (setState, state) => (
       left={<Icon name='lock' />}
       right={<Icon name='warning' />}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
   </div>
-), () => ({ value: '' }))
+))
 
-addStory.controlled('with suffix', readme, (setState, state) => (
+addStory('with suffix', readme, ({ value = '0' }, setState) => (
   <div style={{ width: 300 }}>
     <TextInput
       placeholder='How many cars would you like to have?'
       suffix='cars'
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
   </div>
-), () => ({ value: '0' }))
+))
 
-addStory.controlled('with icon and suffix', readme, (setState, state) => (
+addStory('with icon and suffix', readme, ({ value = 0, suffix = 'cars' }, setState) => (
   <div style={{ width: 300 }}>
     <label>
       <input
         type='checkbox'
         onChange={e => setState({ suffix: e.target.checked ? 'cars' : null })}
-        checked={!!state.suffix}
+        checked={!!suffix}
       />
       {' '}With suffix
     </label>
@@ -108,18 +108,18 @@ addStory.controlled('with icon and suffix', readme, (setState, state) => (
     <TextInput
       placeholder='Single left icon'
       left={<Icon name='directions_car' />}
-      suffix={state.suffix}
+      suffix={suffix}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
     <TextInput
       placeholder='Single right icon'
       right={<Icon name='directions_car' />}
-      suffix={state.suffix}
+      suffix={suffix}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
@@ -127,34 +127,34 @@ addStory.controlled('with icon and suffix', readme, (setState, state) => (
       placeholder='Both icons'
       left={<Icon name='directions_car' />}
       right={<Icon name='warning' />}
-      suffix={state.suffix}
+      suffix={suffix}
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
   </div>
-), () => ({ value: 0, suffix: 'cars' }))
+))
 
-addStory.controlled('with icon and special suffix', readme, (setState, state) => {
+addStory('with icon and special suffix', readme, ({ value = '2' }, setState) => {
   const suffix = (
     <span>
       happy <strong>users</strong> <Icon name='face' /><Icon name='favorite' /><Icon name='mobile_apps' />
     </span>
   )
 
-  const value = Math.max(0, Math.min(1, state.value.length / 10))
+  const _value = Math.max(0, Math.min(1, value.length / 10))
 
-  const progressType = value > 0.8
+  const progressType = _value > 0.8
     ? 'success'
-    : value > 0.4 ? 'warning' : 'error'
+    : _value > 0.4 ? 'warning' : 'error'
 
   const progress = (
     <ProgressBar
       type={progressType}
-      value={value}
+      value={_value}
       style={{ width: 50, display: 'inline-block' }}
     >
-      {(100 * value) + '%'}
+      {(100 * _value) + '%'}
     </ProgressBar>
   )
 
@@ -165,7 +165,7 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         left={<Icon name='directions_car' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
 
@@ -174,7 +174,7 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         right={<Icon name='directions_car' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
 
@@ -184,7 +184,7 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         right={<Icon name='warning' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
 
@@ -193,7 +193,7 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         left={<Icon name='directions_car' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
 
@@ -202,7 +202,7 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         right={<Icon name='directions_car' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
 
@@ -212,33 +212,33 @@ addStory.controlled('with icon and special suffix', readme, (setState, state) =>
         right={<Icon name='warning' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
+        value={value}
         onChange={value => setState({value})}
       />
     </div>
   )
-}, () => ({ value: '2' }))
+})
 
-addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
+addStory('RTL: with icon and suffix', readme, ({ value = '2' }, setState) => {
   const suffix = (
     <span>
       happy <strong>users</strong> <Icon name='face' /><Icon name='favorite' /><Icon name='mobile_apps' />
     </span>
   )
 
-  const value = Math.max(0, Math.min(1, state.value.length / 10))
+  const _value = Math.max(0, Math.min(1, value.length / 10))
 
-  const progressType = value > 0.8
+  const progressType = _value > 0.8
     ? 'success'
-    : value > 0.4 ? 'warning' : 'error'
+    : _value > 0.4 ? 'warning' : 'error'
 
   const progress = (
     <ProgressBar
       type={progressType}
-      value={value}
+      value={_value}
       style={{ width: 50, display: 'inline-block' }}
     >
-      {(100 * value) + '%'}
+      {(100 * _value) + '%'}
     </ProgressBar>
   )
 
@@ -249,8 +249,8 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         left={<Icon name='directions_car' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
 
       <TextInput
@@ -258,8 +258,8 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         right={<Icon name='directions_car' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
 
       <TextInput
@@ -268,8 +268,8 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         right={<Icon name='warning' />}
         suffix={suffix}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
 
       <TextInput
@@ -277,8 +277,8 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         left={<Icon name='directions_car' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
 
       <TextInput
@@ -286,8 +286,8 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         right={<Icon name='directions_car' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
 
       <TextInput
@@ -296,14 +296,14 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
         right={<Icon name='warning' />}
         suffix={progress}
         style={additionalStyling}
-        value={state.value}
-        onChange={value => setState({value})}
+        value={value}
+        onChange={value => setState({ value })}
       />
     </div>
   )
-}, () => ({ value: '2' }))
+})
 
-addStory.controlled('small with icon and suffix', readme, (setState, state) => (
+addStory('small with icon and suffix', readme, ({ value = '0' }, setState) => (
   <div style={{ width: 300 }}>
     <TextInput
       size='small'
@@ -311,7 +311,7 @@ addStory.controlled('small with icon and suffix', readme, (setState, state) => (
       left={<Icon name='directions_car' />}
       suffix='cars'
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
@@ -321,7 +321,7 @@ addStory.controlled('small with icon and suffix', readme, (setState, state) => (
       right={<Icon name='directions_car' />}
       suffix='cars'
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
 
@@ -332,11 +332,11 @@ addStory.controlled('small with icon and suffix', readme, (setState, state) => (
       right={<Icon name='warning' />}
       suffix='cars'
       style={additionalStyling}
-      value={state.value}
+      value={value}
       onChange={value => setState({ value })}
     />
   </div>
-), () => ({ value: 0 }))
+))
 
 addStory('small', readme, () => (
   <div>

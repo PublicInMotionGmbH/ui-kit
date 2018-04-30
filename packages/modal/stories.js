@@ -9,14 +9,14 @@ const addStory = createStoriesFactory('Modal', module, {
   propTables: [ Modal ]
 })
 
-const render = (setState, state) => {
+addStory('initial', readme, ({ open = false }, setState) => {
   const modalRoot = document.querySelector('body')
   return (
     <div>
-      <button onClick={() => { setState({ open: !state.open }) }}>
+      <button onClick={() => { setState({ open: !open }) }}>
         Open Modal
       </button>
-      <Modal open={state.open} attachTo={modalRoot}>
+      <Modal open={open} attachTo={modalRoot}>
         <h1>Modal</h1>
         <button onClick={() => { setState({ open: false }) }}>
           Close Modal
@@ -24,12 +24,4 @@ const render = (setState, state) => {
       </Modal>
     </div>
   )
-}
-
-const getInitialState = () => {
-  return {
-    open: false
-  }
-}
-
-addStory.controlled('initial', readme, render, getInitialState)
+})
