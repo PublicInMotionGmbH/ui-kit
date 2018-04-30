@@ -5,6 +5,43 @@ import { buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Function to build toggle props with handlers */
+  getToggleButtonProps: PropTypes.func.isRequired,
+
+  /** Function to build clear button props with handlers */
+  getClearButtonProps: PropTypes.func.isRequired,
+
+  /** Function to build input props with handlers */
+  getInputProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderValue: PropTypes.func.isRequired,
+
+  /** Value provided to input */
+  inputValue: PropTypes.string,
+
+  /** Additional icon to put in the select box */
+  icon: PropTypes.node,
+
+  /** Is it multi-select? */
+  multi: PropTypes.bool,
+
+  /** Placeholder to show when there is no value */
+  placeholder: PropTypes.string,
+
+  /** Is menu open? */
+  isOpen: PropTypes.bool,
+
+  /** List of currently selected items */
+  selectedItems: PropTypes.array
+}
+
+const defaultProps = {
+  isOpen: false,
+  selectedItems: []
+}
+
 /**
  * Value shown in single-select ComboBox.
  *
@@ -202,41 +239,7 @@ class ComboBoxValue extends React.PureComponent {
   }
 }
 
-ComboBoxValue.propTypes = {
-  /** Function to build toggle props with handlers */
-  getToggleButtonProps: PropTypes.func.isRequired,
-
-  /** Function to build clear button props with handlers */
-  getClearButtonProps: PropTypes.func.isRequired,
-
-  /** Function to build input props with handlers */
-  getInputProps: PropTypes.func.isRequired,
-
-  /** Function to render item value */
-  renderValue: PropTypes.func.isRequired,
-
-  /** Value provided to input */
-  inputValue: PropTypes.string,
-
-  /** Additional icon to put in the select box */
-  icon: PropTypes.node,
-
-  /** Is it multi-select? */
-  multi: PropTypes.bool,
-
-  /** Placeholder to show when there is no value */
-  placeholder: PropTypes.string,
-
-  /** Is menu open? */
-  isOpen: PropTypes.bool,
-
-  /** List of currently selected items */
-  selectedItems: PropTypes.array
-}
-
-ComboBoxValue.defaultProps = {
-  isOpen: false,
-  selectedItems: []
-}
+ComboBoxValue.propTypes = propTypes
+ComboBoxValue.defaultProps = defaultProps
 
 export default ComboBoxValue

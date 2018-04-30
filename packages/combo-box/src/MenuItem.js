@@ -5,6 +5,30 @@ import { buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Item to show */
+  item: PropTypes.any.isRequired,
+
+  /** Index of this item in options list */
+  index: PropTypes.number.isRequired,
+
+  /** Function to build item props with handlers */
+  getItemProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderItem: PropTypes.func.isRequired,
+
+  /** Index of currently highlighted item */
+  highlightedIndex: PropTypes.number,
+
+  /** List of currently selected items */
+  selectedItems: PropTypes.array
+}
+
+const defaultProps = {
+  selectedItems: []
+}
+
 /**
  * Component which represents item in expandable menu.
  *
@@ -46,28 +70,7 @@ function MenuItem (props) {
   )
 }
 
-MenuItem.propTypes = {
-  /** Item to show */
-  item: PropTypes.any.isRequired,
-
-  /** Index of this item in options list */
-  index: PropTypes.number.isRequired,
-
-  /** Function to build item props with handlers */
-  getItemProps: PropTypes.func.isRequired,
-
-  /** Function to render item value */
-  renderItem: PropTypes.func.isRequired,
-
-  /** Index of currently highlighted item */
-  highlightedIndex: PropTypes.number,
-
-  /** List of currently selected items */
-  selectedItems: PropTypes.array
-}
-
-MenuItem.defaultProps = {
-  selectedItems: []
-}
+MenuItem.propTypes = propTypes
+MenuItem.defaultProps = defaultProps
 
 export default MenuItem

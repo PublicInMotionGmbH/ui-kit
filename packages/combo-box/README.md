@@ -20,6 +20,8 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+All of these components additionally allow some of `Downshift` props.
+
 ### SelectBox
 
 Property name | Type      | Default           | Description
