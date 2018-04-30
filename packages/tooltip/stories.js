@@ -140,7 +140,7 @@ addStory('Popover fade', readme, () => (
 ))
 
 addStory('Popover with tooltip', readme, () => (
-  <Tooltip  position='right' triggerOn='click' arrow={false} render={() => (
+  <Tooltip position='right' triggerOn='click' arrow={false} render={() => (
     <Tooltip render={() => <div>Tooltip</div>}>
       <span style={{...tooltipStyle, backgroundColor: 'transparent'}}>
         Popover with Tooltip
