@@ -23,7 +23,7 @@ function calculateInputStyles (inputEl, suffixEl) {
     },
     suffix: {
       ...styles,
-      maxWidth: width.input - width.left - width.right,
+      maxWidth: width.input - width.value - width.left - width.right,
       [start]: Math.min(width[start] + width.value, width.input - width.suffix - width[end])
     }
   }
