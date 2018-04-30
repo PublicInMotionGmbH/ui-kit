@@ -30,7 +30,19 @@ const propTypes = {
   placeholder: PropTypes.string,
 
   /** Week day format */
-  weekDayFormat: PropTypes.string
+  weekDayFormat: PropTypes.string,
+
+  /** Moment.js object or formatted value */
+  value: PropTypes.oneOf(PropTypes.string, PropTypes.object),
+
+  /** Event handler when date is changed */
+  onChange: PropTypes.func,
+
+  /** Event handler when calendar is focused */
+  onFocus: PropTypes.func,
+
+  /** Event handler when calendar has lost focus */
+  onBlur: PropTypes.func
 }
 
 const defaultProps = {
@@ -48,7 +60,7 @@ const defaultProps = {
  */
 class Calendar extends React.PureComponent {
   state = {
-    date: moment(this.props.value),
+    date: this.props.value == null ? null : moment(this.props.value),
     focused: false
   }
 
@@ -79,6 +91,7 @@ class Calendar extends React.PureComponent {
       onChange(date)
     }
   }
+
   /**
    * Call onFocus/onBlur events when calendar status is changed.
    *
