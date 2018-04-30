@@ -20,9 +20,16 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+This component allows any properties which can be added to `div` element. Additionally, handles some differently:
+
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+className     | string    | n/a             | additional class name passed to wrapper
+value         | string    | self-controlled | phone number to show
+placeholder   | string    | n/a             | placeholder to show when there is no value
+onChange      | function  | n/a             | event handler for changed value
+onFocus       | function  | n/a             | event handler fired when input has been focused
+onBlur        | function  | n/a             | event handler fired when input lost focus
 
 ## Changelog
 
