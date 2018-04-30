@@ -5,6 +5,27 @@ import { buildClassName } from '@talixo/shared'
 
 import Tag from './Tag'
 
+const propTypes = {
+  /** Additional styles for wrapper */
+  style: PropTypes.object,
+
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func.isRequired,
+
+  /** List of currently selected items */
+  selectedItems: PropTypes.array,
+
+  /** Function to build 'remove' button props with handlers */
+  getRemoveButtonProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderValue: PropTypes.func.isRequired
+}
+
+const defaultProps = {
+  selectedItems: []
+}
+
 /**
  * Component which represents list of value tags for multi-select elements
  *
@@ -37,25 +58,7 @@ function TagsList (props) {
   )
 }
 
-TagsList.propTypes = {
-  /** Additional styles for wrapper */
-  style: PropTypes.object,
-
-  /** Function to build item ID - used for 'key' properties */
-  buildItemId: PropTypes.func.isRequired,
-
-  /** List of currently selected items */
-  selectedItems: PropTypes.array,
-
-  /** Function to build 'remove' button props with handlers */
-  getRemoveButtonProps: PropTypes.func.isRequired,
-
-  /** Function to render item value */
-  renderValue: PropTypes.func.isRequired
-}
-
-TagsList.defaultProps = {
-  selectedItems: []
-}
+TagsList.propTypes = propTypes
+TagsList.defaultProps = defaultProps
 
 export default TagsList

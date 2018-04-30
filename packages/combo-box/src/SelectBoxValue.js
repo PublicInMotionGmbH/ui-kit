@@ -7,6 +7,35 @@ import { Icon } from '@talixo/icon'
 
 import TagsList from './TagsList'
 
+const propTypes = {
+  /** Function to build toggle props with handlers */
+  getToggleButtonProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderValue: PropTypes.func.isRequired,
+
+  /** Additional icon to put in the select box */
+  icon: PropTypes.node,
+
+  /** Is it multi-select? */
+  multi: PropTypes.bool,
+
+  /** Placeholder to show when there is no value */
+  placeholder: PropTypes.node,
+
+  /** Is menu open? */
+  isOpen: PropTypes.bool,
+
+  /** List of currently selected items */
+  selectedItems: PropTypes.array
+}
+
+const defaultProps = {
+  multi: false,
+  isOpen: false,
+  selectedItems: []
+}
+
 /**
  * Value shown in SelectBox.
  *
@@ -65,33 +94,7 @@ function SelectBoxValue (props) {
   )
 }
 
-SelectBoxValue.propTypes = {
-  /** Function to build toggle props with handlers */
-  getToggleButtonProps: PropTypes.func.isRequired,
-
-  /** Function to render item value */
-  renderValue: PropTypes.func.isRequired,
-
-  /** Additional icon to put in the select box */
-  icon: PropTypes.node,
-
-  /** Is it multi-select? */
-  multi: PropTypes.bool,
-
-  /** Placeholder to show when there is no value */
-  placeholder: PropTypes.node,
-
-  /** Is menu open? */
-  isOpen: PropTypes.bool,
-
-  /** List of currently selected items */
-  selectedItems: PropTypes.array
-}
-
-SelectBoxValue.defaultProps = {
-  multi: false,
-  isOpen: false,
-  selectedItems: []
-}
+SelectBoxValue.propTypes = propTypes
+SelectBoxValue.defaultProps = defaultProps
 
 export default SelectBoxValue

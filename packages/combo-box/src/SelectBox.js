@@ -10,6 +10,56 @@ import SelectBoxValue from './SelectBoxValue'
 
 const moduleName = 'combo-box'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Icon to show on right of select-box */
+  icon: PropTypes.node,
+
+  /** List of options to show */
+  options: PropTypes.array.isRequired,
+
+  /** Placeholder to show when there is no value selected */
+  placeholder: PropTypes.node,
+
+  /** Is it multi-select? */
+  multi: PropTypes.bool,
+
+  /** Value for controlled component */
+  value: PropTypes.any,
+
+  /** Event called after current value of select-box has been changed */
+  onChange: PropTypes.func,
+
+  /** Event called when combo-box is focused */
+  onFocus: PropTypes.func,
+
+  /** Event called when combo-box has lost focus */
+  onBlur: PropTypes.func,
+
+  /** Function to render item */
+  renderItem: PropTypes.func,
+
+  /** Function to render value, otherwise will use same as item */
+  renderValue: PropTypes.func,
+
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func,
+
+  /** Function passed to Downshift to make it working for objects */
+  itemToString: PropTypes.func
+}
+
+const defaultProps = {
+  options: [],
+  multi: false,
+  placeholder: '...',
+  renderItem: item => item,
+  buildItemId: (item, index) => index,
+  itemToString: item => item
+}
+
 /**
  * Component which represents Combo box.
  *
@@ -161,8 +211,7 @@ class SelectBox extends React.PureComponent {
   render () {
     const {
       icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, renderTag,
-      ...passedProps
+      buildItemId, renderItem, renderValue, ...passedProps
     } = this.props
 
     return (
@@ -178,42 +227,7 @@ class SelectBox extends React.PureComponent {
   }
 }
 
-SelectBox.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** List of options to show */
-  options: PropTypes.array.isRequired,
-
-  /** Placeholder to show when there is no value selected */
-  placeholder: PropTypes.node,
-
-  /** Is it multi-select? */
-  multi: PropTypes.bool,
-
-  /** Event called after current value of select-box has been changed */
-  onChange: PropTypes.func,
-
-  /** Function to render item */
-  renderItem: PropTypes.func,
-
-  /** Function to render value, otherwise will use same as item */
-  renderValue: PropTypes.func,
-
-  /** Function to build item ID - used for 'key' properties */
-  buildItemId: PropTypes.func,
-
-  /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
-}
-
-SelectBox.defaultProps = {
-  options: [],
-  multi: false,
-  placeholder: '...',
-  renderItem: item => item,
-  buildItemId: (item, index) => index,
-  itemToString: item => item
-}
+SelectBox.propTypes = propTypes
+SelectBox.defaultProps = defaultProps
 
 export default SelectBox
