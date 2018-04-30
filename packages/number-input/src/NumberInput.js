@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
 import NumberInputStepper from './NumberInputStepper'
@@ -88,26 +87,27 @@ class NumberInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, size, onChange, precision, initialTime, stepTime, ...passedProps } = this.props
+    const {
+      className, error, stepper, size, onChange, precision,
+      initialTime, stepTime, right, ...passedProps
+    } = this.props
 
-    const wrapperClass = buildClassName('number-input', className, [ size ], { error })
+    const wrapperClass = buildClassName('number-input', className, [ size ], { error, stepper })
 
-    const stepper = (
+    const stepperElement = stepper ? (
       <NumberInputStepper
         onIncrement={this.increment}
         onDecrement={this.decrement}
         initialTime={initialTime}
         stepTime={stepTime}
       />
-    )
+    ) : null
 
     return (
       <TextInput
         className={wrapperClass}
-        left={<Icon name='directions_car' />}
-        suffix='cars'
         type='number'
-        right={stepper}
+        right={stepperElement}
         size={size}
         onChange={value => this.change(value)}
         {...passedProps}
@@ -117,8 +117,11 @@ class NumberInput extends React.PureComponent {
 }
 
 NumberInput.propTypes = {
-  /** Additional class name of input  */
+  /** Additional class name of input */
   className: PropTypes.string,
+
+  /** Should include stepper in number input? */
+  stepper: PropTypes.bool,
 
   /** Indicates that input has error */
   error: PropTypes.bool,
@@ -152,6 +155,7 @@ NumberInput.propTypes = {
 }
 
 NumberInput.defaultProps = {
+  stepper: true,
   error: false,
   value: 0,
   precision: 0, // buttons doesn't work correctly above 1e15 correctly (because of float numbers)

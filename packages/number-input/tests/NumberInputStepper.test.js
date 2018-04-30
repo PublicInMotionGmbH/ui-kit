@@ -39,6 +39,75 @@ describe('<NumberInputStepper />', () => {
     expect(spy.mock.calls.length).toBe(1)
   })
 
+  it('should correctly work when clicking spacebar on increment button', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <NumberInputStepper
+        onIncrement={spy}
+        initialTime={500}
+        stepTime={300}
+      />
+    )
+
+    expect(spy.mock.calls.length).toBe(0)
+
+    wrapper.find(`.${name}__button`).at(0).simulate('keydown', {
+      which: 32 // Space bar
+    })
+
+    expect(spy.mock.calls.length).toBe(1)
+
+    // It should not try to increment more
+    jest.runTimersToTime(10000)
+    expect(spy.mock.calls.length).toBe(1)
+  })
+
+  it('should correctly work when clicking spacebar on decrement button', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <NumberInputStepper
+        onDecrement={spy}
+        initialTime={500}
+        stepTime={300}
+      />
+    )
+
+    expect(spy.mock.calls.length).toBe(0)
+
+    wrapper.find(`.${name}__button`).at(1).simulate('keydown', {
+      which: 32 // Space bar
+    })
+
+    expect(spy.mock.calls.length).toBe(1)
+
+    // It should not try to increment more
+    jest.runTimersToTime(10000)
+    expect(spy.mock.calls.length).toBe(1)
+  })
+
+  it('should ignore other keys on buttons', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <NumberInputStepper
+        onIncrement={spy}
+        onDecrement={spy}
+        initialTime={500}
+        stepTime={300}
+      />
+    )
+
+    expect(spy.mock.calls.length).toBe(0)
+
+    wrapper.find(`.${name}__button`).at(0).simulate('keydown', { which: 33 })
+    wrapper.find(`.${name}__button`).at(1).simulate('keydown', { which: 33 })
+
+    expect(spy.mock.calls.length).toBe(0)
+
+    // It should not try to increment more
+    jest.runTimersToTime(10000)
+    expect(spy.mock.calls.length).toBe(0)
+  })
+
   it('should correctly work when clicking increment button', () => {
     const spy = jest.fn()
     const wrapper = mount(
