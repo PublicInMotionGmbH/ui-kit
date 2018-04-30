@@ -29,7 +29,7 @@ exports[`<Calendar /> renders children correctly 1`] = `
             readOnly={false}
             required={false}
             type="text"
-            value=""
+            value="2018-04-30"
           />
           <p
             className="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
