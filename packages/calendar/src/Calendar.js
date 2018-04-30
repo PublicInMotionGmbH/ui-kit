@@ -33,7 +33,7 @@ const propTypes = {
   weekDayFormat: PropTypes.string,
 
   /** Moment.js object or formatted value */
-  value: PropTypes.oneOf(PropTypes.string, PropTypes.object),
+  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
 
   /** Event handler when date is changed */
   onChange: PropTypes.func,
