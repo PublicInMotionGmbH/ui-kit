@@ -10,6 +10,45 @@ import Menu from './Menu'
 
 const moduleName = 'combo-box'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** List of options to show */
+  options: PropTypes.array.isRequired,
+
+  /** Event called after current value of combo-box has been changed */
+  onChoose: PropTypes.func,
+
+  /** Event called when input is focused */
+  onFocus: PropTypes.func,
+
+  /** Event called when input has lost focus */
+  onBlur: PropTypes.func,
+
+  /** Event called when input inside has changed */
+  onChange: PropTypes.func,
+
+  /** Function to render item */
+  renderItem: PropTypes.func,
+
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func,
+
+  /** Function passed to Downshift to make it working for objects */
+  itemToString: PropTypes.func,
+
+  /** Input which needs auto-complete behavior */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  options: [],
+  renderItem: item => item,
+  buildItemId: (item, index) => index,
+  itemToString: item => item
+}
+
 /**
  * Compose props together
  *
@@ -235,31 +274,7 @@ class AutoComplete extends React.PureComponent {
   }
 }
 
-AutoComplete.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** List of options to show */
-  options: PropTypes.array.isRequired,
-
-  /** Event called after current value of combo-box has been changed */
-  onChoose: PropTypes.func,
-
-  /** Function to render item */
-  renderItem: PropTypes.func,
-
-  /** Function to build item ID - used for 'key' properties */
-  buildItemId: PropTypes.func,
-
-  /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
-}
-
-AutoComplete.defaultProps = {
-  options: [],
-  renderItem: item => item,
-  buildItemId: (item, index) => index,
-  itemToString: item => item
-}
+AutoComplete.propTypes = propTypes
+AutoComplete.defaultProps = defaultProps
 
 export default AutoComplete

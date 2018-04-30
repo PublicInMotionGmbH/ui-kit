@@ -16,6 +16,62 @@ const BACKSPACE_KEY = 8
 const TAB_KEY = 9
 const COMMA_KEY = 188
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** List of options to show */
+  options: PropTypes.array.isRequired,
+
+  /** Placeholder to show when there is no value selected */
+  placeholder: PropTypes.node,
+
+  /** Is it multi-select? */
+  multi: PropTypes.bool,
+
+  /** Event called after current value of combo-box has been changed */
+  onChange: PropTypes.func,
+
+  /** Event called when combo-box is focused */
+  onFocus: PropTypes.func,
+
+  /** Event called when combo-box has lost focus */
+  onBlur: PropTypes.func,
+
+  /** Event called after input value has been changed */
+  onInputValueChange: PropTypes.func,
+
+  /** Event called after unknown value is requested to be added */
+  onNewValue: PropTypes.func,
+
+  /** Function to render item */
+  renderItem: PropTypes.func,
+
+  /** Function to render value, otherwise will use same as item */
+  renderValue: PropTypes.func,
+
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func,
+
+  /** Function passed to Downshift to make it working for objects */
+  itemToString: PropTypes.func,
+
+  /** Value for input if you want to control it by yourself */
+  inputValue: PropTypes.string,
+
+  /** Value for controlled component */
+  value: PropTypes.any
+}
+
+const defaultProps = {
+  options: [],
+  multi: false,
+  placeholder: '...',
+  renderItem: item => item,
+  buildItemId: (item, index) => index,
+  itemToString: item => item
+}
+
 /**
  * Component which represents Combo box.
  *
@@ -319,8 +375,7 @@ class ComboBox extends React.PureComponent {
   render () {
     const {
       icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, renderTag,
-      children, ...passedProps
+      buildItemId, renderItem, renderValue, children, ...passedProps
     } = this.props
 
     return (
@@ -336,51 +391,7 @@ class ComboBox extends React.PureComponent {
   }
 }
 
-ComboBox.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** List of options to show */
-  options: PropTypes.array.isRequired,
-
-  /** Placeholder to show when there is no value selected */
-  placeholder: PropTypes.node,
-
-  /** Is it multi-select? */
-  multi: PropTypes.bool,
-
-  /** Event called after current value of combo-box has been changed */
-  onChange: PropTypes.func,
-
-  /** Event called after input value has been changed */
-  onInputValueChange: PropTypes.func,
-
-  /** Event called after unknown value is requested to be added */
-  onNewValue: PropTypes.func,
-
-  /** Function to render item */
-  renderItem: PropTypes.func,
-
-  /** Function to render value, otherwise will use same as item */
-  renderValue: PropTypes.func,
-
-  /** Function to build item ID - used for 'key' properties */
-  buildItemId: PropTypes.func,
-
-  /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func,
-
-  /** Value for input if you want to control it by yourself */
-  inputValue: PropTypes.string
-}
-
-ComboBox.defaultProps = {
-  options: [],
-  multi: false,
-  placeholder: '...',
-  renderItem: item => item,
-  buildItemId: (item, index) => index,
-  itemToString: item => item
-}
+ComboBox.propTypes = propTypes
+ComboBox.defaultProps = defaultProps
 
 export default ComboBox

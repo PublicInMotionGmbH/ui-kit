@@ -5,6 +5,17 @@ import { buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Item to show */
+  item: PropTypes.any.isRequired,
+
+  /** Function to build 'remove' button props with handlers */
+  getRemoveButtonProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderValue: PropTypes.func.isRequired
+}
+
 /**
  * Component which represents value tag in multi-select elements.
  *
@@ -38,15 +49,6 @@ function Tag (props) {
   )
 }
 
-Tag.propTypes = {
-  /** Item to show */
-  item: PropTypes.any.isRequired,
-
-  /** Function to build 'remove' button props with handlers */
-  getRemoveButtonProps: PropTypes.func.isRequired,
-
-  /** Function to render item value */
-  renderValue: PropTypes.func.isRequired
-}
+Tag.propTypes = propTypes
 
 export default Tag
