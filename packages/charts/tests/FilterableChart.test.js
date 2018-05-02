@@ -101,7 +101,6 @@ describe('<WithFiltersHOC>', () => {
     beforeEach(() => {
       props = createProps({ data: testPie, legendProps: { onClick: jest.fn() } })
       wrapper = createWrapperObj(props)
-      console.log(wrapper.find('Legend').dive())
       item1 = wrapper.find('Legend').dive().find('LegendItem').first()
     })
     it('should change disabled state of the first item', () => {
