@@ -24,7 +24,7 @@
     "react": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0",
+    "@talixo/shared": "^0.1.0",
     "lodash": "^4.17.5",
     "react-google-maps": "9.4.5",
     "recompose": "0.26.0"

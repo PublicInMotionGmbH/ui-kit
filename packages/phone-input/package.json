@@ -25,9 +25,9 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/combo-box": "^1.0.0",
-    "@talixo/country-flag": "^1.0.0",
-    "@talixo/shared": "^1.0.0",
+    "@talixo/combo-box": "^0.1.0",
+    "@talixo/country-flag": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "country-telephone-data": "^0.5.5"
   }
 }
