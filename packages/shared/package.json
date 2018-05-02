@@ -1,6 +1,6 @@
 {
   "name": "@talixo/shared",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Talixo common configuration",
   "author": "Public in Motion GmbH",
   "main": "dist/index.js",
@@ -14,7 +14,10 @@
   "bugs": {
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
-  "dependencies": {
+  "devDependencies": {
+    "classnames": "^2.2.5"
+  },
+  "peerDependencies": {
     "classnames": "^2.2.5"
   }
 }

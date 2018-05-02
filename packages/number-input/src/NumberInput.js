@@ -12,7 +12,6 @@ import NumberInputStepper from './NumberInputStepper'
  *
  * @property {object} props
  * @property {string} [props.className]
- * @property {string} [props.size]
  * @property {object} [props.style]
  * @property {boolean} props.error
  * @property {number} props.value
@@ -88,11 +87,11 @@ class NumberInput extends React.PureComponent {
    */
   render () {
     const {
-      className, error, stepper, size, onChange, precision,
+      className, error, stepper, onChange, precision,
       initialTime, stepTime, right, ...passedProps
     } = this.props
 
-    const wrapperClass = buildClassName('number-input', className, [ size ], { error, stepper })
+    const wrapperClass = buildClassName('number-input', className, { error, stepper })
 
     const stepperElement = stepper ? (
       <NumberInputStepper
@@ -108,7 +107,6 @@ class NumberInput extends React.PureComponent {
         className={wrapperClass}
         type='number'
         right={stepperElement}
-        size={size}
         onChange={value => this.change(value)}
         {...passedProps}
       />
@@ -125,9 +123,6 @@ NumberInput.propTypes = {
 
   /** Indicates that input has error */
   error: PropTypes.bool,
-
-  /** Size of input (can be 'small') */
-  size: PropTypes.oneOf([ 'small' ]),
 
   /** Additional styling of wrapper */
   style: PropTypes.object,

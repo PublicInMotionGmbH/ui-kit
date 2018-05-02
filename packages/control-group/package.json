@@ -1,6 +1,6 @@
 {
   "name": "@talixo/control-group",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents ControlGroup",
   "main": "dist/index.js",
   "module": "index.js",
@@ -19,14 +19,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/button": "^1.0.0"
+    "@talixo/button": "^0.1.0",
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "@talixo/shared": "^0.1.0"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0"
-  },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0"
+    "react": "^16.2.0",
+    "@talixo/shared": "^0.1.0"
   }
 }

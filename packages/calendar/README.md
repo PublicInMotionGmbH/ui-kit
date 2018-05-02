@@ -14,6 +14,9 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `moment: ^2.22.0`
+- `react-dates: ^16.5.0`
+- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/calendar`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -38,4 +41,4 @@ onBlur             | function              | n/a             | event handler whe
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

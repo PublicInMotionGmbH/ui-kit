@@ -1,6 +1,6 @@
 {
   "name": "@talixo/calendar",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Calendar",
   "main": "dist/index.js",
   "module": "index.js",
@@ -18,14 +18,20 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
+  "devDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "moment": "^2.22.0",
+    "@talixo/shared": "^0.1.0",
+    "react-dates": "^16.5.0"
+  },
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "moment": "^2.22.0"
-  },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
+    "moment": "^2.22.0",
+    "@talixo/shared": "^0.1.0",
     "react-dates": "^16.5.0"
   }
 }
