@@ -1,6 +1,6 @@
 {
   "name": "@talixo/__id__",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "__description__",
   "main": "dist/index.js",
   "module": "index.js",
