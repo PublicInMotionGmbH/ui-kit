@@ -41,13 +41,6 @@ describe('<NumberInput />', () => {
     expect(wrapper.hasClass(name)).toBe(true)
   })
 
-  it('should handle `size`', () => {
-    const wrapper = shallow(<NumberInput size='small' />)
-
-    // It adds new class name
-    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
-  })
-
   it('should pass styles', () => {
     const wrapper = shallow(<NumberInput style={{ color: 'red' }} />)
 
