@@ -27,7 +27,6 @@ Property name | Type      | Default     | Description
 className     | string    | n/a         | additional class name passed to wrapper
 stepper       | boolean   | `true`      | should stepper buttons be visible?
 error         | boolean   | `false`     | indicates that input has error
-size          | string    | n/a         | size of input (can be 'small')
 style         | object    | n/a         | additional styling of wrapper
 value         | number    | `0`         | input value
 min           | number    | `-Infinity` | minimum number to set inside

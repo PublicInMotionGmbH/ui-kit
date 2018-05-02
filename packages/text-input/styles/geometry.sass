@@ -60,26 +60,6 @@
   &--error &__input::placeholder
     color: $input-error-color
 
-  // Handle small size
-
-  &--small
-    font-size: $input-small-font-size
-
-  &--small &__input
-    padding: $input-small-padding
-
-  &--small &__left
-    left: $input-small-padding
-
-  &--small#{&}--with-left &__input
-    padding-left: 1.5 * $input-small-padding + $input-icon-width
-
-  &--small &__right
-    right: $input-small-padding
-
-  &--small#{&}--with-right &__input
-    padding-right: 1.5 * $input-small-padding + $input-icon-width
-
   // Handle suffix correctly
 
   &--empty &__suffix
@@ -106,21 +86,3 @@
   [dir=rtl] &--with-right#{&}--with-left &__input
     padding-right: 1.5 * $input-padding + $input-icon-width
     padding-left: 1.5 * $input-padding + $input-icon-width
-
-  [dir=rtl] &--small &__left
-    right: $input-small-padding
-
-  [dir=rtl] &--small#{&}--with-left &__input
-    padding-left: $input-small-padding
-    padding-right: 1.5 * $input-small-padding + $input-icon-width
-
-  [dir=rtl] &--small &__right
-    left: $input-small-padding
-
-  [dir=rtl] &--small#{&}--with-right &__input
-    padding-right: $input-small-padding
-    padding-left: 1.5 * $input-small-padding + $input-icon-width
-
-  [dir=rtl] &--small#{&}--with-right#{&}--with-left &__input
-    padding-right: 1.5 * $input-small-padding + $input-icon-width
-    padding-left: 1.5 * $input-small-padding + $input-icon-width

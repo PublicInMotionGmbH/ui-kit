@@ -1,7 +1,8 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
+import throttle from 'lodash/throttle'
+import isUndefined from 'lodash/isUndefined'
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
@@ -103,7 +104,7 @@ class Tooltip extends React.Component {
       top: null
     }
 
-    this.updatePosition = _.throttle(this.updatePosition.bind(this), 10)
+    this.updatePosition = throttle(this.updatePosition.bind(this), 10)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseOver = this.handleMouseOver.bind(this)
@@ -155,7 +156,7 @@ class Tooltip extends React.Component {
    * Handle mouse enter event
    */
   handleMouseEnter () {
-    if (!_.isUndefined(this.props.open)) return
+    if (!isUndefined(this.props.open)) return
     this.setState({ clicked: false, open: true })
     this.updatePosition()
   }
@@ -164,7 +165,7 @@ class Tooltip extends React.Component {
    * Handle mouse leave
    */
   handleMouseLeave () {
-    if (!_.isUndefined(this.props.open)) return
+    if (!isUndefined(this.props.open)) return
     this.setState({ open: false })
     this.updatePosition()
   }
@@ -173,7 +174,7 @@ class Tooltip extends React.Component {
    * Handle mouse over
    */
   handleMouseOver () {
-    if (!_.isUndefined(this.props.open)) return
+    if (!isUndefined(this.props.open)) return
     if (!this.state.clicked && !this.state.open) this.setState({ open: true })
     this.updatePosition()
   }
@@ -182,7 +183,7 @@ class Tooltip extends React.Component {
    * Handle mouse click
    */
   handleMouseClick () {
-    if (!_.isUndefined(this.props.open)) return
+    if (!isUndefined(this.props.open)) return
     this.setState({ open: !this.state.open })
     this.updatePosition()
   }

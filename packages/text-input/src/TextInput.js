@@ -275,7 +275,7 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, size, style, value, suffix, left, right, ...restProps } = this.props
+    const { className, error, onChange, style, value, suffix, left, right, ...restProps } = this.props
 
     // Initialize helper variables
     const hasLeft = left != null
@@ -283,7 +283,7 @@ class TextInput extends React.PureComponent {
     const hasSuffix = suffix != null
 
     // Build classes for wrapper
-    const wrapperClasses = buildClassName(moduleName, className, [ size ], {
+    const wrapperClasses = buildClassName(moduleName, className, {
       'with-left': hasLeft,
       'with-right': hasRight,
       'with-suffix': hasSuffix,
@@ -326,9 +326,6 @@ TextInput.propTypes = {
 
   /** Callback for change event */
   onChange: PropTypes.func,
-
-  /** Size of text input (can be 'small') */
-  size: PropTypes.oneOf([ 'small' ]),
 
   /** Additional input wrapper styling */
   style: PropTypes.object,

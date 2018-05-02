@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
 
 /**
  * Check if Directions props has changed
@@ -17,9 +17,9 @@ import _ from 'lodash'
  */
 function hasPropsChanged (props, nextProps) {
   return (
-    !_.isEqual(props.startPoint, nextProps.startPoint) ||
-    !_.isEqual(props.endPoint, nextProps.endPoint) ||
-    !_.isEqual(props.via || [], nextProps.via || [])
+    !isEqual(props.startPoint, nextProps.startPoint) ||
+    !isEqual(props.endPoint, nextProps.endPoint) ||
+    !isEqual(props.via || [], nextProps.via || [])
   )
 }
 

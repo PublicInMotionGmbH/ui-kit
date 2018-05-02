@@ -26,7 +26,6 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | additional class name passed to wrapper
 error         | bool      | `false` | indicates that input has error
 onChange      | function  | n/a     | callback for change event
-size          | string    | `''`    | size of text input (can be 'small')
 style         | object    | n/a     | additional input wrapper styling
 left          | node      | n/a     | icon/element to put on starting side
 right         | node      | n/a     | icon/element to put on ending side
