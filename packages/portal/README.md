@@ -27,4 +27,4 @@ attachTo      | Element   | `document.body`   | DOM Element where Portal should 
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

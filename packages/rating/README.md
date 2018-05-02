@@ -31,4 +31,4 @@ onChange      | function  | n/a      | Handler for changing rating by user
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

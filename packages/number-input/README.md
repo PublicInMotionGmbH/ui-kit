@@ -38,4 +38,4 @@ stepTime      | number    | `20`        | time for each automated de/increment w
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

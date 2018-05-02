@@ -49,4 +49,4 @@ children      | no       | nodes          | none    | `Sidebar` or `Panel`, if y
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

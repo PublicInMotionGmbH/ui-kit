@@ -31,4 +31,4 @@ style         | object    | n/a     | styles passed to wrapper
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

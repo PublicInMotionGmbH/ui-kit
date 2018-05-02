@@ -30,4 +30,4 @@ yesLabel      | string    | `"Yes"` | label for checked switcher
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

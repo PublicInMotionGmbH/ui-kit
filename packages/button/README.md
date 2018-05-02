@@ -32,4 +32,4 @@ variant       | string    | n/a     | button variant
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

@@ -30,4 +30,4 @@ variant       | string    | n/a     | pill variant (ghost)
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version
