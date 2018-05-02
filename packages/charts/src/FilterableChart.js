@@ -15,7 +15,7 @@ const propTypes = {
   /** Additional props to be passed to legend. Accepts any property which is allowed for Legend Component. */
   legendProps: PropTypes.object,
 
-  /** Path to data items tha can be filtered. */
+  /** Path to data items that will be filtered. */
   pathToDataItems: PropTypes.array
 }
 
