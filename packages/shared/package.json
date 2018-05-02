@@ -2,6 +2,14 @@
   "name": "@talixo/shared",
   "version": "0.1.0",
   "description": "Talixo common configuration",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only shared",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only shared"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Public in Motion GmbH",
   "main": "dist/index.js",
   "module": "index.js",

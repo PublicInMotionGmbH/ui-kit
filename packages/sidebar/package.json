@@ -10,6 +10,9 @@
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only sidebar"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Public in Motion GmbH",
   "repository": {
     "type": "git",

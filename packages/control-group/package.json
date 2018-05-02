@@ -9,6 +9,9 @@
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only control-group"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Public in Motion GmbH",
   "repository": {
     "type": "git",

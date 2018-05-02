@@ -14,6 +14,9 @@
     "update:component": "node scripts/convertSpriteToJavaScript.js",
     "update:meta": "node scripts/buildListOfFlags.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Public in Motion GmbH",
   "repository": {
     "type": "git",
