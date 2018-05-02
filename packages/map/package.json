@@ -1,6 +1,6 @@
 {
   "name": "@talixo/maps",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Map",
   "main": "dist/index.js",
   "module": "index.js",

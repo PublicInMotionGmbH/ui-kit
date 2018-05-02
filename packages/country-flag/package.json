@@ -1,6 +1,6 @@
 {
   "name": "@talixo/country-flag",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Light-weight UI component which represents country flags icons",
   "main": "dist/index.js",
   "module": "index.js",

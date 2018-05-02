@@ -1,6 +1,6 @@
 {
   "name": "@talixo/calendar",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Calendar",
   "main": "dist/index.js",
   "module": "index.js",
