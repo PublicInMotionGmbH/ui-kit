@@ -26,9 +26,7 @@
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
-  },
-  "dependencies": {
+    "react-dom": "^16.2.0",
     "@talixo/shared": "^0.1.0"
   },
   "devDependencies": {
@@ -38,6 +36,10 @@
     "gulp": "^3.9.1",
     "gulp-svg-sprite": "^1.4.0",
     "gulp-svgo": "^1.4.0",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "@talixo/shared": "^0.1.0"
   }
 }

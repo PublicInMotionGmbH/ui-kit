@@ -14,6 +14,10 @@ Your package should additionally have some extra dependencies:
 - `classnames: ^2.2.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
+- `lodash: ^4.17.5`
+- `react-google-maps: ^9.4.5`
+- `recompose: ^0.26.0`
+- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/map`, but you have to install them manually,
 to avoid having different versions of these in your application.

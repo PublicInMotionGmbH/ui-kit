@@ -19,11 +19,17 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
+  "devDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "@talixo/shared": "^0.1.0",
+    "lodash": "^4.17.5",
+    "react-google-maps": "9.4.5",
+    "recompose": "0.26.0"
+  },
   "peerDependencies": {
     "prop-types": "^15.6.1",
-    "react": "^16.2.0"
-  },
-  "dependencies": {
+    "react": "^16.2.0",
     "@talixo/shared": "^0.1.0",
     "lodash": "^4.17.5",
     "react-google-maps": "9.4.5",

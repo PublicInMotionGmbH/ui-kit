@@ -14,6 +14,10 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `react-input-autosize: ^2.2.1`
+- `downshift: ^1.31.11`
+- `@talixo/shared: ^0.1.0`
+- `@talixo/icon: ^0.1.0`
 
 These packages are required by `@talixo/combo-box`, but you have to install them manually,
 to avoid having different versions of these in your application.
