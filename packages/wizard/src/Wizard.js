@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import Form from '@talixo/form'
-
 import { buildClassName } from '@talixo/shared'
 
 /**
@@ -12,14 +10,64 @@ import { buildClassName } from '@talixo/shared'
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-function Wizard (props) {
-  const { className, children, ...passedProps } = props
+class Wizard extends React.PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      currentStep: 0
+    }
 
-  return (
-    <div className={buildClassName('wizard', className)} {...passedProps}>
-      { children }
-    </div>
-  )
+    this._next = this._next.bind(this)
+    this._prev = this._prev.bind(this)
+  }
+
+  _next () {
+    let currentStep = this.state.currentStep
+    if (currentStep >= 1) {
+      currentStep = 2
+    } else {
+      currentStep = currentStep + 1
+    }
+
+    this.setState({
+      currentStep: currentStep
+    })
+  }
+
+  _prev () {
+    let currentStep = this.state.currentStep
+    if (currentStep <= 0) {
+      currentStep = 0
+    } else {
+      currentStep = currentStep - 1
+    }
+
+    this.setState({
+      currentStep: currentStep
+    })
+  }
+
+  /*   _actualStep () {
+    return {
+
+    }
+  } */
+
+  render () {
+    const {children, className, ...passedProps} = this.props
+    const {currentStep} = this.state
+    return (
+      <div className={buildClassName('wizard', className)} {...passedProps} >
+        <div>
+          {/* {this._actualStep()} */}
+          {children[currentStep]}
+        </div>
+
+        <button onClick={this._prev}>Prev</button>
+        <button onClick={this._next}>Next</button>
+      </div>
+    )
+  }
 }
 
 Wizard.propTypes = {
