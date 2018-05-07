@@ -21,13 +21,13 @@ const propTypes = {
   /** Label for input. */
   label: PropTypes.node,
 
-  /** Event called after input value has lost focus. */
+  /** Event called after input has lost focus. */
   onBlur: PropTypes.func,
 
-  /** Event called after input value has been changed. */
+  /** Event called after input has been changed. */
   onChange: PropTypes.func,
 
-  /** Event called after input value has gained focus. */
+  /** Event called after input has gained focus. */
   onFocus: PropTypes.func,
 
   /** Displayed warning message. */
@@ -88,11 +88,7 @@ class FormField extends React.Component {
    */
   handleBlur = (e) => {
     const { onBlur } = this.props
-    this.setState({ focus: false })
-
-    if (onBlur) {
-      onBlur(e)
-    }
+    this.changeFocus(e, onBlur, false)
   }
 
   /**
@@ -102,10 +98,21 @@ class FormField extends React.Component {
    */
   handleFocus = (e) => {
     const { onFocus } = this.props
-    this.setState({ focus: true })
+    this.changeFocus(e, onFocus, true)
+  }
 
-    if (onFocus) {
-      onFocus(e)
+  /**
+   * Handle focus change.
+   *
+   * @param {SyntheticEvent} e
+   * @param {function} eventHandler
+   * @param {boolean} focus
+   */
+  changeFocus = (e, eventHandler, focus) => {
+    this.setState({ focus })
+
+    if (eventHandler) {
+      eventHandler(e)
     }
   }
 
@@ -120,7 +127,7 @@ class FormField extends React.Component {
     const labelClsName = buildClassName([ moduleName, 'label' ])
 
     // Build label
-    return label ? <label className={labelClsName} htmlFor={uniqueId}>{label}</label> : null
+    return <label className={labelClsName} htmlFor={uniqueId}>{label}</label>
   }
 
   /**
@@ -133,7 +140,7 @@ class FormField extends React.Component {
     const typeClsName = buildClassName([ moduleName, typeName ])
 
     // Build label
-    return type ? <div className={typeClsName}>{type}</div> : null
+    return <div className={typeClsName}>{type}</div>
   }
 
   /**
@@ -170,11 +177,9 @@ class FormField extends React.Component {
     })
 
     // Build input with passed props
-    return React.Children.only(children) && (
-      React.Children.map(children, (child) => {
-        return React.cloneElement(child, buildPassedProps(child))
-      })
-    )
+    return React.Children.map(children, (child) => {
+      return React.cloneElement(child, buildPassedProps(child))
+    })
   }
 
   render () {
@@ -182,21 +187,25 @@ class FormField extends React.Component {
     const { focus } = this.state
     const { buildInput, buildLabel, buildMessage } = this
 
+    // Build class names
+    const fieldClsName = buildClassName(moduleName, className, { focus: focus, blur: !focus })
+    const inputWrapperClsName = buildClassName([moduleName, 'input-wrapper'])
+
     // Build uniquId if id is not provided.
     const uniqueId = id || `form_field_${generateUid().toString(36)}`
 
     // Build input for passing props
-    const input = buildInput(uniqueId)
+    const input = React.Children.only(children) && buildInput(uniqueId)
 
     return (
-      <div className={buildClassName(moduleName, className, { focus: focus, blur: !focus })} {...passedProps}>
-        {buildLabel(uniqueId)}
-        <div className={buildClassName([moduleName, 'input-wrapper'])}>
+      <div className={fieldClsName} {...passedProps}>
+        {label && buildLabel(uniqueId)}
+        <div className={inputWrapperClsName}>
           {input}
-          {buildMessage(error, 'error')}
-          {buildMessage(warning, 'warning')}
+          {error && buildMessage(error, 'error')}
+          {warning && buildMessage(warning, 'warning')}
         </div>
-        {buildMessage(hint, 'hint')}
+        {hint && buildMessage(hint, 'hint')}
       </div>
     )
   }
