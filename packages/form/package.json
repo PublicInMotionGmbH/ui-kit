@@ -20,10 +20,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/button": "^1.0.0",
-    "@talixo/control-group": "^1.0.0",
-    "@talixo/icon": "^1.0.0",
-    "@talixo/text-input": "^1.0.0"
+    "@talixo/button": "^0.1.0",
+    "@talixo/control-group": "^0.1.0",
+    "@talixo/icon": "^0.1.0",
+    "@talixo/text-input": "^0.1.0",
+    "formik": "^0.11.11"
   },
   "peerDependencies": {
     "prop-types": "^15.6.1",
@@ -31,6 +32,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0"
+    "@talixo/shared": "^0.1.0"
   }
 }

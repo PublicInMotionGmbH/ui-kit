@@ -1,4 +1,5 @@
 import React from 'react'
+import { Formik } from 'formik'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { Button } from '@talixo/button'
@@ -22,8 +23,8 @@ const addStory = createStoriesFactory('Form', module, {
 function TestFooter (props) {
   return (
     <ControlGroup position='center'>
-      <Button>Clear</Button>
-      <Button>Submit</Button>
+      <Button onClick={props.handleReset}>Clear</Button>
+      <Button type='submit'>Submit</Button>
     </ControlGroup>
   )
 }
@@ -46,4 +47,27 @@ addStory('with footer component', readme, () => (
     <TextInput placeholder='Telephone number' left={<Icon name='phone' />} /><br />
     <TextInput placeholder='Email address' left={<Icon name='mail' />} /><br />
   </Form>
+))
+
+const renderForm = props => (
+  <Form footerComponent={<TestFooter />} onSubmit={props.handleSubmit}>
+    <h2>This is a default form wrapper</h2>
+    <TextInput
+      onChange={value => props.setFieldValue('name', value)}
+      value={props.values['name']}
+      name='name'
+      placeholder='Name'
+      left={<Icon name='person' />}
+    />
+    <br />
+  </Form>
+)
+const submit = value => {
+  console.log('Submitted: ', value)
+}
+addStory('with formik library', readme, () => (
+  <Formik
+    render={renderForm}
+    onSubmit={submit}
+  />
 ))
