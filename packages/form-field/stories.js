@@ -12,7 +12,8 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('FormField', module, {
-  propTables: [ FormField ]
+  propTables: [ FormField ],
+  propTablesExclude: [ Checkbox, NumberInput, TextInput ]
 })
 
 // Stories
