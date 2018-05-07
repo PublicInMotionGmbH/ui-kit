@@ -6,6 +6,9 @@ import { buildClassName } from '@talixo/shared'
 const moduleName = 'fieldset'
 
 const propTypes = {
+  /** Aside Legend */
+  asideLegend: PropTypes.node,
+
   /** All nodes inside fieldset */
   children: PropTypes.node,
 
@@ -20,24 +23,25 @@ const propTypes = {
  * Component which represents Fieldset.
  *
  * @param {object} props
+ * @param {*} [props.asideLegend]
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @param {string} [props.legend]
  * @returns {React.Element}
  */
 function Fieldset (props) {
-  const { className, children, legend, additionalLegend, ...passedProps } = props
+  const { asideLegend, className, children, legend, ...passedProps } = props
 
   return (
-    <div className={buildClassName(moduleName, className)} {...passedProps}>
-      {legend && <span className={buildClassName([moduleName, 'legend'])}>
+    <fieldset className={buildClassName(moduleName, className)} {...passedProps}>
+      {legend && <legend className={buildClassName([moduleName, 'legend'])}>
         {legend}
-        {additionalLegend && <span className={buildClassName([moduleName, 'additional-legend'])}>
-          {additionalLegend}
-        </span>}
-      </span>}
-
+        {asideLegend && <aside className={buildClassName([moduleName, 'aside-legend'])}>
+          {asideLegend}
+        </aside>}
+      </legend>}
       {children}
-    </div>
+    </fieldset>
   )
 }
 

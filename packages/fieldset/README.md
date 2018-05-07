@@ -20,10 +20,11 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `div`. Additionally, it handles some differently:
+It allows any props which are allowed for `fieldset`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|------------------------------------
+asideLegend   | node      | n/a     | Aside legend of fieldset
 className     | string    | n/a     | Additional class name passed to wrapper.
 children      | node      | n/a     | Children node in fieldset like input or checkbox
 legend        | string    | n/a     | Legend of fieldset

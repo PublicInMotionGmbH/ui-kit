@@ -2,6 +2,7 @@
 
 @include module('fieldset')
   margin-bottom: $fieldset-margin
+  border: none
 
   &:not(:last-child):after
     content: ''
@@ -15,5 +16,6 @@
     font-size: dp(3)
     margin-bottom: $fieldset-margin
 
-  &__additional-legend
-    margin-left: dp(7)
+  &__aside-legend
+    display: inline-block
+    margin-left: dp(6)

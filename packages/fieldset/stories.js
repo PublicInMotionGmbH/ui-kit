@@ -35,7 +35,7 @@ addStory('default', readme, () => (
 ))
 
 addStory('additional legend', readme, () => (
-  <Fieldset legend='Personal details' additionalLegend={<span><Icon name='credit_card' />Credit Card</span>}>
+  <Fieldset legend='Personal details' asideLegend={<span><Icon name='person' />user</span>}>
     <h4>Please enter you name and surname</h4>
     <TextInput placeholder='Your name' style={additionalStyling} />
     <TextInput placeholder='Your surname' style={additionalStyling} />
