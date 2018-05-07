@@ -1,7 +1,7 @@
 {
   "name": "@talixo/radio-group",
-  "version": "1.0.0",
-  "description": "UI Component which represents RadioGroup",
+  "version": "0.1.0",
+  "description": "UI component which represents RadioGroup",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
@@ -9,6 +9,9 @@
     "test": "node ../../scripts/runTests.js --only radio-group",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only radio-group"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -19,13 +22,17 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
-  "peerDependencies": {
+  "devDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "@talixo/radio-input": "^1.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
-    "@talixo/radio-input": "^1.0.0"
+  "peerDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
