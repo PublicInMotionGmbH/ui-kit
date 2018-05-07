@@ -7,6 +7,55 @@ import { TextInput } from '@talixo/text-input'
 
 import NumberInputStepper from './NumberInputStepper'
 
+export const moduleName = 'number-input'
+
+const propTypes = {
+  /** Additional class name of input */
+  className: PropTypes.string,
+
+  /** Should include stepper in number input? */
+  stepper: PropTypes.bool,
+
+  /** Indicates that input has error */
+  error: PropTypes.bool,
+
+  /** Additional styling of wrapper */
+  style: PropTypes.object,
+
+  /** Initial input value */
+  value: PropTypes.number,
+
+  /** Minimum value */
+  min: PropTypes.number,
+
+  /** Maximum value */
+  max: PropTypes.number,
+
+  /** Step for mouse-wheel, keyboard and buttons */
+  step: PropTypes.number,
+
+  /** Number of decimal places */
+  precision: PropTypes.number,
+
+  /** Time in ms, in which we start automatically increasing on pressed button */
+  initialTime: PropTypes.number,
+
+  /** Time in ms, in which we make another tick when pressing a button */
+  stepTime: PropTypes.number
+}
+
+const defaultProps = {
+  stepper: true,
+  error: false,
+  value: 0,
+  precision: 0, // buttons doesn't work correctly above 1e15 correctly (because of float numbers)
+  min: -Infinity,
+  max: Infinity,
+  step: 1,
+  initialTime: 700,
+  stepTime: 20
+}
+
 /**
  * Component which represents number input
  *
@@ -91,7 +140,7 @@ class NumberInput extends React.PureComponent {
       initialTime, stepTime, right, ...passedProps
     } = this.props
 
-    const wrapperClass = buildClassName('number-input', className, { error, stepper })
+    const wrapperClass = buildClassName(moduleName, className, { error, stepper })
 
     const stepperElement = stepper ? (
       <NumberInputStepper
@@ -114,51 +163,8 @@ class NumberInput extends React.PureComponent {
   }
 }
 
-NumberInput.propTypes = {
-  /** Additional class name of input */
-  className: PropTypes.string,
+NumberInput.propTypes = propTypes
 
-  /** Should include stepper in number input? */
-  stepper: PropTypes.bool,
-
-  /** Indicates that input has error */
-  error: PropTypes.bool,
-
-  /** Additional styling of wrapper */
-  style: PropTypes.object,
-
-  /** Initial input value */
-  value: PropTypes.number,
-
-  /** Minimum value */
-  min: PropTypes.number,
-
-  /** Maximum value */
-  max: PropTypes.number,
-
-  /** Step for mouse-wheel, keyboard and buttons */
-  step: PropTypes.number,
-
-  /** Number of decimal places */
-  precision: PropTypes.number,
-
-  /** Time in ms, in which we start automatically increasing on pressed button */
-  initialTime: PropTypes.number,
-
-  /** Time in ms, in which we make another tick when pressing a button */
-  stepTime: PropTypes.number
-}
-
-NumberInput.defaultProps = {
-  stepper: true,
-  error: false,
-  value: 0,
-  precision: 0, // buttons doesn't work correctly above 1e15 correctly (because of float numbers)
-  min: -Infinity,
-  max: Infinity,
-  step: 1,
-  initialTime: 700,
-  stepTime: 20
-}
+NumberInput.defaultProps = defaultProps
 
 export default NumberInput
