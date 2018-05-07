@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
 import NumberInputStepper from './NumberInputStepper'
@@ -13,7 +12,6 @@ import NumberInputStepper from './NumberInputStepper'
  *
  * @property {object} props
  * @property {string} [props.className]
- * @property {string} [props.size]
  * @property {object} [props.style]
  * @property {boolean} props.error
  * @property {number} props.value
@@ -88,27 +86,27 @@ class NumberInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, size, onChange, precision, initialTime, stepTime, ...passedProps } = this.props
+    const {
+      className, error, stepper, onChange, precision,
+      initialTime, stepTime, right, ...passedProps
+    } = this.props
 
-    const wrapperClass = buildClassName('number-input', className, [ size ], { error })
+    const wrapperClass = buildClassName('number-input', className, { error, stepper })
 
-    const stepper = (
+    const stepperElement = stepper ? (
       <NumberInputStepper
         onIncrement={this.increment}
         onDecrement={this.decrement}
         initialTime={initialTime}
         stepTime={stepTime}
       />
-    )
+    ) : null
 
     return (
       <TextInput
         className={wrapperClass}
-        left={<Icon name='directions_car' />}
-        suffix='cars'
         type='number'
-        right={stepper}
-        size={size}
+        right={stepperElement}
         onChange={value => this.change(value)}
         {...passedProps}
       />
@@ -117,14 +115,14 @@ class NumberInput extends React.PureComponent {
 }
 
 NumberInput.propTypes = {
-  /** Additional class name of input  */
+  /** Additional class name of input */
   className: PropTypes.string,
+
+  /** Should include stepper in number input? */
+  stepper: PropTypes.bool,
 
   /** Indicates that input has error */
   error: PropTypes.bool,
-
-  /** Size of input (can be 'small') */
-  size: PropTypes.oneOf([ 'small' ]),
 
   /** Additional styling of wrapper */
   style: PropTypes.object,
@@ -152,6 +150,7 @@ NumberInput.propTypes = {
 }
 
 NumberInput.defaultProps = {
+  stepper: true,
   error: false,
   value: 0,
   precision: 0, // buttons doesn't work correctly above 1e15 correctly (because of float numbers)

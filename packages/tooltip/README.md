@@ -14,6 +14,11 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `lodash: ^4.17.5`
+- `react-transition-group: ^2.2.1`
+- `react-instantiable-stateless: ^1.0.3`
+- `@talixo/shared: ^0.1.0`
+- `@talixo/portal: ^0.1.0`
 
 These packages are required by `@talixo/tooltip`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -24,19 +29,21 @@ Property name | Type         | Default | Description
 --------------|--------------|:-------:|-----------------------
 children      | nodes        | n/a     | Tooltipped elements
 className     | string       | n/a     | Additional class name passed to the tooltip
-color         | string       | n/a     | Color of the tooltip
 fade          | bool         | `false` | Fade in / out animation
 fadeTime      | number       | n/a     | Fadetime
 open          | bool         | n/a     | Controls whether tooltip is open
-position      | PositionType | `right` | Tooltip position
-rootNode      | string       | `body`  | Root element of tooltip portal
-render        | func         | n/a     | Renders toolyip content
+position      | Position     | `right` | Tooltip position
+attachTo      | node         | n/a     | node of tooltip portal
+render        | function     | n/a     | Renders tooltip content
 style         | object       | n/a     | Additional styles passed to the tooltip
+arrow         | bool         | `true`  | Show arrow next to tooltip
+triggerOn     | Trigger      | `hover` | Type of event to open tooltip
 
 Type name    | Enum options
 -------------|--------------------------------------
-PositionType | 'left', 'right', 'top', 'bottom'
+Position     | 'left', 'right', 'top', 'bottom'
+Trriger      | 'hover', 'click'
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

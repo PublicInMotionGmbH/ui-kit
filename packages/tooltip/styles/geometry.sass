@@ -4,19 +4,19 @@
   position: absolute
   display: inline-block
   padding: dp(1) dp(1.5)
-  border: $border-width solid $color-orange-talixo
+  border: dp(0.07) solid $color-border-tooltip
   border-radius: $border-radius-m
-  background-color: $color-orange-talixo
   font-size: $font-size-m
   line-height: 1.5em
-  color: $color-white
   top: 0
   left: 0
+  box-shadow: 0 dp(1) dp(3) dp(0.5) rgba(0, 0, 0, .05)
 
   > *
     margin: 0 dp(0.5)
 
   &:before
+    display: none
     position: absolute
     content: ''
     width: 0
@@ -24,16 +24,25 @@
     border-style: solid
     z-index: -1
 
-  &-fade-enter
+  &:after
+    display: none
+    position: absolute
+    content: ''
+    width: 0
+    height: 0
+    border-style: solid
+    z-index: -1
+
+  &__fade-enter
     opacity: 0.01
 
-  &-fade-enter-active
+  &__fade-enter-active
     opacity: 1
 
-  &-fade-exit
+  &__fade-exit
     opacity: 1
 
-  &-fade-exit-active
+  &__fade-exit-active
     opacity: 0.01
 
   &--right
@@ -43,7 +52,14 @@
       top: 50%
       left: 0
       border-width: dp(0.5) dp(1.25) dp(0.5) 0
-      border-color: transparent $color-orange-talixo transparent transparent
+      border-color: transparent $color-border-tooltip transparent transparent
+      transform: translateX(-100%) translateY(dp(-0.5))
+
+    &:after
+      top: 50%
+      left: 3%
+      border-width: dp(0.5) dp(1.25) dp(0.5) 0
+      border-color: transparent $color-white transparent transparent
       transform: translateX(-100%) translateY(dp(-0.5))
 
   &--left
@@ -53,7 +69,14 @@
       top: 50%
       left: 100%
       border-width: dp(0.5) 0 dp(0.5) dp(1.25)
-      border-color: transparent transparent transparent $color-orange-talixo
+      border-color: transparent transparent transparent $color-border-tooltip
+      transform: translateY(dp(-0.5))
+
+    &:after
+      top: 50%
+      left: 97%
+      border-width: dp(0.5) 0 dp(0.5) dp(1.25)
+      border-color: transparent transparent transparent $color-white
       transform: translateY(dp(-0.5))
 
   &--bottom
@@ -63,7 +86,14 @@
       top: 0
       left: 50%
       border-width: 0 dp(0.5) dp(1.25) dp(0.5)
-      border-color: transparent transparent $color-orange-talixo transparent
+      border-color: transparent transparent $color-border-tooltip transparent
+      transform: translateY(-100%) translateX(dp(-0.5))
+
+    &:after
+      top: 9%
+      left: 50%
+      border-width: 0 dp(0.5) dp(1.25) dp(0.5)
+      border-color: transparent transparent $color-white transparent
       transform: translateY(-100%) translateX(dp(-0.5))
 
   &--top
@@ -73,21 +103,23 @@
       top: 100%
       left: 50%
       border-width: dp(1.25) dp(0.5) 0 dp(0.5)
-      border-color: $color-orange-talixo transparent transparent transparent
+      border-color: $color-border-tooltip transparent transparent transparent
       transform: translateX(dp(-0.5))
 
-  &--black:before
-    border-color: $color-black
+    &:after
+      top: 96%
+      left: 50%
+      border-width: dp(1.25) dp(0.5) 0 dp(0.5)
+      border-color: $color-white transparent transparent transparent
+      transform: translateX(dp(-0.5))
 
-  &--primary
-    background-color: $color-orange-talixo
-    border-color: $color-orange-talixo
-
-  &--black
-    background-color: $color-black
-    border-color: $color-black
-
-  &-hover
+  &__wrapper
+    display: inline-block
     position: relative
     width: auto
     height: auto
+
+  &--arrow
+    &:before,
+    &:after
+      display: inline-block

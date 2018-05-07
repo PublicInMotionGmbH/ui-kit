@@ -1,6 +1,6 @@
 {
   "name": "@talixo/icon",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI component for icons",
   "main": "dist/index.js",
   "module": "index.js",
@@ -10,6 +10,9 @@
     "test": "node ../../scripts/runTests.js --only icon",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only icon"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -21,19 +24,22 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@talixo/icon-pack": "^1.2.1",
+    "@talixo/shared": "^0.1.0",
     "fs-extra": "^5.0.0",
     "progress": "^2.0.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "stream-to-string": "^1.1.0",
     "unzip-stream": "^0.3.0",
     "wget-improved": "^1.5.0"
   },
   "peerDependencies": {
+    "@talixo/icon-pack": "^1.2.1",
+    "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
-    "@talixo/icon-pack": "^1.2.1"
   }
 }

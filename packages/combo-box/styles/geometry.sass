@@ -1,88 +1,169 @@
 @import './config'
-@import './theming'
 
 @include module('combo-box')
-  &__wrapper
-    display: flex
-    flex-direction: column
-    position: relative
-    width: 100%
-    cursor: pointer
-
-  &__button, &__input input
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    align-items: center
-    width: 100%
-    border: $dropdown-border-width solid
-    border-radius: $dropdown-border-radius
-    outline: none
-    line-height: dp(3)
-    cursor: pointer
-
-  &__button
-    > *
-      display: inline-block
-      padding: dp(1.5)
-
-    button::-moz-focus-inner,
-    input[type='button']::-moz-focus-inner
-      padding: 0 !important
-      border: 0 !important
-
-  &--open:not(#{&}__input--separated) input,
-  &--open:not(#{&}__button--separated)
-    border-radius: $dropdown-border-radius $dropdown-border-radius 0 0 !important
-    border-bottom-width: 0 !important
+  position: relative
+  display: block
 
   &__value
-    font-size: $font-size-m
-    font-weight: $font-weight-normal
-    border: none
+    position: relative
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    text-align: inherit
+    text-align: start
+    line-height: 1.2em
+    border: 1px solid #eee
+    width: 100%
+    padding: 10px 15px
+    border-radius: 2px
     outline: none
+
+  &__inner
+    flex: 1
+
+  &__inner > input,
+  &__inner > div > input
+    outline: none
+    border: 0
+    padding: 0
+    font: inherit
+
+  &__value--placeholder
+    &, input
+      color: #bbb
+
+  &__value--placeholder
+    user-select: none
+
+  &--open &__value
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+  &__menu
+    box-sizing: border-box
+    position: absolute
+    left: 0
+    right: 0
+    z-index: 999
+    top: 100%
+    width: 100%
+    max-height: 50vh
+    border: 1px solid #eee
+    border-top: 0
+    background: #fff
+    overflow: scroll
+
+  &__arrow,
+  &__clear
+    display: inline-block
+    font-size: 1.5rem
+    line-height: 1em
+    border: 0
+    bacxkground: transparent
+    color: #bbb
 
   &__arrow
-    box-sizing: content-box
-    padding: 0
-    margin: 0 dp(0.5)
+    pointer-events: none
+
+  &__clear:hover
+    cursor: pointer
+    color: #000
+
+  &__controls
+    display: flex
+    align-items: center
+    margin-left: auto
+    white-space: nowrap
+
+  &__icon
     display: inline-block
-    outline: none
-    > *
-      color: $color-talixo-gray
-      font-size: $font-size-xl
-      font-weight: $font-weight-semibold
-      text-align: center
-      display: block
-
-  &__options
-    position: absolute
-    top: 100%
-    z-index: 100
-    width: 100%
-    border: $dropdown-border-width solid $color-placeholder-text
-    border-radius: $dropdown-border-radius
-    box-sizing: border-box
-    border-top-width: 0
-    border-radius: 0 0 $dropdown-border-radius $dropdown-border-radius
-
-    &--separated
-      margin-top: $dropdown-border-width
-      border-top-width: $dropdown-border-width
-      border-radius: $dropdown-border-radius
+    font-size: 0.8rem
+    line-height: 0.8rem
+    color: #bbb
 
   &__item
-    font-size: $font-size-m
-    font-weight: $font-weight-normal
-    padding: dp(2)
+    display: flex
+    align-items: center
+    padding: 10px 15px
+    cursor: pointer
 
-  &__item--overflow-truncate
-    text-overflow: ellipsis
+  &__item__tick
+    display: none
+    width: 30px
+    margin-left: -10px
+    text-align: center
+    color: rgba(0, 0, 0, .1)
+
+  &__item--highlighted
+    background: #f9f9f9
+
+  &__item--highlighted &__item__tick
+    color: rgba(0, 0, 0, .2)
+
+  &__item--selected &__item__tick
+    color: inherit
+
+  &__tags
+    margin: -0.52em -3px
+
+  &__tags
+    display: inline
+    margin-right: 0.52em
+
+  [dir=rtl] &__tags
+    margin-right: -3px
+    margin-left: 0.52em
+
+  &__tag
+    box-sizing: border-box
+    display: inline-flex
+    vertical-align: middle
+    justify-content: center
     white-space: nowrap
     overflow: hidden
+    max-width: 100%
+    line-height: 1
+    width: auto
+    text-overflow: ellipsis
+    margin: 0.2em
+    padding: 0.4em 10px
+    background: #f5f5f5
+    border-radius: 2px
+    font-size: 1em
 
-  &__item--overflow-break
-    word-wrap: break-word
+  &__remove
+    padding: 0
+    margin-left: 5px
+    border: 0
+    outline: none
+    background: transparent
+    font: inherit
+    color: inherit
+    cursor: pointer
+    vertical-align: middle
+    width: 1.2em
+    height: 1.2em
+    line-height: 1.2em
+    font-size: #{5em / 6}
+    text-align: center
 
-  &__item--selected
-    font-weight: $font-weight-semibold
+    &:hover
+      background: rgba(0, 0, 0, .1)
+
+    .tai
+      display: block
+
+  &--multi &__item__tick
+    display: inline-block
+
+  [dir=rtl] &__item__tick
+    margin-left: initial
+    margin-right: -10px
+
+  [dir=rtl] &__remove
+    margin-left: initial
+    margin-right: 5px
+
+  [dir=rtl] &__controls
+    margin-left: initial
+    margin-right: auto

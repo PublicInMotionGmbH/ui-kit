@@ -1,6 +1,6 @@
 {
   "name": "@talixo/ui-kit",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Kit for Talixo",
   "main": "index.js",
   "scripts": {

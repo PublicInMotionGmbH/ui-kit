@@ -5,7 +5,28 @@ import { prefix } from '@talixo/shared'
 
 const name = prefix('tooltip')
 
+function dispatchEvent (element, eventName, mouse) {
+  const Event = mouse ? window.MouseEvent : window.Event
+
+  element.dispatchEvent(new Event(eventName))
+}
+
 describe('<Tooltip />', () => {
+  beforeEach(() => {
+    jest.useFakeTimers()
+    window.Element.prototype.getBoundingClientRect = jest.fn(() => {
+      return {
+        width: 100,
+        height: 50,
+        top: 50,
+        left: 50,
+        bottom: 0,
+        right: 0
+      }
+    })
+  })
+  afterEach(() => jest.useRealTimers())
+
   it('renders children correctly', () => {
     const wrapper = mount(
       <Tooltip position='left' render={() => <span>Left</span>}>
@@ -14,6 +35,7 @@ describe('<Tooltip />', () => {
     )
 
     expect(wrapper).toMatchSnapshot()
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -23,9 +45,78 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
+
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('show tooltip when mouseenter', () => {
+    const wrapper = mount(
+      <Tooltip position='left' render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseenter', true)
+    wrapper.update()
+
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('hide tooltip when mouseleave', () => {
+    const wrapper = mount(
+      <Tooltip position='left' render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
+    jest.runAllTimers()
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseleave', true)
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.contains(<span>Left</span>)).toBe(false)
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('renders render when clicked', () => {
+    const wrapper = mount(
+      <Tooltip position='left' triggerOn='click' render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'click', true)
+    wrapper.update()
+
+    expect(wrapper.contains(<span>Left</span>)).toBe(true)
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('not render when triggerOn is not `click` when clicked', () => {
+    const wrapper = mount(
+      <Tooltip position='left' triggerOn='hover' render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'click', true)
+    wrapper.update()
+
+    expect(wrapper.contains(<span>Left</span>)).toBe(false)
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -35,9 +126,12 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).hasClass(`${name}--top`)).toBe(true)
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -47,9 +141,12 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).hasClass('big')).toBe(true)
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -59,9 +156,12 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).prop('style').transition).toBeDefined()
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -71,9 +171,12 @@ describe('<Tooltip />', () => {
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )
-    wrapper.find(`.${name}-target`).simulate('mouseOver')
+
+    dispatchEvent(wrapper.find(`.${name}-target`).getDOMNode(), 'mouseover', true)
+    wrapper.update()
 
     expect(wrapper.find(`.${name}`).prop('style').transition).toContain('opacity 1200ms')
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -85,6 +188,7 @@ describe('<Tooltip />', () => {
     )
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -97,6 +201,7 @@ describe('<Tooltip />', () => {
     wrapper.find(`.${name}-target`).simulate('click')
 
     expect(wrapper.contains(<span>Left</span>)).toBe(true)
+    jest.runAllTimers()
     wrapper.unmount()
   })
 
@@ -109,5 +214,81 @@ describe('<Tooltip />', () => {
     )
 
     expect(wrapper).toThrow()
+  })
+
+  it('update position correctly', () => {
+    const wrapper = mount(
+      <Tooltip position='left' open render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    wrapper.setProps({position: 'right'})
+
+    expect(wrapper.prop('position')).toBe('right')
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('update state open correctly', () => {
+    const wrapper = mount(
+      <Tooltip position='left' open render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    wrapper.setProps({open: false})
+
+    expect(wrapper.prop('open')).toBe(false)
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('update state open correctly', () => {
+    const wrapper = mount(
+      <Tooltip position='left' open render={() => <span>Left</span>}>
+        <span className={`${name}-target`}>Tooltip</span>
+      </Tooltip>
+    )
+
+    wrapper.setProps({open: false})
+
+    expect(wrapper.prop('open')).toBe(false)
+    jest.runAllTimers()
+    wrapper.unmount()
+  })
+
+  it('should render tooltip with arrow by default', () => {
+    const wrapper = shallow(
+      <Tooltip open render={() => <span id='test' />}>
+        <span>x</span>
+      </Tooltip>
+    )
+
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--arrow`)).toBe(true)
+  })
+
+  it('should render tooltip without arrow', () => {
+    const wrapper = shallow(
+      <Tooltip open render={() => <span id='test' />} arrow={false}>
+        <span>x</span>
+      </Tooltip>
+    )
+
+    expect(wrapper.find(`.${name}`).hasClass(`${name}--arrow`)).toBe(false)
+  })
+
+  it('should allow setting ref on children', () => {
+    const spy = jest.fn()
+
+    const wrapper = mount(
+      <Tooltip render={() => <span>Left</span>}>
+        <span ref={spy}>x</span>
+      </Tooltip>
+    )
+
+    expect(spy.mock.calls.length).toBeTruthy()
+
+    wrapper.unmount()
   })
 })
