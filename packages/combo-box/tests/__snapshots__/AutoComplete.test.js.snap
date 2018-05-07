@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AutoComplete /> should render correctly 1`] = `
+<div
+  className="talixo-combo-box"
+>
+  <input
+    aria-activedescendant={null}
+    aria-autocomplete="list"
+    aria-expanded={false}
+    autoComplete="off"
+    id="downshift-0-input"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    role="combobox"
+    type="email"
+    value=""
+  />
+</div>
+`;

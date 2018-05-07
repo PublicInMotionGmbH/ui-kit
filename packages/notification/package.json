@@ -1,6 +1,6 @@
 {
   "name": "@talixo/notification",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Notification",
   "main": "dist/index.js",
   "module": "index.js",
@@ -9,6 +9,9 @@
     "test": "node ../../scripts/runTests.js --only notification",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only notification"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -19,14 +22,20 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
-  "peerDependencies": {
+  "devDependencies": {
+    "@talixo/icon": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-transition-group": "^2.2.1"
   },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
-    "@talixo/icon": "^1.0.0",
+  "peerDependencies": {
+    "@talixo/icon": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-transition-group": "^2.2.1"
   }
 }

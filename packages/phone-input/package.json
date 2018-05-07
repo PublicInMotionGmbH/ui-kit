@@ -1,0 +1,43 @@
+{
+  "name": "@talixo/phone-input",
+  "version": "0.1.0",
+  "description": "UI component which represents input to provided phone number",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only phone-input",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only phone-input"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/combo-box": "^0.1.0",
+    "@talixo/country-flag": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
+    "country-telephone-data": "^0.5.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "@talixo/combo-box": "^0.1.0",
+    "@talixo/country-flag": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
+    "country-telephone-data": "^0.5.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

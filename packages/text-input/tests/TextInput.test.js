@@ -97,12 +97,6 @@ describe('<TextInput />', () => {
     expect(wrapper.hasClass(`${name}--with-right`)).toBe(false)
   })
 
-  it('should allow `small` size to be passed', () => {
-    const wrapper = shallow(<TextInput size='small' />)
-
-    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
-  })
-
   it('should handle `onChange` event properly', () => {
     const spy = jest.fn()
     const wrapper = shallow(<TextInput onChange={spy} />)

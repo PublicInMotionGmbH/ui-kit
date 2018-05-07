@@ -85,6 +85,18 @@ addStory.controlled('faster buttons', readme, (setState, state) => (
   </div>
 ), () => ({ value: 0 }))
 
+addStory.controlled('without stepper', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input without stepper buttons</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      switcher={false}
+    />
+  </div>
+), () => ({ value: 0 }))
+
 addStory.controlled('RTL', readme, (setState, state) => (
   <div style={{ width: 300 }} dir='rtl'>
     <h2>RTL: number input</h2>

@@ -1,9 +1,9 @@
-import Autocomplete from './src/Autocomplete'
 import ComboBox from './src/ComboBox'
-import Dropdown from './src/Dropdown'
+import SelectBox from './src/SelectBox'
+import AutoComplete from './src/AutoComplete'
 
 export {
   ComboBox,
-  Dropdown,
-  Autocomplete
+  SelectBox,
+  AutoComplete
 }

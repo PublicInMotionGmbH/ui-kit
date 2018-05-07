@@ -1,0 +1,1193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PhoneInput /> renders children correctly 1`] = `
+<span
+  className="talixo-phone-input"
+>
+  <SelectBox
+    buildItemId={[Function]}
+    className="talixo-phone-input__country-box"
+    itemToString={[Function]}
+    multi={false}
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "code": "af",
+          "name": "Afghanistan (‫افغانستان‬‎)",
+          "prefix": "+93",
+        },
+        Object {
+          "code": "al",
+          "name": "Albania (Shqipëri)",
+          "prefix": "+355",
+        },
+        Object {
+          "code": "dz",
+          "name": "Algeria (‫الجزائر‬‎)",
+          "prefix": "+213",
+        },
+        Object {
+          "code": "as",
+          "name": "American Samoa",
+          "prefix": "+1684",
+        },
+        Object {
+          "code": "ad",
+          "name": "Andorra",
+          "prefix": "+376",
+        },
+        Object {
+          "code": "ao",
+          "name": "Angola",
+          "prefix": "+244",
+        },
+        Object {
+          "code": "ai",
+          "name": "Anguilla",
+          "prefix": "+1264",
+        },
+        Object {
+          "code": "ag",
+          "name": "Antigua and Barbuda",
+          "prefix": "+1268",
+        },
+        Object {
+          "code": "ar",
+          "name": "Argentina",
+          "prefix": "+54",
+        },
+        Object {
+          "code": "am",
+          "name": "Armenia (Հայաստան)",
+          "prefix": "+374",
+        },
+        Object {
+          "code": "aw",
+          "name": "Aruba",
+          "prefix": "+297",
+        },
+        Object {
+          "code": "au",
+          "name": "Australia",
+          "prefix": "+61",
+        },
+        Object {
+          "code": "at",
+          "name": "Austria (Österreich)",
+          "prefix": "+43",
+        },
+        Object {
+          "code": "az",
+          "name": "Azerbaijan (Azərbaycan)",
+          "prefix": "+994",
+        },
+        Object {
+          "code": "bs",
+          "name": "Bahamas",
+          "prefix": "+1242",
+        },
+        Object {
+          "code": "bh",
+          "name": "Bahrain (‫البحرين‬‎)",
+          "prefix": "+973",
+        },
+        Object {
+          "code": "bd",
+          "name": "Bangladesh (বাংলাদেশ)",
+          "prefix": "+880",
+        },
+        Object {
+          "code": "bb",
+          "name": "Barbados",
+          "prefix": "+1246",
+        },
+        Object {
+          "code": "by",
+          "name": "Belarus (Беларусь)",
+          "prefix": "+375",
+        },
+        Object {
+          "code": "be",
+          "name": "Belgium (België)",
+          "prefix": "+32",
+        },
+        Object {
+          "code": "bz",
+          "name": "Belize",
+          "prefix": "+501",
+        },
+        Object {
+          "code": "bj",
+          "name": "Benin (Bénin)",
+          "prefix": "+229",
+        },
+        Object {
+          "code": "bm",
+          "name": "Bermuda",
+          "prefix": "+1441",
+        },
+        Object {
+          "code": "bt",
+          "name": "Bhutan (འབྲུག)",
+          "prefix": "+975",
+        },
+        Object {
+          "code": "bo",
+          "name": "Bolivia",
+          "prefix": "+591",
+        },
+        Object {
+          "code": "ba",
+          "name": "Bosnia and Herzegovina (Босна и Херцеговина)",
+          "prefix": "+387",
+        },
+        Object {
+          "code": "bw",
+          "name": "Botswana",
+          "prefix": "+267",
+        },
+        Object {
+          "code": "br",
+          "name": "Brazil (Brasil)",
+          "prefix": "+55",
+        },
+        Object {
+          "code": "io",
+          "name": "British Indian Ocean Territory",
+          "prefix": "+246",
+        },
+        Object {
+          "code": "vg",
+          "name": "British Virgin Islands",
+          "prefix": "+1284",
+        },
+        Object {
+          "code": "bn",
+          "name": "Brunei",
+          "prefix": "+673",
+        },
+        Object {
+          "code": "bg",
+          "name": "Bulgaria (България)",
+          "prefix": "+359",
+        },
+        Object {
+          "code": "bf",
+          "name": "Burkina Faso",
+          "prefix": "+226",
+        },
+        Object {
+          "code": "bi",
+          "name": "Burundi (Uburundi)",
+          "prefix": "+257",
+        },
+        Object {
+          "code": "kh",
+          "name": "Cambodia (កម្ពុជា)",
+          "prefix": "+855",
+        },
+        Object {
+          "code": "cm",
+          "name": "Cameroon (Cameroun)",
+          "prefix": "+237",
+        },
+        Object {
+          "code": "ca",
+          "name": "Canada",
+          "prefix": "+1",
+        },
+        Object {
+          "code": "cv",
+          "name": "Cape Verde (Kabu Verdi)",
+          "prefix": "+238",
+        },
+        Object {
+          "code": "bq",
+          "name": "Caribbean Netherlands",
+          "prefix": "+599",
+        },
+        Object {
+          "code": "ky",
+          "name": "Cayman Islands",
+          "prefix": "+1345",
+        },
+        Object {
+          "code": "cf",
+          "name": "Central African Republic (République centrafricaine)",
+          "prefix": "+236",
+        },
+        Object {
+          "code": "td",
+          "name": "Chad (Tchad)",
+          "prefix": "+235",
+        },
+        Object {
+          "code": "cl",
+          "name": "Chile",
+          "prefix": "+56",
+        },
+        Object {
+          "code": "cn",
+          "name": "China (中国)",
+          "prefix": "+86",
+        },
+        Object {
+          "code": "co",
+          "name": "Colombia",
+          "prefix": "+57",
+        },
+        Object {
+          "code": "km",
+          "name": "Comoros (‫جزر القمر‬‎)",
+          "prefix": "+269",
+        },
+        Object {
+          "code": "cd",
+          "name": "Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)",
+          "prefix": "+243",
+        },
+        Object {
+          "code": "cg",
+          "name": "Congo (Republic) (Congo-Brazzaville)",
+          "prefix": "+242",
+        },
+        Object {
+          "code": "ck",
+          "name": "Cook Islands",
+          "prefix": "+682",
+        },
+        Object {
+          "code": "cr",
+          "name": "Costa Rica",
+          "prefix": "+506",
+        },
+        Object {
+          "code": "ci",
+          "name": "Côte d’Ivoire",
+          "prefix": "+225",
+        },
+        Object {
+          "code": "hr",
+          "name": "Croatia (Hrvatska)",
+          "prefix": "+385",
+        },
+        Object {
+          "code": "cu",
+          "name": "Cuba",
+          "prefix": "+53",
+        },
+        Object {
+          "code": "cw",
+          "name": "Curaçao",
+          "prefix": "+599",
+        },
+        Object {
+          "code": "cy",
+          "name": "Cyprus (Κύπρος)",
+          "prefix": "+357",
+        },
+        Object {
+          "code": "cz",
+          "name": "Czech Republic (Česká republika)",
+          "prefix": "+420",
+        },
+        Object {
+          "code": "dk",
+          "name": "Denmark (Danmark)",
+          "prefix": "+45",
+        },
+        Object {
+          "code": "dj",
+          "name": "Djibouti",
+          "prefix": "+253",
+        },
+        Object {
+          "code": "dm",
+          "name": "Dominica",
+          "prefix": "+1767",
+        },
+        Object {
+          "code": "do",
+          "name": "Dominican Republic (República Dominicana)",
+          "prefix": "+1",
+        },
+        Object {
+          "code": "ec",
+          "name": "Ecuador",
+          "prefix": "+593",
+        },
+        Object {
+          "code": "eg",
+          "name": "Egypt (‫مصر‬‎)",
+          "prefix": "+20",
+        },
+        Object {
+          "code": "sv",
+          "name": "El Salvador",
+          "prefix": "+503",
+        },
+        Object {
+          "code": "gq",
+          "name": "Equatorial Guinea (Guinea Ecuatorial)",
+          "prefix": "+240",
+        },
+        Object {
+          "code": "er",
+          "name": "Eritrea",
+          "prefix": "+291",
+        },
+        Object {
+          "code": "ee",
+          "name": "Estonia (Eesti)",
+          "prefix": "+372",
+        },
+        Object {
+          "code": "et",
+          "name": "Ethiopia",
+          "prefix": "+251",
+        },
+        Object {
+          "code": "fk",
+          "name": "Falkland Islands (Islas Malvinas)",
+          "prefix": "+500",
+        },
+        Object {
+          "code": "fo",
+          "name": "Faroe Islands (Føroyar)",
+          "prefix": "+298",
+        },
+        Object {
+          "code": "fj",
+          "name": "Fiji",
+          "prefix": "+679",
+        },
+        Object {
+          "code": "fi",
+          "name": "Finland (Suomi)",
+          "prefix": "+358",
+        },
+        Object {
+          "code": "fr",
+          "name": "France",
+          "prefix": "+33",
+        },
+        Object {
+          "code": "gf",
+          "name": "French Guiana (Guyane française)",
+          "prefix": "+594",
+        },
+        Object {
+          "code": "pf",
+          "name": "French Polynesia (Polynésie française)",
+          "prefix": "+689",
+        },
+        Object {
+          "code": "ga",
+          "name": "Gabon",
+          "prefix": "+241",
+        },
+        Object {
+          "code": "gm",
+          "name": "Gambia",
+          "prefix": "+220",
+        },
+        Object {
+          "code": "ge",
+          "name": "Georgia (საქართველო)",
+          "prefix": "+995",
+        },
+        Object {
+          "code": "de",
+          "name": "Germany (Deutschland)",
+          "prefix": "+49",
+        },
+        Object {
+          "code": "gh",
+          "name": "Ghana (Gaana)",
+          "prefix": "+233",
+        },
+        Object {
+          "code": "gi",
+          "name": "Gibraltar",
+          "prefix": "+350",
+        },
+        Object {
+          "code": "gr",
+          "name": "Greece (Ελλάδα)",
+          "prefix": "+30",
+        },
+        Object {
+          "code": "gl",
+          "name": "Greenland (Kalaallit Nunaat)",
+          "prefix": "+299",
+        },
+        Object {
+          "code": "gd",
+          "name": "Grenada",
+          "prefix": "+1473",
+        },
+        Object {
+          "code": "gp",
+          "name": "Guadeloupe",
+          "prefix": "+590",
+        },
+        Object {
+          "code": "gu",
+          "name": "Guam",
+          "prefix": "+1671",
+        },
+        Object {
+          "code": "gt",
+          "name": "Guatemala",
+          "prefix": "+502",
+        },
+        Object {
+          "code": "gn",
+          "name": "Guinea (Guinée)",
+          "prefix": "+224",
+        },
+        Object {
+          "code": "gw",
+          "name": "Guinea-Bissau (Guiné Bissau)",
+          "prefix": "+245",
+        },
+        Object {
+          "code": "gy",
+          "name": "Guyana",
+          "prefix": "+592",
+        },
+        Object {
+          "code": "ht",
+          "name": "Haiti",
+          "prefix": "+509",
+        },
+        Object {
+          "code": "hn",
+          "name": "Honduras",
+          "prefix": "+504",
+        },
+        Object {
+          "code": "hk",
+          "name": "Hong Kong (香港)",
+          "prefix": "+852",
+        },
+        Object {
+          "code": "hu",
+          "name": "Hungary (Magyarország)",
+          "prefix": "+36",
+        },
+        Object {
+          "code": "is",
+          "name": "Iceland (Ísland)",
+          "prefix": "+354",
+        },
+        Object {
+          "code": "in",
+          "name": "India (भारत)",
+          "prefix": "+91",
+        },
+        Object {
+          "code": "id",
+          "name": "Indonesia",
+          "prefix": "+62",
+        },
+        Object {
+          "code": "ir",
+          "name": "Iran (‫ایران‬‎)",
+          "prefix": "+98",
+        },
+        Object {
+          "code": "iq",
+          "name": "Iraq (‫العراق‬‎)",
+          "prefix": "+964",
+        },
+        Object {
+          "code": "ie",
+          "name": "Ireland",
+          "prefix": "+353",
+        },
+        Object {
+          "code": "il",
+          "name": "Israel (‫ישראל‬‎)",
+          "prefix": "+972",
+        },
+        Object {
+          "code": "it",
+          "name": "Italy (Italia)",
+          "prefix": "+39",
+        },
+        Object {
+          "code": "jm",
+          "name": "Jamaica",
+          "prefix": "+1876",
+        },
+        Object {
+          "code": "jp",
+          "name": "Japan (日本)",
+          "prefix": "+81",
+        },
+        Object {
+          "code": "jo",
+          "name": "Jordan (‫الأردن‬‎)",
+          "prefix": "+962",
+        },
+        Object {
+          "code": "kz",
+          "name": "Kazakhstan (Казахстан)",
+          "prefix": "+7",
+        },
+        Object {
+          "code": "ke",
+          "name": "Kenya",
+          "prefix": "+254",
+        },
+        Object {
+          "code": "ki",
+          "name": "Kiribati",
+          "prefix": "+686",
+        },
+        Object {
+          "code": "kw",
+          "name": "Kuwait (‫الكويت‬‎)",
+          "prefix": "+965",
+        },
+        Object {
+          "code": "kg",
+          "name": "Kyrgyzstan (Кыргызстан)",
+          "prefix": "+996",
+        },
+        Object {
+          "code": "la",
+          "name": "Laos (ລາວ)",
+          "prefix": "+856",
+        },
+        Object {
+          "code": "lv",
+          "name": "Latvia (Latvija)",
+          "prefix": "+371",
+        },
+        Object {
+          "code": "lb",
+          "name": "Lebanon (‫لبنان‬‎)",
+          "prefix": "+961",
+        },
+        Object {
+          "code": "ls",
+          "name": "Lesotho",
+          "prefix": "+266",
+        },
+        Object {
+          "code": "lr",
+          "name": "Liberia",
+          "prefix": "+231",
+        },
+        Object {
+          "code": "ly",
+          "name": "Libya (‫ليبيا‬‎)",
+          "prefix": "+218",
+        },
+        Object {
+          "code": "li",
+          "name": "Liechtenstein",
+          "prefix": "+423",
+        },
+        Object {
+          "code": "lt",
+          "name": "Lithuania (Lietuva)",
+          "prefix": "+370",
+        },
+        Object {
+          "code": "lu",
+          "name": "Luxembourg",
+          "prefix": "+352",
+        },
+        Object {
+          "code": "mo",
+          "name": "Macau (澳門)",
+          "prefix": "+853",
+        },
+        Object {
+          "code": "mk",
+          "name": "Macedonia (FYROM) (Македонија)",
+          "prefix": "+389",
+        },
+        Object {
+          "code": "mg",
+          "name": "Madagascar (Madagasikara)",
+          "prefix": "+261",
+        },
+        Object {
+          "code": "mw",
+          "name": "Malawi",
+          "prefix": "+265",
+        },
+        Object {
+          "code": "my",
+          "name": "Malaysia",
+          "prefix": "+60",
+        },
+        Object {
+          "code": "mv",
+          "name": "Maldives",
+          "prefix": "+960",
+        },
+        Object {
+          "code": "ml",
+          "name": "Mali",
+          "prefix": "+223",
+        },
+        Object {
+          "code": "mt",
+          "name": "Malta",
+          "prefix": "+356",
+        },
+        Object {
+          "code": "mh",
+          "name": "Marshall Islands",
+          "prefix": "+692",
+        },
+        Object {
+          "code": "mq",
+          "name": "Martinique",
+          "prefix": "+596",
+        },
+        Object {
+          "code": "mr",
+          "name": "Mauritania (‫موريتانيا‬‎)",
+          "prefix": "+222",
+        },
+        Object {
+          "code": "mu",
+          "name": "Mauritius (Moris)",
+          "prefix": "+230",
+        },
+        Object {
+          "code": "mx",
+          "name": "Mexico (México)",
+          "prefix": "+52",
+        },
+        Object {
+          "code": "fm",
+          "name": "Micronesia",
+          "prefix": "+691",
+        },
+        Object {
+          "code": "md",
+          "name": "Moldova (Republica Moldova)",
+          "prefix": "+373",
+        },
+        Object {
+          "code": "mc",
+          "name": "Monaco",
+          "prefix": "+377",
+        },
+        Object {
+          "code": "mn",
+          "name": "Mongolia (Монгол)",
+          "prefix": "+976",
+        },
+        Object {
+          "code": "me",
+          "name": "Montenegro (Crna Gora)",
+          "prefix": "+382",
+        },
+        Object {
+          "code": "ms",
+          "name": "Montserrat",
+          "prefix": "+1664",
+        },
+        Object {
+          "code": "ma",
+          "name": "Morocco (‫المغرب‬‎)",
+          "prefix": "+212",
+        },
+        Object {
+          "code": "mz",
+          "name": "Mozambique (Moçambique)",
+          "prefix": "+258",
+        },
+        Object {
+          "code": "mm",
+          "name": "Myanmar (Burma) (မြန်မာ)",
+          "prefix": "+95",
+        },
+        Object {
+          "code": "na",
+          "name": "Namibia (Namibië)",
+          "prefix": "+264",
+        },
+        Object {
+          "code": "nr",
+          "name": "Nauru",
+          "prefix": "+674",
+        },
+        Object {
+          "code": "np",
+          "name": "Nepal (नेपाल)",
+          "prefix": "+977",
+        },
+        Object {
+          "code": "nl",
+          "name": "Netherlands (Nederland)",
+          "prefix": "+31",
+        },
+        Object {
+          "code": "nc",
+          "name": "New Caledonia (Nouvelle-Calédonie)",
+          "prefix": "+687",
+        },
+        Object {
+          "code": "nz",
+          "name": "New Zealand",
+          "prefix": "+64",
+        },
+        Object {
+          "code": "ni",
+          "name": "Nicaragua",
+          "prefix": "+505",
+        },
+        Object {
+          "code": "ne",
+          "name": "Niger (Nijar)",
+          "prefix": "+227",
+        },
+        Object {
+          "code": "ng",
+          "name": "Nigeria",
+          "prefix": "+234",
+        },
+        Object {
+          "code": "nu",
+          "name": "Niue",
+          "prefix": "+683",
+        },
+        Object {
+          "code": "nf",
+          "name": "Norfolk Island",
+          "prefix": "+672",
+        },
+        Object {
+          "code": "kp",
+          "name": "North Korea (조선 민주주의 인민 공화국)",
+          "prefix": "+850",
+        },
+        Object {
+          "code": "mp",
+          "name": "Northern Mariana Islands",
+          "prefix": "+1670",
+        },
+        Object {
+          "code": "no",
+          "name": "Norway (Norge)",
+          "prefix": "+47",
+        },
+        Object {
+          "code": "om",
+          "name": "Oman (‫عُمان‬‎)",
+          "prefix": "+968",
+        },
+        Object {
+          "code": "pk",
+          "name": "Pakistan (‫پاکستان‬‎)",
+          "prefix": "+92",
+        },
+        Object {
+          "code": "pw",
+          "name": "Palau",
+          "prefix": "+680",
+        },
+        Object {
+          "code": "ps",
+          "name": "Palestine (‫فلسطين‬‎)",
+          "prefix": "+970",
+        },
+        Object {
+          "code": "pa",
+          "name": "Panama (Panamá)",
+          "prefix": "+507",
+        },
+        Object {
+          "code": "pg",
+          "name": "Papua New Guinea",
+          "prefix": "+675",
+        },
+        Object {
+          "code": "py",
+          "name": "Paraguay",
+          "prefix": "+595",
+        },
+        Object {
+          "code": "pe",
+          "name": "Peru (Perú)",
+          "prefix": "+51",
+        },
+        Object {
+          "code": "ph",
+          "name": "Philippines",
+          "prefix": "+63",
+        },
+        Object {
+          "code": "pl",
+          "name": "Poland (Polska)",
+          "prefix": "+48",
+        },
+        Object {
+          "code": "pt",
+          "name": "Portugal",
+          "prefix": "+351",
+        },
+        Object {
+          "code": "pr",
+          "name": "Puerto Rico",
+          "prefix": "+1",
+        },
+        Object {
+          "code": "qa",
+          "name": "Qatar (‫قطر‬‎)",
+          "prefix": "+974",
+        },
+        Object {
+          "code": "re",
+          "name": "Réunion (La Réunion)",
+          "prefix": "+262",
+        },
+        Object {
+          "code": "ro",
+          "name": "Romania (România)",
+          "prefix": "+40",
+        },
+        Object {
+          "code": "ru",
+          "name": "Russia (Россия)",
+          "prefix": "+7",
+        },
+        Object {
+          "code": "rw",
+          "name": "Rwanda",
+          "prefix": "+250",
+        },
+        Object {
+          "code": "bl",
+          "name": "Saint Barthélemy (Saint-Barthélemy)",
+          "prefix": "+590",
+        },
+        Object {
+          "code": "sh",
+          "name": "Saint Helena",
+          "prefix": "+290",
+        },
+        Object {
+          "code": "kn",
+          "name": "Saint Kitts and Nevis",
+          "prefix": "+1869",
+        },
+        Object {
+          "code": "lc",
+          "name": "Saint Lucia",
+          "prefix": "+1758",
+        },
+        Object {
+          "code": "mf",
+          "name": "Saint Martin (Saint-Martin (partie française))",
+          "prefix": "+590",
+        },
+        Object {
+          "code": "pm",
+          "name": "Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)",
+          "prefix": "+508",
+        },
+        Object {
+          "code": "vc",
+          "name": "Saint Vincent and the Grenadines",
+          "prefix": "+1784",
+        },
+        Object {
+          "code": "ws",
+          "name": "Samoa",
+          "prefix": "+685",
+        },
+        Object {
+          "code": "sm",
+          "name": "San Marino",
+          "prefix": "+378",
+        },
+        Object {
+          "code": "st",
+          "name": "São Tomé and Príncipe (São Tomé e Príncipe)",
+          "prefix": "+239",
+        },
+        Object {
+          "code": "sa",
+          "name": "Saudi Arabia (‫المملكة العربية السعودية‬‎)",
+          "prefix": "+966",
+        },
+        Object {
+          "code": "sn",
+          "name": "Senegal (Sénégal)",
+          "prefix": "+221",
+        },
+        Object {
+          "code": "rs",
+          "name": "Serbia (Србија)",
+          "prefix": "+381",
+        },
+        Object {
+          "code": "sc",
+          "name": "Seychelles",
+          "prefix": "+248",
+        },
+        Object {
+          "code": "sl",
+          "name": "Sierra Leone",
+          "prefix": "+232",
+        },
+        Object {
+          "code": "sg",
+          "name": "Singapore",
+          "prefix": "+65",
+        },
+        Object {
+          "code": "sx",
+          "name": "Sint Maarten",
+          "prefix": "+1721",
+        },
+        Object {
+          "code": "sk",
+          "name": "Slovakia (Slovensko)",
+          "prefix": "+421",
+        },
+        Object {
+          "code": "si",
+          "name": "Slovenia (Slovenija)",
+          "prefix": "+386",
+        },
+        Object {
+          "code": "sb",
+          "name": "Solomon Islands",
+          "prefix": "+677",
+        },
+        Object {
+          "code": "so",
+          "name": "Somalia (Soomaaliya)",
+          "prefix": "+252",
+        },
+        Object {
+          "code": "za",
+          "name": "South Africa",
+          "prefix": "+27",
+        },
+        Object {
+          "code": "kr",
+          "name": "South Korea (대한민국)",
+          "prefix": "+82",
+        },
+        Object {
+          "code": "ss",
+          "name": "South Sudan (‫جنوب السودان‬‎)",
+          "prefix": "+211",
+        },
+        Object {
+          "code": "es",
+          "name": "Spain (España)",
+          "prefix": "+34",
+        },
+        Object {
+          "code": "lk",
+          "name": "Sri Lanka (ශ්‍රී ලංකාව)",
+          "prefix": "+94",
+        },
+        Object {
+          "code": "sd",
+          "name": "Sudan (‫السودان‬‎)",
+          "prefix": "+249",
+        },
+        Object {
+          "code": "sr",
+          "name": "Suriname",
+          "prefix": "+597",
+        },
+        Object {
+          "code": "sz",
+          "name": "Swaziland",
+          "prefix": "+268",
+        },
+        Object {
+          "code": "se",
+          "name": "Sweden (Sverige)",
+          "prefix": "+46",
+        },
+        Object {
+          "code": "ch",
+          "name": "Switzerland (Schweiz)",
+          "prefix": "+41",
+        },
+        Object {
+          "code": "sy",
+          "name": "Syria (‫سوريا‬‎)",
+          "prefix": "+963",
+        },
+        Object {
+          "code": "tw",
+          "name": "Taiwan (台灣)",
+          "prefix": "+886",
+        },
+        Object {
+          "code": "tj",
+          "name": "Tajikistan",
+          "prefix": "+992",
+        },
+        Object {
+          "code": "tz",
+          "name": "Tanzania",
+          "prefix": "+255",
+        },
+        Object {
+          "code": "th",
+          "name": "Thailand (ไทย)",
+          "prefix": "+66",
+        },
+        Object {
+          "code": "tl",
+          "name": "Timor-Leste",
+          "prefix": "+670",
+        },
+        Object {
+          "code": "tg",
+          "name": "Togo",
+          "prefix": "+228",
+        },
+        Object {
+          "code": "tk",
+          "name": "Tokelau",
+          "prefix": "+690",
+        },
+        Object {
+          "code": "to",
+          "name": "Tonga",
+          "prefix": "+676",
+        },
+        Object {
+          "code": "tt",
+          "name": "Trinidad and Tobago",
+          "prefix": "+1868",
+        },
+        Object {
+          "code": "tn",
+          "name": "Tunisia (‫تونس‬‎)",
+          "prefix": "+216",
+        },
+        Object {
+          "code": "tr",
+          "name": "Turkey (Türkiye)",
+          "prefix": "+90",
+        },
+        Object {
+          "code": "tm",
+          "name": "Turkmenistan",
+          "prefix": "+993",
+        },
+        Object {
+          "code": "tc",
+          "name": "Turks and Caicos Islands",
+          "prefix": "+1649",
+        },
+        Object {
+          "code": "tv",
+          "name": "Tuvalu",
+          "prefix": "+688",
+        },
+        Object {
+          "code": "vi",
+          "name": "U.S. Virgin Islands",
+          "prefix": "+1340",
+        },
+        Object {
+          "code": "ug",
+          "name": "Uganda",
+          "prefix": "+256",
+        },
+        Object {
+          "code": "ua",
+          "name": "Ukraine (Україна)",
+          "prefix": "+380",
+        },
+        Object {
+          "code": "ae",
+          "name": "United Arab Emirates (‫الإمارات العربية المتحدة‬‎)",
+          "prefix": "+971",
+        },
+        Object {
+          "code": "gb",
+          "name": "United Kingdom",
+          "prefix": "+44",
+        },
+        Object {
+          "code": "us",
+          "name": "United States",
+          "prefix": "+1",
+        },
+        Object {
+          "code": "uy",
+          "name": "Uruguay",
+          "prefix": "+598",
+        },
+        Object {
+          "code": "uz",
+          "name": "Uzbekistan (Oʻzbekiston)",
+          "prefix": "+998",
+        },
+        Object {
+          "code": "vu",
+          "name": "Vanuatu",
+          "prefix": "+678",
+        },
+        Object {
+          "code": "va",
+          "name": "Vatican City (Città del Vaticano)",
+          "prefix": "+39",
+        },
+        Object {
+          "code": "ve",
+          "name": "Venezuela",
+          "prefix": "+58",
+        },
+        Object {
+          "code": "vn",
+          "name": "Vietnam (Việt Nam)",
+          "prefix": "+84",
+        },
+        Object {
+          "code": "wf",
+          "name": "Wallis and Futuna",
+          "prefix": "+681",
+        },
+        Object {
+          "code": "ye",
+          "name": "Yemen (‫اليمن‬‎)",
+          "prefix": "+967",
+        },
+        Object {
+          "code": "zm",
+          "name": "Zambia",
+          "prefix": "+260",
+        },
+        Object {
+          "code": "zw",
+          "name": "Zimbabwe",
+          "prefix": "+263",
+        },
+      ]
+    }
+    placeholder="..."
+    renderItem={[Function]}
+    renderValue={[Function]}
+    value={null}
+  />
+  <input
+    onChange={[Function]}
+    type="tel"
+    value=""
+  />
+</span>
+`;
