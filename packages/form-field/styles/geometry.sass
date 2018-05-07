@@ -1,0 +1,46 @@
+@import './config'
+
+@include module('form-field')
+  display: block
+  position: relative
+  box-sizing: border-box
+
+  &__label
+    display: inline-block !important
+    vertical-align: top
+    padding-top: $form-field-label-padding-top
+    width: $form-field-label-width
+    font-size: $font-size-m
+    font-weight: $font-weight-semibold
+    text-align: right
+    padding-right: $form-field-label-padding-right
+    box-sizing: border-box
+
+  &__hint
+    display: inline-block !important
+    vertical-align: middle
+    width: $form-field-hint-width
+    font-size: $font-size-s
+    color: $form-field-hint-color
+    padding-left: $form-field-hint-padding-left
+    word-wrap: break-word
+    box-sizing: border-box
+
+  &__input-wrapper
+    display: inline-block !important
+    vertical-align: middle
+    width: $form-field-input-width
+
+  &__error
+    font-size: $font-size-s
+    color: $form-field-error-color
+    word-wrap: break-word
+
+  &__warning
+    font-size: $font-size-s
+    color: $form-field-warning-color
+    word-wrap: break-word
+
+  &--focus
+
+  &--blur
