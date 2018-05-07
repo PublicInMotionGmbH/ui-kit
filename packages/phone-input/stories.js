@@ -21,7 +21,11 @@ addStory('with placeholder', readme, () => (
   <PhoneInput placeholder='Type your phone number...' />
 ))
 
-addStory('controlled', readme, (setState, state) => (
+addStory('with error', readme, () => (
+  <PhoneInput error />
+))
+
+addStory.controlled('controlled', readme, (setState, state) => (
   <PhoneInput
     value={state.value}
     onChange={value => setState({ value })}

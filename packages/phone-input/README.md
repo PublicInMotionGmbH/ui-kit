@@ -29,6 +29,7 @@ This component allows any properties which can be added to `div` element. Additi
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
 className     | string    | n/a             | additional class name passed to wrapper
+error         | boolean   | `false`         | indicates that input has error
 value         | string    | self-controlled | phone number to show
 placeholder   | string    | n/a             | placeholder to show when there is no value
 onChange      | function  | n/a             | event handler for changed value

@@ -12,6 +12,11 @@
     border-radius: 0 $border-radius-m $border-radius-m 0
     outline: none
 
+  &--error
+    > input
+      color: $color-talixo-error-red
+      border-color: $color-talixo-error-red
+
   @include module('country-flag')
     box-shadow: 0 0 dp(1.25) dp(0.25) rgba(0, 0, 0, .1)
 

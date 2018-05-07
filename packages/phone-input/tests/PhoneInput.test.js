@@ -3,9 +3,9 @@ import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
 
-import PhoneInput from '../src/PhoneInput'
+import PhoneInput, {moduleName} from '../src/PhoneInput'
 
-const moduleName = prefix('phone-input')
+const name = prefix(moduleName)
 const flagName = prefix('country-flag')
 const comboName = prefix('combo-box')
 
@@ -17,6 +17,12 @@ describe('<PhoneInput />', () => {
     const wrapper = shallow(<PhoneInput />)
 
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('should render with error styling', () => {
+    const wrapper = shallow(<PhoneInput error />)
+
+    expect(wrapper.hasClass(`${name}--error`)).toBe(true)
   })
 
   it('should not render any flag when number is empty', () => {
@@ -97,13 +103,13 @@ describe('<PhoneInput />', () => {
     wrapper.update()
 
     // Find first prefix item
-    const prefix = wrapper.find(`.${comboName}__menu`).find(`.${moduleName}__country`).at(0)
+    const prefix = wrapper.find(`.${comboName}__menu`).find(`.${name}__country`).at(0)
 
     // Extract prefix
-    const expected = prefix.find(`.${moduleName}__country__description > strong`).text()
+    const expected = prefix.find(`.${name}__country__description > strong`).text()
 
     // Click first prefix item
-    wrapper.find(`.${comboName}__menu`).find(`.${moduleName}__country`).at(0).simulate('click')
+    wrapper.find(`.${comboName}__menu`).find(`.${name}__country`).at(0).simulate('click')
 
     expect(spy.mock.calls.length).toBe(1)
     expect(spy.mock.calls[0]).toEqual([ `${expected} 555555` ])
