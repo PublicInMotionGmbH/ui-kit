@@ -20,10 +20,14 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name | Type      | Default      | Description                    
+--------------|-----------|:------------:|--------------------------------
+className     | string    | n/a          | Additional class name passed to wrapper.
+children      | node      | n/a          | Each children element is separate step of wizard.
+displayedLimit| number    | `10`         | Maximum number of displayed steps buttons.
+nextLabel     | node      | `'Next'`     | Next button label.
+previousLabel | node      | `'Previous'` | Previous button label
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version
