@@ -1,0 +1,124 @@
+@import './config'
+
+@include module('text-input')
+  border: none
+  &__suffix
+    margin-left: dp(1)
+    font-size: dp(1.5) !important
+
+    &:before
+      display: none
+
+.options-input
+  position: relative
+  &__toggle
+    display: flex
+    align-items: center
+    white-space: nowrap
+    font-size: dp(1.7)
+    line-height: 1.5em
+    border-radius: $border-radius-m
+    height: dp(6)
+    font-weight: 600
+    padding: 0
+    margin: 0
+    border: 1px solid transparent
+    background: transparent
+    outline: none
+    cursor: pointer
+
+    &:hover, &:focus
+      padding: 0 dp(1.25)
+      margin-left: dp(-1.25)
+      margin-right: dp(-1.25)
+      border-color: #ccc
+
+  &__value .talixo-icon
+    font-size: 1.5em
+    margin-right: dp(0.5)
+
+  &__value
+    display: flex
+
+  &__option
+    display: inline-flex
+    align-items: center
+    margin-right: dp(1)
+
+  &__list
+    display: none
+    position: absolute
+    z-index: 998
+    left: dp(8.8)
+    min-width: dp(35)
+    margin-top: -1px
+    border: 1px solid $brand-color
+    border-radius: $border-radius-m
+    border-top-left-radius: 0
+    background: #fff
+
+    &-option__label
+      font-size: dp(1.6)
+      margin-bottom: dp(1.64)
+    
+    &-option__title
+      display: block
+
+    &-option__description
+      font-weight: 400
+    
+  &__list &__list-option--active
+    background: #fff
+
+@include module('number-input')
+  input
+    font-weight: 600
+    border: 0
+    padding-right: dp(9)
+    background: transparent
+
+@include module('options-input')
+  &__list-option
+    line-height: 1em
+    background: #f5f5f5
+    border-bottom: 1px solid #eee
+
+    &--active
+      background: #fff
+
+    &__title, &__description
+      display: block
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+
+    &__title
+      font-weight: 600
+    
+
+    &__description
+      font-weight: 400
+    
+
+    &:last-child
+      border-bottom: 0
+
+@include module('options-input')
+  &--open .options-input__toggle
+    position: relative
+    z-index: 999
+    background: #fff
+    padding: 0 dp(1.25)
+    margin-left: dp(-1.25)
+    margin-right: dp(-1.25)
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    border-color: $brand-color
+    border-bottom-color: transparent
+
+  &--open .options-input__list
+    display: block
+
+//must be greater than 999
+.talixo-tooltip
+  z-index: 1000
