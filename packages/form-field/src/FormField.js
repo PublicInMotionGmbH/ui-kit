@@ -169,7 +169,7 @@ class FormField extends React.Component {
      */
     const buildPassedProps = (child) => ({
       className: buildInputClsName(child),
-      error: error !== undefined,
+      error: error != null,
       id: uniqueId,
       onBlur: handleBlur,
       onChange: onChange,

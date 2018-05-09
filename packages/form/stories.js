@@ -1,5 +1,4 @@
 import React from 'react'
-import { Formik } from 'formik'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { Button } from '@talixo/button'
@@ -19,7 +18,7 @@ const readme = getReadmeDescription(require('./README.md'))
 // Create factories for story
 const addStory = createStoriesFactory('Form', module, {
   propTables: [ Form ],
-  propTablesExclude: [ TextInput, Formik, Button, ControlGroup, Icon, FormField ]
+  propTablesExclude: [ TextInput, Button, ControlGroup, Icon, FormField ]
 })
 
 // Test components
