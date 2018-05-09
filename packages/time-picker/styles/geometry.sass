@@ -1,0 +1,66 @@
+@import './config'
+
+@include module('time-picker')
+  position: relative
+  display: block
+
+  &__input-hour,
+  &__input-minutes
+    display: inline-block !important
+    width: dp(14)
+
+  &__colon
+    padding: dp(1)
+
+@include module('time-menu')
+  position: relative
+  display: flex
+  max-height: dp(42)
+  flex-direction: column
+  flex-wrap: wrap
+  width: dp(24)
+  margin: dp(1)
+
+  &__button
+    flex: 1 1 dp(5)
+    width: dp(10)
+    display: flex
+    align-items: center
+    justify-content: center
+    margin: dp(1)
+
+@include module('time-input')
+  position: relative
+  display: block
+
+  &__input
+    > input
+      background-color: $time-picker-background-color
+      border: 1px solid $time-picker-border-color
+
+    &--open
+      position: relative
+      z-index: 2
+
+      > input
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom: 1px solid $time-picker-background-color
+
+  &__menu
+    position: absolute
+    display: flex
+    flex-direction: row
+    padding: dp(1)
+    margin-top: dp(-0.125)
+    background-color: $time-picker-background-color
+    border: 1px solid $time-picker-border-color
+
+  &__arrow
+    display: inline-block
+    font-size: 1.5rem
+    line-height: 1em
+    border: 0
+    background: transparent
+    color: #bbb
+    cursor: pointer
