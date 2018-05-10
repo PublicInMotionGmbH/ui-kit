@@ -1,12 +1,44 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { Icon } from '@talixo/icon'
 import { NumberInput } from '@talixo/number-input'
 import { Tooltip } from '@talixo/tooltip'
 import { buildClassName } from '@talixo/shared'
 
-/* OPTIONS */
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Data for generate ListOption */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    icon: PropTypes.string,
+    label: PropTypes.string,
+    default: PropTypes.number,
+    min: PropTypes.number,
+    max: PropTypes.number
+  }))
+}
+
+const defaultProps = {
+  options: []
+}
+
+/**
+ * * Component which represents Option.
+ *
+ * @param {*} props
+ * @param {array} [props.options]
+ * @param {string} [props.options.id]
+ * @param {string} [props.options.icon]
+ * @param {string} [props.options.label]
+ * @param {number} [props.options.default]
+ * @param {number} [props.options.min]
+ * @param {number} [props.options.max]
+ *
+ * @returns {React.Element}
+ */
 function Option (props) {
   const { option, value } = props
 
@@ -25,7 +57,20 @@ function Option (props) {
   )
 }
 
-/* LIST OPTIONS */
+/**
+ * * Component which represents ListOption.
+ *
+ * @param {*} props
+ * @param {array} [props.options]
+ * @param {string} [props.options.id]
+ * @param {string} [props.options.icon]
+ * @param {string} [props.options.label]
+ * @param {number} [props.options.default]
+ * @param {number} [props.options.min]
+ * @param {number} [props.options.max]
+ *
+ * @returns {React.Element}
+ */
 function ListOption (props) {
   const { option, value, onChange } = props
 
@@ -59,10 +104,17 @@ function ListOption (props) {
 }
 
 /**
- * Component which represents OptionsInput.
+ * * Component which represents OptionsInput.
  *
- * @param {object} props
- * @param {string} [props.className]
+ * @param {*} props
+ * @param {array} [props.options]
+ * @param {string} [props.options.id]
+ * @param {string} [props.options.icon]
+ * @param {string} [props.options.label]
+ * @param {number} [props.options.default]
+ * @param {number} [props.options.min]
+ * @param {number} [props.options.max]
+ *
  * @returns {React.Element}
  */
 class OptionsInput extends React.PureComponent {
@@ -71,20 +123,36 @@ class OptionsInput extends React.PureComponent {
     value: this.buildValue(this.props.options, this.props.value)
   }
 
+  /**
+   * This function set state value
+   *
+   * @param {*} nextProps
+   */
   componentWillReceiveProps (nextProps) {
     let value = nextProps.value ? { ...nextProps.value } : { ...this.state.value }
 
     if (this.props.options !== nextProps.options) {
-      value = this.buildValue(nextProps.options) // before: nextProps.options !!!!!!!!!!!!TOCHECK
+      value = this.buildValue(nextProps.options)
     }
 
     this.setState({ value })
   }
 
+  /**
+   * This function detach events
+   */
   componentWillUnmount () {
     this.detachCloseEvents()
   }
 
+  /**
+   * This function set value of value
+   *
+   * @param {array} options
+   * @param {number} baseValue
+   *
+   * @returns {number}
+   */
   buildValue (options, baseValue) {
     const currentValue = baseValue || {}
 
@@ -98,6 +166,9 @@ class OptionsInput extends React.PureComponent {
     return value
   }
 
+  /**
+   * This function set state.open
+   */
   toggle () {
     const nextOpen = !this.state.open
 
@@ -110,25 +181,36 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
+  /**
+   * This function set state.open
+   */
   close () {
     this.setState({ open: false })
   }
 
+  /**
+   * This function add events listeners
+   */
   attachCloseEvents () {
     document.body.addEventListener('click', this.handleCloseEvent, true)
     document.body.addEventListener('focus', this.handleCloseEvent, true)
   }
 
+  /**
+   * This function remove events listeners
+   */
   detachCloseEvents () {
     document.body.removeEventListener('click', this.handleCloseEvent)
     document.body.removeEventListener('focus', this.handleCloseEvent)
   }
 
+  /**
+   * This function handle events
+   */
   handleCloseEvent = (event) => {
     if (!this.el) {
       return
     }
-
     const body = event.currentTarget
 
     let element = event.target
@@ -145,6 +227,11 @@ class OptionsInput extends React.PureComponent {
     this.close()
   }
 
+  /**
+   * This function set state.value
+   * @param {string} id
+   * @param {number} value
+   */
   change (id, value) {
     const nextValue = {
       ...this.state.value,
@@ -164,6 +251,9 @@ class OptionsInput extends React.PureComponent {
     this.el = node
   }
 
+  /**
+   * This function handle focus
+   */
   focus () {
     this.toggle()
 
@@ -172,6 +262,9 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
+  /**
+   * This function handle blur
+   */
   blur () {
     if (this.props.onBlur) {
       this.props.onBlur()
@@ -227,8 +320,7 @@ class OptionsInput extends React.PureComponent {
   }
 }
 
-OptionsInput.defaultProps = {
-  options: []
-}
+OptionsInput.propTypes = propTypes
+OptionsInput.defaultProps = defaultProps
 
 export default OptionsInput
