@@ -2,7 +2,7 @@
 
 exports[`<FormHandler /> rendering renders children correctly 1`] = `
 <form
-  errors={Object {}}
+  className="talixo-form-handler"
   method="POST"
   onSubmit={[Function]}
 >

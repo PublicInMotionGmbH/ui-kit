@@ -18,21 +18,30 @@ const addStory = createStoriesFactory('Form Handler', module, {
 
 // Stories
 const schema = yup.object().shape({
-  // name: yup.mixed().required('Type in your name.')
+  name: yup.mixed().required('Type in your name.'),
+  email: yup.string().email('Wrong email address')
 })
 addStory.controlled('initial', readme, (setState, state) => (
   <div>
     <FormHandler
-      onSubmit={v => console.log(v)}
+      onSubmit={v => console.log(state.name)}
       errors={{ name: state.name }}
       validationSchema={schema}
     >
-      <FormField label='Name' name='name'>
+      <FormField label='Name' name='name' >
+        <TextInput />
+      </FormField>
+      <FormField
+        label='Email'
+        name='email'
+        onBlur={(e) => console.log('onBlur: ', e)}
+        onChange={(v) => console.log('onChange: ', v)}
+      >
         <TextInput />
       </FormField>
       <Button type='submit'>Send</Button>
     </FormHandler>
-    <input type='text' onChange={({ target: { value } }) => setState({ name: value })} />
+    <TextInput onChange={value => { console.log(value); setState({ name: value }) }} />
   </div>
 ), () => ({
   name: ''

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { Formik } from 'formik'
 
 import { FormField } from '@talixo/form-field'
+import { buildClassName } from '@talixo/shared'
+
+const moduleName = 'form-handler'
 
 /**
  * Checks if node is a FormField component
@@ -30,18 +33,31 @@ export function isFormField (node) {
 }
 
 const propTypes = {
-  errors: PropTypes.object,
-  onSubmit: PropTypes.func,
-  validationSchema: PropTypes.object,
-  initialValues: PropTypes.object
-}
+  /** Additional class name for form. */
+  className: PropTypes.string,
 
-const defaultProps = {
-  errors: {}
+  /** Error object. Key is a name of a field. */
+  errors: PropTypes.objectOf(PropTypes.string),
+
+  /** onSubmit callback function. */
+  onSubmit: PropTypes.func,
+
+  /** Validation object. A Yup schema or a function that returns a Yup schema. */
+  validationSchema: PropTypes.object,
+
+  /** Initial values of form fields. */
+  values: PropTypes.object
 }
 
 /**
  * Component which represents Form Handler
+ *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {object} [props.errors]
+ * @property {function} [props.onSubmit]
+ * @property {} [props.validationSchema]
+ * @property {string} [props.values]
  *
  * @class
  */
@@ -115,12 +131,26 @@ class FormHandler extends React.PureComponent {
       }
 
       // Modify props of FormField
+
+      const onChange = (value) => {
+        setFieldValue(name, value)
+        if (node.props.onChange) {
+          node.props.onChange(value)
+        }
+      }
+      const onBlur = (e) => {
+        handleBlur({ persist: () => {}, target: { name: name } })
+        if (node.props.onBlur) {
+          node.props.onBlur(e)
+        }
+      }
       return React.cloneElement(node, {
+        ...node.props,
         ref: node.ref,
         value: values[name],
         error: touched[name] ? errors[name] : null,
-        onChange: value => setFieldValue(name, value),
-        onBlur: () => handleBlur({ persist: () => {}, target: { name: name } })
+        onChange,
+        onBlur
       })
     }
 
@@ -163,11 +193,20 @@ class FormHandler extends React.PureComponent {
    */
   renderForm = props => {
     const { handleSubmit } = props
-    const { children, onSubmit, initialValues, values, validationSchema, ...passedProps } = this.props
+    const {
+      children, className, onSubmit,
+      initialValues, values, validationSchema,
+      ...passedProps
+    } = this.props
+    const formCls = buildClassName(moduleName, className)
     const elements = React.Children.map(children, node => this.transformNode(node, props))
 
     return (
-      <form method='POST' onSubmit={handleSubmit} {...passedProps}>
+      <form
+        className={formCls}
+        method='POST'
+        onSubmit={handleSubmit}
+        {...passedProps}>
         {elements}
       </form>
     )
@@ -194,7 +233,7 @@ class FormHandler extends React.PureComponent {
   }
 
   render () {
-    const { children, onSubmit, values, ...passedProps } = this.props
+    const { children, className, onSubmit, values, ...passedProps } = this.props
 
     return (
       <Formik
@@ -209,6 +248,5 @@ class FormHandler extends React.PureComponent {
 }
 
 FormHandler.propTypes = propTypes
-FormHandler.defaultProps = defaultProps
 
 export default FormHandler

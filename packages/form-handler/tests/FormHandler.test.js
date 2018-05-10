@@ -44,41 +44,60 @@ describe('<FormHandler />', () => {
     })
   })
 
-  describe('passing props to children', () => {
-    let wrapper, spyFn, input
+  describe('applying custom onChange and onBlur to children', () => {
+    let wrapper, input
+    const onChange = jest.fn()
+    const onBlur = jest.fn()
     beforeEach(() => {
-      wrapper = createWrapper()
-      spyFn = jest.fn()
-      input = wrapper.find('.talixo-text-input__input').first()
+      wrapper = mount(
+        <FormHandler>
+          <FormField name='test' onChange={onChange} onBlur={onBlur}>
+            <TextInput />
+          </FormField>
+        </FormHandler>
+      )
+      input = wrapper.find('.talixo-text-input__input')
     })
     afterEach(() => {
       wrapper.unmount()
     })
+
     it('should invoke setFieldValue when input has changed', () => {
-      wrapper.instance().formik.setFieldValue = spyFn
-      input.simulate('change', { target: { value: 'My new value' } })
-      // expect(spyFn).toHaveBeenCalledTimes(1)
+      const value = 'My new value!'
+      input.simulate('change', { target: { value } })
+      expect(wrapper.instance().formik.getFormikBag().values.test).toBe(value)
+    })
+
+    it('should invoke children onChange when input has changed', () => {
+      onChange.mockReset()
+      const value = 'My new value!'
+      input.simulate('change', { target: { value } })
+      expect(onChange).toHaveBeenCalledTimes(1)
     })
 
     it('should invoke handleBlur when input has blurred', () => {
+      const spyFn = jest.fn()
       wrapper.instance().formik.handleBlur = spyFn
       input.simulate('focus')
       input.simulate('change', { target: { value: 'My new value' } })
       input.simulate('blur')
       expect(spyFn).toHaveBeenCalledTimes(1)
-      // expect(spyFn).toHaveBeenCalledWith({ persist: expect.any(Function), target: { name: 'test' } })
+    })
+
+    it('should invoke handleBlur when input has blurred', () => {
+      onBlur.mockReset()
+      input.simulate('focus')
+      input.simulate('change', { target: { value: 'My new value' } })
+      input.simulate('blur')
+      expect(onBlur).toHaveBeenCalledTimes(1)
     })
   })
 
   describe('props updating', () => {
-    const initialErrors = { test: null }
-    const updatedErrors = { test: 'Test error' }
-    const props = { errors: initialErrors }
-    const initialValues = { test: 'Test value' }
-    const updatedValues = { test: 'Updated test value' }
-    const undefValues = { test: undefined }
-
     describe('errors update', () => {
+      const initialErrors = { test: null }
+      const updatedErrors = { test: 'Test error' }
+      const props = { errors: initialErrors }
       let wrapper
       beforeEach(() => {
         wrapper = createWrapper(props)
@@ -93,6 +112,9 @@ describe('<FormHandler />', () => {
     })
 
     describe('values update', () => {
+      const initialValues = { test: 'Test value' }
+      const updatedValues = { test: 'Updated test value' }
+      const undefValues = { test: undefined }
       let wrapper
       afterEach(() => {
         wrapper.unmount()
