@@ -14,20 +14,27 @@
 
 @include module('time-menu')
   position: relative
-  display: flex
-  max-height: dp(42)
-  flex-direction: column
-  flex-wrap: wrap
-  width: dp(24)
-  margin: dp(1)
+  column-width: 100%
+  column-count: 1
+  column-gap: dp(2)
+  padding: dp(1)
+  user-select: none
+
+  &__header
+    column-span: all
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    margin-bottom: dp(2)
+    font-size: dp(3)
+    line-height: dp(3)
 
   &__button
-    flex: 1 1 dp(5)
-    width: dp(10)
+    min-width: dp(10)
     display: flex
     align-items: center
     justify-content: center
-    margin: dp(1)
+    margin-bottom: dp(2)
 
 @include module('time-input')
   position: relative

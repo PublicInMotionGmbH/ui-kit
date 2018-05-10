@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { Icon } from '@talixo/icon'
 
 import { formatTimeValue } from '../utils/time'
 import { timeData } from '../utils/timeData'
@@ -76,12 +77,35 @@ class TimePicker extends React.PureComponent {
     const { type } = this.props
     const { hours, hoursAM, hoursPM } = timeData
 
+    const HeaderAM = () => [
+      <Icon key='icon-am' name='brightness_3' />,
+      <span key='label-am' style={{ marginLeft: '8px' }}>AM</span>
+    ]
+    const HeaderPM = () => [
+      <Icon key='icon-pm' name='brightness_5' />,
+      <span key='label-pm' style={{ marginLeft: '8px' }}>PM</span>
+    ]
+
     return type === '12'
       ? [
-        <TimeMenu key='hours-am' data={hoursAM} {...rest} />,
-        <TimeMenu key='hours-pm' data={hoursPM} {...rest} />
+        <TimeMenu
+          key='hours-am'
+          columns={2}
+          data={hoursAM}
+          {...rest}
+        >
+          <HeaderAM />
+        </TimeMenu>,
+        <TimeMenu
+          key='hours-pm'
+          columns={2}
+          data={hoursPM}
+          {...rest}
+        >
+          <HeaderPM />
+        </TimeMenu>
       ]
-      : (<TimeMenu data={hours} {...rest} />)
+      : (<TimeMenu columns={4} data={hours} {...rest} />)
   }
 
   /**
@@ -93,7 +117,7 @@ class TimePicker extends React.PureComponent {
   buildMenuMinutes = (rest) => {
     const { minutes } = timeData
 
-    return (<TimeMenu data={minutes} {...rest} />)
+    return (<TimeMenu columns={2} data={minutes} {...rest} />)
   }
 
   /**
