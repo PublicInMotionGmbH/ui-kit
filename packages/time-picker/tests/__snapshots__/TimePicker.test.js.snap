@@ -1,16 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TimePicker /> renders children correctly 1`] = `
+exports[`<TimePicker /> renders correctly 1`] = `
 <div
   className="talixo-time-picker"
 >
   <TimeInput
     className="talixo-time-picker__input-hour"
-    format="h"
-    menuComponent={[Function]}
-    onChange={[Function]}
-    type="24"
-  />
+    format="HH"
+    onBlur={[Function]}
+    value={
+      Object {
+        "format": [Function],
+      }
+    }
+  >
+    <div
+      className="talixo-time-picker__menu"
+    >
+      <TimeMenuHour24
+        format="HH"
+        onValueSelect={[Function]}
+      />
+    </div>
+  </TimeInput>
   <span
     className="talixo-time-picker__colon"
   >
@@ -18,10 +30,39 @@ exports[`<TimePicker /> renders children correctly 1`] = `
   </span>
   <TimeInput
     className="talixo-time-picker__input-minutes"
-    format="m"
-    menuComponent={[Function]}
-    onChange={[Function]}
-    type="24"
-  />
+    format="mm"
+    onBlur={[Function]}
+    value={
+      Object {
+        "format": [Function],
+      }
+    }
+  >
+    <div
+      className="talixo-time-picker__menu"
+    >
+      <TimeMenu
+        columns={2}
+        data={
+          Array [
+            0,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50,
+            55,
+          ]
+        }
+        format=":mm"
+        onValueSelect={[Function]}
+      />
+    </div>
+  </TimeInput>
 </div>
 `;

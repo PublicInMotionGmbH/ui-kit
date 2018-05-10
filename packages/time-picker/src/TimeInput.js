@@ -1,84 +1,71 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
-import { formatInputValue, formatOutput, getAp, getTime } from '../utils/time'
-
 export const moduleName = 'time-input'
+
+const A_KEY = 65
+const P_KEY = 80
 
 const propTypes = {
   /** Additional class name. */
   className: PropTypes.string,
 
-  /** Menu component. */
-  menuComponent: PropTypes.func.isRequired,
+  /** Event called after input has lost focus. */
+  onBlur: PropTypes.func,
 
   /** Event called after input value has been changed. */
   onChange: PropTypes.func,
 
   /** Format of time. */
-  format: PropTypes.oneOf(['h', 'm']).isRequired,
+  format: PropTypes.oneOf(['HH', 'hh A', 'mm']).isRequired,
 
-  /** Time type. */
-  type: PropTypes.oneOf(['12', '24']).isRequired
+  /** Time object. */
+  value: PropTypes.object
 }
 
 const defaultProps = {
 }
 
-/**
- * Component which represents Time Input.
- *
- * @property {object} props
- * @property {string} [props.className]
- * @property {*} [props.menuComponent]
- * @property {*} [props.onChange]
- * @property {string} [props.format]
- * @property {string} [props.type]
- *
- * @property {object} state
- * @property {boolean} [state.isOpen]
- * @property {string} [state.inputValue]
- * @property {object} [state.time]
- *
- * @class
- */
-class TimeInput extends React.PureComponent {
+class TimeInput extends React.Component {
   state = {
-    isOpen: false,
+    open: false,
     inputValue: '',
-    time: getTime(this.props.type)[this.props.format]
+    suffix: null
   }
 
   componentDidMount () {
-    const { onChange } = this.props
-    const { time } = this.state
-    const inputValue = time.value
+    this.formatValue(this.props)
+  }
 
-    this.setState({ inputValue })
-
-    if (onChange) {
-      onChange(time)
-    }
+  componentWillReceiveProps (nextProps) {
+    const { open } = this.state
+    this.formatValue(nextProps)
+    if (open) { this.setState({ open: false }) }
   }
 
   /**
-   * Fire function passed to onChange if state.time changes
-   * and onChange function is passed to element.
+   * Formats value to desired format.
+   * @property {object} props
    *
-   * @param {object} props
-   * @param {object} [props.time]
+   * @returns {React.Element}
    */
-  componentDidUpdate (prevProps, prevState) {
-    const { onChange } = this.props
-    const { time } = this.state
+  formatValue = (props) => {
+    const { format, value } = props
 
-    if (prevState.time !== time && onChange) {
-      onChange(time)
-    }
+    const inputValue = format === 'hh A'
+      ? moment(value).format('h')
+      : moment(value).format(format)
+
+    let suffix = format !== 'hh A'
+      ? null
+      : moment(value).format('A')
+
+    this.setState({ inputValue, suffix })
   }
 
   /**
@@ -87,88 +74,66 @@ class TimeInput extends React.PureComponent {
    * @returns {React.Element}
    */
   buildControl = () => {
-    const { isOpen } = this.state
-    const { toggleMenu } = this
+    const { open } = this.state
 
     const arrowClsName = buildClassName([ moduleName, 'arrow' ])
 
     return (
-      <span className={arrowClsName} onClick={toggleMenu}>
-        <Icon name={isOpen ? 'expand_less' : 'expand_more'} />
+      <span className={arrowClsName} onClick={this.toggleMenu}>
+        <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
   }
 
   /**
-   * Handle menu change.
+   * Handles input value change.
+   * @property {string} value
    *
-   * @param {object} time
    */
-  handleMenuChange = (time) => {
-    const inputValue = time.value
+  handleChange = (value) => {
+    const { format } = this.props
+    const parsedValue = isNaN(parseInt(value))
+      ? 0
+      : parseInt(value)
 
-    this.setState({ inputValue, isOpen: false, time })
+    let inputValue
+    switch (format) {
+      case 'HH':
+        inputValue = Math.min(parsedValue, 23)
+        break
+      case 'hh A':
+        inputValue = Math.min(parsedValue, 12)
+        break
+      case 'mm':
+        inputValue = Math.min(parsedValue, 59)
+        break
+      default:
+        inputValue = value
+    }
+
+    this.setState({ inputValue })
   }
 
   /**
-   * Handle input blur.
-   */
-  handleInputBlur = () => {
-    const { format, type } = this.props
-    const { inputValue: prevInputValue } = this.state
-
-    const ap = getAp(prevInputValue, format, type)
-
-    let inputValue = parseFloat(prevInputValue)
-    if (prevInputValue === '') { inputValue = 0 }
-    if (inputValue < 10) { inputValue = '0' + inputValue.toString() }
-
-    const time = formatOutput(inputValue, type, ap, format)
-
-    this.setState({ inputValue, time })
-  }
-
-  /**
-   * Handle input change.
+   * Handle keyboard events on input.
    *
-   * @param {string} value
+   * @param {SyntheticEvent|Event} event
    */
-  handleInputChange = (value) => {
-    const { format, type } = this.props
-    const { inputValue: prevInputValue } = this.state
+  handleInputKeyDown = (event) => {
+    const { format } = this.props
+    if (format !== 'hh A') { return }
 
-    const ap = getAp(value, format, type)
+    if (event.which === A_KEY) {
+      event.stopPropagation()
+      let suffix = 'AM'
+      this.setState({ suffix })
+    }
 
-    let inputValue = formatInputValue(format, value, prevInputValue, type)
-
-    const time = formatOutput(inputValue, type, ap, format)
-
-    this.setState({ inputValue, time })
-  }
-
-  /**
-   * Toggle menu.
-   */
-  toggleMenu = () => {
-    this.setState(state => ({ isOpen: !state.isOpen }))
-  }
-
-  /**
-   * Render menu component.
-   *
-   * @returns {React.Element}
-   */
-  renderMenu = () => {
-    const { menuComponent: MenuComponent } = this.props
-    const { handleMenuChange } = this
-
-    const menuClsName = buildClassName([ moduleName, 'menu' ])
-
-    return (
-      <div className={menuClsName}>
-        <MenuComponent onValueSelect={handleMenuChange} />
-      </div>
-    )
+    if (event.which === P_KEY) {
+      event.stopPropagation()
+      let suffix = 'PM'
+      this.setState({ suffix })
+    }
   }
 
   /**
@@ -176,52 +141,43 @@ class TimeInput extends React.PureComponent {
    *
    * @returns {React.Element}
    */
-  renderValue = () => {
-    const { format, type } = this.props
-    const { inputValue, isOpen, time } = this.state
-    const { buildControl, handleInputBlur, handleInputChange } = this
+  renderInput = () => {
+    const { onBlur } = this.props
+    const { inputValue, open, suffix } = this.state
 
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, {open: isOpen})
-
-    const ap = time && time.ap
-      ? time.ap
-      : null
-
-    const suffix = type === '24' || format === 'm'
-      ? null
-      : ap === 'p'
-        ? 'PM'
-        : 'AM'
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, {open})
 
     return (
       <TextInput
         className={inputClsName}
-        onBlur={handleInputBlur}
-        onChange={handleInputChange}
-        right={buildControl()}
-        suffix={suffix}
+        onChange={this.handleChange}
+        onBlur={() => onBlur(inputValue, suffix)}
+        onKeyDown={this.handleInputKeyDown}
+        right={this.buildControl()}
         type='text'
+        suffix={suffix}
         value={inputValue}
       />
     )
   }
 
   /**
-   * Render TextInput and menu wrapped in div.
-   *
-   * @returns {React.Element}
+   * Toggle menu.
    */
+  toggleMenu = () => {
+    this.setState(state => ({ open: !state.open }))
+  }
+
   render () {
-    const { className, menuComponent, onChange, ...passedProps } = this.props
-    const { isOpen } = this.state
-    const { renderMenu, renderValue } = this
+    const { className, children, format, onBlur, onChange, value, ...passedProps } = this.props
+    const { open } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)
 
     return (
       <div className={wrapperClsName} {...passedProps}>
-        {renderValue()}
-        {isOpen && renderMenu()}
+        {this.renderInput()}
+        {open && children}
       </div>
     )
   }

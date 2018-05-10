@@ -19,14 +19,18 @@ addStory('initial', readme, () => (
   <TimePicker />
 ))
 
+addStory('with passed value', readme, () => (
+  <TimePicker value={new Date('2017')} />
+))
+
 addStory.controlled('12', readme, (setState, state) => (
   <div>
     <span style={spanStyle}>
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      type='12'
-      onChange={time => setState({time})}
+      hourFormat='hh A'
+      onChange={time => setState({time: new Date(time).toTimeString()})}
     />
   </div>
 ), () => ({ time: '' }))
@@ -37,8 +41,8 @@ addStory.controlled('24', readme, (setState, state) => (
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      type='24'
-      onChange={time => setState({time})}
+      hourFormat='HH'
+      onChange={time => setState({time: new Date(time).toTimeString()})}
     />
   </div>
 ), () => ({ time: '' }))

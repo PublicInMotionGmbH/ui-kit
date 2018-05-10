@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 import { buildClassName } from '@talixo/shared'
 import { Button } from '@talixo/button'
@@ -27,17 +28,15 @@ const defaultProps = {
  * Component which represents Time Menu.
  *
  * @param {object} props
- * @param {node} [props.children]
- * @param {number} [props.columns]
  * @param {string} [props.className]
+ * @param {number} [props.columns]
  * @param {array} [props.data]
- * @param {*} [props.header]
  * @param {*} [props.onValueSelect]
  *
  * @returns {React.Element}
  */
 function TimeMenu (props) {
-  const { children, className, columns, data, onValueSelect, style, ...passedProps } = props
+  const { children, className, columns, data, format, onValueSelect, style, ...passedProps } = props
 
   const wrapperClsName = buildClassName(moduleName, className)
   const headerClsName = buildClassName([moduleName, 'header'])
@@ -49,15 +48,18 @@ function TimeMenu (props) {
   function buildButtons () {
     const buttonClsName = buildClassName([moduleName, 'button'])
 
-    const buttons = data.map((time, i) => (
-      <Button
-        key={i}
-        className={buttonClsName}
-        onClick={() => props.onValueSelect(time)}
-      >
-        {time.label}
-      </Button>
-    ))
+    const buttons = data.map((_, i) => {
+      let label = moment(_, format).format(format)
+      return (
+        <Button
+          key={i}
+          className={buttonClsName}
+          onClick={() => props.onValueSelect(_)}
+        >
+          {label}
+        </Button>
+      )
+    })
 
     return buttons
   }

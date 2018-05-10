@@ -9,6 +9,15 @@
     display: inline-block !important
     width: dp(14)
 
+  &__menu
+    position: absolute
+    display: flex
+    flex-direction: row
+    padding: dp(1)
+    margin-top: dp(-0.125)
+    background-color: $time-picker-background-color
+    border: 1px solid $time-picker-border-color
+
   &__colon
     padding: dp(1)
 
@@ -53,15 +62,6 @@
         border-bottom-left-radius: 0
         border-bottom-right-radius: 0
         border-bottom: 1px solid $time-picker-background-color
-
-  &__menu
-    position: absolute
-    display: flex
-    flex-direction: row
-    padding: dp(1)
-    margin-top: dp(-0.125)
-    background-color: $time-picker-background-color
-    border: 1px solid $time-picker-border-color
 
   &__arrow
     display: inline-block
