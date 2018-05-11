@@ -4,7 +4,7 @@ import 'react-dates/initialize'
 
 import moment from 'moment'
 
-import { SingleDatePicker } from 'react-dates'
+import SingleDatePicker from 'react-dates/lib/components/SingleDatePicker'
 
 import { buildClassName } from '@talixo/shared'
 

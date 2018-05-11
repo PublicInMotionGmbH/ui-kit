@@ -41,4 +41,5 @@ onBlur             | function              | n/a             | event handler whe
 
 ## Changelog
 
+- **0.1.1** - reduce bundle size
 - **0.1.0** - initial version
