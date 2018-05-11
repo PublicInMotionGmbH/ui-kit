@@ -56,7 +56,7 @@ const propTypes = {
  * @property {string} [props.className]
  * @property {object} [props.errors]
  * @property {function} [props.onSubmit]
- * @property {} [props.validationSchema]
+ * @property {object} [props.validationSchema]
  * @property {string} [props.values]
  *
  * @class
@@ -131,7 +131,6 @@ class FormHandler extends React.PureComponent {
       }
 
       // Modify props of FormField
-
       const onChange = (value) => {
         setFieldValue(name, value)
         if (node.props.onChange) {
