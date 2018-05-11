@@ -33,16 +33,6 @@ xAxisTitle    | string          | n/a                   | X axis title.
 yAxisTitle    | string          | n/a                   | Y axis title.
 zoomable      | boolean         | `false`               | Indicates if chart is zoomable, can be applied to chart.
 
-
-### ChartWithFilter
-It allows any props which are allowed for react-vis 'Chart' component. Additionally, it handles some differently:
-
-Property name   | Type                                | Default   | Description                    
-----------------|-------------------------------------|:---------:|-----------------------------------------
-legendPosition  | 'top', 'bottom', 'right' or 'left'  | `top`     | Position of the legend relative to chart.
-legendProps     | Legend                              | {}        | Additional props to be passed to legend. Accepts any property which is allowed for Legend Component.
-
-
 ### PieChart
 It allows any props which are allowed for react-vis 'FlexibleXYPlot'. Additionally, it handles some differently:
 
@@ -52,15 +42,15 @@ arcProps      | object          | n/a                   | Additional props that 
 className     | string          | n/a                   | Additional class name passed to wrapper.
 data          | PieData         | `{ dataItems: [] }`   | Line chart data.
 
+### FilterableChart
 
-### PieChartWithFilter
-It allows any props which are allowed for react-vis 'PieChart' component. Additionally, it handles some differently:
+It allows any props which are allowed for react-vis 'FlexibleXYPlot'. Additionally, it handles some differently:
 
-Property name   | Type                                | Default   | Description                    
-----------------|-------------------------------------|:---------:|-----------------------------------------
-legendPosition  | 'top', 'bottom', 'right' or 'left'  | `top`     | Position of the legend relative to chart.
-legendProps     | Legend                              | {}        | Additional props to be passed to legend. Accepts any property which is allowed for Legend Component.
-
+Property name     | Type            | Default               | Description                    
+------------------|-----------------|:---------------------:|-----------------------------------------
+legendPosition    | object          | n/a                   | Position of the legend relative to chart.
+legendProps       | string          | n/a                   | Additional props to be passed to legend. Accepts any property which is allowed for Legend Component.
+pathToDataItems   | array           | `[]`                  | Path to data items tha will be filtered.
 
 ### Legend
 It allows any props which are allowed for `div`. Additionally, it handles some differently:

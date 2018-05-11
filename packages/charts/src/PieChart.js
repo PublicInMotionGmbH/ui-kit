@@ -4,7 +4,6 @@ import { FlexibleXYPlot, ArcSeries } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
-import WithFilters from './WithFiltersHOC'
 import { getPieValuesSum, generateArcsData, generateSeriesClassName } from './utils'
 
 const moduleName = 'pie-chart'
@@ -110,4 +109,3 @@ PieChart.defaultProps = defaultProps
 PieChart.displayName = 'PieChart'
 
 export default PieChart
-export const PieChartWithFilters = WithFilters(PieChart, ['dataItems'])

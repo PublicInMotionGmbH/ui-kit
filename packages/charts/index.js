@@ -1,11 +1,11 @@
-import Chart, { ChartWithFilters } from './src/Chart'
+import Chart from './src/Chart'
+import FilterableChart from './src/FilterableChart'
 import Legend from './src/Legend'
-import PieChart, { PieChartWithFilters } from './src/PieChart'
+import PieChart from './src/PieChart'
 
 export {
   Chart,
-  ChartWithFilters,
+  FilterableChart,
   Legend,
-  PieChart,
-  PieChartWithFilters
+  PieChart
 }

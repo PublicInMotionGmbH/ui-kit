@@ -1,7 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import WithFiltersHOC from '../src/WithFiltersHOC'
+import FilterableChart from '../src/FilterableChart'
+import Chart from '../src/Chart'
+import PieChart from '../src/PieChart'
 
 const testArray = [
   {
@@ -30,16 +32,20 @@ export const testPie = {
 }
 
 const createProps = (props = {}) => ({
-  data: testArray,
   ...props
 })
 const defaultProps = createProps()
-const TestComponent = function (props) { return <div {...props}>TEST HOC</div> }
-const HocArrayData = WithFiltersHOC(TestComponent)
-const HocObjectData = WithFiltersHOC(TestComponent, ['dataItems'])
 
-const createWrapper = (props = defaultProps) => shallow(<HocArrayData {...props} />)
-const createWrapperObj = (props = {...defaultProps, data: testPie}) => shallow(<HocObjectData {...props} />)
+const createWrapper = (props = defaultProps) => shallow(
+  <FilterableChart {...props}>
+    <Chart data={testArray} />
+  </FilterableChart>
+)
+const createWrapperObj = (props = defaultProps) => shallow(
+  <FilterableChart {...props} pathToDataItems={['dataItems']}>
+    <PieChart data={testPie} />
+  </FilterableChart>
+)
 
 describe('<WithFiltersHOC>', () => {
   let wrapper, props

@@ -3,8 +3,9 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 import { action } from '@storybook/addon-actions'
 
 import Legend from './src/Legend'
-import Chart, { ChartWithFilters } from './src/Chart'
-import PieChart, { PieChartWithFilters } from './src/PieChart'
+import Chart from './src/Chart'
+import PieChart from './src/PieChart'
+import FilterableChart from './src/FilterableChart'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -208,43 +209,59 @@ addStory('Bar Chart', readme, () => (
   </div>
 ))
 
+addStory('Filterble Bar Chart', readme, () => (
+  <div style={wrapperStyle}>
+    <FilterableChart>
+      <Chart
+        domainPadding={{x: 10}}
+        data={barData}
+        type='bar'
+      />
+    </FilterableChart>
+  </div>
+))
+
 addStory('Bar Chart With Filters', readme, () => (
   <div>
     <h2>Bar chart with filters. Legend on the top</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        domainPadding={{x: 10}}
-        legendPosition='top'
-        data={barData}
-        type='bar'
-      />
+      <FilterableChart legendPosition='top'>
+        <Chart
+          domainPadding={{x: 10}}
+          data={barData}
+          type='bar'
+        />
+      </FilterableChart>
     </div>
     <h2>Bar chart with filters. Legend at the bottom</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        domainPadding={{x: 10}}
-        legendPosition='bottom'
-        data={barData}
-        type='bar'
-      />
+      <FilterableChart legendPosition='bottom'>
+        <Chart
+          domainPadding={{x: 10}}
+          data={barData}
+          type='bar'
+        />
+      </FilterableChart>
     </div>
     <h2>Bar chart with filters. Legend on the left side</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        domainPadding={{x: 10}}
-        legendPosition='left'
-        data={barData}
-        type='bar'
-      />
+      <FilterableChart legendPosition='left'>
+        <Chart
+          domainPadding={{x: 10}}
+          data={barData}
+          type='bar'
+        />
+      </FilterableChart>
     </div>
     <h2>Bar chart with filters. Legend on the right side</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        domainPadding={{x: 10}}
-        legendPosition='right'
-        data={barData}
-        type='bar'
-      />
+      <FilterableChart legendPosition='right'>
+        <Chart
+          domainPadding={{x: 10}}
+          data={barData}
+          type='bar'
+        />
+      </FilterableChart>
     </div>
   </div>
 ))
@@ -265,46 +282,51 @@ addStory('Line Chart with filters', readme, () => (
   <div>
     <h2>Line chart with filters. Legend on the top</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        data={lineData}
-        xAxisTitle='XAxis'
-        yAxisTitle='yAxis'
-        timeSeries
-        zoomable
-      />
+      <FilterableChart legendPosition='top'>
+        <Chart
+          data={lineData}
+          xAxisTitle='XAxis'
+          yAxisTitle='yAxis'
+          timeSeries
+          zoomable
+        />
+      </FilterableChart>
     </div>
     <h2>Line chart with filters. Legend at the bottom</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        data={lineData}
-        xAxisTitle='XAxis'
-        yAxisTitle='yAxis'
-        legendPosition='bottom'
-        timeSeries
-        zoomable
-      />
+      <FilterableChart legendPosition='bottom'>
+        <Chart
+          data={lineData}
+          xAxisTitle='XAxis'
+          yAxisTitle='yAxis'
+          timeSeries
+          zoomable
+        />
+      </FilterableChart>
     </div>
     <h2>Line chart with filters. Legend on the left side</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        data={lineData}
-        xAxisTitle='XAxis'
-        yAxisTitle='yAxis'
-        legendPosition='left'
-        timeSeries
-        zoomable
-      />
+      <FilterableChart legendPosition='left'>
+        <Chart
+          data={lineData}
+          xAxisTitle='XAxis'
+          yAxisTitle='yAxis'
+          timeSeries
+          zoomable
+        />
+      </FilterableChart>
     </div>
     <h2>Line chart with filters. Legend on the right side</h2>
     <div style={wrapperStyle}>
-      <ChartWithFilters
-        data={lineData}
-        xAxisTitle='XAxis'
-        yAxisTitle='yAxis'
-        legendPosition='right'
-        timeSeries
-        zoomable
-      />
+      <FilterableChart legendPosition='right'>
+        <Chart
+          data={lineData}
+          xAxisTitle='XAxis'
+          yAxisTitle='yAxis'
+          timeSeries
+          zoomable
+        />
+      </FilterableChart>
     </div>
   </div>
 ))
@@ -325,34 +347,39 @@ addStory('Pie Chart with filters', readme, () => (
   <div>
     <h2>Pie chart with filters. Legend on the top</h2>
     <div style={wrapperStyle}>
-      <PieChartWithFilters
-        data={pieData}
-        labelProps={labelProps}
-      />
+      <FilterableChart pathToDataItems={['dataItems']} legendPosition='top'>
+        <PieChart
+          data={pieData}
+          labelProps={labelProps}
+        />
+      </FilterableChart>
     </div>
     <h2>Pie chart with filters. Legend at the bottom</h2>
     <div style={wrapperStyle}>
-      <PieChartWithFilters
-        data={pieData}
-        labelProps={labelProps}
-        legendPosition='bottom'
-      />
+      <FilterableChart pathToDataItems={['dataItems']} legendPosition='bottom'>
+        <PieChart
+          data={pieData}
+          labelProps={labelProps}
+        />
+      </FilterableChart>
     </div>
     <h2>Pie chart with filters. Legend on the left side</h2>
     <div style={wrapperStyle}>
-      <PieChartWithFilters
-        data={pieData}
-        labelProps={labelProps}
-        legendPosition='left'
-      />
+      <FilterableChart pathToDataItems={['dataItems']} legendPosition='left'>
+        <PieChart
+          data={pieData}
+          labelProps={labelProps}
+        />
+      </FilterableChart>
     </div>
     <h2>Pie chart with filters. Legend on the right side</h2>
     <div style={wrapperStyle}>
-      <PieChartWithFilters
-        data={pieData}
-        labelProps={labelProps}
-        legendPosition='right'
-      />
+      <FilterableChart pathToDataItems={['dataItems']} legendPosition='right'>
+        <PieChart
+          data={pieData}
+          labelProps={labelProps}
+        />
+      </FilterableChart>
     </div>
   </div>
 ))

@@ -12,7 +12,6 @@ import {
 
 import { buildClassName } from '@talixo/shared'
 
-import WithFilters from './WithFiltersHOC'
 import Highligth from './Highlight'
 import { generateSeriesClassName } from './utils'
 
@@ -216,4 +215,3 @@ Chart.defaultProps = defaultProps
 Chart.displayName = 'Chart'
 
 export default Chart
-export const ChartWithFilters = WithFilters(Chart)
