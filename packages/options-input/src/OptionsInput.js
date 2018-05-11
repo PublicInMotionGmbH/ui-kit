@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Icon } from '@talixo/icon'
-import { NumberInput } from '@talixo/number-input'
-import { Tooltip } from '@talixo/tooltip'
 import { buildClassName } from '@talixo/shared'
+
+import ListOption from './ListOption'
+import Option from './Option'
 
 const propTypes = {
   /** Additional class name */
@@ -26,96 +27,19 @@ const defaultProps = {
 }
 
 /**
- * * Component which represents Option.
- *
- * @param {*} props
- * @param {array} [props.options]
- * @param {string} [props.options.id]
- * @param {string} [props.options.icon]
- * @param {string} [props.options.label]
- * @param {number} [props.options.default]
- * @param {number} [props.options.min]
- * @param {number} [props.options.max]
- *
- * @returns {React.Element}
- */
-function Option (props) {
-  const { option, value } = props
-
-  const label = <React.Fragment>
-    <h6>{option.label}</h6>
-    {option.description ? <p>{option.description}</p> : null}
-  </React.Fragment>
-
-  return (
-    <span className='options-input__option'>
-      <Tooltip render={() => label} position='top'>
-        <span><Icon name={option.icon} /></span>
-      </Tooltip>
-      <span>{value}</span>
-    </span>
-  )
-}
-
-/**
- * * Component which represents ListOption.
- *
- * @param {*} props
- * @param {array} [props.options]
- * @param {string} [props.options.id]
- * @param {string} [props.options.icon]
- * @param {string} [props.options.label]
- * @param {number} [props.options.default]
- * @param {number} [props.options.min]
- * @param {number} [props.options.max]
- *
- * @returns {React.Element}
- */
-function ListOption (props) {
-  const { option, value, onChange } = props
-
-  const clsName = buildClassName('options-input__list-option', {
-    'options-input__list-option--active': value > 0
-  })
-
-  const icon = (
-    <Icon name={option.icon} />
-  )
-
-  const label = (
-    <div className='options-input__list-option__label'>
-      <span className='options-input__list-option__title'>{option.label}</span>
-      <span className='options-input__list-option__description'>{option.description}</span>
-    </div>
-  )
-
-  return (
-    <div className={clsName}>
-      <NumberInput
-        left={icon}
-        suffix={label}
-        value={value}
-        onChange={value => onChange(option.id, value)}
-        min={option.min}
-        max={option.max}
-      />
-    </div>
-  )
-}
-
-/**
  * * Component which represents OptionsInput.
  *
- * @param {*} props
- * @param {array} [props.options]
- * @param {string} [props.options.id]
- * @param {string} [props.options.icon]
- * @param {string} [props.options.label]
- * @param {number} [props.options.default]
- * @param {number} [props.options.min]
- * @param {number} [props.options.max]
+ * @property {*} props
+ * @property {string} [props.className]
+ * @property {array} [props.options]
+ * @property {string} [props.options.id]
+ * @property {string} [props.options.icon]
+ * @property {string} [props.options.label]
+ * @property {number} [props.options.default]
+ * @property {number} [props.options.min]
+ * @property {number} [props.options.max]
  *
- * @returns {React.Element}
+ * @class {React.Element}
  */
 class OptionsInput extends React.PureComponent {
   state = {
