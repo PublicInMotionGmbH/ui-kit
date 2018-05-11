@@ -18,14 +18,11 @@ const propTypes = {
   /** Event called after input has lost focus. */
   onBlur: PropTypes.func,
 
-  /** Event called after input value has been changed. */
-  onChange: PropTypes.func,
-
   /** Format of time. */
   format: PropTypes.oneOf(['HH', 'hh A', 'mm']).isRequired,
 
   /** Time object. */
-  value: PropTypes.object
+  value: PropTypes.object.isRequired
 }
 
 const defaultProps = {
@@ -41,7 +38,6 @@ const MINUTES = 'mm'
  * @property {object} props
  * @property {string} [props.className]
  * @property {function} [props.onBlur]
- * @property {function} [props.onChange]
  * @property {string} [props.format]
  * @property {object} [props.value]
  *
@@ -64,9 +60,12 @@ class TimeInput extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { open } = this.state
-    this.formatValue(nextProps)
-    if (open) { this.setState({ open: false }) }
+    if (this.props.value !== nextProps.value) {
+      const { open } = this.state
+
+      this.formatValue(nextProps)
+      if (open) { this.setState({ open: false }) }
+    }
   }
 
   /**
@@ -118,7 +117,7 @@ class TimeInput extends React.Component {
     const { format } = this.props
 
     // Parse value
-    const parsedValue = isNaN(parseInt(value))
+    const parsedValue = isNaN(parseFloat(value))
       ? 0
       : parseInt(value)
 
@@ -137,6 +136,8 @@ class TimeInput extends React.Component {
       default:
         inputValue = value
     }
+
+    inputValue = inputValue.toString()
 
     this.setState({ inputValue })
   }
@@ -200,7 +201,7 @@ class TimeInput extends React.Component {
   }
 
   render () {
-    const { className, children, format, onBlur, onChange, value, ...passedProps } = this.props
+    const { className, children, format, onBlur, value, ...passedProps } = this.props
     const { open } = this.state
 
     // Build class name for wrapper

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TimeInput /> renders correctly 1`] = `
+<div
+  className="talixo-time-input"
+>
+  <TextInput
+    className="talixo-time-input__input"
+    error={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    right={
+      <span
+        className="talixo-time-input__arrow"
+        onClick={[Function]}
+      >
+        <Icon
+          name="expand_more"
+        />
+      </span>
+    }
+    suffix={null}
+    type="number"
+    value="00"
+  />
+</div>
+`;

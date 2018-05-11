@@ -40,7 +40,6 @@ Property name | Type        | Required | Default | Description
 --------------|-------------|----------|:-------:|--------------------------------
 className     | string      |          | n/a     | Additional class name passed to wrapper.
 onBlur        | function    |          | n/a     | Event called after input has lost focus.
-onChange      | function    |          | n/a     | Event called after input value has been changed.
 format        | InputFormat | yes      | n/a     | Format of time.
 value         | object      | yes      | n/a     | Time object.
 

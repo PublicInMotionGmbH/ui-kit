@@ -1,0 +1,123 @@
+import React from 'react'
+import { mount, shallow } from 'enzyme'
+
+import { prefix } from '@talixo/shared'
+
+import TimeInput, { moduleName } from '../src/TimeInput'
+
+const clsName = prefix(moduleName)
+
+const createWrapper = (props) => shallow(<TimeInput {...props} />)
+
+// jest.mock('moment', () => () => ({format: () => '2018–05–10T17:26:56+00:00'}))
+const value = new Date('2018-05-10T00:00:00')
+
+describe('<TimeInput />', () => {
+  it('renders correctly', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+
+    expect(wrapper).toMatchSnapshot()
+  })
+
+  it('renders open correctly', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+    wrapper.setState({ open: true })
+    const input = wrapper.find('TextInput')
+
+    expect(input.hasClass(`${clsName}__input--open`)).toEqual(true)
+  })
+
+  it('toggles menu on arrow click', () => {
+    const format = 'HH'
+    const wrapper = mount(<TimeInput format={format} value={value} />)
+    const arrow = wrapper.find(`.${clsName}__arrow`)
+    arrow.simulate('click')
+
+    expect(wrapper.state().open).toEqual(true)
+    wrapper.unmount()
+  })
+
+  it('closes menu if componenet receives props.value', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+    wrapper.setState({ open: true })
+    wrapper.setProps({ value: new Date('2018-05-10T00:30:00') })
+
+    expect(wrapper.state().open).toEqual(false)
+  })
+})
+
+describe('onBlur', () => {
+  it('is called when input looses focus', () => {
+    const format = 'HH'
+    const onBlur = jest.fn()
+    const wrapper = createWrapper({ format, onBlur, value })
+
+    const input = wrapper.find('TextInput')
+    input.simulate('change', { target: 2 })
+    input.simulate('blur')
+    expect(onBlur).toHaveBeenCalledTimes(1)
+  })
+
+  it('passes value correctly', () => {
+    let selectedSuffix, selectedValue
+    const format = 'HH'
+    const onBlur = jest.fn().mockImplementation((inputValue, suffix) => {
+      selectedValue = inputValue
+      selectedSuffix = suffix
+    })
+    const wrapper = createWrapper({ format, onBlur, value })
+
+    wrapper.setState({ inputValue: '22', suffix: 'AM' })
+    const input = wrapper.find('TextInput')
+    input.simulate('blur')
+    expect(selectedValue).toEqual('22')
+    expect(selectedSuffix).toEqual('AM')
+  })
+})
+
+describe('onKeyDown', () => {
+  it('is ignored if format is not `hh A`', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+
+    wrapper.setState({ suffix: 'PM' })
+    const input = wrapper.find('TextInput')
+    input.simulate('keyDown', {
+      which: 65,
+      stopPropagation: () => {}
+    })
+
+    expect(wrapper.state().suffix).toEqual('PM')
+  })
+
+  it('changes state.suffix to `AM` when `a` is pressed', () => {
+    const format = 'hh A'
+    const wrapper = createWrapper({ format, value })
+
+    wrapper.setState({ suffix: 'PM' })
+    const input = wrapper.find('TextInput')
+    input.simulate('keyDown', {
+      which: 65,
+      stopPropagation: () => {}
+    })
+
+    expect(wrapper.state().suffix).toEqual('AM')
+  })
+
+  it('changes state.suffix to `PM` when `p` is pressed', () => {
+    const format = 'hh A'
+    const wrapper = createWrapper({ format, value })
+
+    wrapper.setState({ suffix: 'AM' })
+    const input = wrapper.find('TextInput')
+    input.simulate('keyDown', {
+      which: 80,
+      stopPropagation: () => {}
+    })
+
+    expect(wrapper.state().suffix).toEqual('PM')
+  })
+})
