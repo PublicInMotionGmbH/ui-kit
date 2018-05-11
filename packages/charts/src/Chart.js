@@ -37,14 +37,14 @@ const propTypes = {
       color: PropTypes.string,
 
       /** Data information to be displayed in chart. */
-      dataItems: PropTypes.shape({
+      dataItems: PropTypes.arrayOf(PropTypes.shape({
 
         /** X axis data. */
         x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
         /** Y axis data. */
         y: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-      }),
+      })),
 
       /** Indicates if data will be shown in the chart. */
       disabled: PropTypes.bool,
