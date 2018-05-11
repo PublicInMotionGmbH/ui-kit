@@ -20,8 +20,8 @@ const propTypes = {
   /** Hour format. */
   hourFormat: PropTypes.oneOf(['HH', 'hh A']),
 
-  /** Time object passed to component. */
-  value: PropTypes.object
+  /** Time string passed to component. */
+  value: PropTypes.string
 }
 
 const defaultProps = {
@@ -187,7 +187,9 @@ class TimePicker extends React.PureComponent {
     const { value } = this.state
 
     if (prevState.value !== value && onChange) {
-      onChange(value)
+      // Format value to 'HH:mm' format
+      const formattedValue = moment(value).format('HH:mm')
+      onChange(formattedValue)
     }
   }
 
