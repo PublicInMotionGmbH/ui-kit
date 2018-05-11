@@ -11,7 +11,12 @@ const addStory = createStoriesFactory('Time Picker', module, {
   propTables: [ TimePicker ]
 })
 
-const spanStyle = { display: 'inline-block', margin: '16px' }
+const handleChange = (value, setState) => {
+  const time = new Date(value).toTimeString()
+  setState({ time })
+}
+
+const spanStyle = { display: 'inline-block', marginBottom: '16px' }
 
 // Stories
 
@@ -30,7 +35,7 @@ addStory.controlled('12', readme, (setState, state) => (
     </span>
     <TimePicker
       hourFormat='hh A'
-      onChange={time => setState({time: new Date(time).toTimeString()})}
+      onChange={(value) => handleChange(value, setState)}
     />
   </div>
 ), () => ({ time: '' }))
@@ -42,7 +47,7 @@ addStory.controlled('24', readme, (setState, state) => (
     </span>
     <TimePicker
       hourFormat='HH'
-      onChange={time => setState({time: new Date(time).toTimeString()})}
+      onChange={() => handleChange(setState)}
     />
   </div>
 ), () => ({ time: '' }))

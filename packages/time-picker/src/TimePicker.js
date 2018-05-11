@@ -17,17 +17,19 @@ const propTypes = {
   /** Event called after input value has been changed. */
   onChange: PropTypes.func,
 
-  /** Time type. */
+  /** Hour format. */
   hourFormat: PropTypes.oneOf(['HH', 'hh A']),
 
-  /** Time object to be displayed */
+  /** Time object passed to component. */
   value: PropTypes.object
 }
 
 const defaultProps = {
-  hourFormat: 'HH',
-  value: moment()
+  hourFormat: 'HH'
 }
+
+const HOURS_24 = 'HH'
+const MINUTES = 'mm'
 
 /**
  * Component which represents header for AM time.
@@ -57,6 +59,8 @@ const HeaderPM = () => [
  */
 const TimeMenuHour24 = (props) => {
   const { format, onValueSelect } = props
+
+  // Create array of hour values
   const data = new Array(24)
     .fill(null)
     .map((_, i) => i)
@@ -80,10 +84,12 @@ const TimeMenuHour24 = (props) => {
 const TimeMenuHour12 = (props) => {
   const { format, onValueSelect } = props
 
+  // Create array of hour values
   const dataAM = new Array(12)
     .fill(null)
     .map((_, i) => i)
 
+  // Create array of hour values
   const dataPM = new Array(12)
     .fill(null)
     .map((_, i) => i + 12)
@@ -117,7 +123,7 @@ const TimeMenuHour12 = (props) => {
  * @returns {array|React.Element}
  */
 const buildMenuHours = (handleHoursBlur, hourFormat) => {
-  return hourFormat === 'HH'
+  return hourFormat === HOURS_24
     ? <TimeMenuHour24
       format={hourFormat}
       onValueSelect={handleHoursBlur}
@@ -135,6 +141,7 @@ const buildMenuHours = (handleHoursBlur, hourFormat) => {
  * @returns {React.Element}
  */
 const buildMenuMinutes = (handleMinutesBlur) => {
+  // Create array of minutes values
   const data = new Array(12)
     .fill(null)
     .map((_, i) => i * 5)
@@ -150,16 +157,16 @@ const buildMenuMinutes = (handleMinutesBlur) => {
 }
 
 /**
- * Component which represents Time Picker.
+ * Component which represents time picker.
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {string} [props.hourFormat]
  * @property {function} [props.onChange]
  * @property {string} [props.type]
  *
  * @property {object} state
- * @property {string} [state.h]
- * @property {string} [state.m]
+ * @property {object} [state.value]
  *
  * @class
  */
@@ -192,6 +199,7 @@ class TimePicker extends React.PureComponent {
   handleHoursBlur = (inputValue, suffix) => {
     const { value: prevValue } = this.state
 
+    // Add 12 hours to 'AM' time
     const formattedValue = suffix === 'PM'
       ? parseInt(inputValue) + 12
       : inputValue
@@ -253,7 +261,7 @@ class TimePicker extends React.PureComponent {
         <TimeInput
           className={inputMinutesClsName}
           onBlur={handleMinutesBlur}
-          format='mm'
+          format={MINUTES}
           value={value}
         >
           <div className={menuClsName}>

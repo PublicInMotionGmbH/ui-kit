@@ -11,11 +11,11 @@ const propTypes = {
   /** Additional class name. */
   className: PropTypes.string,
 
-  /** Number of data columns */
+  /** Number of data columns. */
   columns: PropTypes.number,
 
-  /** Time data. */
-  data: PropTypes.array.isRequired,
+  /** Array of time values. */
+  data: PropTypes.arrayOf(PropTypes.number).isRequired,
 
   /**  Event handler when menu value is selected. */
   onValueSelect: PropTypes.func
@@ -38,16 +38,25 @@ const defaultProps = {
 function TimeMenu (props) {
   const { children, className, columns, data, format, onValueSelect, style, ...passedProps } = props
 
+  // Build class names
   const wrapperClsName = buildClassName(moduleName, className)
   const headerClsName = buildClassName([moduleName, 'header'])
 
+  // Build wrapper style
   const wrapperStyle = columns
     ? { ...style, columnCount: columns }
     : style
 
+  /**
+   * Build menu buttons.
+   *
+   * @returns {React.Element}
+   */
   function buildButtons () {
+    // Build class name for button
     const buttonClsName = buildClassName([moduleName, 'button'])
 
+    // Map data to create buttons
     const buttons = data.map((_, i) => {
       let label = moment(_, format).format(format)
       return (
@@ -65,7 +74,11 @@ function TimeMenu (props) {
   }
 
   return (
-    <div className={wrapperClsName} style={wrapperStyle} {...passedProps}>
+    <div
+      className={wrapperClsName}
+      style={wrapperStyle}
+      {...passedProps}
+    >
       <div className={headerClsName}>
         {children}
       </div>

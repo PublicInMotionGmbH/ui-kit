@@ -31,6 +31,27 @@ const propTypes = {
 const defaultProps = {
 }
 
+const HOURS_24 = 'HH'
+const HOURS_12 = 'hh A'
+const MINUTES = 'mm'
+
+/**
+ * Component which represents time input
+ *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {function} [props.onBlur]
+ * @property {function} [props.onChange]
+ * @property {string} [props.format]
+ * @property {object} [props.value]
+ *
+ * @property {object} state
+ * @property {boolean} [state.open]
+ * @property {string} [state.inputValue]
+ * @property {string|null} [state.suffix]
+ *
+ * @class
+ */
 class TimeInput extends React.Component {
   state = {
     open: false,
@@ -50,18 +71,20 @@ class TimeInput extends React.Component {
 
   /**
    * Formats value to desired format.
-   * @property {object} props
+   * @param {object} props
    *
    * @returns {React.Element}
    */
   formatValue = (props) => {
     const { format, value } = props
 
-    const inputValue = format === 'hh A'
+    // Format value according to provided format
+    const inputValue = format === HOURS_12
       ? moment(value).format('h')
       : moment(value).format(format)
 
-    let suffix = format !== 'hh A'
+    // Format suffix if needed
+    let suffix = format !== HOURS_12
       ? null
       : moment(value).format('A')
 
@@ -76,6 +99,7 @@ class TimeInput extends React.Component {
   buildControl = () => {
     const { open } = this.state
 
+    // Build class name for arrow
     const arrowClsName = buildClassName([ moduleName, 'arrow' ])
 
     return (
@@ -87,25 +111,28 @@ class TimeInput extends React.Component {
 
   /**
    * Handles input value change.
-   * @property {string} value
+   * @param {string} value
    *
    */
   handleChange = (value) => {
     const { format } = this.props
+
+    // Parse value
     const parsedValue = isNaN(parseInt(value))
       ? 0
       : parseInt(value)
 
     let inputValue
+    // Format value within desired range
     switch (format) {
-      case 'HH':
-        inputValue = Math.min(parsedValue, 23)
+      case HOURS_24:
+        inputValue = Math.min(23, Math.max(0, parsedValue))
         break
-      case 'hh A':
-        inputValue = Math.min(parsedValue, 12)
+      case HOURS_12:
+        inputValue = Math.min(11, Math.max(0, parsedValue))
         break
-      case 'mm':
-        inputValue = Math.min(parsedValue, 59)
+      case MINUTES:
+        inputValue = Math.min(59, Math.max(0, parsedValue))
         break
       default:
         inputValue = value
@@ -121,14 +148,17 @@ class TimeInput extends React.Component {
    */
   handleInputKeyDown = (event) => {
     const { format } = this.props
-    if (format !== 'hh A') { return }
+    // If format is differnet than 'hh A' - return
+    if (format !== HOURS_12) { return }
 
+    // Prevent propagation if 'a' key is pressed and change suffix to 'AM'
     if (event.which === A_KEY) {
       event.stopPropagation()
       let suffix = 'AM'
       this.setState({ suffix })
     }
 
+    // Prevent propagation if 'p' key is pressed and change suffix to 'PM'
     if (event.which === P_KEY) {
       event.stopPropagation()
       let suffix = 'PM'
@@ -145,6 +175,7 @@ class TimeInput extends React.Component {
     const { onBlur } = this.props
     const { inputValue, open, suffix } = this.state
 
+    // Build class name for input
     const inputClsName = buildClassName([ moduleName, 'input' ], null, {open})
 
     return (
@@ -154,7 +185,7 @@ class TimeInput extends React.Component {
         onBlur={() => onBlur(inputValue, suffix)}
         onKeyDown={this.handleInputKeyDown}
         right={this.buildControl()}
-        type='text'
+        type='number'
         suffix={suffix}
         value={inputValue}
       />
@@ -172,6 +203,7 @@ class TimeInput extends React.Component {
     const { className, children, format, onBlur, onChange, value, ...passedProps } = this.props
     const { open } = this.state
 
+    // Build class name for wrapper
     const wrapperClsName = buildClassName(moduleName, className)
 
     return (

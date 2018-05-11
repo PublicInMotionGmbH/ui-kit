@@ -49,6 +49,14 @@
   position: relative
   display: block
 
+  input[type=number]
+    appearance: none
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+    appearance: none
+    margin: 0
+
   &__input
     > input
       background-color: $time-picker-background-color
