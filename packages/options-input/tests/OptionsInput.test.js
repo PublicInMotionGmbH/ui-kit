@@ -51,6 +51,25 @@ describe('<OptionsInput />', () => {
     wrapper.unmount()
   })
 
+  it('changes value onChange', () => {
+    const spy = jest.fn()
+    const wrapper = mount(<OptionsInput
+      options={options}
+      onChange={spy}
+    />)
+
+    wrapper.find('input').at(0).simulate('change', {
+      target: {
+        value: 8
+      }
+    })
+
+    expect(spy.mock.calls.length).toBe(1)
+    expect(spy.mock.calls[0][0].person).toEqual(8)
+
+    wrapper.unmount()
+  })
+
   it('open list when focus on button', () => {
     const wrapper = mount(<OptionsInput
       options={options}
@@ -73,6 +92,20 @@ describe('<OptionsInput />', () => {
     />)
 
     wrapper.find('button').at(0).simulate('blur')
+
+    expect(spy).toHaveBeenCalledTimes(1)
+
+    wrapper.unmount()
+  })
+
+  it('calls focus function when onFocus is triggered', () => {
+    const spy = jest.fn()
+    const wrapper = mount(<OptionsInput
+      options={options}
+      onFocus={spy}
+    />)
+
+    wrapper.find('button').at(0).simulate('focus')
 
     expect(spy).toHaveBeenCalledTimes(1)
 
