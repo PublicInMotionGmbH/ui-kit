@@ -3,7 +3,12 @@ import { XYPlot, LineSeries } from 'react-vis'
 import Highlight from '../src/Highlight'
 import { mount } from 'enzyme'
 
-const lineData = [{ x: new Date('May 23 2017').getTime(), y: 5 }, { x: new Date('May 29 2017').getTime(), y: 2 }, { x: new Date('May 31 2017').getTime(), y: 2 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+const lineData = [
+  { x: new Date('May 23 2017').getTime(), y: 5 },
+  { x: new Date('May 29 2017').getTime(), y: 2 },
+  { x: new Date('May 31 2017').getTime(), y: 2 },
+  { x: new Date('June 13 2017').getTime(), y: 2 }
+]
 
 const createProps = (props = {}) => ({
   ...props

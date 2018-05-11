@@ -19,6 +19,10 @@ exports[`<Highlight> rendering should render properly 1`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     onMouseMove={[Function]}
+    onTouchCancel={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
     onWheel={[Function]}
     width={300}
   >

@@ -9,7 +9,12 @@ const lineTestData = [{
   title: 'Line 1',
   id: 0,
   disabled: false,
-  dataItems: [{ x: new Date('May 23 2017').getTime(), y: 5 }, { x: new Date('May 29 2017').getTime(), y: 2 }, { x: new Date('May 31 2017').getTime(), y: 2 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+  dataItems: [
+    { x: new Date('May 23 2017').getTime(), y: 5 },
+    { x: new Date('May 29 2017').getTime(), y: 2 },
+    { x: new Date('May 31 2017').getTime(), y: 2 },
+    { x: new Date('June 13 2017').getTime(), y: 2 }
+  ]
 }]
 
 const pieTestData = {
