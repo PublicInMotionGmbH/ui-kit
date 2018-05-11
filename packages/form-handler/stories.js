@@ -233,7 +233,7 @@ addStory.controlled('booking', readme, (setState, state) => (
         <Calendar />
       </FormField>
       <br />
-      <FormField label='Passengers' {...commonProps}>
+      <FormField name='passengers' label='Passengers' {...commonProps}>
         <NumberInput min={0} max={4} style={{ width: '30%' }} />
       </FormField>
     </Fieldset>
