@@ -5,9 +5,6 @@ import { Icon } from '@talixo/icon'
 import { Tooltip } from '@talixo/tooltip'
 
 const propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
   /** Data for generate Option */
   option: PropTypes.object,
 

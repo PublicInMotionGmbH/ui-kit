@@ -21,9 +21,32 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### OptionsInput
+
+It allows any property which can be passed to `div`. Additionally, it handles some differently:
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
+options       | array     | `[]`    | array with objects containing data passed to component
+
+### ListOption
+
+It allows any property which can be passed to `div`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+option        | object    | n/a     | object with data passed to component
+value         | number    | n/a     | value of input
+
+### Option
+
+It allows any property which can be passed to `span`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+option        | object    | n/a     | object with data passed to component
+value         | number    | n/a     | value of input
 
 ## Changelog
 

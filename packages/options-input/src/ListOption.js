@@ -6,9 +6,6 @@ import { NumberInput } from '@talixo/number-input'
 import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
   /** Data for generate ListOption */
   option: PropTypes.object,
 
