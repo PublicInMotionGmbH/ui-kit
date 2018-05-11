@@ -61,10 +61,7 @@ class TimeInput extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value) {
-      const { open } = this.state
-
       this.formatValue(nextProps)
-      if (open) { this.setState({ open: false }) }
     }
   }
 
@@ -102,7 +99,7 @@ class TimeInput extends React.Component {
     const arrowClsName = buildClassName([ moduleName, 'arrow' ])
 
     return (
-      <span className={arrowClsName} onClick={this.toggleMenu}>
+      <span className={arrowClsName}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
@@ -117,7 +114,7 @@ class TimeInput extends React.Component {
     const { format } = this.props
 
     // Parse value
-    const parsedValue = isNaN(parseFloat(value))
+    const parsedValue = isNaN(parseInt(value))
       ? 0
       : parseInt(value)
 
@@ -140,6 +137,33 @@ class TimeInput extends React.Component {
     inputValue = inputValue.toString()
 
     this.setState({ inputValue })
+  }
+
+  /**
+   * Handles input focus.
+   * @param {string} value
+   *
+   */
+  handleBlur = () => {
+    const { onBlur } = this.props
+    const { inputValue, suffix } = this.state
+
+    if (onBlur) {
+      onBlur(inputValue, suffix)
+    }
+
+    this.setState({ open: false })
+  }
+
+  /**
+   * Handles input focus.
+   * @param {string} value
+   *
+   */
+  handleFocus = () => {
+    // const { open } = this.state
+
+    this.setState({ open: true })
   }
 
   /**
@@ -173,7 +197,6 @@ class TimeInput extends React.Component {
    * @returns {React.Element}
    */
   renderInput = () => {
-    const { onBlur } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
@@ -183,7 +206,8 @@ class TimeInput extends React.Component {
       <TextInput
         className={inputClsName}
         onChange={this.handleChange}
-        onBlur={() => onBlur(inputValue, suffix)}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         onKeyDown={this.handleInputKeyDown}
         right={this.buildControl()}
         type='number'
@@ -191,13 +215,6 @@ class TimeInput extends React.Component {
         value={inputValue}
       />
     )
-  }
-
-  /**
-   * Toggle menu.
-   */
-  toggleMenu = () => {
-    this.setState(state => ({ open: !state.open }))
   }
 
   render () {

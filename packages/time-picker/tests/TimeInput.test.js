@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
 
@@ -27,25 +27,6 @@ describe('<TimeInput />', () => {
     const input = wrapper.find('TextInput')
 
     expect(input.hasClass(`${clsName}__input--open`)).toEqual(true)
-  })
-
-  it('toggles menu on arrow click', () => {
-    const format = 'HH'
-    const wrapper = mount(<TimeInput format={format} value={value} />)
-    const arrow = wrapper.find(`.${clsName}__arrow`)
-    arrow.simulate('click')
-
-    expect(wrapper.state().open).toEqual(true)
-    wrapper.unmount()
-  })
-
-  it('closes menu if componenet receives props.value', () => {
-    const format = 'HH'
-    const wrapper = createWrapper({ format, value })
-    wrapper.setState({ open: true })
-    wrapper.setProps({ value: new Date('2018-05-10T00:30:00') })
-
-    expect(wrapper.state().open).toEqual(false)
   })
 })
 
@@ -75,6 +56,28 @@ describe('onBlur', () => {
     input.simulate('blur')
     expect(selectedValue).toEqual('22')
     expect(selectedSuffix).toEqual('AM')
+  })
+
+  it('closes menu', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+
+    wrapper.setState({ open: true })
+    const input = wrapper.find('TextInput')
+    input.simulate('blur')
+
+    expect(wrapper.state().open).toEqual(false)
+  })
+})
+
+describe('onFocus', () => {
+  it('is called when input gains focus', () => {
+    const format = 'HH'
+    const wrapper = createWrapper({ format, value })
+
+    const input = wrapper.find('TextInput')
+    input.simulate('focus')
+    expect(wrapper.state().open).toEqual(true)
   })
 })
 

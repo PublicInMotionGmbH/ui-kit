@@ -47,12 +47,13 @@ value         | object      | yes      | n/a     | Time object.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type        | Required | Default | Description
---------------|-------------|----------|:-------:|--------------------------------
-className     | string      |          | n/a     | Additional class name passed to wrapper.
-columns       | number      |          | n/a     | Number of data columns.
-data          | array       | yes      | n/a     | Array of time values.
-onValueSelect | function    |          | n/a     | Event handler when menu value is selected.
+Property name | Type     | Required | Default | Description
+--------------|----------|----------|:-------:|--------------------------------
+className     | string   |          | n/a     | Additional class name passed to wrapper.
+columns       | number   |          | n/a     | Number of data columns.
+data          | array    | yes      | n/a     | Array of time values.
+format        | string   | yes      | n/a     | Format of label.
+onValueSelect | function |          | n/a     | Event handler when menu value is selected.
 
 #### Types
 

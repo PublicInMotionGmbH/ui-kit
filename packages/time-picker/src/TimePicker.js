@@ -18,17 +18,18 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Hour format. */
-  hourFormat: PropTypes.oneOf(['HH', 'hh A']),
+  hourFormat: PropTypes.oneOf(['24', '12']),
 
   /** Time string passed to component. */
   value: PropTypes.string
 }
 
 const defaultProps = {
-  hourFormat: 'HH'
+  hourFormat: '24'
 }
 
 const HOURS_24 = 'HH'
+const HOURS_12 = 'hh A'
 const MINUTES = 'mm'
 
 /**
@@ -58,7 +59,7 @@ const HeaderPM = () => [
  * @returns {React.Element}
  */
 const TimeMenuHour24 = (props) => {
-  const { format, onValueSelect } = props
+  const { format, onValueSelect, value } = props
 
   // Create array of hour values
   const data = new Array(24)
@@ -71,6 +72,7 @@ const TimeMenuHour24 = (props) => {
       data={data}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     />
   )
 }
@@ -82,7 +84,7 @@ const TimeMenuHour24 = (props) => {
  * @returns {React.Element}
  */
 const TimeMenuHour12 = (props) => {
-  const { format, onValueSelect } = props
+  const { format, onValueSelect, value } = props
 
   // Create array of hour values
   const dataAM = new Array(12)
@@ -101,6 +103,7 @@ const TimeMenuHour12 = (props) => {
       data={dataAM}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     >
       <HeaderAM />
     </TimeMenu>,
@@ -110,6 +113,7 @@ const TimeMenuHour12 = (props) => {
       data={dataPM}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     >
       <HeaderPM />
     </TimeMenu>
@@ -122,14 +126,16 @@ const TimeMenuHour12 = (props) => {
  * @param {object} rest
  * @returns {array|React.Element}
  */
-const buildMenuHours = (handleHoursBlur, hourFormat) => {
-  return hourFormat === HOURS_24
+const buildMenuHours = (value, handleHoursBlur, format) => {
+  return format === HOURS_24
     ? <TimeMenuHour24
-      format={hourFormat}
+      value={value}
+      format={format}
       onValueSelect={handleHoursBlur}
     />
     : <TimeMenuHour12
-      format={hourFormat}
+      value={value}
+      format={format}
       onValueSelect={handleHoursBlur}
     />
 }
@@ -140,7 +146,7 @@ const buildMenuHours = (handleHoursBlur, hourFormat) => {
  * @param {object} rest
  * @returns {React.Element}
  */
-const buildMenuMinutes = (handleMinutesBlur) => {
+const buildMenuMinutes = (value, handleMinutesBlur) => {
   // Create array of minutes values
   const data = new Array(12)
     .fill(null)
@@ -148,6 +154,7 @@ const buildMenuMinutes = (handleMinutesBlur) => {
 
   return (
     <TimeMenu
+      value={value}
       columns={2}
       format=':mm'
       data={data}
@@ -163,7 +170,7 @@ const buildMenuMinutes = (handleMinutesBlur) => {
  * @property {string} [props.className]
  * @property {string} [props.hourFormat]
  * @property {function} [props.onChange]
- * @property {string} [props.type]
+ * @property {string} [props.value]
  *
  * @property {object} state
  * @property {object} [state.value]
@@ -247,16 +254,21 @@ class TimePicker extends React.PureComponent {
     const menuClsName = buildClassName([ moduleName, 'menu' ])
     const colonClsName = buildClassName([moduleName, 'colon'])
 
+    // Convert format token
+    const format = hourFormat === '24'
+      ? HOURS_24
+      : HOURS_12
+
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
           className={inputHourClsName}
           onBlur={handleHoursBlur}
-          format={hourFormat}
+          format={format}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuHours(handleHoursBlur, hourFormat)}
+            {buildMenuHours(value, handleHoursBlur, format)}
           </div>
         </TimeInput>
         <span className={colonClsName}>:</span>
@@ -267,7 +279,7 @@ class TimePicker extends React.PureComponent {
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuMinutes(handleMinutesBlur)}
+            {buildMenuMinutes(value, handleMinutesBlur)}
           </div>
         </TimeInput>
       </div>

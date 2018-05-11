@@ -9,11 +9,11 @@ exports[`<TimeInput /> renders correctly 1`] = `
     error={false}
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     right={
       <span
         className="talixo-time-input__arrow"
-        onClick={[Function]}
       >
         <Icon
           name="expand_more"

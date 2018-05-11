@@ -26,8 +26,8 @@ describe('onValueSelect', () => {
     const onValueSelect = jest.fn()
     const wrapper = createWrapper({ data, onValueSelect })
 
-    const button = wrapper.find('Button').at(0)
-    button.simulate('click')
+    const button = wrapper.find('button').at(0)
+    button.simulate('mousedown')
     expect(onValueSelect).toHaveBeenCalledTimes(1)
   })
 
@@ -37,8 +37,8 @@ describe('onValueSelect', () => {
     const value = data[0]
     const wrapper = createWrapper({ data, onValueSelect })
 
-    const button = wrapper.find('Button').at(0)
-    button.simulate('click')
+    const button = wrapper.find('button').at(0)
+    button.simulate('mousedown')
     expect(selectedValue).toEqual(value)
   })
 })

@@ -20,6 +20,11 @@ exports[`<TimePicker /> renders correctly 1`] = `
       <TimeMenuHour24
         format="HH"
         onValueSelect={[Function]}
+        value={
+          Object {
+            "format": [Function],
+          }
+        }
       />
     </div>
   </TimeInput>
@@ -61,6 +66,11 @@ exports[`<TimePicker /> renders correctly 1`] = `
         }
         format=":mm"
         onValueSelect={[Function]}
+        value={
+          Object {
+            "format": [Function],
+          }
+        }
       />
     </div>
   </TimeInput>

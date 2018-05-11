@@ -29,7 +29,7 @@ addStory.controlled('12', readme, (setState, state) => (
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      hourFormat='hh A'
+      hourFormat='12'
       onChange={(time) => setState({ time })}
     />
   </div>
@@ -41,7 +41,7 @@ addStory.controlled('24', readme, (setState, state) => (
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      hourFormat='HH'
+      hourFormat='24'
       onChange={(time) => setState({ time })}
     />
   </div>
