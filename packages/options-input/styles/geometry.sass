@@ -70,6 +70,20 @@
   &__list &__list-option--active
     background: #fff
 
+  &__list-option
+    &__title, &__description
+      display: block
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+
+    &__title
+      font-weight: 600
+    
+
+    &__description
+      font-weight: 400
+
 @include module('number-input')
   input
     font-weight: 600
@@ -87,18 +101,7 @@
     &--active
       background: #fff
 
-    &__title, &__description
-      display: block
-      white-space: nowrap
-      text-overflow: ellipsis
-      overflow: hidden
 
-    &__title
-      font-weight: 600
-    
-
-    &__description
-      font-weight: 400
     
 
     &:last-child
