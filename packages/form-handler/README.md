@@ -26,7 +26,7 @@ It allows any props which are allowed for `Formik` and `form`. Additionally, it 
 Property name     | Type      | Default | Description                    
 ------------------|-----------|:-------:|-------------------------------------------------------------------------
 className         | string    | n/a     | Additional class name passed to wrapper.
-errors            | object    | `{}`    | Error object. Key is a name of a field.
+errors            | object    | n/a     | Error object. Key is a name of a field.
 onSubmit          | function  | n/a     | onSubmit callback function.
 validationSchema  | object    | n/a     | Validation object. A Yup schema or a function that returns a Yup schema.
 values            | object    | n/a     | Initial values of form fields.

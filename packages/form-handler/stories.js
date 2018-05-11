@@ -51,20 +51,18 @@ function renderCountry (x) {
 }
 
 addStory('default', readme, () => (
-  <FormHandler>
-    <FormHandler onSubmit={submit}>
-      <FormField label='Name' name='name' {...commonProps}>
-        <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Email' name='email' {...commonProps}>
-        <TextInput />
-      </FormField>
-      <br />
-      <ControlGroup position='center'>
-        <Button type='submit'>Send</Button>
-      </ControlGroup>
-    </FormHandler>
+  <FormHandler onSubmit={submit}>
+    <FormField label='Name' name='name' {...commonProps}>
+      <TextInput />
+    </FormField>
+    <br />
+    <FormField label='Email' name='email' {...commonProps}>
+      <TextInput />
+    </FormField>
+    <br />
+    <ControlGroup position='center'>
+      <Button type='submit'>Send</Button>
+    </ControlGroup>
   </FormHandler>
 ))
 
