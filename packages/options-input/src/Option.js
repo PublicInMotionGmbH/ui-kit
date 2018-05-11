@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { Icon } from '@talixo/icon'
 import { Tooltip } from '@talixo/tooltip'
 
+import OptionLabel from './OptionLabel'
+
 const propTypes = {
   /** Data for generate Option */
   option: PropTypes.object,
@@ -15,23 +17,18 @@ const propTypes = {
 /**
  * * Component which represents Option.
  *
- * @param {*} props
- * @param {object} [props.option]
- * @param {number} [props.options.default]
+ * @param {object} props
+ * @param {object} props.option
+ * @param {*} [props.value]
  *
  * @returns {React.Element}
  */
 function Option (props) {
   const { option, value } = props
 
-  const label = <React.Fragment>
-    <h6>{option.label}</h6>
-    {option.description ? <p>{option.description}</p> : null}
-  </React.Fragment>
-
   return (
     <span className='options-input__option'>
-      <Tooltip render={() => label} position='top'>
+      <Tooltip render={() => <OptionLabel option={option} />} position='top'>
         <span><Icon name={option.icon} /></span>
       </Tooltip>
       <span>{value}</span>

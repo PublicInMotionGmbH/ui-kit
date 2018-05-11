@@ -10,15 +10,19 @@ const propTypes = {
   option: PropTypes.object,
 
   /** Value of input */
-  value: PropTypes.number
+  value: PropTypes.number,
+
+  /** onChange */
+  onChange: PropTypes.func
 }
 
 /**
  * * Component which represents ListOption.
  *
- * @param {*} props
+ * @param {object} props
  * @param {object} [props.option]
  * @param {number} [props.options.default]
+ * @param {function} onChange
  *
  * @returns {React.Element}
  */

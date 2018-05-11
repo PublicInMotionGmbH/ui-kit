@@ -10,7 +10,6 @@
       display: none
 
 .options-input
-  position: relative
   &__toggle
     display: flex
     align-items: center
@@ -20,7 +19,7 @@
     border-radius: $border-radius-m
     height: dp(6)
     font-weight: 600
-    padding: 0
+    padding: 0 dp(1.25)
     margin: 0
     border: 1px solid transparent
     background: transparent
@@ -28,9 +27,6 @@
     cursor: pointer
 
     &:hover, &:focus
-      padding: 0 dp(1.25)
-      margin-left: dp(-1.25)
-      margin-right: dp(-1.25)
       border-color: #ccc
 
   &__value .talixo-icon
@@ -49,7 +45,6 @@
     display: none
     position: absolute
     z-index: 998
-    left: dp(8.8)
     min-width: dp(35)
     margin-top: -1px
     border: 1px solid $brand-color
@@ -80,7 +75,6 @@
     &__title
       font-weight: 600
     
-
     &__description
       font-weight: 400
 
@@ -93,6 +87,7 @@
 
 @include module('options-input')
   display: inline-block
+  position: relative
   &__list-option
     line-height: 1em
     background: #f5f5f5
@@ -101,20 +96,14 @@
     &--active
       background: #fff
 
-
-    
-
     &:last-child
       border-bottom: 0
 
-@include module('options-input')
   &--open .options-input__toggle
     position: relative
     z-index: 999
     background: #fff
     padding: 0 dp(1.25)
-    margin-left: dp(-1.25)
-    margin-right: dp(-1.25)
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
     border-color: $brand-color

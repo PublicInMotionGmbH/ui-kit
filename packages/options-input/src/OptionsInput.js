@@ -50,16 +50,18 @@ class OptionsInput extends React.PureComponent {
   /**
    * This function set state value
    *
-   * @param {*} nextProps
+   * @param {object} nextProps
    */
   componentWillReceiveProps (nextProps) {
-    let value = nextProps.value ? { ...nextProps.value } : { ...this.state.value }
-
-    if (this.props.options !== nextProps.options) {
-      value = this.buildValue(nextProps.options)
+    if (this.state.value !== nextProps.value) {
+      let value = nextProps.value ? { ...nextProps.value } : { ...this.state.value }
+      this.setState({ value })
     }
 
-    this.setState({ value })
+    if (this.props.options !== nextProps.options) {
+      let value = this.buildValue(nextProps.options)
+      this.setState({ value })
+    }
   }
 
   /**
@@ -140,9 +142,7 @@ class OptionsInput extends React.PureComponent {
     let element = event.target
 
     while (element !== body) {
-      if (element === this.el) {
-        return
-      }
+      if (element === this.el) return
 
       element = element.parentNode
     }

@@ -9,16 +9,13 @@ const options = [{id: 'person', icon: 'person', label: 'Adults', description: 'O
 
 describe('<OptionsInput />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<OptionsInput options={options}
-    />)
+    const wrapper = shallow(<OptionsInput options={options} />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('passes icon prop correctly', () => {
-    const wrapper = mount(<OptionsInput
-      options={options}
-    />)
+    const wrapper = mount(<OptionsInput options={options} />)
 
     expect(wrapper.find('Tooltip').find('Icon').at(0).prop('name')).toBe('person')
 
@@ -26,9 +23,7 @@ describe('<OptionsInput />', () => {
   })
 
   it('sets correct default value', () => {
-    const wrapper = mount(<OptionsInput
-      options={options}
-    />)
+    const wrapper = mount(<OptionsInput options={options} />)
 
     expect(wrapper.find('NumberInput').at(0).prop('value')).toBe(1)
 
@@ -53,10 +48,7 @@ describe('<OptionsInput />', () => {
 
   it('changes value onChange', () => {
     const spy = jest.fn()
-    const wrapper = mount(<OptionsInput
-      options={options}
-      onChange={spy}
-    />)
+    const wrapper = mount(<OptionsInput options={options} onChange={spy} />)
 
     wrapper.find('input').at(0).simulate('change', {
       target: {
@@ -71,9 +63,7 @@ describe('<OptionsInput />', () => {
   })
 
   it('open list when focus on button', () => {
-    const wrapper = mount(<OptionsInput
-      options={options}
-    />)
+    const wrapper = mount(<OptionsInput options={options} />)
 
     expect(wrapper.state('open')).toBe(false)
 
@@ -86,10 +76,7 @@ describe('<OptionsInput />', () => {
 
   it('calls blur function when onBlur is triggered', () => {
     const spy = jest.fn()
-    const wrapper = mount(<OptionsInput
-      options={options}
-      onBlur={spy}
-    />)
+    const wrapper = mount(<OptionsInput options={options} onBlur={spy} />)
 
     wrapper.find('button').at(0).simulate('blur')
 
@@ -100,10 +87,7 @@ describe('<OptionsInput />', () => {
 
   it('calls focus function when onFocus is triggered', () => {
     const spy = jest.fn()
-    const wrapper = mount(<OptionsInput
-      options={options}
-      onFocus={spy}
-    />)
+    const wrapper = mount(<OptionsInput options={options} onFocus={spy} />)
 
     wrapper.find('button').at(0).simulate('focus')
 
