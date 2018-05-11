@@ -36,8 +36,8 @@ const propTypes = {
       /** Color of the data series. */
       color: PropTypes.string,
 
-      /** Data inforamtion to be displayed in chart. */
-      dataitems: PropTypes.shape({
+      /** Data information to be displayed in chart. */
+      dataItems: PropTypes.shape({
 
         /** X axis data. */
         x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -71,7 +71,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  data: [{ dataitems: [] }],
+  data: [{ dataItems: [] }],
   lineColors: [],
   timeSeries: false,
   type: 'line',
@@ -92,9 +92,9 @@ const defaultProps = {
  * @property {object[]} [props.data]
  * @property {string} [props.data.className]
  * @property {string} [props.data.color]
- * @property {object} [props.data.dataitems]
- * @property {string|number} props.data.dataitems.x
- * @property {string|number} props.data.dataitems.y
+ * @property {object} [props.data.dataItems]
+ * @property {string|number} props.data.dataItems.x
+ * @property {string|number} props.data.dataItems.y
  * @property {bool} [props.data.disabled]
  * @property {string} [props.data.label]
  *

@@ -44,14 +44,14 @@ const defaultProps = {
  *
  * @property {object} [props]
  * @property {string} [props.color]
- * @property {nomber} [props.innerHeight]
- * @property {nomber} [props.innerWidth]
- * @property {nomber} [props.marginLeft]
- * @property {nomber} [props.marginTop]
+ * @property {number} [props.innerHeight]
+ * @property {number} [props.innerWidth]
+ * @property {number} [props.marginLeft]
+ * @property {number} [props.marginTop]
  * @property {function} [props.onBrush]
  * @property {function} [props.onBrushStart]
  * @property {function} [props.onBrushEnd]
- * @property {nomber} [props.opacity]
+ * @property {number} [props.opacity]
  *
  *
  * @property {object} [state]

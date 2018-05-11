@@ -40,7 +40,7 @@ export function getPieValuesSum (dataItems) {
  * @param {array} data
  * @param {number} sum
  * @param {object} config
- * @returns {arrat}
+ * @returns {array}
  */
 export function generateArcsData (data, sum, config = {}) {
   const { PI } = Math
