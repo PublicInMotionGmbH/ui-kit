@@ -2,10 +2,10 @@
 
 exports[`<TimeInput /> renders correctly 1`] = `
 <div
-  className="talixo-time-input"
+  className="talixo-time-picker__input"
 >
   <TextInput
-    className="talixo-time-input__input"
+    className="talixo-time-picker__input"
     error={false}
     onBlur={[Function]}
     onChange={[Function]}
@@ -13,7 +13,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
     onKeyDown={[Function]}
     right={
       <span
-        className="talixo-time-input__arrow"
+        className="talixo-time-picker__input talixo-time-picker__input--arrow"
       >
         <Icon
           name="expand_more"

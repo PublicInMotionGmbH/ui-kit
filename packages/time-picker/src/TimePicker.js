@@ -59,12 +59,7 @@ const HeaderPM = () => [
  * @returns {React.Element}
  */
 const TimeMenuHour24 = (props) => {
-  const { format, onValueSelect, value } = props
-
-  // Create array of hour values
-  const data = new Array(24)
-    .fill(null)
-    .map((_, i) => i)
+  const { data, format, onValueSelect, value } = props
 
   return (
     <TimeMenu
@@ -84,23 +79,13 @@ const TimeMenuHour24 = (props) => {
  * @returns {React.Element}
  */
 const TimeMenuHour12 = (props) => {
-  const { format, onValueSelect, value } = props
-
-  // Create array of hour values
-  const dataAM = new Array(12)
-    .fill(null)
-    .map((_, i) => i)
-
-  // Create array of hour values
-  const dataPM = new Array(12)
-    .fill(null)
-    .map((_, i) => i + 12)
+  const { dataAM, dataPM, format, onValueSelect, value } = props
 
   return [
     <TimeMenu
       key='hours-am'
       columns={2}
-      data={dataAM}
+      dataAM={dataAM}
       format={format}
       onValueSelect={onValueSelect}
       value={value}
@@ -110,7 +95,7 @@ const TimeMenuHour12 = (props) => {
     <TimeMenu
       key='hours-pm'
       columns={2}
-      data={dataPM}
+      dataPM={dataPM}
       format={format}
       onValueSelect={onValueSelect}
       value={value}
@@ -127,13 +112,31 @@ const TimeMenuHour12 = (props) => {
  * @returns {array|React.Element}
  */
 const buildMenuHours = (value, handleHoursBlur, format) => {
+  // Create array of hour values
+  const data = new Array(24)
+    .fill(null)
+    .map((_, i) => i)
+
+  // Create array of hour values
+  const dataAM = new Array(12)
+    .fill(null)
+    .map((_, i) => i)
+
+  // Create array of hour values
+  const dataPM = new Array(12)
+    .fill(null)
+    .map((_, i) => i + 12)
+
   return format === HOURS_24
     ? <TimeMenuHour24
+      data={data}
       value={value}
       format={format}
       onValueSelect={handleHoursBlur}
     />
     : <TimeMenuHour12
+      dataAM={dataAM}
+      dataPM={dataPM}
       value={value}
       format={format}
       onValueSelect={handleHoursBlur}
@@ -179,7 +182,7 @@ const buildMenuMinutes = (value, handleMinutesBlur) => {
  */
 class TimePicker extends React.PureComponent {
   state = {
-    value: moment(this.props.value)
+    value: this.props.value ? moment(this.props.value, 'HH:mm') : moment()
   }
 
   /**
@@ -206,12 +209,19 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleHoursBlur = (inputValue, suffix) => {
+    const { hourFormat } = this.props
     const { value: prevValue } = this.state
+    let formattedValue
+
+    // If hour format is 'AM/PM' we need to convert 12 to 0. This is because moment treats 0 as 12am and 12 as 12pm
+    formattedValue = hourFormat === '12' && inputValue === '12'
+      ? '0'
+      : inputValue
 
     // Add 12 hours to 'AM' time
-    const formattedValue = suffix === 'PM'
-      ? parseInt(inputValue) + 12
-      : inputValue
+    formattedValue = suffix === 'PM'
+      ? parseInt(formattedValue) + 12
+      : formattedValue
 
     // Format time output
     const value = prevValue

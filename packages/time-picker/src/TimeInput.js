@@ -6,7 +6,7 @@ import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
-export const moduleName = 'time-input'
+export const moduleName = 'time-picker'
 
 const A_KEY = 65
 const P_KEY = 80
@@ -60,7 +60,7 @@ class TimeInput extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.value !== nextProps.value) {
+    if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
       this.formatValue(nextProps)
     }
   }
@@ -96,7 +96,7 @@ class TimeInput extends React.Component {
     const { open } = this.state
 
     // Build class name for arrow
-    const arrowClsName = buildClassName([ moduleName, 'arrow' ])
+    const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
       <span className={arrowClsName}>
@@ -125,7 +125,7 @@ class TimeInput extends React.Component {
         inputValue = Math.min(23, Math.max(0, parsedValue))
         break
       case HOURS_12:
-        inputValue = Math.min(11, Math.max(0, parsedValue))
+        inputValue = Math.min(12, Math.max(0, parsedValue))
         break
       case MINUTES:
         inputValue = Math.min(59, Math.max(0, parsedValue))
@@ -134,7 +134,9 @@ class TimeInput extends React.Component {
         inputValue = value
     }
 
-    inputValue = inputValue.toString()
+    inputValue = inputValue === 0
+      ? ''
+      : inputValue.toString()
 
     this.setState({ inputValue })
   }
@@ -222,7 +224,7 @@ class TimeInput extends React.Component {
     const { open } = this.state
 
     // Build class name for wrapper
-    const wrapperClsName = buildClassName(moduleName, className)
+    const wrapperClsName = buildClassName([ moduleName, 'input' ], className)
 
     return (
       <div className={wrapperClsName} {...passedProps}>

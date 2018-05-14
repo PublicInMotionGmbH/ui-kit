@@ -10,6 +10,39 @@
   &__input-minutes
     flex-basis: dp(14)
 
+  &__input
+    position: relative
+    display: block
+
+    input[type=number]
+      appearance: none
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button
+      appearance: none
+      margin: 0
+
+    > input
+      background-color: $time-picker-background-color
+      border: 1px solid $time-picker-border-color
+
+    &--open
+      position: relative
+      z-index: 2
+
+      > input
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom: 1px solid $time-picker-background-color
+
+    &--arrow
+      display: inline-block
+      font-size: 1.5rem
+      line-height: 1em
+      border: 0
+      background: transparent
+      color: #bbb
+
   &__menu
     position: absolute
     display: flex
@@ -58,38 +91,3 @@
       border-color: #6bf
       color: $color-white
       font-weight: $font-weight-bold
-
-
-@include module('time-input')
-  position: relative
-  display: block
-
-  input[type=number]
-    appearance: none
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button
-    appearance: none
-    margin: 0
-
-  &__input
-    > input
-      background-color: $time-picker-background-color
-      border: 1px solid $time-picker-border-color
-
-    &--open
-      position: relative
-      z-index: 2
-
-      > input
-        border-bottom-left-radius: 0
-        border-bottom-right-radius: 0
-        border-bottom: 1px solid $time-picker-background-color
-
-  &__arrow
-    display: inline-block
-    font-size: 1.5rem
-    line-height: 1em
-    border: 0
-    background: transparent
-    color: #bbb
