@@ -8,4 +8,6 @@ const countriesList = allCountries
     prefix: `+${country.dialCode}`
   }))
 
+export const sortedCountriesList = countriesList.slice().sort((a, b) => b.prefix.length - a.prefix.length)
+
 export default countriesList

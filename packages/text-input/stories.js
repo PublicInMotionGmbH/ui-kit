@@ -4,6 +4,7 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import { Icon } from '@talixo/icon'
 import { ProgressBar } from '@talixo/progress-bar'
+import TextMaskInput from 'react-text-mask'
 
 import TextInput from './src/TextInput'
 
@@ -41,6 +42,29 @@ addStory('default', readme, () => (
     />
   </div>
 ))
+
+addStory.controlled('masked / different input', readme, (setState, state) => (
+  <div>
+    <h2>Masked input</h2>
+    <TextInput
+      value={state.value}
+      left={<Icon name='credit_card' />}
+      InputComponent={TextMaskInput}
+      mask={[
+        // Credit card has 13-19 digits
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/
+      ]}
+      placeholderChar={'\u2000'}
+      placeholder='Type your credit card number.'
+      style={additionalStyling}
+      onChange={value => setState({ value })}
+    />
+  </div>
+), () => ({ value: '' }))
 
 addStory.controlled('controlled', readme, (setState, state) => (
   <div style={{ width: 300 }}>

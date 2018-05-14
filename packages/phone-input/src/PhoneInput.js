@@ -1,5 +1,7 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
+import TextMaskInput from 'react-text-mask'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -9,6 +11,7 @@ import { CountryFlag } from '@talixo/country-flag'
 import countriesList from '../utils/countriesList'
 import detectCountry from '../utils/detectCountry'
 import replaceCountryPrefix from '../utils/replaceCountryPrefix'
+import buildMaskForCountry from '../utils/buildMaskForCountry'
 
 export const moduleName = 'phone-input'
 
@@ -30,6 +33,16 @@ const propTypes = {
 
   /** Event handler when input has been focused */
   onFocus: PropTypes.func
+}
+
+/**
+ * Trim value (including \u2000 placeholders).
+ *
+ * @param {string} value
+ * @returns {string}
+ */
+function trim (value) {
+  return value.replace(/[\u2000]+/g, '').trim()
 }
 
 /**
@@ -70,6 +83,7 @@ function renderCountryItem (country) {
 class PhoneInput extends React.PureComponent {
   state = {
     value: this.props.value || '',
+    focused: false,
     country: detectCountry(this.props.value)
   }
 
@@ -94,6 +108,8 @@ class PhoneInput extends React.PureComponent {
    * @param {string} value
    */
   change (value) {
+    value = trim(value)
+
     // Update state immediately, when component is self-controlled
     if (this.props.value == null) {
       this.setState({ value })
@@ -133,7 +149,7 @@ class PhoneInput extends React.PureComponent {
    * @param {HTMLElement} node
    */
   saveRef = (node) => {
-    this.el = node
+    this.el = findDOMNode(node)
   }
 
   /**
@@ -156,22 +172,62 @@ class PhoneInput extends React.PureComponent {
   }
 
   /**
+   * Handle focusing text input.
+   *
+   * @param {Event|SyntheticEvent} event
+   */
+  focus = (event) => {
+    const { onFocus } = this.props
+
+    // Make sure that user can't click on some place in input, where it guides him
+    // TODO: when react-text-mask will properly work with removing placeholder character, remove it
+    clearTimeout(this.focusTimeout)
+    this.focusTimeout = setTimeout(() => this.setState({
+      focused: true
+    }))
+
+    if (onFocus) {
+      onFocus(event)
+    }
+  }
+
+  /**
+   * Handle losing focus on text input.
+   *
+   * @param {Event|SyntheticEvent} event
+   */
+  blur = (event) => {
+    const { onBlur } = this.props
+
+    this.setState({ focused: false })
+
+    if (onBlur) {
+      onBlur(event)
+    }
+  }
+
+  /**
    * Render input with phone number.
    *
    * @returns {React.Element}
    */
   renderInput () {
-    const { onFocus, onBlur, placeholder } = this.props
+    const { placeholder } = this.props
+    const { value, country, focused } = this.state
 
     return (
-      <input
+      <TextMaskInput
+        guide={focused}
+        keepCharPositions={false}
+        mask={buildMaskForCountry(country)}
+        placeholderChar={'\u2000'}
         type='tel'
         ref={this.saveRef}
-        value={this.state.value}
+        value={value}
         placeholder={placeholder}
         onChange={e => this.change(e.target.value)}
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={this.focus}
+        onBlur={this.blur}
       />
     )
   }
