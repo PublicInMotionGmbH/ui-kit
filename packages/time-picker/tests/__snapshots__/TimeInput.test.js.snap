@@ -5,6 +5,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
   className="talixo-time-input"
 >
   <TextInput
+    InputComponent="input"
     className="talixo-time-input__input"
     error={false}
     onBlur={[Function]}
