@@ -215,6 +215,7 @@ class TimeInput extends React.Component {
         type='number'
         suffix={suffix}
         value={inputValue}
+        autoComplete='off'
       />
     )
   }

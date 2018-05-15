@@ -22,7 +22,7 @@ const propTypes = {
   /**  Event handler when menu value is selected. */
   onValueSelect: PropTypes.func,
 
-  /** Time string passed to component. */
+  /** Time object passed to component. */
   value: PropTypes.object
 }
 

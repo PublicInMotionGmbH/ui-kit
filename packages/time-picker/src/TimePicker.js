@@ -85,7 +85,7 @@ const TimeMenuHour12 = (props) => {
     <TimeMenu
       key='hours-am'
       columns={2}
-      dataAM={dataAM}
+      data={dataAM}
       format={format}
       onValueSelect={onValueSelect}
       value={value}
@@ -95,7 +95,7 @@ const TimeMenuHour12 = (props) => {
     <TimeMenu
       key='hours-pm'
       columns={2}
-      dataPM={dataPM}
+      data={dataPM}
       format={format}
       onValueSelect={onValueSelect}
       value={value}

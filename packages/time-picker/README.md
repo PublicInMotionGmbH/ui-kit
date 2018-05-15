@@ -52,8 +52,9 @@ Property name | Type     | Required | Default | Description
 className     | string   |          | n/a     | Additional class name passed to wrapper.
 columns       | number   |          | n/a     | Number of data columns.
 data          | array    | yes      | n/a     | Array of time values.
-format        | string   | yes      | n/a     | Format of label.
+format        | string   |          | n/a     | Format of label.
 onValueSelect | function |          | n/a     | Event handler when menu value is selected.
+value         | object   |          | n/a     | Time object passed to component.
 
 #### Types
 
