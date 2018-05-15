@@ -1,6 +1,6 @@
 {
   "name": "@talixo/form-field",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents FormField",
   "main": "dist/index.js",
   "module": "index.js",

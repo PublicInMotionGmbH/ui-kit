@@ -42,7 +42,7 @@ let counter = 1
 /**
  * Generate unique id.
  *
- * @returns {string}
+ * @returns {number}
  */
 function generateUid () {
   return counter++
@@ -51,7 +51,7 @@ function generateUid () {
 /**
  * Reset id for testing purposes.
  *
- * @returns {string}
+ * @returns {number}
  */
 export function resetIdCounter () {
   counter = 1
@@ -119,6 +119,8 @@ class FormField extends React.Component {
   /**
    * Build label for form field.
    *
+   * @param {string} uniqueId
+   *
    * @returns {React.Element}
    */
   buildLabel = (uniqueId) => {
@@ -133,6 +135,9 @@ class FormField extends React.Component {
   /**
    * Build message for form field.
    *
+   * @param {node} type
+   * @param {string} typeName
+   *
    * @returns {React.Element}
    */
   buildMessage (type, typeName) {
@@ -145,6 +150,8 @@ class FormField extends React.Component {
 
   /**
    * Build input.
+   *
+   * @param {string} uniqueId
    *
    * @returns {React.Element}
    */
@@ -165,11 +172,13 @@ class FormField extends React.Component {
     /**
      * Build properties passed to input.
      *
+     * @param {node} child
+     *
      * @returns {object}
      */
     const buildPassedProps = (child) => ({
       className: buildInputClsName(child),
-      error: error !== undefined,
+      error: error != null,
       id: uniqueId,
       onBlur: handleBlur,
       onChange: onChange,
