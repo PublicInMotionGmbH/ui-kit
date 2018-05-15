@@ -20,7 +20,7 @@ const propTypes = {
   /** Hour format. */
   hourFormat: PropTypes.oneOf(['24', '12']),
 
-  /** Time string passed to component. */
+  /** Time string in 'HH:mm' format passed to component. */
   value: PropTypes.string
 }
 
