@@ -1,4 +1,15 @@
 @import './config'
 
 @include module('masked-input')
-  display: block
+  display: inline-block
+  position: relative
+
+  &__mask
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 2
+    background-color: #fff
+    pointer-events: none

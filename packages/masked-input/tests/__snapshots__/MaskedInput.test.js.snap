@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MaskedInput /> renders children correctly 1`] = `
-<span
+<div
   className="talixo-masked-input"
-/>
+>
+  <TextInput
+    error={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    type="text"
+  />
+</div>
 `;
