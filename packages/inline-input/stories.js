@@ -56,13 +56,13 @@ addStory('disabled', readme, () => (
 
 addStory.controlled('input change', readme, (setState, state) => (
   <div>
+    <span style={{ display: 'inline-block', padding: '16px', fontWeight: 700 }}>
+      You typed: {state.value}
+    </span>
     <InlineInput
       placeholder='Edit me'
-      onChange={(value) => { console.log(value) }}
+      onChange={(value) => setState({ value })}
     />
-    <span style={{ display: 'inline-block', padding: '16px', fontWeight: 700 }}>
-      {/* You typed: {state.value} */}
-    </span>
   </div>
 ), () => {
   return {

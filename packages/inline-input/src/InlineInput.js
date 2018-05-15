@@ -73,46 +73,73 @@ class InlineInput extends React.Component {
     selection: defaultSelection
   }
 
+  /**
+   * Focus input when component is updated.
+   */
   componentDidUpdate (prevProps, prevState) {
     const editable = this._input !== undefined && prevState.editing !== this.state.editing && !prevState.editing
 
-    if (editable) {
-      this.focusInput(this._input)
-    }
+    if (editable) { this.focusInput(this._input) }
   }
 
-  focusInput (obj) {
+  /**
+   * Focus input and set selection.
+   *
+   * @param {node} input
+   *
+   */
+  focusInput (input) {
     const { selected, selection: { start, end } } = this.state
 
     if (selected) {
       if (start <= end) {
-        obj.setSelectionRange(start, end)
+        input.setSelectionRange(start, end)
       } else {
-        obj.setSelectionRange(end, start, 'backwards')
+        input.setSelectionRange(end, start, 'backwards')
       }
     }
-    obj.focus()
+    input.focus()
   }
 
+  /**
+   * Handle input blur.
+   *
+   */
   handleBlur = () => {
     this.setState({ editing: false })
   }
 
+  /**
+   * Handle input change.
+   *
+   * @param {string} inputValue
+   *
+   */
   handleInputChange = (inputValue) => {
     const { onChange } = this.props
 
     this.setState({ inputValue })
 
     // Trigger input change to parent components
-    if (onChange) {
-      onChange(inputValue)
-    }
+    if (onChange) { onChange(inputValue) }
   }
 
+  /**
+   * Handle key press.
+   *
+   * @param {SyntheticEvent} e   *
+   *
+   */
   handleKeyPress = (e) => {
     if (e.key === 'Enter') { this.setState({ editing: false }) }
   }
 
+  /**
+   * Handle span click.
+   *
+   * @param {SyntheticEvent} e   *
+   *
+   */
   handleSpanClick = (e) => {
     const { disabled } = this.props
     let selected, selection
@@ -133,22 +160,36 @@ class InlineInput extends React.Component {
     this.setState({ editing, selected, selection })
   }
 
+  /**
+   * Set ref.
+   *
+   * @param {node} node   *
+   *
+   */
   setRef = (node) => {
     this._input = node
   }
 
+  /**
+   * Render inline input
+   *
+   * @returns {React.Element}
+   */
   render () {
     const { className, disabled, emptyValue, error, icon, onChange, placeholder, value, ...passedProps } = this.props
     const { editing, inputValue } = this.state
     const { setRef, handleBlur, handleInputChange, handleKeyPress, handleSpanClick } = this
 
+    // Build placeholder and span values
     const spanPlaceholder = emptyValue == null ? placeholder : emptyValue
     const spanValue = inputValue === '' ? spanPlaceholder : inputValue
 
+    // Build class names
     const wrapperClsName = buildClassName(moduleName, className, { disabled })
     const inputClsName = buildClassName([moduleName, 'input'])
     const spanClsName = buildClassName([moduleName, 'span'], null, { disabled, error })
 
+    // Build inline input component
     return (
       <div className={wrapperClsName} {...passedProps}>
         {editing && !disabled
