@@ -1,0 +1,25 @@
+@import './config'
+
+@include module('expiration-date-input')
+  display: flex
+  width: auto
+
+  &__year
+    min-width: dp(12)
+
+  &__month
+    min-width: dp(11)
+
+  .talixo-text-input__right
+    pointer-events: none
+    color: #999
+
+@include module('range-input')
+  display: inline-block
+
+  &:not(:last-child)
+    margin-right: dp(2)
+
+    &:hover .talixo-combo-box__value,
+    .talixo-combo-box--open .talixo-combo-box__value
+      border-color: #ccc
