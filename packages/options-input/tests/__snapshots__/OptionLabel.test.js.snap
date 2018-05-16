@@ -2,11 +2,15 @@
 
 exports[`<OptionLabel /> renders children correctly 1`] = `
 <React.Fragment>
-  <h6>
+  <span
+    className="options-input__option-label__title"
+  >
     Adults
-  </h6>
-  <p>
+  </span>
+  <span
+    className="options-input__option-label__description"
+  >
     Older than 15
-  </p>
+  </span>
 </React.Fragment>
 `;
