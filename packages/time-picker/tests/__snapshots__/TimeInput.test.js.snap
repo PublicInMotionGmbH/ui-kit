@@ -23,7 +23,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
     }
     suffix={null}
     type="number"
-    value="00"
+    value="22"
   />
 </div>
 `;

@@ -32,30 +32,6 @@ onChange      | function    | n/a     | Event called after input value has been 
 hourFormat    | HourFormat  | `'HH'`  | Hour format.
 value         | string      | n/a     | Time string in 'HH:mm' format passed to component.
 
-### TimeInput
-
-It allows any props which are allowed for `div`. Additionally, it handles some differently:
-
-Property name | Type        | Required | Default | Description
---------------|-------------|----------|:-------:|--------------------------------
-className     | string      |          | n/a     | Additional class name passed to wrapper.
-onBlur        | function    |          | n/a     | Event called after input has lost focus.
-format        | InputFormat | yes      | n/a     | Format of time.
-value         | object      | yes      | n/a     | Time object.
-
-### TimeMenu
-
-It allows any props which are allowed for `div`. Additionally, it handles some differently:
-
-Property name | Type     | Required | Default | Description
---------------|----------|----------|:-------:|--------------------------------
-className     | string   |          | n/a     | Additional class name passed to wrapper.
-columns       | number   |          | n/a     | Number of data columns.
-data          | array    | yes      | n/a     | Array of time values.
-format        | string   |          | n/a     | Format of label.
-onValueSelect | function |          | n/a     | Event handler when menu value is selected.
-value         | object   |          | n/a     | Time object passed to component.
-
 #### Types
 
 Type name      | Enum options

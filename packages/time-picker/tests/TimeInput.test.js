@@ -9,7 +9,11 @@ const clsName = prefix(moduleName)
 
 const createWrapper = (props) => shallow(<TimeInput {...props} />)
 
-// jest.mock('moment', () => () => ({format: () => '2018–05–10T17:26:56+00:00'}))
+jest.mock('moment', () => {
+  const moment = require.requireActual('moment')
+  return moment.utc
+})
+
 const value = new Date('2018-05-10T00:00:00')
 
 describe('<TimeInput />', () => {
