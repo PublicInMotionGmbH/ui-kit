@@ -13,7 +13,7 @@ const propTypes = {
 
   /** Data for generate ListOption */
   options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     icon: PropTypes.string,
     label: PropTypes.string,
     default: PropTypes.number,
@@ -44,9 +44,8 @@ const defaultProps = {
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: this.buildValue(this.props.options, this.props.value)
+    value: this.buildValue(this.props.options)
   }
-
   /**
    * This function set state value
    *

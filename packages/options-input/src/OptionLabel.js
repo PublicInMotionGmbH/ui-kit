@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   /** Data for generate option */
-  option: PropTypes.object
+  option: PropTypes.shape({
+    label: PropTypes.string,
+    description: PropTypes.string
+  })
 }
 
 /**
@@ -15,12 +18,12 @@ const propTypes = {
  * @returns {React.Element}
  */
 function OptionLabel (props) {
-  const { option } = props
+  const { option: { description, label } } = props
 
   return (
     <React.Fragment>
-      <h6>{option.label}</h6>
-      {option.description ? <p>{option.description}</p> : null}
+      <span className='options-input__option-label__title'>{label}</span>
+      {description ? <span className='options-input__option-label__description'>{description}</span> : null}
     </React.Fragment>
   )
 }

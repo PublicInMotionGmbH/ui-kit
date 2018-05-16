@@ -21,7 +21,7 @@
     font-weight: 600
     padding: 0 dp(1.25)
     margin: 0
-    border: 1px solid transparent
+    border: $border-width-m solid transparent
     background: transparent
     outline: none
     cursor: pointer
@@ -41,13 +41,20 @@
     align-items: center
     margin-right: dp(1)
 
+    &-label__title
+      display: block
+      font-weight: 600
+
+    &-label__description
+      font-weight: 400
+
   &__list
     display: none
     position: absolute
     z-index: 998
     min-width: dp(35)
-    margin-top: -1px
-    border: 1px solid $brand-color
+    margin-top: dp(-0.125)
+    border: $border-width-m solid $brand-color
     border-radius: $border-radius-m
     border-top-left-radius: 0
     background: #fff
@@ -91,7 +98,7 @@
   &__list-option
     line-height: 1em
     background: #f5f5f5
-    border-bottom: 1px solid #eee
+    border-bottom: $border-width-m solid #eee
 
     &--active
       background: #fff

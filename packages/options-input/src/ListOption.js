@@ -7,7 +7,15 @@ import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
   /** Data for generate ListOption */
-  option: PropTypes.object,
+  option: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    icon: PropTypes.string,
+    label: PropTypes.string,
+    default: PropTypes.number,
+    description: PropTypes.string,
+    min: PropTypes.number,
+    max: PropTypes.number
+  }),
 
   /** Value of input */
   value: PropTypes.number,
@@ -21,7 +29,7 @@ const propTypes = {
  *
  * @param {object} props
  * @param {object} [props.option]
- * @param {number} [props.options.default]
+ * @param {number} [props.value]
  * @param {function} onChange
  *
  * @returns {React.Element}
