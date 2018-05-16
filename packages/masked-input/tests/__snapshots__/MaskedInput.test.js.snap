@@ -4,12 +4,11 @@ exports[`<MaskedInput /> renders children correctly 1`] = `
 <div
   className="talixo-masked-input"
 >
-  <TextInput
-    error={false}
+  <Calendar
+    displayFormat="YYYY-MM-DD"
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
-    type="text"
   />
 </div>
 `;
