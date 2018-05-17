@@ -280,7 +280,7 @@ class RangeInput extends React.PureComponent {
   onKeyDown = (event) => {
     const charCode = event.which || event.keyCode
 
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    if (charCode > 31 && !(charCode > 36 || charCode < 41) && (charCode < 48 || charCode > 57)) {
       event.preventDefault()
     }
   }

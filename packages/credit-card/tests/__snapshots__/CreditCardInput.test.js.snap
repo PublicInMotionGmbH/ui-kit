@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreditCardInput /> renders children correctly 1`] = `
+<TextInput
+  InputComponent={[Function]}
+  className="talixo-credit-card-input"
+  error={false}
+  guide={false}
+  keepCharPositions={false}
+  left={
+    <Icon
+      name="credit_card"
+    />
+  }
+  mask={
+    Array [
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      " ",
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      " ",
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      " ",
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      " ",
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+    ]
+  }
+  onBlur={[Function]}
+  onChange={[Function]}
+  onFocus={[Function]}
+  placeholder="0000 0000 0000 0000"
+  placeholderChar=" "
+  type="text"
+  value=""
+/>
+`;

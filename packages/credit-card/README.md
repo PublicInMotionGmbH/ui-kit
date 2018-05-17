@@ -21,13 +21,32 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-### ExpirationDateInput
+### CreditCardInput
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper.
+onBlur        | function  | n/a     | Handler for onBlur event.
 onChange      | function  | n/a     | Handler for onChange event.
+onFocus       | function  | n/a     | Handler for onFocus event.
 value         | string    | n/a     | Value to be displayed inside inputs.
+
+### ExpirationDateInput
+
+Property name | Type       | Default | Description                    
+--------------|------------|:-------:|--------------------------------
+className     | string     | n/a     | Additional class name passed to wrapper.
+onChange      | function   | n/a     | Handler for onChange event.
+value         | ValueShape | n/a     | Value to be displayed inside inputs.
+
+## Property shapes
+
+### ValueShape
+
+Property name | Type   | Default | Description                    
+--------------|--------|:-------:|--------------------------------
+month         | number | n/a     | Month to be displayed in the month input.
+year          | number | n/a     | Year to be displayed in the year input.
 
 ## Changelog
 
