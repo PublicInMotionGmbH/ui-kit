@@ -121,7 +121,7 @@ describe('<PhoneInput />', () => {
     })
 
     wrapper.setProps({ value: '+48 333 333' })
-    expect(wrapper.find('input').prop('value')).toBe('+48 333 333')
+    expect(wrapper.find('input').getDOMNode().value).toBe('+48 333333')
 
     wrapper.unmount()
   })
@@ -137,7 +137,7 @@ describe('<PhoneInput />', () => {
       }
     })
 
-    expect(wrapper.find('input').prop('value')).toBe('+48 555')
+    expect(wrapper.find('input').getDOMNode().value).toBe('+48 555')
 
     wrapper.unmount()
   })
