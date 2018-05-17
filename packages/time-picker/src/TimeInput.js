@@ -169,7 +169,7 @@ class TimeInput extends React.Component {
    */
   handleInputKeyDown = (event) => {
     const { format } = this.props
-    // If format is differnet than 'hh A' - return
+    // If format is different than 'hh A' - return
     if (format !== HOURS_12) { return }
 
     // Prevent propagation if 'a' key is pressed and change suffix to 'AM'
