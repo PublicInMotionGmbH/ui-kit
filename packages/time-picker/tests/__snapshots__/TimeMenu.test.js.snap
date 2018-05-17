@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TimeMenu /> renders correctly 1`] = `
+<div
+  className="talixo-time-menu"
+>
+  <div
+    className="talixo-time-menu__header"
+  />
+  <button
+    className="talixo-time-menu__button"
+    key="0"
+    onMouseDown={[Function]}
+    tabIndex="-1"
+  >
+    1970-01-01T00:00:00Z
+  </button>
+  <button
+    className="talixo-time-menu__button"
+    key="1"
+    onMouseDown={[Function]}
+    tabIndex="-1"
+  >
+    1970-01-01T00:00:00Z
+  </button>
+  <button
+    className="talixo-time-menu__button"
+    key="2"
+    onMouseDown={[Function]}
+    tabIndex="-1"
+  >
+    1970-01-01T00:00:00Z
+  </button>
+  <button
+    className="talixo-time-menu__button"
+    key="3"
+    onMouseDown={[Function]}
+    tabIndex="-1"
+  >
+    1970-01-01T00:00:00Z
+  </button>
+</div>
+`;
