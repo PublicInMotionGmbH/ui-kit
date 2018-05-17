@@ -14,14 +14,26 @@ jest.mock('moment', () => {
   return moment.utc
 })
 
+let D = global.Date.now
+
+function mock (date) {
+  global.Date.now = jest.fn(() => date)
+}
+
+function unmock () {
+  global.Date.now = D
+}
+
 const value = new Date('2018-05-10T00:00:00')
 
 describe('<TimeInput />', () => {
   it('renders correctly', () => {
+    mock('2017')
     const format = 'HH'
     const wrapper = createWrapper({ format, value })
 
     expect(wrapper).toMatchSnapshot()
+    unmock()
   })
 
   it('renders open correctly', () => {
