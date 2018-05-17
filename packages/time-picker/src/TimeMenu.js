@@ -70,6 +70,7 @@ function TimeMenu (props) {
 
       return (
         <button
+          tabIndex='-1'
           key={i}
           className={buttonClsName}
           onMouseDown={() => props.onValueSelect(_)}

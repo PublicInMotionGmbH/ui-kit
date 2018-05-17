@@ -186,20 +186,16 @@ class TimePicker extends React.PureComponent {
   }
 
   /**
-   * Fire function passed to onChange if state.value changes
-   * and onChange function is passed to element.
-   *
-   * @param {object} props
-   * @param {object} [props.value]
-   */
-  componentDidUpdate (prevProps, prevState) {
-    const { onChange } = this.props
-    const { value } = this.state
-
-    if (prevState.value !== value && onChange) {
-      // Format value to 'HH:mm' format
-      const formattedValue = moment(value).format('HH:mm')
-      onChange(formattedValue)
+  * Update current value in component state,
+  * when value is controlled.
+  *
+  * @param {object} props
+  * @param {object} [props.value]
+  */
+  componentWillReceiveProps (props) {
+    if (props.value !== this.props.value) {
+      const value = moment(props.value, 'HH:mm')
+      this.setState({ value })
     }
   }
 
@@ -209,7 +205,7 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleHoursBlur = (inputValue, suffix) => {
-    const { hourFormat } = this.props
+    const { hourFormat, onChange } = this.props
     const { value: prevValue } = this.state
     let formattedValue
 
@@ -229,6 +225,12 @@ class TimePicker extends React.PureComponent {
       .hour(formattedValue)
 
     this.setState({ value })
+
+    if (onChange) {
+      // Format value to 'HH:mm' format
+      const formattedValue = moment(value).format('HH:mm')
+      onChange(formattedValue)
+    }
   }
 
   /**
@@ -237,6 +239,7 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleMinutesBlur = (inputValue) => {
+    const { onChange } = this.props
     const { value: prevValue } = this.state
 
     // Format time output
@@ -245,6 +248,12 @@ class TimePicker extends React.PureComponent {
       .minute(inputValue)
 
     this.setState({ value })
+
+    if (onChange) {
+      // Format value to 'HH:mm' format
+      const formattedValue = moment(value).format('HH:mm')
+      onChange(formattedValue)
+    }
   }
 
   /**

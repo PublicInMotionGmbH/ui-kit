@@ -113,30 +113,29 @@ class TimeInput extends React.Component {
   handleChange = (value) => {
     const { format } = this.props
 
-    // Parse value
-    const parsedValue = isNaN(parseInt(value))
-      ? 0
-      : parseInt(value)
-
     let inputValue
     // Format value within desired range
     switch (format) {
       case HOURS_24:
-        inputValue = Math.min(23, Math.max(0, parsedValue))
+        inputValue = Math.min(23, Math.max(0, parseInt(value))).toString()
         break
       case HOURS_12:
+        const parsedValue = isNaN(parseInt(value))
+          ? 0
+          : parseInt(value)
+
         inputValue = Math.min(12, Math.max(0, parsedValue))
+
+        inputValue = inputValue === 0
+          ? ''
+          : inputValue.toString()
         break
       case MINUTES:
-        inputValue = Math.min(59, Math.max(0, parsedValue))
+        inputValue = Math.min(59, Math.max(0, parseInt(value))).toString()
         break
       default:
         inputValue = value
     }
-
-    inputValue = inputValue === 0
-      ? ''
-      : inputValue.toString()
 
     this.setState({ inputValue })
   }
@@ -150,11 +149,11 @@ class TimeInput extends React.Component {
     const { onBlur } = this.props
     const { inputValue, suffix } = this.state
 
+    this.setState({ open: false })
+
     if (onBlur) {
       onBlur(inputValue, suffix)
     }
-
-    this.setState({ open: false })
   }
 
   /**
