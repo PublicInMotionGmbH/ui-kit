@@ -35,4 +35,5 @@ InputComponent | component | `'input'` | component used for input below
 
 ## Changelog
 
+- **0.2.0** - add possibility to pass `InputComponent`
 - **0.1.0** - initial version
