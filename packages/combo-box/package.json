@@ -27,7 +27,7 @@
     "@talixo/icon": "^0.1.0",
     "@talixo/progress-ring": "^0.1.0",
     "@talixo/shared": "^0.1.0",
-    "@talixo/text-input": "^0.1.0",
+    "@talixo/text-input": "^0.2.0",
     "downshift": "^1.31.11",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
