@@ -71,6 +71,7 @@ export function createStoriesFactory (name, module, defaultOptions = {}) {
     // Build list of excluded components from propTypes table
     const excludedControllers = [
       controller.Controller,
+      ...(defaultOptions.propTablesExclude || []),
       ...(infoOptions.propTablesExclude || [])
     ]
 

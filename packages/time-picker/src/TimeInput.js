@@ -67,8 +67,8 @@ class TimeInput extends React.Component {
 
   /**
    * Formats value to desired format.
-   * @param {object} props
    *
+   * @param {object} props
    * @returns {React.Element}
    */
   formatValue = (props) => {
@@ -107,64 +107,58 @@ class TimeInput extends React.Component {
 
   /**
    * Handles input value change.
-   * @param {string} value
    *
+   * @param {string} value
    */
   handleChange = (value) => {
     const { format } = this.props
 
-    // Parse value
-    const parsedValue = isNaN(parseInt(value))
-      ? 0
-      : parseInt(value)
-
     let inputValue
+
     // Format value within desired range
     switch (format) {
       case HOURS_24:
-        inputValue = Math.min(23, Math.max(0, parsedValue))
+        inputValue = Math.min(23, Math.max(0, parseInt(value))).toString()
         break
       case HOURS_12:
+        const parsedValue = isNaN(parseInt(value))
+          ? 0
+          : parseInt(value)
+
         inputValue = Math.min(12, Math.max(0, parsedValue))
+
+        inputValue = inputValue === 0
+          ? ''
+          : inputValue.toString()
         break
       case MINUTES:
-        inputValue = Math.min(59, Math.max(0, parsedValue))
+        inputValue = Math.min(59, Math.max(0, parseInt(value))).toString()
         break
       default:
         inputValue = value
     }
 
-    inputValue = inputValue === 0
-      ? ''
-      : inputValue.toString()
-
     this.setState({ inputValue })
   }
 
   /**
-   * Handles input focus.
-   * @param {string} value
-   *
+   * Handles input blur.
    */
   handleBlur = () => {
     const { onBlur } = this.props
     const { inputValue, suffix } = this.state
 
+    this.setState({ open: false })
+
     if (onBlur) {
       onBlur(inputValue, suffix)
     }
-
-    this.setState({ open: false })
   }
 
   /**
    * Handles input focus.
-   * @param {string} value
-   *
    */
   handleFocus = () => {
-    // const { open } = this.state
-
     this.setState({ open: true })
   }
 
@@ -175,7 +169,7 @@ class TimeInput extends React.Component {
    */
   handleInputKeyDown = (event) => {
     const { format } = this.props
-    // If format is differnet than 'hh A' - return
+    // If format is different than 'hh A' - return
     if (format !== HOURS_12) { return }
 
     // Prevent propagation if 'a' key is pressed and change suffix to 'AM'
@@ -202,7 +196,7 @@ class TimeInput extends React.Component {
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, {open})
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open })
 
     return (
       <TextInput

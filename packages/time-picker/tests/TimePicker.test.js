@@ -74,6 +74,22 @@ describe('<TimePicker />', () => {
     expect(minutesFormat).toEqual('mm')
     expect(menuFormat).toEqual('HH')
   })
+
+  it('updates state.value when value prop is set', () => {
+    mock('2017')
+    const wrapper = shallow(<TimePicker />)
+    wrapper.setProps({ value: '11:11' })
+    const parsedValue = moment(wrapper.state().value).format('HH:mm')
+    expect(parsedValue).toEqual('11:11')
+  })
+
+  it('updates state.value when value prop was passed', () => {
+    mock('2017')
+    const wrapper = shallow(<TimePicker value='15:15' />)
+    wrapper.setProps({ value: '11:11' })
+    const parsedValue = moment(wrapper.state().value).format('HH:mm')
+    expect(parsedValue).toEqual('11:11')
+  })
 })
 
 describe('onChange', () => {
@@ -88,10 +104,14 @@ describe('onChange', () => {
     wrapper.unmount()
   })
 
-  it('is called when state.value changes', () => {
-    const value = new Date()
-    wrapper.setState({ value })
+  it('is called when input is blurred', () => {
+    const inputHours = wrapper.find('input').at(0)
+    inputHours.simulate('blur')
     expect(onChange).toHaveBeenCalledTimes(1)
+
+    const inputMinutes = wrapper.find('input').at(1)
+    inputMinutes.simulate('blur')
+    expect(onChange).toHaveBeenCalledTimes(2)
   })
 })
 
