@@ -3,15 +3,32 @@ import { shallow } from 'enzyme'
 
 import TimeMenu from '../src/TimeMenu'
 
+jest.mock('moment', () => {
+  const moment = require.requireActual('moment')
+  return moment.utc
+})
+
+let D = global.Date.now
+
+function mock (date) {
+  global.Date.now = jest.fn(() => date)
+}
+
+function unmock () {
+  global.Date.now = D
+}
+
 const createWrapper = (props) => shallow(<TimeMenu {...props} />)
 
 let data = [1, 2, 3, 4]
 
 describe('<TimeMenu />', () => {
   it('renders correctly', () => {
+    mock('2017')
     const wrapper = createWrapper({ data })
 
     expect(wrapper).toMatchSnapshot()
+    unmock()
   })
 
   it('renders columns correctly', () => {

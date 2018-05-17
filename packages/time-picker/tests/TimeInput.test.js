@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import moment from 'moment'
 
 import { prefix } from '@talixo/shared'
 
@@ -14,14 +15,26 @@ jest.mock('moment', () => {
   return moment.utc
 })
 
-const value = new Date('2018-05-10T00:00:00')
+let D = global.Date.now
+
+function mock (date) {
+  global.Date.now = jest.fn(() => date)
+}
+
+function unmock () {
+  global.Date.now = D
+}
+
+const value = moment('2018-05-10T00:00:00')
 
 describe('<TimeInput />', () => {
   it('renders correctly', () => {
+    mock('2017')
     const format = 'HH'
     const wrapper = createWrapper({ format, value })
 
     expect(wrapper).toMatchSnapshot()
+    unmock()
   })
 
   it('renders open correctly', () => {
