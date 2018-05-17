@@ -38,4 +38,5 @@ onBlur        | function  | n/a             | event handler fired when input los
 
 ## Changelog
 
+- **0.2.0** - add mask for country prefix
 - **0.1.0** - initial version
