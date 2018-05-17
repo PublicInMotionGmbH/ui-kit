@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import moment from 'moment'
 
 import { prefix } from '@talixo/shared'
 
@@ -24,7 +25,7 @@ function unmock () {
   global.Date.now = D
 }
 
-const value = new Date('2018-05-10T00:00:00')
+const value = moment('2018-05-10T00:00:00')
 
 describe('<TimeInput />', () => {
   it('renders correctly', () => {
