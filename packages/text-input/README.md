@@ -22,15 +22,16 @@ to avoid having different versions of these in your application.
 ## Supported props
 It allows any props which are allowed for `input[type=text]`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-error         | bool      | `false` | indicates that input has error
-onChange      | function  | n/a     | callback for change event
-style         | object    | n/a     | additional input wrapper styling
-left          | node      | n/a     | icon/element to put on starting side
-right         | node      | n/a     | icon/element to put on ending side
-suffix        | node      | n/a     | element or text to show after current input value
+Property name  | Type      | Default   | Description
+---------------|-----------|:---------:|--------------------------------
+className      | string    | n/a       | additional class name passed to wrapper
+error          | bool      | `false`   | indicates that input has error
+onChange       | function  | n/a       | callback for change event
+style          | object    | n/a       | additional input wrapper styling
+left           | node      | n/a       | icon/element to put on starting side
+right          | node      | n/a       | icon/element to put on ending side
+suffix         | node      | n/a       | element or text to show after current input value
+InputComponent | component | `'input'` | component used for input below
 
 ## Changelog
 

@@ -1,4 +1,4 @@
-import countriesList from './countriesList'
+import { sortedCountriesList } from './countriesList'
 
 /**
  * Detect country by phone number.
@@ -11,7 +11,9 @@ function detectCountry (phoneNumber) {
     return null
   }
 
-  return countriesList.find(x => phoneNumber.indexOf(x.prefix) === 0)
+  phoneNumber = ('' + phoneNumber).replace(/[^0-9+]+/g, '')
+
+  return sortedCountriesList.find(x => phoneNumber.indexOf(x.prefix) === 0)
 }
 
 export default detectCountry

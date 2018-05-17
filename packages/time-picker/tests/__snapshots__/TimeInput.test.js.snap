@@ -5,6 +5,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
   className="talixo-time-picker__input"
 >
   <TextInput
+    InputComponent="input"
     autoComplete="off"
     className="talixo-time-picker__input"
     error={false}
