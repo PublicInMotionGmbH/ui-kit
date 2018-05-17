@@ -32,4 +32,5 @@ children      | nodes     | n/a     | content of collapsible container
 
 ## Changelog
 
+- **0.1.1** - optimize behavior when content is changing dynamically
 - **0.1.0** - initial version
