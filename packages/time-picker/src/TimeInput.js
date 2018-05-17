@@ -6,7 +6,7 @@ import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
-export const moduleName = 'time-input'
+export const moduleName = 'time-picker'
 
 const A_KEY = 65
 const P_KEY = 80
@@ -60,11 +60,8 @@ class TimeInput extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.value !== nextProps.value) {
-      const { open } = this.state
-
+    if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
       this.formatValue(nextProps)
-      if (open) { this.setState({ open: false }) }
     }
   }
 
@@ -99,10 +96,10 @@ class TimeInput extends React.Component {
     const { open } = this.state
 
     // Build class name for arrow
-    const arrowClsName = buildClassName([ moduleName, 'arrow' ])
+    const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName} onClick={this.toggleMenu}>
+      <span className={arrowClsName}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
@@ -117,7 +114,7 @@ class TimeInput extends React.Component {
     const { format } = this.props
 
     // Parse value
-    const parsedValue = isNaN(parseFloat(value))
+    const parsedValue = isNaN(parseInt(value))
       ? 0
       : parseInt(value)
 
@@ -128,7 +125,7 @@ class TimeInput extends React.Component {
         inputValue = Math.min(23, Math.max(0, parsedValue))
         break
       case HOURS_12:
-        inputValue = Math.min(11, Math.max(0, parsedValue))
+        inputValue = Math.min(12, Math.max(0, parsedValue))
         break
       case MINUTES:
         inputValue = Math.min(59, Math.max(0, parsedValue))
@@ -137,9 +134,38 @@ class TimeInput extends React.Component {
         inputValue = value
     }
 
-    inputValue = inputValue.toString()
+    inputValue = inputValue === 0
+      ? ''
+      : inputValue.toString()
 
     this.setState({ inputValue })
+  }
+
+  /**
+   * Handles input focus.
+   * @param {string} value
+   *
+   */
+  handleBlur = () => {
+    const { onBlur } = this.props
+    const { inputValue, suffix } = this.state
+
+    if (onBlur) {
+      onBlur(inputValue, suffix)
+    }
+
+    this.setState({ open: false })
+  }
+
+  /**
+   * Handles input focus.
+   * @param {string} value
+   *
+   */
+  handleFocus = () => {
+    // const { open } = this.state
+
+    this.setState({ open: true })
   }
 
   /**
@@ -173,7 +199,6 @@ class TimeInput extends React.Component {
    * @returns {React.Element}
    */
   renderInput = () => {
-    const { onBlur } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
@@ -183,21 +208,16 @@ class TimeInput extends React.Component {
       <TextInput
         className={inputClsName}
         onChange={this.handleChange}
-        onBlur={() => onBlur(inputValue, suffix)}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         onKeyDown={this.handleInputKeyDown}
         right={this.buildControl()}
         type='number'
         suffix={suffix}
         value={inputValue}
+        autoComplete='off'
       />
     )
-  }
-
-  /**
-   * Toggle menu.
-   */
-  toggleMenu = () => {
-    this.setState(state => ({ open: !state.open }))
   }
 
   render () {
@@ -205,7 +225,7 @@ class TimeInput extends React.Component {
     const { open } = this.state
 
     // Build class name for wrapper
-    const wrapperClsName = buildClassName(moduleName, className)
+    const wrapperClsName = buildClassName([ moduleName, 'input' ], className)
 
     return (
       <div className={wrapperClsName} {...passedProps}>

@@ -7,37 +7,33 @@ exports[`<TimeMenu /> renders correctly 1`] = `
   <div
     className="talixo-time-menu__header"
   />
-  <Button
+  <button
     className="talixo-time-menu__button"
-    disabled={false}
     key="0"
-    onClick={[Function]}
+    onMouseDown={[Function]}
   >
     1970-01-01T01:00:00+01:00
-  </Button>
-  <Button
+  </button>
+  <button
     className="talixo-time-menu__button"
-    disabled={false}
     key="1"
-    onClick={[Function]}
+    onMouseDown={[Function]}
   >
     1970-01-01T01:00:00+01:00
-  </Button>
-  <Button
+  </button>
+  <button
     className="talixo-time-menu__button"
-    disabled={false}
     key="2"
-    onClick={[Function]}
+    onMouseDown={[Function]}
   >
     1970-01-01T01:00:00+01:00
-  </Button>
-  <Button
+  </button>
+  <button
     className="talixo-time-menu__button"
-    disabled={false}
     key="3"
-    onClick={[Function]}
+    onMouseDown={[Function]}
   >
     1970-01-01T01:00:00+01:00
-  </Button>
+  </button>
 </div>
 `;

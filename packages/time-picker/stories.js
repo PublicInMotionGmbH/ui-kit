@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import TimePicker from './src/TimePicker'
@@ -11,21 +13,17 @@ const addStory = createStoriesFactory('Time Picker', module, {
   propTables: [ TimePicker ]
 })
 
-const handleChange = (value, setState) => {
-  const time = new Date(value).toTimeString()
-  setState({ time })
-}
-
+const change = action('change')
 const spanStyle = { display: 'inline-block', marginBottom: '16px' }
 
 // Stories
 
 addStory('initial', readme, () => (
-  <TimePicker />
+  <TimePicker onChange={change} />
 ))
 
 addStory('with passed value', readme, () => (
-  <TimePicker value={new Date('2017')} />
+  <TimePicker value='13:25' onChange={change} />
 ))
 
 addStory.controlled('12', readme, (setState, state) => (
@@ -34,8 +32,8 @@ addStory.controlled('12', readme, (setState, state) => (
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      hourFormat='hh A'
-      onChange={(value) => handleChange(value, setState)}
+      hourFormat='12'
+      onChange={(time) => setState({ time })}
     />
   </div>
 ), () => ({ time: '' }))
@@ -46,8 +44,8 @@ addStory.controlled('24', readme, (setState, state) => (
       Time: <strong>{state.time}</strong>
     </span>
     <TimePicker
-      hourFormat='HH'
-      onChange={() => handleChange(setState)}
+      hourFormat='24'
+      onChange={(time) => setState({ time })}
     />
   </div>
 ), () => ({ time: '' }))

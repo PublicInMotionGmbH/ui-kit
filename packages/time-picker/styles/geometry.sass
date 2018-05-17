@@ -2,12 +2,46 @@
 
 @include module('time-picker')
   position: relative
-  display: block
+  display: flex
+  flex-direction: row
+  align-items: center
 
   &__input-hour,
   &__input-minutes
-    display: inline-block !important
-    width: dp(14)
+    flex-basis: dp(14)
+
+  &__input
+    position: relative
+    display: block
+
+    input[type=number]
+      appearance: none
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button
+      appearance: none
+      margin: 0
+
+    > input
+      background-color: $time-picker-background-color
+      border: 1px solid $time-picker-border-color
+
+    &--open
+      position: relative
+      z-index: 2
+
+      > input
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+        border-bottom: 1px solid $time-picker-background-color
+
+    &--arrow
+      display: inline-block
+      font-size: 1.5rem
+      line-height: 1em
+      border: 0
+      background: transparent
+      color: #bbb
 
   &__menu
     position: absolute
@@ -20,6 +54,9 @@
 
   &__colon
     padding: dp(1)
+
+  .talixo-text-input__right
+    pointer-events: none
 
 @include module('time-menu')
   position: relative
@@ -43,39 +80,17 @@
     display: flex
     align-items: center
     justify-content: center
+    background-color: $color-white
+    border: 1px solid $time-picker-border-color
+    border-radius: dp(0.5)
+    line-height: dp(4)
+    white-space: nowrap
     margin-bottom: dp(2)
-
-@include module('time-input')
-  position: relative
-  display: block
-
-  input[type=number]
-    appearance: none
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button
-    appearance: none
-    margin: 0
-
-  &__input
-    > input
-      background-color: $time-picker-background-color
-      border: 1px solid $time-picker-border-color
-
-    &--open
-      position: relative
-      z-index: 2
-
-      > input
-        border-bottom-left-radius: 0
-        border-bottom-right-radius: 0
-        border-bottom: 1px solid $time-picker-background-color
-
-  &__arrow
-    display: inline-block
-    font-size: 1.5rem
-    line-height: 1em
-    border: 0
-    background: transparent
-    color: #bbb
     cursor: pointer
+    outline: none
+
+    &--selected
+      background-color: #6bf
+      border-color: #6bf
+      color: $color-white
+      font-weight: $font-weight-bold

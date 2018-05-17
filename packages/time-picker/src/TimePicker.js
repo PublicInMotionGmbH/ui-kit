@@ -18,17 +18,18 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Hour format. */
-  hourFormat: PropTypes.oneOf(['HH', 'hh A']),
+  hourFormat: PropTypes.oneOf(['24', '12']),
 
-  /** Time object passed to component. */
-  value: PropTypes.object
+  /** Time string in 'HH:mm' format passed to component. */
+  value: PropTypes.string
 }
 
 const defaultProps = {
-  hourFormat: 'HH'
+  hourFormat: '24'
 }
 
 const HOURS_24 = 'HH'
+const HOURS_12 = 'hh A'
 const MINUTES = 'mm'
 
 /**
@@ -58,12 +59,7 @@ const HeaderPM = () => [
  * @returns {React.Element}
  */
 const TimeMenuHour24 = (props) => {
-  const { format, onValueSelect } = props
-
-  // Create array of hour values
-  const data = new Array(24)
-    .fill(null)
-    .map((_, i) => i)
+  const { data, format, onValueSelect, value } = props
 
   return (
     <TimeMenu
@@ -71,6 +67,7 @@ const TimeMenuHour24 = (props) => {
       data={data}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     />
   )
 }
@@ -82,17 +79,7 @@ const TimeMenuHour24 = (props) => {
  * @returns {React.Element}
  */
 const TimeMenuHour12 = (props) => {
-  const { format, onValueSelect } = props
-
-  // Create array of hour values
-  const dataAM = new Array(12)
-    .fill(null)
-    .map((_, i) => i)
-
-  // Create array of hour values
-  const dataPM = new Array(12)
-    .fill(null)
-    .map((_, i) => i + 12)
+  const { dataAM, dataPM, format, onValueSelect, value } = props
 
   return [
     <TimeMenu
@@ -101,6 +88,7 @@ const TimeMenuHour12 = (props) => {
       data={dataAM}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     >
       <HeaderAM />
     </TimeMenu>,
@@ -110,6 +98,7 @@ const TimeMenuHour12 = (props) => {
       data={dataPM}
       format={format}
       onValueSelect={onValueSelect}
+      value={value}
     >
       <HeaderPM />
     </TimeMenu>
@@ -122,14 +111,34 @@ const TimeMenuHour12 = (props) => {
  * @param {object} rest
  * @returns {array|React.Element}
  */
-const buildMenuHours = (handleHoursBlur, hourFormat) => {
-  return hourFormat === HOURS_24
+const buildMenuHours = (value, handleHoursBlur, format) => {
+  // Create array of hour values
+  const data = new Array(24)
+    .fill(null)
+    .map((_, i) => i)
+
+  // Create array of hour values
+  const dataAM = new Array(12)
+    .fill(null)
+    .map((_, i) => i)
+
+  // Create array of hour values
+  const dataPM = new Array(12)
+    .fill(null)
+    .map((_, i) => i + 12)
+
+  return format === HOURS_24
     ? <TimeMenuHour24
-      format={hourFormat}
+      data={data}
+      value={value}
+      format={format}
       onValueSelect={handleHoursBlur}
     />
     : <TimeMenuHour12
-      format={hourFormat}
+      dataAM={dataAM}
+      dataPM={dataPM}
+      value={value}
+      format={format}
       onValueSelect={handleHoursBlur}
     />
 }
@@ -140,7 +149,7 @@ const buildMenuHours = (handleHoursBlur, hourFormat) => {
  * @param {object} rest
  * @returns {React.Element}
  */
-const buildMenuMinutes = (handleMinutesBlur) => {
+const buildMenuMinutes = (value, handleMinutesBlur) => {
   // Create array of minutes values
   const data = new Array(12)
     .fill(null)
@@ -148,6 +157,7 @@ const buildMenuMinutes = (handleMinutesBlur) => {
 
   return (
     <TimeMenu
+      value={value}
       columns={2}
       format=':mm'
       data={data}
@@ -163,7 +173,7 @@ const buildMenuMinutes = (handleMinutesBlur) => {
  * @property {string} [props.className]
  * @property {string} [props.hourFormat]
  * @property {function} [props.onChange]
- * @property {string} [props.type]
+ * @property {string} [props.value]
  *
  * @property {object} state
  * @property {object} [state.value]
@@ -172,7 +182,7 @@ const buildMenuMinutes = (handleMinutesBlur) => {
  */
 class TimePicker extends React.PureComponent {
   state = {
-    value: moment(this.props.value)
+    value: this.props.value ? moment(this.props.value, 'HH:mm') : moment()
   }
 
   /**
@@ -187,7 +197,9 @@ class TimePicker extends React.PureComponent {
     const { value } = this.state
 
     if (prevState.value !== value && onChange) {
-      onChange(value)
+      // Format value to 'HH:mm' format
+      const formattedValue = moment(value).format('HH:mm')
+      onChange(formattedValue)
     }
   }
 
@@ -197,12 +209,19 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleHoursBlur = (inputValue, suffix) => {
+    const { hourFormat } = this.props
     const { value: prevValue } = this.state
+    let formattedValue
+
+    // If hour format is 'AM/PM' we need to convert 12 to 0. This is because moment treats 0 as 12am and 12 as 12pm
+    formattedValue = hourFormat === '12' && inputValue === '12'
+      ? '0'
+      : inputValue
 
     // Add 12 hours to 'AM' time
-    const formattedValue = suffix === 'PM'
-      ? parseInt(inputValue) + 12
-      : inputValue
+    formattedValue = suffix === 'PM'
+      ? parseInt(formattedValue) + 12
+      : formattedValue
 
     // Format time output
     const value = prevValue
@@ -245,16 +264,21 @@ class TimePicker extends React.PureComponent {
     const menuClsName = buildClassName([ moduleName, 'menu' ])
     const colonClsName = buildClassName([moduleName, 'colon'])
 
+    // Convert format token
+    const format = hourFormat === '24'
+      ? HOURS_24
+      : HOURS_12
+
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
           className={inputHourClsName}
           onBlur={handleHoursBlur}
-          format={hourFormat}
+          format={format}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuHours(handleHoursBlur, hourFormat)}
+            {buildMenuHours(value, handleHoursBlur, format)}
           </div>
         </TimeInput>
         <span className={colonClsName}>:</span>
@@ -265,7 +289,7 @@ class TimePicker extends React.PureComponent {
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuMinutes(handleMinutesBlur)}
+            {buildMenuMinutes(value, handleMinutesBlur)}
           </div>
         </TimeInput>
       </div>

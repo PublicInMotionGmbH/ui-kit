@@ -2,19 +2,19 @@
 
 exports[`<TimeInput /> renders correctly 1`] = `
 <div
-  className="talixo-time-input"
+  className="talixo-time-picker__input"
 >
   <TextInput
-    InputComponent="input"
-    className="talixo-time-input__input"
+    autoComplete="off"
+    className="talixo-time-picker__input"
     error={false}
     onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     right={
       <span
-        className="talixo-time-input__arrow"
-        onClick={[Function]}
+        className="talixo-time-picker__input talixo-time-picker__input--arrow"
       >
         <Icon
           name="expand_more"
@@ -23,7 +23,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
     }
     suffix={null}
     type="number"
-    value="00"
+    value="22"
   />
 </div>
 `;
