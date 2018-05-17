@@ -67,8 +67,8 @@ class TimeInput extends React.Component {
 
   /**
    * Formats value to desired format.
-   * @param {object} props
    *
+   * @param {object} props
    * @returns {React.Element}
    */
   formatValue = (props) => {
@@ -107,8 +107,8 @@ class TimeInput extends React.Component {
 
   /**
    * Handles input value change.
-   * @param {string} value
    *
+   * @param {string} value
    */
   handleChange = (value) => {
     const { format } = this.props
@@ -119,6 +119,7 @@ class TimeInput extends React.Component {
       : parseInt(value)
 
     let inputValue
+
     // Format value within desired range
     switch (format) {
       case HOURS_24:
@@ -142,9 +143,7 @@ class TimeInput extends React.Component {
   }
 
   /**
-   * Handles input focus.
-   * @param {string} value
-   *
+   * Handles input blur.
    */
   handleBlur = () => {
     const { onBlur } = this.props
@@ -159,12 +158,8 @@ class TimeInput extends React.Component {
 
   /**
    * Handles input focus.
-   * @param {string} value
-   *
    */
   handleFocus = () => {
-    // const { open } = this.state
-
     this.setState({ open: true })
   }
 
@@ -202,7 +197,7 @@ class TimeInput extends React.Component {
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, {open})
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open })
 
     return (
       <TextInput

@@ -47,7 +47,7 @@ function TimeMenu (props) {
 
   // Build class names
   const wrapperClsName = buildClassName(moduleName, className)
-  const headerClsName = buildClassName([moduleName, 'header'])
+  const headerClsName = buildClassName([ moduleName, 'header' ])
 
   // Build wrapper style
   const wrapperStyle = columns
@@ -61,12 +61,12 @@ function TimeMenu (props) {
    */
   function buildButtons () {
     // Map data to create buttons
-    const buttons = data.map((_, i) => {
+    return data.map((_, i) => {
       let label = moment(_, format).format(format)
       const selected = moment(value).format(format) === label
 
       // Build class name for button
-      const buttonClsName = buildClassName([moduleName, 'button'], null, { selected })
+      const buttonClsName = buildClassName([ moduleName, 'button' ], null, { selected })
 
       return (
         <button
@@ -78,8 +78,6 @@ function TimeMenu (props) {
         </button>
       )
     })
-
-    return buttons
   }
 
   return (
