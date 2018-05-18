@@ -18,7 +18,10 @@ const propTypes = {
   nextLabel: PropTypes.node,
 
   /** Previous button label */
-  previousLabel: PropTypes.node
+  previousLabel: PropTypes.node,
+
+  /** Step from which wizard should start */
+  step: PropTypes.number
 }
 
 /**
@@ -30,14 +33,19 @@ const propTypes = {
  * @property {number} [props.displayedLimit]
  * @property {string} [props.nextLabel]
  * @property {string} [props.previousLabel]
+ * @property {number} [props.step]
  * @class {React.Element}
  */
 class Wizard extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      currentStep: 1
+      currentStep: props.step || 1
     }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
   }
 
   render () {

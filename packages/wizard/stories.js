@@ -81,3 +81,12 @@ addStory('custom wizard', readme, () => (
     <Step4 />
   </Wizard>
 ))
+
+addStory('with set starting step', readme, () => (
+  <Wizard step={3}>
+    <Step1 />
+    <Step2 />
+    <Step3 />
+    <Step4 />
+  </Wizard>
+))

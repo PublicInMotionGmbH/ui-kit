@@ -85,4 +85,17 @@ describe('<Wizard />', () => {
 
     wrapper.unmount()
   })
+
+  it('change initial step', () => {
+    const wrapper = shallow(
+      <Wizard>
+        <Step1 />
+        <Step2 />
+        <Step3 />
+      </Wizard>)
+
+    expect(wrapper.state().currentStep).toBe(1)
+    wrapper.setProps({step: 4})
+    expect(wrapper.state().currentStep).toBe(4)
+  })
 })

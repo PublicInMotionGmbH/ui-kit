@@ -27,6 +27,7 @@ children      | node      | n/a          | Each children element is separate ste
 displayedLimit| number    | `10`         | Maximum number of displayed steps buttons.
 nextLabel     | node      | `'Next'`     | Next button label.
 previousLabel | node      | `'Previous'` | Previous button label
+step          | number    | n/a          | Custom starting step
 
 ## Changelog
 
