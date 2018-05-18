@@ -17,6 +17,7 @@ const moduleName = 'text-input'
  * @property {string} [props.className]
  * @property {boolean} [props.error]
  * @property {function} [props.onChange]
+ * @property {function} [props.InputComponent]
  * @property {string} [props.placeholder]
  * @property {string} [props.size]
  * @property {object} [props.style]
@@ -275,7 +276,7 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, size, style, value, suffix, left, right, ...restProps } = this.props
+    const { className, error, onChange, style, value, suffix, left, right, InputComponent, ...restProps } = this.props
 
     // Initialize helper variables
     const hasLeft = left != null
@@ -283,7 +284,7 @@ class TextInput extends React.PureComponent {
     const hasSuffix = suffix != null
 
     // Build classes for wrapper
-    const wrapperClasses = buildClassName(moduleName, className, [ size ], {
+    const wrapperClasses = buildClassName(moduleName, className, {
       'with-left': hasLeft,
       'with-right': hasRight,
       'with-suffix': hasSuffix,
@@ -301,7 +302,7 @@ class TextInput extends React.PureComponent {
       <div className={wrapperClasses} style={style}>
         {leftElement}
 
-        <input
+        <InputComponent
           className={buildClassName([ moduleName, 'input' ])}
           onChange={this.onInputChange}
           ref={this.inputRef}
@@ -327,9 +328,6 @@ TextInput.propTypes = {
   /** Callback for change event */
   onChange: PropTypes.func,
 
-  /** Size of text input (can be 'small') */
-  size: PropTypes.oneOf([ 'small' ]),
-
   /** Additional input wrapper styling */
   style: PropTypes.object,
 
@@ -340,10 +338,14 @@ TextInput.propTypes = {
   left: PropTypes.node,
 
   /** Right side icon or controls */
-  right: PropTypes.node
+  right: PropTypes.node,
+
+  /** Component used for input below */
+  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
 }
 
 TextInput.defaultProps = {
+  InputComponent: 'input',
   error: false,
   type: 'text'
 }

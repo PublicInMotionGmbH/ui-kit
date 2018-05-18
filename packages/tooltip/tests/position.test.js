@@ -1,6 +1,8 @@
 import { getPositionNearElement } from '../utils/position'
 
 describe('getPositionNearElement', () => {
+  let getBoundingClientRect = window.Element.prototype.getBoundingClientRect
+
   beforeEach(() => {
     window.Element.prototype.getBoundingClientRect = jest.fn(() => {
       return {
@@ -12,6 +14,10 @@ describe('getPositionNearElement', () => {
         right: 0
       }
     })
+  })
+
+  afterEach(() => {
+    window.Element.prototype.getBoundingClientRect = getBoundingClientRect
   })
 
   it('returns right correctly', () => {

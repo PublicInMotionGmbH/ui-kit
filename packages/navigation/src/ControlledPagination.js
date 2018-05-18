@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
+import range from 'lodash/range'
+import includes from 'lodash/includes'
 
 import Element from './Element'
 
@@ -115,7 +116,7 @@ function Pagination (props) {
       : start + displayedLimit
 
     // Create an array of numbers to be displayed
-    const pageArray = _.range(start, end)
+    const pageArray = range(start, end)
 
     // Add previous button
     items.push(
@@ -129,7 +130,7 @@ function Pagination (props) {
     )
 
     // Add margin number buttons if needed
-    if (isLong && !_.includes(pageArray, 1)) {
+    if (isLong && !includes(pageArray, 1)) {
       items.push(...renderedMargin('first', 1, onChange, passedProps))
     }
 
@@ -137,7 +138,7 @@ function Pagination (props) {
     items.push(...renderedNumbers(pageArray, activePage, onChange, passedProps))
 
     // Add margin numbers buttons if needed
-    if (isLong && !_.includes(pageArray, pageCount - 1)) {
+    if (isLong && !includes(pageArray, pageCount - 1)) {
       items.push(...renderedMargin('last', pageCount, onChange, passedProps))
     }
 

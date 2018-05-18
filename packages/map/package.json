@@ -1,6 +1,6 @@
 {
   "name": "@talixo/maps",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Map",
   "main": "dist/index.js",
   "module": "index.js",
@@ -9,6 +9,9 @@
     "test": "node ../../scripts/runTests.js --only map",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only map"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -19,13 +22,19 @@
     "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0"
-  },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0",
+  "devDependencies": {
+    "@talixo/shared": "^0.1.0",
     "lodash": "^4.17.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-google-maps": "9.4.5",
+    "recompose": "0.26.0"
+  },
+  "peerDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "lodash": "^4.17.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
     "react-google-maps": "9.4.5",
     "recompose": "0.26.0"
   }

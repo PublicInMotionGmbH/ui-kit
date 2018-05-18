@@ -4,6 +4,7 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import { Icon } from '@talixo/icon'
 import { ProgressBar } from '@talixo/progress-bar'
+import TextMaskInput from 'react-text-mask'
 
 import TextInput from './src/TextInput'
 
@@ -41,6 +42,29 @@ addStory('default', readme, () => (
     />
   </div>
 ))
+
+addStory.controlled('masked / different input', readme, (setState, state) => (
+  <div>
+    <h2>Masked input</h2>
+    <TextInput
+      value={state.value}
+      left={<Icon name='credit_card' />}
+      InputComponent={TextMaskInput}
+      mask={[
+        // Credit card has 13-19 digits
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/, /\d/, ' ',
+        /\d/, /\d/, /\d/
+      ]}
+      placeholderChar={'\u2000'}
+      placeholder='Type your credit card number.'
+      style={additionalStyling}
+      onChange={value => setState({ value })}
+    />
+  </div>
+), () => ({ value: '' }))
 
 addStory.controlled('controlled', readme, (setState, state) => (
   <div style={{ width: 300 }}>
@@ -302,58 +326,3 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
     </div>
   )
 }, () => ({ value: '2' }))
-
-addStory.controlled('small with icon and suffix', readme, (setState, state) => (
-  <div style={{ width: 300 }}>
-    <TextInput
-      size='small'
-      placeholder='Single left icon'
-      left={<Icon name='directions_car' />}
-      suffix='cars'
-      style={additionalStyling}
-      value={state.value}
-      onChange={value => setState({ value })}
-    />
-
-    <TextInput
-      size='small'
-      placeholder='Single right icon'
-      right={<Icon name='directions_car' />}
-      suffix='cars'
-      style={additionalStyling}
-      value={state.value}
-      onChange={value => setState({ value })}
-    />
-
-    <TextInput
-      size='small'
-      placeholder='Both icons'
-      left={<Icon name='directions_car' />}
-      right={<Icon name='warning' />}
-      suffix='cars'
-      style={additionalStyling}
-      value={state.value}
-      onChange={value => setState({ value })}
-    />
-  </div>
-), () => ({ value: 0 }))
-
-addStory('small', readme, () => (
-  <div>
-    <h2>Small text input</h2>
-    <TextInput
-      placeholder='Small text input'
-      size='small'
-      style={additionalStyling}
-      onChange={change}
-    />
-    <h2>Small text input with error</h2>
-    <TextInput
-      placeholder='Small text input with errors'
-      size='small'
-      style={additionalStyling}
-      onChange={change}
-      error
-    />
-  </div>
-))

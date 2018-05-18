@@ -55,7 +55,7 @@ class CountryFlagsSprite extends React.Component {
   /**
    * Attach sprite on mount when there is no other sprite yet
    */
-  componentWillMount () {
+  componentDidMount () {
     if (!mountedInstances) {
       attachSprite()
     }

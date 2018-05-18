@@ -26,6 +26,8 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `@talixo/shared: ^0.1.0`
+- `@talixo/icon-pack: ^1.2.1`
 
 These packages are required by `@talixo/icon`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -41,4 +43,4 @@ name          | string    | n/a     | icon name
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version
