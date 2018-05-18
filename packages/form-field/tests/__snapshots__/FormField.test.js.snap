@@ -8,6 +8,7 @@ exports[`<FormField /> renders children correctly 1`] = `
     className="talixo-form-field__input-wrapper"
   >
     <TextInput
+      InputComponent="input"
       className="talixo-form-field__input"
       error={false}
       id="form_field_1"
