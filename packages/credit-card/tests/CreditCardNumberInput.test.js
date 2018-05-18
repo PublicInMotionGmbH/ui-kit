@@ -1,26 +1,34 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 
-import CreditCardInput from '../src/CreditCardInput'
+import CreditCardNumberInput from '../src/CreditCardNumberInput'
 
-describe('<CreditCardInput />', () => {
+describe('<CreditCardNumberInput />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<CreditCardInput />)
+    const wrapper = shallow(<CreditCardNumberInput />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('passes value correctly', () => {
     const value = '12345678910'
-    const wrapper = shallow(<CreditCardInput value={value} />)
+    const wrapper = shallow(<CreditCardNumberInput value={value} />)
     const input = wrapper.find('TextInput')
 
     expect(input.props().value).toEqual(value)
   })
 
+  it('masks correctly', () => {
+    const value = '12345678910111213'
+    const wrapper = mount(<CreditCardNumberInput value={value} />)
+    const input = wrapper.find('input').getDOMNode()
+    expect(input.value).toEqual('1234 5678 9101 1121 3')
+    wrapper.unmount()
+  })
+
   describe('componentWillReceiveProps', () => {
     it('updates current value', () => {
-      const wrapper = shallow(<CreditCardInput />)
+      const wrapper = shallow(<CreditCardNumberInput />)
       wrapper.setProps({ value: '10000' })
 
       expect(wrapper.state().value).toEqual('10000')
@@ -28,7 +36,7 @@ describe('<CreditCardInput />', () => {
 
     it('updates current value when value is provided', () => {
       const value = '12345678910'
-      const wrapper = shallow(<CreditCardInput value={value} />)
+      const wrapper = shallow(<CreditCardNumberInput value={value} />)
       wrapper.setProps({ value: '10000' })
 
       expect(wrapper.state().value).toEqual('10000')
@@ -40,7 +48,7 @@ describe('change', () => {
   let onChange, wrapper, input
   beforeEach(() => {
     onChange = jest.fn()
-    wrapper = shallow(<CreditCardInput onChange={onChange} />)
+    wrapper = shallow(<CreditCardNumberInput onChange={onChange} />)
 
     input = wrapper.find('TextInput')
     input.simulate('change', '2')
@@ -59,7 +67,7 @@ describe('focus', () => {
   let onFocus, wrapper, input
   beforeEach(() => {
     onFocus = jest.fn()
-    wrapper = shallow(<CreditCardInput onFocus={onFocus} />)
+    wrapper = shallow(<CreditCardNumberInput onFocus={onFocus} />)
 
     input = wrapper.find('TextInput')
     input.simulate('focus')
@@ -79,7 +87,7 @@ describe('blur', () => {
   let onBlur, wrapper, input
   beforeEach(() => {
     onBlur = jest.fn()
-    wrapper = shallow(<CreditCardInput onBlur={onBlur} />)
+    wrapper = shallow(<CreditCardNumberInput onBlur={onBlur} />)
 
     input = wrapper.find('TextInput')
     input.simulate('blur')
@@ -91,5 +99,16 @@ describe('blur', () => {
 
   it('changes state.focused to false', () => {
     expect(wrapper.state().focused).toEqual(false)
+  })
+})
+
+describe('trim', () => {
+  it('it trims correctly', () => {
+    const onChange = jest.fn()
+    const wrapper = shallow(<CreditCardNumberInput onChange={onChange} />)
+
+    const input = wrapper.find('TextInput')
+    input.simulate('change', '   1234')
+    expect(wrapper.state().value).toEqual('1234')
   })
 })

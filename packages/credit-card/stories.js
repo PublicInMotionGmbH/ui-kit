@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import CreditCardInput from './src/CreditCardInput'
+import CreditCardNumberInput from './src/CreditCardNumberInput'
 import ExpirationDateInput from './src/ExpirationDateInput'
 
 // Load first paragraph from README file
@@ -17,6 +18,10 @@ const addStory = createStoriesFactory('Credit Card', module, {
 
 addStory('credit card input', readme, () => (
   <CreditCardInput onChange={action('change')} />
+))
+
+addStory('credit card number input', readme, () => (
+  <CreditCardNumberInput onChange={action('change')} />
 ))
 
 addStory('expiration date input', readme, () => (

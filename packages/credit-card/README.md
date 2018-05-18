@@ -21,7 +21,7 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-### CreditCardInput
+### CreditCardNumberInput
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CreditCardInput /> renders children correctly 1`] = `
+exports[`<CreditCardNumberInput /> renders children correctly 1`] = `
 <TextInput
   InputComponent={[Function]}
-  className="talixo-credit-card-input"
+  className="talixo-credit-card-number-input"
   error={false}
   guide={false}
   keepCharPositions={false}

@@ -27,9 +27,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "@talixo/combo-box": "^0.1.0",
+    "@talixo/form-field": "^0.1.0",
     "@talixo/icon": "^0.1.0",
     "@talixo/shared": "^0.1.0",
-    "@talixo/text-input": "^0.1.0",
+    "@talixo/text-input": "^0.2.0",
     "react-text-mask": "^5.4.1"
   },
   "peerDependencies": {
@@ -37,8 +38,10 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "@talixo/combo-box": "^0.1.0",
+    "@talixo/form-field": "^0.1.0",
     "@talixo/icon": "^0.1.0",
     "@talixo/shared": "^0.1.0",
-    "@talixo/text-input": "^0.1.0"
+    "@talixo/text-input": "^0.2.0",
+    "react-text-mask": "^5.4.1"
   }
 }
