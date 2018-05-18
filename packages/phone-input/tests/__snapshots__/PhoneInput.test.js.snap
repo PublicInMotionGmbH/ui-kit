@@ -1184,8 +1184,39 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     renderValue={[Function]}
     value={null}
   />
-  <input
+  <t
+    guide={false}
+    keepCharPositions={false}
+    mask={
+      Array [
+        "+",
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+        /\\\\d/,
+      ]
+    }
+    onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
+    placeholderChar=" "
+    render={[Function]}
     type="tel"
     value=""
   />

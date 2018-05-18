@@ -14,6 +14,7 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `react-text-mask: ^5.4.1`
 - `country-telephone-data: ^0.5.5`
 - `@talixo/shared: ^0.1.0`
 - `@talixo/country-flag: ^0.1.0`
@@ -37,4 +38,5 @@ onBlur        | function  | n/a             | event handler fired when input los
 
 ## Changelog
 
+- **0.2.0** - add mask for country prefix
 - **0.1.0** - initial version

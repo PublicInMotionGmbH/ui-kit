@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TimePicker /> renders correctly 1`] = `
+<div
+  className="talixo-time-picker"
+>
+  <TimeInput
+    className="talixo-time-picker__input-hour"
+    format="HH"
+    onBlur={[Function]}
+    value={"2017-01-01T00:00:00.000Z"}
+  >
+    <div
+      className="talixo-time-picker__menu"
+    >
+      <TimeMenuHour24
+        data={
+          Array [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+          ]
+        }
+        format="HH"
+        onValueSelect={[Function]}
+        value={"2017-01-01T00:00:00.000Z"}
+      />
+    </div>
+  </TimeInput>
+  <span
+    className="talixo-time-picker__colon"
+  >
+    :
+  </span>
+  <TimeInput
+    className="talixo-time-picker__input-minutes"
+    format="mm"
+    onBlur={[Function]}
+    value={"2017-01-01T00:00:00.000Z"}
+  >
+    <div
+      className="talixo-time-picker__menu"
+    >
+      <TimeMenu
+        columns={2}
+        data={
+          Array [
+            0,
+            5,
+            10,
+            15,
+            20,
+            25,
+            30,
+            35,
+            40,
+            45,
+            50,
+            55,
+          ]
+        }
+        format=":mm"
+        onValueSelect={[Function]}
+        value={"2017-01-01T00:00:00.000Z"}
+      />
+    </div>
+  </TimeInput>
+</div>
+`;
