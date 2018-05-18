@@ -129,7 +129,11 @@ class FormField extends React.Component {
     const labelClsName = buildClassName([ moduleName, 'label' ])
 
     // Build label
-    return <label className={labelClsName} htmlFor={uniqueId}>{label}</label>
+    return (
+      <div className={labelClsName} >
+        <label htmlFor={uniqueId}>{label}</label>
+      </div>
+    )
   }
 
   /**
@@ -140,9 +144,10 @@ class FormField extends React.Component {
    *
    * @returns {React.Element}
    */
-  buildMessage (type, typeName) {
+  buildMessage = (type, typeName) => {
+    const { label } = this.props
     // Build class names for label
-    const typeClsName = buildClassName([ moduleName, typeName ])
+    const typeClsName = buildClassName([ moduleName, typeName ], null, { labeled: label != null })
 
     // Build label
     return <div className={typeClsName}>{type}</div>
@@ -211,10 +216,10 @@ class FormField extends React.Component {
         {label && buildLabel(uniqueId)}
         <div className={inputWrapperClsName}>
           {input}
-          {error && buildMessage(error, 'error')}
-          {warning && buildMessage(warning, 'warning')}
+          {hint && buildMessage(hint, 'hint')}
         </div>
-        {hint && buildMessage(hint, 'hint')}
+        {error && buildMessage(error, 'error')}
+        {warning && buildMessage(warning, 'warning')}
       </div>
     )
   }
