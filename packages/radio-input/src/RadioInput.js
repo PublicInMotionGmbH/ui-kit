@@ -7,7 +7,7 @@ import { buildClassName } from '@talixo/shared'
  * Component which represents Radio Input.
  *
  * @param {object} props
- * @param {node} [props.children]
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @param {string} [props.size]
  * @param {object} [props.style]
