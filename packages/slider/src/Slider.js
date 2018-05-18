@@ -9,6 +9,12 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Defaul value */
+  defaultValue: PropTypes.number,
+
+  /** Label for input range */
+  label: PropTypes.string,
+
   /** Maximum value in range */
   max: PropTypes.number,
 
@@ -24,6 +30,8 @@ const propTypes = {
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {number} [props.defaultValue]
+ * @property {string} [props.label]
  * @property {number} [props.max]
  * @property {number} [props.min]
  * @property {number} [props.step]

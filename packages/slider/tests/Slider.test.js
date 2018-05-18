@@ -43,5 +43,7 @@ describe('<Slider />', () => {
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(wrapper.find('input').props().value).toBe(30)
+
+    wrapper.unmount()
   })
 })
