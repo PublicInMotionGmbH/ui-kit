@@ -1,7 +1,6 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 
-
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import DataTable from './src/DataTable'
