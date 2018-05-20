@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Row, Cell } from '@talixo/table'
+import { Action, ActionsCell, Cell, Row } from '@talixo/table'
 
 const propTypes = {
   rowData: PropTypes.array
@@ -9,14 +9,38 @@ const propTypes = {
 
 const defaultProps = {}
 
-const TableRow = ({ rowData }) => (
-  <Row>
+function generateActions (actions, item) {
+  const click = (onClick, e) => {
+    if (onClick) onClick(item, e)
+  }
+  return (
+    <ActionsCell>
+      {
+        actions.map(action => (
+          <Action {...action} onClick={e => click(action.onClick, e)} />
+        ))
+      }
+    </ActionsCell>
+  )
+}
+
+const TableRow = ({ actions, rowData, columns }) => (
+  <React.Fragment>
     {
-      rowData.map((item) => (
-        <Cell key={item}>{item}</Cell>
+      rowData.map((item, i) => (
+        <Row>
+          {
+            columns.filter(col => col !== 'actions').map(col => (
+              <Cell>{item[col]}</Cell>
+            ))
+          }
+          {
+            actions.length > 0 && generateActions(actions, item)
+          }
+        </Row>
       ))
     }
-  </Row>
+  </React.Fragment>
 )
 
 TableRow.propTypes = propTypes
