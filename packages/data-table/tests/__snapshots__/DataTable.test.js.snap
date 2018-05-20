@@ -1,7 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DataTable /> renders children correctly 1`] = `
-<span
+<Table
   className="talixo-data-table"
-/>
+  condensed={false}
+  fixed={false}
+>
+  <Body>
+    <TableRow
+      columns={
+        Array [
+          "id",
+          "opened",
+          "date_of_ride",
+          "pickup",
+        ]
+      }
+      rowData={
+        Array [
+          Object {
+            "date_of_ride": "18th Feb 2018",
+            "id": 0,
+            "opened": "16th Jan 2018",
+            "pickup": "Berlin SXF Alexanderplatz",
+          },
+          Object {
+            "date_of_ride": "19th Feb 2018",
+            "id": 1,
+            "opened": "17th Jan 2018",
+            "pickup": "Krakow",
+          },
+          Object {
+            "date_of_ride": "20th Feb 2018",
+            "id": 2,
+            "opened": "18th Jan 2018",
+            "pickup": "Warszawa",
+          },
+          Object {
+            "date_of_ride": "21th Feb 2018",
+            "id": 3,
+            "opened": "19th Jan 2018",
+            "pickup": "Frankfurt",
+          },
+          Object {
+            "date_of_ride": "22th Feb 2018",
+            "id": 4,
+            "opened": "20th Jan 2018",
+            "pickup": "Dortmund",
+          },
+          Object {
+            "date_of_ride": "23th Feb 2018",
+            "id": 5,
+            "opened": "21th Jan 2018",
+            "pickup": "Paris",
+          },
+          Object {
+            "date_of_ride": "24th Feb 2018",
+            "id": 6,
+            "opened": "22th Jan 2018",
+            "pickup": "Barcelona",
+          },
+          Object {
+            "date_of_ride": "25th Feb 2018",
+            "id": 7,
+            "opened": "23th Jan 2018",
+            "pickup": "London",
+          },
+        ]
+      }
+    />
+  </Body>
+</Table>
 `;
