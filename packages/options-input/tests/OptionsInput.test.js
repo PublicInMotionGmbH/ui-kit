@@ -55,8 +55,7 @@ describe('<OptionsInput />', () => {
         value: 8
       }
     })
-
-    expect(spy.mock.calls.length).toBe(1)
+    expect(spy.mock.calls.length).toBe(2)
     expect(spy.mock.calls[0][0].person).toEqual(8)
 
     wrapper.unmount()
@@ -80,7 +79,7 @@ describe('<OptionsInput />', () => {
 
     wrapper.find('button').at(0).simulate('blur')
 
-    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledTimes(2)
 
     wrapper.unmount()
   })
@@ -91,7 +90,7 @@ describe('<OptionsInput />', () => {
 
     wrapper.find('button').at(0).simulate('focus')
 
-    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledTimes(2)
 
     wrapper.unmount()
   })
@@ -109,6 +108,21 @@ describe('<OptionsInput />', () => {
     document.body.click()
 
     expect(wrapper.state('open')).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('changes props value', () => {
+    const wrapper = mount(<OptionsInput
+      options={[{id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15', default: 3},
+        {id: 'rocket', icon: 'rocket', label: 'Rockets', default: 1}]}
+    />)
+
+    expect(wrapper.prop('value')).toBe(undefined)
+    expect(wrapper.state('value').person).toBe(3)
+    wrapper.setProps({value: {person: 6}})
+    expect(wrapper.prop('value').person).toBe(6)
+    expect(wrapper.state('value').person).toBe(6)
 
     wrapper.unmount()
   })

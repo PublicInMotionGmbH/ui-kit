@@ -32,25 +32,7 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper
 options       | array     | `[]`    | Array with objects containing data passed to component
-
-### ListOption
-
-It allows any property which can be passed to `div`. Additionally, it handles some differently:
-
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-option        | object    | n/a     | Object with data passed to component
-value         | number    | n/a     | Value of input
-onChange      | func      | n/a     | Function passed to element
-
-### Option
-
-It allows any property which can be passed to `span`. Additionally, it handles some differently:
-
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-option        | object    | n/a     | Object with data passed to component
-value         | number    | n/a     | Value of input
+value         | object    | n/a     | Value of option/options
 
 ## Changelog
 

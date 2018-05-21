@@ -12,7 +12,6 @@ const addStory = createStoriesFactory('OptionsInput', module, {
 })
 
 // Stories
-
 addStory('initial', readme, () => (
   <OptionsInput
     options={[{id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15'},

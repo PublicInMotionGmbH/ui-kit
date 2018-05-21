@@ -13,19 +13,28 @@ const propTypes = {
 
   /** Data for generate ListOption */
   options: PropTypes.arrayOf(PropTypes.shape({
+
     /** Id for option */
     id: PropTypes.string.isRequired,
+
     /** Type of icon */
     icon: PropTypes.string,
+
     /** Label for option */
     label: PropTypes.string,
+
     /** Default value */
     default: PropTypes.number,
+
     /** Minimum value within the range */
     min: PropTypes.number,
+
     /** Maximum value within the range */
     max: PropTypes.number
-  }))
+  })),
+
+  /** Value of option */
+  value: PropTypes.object
 }
 
 const defaultProps = {
@@ -50,21 +59,26 @@ const defaultProps = {
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: this.buildValue(this.props.options)
+    value: this.buildValue(this.props.options, this.props.value)
   }
+
   /**
    * This function set state value
    *
    * @param {object} nextProps
    */
   componentWillReceiveProps (nextProps) {
-    if (this.state.value !== nextProps.value) {
-      let value = nextProps.value ? { ...nextProps.value } : { ...this.state.value }
-      this.setState({ value })
+    let value = this.state.value
+
+    if (this.state.value !== nextProps.value && nextProps.value !== undefined) {
+      value = this.buildValue(nextProps.options, nextProps.value)
     }
 
     if (this.props.options !== nextProps.options) {
-      let value = this.buildValue(nextProps.options)
+      value = this.buildValue(nextProps.options, value)
+    }
+
+    if (value !== this.state.value) {
       this.setState({ value })
     }
   }
@@ -201,9 +215,8 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className } = this.props
+    const { options, className, ...restProps } = this.props
     const { value } = this.state
-
     const elements = options.filter(x => value[x.id]).map(x => (
       <Option
         key={x.id}
@@ -226,7 +239,7 @@ class OptionsInput extends React.PureComponent {
     })
 
     return (
-      <div className={clsName} ref={this.saveRef.bind(this)}>
+      <div className={clsName} ref={this.saveRef.bind(this)} {...restProps} >
         <button
           type='button'
           className='options-input__toggle'
