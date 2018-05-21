@@ -13,11 +13,17 @@ const propTypes = {
 
   /** Data for generate ListOption */
   options: PropTypes.arrayOf(PropTypes.shape({
+    /** Id for option */
     id: PropTypes.string.isRequired,
+    /** Type of icon */
     icon: PropTypes.string,
+    /** Label for option */
     label: PropTypes.string,
+    /** Default value */
     default: PropTypes.number,
+    /** Minimum value within the range */
     min: PropTypes.number,
+    /** Maximum value within the range */
     max: PropTypes.number
   }))
 }

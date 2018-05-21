@@ -21,3 +21,6 @@ npm-debug.log
 tests
 rollup.config.js
 stories.js
+
+#Visual Studio Code
+.vscode
