@@ -16,11 +16,18 @@ const propTypes = {
 
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
-  headers: PropTypes.object,
+  columns: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    render: PropTypes.func,
+    renderHeader: PropTypes.func
+  })).isRequired,
 
   onSort: PropTypes.func,
 
-  sortable: PropTypes.bool
+  sortable: PropTypes.bool,
+
+  verticalActionCell: PropTypes.bool
 }
 
 const defaultProps = {
@@ -36,7 +43,6 @@ const defaultProps = {
  */
 class DataTable extends React.Component {
   state = {
-    filteredColumns: Object.keys(this.props.headers || this.props.data[0]),
     sotrtedData: this.props.data,
     sortColumn: '',
     reversedOrder: false
@@ -44,33 +50,33 @@ class DataTable extends React.Component {
 
   columns = Object.keys(this.props.headers || {})
 
-  sort = (column) => {
+  sort = (columnID) => {
     const { onSort } = this.props
     const { sortColumn, sotrtedData, reversedOrder } = this.state
 
-    const _reversedOrder = sortColumn === column ? !reversedOrder : false
+    const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
     const direction = !_reversedOrder ? 'asc' : 'desc'
-    const newData = _.orderBy(sotrtedData, column, [direction])
+    const newData = _.orderBy(sotrtedData, columnID, [direction])
 
-    this.setState({ sotrtedData: newData, sortColumn: column, reversedOrder: _reversedOrder })
+    this.setState({ sotrtedData: newData, sortColumn: columnID, reversedOrder: _reversedOrder })
 
     if (onSort) {
-      onSort(column)
+      onSort(columnID)
     }
   }
 
-  // TODO: enable column exclusion
   buildHeaders = () => {
-    if (!this.props.headers) return null
-
-    const { headers, sortable } = this.props
-    const { filteredColumns } = this.state
+    const { columns, sortable } = this.props
+    const { sortColumn, reversedOrder } = this.state
     const { sort } = this
+    const sortOrder = !reversedOrder ? 'asc' : 'desc'
 
     const headersProps = {
-      headers: headers,
-      showColumns: filteredColumns,
-      onClick: (sortable && sort) || undefined
+      columns: columns,
+      onClick: (sortable && sort) || undefined,
+      sortable: sortable,
+      sortColumn: sortColumn,
+      sortOrder: sortOrder
     }
     return (
       <TableHeaders {...headersProps} />
@@ -78,8 +84,8 @@ class DataTable extends React.Component {
   }
 
   render (props) {
-    const { actions, className, data, headers, sortable, ...passedProps } = this.props
-    const { filteredColumns, sotrtedData } = this.state
+    const { actions, columns, className, data, onSort, sortable, verticalActionCell, ...passedProps } = this.props
+    const { sotrtedData } = this.state
     const { buildHeaders } = this
 
     const wrapperCls = buildClassName(moduleName, className)
@@ -88,7 +94,12 @@ class DataTable extends React.Component {
       <Table className={wrapperCls} {...passedProps}>
         { buildHeaders() }
         <Body>
-          <TableRow rowData={sotrtedData} columns={filteredColumns} actions={actions} />
+          <TableRow
+            actions={actions}
+            columns={columns}
+            rowData={sotrtedData}
+            verticalActionCell={verticalActionCell}
+          />
         </Body>
       </Table>
     )
