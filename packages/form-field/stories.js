@@ -50,6 +50,10 @@ addStory.controlled('text-input', readme, (setState, state) => (
     >
       <TextInput />
     </FormField>
+    <h2>With passed value</h2>
+    <FormField value='some value'>
+      <TextInput />
+    </FormField>
     <h2>Focus state</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       Focus status: {state.focus ? 'Focus' : 'No focus'}
@@ -123,6 +127,10 @@ addStory.controlled('number-input', readme, (setState, state) => (
       onBlur={() => { setState({ focus: false }) }}
       onFocus={() => { setState({ focus: true }) }}
     >
+      <NumberInput />
+    </FormField>
+    <h2>With passed value</h2>
+    <FormField value={23}>
       <NumberInput />
     </FormField>
     <h2>Controlled</h2>
