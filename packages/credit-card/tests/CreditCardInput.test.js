@@ -32,6 +32,41 @@ describe('<CreditCardInput />', () => {
     expect(cardExpirationDate).toEqual(values.cardExpirationDate)
     expect(cvc).toEqual(values.cvc)
   })
+
+  it('handles custom labels', () => {
+    const customValues = {
+      cardHolderNameLabel: 'Nombre en la tarjeta*',
+      cardNumberLabel: 'Número de tarjeta*',
+      cardExpirationDateLabel: 'Fecha de caducidad*',
+      cvcLabel: 'CVC*'
+    }
+
+    const wrapper = shallow(<CreditCardInput
+      cardHolderNameLabel={customValues.cardHolderNameLabel}
+      cardNumberLabel={customValues.cardNumberLabel}
+      cardExpirationDateLabel={customValues.cardExpirationDateLabel}
+      cvcLabel={customValues.cvcLabel}
+    />)
+
+    const cardHolderName = wrapper.find('FormField').at(0)
+    const cardNumber = wrapper.find('FormField').at(1)
+    const cardExpirationDate = wrapper.find('FormField').at(2)
+    const cvc = wrapper.find('FormField').at(3)
+
+    expect(cardHolderName.props().label).toEqual(customValues.cardHolderNameLabel)
+    expect(cardNumber.props().label).toEqual(customValues.cardNumberLabel)
+    expect(cardExpirationDate.props().label).toEqual(customValues.cardExpirationDateLabel)
+    expect(cvc.props().label).toEqual(customValues.cvcLabel)
+  })
+
+  it('handles custom header', () => {
+    const header = 'Custom header'
+    const wrapper = shallow(<CreditCardInput header={header} />)
+
+    const legendHeader = wrapper.children().at(0).text()
+
+    expect(legendHeader).toEqual(header)
+  })
 })
 
 describe('change', () => {

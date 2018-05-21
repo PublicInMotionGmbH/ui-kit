@@ -23,13 +23,18 @@ to avoid having different versions of these in your application.
 
 ### CreditCardInput
 
-Property name | Type        | Default | Description                    
---------------|-------------|:-------:|--------------------------------
-className     | string      | n/a     | Additional class name passed to wrapper.
-onBlur        | function    | n/a     | Handler for onBlur event.
-onChange      | function    | n/a     | Handler for onChange event.
-onFocus       | function    | n/a     | Handler for onFocus event.
-values        | ValuesShape | n/a     | Values to be displayed inside inputs.
+Property name           | Type        | Default              | Description                    
+------------------------|-------------|:--------------------:|--------------------------------
+cardHolderNameLabel     | string      | `'Name on card*'`    | Label for card holder name input.
+cardNumberLabel         | string      | `'Card number*'`     | Label for card number input.
+cardExpirationDateLabel | string      | `'Expiration date*'` | Label for card expiration date input.
+className               | string      | n/a                  | Additional class name passed to wrapper.
+cvcLabel                | string      | `'CVC*'`             | Label for cvc input.
+header                  | node        | `'Payment'`          | Form header.
+onBlur                  | function    | n/a                  | Handler for onBlur event.
+onChange                | function    | n/a                  | Handler for onChange event.
+onFocus                 | function    | n/a                  | Handler for onFocus event.
+values                  | ValuesShape | `''|null`            | Values to be displayed inside inputs.
 
 ### CreditCardNumberInput
 

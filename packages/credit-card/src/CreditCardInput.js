@@ -5,16 +5,31 @@ import { TextInput } from '@talixo/text-input'
 import { FormField } from '@talixo/form-field'
 import { FormHandler } from '@talixo/form-handler'
 
+import { buildClassName } from '@talixo/shared'
+
 import CreditCardNumberInput from './CreditCardNumberInput'
 import ExpirationDateInput from './ExpirationDateInput'
-
-import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'credit-card-input'
 
 const propTypes = {
+  /** Label for card holder name input. */
+  cardHolderNameLabel: PropTypes.string,
+
+  /** Label for card number input. */
+  cardNumberLabel: PropTypes.string,
+
+  /** Label for card expiration date input. */
+  cardExpirationDateLabel: PropTypes.string,
+
   /** Additional class name passed to wrapper. */
   className: PropTypes.string,
+
+  /** Label for cvc input. */
+  cvcLabel: PropTypes.string,
+
+  /** Form header. */
+  header: PropTypes.node,
 
   /** Handler for onBlur event. */
   onBlur: PropTypes.func,
@@ -41,6 +56,11 @@ const propTypes = {
 }
 
 const defaultProps = {
+  cardHolderNameLabel: 'Name on card*',
+  cardNumberLabel: 'Card number*',
+  cardExpirationDateLabel: 'Expiration date*',
+  cvcLabel: 'CVC*',
+  header: 'Payment',
   values: {
     cardHolderName: '',
     cardNumber: '',
@@ -56,25 +76,32 @@ const defaultProps = {
  * Component which represents credit card input.
  *
  * @param {object} props
+ * @param {string} [props.cardHolderNameLabel]
+ * @param {string} [props.cardNumberLabel]
+ * @param {string} [props.cardExpirationDateLabel]
  * @param {string} [props.className]
+ * @param {string} [props.cvcLabel]
  * @param {func} [props.onBlur]
  * @param {func} [props.onChange]
  * @param {func} [props.onFocus]
  * @param {func} [props.onSubmit]
- * @param {string} [props.value]
+ * @param {string} [props.values]
  *
  * @returns {React.Element}
  */
 function CreditCardInput (props) {
-  const { className, onBlur, onChange, onFocus, onSubmit, values } = props
+  const { cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className, cvcLabel, header, onBlur, onChange, onFocus, onSubmit, values } = props
+
+  const formhandlerClsName = buildClassName(moduleName, className)
+  const contentClsName = buildClassName([moduleName, 'content'])
 
   return (
-    <FormHandler className={buildClassName(moduleName, className)} onSubmit={onSubmit} values={values}>
-      <legend><h3>Payment</h3></legend>
-      <div className={buildClassName([moduleName, 'content'])}>
+    <FormHandler className={formhandlerClsName} onSubmit={onSubmit} values={values}>
+      <legend><h3>{header}</h3></legend>
+      <div className={contentClsName}>
         <FormField
           name='cardHolderName'
-          label='Name on card*'
+          label={cardHolderNameLabel}
           onBlur={onBlur}
           onChange={(value) => onChange(value, 'cardHolderName')}
           onFocus={onFocus}
@@ -86,7 +113,7 @@ function CreditCardInput (props) {
         </FormField>
         <FormField
           name='cardNumber'
-          label='Card number*'
+          label={cardNumberLabel}
           onBlur={onBlur}
           onChange={(value) => onChange(value, 'cardNumber')}
           onFocus={onFocus}
@@ -98,7 +125,7 @@ function CreditCardInput (props) {
         </FormField>
         <FormField
           name='cardExpirationDate'
-          label='Expiration date*'
+          label={cardExpirationDateLabel}
           onBlur={onBlur}
           onChange={(value) => onChange(value, 'cardExpirationDate')}
           onFocus={onFocus}
@@ -108,7 +135,7 @@ function CreditCardInput (props) {
         </FormField>
         <FormField
           name='cvc'
-          label='CVC*'
+          label={cvcLabel}
           onBlur={onBlur}
           onChange={(value) => onChange(value, 'cvc')}
           onFocus={onFocus}

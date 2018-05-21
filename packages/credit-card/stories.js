@@ -22,7 +22,26 @@ const submit = action('submit')
 // Stories
 
 addStory('credit card input', readme, () => (
-  <CreditCardInput onChange={change} onBlur={blur} onFocus={focus} onSubmit={submit} />
+  <CreditCardInput
+    onChange={change}
+    onBlur={blur}
+    onFocus={focus}
+    onSubmit={submit}
+  />
+))
+
+addStory('custom credit card input', readme, () => (
+  <CreditCardInput
+    onChange={change}
+    onBlur={blur}
+    onFocus={focus}
+    onSubmit={submit}
+    cardHolderNameLabel='Nombre en la tarjeta*'
+    cardNumberLabel='Número de tarjeta*'
+    cardExpirationDateLabel='Fecha de caducidad*'
+    cvcLabel='CVC*'
+    header='Pago'
+  />
 ))
 
 addStory.controlled('controlled credit card input', readme, (setState, state) => (
@@ -38,14 +57,14 @@ addStory.controlled('controlled credit card input', readme, (setState, state) =>
     </span>
     <br />
     <span>
-      <strong>Expiration number: </strong>
+      <strong>Expiration date: </strong>
       {state.cardExpirationDate &&
         <span>{state.cardExpirationDate.month}/{state.cardExpirationDate.year}</span>
       }
     </span>
     <br />
     <span>
-      <strong>cvc: </strong>
+      <strong>CVC: </strong>
       {state.cvc}
     </span>
     <br />
