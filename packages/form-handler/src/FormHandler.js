@@ -193,10 +193,20 @@ class FormHandler extends React.PureComponent {
   renderForm = props => {
     const { handleSubmit } = props
     const {
-      children, className, onSubmit,
+      children, className, onSubmit, onChange,
       initialValues, values, validationSchema,
       ...passedProps
     } = this.props
+
+    if (this.formik && onChange) {
+      const nextValues = this.formik.getFormikBag().values
+
+      if (nextValues !== this.values) {
+        this.values = nextValues
+        onChange(nextValues)
+      }
+    }
+
     const formCls = buildClassName(moduleName, className)
     const elements = React.Children.map(children, node => this.transformNode(node, props))
 
@@ -229,6 +239,7 @@ class FormHandler extends React.PureComponent {
    */
   saveRef = (ref) => {
     this.formik = ref
+    this.values = ref ? ref.getFormikBag().values : null
   }
 
   render () {

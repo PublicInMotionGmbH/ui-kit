@@ -21,6 +21,16 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### CreditCardInput
+
+Property name | Type        | Default | Description                    
+--------------|-------------|:-------:|--------------------------------
+className     | string      | n/a     | Additional class name passed to wrapper.
+onBlur        | function    | n/a     | Handler for onBlur event.
+onChange      | function    | n/a     | Handler for onChange event.
+onFocus       | function    | n/a     | Handler for onFocus event.
+values        | ValuesShape | n/a     | Values to be displayed inside inputs.
+
 ### CreditCardNumberInput
 
 Property name | Type      | Default | Description                    
@@ -33,15 +43,24 @@ value         | string    | n/a     | Value to be displayed inside inputs.
 
 ### ExpirationDateInput
 
-Property name | Type       | Default | Description                    
---------------|------------|:-------:|--------------------------------
-className     | string     | n/a     | Additional class name passed to wrapper.
-onChange      | function   | n/a     | Handler for onChange event.
-value         | ValueShape | n/a     | Value to be displayed inside inputs.
+Property name | Type            | Default | Description                    
+--------------|-----------------|:-------:|--------------------------------
+className     | string          | n/a     | Additional class name passed to wrapper.
+onChange      | function        | n/a     | Handler for onChange event.
+value         | ExpirationShape | n/a     | Value to be displayed inside inputs.
 
 ## Property shapes
 
-### ValueShape
+### ValuesShape
+
+Property name      | Type            | Default | Description
+-------------------|-----------------|:-------:|--------------------------------
+cardHolderName     | string          | n/a     | Value to be displayed in the card holder name input.
+cardNumber         | string          | n/a     | Value to be displayed in the card number input.
+cardExpirationDate | ExpirationShape | n/a     | Date to be displayed in the expiration date input.
+cvc                | string          | n/a     | Value to be displayed in the cvc input.
+
+### ExpirationShape
 
 Property name | Type   | Default | Description                    
 --------------|--------|:-------:|--------------------------------

@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreditCardInput /> renders correctly 1`] = `
+<FormHandler
+  className="talixo-credit-card-input"
+  values={
+    Object {
+      "cardExpirationDate": Object {
+        "month": null,
+        "year": null,
+      },
+      "cardHolderName": "",
+      "cardNumber": "",
+      "cvc": "",
+    }
+  }
+>
+  <legend>
+    <h3>
+      Payment
+    </h3>
+  </legend>
+  <div
+    className="talixo-credit-card-input__content"
+  >
+    <FormField
+      label="Name on card*"
+      name="cardHolderName"
+      onChange={[Function]}
+      value=""
+    >
+      <TextInput
+        InputComponent="input"
+        autoComplete="cc-full-name"
+        error={false}
+        type="text"
+      />
+    </FormField>
+    <FormField
+      label="Card number*"
+      name="cardNumber"
+      onChange={[Function]}
+      value=""
+    >
+      <CreditCardNumberInput
+        autoComplete="cc-number"
+      />
+    </FormField>
+    <FormField
+      label="Expiration date*"
+      name="cardExpirationDate"
+      onChange={[Function]}
+      value={
+        Object {
+          "month": null,
+          "year": null,
+        }
+      }
+    >
+      <ExpirationDateInput />
+    </FormField>
+    <FormField
+      label="CVC*"
+      name="cvc"
+      onChange={[Function]}
+      value=""
+    >
+      <TextInput
+        InputComponent="input"
+        autoComplete="cc-csc"
+        error={false}
+        maxLength={4}
+        size={4}
+        type="text"
+      />
+    </FormField>
+  </div>
+</FormHandler>
+`;

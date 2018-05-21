@@ -14,11 +14,57 @@ const addStory = createStoriesFactory('Credit Card', module, {
   propTables: [ ExpirationDateInput ]
 })
 
+const blur = action('blur')
+const change = action('change')
+const focus = action('focus')
+const submit = action('submit')
+
 // Stories
 
 addStory('credit card input', readme, () => (
-  <CreditCardInput onChange={action('change')} />
+  <CreditCardInput onChange={change} onBlur={blur} onFocus={focus} onSubmit={submit} />
 ))
+
+addStory.controlled('controlled credit card input', readme, (setState, state) => (
+  <div>
+    <span>
+      <strong>Name: </strong>
+      {state.cardHolderName}
+    </span>
+    <br />
+    <span>
+      <strong>Card number: </strong>
+      {state.cardNumber}
+    </span>
+    <br />
+    <span>
+      <strong>Expiration number: </strong>
+      {state.cardExpirationDate &&
+        <span>{state.cardExpirationDate.month}/{state.cardExpirationDate.year}</span>
+      }
+    </span>
+    <br />
+    <span>
+      <strong>cvc: </strong>
+      {state.cvc}
+    </span>
+    <br />
+    <CreditCardInput
+      onChange={(value, name) => setState({ [name]: value })}
+      onBlur={blur}
+      onFocus={focus}
+      onSubmit={submit}
+      values={state.values}
+    />
+  </div>
+), () => ({
+  values: {
+    cardHolderName: '',
+    cardNumber: '',
+    cardExpirationDate: null,
+    cvc: ''
+  }
+}))
 
 addStory('credit card number input', readme, () => (
   <CreditCardNumberInput onChange={action('change')} />

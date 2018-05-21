@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { TextInput } from '@talixo/text-input'
 import { FormField } from '@talixo/form-field'
+import { FormHandler } from '@talixo/form-handler'
 
 import CreditCardNumberInput from './CreditCardNumberInput'
 import ExpirationDateInput from './ExpirationDateInput'
@@ -24,76 +25,104 @@ const propTypes = {
   /** Handler for onFocus event. */
   onFocus: PropTypes.func,
 
-  /** Value to be displayed inside inputs. */
-  value: PropTypes.shape({
-    name: PropTypes.number,
-    cadrNumber: PropTypes.number,
-    expirationDate: PropTypes.number,
-    cvc: PropTypes.number
+  /** Handler for onSubmit event. */
+  onSubmit: PropTypes.func,
+
+  /** Values to be displayed inside inputs. */
+  values: PropTypes.shape({
+    cardHolderName: PropTypes.string,
+    cardNumber: PropTypes.string,
+    cardExpirationDate: PropTypes.shape({
+      month: PropTypes.number,
+      year: PropTypes.number
+    }),
+    cvc: PropTypes.string
   })
 }
 
-const defaultProps = {}
+const defaultProps = {
+  values: {
+    cardHolderName: '',
+    cardNumber: '',
+    cardExpirationDate: {
+      month: null,
+      year: null
+    },
+    cvc: ''
+  }
+}
 
 /**
  * Component which represents credit card input.
  *
- * @property {object} props
- * @property {string} [props.className]
- * @property {func} [props.onBlur]
- * @property {func} [props.onChange]
- * @property {func} [props.onFocus]
- * @property {string} [props.value]
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {func} [props.onBlur]
+ * @param {func} [props.onChange]
+ * @param {func} [props.onFocus]
+ * @param {func} [props.onSubmit]
+ * @param {string} [props.value]
  *
- * @property {object} state
- * @property {object|null} state.value
- * @property {string} state.value.name
- * @property {string} state.value.cadrNumber
- * @property {string} state.value.expirationDate
- * @property {string} state.value.cvc
- *
- * @class
+ * @returns {React.Element}
  */
-class CreditCardInput extends React.PureComponent {
-  state = {
-    value: null
-  }
-  /**
-   * Render credit card input component.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { className } = this.props
+function CreditCardInput (props) {
+  const { className, onBlur, onChange, onFocus, onSubmit, values } = props
 
-    return (
-      <fieldset className={buildClassName(moduleName, className)}>
-        <legend><h3>Payment</h3></legend>
-        <div className={buildClassName([moduleName, 'content'])}>
-          <FormField name='cardHolderName' label='Name on card*'>
-            <TextInput
-              autoComplete='cc-full-name'
-            />
-          </FormField>
-          <FormField name='cardNumber' label='Card number*'>
-            <CreditCardNumberInput
-              autoComplete='cc-number'
-            />
-          </FormField>
-          <FormField name='cardExpirationDate' label='Expiration date*'>
-            <ExpirationDateInput />
-          </FormField>
-          <FormField name='cvc' label='CVC*'>
-            <TextInput
-              autoComplete='cc-csc'
-              maxLength={4}
-              size={4}
-            />
-          </FormField>
-        </div>
-      </fieldset>
-    )
-  }
+  return (
+    <FormHandler className={buildClassName(moduleName, className)} onSubmit={onSubmit} values={values}>
+      <legend><h3>Payment</h3></legend>
+      <div className={buildClassName([moduleName, 'content'])}>
+        <FormField
+          name='cardHolderName'
+          label='Name on card*'
+          onBlur={onBlur}
+          onChange={(value) => onChange(value, 'cardHolderName')}
+          onFocus={onFocus}
+          value={values.cardHolderName}
+        >
+          <TextInput
+            autoComplete='cc-full-name'
+          />
+        </FormField>
+        <FormField
+          name='cardNumber'
+          label='Card number*'
+          onBlur={onBlur}
+          onChange={(value) => onChange(value, 'cardNumber')}
+          onFocus={onFocus}
+          value={values.cardNumber}
+        >
+          <CreditCardNumberInput
+            autoComplete='cc-number'
+          />
+        </FormField>
+        <FormField
+          name='cardExpirationDate'
+          label='Expiration date*'
+          onBlur={onBlur}
+          onChange={(value) => onChange(value, 'cardExpirationDate')}
+          onFocus={onFocus}
+          value={values.cardExpirationDate}
+        >
+          <ExpirationDateInput />
+        </FormField>
+        <FormField
+          name='cvc'
+          label='CVC*'
+          onBlur={onBlur}
+          onChange={(value) => onChange(value, 'cvc')}
+          onFocus={onFocus}
+          value={values.cvc}
+        >
+          <TextInput
+            autoComplete='cc-csc'
+            maxLength={4}
+            size={4}
+          />
+        </FormField>
+      </div>
+    </FormHandler>
+  )
 }
 
 CreditCardInput.propTypes = propTypes
