@@ -31,6 +31,7 @@ onBlur        | function  | n/a     | Event called after input has lost focus.
 onChange      | function  | n/a     | Event called after input has been changed.
 onFocus       | function  | n/a     | Event called after input has gained focus.
 warning       | node      | n/a     | Displayed warning message.
+value         | any       | n/a     | Value passed to input.
 
 ## Changelog
 

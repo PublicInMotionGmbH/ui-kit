@@ -31,7 +31,10 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** Displayed warning message. */
-  warning: PropTypes.node
+  warning: PropTypes.node,
+
+  /** Value passed to input. */
+  value: PropTypes.any
 }
 
 const defaultProps = {}
@@ -161,7 +164,7 @@ class FormField extends React.Component {
    * @returns {React.Element}
    */
   buildInput = (uniqueId) => {
-    const { error, onChange, children } = this.props
+    const { error, onChange, children, value } = this.props
     const { handleBlur, handleFocus } = this
     /**
      * Build class names for input.
@@ -187,7 +190,8 @@ class FormField extends React.Component {
       id: uniqueId,
       onBlur: handleBlur,
       onChange: onChange,
-      onFocus: handleFocus
+      onFocus: handleFocus,
+      value: value
     })
 
     // Build input with passed props

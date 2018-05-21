@@ -52,6 +52,14 @@ describe('<FormField />', () => {
     expect(wrapper.hasClass(className)).toEqual(true)
   })
 
+  it('passes value correctly', () => {
+    const value = 'some value'
+    const wrapper = createWrapper({ value })
+    const input = wrapper.find('TextInput')
+
+    expect(input.props().value).toEqual(value)
+  })
+
   it('doesn\'t override child\'s className', () => {
     const className = 'surname'
     const wrapper = createWrapper(null, { className })
