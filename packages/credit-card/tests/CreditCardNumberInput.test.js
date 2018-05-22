@@ -58,6 +58,12 @@ describe('change', () => {
     expect(onChange).toHaveBeenCalledTimes(1)
   })
 
+  it('returns when value is the same as in state', () => {
+    input.simulate('change', '2')
+
+    expect(wrapper.state().value).toEqual('2')
+  })
+
   it('changes state.value to passed value if props.value is null', () => {
     expect(wrapper.state().value).toEqual('2')
   })

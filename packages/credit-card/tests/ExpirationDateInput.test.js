@@ -49,13 +49,65 @@ describe('onChange', () => {
     const wrapper = shallow(<ExpirationDateInput onChange={onChange} />)
 
     const inputMonth = wrapper.find('RangeInput').at(0)
-    inputMonth.simulate('change', { target: { value: '2' } })
+    inputMonth.simulate('change', 2)
 
     expect(onChange).toHaveBeenCalledTimes(1)
 
     const inputYear = wrapper.find('RangeInput').at(1)
-    inputYear.simulate('change', { target: { value: '2' } })
+    inputYear.simulate('change', 2)
 
     expect(onChange).toHaveBeenCalledTimes(2)
+  })
+
+  it('sets value if it was passed in props', () => {
+    const wrapper = shallow(<ExpirationDateInput value={{ month: 1, year: 2022 }} />)
+
+    const inputMonth = wrapper.find('RangeInput').at(0)
+    inputMonth.simulate('change', 2)
+    expect(wrapper.state().value).toEqual({ month: 2, year: 2022 })
+  })
+})
+
+describe('componentWillReceiveProps', () => {
+  it('returns if passed value is null', () => {
+    const wrapper = shallow(<ExpirationDateInput />)
+    wrapper.setProps({ value: null })
+
+    expect(wrapper.state().value).toEqual(null)
+  })
+
+  it('returns if passed value is undefined', () => {
+    const wrapper = shallow(<ExpirationDateInput />)
+    wrapper.setProps({ value: undefined })
+
+    expect(wrapper.state().value).toEqual(null)
+  })
+
+  it('returns if passed value is the same as state.value', () => {
+    const value = {
+      month: 1,
+      year: 2020
+    }
+
+    const wrapper = shallow(<ExpirationDateInput value={value} />)
+
+    wrapper.setProps({ value })
+
+    expect(wrapper.state().value).toEqual(value)
+  })
+
+  it('sets passed value', () => {
+    const value = {
+      month: 1,
+      year: 2020
+    }
+
+    const wrapper = shallow(<ExpirationDateInput />)
+    wrapper.state.month = 2
+    wrapper.state.year = 2023
+
+    wrapper.setProps({ value })
+
+    expect(wrapper.state().value).toEqual(value)
   })
 })

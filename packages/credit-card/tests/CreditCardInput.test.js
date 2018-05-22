@@ -22,10 +22,8 @@ describe('<CreditCardInput />', () => {
 
   it('passes values correctly', () => {
     const wrapper = shallow(<CreditCardInput values={values} />)
-    const cardHolderName = wrapper.find('FormField').at(0).props().value
-    const cardNumber = wrapper.find('FormField').at(1).props().value
-    const cardExpirationDate = wrapper.find('FormField').at(2).props().value
-    const cvc = wrapper.find('FormField').at(3).props().value
+
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n.props().value)
 
     expect(cardHolderName).toEqual(values.cardHolderName)
     expect(cardNumber).toEqual(values.cardNumber)
@@ -48,10 +46,7 @@ describe('<CreditCardInput />', () => {
       cvcLabel={customValues.cvcLabel}
     />)
 
-    const cardHolderName = wrapper.find('FormField').at(0)
-    const cardNumber = wrapper.find('FormField').at(1)
-    const cardExpirationDate = wrapper.find('FormField').at(2)
-    const cvc = wrapper.find('FormField').at(3)
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n)
 
     expect(cardHolderName.props().label).toEqual(customValues.cardHolderNameLabel)
     expect(cardNumber.props().label).toEqual(customValues.cardNumberLabel)
@@ -75,10 +70,7 @@ describe('change', () => {
     const onChange = jest.fn().mockImplementation((value, name) => { output[name] = value })
     const wrapper = shallow(<CreditCardInput onChange={onChange} />)
 
-    const cardHolderName = wrapper.find('FormField').at(0)
-    const cardNumber = wrapper.find('FormField').at(1)
-    const cardExpirationDate = wrapper.find('FormField').at(2)
-    const cvc = wrapper.find('FormField').at(3)
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n)
 
     cardHolderName.simulate('change', values.cardHolderName)
     cardNumber.simulate('change', values.cardNumber)
