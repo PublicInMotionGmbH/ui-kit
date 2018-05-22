@@ -1,23 +1,83 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import DataTable from '../src/DataTable'
+import DataTable, {moduleName} from '../src/DataTable'
+import { actions, columns, tableData, tableDataSort } from './fixtures/testData'
+import {buildClassName} from '@talixo/shared'
 
-const tableData = [
-  { id: 0, opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', pickup: 'Berlin SXF Alexanderplatz' },
-  { id: 1, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', pickup: 'Krakow' },
-  { id: 2, opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', pickup: 'Warszawa' },
-  { id: 3, opened: '19th Jan 2018', date_of_ride: '21th Feb 2018', pickup: 'Frankfurt' },
-  { id: 4, opened: '20th Jan 2018', date_of_ride: '22th Feb 2018', pickup: 'Dortmund' },
-  { id: 5, opened: '21th Jan 2018', date_of_ride: '23th Feb 2018', pickup: 'Paris' },
-  { id: 6, opened: '22th Jan 2018', date_of_ride: '24th Feb 2018', pickup: 'Barcelona' },
-  { id: 7, opened: '23th Jan 2018', date_of_ride: '25th Feb 2018', pickup: 'London' }
-]
+const headerCls = buildClassName([moduleName, 'header'])
+
+// Wrapper creatio heleprs
+const createProps = props => ({
+  actions: actions,
+  data: tableData,
+  columns: columns,
+  ...props
+})
+const defaultProps = createProps()
+const createWrapper = (props = defaultProps) => shallow(<DataTable {...props} />)
 
 describe('<DataTable />', () => {
-  it('renders children correctly', () => {
-    const wrapper = shallow(<DataTable data={tableData} />)
+  describe('rendering', () => {
+    let wrapper
 
-    expect(wrapper).toMatchSnapshot()
+    beforeEach(() => {
+      wrapper = createWrapper()
+    })
+
+    it('renders children correctly', () => {
+      expect(wrapper).toMatchSnapshot()
+    })
+  })
+
+  describe('sorting', () => {
+    const props = createProps({ onSort: jest.fn(), sortable: true })
+    let wrapper, header0, header4
+
+    beforeEach(() => {
+      wrapper = createWrapper(props)
+      header0 = wrapper.find('TableHeaders').dive().find(`.${headerCls}`).first()
+      header4 = wrapper.find('TableHeaders').dive().find(`.${headerCls}`).at(4)
+    })
+
+    it('should invoke props.onSort function', () => {
+      header0.simulate('click', {})
+      expect(props.onSort).toHaveBeenCalledTimes(1)
+    })
+
+    it('should update state.sortColumn', () => {
+      const newId = columns[0].id
+      header0.simulate('click', {})
+      expect(wrapper.state().sortColumn).toBe(newId)
+    })
+
+    it('should set reversed order to false', () => {
+      header0.simulate('click', {})
+      header0.simulate('click', {})
+      header0.simulate('click', {})
+      expect(wrapper.state().reversedOrder).toBe(false)
+    })
+
+    it('should change sortColumn and reversedOrder to true in state', () => {
+      const newId = columns[0].id
+      wrapper.instance().sort(newId)
+      wrapper.instance().sort(newId)
+      expect(wrapper.state().reversedOrder).toBe(true)
+    })
+
+    it('should order data ascending', () => {
+      const newId = columns[4].id
+      const orderedData = tableDataSort(newId)
+      header4.simulate('click', {})
+      expect(wrapper.state().sotrtedData).toEqual(orderedData)
+    })
+
+    it('should order data descending', () => {
+      const newId = columns[4].id
+      const orderedData = tableDataSort(newId, 'desc')
+      header4.simulate('click', {})
+      header4.simulate('click', {})
+      expect(wrapper.state().sotrtedData).toEqual(orderedData)
+    })
   })
 })

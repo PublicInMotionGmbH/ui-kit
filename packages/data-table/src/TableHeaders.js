@@ -12,15 +12,23 @@ import { moduleName } from './DataTable'
 // const moduleName = 'table-headers'
 
 const propTypes = {
-  headers: PropTypes.array
+  columns: PropTypes.array,
+
+  onClick: PropTypes.func,
+
+  sortable: PropTypes.bool,
+
+  sortColumn: PropTypes.string,
+
+  sortOrder: PropTypes.string
 }
 
 const defaultProps = {}
 
-function sortControls (inUse, order) {
+function sortControls (inUse, sortOrder) {
   const arrowsCls = buildClassName([moduleName, 'header', 'arrows'])
-  const arrowUpCls = buildClassName([moduleName, 'header', 'arrow-up'], null, { selected: inUse && order === 'asc' })
-  const arrowDownCls = buildClassName([moduleName, 'header', 'arrow-down'], null, { selected: inUse && order === 'desc' })
+  const arrowUpCls = buildClassName([moduleName, 'header', 'arrow-up'], null, { selected: inUse && sortOrder === 'asc' })
+  const arrowDownCls = buildClassName([moduleName, 'header', 'arrow-down'], null, { selected: inUse && sortOrder === 'desc' })
 
   return (
     <div className={arrowsCls}>
@@ -30,7 +38,8 @@ function sortControls (inUse, order) {
   )
 }
 
-function TableHeaders ({ columns, onClick, sortable, sortColumn, sortOrder }) {
+function TableHeaders (props) {
+  const { columns, onClick, sortable, sortColumn, sortOrder } = props
   const headerCls = buildClassName([moduleName, 'header'], null, { clickable: !!onClick })
   const actions = _.find(columns, item => item.id === 'actions')
   const cols = columns.filter(i => i.id !== 'actions')

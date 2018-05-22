@@ -5,12 +5,15 @@ import { Action, ActionsCell, Cell, Row } from '@talixo/table'
 
 const propTypes = {
   actions: PropTypes.array,
-  columns: PropTypes.arrayOf(PropTypes.object),
-  rowData: PropTypes.arrayOf(PropTypes.object),
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rowData: PropTypes.arrayOf(PropTypes.object).isRequired,
   verticalActionCell: PropTypes.bool
 }
 
-const defaultProps = {}
+const defaultProps = {
+  actions: [],
+  verticalActionCell: false
+}
 
 function generateActions (actions, item, vertical = false) {
   const click = (onClick, e) => {
@@ -21,21 +24,29 @@ function generateActions (actions, item, vertical = false) {
   ))
   return (
     <ActionsCell vertical={vertical}>
-      { displayedActions.map(action => (<Action icon={action.icon} label={action.label} onClick={e => click(action.onClick, e)} />)) }
+      {
+        displayedActions.map(action => (
+          <Action
+            key={action.label}
+            icon={action.icon}
+            label={action.label}
+            onClick={e => click(action.onClick, e)}
+          />
+        ))
+      }
     </ActionsCell>
   )
 }
 
 function TableRow ({ actions, columns, rowData, verticalActionCell }) {
   const cols = columns.filter(({ id }) => id !== 'actions')
-  console.log('verticalActionCell', verticalActionCell)
 
   return (
     <React.Fragment>
       {
         rowData.map((item, i) => (
-          <Row>
-            { cols.map(({ id, render }) => (<Cell>{ render ? render(item[id]) : item[id] }</Cell>)) }
+          <Row key={item.id}>
+            { cols.map(({ id, render }) => (<Cell key={id}>{ render ? render(item[id]) : item[id] }</Cell>)) }
             { actions.length > 0 && generateActions(actions, item, verticalActionCell) }
           </Row>
         ))

@@ -48,17 +48,19 @@ class DataTable extends React.Component {
     reversedOrder: false
   }
 
-  columns = Object.keys(this.props.headers || {})
-
   sort = (columnID) => {
     const { onSort } = this.props
     const { sortColumn, sotrtedData, reversedOrder } = this.state
 
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
     const direction = !_reversedOrder ? 'asc' : 'desc'
-    const newData = _.orderBy(sotrtedData, columnID, [direction])
+    const newData = _.orderBy(sotrtedData, columnID, direction)
 
-    this.setState({ sotrtedData: newData, sortColumn: columnID, reversedOrder: _reversedOrder })
+    this.setState({
+      sotrtedData: newData,
+      sortColumn: columnID,
+      reversedOrder: _reversedOrder
+    })
 
     if (onSort) {
       onSort(columnID)
@@ -84,7 +86,10 @@ class DataTable extends React.Component {
   }
 
   render (props) {
-    const { actions, columns, className, data, onSort, sortable, verticalActionCell, ...passedProps } = this.props
+    const {
+      actions, columns, className, data, onSort,
+      sortable, verticalActionCell, ...passedProps
+    } = this.props
     const { sotrtedData } = this.state
     const { buildHeaders } = this
 

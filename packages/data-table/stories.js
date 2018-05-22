@@ -17,7 +17,7 @@ const addStory = createStoriesFactory('DataTable', module, {
 // Mock data
 const tableData = [
   { id: 0, opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: 'John Smith', pickup: 'Berlin SXF Alexanderplatz' },
-  { id: 1, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: 'Donal Duck', pickup: 'Krakow' },
+  { id: 1, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: 'Donald Duck', pickup: 'Krakow' },
   { id: 2, opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Mickey Mouse', pickup: 'Warszawa' },
   { id: 3, opened: '19th Jan 2018', date_of_ride: '21th Feb 2018', assignee: 'Captain Planet', pickup: 'Frankfurt' },
   { id: 4, opened: '20th Jan 2018', date_of_ride: '22th Feb 2018', assignee: 'Doctor Queen', pickup: 'Dortmund' },
@@ -49,6 +49,6 @@ addStory('initial', readme, () => (
     data={tableData}
     onSort={action('onSort')}
     verticalActionCell
-    // sortable
+    sortable
   />
 ))
