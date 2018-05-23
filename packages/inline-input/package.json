@@ -29,6 +29,6 @@
   },
   "dependencies": {
     "@talixo/shared": "^1.0.0",
-    "@talixo/text-input": "^1.0.0"
+    "@talixo/text-input": "^0.2.0"
   }
 }
