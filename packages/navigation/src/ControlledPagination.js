@@ -4,15 +4,34 @@ import range from 'lodash/range'
 import includes from 'lodash/includes'
 
 import Element from './Element'
+import calculateNearestMultiple from '../utils/calculateNearestMultiple'
 
-/**
-* Returns the largest multiple of divisor less than or equal to provided number
-*
-* @param {number} number
-* @param {number} divisor
-* @returns {number}
-*/
-const nearestMultiple = (number, divisor) => Math.floor(number / divisor) * divisor
+const propTypes = {
+  /** Active page */
+  activePage: PropTypes.number,
+
+  /** Maximum number of displayed page buttons */
+  displayedLimit: PropTypes.number,
+
+  /** Next button label */
+  nextLabel: PropTypes.node,
+
+  /** Function passed to page buttons */
+  onChange: PropTypes.func,
+
+  /** The total number of pages */
+  pageCount: PropTypes.number.isRequired,
+
+  /** Previous button label */
+  previousLabel: PropTypes.node
+}
+
+const defaultProps = {
+  activePage: 1,
+  displayedLimit: 10,
+  nextLabel: 'Next',
+  previousLabel: 'Previous'
+}
 
 /**
  * Method that maps numbers to elements.
@@ -106,7 +125,7 @@ function Pagination (props) {
     // If the active number is larger than the displayedLimit
     // set the range start to be the nearest multiple of the limit
     const start = activePage > displayedLimit
-      ? nearestMultiple(activePage - 1, displayedLimit)
+      ? calculateNearestMultiple(activePage - 1, displayedLimit)
       : null
 
     // Set the range end to be larger from start by the displayedLimit
@@ -159,31 +178,8 @@ function Pagination (props) {
   return createPagination()
 }
 
-Pagination.propTypes = {
-  /** Active page */
-  activePage: PropTypes.number,
+Pagination.propTypes = propTypes
 
-  /** Maximum number of displayed page buttons */
-  displayedLimit: PropTypes.number,
-
-  /** Next button label */
-  nextLabel: PropTypes.node,
-
-  /** Function passed to page buttons */
-  onChange: PropTypes.func,
-
-  /** The total number of pages */
-  pageCount: PropTypes.number.isRequired,
-
-  /** Previous button label */
-  previousLabel: PropTypes.node
-}
-
-Pagination.defaultProps = {
-  activePage: 1,
-  displayedLimit: 10,
-  nextLabel: 'Next',
-  previousLabel: 'Previous'
-}
+Pagination.defaultProps = defaultProps
 
 export default Pagination
