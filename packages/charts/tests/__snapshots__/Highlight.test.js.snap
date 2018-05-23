@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Highlight> rendering should render properly 1`] = `
+<div
+  className="rv-xy-plot "
+  style={
+    Object {
+      "height": "300px",
+      "width": "300px",
+    }
+  }
+>
+  <svg
+    className="rv-xy-plot__inner"
+    height={300}
+    onClick={[Function]}
+    onDoubleClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
+    onWheel={[Function]}
+    width={300}
+  >
+    <path
+      className="rv-xy-plot__series rv-xy-plot__series--line "
+      d="M0,0L71.42857142857143,250L95.23809523809523,250L250,250"
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+          "stroke": "#12939A",
+          "strokeDasharray": undefined,
+          "strokeWidth": undefined,
+        }
+      }
+      transform="translate(40,10)"
+    />
+    <g
+      className="highlight-container"
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      transform="translate(40, 10)"
+    >
+      <rect
+        className="mouse-target"
+        fill="black"
+        height={250}
+        opacity="0"
+        width={250}
+        x={0}
+        y={0}
+      />
+      <rect
+        className="highlight"
+        fill="rgb(77, 182, 172)"
+        height={0}
+        opacity={0.3}
+        pointerEvents="none"
+        width={0}
+        x={0}
+        y={0}
+      />
+    </g>
+  </svg>
+</div>
+`;

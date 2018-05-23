@@ -1,0 +1,34 @@
+@import '~@talixo/shared/styles/config'
+
+$color-font: $color-black
+$color-legend-base: $color-talixo-red
+$color-legend-border: $color-border
+$color-disabled: $color-talixo-light-gray
+$color-legend-hover: lighten($color-border, 10%) !default
+
+$legend-background: rgba(255, 255, 255, 0.2)
+$legend-padding: dp(1)
+$legend-item-height: dp(3.5)
+$legend-transition: ease-in .1s all
+
+@mixin graph-color ($id, $color)
+  #{prefix('legend-item', 'colorbox--#{$id}')}
+    background-color: $color
+
+  #{prefix('chart-series--#{$id}')}
+    stroke: $color
+    fill: $color
+    > path
+      stroke: $color !important
+      fill: $color!important
+
+@mixin graph-colors ($baseColor)
+  @for $i from 0 to 5
+    $multiplier: (5 - $i) * 7%
+    @include graph-color($i, lighten($baseColor, $multiplier))
+
+  @for $i from 0 to 5
+    $multiplier:  ($i + 1) * 7%
+    @include graph-color($i + 5, darken($baseColor, $multiplier))
+
+
