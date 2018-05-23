@@ -1,2 +1,11 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('badge')
+  display: inline-block
+  padding: 0 dp(.8)
+  font-size: $badge-font-size
+  font-weight: $badge-font-weight
+  border-radius: $badge-border-radius
+  background-color: $badge-background-color
+  border-color: $badge-border-color
+  color: $badge-color
