@@ -11,22 +11,52 @@ import TableRow from './TableRow'
 export const moduleName = 'data-table'
 
 const propTypes = {
+  /** Actions which can be applied to rows */
+  actions: PropTypes.arrayOf(PropTypes.shape({
+
+    /** Function which indicates if button should be displayed.
+     * Assigns item from data as function argument. */
+    condition: PropTypes.func,
+
+    /** Button icon */
+    icon: PropTypes.string,
+
+    /** Button label */
+    label: PropTypes.string,
+
+    /** onClick callback function. */
+    onClick: PropTypes.func
+  })),
+
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Data to be populated inside table. Require the same keys as inc olumns objects. */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
+  /** Information about columns to be displayed in table. */
   columns: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
+
+    /** Id of give column. */
+    id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
+
+    /** Name of the column. This will be displayed inside table header. */
     name: PropTypes.string.isRequired,
+
+    /** Render function of items to be displayed in table cells of give column. */
     render: PropTypes.func,
+
+    /** Render function of given header. */
     renderHeader: PropTypes.func
   })).isRequired,
 
+  /** IonSort Function callback */
   onSort: PropTypes.func,
 
+  /** Indicates if table is sortable. */
   sortable: PropTypes.bool,
 
+  /** Indicates if actions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
 }
 
@@ -37,9 +67,28 @@ const defaultProps = {
 /**
  * Component which represents DataTable.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {object[]} [props.actions]
+ * @property {function} [props.actions.condition]
+ * @property {string} [props.actions.icon]
+ * @property {string} [props.actions.label]
+ * @property {function} [props.actions.onClick]
+ * @property {object} [props.data]
+ * @property {object[]} [props.columns]
+ * @property {string|number} [props.columns.id]
+ * @property {string} [props.columns.name]
+ * @property {function} [props.columns.render]
+ * @property {function} [props.columns.renderHeader]
+ * @property {function} [props.onSort]
+ * @property {boolean} [props.sortable]
+ * @property {boolean} [props.verticalActionCell]
+ *
+ * @property {object} state
+ * @property {object} state.sortedData
+ * @property {object} state.sortColumn - the column that is used in sortin process
+ * @property {object} state.reversedOrder - indicates if sorting should be descending
+ *
+ * @class
  */
 class DataTable extends React.Component {
   state = {
@@ -94,7 +143,7 @@ class DataTable extends React.Component {
     const { buildHeaders } = this
 
     const wrapperCls = buildClassName(moduleName, className)
-    // TODO: Add footer component
+
     return (
       <Table className={wrapperCls} {...passedProps}>
         { buildHeaders() }
