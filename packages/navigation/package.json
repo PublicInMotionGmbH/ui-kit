@@ -37,8 +37,8 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0",
-    "@talixo/tooltip": "^1.0.0",
+    "@talixo/shared": "^0.1.0",
+    "@talixo/tooltip": "^0.1.0",
     "lodash": "^4.17.5"
   }
 }
