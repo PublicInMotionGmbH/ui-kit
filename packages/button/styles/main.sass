@@ -1,2 +1,97 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('button')
+  box-shadow: $button-shadow-size $button-shadow-color
+  background-color: $button-default-background-color
+  padding: dp(1) dp(1.5)
+  margin: 0 dp(.2)
+  border: $button-border-width solid transparent
+  border-radius: $button-border-radius
+  font-size: $button-font-size
+  line-height: dp(3)
+  cursor: pointer
+  outline: inherit !important
+  display: inline-flex
+  align-items: center
+
+  > *
+    margin: 0 dp(0.5)
+  
+  &--small
+    padding: dp(0.5) dp(1.5)
+    font-size: $button-font-size-small
+
+  &--full-width
+    width: 100%
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+    margin: 0
+    text-align: center
+
+  &:hover
+    background-color: $button-default-background-color-hover
+
+  &:disabled
+    background-color: $button-ghost-background-color
+    border-color: $button-ghost-border-color
+    color: $button-ghost-text-color
+    cursor: not-allowed
+
+  &--primary
+    background-color: $button-primary-background-color
+    border-color: $button-primary-border-color
+    color: $button-primary-text-color
+
+    &:hover:not(:disabled):not(:active)
+      background-color: $button-primary-background-color-hover
+      border-color: $button-primary-border-color-hover
+
+    &:active:not(:disabled)
+      background-color: $button-primary-background-color-active
+      border-color: $button-primary-border-color-active
+
+    &#{prefix('button')}--ghost
+      color: $button-primary-ghost-text-color
+      border-color: $button-primary-ghost-border-color
+      background-color: $button-primary-ghost-background-color
+
+      &:hover
+        color: $button-primary-ghost-text-color-hover
+        border-color: $button-primary-ghost-border-color-hover
+        background-color: $button-primary-ghost-background-color-hover
+
+  &--black
+    background-color: $button-dark-background-color
+    border-color: $button-dark-border-color
+    color: $button-dark-text-color
+
+    &:hover:not(:disabled):not(:active)
+      background-color: $button-dark-background-color-hover
+      border-color: $button-dark-border-color-hover
+
+    &:active:not(:disabled)
+      background-color: $button-dark-background-color-active
+      border-color: $button-dark-border-color-active
+
+    &#{prefix('button')}--ghost
+      color: $button-dark-ghost-text-color
+      border-color: $button-dark-ghost-border-color
+      background-color: $button-dark-ghost-background-color
+
+      &:hover
+        background-color: $button-dark-ghost-background-color-hover
+        border-color: $button-dark-ghost-border-color-hover
+        color: $button-dark-ghost-text-color-hover
+
+      &:active
+        background-color: $button-dark-ghost-background-color-active
+        border-color: $button-dark-ghost-border-color-active
+
+  &--ghost
+    background-color: $button-ghost-background-color
+    color: $button-ghost-text-color
+    border-color: $button-ghost-border-color
+
+    &:hover
+      background-color: $button-ghost-background-color-hover
+      color: $button-ghost-text-color-hover
