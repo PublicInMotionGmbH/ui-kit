@@ -1,2 +1,46 @@
-@import './geometry'
-@import './theming'
+@import '~react-dates/lib/css/_datepicker.css'
+@import './config'
+
+@include module('calendar')
+  .DateInput_input
+    box-sizing: border-box
+    
+  .SingleDatePickerInput__withBorder
+    padding: dp(.1)
+    border: 1px solid
+    border-radius: $border-radius-m
+  
+  .DayPicker_weekHeader
+    top: dp(7.2)
+
+  .DateInput_input, .DateInput_input__focused
+    border-radius: $border-radius-m
+
+  .DayPickerKeyboardShortcuts_show
+    display: none
+
+  .SingleDatePicker
+    display: block
+
+  .SingleDatePicker_picker
+    z-index: 999
+
+  .DateInput
+    width: 100%
+
+    
+  .DateInput_input, .DateInput_input__focused
+    border-bottom: none
+
+  .DayPickerKeyboardShortcuts_show__bottomRight
+    border-right-color: $color-orange-talixo
+
+  .CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover
+    background-color: $color-orange-talixo
+    border-color: $color-orange-talixo
+
+  .SingleDatePickerInput__withBorder
+    border-color: $color-placeholder-text
+    
+  .DateInput_input::placeholder
+    color: $color-placeholder-text
