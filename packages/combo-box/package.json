@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/country-flag": "^0.1.0",
-    "@talixo/icon": "^0.1.0",
+    "@talixo/icon": "^0.1.1",
     "@talixo/progress-ring": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "@talixo/text-input": "^0.2.0",
