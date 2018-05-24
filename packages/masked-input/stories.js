@@ -78,7 +78,12 @@ addStory.controlled('default', readme, (setState, state) => (
         placeholder='Type something and click out of this box...'
       />
     }
-    renderMask={(v) => <div className='storybook-mask-example'>{v}</div>}
+    renderMask={(v) => (
+      <div className='storybook-mask-example'>
+        <Icon name='check_sign' className='storybook-mask-input__mask-icon storybook-mask-input__mask-icon--checked' />
+        {v}
+      </div>
+    )}
     value={state.value}
     style={{ display: 'block' }}
     {...commonProps}

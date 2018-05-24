@@ -134,18 +134,15 @@ class MaskedInput extends React.Component {
    * @returns {object|null}
    */
   maskRenderer = () => {
-    const { focused, value } = this.state
     const { renderMask } = this.props
+    const { value } = this.state
 
     // Only generate element if input is not focused and value inside state exists
-    if (!focused && value) {
-      const element = renderMask(value)
-      return React.cloneElement(element, {
-        ...element.porps,
-        className: buildClassName([moduleName, 'mask'], element.props.className)
-      })
-    }
-    return null
+    const element = renderMask(value)
+    return React.cloneElement(element, {
+      ...element.porps,
+      className: buildClassName([moduleName, 'mask'], element.props.className)
+    })
   }
 
   render () {
@@ -153,14 +150,15 @@ class MaskedInput extends React.Component {
       className, error, onBlur, onFocus,
       onChange, renderInput, renderMask, ...passedProps
     } = this.props
+    const { focused, value } = this.state
     const { getInputProps, maskRenderer } = this
     const wrapperCls = buildClassName(moduleName, className)
-    const mask = maskRenderer()
+    // const mask = maskRenderer()
     const inputProps = getInputProps()
 
     return (
       <div className={wrapperCls} {...passedProps}>
-        { mask }
+        { !focused && value && maskRenderer() }
         { React.cloneElement(renderInput, inputProps) }
       </div>
     )
