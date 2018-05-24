@@ -26,6 +26,7 @@
     "@talixo/icon": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "@talixo/table": "^0.1.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
@@ -34,11 +35,9 @@
     "@talixo/icon": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "@talixo/table": "^0.1.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "dependencies": {
-    "lodash": "^4.17.10"
   }
 }

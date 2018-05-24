@@ -16,7 +16,7 @@ const propTypes = {
   })).isRequired,
 
   /** Data to be populated inside table. Require the same keys as inc olumns objects. */
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rowData: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   /** Actions which can be applied to rows. */
   tableActions: PropTypes.arrayOf(PropTypes.shape({

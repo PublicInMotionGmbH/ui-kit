@@ -55,4 +55,4 @@ renderHeader        | function          | no        | n/a     | Render function 
 
 ## Changelog
 
-- **0.1.0** - initial version
+- **0.0.0** - initial version
