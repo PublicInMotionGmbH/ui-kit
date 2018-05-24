@@ -22,7 +22,7 @@ describe('<CreditCardNumberInput />', () => {
     const value = '12345678910111213'
     const wrapper = mount(<CreditCardNumberInput value={value} />)
     const input = wrapper.find('input').getDOMNode()
-    expect(input.value).toEqual('1234 5678 9101 1121 3')
+    expect(input.value).toEqual('12345678910111213')
     wrapper.unmount()
   })
 

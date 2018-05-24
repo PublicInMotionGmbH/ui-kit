@@ -20,6 +20,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
         className="talixo-text-input talixo-form-field__input talixo-text-input--empty"
       >
         <input
+          InputComponent="input"
           className="talixo-text-input__input"
           id="form_field_1"
           onBlur={[Function]}
@@ -45,6 +46,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
           className="talixo-text-input talixo-form-field__input talixo-text-input--empty"
         >
           <input
+            InputComponent="input"
             className="talixo-text-input__input"
             id="form_field_2"
             onBlur={[Function]}
@@ -67,6 +69,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
         className="talixo-text-input talixo-form-field__input talixo-text-input--empty"
       >
         <input
+          InputComponent="input"
           className="talixo-text-input__input"
           id="form_field_3"
           onBlur={[Function]}

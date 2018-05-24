@@ -5,6 +5,7 @@ exports[`<TextInput /> should render properly 1`] = `
   className="talixo-text-input talixo-text-input--empty"
 >
   <input
+    InputComponent="input"
     className="talixo-text-input__input"
     onChange={[Function]}
     style={null}
