@@ -21,9 +21,37 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+It allows any props which are allowed for `Table` omponent from `@talixo/table`. Additionally, it handles some differently:
+
+Property name       | Type      | Required  | Default | Description                    
+--------------------|-----------|-----------|:-------:|--------------------------------
+className           | string    | no        | n/a     | Additional class name passed to wrapper.
+columns             | Column[]  | yes       | n/a     | Information about columns which will be displayed in table.
+data                | object[]  | yes       | n/a     | Data to be populated inside table. Require the same keys as inc olumns objects.
+onSort              | function  | no        | n/a     | onSort function callback.
+sortable            | boolean   | no        |`false`  | Indicates if table is sortable.
+tableActions        | Actions[] | no        | n/a     | Actions which can be applied to rows.
+verticalActionCell  | string    | no        | n/a     | Indicates if tableActions should be displayed vertically or horizontally.
+
+## Property shapes
+
+### Actions
+
+Property name       | Type      | Required  | Default | Description                    
+--------------------|-----------|-----------|:-------:|--------------------------------
+condition           | function  | no        | n/a     | Function which indicates if button should be displayed. Assigns item from data as function argument.
+icon                | string    | yes       | n/a     | Button icon name from `@talixo/icon` package.
+label               | string    | yes       | n/a     | Button label.
+onClick             | function  | no        | n/a     | onClick callback function.
+
+### Column
+
+Property name       | Type              | Required  | Default | Description
+--------------------|-------------------|-----------|:-------:|--------------------------------
+id                  | string or number  | yes       | n/a     | Id of given column.
+name                | string            | yes       | n/a     | Name of the column. This will be displayed inside table header.
+render              | function          | no        | n/a     | Render function of items to be displayed in table cells of give column.
+renderHeader        | function          | no        | n/a     | Render function of given header.
 
 ## Changelog
 

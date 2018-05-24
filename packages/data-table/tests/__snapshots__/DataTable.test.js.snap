@@ -33,7 +33,7 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
           "renderHeader": [Function],
         },
         Object {
-          "id": "actions",
+          "id": "tableActions",
           "name": "Actions",
           "renderHeader": [Function],
         },
@@ -45,26 +45,6 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
   />
   <Body>
     <TableRow
-      actions={
-        Array [
-          Object {
-            "icon": "control_point_duplicate",
-            "label": "Duplicate",
-            "onClick": [Function],
-          },
-          Object {
-            "icon": "clear",
-            "label": "Remove",
-            "onClick": [Function],
-          },
-          Object {
-            "condition": [Function],
-            "icon": "done",
-            "label": "Assign",
-            "onClick": [Function],
-          },
-        ]
-      }
       columns={
         Array [
           Object {
@@ -91,7 +71,7 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
             "renderHeader": [Function],
           },
           Object {
-            "id": "actions",
+            "id": "tableActions",
             "name": "Actions",
             "renderHeader": [Function],
           },
@@ -122,6 +102,7 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
           },
         ]
       }
+      tableActions={Array []}
       verticalActionCell={false}
     />
   </Body>

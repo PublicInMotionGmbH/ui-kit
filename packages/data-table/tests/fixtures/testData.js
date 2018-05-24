@@ -19,7 +19,7 @@ export const columns = [
     name: 'Pickup / Dropoff',
     renderHeader: name => <span className='test-span'>{name}</span>
   },
-  { id: 'actions', name: 'Actions', renderHeader: name => <span className='test-span'>{name}</span> }
+  { id: 'tableActions', name: 'Actions', renderHeader: name => <span className='test-span'>{name}</span> }
 
 ]
 export const columnsWithActions = [
@@ -32,10 +32,10 @@ export const columnsWithActions = [
     name: 'Pickup / Dropoff',
     renderHeader: name => <span className='test-span'>{name}</span>
   },
-  { id: 'actions', name: 'Actions' }
+  { id: 'tableActions', name: 'Actions' }
 ]
 
-export const actions = [
+export const tableActions = [
   { label: 'Duplicate', onClick: jest.fn(), icon: 'control_point_duplicate' },
   { label: 'Remove', onClick: jest.fn(), icon: 'clear' },
   { label: 'Assign', onClick: jest.fn(), icon: 'done', condition: row => !!row.assignee }

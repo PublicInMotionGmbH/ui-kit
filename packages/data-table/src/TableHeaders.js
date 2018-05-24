@@ -9,22 +9,40 @@ import { Head, HeadCell } from '@talixo/table'
 
 import { moduleName } from './DataTable'
 
-// const moduleName = 'table-headers'
-
 const propTypes = {
-  columns: PropTypes.array,
+  /** Information about columns which will be displayed in table. */
+  columns: PropTypes.arrayOf(PropTypes.shape({
 
+    /** Id of given column. */
+    id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
+
+    /** Name of the column. This will be displayed inside table header. */
+    name: PropTypes.string.isRequired,
+
+    /** Render function of given header. */
+    renderHeader: PropTypes.func
+  })).isRequired,
+
+  /** onClick callback function. */
   onClick: PropTypes.func,
 
+  /** Indicates if table is sortable. */
   sortable: PropTypes.bool,
 
-  sortColumn: PropTypes.string,
+  /** Idicates which column is used to sort data inside table. */
+  sortColumn: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
-  sortOrder: PropTypes.string
+  /** Order of sorting. */
+  sortOrder: PropTypes.oneOf(['asc', 'desc'])
 }
 
-const defaultProps = {}
-
+/**
+ * Generate arrows which will indicate sorting order.
+ *
+ * @param {boolean} inUse
+ * @param {string} sortOrder
+ * @returns {ReactElement}
+ */
 function sortControls (inUse, sortOrder) {
   const arrowsCls = buildClassName([moduleName, 'header', 'arrows'])
   const arrowUpCls = buildClassName([moduleName, 'header', 'arrow-up'], null, { selected: inUse && sortOrder === 'asc' })
@@ -38,12 +56,30 @@ function sortControls (inUse, sortOrder) {
   )
 }
 
+/**
+ * Component which represents DataTable Headers.
+ *
+ * @param {object} [props]
+ * @param {object[]} [props.columns]
+ * @param {number|string} [props.columns.id]
+ * @param {string} [props.columns.name]
+ * @param {function} [props.columns.renderHeader]
+ * @param {function} [props.onClick]
+ * @param {boolean} [props.sortable]
+ * @param {string|number} [props.sortColumn]
+ * @param {string} [props.sortOrder]
+ *
+ * @returns {ReactElement}
+ */
 function TableHeaders (props) {
   const { columns, onClick, sortable, sortColumn, sortOrder } = props
   const headerCls = buildClassName([moduleName, 'header'], null, { clickable: !!onClick })
-  const actions = _.find(columns, item => item.id === 'actions')
-  const cols = columns.filter(i => i.id !== 'actions')
 
+  // Filter columns to ensure tableActions will be displayed as last column.
+  const tableActions = _.find(columns, item => item.id === 'tableActions')
+  const cols = columns.filter(i => i.id !== 'tableActions')
+
+  // Create onClick function.
   const click = (id, e) => {
     if (onClick) onClick(id, e)
   }
@@ -53,15 +89,19 @@ function TableHeaders (props) {
       {
         cols.map((col, i) => (
           <HeadCell className={headerCls} key={col.id} onClick={e => click(col.id, e)}>
-            { col.renderHeader ? col.renderHeader(col.name) : col.name }
+            { col.renderHeader && typeof col.renderHeader === 'function' ? col.renderHeader(col.name) : col.name }
             { sortable && sortControls(sortColumn === col.id, sortOrder) }
           </HeadCell>
         ))
       }
       {
-        actions && actions.name &&
+        tableActions && tableActions.name &&
           <HeadCell>
-            { actions.renderHeader ? actions.renderHeader(actions.name) : actions.name }
+            {
+              tableActions.renderHeader && typeof tableActions.renderHeader === 'function'
+                ? tableActions.renderHeader(tableActions.name)
+                : tableActions.name
+            }
           </HeadCell>
       }
     </Head>
@@ -69,7 +109,5 @@ function TableHeaders (props) {
 }
 
 TableHeaders.propTypes = propTypes
-
-TableHeaders.defaultProps = defaultProps
 
 export default TableHeaders

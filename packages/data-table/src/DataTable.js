@@ -11,33 +11,13 @@ import TableRow from './TableRow'
 export const moduleName = 'data-table'
 
 const propTypes = {
-  /** Actions which can be applied to rows */
-  actions: PropTypes.arrayOf(PropTypes.shape({
-
-    /** Function which indicates if button should be displayed.
-     * Assigns item from data as function argument. */
-    condition: PropTypes.func,
-
-    /** Button icon */
-    icon: PropTypes.string,
-
-    /** Button label */
-    label: PropTypes.string,
-
-    /** onClick callback function. */
-    onClick: PropTypes.func
-  })),
-
-  /** Additional class name */
+  /** Additional class name. */
   className: PropTypes.string,
 
-  /** Data to be populated inside table. Require the same keys as inc olumns objects. */
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-
-  /** Information about columns to be displayed in table. */
+  /** Information about columns which will be displayed in table. */
   columns: PropTypes.arrayOf(PropTypes.shape({
 
-    /** Id of give column. */
+    /** Id of given column. */
     id: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
 
     /** Name of the column. This will be displayed inside table header. */
@@ -50,13 +30,33 @@ const propTypes = {
     renderHeader: PropTypes.func
   })).isRequired,
 
-  /** IonSort Function callback */
+  /** Data to be populated inside table. Require the same keys as inc olumns objects. */
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  /** onSort function callback. */
   onSort: PropTypes.func,
 
   /** Indicates if table is sortable. */
   sortable: PropTypes.bool,
 
-  /** Indicates if actions should be displayed vertically or horizontally. */
+  /** Actions which can be applied to rows. */
+  tableActions: PropTypes.arrayOf(PropTypes.shape({
+
+    /** Function which indicates if button should be displayed.
+     * Assigns item from data as function argument. */
+    condition: PropTypes.func,
+
+    /** Button icon name from `@talixo/icon` package. */
+    icon: PropTypes.string.isRequired,
+
+    /** Button label. */
+    label: PropTypes.string.isRequired,
+
+    /** onClick callback function. */
+    onClick: PropTypes.func
+  })),
+
+  /** Indicates if tableActions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
 }
 
@@ -68,19 +68,20 @@ const defaultProps = {
  * Component which represents DataTable.
  *
  * @property {object} props
- * @property {object[]} [props.actions]
- * @property {function} [props.actions.condition]
- * @property {string} [props.actions.icon]
- * @property {string} [props.actions.label]
- * @property {function} [props.actions.onClick]
- * @property {object} [props.data]
- * @property {object[]} [props.columns]
- * @property {string|number} [props.columns.id]
- * @property {string} [props.columns.name]
+ * @property {string} [props.className]
+ * @property {object[]} props.columns
+ * @property {string|number} props.columns.id
+ * @property {string} props.columns.name
  * @property {function} [props.columns.render]
  * @property {function} [props.columns.renderHeader]
+ * @property {object} props.data
  * @property {function} [props.onSort]
  * @property {boolean} [props.sortable]
+ * @property {object[]} [props.tableActions]
+ * @property {function} [props.tableActions.condition]
+ * @property {string} props.tableActions.icon
+ * @property {string} props.tableActions.label
+ * @property {function} [props.tableActions.onClick]
  * @property {boolean} [props.verticalActionCell]
  *
  * @property {object} state
@@ -97,12 +98,20 @@ class DataTable extends React.Component {
     reversedOrder: false
   }
 
+  /**
+   * This function sorts data according to given column
+   *
+   * @param {sting|number} columnID - id of the column used in sorting.
+   */
   sort = (columnID) => {
     const { onSort } = this.props
     const { sortColumn, sotrtedData, reversedOrder } = this.state
 
+    // Check if column has already been used to sort.
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
+    // Set direction of sorting.
     const direction = !_reversedOrder ? 'asc' : 'desc'
+    // Oreder data using lodash sort funciton.
     const newData = _.orderBy(sotrtedData, columnID, direction)
 
     this.setState({
@@ -116,10 +125,16 @@ class DataTable extends React.Component {
     }
   }
 
+  /**
+   * Build table headers.
+   *
+   * @returns {ReactElement}
+   */
   buildHeaders = () => {
     const { columns, sortable } = this.props
     const { sortColumn, reversedOrder } = this.state
     const { sort } = this
+    // Pass sorting order to allow propper sorting arrow hightlight.
     const sortOrder = !reversedOrder ? 'asc' : 'desc'
 
     const headersProps = {
@@ -136,7 +151,7 @@ class DataTable extends React.Component {
 
   render (props) {
     const {
-      actions, columns, className, data, onSort,
+      tableActions, columns, className, data, onSort,
       sortable, verticalActionCell, ...passedProps
     } = this.props
     const { sotrtedData } = this.state
@@ -149,7 +164,7 @@ class DataTable extends React.Component {
         { buildHeaders() }
         <Body>
           <TableRow
-            actions={actions}
+            tableActions={tableActions}
             columns={columns}
             rowData={sotrtedData}
             verticalActionCell={verticalActionCell}

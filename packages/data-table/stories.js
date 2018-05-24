@@ -32,10 +32,10 @@ const columns = [
   { id: 'assignee', name: 'Assignee' },
   { id: 'date_of_ride', name: 'Date of ride', render: cell => cell },
   { id: 'pickup', name: 'Pickup / Dropoff', renderHeader: name => <span><Icon name='directions_car' style={{ fontSize: 20 }} />{name}</span> },
-  { id: 'actions', name: 'Actions' }
+  { id: 'tableActions', name: 'Actions' }
 ]
 
-const actions = [
+const tableActions = [
   { label: 'Duplicate', onClick: action('Duplicate'), icon: 'control_point_duplicate' },
   { label: 'Remove', onClick: action('Remove'), icon: 'clear' },
   { label: 'Assign', onClick: action('Assign'), icon: 'done', condition: row => !row.assignee }
@@ -44,7 +44,7 @@ const actions = [
 // Stories
 addStory('initial', readme, () => (
   <DataTable
-    actions={actions}
+    tableActions={tableActions}
     columns={columns}
     data={tableData}
     onSort={action('onSort')}
