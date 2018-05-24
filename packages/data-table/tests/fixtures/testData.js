@@ -25,8 +25,8 @@ export const columns = [
 export const columnsWithActions = [
   { id: 'id', name: 'ID' },
   { id: 'opened', name: 'Date opened' },
-  { id: 'assignee', name: 'Assignee', render: cell => <span className='test-span'>{cell}</span> },
-  { id: 'date_of_ride', name: 'Date of ride', render: cell => cell },
+  { id: 'assignee', name: 'Assignee' },
+  { id: 'date_of_ride', name: 'Date of ride' },
   {
     id: 'pickup',
     name: 'Pickup / Dropoff',
