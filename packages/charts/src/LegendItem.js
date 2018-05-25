@@ -5,7 +5,7 @@ import { buildClassName } from '@talixo/shared'
 
 import { getColorIndex } from './utils'
 
-const moduleName = 'legend-item'
+export const moduleName = 'legend-item'
 
 const propTypes = {
   /** Additional wrapper className */
@@ -48,15 +48,7 @@ const defaultProps = {
  * @returns {ReactElement}
  */
 function LegendItem (props) {
-  const {
-    className,
-    color,
-    disabled,
-    id,
-    onClick,
-    label,
-    value
-  } = props
+  const { className, color, disabled, id, onClick, label, value } = props
   const itemCls = buildClassName(`${moduleName}`, className, {
     clickable: onClick,
     disabled: disabled
@@ -67,7 +59,7 @@ function LegendItem (props) {
   return (
     <div onClick={onClick} className={itemCls}>
       <div
-        style={(color && {backgroundColor: color}) || {}}
+        style={(color && { backgroundColor: color }) || {}}
         className={colorboxCls}
       />
       <div className={labelCls}>{ label }</div>

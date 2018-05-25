@@ -62,13 +62,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function PieChart (props) {
-  const {
-    arcsProps,
-    className,
-    data,
-    style,
-    ...passedProps
-  } = props
+  const { arcsProps, className, data, style, ...passedProps } = props
   const { dataItems } = data
   const wrapperCls = buildClassName(moduleName, className)
   const sum = getPieValuesSum(dataItems)

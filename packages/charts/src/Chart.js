@@ -1,13 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  FlexibleXYPlot,
-  XAxis,
-  YAxis,
-  LineSeries,
-  HorizontalGridLines,
-  VerticalBarSeries,
-  VerticalGridLines
+  FlexibleXYPlot, XAxis, YAxis, LineSeries,
+  HorizontalGridLines, VerticalBarSeries, VerticalGridLines
 } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
@@ -18,7 +13,7 @@ import { generateSeriesClassName } from './utils'
 const moduleName = 'chart'
 
 const Components = {
-  bar: VerticalBarSeries.displayName = 'BarChart' && VerticalBarSeries,
+  bar: VerticalBarSeries,
   line: LineSeries
 }
 
@@ -69,7 +64,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  data: [{ dataItems: [] }],
+  data: [],
   lineColors: [],
   timeSeries: false,
   type: 'line',
@@ -155,15 +150,8 @@ class Chart extends React.Component {
     const { lastDrawLocation } = this.state
     const { onBrushEnd, getChartType, getSeriesProps } = this
     const {
-      className,
-      data,
-      dataSeriesProps,
-      lineProps,
-      xAxisTitle,
-      yAxisTitle,
-      type,
-      zoomable,
-      ...passedProps
+      className, data, dataSeriesProps, lineProps, xAxisTitle,
+      yAxisTitle, type, zoomable, ...passedProps
     } = this.props
 
     const wrapperCls = buildClassName(moduleName, className)

@@ -1,6 +1,8 @@
 import React from 'react'
-import LegendItem from '../src/LegendItem'
 import { shallow } from 'enzyme'
+
+import LegendItem, { moduleName } from '../src/LegendItem'
+import { buildClassName } from '@talixo/shared'
 
 const fakeProps = {
   className: 'test',
@@ -20,11 +22,14 @@ const createWrapper = (props = defaultProps) => shallow(<LegendItem {...props} /
 describe('<LegendItem> component ', () => {
   let wrapper
   describe('rendering', () => {
-    beforeEach(() => {
-      wrapper = createWrapper(fakeProps)
-    })
     it('should render properly', () => {
+      wrapper = createWrapper(fakeProps)
       expect(wrapper).toMatchSnapshot()
+    })
+    it('should not add color to styles when it is not passed', () => {
+      wrapper = createWrapper({ ...fakeProps, color: null })
+      const divCls = buildClassName(`${moduleName}__colorbox`)
+      expect(wrapper.find(`.${divCls}`).props().style).toEqual({})
     })
   })
 })
