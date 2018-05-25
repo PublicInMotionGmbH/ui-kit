@@ -58,13 +58,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Legend (props) {
-  const {
-    className,
-    dataItems,
-    direction,
-    onClick,
-    ...passedProps
-  } = props
+  const { className, dataItems, direction, onClick, ...passedProps } = props
   const wrapperCls = buildClassName(moduleName, className, [direction])
 
   return (

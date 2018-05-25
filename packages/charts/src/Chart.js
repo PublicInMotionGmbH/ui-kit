@@ -12,7 +12,7 @@ import {
 
 import { buildClassName } from '@talixo/shared'
 
-import Highligth from './Highlight'
+import Highlight from './Highlight'
 import { generateSeriesClassName } from './utils'
 
 const moduleName = 'chart'
@@ -37,7 +37,6 @@ const propTypes = {
 
       /** Data information to be displayed in chart. */
       dataItems: PropTypes.arrayOf(PropTypes.shape({
-
         /** X axis data. */
         x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
@@ -196,7 +195,7 @@ class Chart extends React.Component {
         }
         {
           zoomable && type === 'line' &&
-          <Highligth
+          <Highlight
             color={null}
             onBrushEnd={onBrushEnd}
           />

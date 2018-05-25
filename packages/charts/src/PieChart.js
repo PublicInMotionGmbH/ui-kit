@@ -17,10 +17,8 @@ const propTypes = {
 
   /** Pie chart data.  */
   data: PropTypes.shape({
-
     /** Data items to be displayed on the pie chart. */
     dataItems: PropTypes.arrayOf(PropTypes.shape({
-
       /** Additional class name of react-vis ArcSeries. */
       className: PropTypes.string,
 
