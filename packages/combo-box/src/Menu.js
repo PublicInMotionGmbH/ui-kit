@@ -3,109 +3,65 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+import MenuItem from './MenuItem'
+
+const propTypes = {
+  /** Function to build item ID - used for 'key' properties */
+  buildItemId: PropTypes.func.isRequired,
+
+  /** List of options to show */
+  options: PropTypes.array,
+
+  /** Function to build item props with handlers */
+  getItemProps: PropTypes.func.isRequired,
+
+  /** Function to render item value */
+  renderItem: PropTypes.func.isRequired,
+
+  /** Index of currently highlighted item */
+  highlightedIndex: PropTypes.number,
+
+  /** List of currently selected items */
+  selectedItems: PropTypes.array
+}
+
+const defaultProps = {
+  options: []
+}
+
 /**
- * Dropdown menu component.
+ * Component which represents expandable menu used in this package.
  *
  * @param {object} props
- * @param {*} [props.getItemProps]
- * @param {number} [props.highlightedIndex]
- * @param {*} [props.itemComponent]
- * @param {array} [props.items]
- * @param {boolean} [props.loading]
- * @param {string || number} [props.maxHeight]
- * @param {string} [props.overflow]
- * @param {boolean} [props.separated]
- * @param {*} [props.selectedItem]
- * @param {object} [props.style]
+ * @param {array} props.options
+ * @param {function} props.buildItemId
+ *
  * @returns {React.Element}
  */
-const AutocompleteMenu = props => {
-  const {
-    getItemProps, highlightedIndex, items, itemComponent: ItemComponent,
-    loading, maxHeight, overflow, selectedItem, separated, style
-  } = props
+function Menu (props) {
+  const { buildItemId, options } = props
 
-  const maxHeightStyle = {
-    overflowY: 'auto',
-    maxHeight,
-    ...style
-  }
+  // Build class name for menu component
+  const clsName = buildClassName([ 'combo-box', 'menu' ])
 
-  const wrapperClsNames = buildClassName([ 'combo-box', 'options' ], null, { separated })
-  const loadingClsName = buildClassName([ 'combo-box', 'item' ])
-
-  const generateClsNames = (item, index) => (
-    buildClassName([ 'combo-box', 'item' ], null, {
-      highlighted: highlightedIndex === index,
-      selected: selectedItem === item,
-      'overflow-truncate': overflow === 'truncate',
-      'overflow-break': overflow === 'break'
-    })
-  )
-
-  if (loading) {
-    return (
-      <div className={wrapperClsNames} style={maxHeight ? maxHeightStyle : style}>
-        <div
-          className={loadingClsName}
-        >
-          Loading...
-        </div>
-      </div>
-    )
-  }
+  // Build elements for all possible options
+  const elements = options.map((item, index) => (
+    <MenuItem
+      key={buildItemId(item, index)}
+      {...props}
+      item={item}
+      index={index}
+    />
+  ))
 
   return (
-    <div className={wrapperClsNames} style={maxHeight ? maxHeightStyle : style}>
-      {items.map((item, index) => (
-        <div
-          {...getItemProps({ item })}
-          key={ItemComponent ? index : item}
-          className={generateClsNames(item, index)}
-        >
-          {ItemComponent ? <ItemComponent item={item} /> : item}
-        </div>
-      ))}
+    <div className={clsName}>
+      {elements}
     </div>
   )
 }
 
-AutocompleteMenu.propTypes = {
-  /** Returns the props applied to menu item */
-  getItemProps: PropTypes.func,
+Menu.propTypes = propTypes
+Menu.defaultProps = defaultProps
 
-  /** The currently highlighted item */
-  highlightedIndex: PropTypes.number,
-
-  /** Optional item component */
-  itemComponent: PropTypes.func,
-
-  /** Items array */
-  items: PropTypes.array,
-
-  /** Loading state */
-  loading: PropTypes.bool,
-
-  /** Maximum toggle menu height */
-  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** Item text overflow type */
-  overflow: PropTypes.oneOf(['truncate', 'break']),
-
-  /** The currently selected item */
-  selectedItem: PropTypes.any,
-
-  /** Displays menu as separated element */
-  separated: PropTypes.bool,
-
-  /** The currently selected item */
-  style: PropTypes.object
-}
-
-AutocompleteMenu.defaultProps = {
-  items: [],
-  separated: false,
-  getItemProps: props => props
-}
-
-export default AutocompleteMenu
+export default Menu

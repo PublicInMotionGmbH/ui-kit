@@ -1,6 +1,6 @@
 {
   "name": "@talixo/badge",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI component for badge",
   "main": "dist/index.js",
   "module": "index.js",
@@ -9,6 +9,9 @@
     "test": "node ../../scripts/runTests.js --only badge",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only badge"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -20,15 +23,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/button": "^1.0.0",
-    "@talixo/navigation": "^1.0.0"
-  },
-  "peerDependencies": {
+    "@talixo/button": "^0.1.0",
+    "@talixo/navigation": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0"
+  "peerDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }

@@ -1,0 +1,29 @@
+@import '~react-dates/lib/css/_datepicker.css'
+@import './config'
+
+@include module('calendar')
+  .DateInput_input
+    box-sizing: border-box
+    
+  .SingleDatePickerInput__withBorder
+    padding: dp(.1)
+    border: 1px solid
+    border-radius: $border-radius-m
+  
+  .DayPicker_weekHeader
+    top: dp(7.2)
+
+  .DateInput_input, .DateInput_input__focused
+    border-radius: $border-radius-m
+
+  .DayPickerKeyboardShortcuts_show
+    display: none
+
+  .SingleDatePicker
+    display: block
+
+  .SingleDatePicker_picker
+    z-index: 999
+
+  .DateInput
+    width: 100%

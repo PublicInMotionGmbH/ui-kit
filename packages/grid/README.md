@@ -22,6 +22,7 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/grid`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -63,4 +64,4 @@ xlarge        | number      | n/a     | look at Segment
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

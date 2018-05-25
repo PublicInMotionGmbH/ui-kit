@@ -2,13 +2,9 @@
 
 exports[`<NumberInput /> renders correctly 1`] = `
 <TextInput
-  className="talixo-number-input"
+  InputComponent="input"
+  className="talixo-number-input talixo-number-input--stepper"
   error={false}
-  left={
-    <Icon
-      name="directions_car"
-    />
-  }
   max={Infinity}
   min={-Infinity}
   onChange={[Function]}
@@ -21,7 +17,6 @@ exports[`<NumberInput /> renders correctly 1`] = `
     />
   }
   step={1}
-  suffix="cars"
   type="number"
   value={0}
 />

@@ -45,18 +45,7 @@ class Collapse extends React.PureComponent {
     }
 
     // Change `maxHeight` of element
-
-    // Get desired height
-    this.height = this.getHeight()
-
-    // Update element maxHeight when it's mounted
-    if (this.height != null) {
-      this.node.style.maxHeight = this.height + 'px'
-
-      // Trigger reflow by using 'offsetHeight',
-      // otherwise transition will not happen
-      this.reflowHeight = this.node.offsetHeight
-    }
+    this.makeTransition(props)
   }
 
   componentWillUnmount () {
@@ -71,6 +60,40 @@ class Collapse extends React.PureComponent {
 
     // Start listening for transition changes
     this.startListening()
+  }
+
+  makeTransition (props) {
+    // Use either next or current props
+    props = props || this.props
+
+    // Do not transit when it is not mounted
+    if (!this.mounted) {
+      return
+    }
+
+    // Get desired height
+    const nextHeight = this.getHeight()
+
+    // Do not update height when it is already the same
+    if (nextHeight === this.height) {
+      return
+    }
+
+    // Update with new height
+    this.height = nextHeight
+
+    // Update element maxHeight when it's mounted
+    if (this.height != null) {
+      this.node.style.maxHeight = this.height + 'px'
+
+      // Trigger reflow by using 'offsetHeight',
+      // otherwise transition will not happen
+      this.reflowHeight = this.node.offsetHeight
+    }
+
+    // Try to update max-height dynamically again
+    clearTimeout(this.dynamicTransitionTimeout)
+    this.dynamicTransitionTimeout = setTimeout(() => this.makeTransition())
   }
 
   /**
@@ -93,6 +116,9 @@ class Collapse extends React.PureComponent {
     if (!this.node) {
       return
     }
+
+    // Stop updating max-height dynamically in transition time
+    clearTimeout(this.dynamicTransitionTimeout)
 
     for (let i = 0; i < TRANSFORM_END.length; i++) {
       this.node.removeEventListener(TRANSFORM_END[i], this.finishTransition)
@@ -126,6 +152,9 @@ class Collapse extends React.PureComponent {
 
     // Get styles to check if default element is overriding max height
     const { style } = this.props
+
+    // Stop updating max-height dynamically now
+    clearTimeout(this.dynamicTransitionTimeout)
 
     if (style && style.maxHeight != null) {
       // Render whole component if it's using `maxHeight`

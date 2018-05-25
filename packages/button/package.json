@@ -1,6 +1,6 @@
 {
   "name": "@talixo/button",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI component for Button",
   "main": "dist/index.js",
   "module": "index.js",
@@ -9,6 +9,9 @@
     "test": "node ../../scripts/runTests.js --only button",
     "prepublishOnly": "npm run build",
     "build": "node ../../scripts/buildPackages.js --only button"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Public in Motion GmbH",
   "repository": {
@@ -20,14 +23,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon": "^1.0.0"
-  },
-  "peerDependencies": {
+    "@talixo/icon": "^0.1.1",
+    "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
-  "dependencies": {
-    "@talixo/shared": "^1.0.0"
+  "peerDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }

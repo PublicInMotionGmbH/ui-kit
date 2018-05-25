@@ -8,53 +8,80 @@ import { Collapse } from '@talixo/collapse'
 /**
  * Build element to show in accordion
  *
- * @param {object} config
- * @param {function|null} config.onChange
- * @param {*} config.value
- * @param {boolean} config.smooth
- * @param {number|null} config.animationTime
- * @param {object|{ label: *, content: *, id: * }} option
+ * @param {object} props
+ * @param {function} props.onChange
+ * @param {function} props.buildId
+ * @param {function} [props.renderOpenIcon]
+ * @param {function} [props.renderCloseIcon]
+ * @param {*} [props.value]
+ * @param {boolean} props.smooth
+ * @param {number|null} props.animationTime
+ * @param {object|{ label: *, content: * }} option
  * @param {number} index
  * @returns {*}
  */
-function buildElement (config, option, index) {
-  const { onChange, value, smooth, animationTime } = config
+function buildElement (props, option, index) {
+  const {
+    buildId, onChange, value, smooth, animationTime,
+    renderOpenIcon, renderCloseIcon
+  } = props
+
+  // Build ID based on the option
+  const id = buildId(option, index)
 
   // Check if current block is collapsed
-  const collapsed = value !== option.id
+  const collapsed = value !== id
 
   // Find next value on toggle
-  const nextValue = collapsed ? option.id : null
+  const nextValue = collapsed ? id : null
 
   // Build onClick handler
-  const change = onChange ? () => onChange(nextValue) : null
+  const change = () => onChange(nextValue)
 
   // Build class name for element
-  const className = buildClassName([ 'accordion', 'element' ], null, { collapsed })
+  const className = buildClassName('accordion-element', null, { collapsed })
 
   // Build props for elements
   const buttonProps = {
     role: 'tab',
-    className: prefix('accordion', 'element', 'toggle'),
+    className: prefix('accordion-element', 'toggle'),
     onClick: change,
     'aria-expanded': !collapsed
   }
 
+  // Build props for collapse element
   const collapseProps = {
     role: 'tabpanel',
+    className: prefix('accordion-element', 'content'),
     smooth: smooth,
     animationTime: animationTime,
     collapsed: collapsed,
     'aria-hidden': collapsed
   }
 
+  const renderIcon = collapsed ? renderOpenIcon : renderCloseIcon
+  const icon = renderIcon ? (
+    <span className={prefix('accordion-element', 'toggle', 'icon')}>
+      {renderIcon(option, { ...props, id, collapsed })}
+    </span>
+  ) : null
+
+  // Build class name for inner elements
+  const buttonInnerClsName = prefix('accordion-element', 'toggle', 'inner')
+  const contentInnerClsName = prefix('accordion-element', 'content', 'inner')
+
   return (
-    <div className={className} key={`${index}--${option.id}`}>
+    <div className={className} key={`${index}--${id}`}>
       <button type='button' {...buttonProps}>
-        {option.label}
+        <div className={buttonInnerClsName}>
+          {option.label}
+          {icon}
+        </div>
       </button>
       <Collapse {...collapseProps}>
-        {option.content}
+        <div className={contentInnerClsName}>
+          {option.content}
+        </div>
       </Collapse>
     </div>
   )
@@ -63,28 +90,99 @@ function buildElement (config, option, index) {
 /**
  * Component which represents checkbox.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {node} [props.children]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {node} [props.children]
+ * @param {function} props.onChange
+ * @param {function} props.buildId
+ * @param {function} [props.renderOpenIcon]
+ * @param {function} [props.renderCloseIcon]
+ * @param {*} [props.value]
+ * @param {boolean} props.smooth
+ * @param {number|null} props.animationTime
+ *
+ * @property {object} state
+ * @property {*} state.value
+ *
+ * @class
  */
-function Accordion (props) {
-  const { options, className, smooth, animationTime, value, onChange, ...passedProps } = props
+class Accordion extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
 
-  // Calculate animation time
-  const time = parseInt(animationTime, 10) || null
+  /**
+   * Update current value in component state,
+   * when value is controlled.
+   *
+   * @param {object} props
+   */
+  componentWillReceiveProps (props) {
+    if (props.value !== this.state.value) {
+      this.setState({ value: props.value })
+    }
+  }
 
-  // Build class name for Accordion
-  const clsName = buildClassName('accordion', className)
+  /**
+   * Change value for self-controlled component,
+   * or only send event with new value.
+   *
+   * @param {*} nextValue
+   */
+  onChange = nextValue => {
+    const { value, onChange } = this.props
 
-  // Build accordion elements
-  const elements = options.map(buildElement.bind(null, { onChange, value, smooth, animationTime: time }))
+    // Update value when it's self-controlled
+    if (value == null) {
+      this.setState({ value: nextValue })
+    }
 
-  return (
-    <div className={clsName} {...passedProps}>
-      {elements}
-    </div>
-  )
+    // Send event with new value
+    if (onChange) {
+      onChange(nextValue)
+    }
+  }
+
+  /**
+   * Render accordion.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const {
+      options, className, smooth, animationTime, value,
+      buildId, onChange, renderOpenIcon, renderCloseIcon, ...passedProps
+    } = this.props
+
+    // Get current value
+    const _value = this.state.value
+
+    // Calculate animation time
+    const time = parseInt(animationTime, 10) || null
+
+    // Build class name for Accordion
+    const clsName = buildClassName('accordion', className)
+
+    // Prepare accordion element factory
+    const _buildElement = buildElement.bind(null, {
+      onChange: this.onChange,
+      buildId: buildId,
+      value: _value,
+      smooth: smooth,
+      animationTime: time,
+      renderOpenIcon: renderOpenIcon,
+      renderCloseIcon: renderCloseIcon
+    })
+
+    // Build accordion elements
+    const elements = options.map(_buildElement)
+
+    return (
+      <div className={clsName} {...passedProps}>
+        {elements}
+      </div>
+    )
+  }
 }
 
 Accordion.propTypes = {
@@ -98,17 +196,30 @@ Accordion.propTypes = {
   animationTime: PropTypes.number,
 
   /** Options to show in accordion */
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.node.isRequired,
+    content: PropTypes.node.isRequired
+  })).isRequired,
 
   /** ID of currently opened element */
   value: PropTypes.any,
 
   /** Event fired when button is clicked */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+
+  /** Render "open" icon for closed tab */
+  renderOpenIcon: PropTypes.func,
+
+  /** Render "close" icon for opened tab */
+  renderCloseIcon: PropTypes.func,
+
+  /** Function to build unique ID per option */
+  buildId: PropTypes.func
 }
 
 Accordion.defaultProps = {
-  smooth: true
+  smooth: true,
+  buildId: (option, index) => index
 }
 
 export default Accordion

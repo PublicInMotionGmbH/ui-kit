@@ -15,10 +15,18 @@ describe('<NumberInput />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('should render stepper', () => {
+  it('should render stepper by default', () => {
     const wrapper = mount(<NumberInput />)
 
     expect(wrapper.find(NumberInputStepper).length).toBe(1)
+
+    wrapper.unmount()
+  })
+
+  it('should not render stepper when it is switched off', () => {
+    const wrapper = mount(<NumberInput stepper={false} />)
+
+    expect(wrapper.find(NumberInputStepper).length).toBe(0)
 
     wrapper.unmount()
   })
@@ -31,13 +39,6 @@ describe('<NumberInput />', () => {
 
     // It still does have basic one
     expect(wrapper.hasClass(name)).toBe(true)
-  })
-
-  it('should handle `size`', () => {
-    const wrapper = shallow(<NumberInput size='small' />)
-
-    // It adds new class name
-    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
   })
 
   it('should pass styles', () => {

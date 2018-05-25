@@ -219,7 +219,7 @@ async function main () {
   }
 
   // Find all files in template which should be put into package
-  const templateFiles = glob.sync('**/*', { cwd: template, nodir: true })
+  const templateFiles = glob.sync('**/*', { dot: true, cwd: template, nodir: true })
 
   // Iterate over files
   for (const filePath of templateFiles) {

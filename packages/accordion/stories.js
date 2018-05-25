@@ -1,5 +1,8 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
+
+import { Icon } from '@talixo/icon'
 
 import Accordion from './src/Accordion'
 
@@ -12,6 +15,13 @@ const addStory = createStoriesFactory('Accordion', module, {
 })
 
 const options = [
+  { label: 'First one', content: 'Something is there' },
+  { label: 'Another', content: <strong>Also here we've got some content</strong> },
+  { label: 'Third', content: 'Here we are' },
+  { label: 'Fourth', content: 'It is there!' }
+]
+
+const optionsById = [
   { id: 1, label: 'First one', content: 'Something is there' },
   { id: 'another', label: 'Another', content: <strong>Also here we've got some content</strong> },
   { id: 'third', label: 'Third', content: 'Here we are' },
@@ -21,13 +31,12 @@ const options = [
 
 // Stories
 
-addStory.controlled('initial', readme, (setState, state) => (
+addStory('self-controlled', readme, () => (
   <Accordion
-    value={state.active}
-    onChange={x => setState({ active: x })}
+    onChange={action('change')}
     options={options}
   />
-), () => ({ active: null }))
+))
 
 addStory.controlled('different animation time', readme, (setState, state) => (
   <Accordion
@@ -38,11 +47,32 @@ addStory.controlled('different animation time', readme, (setState, state) => (
   />
 ), () => ({ active: null }))
 
+addStory.controlled('with special arrow', readme, (setState, state) => (
+  <Accordion
+    value={state.active}
+    onChange={x => setState({ active: x })}
+    animationTime={100}
+    options={options}
+    renderOpenIcon={() => <Icon name='keyboard_arrow_down' />}
+    renderCloseIcon={() => <Icon name='keyboard_arrow_up' />}
+  />
+), () => ({ active: null }))
+
 addStory.controlled('not smooth', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
     smooth={false}
     options={options}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('multiple items (different IDs)', readme, (setState, state) => (
+  <Accordion
+    value={state.active}
+    onChange={x => setState({ active: x })}
+    smooth={false}
+    options={optionsById}
+    buildId={option => option.id}
   />
 ), () => ({ active: null }))
