@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTable /> rendering renders children correctly 1`] = `
+<Table
+  className="talixo-data-table"
+  condensed={false}
+  fixed={false}
+>
+  <TableHeaders
+    columns={
+      Array [
+        Object {
+          "id": "id",
+          "name": "ID",
+        },
+        Object {
+          "id": "opened",
+          "name": "Date opened",
+        },
+        Object {
+          "id": "assignee",
+          "name": "Assignee",
+          "render": [Function],
+        },
+        Object {
+          "id": "date_of_ride",
+          "name": "Date of ride",
+          "render": [Function],
+        },
+        Object {
+          "id": "pickup",
+          "name": "Pickup / Dropoff",
+          "renderHeader": [Function],
+        },
+        Object {
+          "id": "tableActions",
+          "name": "Actions",
+          "renderHeader": [Function],
+        },
+      ]
+    }
+    sortColumn=""
+    sortOrder="asc"
+    sortable={false}
+  />
+  <Body>
+    <TableRow
+      columns={
+        Array [
+          Object {
+            "id": "id",
+            "name": "ID",
+          },
+          Object {
+            "id": "opened",
+            "name": "Date opened",
+          },
+          Object {
+            "id": "assignee",
+            "name": "Assignee",
+            "render": [Function],
+          },
+          Object {
+            "id": "date_of_ride",
+            "name": "Date of ride",
+            "render": [Function],
+          },
+          Object {
+            "id": "pickup",
+            "name": "Pickup / Dropoff",
+            "renderHeader": [Function],
+          },
+          Object {
+            "id": "tableActions",
+            "name": "Actions",
+            "renderHeader": [Function],
+          },
+        ]
+      }
+      rowData={
+        Array [
+          Object {
+            "assignee": "John Smith",
+            "date_of_ride": "18th Feb 2018",
+            "id": 0,
+            "opened": "16th Jan 2018",
+            "pickup": "Berlin SXF Alexanderplatz",
+          },
+          Object {
+            "assignee": "",
+            "date_of_ride": "19th Feb 2018",
+            "id": 1,
+            "opened": "17th Jan 2018",
+            "pickup": "Krakow",
+          },
+          Object {
+            "assignee": "Mickey Mouse",
+            "date_of_ride": "20th Feb 2018",
+            "id": 2,
+            "opened": "18th Jan 2018",
+            "pickup": "Warszawa",
+          },
+        ]
+      }
+      tableActions={Array []}
+      verticalActionCell={false}
+    />
+  </Body>
+</Table>
+`;

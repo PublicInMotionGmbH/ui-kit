@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TableRow /> rendering renders children correctly 1`] = `
+<React.Fragment>
+  <Row
+    key="0"
+  >
+    <Cell
+      key="id"
+    >
+      0
+    </Cell>
+    <Cell
+      key="opened"
+    >
+      16th Jan 2018
+    </Cell>
+    <Cell
+      key="assignee"
+    >
+      <span
+        className="test-span"
+      >
+        John Smith
+      </span>
+    </Cell>
+    <Cell
+      key="date_of_ride"
+    >
+      18th Feb 2018
+    </Cell>
+    <Cell
+      key="pickup"
+    >
+      Berlin SXF Alexanderplatz
+    </Cell>
+  </Row>
+  <Row
+    key="1"
+  >
+    <Cell
+      key="id"
+    >
+      1
+    </Cell>
+    <Cell
+      key="opened"
+    >
+      17th Jan 2018
+    </Cell>
+    <Cell
+      key="assignee"
+    >
+      <span
+        className="test-span"
+      />
+    </Cell>
+    <Cell
+      key="date_of_ride"
+    >
+      19th Feb 2018
+    </Cell>
+    <Cell
+      key="pickup"
+    >
+      Krakow
+    </Cell>
+  </Row>
+  <Row
+    key="2"
+  >
+    <Cell
+      key="id"
+    >
+      2
+    </Cell>
+    <Cell
+      key="opened"
+    >
+      18th Jan 2018
+    </Cell>
+    <Cell
+      key="assignee"
+    >
+      <span
+        className="test-span"
+      >
+        Mickey Mouse
+      </span>
+    </Cell>
+    <Cell
+      key="date_of_ride"
+    >
+      20th Feb 2018
+    </Cell>
+    <Cell
+      key="pickup"
+    >
+      Warszawa
+    </Cell>
+  </Row>
+</React.Fragment>
+`;
