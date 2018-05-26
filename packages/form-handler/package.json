@@ -23,10 +23,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "@talixo/shared": "^0.1.0",
     "@talixo/button": "^0.1.0",
     "@talixo/calendar": "^0.1.0",
     "@talixo/checkbox": "^0.1.0",
@@ -38,14 +34,18 @@
     "@talixo/number-input": "^0.1.0",
     "@talixo/phone-input": "^0.2.0",
     "@talixo/radio-input": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "@talixo/switcher": "^0.1.0",
     "@talixo/text-input": "^0.2.0",
-    "yup": "^0.24.1",
-    "formik": "^0.11.11"
+    "formik": "^0.11.11",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "yup": "^0.24.1"
   },
   "peerDependencies": {
-    "@talixo/shared": "^0.1.0",
     "@talixo/form-field": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

@@ -26,18 +26,18 @@
     "@talixo/checkbox": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "lodash": "^4.17.5",
-    "react-vis": "^1.9.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-vis": "^1.9.2"
   },
   "peerDependencies": {
     "@talixo/checkbox": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "lodash": "^4.17.5",
-    "react-vis": "^1.9.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-vis": "^1.9.2"
   }
 }
