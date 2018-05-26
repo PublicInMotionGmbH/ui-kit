@@ -258,7 +258,7 @@ class AutoComplete extends React.PureComponent {
   render () {
     const {
       icon, options, onChoose, buildItemId, renderItem,
-      children, onFocus, onBlur, ...passedProps
+      children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
     return (
