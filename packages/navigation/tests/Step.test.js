@@ -3,23 +3,23 @@ import { shallow } from 'enzyme'
 
 import { buildClassName } from '@talixo/shared'
 
-import Element, { moduleName } from '../src/Element'
+import Step, { moduleName } from '../src/Step'
 
 describe('Module name', () => {
   it('is passed correctly', () => {
-    const wrapper = shallow(<Element />)
-    const clsName = buildClassName([moduleName, 'element'])
+    const wrapper = shallow(<Step />)
+    const clsName = buildClassName([moduleName, 'step'])
 
     expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 })
 
-describe('<Element />', () => {
+describe('<Step />', () => {
   it('renders correctly', () => {
     const wrapper = shallow(
-      <Element>
+      <Step>
         Home
-      </Element>
+      </Step>
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -27,33 +27,33 @@ describe('<Element />', () => {
 
   it('renders active correctly', () => {
     const wrapper = shallow(
-      <Element active>
+      <Step active>
         Home
-      </Element>
+      </Step>
     )
-    const clsName = buildClassName([moduleName, 'element'], null, 'active')
+    const clsName = buildClassName([moduleName, 'step'], null, 'active')
 
     expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('renders completed correctly', () => {
     const wrapper = shallow(
-      <Element completed>
+      <Step completed>
         Home
-      </Element>
+      </Step>
     )
-    const clsName = buildClassName([moduleName, 'element'], null, 'completed')
+    const clsName = buildClassName([moduleName, 'step'], null, 'completed')
 
     expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
     const wrapper = shallow(
-      <Element disabled>
+      <Step disabled>
         Home
-      </Element>
+      </Step>
     )
-    const clsName = buildClassName([moduleName, 'element'], null, 'disabled')
+    const clsName = buildClassName([moduleName, 'step'], null, 'disabled')
 
     expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
@@ -61,14 +61,27 @@ describe('<Element />', () => {
   it('calls onClick when clicked', () => {
     const onClick = jest.fn()
     const wrapper = shallow(
-      <Element className='red' onClick={onClick}>
+      <Step className='red' onClick={onClick}>
         Home
-      </Element>
+      </Step>
     )
 
     wrapper
       .find('.red')
       .simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('renders tooltip', () => {
+    const wrapper = shallow(<Step />)
+
+    expect(wrapper.find('Tooltip').exists()).toEqual(true)
+  })
+
+  it('renders children in tooltip', () => {
+    const wrapper = shallow(<Step>Home</Step>)
+
+    const tooltip = wrapper.find('Tooltip')
+    expect(tooltip.props().render()).toEqual(<span>Home</span>)
   })
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { Tooltip } from '@talixo/tooltip'
 
 export const moduleName = 'navigation'
 
@@ -9,7 +10,7 @@ const propTypes = {
   /** Active state */
   active: PropTypes.bool,
 
-  /** Element items */
+  /** Step items */
   children: PropTypes.node,
 
   /** Completed state */
@@ -31,7 +32,7 @@ const defaultProps = {
 }
 
 /**
- * Component which represents Element.
+ * Component which represents Step.
  *
  * @param {object} props
  * @param {boolean} [props.active]
@@ -40,23 +41,23 @@ const defaultProps = {
  * @param {string} [props.className]
  * @param {boolean} [props.disabled]
  * @param {function} [props.onClick]
- * @returns {React.Element}
+ * @returns {React.Step}
  */
-function Element (props) {
+function Step (props) {
   const { active, children, completed, className, disabled, onClick, ...passedProps } = props
 
   // Build element class name
-  const classNames = buildClassName([ moduleName, 'element' ], className, { active, completed, disabled })
+  const classNames = buildClassName([ moduleName, 'step' ], className, { active, completed, disabled })
 
   return (
-    <li className={classNames} onClick={onClick} {...passedProps}>
-      {children}
-    </li>
+    <Tooltip position='top' render={() => (<span>{children}</span>)}>
+      <li onClick={onClick} className={classNames} {...passedProps} />
+    </Tooltip>
   )
 }
 
-Element.propTypes = propTypes
+Step.propTypes = propTypes
 
-Element.defaultProps = defaultProps
+Step.defaultProps = defaultProps
 
-export default Element
+export default Step

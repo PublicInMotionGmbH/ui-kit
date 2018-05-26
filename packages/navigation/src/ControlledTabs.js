@@ -3,6 +3,22 @@ import PropTypes from 'prop-types'
 
 import Element from './Element'
 
+const propTypes = {
+  /** Active tab */
+  activeTab: PropTypes.number,
+
+  /** List of tab labels */
+  labels: PropTypes.arrayOf(PropTypes.object),
+
+  /** Function passed to page buttons */
+  onChange: PropTypes.func
+}
+
+const defaultProps = {
+  activeTab: 0,
+  labels: []
+}
+
 /**
  * Component which represents ControlledTabs.
  *
@@ -27,20 +43,8 @@ function ControlledTabs (props) {
   ))
 }
 
-ControlledTabs.propTypes = {
-  /** Active tab */
-  activeTab: PropTypes.number,
+ControlledTabs.propTypes = propTypes
 
-  /** List of tab labels */
-  labels: PropTypes.arrayOf(PropTypes.object),
-
-  /** Function passed to page buttons */
-  onChange: PropTypes.func
-}
-
-ControlledTabs.defaultProps = {
-  activeTab: 0,
-  labels: [{}]
-}
+ControlledTabs.defaultProps = defaultProps
 
 export default ControlledTabs
