@@ -1,0 +1,36 @@
+{
+  "name": "@talixo/form",
+  "version": "1.0.0",
+  "description": "UI Component which represents Form",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only form",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only form"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/button": "^1.0.0",
+    "@talixo/control-group": "^1.0.0",
+    "@talixo/icon": "^1.0.0",
+    "@talixo/text-input": "^1.0.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {
+    "@talixo/shared": "^1.0.0"
+  }
+}
