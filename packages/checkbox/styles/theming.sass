@@ -1,6 +1,16 @@
 @import './config'
 
 @include module('checkbox')
+  &--error
+    color: $color-talixo-error-red !important
+
+    > input
+      border-color: $color-talixo-error-red !important
+
+      &:focus
+        outline: none
+        box-shadow: 0 0 0 dp(0.5) adjust-color($color-talixo-error-red, $alpha: -0.75) !important
+
   > input
     border-color: $color-ghost-border
     -webkit-appearance: none
