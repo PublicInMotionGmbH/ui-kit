@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Wizard /> renders children correctly 1`] = `
+<div
+  className="talixo-wizard"
+>
+  <Step1 />
+  <Navigation
+    type="pagination"
+  >
+    <Pagination
+      activePage={1}
+      displayedLimit={10}
+      nextLabel="Next"
+      onChange={[Function]}
+      pageCount={3}
+      previousLabel="Previous"
+    />
+  </Navigation>
+</div>
+`;

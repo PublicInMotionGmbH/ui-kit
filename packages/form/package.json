@@ -1,6 +1,6 @@
 {
   "name": "@talixo/form",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "UI Component which represents Form",
   "main": "dist/index.js",
   "module": "index.js",
@@ -31,6 +31,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@talixo/shared": "^1.0.0"
+    "@talixo/shared": "^0.1.0"
   }
 }
