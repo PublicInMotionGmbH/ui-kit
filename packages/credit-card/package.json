@@ -1,14 +1,14 @@
 {
-  "name": "@talixo/form-handler",
+  "name": "@talixo/credit-card",
   "version": "0.0.0",
-  "description": "UI Component which represents Form Handler",
+  "description": "UI Component which represents Credit Card",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "node ../../scripts/runTests.js --only form-handler",
+    "test": "node ../../scripts/runTests.js --only credit-card",
     "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/buildPackages.js --only form-handler"
+    "build": "node ../../scripts/buildPackages.js --only credit-card"
   },
   "publishConfig": {
     "access": "public"
@@ -26,31 +26,24 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "@talixo/shared": "^0.1.0",
-    "@talixo/button": "^0.1.0",
-    "@talixo/calendar": "^0.1.0",
-    "@talixo/checkbox": "^0.1.0",
     "@talixo/combo-box": "^0.1.0",
-    "@talixo/control-group": "^0.1.0",
-    "@talixo/fieldset": "^0.1.0",
     "@talixo/form-field": "^0.1.0",
+    "@talixo/form-handler": "^0.0.0",
     "@talixo/icon": "^0.1.0",
-    "@talixo/number-input": "^0.1.0",
-    "@talixo/phone-input": "^0.2.0",
-    "@talixo/radio-input": "^0.1.0",
-    "@talixo/switcher": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
     "@talixo/text-input": "^0.2.0",
-    "yup": "^0.24.1",
-    "formik": "^0.11.11"
+    "react-text-mask": "^5.4.1"
   },
   "peerDependencies": {
-    "@talixo/shared": "^0.1.0",
-    "@talixo/form-field": "^0.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
-  },
-  "dependencies": {
-    "formik": "^0.11.11"
+    "react-dom": "^16.2.0",
+    "@talixo/combo-box": "^0.1.0",
+    "@talixo/form-field": "^0.1.0",
+    "@talixo/form-handler": "^0.0.0",
+    "@talixo/icon": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
+    "@talixo/text-input": "^0.2.0",
+    "react-text-mask": "^5.4.1"
   }
 }
