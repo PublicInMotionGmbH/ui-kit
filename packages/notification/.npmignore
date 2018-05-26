@@ -21,3 +21,7 @@ npm-debug.log
 tests
 rollup.config.js
 stories.js
+scripts/
+
+# Temporary files
+cache/

@@ -16,6 +16,7 @@ const moduleName = 'text-input'
  * @property {object} props
  * @property {string} [props.className]
  * @property {boolean} [props.error]
+ * @property {function} [props.inputRef]
  * @property {function} [props.onChange]
  * @property {function} [props.InputComponent]
  * @property {string} [props.placeholder]
@@ -208,7 +209,13 @@ class TextInput extends React.PureComponent {
    * @param {HTMLElement} el
    */
   inputRef (el) {
+    const { inputRef } = this.props
+
     this.input = el
+
+    if (inputRef) {
+      inputRef(el)
+    }
   }
 
   /**
@@ -276,7 +283,7 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, style, value, suffix, left, right, InputComponent, ...restProps } = this.props
+    const { className, error, inputRef, onChange, InputComponent, style, value, suffix, left, right, ...restProps } = this.props
 
     // Initialize helper variables
     const hasLeft = left != null
@@ -324,6 +331,9 @@ TextInput.propTypes = {
 
   /** Indicates that input has error */
   error: PropTypes.bool,
+
+  /** Ref passed to input element */
+  inputRef: PropTypes.func,
 
   /** Callback for change event */
   onChange: PropTypes.func,
