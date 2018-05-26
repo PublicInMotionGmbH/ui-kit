@@ -1,0 +1,70 @@
+@import './config'
+
+@include module('legend')
+  display: flex
+  right: 0
+  box-sizing: border-box
+  padding: $legend-padding
+
+  &--horizontal
+    max-width: 100%
+    flex-direction: row
+    overflow-x: auto
+
+    #{prefix('legend-item')}
+      display: inline-flex
+      flex-direction: column
+      white-space: nowrap
+
+      &__colorbox
+        display: block
+
+  &--vertical
+    flex-direction: column
+    overflow-y: auto
+
+    #{prefix('legend-item')}
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+
+      &__label
+        display: inline
+
+      &__colorbox
+        margin: 0 dp(1.5)
+
+@include module('legend-item')
+  min-height: $legend-item-height
+  line-height: $legend-item-height
+  padding: $legend-padding
+
+  &__colorbox
+    width: dp(3)
+    height: dp(.375)
+    padding: 0
+    display: inline-block
+    vertical-align: middle
+
+@include module('filtered-chart')
+  display: flex
+
+  &--top, &--bottom
+    align-items: center
+
+  &--top
+    flex-direction: column
+
+  &--bottom
+    flex-direction: column-reverse
+
+  &--left, &--right
+    justify-content: space-between
+
+    #{prefix(filtered-chart)}__legend
+      width: 15%
+
+  &--left
+    flex-direction: row
+  &--right
+    flex-direction: row-reverse
