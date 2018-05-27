@@ -47,7 +47,6 @@ const propTypes = {
 const defaultProps = {
   stepper: true,
   error: false,
-  value: 0,
   precision: 0, // buttons doesn't work correctly above 1e15 correctly (because of float numbers)
   min: -Infinity,
   max: Infinity,
@@ -131,7 +130,8 @@ class NumberInput extends React.PureComponent {
    * Increment value
    */
   increment = () => {
-    const { value, step } = this.props
+    const { step } = this.props
+    const { value } = this.state
 
     return this.change(value, step)
   }
@@ -140,7 +140,8 @@ class NumberInput extends React.PureComponent {
    * Decrement value
    */
   decrement = () => {
-    const { value, step } = this.props
+    const { step } = this.props
+    const { value } = this.state
 
     return this.change(value, -step)
   }
@@ -178,7 +179,7 @@ class NumberInput extends React.PureComponent {
         type='number'
         right={stepperElement}
         onChange={this.onChange}
-        value={value}
+        value={'' + value}
         {...passedProps}
       />
     )

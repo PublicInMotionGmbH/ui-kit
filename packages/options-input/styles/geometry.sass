@@ -1,14 +1,15 @@
 @import './config'
 
-@include module('text-input')
-  border: none
-  &__suffix
-    margin-left: dp(1)
-
-    &:before
-      display: none
-
 .options-input
+  @include module('text-input')
+    border: none
+
+    &__suffix
+      margin-left: dp(1)
+
+      &:before
+        display: none
+
   &__toggle
     display: flex
     align-items: center

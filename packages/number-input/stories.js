@@ -92,7 +92,7 @@ addStory.controlled('without stepper', readme, (setState, state) => (
     <NumberInput
       onChange={value => setState({ value })}
       value={state.value}
-      switcher={false}
+      stepper={false}
     />
   </div>
 ), () => ({ value: 0 }))
