@@ -1,6 +1,6 @@
 {
   "name": "@talixo/form-field",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "UI Component which represents FormField",
   "main": "dist/index.js",
   "module": "index.js",
@@ -31,7 +31,7 @@
   "peerDependencies": {
     "@talixo/checkbox": "^0.1.0",
     "@talixo/number-input": "^0.1.0",
-    "@talixo/shared": "^1.0.0",
+    "@talixo/shared": "^0.1.0",
     "@talixo/text-input": "^0.2.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
