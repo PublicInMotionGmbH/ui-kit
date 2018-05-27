@@ -23,6 +23,12 @@ You can run scripts using `npm run NAME` or `yarn run NAME` commands.
 - `build` - build distributable version of all packages
 - `storybook` - run Storybook in development mode (available at `http://localhost:9009/`)
 - `build-storybook` - build static Storybook into `storybook-static` directory
+- `compare-own-versions` - compare local package versions with NPM ones, able to fix them by `--fix` param
+- `compare-dependencies` - compare dependencies in packages, able to fix some problems by `--fix` or update external dependencies by `--update`
+- `readme-dependencies` - list differences or update (`--fix`) peer dependencies in README files
+
+Last 3 commands can also use `--all` flag, which will list everything, not only problems and differences.
+Also, both these commands, `build` and `test` allow `--only` flag, where you can list packages which should be taken in action.
 
 ### Working with Lerna
 
