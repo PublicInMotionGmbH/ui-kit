@@ -51,7 +51,7 @@ const columnsWithAction = [
   { id: 'assignee', name: 'Assignee' },
   { id: 'date_of_ride', name: 'Date of ride' },
   { id: 'pickup', name: 'Pickup / Dropoff' },
-  { id: 'tableActions', name: 'Actions' }
+  { id: 'actions', name: 'Actions' }
 ]
 
 const columnsCustomCells = [
@@ -60,7 +60,7 @@ const columnsCustomCells = [
   { id: 'assignee', name: 'Assignee', render: cell => <span><Icon name='person' /> {cell}</span> },
   { id: 'date_of_ride', name: 'Date of ride', render: cell => <span><Icon name='date_range' /> {cell}</span> },
   { id: 'pickup', name: 'Pickup / Dropoff', render: cell => <span><Icon name='flight_takeoff' /> {cell}</span> },
-  { id: 'tableActions', name: 'Actions' }
+  { id: 'actions', name: 'Actions' }
 ]
 
 const columnsCustomHeaders = [
@@ -69,17 +69,17 @@ const columnsCustomHeaders = [
   { id: 'assignee', name: 'Assignee', renderHeader: name => <span><Icon name='person' /> {name}</span> },
   { id: 'date_of_ride', name: 'Date of ride', renderHeader: name => <span><Icon name='date_range' /> {name}</span> },
   { id: 'pickup', name: 'Pickup / Dropoff', renderHeader: name => <span><Icon name='flight_takeoff' /> {name}</span> },
-  { id: 'tableActions', name: 'Actions', renderHeader: name => <span><Icon name='settings' /> {name}</span> }
+  { id: 'actions', name: 'Actions', renderHeader: name => <span><Icon name='settings' /> {name}</span> }
 ]
 
 // Mock Actions
-const tableActions = [
+const actions = [
   { label: 'Duplicate', onClick: action('Duplicate'), icon: 'control_point_duplicate' },
   { label: 'Remove', onClick: action('Remove'), icon: 'clear' },
   { label: 'Assign', onClick: action('Assign'), icon: 'done' }
 ]
 
-const tableActionsConditional = [
+const actionsConditional = [
   { label: 'Assign', onClick: action('Assign'), icon: 'done', condition: row => !row.assignee },
   { label: 'Duplicate', onClick: action('Duplicate'), icon: 'control_point_duplicate', condition: row => row.assignee },
   { label: 'Remove', onClick: action('Remove'), icon: 'clear' }
@@ -97,14 +97,14 @@ addStory('with actions cell', readme, () => (
   <div>
     <h2>Horizontal actions cell</h2>
     <DataTable
-      tableActions={tableActions}
+      actions={actions}
       columns={columnsWithAction}
       data={tableData}
     />
     <br />
     <h2>Vertical actions cell</h2>
     <DataTable
-      tableActions={tableActions}
+      actions={actions}
       columns={columnsWithAction}
       data={tableData}
       verticalActionCell
@@ -116,14 +116,14 @@ addStory('with conditional actions', readme, () => (
   <div>
     <h2>Horizontal actions cell</h2>
     <DataTable
-      tableActions={tableActionsConditional}
+      actions={actionsConditional}
       columns={columnsWithAction}
       data={tableDataNoAssignee}
     />
     <br />
     <h2>Vertical actions cell</h2>
     <DataTable
-      tableActions={tableActionsConditional}
+      actions={actionsConditional}
       columns={columnsWithAction}
       data={tableDataNoAssignee}
       verticalActionCell
@@ -133,7 +133,7 @@ addStory('with conditional actions', readme, () => (
 
 addStory('custom cells', readme, () => (
   <DataTable
-    tableActions={tableActions}
+    actions={actions}
     columns={columnsCustomCells}
     data={tableData}
   />
@@ -141,7 +141,7 @@ addStory('custom cells', readme, () => (
 
 addStory('custom haders', readme, () => (
   <DataTable
-    tableActions={tableActions}
+    actions={actions}
     columns={columnsCustomHeaders}
     data={tableData}
   />
@@ -149,7 +149,7 @@ addStory('custom haders', readme, () => (
 
 addStory('sortable', readme, () => (
   <DataTable
-    tableActions={tableActions}
+    actions={actions}
     columns={columnsCustomHeaders}
     data={tableData}
     onSort={action('onSort')}

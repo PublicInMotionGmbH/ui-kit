@@ -40,7 +40,7 @@ const propTypes = {
   sortable: PropTypes.bool,
 
   /** Actions which can be applied to rows. */
-  tableActions: PropTypes.arrayOf(PropTypes.shape({
+  actions: PropTypes.arrayOf(PropTypes.shape({
 
     /** Function which indicates if button should be displayed.
      * Assigns item from data as function argument. */
@@ -56,7 +56,7 @@ const propTypes = {
     onClick: PropTypes.func
   })),
 
-  /** Indicates if tableActions should be displayed vertically or horizontally. */
+  /** Indicates if actions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
 }
 
@@ -77,11 +77,11 @@ const defaultProps = {
  * @property {object} props.data
  * @property {function} [props.onSort]
  * @property {boolean} [props.sortable]
- * @property {object[]} [props.tableActions]
- * @property {function} [props.tableActions.condition]
- * @property {string} props.tableActions.icon
- * @property {string} props.tableActions.label
- * @property {function} [props.tableActions.onClick]
+ * @property {object[]} [props.actions]
+ * @property {function} [props.actions.condition]
+ * @property {string} props.actions.icon
+ * @property {string} props.actions.label
+ * @property {function} [props.actions.onClick]
  * @property {boolean} [props.verticalActionCell]
  *
  * @property {object} state
@@ -151,7 +151,7 @@ class DataTable extends React.Component {
 
   render (props) {
     const {
-      tableActions, columns, className, data, onSort,
+      actions, columns, className, data, onSort,
       sortable, verticalActionCell, ...passedProps
     } = this.props
     const { sotrtedData } = this.state
@@ -164,7 +164,7 @@ class DataTable extends React.Component {
         { buildHeaders() }
         <Body>
           <TableRow
-            tableActions={tableActions}
+            actions={actions}
             columns={columns}
             rowData={sotrtedData}
             verticalActionCell={verticalActionCell}

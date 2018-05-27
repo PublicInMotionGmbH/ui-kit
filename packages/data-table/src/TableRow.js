@@ -19,7 +19,7 @@ const propTypes = {
   rowData: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   /** Actions which can be applied to rows. */
-  tableActions: PropTypes.arrayOf(PropTypes.shape({
+  actions: PropTypes.arrayOf(PropTypes.shape({
 
     /** Function which indicates if button should be displayed.
      * Assigns item from data as function argument. */
@@ -35,31 +35,31 @@ const propTypes = {
     onClick: PropTypes.func
   })),
 
-  /** Indicates if tableActions should be displayed vertically or horizontally. */
+  /** Indicates if actions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
 }
 
 const defaultProps = {
-  tableActions: [],
+  actions: [],
   verticalActionCell: false
 }
 
 /**
  * This function generates action cell for passed row.
  *
- * @param {object[]} tableActions
+ * @param {object[]} actions
  * @param {object} row
  * @param {boolean} [vertical]
  * @returns {ReactElement}
  */
-function generateActions (tableActions, row, vertical = false) {
+function generateActions (actions, row, vertical = false) {
   // Generate click function.
   const click = (onClick, e) => {
     if (onClick) onClick(row, e)
   }
 
   // Check condition provided by the user.
-  const displayedActions = tableActions.filter(action => (
+  const displayedActions = actions.filter(action => (
     action.condition && typeof action.condition === 'function'
       ? action.condition(row)
       : true
@@ -89,20 +89,20 @@ function generateActions (tableActions, row, vertical = false) {
  * @param {number|string} props.columns.id
  * @param {function} [props.columns.render]
  * @param {object[]} props.rowData
- * @param {object[]} [props.tableActions]
- * @param {function} [props.tableActions.condition]
- * @param {string} props.tableActions.icon
- * @param {string} props.tableActions.label
- * @param {function} [props.tableActions.onClick]
+ * @param {object[]} [props.actions]
+ * @param {function} [props.actions.condition]
+ * @param {string} props.actions.icon
+ * @param {string} props.actions.label
+ * @param {function} [props.actions.onClick]
  * @param {boolean} [props.verticalActionCell]
  *
  * @returns {ReactElement}
  */
 function TableRow (props) {
-  const { columns, rowData, tableActions, verticalActionCell } = props
+  const { columns, rowData, actions, verticalActionCell } = props
 
-  // Filter columns to ensure tableActions will be displayed as last column.
-  const cols = columns.filter(({ id }) => id !== 'tableActions')
+  // Filter columns to ensure actions will be displayed as last column.
+  const cols = columns.filter(({ id }) => id !== 'actions')
 
   return (
     <React.Fragment>
@@ -114,7 +114,7 @@ function TableRow (props) {
                 <Cell key={id}>{ render && typeof render === 'function' ? render(row[id]) : row[id] }</Cell>)
               )
             }
-            { tableActions.length > 0 && generateActions(tableActions, row, verticalActionCell) }
+            { actions.length > 0 && generateActions(actions, row, verticalActionCell) }
           </Row>
         ))
       }

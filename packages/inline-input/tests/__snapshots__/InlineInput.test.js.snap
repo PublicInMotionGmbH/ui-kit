@@ -16,6 +16,7 @@ exports[`<InlineInput /> should change span to input when span is clicked 1`] = 
   className="talixo-inline-input"
 >
   <TextInput
+    InputComponent="input"
     className="talixo-inline-input__input"
     error={false}
     inputRef={[Function]}

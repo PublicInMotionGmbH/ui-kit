@@ -75,9 +75,9 @@ function TableHeaders (props) {
   const { columns, onClick, sortable, sortColumn, sortOrder } = props
   const headerCls = buildClassName([moduleName, 'header'], null, { clickable: !!onClick })
 
-  // Filter columns to ensure tableActions will be displayed as last column.
-  const tableActions = _.find(columns, item => item.id === 'tableActions')
-  const cols = columns.filter(i => i.id !== 'tableActions')
+  // Filter columns to ensure actions will be displayed as last column.
+  const actions = _.find(columns, item => item.id === 'actions')
+  const cols = columns.filter(i => i.id !== 'actions')
 
   // Create onClick function.
   const click = (id, e) => {
@@ -95,12 +95,12 @@ function TableHeaders (props) {
         ))
       }
       {
-        tableActions && tableActions.name &&
+        actions && actions.name &&
           <HeadCell>
             {
-              tableActions.renderHeader && typeof tableActions.renderHeader === 'function'
-                ? tableActions.renderHeader(tableActions.name)
-                : tableActions.name
+              actions.renderHeader && typeof actions.renderHeader === 'function'
+                ? actions.renderHeader(actions.name)
+                : actions.name
             }
           </HeadCell>
       }

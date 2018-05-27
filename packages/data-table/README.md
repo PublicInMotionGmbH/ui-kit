@@ -33,8 +33,8 @@ columns             | Column[]  | yes       | n/a     | Information about column
 data                | object[]  | yes       | n/a     | Data to be populated inside table. Require the same keys as inc olumns objects.
 onSort              | function  | no        | n/a     | onSort function callback.
 sortable            | boolean   | no        |`false`  | Indicates if table is sortable.
-tableActions        | Actions[] | no        | n/a     | Actions which can be applied to rows.
-verticalActionCell  | string    | no        | n/a     | Indicates if tableActions should be displayed vertically or horizontally.
+actions             | Actions[] | no        | n/a     | Actions which can be applied to rows.
+verticalActionCell  | string    | no        | n/a     | Indicates if actions should be displayed vertically or horizontally.
 
 ## Property shapes
 

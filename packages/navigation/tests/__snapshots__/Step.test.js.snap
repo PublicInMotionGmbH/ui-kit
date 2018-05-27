@@ -2,9 +2,11 @@
 
 exports[`<Step /> renders correctly 1`] = `
 <Tooltip
+  arrow={true}
   fade={false}
   position="top"
   render={[Function]}
+  triggerOn="hover"
 >
   <li
     className="talixo-navigation__step"

@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import TableRow from '../src/TableRow'
-import { tableData, tableActions, columns } from './fixtures/testData'
+import { tableData, actions, columns } from './fixtures/testData'
 
 const createProps = props => ({
   rowData: tableData,
@@ -37,7 +37,7 @@ describe('<TableRow />', () => {
   })
 
   describe('actions handling', () => {
-    const props = createProps({ tableActions })
+    const props = createProps({ actions })
     let wrapper, actionButtons
 
     beforeEach(() => {
@@ -46,20 +46,20 @@ describe('<TableRow />', () => {
     })
 
     it('should render actions button which fulfill conditions', () => {
-      const expectedLength = tableActions.length * tableData.length - 1
+      const expectedLength = actions.length * tableData.length - 1
       expect(actionButtons).toHaveLength(expectedLength)
     })
 
     it('should invoke onClick when button is Action is clicked', () => {
-      props.tableActions[0].onClick.mockReset()
+      props.actions[0].onClick.mockReset()
       actionButtons.first().simulate('click', {})
-      expect(props.tableActions[0].onClick).toHaveBeenCalledTimes(1)
+      expect(props.actions[0].onClick).toHaveBeenCalledTimes(1)
     })
 
     it('should invoke onClick with proper argument', () => {
-      props.tableActions[0].onClick.mockReset()
+      props.actions[0].onClick.mockReset()
       actionButtons.first().simulate('click', {})
-      expect(props.tableActions[0].onClick).toHaveBeenCalledWith(props.rowData[0], expect.anything())
+      expect(props.actions[0].onClick).toHaveBeenCalledWith(props.rowData[0], expect.anything())
     })
   })
 })

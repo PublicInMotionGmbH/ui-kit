@@ -209,7 +209,7 @@ addStory('Bar Chart', readme, () => (
   </div>
 ))
 
-addStory('Filterble Bar Chart', readme, () => (
+addStory('Filterable Bar Chart', readme, () => (
   <div style={wrapperStyle}>
     <FilterableChart>
       <Chart
