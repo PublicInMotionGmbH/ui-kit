@@ -103,14 +103,3 @@ addStory.controlled('RTL', readme, (setState, state) => (
     <NumberInput onChange={value => setState({ value })} value={state.value} />
   </div>
 ), () => ({ value: 0 }))
-
-addStory('small', readme, () => (
-  <div>
-    <h2>Small number input</h2>
-    <NumberInput onChange={change} size='small' />
-    <h2>Small number input with initial value</h2>
-    <NumberInput onChange={change} size='small' value={15} />
-    <h2>Small number input with errors</h2>
-    <NumberInput onChange={change} size='small' error />
-  </div>
-))

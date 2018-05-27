@@ -139,7 +139,7 @@ addStory('custom cells', readme, () => (
   />
 ))
 
-addStory('custom haders', readme, () => (
+addStory('custom headers', readme, () => (
   <DataTable
     actions={actions}
     columns={columnsCustomHeaders}
