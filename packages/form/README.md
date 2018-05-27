@@ -11,6 +11,7 @@ using `npm install @talixo/form --save` or `yarn add @talixo/form`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/shared: ^0.1.0`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
