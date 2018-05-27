@@ -189,3 +189,10 @@ Starting Storybook for development at different port         | `npm run storyboo
 Build static code for Storybook into `storybook-static`      | `npm run build-storybook`
 Remove all `node_modules`                                    | `find . -name "node_modules" -exec rm -rf '{}' +` in main directory
 Reinitializing everything                                    | `find . -name "node_modules" -exec rm -rf '{}' + && npm run init` in main directory
+Compare our packages versions to these on NPM (w/ problems)  | `npm run compare-own-versions`
+Compare our packages versions to these on NPM (list all)     | `npm run compare-own-versions -- --all`
+Update our packages versions to match these on NPM           | `npm run compare-own-versions -- --fix`
+Compare and list our dependencies (with problems)            | `npm run compare-dependencies`
+Compare and list our dependencies (list all)                 | `npm run compare-dependencies -- --all`
+List our dependencies and fix local problems                 | `npm run compare-dependencies -- --fix`
+List our dependencies and update external to our newest deps | `npm run compare-dependencies -- --update`

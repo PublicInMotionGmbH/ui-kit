@@ -96,6 +96,8 @@ function analyzePackage (dirPath) {
   return {
     id: name,
     name: config.name,
+    configPath: path.join(dirPath, 'package.json'),
+    config: config,
     input: inputPath,
     dependencies: Object.keys(Object.assign({}, config.dependencies, config.peerDependencies)),
     omitBuild: !!config.omitBuild,
