@@ -28,7 +28,7 @@ className       | string    | n/a                   | additional class name pass
 smooth          | bool      | n/a                   | should elements be collapsed and opened smoothly?
 animationTime   | number    | n/a                   | time of smooth animation (in ms)
 options         | Option[]  | n/a                   | options to show in Accordion
-value           | any       | n/a                   | ID of currently opened option
+value           | any       | self-controlled       | ID of currently opened option
 onChange        | function  | n/a                   | Handler fired on possible change of opened container
 renderOpenIcon  | function  | n/a                   | Render "open" icon for closed option
 renderCloseIcon | function  | n/a                   | Render "close" icon for opened option

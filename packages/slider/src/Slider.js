@@ -9,11 +9,8 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Defaul value */
-  defaultValue: PropTypes.number,
-
-  /** Label for input range */
-  label: PropTypes.string,
+  /** Controlled value, otherwise self-controlled */
+  value: PropTypes.number,
 
   /** Maximum value in range */
   max: PropTypes.number,
@@ -42,51 +39,48 @@ const propTypes = {
  * @class {React.Element}
  */
 class Slider extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      value: this.props.defaultValue || this.setDefaultValue()
+  state = {
+    value: this.props.value || this.props.min
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.value != null && props.value !== this.state.value) {
+      this.setState({ value: props.value })
     }
-    this.handleChange = this.handleChange.bind(this)
   }
 
   /**
-   * This function set value to be used as default
+   * This function handles change of input value.
    *
-   * @returns {number}
-   */
-  setDefaultValue () {
-    const min = this.props.min || 0
-    const max = this.props.max || 100
-
-    return (max < min) ? min : min + (max - min) / 2
-  }
-
-  /**
-   * This function handle change of input value
    * @param {object} e
    */
-  handleChange (e) {
-    this.setState({
-      value: e.target.value
-    })
-  };
+  handleChange = (e) => {
+    const value = e.target.value
+
+    if (this.props.value == null) {
+      this.setState({ value })
+    }
+
+    if (this.props.onChange) {
+      this.props.onChange(value)
+    }
+  }
 
   render () {
-    const { className, label, max, min, step, ...passedProps } = this.props
-    const { value } = this.state
+    const { className, max, min, step, value, onChange, ...passedProps } = this.props
+    const _value = this.state.value
+
     return (
       <span className={buildClassName(moduleName, className)} {...passedProps}>
-        {label && <label className={buildClassName([moduleName, 'label'])}>{label}</label>}
-        <span className={buildClassName([moduleName, 'value'])}>{value}</span>
+        <span className={buildClassName([ moduleName, 'value' ])}>{_value}</span>
         <input
-          className={buildClassName([moduleName, 'input'])}
+          className={buildClassName([ moduleName, 'input' ])}
           max={max}
           min={min}
           onChange={this.handleChange}
           step={step}
           type='range'
-          value={value}
+          value={_value}
         />
       </span>
     )

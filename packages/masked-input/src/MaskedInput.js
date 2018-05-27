@@ -42,7 +42,7 @@ const defaultProps = {
  */
 class MaskedInput extends React.Component {
   state = {
-    value: null,
+    value: this.props.value === undefined ? null : this.props.value,
     focused: false
   }
 
@@ -52,7 +52,7 @@ class MaskedInput extends React.Component {
    * @param nextProps
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.state.value) {
+    if (nextProps.value !== undefined && nextProps.value !== this.state.value) {
       this.setState({ value: nextProps.value })
     }
   }
@@ -82,6 +82,14 @@ class MaskedInput extends React.Component {
       if (onBlur) onBlur(focused, ...args)
       if (childOnBlur) childOnBlur(...args)
     }
+  }
+
+  focus = (...args) => {
+    this.handleFocusChange(true, ...args)
+  }
+
+  blur = (...args) => {
+    this.handleFocusChange(false, ...args)
   }
 
   /**
@@ -116,13 +124,12 @@ class MaskedInput extends React.Component {
    */
   getInputProps = () => {
     const { renderInput } = this.props
-    const { handleFocusChange, handleChange } = this
 
     const newProps = {
       ...renderInput.props,
-      onBlur: handleFocusChange.bind(this, false),
-      onFocus: handleFocusChange.bind(this, true),
-      onChange: handleChange
+      onBlur: this.blur,
+      onFocus: this.focus,
+      onChange: this.handleChange
     }
 
     return newProps
@@ -140,20 +147,17 @@ class MaskedInput extends React.Component {
     // Only generate element if input is not focused and value inside state exists
     const element = renderMask(value)
     return React.cloneElement(element, {
-      ...element.porps,
-      className: buildClassName([moduleName, 'mask'], element.props.className)
+      ...element.props,
+      className: buildClassName([ moduleName, 'mask' ], element.props.className)
     })
   }
 
   render () {
-    const {
-      className, error, onBlur, onFocus,
-      onChange, renderInput, renderMask, ...passedProps
-    } = this.props
+    const { className, error, onBlur, onFocus, onChange, renderInput, renderMask, ...passedProps } = this.props
     const { focused, value } = this.state
     const { getInputProps, maskRenderer } = this
+
     const wrapperCls = buildClassName(moduleName, className)
-    // const mask = maskRenderer()
     const inputProps = getInputProps()
 
     return (

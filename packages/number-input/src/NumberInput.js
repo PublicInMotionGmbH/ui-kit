@@ -73,6 +73,17 @@ const defaultProps = {
  * @class
  */
 class NumberInput extends React.PureComponent {
+  state = {
+    value: this.props.value || 0
+  }
+
+  componentWillReceiveProps (props) {
+    const nextValue = props.value || 0
+    if (props.value != null && nextValue !== this.state.value) {
+      this.setState({ value: nextValue })
+    }
+  }
+
   /**
    * Calculate current value from text (or number)
    *
@@ -96,7 +107,8 @@ class NumberInput extends React.PureComponent {
    * @param {number} [delta]
    */
   change = (base, delta) => {
-    const { value, onChange } = this.props
+    const { onChange } = this.props
+    const { value } = this.state
 
     const previous = +value
     const current = this.calculate(base)
@@ -104,6 +116,10 @@ class NumberInput extends React.PureComponent {
 
     if (next === previous) {
       return
+    }
+
+    if (this.props.value == null) {
+      this.setState({ value: next })
     }
 
     if (onChange) {
@@ -129,6 +145,10 @@ class NumberInput extends React.PureComponent {
     return this.change(value, -step)
   }
 
+  onChange = (value) => {
+    return this.change(value)
+  }
+
   /**
    * Render input
    *
@@ -137,8 +157,9 @@ class NumberInput extends React.PureComponent {
   render () {
     const {
       className, error, stepper, onChange, precision,
-      initialTime, stepTime, right, ...passedProps
+      initialTime, stepTime, right, value: _value, ...passedProps
     } = this.props
+    const { value } = this.state
 
     const wrapperClass = buildClassName(moduleName, className, { error, stepper })
 
@@ -156,7 +177,8 @@ class NumberInput extends React.PureComponent {
         className={wrapperClass}
         type='number'
         right={stepperElement}
-        onChange={value => this.change(value)}
+        onChange={this.onChange}
+        value={value}
         {...passedProps}
       />
     )

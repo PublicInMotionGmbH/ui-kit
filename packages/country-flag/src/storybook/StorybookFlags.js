@@ -11,17 +11,11 @@ const icons = require('../../sprites/meta.json')
  * @extends {React.Component}
  */
 class StorybookFlags extends React.Component {
-  constructor (props, context) {
-    super(props, context)
-
-    this.onQueryChange = this.onQueryChange.bind(this)
-
-    this.state = {
-      query: ''
-    }
+  state = {
+    query: ''
   }
 
-  onQueryChange (e) {
+  onQueryChange = (e) => {
     this.setState({ query: e.target.value })
   }
 

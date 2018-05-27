@@ -175,7 +175,7 @@ class OptionsInput extends React.PureComponent {
    * @param {string} id
    * @param {number} value
    */
-  change (id, value) {
+  change = (id, value) => {
     const nextValue = {
       ...this.state.value,
       [id]: value
@@ -190,14 +190,14 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
-  saveRef (node) {
+  saveRef = (node) => {
     this.el = node
   }
 
   /**
    * This function handle focus
    */
-  focus () {
+  focus = () => {
     this.toggle()
 
     if (this.props.onFocus) {
@@ -208,7 +208,7 @@ class OptionsInput extends React.PureComponent {
   /**
    * This function handle blur
    */
-  blur () {
+  blur = () => {
     if (this.props.onBlur) {
       this.props.onBlur()
     }
@@ -230,7 +230,7 @@ class OptionsInput extends React.PureComponent {
         key={x.id}
         option={x}
         value={value[x.id]}
-        onChange={this.change.bind(this)}
+        onChange={this.change}
       />
     ))
 
@@ -239,12 +239,12 @@ class OptionsInput extends React.PureComponent {
     })
 
     return (
-      <div className={clsName} ref={this.saveRef.bind(this)} {...restProps} >
+      <div className={clsName} ref={this.saveRef} {...restProps} >
         <button
           type='button'
           className='options-input__toggle'
-          onFocus={this.focus.bind(this)}
-          onBlur={this.blur.bind(this)}
+          onFocus={this.focus}
+          onBlur={this.blur}
           aria-expanded={this.state.open}
           role='button'
         >

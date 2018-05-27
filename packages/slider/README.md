@@ -21,14 +21,13 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-defaultValue  | number    | n/a     | initial value of input
-label         | string    | n/a     | label for input range
-max           | number    | n/a     | maximum value in range
-min           | number    | n/a     | minimum value in range
-step          | number    | n/a     | size of each movement of the slider control
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+className     | string    | n/a             | additional class name passed to wrapper
+value         | number    | self-controlled | value of input
+max           | number    | n/a             | maximum value in range
+min           | number    | n/a             | minimum value in range
+step          | number    | n/a             | size of each movement of the slider control
 
 ## Changelog
 

@@ -93,25 +93,12 @@ function composeHandlers (...handlers) {
  * @class
  */
 class Tooltip extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      triggerOn: this.props.triggerOn,
-      clicked: false,
-      open: this.props.open,
-      left: null,
-      top: null
-    }
-
-    this.updatePosition = throttle(this.updatePosition.bind(this), 10)
-    this.handleMouseEnter = this.handleMouseEnter.bind(this)
-    this.handleMouseLeave = this.handleMouseLeave.bind(this)
-    this.handleMouseOver = this.handleMouseOver.bind(this)
-    this.handleMouseClick = this.handleMouseClick.bind(this)
-    this.addListeners = this.addListeners.bind(this)
-    this.removeListeners = this.removeListeners.bind(this)
-    this.setRef = this.setRef.bind(this)
+  state = {
+    triggerOn: this.props.triggerOn,
+    clicked: false,
+    open: this.props.open,
+    left: null,
+    top: null
   }
 
   /**
@@ -145,17 +132,17 @@ class Tooltip extends React.Component {
    * Update position of tooltip
    * @param {*} nextProps
    */
-  updatePosition (nextProps) {
+  updatePosition = throttle((nextProps) => {
     if (!this.el) return
 
     const { top, left } = getPositionNearElement(this.el, (nextProps && nextProps.position) || this.props.position)
     this.setState({ top, left })
-  }
+  }, 10)
 
   /**
    * Handle mouse enter event
    */
-  handleMouseEnter () {
+  handleMouseEnter = () => {
     if (!isUndefined(this.props.open)) return
     this.setState({ clicked: false, open: true })
     this.updatePosition()
@@ -164,7 +151,7 @@ class Tooltip extends React.Component {
   /**
    * Handle mouse leave
    */
-  handleMouseLeave () {
+  handleMouseLeave = () => {
     if (!isUndefined(this.props.open)) return
     this.setState({ open: false })
     this.updatePosition()
@@ -173,7 +160,7 @@ class Tooltip extends React.Component {
   /**
    * Handle mouse over
    */
-  handleMouseOver () {
+  handleMouseOver = () => {
     if (!isUndefined(this.props.open)) return
     if (!this.state.clicked && !this.state.open) this.setState({ open: true })
     this.updatePosition()
@@ -182,19 +169,19 @@ class Tooltip extends React.Component {
   /**
    * Handle mouse click
    */
-  handleMouseClick () {
+  handleMouseClick = () => {
     if (!isUndefined(this.props.open)) return
     this.setState({ open: !this.state.open })
     this.updatePosition()
   }
 
-  setRef (node) {
+  setRef = (node) => {
     this.removeListeners(this.el)
     this.el = findDOMNode(node)
     this.addListeners(this.el)
   }
 
-  addListeners (element) {
+  addListeners = (element) => {
     if (!element) {
       return
     }
@@ -210,7 +197,7 @@ class Tooltip extends React.Component {
     }
   }
 
-  removeListeners (element) {
+  removeListeners = (element) => {
     if (!element) {
       return
     }

@@ -32,35 +32,62 @@ const propTypes = {
 /**
  * Component which represents RadioGroup.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {string} [props.name]
- * @param {array} [props.options]
- * @param {string} [props.size]
- * @param {string|number} [props.value]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {string} [props.name]
+ * @property {array} [props.options]
+ * @property {string} [props.size]
+ * @property {string|number} [props.value]
+ * @class
  */
-function RadioGroup (props) {
-  const { className, children, name, options, value, size, onChange, ...passedProps } = props
+class RadioGroup extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
 
-  const optionsList = options.map((obj) => (
-    <RadioInput
-      checked={value === obj.value}
-      disabled={obj.disabled || false}
-      key={obj.label}
-      name={name}
-      onChange={checked => checked && onChange && onChange(obj.value)}
-      size={size}
-      value={obj.value}>
-      {obj.label}
-    </RadioInput>
-  ))
+  componentWillReceiveProps (props) {
+    if (props.value !== undefined && props.value !== this.state.value) {
+      this.setState({ value: props.value })
+    }
+  }
 
-  return (
-    <div className={buildClassName('radio-group', className)} {...passedProps} >
-      {optionsList}
-    </div>
-  )
+  change (value, checked) {
+    if (!checked) {
+      return
+    }
+
+    if (this.props.value === undefined) {
+      this.setState({ value })
+    }
+
+    if (this.props.onChange) {
+      this.props.onChange(value)
+    }
+  }
+
+  render () {
+    const { className, children, name, options, value, size, onChange, ...passedProps } = this.props
+    const _value = this.state.value
+
+    const optionsList = options.map(obj => (
+      <RadioInput
+        checked={_value === obj.value}
+        disabled={obj.disabled || false}
+        key={obj.label}
+        name={name}
+        onChange={this.change.bind(this, obj.value)}
+        size={size}
+        value={obj.value}>
+        {obj.label}
+      </RadioInput>
+    ))
+
+    return (
+      <div className={buildClassName('radio-group', className)} {...passedProps} >
+        {optionsList}
+      </div>
+    )
+  }
 }
 
 RadioGroup.propTypes = propTypes

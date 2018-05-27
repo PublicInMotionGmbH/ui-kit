@@ -23,14 +23,14 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | Checkbox description
-error         | boolean   | `false` | indicates that input has error
-size          | string    | n/a     | checkbox label size ('small' or 'large')
-style         | object    | n/a     | additional styles
-
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+className     | string    | n/a             | additional class name passed to wrapper
+children      | node      | n/a             | Checkbox description
+error         | boolean   | `false`         | indicates that input has error
+size          | string    | n/a             | checkbox label size ('small' or 'large')
+style         | object    | n/a             | additional styles
+value         | boolean   | self-controlled | is it checked?
 
 ## Changelog
 

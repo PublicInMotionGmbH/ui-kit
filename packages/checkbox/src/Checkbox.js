@@ -29,41 +29,56 @@ const defaultProps = {
 /**
  * Component which represents checkbox.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @param {boolean} [props.error]
- * @param {function} [props.onChange]
- * @param {node} [props.children]
- * @param {string} [props.size]
- * @param {object} [props.style]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {boolean} [props.error]
+ * @property {function} [props.onChange]
+ * @property {node} [props.children]
+ * @property {string} [props.size]
+ * @property {object} [props.style]
+ * @class
  */
-function Checkbox (props) {
-  const { children, className, error, onChange, size, style, ...passedProps } = props
+class Checkbox extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
 
-  /**
-   * Handle input change
-   *
-   * @param {object} event
-   */
-  const handleChange = (event) => {
-    if (onChange) {
-      onChange(event.target.checked)
+  componentWillReceiveProps (props) {
+    if (props.value !== this.state.value && props.value != null) {
+      this.setState({ value: props.value })
     }
   }
 
-  const clsName = buildClassName(moduleName, className, {error, [size]: size})
+  change = (event) => {
+    const value = event.target.checked
 
-  return (
-    <label className={clsName} style={style}>
-      <input
-        type='checkbox'
-        onChange={event => handleChange(event)}
-        {...passedProps}
-      />
-      <span>{children}</span>
-    </label>
-  )
+    if (this.props.value == null) {
+      this.setState({ value })
+    }
+
+    if (this.props.onChange) {
+      this.props.onChange(value)
+    }
+  }
+
+  render () {
+    const { children, className, error, size, style, value, ...passedProps } = this.props
+    const _value = this.state.value
+
+    const clsName = buildClassName(moduleName, className, {error, [size]: size})
+
+    return (
+      <label className={clsName} style={style}>
+        <input
+          type='checkbox'
+          onChange={this.change}
+          checked={_value}
+          {...passedProps}
+        />
+        <span>{children}</span>
+      </label>
+    )
+  }
 }
 
 Checkbox.propTypes = propTypes
