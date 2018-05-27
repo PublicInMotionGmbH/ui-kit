@@ -196,3 +196,4 @@ Compare and list our dependencies (with problems)            | `npm run compare-
 Compare and list our dependencies (list all)                 | `npm run compare-dependencies -- --all`
 List our dependencies and fix local problems                 | `npm run compare-dependencies -- --fix`
 List our dependencies and update external to our newest deps | `npm run compare-dependencies -- --update`
+Fix peer dependencies in README.md file                      | `npm run readme-dependencies -- --fix`

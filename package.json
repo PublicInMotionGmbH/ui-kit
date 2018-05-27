@@ -15,6 +15,7 @@
     "build": "node ./scripts/buildPackages.js",
     "compare-own-versions": "node ./scripts/fixLocalVersions.js",
     "compare-dependencies": "node ./scripts/fixDependenciesVersions.js",
+    "readme-dependencies": "node ./scripts/fixReadmeVersions.js",
     "gh-pages": "npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages",
     "postinstall": "lerna bootstrap --hoist && lerna link && npm run build",
     "prepublishOnly": "npm test",

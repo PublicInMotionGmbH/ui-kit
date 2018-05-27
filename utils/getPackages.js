@@ -96,6 +96,7 @@ function analyzePackage (dirPath) {
   return {
     id: name,
     name: config.name,
+    readmePath: path.join(dirPath, 'README.md'),
     configPath: path.join(dirPath, 'package.json'),
     config: config,
     input: inputPath,
