@@ -15,6 +15,8 @@ async function main () {
 
   const maxLength = packages.reduce((a, b) => Math.max(a, b.name.length), 0)
 
+  let needsFixes = false
+
   for (const pkg of packages) {
     const name = pkg.name
     const visibleName = ' '.repeat(maxLength - name.length) + name
@@ -57,10 +59,12 @@ async function main () {
         const between = ' '.repeat(maxDependencyLength - dependency.name.length)
 
         if (expectedDependencies[dependency.name] && expectedDependencies[dependency.name] !== dependency.version) {
+          needsFixes = true
           lines.push(
             `${chalk.bold(dependency.name)}: ${between} ${chalk.red(dependency.version)} ${chalk.green(expectedDependencies[dependency.name])}`
           )
         } else if (!expectedDependencies[dependency.name]) {
+          needsFixes = true
           lines.push(chalk.red(`${chalk.bold(dependency.name)}: ${between} ${dependency.version}`))
         } else if (all) {
           lines.push(`${chalk.bold(dependency.name)}:${between}${dependency.version}`)
@@ -68,6 +72,7 @@ async function main () {
       }
 
       for (const dependency of Object.keys(expectedDependencies).filter(x => existingDependencies.indexOf(x) === -1)) {
+        needsFixes = true
         const between = ' '.repeat(maxDependencyLength - dependency.length)
         lines.push(chalk.green(`${chalk.green(chalk.bold(dependency))}: ${between} ${expectedDependencies[dependency]}`))
       }
@@ -98,6 +103,10 @@ async function main () {
 
       fs.writeFileSync(pkg.readmePath, readme.replace(regexList, options))
     }
+  }
+
+  if (needsFixes) {
+    process.exit(1)
   }
 }
 

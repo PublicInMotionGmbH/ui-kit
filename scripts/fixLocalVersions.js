@@ -21,6 +21,8 @@ async function main () {
   // Get array of packages to build (if passed through CLI)
   const { only, fix, all } = yargs.array('only').boolean('fix').boolean('all').argv
 
+  let needsFixes = false
+
   // Get packages which should be updated
   const packages = getPackages(only)
 
@@ -42,6 +44,8 @@ async function main () {
 
     console.log(chalk.bold(visibleName), ' ', chalk.red(version), chalk.green(newest))
 
+    needsFixes = true
+
     if (!fix) {
       return
     }
@@ -50,6 +54,10 @@ async function main () {
     json.version = newest
     fs.writeFileSync(pkg.configPath, JSON.stringify(json, null, 2) + '\n')
   })
+
+  if (needsFixes) {
+    process.exit(1)
+  }
 }
 
 // Run procedure

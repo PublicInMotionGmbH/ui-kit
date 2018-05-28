@@ -50,6 +50,8 @@ async function main () {
   // Get array of packages to build (if passed through CLI)
   const { only, fix, all, update } = yargs.array('only').boolean('fix').boolean('update').boolean('all').argv
 
+  let needsFixes = false
+
   // Get all available packages
   const availablePackages = getPackages()
 
@@ -250,6 +252,10 @@ async function main () {
         }
       }
 
+      if (hasChanges) {
+        needsFixes = true
+      }
+
       if (!all && !warnings.length) {
         continue
       }
@@ -288,8 +294,16 @@ async function main () {
     }
 
     if (hasChanges) {
-      fs.writeFileSync(pkg.configPath, JSON.stringify(pkg.config, null, 2) + '\n')
+      needsFixes = true
+
+      if (fix) {
+        fs.writeFileSync(pkg.configPath, JSON.stringify(pkg.config, null, 2) + '\n')
+      }
     }
+  }
+
+  if (needsFixes) {
+    process.exit(1)
   }
 }
 
