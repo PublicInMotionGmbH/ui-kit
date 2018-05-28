@@ -65,14 +65,7 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       onChange={[Function]}
       value=""
     >
-      <TextInput
-        InputComponent="input"
-        autoComplete="cc-csc"
-        error={false}
-        maxLength={4}
-        size={4}
-        type="text"
-      />
+      <CvcInput />
     </FormField>
   </div>
 </FormHandler>

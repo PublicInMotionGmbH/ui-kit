@@ -8,6 +8,7 @@ import { FormHandler } from '@talixo/form-handler'
 import { buildClassName } from '@talixo/shared'
 
 import CreditCardNumberInput from './CreditCardNumberInput'
+import CvcInput from './CvcInput'
 import ExpirationDateInput from './ExpirationDateInput'
 
 const moduleName = 'credit-card-input'
@@ -141,11 +142,7 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cvc}
         >
-          <TextInput
-            autoComplete='cc-csc'
-            maxLength={4}
-            size={4}
-          />
+          <CvcInput />
         </FormField>
       </div>
     </FormHandler>
