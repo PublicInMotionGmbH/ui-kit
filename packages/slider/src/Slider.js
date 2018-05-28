@@ -22,6 +22,10 @@ const propTypes = {
   step: PropTypes.number
 }
 
+const defaultProps = {
+  min: 0
+}
+
 /**
  * Component which represents Slider.
  *
@@ -40,7 +44,7 @@ const propTypes = {
  */
 class Slider extends React.PureComponent {
   state = {
-    value: this.props.value || this.props.min
+    value: this.props.value == null ? this.props.min : this.props.value
   }
 
   componentWillReceiveProps (props) {
@@ -88,5 +92,6 @@ class Slider extends React.PureComponent {
 }
 
 Slider.propTypes = propTypes
+Slider.defaultProps = defaultProps
 
 export default Slider
