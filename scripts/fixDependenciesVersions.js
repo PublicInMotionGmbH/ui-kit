@@ -184,8 +184,8 @@ async function main () {
                   peerDependencies[dName] = `^${expectedVersion}`
                 }
 
-                if (dPeer) {
-                  peerDependencies[dName] = `^${expectedVersion}`
+                if (dOptional) {
+                  optionalDependencies[dName] = `^${expectedVersion}`
                 }
               } else {
                 warnings.push('expected ' + chalk.bold(expectedVersion))
@@ -220,8 +220,8 @@ async function main () {
             peerDependencies[dName] = `${map[dName]}`
           }
 
-          if (dPeer) {
-            peerDependencies[dName] = `${map[dName]}`
+          if (dOptional) {
+            optionalDependencies[dName] = `${map[dName]}`
           }
         } else {
           warnings.push(description)
