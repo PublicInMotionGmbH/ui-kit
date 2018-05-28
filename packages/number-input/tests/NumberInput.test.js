@@ -64,7 +64,7 @@ describe('<NumberInput />', () => {
   it('should handle `value` correctly', () => {
     const wrapper = shallow(<NumberInput value={333} />)
 
-    expect(wrapper.find('TextInput').prop('value')).toBe(333)
+    expect(wrapper.find('TextInput').prop('value')).toBe('333')
   })
 
   it('should work with `min` value', () => {
