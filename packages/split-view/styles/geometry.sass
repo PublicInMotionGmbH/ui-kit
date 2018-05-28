@@ -1,4 +1,28 @@
 @import './config'
 
 @include module('split-view')
-  display: block
+  display: flex
+  flex-direction: row
+
+  &__details
+    margin: 0 dp(5)
+    flex-basis: 100%
+    border: $split-view-border
+    border-radius: $split-view-border-radius
+    height: fit-content
+    min-height: $split-view-list-item-height
+
+  &__list
+    flex-basis: $split-view-list-width
+
+    &__item
+      border-bottom: $split-view-border
+      height: $split-view-list-item-height
+      transition: $split-view-transition
+      cursor: pointer
+
+      &:hover
+        background-color: $split-view-item-hover
+
+      &--active
+        background-color: lighten($split-view-item-hover, 5)
