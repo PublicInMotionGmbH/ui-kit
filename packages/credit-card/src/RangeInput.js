@@ -121,7 +121,7 @@ function range (min, max) {
 }
 
 /**
- * Component which represents expiration date input.
+ * Component which represents range input.
  *
  * @property {object} props
  * @property {number} [props.minLength]

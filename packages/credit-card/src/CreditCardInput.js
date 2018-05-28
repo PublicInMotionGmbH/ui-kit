@@ -46,12 +46,24 @@ const propTypes = {
 
   /** Values to be displayed inside inputs. */
   values: PropTypes.shape({
+
+    /** Card holder name. */
     cardHolderName: PropTypes.string,
+
+    /** Card number. */
     cardNumber: PropTypes.string,
+
+    /** Card expiration date object. */
     cardExpirationDate: PropTypes.shape({
+
+      /** Expiration month. */
       month: PropTypes.number,
+
+      /** Expiration year. */
       year: PropTypes.number
     }),
+
+    /** Cvc number */
     cvc: PropTypes.string
   })
 }
