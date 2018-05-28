@@ -27,6 +27,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
           onFocus={[Function]}
           style={null}
           type="text"
+          value=""
         />
       </div>
     </div>
@@ -52,6 +53,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
             onFocus={[Function]}
             style={null}
             type="text"
+            value=""
           />
         </div>
       </div>
@@ -74,6 +76,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
           onFocus={[Function]}
           style={null}
           type="text"
+          value=""
         />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { buildClassName } from '@talixo/shared'
 
 import TableHeaders from '../src/TableHeaders'
 import { tableData, columns, columnsWithActions } from './fixtures/testData'
-import { moduleName } from '../src/DataTable'
+import { moduleName } from '../src/config'
 
 // ClassNames helpers
 const arrowsCls = buildClassName([moduleName, 'header', 'arrows'])

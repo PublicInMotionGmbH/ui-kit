@@ -8,7 +8,7 @@ import { Table, Body } from '@talixo/table'
 import TableHeaders from './TableHeaders'
 import TableRow from './TableRow'
 
-export const moduleName = 'data-table'
+import { moduleName } from './config'
 
 const propTypes = {
   /** Additional class name. */
@@ -93,7 +93,7 @@ const defaultProps = {
  */
 class DataTable extends React.Component {
   state = {
-    sotrtedData: this.props.data,
+    sortedData: this.props.data,
     sortColumn: '',
     reversedOrder: false
   }
@@ -105,17 +105,17 @@ class DataTable extends React.Component {
    */
   sort = (columnID) => {
     const { onSort } = this.props
-    const { sortColumn, sotrtedData, reversedOrder } = this.state
+    const { sortColumn, sortedData, reversedOrder } = this.state
 
     // Check if column has already been used to sort.
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
     // Set direction of sorting.
     const direction = !_reversedOrder ? 'asc' : 'desc'
     // Oreder data using lodash sort funciton.
-    const newData = _.orderBy(sotrtedData, columnID, direction)
+    const newData = _.orderBy(sortedData, columnID, direction)
 
     this.setState({
-      sotrtedData: newData,
+      sortedData: newData,
       sortColumn: columnID,
       reversedOrder: _reversedOrder
     })
@@ -128,7 +128,7 @@ class DataTable extends React.Component {
   /**
    * Build table headers.
    *
-   * @returns {ReactElement}
+   * @returns {React.Element}
    */
   buildHeaders = () => {
     const { columns, sortable } = this.props
@@ -154,7 +154,7 @@ class DataTable extends React.Component {
       actions, columns, className, data, onSort,
       sortable, verticalActionCell, ...passedProps
     } = this.props
-    const { sotrtedData } = this.state
+    const { sortedData } = this.state
     const { buildHeaders } = this
 
     const wrapperCls = buildClassName(moduleName, className)
@@ -166,7 +166,7 @@ class DataTable extends React.Component {
           <TableRow
             actions={actions}
             columns={columns}
-            rowData={sotrtedData}
+            rowData={sortedData}
             verticalActionCell={verticalActionCell}
           />
         </Body>

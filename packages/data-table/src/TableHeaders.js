@@ -7,7 +7,7 @@ import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 import { Head, HeadCell } from '@talixo/table'
 
-import { moduleName } from './DataTable'
+import { moduleName } from './config'
 
 const propTypes = {
   /** Information about columns which will be displayed in table. */
@@ -41,7 +41,7 @@ const propTypes = {
  *
  * @param {boolean} inUse
  * @param {string} sortOrder
- * @returns {ReactElement}
+ * @returns {React.Element}
  */
 function sortControls (inUse, sortOrder) {
   const arrowsCls = buildClassName([moduleName, 'header', 'arrows'])
@@ -69,7 +69,7 @@ function sortControls (inUse, sortOrder) {
  * @param {string|number} [props.sortColumn]
  * @param {string} [props.sortOrder]
  *
- * @returns {ReactElement}
+ * @returns {React.Element}
  */
 function TableHeaders (props) {
   const { columns, onClick, sortable, sortColumn, sortOrder } = props

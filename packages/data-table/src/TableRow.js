@@ -50,7 +50,7 @@ const defaultProps = {
  * @param {object[]} actions
  * @param {object} row
  * @param {boolean} [vertical]
- * @returns {ReactElement}
+ * @returns {React.Element}
  */
 function generateActions (actions, row, vertical = false) {
   // Generate click function.
@@ -96,7 +96,7 @@ function generateActions (actions, row, vertical = false) {
  * @param {function} [props.actions.onClick]
  * @param {boolean} [props.verticalActionCell]
  *
- * @returns {ReactElement}
+ * @returns {React.Element}
  */
 function TableRow (props) {
   const { columns, rowData, actions, verticalActionCell } = props

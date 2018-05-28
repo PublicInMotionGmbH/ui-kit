@@ -1,11 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import DataTable, {moduleName} from '../src/DataTable'
+import DataTable from '../src/DataTable'
+import { moduleName } from '../src/config'
 import { actions, columns, tableData, tableDataSort } from './fixtures/testData'
-import {buildClassName} from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
-const headerCls = buildClassName([moduleName, 'header'])
+const headerCls = buildClassName([ moduleName, 'header' ])
 
 // Wrapper creatio heleprs
 const createProps = props => ({
@@ -69,7 +70,7 @@ describe('<DataTable />', () => {
       const newId = columns[4].id
       const orderedData = tableDataSort(newId)
       header4.simulate('click', {})
-      expect(wrapper.state().sotrtedData).toEqual(orderedData)
+      expect(wrapper.state().sortedData).toEqual(orderedData)
     })
 
     it('should order data descending', () => {
@@ -77,7 +78,7 @@ describe('<DataTable />', () => {
       const orderedData = tableDataSort(newId, 'desc')
       header4.simulate('click', {})
       header4.simulate('click', {})
-      expect(wrapper.state().sotrtedData).toEqual(orderedData)
+      expect(wrapper.state().sortedData).toEqual(orderedData)
     })
   })
 })
