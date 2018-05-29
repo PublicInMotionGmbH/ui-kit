@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TableHeaders /> rendering should render children properly 1`] = `
+<Head>
+  <HeadCell
+    className="talixo-data-table__header"
+    key="id"
+    onClick={[Function]}
+  >
+    ID
+  </HeadCell>
+  <HeadCell
+    className="talixo-data-table__header"
+    key="opened"
+    onClick={[Function]}
+  >
+    Date opened
+  </HeadCell>
+  <HeadCell
+    className="talixo-data-table__header"
+    key="assignee"
+    onClick={[Function]}
+  >
+    Assignee
+  </HeadCell>
+  <HeadCell
+    className="talixo-data-table__header"
+    key="date_of_ride"
+    onClick={[Function]}
+  >
+    Date of ride
+  </HeadCell>
+  <HeadCell
+    className="talixo-data-table__header"
+    key="pickup"
+    onClick={[Function]}
+  >
+    <span
+      className="test-span"
+    >
+      Pickup / Dropoff
+    </span>
+  </HeadCell>
+  <HeadCell>
+    <span
+      className="test-span"
+    >
+      Actions
+    </span>
+  </HeadCell>
+</Head>
+`;

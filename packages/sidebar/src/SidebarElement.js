@@ -24,18 +24,10 @@ import { Icon } from '@talixo/icon'
  * @class
  */
 class SidebarElement extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.saveRef = this.saveRef.bind(this)
-
-    this.node = null
-    this.state = {
-      open: false
-    }
+  state = {
+    open: false
   }
+  node = null
 
   /**
    * Remove listeners when component is unmounted.
@@ -51,7 +43,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Element} node
    */
-  saveRef (node) {
+  saveRef = (node) => {
     this.node = node
   }
 
@@ -61,7 +53,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Event} e
    */
-  handleClose (e) {
+  handleClose = (e) => {
     // Ignore when there is no DOM element attached
     if (!this.node) {
       return
@@ -95,7 +87,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Event} e
    */
-  handleClick (e) {
+  handleClick = (e) => {
     const { children, onClick } = this.props
 
     // Toggle opening status when it could be open

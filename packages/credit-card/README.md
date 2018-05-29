@@ -1,0 +1,83 @@
+# Talixo Credit Card
+
+UI Component which represents Credit Card
+
+## How to install
+
+Package is available as `@talixo/credit-card` in NPM registry, so you can use it in your project
+using `npm install @talixo/credit-card --save` or `yarn add @talixo/credit-card`.
+
+## Requirements
+
+Your package should additionally have some extra dependencies:
+
+- `@talixo/combo-box: ^0.1.0`
+- `@talixo/form-field: ^0.0.0`
+- `@talixo/form-handler: ^0.0.0`
+- `@talixo/icon: ^0.1.1`
+- `@talixo/shared: ^0.1.0`
+- `@talixo/text-input: ^0.2.0`
+- `prop-types: ^15.6.1`
+- `react: ^16.2.0`
+- `react-dom: ^16.2.0`
+- `react-text-mask: ^5.4.1`
+
+These packages are required by `@talixo/credit-card`, but you have to install them manually,
+to avoid having different versions of these in your application.
+
+## Supported props
+
+### CreditCardInput
+
+Property name           | Type        | Default              | Description                    
+------------------------|-------------|:--------------------:|--------------------------------
+cardHolderNameLabel     | string      | `'Name on card*'`    | Label for card holder name input.
+cardNumberLabel         | string      | `'Card number*'`     | Label for card number input.
+cardExpirationDateLabel | string      | `'Expiration date*'` | Label for card expiration date input.
+className               | string      | n/a                  | Additional class name passed to wrapper.
+cvcLabel                | string      | `'CVC*'`             | Label for cvc input.
+header                  | node        | `'Payment'`          | Form header.
+onBlur                  | function    | n/a                  | Handler for onBlur event.
+onChange                | function    | n/a                  | Handler for onChange event.
+onFocus                 | function    | n/a                  | Handler for onFocus event.
+values                  | ValuesShape | `''|null`            | Values to be displayed inside inputs.
+
+### CreditCardNumberInput
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | Additional class name passed to wrapper.
+onBlur        | function  | n/a     | Handler for onBlur event.
+onChange      | function  | n/a     | Handler for onChange event.
+onFocus       | function  | n/a     | Handler for onFocus event.
+value         | string    | n/a     | Value to be displayed inside inputs.
+
+### ExpirationDateInput
+
+Property name | Type            | Default | Description                    
+--------------|-----------------|:-------:|--------------------------------
+className     | string          | n/a     | Additional class name passed to wrapper.
+onChange      | function        | n/a     | Handler for onChange event.
+value         | ExpirationShape | n/a     | Value to be displayed inside inputs.
+
+## Property shapes
+
+### ValuesShape
+
+Property name      | Type            | Default | Description
+-------------------|-----------------|:-------:|--------------------------------
+cardHolderName     | string          | n/a     | Value to be displayed in the card holder name input.
+cardNumber         | string          | n/a     | Value to be displayed in the card number input.
+cardExpirationDate | ExpirationShape | n/a     | Date to be displayed in the expiration date input.
+cvc                | string          | n/a     | Value to be displayed in the cvc input.
+
+### ExpirationShape
+
+Property name | Type   | Default | Description                    
+--------------|--------|:-------:|--------------------------------
+month         | number | n/a     | Month to be displayed in the month input.
+year          | number | n/a     | Year to be displayed in the year input.
+
+## Changelog
+
+- **0.1.0** - initial version

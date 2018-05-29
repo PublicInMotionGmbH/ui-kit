@@ -11,14 +11,14 @@ using `npm install @talixo/phone-input --save` or `yarn add @talixo/phone-input`
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/combo-box: ^0.1.0`
+- `@talixo/country-flag: ^0.1.0`
+- `@talixo/shared: ^0.1.0`
+- `country-telephone-data: ^0.5.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 - `react-text-mask: ^5.4.1`
-- `country-telephone-data: ^0.5.5`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/country-flag: ^0.1.0`
-- `@talixo/combo-box: ^0.1.0`
 
 These packages are required by `@talixo/phone-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -30,6 +30,7 @@ This component allows any properties which can be added to `div` element. Additi
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
 className     | string    | n/a             | additional class name passed to wrapper
+error         | boolean   | `false`         | indicates that input has error
 value         | string    | self-controlled | phone number to show
 placeholder   | string    | n/a             | placeholder to show when there is no value
 onChange      | function  | n/a             | event handler for changed value

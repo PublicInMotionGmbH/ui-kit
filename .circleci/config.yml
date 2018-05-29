@@ -50,6 +50,21 @@ jobs:
           name: Run linter
           command: npm run lint
 
+      # test local versions
+      - run:
+          name: Test local versions
+          command: npm run compare-own-versions -- --all
+
+      # test dependencies versions in README file
+      - run:
+          name: Test README dependencies
+          command: npm run readme-dependencies -- --all
+
+      # test dependencies versions in package.json
+      - run:
+          name: Test package dependencies
+          command: npm run compare-dependencies -- --all
+
       # check if all components are building properly
       - run:
           name: Trying to build

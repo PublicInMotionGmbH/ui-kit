@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeInput /> renders correctly 1`] = `
+<div
+  className="talixo-range-input"
+>
+  <AutoComplete
+    buildItemId={[Function]}
+    inputValue=""
+    isOpen={false}
+    itemToString={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    onInputValueChange={[Function]}
+    options={Array []}
+    renderItem={[Function]}
+    value={null}
+  >
+    <TextInput
+      InputComponent="input"
+      error={false}
+      maxLength={9}
+      onKeyDown={[Function]}
+      right={
+        <Icon
+          name="keyboard_arrow_down"
+        />
+      }
+      type="text"
+    />
+  </AutoComplete>
+</div>
+`;
+
+exports[`<RangeInput /> renders correctly mounted 1`] = `
+<div
+  className="talixo-range-input"
+>
+  <div
+    className="talixo-combo-box"
+  >
+    <div
+      className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
+    >
+      <input
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        className="talixo-text-input__input"
+        id="downshift-0-input"
+        maxLength={9}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="combobox"
+        style={null}
+        type="text"
+        value=""
+      />
+      <span
+        className="talixo-text-input__right"
+      >
+        <span
+          aria-hidden="true"
+          className="talixo-icon tai tai--material"
+        >
+          
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;

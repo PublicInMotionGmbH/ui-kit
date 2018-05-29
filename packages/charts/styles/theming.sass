@@ -1,0 +1,22 @@
+@import './config'
+
+@include graph-colors($color-legend-base)
+
+@include module('legend')
+  background-color: $legend-background
+
+@include module('legend-item')
+  color: $color-font
+
+  &--clickable
+    transition: $legend-transition
+    cursor: pointer
+    user-select: none
+
+  &--clickable:hover
+    background-color: $color-legend-hover
+
+  &--disabled
+    color: $color-disabled
+    > #{prefix('legend-item', 'colorbox')}
+      background-color: $color-disabled

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InlineInput /> renders correctly 1`] = `
+<div
+  className="talixo-inline-input"
+>
+  <span
+    className="talixo-inline-input__span"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`<InlineInput /> should change span to input when span is clicked 1`] = `
+<div
+  className="talixo-inline-input"
+>
+  <TextInput
+    InputComponent="input"
+    className="talixo-inline-input__input"
+    error={false}
+    inputRef={[Function]}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyPress={[Function]}
+    placeholder=""
+    type="text"
+    value=""
+  />
+</div>
+`;

@@ -16,6 +16,7 @@ const moduleName = 'text-input'
  * @property {object} props
  * @property {string} [props.className]
  * @property {boolean} [props.error]
+ * @property {function} [props.inputRef]
  * @property {function} [props.onChange]
  * @property {function} [props.InputComponent]
  * @property {string} [props.placeholder]
@@ -32,22 +33,13 @@ const moduleName = 'text-input'
  * @class
  */
 class TextInput extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      hash: null,
-      suffixStyle: { position: 'absolute', visibility: 'hidden', pointerEvents: 'none' },
-      inputStyle: null
-    }
-
-    this.hasSuffixInitialized = false
-
-    this.onInputChange = this.onInputChange.bind(this)
-    this.updateStyles = this.updateStyles.bind(this)
-    this.inputRef = this.inputRef.bind(this)
-    this.suffixRef = this.suffixRef.bind(this)
+  state = {
+    value: this.props.value == null ? '' : this.props.value,
+    hash: null,
+    suffixStyle: { position: 'absolute', visibility: 'hidden', pointerEvents: 'none' },
+    inputStyle: null
   }
+  hasSuffixInitialized = false
 
   /**
    * Initialize styles (and listeners) for suffix
@@ -104,6 +96,12 @@ class TextInput extends React.PureComponent {
     })
   }
 
+  componentWillReceiveProps (props) {
+    if (props.value != null && props.value !== this.props.value) {
+      this.setState({ value: props.value })
+    }
+  }
+
   /**
    * Position suffix after component is mounted
    */
@@ -141,11 +139,15 @@ class TextInput extends React.PureComponent {
    *
    * @param {SyntheticEvent} e
    */
-  onInputChange (e) {
-    const { onChange } = this.props
+  onInputChange = (e) => {
+    const { value, onChange } = this.props
 
     // Update styles connected to suffix
     this.updateStyles()
+
+    if (value == null) {
+      this.setState({ value })
+    }
 
     // Trigger change to parent components
     if (onChange) {
@@ -180,7 +182,7 @@ class TextInput extends React.PureComponent {
   /**
    * Update suffix & input styles
    */
-  updateStyles () {
+  updateStyles = () => {
     // Do not update styles if browser is not ready yet
     if (!this.shouldCalculateStyles()) {
       return
@@ -207,8 +209,14 @@ class TextInput extends React.PureComponent {
    *
    * @param {HTMLElement} el
    */
-  inputRef (el) {
+  inputRef = (el) => {
+    const { inputRef } = this.props
+
     this.input = el
+
+    if (inputRef) {
+      inputRef(el)
+    }
   }
 
   /**
@@ -216,7 +224,7 @@ class TextInput extends React.PureComponent {
    *
    * @param {HTMLElement} el
    */
-  suffixRef (el) {
+  suffixRef = (el) => {
     this.suffix = el
   }
 
@@ -276,7 +284,8 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, style, value, suffix, left, right, InputComponent, ...restProps } = this.props
+    const { className, error, inputRef, onChange, InputComponent, style, value, suffix, left, right, ...restProps } = this.props
+    const _value = this.state.value
 
     // Initialize helper variables
     const hasLeft = left != null
@@ -307,7 +316,7 @@ class TextInput extends React.PureComponent {
           onChange={this.onInputChange}
           ref={this.inputRef}
           style={this.state.inputStyle}
-          value={value}
+          value={_value}
           {...restProps}
         />
 
@@ -325,6 +334,9 @@ TextInput.propTypes = {
   /** Indicates that input has error */
   error: PropTypes.bool,
 
+  /** Ref passed to input element */
+  inputRef: PropTypes.func,
+
   /** Callback for change event */
   onChange: PropTypes.func,
 
@@ -339,6 +351,9 @@ TextInput.propTypes = {
 
   /** Right side icon or controls */
   right: PropTypes.node,
+
+  /** Value to put inside input */
+  value: PropTypes.string,
 
   /** Component used for input below */
   InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])

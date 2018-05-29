@@ -6,6 +6,8 @@ import ControlledPagination from './src/ControlledPagination'
 import ControlledTabs from './src/ControlledTabs'
 import Element from './src/Element'
 import Navigation from './src/Navigation'
+import Step from './src/Step'
+import Steps from './src/Steps'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -95,5 +97,33 @@ addStory.controlled('controlled tabs', readme, (setState, state) => (
 ), () => {
   return {
     tab: 0
+  }
+})
+
+addStory('step', readme, () => (
+  <Navigation type='steps'>
+    <Step completed>Cart</Step>
+    <Step>Shipping</Step>
+    <Step active>Billing</Step>
+    <Step disabled>Confirm</Step>
+  </Navigation>
+))
+
+addStory.controlled('steps', readme, (setState, state) => (
+  <Navigation type='steps'>
+    <Steps
+      current={state.current}
+      steps={[
+        { name: 'Cart', disabled: false },
+        { name: 'Shipping', disabled: true },
+        { name: 'Billing', disabled: false },
+        { name: 'Confirm', disabled: false }
+      ]}
+      onChange={current => setState({ current })}
+    />
+  </Navigation>
+), () => {
+  return {
+    current: undefined
   }
 })
