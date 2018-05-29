@@ -53,7 +53,6 @@ describe('<DetailsView>', () => {
       wrapper = createWrapper()
     })
     it('should not render anything', () => {
-      console.log(wrapper.find(`.${detailsCls}`))
       expect(wrapper.find(`.${detailsCls}`).exists()).toBe(false)
     })
   })

@@ -29,35 +29,6 @@ exports[`<DetailsView> when detailsRender is passed should render children prope
 </React.Fragment>
 `;
 
-exports[`<DetailsView> when itemRender is passed should render children properly 1`] = `
-<React.Fragment>
-  <div
-    className="talixo-split-view__details"
-  >
-    <div
-      className="test-detail"
-    >
-      <div>
-        Name: 
-        Josh Smith I
-      </div>
-      <div>
-        Value: 
-        0
-      </div>
-      <div>
-        Title: 
-        Title 1
-      </div>
-      <div>
-        Subtitle: 
-        Subtitle 1
-      </div>
-    </div>
-  </div>
-</React.Fragment>
-`;
-
 exports[`<DetailsView> when rendered should render properly 1`] = `
 <React.Fragment>
   <div

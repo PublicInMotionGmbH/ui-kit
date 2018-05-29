@@ -59,9 +59,3 @@ exports[`<DetailsView> when rendered renders children correctly 1`] = `
   />
 </div>
 `;
-
-exports[`<SplitView /> renders children correctly 1`] = `
-<span
-  className="talixo-split-view"
-/>
-`;
