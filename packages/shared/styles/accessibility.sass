@@ -8,3 +8,6 @@
     @return #fff
   @else
     @return #000
+
+@function bold-color($n, $amount)
+  @return mix(text-contrast($n), $n, $amount)

@@ -155,7 +155,7 @@ class Chart extends React.Component {
     } = this.props
 
     const wrapperCls = buildClassName(moduleName, className)
-    const RenderComponet = Components[type]
+    const RenderComponent = Components[type]
     const isLineChart = type === 'line'
     const xType = !passedProps.xType && getChartType()
 
@@ -173,7 +173,7 @@ class Chart extends React.Component {
           data
             .map((item, index) => {
               return !item.disabled
-                ? <RenderComponet
+                ? <RenderComponent
                   animate
                   style={isLineChart ? {fill: 'none'} : {}}
                   {...getSeriesProps(item, index)}

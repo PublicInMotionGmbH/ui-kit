@@ -12,3 +12,103 @@
 
 @import 'prefixing'
 @import 'accessibility'
+
+// NEW CONFIGURATION
+
+// Colors base
+
+$x-color-primary: #3f43a1 !default
+$x-color-primary-opposite: text-contrast($x-color-primary) !default
+
+$x-color-secondary: #f5770e !default
+$x-color-secondary-opposite: text-contrast($x-color-secondary) !default
+
+$x-color-tertiary: #00b989 !default
+$x-color-tertiary-opposite: text-contrast($x-color-tertiary) !default
+
+$x-color-background: #fff !default
+$x-color-text: text-contrast($x-color-background) !default
+
+// Colors by goal
+
+$x-color-intense: #132450 !default
+$x-color-intense-opposite: text-contrast($x-color-intense) !default
+
+$x-color-intenser: #000b30 !default
+$x-color-intenser-opposite: text-contrast($x-color-intenser) !default
+
+$x-color-calm: #a4a5b2 !default
+$x-color-calm-opposite: text-contrast($x-color-calm) !default
+
+$x-color-calmer: #f4f5f8 !default
+$x-color-calmer-opposite: text-contrast($x-color-calmer) !default
+
+$x-color-success: #00b989 !default
+$x-color-success-opposite: text-contrast($x-color-success) !default
+
+$x-color-warning: #f5c623 !default
+$x-color-warning-opposite: text-contrast($x-color-warning) !default
+
+$x-color-error: #ff4055 !default
+$x-color-error-opposite: text-contrast($x-color-error) !default
+
+$x-color-info: #1660ff !default
+$x-color-info-opposite: text-contrast($x-color-info) !default
+
+// Colors by general purpose
+
+$x-input-border-color: $x-color-calmer !default
+$x-input-background-color: $x-color-background !default
+$x-input-text-color: $x-color-text !default
+
+$x-input-hover-border-color: darken($x-input-border-color, 5%) !default
+$x-input-hover-background-color: $x-input-background-color !default
+$x-input-hover-text-color: $x-input-text-color !default
+
+$x-input-focus-border-color: $x-color-primary !default
+$x-input-focus-background-color: $x-input-background-color !default
+$x-input-focus-text-color: $x-input-text-color !default
+
+$x-input-error-border-color: $x-color-error !default
+$x-input-error-background-color: $x-input-background-color !default
+$x-input-error-text-color: mix($x-input-text-color, $x-input-error-border-color, 70%) !default
+
+$x-input-warning-border-color: $x-color-warning !default
+$x-input-warning-background-color: $x-input-background-color !default
+$x-input-warning-text-color: mix($x-input-text-color, $x-input-warning-border-color, 70%) !default
+
+$x-input-placeholder-color: mix($x-input-text-color, $x-input-background-color, 30%) !default
+$x-input-error-placeholder-color: mix($x-input-error-text-color, $x-input-background-color, 30%) !default
+$x-input-warning-placeholder-color: mix($x-input-warning-text-color, $x-input-background-color, 30%) !default
+
+// Borders
+
+$x-border-width: 1px !default
+$x-border-width-heavy: 2 * $x-border-width !default
+$x-border-radius: 3px !default
+
+// Sizes
+
+$x-line-height-base: 1.428571429 !default // 20/14
+
+$x-padding-vertical-base: dp(2) !default
+$x-padding-vertical-small: 0.5 * $x-padding-vertical-base !default
+$x-padding-vertical-bigger: 1.5 * $x-padding-vertical-base !default
+
+$x-padding-horizontal-base: dp(2) !default
+$x-padding-horizontal-small: 0.5 * $x-padding-horizontal-base !default
+$x-padding-horizontal-bigger: 1.5 * $x-padding-horizontal-base !default
+
+$x-input-text-size: dp(1.75) !default
+$x-input-padding-vertical: $x-padding-vertical-base !default
+$x-input-padding-horizontal: $x-padding-horizontal-base !default
+
+$x-input-height: (2 * $x-input-padding-vertical) + $x-input-text-size * $x-line-height-base !default
+
+// Weights
+
+$x-weight-semibold: 600 !default
+
+// Temporary settings
+
+$combo-box-menu-separator-height: 0 !default

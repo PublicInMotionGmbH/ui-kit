@@ -180,6 +180,7 @@ class NumberInput extends React.PureComponent {
         right={stepperElement}
         onChange={this.onChange}
         value={'' + value}
+        error={error}
         {...passedProps}
       />
     )
