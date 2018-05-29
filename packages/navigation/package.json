@@ -24,14 +24,16 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/shared": "^0.1.0",
-    "lodash": "^4.17.5",
+    "@talixo/tooltip": "^0.1.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
     "@talixo/shared": "^0.1.0",
-    "lodash": "^4.17.5",
+    "@talixo/tooltip": "^0.1.0",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

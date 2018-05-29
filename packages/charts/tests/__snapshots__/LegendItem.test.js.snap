@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LegendItem> component  rendering should render properly 1`] = `
+<div
+  className="talixo-legend-item test talixo-legend-item--clickable"
+  onClick={[Function]}
+>
+  <div
+    className="talixo-legend-item__colorbox talixo-legend-item__colorbox--0"
+    style={
+      Object {
+        "backgroundColor": "white",
+      }
+    }
+  />
+  <div
+    className="talixo-legend-item__label"
+  />
+  <div
+    className="talixo-legend-item__label"
+  >
+     
+    (10)
+  </div>
+</div>
+`;

@@ -11,10 +11,10 @@ using `npm install @talixo/pill --save` or `yarn add @talixo/pill`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/shared: ^0.1.0`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/pill`, but you have to install them manually,
 to avoid having different versions of these in your application.

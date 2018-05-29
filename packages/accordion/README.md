@@ -11,11 +11,11 @@ using `npm install @talixo/accordion --save` or `yarn add @talixo/accordion`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/collapse: ^0.1.1`
+- `@talixo/shared: ^0.1.0`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/collapse: ^0.1.0`
 
 These packages are required by `@talixo/accordion`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -28,7 +28,7 @@ className       | string    | n/a                   | additional class name pass
 smooth          | bool      | n/a                   | should elements be collapsed and opened smoothly?
 animationTime   | number    | n/a                   | time of smooth animation (in ms)
 options         | Option[]  | n/a                   | options to show in Accordion
-value           | any       | n/a                   | ID of currently opened option
+value           | any       | self-controlled       | ID of currently opened option
 onChange        | function  | n/a                   | Handler fired on possible change of opened container
 renderOpenIcon  | function  | n/a                   | Render "open" icon for closed option
 renderCloseIcon | function  | n/a                   | Render "close" icon for opened option

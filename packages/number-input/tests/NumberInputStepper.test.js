@@ -1,11 +1,11 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import NumberInputStepper from '../src/NumberInputStepper'
+import NumberInputStepper, {moduleName} from '../src/NumberInputStepper'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('number-input-stepper')
+const name = prefix(moduleName)
 
 describe('<NumberInputStepper />', () => {
   beforeEach(() => jest.useFakeTimers())

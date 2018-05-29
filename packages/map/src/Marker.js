@@ -20,23 +20,8 @@ import { Location } from './PropTypes'
  * @class
  */
 class Marker extends React.PureComponent {
-  /**
-   * @param {object} props
-   * @param {object|{ lat: number, lng: number}} props.position
-   * @param {*} [props.info]
-   * @param {boolean} [props.open]
-   * @param {function} [props.onClick]
-   * @param {function} [props.onClose]
-   */
-  constructor (props) {
-    super(props)
-
-    this.onClick = this.onClick.bind(this)
-    this.onClose = this.onClose.bind(this)
-
-    this.state = {
-      open: props.open || false
-    }
+  state = {
+    open: this.props.open || false
   }
 
   /**
@@ -84,7 +69,7 @@ class Marker extends React.PureComponent {
    *
    * @param {*} event
    */
-  onClick (event) {
+  onClick = (event) => {
     const { onClick } = this.props
 
     // Toggle info window
@@ -108,7 +93,7 @@ class Marker extends React.PureComponent {
   /**
    * Handle event on closing info window
    */
-  onClose () {
+  onClose = () => {
     const { onClose } = this.props
 
     // Close info window

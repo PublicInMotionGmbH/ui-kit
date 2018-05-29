@@ -1,12 +1,12 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import NumberInput from '../src/NumberInput'
+import NumberInput, {moduleName} from '../src/NumberInput'
 import NumberInputStepper from '../src/NumberInputStepper'
 
 import { prefix } from '@talixo/shared'
 
-const name = prefix('number-input')
+const name = prefix(moduleName)
 
 describe('<NumberInput />', () => {
   it('renders correctly', () => {
@@ -29,6 +29,12 @@ describe('<NumberInput />', () => {
     expect(wrapper.find(NumberInputStepper).length).toBe(0)
 
     wrapper.unmount()
+  })
+
+  it('should render with error styling', () => {
+    const wrapper = shallow(<NumberInput error />)
+
+    expect(wrapper.hasClass(`${name}--error`)).toBe(true)
   })
 
   it('should pass class name to TextInput', () => {
@@ -58,7 +64,7 @@ describe('<NumberInput />', () => {
   it('should handle `value` correctly', () => {
     const wrapper = shallow(<NumberInput value={333} />)
 
-    expect(wrapper.find('TextInput').prop('value')).toBe(333)
+    expect(wrapper.find('TextInput').prop('value')).toBe('333')
   })
 
   it('should work with `min` value', () => {

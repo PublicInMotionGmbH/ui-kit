@@ -5,9 +5,28 @@ import { prefix } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
-const moduleName = 'number-input-stepper'
+export const moduleName = 'number-input-stepper'
 
 const SPACE_KEY = 32
+
+const propTypes = {
+  /** Event fired when increment is requested */
+  onIncrement: PropTypes.func,
+
+  /** Event fired when decrement is requested */
+  onDecrement: PropTypes.func,
+
+  /** Time in ms, in which we start automatically increasing on pressed button */
+  initialTime: PropTypes.number,
+
+  /** Time in ms, in which we make another tick when pressing a button */
+  stepTime: PropTypes.number
+}
+
+const defaultProps = {
+  initialTime: 700,
+  stepTime: 20
+}
 
 /**
  * Component which represents stepper buttons for number input
@@ -172,23 +191,8 @@ class NumberInputStepper extends React.PureComponent {
   }
 }
 
-NumberInputStepper.propTypes = {
-  /** Event fired when increment is requested */
-  onIncrement: PropTypes.func,
+NumberInputStepper.propTypes = propTypes
 
-  /** Event fired when decrement is requested */
-  onDecrement: PropTypes.func,
-
-  /** Time in ms, in which we start automatically increasing on pressed button */
-  initialTime: PropTypes.number,
-
-  /** Time in ms, in which we make another tick when pressing a button */
-  stepTime: PropTypes.number
-}
-
-NumberInputStepper.defaultProps = {
-  initialTime: 700,
-  stepTime: 20
-}
+NumberInputStepper.defaultProps = defaultProps
 
 export default NumberInputStepper

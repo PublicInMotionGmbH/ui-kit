@@ -114,7 +114,7 @@ class ComboBox extends React.PureComponent {
    * @param {object} changes
    * @returns {object}
    */
-  stateReducer (state, changes) {
+  stateReducer = (state, changes) => {
     const nextState = this._stateReducer(state, changes)
 
     if (this.props.inputValue == null && nextState.inputValue !== undefined) {
@@ -179,8 +179,8 @@ class ComboBox extends React.PureComponent {
       inputValue: this.state.inputValue,
       renderValue: renderValue || renderItem,
       getInputProps: props => data.getInputProps(this.getInputProps(props)),
-      getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
-      getClearButtonProps: this.getClearButtonProps.bind(this),
+      getRemoveButtonProps: this.getRemoveButtonProps,
+      getClearButtonProps: this.getClearButtonProps,
       selectedItems: value == null ? [] : [].concat(value),
       onInputFocus: onFocus,
       onInputBlur: onBlur
@@ -193,7 +193,7 @@ class ComboBox extends React.PureComponent {
    * @param {object} props
    * @returns {object|{ onClick: function }}
    */
-  getRemoveButtonProps (props) {
+  getRemoveButtonProps = (props) => {
     const { onClick, item } = props || {}
 
     return {
@@ -218,7 +218,7 @@ class ComboBox extends React.PureComponent {
    * @param {object} props
    * @returns {object|{ onClick: function }}
    */
-  getClearButtonProps (props) {
+  getClearButtonProps = (props) => {
     const onClick = props ? props.onClick : null
 
     return {
@@ -307,7 +307,7 @@ class ComboBox extends React.PureComponent {
    *
    * @param {object} item
    */
-  select (item) {
+  select = (item) => {
     const { onChange, multi, value } = this.props
 
     // Handle simple selection for single select-box
@@ -338,7 +338,7 @@ class ComboBox extends React.PureComponent {
    * @param {object} _data
    * @returns {React.Element}
    */
-  renderComponent (_data) {
+  renderComponent = (_data) => {
     // Compose Downshift & our properties
     const data = this.getStateProps(_data)
 
@@ -380,12 +380,12 @@ class ComboBox extends React.PureComponent {
 
     return (
       <Downshift
-        stateReducer={this.stateReducer.bind(this)}
-        onChange={this.select.bind(this)}
+        stateReducer={this.stateReducer}
+        onChange={this.select}
         selectedItem={null}
         {...passedProps}
       >
-        {this.renderComponent.bind(this)}
+        {this.renderComponent}
       </Downshift>
     )
   }

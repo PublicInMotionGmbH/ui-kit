@@ -7,20 +7,24 @@ import { buildClassName } from '@talixo/shared'
  * Component which represents Radio Input.
  *
  * @param {object} props
- * @param {node} [props.children]
+ * @param {*} [props.children]
  * @param {string} [props.className]
  * @param {string} [props.size]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
 function RadioInput (props) {
-  const { children, className, size, style, ...passedProps } = props
+  const { children, className, size, style, onChange, ...passedProps } = props
 
   const wrapperClass = buildClassName('radio-input', className, [ size ])
 
+  const handleOnChange = e => {
+    if (onChange) { onChange(e.target.checked) }
+  }
+
   return (
     <label className={wrapperClass} style={style}>
-      <input type='radio' {...passedProps} />
+      <input type='radio' onChange={handleOnChange} {...passedProps} />
       <span>{children}</span>
     </label>
   )

@@ -1,4 +1,4 @@
-# Talixo Checkbox 
+# Talixo Checkbox
 
 It's just simple wrapper for checkbox.
 
@@ -11,10 +11,10 @@ using `npm install @talixo/checkbox --save` or `yarn add @talixo/checkbox`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/shared: ^0.1.0`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/checkbox`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -23,13 +23,14 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `input[type=checkbox]`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-children      | node      | n/a     | Checkbox description
-size          | string    | n/a     | checkbox label size ('small' or 'large')
-style         | object    | n/a     | additional styles
-
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+className     | string    | n/a             | additional class name passed to wrapper
+children      | node      | n/a             | Checkbox description
+error         | boolean   | `false`         | indicates that input has error
+size          | string    | n/a             | checkbox label size ('small' or 'large')
+style         | object    | n/a             | additional styles
+value         | boolean   | self-controlled | is it checked?
 
 ## Changelog
 

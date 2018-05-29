@@ -35,7 +35,7 @@
     "react-input-autosize": "^2.2.1"
   },
   "peerDependencies": {
-    "@talixo/icon": "^0.1.0",
+    "@talixo/icon": "^0.1.1",
     "@talixo/shared": "^0.1.0",
     "downshift": "^1.31.11",
     "prop-types": "^15.6.1",
