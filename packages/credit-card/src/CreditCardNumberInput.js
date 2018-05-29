@@ -48,7 +48,7 @@ function trim (value) {
 }
 
 /**
- * Component which represents credit card input.
+ * Component which represents credit card number input.
  *
  * @property {object} props
  * @property {string} [props.className]

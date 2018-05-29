@@ -19,7 +19,16 @@ const propTypes = {
   min: PropTypes.number,
 
   /** Size of each movement of the slider control */
-  step: PropTypes.number
+  step: PropTypes.number,
+
+  /** Handler fired when value is changed */
+  onChange: PropTypes.func,
+
+  /** Handler fired when input is blurred */
+  onBlur: PropTypes.func,
+
+  /** Handler fired when input is focused */
+  onFocus: PropTypes.func
 }
 
 const defaultProps = {
@@ -59,7 +68,7 @@ class Slider extends React.PureComponent {
    * @param {object} e
    */
   handleChange = (e) => {
-    const value = e.target.value
+    const value = +e.target.value
 
     if (this.props.value == null) {
       this.setState({ value })
@@ -71,7 +80,7 @@ class Slider extends React.PureComponent {
   }
 
   render () {
-    const { className, max, min, step, value, onChange, ...passedProps } = this.props
+    const { className, max, min, step, value, onChange, onFocus, onBlur, ...passedProps } = this.props
     const _value = this.state.value
 
     return (
@@ -84,6 +93,8 @@ class Slider extends React.PureComponent {
           onChange={this.handleChange}
           step={step}
           type='range'
+          onFocus={onFocus}
+          onBlur={onBlur}
           value={_value}
         />
       </span>

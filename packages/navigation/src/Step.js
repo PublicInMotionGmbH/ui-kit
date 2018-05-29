@@ -41,7 +41,7 @@ const defaultProps = {
  * @param {string} [props.className]
  * @param {boolean} [props.disabled]
  * @param {function} [props.onClick]
- * @returns {React.Step}
+ * @returns {React.Element}
  */
 function Step (props) {
   const { active, children, completed, className, disabled, onClick, ...passedProps } = props

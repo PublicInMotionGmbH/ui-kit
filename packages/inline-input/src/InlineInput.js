@@ -133,7 +133,7 @@ class InlineInput extends React.Component {
   /**
    * Handle key press.
    *
-   * @param {SyntheticEvent} e   *
+   * @param {SyntheticEvent} e
    *
    */
   handleKeyPress = (e) => {
@@ -143,7 +143,7 @@ class InlineInput extends React.Component {
   /**
    * Handle span click.
    *
-   * @param {SyntheticEvent} e   *
+   * @param {SyntheticEvent} e
    *
    */
   handleSpanClick = (e) => {
@@ -169,7 +169,7 @@ class InlineInput extends React.Component {
   /**
    * Set ref.
    *
-   * @param {node} node   *
+   * @param {HTMLElement|null} node
    *
    */
   setRef = (node) => {

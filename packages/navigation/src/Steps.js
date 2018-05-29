@@ -26,7 +26,7 @@ const defaultProps = {
  * @param {object} [props.current]
  * @param {object[]} [props.steps]
  * @param {function} [props.onChange]
- * @returns {React.Step}
+ * @returns {React.Element}
  */
 function Steps (props) {
   const { current, steps, onChange, ...passedProps } = props

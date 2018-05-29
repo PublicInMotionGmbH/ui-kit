@@ -28,6 +28,9 @@ value         | number    | self-controlled | value of input
 max           | number    | n/a             | maximum value in range
 min           | number    | n/a             | minimum value in range
 step          | number    | n/a             | size of each movement of the slider control
+onFocus       | function  | n/a             | event handler when input is focused
+onBlur        | function  | n/a             | event handler when input lost focus
+onChange      | function  | n/a             | event handler when input is changed, with new value
 
 ## Changelog
 

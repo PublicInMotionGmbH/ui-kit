@@ -210,6 +210,8 @@ class FormHandler extends React.PureComponent {
     const formCls = buildClassName(moduleName, className)
     const elements = React.Children.map(children, node => this.transformNode(node, props))
 
+    // TODO: Shouldn't it use @talixo/form instead?
+    // TODO: Couldn't it have onChange event as well?
     return (
       <form
         className={formCls}

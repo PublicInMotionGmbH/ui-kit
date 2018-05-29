@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Icon } from '@talixo/icon'
@@ -12,6 +13,9 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Inline Input', module, {
   propTables: [ InlineInput ]
 })
+
+// Create actions
+const change = action('change')
 
 // Stories
 
@@ -54,18 +58,11 @@ addStory('disabled', readme, () => (
   <InlineInput placeholder='I am disabled' disabled />
 ))
 
-addStory.controlled('input change', readme, (setState, state) => (
+addStory('input change', readme, () => (
   <div>
-    <span style={{ display: 'inline-block', padding: '16px', fontWeight: 700 }}>
-      You typed: {state.value}
-    </span>
     <InlineInput
       placeholder='Edit me'
-      onChange={(value) => setState({ value })}
+      onChange={change}
     />
   </div>
-), () => {
-  return {
-    value: ''
-  }
-})
+))

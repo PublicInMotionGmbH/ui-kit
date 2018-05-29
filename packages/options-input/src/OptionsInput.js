@@ -239,7 +239,7 @@ class OptionsInput extends React.PureComponent {
     })
 
     return (
-      <div className={clsName} ref={this.saveRef} {...restProps} >
+      <div className={clsName} ref={this.saveRef} {...restProps}>
         <button
           type='button'
           className='options-input__toggle'
