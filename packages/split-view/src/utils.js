@@ -1,3 +1,5 @@
+import React from 'react'
+
 export function formatKey (key) {
   return key
     .replace(/[_-](.)/g, ($0, $1) => ' ' + $1.toUpperCase())
@@ -6,6 +8,15 @@ export function formatKey (key) {
     .replace(/^./g, $0 => $0.toUpperCase())
 }
 
-export function displayObjectProperties (object) {
-  // const keys = Object.keys(object)
+export function displayObject (object) {
+  const keys = Object.keys(object)
+  return (
+    <div>
+      {
+        keys.map(key => (
+          <div key={key}>{formatKey(key)}: {object[key]}</div>
+        ))
+      }
+    </div>
+  )
 }

@@ -10,10 +10,9 @@ import { moduleName } from './config'
 const propTypes = {
   className: PropTypes.string,
   itemRender: PropTypes.func,
-  items: PropTypes.arrayOf(PropTypes.object)
+  items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 const defaultProps = {
-  items: []
 }
 
 function ItemList (props) {

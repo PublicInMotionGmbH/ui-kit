@@ -1,3 +1,4 @@
+import React from 'react'
 // Test Data
 export const data = [
   { name: 'Josh Smith I', value: 0, title: 'Title 1', subtitle: 'Subtitle 1' },
@@ -26,9 +27,9 @@ export function detailsRender (item) {
   )
 }
 
-export function ListHeader () {
+export function ListHeader (props) {
   return (
-    <div className='test-header'>
+    <div {...props}>
       Test Header
     </div>
   )

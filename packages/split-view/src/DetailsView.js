@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 
 import { moduleName } from './config'
+import { displayObject } from './utils'
 
 const propTypes = {
   detailsRender: PropTypes.func,
@@ -11,7 +12,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  detailsRender: item => JSON.stringify(item)
+  detailsRender: item => displayObject(item)
 }
 
 const DetailsView = (props) => {

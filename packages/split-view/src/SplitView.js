@@ -37,15 +37,27 @@ const defaultProps = {
  */
 class SplitView extends React.Component {
   state = {
-    openIndex: this.props.openItem || 0
+    openIndex: this.props.openIndex || 0
   }
 
+  /**
+   * Update index of opened element if it has been changed
+   *
+   * @param {object} nextProps
+   * @param {object} [nextProps.openIndex]
+   */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.openIndex === this.state.openIndex) {
+    if (nextProps.openIndex !== this.state.openIndex) {
       this.setState({ openIndex: nextProps.openIndex })
     }
   }
 
+  /**
+   * Update opnened element if it has been changed by clicking
+   * the list element and invoke props.onSelect function
+   *
+   * @param {object} item
+   */
   onClick = (item) => {
     const { openIndex } = this.state
     const { data, onSelect, openIndex: propsOpenIndex } = this.props
@@ -57,18 +69,27 @@ class SplitView extends React.Component {
     }
   }
 
+  generateHeader = () => {
+    const { listHeader } = this.props
+
+    const headerCls = buildClassName([moduleName, 'header'], listHeader.props.className)
+    return React.cloneElement(listHeader, { ...listHeader.props, className: headerCls })
+  }
+
   render () {
-    const { onClick } = this
+    const { onClick, generateHeader } = this
     const { openIndex } = this.state
     const { className, data, detailsRender, itemRender, listHeader, onSelect, openIndex: propsOpenIndex, ...passedProps } = this.props
+
+    // Class Names
     const wrapperCls = buildClassName(moduleName, className)
     const panelCls = buildClassName([moduleName, 'side-panel'], className)
-    const displayItem = data[openIndex] || null
+    const displayItem = data[openIndex]
 
     return (
       <div className={wrapperCls} {...passedProps}>
         <div className={panelCls}>
-          { listHeader }
+          { listHeader && generateHeader() }
           <ItemList
             items={data}
             itemRender={itemRender}
