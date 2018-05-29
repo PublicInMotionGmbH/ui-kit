@@ -9,31 +9,44 @@ import DetailsView from './DetailsView'
 import { moduleName } from './config'
 
 const propTypes = {
-  /** Additional class name */
+  /** Additional class name. */
   className: PropTypes.string,
 
+  /** Data to be displayed inside SplitView component. */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
+  /** Render function of details section. */
   detailsRender: PropTypes.func,
 
+  /** Render function of list section. */
   itemRender: PropTypes.func,
 
+  /** Header element of list section. */
   listHeader: PropTypes.node,
 
+  /** onSelect callback. */
   onSelect: PropTypes.func,
 
+  /** Index of opened element. */
   openIndex: PropTypes.number
-}
-
-const defaultProps = {
 }
 
 /**
  * Component which represents Split View.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {object[]} props.data
+ * @property {function} [props.detailsRender]
+ * @property {function} [props.itemRender]
+ * @property {*} [props.listHeader]
+ * @property {function} [props.onSelect]
+ * @property {number} [props.openIndex]
+ *
+ * @property {object} state
+ * @property {number} state.openIndex
+ *
+ * @class
  */
 class SplitView extends React.Component {
   state = {
@@ -41,7 +54,7 @@ class SplitView extends React.Component {
   }
 
   /**
-   * Update index of opened element if it has been changed
+   * Update index of opened element if it has been changed.
    *
    * @param {object} nextProps
    * @param {object} [nextProps.openIndex]
@@ -54,7 +67,7 @@ class SplitView extends React.Component {
 
   /**
    * Update opnened element if it has been changed by clicking
-   * the list element and invoke props.onSelect function
+   * the list element and invoke props.onSelect function.
    *
    * @param {object} item
    */
@@ -68,7 +81,9 @@ class SplitView extends React.Component {
       this.setState({ openIndex: itemIndex })
     }
   }
-
+  /**
+   * Generates header component if provided.
+   */
   generateHeader = () => {
     const { listHeader } = this.props
 
@@ -107,7 +122,5 @@ class SplitView extends React.Component {
 }
 
 SplitView.propTypes = propTypes
-
-SplitView.defaultProps = defaultProps
 
 export default SplitView

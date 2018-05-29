@@ -21,9 +21,17 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
+
+Property name   | Type      | Default | Description
+----------------|-----------|:-------:|--------------------------------------------------
+className       | string    | n/a     | Additional class name.
+data            | object[]  | n/a     | Data to be displayed inside SplitView component.
+detailsRender   | function  | n/a     | Render function of details section.
+itemRender      | function  | n/a     | Render function of list section.
+listHeader      | node      | n/a     | Header element of list section.
+onSelect        | function  | n/a     | onSelect callback.
+openIndex       | number    | n/a     | Index of opened element.
 
 ## Changelog
 
