@@ -19,9 +19,15 @@ const DetailsView = (props) => {
   const detailsCls = buildClassName([moduleName, 'details'])
 
   return (
-    <div className={detailsCls}>
-      { detailsRender(item) }
-    </div>
+    <React.Fragment>
+      {
+        item
+          ? <div className={detailsCls}>
+            { item && detailsRender(item) }
+          </div>
+          : null
+      }
+    </React.Fragment>
   )
 }
 

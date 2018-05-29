@@ -3,6 +3,8 @@
 @include module('split-view')
   display: flex
   flex-direction: row
+  height: 100%
+  overflow: hidden
 
   &__details
     margin: 0 dp(5)
@@ -11,9 +13,13 @@
     border-radius: $split-view-border-radius
     height: fit-content
     min-height: $split-view-list-item-height
+    transition: $split-view-transition
+
+  &__side-panel
+    flex-basis: $split-view-list-width
+    overflow: auto
 
   &__list
-    flex-basis: $split-view-list-width
 
     &__item
       border-bottom: $split-view-border

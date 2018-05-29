@@ -12,7 +12,17 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  itemRender: PropTypes.func
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+
+  detailsRender: PropTypes.func,
+
+  itemRender: PropTypes.func,
+
+  listHeader: PropTypes.node,
+
+  onSelect: PropTypes.func,
+
+  openIndex: PropTypes.number
 }
 
 const defaultProps = {
@@ -38,10 +48,10 @@ class SplitView extends React.Component {
 
   onClick = (item) => {
     const { openIndex } = this.state
-    const { data, onClick, openIndex: propsOpenIndex } = this.props
+    const { data, onSelect, openIndex: propsOpenIndex } = this.props
     const itemIndex = _.findIndex(data, item)
 
-    if (onClick) { onClick(item) }
+    if (onSelect) { onSelect(item) }
     if (propsOpenIndex == null && openIndex !== itemIndex) {
       this.setState({ openIndex: itemIndex })
     }
@@ -50,18 +60,22 @@ class SplitView extends React.Component {
   render () {
     const { onClick } = this
     const { openIndex } = this.state
-    const { className, data, detailsRender, itemRender, openItem: propsOpenItem, ...passedProps } = this.props
+    const { className, data, detailsRender, itemRender, listHeader, onSelect, openIndex: propsOpenIndex, ...passedProps } = this.props
     const wrapperCls = buildClassName(moduleName, className)
-    const displayItem = data[openIndex]
+    const panelCls = buildClassName([moduleName, 'side-panel'], className)
+    const displayItem = data[openIndex] || null
 
     return (
       <div className={wrapperCls} {...passedProps}>
-        <ItemList
-          items={data}
-          itemRender={itemRender}
-          onClick={onClick}
-          openIndex={openIndex}
-        />
+        <div className={panelCls}>
+          { listHeader }
+          <ItemList
+            items={data}
+            itemRender={itemRender}
+            onClick={onClick}
+            openIndex={openIndex}
+          />
+        </div>
         <DetailsView
           detailsRender={detailsRender}
           item={displayItem}
