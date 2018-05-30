@@ -169,6 +169,7 @@ class Chart extends React.Component {
       >
         <HorizontalGridLines />
         <VerticalGridLines />
+        <XAxis title={xAxisTitle} />
         {
           data
             .map((item, index) => {
@@ -188,7 +189,6 @@ class Chart extends React.Component {
             onBrushEnd={onBrushEnd}
           />
         }
-        <XAxis title={xAxisTitle} />
         <YAxis title={yAxisTitle} />
       </FlexibleXYPlot>
     )
