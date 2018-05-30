@@ -1,0 +1,28 @@
+@import './config'
+
+.storybook__split-view
+  &__list-item
+    display: flex
+    align-items: center
+    height: 100%
+    padding: 0 dp(5)
+
+  &__details
+    padding: dp(5)
+
+    &__subtitle
+      font-size: dp(1.5)
+      font-weight: $font-weight-bold
+
+    &__item
+      padding: dp(2)
+      > .talixo-icon
+        font-size: dp(4)
+
+      > span:last-of-type
+        padding: 0 dp(10)
+
+  &__header
+    padding: dp(2)
+    & > div
+      padding: dp(2) 0

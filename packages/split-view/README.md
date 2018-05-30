@@ -31,7 +31,7 @@ detailsRender   | function  | n/a     | Render function of details section.
 itemRender      | function  | n/a     | Render function of list section.
 listHeader      | node      | n/a     | Header element of list section.
 onSelect        | function  | n/a     | onSelect callback.
-openIndex       | number    | n/a     | Index of opened element.
+openItem        | number    | n/a     | Opened element.
 
 ## Changelog
 

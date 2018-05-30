@@ -27,8 +27,8 @@ const propTypes = {
   /** onSelect callback. */
   onSelect: PropTypes.func,
 
-  /** Index of opened element. */
-  openIndex: PropTypes.number
+  /** Opened element. */
+  openItem: PropTypes.object
 }
 
 /**
@@ -41,27 +41,27 @@ const propTypes = {
  * @property {function} [props.itemRender]
  * @property {*} [props.listHeader]
  * @property {function} [props.onSelect]
- * @property {number} [props.openIndex]
+ * @property {number} [props.openItem]
  *
  * @property {object} state
- * @property {number} state.openIndex
+ * @property {object} state.openItem
  *
  * @class
  */
 class SplitView extends React.Component {
   state = {
-    openIndex: this.props.openIndex || 0
+    openItem: this.props.openItem || this.props.data[0]
   }
 
   /**
    * Update index of opened element if it has been changed.
    *
    * @param {object} nextProps
-   * @param {object} [nextProps.openIndex]
+   * @param {object} [nextProps.openItem]
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.openIndex !== this.state.openIndex) {
-      this.setState({ openIndex: nextProps.openIndex })
+    if (nextProps.openItem !== this.state.openItem) {
+      this.setState({ openItem: nextProps.openItem })
     }
   }
 
@@ -72,13 +72,13 @@ class SplitView extends React.Component {
    * @param {object} item
    */
   onClick = (item) => {
-    const { openIndex } = this.state
-    const { data, onSelect, openIndex: propsOpenIndex } = this.props
+    const { openItem } = this.state
+    const { data, onSelect, openItem: propsOpenItem } = this.props
     const itemIndex = _.findIndex(data, item)
 
     if (onSelect) { onSelect(item) }
-    if (propsOpenIndex == null && openIndex !== itemIndex) {
-      this.setState({ openIndex: itemIndex })
+    if (propsOpenItem == null && openItem !== itemIndex) {
+      this.setState({ openItem: item })
     }
   }
   /**
@@ -86,20 +86,18 @@ class SplitView extends React.Component {
    */
   generateHeader = () => {
     const { listHeader } = this.props
-
     const headerCls = buildClassName([moduleName, 'header'], listHeader.props.className)
-    return React.cloneElement(listHeader, { ...listHeader.props, className: headerCls })
+    return React.cloneElement(listHeader, { className: headerCls })
   }
 
   render () {
     const { onClick, generateHeader } = this
-    const { openIndex } = this.state
-    const { className, data, detailsRender, itemRender, listHeader, onSelect, openIndex: propsOpenIndex, ...passedProps } = this.props
+    const { openItem } = this.state
+    const { className, data, detailsRender, itemRender, listHeader, onSelect, openItem: propsOpenItem, ...passedProps } = this.props
 
     // Class Names
     const wrapperCls = buildClassName(moduleName, className)
     const panelCls = buildClassName([moduleName, 'side-panel'], className)
-    const displayItem = data[openIndex]
 
     return (
       <div className={wrapperCls} {...passedProps}>
@@ -109,12 +107,12 @@ class SplitView extends React.Component {
             items={data}
             itemRender={itemRender}
             onClick={onClick}
-            openIndex={openIndex}
+            openItem={openItem}
           />
         </div>
         <DetailsView
           detailsRender={detailsRender}
-          item={displayItem}
+          item={openItem}
         />
       </div>
     )

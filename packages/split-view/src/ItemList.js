@@ -9,7 +9,7 @@ import { moduleName } from './config'
 
 const propTypes = {
 
-  /** Additional class name */
+  /** Additional class name. */
   className: PropTypes.string,
 
   /** Function used to render data item. */
@@ -21,24 +21,24 @@ const propTypes = {
   /** onClick callback function. */
   onClick: PropTypes.func,
 
-  /** Index of currently opened item. */
-  openIndex: PropTypes.number
+  /** Currently opened item. */
+  openItem: PropTypes.object
 }
 
 /**
  * Component which renders data items list.
  *
- * @param props
+ * @param {object} props
  * @param {string} [props.className]
  * @param {function} [props.itemRender]
  * @param {object[]} props.items
  * @param {function} [props.onClick]
- * @param {number} [props.openIndex]
+ * @param {number} [props.openItem]
  *
  * @returns {React.Element}
  */
 function ItemList (props) {
-  const { className, itemRender, items, onClick, openIndex } = props
+  const { className, itemRender, items, onClick, openItem } = props
   const wrapperCls = buildClassName([moduleName, 'list'], className)
 
   return (
@@ -47,7 +47,7 @@ function ItemList (props) {
         items.map((item, index) => (
           <Item
             key={index}
-            active={openIndex === index}
+            active={openItem === item}
             item={item}
             itemRender={itemRender}
             onClick={onClick}

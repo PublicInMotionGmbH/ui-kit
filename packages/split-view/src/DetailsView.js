@@ -22,7 +22,7 @@ const defaultProps = {
  * Component which renders details about given data item
  * using provided detailsRender function.
  *
- * @param props
+ * @param {object} props
  * @param {function} [props.datailsRender]
  * @param {object} [props.item]
  *

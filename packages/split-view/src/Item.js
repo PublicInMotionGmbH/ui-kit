@@ -24,7 +24,7 @@ const defaultProps = {
 /**
  * Component which renders data item inside list using given renderItem function.
  *
- * @param props
+ * @param {object} props
  * @param {bool} [props.active]
  * @param {object} props.item
  * @param {function} [props.itemRender]
