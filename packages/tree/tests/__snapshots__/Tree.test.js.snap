@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tree /> renders children correctly 1`] = `
+<ul
+  className="talixo-tree"
+>
+  <TreeNode
+    key="1"
+    node={
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "id": 2,
+                "name": "tiger",
+              },
+              Object {
+                "id": 3,
+                "name": "cow",
+              },
+            ],
+            "id": 5,
+            "name": "mammals",
+          },
+        ],
+        "id": 1,
+        "name": "animal",
+      }
+    }
+  />
+  <TreeNode
+    key="4"
+    node={
+      Object {
+        "id": 4,
+        "name": "people",
+      }
+    }
+  />
+</ul>
+`;

@@ -11,7 +11,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Data passed to generate tree view */
-  data: PropTypes.array,
+  data: PropTypes.array.isRequired,
 
   /** Open tree when load */
   initialOpen: PropTypes.bool,
