@@ -1,2 +1,173 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+$phone-input-font-size: $x-input-text-size !default
+$phone-input-height: $x-input-height !default
+$phone-input-padding-horizontal: $x-input-padding-horizontal !default
+
+$phone-input-icon-width: dp(2.5) !default
+$phone-input-icon-size: $phone-input-icon-width !default
+
+$phone-input-text-color: $x-input-text-color !default
+$phone-input-background-color: $x-input-background-color !default
+$phone-input-border-color: $x-input-border-color !default
+
+$phone-input-border-width: $x-border-width !default
+$phone-input-border-radius: $x-border-radius !default
+
+$phone-input-hover-background-color: $x-input-hover-background-color !default
+$phone-input-hover-border-color: $x-input-hover-border-color !default
+$phone-input-hover-text-color: $x-input-hover-text-color !default
+
+$phone-input-focus-background-color: $x-input-focus-background-color !default
+$phone-input-focus-border-color: $x-input-focus-border-color !default
+$phone-input-focus-text-color: $x-input-focus-text-color !default
+
+$phone-input-error-background-color: $x-input-error-background-color !default
+$phone-input-error-border-color: $x-input-error-border-color !default
+$phone-input-error-text-color: $x-input-error-text-color !default
+$phone-input-error-placeholder-color: $x-input-error-placeholder-color !default
+
+$phone-input-placeholder-color: $x-input-placeholder-color !default
+
+$phone-input-flags-list-width: dp(25) !default
+$phone-input-arrow-margin: dp(1) !default
+$phone-input-arrow-size: dp(2) !default
+$phone-input-flag-margin: dp(1) !default
+
+$phone-input-unknown-flag-background-color: mix($phone-input-background-color, $phone-input-text-color, 90%) !default
+$phone-input-unknown-flag-text-color: $phone-input-background-color !default
+
+@include module('phone-input')
+  display: flex
+  flex-direction: row
+  width: 100%
+
+  input
+    flex: 1 auto
+    box-sizing: border-box
+    width: 100%
+    outline: none
+    font: inherit
+    color: $phone-input-text-color
+    background-color: $phone-input-background-color
+    border: $phone-input-border-width solid $phone-input-border-color
+    border-left-width: 0
+    border-radius: $phone-input-border-radius
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+
+    font-size: $phone-input-font-size
+    height: $phone-input-height
+    line-height: $phone-input-height
+    padding: 0 $phone-input-padding-horizontal
+
+    &::placeholder
+      color: $phone-input-placeholder-color
+
+    &:hover
+      background-color: $phone-input-hover-background-color
+      border-color: $phone-input-hover-border-color
+      color: $phone-input-hover-text-color
+
+    &:focus
+      background-color: $phone-input-focus-background-color
+      border-color: $phone-input-focus-border-color
+      color: $phone-input-focus-text-color
+
+  &__unknown-flag
+    display: inline-block
+    height: 1em
+    line-height: 1em
+    width: 1.4em
+    background: $phone-input-unknown-flag-background-color
+    vertical-align: middle
+    text-align: center
+
+    &:before
+      content: '?'
+      font-weight: bold
+      color: $phone-input-unknown-flag-text-color
+
+  &--hover input,
+  &--hover #{prefix('combo-box')} #{prefix('combo-box', 'value')}
+    &, &:hover, &:focus
+      background-color: $phone-input-hover-background-color
+      border-color: $phone-input-hover-border-color
+      color: $phone-input-hover-text-color
+
+  &--focus input,
+  &--focus #{prefix('combo-box')} #{prefix('combo-box', 'value')}
+    &, &:hover, &:focus
+      background-color: $phone-input-focus-background-color
+      border-color: $phone-input-focus-border-color
+      color: $phone-input-focus-text-color
+
+  &--error:not(#{prefix('phone-input--hover')}):not(#{prefix('phone-input--focus')}),
+  &--error#{prefix('phone-input--hover')}:not(#{prefix('phone-input--focus')})
+    input,
+    #{prefix('combo-box')} #{prefix('combo-box', 'value')}
+      &, &:hover
+        background-color: $phone-input-error-background-color
+        border-color: $phone-input-error-border-color
+        color: $phone-input-error-text-color
+
+    &::placeholder
+      color: $phone-input-error-placeholder-color
+
+  @include module('combo-box')
+    &__value
+      border-radius: $phone-input-border-radius
+      border-top-right-radius: 0
+      border-bottom-right-radius: 0
+      border-right: 0
+      padding-right: 0
+      cursor: pointer
+      height: 100%
+
+      > *
+        pointer-events: none
+
+    &__menu
+      min-width: $phone-input-flags-list-width
+      left: $phone-input-border-radius
+
+    &__controls
+      margin-left: $phone-input-arrow-margin
+
+    &__arrow
+      font-size: $phone-input-arrow-size
+
+  &__country
+    display: flex
+    width: 100%
+    line-height: 1em
+
+    @include module('country-flag')
+      margin-right: $phone-input-flag-margin
+
+    &__description
+      strong
+        display: block
+      span
+        color: #999
+        font-size: 0.8em
+
+  @include module('country-flag')
+    box-shadow: 0 0 dp(1.25) dp(0.25) rgba(0, 0, 0, .1)
+
+  [dir=rtl] #{prefix('combo-box', 'controls')}
+    margin-left: 0
+    margin-right: $phone-input-arrow-margin
+
+  [dir=rtl] &__country
+    @include module('country-flag')
+      margin-right: 0
+      margin-left: $phone-input-flag-margin
+
+  [dir=rtl] & input
+    border-radius: $phone-input-border-radius 0 0 $phone-input-border-radius
+
+  [dir=rtl] &
+    @include module('combo-box')
+      &__value
+        border-radius: 0 $phone-input-border-radius $phone-input-border-radius 0

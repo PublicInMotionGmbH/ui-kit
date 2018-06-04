@@ -84,15 +84,23 @@ function renderCountryItem (country) {
  *
  * @property {object} state
  * @property {string} state.value
+ * @property {boolean} state.focused
  * @property {string|null} [state.country]
+ * @property {boolean|string[]} state.focus
+ * @property {boolean|string[]} state.hover
  *
  * @class
  */
 class PhoneInput extends React.PureComponent {
   state = {
     value: this.props.value || '',
-    focused: false,
-    country: detectCountry(this.props.value)
+    country: detectCountry(this.props.value),
+
+    hover: false,
+    focus: false,
+
+    // Hack for text-mask-input
+    focused: false
   }
 
   /**
@@ -160,6 +168,62 @@ class PhoneInput extends React.PureComponent {
     this.el = findDOMNode(node)
   }
 
+  onInputMouseOver = () => this.setMouseOverState('input')
+  onInputMouseOut = () => this.setMouseOutState('input')
+  onInputFocus = () => this.setFocusState('input')
+  onInputBlur = () => this.setBlurState('input')
+
+  onListMouseOver = () => this.setMouseOverState('flags')
+  onListMouseOut = () => this.setMouseOutState('flags')
+  onListFocus = () => this.setFocusState('flags')
+  onListBlur = () => this.setBlurState('flags')
+
+  /**
+   * Set hover state
+   *
+   * @param {string} what
+   */
+  setMouseOverState (what) {
+    const hover = this.state.hover ? this.state.hover.filter(x => x !== what) : []
+    hover.push(what)
+    this.setState({ hover })
+  }
+
+  /**
+   * Set dis-hover state
+   *
+   * @param {string} what
+   */
+  setMouseOutState (what) {
+    setTimeout(() => {
+      const hover = this.state.hover ? this.state.hover.filter(x => x !== what) : []
+      this.setState({ hover: hover.length ? hover : false })
+    })
+  }
+
+  /**
+   * Set focus state
+   *
+   * @param {string} what
+   */
+  setFocusState (what) {
+    const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
+    focus.push(what)
+    this.setState({ focus })
+  }
+
+  /**
+   * Set blur state
+   *
+   * @param {string} what
+   */
+  setBlurState (what) {
+    setTimeout(() => {
+      const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
+      this.setState({ focus: focus.length ? focus : false })
+    })
+  }
+
   /**
    * Render SelectBox with countries and prefixes.
    *
@@ -171,10 +235,15 @@ class PhoneInput extends React.PureComponent {
         className={buildClassName([ moduleName, 'country-box' ])}
         options={countriesList}
         value={this.state.country}
+        placeholder={<span className={buildClassName([ moduleName, 'unknown-flag' ])} />}
         renderValue={country => <CountryFlag code={country.code} />}
         renderItem={renderCountryItem}
         buildItemId={country => country.code}
         onChange={this.changeCountry}
+        onFocus={this.onListFocus}
+        onBlur={this.onListBlur}
+        onMouseEnter={this.onListMouseOver}
+        onMouseLeave={this.onListMouseOut}
       />
     )
   }
@@ -186,6 +255,8 @@ class PhoneInput extends React.PureComponent {
    */
   focus = (event) => {
     const { onFocus } = this.props
+
+    this.onInputFocus()
 
     // Make sure that user can't click on some place in input, where it guides him
     // TODO: when react-text-mask will properly work with removing placeholder character, remove it
@@ -206,6 +277,8 @@ class PhoneInput extends React.PureComponent {
    */
   blur = (event) => {
     const { onBlur } = this.props
+
+    this.onInputBlur()
 
     this.setState({ focused: false })
 
@@ -234,6 +307,9 @@ class PhoneInput extends React.PureComponent {
         value={value}
         placeholder={placeholder}
         onChange={e => this.change(e.target.value)}
+        onMouseEnter={this.onInputMouseOver}
+        onMouseOut={this.onInputMouseOut}
+        onMouseLeave={this.onInputMouseOut}
         onFocus={this.focus}
         onBlur={this.blur}
       />
@@ -247,9 +323,12 @@ class PhoneInput extends React.PureComponent {
    */
   render () {
     const { className, error, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
+    const { hover, focus } = this.state
+
+    const clsName = buildClassName(moduleName, className, { error, hover, focus })
 
     return (
-      <span className={buildClassName(moduleName, className, {error})} {...passedProps}>
+      <span className={clsName} {...passedProps}>
         {this.renderCountryBox()}
         {this.renderInput()}
       </span>
