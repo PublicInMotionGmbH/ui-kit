@@ -12,10 +12,7 @@
     transform: translateY(-50%)
     white-space: nowrap
     pointer-events: none
-
-    &:before
-      content: '\00a0'
-      display: inline-block
+    margin-left: $text-input-suffix-margin
 
   &--empty #{inside(&, 'suffix')}
     display: none
@@ -98,3 +95,7 @@
   [dir=rtl] &--with-right#{&}--with-left #{inside(&, 'input')}
     padding-right: $text-input-icon-with-padding
     padding-left: $text-input-icon-with-padding
+
+  [dir=rtl] #{inside(&, 'suffix')}
+    margin-left: 0
+    margin-right: $text-input-suffix-margin

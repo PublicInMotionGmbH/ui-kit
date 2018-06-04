@@ -9,7 +9,7 @@ $number-input-stepper-font-size: $number-input-stepper-height * 0.7 !default
 $number-input-stepper-border-width: $x-border-width !default
 $number-input-stepper-weight: $x-weight-semibold !default
 
-$number-input-stepper-background-color: $x-color-background !default
+$number-input-stepper-background-color: transparent !default
 $number-input-stepper-border-color: transparentize($x-color-primary, 0.3) !default
 $number-input-stepper-text-color: $x-color-primary !default
 
@@ -21,22 +21,21 @@ $number-input-stepper-active-background-color: $number-input-stepper-hover-borde
 $number-input-stepper-active-border-color: $number-input-stepper-active-background-color !default
 $number-input-stepper-active-text-color: text-contrast($number-input-stepper-active-background-color) !default
 
-$number-input-padding-with-stepper: $number-input-stepper-glue + 2 * $number-input-stepper-width + $text-input-padding-horizontal !default
-$number-input-full-stepper-width: $number-input-stepper-glue + 2 * $number-input-stepper-width !default
+$number-input-full-stepper-width: 4 * $number-input-stepper-glue + 2 * $number-input-stepper-width !default
+$number-input-padding-with-stepper: $number-input-full-stepper-width + 1.5 * $text-input-padding-horizontal !default
 
 @include module('number-input')
   position: relative
 
-  @include module('text-input')
-    &--with-right #{prefix('text-input', 'input')}
-      padding-right: $number-input-padding-with-stepper
+  &#{prefix('text-input')}--with-right #{prefix('text-input', 'input')}
+    padding-right: $number-input-padding-with-stepper
 
-    &--with-right #{prefix('text-input', 'right')}
-      white-space: nowrap
-      font-size: 0
-      height: $number-input-stepper-height
-      line-height: $number-input-stepper-height
-      width: $number-input-full-stepper-width
+  &#{prefix('text-input')}--with-right #{prefix('text-input', 'right')}
+    white-space: nowrap
+    font-size: 0
+    height: $number-input-stepper-height
+    line-height: $number-input-stepper-height
+    width: $number-input-full-stepper-width
 
   #{inside('#{&}-stepper', 'button')}
     display: inline-block

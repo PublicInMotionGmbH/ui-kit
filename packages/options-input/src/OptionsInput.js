@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
-import ListOption from './ListOption'
-import Option from './Option'
+import { Icon } from '@talixo/icon'
+
+import OptionsInputList from './OptionsInputList'
+import OptionsInputValue from './OptionsInputValue'
 
 const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Data for generate ListOption */
+  /** Options to show */
   options: PropTypes.arrayOf(PropTypes.shape({
-
     /** Id for option */
     id: PropTypes.string.isRequired,
 
@@ -33,37 +33,62 @@ const propTypes = {
     max: PropTypes.number
   })),
 
-  /** Value of option */
-  value: PropTypes.object
+  /** Input value */
+  value: PropTypes.object,
+
+  /** Event handler fired on change of value */
+  onChange: PropTypes.func,
+
+  /** Event handler fired on focus */
+  onFocus: PropTypes.func,
+
+  /** Event handler fired on blur */
+  onBlur: PropTypes.func
 }
 
 const defaultProps = {
   options: []
 }
 
+export const moduleName = 'options-input'
+
 /**
- * * Component which represents OptionsInput.
+ * Build value according to options list and sent value.
+ *
+ * @param {object[]} options
+ * @param {object} baseValue
+ *
+ * @returns {number}
+ */
+function buildValue (options, baseValue) {
+  const currentValue = baseValue || {}
+
+  const value = {}
+
+  for (let i = 0; i < options.length; i++) {
+    const option = options[i]
+    value[option.id] = currentValue[option.id] || option.default || 0
+  }
+
+  return value
+}
+
+/**
+ * * Component which represents input where you can select some numeric options.
  *
  * @property {*} props
  * @property {string} [props.className]
- * @property {array} [props.options]
- * @property {string} [props.options.id]
- * @property {string} [props.options.icon]
- * @property {string} [props.options.label]
- * @property {number} [props.options.default]
- * @property {number} [props.options.min]
- * @property {number} [props.options.max]
- *
- * @class {React.Element}
+ * @property {object} [props.value]
+ * @property {object[]|Array<{ id: string, [icon]: string, [label]: string, [default]: number, [min]: number, [max]: number}>} [props.options]
  */
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: this.buildValue(this.props.options, this.props.value)
+    value: buildValue(this.props.options, this.props.value)
   }
 
   /**
-   * This function set state value
+   * Update value according to provided value and options.
    *
    * @param {object} nextProps
    */
@@ -71,11 +96,11 @@ class OptionsInput extends React.PureComponent {
     let value = this.state.value
 
     if (this.state.value !== nextProps.value && nextProps.value !== undefined) {
-      value = this.buildValue(nextProps.options, nextProps.value)
+      value = buildValue(nextProps.options, nextProps.value)
     }
 
     if (this.props.options !== nextProps.options) {
-      value = this.buildValue(nextProps.options, value)
+      value = buildValue(nextProps.options, value)
     }
 
     if (value !== this.state.value) {
@@ -88,27 +113,6 @@ class OptionsInput extends React.PureComponent {
    */
   componentWillUnmount () {
     this.detachCloseEvents()
-  }
-
-  /**
-   * This function set value of value
-   *
-   * @param {array} options
-   * @param {number} baseValue
-   *
-   * @returns {number}
-   */
-  buildValue (options, baseValue) {
-    const currentValue = baseValue || {}
-
-    const value = {}
-
-    for (let i = 0; i < options.length; i++) {
-      const option = options[i]
-      value[option.id] = currentValue[option.id] || option.default || 0
-    }
-
-    return value
   }
 
   /**
@@ -171,7 +175,8 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function set state.value
+   * Update value.
+   *
    * @param {string} id
    * @param {number} value
    */
@@ -195,7 +200,7 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function handle focus
+   * Handle focusing element.
    */
   focus = () => {
     this.toggle()
@@ -206,7 +211,7 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function handle blur
+   * Handle losing focus on element.
    */
   blur = () => {
     if (this.props.onBlur) {
@@ -215,48 +220,35 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, ...restProps } = this.props
-    const { value } = this.state
-    const elements = options.filter(x => value[x.id]).map(x => (
-      <Option
-        key={x.id}
-        option={x}
-        value={value[x.id]}
-      />
-    ))
+    const { options, className, onChange, onFocus, onBlur, ...restProps } = this.props
+    const { value, open } = this.state
 
-    const listElements = options.map(x => (
-      <ListOption
-        key={x.id}
-        option={x}
-        value={value[x.id]}
-        onChange={this.change}
-      />
-    ))
-
-    const clsName = buildClassName('options-input', className, {
-      'open': this.state.open
+    const clsName = buildClassName(moduleName, className, {
+      open: open
     })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
         <button
           type='button'
-          className='options-input__toggle'
+          className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
           onBlur={this.blur}
-          aria-expanded={this.state.open}
+          aria-expanded={open}
           role='button'
         >
-          <div className='options-input__value'>
-            {elements}
-          </div>
+          <OptionsInputValue
+            options={options}
+            value={value}
+          />
 
-          <Icon name={this.state.open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />
+          <Icon name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />
         </button>
-        <div className='options-input__list' aria-hidden={!this.state.open}>
-          {listElements}
-        </div>
+        <OptionsInputList
+          options={options}
+          value={value}
+          onChange={this.change}
+        />
       </div>
     )
   }
