@@ -22,6 +22,7 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {boolean} [props.small]
  * @returns {React.Element}
  */
 function Divider (props) {
