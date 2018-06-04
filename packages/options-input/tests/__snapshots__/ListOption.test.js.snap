@@ -2,7 +2,7 @@
 
 exports[`<ListOption /> renders children correctly 1`] = `
 <div
-  className="talixo-options-input__list-option options-input__list-option--active"
+  className="talixo-options-input-list-option talixo-options-input-list-option--active"
 >
   <NumberInput
     error={false}
@@ -21,15 +21,15 @@ exports[`<ListOption /> renders children correctly 1`] = `
     stepper={true}
     suffix={
       <div
-        className="options-input__list-option__label"
+        className="talixo-options-input-list-option__label"
       >
         <span
-          className="options-input__list-option__title"
+          className="talixo-options-input-list-option__title"
         >
           Adults
         </span>
         <span
-          className="options-input__list-option__description"
+          className="talixo-options-input-list-option__description"
         >
           Older than 15
         </span>

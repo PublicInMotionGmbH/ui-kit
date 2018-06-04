@@ -2,7 +2,7 @@
 
 exports[`<Option /> renders children correctly 1`] = `
 <span
-  className="options-input__option"
+  className="talixo-options-input-option"
 >
   <Tooltip
     arrow={true}
