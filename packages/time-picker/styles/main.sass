@@ -1,1 +1,111 @@
-@import './geometry'
+@import './config'
+
+@include module('time-picker')
+  position: relative
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  &__input-hour,
+  &__input-minutes
+    flex-basis: $time-picker-input-width-basis
+
+  & &__input
+    position: relative
+    display: block
+
+    input[type=number]
+      appearance: none
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button
+      appearance: none
+      margin: 0
+
+    &--open
+      position: relative
+      z-index: 2
+
+      > input
+        &, &:hover, &:focus
+          z-index: 2
+          border-bottom-left-radius: 0
+          border-bottom-right-radius: 0
+          border-bottom-color: transparent
+
+    &--arrow
+      display: inline-block
+      font-size: $time-picker-arrow-size
+      line-height: 1em
+      border: 0
+      background: transparent
+      color: $time-picker-arrow-color
+
+  &__menu
+    position: absolute
+    display: flex
+    flex-direction: row
+    padding: $time-picker-menu-padding
+    z-index: 1
+    margin-top: -1 * $time-picker-border-width
+    background-color: $time-picker-background-color
+    border: $time-picker-border-width solid $time-picker-border-color
+
+  &__colon
+    padding: $time-picker-colon-margin
+
+  .talixo-text-input__right
+    pointer-events: none
+
+  // FIXME: AM/PM is put too much down
+  .talixo-text-input__suffix
+    padding-bottom: 1px
+
+@include module('time-menu')
+  position: relative
+  column-width: 100%
+  column-count: 1
+  column-gap: $time-picker-menu-gap
+  padding: #{$time-picker-menu-gap / 2}
+  user-select: none
+  margin-bottom: -$time-picker-menu-gap
+
+  &__header
+    column-span: all
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    margin-bottom: $time-picker-menu-gap
+    color: $time-picker-header-text-color
+    font-size: $time-picker-header-font-size
+    font-weight: $time-picker-header-font-weight
+    line-height: 1em
+
+  &__button
+    min-width: $time-picker-button-width
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: $time-picker-button-font-size
+    font-weight: $time-picker-button-font-weight
+    color: $time-picker-button-text-color
+    background-color: $time-picker-button-background-color
+    border: $time-picker-border-width solid $time-picker-button-border-color
+    border-radius: $time-picker-border-radius
+    line-height: $time-picker-button-height
+    white-space: nowrap
+    margin-bottom: $time-picker-menu-gap
+    cursor: pointer
+    outline: none
+
+    &:not(#{prefix('time-menu', 'button')}--selected):hover
+      background-color: $time-picker-button-hover-background-color
+      border-color: $time-picker-button-hover-border-color
+      color: $time-picker-button-hover-text-color
+      font-weight: $time-picker-button-hover-font-weight
+
+    &--selected
+      background-color: $time-picker-button-selected-background-color
+      border-color: $time-picker-button-selected-border-color
+      color: $time-picker-button-selected-text-color
+      font-weight: $time-picker-button-selected-font-weight

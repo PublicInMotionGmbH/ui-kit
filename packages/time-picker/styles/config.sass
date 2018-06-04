@@ -1,4 +1,42 @@
 @import '~@talixo/shared/styles/config'
+@import '~@talixo/text-input/styles/config'
 
-$time-picker-background-color: $color-white
-$time-picker-border-color: $color-placeholder-text
+$time-picker-font-size: $text-input-font-size !default
+$time-picker-text-color: $text-input-focus-text-color !default
+$time-picker-background-color: $text-input-focus-background-color !default
+$time-picker-border-color: $text-input-focus-border-color !default
+$time-picker-border-width: $text-input-border-width !default
+$time-picker-border-radius: $text-input-border-radius !default
+
+$time-picker-input-width-basis: dp(14) !default
+
+$time-picker-arrow-size: dp(2.5) !default
+$time-picker-arrow-color: #bbb !default
+
+$time-picker-colon-margin: dp(1) !default
+
+$time-picker-menu-gap: dp(1) !default
+$time-picker-menu-padding: $time-picker-menu-gap !default
+
+$time-picker-header-text-color: $time-picker-text-color !default
+$time-picker-header-font-size: dp(2) !default
+$time-picker-header-font-weight: $x-weight-semibold !default
+
+$time-picker-button-width: dp(8) !default
+$time-picker-button-height: dp(3) !default
+$time-picker-button-font-size: 0.5 * $time-picker-button-height !default
+
+$time-picker-button-background-color: $time-picker-background-color !default
+$time-picker-button-border-color: $time-picker-border-color !default
+$time-picker-button-text-color: $time-picker-text-color !default
+$time-picker-button-font-weight: $x-weight-normal !default
+
+$time-picker-button-hover-background-color: mix($x-color-primary, $time-picker-button-background-color, 10%) !default
+$time-picker-button-hover-border-color: $time-picker-button-border-color !default
+$time-picker-button-hover-text-color: text-contrast($time-picker-button-hover-background-color) !default
+$time-picker-button-hover-font-weight: $time-picker-button-font-weight !default
+
+$time-picker-button-selected-background-color: $x-color-primary !default
+$time-picker-button-selected-border-color: $time-picker-button-selected-background-color !default
+$time-picker-button-selected-text-color: text-contrast($time-picker-button-selected-background-color) !default
+$time-picker-button-selected-font-weight: $x-weight-semibold !default
