@@ -63,6 +63,7 @@
   .SingleDatePicker_picker
     display: block
     position: absolute
+    box-sizing: border-box
     border-radius: $calendar-border-radius
     top: 100%
     left: -1 * $calendar-picker-left-movement
@@ -70,6 +71,7 @@
     min-width: $calendar-picker-min-width
     padding: #{$calendar-picker-padding-vertical} #{$calendar-padding-horizontal} #{$calendar-picker-padding-vertical - $calendar-picker-month-font-size * 0.5}
     width: 100%
+    width: calc(100% + #{2 * $calendar-picker-left-movement})
     background-color: $calendar-picker-background-color
     border: $calendar-border-width solid $calendar-focus-border-color
     z-index: 1
@@ -136,14 +138,14 @@
   .CalendarMonth_table
     width: 100%
     border-collapse: separate
-    border-spacing: dp(0.75)
+    border-spacing: $calendar-picker-day-gap
 
   .CalendarDay
     text-align: center
     color: $calendar-picker-day-text-color
     background-color: $calendar-picker-day-background-color
     font-weight: $calendar-picker-day-font-weight
-    height: dp(2.75) !important
+    height: $calendar-picker-day-height !important
     cursor: pointer
     outline: none
 
