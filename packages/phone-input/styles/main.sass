@@ -119,7 +119,7 @@ $phone-input-unknown-flag-text-color: $phone-input-background-color !default
       border-radius: $phone-input-border-radius
       border-top-right-radius: 0
       border-bottom-right-radius: 0
-      border-right: 0
+      border-right-width: 0
       padding-right: 0
       cursor: pointer
       height: 100%
@@ -155,6 +155,7 @@ $phone-input-unknown-flag-text-color: $phone-input-background-color !default
   @include module('country-flag')
     box-shadow: 0 0 dp(1.25) dp(0.25) rgba(0, 0, 0, .1)
 
+
   [dir=rtl] #{prefix('combo-box', 'controls')}
     margin-left: 0
     margin-right: $phone-input-arrow-margin
@@ -165,9 +166,19 @@ $phone-input-unknown-flag-text-color: $phone-input-background-color !default
       margin-left: $phone-input-flag-margin
 
   [dir=rtl] & input
+    border-width: $phone-input-border-width
+    border-right-width: 0
     border-radius: $phone-input-border-radius 0 0 $phone-input-border-radius
 
   [dir=rtl] &
     @include module('combo-box')
       &__value
+        border-right-width: $phone-input-border-width
+        border-left-width: 0
+        padding-right: $phone-input-padding-horizontal
+        padding-left: 0
         border-radius: 0 $phone-input-border-radius $phone-input-border-radius 0
+
+      &__menu
+        left: 0
+        right: $phone-input-border-radius
