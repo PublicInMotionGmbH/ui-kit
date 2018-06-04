@@ -3,14 +3,11 @@
 @include module('tree')
   display: inline-block
   cursor: pointer
-  border-left: 1px solid black
+  border-left: dp(0.125) solid $tree-border-color
   padding-left: dp(1)
   font-size: dp(3)
 
-  &, ul
-    list-style-type: none
-
-  .tree-node
+  &__node
     box-sizing: border-box
     display: inline-block
     border-radius: dp(0.4)
@@ -19,22 +16,22 @@
     margin-top: dp(0.2)
     margin-bottom: dp(0.2)
 
-  .tree-node__name
-    display: inline-block;
-    width: calc(100% - 33px);
-    margin-top: dp(0.3)
+    &-name
+      display: inline-block;
+      margin-bottom: dp(0.3)
 
+    &-children
+      list-style-type: none
 
-  .tree-node--childless
-    padding-left: dp(4)
-
-  .isSelected
-    background-color: $tree-node-background-color
-    color: white
-
-  .collapse-icon 
-    padding: 0
-    span
-      cursor: pointer
-      font-size: dp(4)
+    &-icon 
       padding: 0
+      span
+        cursor: pointer
+        font-size: dp(4)
+        padding: 0
+    
+    &--childless
+      padding-left: dp(5)
+
+    &--selected
+      color: $tree-node-name-selected

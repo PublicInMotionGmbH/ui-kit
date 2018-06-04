@@ -1,21 +1,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { buildClassName } from '@talixo/shared'
+import { Collapse } from '@talixo/collapse'
 import { Icon } from '@talixo/icon'
+
 const moduleName = 'tree'
 
+/**
+ * Function to recursivly define propTypes
+ * @param {func} f
+ */
+function lazyFunction (f) {
+  return function () {
+    return f.apply(this, arguments)
+  }
+}
+
+const lazyChildrenType = lazyFunction(function () {
+  return childrenType
+})
+
+const childrenType = PropTypes.arrayOf(PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  children: PropTypes.arrayOf(lazyChildrenType)
+}))
+
 const propTypes = {
+  /** Children of node */
+  children: childrenType,
+
   /** Additional class name */
   className: PropTypes.string,
-
-  /** Data passed to generate tree view */
-  data: PropTypes.array,
 
   /** Open tree when load */
   initialOpen: PropTypes.bool,
 
   /** Enable to select tree nodes */
-  selectEnabled: PropTypes.bool
+  selectEnabled: PropTypes.bool,
+
+  /** Collapse tree with smooth effect */
+  smooth: PropTypes.bool
 }
 
 /**
@@ -23,78 +49,83 @@ const propTypes = {
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {boolean} [props.initialOpen]
+ * @property {boolean} [props.selectEnabled]
+ * @property {boolean} [props.smooth]
  * @class {React.Element}
  */
 class TreeNode extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isSelected: false,
-      isExpanded: this.props.open
-    }
-    this.toggle = this.toggle.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+  state = {
+    selected: false,
+    collapsed: !this.props.initialOpen
   }
 
-  componentDidMount (props) {
-    this.setState({
-      isExpanded: this.props.initialOpen
-    })
-  }
-
-  handleClick (props) {
+  /**
+   * Function which handle click on node, change select
+   * @param {*} props
+   */
+  handleClick = (props) => {
     if (!this.props.selectEnabled) return
     this.setState({
-      isSelected: !this.state.isSelected
+      selected: !this.state.selected
     })
   }
 
-  toggle () {
+  /**
+   * Function which handle toggle on node, change collaps
+   */
+  toggle = () => {
     this.setState({
-      isExpanded: !this.state.isExpanded
+      collapsed: !this.state.collapsed
     })
   }
 
   render () {
-    const { children, open, selectEnabled, initialOpen } = this.props
-    const { isExpanded, isSelected } = this.state
-    let icon = this.state.isExpanded ? 'expand_more' : 'chevron_right'
+    const { children, initialOpen, node, selectEnabled, smooth } = this.props
+    const { collapsed, selected } = this.state
+    const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
+    const nodeNameCls = buildClassName([moduleName, 'node-name'])
+    const childrenCls = buildClassName([moduleName, 'node-children'])
+    const iconCls = buildClassName([moduleName, 'node-icon'])
+    const icon = this.state.collapsed ? 'chevron_right' : 'expand_more'
     let iconContainer
     let nodes
-    let style
-    let treeNodeClsName = ''
-    let selected = isSelected ? 'isSelected' : 'notSelected'
 
     if (children) {
-      iconContainer = <span className='collapse-icon' onClick={this.toggle} >{<Icon name={`${icon}`} />}</span>
+      iconContainer = <span
+        className={iconCls}
+        onClick={this.toggle} >
+        {<Icon name={`${icon}`} />}
+      </span>
 
-      nodes = children.map((i) =>
-        <TreeNode
-          selectEnabled={selectEnabled}
-          initialOpen={initialOpen}
-          open={open}
-          key={i.id}
-          node={i}
-          children={i.children} />
-      )
-
-      if (isExpanded) {
-        style = {
-          display: 'block'
-        }
-      } else {
-        style = {
-          display: 'none'
-        }
-      }
-    } else {
-      treeNodeClsName = `${moduleName}-node--childless`
+      nodes = children.map((el, i) => {
+        return (
+          <TreeNode
+            children={el.children}
+            initialOpen={initialOpen}
+            key={i}
+            node={el}
+            selectEnabled={selectEnabled}
+            smooth={smooth}
+          />
+        )
+      })
     }
 
     return (
       <span>
-        <li className={`${moduleName}-node ${treeNodeClsName} ${selected}`}>{iconContainer}<span className={`${moduleName}-node__name`} onClick={this.handleClick}>{this.props.node.name}</span></li>
-        <ul style={style}>{nodes}</ul>
+        <li className={nodeCls}>
+          {iconContainer}
+          <span className={nodeNameCls} onClick={this.handleClick}>
+            {node ? node.name : null}
+          </span>
+        </li>
+        <Collapse
+          collapsed={collapsed}
+          smooth={smooth}
+          animationTime={100}>
+          <ul className={childrenCls}>{nodes}</ul>
+        </Collapse>
       </span>
     )
   }

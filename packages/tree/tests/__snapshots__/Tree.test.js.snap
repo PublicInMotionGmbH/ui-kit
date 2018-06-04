@@ -5,7 +5,7 @@ exports[`<Tree /> renders children correctly 1`] = `
   className="talixo-tree"
 >
   <TreeNode
-    key="1"
+    key="0"
     node={
       Object {
         "children": Array [
@@ -30,7 +30,7 @@ exports[`<Tree /> renders children correctly 1`] = `
     }
   />
   <TreeNode
-    key="4"
+    key="1"
     node={
       Object {
         "id": 4,

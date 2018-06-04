@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TreeNode /> renders children correctly 1`] = `
+<span>
+  <li
+    className="talixo-tree__node"
+  >
+    <span
+      className="talixo-tree__node-icon"
+      onClick={[Function]}
+    >
+      <Icon
+        name="chevron_right"
+      />
+    </span>
+    <span
+      className="talixo-tree__node-name"
+      onClick={[Function]}
+    />
+  </li>
+  <Collapse
+    animationTime={100}
+    collapsed={true}
+    smooth={true}
+  >
+    <ul
+      className="talixo-tree__node-children"
+    >
+      <TreeNode
+        key="0"
+        node={
+          Object {
+            "id": 1,
+            "name": "animal",
+          }
+        }
+      />
+    </ul>
+  </Collapse>
+</span>
+`;

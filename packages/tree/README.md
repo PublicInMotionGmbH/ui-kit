@@ -21,9 +21,33 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### Tree
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+className     | string    | n/a     | Additional class name passed to wrapper
+data          | dataType[]| n/a     | Data passed to component
+initialOpen   | bool      | n/a     | Open tree on load
+selectEnabled | bool      | n/a     | Enable to select each node
+smooth        | bool      | n/a     | Animation of collapse
+
+### TreeNode
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+children      | dataType[]| n/a     | Data passed to single node
+className     | string    | n/a     | Additional class name passed to wrapper
+initialOpen   | bool      | n/a     | Open tree on load
+selectEnabled | bool      | n/a     | Enable to select each node
+smooth        | bool      | n/a     | Animation of collapse
+
+### dataType
+
+Type name       | Type              |
+----------------|----------------------------------
+id              |  number           | id of node
+name            |  string           | name od node
+children        |  dataType[]       | children of node
 
 ## Changelog
 
