@@ -44,6 +44,12 @@ const propTypes = {
   /** Collapse tree with smooth effect */
   smooth: PropTypes.bool
 }
+
+const defaultProps = {
+  initialOpen: false,
+  selectEnabled: false,
+  smooth: true
+}
 /**
  * Component which represents Tree.
  *
@@ -65,5 +71,6 @@ function Tree (props) {
 }
 
 Tree.propTypes = propTypes
+Tree.defaultProps = defaultProps
 
 export default Tree

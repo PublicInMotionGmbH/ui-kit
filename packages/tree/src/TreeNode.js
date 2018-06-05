@@ -44,6 +44,12 @@ const propTypes = {
   smooth: PropTypes.bool
 }
 
+const defaultProps = {
+  initialOpen: false,
+  selectEnabled: false,
+  smooth: true
+}
+
 /**
  * Component which represents TreeNode.
  *
@@ -132,5 +138,6 @@ class TreeNode extends React.Component {
 }
 
 TreeNode.propTypes = propTypes
+TreeNode.defaultProps = defaultProps
 
 export default TreeNode

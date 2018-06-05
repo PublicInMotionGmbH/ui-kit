@@ -27,6 +27,7 @@ exports[`<TreeNode /> renders children correctly 1`] = `
       className="talixo-tree__node-children"
     >
       <TreeNode
+        initialOpen={false}
         key="0"
         node={
           Object {
@@ -34,6 +35,8 @@ exports[`<TreeNode /> renders children correctly 1`] = `
             "name": "animal",
           }
         }
+        selectEnabled={false}
+        smooth={true}
       />
     </ul>
   </Collapse>

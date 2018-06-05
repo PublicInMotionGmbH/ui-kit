@@ -27,9 +27,9 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper
 data          | dataType[]| n/a     | Data passed to component
-initialOpen   | bool      | n/a     | Open tree on load
-selectEnabled | bool      | n/a     | Enable to select each node
-smooth        | bool      | n/a     | Animation of collapse
+initialOpen   | bool      | `false` | Open tree on load
+selectEnabled | bool      | `false` | Enable to select each node
+smooth        | bool      | `true`  | Animation of collapse
 
 ### TreeNode
 
@@ -37,9 +37,9 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 children      | dataType[]| n/a     | Data passed to single node
 className     | string    | n/a     | Additional class name passed to wrapper
-initialOpen   | bool      | n/a     | Open tree on load
-selectEnabled | bool      | n/a     | Enable to select each node
-smooth        | bool      | n/a     | Animation of collapse
+initialOpen   | bool      | `false` | Open tree on load
+selectEnabled | bool      | `false` | Enable to select each node
+smooth        | bool      | `true`  | Animation of collapse
 
 ### dataType
 
