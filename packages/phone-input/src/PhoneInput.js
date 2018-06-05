@@ -53,6 +53,23 @@ function trim (value) {
 }
 
 /**
+ * Set caret position in specified element.
+ *
+ * @param {HTMLElement} element
+ * @param {number} position
+ */
+function setCaretPosition (element, position) {
+  if (!element) {
+    return
+  }
+
+  if (element.setSelectionRange) {
+    element.focus()
+    element.setSelectionRange(position, position)
+  }
+}
+
+/**
  * Render country with prefix as dropdown item.
  *
  * @param {object|{ code: string, prefix: string, name: string }} country
@@ -119,6 +136,14 @@ class PhoneInput extends React.PureComponent {
   }
 
   /**
+   * Clear all timers when component is unmounted.
+   */
+  componentWillUnmount () {
+    clearTimeout(this.caretTimeout)
+    clearTimeout(this.focusTimeout)
+  }
+
+  /**
    * Request change of phone number.
    *
    * @param {string} value
@@ -151,11 +176,19 @@ class PhoneInput extends React.PureComponent {
    * @param {object} country
    */
   changeCountry = (country) => {
-    this.change(replaceCountryPrefix(this.state.value, this.state.country, country))
+    const nextValue = replaceCountryPrefix(this.state.value, this.state.country, country)
+    const endPrefix = nextValue.indexOf(' ') + 1
 
-    // Focus input when it is possible
+    this.change(nextValue)
+
+    // Focus input when it is possible,
+    // and move cursor after prefix
     if (this.el) {
       this.el.focus()
+
+      if (endPrefix) {
+        this.caretTimeout = setTimeout(() => setCaretPosition(this.el, endPrefix))
+      }
     }
   }
 
