@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
+import { Icon } from '@talixo/icon'
 import Chat from './src/Chat'
 
 // Load first paragraph from README file
@@ -38,11 +39,13 @@ addStory.controlled('initial', readme, (setState, state) => (
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
     user='Daniel'
     usersTyping={state.usersTyping}
+    informationMessage={<span>This is additional message</span>}
+    additionalButton={<Icon name='thumb_up' />}
   />
 ), () => ({
   messages: messages,
-  usersTyping: [{
+  usersTyping: [/* {
     user: 'John',
     status: true
-  }]
+  } */]
 }))

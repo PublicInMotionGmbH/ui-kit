@@ -1,2 +1,19 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('chat')
+
+  &--input-container
+    display: inline-block
+
+  &--info-message
+    display: block
+    margin-top: dp(1.5)
+    margin-bottom: dp(0.7)
+
+  &--additional-button
+    font-size: dp(3)
+    padding: dp(1)
+
+  &--user-typing-container
+    display: inline-block
+    height: dp(2)
