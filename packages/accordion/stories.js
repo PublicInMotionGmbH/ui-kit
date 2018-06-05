@@ -51,7 +51,6 @@ addStory.controlled('with special arrow', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
     options={options}
     renderOpenIcon={() => <Icon name='keyboard_arrow_down' />}
     renderCloseIcon={() => <Icon name='keyboard_arrow_up' />}

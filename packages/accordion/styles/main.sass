@@ -1,2 +1,58 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('accordion')
+  display: block
+  border: $accordion-border-width solid $accordion-border-color
+  border-radius: $accordion-border-radius
+
+  &-element
+    border-bottom: $accordion-border-width solid $accordion-border-color
+
+    &__toggle
+      position: relative
+      display: block
+      appearance: none
+      width: 100%
+      border: 0
+      outline: none
+      text-align: left
+      padding: $accordion-header-padding-vertical $accordion-header-padding-horizontal
+      font-weight: $accordion-header-font-weight
+      font-size: $accordion-header-font-size
+      color: $accordion-header-text-color
+      background-color: $accordion-header-background-color
+      cursor: pointer
+
+      &__icon
+        display: inline-block
+        position: absolute
+        color: $accordion-arrow-color
+        right: $accordion-header-padding-horizontal
+        top: 50%
+        transform: translateY(-50%)
+        font-size: $accordion-arrow-size
+
+      &:hover
+        color: $accordion-header-hover-text-color
+        background-color: $accordion-header-hover-background-color
+
+      &:hover #{prefix('accordion-element', 'toggle', 'icon')}
+        color: $accordion-arrow-hover-color
+
+    & > #{prefix('collapse')} > #{prefix('collapse', 'content')}
+      font-weight: $accordion-content-font-weight
+      font-size: $accordion-content-font-size
+      color: $accordion-content-text-color
+      background-color: $accordion-content-background-color
+      padding: 0 $accordion-content-padding-vertical $accordion-content-padding-horizontal
+
+    &:first-child > &__toggle
+       border-top-left-radius: $accordion-border-radius
+       border-top-right-radius: $accordion-border-radius
+
+    &:last-child > &__toggle
+       border-bottom-left-radius: $accordion-border-radius
+       border-bottom-right-radius: $accordion-border-radius
+
+    &:last-child
+       border-bottom-width: 0

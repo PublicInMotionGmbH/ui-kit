@@ -201,7 +201,7 @@ Accordion.propTypes = {
     content: PropTypes.node.isRequired
   })).isRequired,
 
-  /** ID of currently opened element */
+  /** IDs of currently opened element */
   value: PropTypes.any,
 
   /** Event fired when button is clicked */
@@ -218,6 +218,7 @@ Accordion.propTypes = {
 }
 
 Accordion.defaultProps = {
+  animationTime: 300,
   smooth: true,
   buildId: (option, index) => index
 }
