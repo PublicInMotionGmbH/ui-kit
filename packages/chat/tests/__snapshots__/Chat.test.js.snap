@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chat /> renders children correctly 1`] = `
+<div
+  style={
+    Object {
+      "display": "block",
+    }
+  }
+>
+  <div
+    key="0"
+  >
+    <span>
+      This is message
+    </span>
+    John
+  </div>
+  <div
+    key="1"
+  >
+    <span>
+      This is reply
+    </span>
+    Tom
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </form>
+</div>
+`;

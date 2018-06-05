@@ -54,8 +54,8 @@ class Chat extends React.Component {
     return (
       <div style={{ display: 'block' }} {...passedProps}>
         {
-          messages.map(message => (
-            <div>
+          messages.map((message, i) => (
+            <div key={i}>
               <span>
                 {message.message}
               </span>
