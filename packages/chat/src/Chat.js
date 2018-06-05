@@ -1,7 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import { buildClassName } from '@talixo/shared'
+const propTypes = {
+  /** Additional class name. */
+  className: PropTypes.string,
+
+  /** Additional class name. */
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** User name. */
+      user: PropTypes.string,
+
+      message: PropTypes.node,
+
+      time: PropTypes.string
+    })
+  ),
+
+  /** Typing users. */
+  usersTyping: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** User name. */
+      user: PropTypes.string,
+
+      /** Typing status. */
+      status: PropTypes.boolean
+    })
+  ),
+
+  /** User name. */
+  user: PropTypes.string
+}
+
+const defaultProps = {
+  messages: [],
+  usersTyping: [],
+  user: 'user'
+}
 
 /**
  * Component which represents Chat.
@@ -12,19 +47,31 @@ import PropTypes from 'prop-types'
  * @param {array} [props.user]
  * @returns {React.Element}
  */
-class Chat extends React.Component {
-  state = {
-    inputValue: ''
+class Chat extends React.PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      typingStatus: false
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.typingStatus !== this.state.typingStatus) {
+      this.props.addTypingUser({
+        status: this.state.typingStatus,
+        user: this.props.user
+      })
+    }
   }
 
   handleInputChange = (e) => {
-    const { onChange } = this.props
-
-    this.setState({ inputValue: e.target.value })
-
-    if (onChange) {
-      onChange(e.target.value)
+    if (this.state.typingStatus) {
+      clearTimeout(this._typingTimeout)
     }
+
+    this.setState(state => ({ typingStatus: true }), () => {
+      this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
+    })
   }
 
   handleSubmit = (e) => {
@@ -37,11 +84,11 @@ class Chat extends React.Component {
       date: new Date().getTime()
     }
 
-    if (onSubmit) {
+    if (onSubmit && this._input.value !== '') {
       onSubmit(message)
     }
 
-    this.setState({ inputValue: '' })
+    this._input.value = ''
   }
 
   setRef = (node) => {
@@ -49,7 +96,7 @@ class Chat extends React.Component {
   }
 
   render () {
-    const { className, messages, user, writing, ...passedProps } = this.props
+    const { className, messages, user, usersTyping, addTypingUser, ...passedProps } = this.props
 
     return (
       <div style={{ display: 'block' }} {...passedProps}>
@@ -64,22 +111,39 @@ class Chat extends React.Component {
           ))
         }
         {
-          writing && (<span>typing...</span>)
+          usersTyping.length > 0 && (
+            <span>
+              {
+                usersTyping.map((user, i) => {
+                  let moreUsers = null
+                  if (i > 0) {
+                    moreUsers = ', '
+                    if (i === usersTyping.length - 1) {
+                      moreUsers = ' and '
+                    }
+                  }
+                  return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
+                })
+              }
+              {usersTyping.length === 1 ? ' is' : ' are'} typing
+            </span>
+          )
         }
         <form onSubmit={this.handleSubmit}>
-          <input type='text' ref={this.setRef} value={this.state.inputValue} onChange={this.handleInputChange} />
+          <input
+            type='text'
+            ref={this.setRef}
+            onChange={this.handleInputChange}
+            placeholder='reply'
+          />
         </form>
       </div>
     )
   }
 }
 
-Chat.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string
-}
+Chat.propTypes = propTypes
 
-Chat.defaultProps = {
-}
+Chat.defaultProps = defaultProps
 
 export default Chat

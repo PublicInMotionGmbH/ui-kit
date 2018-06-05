@@ -29,15 +29,20 @@ const messages = [
 addStory.controlled('initial', readme, (setState, state) => (
   <Chat
     messages={state.messages}
-    onChange={() => {
-      setState({ writing: true })
-      setTimeout(() => setState({ writing: false }), 1000)
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
     }}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
     user='Daniel'
-    writing={state.writing}
+    usersTyping={state.usersTyping}
   />
 ), () => ({
   messages: messages,
-  writing: false
+  usersTyping: [{
+    user: 'John',
+    status: true
+  }]
 }))
