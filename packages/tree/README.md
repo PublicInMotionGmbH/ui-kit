@@ -15,6 +15,8 @@ Your package should additionally have some extra dependencies:
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 - `@talixo/shared: ^0.1.0`
+- `@talixo/icon: ^0.1.1`
+- `@talixo/collapse: ^0.1.1`
 
 These packages are required by `@talixo/tree`, but you have to install them manually,
 to avoid having different versions of these in your application.
