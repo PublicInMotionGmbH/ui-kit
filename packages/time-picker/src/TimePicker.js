@@ -193,7 +193,7 @@ class TimePicker extends React.PureComponent {
   * @param {object} [props.value]
   */
   componentWillReceiveProps (props) {
-    if (props.value !== this.props.value) {
+    if (props.value !== this.props.value && props.value !== undefined) {
       const value = moment(props.value, 'HH:mm')
       this.setState({ value })
     }
@@ -224,6 +224,11 @@ class TimePicker extends React.PureComponent {
       .clone()
       .hour(formattedValue)
 
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
+
     this.setState({ value })
 
     if (onChange) {
@@ -246,6 +251,11 @@ class TimePicker extends React.PureComponent {
     const value = prevValue
       .clone()
       .minute(inputValue)
+
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
 
     this.setState({ value })
 
