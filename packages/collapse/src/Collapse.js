@@ -32,7 +32,7 @@ class Collapse extends React.PureComponent {
   componentWillReceiveProps (props) {
     // Do nothing special when component hasn't changed it's collapsing state
     // Or it shouldn't be smooth
-    if (props.collapsed === this.props.collapsed || !props.smooth) {
+    if (props.collapsed === this.props.collapsed || !props.smooth || props.animationTime === 0) {
       return
     }
 

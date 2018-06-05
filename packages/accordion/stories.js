@@ -66,11 +66,20 @@ addStory.controlled('not smooth', readme, (setState, state) => (
   />
 ), () => ({ active: null }))
 
-addStory.controlled('multiple items (different IDs)', readme, (setState, state) => (
+addStory.controlled('multiple items with same IDs', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    smooth={false}
+    options={optionsById}
+    buildId={option => option.id}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('multiple items open at once', readme, (setState, state) => (
+  <Accordion
+    multi
+    value={state.active}
+    onChange={x => setState({ active: x })}
     options={optionsById}
     buildId={option => option.id}
   />
