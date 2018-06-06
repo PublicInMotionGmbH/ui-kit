@@ -33,10 +33,10 @@ exports[`<Chat /> renders children correctly 1`] = `
       }
       user="Tom"
     />
-    <span
-      className="talixo-chat talixo-chat--user-typing-container"
-    />
   </div>
+  <span
+    className="talixo-chat talixo-chat--user-typing-container"
+  />
   <form
     onSubmit={[Function]}
   >
