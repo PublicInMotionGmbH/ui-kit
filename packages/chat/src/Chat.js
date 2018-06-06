@@ -14,7 +14,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Information message */
-  informationMessage: PropTypes.node,
+  additionalInformation: PropTypes.node,
 
   /** Additional class name. */
   messages: PropTypes.arrayOf(
@@ -51,7 +51,7 @@ const defaultProps = {
   messages: [],
   usersTyping: [],
   user: 'user',
-  renderMessageMarkdown: message => message
+  messageRenderer: message => message
 }
 
 /**
@@ -67,6 +67,7 @@ class Chat extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
+      inputValue: '',
       typingStatus: false
     }
   }
@@ -80,12 +81,12 @@ class Chat extends React.PureComponent {
     }
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = (inputValue) => {
     if (this.state.typingStatus) {
       clearTimeout(this._typingTimeout)
     }
 
-    this.setState(state => ({ typingStatus: true }), () => {
+    this.setState(state => ({ typingStatus: true, inputValue }), () => {
       this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
     })
   }
@@ -112,14 +113,14 @@ class Chat extends React.PureComponent {
   }
 
   renderMessages = () => {
-    const { messages, renderMessageMarkdown } = this.props
+    const { messages, messageRenderer } = this.props
     const msgContainerCls = buildClassName(moduleName, null, 'messages-container')
 
     return (
       messages.map((message, i) => (
         <div key={i} className={msgContainerCls}>
           <span>
-            {renderMessageMarkdown(message.message)}
+            {messageRenderer(message.message)}
           </span>
           {message.user}
         </div>
@@ -150,9 +151,10 @@ class Chat extends React.PureComponent {
   }
 
   render () {
-    const { additionalButton, className, informationMessage, messages, user, usersTyping, addTypingUser, messageRenderer, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, ...passedProps } = this.props
+    const { inputValue } = this.state
 
-    const infoMsgCls = buildClassName(moduleName, null, 'info-message')
+    const additionalInfoCls = buildClassName(moduleName, null, 'additional-info')
     const additionalBtnCls = buildClassName(moduleName, null, 'additional-button')
     const inputContainerCls = buildClassName(moduleName, null, 'input-container')
 
@@ -163,12 +165,12 @@ class Chat extends React.PureComponent {
         <form onSubmit={this.handleSubmit}>
           {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
           <span className={inputContainerCls}>
-            {informationMessage && <span className={infoMsgCls}>{informationMessage}</span>}
+            {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
             <TextInput
-              type='text'
               inputRef={this.setRef}
               onChange={this.handleInputChange}
               placeholder='reply'
+              value={inputValue}
             />
           </span>
         </form>

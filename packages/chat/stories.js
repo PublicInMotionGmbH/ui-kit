@@ -15,12 +15,12 @@ const addStory = createStoriesFactory('Chat', module, {
 const messages = [
   {
     date: 1528104696738,
-    message: 'This is message',
+    message: 'This is message from ',
     user: 'John'
   },
   {
     date: 1528104730633,
-    message: 'This is reply',
+    message: 'This is reply from ',
     user: 'Tom'
   }
 ]
@@ -39,7 +39,43 @@ addStory.controlled('initial', readme, (setState, state) => (
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
     user='Daniel'
     usersTyping={state.usersTyping}
-    informationMessage={<span>This is additional message</span>}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: []
+}))
+
+addStory.controlled('with additional information', readme, (setState, state) => (
+  <Chat
+    messages={state.messages}
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
+    }}
+    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    user='Daniel'
+    usersTyping={state.usersTyping}
+    additionalInformation={<span>This is additional message</span>}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: []
+}))
+
+addStory.controlled('with additional button', readme, (setState, state) => (
+  <Chat
+    messages={state.messages}
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
+    }}
+    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    user='Daniel'
+    usersTyping={state.usersTyping}
     additionalButton={<Icon name='thumb_up' />}
   />
 ), () => ({
