@@ -1,12 +1,39 @@
 @import './config'
 
+$progress-ring-size: 1em !default
+
+$progress-ring-empty-ring-color: #dddbda !default
+
+$progress-ring-base-color: $x-color-primary !default
+$progress-ring-base-text-color: $x-color-primary-opposite !default
+
+$progress-ring-secondary-color: $x-color-secondary !default
+$progress-ring-secondary-text-color: $x-color-secondary-opposite !default
+
+$progress-ring-tertiary-color: $x-color-tertiary !default
+$progress-ring-tertiary-text-color: $x-color-tertiary-opposite !default
+
+$progress-ring-error-color: $x-color-error !default
+$progress-ring-error-text-color: $x-color-error-opposite !default
+
+$progress-ring-warn-color: $x-color-warning !default
+$progress-ring-warn-text-color: $x-color-warning-opposite !default
+
+$progress-ring-info-color: $x-color-info !default
+$progress-ring-info-text-color: $x-color-info-opposite !default
+
+$progress-ring-success-color: $x-color-success !default
+$progress-ring-success-text-color: $x-color-success-opposite !default
+
+// Scale
 $p1: 5
 $p2: 12
 
+// Padding
 $down: $p1 / $p2
 $up: $p2 / $p1
 
-@mixin progress-ring-color ($name, $color)
+@mixin progress-ring-color ($name, $color, $text-color)
   #{prefix('progress-ring')}
     &--#{$name} &__progress > svg > path
       fill: $color
@@ -18,17 +45,17 @@ $up: $p2 / $p1
     &--#{$name}#{&}--completed &__content:not(:empty)
       box-shadow: inset 0 0 0 1em $color
       background: $color
-      color: text-contrast($color)
+      color: $text-color
 
 @include module('progress-ring')
   position: relative
   display: inline-block
-  font-size: 1.2em
+  font-size: $progress-ring-size
   width: 1em
   height: 1em
   line-height: 1em
   border-radius: 50%
-  background: #dddbda
+  background: $progress-ring-empty-ring-color
   overflow: hidden
   vertical-align: middle
 
@@ -38,31 +65,39 @@ $up: $p2 / $p1
     height: 1em
 
     > svg > path
-      fill: #4bca81
+      transition: 300ms fill ease-in
+      fill: $progress-ring-base-color
 
   &__content
     display: inline-block
     position: absolute
     border-radius: 50%
     font-size: 1em * $down
-    left: 0.125em * $up
-    top: 0.125em * $up
+
+    // Hack: this way looks better scaling than using only left/top or transform + left/top 50%
+    transform: translateX(0.125em * $up) translateY(0.125em * $up)
+    left: 0
+    top: 0
+
     width: 0.75em * $up
     height: 0.75em * $up
     line-height: 0.75em * $up * 0.95
     text-align: center
     background: #fff
-    color: #4bca81
+    color: $progress-ring-base-color
     transition: 300ms all ease-in
-    box-shadow: inset 0 0 0 0 #4bca81
+    box-shadow: inset 0 0 0 0 $progress-ring-base-color
 
     .tai
       font-size: 1.45em
 
   &--completed &__content:not(:empty)
-    box-shadow: inset 0 0 0 1em #4bca81
-    background: #4bca81
-    color: #fff
+    box-shadow: inset 0 0 0 1em $progress-ring-success-color
+    background: $progress-ring-success-color
+    color: $progress-ring-success-text-color
+
+  &--completed &__progress > svg > path
+      fill: $progress-ring-success-color
 
   &--indeterminate &__progress
     animation: indeterminateProgressRing 1s infinite linear
@@ -73,7 +108,9 @@ $up: $p2 / $p1
   100%
     transform: rotate(360deg)
 
-@include progress-ring-color('success', $color-talixo-success-green)
-@include progress-ring-color('error', #f01414)
-@include progress-ring-color('info', $color-pill-blue)
-@include progress-ring-color('warning', $color-talixo-warning-yellow)
+@include progress-ring-color('secondary', $progress-ring-secondary-color, $progress-ring-secondary-text-color)
+@include progress-ring-color('tertiary', $progress-ring-tertiary-color, $progress-ring-tertiary-text-color)
+@include progress-ring-color('success', $progress-ring-success-color, $progress-ring-success-text-color)
+@include progress-ring-color('error', $progress-ring-error-color, $progress-ring-error-text-color)
+@include progress-ring-color('info', $progress-ring-info-color, $progress-ring-info-text-color)
+@include progress-ring-color('warning', $progress-ring-warn-color, $progress-ring-warn-text-color)
