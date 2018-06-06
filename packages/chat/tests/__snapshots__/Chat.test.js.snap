@@ -2,6 +2,7 @@
 
 exports[`<Chat /> renders children correctly 1`] = `
 <div
+  className="talixo-chat"
   style={
     Object {
       "display": "block",
@@ -33,25 +34,30 @@ exports[`<Chat /> renders children correctly 1`] = `
       }
       user="Tom"
     />
-    <span
-      className="talixo-chat talixo-chat--user-typing-container"
-    />
   </div>
   <form
+    className="talixo-chat__form"
     onSubmit={[Function]}
   >
     <span
-      className="talixo-chat talixo-chat--input-container"
+      className="talixo-chat__user-typing-container"
+    />
+    <span
+      className="talixo-chat__input-container"
     >
-      <TextInput
-        InputComponent="input"
-        error={false}
-        inputRef={[Function]}
-        onChange={[Function]}
-        placeholder="reply"
-        type="text"
-        value=""
-      />
+      <span
+        className="talixo-chat__input-container-inner"
+      >
+        <TextInput
+          InputComponent="input"
+          error={false}
+          inputRef={[Function]}
+          onChange={[Function]}
+          placeholder="reply"
+          type="text"
+          value=""
+        />
+      </span>
     </span>
   </form>
 </div>
