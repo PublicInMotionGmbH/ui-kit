@@ -11,6 +11,23 @@ import TableRow from './TableRow'
 import { moduleName } from './config'
 
 const propTypes = {
+  /** Actions which can be applied to rows. */
+  actions: PropTypes.arrayOf(PropTypes.shape({
+
+    /** Function which indicates if button should be displayed.
+     * Assigns item from data as function argument. */
+    condition: PropTypes.func,
+
+    /** Button icon name from `@talixo/icon` package. */
+    icon: PropTypes.string.isRequired,
+
+    /** Button label. */
+    label: PropTypes.string.isRequired,
+
+    /** onClick callback function. */
+    onClick: PropTypes.func
+  })),
+
   /** Additional class name. */
   className: PropTypes.string,
 
@@ -33,28 +50,20 @@ const propTypes = {
   /** Data to be populated inside table. Require the same keys as in columns objects. */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
+  /** Render function of items which will be displayed in table collapsible rows. */
+  expandRender: PropTypes.func,
+
+  /** Array should contain IDs of expanded rows. Its elements should be `id` properties of data items (if provided) or indexes of elements in data array. */
+  expandedRows: PropTypes.array,
+
+  /** Row onClick callback function. */
+  onClick: PropTypes.func,
+
   /** onSort function callback. */
   onSort: PropTypes.func,
 
   /** Indicates if table is sortable. */
   sortable: PropTypes.bool,
-
-  /** Actions which can be applied to rows. */
-  actions: PropTypes.arrayOf(PropTypes.shape({
-
-    /** Function which indicates if button should be displayed.
-     * Assigns item from data as function argument. */
-    condition: PropTypes.func,
-
-    /** Button icon name from `@talixo/icon` package. */
-    icon: PropTypes.string.isRequired,
-
-    /** Button label. */
-    label: PropTypes.string.isRequired,
-
-    /** onClick callback function. */
-    onClick: PropTypes.func
-  })),
 
   /** Indicates if actions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
@@ -64,7 +73,7 @@ const defaultProps = {
   sortable: false
 }
 
-function checkForId (collection) {
+export function checkForId (collection) {
   const keys = Object.keys(collection[0])
   const hasId = keys.indexOf('id') > -1
   if (hasId) {
@@ -80,6 +89,11 @@ function checkForId (collection) {
  * Component which represents DataTable.
  *
  * @property {object} props
+ * @property {object[]} [props.actions]
+ * @property {function} [props.actions.condition]
+ * @property {string} props.actions.icon
+ * @property {string} props.actions.label
+ * @property {function} [props.actions.onClick]
  * @property {string} [props.className]
  * @property {object[]} props.columns
  * @property {string|number} props.columns.id
@@ -87,18 +101,16 @@ function checkForId (collection) {
  * @property {function} [props.columns.render]
  * @property {function} [props.columns.renderHeader]
  * @property {object} props.data
+ * @property {object} [props.expandRender]
+ * @property {array} [props.expandedRows]
+ * @property {function} [props.onClick]
  * @property {function} [props.onSort]
  * @property {boolean} [props.sortable]
- * @property {object[]} [props.actions]
- * @property {function} [props.actions.condition]
- * @property {string} props.actions.icon
- * @property {string} props.actions.label
- * @property {function} [props.actions.onClick]
  * @property {boolean} [props.verticalActionCell]
  *
  * @property {object} state
  * @property {object} state.sortedData
- * @property {object} state.sortColumn - the column that is used in sortin process
+ * @property {object} state.sortColumn - the column that is used in sorting process
  * @property {object} state.reversedOrder - indicates if sorting should be descending
  *
  * @class
@@ -163,8 +175,8 @@ class DataTable extends React.Component {
 
   render (props) {
     const {
-      actions, expandRender, columns, className, data, onSort,
-      sortable, verticalActionCell, ...passedProps
+      actions, columns, className, expandRender, expandedRows, data,
+      onClick, onSort, sortable, verticalActionCell, ...passedProps
     } = this.props
     const { sortedData } = this.state
     const { buildHeaders } = this
@@ -179,7 +191,9 @@ class DataTable extends React.Component {
             actions={actions}
             columns={columns}
             expandRender={expandRender}
+            expandedRows={expandedRows}
             rowData={sortedData}
+            onClick={onClick}
             verticalActionCell={verticalActionCell}
           />
         </Body>

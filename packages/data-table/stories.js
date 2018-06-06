@@ -175,6 +175,7 @@ addStory('sortable', readme, () => (
     actions={actions}
     columns={columnsCustomHeaders}
     data={tableData}
+    onClick={action('onClick')}
     onSort={action('onSort')}
     sortable
   />
@@ -186,6 +187,7 @@ addStory('expandable rows', readme, () => (
     columns={columnsCustomHeaders}
     data={tableData}
     expandRender={expandRender}
+    onClick={action('onClick')}
     onSort={action('onSort')}
     sortable
   />

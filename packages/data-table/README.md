@@ -28,12 +28,15 @@ It allows any props which are allowed for `Table` omponent from `@talixo/table`.
 
 Property name       | Type      | Required  | Default | Description                    
 --------------------|-----------|-----------|:-------:|--------------------------------
+actions             | Actions[] | no        | n/a     | Actions which can be applied to rows.
 className           | string    | no        | n/a     | Additional class name passed to wrapper.
 columns             | Column[]  | yes       | n/a     | Information about columns which will be displayed in table.
 data                | object[]  | yes       | n/a     | Data to be populated inside table. Require the same keys as inc olumns objects.
+expandRender        | function  | no        | n/a     | Render function of items which will be displayed in table collapsible rows.
+expandedRows        | array     | no        | n/a     | Array should contain IDs of expanded rows. Its elements should be `id` properties of data items (if provided) or indexes of elements in data array.
+onClick             | function  | no        | n/a     | Row onClick callback function.
 onSort              | function  | no        | n/a     | onSort function callback.
 sortable            | boolean   | no        |`false`  | Indicates if table is sortable.
-actions             | Actions[] | no        | n/a     | Actions which can be applied to rows.
 verticalActionCell  | string    | no        | n/a     | Indicates if actions should be displayed vertically or horizontally.
 
 ## Property shapes
