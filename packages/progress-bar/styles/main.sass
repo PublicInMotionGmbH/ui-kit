@@ -1,2 +1,176 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+// Colors
+$progress-bar-empty-color: #ddd !default
+
+$progress-bar-base-color: $x-color-primary !default
+$progress-bar-base-empty-color: mix($progress-bar-empty-color, $progress-bar-base-color, 90%) !default
+$progress-bar-base-text-color: $x-color-primary-opposite !default
+
+$progress-bar-secondary-color: $x-color-secondary !default
+$progress-bar-secondary-empty-color: mix($progress-bar-empty-color, $progress-bar-secondary-color, 90%) !default
+$progress-bar-secondary-text-color: $x-color-secondary-opposite !default
+
+$progress-bar-tertiary-color: $x-color-tertiary !default
+$progress-bar-tertiary-empty-color: mix($progress-bar-empty-color, $progress-bar-tertiary-color, 90%) !default
+$progress-bar-tertiary-text-color: $x-color-tertiary-opposite !default
+
+$progress-bar-stripes-alpha: 0.1 !default
+$progress-bar-stripes-color: rgba(text-contrast($progress-bar-base-color), $progress-bar-stripes-alpha) !default
+
+$progress-bar-error-color: $x-color-error !default
+$progress-bar-error-empty-color: mix($progress-bar-empty-color, $progress-bar-error-color, 90%) !default
+$progress-bar-error-text-color: $x-color-error-opposite !default
+
+$progress-bar-success-color: $x-color-success !default
+$progress-bar-success-empty-color: mix($progress-bar-empty-color, $progress-bar-success-color, 90%) !default
+$progress-bar-success-text-color: $x-color-success-opposite !default
+
+$progress-bar-info-color: $x-color-info !default
+$progress-bar-info-empty-color: mix($progress-bar-empty-color, $progress-bar-info-color, 90%) !default
+$progress-bar-info-text-color: $x-color-info-opposite !default
+
+$progress-bar-warn-color: $x-color-warning !default
+$progress-bar-warn-empty-color: mix($progress-bar-empty-color, $progress-bar-warn-color, 90%) !default
+$progress-bar-warn-text-color: $x-color-warning-opposite !default
+
+$progress-bar-height: dp(2.5) !default
+$progress-bar-small-height: dp(1.675) !default
+$progress-bar-padding-horizontal: $progress-bar-height / 2 !default
+$progress-bar-stripes-scale: 2 !default
+$progress-bar-indeterminate-stripes-scale: $progress-bar-stripes-scale !default
+
+$progress-bar-stripes-speed: 0.15s !default // multiplied by scale
+
+$progress-bar-border-radius: $x-border-radius !default
+$progress-bar-text-shadow: true !default
+
+// Calculate helping variables
+
+$progress-bar-stripes-size: $progress-bar-height * $progress-bar-stripes-scale
+$progress-bar-indeterminate-stripes-size: $progress-bar-height * $progress-bar-indeterminate-stripes-scale
+
+$progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterminate-stripes-scale
+
+// Set up styles for progress bar
+
+@include module('progress-bar')
+  position: relative
+  display: block
+  height: $progress-bar-height
+  background: $progress-bar-empty-color
+  border-radius: $progress-bar-border-radius
+  overflow: hidden
+  vertical-align: middle
+
+  &__inner
+    position: relative
+    height: 100%
+    background: $progress-bar-base-color
+    min-width: 3px
+    z-index: 1
+    overflow: hidden
+
+  &__label,
+  &__shadow
+    position: absolute
+    left: $progress-bar-padding-horizontal
+    right: $progress-bar-padding-horizontal
+    top: 0
+    bottom: 0
+    height: 100%
+    white-space: nowrap
+    color: text-contrast($progress-bar-empty-color)
+    font-size: $progress-bar-height * 0.5
+    line-height: $progress-bar-height
+    text-overflow: ellipsis
+
+  &__label
+    z-index: 2
+    color: $progress-bar-base-text-color
+
+    @if $progress-bar-text-shadow
+      text-shadow: 0 0 3px transparentize(text-contrast($progress-bar-base-text-color), 0.7)
+
+  &--striped &__inner:after,
+  &--indeterminate &__inner:after
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    user-select: none
+    pointer-events: none
+    background-size: $progress-bar-stripes-size $progress-bar-stripes-size
+    background-repeat: repeat
+    background-image: linear-gradient(45deg, $progress-bar-stripes-color 25%, transparent 0, transparent 50%, $progress-bar-stripes-color 0, $progress-bar-stripes-color 75%, transparent 0, transparent)
+
+  &--indeterminate &__inner
+    width: 100%
+    transform: none
+    animation: none
+
+    &:after
+      background-size: $progress-bar-indeterminate-stripes-size $progress-bar-indeterminate-stripes-size
+      animation: $progress-bar-stripes-time indeterminateProgressStripes infinite linear
+
+  &--smooth &__inner
+    transition: 400ms width linear
+
+// Build mixins for progress bar variations
+
+@mixin progress-bar-color ($type, $color, $empty-color: nil, $text-color: nil, $shadow-color: nil)
+  @if $text-color == nil
+    $text-color: text-contrast($color)
+
+  @if $empty-color == nil
+    $empty-color: mix($progress-bar-empty-color, $color, 85%)
+
+  @if $shadow-color == nil
+    $shadow-color: text-contrast($empty-color)
+
+  @include module('progress-bar')
+    &--#{$type}
+      background: $empty-color
+
+    &--#{$type} &__inner
+      background: $color
+
+    &--#{$type} &__label
+      color: $text-color
+
+      @if $progress-bar-text-shadow
+        text-shadow: 0 0 3px transparentize(text-contrast($text-color), 0.7)
+
+    &--#{$type} &__shadow
+      color: $shadow-color
+
+@mixin progress-bar-height ($type, $height)
+  @include module('progress-bar')
+    &--#{$type}
+      height: $height
+
+    &--#{$type} &__label,
+    &--#{$type} &__shadow
+      font-size: $height * 0.6
+      line-height: $height
+
+// Build styles for some progress bar variations
+
+@include progress-bar-color('secondary', $progress-bar-secondary-color, $progress-bar-secondary-empty-color, $progress-bar-secondary-text-color)
+@include progress-bar-color('tertiary', $progress-bar-tertiary-color, $progress-bar-tertiary-empty-color, $progress-bar-tertiary-text-color)
+@include progress-bar-color('error', $progress-bar-error-color, $progress-bar-error-empty-color, $progress-bar-error-text-color)
+@include progress-bar-color('success', $progress-bar-success-color, $progress-bar-success-empty-color, $progress-bar-success-text-color)
+@include progress-bar-color('info', $progress-bar-info-color, $progress-bar-info-empty-color, $progress-bar-info-text-color)
+@include progress-bar-color('warning', $progress-bar-warn-color, $progress-bar-warn-empty-color, $progress-bar-warn-text-color)
+
+@include progress-bar-height('small', $progress-bar-small-height)
+
+// Build animation for indeterminate progress
+
+@keyframes indeterminateProgressStripes
+  0%
+    background-position: 0 0
+  100%
+    background-position: $progress-bar-indeterminate-stripes-size 0
