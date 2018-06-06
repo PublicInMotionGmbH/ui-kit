@@ -1,5 +1,29 @@
-// Simple function to calculate accessible text color on background
+$contrasted-dark-default: #000 !default
+$contrasted-light-default: #fff !default
 
+// Compass function:
+// https://github.com/Compass/compass/blob/4de01475c98449c4435359544db443fd3da6e9d3/core/stylesheets/compass/utilities/color/_contrast.scss
+@function brightness($color)
+  @return (red($color) + green($color) + blue($color)) / (255 * 3)
+
+@function contrast-color($color, $dark: $contrasted-dark-default, $light: $contrasted-light-default)
+  @if $color == null
+    @return null
+  @else
+    $color-brightness: brightness($color)
+    $dark-text-brightness: brightness($dark)
+    $light-text-brightness: brightness($light)
+
+    $light-brightness-diff: $color-brightness - $light-text-brightness
+    $dark-brightness-diff: $color-brightness - $dark-text-brightness
+
+    @if abs($light-brightness-diff) > abs($dark-brightness-diff)
+      @return $light
+    @else
+      @return $dark
+
+// @deprecated
+// We need to get rid of it
 @function text-contrast($n)
   $brightness: round((red($n) * 299) + (green($n) * 587) + (blue($n) * 114) / 1000)
   $light: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000)
@@ -10,4 +34,9 @@
     @return #000
 
 @function bold-color($n, $amount)
-  @return mix(text-contrast($n), $n, $amount)
+  @return mix(contrast-color($n, #000, #fff), $n, $amount)
+
+@function mix-keep-saturation($appendedColor, $previousColor, $percentage)
+  $color: mix($appendedColor, $previousColor, $percentage)
+
+  @return hsla(hue($color), saturation($previousColor), lightness($color), alpha($color))

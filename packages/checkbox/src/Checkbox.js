@@ -15,11 +15,11 @@ const propTypes = {
   /** Indicates that input has error */
   error: PropTypes.bool,
 
-  /** Checkbox label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
   /** Additional styles for wrapper */
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  /** Event handler for change of checked status */
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
@@ -62,10 +62,10 @@ class Checkbox extends React.PureComponent {
   }
 
   render () {
-    const { children, className, error, size, style, value, ...passedProps } = this.props
+    const { children, className, error, style, value, onChange, ...passedProps } = this.props
     const _value = this.state.value
 
-    const clsName = buildClassName(moduleName, className, {error, [size]: size})
+    const clsName = buildClassName(moduleName, className, { error })
 
     return (
       <label className={clsName} style={style}>
