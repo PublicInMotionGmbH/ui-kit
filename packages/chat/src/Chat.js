@@ -2,14 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { TextInput } from '@talixo/text-input'
 
 import Message from './Message'
 
 const moduleName = 'chat'
 
 const propTypes = {
+  /** AddtiionalButton */
+  additionalButton: PropTypes.node,
+
   /** Additional class name. */
   className: PropTypes.string,
+
+  /** Information message */
+  additionalInformation: PropTypes.node,
 
   /** Additional class name. */
   messages: PropTypes.arrayOf(
@@ -23,10 +30,14 @@ const propTypes = {
     })
   ),
 
+  /**  */
+  messageRenderer: PropTypes.func,
+
   /** Typing users. */
   usersTyping: PropTypes.arrayOf(
     PropTypes.shape({
       /** User name. */
+
       user: PropTypes.string,
 
       /** Typing status. */
@@ -45,7 +56,8 @@ const defaultProps = {
   messages: [],
   type: 'chat',
   usersTyping: [],
-  user: 'user'
+  user: 'user',
+  messageRenderer: message => message
 }
 
 /**
@@ -61,6 +73,7 @@ class Chat extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
+      inputValue: '',
       typingStatus: false
     }
   }
@@ -74,12 +87,12 @@ class Chat extends React.PureComponent {
     }
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = (inputValue) => {
     if (this.state.typingStatus) {
       clearTimeout(this._typingTimeout)
     }
 
-    this.setState(state => ({ typingStatus: true }), () => {
+    this.setState(state => ({ typingStatus: true, inputValue }), () => {
       this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
     })
   }
@@ -105,54 +118,72 @@ class Chat extends React.PureComponent {
     this._input = node
   }
 
-  render () {
-    const { className, messages, user, usersTyping, addTypingUser, type, ...passedProps } = this.props
-
-    const messagesClsName = buildClassName([moduleName, 'messages'])
+  renderMessages = () => {
+    const { messages, messageRenderer, type, user } = this.props
     const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
+
+    return (
+      messages.map((message, i) => (
+        <Message
+          className={messageClsName}
+          key={i}
+          message={messageRenderer(message.message)}
+          user={message.user}
+          time={message.time}
+          style={{ marginLeft: type === 'chat' && user === message.user && 'auto' }}
+        />
+      ))
+    )
+  }
+
+  renderTypingUsers = () => {
+    const { usersTyping } = this.props
+    const userTypingContainerCls = buildClassName(moduleName, null, 'user-typing-container')
+
+    return (
+      <span className={userTypingContainerCls}>
+        {usersTyping.map((user, i) => {
+          let moreUsers = null
+          if (i > 0) {
+            moreUsers = ', '
+            if (i === usersTyping.length - 1) {
+              moreUsers = ' and '
+            }
+          }
+          return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
+        })}
+        {usersTyping.length > 0 &&
+         (<span>{usersTyping.length === 1 ? ' is' : ' are'} typing</span>)}
+      </span>
+    )
+  }
+
+  render () {
+    const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, type, ...passedProps } = this.props
+    const { inputValue } = this.state
+
+    const additionalInfoCls = buildClassName(moduleName, null, 'additional-info')
+    const additionalBtnCls = buildClassName(moduleName, null, 'additional-button')
+    const inputContainerCls = buildClassName(moduleName, null, 'input-container')
+    const messagesClsName = buildClassName([moduleName, 'messages'])
 
     return (
       <div style={{ display: 'block' }} {...passedProps}>
         <div className={messagesClsName}>
-          {
-            messages.map((message, i) => (
-              <Message
-                className={messageClsName}
-                key={i}
-                message={message.message}
-                user={message.user}
-                time={message.time}
-                style={{ marginLeft: type === 'chat' && user === message.user && 'auto' }}
-              />
-            ))
-          }
-          {
-            usersTyping.length > 0 && (
-              <span>
-                {
-                  usersTyping.map((user, i) => {
-                    let moreUsers = null
-                    if (i > 0) {
-                      moreUsers = ', '
-                      if (i === usersTyping.length - 1) {
-                        moreUsers = ' and '
-                      }
-                    }
-                    return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
-                  })
-                }
-                {usersTyping.length === 1 ? ' is' : ' are'} typing
-              </span>
-            )
-          }
+          {messages.length > 0 && this.renderMessages()}
+          {usersTyping && this.renderTypingUsers()}
         </div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type='text'
-            ref={this.setRef}
-            onChange={this.handleInputChange}
-            placeholder='reply'
-          />
+          {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
+          <span className={inputContainerCls}>
+            {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
+            <TextInput
+              inputRef={this.setRef}
+              onChange={this.handleInputChange}
+              placeholder='reply'
+              value={inputValue}
+            />
+          </span>
         </form>
       </div>
     )
@@ -160,7 +191,6 @@ class Chat extends React.PureComponent {
 }
 
 Chat.propTypes = propTypes
-
 Chat.defaultProps = defaultProps
 
 export default Chat

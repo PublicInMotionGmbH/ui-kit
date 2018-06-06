@@ -2,6 +2,22 @@
 
 @include module('chat')
   display: block
+  &--input-container
+    display: inline-block
+
+  &--additional-info
+    display: block
+    margin-top: dp(1.5)
+    margin-bottom: dp(0.7)
+    color: $chat-additional-info-color
+
+  &--additional-button
+    font-size: dp(3)
+    padding: dp(1)
+
+  &--user-typing-container
+    display: inline-block
+    height: dp(2)
 
   &__messages
     display: flex

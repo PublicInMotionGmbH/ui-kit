@@ -2,6 +2,7 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import { Button } from '@talixo/button'
+import { Icon } from '@talixo/icon'
 
 import Chat from './src/Chat'
 
@@ -43,10 +44,48 @@ addStory.controlled('initial', readme, (setState, state) => (
   />
 ), () => ({
   messages: messages,
-  usersTyping: [{
+  usersTyping: []
+}))
+
+addStory.controlled('with additional information', readme, (setState, state) => (
+  <Chat
+    messages={state.messages}
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
+    }}
+    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    user='Daniel'
+    usersTyping={state.usersTyping}
+    additionalInformation={<span>This is additional message</span>}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: []
+}))
+
+addStory.controlled('with additional button', readme, (setState, state) => (
+  <Chat
+    messages={state.messages}
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
+    }}
+    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    user='Daniel'
+    usersTyping={state.usersTyping}
+    additionalButton={<Icon name='thumb_up' />}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: [/* {
     user: 'John',
     status: true
-  }]
+  } */]
 }))
 
 addStory.controlled('change types', readme, (setState, state) => (
