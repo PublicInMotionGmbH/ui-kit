@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { TextInput } from '@talixo/text-input'
 
 const moduleName = 'chat'
 
@@ -163,9 +164,9 @@ class Chat extends React.PureComponent {
           {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
           <span className={inputContainerCls}>
             {informationMessage && <span className={infoMsgCls}>{informationMessage}</span>}
-            <input
+            <TextInput
               type='text'
-              ref={this.setRef}
+              inputRef={this.setRef}
               onChange={this.handleInputChange}
               placeholder='reply'
             />

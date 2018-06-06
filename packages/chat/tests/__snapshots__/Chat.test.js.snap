@@ -2,6 +2,7 @@
 
 exports[`<Chat /> renders children correctly 1`] = `
 <div
+  renderMessageMarkdown={[Function]}
   style={
     Object {
       "display": "block",
@@ -9,6 +10,7 @@ exports[`<Chat /> renders children correctly 1`] = `
   }
 >
   <div
+    className="talixo-chat talixo-chat--messages-container"
     key="0"
   >
     <span>
@@ -17,6 +19,7 @@ exports[`<Chat /> renders children correctly 1`] = `
     John
   </div>
   <div
+    className="talixo-chat talixo-chat--messages-container"
     key="1"
   >
     <span>
@@ -24,14 +27,24 @@ exports[`<Chat /> renders children correctly 1`] = `
     </span>
     Tom
   </div>
+  <span
+    className="talixo-chat talixo-chat--user-typing-container"
+  />
   <form
     onSubmit={[Function]}
   >
-    <input
-      onChange={[Function]}
-      placeholder="reply"
-      type="text"
-    />
+    <span
+      className="talixo-chat talixo-chat--input-container"
+    >
+      <TextInput
+        InputComponent="input"
+        error={false}
+        inputRef={[Function]}
+        onChange={[Function]}
+        placeholder="reply"
+        type="text"
+      />
+    </span>
   </form>
 </div>
 `;
