@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { buildClassName } from '@talixo/shared'
+
+import Message from './Message'
+
+const moduleName = 'chat'
+
 const propTypes = {
   /** Additional class name. */
   className: PropTypes.string,
@@ -28,12 +34,16 @@ const propTypes = {
     })
   ),
 
+  /** Message type. */
+  type: PropTypes.oneOf(['chat', 'comments']),
+
   /** User name. */
   user: PropTypes.string
 }
 
 const defaultProps = {
   messages: [],
+  type: 'chat',
   usersTyping: [],
   user: 'user'
 }
@@ -96,39 +106,46 @@ class Chat extends React.PureComponent {
   }
 
   render () {
-    const { className, messages, user, usersTyping, addTypingUser, ...passedProps } = this.props
+    const { className, messages, user, usersTyping, addTypingUser, type, ...passedProps } = this.props
+
+    const messagesClsName = buildClassName([moduleName, 'messages'])
+    const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
 
     return (
       <div style={{ display: 'block' }} {...passedProps}>
-        {
-          messages.map((message, i) => (
-            <div key={i}>
+        <div className={messagesClsName}>
+          {
+            messages.map((message, i) => (
+              <Message
+                className={messageClsName}
+                key={i}
+                message={message.message}
+                user={message.user}
+                time={message.time}
+                style={{ marginLeft: type === 'chat' && user === message.user && 'auto' }}
+              />
+            ))
+          }
+          {
+            usersTyping.length > 0 && (
               <span>
-                {message.message}
-              </span>
-              {message.user}
-            </div>
-          ))
-        }
-        {
-          usersTyping.length > 0 && (
-            <span>
-              {
-                usersTyping.map((user, i) => {
-                  let moreUsers = null
-                  if (i > 0) {
-                    moreUsers = ', '
-                    if (i === usersTyping.length - 1) {
-                      moreUsers = ' and '
+                {
+                  usersTyping.map((user, i) => {
+                    let moreUsers = null
+                    if (i > 0) {
+                      moreUsers = ', '
+                      if (i === usersTyping.length - 1) {
+                        moreUsers = ' and '
+                      }
                     }
-                  }
-                  return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
-                })
-              }
-              {usersTyping.length === 1 ? ' is' : ' are'} typing
-            </span>
-          )
-        }
+                    return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
+                  })
+                }
+                {usersTyping.length === 1 ? ' is' : ' are'} typing
+              </span>
+            )
+          }
+        </div>
         <form onSubmit={this.handleSubmit}>
           <input
             type='text'

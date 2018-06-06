@@ -1,2 +1,47 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('chat')
+  display: block
+
+  &__messages
+    display: flex
+    flex-direction: column
+
+  &__message
+    position: relative
+    display: block
+    background-color: #efefef
+    padding: dp(2)
+    border: 1px solid transparent
+    border-radius: dp(1)
+    box-sizing: border-box
+    transition: width 400ms ease-in
+    left: 0
+
+    &--chat
+      margin-bottom: dp(3)
+      width: 80%
+
+      &__info
+        display: flex
+        flex-direction: row-reverse
+        justify-content: space-between
+        position: absolute
+        width: 100%
+        top: 100%
+        left: 0
+
+    &--comments
+      margin-bottom: dp(1.5)
+      width: 100%
+
+      &__info
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        position: relative
+        width: 100%
+        top: 100%
+
+      &__user
+        font-size: $font-size-l
