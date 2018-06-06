@@ -4,8 +4,6 @@ import moment from 'moment'
 
 import { buildClassName } from '@talixo/shared'
 
-const moduleName = 'chat'
-
 const propTypes = {
   /** Additional class name. */
   className: PropTypes.string,
@@ -16,8 +14,8 @@ const propTypes = {
   /** Message content. */
   message: PropTypes.node,
 
-  /** Timestamp of message. */
-  time: PropTypes.string
+  /** Message time stamp. */
+  time: PropTypes.number
 }
 
 const defaultProps = {}
@@ -31,14 +29,13 @@ function Message (props) {
     return `${fromNow} ${hoursMinutes}`
   }
 
-  const wrapperClsName = buildClassName([moduleName, 'message'], className)
   const infoClsName = buildClassName([className, 'info'])
   const timeClsName = buildClassName([className, 'time'])
   const userClsName = buildClassName([className, 'user'])
   const messageClsName = buildClassName([className, 'message'])
 
   return (
-    <div className={wrapperClsName} {...passedProps}>
+    <div className={className} {...passedProps}>
       <div className={infoClsName}>
         <span className={timeClsName}>
           {renderTime()}

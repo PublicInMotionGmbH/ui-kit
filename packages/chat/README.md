@@ -22,10 +22,42 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
+
+Property name         | Type          | Default              | Description
+----------------------|---------------|:--------------------:|--------------------------------
+additionalButton      | node          | n/a                  | Additional button.
+additionalInformation | node          | n/a                  | Information message.
+className             | string        | n/a                  | Additional class name.
+messages              | Messages[]    | `[]`                 | Additional class name.
+messageRenderer       | func          | `message => message` | Message renderer.
+user                  | string        | `'user'`             | User name.
+usersTyping           | UsersTyping[] | `[]`                 | Typing users.
+type                  | Type          | `'chat'`             | Message type.
+
+#### Types
+
+Type name | Enum options
+----------|---------------------------------------------------
+Type      | 'chat', 'comments'
+
+### Property shapes
+
+#### Messages
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+user          | string    | no       | n/a           | User name.
+message       | node      | no       | n/a           | Message content.
+time          | number    | no       | n/a           | Message time stamp.
+
+#### UsersTyping
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+user          | string    | no       | n/a           | User name.
+status        | boolean   | no       | n/a           | Typing status.
 
 ## Changelog
 
-- **0.1.0** - initial version
+- **0.0.0** - initial version

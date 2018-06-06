@@ -39,7 +39,10 @@ addStory.controlled('initial', readme, (setState, state) => (
         : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
       setState({ usersTyping: updatedUsers })
     }}
-    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    onSubmit={message => {
+      setState({ messages: state.messages.concat(message) })
+      console.log(state.messages)
+    }}
     user='Daniel'
     usersTyping={state.usersTyping}
   />
