@@ -64,7 +64,7 @@ ProgressBar.propTypes = {
   className: PropTypes.string,
 
   /** Progress bar style type */
-  type: PropTypes.oneOf([ 'error', 'success', 'info', 'warning' ]),
+  type: PropTypes.oneOf([ 'error', 'success', 'info', 'warning', 'secondary', 'tertiary' ]),
 
   /** Progress, between 0 and 1 */
   value: PropTypes.number,
