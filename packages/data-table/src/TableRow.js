@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { buildClassName } from '@talixo/shared'
 import { Action, ActionsCell, Cell, Row } from '@talixo/table'
+
+import { moduleName } from './config'
 
 const propTypes = {
 
@@ -43,44 +46,6 @@ const defaultProps = {
   actions: [],
   verticalActionCell: false
 }
-
-/**
- * This function generates action cell for passed row.
- *
- * @param {object[]} actions
- * @param {object} row
- * @param {boolean} [vertical]
- * @returns {React.Element}
- */
-function generateActions (actions, row, vertical = false) {
-  // Generate click function.
-  const click = (onClick, e) => {
-    if (onClick) onClick(row, e)
-  }
-
-  // Check condition provided by the user.
-  const displayedActions = actions.filter(action => (
-    action.condition && typeof action.condition === 'function'
-      ? action.condition(row)
-      : true
-  ))
-
-  return (
-    <ActionsCell vertical={vertical}>
-      {
-        displayedActions.map(action => (
-          <Action
-            key={action.label}
-            icon={action.icon}
-            label={action.label}
-            onClick={e => click(action.onClick, e)}
-          />
-        ))
-      }
-    </ActionsCell>
-  )
-}
-
 /**
  * Component which represents a row inside DataTable.
  *
@@ -98,28 +63,116 @@ function generateActions (actions, row, vertical = false) {
  *
  * @returns {React.Element}
  */
-function TableRow (props) {
-  const { columns, rowData, actions, verticalActionCell } = props
+class TableRow extends React.Component {
+  state = {
+    expanded: []
+  }
 
-  // Filter columns to ensure actions will be displayed as last column.
-  const cols = columns.filter(({ id }) => id !== 'actions')
+  onClick = (rowId, e) => {
+    const { onClick } = this.props
+    const { expanded } = this.state
+    const inArray = expanded.indexOf(rowId) > -1
 
-  return (
-    <React.Fragment>
-      {
-        rowData.map((row, i) => (
-          <Row key={row.id}>
-            {
-              cols.map(({ id, render }) => (
-                <Cell key={id}>{ render && typeof render === 'function' ? render(row[id]) : row[id] }</Cell>)
-              )
-            }
-            { actions.length > 0 && generateActions(actions, row, verticalActionCell) }
-          </Row>
-        ))
-      }
-    </React.Fragment>
-  )
+    if (inArray) {
+      const newExpanded = expanded.filter(item => item !== rowId)
+      this.setState({ expanded: newExpanded })
+    } else {
+      this.setState((prevState) => ({ expanded: [...prevState.expanded, rowId] }))
+    }
+
+    if (onClick) {
+      onClick(rowId, e)
+    }
+  }
+
+  /**
+   * This function generates action cell for passed row.
+   *
+   * @param {object[]} actions
+   * @param {object} row
+   * @param {boolean} [vertical]
+   * @returns {React.Element}
+   */
+  generateActions = (row) => {
+    const { actions, verticalActionCell: vertical } = this.props
+    // Generate click function.
+    const click = (onClick, e) => {
+      if (onClick) onClick(row, e)
+    }
+
+    // Check condition provided by the user.
+    const displayedActions = actions.filter(action => (
+      action.condition && typeof action.condition === 'function'
+        ? action.condition(row)
+        : true
+    ))
+
+    return (
+      <ActionsCell vertical={vertical}>
+        {
+          displayedActions.map(action => (
+            <Action
+              key={action.label}
+              icon={action.icon}
+              label={action.label}
+              onClick={e => click(action.onClick, e)}
+            />
+          ))
+        }
+      </ActionsCell>
+    )
+  }
+
+  generateCollapse = (row, colspan, index) => {
+    const { expandRender } = this.props
+    const { expanded } = this.state
+    const visible = expanded.indexOf(row.id) > -1
+    const collapseCls = buildClassName([moduleName, 'collapse'], null, {
+      collapsed: !visible,
+      even: index % 2 !== 0
+    })
+    const collapseCellCls = buildClassName([moduleName, 'collapse', 'cell'])
+
+    return (
+      <Row className={collapseCls}>
+        <Cell className={collapseCellCls} colSpan={colspan}>
+          { expandRender(row) }
+        </Cell>
+      </Row>
+    )
+  }
+
+  render () {
+    const { actions, columns, expandRender, onClick: click, rowData, verticalActionCell, ...restProps } = this.props
+    const { generateActions, generateCollapse, onClick } = this
+    const colSpan = columns.length
+    const cellCls = buildClassName([moduleName, 'cell'], null, { clickable: !!expandRender })
+
+    // Filter columns to ensure actions will be displayed as last column.
+    const cols = columns.filter(({ id }) => id !== 'actions')
+
+    return (
+      <React.Fragment>
+        {
+          rowData.map((row, i) => (
+            <React.Fragment key={row.id}>
+              <Row className={buildClassName([moduleName, 'row'], null, { even: i % 2 !== 0 })} {...restProps}>
+                {
+                  cols.map(({ id, render }) => (
+                    <Cell className={cellCls} onClick={onClick.bind(this, row.id)} key={id}>
+                      { render && typeof render === 'function' ? render(row[id]) : row[id] }
+                    </Cell>)
+                  )
+                }
+                { actions.length > 0 && generateActions(row) }
+              </Row>
+              { expandRender && generateCollapse(row, colSpan, i) }
+            </React.Fragment>
+          ))
+        }
+      </React.Fragment>
+    )
+  }
 }
 
 TableRow.propTypes = propTypes

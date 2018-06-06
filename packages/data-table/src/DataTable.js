@@ -30,7 +30,7 @@ const propTypes = {
     renderHeader: PropTypes.func
   })).isRequired,
 
-  /** Data to be populated inside table. Require the same keys as inc olumns objects. */
+  /** Data to be populated inside table. Require the same keys as in columns objects. */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   /** onSort function callback. */
@@ -64,6 +64,18 @@ const defaultProps = {
   sortable: false
 }
 
+function checkForId (collection) {
+  const keys = Object.keys(collection[0])
+  const hasId = keys.indexOf('id') > -1
+  if (hasId) {
+    return collection
+  }
+  return collection.map((item, index) => ({
+    id: index,
+    ...item
+  }))
+}
+
 /**
  * Component which represents DataTable.
  *
@@ -93,7 +105,7 @@ const defaultProps = {
  */
 class DataTable extends React.Component {
   state = {
-    sortedData: this.props.data,
+    sortedData: checkForId(this.props.data),
     sortColumn: '',
     reversedOrder: false
   }
@@ -111,7 +123,7 @@ class DataTable extends React.Component {
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
     // Set direction of sorting.
     const direction = !_reversedOrder ? 'asc' : 'desc'
-    // Oreder data using lodash sort funciton.
+    // Oreder data using lodash sort function.
     const newData = _.orderBy(sortedData, columnID, direction)
 
     this.setState({
@@ -131,7 +143,7 @@ class DataTable extends React.Component {
    * @returns {React.Element}
    */
   buildHeaders = () => {
-    const { columns, sortable } = this.props
+    const { columns, onSort, sortable } = this.props
     const { sortColumn, reversedOrder } = this.state
     const { sort } = this
     // Pass sorting order to allow propper sorting arrow hightlight.
@@ -139,7 +151,7 @@ class DataTable extends React.Component {
 
     const headersProps = {
       columns: columns,
-      onClick: (sortable && sort) || undefined,
+      onClick: (sortable && sort) || onSort || undefined,
       sortable: sortable,
       sortColumn: sortColumn,
       sortOrder: sortOrder
@@ -151,7 +163,7 @@ class DataTable extends React.Component {
 
   render (props) {
     const {
-      actions, columns, className, data, onSort,
+      actions, expandRender, columns, className, data, onSort,
       sortable, verticalActionCell, ...passedProps
     } = this.props
     const { sortedData } = this.state
@@ -166,6 +178,7 @@ class DataTable extends React.Component {
           <TableRow
             actions={actions}
             columns={columns}
+            expandRender={expandRender}
             rowData={sortedData}
             verticalActionCell={verticalActionCell}
           />
