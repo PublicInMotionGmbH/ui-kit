@@ -2,7 +2,6 @@
 
 exports[`<Chat /> renders children correctly 1`] = `
 <div
-  renderMessageMarkdown={[Function]}
   style={
     Object {
       "display": "block",
@@ -43,6 +42,7 @@ exports[`<Chat /> renders children correctly 1`] = `
         onChange={[Function]}
         placeholder="reply"
         type="text"
+        value=""
       />
     </span>
   </form>
