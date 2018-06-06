@@ -114,7 +114,7 @@ class Chat extends React.PureComponent {
 
   renderMessages = () => {
     const { messages, messageRenderer } = this.props
-    const msgContainerCls = buildClassName(moduleName, null, 'messages-container')
+    const msgContainerCls = buildClassName([moduleName, 'messages-container'])
 
     return (
       messages.map((message, i) => (
@@ -130,7 +130,7 @@ class Chat extends React.PureComponent {
 
   renderTypingUsers = () => {
     const { usersTyping } = this.props
-    const userTypingContainerCls = buildClassName(moduleName, null, 'user-typing-container')
+    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
 
     return (
       <span className={userTypingContainerCls}>
@@ -154,12 +154,13 @@ class Chat extends React.PureComponent {
     const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, ...passedProps } = this.props
     const { inputValue } = this.state
 
-    const additionalInfoCls = buildClassName(moduleName, null, 'additional-info')
-    const additionalBtnCls = buildClassName(moduleName, null, 'additional-button')
-    const inputContainerCls = buildClassName(moduleName, null, 'input-container')
+    const wrapperClsName = buildClassName(moduleName, className)
+    const additionalInfoCls = buildClassName([moduleName, 'additional-info'])
+    const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
+    const inputContainerCls = buildClassName([moduleName, 'input-container'])
 
     return (
-      <div style={{ display: 'block' }} {...passedProps}>
+      <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
         {messages.length > 0 && this.renderMessages()}
         {usersTyping && this.renderTypingUsers()}
         <form onSubmit={this.handleSubmit}>

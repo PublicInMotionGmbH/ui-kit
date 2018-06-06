@@ -80,8 +80,30 @@ addStory.controlled('with additional button', readme, (setState, state) => (
   />
 ), () => ({
   messages: messages,
-  usersTyping: [/* {
+  usersTyping: []
+}))
+
+addStory.controlled('multiple users typing', readme, (setState, state) => (
+  <Chat
+    messages={state.messages}
+    addTypingUser={(user) => {
+      const updatedUsers = user.status
+        ? state.usersTyping.concat(user)
+        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
+      setState({ usersTyping: updatedUsers })
+    }}
+    onSubmit={message => setState({ messages: state.messages.concat(message) })}
+    user='Daniel'
+    usersTyping={state.usersTyping}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: [{
     user: 'John',
     status: true
-  } */]
+  },
+  {
+    user: 'Kennedy',
+    status: true
+  }]
 }))

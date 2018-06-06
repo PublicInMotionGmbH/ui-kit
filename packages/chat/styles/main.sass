@@ -1,20 +1,25 @@
 @import './config'
 
 @include module('chat')
+  border: dp(0.125) solid $chat-border-color
+  padding: dp(4)
+  border-radius: dp(0.5)
 
   &--input-container
     display: inline-block
 
-  &--additional-info
+  &__additional-info
     display: block
     margin-top: dp(1.5)
     margin-bottom: dp(0.7)
     color: $chat-additional-info-color
 
-  &--additional-button
+  &__additional-button
     font-size: dp(3)
     padding: dp(1)
 
-  &--user-typing-container
-    display: inline-block
+  &__user-typing-container
+    display: block
     height: dp(2)
+    margin-bottom: dp(1)
+
