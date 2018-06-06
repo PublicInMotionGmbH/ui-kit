@@ -1,12 +1,20 @@
 @import './config'
 
 @include module('chat')
-  border: dp(0.125) solid $chat-border-color
+  border: dp(0.125) solid $color-talixo-light-gray
   padding: dp(4)
   border-radius: dp(0.5)
+  display: flex;
+  flex-direction: column;
 
-  &--input-container
-    display: inline-block
+  &__form
+    display: flex
+    flex-direction: column
+
+  &__input-container
+    display: inline-flex
+    &-inner
+      flex-basis: 100%
 
   &__additional-info
     display: block
@@ -15,11 +23,59 @@
     color: $chat-additional-info-color
 
   &__additional-button
+    align-self: center
     font-size: dp(3)
     padding: dp(1)
 
   &__user-typing-container
     display: block
-    height: dp(2)
-    margin-bottom: dp(1)
+    height: dp(4)
+    margin-top: dp(2) 
+    margin-bottom: dp(2) 
+    color: $chat-typing-container-color
 
+
+  &__messages
+    display: flex
+    flex-direction: column
+    flex-basis: 100%
+    overflow-y: scroll
+
+  &__message
+    position: relative
+    display: block
+    background-color: #efefef
+    padding: dp(2)
+    border: 1px solid transparent
+    border-radius: dp(1)
+    box-sizing: border-box
+    transition: width 400ms ease-in
+    left: 0
+
+    &--chat
+      margin-bottom: dp(3)
+      width: 80%
+
+      &__info
+        display: flex
+        flex-direction: row-reverse
+        justify-content: space-between
+        position: absolute
+        width: 100%
+        top: 100%
+        left: 0
+
+    &--comments
+      margin-bottom: dp(1.5)
+      width: 100%
+
+      &__info
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        position: relative
+        width: 100%
+        top: 100%
+
+      &__user
+        font-size: $font-size-l

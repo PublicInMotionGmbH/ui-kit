@@ -9,26 +9,34 @@ exports[`<Chat /> renders children correctly 1`] = `
   }
 >
   <div
-    className="talixo-chat talixo-chat--messages-container"
-    key="0"
+    className="talixo-chat__messages"
   >
-    <span>
-      This is message
-    </span>
-    John
+    <Message
+      className="talixo-chat__message talixo-chat__message--chat"
+      key="0"
+      message="This is message"
+      style={
+        Object {
+          "marginLeft": false,
+        }
+      }
+      user="John"
+    />
+    <Message
+      className="talixo-chat__message talixo-chat__message--chat"
+      key="1"
+      message="This is reply"
+      style={
+        Object {
+          "marginLeft": false,
+        }
+      }
+      user="Tom"
+    />
+    <span
+      className="talixo-chat talixo-chat--user-typing-container"
+    />
   </div>
-  <div
-    className="talixo-chat talixo-chat--messages-container"
-    key="1"
-  >
-    <span>
-      This is reply
-    </span>
-    Tom
-  </div>
-  <span
-    className="talixo-chat talixo-chat--user-typing-container"
-  />
   <form
     onSubmit={[Function]}
   >

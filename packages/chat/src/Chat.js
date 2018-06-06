@@ -4,17 +4,19 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 import { TextInput } from '@talixo/text-input'
 
+import Message from './Message'
+
 const moduleName = 'chat'
 
 const propTypes = {
   /** AddtiionalButton */
   additionalButton: PropTypes.node,
 
-  /** Additional class name. */
-  className: PropTypes.string,
-
   /** Information message */
   additionalInformation: PropTypes.node,
+
+  /** Additional class name. */
+  className: PropTypes.string,
 
   /** Additional class name. */
   messages: PropTypes.arrayOf(
@@ -28,7 +30,7 @@ const propTypes = {
     })
   ),
 
-  /**  */
+  /** Function passed to message renderer */
   messageRenderer: PropTypes.func,
 
   /** Typing users. */
@@ -43,12 +45,16 @@ const propTypes = {
     })
   ),
 
+  /** Message type. */
+  type: PropTypes.oneOf(['chat', 'comments']),
+
   /** User name. */
   user: PropTypes.string
 }
 
 const defaultProps = {
   messages: [],
+  type: 'chat',
   usersTyping: [],
   user: 'user',
   messageRenderer: message => message
@@ -113,19 +119,21 @@ class Chat extends React.PureComponent {
   }
 
   renderMessages = () => {
-    const { messages, messageRenderer } = this.props
-    const msgContainerCls = buildClassName([moduleName, 'messages-container'])
+    const { messages, messageRenderer, type, user } = this.props
+    const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
 
     return (
       messages.map((message, i) => (
-        <div key={i} className={msgContainerCls}>
-          <span>
-            {messageRenderer(message.message)}
-          </span>
-          {message.user}
-        </div>
-      )
+        <Message
+          className={messageClsName}
+          key={i}
+          message={messageRenderer(message.message)}
+          user={message.user}
+          time={message.time}
+          style={{ marginLeft: type === 'chat' && user === message.user && 'auto' }}
+        />
       ))
+    )
   }
 
   renderTypingUsers = () => {
@@ -151,28 +159,35 @@ class Chat extends React.PureComponent {
   }
 
   render () {
-    const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, type, ...passedProps } = this.props
     const { inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)
+    const formClsName = buildClassName([moduleName, 'form'])
     const additionalInfoCls = buildClassName([moduleName, 'additional-info'])
     const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
     const inputContainerCls = buildClassName([moduleName, 'input-container'])
+    const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
+    const messagesClsName = buildClassName([moduleName, 'messages'])
 
     return (
       <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
-        {messages.length > 0 && this.renderMessages()}
-        {usersTyping && this.renderTypingUsers()}
-        <form onSubmit={this.handleSubmit}>
-          {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
+        <div className={messagesClsName}>
+          {messages.length > 0 && this.renderMessages()}
+        </div>
+        <form className={formClsName} onSubmit={this.handleSubmit}>
+          {usersTyping && this.renderTypingUsers()}
           <span className={inputContainerCls}>
-            {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
-            <TextInput
-              inputRef={this.setRef}
-              onChange={this.handleInputChange}
-              placeholder='reply'
-              value={inputValue}
-            />
+            {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
+            <span className={inputContainerInnerCls}>
+              {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
+              <TextInput
+                inputRef={this.setRef}
+                onChange={this.handleInputChange}
+                placeholder='reply'
+                value={inputValue}
+              />
+            </span>
           </span>
         </form>
       </div>
