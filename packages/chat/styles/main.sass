@@ -4,8 +4,8 @@
   border: dp(0.125) solid $color-talixo-light-gray
   padding: dp(4)
   border-radius: dp(0.5)
-  display: flex;
-  flex-direction: column;
+  display: flex
+  flex-direction: column
 
   &__form
     display: flex
@@ -13,33 +13,33 @@
 
   &__input-container
     display: inline-flex
+
     &-inner
       flex-basis: 100%
 
   &__additional-info
     display: block
-    margin-top: dp(1.5)
-    margin-bottom: dp(0.7)
+    margin-top: dp(0.1)
+    margin-bottom: dp(0.1)
     color: $chat-additional-info-color
 
   &__additional-button
     align-self: center
-    font-size: dp(3)
-    padding: dp(1)
+    font-size: dp(5)
+    padding-right: dp(3)
+    user-select: none
 
   &__name-typing-container
     display: block
     height: dp(4)
-    margin-top: dp(2)
-    margin-bottom: dp(2)
     color: $chat-typing-container-color
-
 
   &__messages
     display: flex
     flex-direction: column
     flex-basis: 100%
     overflow-y: scroll
+    padding-right: dp(2)
 
   &__message
     position: relative
