@@ -36,6 +36,64 @@ const messages = [
   }
 ]
 
+// Simulation
+
+const randomMessages = [
+  'Hi',
+  'How are you?',
+  'Can I help you?',
+  'OK',
+  'Give me a second',
+  'How you doin?',
+  'No, I don\'t think so...',
+  'Amazing!',
+  'Wow'
+]
+
+const names = ['Mike', 'Tom', 'Susan', 'George', 'Lilly']
+
+let simulation
+
+function startSimulation (setState, state) {
+  setState({ simulation: true })
+
+  simulation = setInterval(() => {
+    const randomUser = {
+      name: names[Math.floor(Math.random(names.length) * names.length)],
+      id: Math.floor(Math.random() * 10000).toString(),
+      status: true
+    }
+
+    const randomMessage = () => ({
+      time: moment().valueOf(),
+      message: randomMessages[Math.floor(Math.random(randomMessages.length) * randomMessages.length)],
+      name: randomUser.name,
+      id: randomUser.id
+    })
+
+    setState({
+      usersTyping: state.usersTyping.concat(randomUser)
+    })
+
+    setTimeout(() => setState({
+      usersTyping: state.usersTyping
+        .filter(typingUser => typingUser.id !== randomUser.id)
+    }), 4000)
+
+    setTimeout(() => setState({
+      messages: state.messages.concat(randomMessage())
+    }), 2000)
+  }, Math.floor(Math.random() * 5000))
+}
+
+function stopSimulation (setState, state) {
+  clearInterval(simulation)
+
+  setState({ simulation: false })
+}
+
+// Helpers
+
 const thumbup = {
   time: moment().valueOf(),
   message: <Icon name='thumb_up' />,
@@ -64,6 +122,24 @@ addStory.controlled('initial', readme, (setState, state) => (
     name={name}
     id='3'
     usersTyping={state.usersTyping}
+  />
+), () => ({
+  messages: messages,
+  usersTyping: []
+}))
+
+addStory.controlled('with custom message renderer', readme, (setState, state) => (
+  <Chat
+    style={chatStyle}
+    messages={state.messages}
+    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onSubmit={message => {
+      setState({ messages: state.messages.concat(message) })
+    }}
+    name={name}
+    id='3'
+    usersTyping={state.usersTyping}
+    messageRenderer={(n) => n.toUpperCase()}
   />
 ), () => ({
   messages: messages,
@@ -158,5 +234,35 @@ addStory.controlled('change types', readme, (setState, state) => (
 ), () => ({
   messages: messages,
   type: 'chat',
+  usersTyping: []
+}))
+
+addStory.controlled('chat simulation', readme, (setState, state) => {
+  return (
+    <div>
+      <Button
+        onClick={() => state.simulation
+          ? stopSimulation(setState, state)
+          : startSimulation(setState, state)
+        }
+      >
+        {state.simulation ? 'Stop' : 'Start'} Simulation
+      </Button>
+      <Chat
+        style={chatStyle}
+        messages={state.messages}
+        addTypingUser={(user) => addTypingUser(user, setState, state)}
+        onSubmit={message => {
+          setState({ messages: state.messages.concat(message) })
+        }}
+        name={name}
+        id='3'
+        usersTyping={state.usersTyping}
+      />
+    </div>
+  )
+}, () => ({
+  simulation: false,
+  messages: [],
   usersTyping: []
 }))
