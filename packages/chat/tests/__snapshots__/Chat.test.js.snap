@@ -36,6 +36,18 @@ exports[`<Chat /> renders children correctly 1`] = `
       }
       time={1528104730633}
     />
+    <Message
+      className="talixo-chat__message talixo-chat__message--chat"
+      key="2"
+      message="This is reply"
+      name="Me"
+      style={
+        Object {
+          "marginLeft": "auto",
+        }
+      }
+      time={1528104730633}
+    />
   </div>
   <form
     className="talixo-chat__form"
