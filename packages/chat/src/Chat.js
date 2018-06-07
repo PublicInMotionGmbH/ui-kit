@@ -93,7 +93,8 @@ class Chat extends React.PureComponent {
   }
 
   /**
-   * Fire addTypingUser when state.typingStatus is updated
+   * Fire addTypingUser when state.typingStatus is updated.
+   * Scroll messages continer to bottom if messages are updated.
    */
   componentDidUpdate (prevProps, prevState) {
     if (prevState.typingStatus !== this.state.typingStatus) {
@@ -101,6 +102,10 @@ class Chat extends React.PureComponent {
         status: this.state.typingStatus,
         user: this.props.user
       })
+    }
+
+    if (this.props.messages !== prevProps.messages) {
+      this.scrollToBottom(this._messages)
     }
   }
 
@@ -153,15 +158,6 @@ class Chat extends React.PureComponent {
   }
 
   /**
-  * Save base node element.
-  *
-  * @param {Element} node
-  */
-  setRef = (node) => {
-    this._input = node
-  }
-
-  /**
    * Render messages.
    *
    * @returns {React.Element}
@@ -174,7 +170,7 @@ class Chat extends React.PureComponent {
     const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
 
     return (
-      <div className={messagesClsName}>
+      <div className={messagesClsName} ref={(node) => this.setRef(node, '_messages')}>
         {
           messages.map((message, i) => (
             <Message
@@ -219,6 +215,25 @@ class Chat extends React.PureComponent {
   }
 
   /**
+  * Save base node element.
+  *
+  * @param {Element} node
+  * @param {string} name
+  */
+  setRef = (node, name) => {
+    this[name] = node
+  }
+
+  /**
+   * Scroll to bottom of the element.
+   *
+   * @param {node} element
+   */
+  scrollToBottom = (element) => {
+    element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })
+  }
+
+  /**
    * Render chat component.
    *
    * @returns {React.Element}
@@ -233,13 +248,10 @@ class Chat extends React.PureComponent {
     const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
     const inputContainerCls = buildClassName([moduleName, 'input-container'])
     const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
-    const messagesClsName = buildClassName([moduleName, 'messages'])
 
     return (
       <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
-        <div className={messagesClsName}>
-          {messages.length > 0 && this.renderMessages()}
-        </div>
+        {messages.length > 0 && this.renderMessages()}
         <form className={formClsName} onSubmit={this.handleSubmit}>
           {usersTyping && this.renderTypingUsers()}
           <span className={inputContainerCls}>
@@ -247,7 +259,7 @@ class Chat extends React.PureComponent {
             <span className={inputContainerInnerCls}>
               {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
               <TextInput
-                inputRef={this.setRef}
+                inputRef={(node) => this.setRef(node, '_input')}
                 onChange={this.handleInputChange}
                 placeholder='reply'
                 value={inputValue}
