@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Message /> renders children correctly 1`] = `
+<div
+  className="talixo-chat__message talixo-chat__message--chat"
+>
+  <div
+    className="talixo-talixo-chat__message talixo-chat__message--chat__info"
+  >
+    <span
+      className="talixo-talixo-chat__message talixo-chat__message--chat__time"
+    >
+      3 days ago 09:31
+    </span>
+    <span
+      className="talixo-talixo-chat__message talixo-chat__message--chat__name"
+    >
+      Johny
+    </span>
+  </div>
+  <span
+    className="talixo-talixo-chat__message talixo-chat__message--chat__message"
+  >
+    Random message
+  </span>
+</div>
+`;
