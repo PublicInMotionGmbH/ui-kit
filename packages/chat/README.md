@@ -29,9 +29,10 @@ Property name         | Type          | Default              | Description
 additionalButton      | node          | n/a                  | Additional button.
 additionalInformation | node          | n/a                  | Information message.
 className             | string        | n/a                  | Additional class name.
-messages              | Messages[]    | `[]`                 | Additional class name.
+messages              | Messages[]    | `[]`                 | Array of messages.
 messageRenderer       | func          | `message => message` | Message renderer.
-user                  | string        | `'user'`             | User name.
+name                  | string        | `'user'`             | User name.
+id                    | string        | Required             | User id.
 usersTyping           | UsersTyping[] | `[]`                 | Typing users.
 type                  | Type          | `'chat'`             | Message type.
 
@@ -47,7 +48,8 @@ Type      | 'chat', 'comments'
 
 Property name | Type      | Required | Default       | Description
 --------------|-----------|----------|:-------------:|------------------------------------------------
-user          | string    | no       | n/a           | User name.
+name          | string    | no       | n/a           | User name.
+id            | string    | no       | n/a           | User id.
 message       | node      | no       | n/a           | Message content.
 time          | number    | no       | n/a           | Message time stamp.
 
@@ -55,7 +57,8 @@ time          | number    | no       | n/a           | Message time stamp.
 
 Property name | Type      | Required | Default       | Description
 --------------|-----------|----------|:-------------:|------------------------------------------------
-user          | string    | no       | n/a           | User name.
+name          | string    | no       | n/a           | User name.
+id            | string    | no       | n/a           | User id.
 status        | boolean   | no       | n/a           | Typing status.
 
 ## Changelog

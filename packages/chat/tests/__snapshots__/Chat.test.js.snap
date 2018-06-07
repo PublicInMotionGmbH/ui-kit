@@ -16,23 +16,25 @@ exports[`<Chat /> renders children correctly 1`] = `
       className="talixo-chat__message talixo-chat__message--chat"
       key="0"
       message="This is message"
+      name="John"
       style={
         Object {
           "marginLeft": false,
         }
       }
-      user="John"
+      time={1528104696738}
     />
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="1"
       message="This is reply"
+      name="Tom"
       style={
         Object {
           "marginLeft": false,
         }
       }
-      user="Tom"
+      time={1528104730633}
     />
   </div>
   <form

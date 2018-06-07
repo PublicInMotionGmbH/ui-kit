@@ -15,7 +15,7 @@ const addStory = createStoriesFactory('Chat', module, {
   propTables: [ Chat ]
 })
 
-const user = 'Daniel'
+const name = 'Daniel'
 
 const chatStyle = {
   height: '500px'
@@ -25,19 +25,30 @@ const messages = [
   {
     time: 1528104696738,
     message: 'This is message',
-    user: 'John'
+    name: 'John',
+    id: '1'
   },
   {
     time: 1528104730633,
     message: 'This is reply',
-    user: 'Tom'
+    name: 'Tom',
+    id: '2'
   }
 ]
 
 const thumbup = {
   time: moment().valueOf(),
   message: <Icon name='thumb_up' />,
-  user: user
+  name: name,
+  id: '3'
+}
+
+const addTypingUser = (user, setState, state) => {
+  const updatedUsers = user.status
+    ? state.usersTyping.concat(user)
+    : state.usersTyping.filter(typingUser => typingUser.id !== user.id)
+
+  setState({ usersTyping: updatedUsers })
 }
 
 // Stories
@@ -46,16 +57,12 @@ addStory.controlled('initial', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => {
-      const updatedUsers = user.status
-        ? state.usersTyping.concat(user)
-        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
-      setState({ usersTyping: updatedUsers })
-    }}
+    addTypingUser={(user) => addTypingUser(user, setState, state)}
     onSubmit={message => {
       setState({ messages: state.messages.concat(message) })
     }}
-    user={user}
+    name={name}
+    id='3'
     usersTyping={state.usersTyping}
   />
 ), () => ({
@@ -67,14 +74,10 @@ addStory.controlled('with additional information', readme, (setState, state) => 
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => {
-      const updatedUsers = user.status
-        ? state.usersTyping.concat(user)
-        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
-      setState({ usersTyping: updatedUsers })
-    }}
+    addTypingUser={(user) => addTypingUser(user, setState, state)}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    user={user}
+    name={name}
+    id='3'
     usersTyping={state.usersTyping}
     additionalInformation={<span>This is additional message</span>}
   />
@@ -87,14 +90,10 @@ addStory.controlled('with additional button', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => {
-      const updatedUsers = user.status
-        ? state.usersTyping.concat(user)
-        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
-      setState({ usersTyping: updatedUsers })
-    }}
+    addTypingUser={(user) => addTypingUser(user, setState, state)}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    user={user}
+    name={name}
+    id='3'
     usersTyping={state.usersTyping}
     additionalButton={<Icon
       style={{ cursor: 'pointer' }}
@@ -111,24 +110,22 @@ addStory.controlled('multiple users typing', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => {
-      const updatedUsers = user.status
-        ? state.usersTyping.concat(user)
-        : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
-      setState({ usersTyping: updatedUsers })
-    }}
+    addTypingUser={(user) => addTypingUser(user, setState, state)}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    user={user}
+    name={name}
+    id='3'
     usersTyping={state.usersTyping}
   />
 ), () => ({
   messages: messages,
   usersTyping: [{
-    user: 'John',
+    name: 'John',
+    id: 1,
     status: true
   },
   {
-    user: 'Kennedy',
+    name: 'Kennedy',
+    id: 4,
     status: true
   }]
 }))
@@ -150,23 +147,16 @@ addStory.controlled('change types', readme, (setState, state) => (
     <Chat
       style={chatStyle}
       messages={state.messages}
-      addTypingUser={(user) => {
-        const updatedUsers = user.status
-          ? state.usersTyping.concat(user)
-          : state.usersTyping.filter(typingUser => typingUser.user !== user.user)
-        setState({ usersTyping: updatedUsers })
-      }}
+      addTypingUser={(user) => addTypingUser(user, setState, state)}
       onSubmit={message => setState({ messages: state.messages.concat(message) })}
-      user={user}
-      usersTyping={state.usersTyping}
+      name={name}
+      id='3'
       type={state.type}
+      usersTyping={state.usersTyping}
     />
   </div>
 ), () => ({
   messages: messages,
-  usersTyping: [{
-    user: 'John',
-    status: true,
-    type: 'chat'
-  }]
+  type: 'chat',
+  usersTyping: []
 }))

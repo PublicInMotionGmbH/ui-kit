@@ -23,7 +23,10 @@ const propTypes = {
   messages: PropTypes.arrayOf(
     PropTypes.shape({
       /** User name. */
-      user: PropTypes.string,
+      name: PropTypes.string,
+
+      /** User id. */
+      id: PropTypes.string,
 
       /** Message content. */
       message: PropTypes.node,
@@ -37,13 +40,19 @@ const propTypes = {
   messageRenderer: PropTypes.func,
 
   /** User name. */
-  user: PropTypes.string,
+  name: PropTypes.string,
+
+  /** User id. */
+  id: PropTypes.string.isRequired,
 
   /** Typing users. */
   usersTyping: PropTypes.arrayOf(
     PropTypes.shape({
       /** User name. */
-      user: PropTypes.string,
+      name: PropTypes.string,
+
+      /** User id. */
+      id: PropTypes.string,
 
       /** Typing status. */
       status: PropTypes.boolean
@@ -59,7 +68,7 @@ const defaultProps = {
   messageRenderer: message => message,
   type: 'chat',
   usersTyping: [],
-  user: 'user'
+  name: 'user'
 }
 
 /**
@@ -70,13 +79,16 @@ const defaultProps = {
  * @property {*} [props.additionalInformation]
  * @property {string} [props.className]
  * @property {array} [props.messages]
- * @property {string} [props.messages.user]
+ * @property {string} [props.messages.name]
+ * @property {string} [props.messages.id]
  * @property {*} [props.messages.message]
  * @property {number} [props.messages.time]
  * @property {*} [props.messageRenderer]
- * @property {string} [props.user]
+ * @property {string} [props.name]
+ * @property {string} [props.id]
  * @property {array} [props.usersTyping]
- * @property {string} [props.usersTyping.user]
+ * @property {string} [props.usersTyping.name]
+ * @property {string} [props.usersTyping.id]
  * @property {boolean} [props.usersTyping.status]
  * @property {string} [props.type]
  *
@@ -97,10 +109,11 @@ class Chat extends React.PureComponent {
    * Scroll messages continer to bottom if messages are updated.
    */
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.typingStatus !== this.state.typingStatus) {
+    if (prevState.typingStatus !== this.state.typingStatus && this.props.addTypingUser) {
       this.props.addTypingUser({
         status: this.state.typingStatus,
-        user: this.props.user
+        name: this.props.name,
+        id: this.props.id
       })
     }
 
@@ -131,7 +144,7 @@ class Chat extends React.PureComponent {
    * @param {SyntheticEvent} event
    */
   handleSubmit = (event) => {
-    const { onSubmit, user } = this.props
+    const { onSubmit, name, id } = this.props
     const { inputValue } = this.state
 
     // Prevent the form from being submitted
@@ -144,8 +157,9 @@ class Chat extends React.PureComponent {
     // Build message
     const message = {
       message: inputValue,
-      user: user,
-      date: moment().valueOf()
+      name: name,
+      id: id,
+      time: moment().valueOf()
     }
 
     // Submit message if the inputValue is not empty
@@ -163,7 +177,7 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   renderMessages = () => {
-    const { messages, messageRenderer, type, user } = this.props
+    const { id, messages, messageRenderer, type } = this.props
 
     // Build class names
     const messagesClsName = buildClassName([moduleName, 'messages'])
@@ -177,9 +191,9 @@ class Chat extends React.PureComponent {
               className={messageClsName}
               key={i}
               message={messageRenderer(message.message)}
-              user={message.user}
+              name={message.name}
               time={message.time}
-              style={{ marginLeft: type === 'chat' && user === message.user && 'auto' }}
+              style={{ marginLeft: type === 'chat' && id === message.id && 'auto' }}
             />
           ))
         }
@@ -206,7 +220,7 @@ class Chat extends React.PureComponent {
               moreUsers = ' and '
             }
           }
-          return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.user}</span>
+          return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.name}</span>
         })}
         {usersTyping.length > 0 &&
          (<span>{usersTyping.length === 1 ? ' is' : ' are'} typing</span>)}
@@ -239,7 +253,7 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { additionalButton, className, additionalInformation, messages, user, usersTyping, addTypingUser, messageRenderer, type, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, id, messages, name, usersTyping, addTypingUser, messageRenderer, type, ...passedProps } = this.props
     const { inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)

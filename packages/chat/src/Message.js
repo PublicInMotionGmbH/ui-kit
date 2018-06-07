@@ -9,7 +9,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** User name. */
-  user: PropTypes.string,
+  name: PropTypes.string,
 
   /** Message content. */
   message: PropTypes.node,
@@ -21,7 +21,7 @@ const propTypes = {
 const defaultProps = {}
 
 function Message (props) {
-  const { className, message, user, time, ...passedProps } = props
+  const { className, message, name, time, ...passedProps } = props
 
   function renderTime () {
     const fromNow = moment(time).fromNow()
@@ -31,7 +31,7 @@ function Message (props) {
 
   const infoClsName = buildClassName([className, 'info'])
   const timeClsName = buildClassName([className, 'time'])
-  const userClsName = buildClassName([className, 'user'])
+  const nameClsName = buildClassName([className, 'name'])
   const messageClsName = buildClassName([className, 'message'])
 
   return (
@@ -40,7 +40,7 @@ function Message (props) {
         <span className={timeClsName}>
           {renderTime()}
         </span>
-        <span className={userClsName}>{user}</span>
+        <span className={nameClsName}>{name}</span>
       </div>
       <span className={messageClsName}>{message}</span>
     </div>
