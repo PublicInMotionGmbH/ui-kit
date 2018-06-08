@@ -28,22 +28,12 @@ to avoid having different versions of these in your application.
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper
-data          | dataType[]| n/a     | Data passed to component
+data          | DataType[]| n/a     | Data passed to component
 initialOpen   | bool      | `false` | Open tree on load
 selectEnabled | bool      | `false` | Enable to select each node
 smooth        | bool      | `true`  | Animation of collapse
 
-### TreeNode
-
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-children      | dataType[]| n/a     | Data passed to single node
-className     | string    | n/a     | Additional class name passed to wrapper
-initialOpen   | bool      | `false` | Open tree on load
-selectEnabled | bool      | `false` | Enable to select each node
-smooth        | bool      | `true`  | Animation of collapse
-
-### dataType
+## DataType
 
 Type name       | Type              |
 ----------------|----------------------------------

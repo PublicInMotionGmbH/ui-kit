@@ -9,7 +9,8 @@ const moduleName = 'tree'
 
 /**
  * Function to recursivly define propTypes
- * @param {func} f
+ * @param {function} f
+ * @returns {function}
  */
 function lazyFunction (f) {
   return function () {
@@ -35,12 +36,9 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Open tree when load */
-  initialOpen: PropTypes.bool,
+  initiallyOpen: PropTypes.bool,
 
-  /** Enable to select tree nodes */
-  selectEnabled: PropTypes.bool,
-
-  /** Function passed */
+  /** Function passed onClick, It allows to select node */
   onClick: PropTypes.func,
 
   /** Collapse tree with smooth effect */
@@ -48,8 +46,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  initialOpen: false,
-  selectEnabled: false,
+  initiallyOpen: false,
   smooth: true
 }
 
@@ -58,15 +55,14 @@ const defaultProps = {
  *
  * @property {object} props
  * @property {string} [props.className]
- * @property {boolean} [props.initialOpen]
- * @property {boolean} [props.selectEnabled]
+ * @property {boolean} [props.initiallyOpen]
  * @property {boolean} [props.smooth]
  * @class {React.Element}
  */
 class TreeNode extends React.Component {
   state = {
     selected: false,
-    collapsed: !this.props.initialOpen
+    collapsed: !this.props.initiallyOpen
   }
 
   /**
@@ -91,52 +87,66 @@ class TreeNode extends React.Component {
     })
   }
 
-  render () {
-    const { children, initialOpen, node, selectEnabled, smooth, onClick, ...restProps } = this.props
-    const { collapsed, selected } = this.state
-    const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
-    const nodeNameCls = buildClassName([moduleName, 'node-name'])
-    const childrenCls = buildClassName([moduleName, 'node-children'])
+  /**
+   * Function which render icon
+   * @returns {*}
+   */
+  renderIcon = () => {
     const iconCls = buildClassName([moduleName, 'node-icon'])
     const icon = this.state.collapsed ? 'chevron_right' : 'expand_more'
-    let iconContainer
-    let nodes
 
-    if (children) {
-      iconContainer = <span
+    return (
+      <span
         className={iconCls}
         onClick={this.toggle} >
-        {<Icon name={`${icon}`} />}
+        {<Icon name={icon} />}
       </span>
+    )
+  }
 
-      nodes = children.map((el, i) => {
+  /**
+   * Function which render children
+   * @returns {React.Element}
+   */
+  renderChildren = () => {
+    const { children, initiallyOpen, smooth, onClick } = this.props
+
+    return (
+      children.map((el, i) => {
         return (
           <TreeNode
             children={el.children}
-            initialOpen={initialOpen}
+            initiallyOpen={initiallyOpen}
             key={i}
             node={el}
-            selectEnabled={selectEnabled}
             smooth={smooth}
             onClick={onClick}
           />
         )
       })
-    }
+    )
+  }
+
+  render () {
+    const { children, node, smooth } = this.props
+    const { collapsed, selected } = this.state
+    const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
+    const nodeNameCls = buildClassName([moduleName, 'node-name'])
+    const childrenCls = buildClassName([moduleName, 'node-children'])
 
     return (
-      <span {...restProps}>
+      <span>
         <li className={nodeCls}>
-          {iconContainer}
+          {children && this.renderIcon()}
           <span className={nodeNameCls} onClick={this.handleClick}>
-            {node ? node.name : null}
+            { node.render && typeof node.render ? node.render(node.name) : node.name }
           </span>
         </li>
         <Collapse
           collapsed={collapsed}
           smooth={smooth}
           animationTime={100}>
-          <ul className={childrenCls}>{nodes}</ul>
+          <ul className={childrenCls}>{children && this.renderChildren()}</ul>
         </Collapse>
       </span>
     )

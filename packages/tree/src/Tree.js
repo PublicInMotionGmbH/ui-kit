@@ -9,7 +9,7 @@ const moduleName = 'tree'
 
 /**
  * Function to recursivly define propTypes
- * @param {func} f
+ * @param {function} f
  * @returns {function}
  */
 function lazyFunction (f) {
@@ -36,21 +36,17 @@ const propTypes = {
   data: dataType.isRequired,
 
   /** Open tree when load component */
-  initialOpen: PropTypes.bool,
+  initiallyOpen: PropTypes.bool,
 
-  /** Function passed */
+  /** Function passed onClick, It allows to select node */
   onClick: PropTypes.func,
-
-  /** Enable to select tree nodes */
-  selectEnabled: PropTypes.bool,
 
   /** Collapse tree with smooth effect */
   smooth: PropTypes.bool
 }
 
 const defaultProps = {
-  initialOpen: false,
-  selectEnabled: false,
+  initiallyOpen: false,
   smooth: true
 }
 /**
@@ -58,19 +54,17 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {array} [props.data]
- * @param {boolean} [props.initialOpen]
- * @param {boolean} [props.selectEnabled]
+ * @param {array} props.data
+ * @param {boolean} [props.initiallyOpen]
  * @param {boolean} [props.smooth]
  * @returns {React.Element}
  */
 function Tree (props) {
-  const { data, initialOpen, selectEnabled, smooth, ...restProps } = props
+  const { data, initiallyOpen, smooth, ...restProps } = props
   const clsName = buildClassName(moduleName)
   const children = data.map((el, i) =>
     <TreeNode
-      initialOpen={initialOpen}
-      selectEnabled={selectEnabled}
+      initiallyOpen={initiallyOpen}
       key={i}
       node={el}
       children={el.children}

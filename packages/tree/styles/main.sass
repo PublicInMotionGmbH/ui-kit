@@ -2,7 +2,6 @@
 
 @include module('tree')
   display: inline-block
-  cursor: pointer
   border-left: dp(0.125) solid $tree-border-color
   padding-left: dp(1)
   font-size: dp(3)
@@ -15,16 +14,18 @@
     padding: dp(0.9)
     margin-top: dp(0.2)
     margin-bottom: dp(0.2)
+    user-select: none
 
     &-name
-      display: inline-block;
-      margin-bottom: dp(0.3)
+      display: inline-block
+      margin-bottom: dp(0.375)
 
     &-children
       list-style-type: none
 
     &-icon 
       padding: 0
+      user-select: none
       span
         cursor: pointer
         font-size: dp(4)
