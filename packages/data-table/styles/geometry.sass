@@ -1,7 +1,6 @@
 @import './config'
 
 @include module('data-table')
-
   &__header, &__cell
     &--clickable
       cursor: pointer
@@ -33,33 +32,35 @@
         #{prefix('data-table', 'cell')}, #{prefix('table', 'actions')}
           background: $data-table-even-row-background-hover-color
 
-  &__collapse
+  & &__collapse
     transition: $data-table-transition
 
     #{prefix('data-table', 'collapse', 'cell')}
-      color: $data-table-collapse-text-color !important
-      background: $data-table-collapse-background-color !important
+      color: $data-table-collapse-text-color
+      background: $data-table-collapse-background-color
       transition: padding-top, padding-bottom $data-table-transition
 
       > *
         transition: max-height, opacity $data-table-transition
-        max-height: fit-content
+        max-height: none
+
     &:hover > #{prefix('data-table', 'collapse', 'cell')}
-      background: $data-table-collapse-background-color !important
+      background: $data-table-collapse-background-color
 
     &--even
       td#{prefix('data-table', 'collapse', 'cell')}
-        color: $data-table-even-collapse-text-color !important
-        background: $data-table-even-collapse-background-color !important
+        color: $data-table-even-collapse-text-color
+        background: $data-table-even-collapse-background-color
 
       &:hover > #{prefix('data-table', 'collapse', 'cell')}
-        background: $data-table-even-collapse-background-color !important
+        background: $data-table-even-collapse-background-color
 
     &--collapsed
       #{prefix('data-table', 'collapse', 'cell')}
         padding: 0
+        overflow: hidden
+
         > *
           transition: max-height $data-table-transition
           max-height: 0
           opacity: 0
-
