@@ -54,9 +54,6 @@ exports[`<Chat /> renders children correctly 1`] = `
     onSubmit={[Function]}
   >
     <span
-      className="talixo-chat__user-typing-container"
-    />
-    <span
       className="talixo-chat__input-container"
     >
       <span

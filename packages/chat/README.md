@@ -34,6 +34,7 @@ messageRenderer       | func          | `message => message` | Message renderer.
 name                  | string        | `'user'`             | User name.
 id                    | string        | Required             | User id.
 usersTyping           | UsersTyping[] | `[]`                 | Typing users.
+placeholder           | string        | `'reply'`            | Reply input placeholder.
 type                  | Type          | `'chat'`             | Message type.
 
 #### Types

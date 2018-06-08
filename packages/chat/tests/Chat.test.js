@@ -1,8 +1,12 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+
+import { prefix } from '@talixo/shared'
 
 import Chat from '../src/Chat'
 import Message from '../src/Message'
+
+const name = prefix('chat')
 
 jest.mock('moment', () => {
   const moment = require.requireActual('moment')
@@ -46,6 +50,100 @@ describe('<Chat />', () => {
 
     expect(wrapper).toMatchSnapshot()
   })
+
+  it('renders classNames correctly', () => {
+    const wrapper = shallow(<Chat id='1' messages={messages} />)
+
+    expect(wrapper.find(`.${name}`).length).toBe(1)
+    expect(wrapper.find(`.${name}__messages`).length).toBe(1)
+    expect(wrapper.find(`.${name}__message--chat`).length).toBe(3)
+    expect(wrapper.find(`.${name}__input-container`).length).toBe(1)
+    expect(wrapper.find(`.${name}__input-container-inner`).length).toBe(1)
+  })
+
+  it('renders user-typing className correctly', () => {
+    const wrapper = shallow(<Chat id='1' messages={messages} />)
+    wrapper.setProps({usersTyping:
+      [{name: 'John', id: '1', status: true}]
+    })
+
+    expect(wrapper.find(`.${name}__user-typing-container`).length).toBe(1)
+  })
+
+  it('renders renderMessages type chat correctly', () => {
+    const wrapper = shallow(<Chat id='1' messages={messages} />)
+
+    expect(wrapper.find(Message).at(0).props().className).toMatch(`${name}__message--chat`)
+  })
+
+  it('renders renderMessages type comments correctly', () => {
+    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
+
+    expect(wrapper.find(Message).at(0).props().className).toMatch(`${name}__message--comments`)
+  })
+
+  it('renders placeholder correctly', () => {
+    const placeholder = 'custom placeholder'
+    const wrapper = shallow(<Chat id='1' placeholder={placeholder} />)
+    const input = wrapper.find('TextInput')
+
+    expect(input.props().placeholder).toEqual(placeholder)
+  })
+
+  it('sets margin-left correctly', () => {
+    const wrapper = shallow(<Chat id='1' messages={messages} />)
+
+    expect(wrapper.find(Message).get(0).props.style.marginLeft).toBe(false)
+    expect(wrapper.find(Message).get(1).props.style.marginLeft).toBe(false)
+    expect(wrapper.find(Message).get(2).props.style.marginLeft).toBe('auto')
+  })
+
+  it('renders one typing user correctly', () => {
+    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
+    wrapper.setProps({usersTyping:
+      [{name: 'John', id: '1', status: true}]
+    })
+
+    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
+  })
+
+  it('renders two typing users correctly', () => {
+    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
+    wrapper.setProps({usersTyping:
+      [{name: 'John', id: '1', status: true},
+        {name: 'Kenny', id: '2', status: true}]
+    })
+
+    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
+  })
+
+  it('renders more then two typing users correctly', () => {
+    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
+    wrapper.setProps({usersTyping:
+      [{name: 'John', id: '1', status: true},
+        {name: 'Kenny', id: '2', status: true},
+        {name: 'Benny', id: '3', status: true}]
+    })
+
+    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
+  })
+
+  it('sets messages ref correctly', () => {
+    const wrapper = mount(<Chat id='1' messages={messages} />)
+    const messagesWrapper = wrapper.find(`.${name}__messages`)
+    const refMessagesWrapper = wrapper.instance()._messages
+
+    expect(messagesWrapper.contains(refMessagesWrapper)).toEqual(true)
+    wrapper.unmount()
+  })
+
+  it('sets messages ref correctly', () => {
+    const wrapper = mount(<Chat id='1' placeholder='hello' messages={messages} />)
+    const refInput = wrapper.instance()._input
+
+    expect(refInput.placeholder).toEqual('hello')
+    wrapper.unmount()
+  })
 })
 
 describe('componentDidUpdate', () => {
@@ -67,6 +165,17 @@ describe('componentDidUpdate', () => {
     wrapper.setProps({ messages: messages.concat(messages[0]) })
 
     expect(scrollToBottom).toHaveBeenCalledTimes(1)
+  })
+
+  it('scrollToBottom fires scrollTo', () => {
+    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const element = {
+      scrollTo: jest.fn()
+    }
+
+    wrapper.instance().scrollToBottom(element)
+
+    expect(element.scrollTo).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -168,66 +277,5 @@ describe('handleSubmit', () => {
     form.simulate('submit', event)
 
     expect(wrapper.state().inputValue).toEqual('')
-  })
-
-  it('renders classNames correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
-
-    expect(wrapper.find('.talixo-chat').length).toBe(1)
-    expect(wrapper.find('.talixo-chat__messages').length).toBe(1)
-    expect(wrapper.find('.talixo-chat__message.talixo-chat__message--chat').length).toBe(3)
-    expect(wrapper.find('.talixo-chat__user-typing-container').length).toBe(1)
-    expect(wrapper.find('.talixo-chat__input-container').length).toBe(1)
-    expect(wrapper.find('.talixo-chat__input-container-inner').length).toBe(1)
-  })
-
-  it('renders renderMessages type chat correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
-
-    expect(wrapper.find(Message).at(0).props().className).toMatch(/.talixo-chat__message--chat/)
-  })
-
-  it('renders renderMessages type comments correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-
-    expect(wrapper.find(Message).at(0).props().className).toMatch(/.talixo-chat__message--comments/)
-  })
-
-  it('sets margin-left correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
-
-    expect(wrapper.find(Message).get(0).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(1).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(2).props.style.marginLeft).toBe('auto')
-  })
-
-  it('renders one typing user correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
-  })
-
-  it('renders two typing users correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true},
-        {name: 'Kenny', id: '2', status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
-  })
-
-  it('renders more then two typing users correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true},
-        {name: 'Kenny', id: '2', status: true},
-        {name: 'Benny', id: '3', status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
   })
 })

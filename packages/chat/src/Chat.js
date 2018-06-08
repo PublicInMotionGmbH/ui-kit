@@ -59,6 +59,9 @@ const propTypes = {
     })
   ),
 
+  /** Reply input placeholder. */
+  placeholder: PropTypes.string,
+
   /** Message type. */
   type: PropTypes.oneOf(['chat', 'comments'])
 }
@@ -68,6 +71,7 @@ const defaultProps = {
   messageRenderer: message => message,
   type: 'chat',
   usersTyping: [],
+  placeholder: 'reply',
   name: 'user'
 }
 
@@ -90,6 +94,7 @@ const defaultProps = {
  * @property {string} [props.usersTyping.name]
  * @property {string} [props.usersTyping.id]
  * @property {boolean} [props.usersTyping.status]
+ * @property {string} [props.placeholder]
  * @property {string} [props.type]
  *
  * @property {object} state
@@ -180,25 +185,18 @@ class Chat extends React.PureComponent {
     const { id, messages, messageRenderer, type } = this.props
 
     // Build class names
-    const messagesClsName = buildClassName([moduleName, 'messages'])
     const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
 
-    return (
-      <div className={messagesClsName} ref={(node) => this.setRef(node, '_messages')}>
-        {
-          messages.map((message, i) => (
-            <Message
-              className={messageClsName}
-              key={i}
-              message={messageRenderer(message.message)}
-              name={message.name}
-              time={message.time}
-              style={{ marginLeft: type === 'chat' && id === message.id && 'auto' }}
-            />
-          ))
-        }
-      </div>
-    )
+    return messages.map((message, i) => (
+      <Message
+        className={messageClsName}
+        key={i}
+        message={messageRenderer(message.message)}
+        name={message.name}
+        time={message.time}
+        style={{ marginLeft: type === 'chat' && id === message.id && 'auto' }}
+      />
+    ))
   }
 
   /**
@@ -222,8 +220,7 @@ class Chat extends React.PureComponent {
           }
           return <span key={i}>{moreUsers && <span>{moreUsers}</span>}{user.name}</span>
         })}
-        {usersTyping.length > 0 &&
-         (<span>{usersTyping.length === 1 ? ' is' : ' are'} typing</span>)}
+        <span>{usersTyping.length === 1 ? ' is' : ' are'} typing</span>
       </span>
     )
   }
@@ -253,10 +250,11 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { additionalButton, className, additionalInformation, id, messages, name, usersTyping, addTypingUser, messageRenderer, type, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, id, messages, name, usersTyping, addTypingUser, messageRenderer, placeholder, type, ...passedProps } = this.props
     const { inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)
+    const messagesClsName = buildClassName([moduleName, 'messages'])
     const formClsName = buildClassName([moduleName, 'form'])
     const additionalInfoCls = buildClassName([moduleName, 'additional-info'])
     const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
@@ -265,9 +263,11 @@ class Chat extends React.PureComponent {
 
     return (
       <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
-        {this.renderMessages()}
+        <div className={messagesClsName} ref={(node) => this.setRef(node, '_messages')}>
+          {messages.length > 0 && this.renderMessages()}
+        </div>
         <form className={formClsName} onSubmit={this.handleSubmit}>
-          {usersTyping && this.renderTypingUsers()}
+          {usersTyping.length > 0 && this.renderTypingUsers()}
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
             <span className={inputContainerInnerCls}>
@@ -275,7 +275,7 @@ class Chat extends React.PureComponent {
               <TextInput
                 inputRef={(node) => this.setRef(node, '_input')}
                 onChange={this.handleInputChange}
-                placeholder='reply'
+                placeholder={placeholder}
                 value={inputValue}
               />
             </span>
