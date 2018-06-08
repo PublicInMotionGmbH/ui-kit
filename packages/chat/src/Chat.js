@@ -42,6 +42,9 @@ const propTypes = {
   /** User name. */
   name: PropTypes.string,
 
+  /** Handler for onSubmit event. */
+  onSubmit: PropTypes.func,
+
   /** User id. */
   id: PropTypes.string.isRequired,
 
@@ -89,6 +92,7 @@ const defaultProps = {
  * @property {number} [props.messages.time]
  * @property {*} [props.messageRenderer]
  * @property {string} [props.name]
+ * @property {*} [props.onSubmit]
  * @property {string} [props.id]
  * @property {array} [props.usersTyping]
  * @property {string} [props.usersTyping.name]
@@ -250,7 +254,7 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { additionalButton, className, additionalInformation, id, messages, name, usersTyping, addTypingUser, messageRenderer, placeholder, type, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, id, messages, name, onSubmit, usersTyping, addTypingUser, messageRenderer, placeholder, type, ...passedProps } = this.props
     const { inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)

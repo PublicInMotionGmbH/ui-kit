@@ -32,6 +32,7 @@ className             | string        | n/a                  | Additional class 
 messages              | Messages[]    | `[]`                 | Array of messages.
 messageRenderer       | func          | `message => message` | Message renderer.
 name                  | string        | `'user'`             | User name.
+onSubmit              | func          | n/a                  | Handler for onSubmit event.
 id                    | string        | Required             | User id.
 usersTyping           | UsersTyping[] | `[]`                 | Typing users.
 placeholder           | string        | `'reply'`            | Reply input placeholder.
