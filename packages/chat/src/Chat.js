@@ -16,6 +16,9 @@ const propTypes = {
   /** Information message. */
   additionalInformation: PropTypes.node,
 
+  /** Called when the user is typing. */
+  addTypingUser: PropTypes.func,
+
   /** Additional class name. */
   className: PropTypes.string,
 
@@ -84,6 +87,7 @@ const defaultProps = {
  * @property {object} props
  * @property {*} [props.additionalButton]
  * @property {*} [props.additionalInformation]
+ * @property {*} [props.addTypingUser]
  * @property {string} [props.className]
  * @property {array} [props.messages]
  * @property {string} [props.messages.name]

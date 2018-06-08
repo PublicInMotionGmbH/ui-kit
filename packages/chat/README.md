@@ -27,6 +27,7 @@ It allows any props which are allowed for `div`. Additionally, it handles some d
 Property name         | Type          | Default              | Description
 ----------------------|---------------|:--------------------:|--------------------------------
 additionalButton      | node          | n/a                  | Additional button.
+addTypingUser         | func          | n/a                  | Called when the user is typing.
 additionalInformation | node          | n/a                  | Information message.
 className             | string        | n/a                  | Additional class name.
 messages              | Messages[]    | `[]`                 | Array of messages.
