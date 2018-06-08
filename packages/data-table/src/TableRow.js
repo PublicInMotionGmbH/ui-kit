@@ -40,6 +40,9 @@ const propTypes = {
   /** Array should contain IDs of expanded rows. Its elements should be `id` properties of data items (if provided) or indexes of elements in data array. */
   expandedRows: PropTypes.array,
 
+  /** Map object which holds ids of data items. */
+  idStorage: PropTypes.object.isRequired,
+
   /** Row onClick callback function. */
   onClick: PropTypes.func,
 
@@ -68,9 +71,13 @@ const defaultProps = {
  * @property {function} [props.columns.render]
  * @property {function} [props.expandRender]
  * @property {array} [props.expandedRows]
+ * @property {object} [props.idStorage]
  * @property {function} [props.onClick]
  * @property {object[]} props.rowData
  * @property {boolean} [props.verticalActionCell]
+ *
+ * @property {object} state
+ * @property {array} state.expandedRows
  *
  * @class
  */
@@ -79,22 +86,41 @@ class TableRow extends React.Component {
     expanded: this.props.expandedRows || []
   }
 
+  /**
+   * Handles changes of expaded rows from props.
+   *
+   * @param {object} nextProps
+   * @param {array} nextProps.expandedRows
+   * @param {object[]} nextProps.rowData
+   */
   componentWillReceiveProps (nextProps) {
-    const { expandedRows } = nextProps
+    const { expandedRows, rowData: newRowData } = nextProps
+    const { rowData } = this.props
     const { expanded } = this.state
 
     if (expandedRows != null && expandedRows !== expanded) {
       this.setState({ expanded: expandedRows })
     }
+
+    if (expandedRows == null && rowData !== newRowData) {
+      this.setState({ expanded: [] })
+    }
   }
 
-  onClick = (rowId, e) => {
-    const { onClick, expandedRows } = this.props
+  /**
+   * Handles row click event and collapsing rows
+   *
+   * @param {object} row
+   * @param {Event|SyntheticEvent} e
+   */
+  onClick = (row, e) => {
+    const { onClick, expandedRows, idStorage } = this.props
     const { expanded } = this.state
+    const rowId = idStorage.get(row)
     const inArray = expanded.indexOf(rowId) > -1
 
     if (onClick) {
-      onClick(rowId, e)
+      onClick(row, e)
     }
 
     if (expandedRows != null) { return }
@@ -154,27 +180,35 @@ class TableRow extends React.Component {
    * @returns {React.Element}
    */
   generateCollapse = (row, colspan, index) => {
-    const { expandRender } = this.props
+    const { expandRender, idStorage } = this.props
     const { expanded } = this.state
+    const rowId = idStorage.get(row)
     // Check if current row is marked as expanded inside state
-    const visible = expanded.indexOf(row.id) > -1
+    const visible = expanded.indexOf(rowId) > -1
     const collapseCls = buildClassName([moduleName, 'collapse'], null, {
       collapsed: !visible,
+      // This is called even to match rendered row order
       even: index % 2 !== 0
     })
     const collapseCellCls = buildClassName([moduleName, 'collapse', 'cell'])
+    const collapse = expandRender(row)
 
     return (
-      <Row className={collapseCls}>
-        <Cell className={collapseCellCls} colSpan={colspan}>
-          { expandRender(row) }
-        </Cell>
-      </Row>
+      <React.Fragment>
+        {
+          collapse &&
+          <Row className={collapseCls}>
+            <Cell className={collapseCellCls} colSpan={colspan}>
+              { collapse }
+            </Cell>
+          </Row>
+        }
+      </React.Fragment>
     )
   }
 
   render () {
-    const { actions, columns, expandRender, expandedRows, onClick: click, rowData, verticalActionCell, ...restProps } = this.props
+    const { actions, columns, expandRender, expandedRows, onClick: click, idStorage, rowData, verticalActionCell, ...restProps } = this.props
     const { generateActions, generateCollapse, onClick } = this
     const cellCls = buildClassName([moduleName, 'cell'], null, { clickable: !!expandRender || !!click })
     // Indicates width of collapsible row
@@ -186,11 +220,11 @@ class TableRow extends React.Component {
       <React.Fragment>
         {
           rowData.map((row, i) => (
-            <React.Fragment key={row.id}>
+            <React.Fragment key={idStorage.get(row)}>
               <Row className={buildClassName([moduleName, 'row'], null, { even: i % 2 !== 0 })} {...restProps}>
                 {
                   cols.map(({ id, render }) => (
-                    <Cell className={cellCls} onClick={onClick.bind(this, row.id)} key={id}>
+                    <Cell className={cellCls} onClick={onClick.bind(this, row)} key={id}>
                       { render && typeof render === 'function' ? render(row[id]) : row[id] }
                     </Cell>)
                   )

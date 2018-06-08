@@ -26,18 +26,21 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `Table` omponent from `@talixo/table`. Additionally, it handles some differently:
 
-Property name       | Type      | Required  | Default | Description                    
---------------------|-----------|-----------|:-------:|--------------------------------
-actions             | Actions[] | no        | n/a     | Actions which can be applied to rows.
-className           | string    | no        | n/a     | Additional class name passed to wrapper.
-columns             | Column[]  | yes       | n/a     | Information about columns which will be displayed in table.
-data                | object[]  | yes       | n/a     | Data to be populated inside table. Require the same keys as inc olumns objects.
-expandRender        | function  | no        | n/a     | Render function of items which will be displayed in table collapsible rows.
-expandedRows        | array     | no        | n/a     | Array should contain IDs of expanded rows. Its elements should be `id` properties of data items (if provided) or indexes of elements in data array.
-onClick             | function  | no        | n/a     | Row onClick callback function.
-onSort              | function  | no        | n/a     | onSort function callback.
-sortable            | boolean   | no        |`false`  | Indicates if table is sortable.
-verticalActionCell  | string    | no        | n/a     | Indicates if actions should be displayed vertically or horizontally.
+Property name       | Type      | Required  | Default           | Description                    
+--------------------|-----------|-----------|:-----------------:|--------------------------------
+actions             | Actions[] | no        | n/a               | Actions which can be applied to rows.
+buildId             | function  | no        | `(row, idx) => row.id` | Function which will be used to add ID to object items if these are not already inside them.
+className           | string    | no        | n/a               | Additional class name passed to wrapper.
+columns             | Column[]  | yes       | n/a               | Information about columns which will be displayed in table.
+data                | object[]  | yes       | n/a               | Data to be populated inside table. Require the same keys as inc olumns objects.
+expandRender        | function  | no        | n/a               | Render function of items which will be displayed in table collapsible rows.
+expandedRows        | array     | no        | n/a               | Array should contain IDs of expanded rows. Its elements should be `id` properties of data items (if provided) or indexes of elements in data array.
+onClick             | function  | no        | n/a               | Row onClick callback function.
+onSort              | function  | no        | n/a               | onSort function callback.
+sortable            | boolean   | no        | `false`           | Indicates if table is sortable.
+sortColumn          | string    | no        | self-constrolled  | ID of the column according to which data is sorted.
+reversedOrder       | boolean   | no        | self-constrolled  | Indicates if table is sortable.
+verticalActionCell  | string    | no        | n/a               | Indicates if actions should be displayed vertically or horizontally.
 
 ## Property shapes
 

@@ -10,6 +10,26 @@ import TableRow from './TableRow'
 
 import { moduleName } from './config'
 
+/**
+ * Checks if data has ID property. If not it generates it according to data item index.
+ *
+ * @param {object[]} collection
+ *
+ * @returns {object[]}
+ */
+export function generateId (element, index) {
+  return 'id' in element ? element.id : index
+}
+
+export function registerElements (rows, buildId) {
+  const newStorage = new Map()
+
+  for (let i = 0; i < rows.length; i++) {
+    newStorage.set(rows[i], buildId(rows[i], i))
+  }
+  return newStorage
+}
+
 const propTypes = {
   /** Actions which can be applied to rows. */
   actions: PropTypes.arrayOf(PropTypes.shape({
@@ -27,6 +47,9 @@ const propTypes = {
     /** onClick callback function. */
     onClick: PropTypes.func
   })),
+
+  /** Function which will be used to add ID to object items if these are not already inside data items. */
+  buildId: PropTypes.func,
 
   /** Additional class name. */
   className: PropTypes.string,
@@ -65,24 +88,19 @@ const propTypes = {
   /** Indicates if table is sortable. */
   sortable: PropTypes.bool,
 
+  /** ID of the column according to which data is sorted. */
+  sortColumn: PropTypes.string,
+
+  /** Handles arrows which indicates sorting order. */
+  reversedOrder: PropTypes.bool,
+
   /** Indicates if actions should be displayed vertically or horizontally. */
   verticalActionCell: PropTypes.bool
 }
 
 const defaultProps = {
+  buildId: generateId,
   sortable: false
-}
-
-export function checkForId (collection) {
-  const keys = Object.keys(collection[0])
-  const hasId = keys.indexOf('id') > -1
-  if (hasId) {
-    return collection
-  }
-  return collection.map((item, index) => ({
-    id: index,
-    ...item
-  }))
 }
 
 /**
@@ -106,6 +124,8 @@ export function checkForId (collection) {
  * @property {function} [props.onClick]
  * @property {function} [props.onSort]
  * @property {boolean} [props.sortable]
+ * @property {boolean} [props.sortColumn]
+ * @property {boolean} [props.reversedOrder]
  * @property {boolean} [props.verticalActionCell]
  *
  * @property {object} state
@@ -117,9 +137,32 @@ export function checkForId (collection) {
  */
 class DataTable extends React.Component {
   state = {
-    sortedData: checkForId(this.props.data),
-    sortColumn: '',
-    reversedOrder: false
+    sortedData: this.props.data,
+    sortColumn: this.props.sortColumn || '',
+    idStorage: registerElements(this.props.data, this.props.buildId),
+    reversedOrder: this.props.reversedOrder || false
+  }
+
+  /**
+   * Checks if data, sort column or sorting order has changed.
+   *
+   * @param nextProps
+   */
+  componentWillReceiveProps (nextProps) {
+    const { data: newData, sortColumn: newSortCol, reversedOrder: newOrder } = nextProps
+    const { data, buildId } = this.props
+    const { sortColumn, reversedOrder } = this.state
+
+    if (data !== newData) {
+      registerElements(newData, buildId)
+      this.setState({ sortedData: newData })
+    }
+    if (sortColumn !== newSortCol) {
+      this.setState({ sortColumn: newSortCol })
+    }
+    if (reversedOrder !== newOrder) {
+      this.setState({ reversedOrder: newOrder })
+    }
   }
 
   /**
@@ -130,6 +173,10 @@ class DataTable extends React.Component {
   sort = (columnID) => {
     const { onSort } = this.props
     const { sortColumn, sortedData, reversedOrder } = this.state
+
+    if (onSort) {
+      onSort(columnID)
+    }
 
     // Check if column has already been used to sort.
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
@@ -143,10 +190,6 @@ class DataTable extends React.Component {
       sortColumn: columnID,
       reversedOrder: _reversedOrder
     })
-
-    if (onSort) {
-      onSort(columnID)
-    }
   }
 
   /**
@@ -175,10 +218,10 @@ class DataTable extends React.Component {
 
   render (props) {
     const {
-      actions, columns, className, expandRender, expandedRows, data,
+      actions, buildId, columns, className, expandRender, expandedRows, data,
       onClick, onSort, sortable, verticalActionCell, ...passedProps
     } = this.props
-    const { sortedData } = this.state
+    const { sortedData, idStorage } = this.state
     const { buildHeaders } = this
 
     const wrapperCls = buildClassName(moduleName, className)
@@ -192,6 +235,7 @@ class DataTable extends React.Component {
             columns={columns}
             expandRender={expandRender}
             expandedRows={expandedRows}
+            idStorage={idStorage}
             rowData={sortedData}
             onClick={onClick}
             verticalActionCell={verticalActionCell}

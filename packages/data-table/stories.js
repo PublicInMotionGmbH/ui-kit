@@ -18,30 +18,23 @@ const addStory = createStoriesFactory('DataTable', module, {
 // Mock data
 const tableData = [
   {
-    // id: 0,
-    opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: 'Donald Truck', pickup: 'Krakow' },
+    id: 0, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: 'Donald Truck', pickup: 'Krakow' },
   {
-    // id: 1,
-    opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: 'John Smith', pickup: 'Berlin' },
+    id: 1, opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: 'John Smith', pickup: 'Berlin' },
   {
-    // id: 2,
-    opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Matthew McMouse', pickup: 'Warszawa' },
+    id: 2, opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Matthew McMouse', pickup: 'Warszawa' },
   {
-    // id: 3,
-    opened: '19th Jan 2018', date_of_ride: '21th Feb 2018', assignee: 'Andrew Planet', pickup: 'Frankfurt' },
+    id: 3, opened: '19th Jan 2018', date_of_ride: '21th Feb 2018', assignee: 'Andrew Planet', pickup: 'Frankfurt' },
   {
-    // id: 4,
-    opened: '20th Jan 2018', date_of_ride: '22th Feb 2018', assignee: 'Drew Drew', pickup: 'Dortmund' },
+    id: 4, opened: '20th Jan 2018', date_of_ride: '22th Feb 2018', assignee: 'Drew Drew', pickup: 'Dortmund' },
   {
-    // id: 5,
-    opened: '21th Jan 2018', date_of_ride: '23th Feb 2018', assignee: 'John Bull', pickup: 'Paris' },
+    id: 5, opened: '21th Jan 2018', date_of_ride: '23th Feb 2018', assignee: 'John Bull', pickup: 'Paris' },
   {
-    // id: 6,
-    opened: '22th Jan 2018', date_of_ride: '24th Feb 2018', assignee: 'Josh Josh', pickup: 'Barcelona' },
+    id: 6, opened: '22th Jan 2018', date_of_ride: '24th Feb 2018', assignee: 'Josh Josh', pickup: 'Barcelona' },
   {
-    // id: 7,
-    opened: '23th Jan 2018', date_of_ride: '25th Feb 2018', assignee: 'John Smith', pickup: 'London' }
+    id: 7, opened: '23th Jan 2018', date_of_ride: '25th Feb 2018', assignee: 'John Smith', pickup: 'London' }
 ]
+
 const tableDataNoAssignee = [
   { id: 0, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: 'Donald Truck', pickup: 'Krakow' },
   { id: 1, opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: '', pickup: 'Berlin' },
