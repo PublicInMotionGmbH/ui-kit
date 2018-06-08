@@ -49,8 +49,4 @@ Segment.propTypes = {
   children: PropTypes.node
 }
 
-Segment.defaultProps = {
-  size: 12
-}
-
 export default Segment
