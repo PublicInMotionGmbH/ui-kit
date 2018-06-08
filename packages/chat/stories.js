@@ -22,7 +22,7 @@ const chatStyle = {
 }
 
 const messages = [
-  {
+/*   {
     time: 1528104696738,
     message: 'This is message',
     name: 'John',
@@ -33,7 +33,7 @@ const messages = [
     message: 'This is reply',
     name: 'Tom',
     id: '2'
-  }
+  } */
 ]
 
 const thumbup = {

@@ -265,7 +265,7 @@ class Chat extends React.PureComponent {
 
     return (
       <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
-        {messages.length > 0 && this.renderMessages()}
+        {this.renderMessages()}
         <form className={formClsName} onSubmit={this.handleSubmit}>
           {usersTyping && this.renderTypingUsers()}
           <span className={inputContainerCls}>
