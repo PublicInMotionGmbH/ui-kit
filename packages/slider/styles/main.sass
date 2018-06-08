@@ -1,2 +1,55 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('slider')
+  display: inline-block
+  width: 100% 
+ 
+  &__label
+    font-size: dp(2.5)
+
+  &__value
+    display: block
+    text-align: center
+    font-size: dp(2.25)
+
+  &__input 
+    -webkit-appearance: none
+    width: 100%
+    outline: none
+
+    &::-webkit-slider-runnable-track 
+      @include range-track-styles
+
+    &::-webkit-slider-thumb 
+      -webkit-appearance: none
+      @include thumb-styles
+
+    &:focus 
+      outline: none
+
+    &:focus::-webkit-slider-runnable-track 
+      background: $slider-track-background-color
+
+    &::-moz-range-track 
+      @include range-track-styles
+
+    &::-moz-range-thumb 
+      @include thumb-styles
+
+    &:-moz-focusring
+      outline: dp(0.125) solid white
+      outline-offset: dp(0.125)
+
+    &::-ms-track
+      @include range-track-styles('ms')
+
+    &::-ms-fill-lower 
+      background: $slider-track-background-color
+      border-radius: dp(1.25)
+
+    &::-ms-fill-upper 
+      background: $slider-track-background-color-upper
+      border-radius: dp(1.25)
+
+    &::-ms-thumb 
+      @include thumb-styles('ms')
