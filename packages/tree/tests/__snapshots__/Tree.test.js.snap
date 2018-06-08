@@ -5,7 +5,7 @@ exports[`<Tree /> renders children correctly 1`] = `
   className="talixo-tree"
 >
   <TreeNode
-    initialOpen={false}
+    initiallyOpen={false}
     key="0"
     node={
       Object {
@@ -29,11 +29,10 @@ exports[`<Tree /> renders children correctly 1`] = `
         "name": "animal",
       }
     }
-    selectEnabled={false}
     smooth={true}
   />
   <TreeNode
-    initialOpen={false}
+    initiallyOpen={false}
     key="1"
     node={
       Object {
@@ -41,7 +40,6 @@ exports[`<Tree /> renders children correctly 1`] = `
         "name": "people",
       }
     }
-    selectEnabled={false}
     smooth={true}
   />
 </ul>

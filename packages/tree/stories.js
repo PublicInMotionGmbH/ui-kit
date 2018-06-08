@@ -54,7 +54,7 @@ addStory('more nested', readme, () => (
 ))
 
 addStory('initially open', readme, () => (
-  <Tree initialOpen data={data} />
+  <Tree initiallyOpen data={data} />
 ))
 
 addStory('select enabled', readme, () => (

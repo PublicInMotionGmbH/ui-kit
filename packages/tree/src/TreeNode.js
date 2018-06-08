@@ -139,7 +139,7 @@ class TreeNode extends React.Component {
         <li className={nodeCls}>
           {children && this.renderIcon()}
           <span className={nodeNameCls} onClick={this.handleClick}>
-            { node.render && typeof node.render ? node.render(node.name) : node.name }
+            {node && (node.render && typeof node.render ? node.render(node.name) : node.name) }
           </span>
         </li>
         <Collapse

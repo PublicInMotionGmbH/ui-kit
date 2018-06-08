@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
+import { Icon } from '@talixo/icon'
 
 import TreeNode from '../src/TreeNode'
 
@@ -20,7 +21,7 @@ describe('<TreeNode />', () => {
 
   it('select node when click', () => {
     const wrapper = mount(<TreeNode
-      selectEnabled
+      onClick={() => {}}
       children={[{
         id: 1,
         name: 'animal'}]}
@@ -69,13 +70,27 @@ describe('<TreeNode />', () => {
 
   it('open children when initialOpen is true', () => {
     const wrapper = mount(<TreeNode
-      initialOpen
+      initiallyOpen
       children={[{
         id: 1,
         name: 'animal'}]}
     />)
 
     expect(wrapper.state('collapsed')).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('shows custom nodes', () => {
+    const wrapper = mount(<TreeNode
+      initiallyOpen
+      children={[{
+        id: 1,
+        name: 'animal',
+        render: node => <span><Icon name='pets' /> {node}</span>}]}
+    />)
+
+    expect(wrapper.find('Icon').at(1).props().name).toBe('pets')
 
     wrapper.unmount()
   })
