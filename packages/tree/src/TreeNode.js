@@ -40,6 +40,9 @@ const propTypes = {
   /** Enable to select tree nodes */
   selectEnabled: PropTypes.bool,
 
+  /** Function passed */
+  onClick: PropTypes.func,
+
   /** Collapse tree with smooth effect */
   smooth: PropTypes.bool
 }
@@ -68,13 +71,15 @@ class TreeNode extends React.Component {
 
   /**
    * Function which handle click on node, change select
-   * @param {*} props
    */
-  handleClick = (props) => {
-    if (!this.props.selectEnabled) return
+  handleClick = (e) => {
+    if (!this.props.onClick) return
+
     this.setState({
       selected: !this.state.selected
     })
+
+    this.props.onClick(this.props.node, e)
   }
 
   /**
@@ -87,7 +92,7 @@ class TreeNode extends React.Component {
   }
 
   render () {
-    const { children, initialOpen, node, selectEnabled, smooth } = this.props
+    const { children, initialOpen, node, selectEnabled, smooth, onClick, ...restProps } = this.props
     const { collapsed, selected } = this.state
     const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
     const nodeNameCls = buildClassName([moduleName, 'node-name'])
@@ -113,13 +118,14 @@ class TreeNode extends React.Component {
             node={el}
             selectEnabled={selectEnabled}
             smooth={smooth}
+            onClick={onClick}
           />
         )
       })
     }
 
     return (
-      <span>
+      <span {...restProps}>
         <li className={nodeCls}>
           {iconContainer}
           <span className={nodeNameCls} onClick={this.handleClick}>

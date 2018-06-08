@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
 
 import Tree from './src/Tree'
 
@@ -10,6 +11,8 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Tree', module, {
   propTables: [ Tree ]
 })
+
+const click = action('click')
 
 // Stories
 
@@ -64,6 +67,18 @@ addStory('select enabled', readme, () => (
 
 addStory('not smooth animation', readme, () => (
   <Tree smooth={false} data={[{id: 1,
+    name: 'animal',
+    children:
+    [{id: 2,
+      name: 'mammals',
+      children:
+    [{id: 3, name: 'tiger'},
+      {id: 4, name: 'cow'}]}]},
+  {id: 5, name: 'people'}]} />
+))
+
+addStory('onclick', readme, () => (
+  <Tree onClick={click} smooth={false} data={[{id: 1,
     name: 'animal',
     children:
     [{id: 2,

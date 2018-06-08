@@ -38,6 +38,9 @@ const propTypes = {
   /** Open tree when load component */
   initialOpen: PropTypes.bool,
 
+  /** Function passed */
+  onClick: PropTypes.func,
+
   /** Enable to select tree nodes */
   selectEnabled: PropTypes.bool,
 
@@ -62,10 +65,18 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Tree (props) {
-  const { data, initialOpen, selectEnabled, smooth } = props
+  const { data, initialOpen, selectEnabled, smooth, ...restProps } = props
   const clsName = buildClassName(moduleName)
   const children = data.map((el, i) =>
-    <TreeNode initialOpen={initialOpen} selectEnabled={selectEnabled} key={i} node={el} children={el.children} smooth={smooth} />
+    <TreeNode
+      initialOpen={initialOpen}
+      selectEnabled={selectEnabled}
+      key={i}
+      node={el}
+      children={el.children}
+      smooth={smooth}
+      {...restProps}
+    />
   )
   return (<ul className={clsName}>{children}</ul>)
 }
