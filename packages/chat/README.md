@@ -12,8 +12,10 @@ using `npm install @talixo/chat --save` or `yarn add @talixo/chat`.
 Your package should additionally have some extra dependencies:
 
 - `prop-types: ^15.6.1`
+- `moment: ^2.22.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `@talixo/button: ^0.1.0`
 - `@talixo/shared: ^0.1.0`
 - `@talixo/icon: ^0.2.0`
 
