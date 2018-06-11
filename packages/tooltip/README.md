@@ -32,17 +32,18 @@ className     | string       | n/a     | Additional class name passed to the too
 fade          | bool         | `false` | Fade in / out animation
 fadeTime      | number       | n/a     | Fadetime
 open          | bool         | n/a     | Controls whether tooltip is open
-position      | Position     | `right` | Tooltip position
+position      | Position     | `top`   | Preferred tooltip position
+lockPosition  | bool         | `false` | Lock tooltip position to specified one - otherwise, it will change position when there is not enough place
 attachTo      | node         | n/a     | node of tooltip portal
 render        | function     | n/a     | Renders tooltip content
 style         | object       | n/a     | Additional styles passed to the tooltip
 arrow         | bool         | `true`  | Show arrow next to tooltip
-triggerOn     | Trigger      | `hover` | Type of event to open tooltip
+triggerOn     | TriggerType  | `hover` | Type of event to open tooltip
 
 Type name    | Enum options
 -------------|--------------------------------------
 Position     | 'left', 'right', 'top', 'bottom'
-Trriger      | 'hover', 'click'
+TriggerType  | 'hover', 'click'
 
 ## Changelog
 

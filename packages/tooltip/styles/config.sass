@@ -1,3 +1,20 @@
 @import '~@talixo/shared/styles/config'
 
-$color-border-tooltip: #CDCDCD
+$tooltip-background-color: $x-color-background !default
+$tooltip-text-color: $x-color-text !default
+$tooltip-border-color: mix($tooltip-background-color, text-contrast($tooltip-background-color), 90%) !default
+
+$tooltip-border-width: $x-border-width !default
+$tooltip-border-radius: $x-border-radius !default
+
+$tooltip-font-size: dp(1.75) !default
+$tooltip-line-height: $x-line-height-base !default
+
+$tooltip-box-shadow: true !default
+$tooltip-box-shadow-color: mix(transparent, text-contrast($tooltip-background-color), 95%) !default
+
+$tooltip-padding-horizontal: $x-padding-horizontal-base !default
+$tooltip-padding-vertical: $x-padding-vertical-small !default
+
+$tooltip-arrow-width: dp(1) !default
+$tooltip-arrow-height: dp(1) !default
