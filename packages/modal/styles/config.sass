@@ -10,8 +10,8 @@ $modal-border-color: mix($modal-background-color, text-contrast($modal-backgroun
 $modal-border-bottom-width: $modal-border-width !default
 $modal-border-bottom-color: $modal-border-color !default
 
-$modal-overlay-color: transparentize(text-contrast($x-color-background), 0.7) !default
-$modal-overlay-minimum-margin: $x-padding-horizontal-base !default
+$modal-backdrop-color: transparentize(text-contrast($x-color-background), 0.7) !default
+$modal-backdrop-minimum-margin: $x-padding-horizontal-base !default
 
 $modal-padding-horizontal: $x-padding-horizontal-bigger !default
 $modal-padding-vertical: $x-padding-vertical-bigger !default
@@ -21,7 +21,7 @@ $modal-max-width: dp(63) !default
 $modal-width: 90% !default
 
 $modal-box-shadow: true !default
-$modal-box-shadow-color: mix(transparent, $modal-overlay-color, 70%) !default
+$modal-box-shadow-color: mix(transparent, $modal-backdrop-color, 70%) !default
 
 $modal-header-padding-horizontal: $modal-padding-horizontal !default
 $modal-header-padding-vertical: $modal-padding-vertical * 0.75 !default
@@ -63,21 +63,25 @@ $modal-informational-icon-size: dp(15) !default
 $modal-informational-header-padding-vertical: $modal-header-padding-vertical !default
 $modal-informational-footer-padding-vertical: $modal-footer-padding-vertical !default
 
+$modal-success-backdrop-color: mix($modal-backdrop-color, $x-color-success, 97.5%) !default
 $modal-informational-success-background-color: mix($modal-informational-background-color, $x-color-success, 95%) !default
 $modal-informational-success-text-color: mix($modal-informational-text-color, $x-color-success, 90%) !default
 $modal-informational-success-icon-color: $x-color-success !default
 $modal-informational-success-border-bottom-color: $x-color-success !default
 
+$modal-error-backdrop-color: mix($modal-backdrop-color, $x-color-error, 97.5%) !default
 $modal-informational-error-background-color: mix($modal-informational-background-color, $x-color-error, 95%) !default
 $modal-informational-error-text-color: mix($modal-informational-text-color, $x-color-error, 90%) !default
 $modal-informational-error-icon-color: $x-color-error !default
 $modal-informational-error-border-bottom-color: $x-color-error !default
 
+$modal-warning-backdrop-color: mix($modal-backdrop-color, $x-color-warning, 97.5%) !default
 $modal-informational-warning-background-color: mix($modal-informational-background-color, $x-color-warning, 95%) !default
 $modal-informational-warning-text-color: mix($modal-informational-text-color, $x-color-warning, 90%) !default
 $modal-informational-warning-icon-color: $x-color-warning !default
 $modal-informational-warning-border-bottom-color: $x-color-warning !default
 
+$modal-info-backdrop-color: mix($modal-backdrop-color, $x-color-info, 97.5%) !default
 $modal-informational-info-background-color: mix($modal-informational-background-color, $x-color-info, 95%) !default
 $modal-informational-info-text-color: mix($modal-informational-text-color, $x-color-info, 90%) !default
 $modal-informational-info-icon-color: $x-color-info !default

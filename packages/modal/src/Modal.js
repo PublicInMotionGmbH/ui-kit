@@ -51,7 +51,7 @@ function Modal (props) {
   const backdropClasses = buildClassName('modal-backdrop', null, {
     entered: open,
     exiting: !open
-  })
+  }, [ type ])
 
   const modalClasses = buildClassName('modal', className, { informational }, [ type ])
   const contentClasses = buildClassName('modal-content')

@@ -18,7 +18,7 @@
   font-size: $modal-font-size
   overflow: auto
   max-height: 100%
-  max-height: calc(100% - #{$modal-overlay-minimum-margin})
+  max-height: calc(100% - #{$modal-backdrop-minimum-margin * 2})
 
   @if $modal-box-shadow
     box-shadow: 0 dp(0.5) dp(1) dp(0.25) $modal-box-shadow-color
@@ -147,7 +147,7 @@
   left: 0
   width: 100%
   height: 100%
-  padding: $modal-overlay-minimum-margin
+  padding: $modal-backdrop-minimum-margin
   vertical-align: middle
   flex-direction: column
   align-items: center
@@ -156,11 +156,23 @@
   transition: all #{$modal-animation-time * 3/4} ease-in-out
 
   &--entered
-    background: $modal-overlay-color
+    background: $modal-backdrop-color
 
     @include module('modal')
       opacity: 1
       transform: scale(1)
+
+  &--entered#{prefix('modal-backdrop--success')}
+    background: $modal-success-backdrop-color
+
+  &--entered#{prefix('modal-backdrop--info')}
+    background: $modal-info-backdrop-color
+
+  &--entered#{prefix('modal-backdrop--warning')}
+    background: $modal-warning-backdrop-color
+
+  &--entered#{prefix('modal-backdrop--error')}
+    background: $modal-error-backdrop-color
 
   &--exiting
     background: transparent
