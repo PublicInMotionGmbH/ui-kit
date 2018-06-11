@@ -5,11 +5,26 @@ import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
+  className: PropTypes.string,
+
+  /** Disabled textarea */
+  disabled: PropTypes.bool,
+
+  /** Placeholder */
+  placeholder: PropTypes.string,
+
+  /** Resize textarea */
+  resize: PropTypes.bool,
+
+  /** Max length */
+  maxLength: PropTypes.number,
+
+  /** Textarea or TextareaAutosize */
+  TextareaComponent: PropTypes.oneOf(['textarea', PropTypes.node])
 }
 
 const defaultProps = {
-  /**  */
+  TextareaComponent: 'textarea',
   resize: true
 }
 /**
@@ -20,14 +35,15 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Textarea (props) {
-  const { className, disabled, maxLength, resize, placeholder, ...passedProps } = props
+  const { className, disabled, placeholder, resize, maxLength, minRows, TextareaComponent, ...passedProps } = props
 
   return (
-    <textarea
-      className={buildClassName('textarea', className, [resize ? null : 'no-resize'])}
-      maxlength={maxLength} {...passedProps}
+    <TextareaComponent
+      className={buildClassName('textarea', className, [resize ? null : 'no-resize', disabled ? 'disabled' : null])}
+      maxLength={maxLength}
       disabled={disabled}
       placeholder={placeholder}
+      {...passedProps}
     />
   )
 }
