@@ -1,0 +1,15 @@
+@import './config'
+
+@include module('textarea')
+  display: block
+  padding: $input-padding
+  border: 1px solid $input-border-color
+  border-radius: $input-border-radius
+  background-color: $input-background-color
+  color: $input-text-color
+  outline: none
+  width: 100%
+  box-sizing: border-box
+
+  &--no-resize
+    resize: none;
