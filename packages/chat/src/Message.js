@@ -20,6 +20,10 @@ const propTypes = {
 
 const defaultProps = {}
 
+function createMarkup (message) {
+  return {__html: message}
+}
+
 function Message (props) {
   const { className, message, name, time, ...passedProps } = props
 
@@ -42,7 +46,7 @@ function Message (props) {
         </span>
         <span className={nameClsName}>{name}</span>
       </div>
-      <span className={messageClsName}>{message}</span>
+      <span className={messageClsName} dangerouslySetInnerHTML={createMarkup(message)} />
     </div>
   )
 }
