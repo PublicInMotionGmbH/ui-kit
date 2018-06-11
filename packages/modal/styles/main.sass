@@ -1,2 +1,171 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('modal')
+  box-sizing: border-box
+  position: relative
+  transform: scale(0.6)
+  opacity: 0
+  transition: $modal-animation-time all linear
+  width: $modal-width
+  max-width: $modal-max-width
+  border-radius: $modal-border-radius
+  border: $modal-border-width solid $modal-border-color
+  border-bottom-width: $modal-border-bottom-width
+  border-bottom-color: $modal-border-bottom-color
+  padding: $modal-padding-vertical $modal-padding-horizontal
+  background-color: $modal-background-color
+  color: $modal-text-color
+  font-size: $modal-font-size
+  overflow: auto
+  max-height: 100%
+  max-height: calc(100% - #{$modal-overlay-minimum-margin})
+
+  @if $modal-box-shadow
+    box-shadow: 0 dp(0.5) dp(1) dp(0.25) $modal-box-shadow-color
+
+  &-header
+    margin: #{$modal-header-margin} #{-$modal-padding-horizontal}
+    padding: $modal-header-padding-vertical $modal-header-padding-horizontal
+    background-color: $modal-header-background-color
+    color: $modal-header-text-color
+    font-weight: $modal-header-font-weight
+    font-size: $modal-header-font-size
+    border-top: $modal-header-border-width solid $modal-header-border-color
+    border-bottom: $modal-header-border-width solid $modal-header-border-color
+
+    &:first-child
+      border-top-left-radius: $modal-border-radius
+      border-top-right-radius: $modal-border-radius
+      margin-top: -$modal-padding-vertical
+      border-top: 0
+
+    &:last-child
+      border-bottom-left-radius: $modal-border-radius
+      border-bottom-right-radius: $modal-border-radius
+      border-bottom: 0
+
+  &-footer
+    margin: #{$modal-footer-margin} #{-$modal-padding-horizontal}
+    padding: $modal-footer-padding-vertical $modal-footer-padding-horizontal
+    background-color: $modal-footer-background-color
+    border-top: $modal-footer-border-width solid $modal-footer-border-color
+    border-bottom: $modal-footer-border-width solid $modal-footer-border-color
+    border-radius: 0 0 $modal-border-radius $modal-border-radius
+    color: $modal-footer-text-color
+    font-weight: $modal-footer-font-weight
+    font-size: $modal-footer-font-size
+
+    &:first-child
+      border-top-left-radius: $modal-border-radius
+      border-top-right-radius: $modal-border-radius
+      border-top: 0
+
+    &:last-child
+      border-bottom-left-radius: $modal-border-radius
+      border-bottom-right-radius: $modal-border-radius
+      margin-bottom: -$modal-padding-vertical
+      border-bottom: 0
+
+  &#{prefix('modal--informational')}
+    display: flex
+    align-items: center
+    border-bottom: $modal-informational-border-bottom-width solid $modal-informational-border-bottom-color
+    background-color: $modal-informational-background-color
+    color: $modal-informational-text-color
+    padding: $modal-informational-padding-vertical $modal-informational-padding-horizontal
+    width: $modal-informational-width
+    max-width: $modal-informational-max-width
+
+    #{prefix('modal-header')}
+      padding-top: $modal-informational-header-padding-vertical
+      padding-bottom: $modal-informational-header-padding-vertical
+
+    #{prefix('modal-footer')}
+      padding-top: $modal-informational-footer-padding-vertical
+      padding-bottom: $modal-informational-footer-padding-vertical
+
+    #{prefix('modal-header')},
+    #{prefix('modal-footer')}
+      background-color: transparent
+      border: 0
+      padding-left: 0
+      padding-right: 0
+
+      &:first-child
+        padding-top: 0
+
+      &:last-child
+        padding-bottom: 0
+
+      &, &:first-child, &:last-child
+        margin: 0
+
+    #{prefix('modal-icon')}
+      color: $modal-informational-icon-color
+      font-size: $modal-informational-icon-size
+      line-height: 1em
+      margin-right: $modal-padding-horizontal
+      user-select: none
+
+  &#{prefix('modal--informational')}#{prefix('modal--success')}
+    background-color: $modal-informational-success-background-color
+    color: $modal-informational-success-text-color
+    border-bottom-color: $modal-informational-success-border-bottom-color
+
+    #{prefix('modal-icon')}
+      color: $modal-informational-success-icon-color
+
+  &#{prefix('modal--informational')}#{prefix('modal--info')}
+    background-color: $modal-informational-info-background-color
+    color: $modal-informational-info-text-color
+    border-bottom-color: $modal-informational-info-border-bottom-color
+
+    #{prefix('modal-icon')}
+      color: $modal-informational-info-icon-color
+
+  &#{prefix('modal--informational')}#{prefix('modal--warning')}
+    background-color: $modal-informational-warning-background-color
+    color: $modal-informational-warning-text-color
+    border-bottom-color: $modal-informational-warning-border-bottom-color
+
+    #{prefix('modal-icon')}
+      color: $modal-informational-warning-icon-color
+
+  &#{prefix('modal--informational')}#{prefix('modal--error')}
+    background-color: $modal-informational-error-background-color
+    color: $modal-informational-error-text-color
+    border-bottom-color: $modal-informational-error-border-bottom-color
+
+    #{prefix('modal-icon')}
+      color: $modal-informational-error-icon-color
+
+@include module('modal-backdrop')
+  box-sizing: border-box
+  position: absolute
+  display: flex
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  padding: $modal-overlay-minimum-margin
+  vertical-align: middle
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  z-index: 1000
+  transition: all #{$modal-animation-time * 3/4} ease-in-out
+
+  &--entered
+    background: $modal-overlay-color
+
+    @include module('modal')
+      opacity: 1
+      transform: scale(1)
+
+  &--exiting
+    background: transparent
+    z-index: -100
+
+    @include module('modal')
+      opacity: 0
+      transform: scale(0.6)

@@ -1,1 +1,84 @@
 @import '~@talixo/shared/styles/config'
+
+$modal-background-color: $x-color-background !default
+$modal-text-color: $x-color-text !default
+$modal-font-size: dp(1.75) !default
+
+$modal-border-radius: $x-border-radius !default
+$modal-border-width: 0 !default
+$modal-border-color: mix($modal-background-color, text-contrast($modal-background-color), 95%) !default
+$modal-border-bottom-width: $modal-border-width !default
+$modal-border-bottom-color: $modal-border-color !default
+
+$modal-overlay-color: transparentize(text-contrast($x-color-background), 0.7) !default
+$modal-overlay-minimum-margin: $x-padding-horizontal-base !default
+
+$modal-padding-horizontal: $x-padding-horizontal-bigger !default
+$modal-padding-vertical: $x-padding-vertical-bigger !default
+
+$modal-animation-time: 400ms !default
+$modal-max-width: dp(63) !default
+$modal-width: 90% !default
+
+$modal-box-shadow: true !default
+$modal-box-shadow-color: mix(transparent, $modal-overlay-color, 70%) !default
+
+$modal-header-padding-horizontal: $modal-padding-horizontal !default
+$modal-header-padding-vertical: $modal-padding-vertical * 0.75 !default
+$modal-header-margin: $modal-padding-vertical !default
+$modal-header-border-width: $x-border-width !default
+
+$modal-header-background-color: $x-color-calmer !default
+$modal-header-text-color: text-contrast($modal-header-background-color) !default
+$modal-header-border-color: mix($modal-header-background-color, text-contrast($modal-background-color), 95%) !default
+
+$modal-header-font-weight: $x-weight-semibold !default
+$modal-header-font-size: 1.125em !default
+
+$modal-footer-padding-horizontal: $modal-padding-horizontal !default
+$modal-footer-padding-vertical: $modal-padding-vertical * 0.75 !default
+$modal-footer-margin: $modal-padding-vertical !default
+$modal-footer-border-width: $x-border-width !default
+
+$modal-footer-background-color: $x-color-calmer !default
+$modal-footer-text-color: text-contrast($modal-footer-background-color) !default
+$modal-footer-border-color: mix($modal-footer-background-color, text-contrast($modal-background-color), 95%) !default
+
+$modal-footer-font-weight: $x-weight-normal !default
+$modal-footer-font-size: 1em !default
+
+$modal-informational-background-color: $modal-background-color !default
+$modal-informational-text-color: $modal-text-color !default
+$modal-informational-padding-horizontal: $modal-padding-horizontal !default
+$modal-informational-padding-vertical: $modal-padding-vertical !default
+$modal-informational-max-width: $modal-max-width !default
+$modal-informational-width: $modal-width !default
+
+$modal-informational-border-bottom-width: dp(0.75) !default
+$modal-informational-border-bottom-color: $modal-border-bottom-color !default
+
+$modal-informational-icon-color: $modal-informational-text-color !default
+$modal-informational-icon-size: dp(15) !default
+
+$modal-informational-header-padding-vertical: $modal-header-padding-vertical !default
+$modal-informational-footer-padding-vertical: $modal-footer-padding-vertical !default
+
+$modal-informational-success-background-color: mix($modal-informational-background-color, $x-color-success, 95%) !default
+$modal-informational-success-text-color: mix($modal-informational-text-color, $x-color-success, 90%) !default
+$modal-informational-success-icon-color: $x-color-success !default
+$modal-informational-success-border-bottom-color: $x-color-success !default
+
+$modal-informational-error-background-color: mix($modal-informational-background-color, $x-color-error, 95%) !default
+$modal-informational-error-text-color: mix($modal-informational-text-color, $x-color-error, 90%) !default
+$modal-informational-error-icon-color: $x-color-error !default
+$modal-informational-error-border-bottom-color: $x-color-error !default
+
+$modal-informational-warning-background-color: mix($modal-informational-background-color, $x-color-warning, 95%) !default
+$modal-informational-warning-text-color: mix($modal-informational-text-color, $x-color-warning, 90%) !default
+$modal-informational-warning-icon-color: $x-color-warning !default
+$modal-informational-warning-border-bottom-color: $x-color-warning !default
+
+$modal-informational-info-background-color: mix($modal-informational-background-color, $x-color-info, 95%) !default
+$modal-informational-info-text-color: mix($modal-informational-text-color, $x-color-info, 90%) !default
+$modal-informational-info-icon-color: $x-color-info !default
+$modal-informational-info-border-bottom-color: $x-color-info !default
