@@ -1,2 +1,73 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+$radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-size) / 2
+
+@include module('radio-input')
+  position: relative
+  min-height: $radio-input-box-size
+  font-size: $radio-input-box-font-size
+
+  > input
+    display: none
+
+  > input + span
+    padding-left: $radio-input-box-margin + $radio-input-box-size
+    padding-right: $radio-input-box-margin
+    color: $radio-input-text-color
+
+  > input + span:before
+    box-sizing: border-box
+    content: ''
+    position: absolute
+    left: 0
+    top: calc(#{1em * $radio-input-box-line-height / 2} - #{$radio-input-box-size / 2})
+    display: inline-block
+    vertical-align: middle
+    width: $radio-input-box-size
+    height: $radio-input-box-size
+    border-radius: 50%
+    border: $radio-input-box-border-width solid $radio-input-box-border-color
+    background-color: $radio-input-box-background-color
+
+    @if $radio-input-box-shadow-size != $radio-input-box-size
+      box-shadow: inset 0 0 0 $radio-input-box-shadow-size $radio-input-box-background-color
+
+  > input:checked + span:before
+    background-color: $radio-input-checked-box-background-color
+    border-color: $radio-input-checked-box-border-color
+
+  > input:checked + span
+    color: $radio-input-checked-text-color
+
+  > input:disabled + span:before
+    border-color: $radio-input-disabled-box-border-color
+    background-color: $radio-input-disabled-box-background-color
+
+    @if $radio-input-box-shadow-size != $radio-input-box-size
+      box-shadow: inset 0 0 0 $radio-input-box-shadow-size $radio-input-disabled-box-background-color
+
+  > input:disabled:checked + span:before
+    border-color: $radio-input-disabled-checked-box-border-color
+    background-color: $radio-input-disabled-checked-box-background-color
+
+  > input:disabled + span
+    color: $radio-input-disabled-text-color
+
+  > input:disabled:checked + span
+    color: $radio-input-disabled-checked-text-color
+
+  &--error > input + span,
+  &--error > input:disabled + span,
+  &--error > input:checked + span,
+  &--error > input:checked:disabled + span
+    color: $radio-input-error-text-color
+
+  &--error > input:not(:disabled) + span:before
+    border-color: $radio-input-error-box-border-color
+
+  &--error > input:checked:not(:disabled) + span:before
+    background-color: $radio-input-error-box-background-color
+
+  [dir=rtl] > input + span
+    padding-left: $radio-input-box-margin
+    padding-right: $radio-input-box-margin + $radio-input-box-size

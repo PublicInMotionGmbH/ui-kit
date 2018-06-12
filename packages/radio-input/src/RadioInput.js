@@ -3,20 +3,38 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Radio button description  */
+  children: PropTypes.node,
+
+  /** Additional wrapper class name */
+  className: PropTypes.string,
+
+  /** Has radio input error? */
+  error: PropTypes.bool,
+
+  /** Styles passed to radio button wrapper */
+  style: PropTypes.object
+}
+
+const defaultProps = {
+  error: false
+}
+
 /**
  * Component which represents Radio Input.
  *
  * @param {object} props
  * @param {*} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.size]
+ * @param {boolean} [props.error]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
 function RadioInput (props) {
-  const { children, className, size, style, onChange, ...passedProps } = props
+  const { children, className, error, style, onChange, ...passedProps } = props
 
-  const wrapperClass = buildClassName('radio-input', className, [ size ])
+  const wrapperClass = buildClassName('radio-input', className, { error })
 
   const handleOnChange = e => {
     if (onChange) { onChange(e.target.checked) }
@@ -30,18 +48,7 @@ function RadioInput (props) {
   )
 }
 
-RadioInput.propTypes = {
-  /** Radio button description  */
-  children: PropTypes.node,
-
-  /** Additional wrapper class name */
-  className: PropTypes.string,
-
-  /** Radio input label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
-  /** Styles passed to radio button wrapper */
-  style: PropTypes.object
-}
+RadioInput.propTypes = propTypes
+RadioInput.defaultProps = defaultProps
 
 export default RadioInput
