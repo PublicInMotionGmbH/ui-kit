@@ -33,12 +33,13 @@ const defaultProps = {
  * @property {string} [props.yesLabel]
  * @property {string} [props.noLabel]
  * @property {boolean} [props.value]
+ * @property {boolean} [props.defaultChecked]
  * @property {function} [props.onChange]
  * @class
  */
 class Switcher extends React.PureComponent {
   state = {
-    value: !!this.props.value || false
+    value: this.props.value == null ? !!this.props.defaultChecked : !!this.props.value
   }
 
   componentWillReceiveProps (props) {
@@ -60,7 +61,7 @@ class Switcher extends React.PureComponent {
   }
 
   render () {
-    const { className, noLabel, yesLabel, onChange, value: _value, ...passedProps } = this.props
+    const { className, noLabel, yesLabel, onChange, value: _value, defaultChecked, ...passedProps } = this.props
     const { value } = this.state
 
     const clsName = buildClassName('switcher', className, {
