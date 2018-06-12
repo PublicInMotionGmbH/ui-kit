@@ -1,6 +1,8 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { Icon } from '@talixo/icon'
+import { Button } from '@talixo/button'
+import { ControlGroup } from '@talixo/control-group'
 
 import Modal from './src/Modal'
 import ModalHeader from './src/ModalHeader'
@@ -23,9 +25,9 @@ addStory.controlled('initial', readme, (setState, state) => (
       We would like to show you your own modal. Treat it well.
 
       <ModalFooter>
-        <button onClick={() => { setState({ open: false }) }}>
+        <Button onClick={() => { setState({ open: false }) }}>
           Close Modal
-        </button>
+        </Button>
       </ModalFooter>
     </Modal>
   </div>
@@ -52,8 +54,10 @@ addStory('with header and footer', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='primary'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -69,8 +73,10 @@ addStory('simple informational modal', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='primary'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -86,8 +92,10 @@ addStory('simple informational modal with icon', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='primary'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -103,8 +111,10 @@ addStory('success informational modal', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='success'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -120,8 +130,10 @@ addStory('error informational modal', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='error'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -137,8 +149,10 @@ addStory('warning informational modal', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='primary'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -154,8 +168,10 @@ addStory('info informational modal', readme, () => (
     We are not sure if you really want to destroy the world. Could you think about it once again?
 
     <ModalFooter>
-      <button type='button'>Yes</button>
-      <button type='button'>No</button>
+      <ControlGroup>
+        <Button type='primary'>Yes</Button>
+        <Button>No</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
@@ -176,8 +192,10 @@ addStory.controlled('controlled informational', readme, (setState, state) => (
       We are not sure if you really want to destroy the world. Could you think about it once again?
 
       <ModalFooter>
-        <button type='button' onClick={() => setState({ open: false })}>Yes</button>
-        <button type='button' onClick={() => setState({ open: false })}>No</button>
+        <ControlGroup>
+          <Button type='error' onClick={() => setState({ open: false })}>Yes</Button>
+          <Button onClick={() => setState({ open: false })}>No</Button>
+        </ControlGroup>
       </ModalFooter>
     </Modal>
   </div>
@@ -197,8 +215,10 @@ addStory('long content', readme, () => (
     <p>Duis sed molestie aliquam. In nec ante. Duis vulputate tempor ac, eleifend congue. Integer euismod nonummy. Phasellus a placerat tempus, dui sed tellus dolor tellus tristique eget, scelerisque sed, vehicula viverra, egestas vitae, vulputate luctus. Maecenas felis. Nunc massa volutpat non, tristique libero quis diam. Donec urna luctus at, ornare mi libero, fringilla sed, viverra eget, lacinia eros orci at tortor. Sed aliquet mauris rhoncus libero a neque ut nibh. Morbi vitae augue. Duis non eros. Integer euismod convallis posuere. Quisque nunc. Suspendisse potenti. Suspendisse ac massa a lectus. Ut a dolor. In hac habitasse platea dictumst. Maecenas malesuada eros, dapibus aliquam. Phasellus a nisl. Nam feugiat, urna quis dolor. Morbi a ipsum. Donec sit amet elit. Proin dui ligula, semper sollicitudin. Vestibulum ligula. Sed ultricies neque nibh lacus, congue ac, mattis vel, purus. Phasellus in faucibus orci magna pharetra velit libero auctor congue nibh nulla pellentesque dui, in faucibus in, dapibus eu, tristique enim, id justo neque, fringilla mi, id augue. Nam purus. Aenean ligula quis consectetuer adipiscing justo luctus eget, neque. Etiam rutrum. In purus vitae erat. Aenean.</p>
 
     <ModalFooter>
-      <button type='button'>Accept</button>
-      <button type='button'>Cancel</button>
+      <ControlGroup>
+        <Button type='primary'>Accept</Button>
+        <Button>Cancel</Button>
+      </ControlGroup>
     </ModalFooter>
   </Modal>
 ), {
