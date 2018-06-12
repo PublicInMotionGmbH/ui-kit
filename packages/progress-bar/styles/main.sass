@@ -90,7 +90,7 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
     color: $progress-bar-base-text-color
 
     @if $progress-bar-text-shadow
-      text-shadow: 0 0 3px transparentize(text-contrast($progress-bar-base-text-color), 0.7)
+      text-shadow: text-shadow-smoothness($progress-bar-base-text-color, $progress-bar-base-color)
 
   &--striped &__inner:after,
   &--indeterminate &__inner:after
@@ -141,7 +141,7 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
       color: $text-color
 
       @if $progress-bar-text-shadow
-        text-shadow: 0 0 3px transparentize(text-contrast($text-color), 0.7)
+        text-shadow: text-shadow-smoothness($text-color, $color)
 
     &--#{$type} &__shadow
       color: $shadow-color

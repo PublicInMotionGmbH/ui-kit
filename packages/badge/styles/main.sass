@@ -7,7 +7,7 @@
     border-color: $border-color
 
     @if $badge-text-shadow
-      text-shadow: 0 0 3px transparentize(text-contrast($text-color), 0.7)
+      text-shadow: text-shadow-smoothness($text-color, $background-color)
 
     @include module('badge__remove')
       border-left-color: $border-color
@@ -28,7 +28,7 @@
   overflow: hidden
 
   @if $badge-text-shadow
-    text-shadow: 0 0 3px transparentize(text-contrast($badge-text-color), 0.7)
+    text-shadow: text-shadow-smoothness($badge-text-color, $badge-background-color)
 
   &__content
     padding: $badge-padding-vertical $badge-padding-horizontal
