@@ -11,7 +11,9 @@ using `npm install @talixo/radio-group --save` or `yarn add @talixo/radio-group`
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/radio-input: ^0.1.0`
 - `@talixo/shared: ^0.1.0`
+- `@talixo/text-input: ^0.2.0`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

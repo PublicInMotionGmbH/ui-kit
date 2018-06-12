@@ -5,6 +5,8 @@ exports[`<RadioInput /> renders children correctly 1`] = `
   className="talixo-radio-input"
 >
   <input
+    className="talixo-radio-input__input"
+    disabled={false}
     onChange={[Function]}
     type="radio"
   />
