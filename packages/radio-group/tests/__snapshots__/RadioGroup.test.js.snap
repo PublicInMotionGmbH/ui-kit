@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RadioGroup /> renders children correctly 1`] = `
+exports[`<RadioGroup /> rendering renders children correctly 1`] = `
 <div
   className="talixo-radio-group"
 >

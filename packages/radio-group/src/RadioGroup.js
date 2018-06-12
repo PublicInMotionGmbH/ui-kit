@@ -76,9 +76,9 @@ class RadioGroup extends React.PureComponent {
    *
    * @param {object} prevProps
    */
-  componentWillReceiveProps (prevProps) {
-    if (prevProps.value != null && prevProps.value !== this.state.value) {
-      this.setState({ value: prevProps.value })
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value != null && nextProps.value !== this.state.value) {
+      this.setState({ value: nextProps.value })
     }
   }
 
@@ -123,9 +123,11 @@ class RadioGroup extends React.PureComponent {
         {
           customComponent
             ? React.cloneElement(customComponent, {
-              onFocus: (...args) => {
-                onChange('custom', true)
-                customComponent.props.onFocus && customComponent.props.onFocus(args)
+              onFocus: (e, ...args) => {
+                onChange('custom', true, e)
+                if (customComponent.props.onFocus) {
+                  customComponent.props.onFocus(e, args)
+                }
               }
             })
             : <TextInput
@@ -145,11 +147,11 @@ class RadioGroup extends React.PureComponent {
    */
   generateOptions = () => {
     const { name, options, size } = this.props
-    const _value = this.state.value
+    const { value } = this.state
 
     const optionsList = options.map(obj => (
       <RadioInput
-        checked={_value === obj.value}
+        checked={value === obj.value}
         disabled={obj.disabled || false}
         key={obj.value}
         name={name}
