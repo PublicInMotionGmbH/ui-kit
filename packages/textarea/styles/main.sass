@@ -1,9 +1,8 @@
 @import './config'
 
 @include module('textarea')
-  display: block
   padding: $textarea-padding
-  border: 1px solid $textarea-border-color
+  border: dp(0.125) solid $textarea-border-color
   border-radius: $textarea-border-radius
   background-color: $textarea-background-color
   color: $textarea-text-color
@@ -16,4 +15,4 @@
     background-color: $textarea-background-color-disabled
 
   &--no-resize
-    resize: none;
+    resize: none

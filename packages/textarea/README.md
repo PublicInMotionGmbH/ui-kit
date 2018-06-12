@@ -21,9 +21,14 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name    | Type      | Default | Description                    
+-----------------|-----------|:-------:|--------------------------------
+className        | string    | n/a     | Additional class name passed to wrapper
+disabled         | bool      | n/a     | Read-only textarea
+maxLength        | number    | n/a     | Define max number of characters in texarea
+placeholder      | string    | n/a     | Custom placeholder to show in textarea
+resize           | bool      | `true`  | Allow to resize textarea
+TextareaComponent| string or node  | `'textarea'`  | Allow to use `'textarea'` tag or TextareaAutosize component
 
 ## Changelog
 

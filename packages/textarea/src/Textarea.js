@@ -10,38 +10,43 @@ const propTypes = {
   /** Disabled textarea */
   disabled: PropTypes.bool,
 
-  /** Placeholder */
+  /** Max length */
+  maxLength: PropTypes.number,
+
+  /** Placeholder for textarea */
   placeholder: PropTypes.string,
 
   /** Resize textarea */
   resize: PropTypes.bool,
 
-  /** Max length */
-  maxLength: PropTypes.number,
-
   /** Textarea or TextareaAutosize */
-  TextareaComponent: PropTypes.oneOf(['textarea', PropTypes.node])
+  TextareaComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
 }
 
 const defaultProps = {
-  TextareaComponent: 'textarea',
-  resize: true
+  resize: true,
+  TextareaComponent: 'textarea'
 }
 /**
  * Component which represents Textarea.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {bool} [props.disabled]
+ * @param {number} [props.maxLength]
+ * @param {string} [props.placeholder]
+ * @param {bool} [props.resize]
+ * @param {string|node} [props.TextareaComponent]
  * @returns {React.Element}
  */
 function Textarea (props) {
-  const { className, disabled, placeholder, resize, maxLength, minRows, TextareaComponent, ...passedProps } = props
+  const { className, disabled, maxLength, placeholder, resize, TextareaComponent, ...passedProps } = props
 
   return (
     <TextareaComponent
       className={buildClassName('textarea', className, [resize ? null : 'no-resize', disabled ? 'disabled' : null])}
-      maxLength={maxLength}
       disabled={disabled}
+      maxLength={maxLength}
       placeholder={placeholder}
       {...passedProps}
     />
