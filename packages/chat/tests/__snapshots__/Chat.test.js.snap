@@ -59,13 +59,17 @@ exports[`<Chat /> renders children correctly 1`] = `
       <span
         className="talixo-chat__input-container-inner"
       >
-        <TextInput
-          InputComponent="input"
-          error={false}
-          inputRef={[Function]}
+        <textarea
           onChange={[Function]}
+          onKeyDown={[Function]}
+          onKeyPress={[Function]}
+          onKeyUp={[Function]}
           placeholder="reply"
-          type="text"
+          style={
+            Object {
+              "maxHeight": "5em",
+            }
+          }
           value=""
         />
       </span>

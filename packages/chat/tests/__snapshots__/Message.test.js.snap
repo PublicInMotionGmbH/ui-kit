@@ -10,7 +10,7 @@ exports[`<Message /> renders children correctly 1`] = `
     <span
       className="talixo-talixo-chat__message talixo-chat__message--chat__time"
     >
-      4 days ago 09:31
+      8 days ago 09:31
     </span>
     <span
       className="talixo-talixo-chat__message talixo-chat__message--chat__name"
@@ -20,8 +20,11 @@ exports[`<Message /> renders children correctly 1`] = `
   </div>
   <span
     className="talixo-talixo-chat__message talixo-chat__message--chat__message"
-  >
-    Random message
-  </span>
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "Random message",
+      }
+    }
+  />
 </div>
 `;

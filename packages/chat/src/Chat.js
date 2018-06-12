@@ -179,7 +179,7 @@ class Chat extends React.PureComponent {
     if (onSubmit && !/^(^$|\s+)$/.test(inputValue)) {
       onSubmit(message)
       this.setState({ inputValue: '' })
-      this._input.style.height = '1em'
+      if (this._input) this._input.style.height = '1em'
     }
   }
 

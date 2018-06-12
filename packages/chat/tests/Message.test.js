@@ -43,7 +43,9 @@ describe('<Message />', () => {
   it('renders name and message correctly', () => {
     const wrapper = shallow(<Message className={messageClsName} message='Random message' name='Johny' time={1528104696738} />)
 
-    expect(wrapper.find('.talixo-chat__message--chat__message').text()).toBe('Random message')
+    expect(wrapper.find('.talixo-chat__message--chat__message').html()).toBe(
+      '<span class="talixo-talixo-chat__message talixo-chat__message--chat__message">Random message</span>'
+    )
     expect(wrapper.find('.talixo-chat__message--chat__name').text()).toBe('Johny')
   })
 

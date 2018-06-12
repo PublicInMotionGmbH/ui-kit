@@ -85,7 +85,7 @@ describe('<Chat />', () => {
   it('renders placeholder correctly', () => {
     const placeholder = 'custom placeholder'
     const wrapper = shallow(<Chat id='1' placeholder={placeholder} />)
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find('textarea')
 
     expect(input.props().placeholder).toEqual(placeholder)
   })
@@ -101,7 +101,7 @@ describe('<Chat />', () => {
   it('renders one typing user correctly', () => {
     const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
     wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true}]
+      [{name: 'John', id: '2', status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
@@ -110,8 +110,8 @@ describe('<Chat />', () => {
   it('renders two typing users correctly', () => {
     const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
     wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true},
-        {name: 'Kenny', id: '2', status: true}]
+      [{name: 'John', id: '2', status: true},
+        {name: 'Kenny', id: '3', status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
@@ -120,9 +120,9 @@ describe('<Chat />', () => {
   it('renders more then two typing users correctly', () => {
     const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
     wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true},
-        {name: 'Kenny', id: '2', status: true},
-        {name: 'Benny', id: '3', status: true}]
+      [{name: 'John', id: '2', status: true},
+        {name: 'Kenny', id: '3', status: true},
+        {name: 'Benny', id: '4', status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
@@ -186,20 +186,20 @@ describe('handleInputChange', () => {
 
   it('changes state.typingStatus to true', () => {
     const wrapper = shallow(<Chat messages={messages} id='1' />)
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find('textarea')
     const status = wrapper.state().typingStatus
 
-    input.simulate('change', 'a')
+    input.simulate('change', { target: { value: 'a' } })
 
     expect(wrapper.state().typingStatus).toEqual(!status)
   })
 
   it('changes state.typingStatus to false after 2000ms', () => {
     const wrapper = shallow(<Chat messages={messages} id='1' />)
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find('textarea')
     const status = wrapper.state().typingStatus
 
-    input.simulate('change', 'a')
+    input.simulate('change', { target: { value: 'a' } })
 
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000)
@@ -212,10 +212,10 @@ describe('handleInputChange', () => {
 
   it('clears timeout if state.typingStatus is true', () => {
     const wrapper = shallow(<Chat messages={messages} id='1' />)
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find('textarea')
 
     wrapper.setState({ typingStatus: true })
-    input.simulate('change', 'a')
+    input.simulate('change', { target: { value: 'a' } })
 
     expect(clearTimeout).toHaveBeenCalledTimes(1)
   })
@@ -269,6 +269,7 @@ describe('handleSubmit', () => {
       id: '1'
     }
 
+    expect(onSubmit).toHaveBeenCalledTimes(1)
     expect(message).toEqual(expectedMessage)
     unmock()
   })
