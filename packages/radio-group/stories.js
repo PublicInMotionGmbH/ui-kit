@@ -14,7 +14,10 @@ const addStory = createStoriesFactory('RadioGroup', module, {
 
 // Helpers
 const change = action('onChange')
-const customChange = action('onCustomChange')
+
+// Mocks
+const options = [{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]
+const disabledOptions = [{ value: 'option_1', label: 'one', disabled: true }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]
 
 // Stories
 
@@ -22,7 +25,16 @@ addStory('initial', readme, () => (
   <RadioGroup
     onChange={change}
     name='RadioName'
-    options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+    options={options}
+  />
+))
+
+addStory('vertical', readme, () => (
+  <RadioGroup
+    onChange={change}
+    name='RadioName'
+    options={options}
+    vertical
   />
 ))
 
@@ -31,7 +43,7 @@ addStory.controlled('with default value', readme, (setState, state) => (
     onChange={value => setState({value})}
     name='RadioNameChecked'
     value={state.value}
-    options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+    options={options}
   />
 ), () => ({ value: 'option_1' }))
 
@@ -43,7 +55,7 @@ addStory.controlled('with different size', readme, (setState, state) => (
       name='RadioName1'
       size='small'
       value={state.value}
-      options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+      options={options}
     />
     <h2>Large size</h2>
     <RadioGroup
@@ -51,7 +63,7 @@ addStory.controlled('with different size', readme, (setState, state) => (
       name='RadioName2'
       size='large'
       value={state.value2}
-      options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+      options={options}
     />
   </div>
 ), () => ({ value: 'option_1', value2: 'option_2' }))
@@ -61,19 +73,32 @@ addStory.controlled('with disabled option', readme, (setState, state) => (
     onChange={value => setState({value})}
     name='RadioNameDisabled'
     value={state.value}
-    options={[{ value: 'option_1', label: 'one', disabled: true }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+    options={disabledOptions}
   />
 ), () => ({ value: 'option_3' }))
 
 addStory.controlled('with custom option', readme, (setState, state) => (
-  <RadioGroup
-    allowCustom
-    onChange={value => setState({value})}
-    onCustomChange={customChange}
-    name='radioCustom'
-    value={state.value}
-    options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
-  />
+  <div>
+    <h2>Horizontal</h2>
+    <RadioGroup
+      allowCustom
+      customPlaceholder='Other'
+      onChange={value => setState({value})}
+      name='radioCustom'
+      value={state.value}
+      options={options}
+    />
+    <h2>Vertical</h2>
+    <RadioGroup
+      allowCustom
+      customPlaceholder='Other'
+      onChange={value => setState({value})}
+      name='radioCustomVertical'
+      value={state.value}
+      options={options}
+      vertical
+    />
+  </div>
 ), () => ({ value: 'option_3' }))
 
 addStory.controlled('with custom option and component', readme, (setState, state) => (
@@ -81,9 +106,8 @@ addStory.controlled('with custom option and component', readme, (setState, state
     allowCustom
     customComponent={<input type='text' />}
     onChange={value => setState({value})}
-    onCustomChange={customChange}
     name='radioCustomComponent'
     value={state.value}
-    options={[{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]}
+    options={options}
   />
 ), () => ({ value: 'option_3' }))

@@ -1,12 +1,14 @@
 @import './config'
 
 @include module('radio-input')
+  cursor: pointer
   display: inline-flex
   flex-flow: row nowrap
   align-items: center
+  margin: 0 dp(3)
   padding: dp(0.375)
+  width: fit-content
   font-weight: initial
-  cursor: pointer
 
   &--disabled
     cursor: not-allowed
@@ -27,8 +29,8 @@
       box-sizing: border-box
       content: ''
       display: inline-block
-      height: dp(2.4)
-      width: dp(2.4)
+      height: dp(2.5)
+      width: dp(2.5)
       margin: 0 dp(1)
       transform: rotate(360deg)
       user-select: none
@@ -36,7 +38,6 @@
 
     span
       flex: 1 1 auto
-      margin: 0 dp(4.4)
       font-size: $font-size-m
 
       > *

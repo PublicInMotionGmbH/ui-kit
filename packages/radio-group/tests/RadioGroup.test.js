@@ -100,14 +100,14 @@ describe('<RadioGroup />', () => {
     describe('default component', () => {
       const props = createProps({
         allowCustom: true,
-        onChange: jest.fn(),
-        onCustomChange: jest.fn()
+        onChange: jest.fn()
       })
-      let wrapper, textInput
+      let wrapper, textInput, input
 
       beforeEach(() => {
         wrapper = createWrapper(props)
         textInput = wrapper.find('TextInput')
+        input = textInput.dive().find('input')
       })
 
       it('should render text input', () => {
@@ -116,29 +116,33 @@ describe('<RadioGroup />', () => {
 
       it('should invoke props.onChange when text input is focused', () => {
         props.onChange.mockReset()
-        textInput.dive().find('input').simulate('focus', {})
+        input.simulate('focus', {})
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
-        expect(props.onChange).toHaveBeenCalledWith('custom', expect.anything())
+        expect(props.onChange).toHaveBeenCalledWith('', expect.anything())
       })
 
-      it('should invoke props.onChange when text input is focused', () => {
-        const newText = 'test text'
-        props.onChange.mockReset()
-        textInput.dive().find('input').simulate('change', { target: { value: newText } })
+      it('should change state.custom when user is typing', () => {
+        const value = 'test value '
+        input.simulate('change', { target: { value } })
+        expect(wrapper.state().custom).toBe(value)
+      })
 
-        expect(props.onCustomChange).toHaveBeenCalledTimes(1)
-        expect(props.onCustomChange).toHaveBeenCalledWith(newText)
+      it('should invoke onChangewith proper value', () => {
+        props.onChange.mockReset()
+        const value = 'test value'
+        input.simulate('change', { target: { value } })
+        expect(props.onChange).toHaveBeenCalledTimes(1)
+        expect(props.onChange).toHaveBeenCalledWith(value, expect.anything())
       })
     })
 
     describe('custom component', () => {
-      const customProps = { onFocus: jest.fn() }
+      const customProps = { onChange: jest.fn(), onFocus: jest.fn() }
       const CustomComponent = (props) => <input />
       const props = createProps({
         allowCustom: true,
         onChange: jest.fn(),
-        onCustomChange: jest.fn(),
         customComponent: <CustomComponent {...customProps} />
       })
       let wrapper, custom
@@ -152,10 +156,24 @@ describe('<RadioGroup />', () => {
         expect(custom.exists()).toBe(true)
       })
 
-      it('should properly invoke custom component onFocus function', () => {
-        custom.simulate('focus', {})
+      it('should pas proper value onChange', () => {
+        props.onChange.mockReset()
+        customProps.onFocus.mockReset()
+        const value = 'value'
+        custom.simulate('change', { target: { value } })
+
+        expect(wrapper.state().custom).toBe(value)
         expect(props.onChange).toHaveBeenCalledTimes(1)
-        expect(props.onChange).toHaveBeenCalledWith('custom', expect.anything())
+        expect(props.onChange).toHaveBeenCalledWith(value, expect.anything())
+        expect(customProps.onChange).toHaveBeenCalledTimes(1)
+      })
+
+      it('should properly invoke custom component onFocus function', () => {
+        props.onChange.mockReset()
+        customProps.onFocus.mockReset()
+        custom.simulate('focus', {})
+
+        expect(props.onChange).toHaveBeenCalledTimes(1)
         expect(customProps.onFocus).toHaveBeenCalledTimes(1)
       })
     })

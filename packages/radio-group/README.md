@@ -25,13 +25,25 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for 'div'. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-name          | string    | n/a     | name of radio group
-options       | array     | n/a     | array of objects which represent options
-size          | string    | n/a     | checkbox label size ('small' or 'large')
-value         | number or string | n/a   | value of default option
+Property name     | Type              | Required  | Default | Description                    
+------------------|-------------------|-----------|:-------:|--------------------------------
+allowCustom       | boolean           | no        | n/a     | Enable custom option.
+className         | string            | no        | n/a     | Additional class name passed to wrapper.
+customComponent   | string            | no        | n/a     | Component which will be displayed as custom option.
+customPlaceholder | string            | no        | n/a     | Placeholder of default custom options input.
+name              | string            | yes       | n/a     | Name of radio group.
+options           | Option[]          | no        | n/a     | Array of objects which represent options.
+size              | string            | no        | n/a     | Checkbox label size ('small' or 'large').
+value             | number or string  | no        | n/a     | Value of default option.
+vertical          | boolean           | no        | n/a     | Idicates if options should be positioned vertically.
+
+## Property shapes
+
+Property name | Type              | Required  | Default | Description                    
+--------------|-------------------|-----------|:-------:|--------------------------------
+disabled      | boolean           | no        | n/a     | Idicates if option should be disabled.
+label         | string            | yes       | n/a     | Option label.
+value         | string            | yes       | n/a     | Value of the option.
 
 ## Changelog
 
