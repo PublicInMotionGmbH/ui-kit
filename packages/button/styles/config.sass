@@ -1,1 +1,355 @@
 @import '~@talixo/shared/styles/config'
+
+$button-border-radius: $x-border-radius !default
+$button-border-width: $x-border-width !default
+
+$button-padding-horizontal: $x-padding-horizontal-base !default
+$button-padding-vertical: $x-padding-vertical-small !default
+
+$button-font-size: dp(1.75) !default
+$button-line-height: $button-font-size * $x-line-height-base !default
+
+$button-small-font-size: dp(1.625) !default
+$button-small-line-height: $button-small-font-size * $x-line-height-base !default
+$button-small-border-radius: $button-border-radius !default
+$button-small-border-width: $button-border-width !default
+$button-small-padding-horizontal: $button-padding-horizontal !default
+$button-small-padding-vertical: $x-padding-vertical-very-small !default
+
+$button-text-shadow: true !default
+
+// Default button colors
+
+$button-background-color: $x-color-calmer !default
+$button-text-color: $x-color-calmer-opposite !default
+$button-border-color: mix($button-background-color, $button-text-color, 90%) !default
+
+$button-hover-background-color: bold-color($button-background-color, 5%) !default
+$button-hover-border-color: bold-color($button-border-color, 5%) !default
+$button-hover-text-color: $button-text-color !default
+
+$button-focus-background-color: $button-hover-background-color !default
+$button-focus-border-color: $button-hover-border-color !default
+$button-focus-text-color: $button-hover-text-color !default
+
+$button-active-background-color: bold-color($button-background-color, 10%) !default
+$button-active-border-color: bold-color($button-border-color, 10%) !default
+$button-active-text-color: $button-text-color !default
+
+$button-ghost-background-color: transparent !default
+$button-ghost-border-color: $button-border-color !default
+$button-ghost-text-color: $x-color-calmer-opposite !default
+
+$button-hover-ghost-background-color: if(alpha($button-ghost-background-color) != 0, bold-color($button-ghost-background-color, 5%), transparentize($button-background-color, 0.9)) !default
+$button-hover-ghost-border-color: bold-color($button-ghost-border-color, 5%) !default
+$button-hover-ghost-text-color: $button-ghost-text-color !default
+
+$button-focus-ghost-background-color: $button-hover-ghost-background-color !default
+$button-focus-ghost-border-color: $button-hover-ghost-border-color !default
+$button-focus-ghost-text-color: $button-hover-ghost-text-color !default
+
+$button-active-ghost-background-color: if(alpha($button-ghost-background-color) != 0, bold-color($button-ghost-background-color, 10%), transparentize($button-background-color, 0.8)) !default
+$button-active-ghost-border-color: bold-color($button-ghost-border-color, 10%) !default
+$button-active-ghost-text-color: $button-ghost-text-color !default
+
+$button-disabled-background-color: mix($x-color-background, $button-background-color, 50%) !default
+$button-disabled-text-color: mix($x-color-background, $button-text-color, 50%) !default
+$button-disabled-border-color: mix($x-color-background, $button-border-color, 50%) !default
+
+$button-disabled-ghost-background-color: mix($x-color-background, $button-ghost-background-color, 50%) !default
+$button-disabled-ghost-text-color: mix($x-color-background, $button-ghost-text-color, 50%) !default
+$button-disabled-ghost-border-color: mix($x-color-background, $button-ghost-border-color, 50%) !default
+
+// Primary button colors
+
+$button-primary-background-color: $x-color-primary !default
+$button-primary-border-color: $x-color-primary !default
+$button-primary-text-color: $x-color-primary-opposite !default
+
+$button-hover-primary-background-color: bold-color($button-primary-background-color, 5%) !default
+$button-hover-primary-border-color: bold-color($button-primary-border-color, 5%) !default
+$button-hover-primary-text-color: $button-primary-text-color !default
+
+$button-focus-primary-background-color: $button-hover-primary-background-color !default
+$button-focus-primary-border-color: $button-hover-primary-border-color !default
+$button-focus-primary-text-color: $button-hover-primary-text-color !default
+
+$button-active-primary-background-color: bold-color($button-primary-background-color, 10%) !default
+$button-active-primary-border-color: bold-color($button-primary-border-color, 10%) !default
+$button-active-primary-text-color: $button-primary-text-color !default
+
+$button-ghost-primary-background-color: transparent !default
+$button-ghost-primary-border-color: $button-primary-border-color !default
+$button-ghost-primary-text-color: $button-primary-background-color !default
+
+$button-hover-ghost-primary-background-color: if(alpha($button-ghost-primary-background-color) != 0, bold-color($button-ghost-primary-background-color, 10%), transparentize($button-primary-background-color, 0.9)) !default
+$button-hover-ghost-primary-border-color: bold-color($button-ghost-primary-border-color, 5%) !default
+$button-hover-ghost-primary-text-color: $button-ghost-primary-text-color !default
+
+$button-focus-ghost-primary-background-color: $button-hover-ghost-primary-background-color !default
+$button-focus-ghost-primary-border-color: $button-hover-ghost-primary-border-color !default
+$button-focus-ghost-primary-text-color: $button-hover-ghost-primary-text-color !default
+
+$button-active-ghost-primary-background-color: if(alpha($button-ghost-primary-background-color) != 0, bold-color($button-ghost-primary-background-color, 10%), transparentize($button-primary-background-color, 0.8)) !default
+$button-active-ghost-primary-border-color: bold-color($button-ghost-primary-border-color, 10%) !default
+$button-active-ghost-primary-text-color: $button-ghost-primary-text-color !default
+
+$button-disabled-primary-background-color: mix($x-color-background, $button-primary-background-color, 50%) !default
+$button-disabled-primary-border-color: mix($x-color-background, $button-primary-border-color, 50%) !default
+$button-disabled-primary-text-color: mix($x-color-background, $button-primary-text-color, 50%) !default
+
+$button-disabled-ghost-primary-background-color: mix($x-color-background, $button-ghost-primary-background-color, 50%) !default
+$button-disabled-ghost-primary-border-color: mix($x-color-background, $button-ghost-primary-border-color, 50%) !default
+$button-disabled-ghost-primary-text-color: mix($x-color-background, $button-ghost-primary-text-color, 50%) !default
+
+// Secondary button colors
+
+$button-secondary-background-color: $x-color-secondary !default
+$button-secondary-border-color: $x-color-secondary !default
+$button-secondary-text-color: $x-color-secondary-opposite !default
+
+$button-hover-secondary-background-color: bold-color($button-secondary-background-color, 5%) !default
+$button-hover-secondary-border-color: bold-color($button-secondary-border-color, 5%) !default
+$button-hover-secondary-text-color: $button-secondary-text-color !default
+
+$button-focus-secondary-background-color: $button-hover-secondary-background-color !default
+$button-focus-secondary-border-color: $button-hover-secondary-border-color !default
+$button-focus-secondary-text-color: $button-hover-secondary-text-color !default
+
+$button-active-secondary-background-color: bold-color($button-secondary-background-color, 10%) !default
+$button-active-secondary-border-color: bold-color($button-secondary-border-color, 10%) !default
+$button-active-secondary-text-color: $button-secondary-text-color !default
+
+$button-ghost-secondary-background-color: transparent !default
+$button-ghost-secondary-border-color: $button-secondary-border-color !default
+$button-ghost-secondary-text-color: $button-secondary-background-color !default
+
+$button-hover-ghost-secondary-background-color: if(alpha($button-ghost-secondary-background-color) != 0, bold-color($button-ghost-secondary-background-color, 10%), transparentize($button-secondary-background-color, 0.9)) !default
+$button-hover-ghost-secondary-border-color: bold-color($button-ghost-secondary-border-color, 5%) !default
+$button-hover-ghost-secondary-text-color: $button-ghost-secondary-text-color !default
+
+$button-focus-ghost-secondary-background-color: $button-hover-ghost-secondary-background-color !default
+$button-focus-ghost-secondary-border-color: $button-hover-ghost-secondary-border-color !default
+$button-focus-ghost-secondary-text-color: $button-hover-ghost-secondary-text-color !default
+
+$button-active-ghost-secondary-background-color: if(alpha($button-ghost-secondary-background-color) != 0, bold-color($button-ghost-secondary-background-color, 10%), transparentize($button-secondary-background-color, 0.8)) !default
+$button-active-ghost-secondary-border-color: bold-color($button-ghost-secondary-border-color, 10%) !default
+$button-active-ghost-secondary-text-color: $button-ghost-secondary-text-color !default
+
+$button-disabled-secondary-background-color: mix($x-color-background, $button-secondary-background-color, 50%) !default
+$button-disabled-secondary-border-color: mix($x-color-background, $button-secondary-border-color, 50%) !default
+$button-disabled-secondary-text-color: mix($x-color-background, $button-secondary-text-color, 50%) !default
+
+$button-disabled-ghost-secondary-background-color: mix($x-color-background, $button-ghost-secondary-background-color, 50%) !default
+$button-disabled-ghost-secondary-border-color: mix($x-color-background, $button-ghost-secondary-border-color, 50%) !default
+$button-disabled-ghost-secondary-text-color: mix($x-color-background, $button-ghost-secondary-text-color, 50%) !default
+
+// Tertiary button colors
+
+$button-tertiary-background-color: $x-color-tertiary !default
+$button-tertiary-border-color: $x-color-tertiary !default
+$button-tertiary-text-color: $x-color-tertiary-opposite !default
+
+$button-hover-tertiary-background-color: bold-color($button-tertiary-background-color, 5%) !default
+$button-hover-tertiary-border-color: bold-color($button-tertiary-border-color, 5%) !default
+$button-hover-tertiary-text-color: $button-tertiary-text-color !default
+
+$button-focus-tertiary-background-color: $button-hover-tertiary-background-color !default
+$button-focus-tertiary-border-color: $button-hover-tertiary-border-color !default
+$button-focus-tertiary-text-color: $button-hover-tertiary-text-color !default
+
+$button-active-tertiary-background-color: bold-color($button-tertiary-background-color, 10%) !default
+$button-active-tertiary-border-color: bold-color($button-tertiary-border-color, 10%) !default
+$button-active-tertiary-text-color: $button-tertiary-text-color !default
+
+$button-ghost-tertiary-background-color: transparent !default
+$button-ghost-tertiary-border-color: $button-tertiary-border-color !default
+$button-ghost-tertiary-text-color: $button-tertiary-background-color !default
+
+$button-hover-ghost-tertiary-background-color: if(alpha($button-ghost-tertiary-background-color) != 0, bold-color($button-ghost-tertiary-background-color, 10%), transparentize($button-tertiary-background-color, 0.9)) !default
+$button-hover-ghost-tertiary-border-color: bold-color($button-ghost-tertiary-border-color, 5%) !default
+$button-hover-ghost-tertiary-text-color: $button-ghost-tertiary-text-color !default
+
+$button-focus-ghost-tertiary-background-color: $button-hover-ghost-tertiary-background-color !default
+$button-focus-ghost-tertiary-border-color: $button-hover-ghost-tertiary-border-color !default
+$button-focus-ghost-tertiary-text-color: $button-hover-ghost-tertiary-text-color !default
+
+$button-active-ghost-tertiary-background-color: if(alpha($button-ghost-tertiary-background-color) != 0, bold-color($button-ghost-tertiary-background-color, 10%), transparentize($button-tertiary-background-color, 0.8)) !default
+$button-active-ghost-tertiary-border-color: bold-color($button-ghost-tertiary-border-color, 10%) !default
+$button-active-ghost-tertiary-text-color: $button-ghost-tertiary-text-color !default
+
+$button-disabled-tertiary-background-color: mix($x-color-background, $button-tertiary-background-color, 50%) !default
+$button-disabled-tertiary-border-color: mix($x-color-background, $button-tertiary-border-color, 50%) !default
+$button-disabled-tertiary-text-color: mix($x-color-background, $button-tertiary-text-color, 50%) !default
+
+$button-disabled-ghost-tertiary-background-color: mix($x-color-background, $button-ghost-tertiary-background-color, 50%) !default
+$button-disabled-ghost-tertiary-border-color: mix($x-color-background, $button-ghost-tertiary-border-color, 50%) !default
+$button-disabled-ghost-tertiary-text-color: mix($x-color-background, $button-ghost-tertiary-text-color, 50%) !default
+
+// Success button colors
+
+$button-success-background-color: $x-color-success !default
+$button-success-border-color: $x-color-success !default
+$button-success-text-color: $x-color-success-opposite !default
+
+$button-hover-success-background-color: bold-color($button-success-background-color, 5%) !default
+$button-hover-success-border-color: bold-color($button-success-border-color, 5%) !default
+$button-hover-success-text-color: $button-success-text-color !default
+
+$button-focus-success-background-color: $button-hover-success-background-color !default
+$button-focus-success-border-color: $button-hover-success-border-color !default
+$button-focus-success-text-color: $button-hover-success-text-color !default
+
+$button-active-success-background-color: bold-color($button-success-background-color, 10%) !default
+$button-active-success-border-color: bold-color($button-success-border-color, 10%) !default
+$button-active-success-text-color: $button-success-text-color !default
+
+$button-ghost-success-background-color: transparent !default
+$button-ghost-success-border-color: $button-success-border-color !default
+$button-ghost-success-text-color: $button-success-background-color !default
+
+$button-hover-ghost-success-background-color: if(alpha($button-ghost-success-background-color) != 0, bold-color($button-ghost-success-background-color, 10%), transparentize($button-success-background-color, 0.9)) !default
+$button-hover-ghost-success-border-color: bold-color($button-ghost-success-border-color, 5%) !default
+$button-hover-ghost-success-text-color: $button-ghost-success-text-color !default
+
+$button-focus-ghost-success-background-color: $button-hover-ghost-success-background-color !default
+$button-focus-ghost-success-border-color: $button-hover-ghost-success-border-color !default
+$button-focus-ghost-success-text-color: $button-hover-ghost-success-text-color !default
+
+$button-active-ghost-success-background-color: if(alpha($button-ghost-success-background-color) != 0, bold-color($button-ghost-success-background-color, 10%), transparentize($button-success-background-color, 0.8)) !default
+$button-active-ghost-success-border-color: bold-color($button-ghost-success-border-color, 10%) !default
+$button-active-ghost-success-text-color: $button-ghost-success-text-color !default
+
+$button-disabled-success-background-color: mix($x-color-background, $button-success-background-color, 50%) !default
+$button-disabled-success-border-color: mix($x-color-background, $button-success-border-color, 50%) !default
+$button-disabled-success-text-color: mix($x-color-background, $button-success-text-color, 50%) !default
+
+$button-disabled-ghost-success-background-color: mix($x-color-background, $button-ghost-success-background-color, 50%) !default
+$button-disabled-ghost-success-border-color: mix($x-color-background, $button-ghost-success-border-color, 50%) !default
+$button-disabled-ghost-success-text-color: mix($x-color-background, $button-ghost-success-text-color, 50%) !default
+
+// Info button colors
+
+$button-info-background-color: $x-color-info !default
+$button-info-border-color: $x-color-info !default
+$button-info-text-color: $x-color-info-opposite !default
+
+$button-hover-info-background-color: bold-color($button-info-background-color, 5%) !default
+$button-hover-info-border-color: bold-color($button-info-border-color, 5%) !default
+$button-hover-info-text-color: $button-info-text-color !default
+
+$button-focus-info-background-color: $button-hover-info-background-color !default
+$button-focus-info-border-color: $button-hover-info-border-color !default
+$button-focus-info-text-color: $button-hover-info-text-color !default
+
+$button-active-info-background-color: bold-color($button-info-background-color, 10%) !default
+$button-active-info-border-color: bold-color($button-info-border-color, 10%) !default
+$button-active-info-text-color: $button-info-text-color !default
+
+$button-ghost-info-background-color: transparent !default
+$button-ghost-info-border-color: $button-info-border-color !default
+$button-ghost-info-text-color: $button-info-background-color !default
+
+$button-hover-ghost-info-background-color: if(alpha($button-ghost-info-background-color) != 0, bold-color($button-ghost-info-background-color, 10%), transparentize($button-info-background-color, 0.9)) !default
+$button-hover-ghost-info-border-color: bold-color($button-ghost-info-border-color, 5%) !default
+$button-hover-ghost-info-text-color: $button-ghost-info-text-color !default
+
+$button-focus-ghost-info-background-color: $button-hover-ghost-info-background-color !default
+$button-focus-ghost-info-border-color: $button-hover-ghost-info-border-color !default
+$button-focus-ghost-info-text-color: $button-hover-ghost-info-text-color !default
+
+$button-active-ghost-info-background-color: if(alpha($button-ghost-info-background-color) != 0, bold-color($button-ghost-info-background-color, 10%), transparentize($button-info-background-color, 0.8)) !default
+$button-active-ghost-info-border-color: bold-color($button-ghost-info-border-color, 10%) !default
+$button-active-ghost-info-text-color: $button-ghost-info-text-color !default
+
+$button-disabled-info-background-color: mix($x-color-background, $button-info-background-color, 50%) !default
+$button-disabled-info-border-color: mix($x-color-background, $button-info-border-color, 50%) !default
+$button-disabled-info-text-color: mix($x-color-background, $button-info-text-color, 50%) !default
+
+$button-disabled-ghost-info-background-color: mix($x-color-background, $button-ghost-info-background-color, 50%) !default
+$button-disabled-ghost-info-border-color: mix($x-color-background, $button-ghost-info-border-color, 50%) !default
+$button-disabled-ghost-info-text-color: mix($x-color-background, $button-ghost-info-text-color, 50%) !default
+
+// Warning button colors
+
+$button-warning-background-color: $x-color-warning !default
+$button-warning-border-color: $x-color-warning !default
+$button-warning-text-color: $x-color-warning-opposite !default
+
+$button-hover-warning-background-color: bold-color($button-warning-background-color, 5%) !default
+$button-hover-warning-border-color: bold-color($button-warning-border-color, 5%) !default
+$button-hover-warning-text-color: $button-warning-text-color !default
+
+$button-focus-warning-background-color: $button-hover-warning-background-color !default
+$button-focus-warning-border-color: $button-hover-warning-border-color !default
+$button-focus-warning-text-color: $button-hover-warning-text-color !default
+
+$button-active-warning-background-color: bold-color($button-warning-background-color, 10%) !default
+$button-active-warning-border-color: bold-color($button-warning-border-color, 10%) !default
+$button-active-warning-text-color: $button-warning-text-color !default
+
+$button-ghost-warning-background-color: transparent !default
+$button-ghost-warning-border-color: $button-warning-border-color !default
+$button-ghost-warning-text-color: $button-warning-background-color !default
+
+$button-hover-ghost-warning-background-color: if(alpha($button-ghost-warning-background-color) != 0, bold-color($button-ghost-warning-background-color, 10%), transparentize($button-warning-background-color, 0.9)) !default
+$button-hover-ghost-warning-border-color: bold-color($button-ghost-warning-border-color, 5%) !default
+$button-hover-ghost-warning-text-color: $button-ghost-warning-text-color !default
+
+$button-focus-ghost-warning-background-color: $button-hover-ghost-warning-background-color !default
+$button-focus-ghost-warning-border-color: $button-hover-ghost-warning-border-color !default
+$button-focus-ghost-warning-text-color: $button-hover-ghost-warning-text-color !default
+
+$button-active-ghost-warning-background-color: if(alpha($button-ghost-warning-background-color) != 0, bold-color($button-ghost-warning-background-color, 10%), transparentize($button-warning-background-color, 0.8)) !default
+$button-active-ghost-warning-border-color: bold-color($button-ghost-warning-border-color, 10%) !default
+$button-active-ghost-warning-text-color: $button-ghost-warning-text-color !default
+
+$button-disabled-warning-background-color: mix($x-color-background, $button-warning-background-color, 50%) !default
+$button-disabled-warning-border-color: mix($x-color-background, $button-warning-border-color, 50%) !default
+$button-disabled-warning-text-color: mix($x-color-background, $button-warning-text-color, 50%) !default
+
+$button-disabled-ghost-warning-background-color: mix($x-color-background, $button-ghost-warning-background-color, 50%) !default
+$button-disabled-ghost-warning-border-color: mix($x-color-background, $button-ghost-warning-border-color, 50%) !default
+$button-disabled-ghost-warning-text-color: mix($x-color-background, $button-ghost-warning-text-color, 50%) !default
+
+// Error button colors
+
+$button-error-background-color: $x-color-error !default
+$button-error-border-color: $x-color-error !default
+$button-error-text-color: $x-color-error-opposite !default
+
+$button-hover-error-background-color: bold-color($button-error-background-color, 5%) !default
+$button-hover-error-border-color: bold-color($button-error-border-color, 5%) !default
+$button-hover-error-text-color: $button-error-text-color !default
+
+$button-focus-error-background-color: $button-hover-error-background-color !default
+$button-focus-error-border-color: $button-hover-error-border-color !default
+$button-focus-error-text-color: $button-hover-error-text-color !default
+
+$button-active-error-background-color: bold-color($button-error-background-color, 10%) !default
+$button-active-error-border-color: bold-color($button-error-border-color, 10%) !default
+$button-active-error-text-color: $button-error-text-color !default
+
+$button-ghost-error-background-color: transparent !default
+$button-ghost-error-border-color: $button-error-border-color !default
+$button-ghost-error-text-color: $button-error-background-color !default
+
+$button-hover-ghost-error-background-color: if(alpha($button-ghost-error-background-color) != 0, bold-color($button-ghost-error-background-color, 10%), transparentize($button-error-background-color, 0.9)) !default
+$button-hover-ghost-error-border-color: bold-color($button-ghost-error-border-color, 5%) !default
+$button-hover-ghost-error-text-color: $button-ghost-error-text-color !default
+
+$button-focus-ghost-error-background-color: $button-hover-ghost-error-background-color !default
+$button-focus-ghost-error-border-color: $button-hover-ghost-error-border-color !default
+$button-focus-ghost-error-text-color: $button-hover-ghost-error-text-color !default
+
+$button-active-ghost-error-background-color: if(alpha($button-ghost-error-background-color) != 0, bold-color($button-ghost-error-background-color, 10%), transparentize($button-error-background-color, 0.8)) !default
+$button-active-ghost-error-border-color: bold-color($button-ghost-error-border-color, 10%) !default
+$button-active-ghost-error-text-color: $button-ghost-error-text-color !default
+
+$button-disabled-error-background-color: mix($x-color-background, $button-error-background-color, 50%) !default
+$button-disabled-error-border-color: mix($x-color-background, $button-error-border-color, 50%) !default
+$button-disabled-error-text-color: mix($x-color-background, $button-error-text-color, 50%) !default
+
+$button-disabled-ghost-error-background-color: mix($x-color-background, $button-ghost-error-background-color, 50%) !default
+$button-disabled-ghost-error-border-color: mix($x-color-background, $button-ghost-error-border-color, 50%) !default
+$button-disabled-ghost-error-text-color: mix($x-color-background, $button-ghost-error-text-color, 50%) !default

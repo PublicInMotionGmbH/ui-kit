@@ -8,18 +8,17 @@ import { buildClassName } from '@talixo/shared'
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {*} [props.color]
+ * @param {*} [props.type]
  * @param {*} [props.size]
- * @param {*} [props.variant]
  * @returns {React.Element}
  */
 function Button (props) {
-  const { children, className, color, size, variant, ...passedProps } = props
+  const { children, className, type, small, wide, submit, ghost, ...passedProps } = props
 
-  const clsName = buildClassName('button', className, [ color, size, variant ])
+  const clsName = buildClassName('button', className, [ type ], { ghost, small, wide })
 
   return (
-    <button className={clsName} {...passedProps}>
+    <button className={clsName} type={submit ? 'submit' : 'button'} {...passedProps}>
       {children}
     </button>
   )
@@ -32,18 +31,26 @@ Button.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Button color */
-  color: PropTypes.string,
+  /** Should this button have `submit` type? */
+  submit: PropTypes.bool,
 
-  /** Button size */
-  size: PropTypes.string,
+  /** Button styling type */
+  type: PropTypes.oneOf([ 'primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'error' ]),
 
-  /** Button variant */
-  variant: PropTypes.string
+  /** Is this button a ghost-button (with transparent background)? */
+  ghost: PropTypes.bool,
+
+  /** Should this button be small? */
+  small: PropTypes.bool,
+
+  /** Should use full 100% width? */
+  wide: PropTypes.bool
 }
 
 Button.defaultProps = {
-  disabled: false
+  ghost: false,
+  small: false,
+  wide: false
 }
 
 export default Button

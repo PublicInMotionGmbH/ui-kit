@@ -40,3 +40,9 @@ $contrasted-light-default: #fff !default
   $color: mix($appendedColor, $previousColor, $percentage)
 
   @return hsla(hue($color), saturation($previousColor), lightness($color), alpha($color))
+
+@function text-shadow-smoothness($text-color, $background-color)
+  $contrast-color: transparentize(text-contrast($text-color), 0.7)
+  $result-color: mix($contrast-color, $background-color, 50%)
+
+  @return 0 0 3px #{$result-color}
