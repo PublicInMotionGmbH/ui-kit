@@ -62,6 +62,10 @@ addStory('default size', readme, () => (
     <Button onClick={click} type='success' ghost>Ghost</Button>{' '}
     <Button onClick={click} type='success' disabled>Disabled</Button>{' '}
     <Button onClick={click} type='success' ghost disabled>Ghost & disabled</Button>
+
+    <h2>Link</h2>
+    <Button onClick={click} type='link'>Default</Button>{' '}
+    <Button onClick={click} type='link' disabled>Disabled</Button>
   </div>
 ))
 
@@ -114,6 +118,10 @@ addStory('small', readme, () => (
     <Button small onClick={click} type='success' ghost>Ghost</Button>{' '}
     <Button small onClick={click} type='success' disabled>Disabled</Button>{' '}
     <Button small onClick={click} type='success' ghost disabled>Ghost & disabled</Button>
+
+    <h2>Link</h2>
+    <Button small onClick={click} type='link'>Default</Button>{' '}
+    <Button small onClick={click} type='link' disabled>Disabled</Button>
   </div>
 ))
 

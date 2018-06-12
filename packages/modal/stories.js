@@ -56,7 +56,7 @@ addStory('with header and footer', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -75,7 +75,7 @@ addStory('simple informational modal', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -94,7 +94,7 @@ addStory('simple informational modal with icon', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -113,7 +113,7 @@ addStory('success informational modal', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='success'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -132,7 +132,7 @@ addStory('error informational modal', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='error'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -151,7 +151,7 @@ addStory('warning informational modal', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -170,7 +170,7 @@ addStory('info informational modal', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Yes</Button>
-        <Button>No</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>
@@ -193,8 +193,8 @@ addStory.controlled('controlled informational', readme, (setState, state) => (
 
       <ModalFooter>
         <ControlGroup>
-          <Button type='error' onClick={() => setState({ open: false })}>Yes</Button>
-          <Button onClick={() => setState({ open: false })}>No</Button>
+          <Button type='error' onClick={() => setState({ open: false })}>OK</Button>
+          <Button type='link' onClick={() => setState({ open: false })}>Cancel</Button>
         </ControlGroup>
       </ModalFooter>
     </Modal>
@@ -217,7 +217,7 @@ addStory('long content', readme, () => (
     <ModalFooter>
       <ControlGroup>
         <Button type='primary'>Accept</Button>
-        <Button>Cancel</Button>
+        <Button type='link'>Cancel</Button>
       </ControlGroup>
     </ModalFooter>
   </Modal>

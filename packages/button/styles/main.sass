@@ -2,51 +2,53 @@
 
 // Internal mixin for applying button colors
 
-@mixin _button-color($selector, $background, $border: $background, $text: text-contrast($background))
+@mixin _button-color($selector, $background, $border: $background, $text: text-contrast($background), $smoothness: $button-text-shadow)
   #{$selector}
     background-color: $background
     border-color: $border
     color: $text
 
-    @if $button-text-shadow
+    @if $smoothness
       text-shadow: text-shadow-smoothness($text, $background)
+    @else if $button-text-shadow
+      text-shadow: none
 
 // External mixin for applying colors
 
-@mixin button-color($selector, $background, $border, $text)
-  @include _button-color('#{prefix('button')}#{$selector}', $background, $border, $text)
+@mixin button-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}', $background, $border, $text, $smoothness)
 
-@mixin button-hover-color($selector, $background, $border, $text)
-  @include _button-color('#{prefix('button')}#{$selector}:hover', $background, $border, $text)
+@mixin button-hover-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:hover', $background, $border, $text, $smoothness)
 
-@mixin button-focus-color($selector, $background, $border, $text)
-  @include _button-color('#{prefix('button')}#{$selector}:focus', $background, $border, $text)
+@mixin button-focus-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:focus', $background, $border, $text, $smoothness)
 
-@mixin button-active-color($selector, $background, $border, $text)
-  @include _button-color('#{prefix('button')}#{$selector}:active', $background, $border, $text)
+@mixin button-active-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:active', $background, $border, $text, $smoothness)
 
-@mixin button-disabled-color($selector, $background, $border, $text)
-  @include _button-color('#{prefix('button')}#{$selector}:disabled', $background, $border, $text)
+@mixin button-disabled-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:disabled', $background, $border, $text, $smoothness)
 
-@mixin button-ghost-color($selector, $background, $border, $text)
+@mixin button-ghost-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
   $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
-  @include button-color($selector, $background, $border, $text)
+  @include button-color($selector, $background, $border, $text, $smoothness)
 
-@mixin button-ghost-hover-color($selector, $background, $border, $text)
+@mixin button-ghost-hover-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
   $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
-  @include button-hover-color($selector, $background, $border, $text)
+  @include button-hover-color($selector, $background, $border, $text, $smoothness)
 
-@mixin button-ghost-focus-color($selector, $background, $border, $text)
+@mixin button-ghost-focus-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
   $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
-  @include button-focus-color($selector, $background, $border, $text)
+  @include button-focus-color($selector, $background, $border, $text, $smoothness)
 
-@mixin button-ghost-active-color($selector, $background, $border, $text)
+@mixin button-ghost-active-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
   $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
-  @include button-active-color($selector, $background, $border, $text)
+  @include button-active-color($selector, $background, $border, $text, $smoothness)
 
-@mixin button-ghost-disabled-color($selector, $background, $border, $text)
+@mixin button-ghost-disabled-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
   $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
-  @include button-disabled-color($selector, $background, $border, $text)
+  @include button-disabled-color($selector, $background, $border, $text, $smoothness)
 
 // Styling itself
 
@@ -75,6 +77,14 @@
   &--wide
     display: block
     width: 100%
+
+  &--link
+    &:hover, &:focus
+      text-decoration: none
+
+  &--link
+    &, &:disabled
+      text-decoration: underline
 
   &:disabled
     cursor: not-allowed
@@ -206,3 +216,11 @@
 @include button-ghost-focus-color('--error', $button-focus-ghost-error-background-color, $button-focus-ghost-error-border-color, $button-focus-ghost-error-text-color)
 @include button-ghost-active-color('--error', $button-active-ghost-error-background-color, $button-active-ghost-error-border-color, $button-active-ghost-error-text-color)
 @include button-ghost-disabled-color('--error', $button-disabled-ghost-error-background-color, $button-disabled-ghost-error-border-color, $button-disabled-ghost-error-text-color)
+
+// Link button colors
+
+@include button-color('--link', $button-link-background-color, $button-link-border-color, $button-link-text-color, false)
+@include button-hover-color('--link', $button-hover-link-background-color, $button-hover-link-border-color, $button-hover-link-text-color, false)
+@include button-focus-color('--link', $button-focus-link-background-color, $button-focus-link-border-color, $button-focus-link-text-color, false)
+@include button-active-color('--link', $button-active-link-background-color, $button-active-link-border-color, $button-active-link-text-color, false)
+@include button-disabled-color('--link', $button-disabled-link-background-color, $button-disabled-link-border-color, $button-disabled-link-text-color, false)

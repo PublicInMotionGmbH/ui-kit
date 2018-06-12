@@ -353,3 +353,26 @@ $button-disabled-error-text-color: mix($x-color-background, $button-error-text-c
 $button-disabled-ghost-error-background-color: mix($x-color-background, $button-ghost-error-background-color, 50%) !default
 $button-disabled-ghost-error-border-color: mix($x-color-background, $button-ghost-error-border-color, 50%) !default
 $button-disabled-ghost-error-text-color: mix($x-color-background, $button-ghost-error-text-color, 50%) !default
+
+// Link button colors
+// TODO: Change $button-link-text-color after typography will be changed
+
+$button-link-background-color: transparent !default
+$button-link-border-color: transparent !default
+$button-link-text-color: $color-ghost-text !default
+
+$button-hover-link-background-color: bold-color($button-link-background-color, 5%) !default
+$button-hover-link-border-color: bold-color($button-link-border-color, 5%) !default
+$button-hover-link-text-color: $button-link-text-color !default
+
+$button-focus-link-background-color: $button-hover-link-background-color !default
+$button-focus-link-border-color: $button-hover-link-border-color !default
+$button-focus-link-text-color: $button-hover-link-text-color !default
+
+$button-active-link-background-color: bold-color($button-link-background-color, 10%) !default
+$button-active-link-border-color: bold-color($button-link-border-color, 10%) !default
+$button-active-link-text-color: $button-link-text-color !default
+
+$button-disabled-link-background-color: mix($x-color-background, $button-link-background-color, 50%) !default
+$button-disabled-link-border-color: mix($x-color-background, $button-link-border-color, 50%) !default
+$button-disabled-link-text-color: mix($x-color-background, $button-link-text-color, 50%) !default

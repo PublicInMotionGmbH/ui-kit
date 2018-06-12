@@ -35,7 +35,7 @@ Button.propTypes = {
   submit: PropTypes.bool,
 
   /** Button styling type */
-  type: PropTypes.oneOf([ 'primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'error' ]),
+  type: PropTypes.oneOf([ 'link', 'primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'error' ]),
 
   /** Is this button a ghost-button (with transparent background)? */
   ghost: PropTypes.bool,
