@@ -29,9 +29,9 @@ describe('<Notification />', () => {
     expect(className).toContain(`${moduleName}--error`)
   })
 
-  it('calls handleRemove when clicked', () => {
+  it('calls onRemove when clicked', () => {
     const onClick = jest.fn()
-    const wrapper = mount(<Notification handleRemove={onClick}>Notification</Notification>)
+    const wrapper = mount(<Notification onRemove={onClick}>Notification</Notification>)
 
     wrapper.find(`span.${moduleName}__close`).simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)
