@@ -1,0 +1,41 @@
+{
+  "name": "@talixo/spy-scroll",
+  "version": "0.0.0",
+  "description": "UI Component which represents Spy Scroll",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only spy-scroll",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only spy-scroll"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-instantiable-stateless": "^1.0.3"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "@talixo/shared": "^0.1.0",
+    "lodash.throttle": "^4.1.1",
+    "react-instantiable-stateless": "^1.0.3"
+  }
+}
