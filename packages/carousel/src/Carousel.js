@@ -17,7 +17,7 @@ const moduleName = 'carousel'
 class Carousel extends React.PureComponent {
   state = {
     currentSlide: 0,
-    childrenLength: this.props.children.length,
+    childrenLength: this.props.children ? this.props.children.length : 0,
     isNext: true
   }
 
