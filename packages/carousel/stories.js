@@ -12,6 +12,9 @@ const addStory = createStoriesFactory('Carousel', module, {
 })
 
 // Styles for stories
+const wrapperStyle = {
+  height: '200px'
+}
 
 const imagesStyle = {
   display: 'inline-block',
@@ -27,17 +30,22 @@ const imagesStyle = {
 // Stories
 
 addStory('initial', readme, () => (
-  <Carousel>
-    <div style={imagesStyle}>TEXT 1</div>
-    <div style={imagesStyle}>TEXT 2</div>
-    <div style={imagesStyle}>TEXT 3</div>
-  </Carousel>
+  <div style={wrapperStyle}>
+    <Carousel>
+      <div style={imagesStyle}>TEXT 1</div>
+      <div style={imagesStyle}>TEXT 2</div>
+      <div style={imagesStyle}>TEXT 3</div>
+    </Carousel>
+  </div>
+
 ))
 
 addStory('with arrows', readme, () => (
-  <Carousel arrows dots>
-    <div style={imagesStyle}>TEXT 1</div>
-    <div style={imagesStyle}>TEXT 2</div>
-    <div style={imagesStyle}>TEXT 3</div>
-  </Carousel>
+  <div style={wrapperStyle}>
+    <Carousel arrows dots>
+      <div style={imagesStyle}>TEXT 1</div>
+      <div style={imagesStyle}>TEXT 2</div>
+      <div style={imagesStyle}>TEXT 3</div>
+    </Carousel>
+  </div>
 ))

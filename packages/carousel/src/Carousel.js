@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
 import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'carousel'
@@ -16,51 +14,86 @@ const moduleName = 'carousel'
  */
 class Carousel extends React.PureComponent {
   state = {
-    currentSlide: 0,
-    childrenLength: this.props.children ? this.props.children.length : 0,
-    isNext: true
+    currentSlide: 1,
+    childrenLength: this.props.children.length + 1,
+    transform: 0,
+    transitionTime: 400
   }
 
   handlerPrev = () => {
-    const { currentSlide, childrenLength } = this.state
+    const { currentSlide, childrenLength, transform } = this.state
 
-    if (currentSlide < 1) {
-      this.setState({currentSlide: childrenLength - 1})
-    } else {
-      this.setState({currentSlide: currentSlide - 1})
+    if (currentSlide === 0) {
+      this.setState({
+        transform: '75%'
+      })
     }
 
-    this.setState({isNext: false})
+    if (currentSlide < 0) {
+      this.setState({
+        currentSlide: childrenLength - 1
+      })
+    } else {
+      this.setState({
+        currentSlide: currentSlide - 1,
+        transform: transform + (100 / childrenLength)
+      })
+    }
   }
 
   handlerNext = () => {
-    const { currentSlide, childrenLength } = this.state
+    const { currentSlide, childrenLength, transform } = this.state
 
-    if (currentSlide > childrenLength - 2) {
-      this.setState({currentSlide: 0})
-    } else {
-      this.setState({currentSlide: currentSlide + 1})
+    if (currentSlide === childrenLength) {
+      this.setState({
+        transitionTime: 0,
+        transform: 0
+      })
     }
 
-    this.setState({isNext: true})
+    if (currentSlide > childrenLength - 1) {
+      this.setState({currentSlide: 1})
+    } else {
+      this.setState({
+        currentSlide: currentSlide + 1,
+        transform: transform - (100 / childrenLength)
+      })
+    }
   }
 
   renderChildren = () => {
     const {children} = this.props
+    const {childrenLength} = this.state
     return (
-      <ReactCSSTransitionGroup
-        transitionName={{
-          enter: this.state.isNext ? 'enter-next' : 'enter-prev',
-          enterActive: 'enter-active',
-          leave: 'leave',
-          leaveActive: this.state.isNext ? 'leave-active-next' : 'leave-active-prev'
-        }}
-        transitionEnterTimeout={900}
-        transitionLeaveTimeout={900}
-      >
-        {<span className='one-slide' key={this.state.currentSlide}>{children[this.state.currentSlide]}</span>}
-      </ReactCSSTransitionGroup>
+      <span style={{width: '100%'}}>
+        {children.map((el, i) => {
+          return (
+            <span className='one-slide' style={{order: i + 1, width: `${100 / childrenLength}%`}} key={i}>{el}</span>
+          )
+        })}
+        <span className='one-slide' style={{order: childrenLength, width: `${100 / childrenLength}%`}} key={children.length}>{children[0]}</span>
+      </span>
+    )
+  }
 
+  renderWrapper = () => {
+    const { childrenLength, transform, transitionTime } = this.state
+
+    return (
+      <span style={{width: `${childrenLength * 100}%`, transform: `translateX(${transform}%)`, transition: `${transitionTime}ms`}} className='children-wrapper'>
+        {this.renderChildren()}
+      </span>
+    )
+  }
+
+  renderDots = () => {
+    const { children } = this.props
+    return (
+      children.map((el, i) => {
+        return (
+          <span key={i} className='dots'>{i}</span>
+        )
+      })
     )
   }
 
@@ -68,24 +101,23 @@ class Carousel extends React.PureComponent {
     const { arrows, className, children, dots, ...passedProps } = this.props
 
     return (
-      <span className={buildClassName(moduleName, className)} {...passedProps} >
-        <span className='children-wrapper'>
-          {this.renderChildren()}
-        </span>
-        {dots && <span className='dots'>{children.length}</span>}
-
-        {arrows && <span className='buttons'>
+      <div className={buildClassName(moduleName, className)} {...passedProps} >
+        {this.renderWrapper()}
+        {dots && this.renderDots()}
+        {arrows && <span className={buildClassName([moduleName, 'buttons'])}>
           <button onClick={this.handlerPrev}>Prev</button>
           <button onClick={this.handlerNext}>Next</button>
         </span>}
-      </span>
+      </div>
     )
   }
 }
 
 Carousel.propTypes = {
   /** Additional class name */
-  className: PropTypes.string
+  className: PropTypes.string,
+
+  slidesVisible: PropTypes.number
 }
 
 Carousel.defaultProps = {

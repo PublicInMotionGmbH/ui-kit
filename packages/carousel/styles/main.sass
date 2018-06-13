@@ -3,48 +3,29 @@
 @include module('carousel')
   position: relative
   display: inline-block
-  width: 200px
-  height: 200px
+  width: 100%
+  height: 100%
   overflow: hidden
 
   .children-wrapper
     position: relative
-    display: inline-block
-    width: 200px
+    display: flex
+    width: 100%
+    height: 100%
+    transition: 500ms transform ease-in;
 
   .one-slide
-    position: absolute
-    top: 0
     display: inline-block
-    width: 200px
-    height: 200px
+    height: 100%
+    box-sizing: border-box
 
-  .buttons
+  &__buttons
     position: absolute
     bottom: 20px
-    left: 20px
+    left: 30px
 
-  .enter-active.enter-next, .enter-active.enter-prev 
-    transform: translateX(0)
-    transition: transform 400ms linear
-  
-
-  .enter-next 
-    transform: translateX(100%)
-  
-
-  .enter-prev 
-    transform: translateX(-100%)
-    transition: transform 400ms linear
-  
-  .leave 
-    transform: translateX(0)
-  
-  .leave-active-next 
-    transform: translateX(-100%)
-    transition: transform 400ms linear
-  
-
-  .leave.leave-active-prev 
-    transform: translateX(100%)
-    transition: transform 400ms linear 
+  .dots
+    position: relative
+    font-size: 40px
+    left: 300px
+    bottom: 30px
