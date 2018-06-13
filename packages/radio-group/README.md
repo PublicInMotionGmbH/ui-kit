@@ -47,4 +47,4 @@ value         | string            | yes       | n/a     | Value of the option.
 
 ## Changelog
 
-- **1.0.0** - initial version
+- **0.1.0** - initial version

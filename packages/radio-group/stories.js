@@ -9,7 +9,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('RadioGroup', module, {
-  propTables: [ RadioGroup ]
+  propTables: [RadioGroup]
 })
 
 // Helpers
@@ -40,7 +40,7 @@ addStory('vertical', readme, () => (
 
 addStory.controlled('with default value', readme, (setState, state) => (
   <RadioGroup
-    onChange={value => setState({value})}
+    onChange={value => setState({ value })}
     name='RadioNameChecked'
     value={state.value}
     options={options}
@@ -59,7 +59,7 @@ addStory.controlled('with different size', readme, (setState, state) => (
     />
     <h2>Large size</h2>
     <RadioGroup
-      onChange={value2 => setState({value2})}
+      onChange={value2 => setState({ value2 })}
       name='RadioName2'
       size='large'
       value={state.value2}
@@ -70,7 +70,7 @@ addStory.controlled('with different size', readme, (setState, state) => (
 
 addStory.controlled('with disabled option', readme, (setState, state) => (
   <RadioGroup
-    onChange={value => setState({value})}
+    onChange={value => setState({ value })}
     name='RadioNameDisabled'
     value={state.value}
     options={disabledOptions}
@@ -83,7 +83,7 @@ addStory.controlled('with custom option', readme, (setState, state) => (
     <RadioGroup
       allowCustom
       customPlaceholder='Other'
-      onChange={value => setState({value})}
+      onChange={value => setState({ value })}
       name='radioCustom'
       value={state.value}
       options={options}
@@ -92,7 +92,7 @@ addStory.controlled('with custom option', readme, (setState, state) => (
     <RadioGroup
       allowCustom
       customPlaceholder='Other'
-      onChange={value => setState({value})}
+      onChange={value => setState({ value })}
       name='radioCustomVertical'
       value={state.value}
       options={options}
@@ -101,11 +101,11 @@ addStory.controlled('with custom option', readme, (setState, state) => (
   </div>
 ), () => ({ value: 'option_3' }))
 
-addStory.controlled('with custom option and component', readme, (setState, state) => (
+addStory.controlled('with custom option component', readme, (setState, state) => (
   <RadioGroup
     allowCustom
     customComponent={<input type='text' />}
-    onChange={value => setState({value})}
+    onChange={value => setState({ value })}
     name='radioCustomComponent'
     value={state.value}
     options={options}
