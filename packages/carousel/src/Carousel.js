@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import { buildClassName } from '@talixo/shared'
+
+const moduleName = 'carousel'
 
 /**
  * Component which represents Carousel.
@@ -14,40 +16,51 @@ import { buildClassName } from '@talixo/shared'
  */
 class Carousel extends React.PureComponent {
   state = {
-    currentSlide: 1,
-    childrenLength: this.props.children.length
+    currentSlide: 0,
+    childrenLength: this.props.children.length,
+    isNext: true
   }
 
   handlerPrev = () => {
-    const { currentSlide, childrenLength } = this.props
-
-    this.setState({currentSlide: childrenLength - 1})
+    const { currentSlide, childrenLength } = this.state
 
     if (currentSlide < 1) {
-      this.setState({currentSlide: childrenLength})
-    } else {
       this.setState({currentSlide: childrenLength - 1})
+    } else {
+      this.setState({currentSlide: currentSlide - 1})
     }
+
+    this.setState({isNext: false})
   }
 
   handlerNext = () => {
-    const { currentSlide, childrenLength } = this.props
+    const { currentSlide, childrenLength } = this.state
 
-    this.setState({currentSlide: childrenLength + 1})
-
-    if (currentSlide === childrenLength) {
-      this.setState({currentSlide: 1})
+    if (currentSlide > childrenLength - 2) {
+      this.setState({currentSlide: 0})
     } else {
-      this.setState({currentSlide: childrenLength + 1})
+      this.setState({currentSlide: currentSlide + 1})
     }
+
+    this.setState({isNext: true})
   }
 
   renderChildren = () => {
     const {children} = this.props
     return (
-      React.Children.map(children, (el, i) => {
-        return <span className='one-slide' key={i}>{el}</span>
-      })
+      <ReactCSSTransitionGroup
+        transitionName={{
+          enter: this.state.isNext ? 'enter-next' : 'enter-prev',
+          enterActive: 'enter-active',
+          leave: 'leave',
+          leaveActive: this.state.isNext ? 'leave-active-next' : 'leave-active-prev'
+        }}
+        transitionEnterTimeout={900}
+        transitionLeaveTimeout={900}
+      >
+        {<span className='one-slide' key={this.state.currentSlide}>{children[this.state.currentSlide]}</span>}
+      </ReactCSSTransitionGroup>
+
     )
   }
 
@@ -55,15 +68,15 @@ class Carousel extends React.PureComponent {
     const { arrows, className, children, dots, ...passedProps } = this.props
 
     return (
-      <span className={buildClassName('carousel', className)} {...passedProps} >
+      <span className={buildClassName(moduleName, className)} {...passedProps} >
         <span className='children-wrapper'>
           {this.renderChildren()}
         </span>
+        {/* {dots && <span className='dots'>{children.length}</span>} */}
 
-        {dots && <span className='dots'>{children.length}</span>}
         {arrows && <span className='buttons'>
-          <button onClick={this.handlerPrev()}>Prev</button>
-          <button onClick={this.handlerNext()}>Next</button>
+          <button onClick={this.handlerPrev}>Prev</button>
+          <button onClick={this.handlerNext}>Next</button>
         </span>}
       </span>
     )

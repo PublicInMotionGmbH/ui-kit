@@ -15,8 +15,8 @@ const addStory = createStoriesFactory('Carousel', module, {
 
 const imagesStyle = {
   display: 'inline-block',
-  height: '200px',
-  width: '200px',
+  height: '100%',
+  width: '100%',
   backgroundColor: 'green',
   border: '5px solid black',
   textAlign: 'center',
@@ -34,8 +34,8 @@ addStory('initial', readme, () => (
   </Carousel>
 ))
 
-addStory('with dots', readme, () => (
-  <Carousel dots arrows>
+addStory('with arrows', readme, () => (
+  <Carousel arrows dots>
     <div style={imagesStyle}>TEXT 1</div>
     <div style={imagesStyle}>TEXT 2</div>
     <div style={imagesStyle}>TEXT 3</div>

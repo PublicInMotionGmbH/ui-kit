@@ -8,13 +8,43 @@
   overflow: hidden
 
   .children-wrapper
+    position: relative
     display: inline-block
-    width: 600px
+    width: 200px
 
   .one-slide
+    position: absolute
+    top: 0
+    display: inline-block
     width: 200px
+    height: 200px
 
   .buttons
     position: absolute
     bottom: 20px
-    
+    left: 20px
+
+  .enter-active.enter-next, .enter-active.enter-prev 
+    transform: translateX(0)
+    transition: transform 400ms linear
+  
+
+  .enter-next 
+    transform: translateX(100%)
+  
+
+  .enter-prev 
+    transform: translateX(-100%)
+    transition: transform 400ms linear
+  
+  .leave 
+    transform: translateX(0)
+  
+  .leave-active-next 
+    transform: translateX(-100%)
+    transition: transform 400ms linear
+  
+
+  .leave.leave-active-prev 
+    transform: translateX(100%)
+    transition: transform 400ms linear 
