@@ -3,5 +3,30 @@
 exports[`<Carousel /> renders children correctly 1`] = `
 <span
   className="talixo-carousel"
-/>
+>
+  <span
+    className="children-wrapper"
+  >
+    <CSSTransitionGroup
+      transitionAppear={false}
+      transitionEnter={true}
+      transitionEnterTimeout={900}
+      transitionLeave={true}
+      transitionLeaveTimeout={900}
+      transitionName={
+        Object {
+          "enter": "enter-next",
+          "enterActive": "enter-active",
+          "leave": "leave",
+          "leaveActive": "leave-active-next",
+        }
+      }
+    >
+      <span
+        className="one-slide"
+        key="0"
+      />
+    </CSSTransitionGroup>
+  </span>
+</span>
 `;

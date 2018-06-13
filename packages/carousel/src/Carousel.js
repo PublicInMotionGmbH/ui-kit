@@ -72,7 +72,7 @@ class Carousel extends React.PureComponent {
         <span className='children-wrapper'>
           {this.renderChildren()}
         </span>
-        {/* {dots && <span className='dots'>{children.length}</span>} */}
+        {dots && <span className='dots'>{children.length}</span>}
 
         {arrows && <span className='buttons'>
           <button onClick={this.handlerPrev}>Prev</button>
@@ -89,6 +89,7 @@ Carousel.propTypes = {
 }
 
 Carousel.defaultProps = {
+  children: []
 }
 
 export default Carousel
