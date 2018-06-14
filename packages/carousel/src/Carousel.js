@@ -1,9 +1,14 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'carousel'
+
+function reflow (node) {
+  return node.offsetHeight
+}
 
 /**
  * Component which represents Carousel.
@@ -14,75 +19,130 @@ const moduleName = 'carousel'
  */
 class Carousel extends React.PureComponent {
   state = {
-    currentSlide: 1,
+    currentSlide: 0,
     childrenLength: this.props.children.length + 1,
     transform: 0,
-    transitionTime: 400
+    transitionTime: this.props.duration,
+    lastSlide: false
   }
 
-  handlerPrev = () => {
-    const { currentSlide, childrenLength, transform } = this.state
+  componentDidUpdate () {
+    // const { currentSlide, childrenLength, lastSlide, transform } = this.state
+    // const { duration } = this.props
+    // if (lastSlide) {
+    //   this.setState({
+    //     transitionTime: 0,
+    //     currentSlide: currentSlide + 1,
+    //     transform: transform - (100 / childrenLength),
+    //     lastSlide: false
+    //   })
+    //   console.log('acompo did mount')
+    // }
+    console.log(this.state.currentSlide)
+    console.log('update')
+  }
 
-    if (currentSlide === 0) {
-      this.setState({
-        transform: '75%'
-      })
+  goImmediately (slide) {
+    const { currentSlide } = this.state
+    const { duration } = this.props
+
+    if (slide === currentSlide) {
+      return Promise.resolve()
     }
 
-    if (currentSlide < 0) {
+    return new Promise(resolve => {
       this.setState({
-        currentSlide: childrenLength - 1
+        currentSlide: slide,
+        transitionTime: 0
+      }, () => {
+        reflow(this.wrapper)
+
+        this.setState({
+          transitionTime: duration
+        }, resolve)
       })
+    })
+  }
+
+  async go (index, type = 'forward') {
+    const { children, perPage } = this.props
+    const { currentSlide } = this.state
+
+    let length = children.length
+
+    while (length < perPage) {
+      length += children.length
+    }
+
+    while (index < 0 /* && length */) {
+      index = length + index
+    }
+
+    let current = currentSlide % length
+    let next = index % length
+
+    if (type === 'forward') {
+      next = next > current ? next : length + next
     } else {
-      this.setState({
-        currentSlide: currentSlide - 1,
-        transform: transform + (100 / childrenLength)
-      })
+      current = next > current ? length + current : current
     }
+
+    await this.goImmediately(current)
+
+    this.setState({ currentSlide: next })
   }
 
   handlerNext = () => {
-    const { currentSlide, childrenLength, transform } = this.state
+    const { perPage } = this.props
+    const { currentSlide } = this.state
 
-    if (currentSlide === childrenLength) {
-      this.setState({
-        transitionTime: 0,
-        transform: 0
-      })
-    }
+    this.go(currentSlide + perPage)
+  }
 
-    if (currentSlide > childrenLength - 1) {
-      this.setState({currentSlide: 1})
-    } else {
-      this.setState({
-        currentSlide: currentSlide + 1,
-        transform: transform - (100 / childrenLength)
-      })
-    }
+  handlerPrev = () => {
+    const { perPage } = this.props
+    const { currentSlide } = this.state
+
+    this.go(currentSlide - perPage, 'back')
+  }
+
+  setRef = node => {
+    this.wrapper = findDOMNode(node)
   }
 
   renderChildren = () => {
-    const {children} = this.props
-    const {childrenLength} = this.state
+    const { children, perPage } = this.props
+
+    const style = { minWidth: `${100 / perPage}%`, maxWidth: `${100 / perPage}%` }
+
+    const elements = []
+
+    for (let i = 0; i < Math.max(children.length, perPage) * 3; i++) {
+      elements.push(
+        <div className='one-slide' style={style} key={'copy-' + i}>{children[i % children.length]}</div>
+      )
+    }
+
     return (
-      <span style={{width: '100%'}}>
+      <div style={{display: 'flex', height: '100%'}}>
         {children.map((el, i) => {
           return (
-            <span className='one-slide' style={{order: i + 1, width: `${100 / childrenLength}%`}} key={i}>{el}</span>
+            <div className='one-slide' style={style} key={i}>{el}</div>
           )
         })}
-        <span className='one-slide' style={{order: childrenLength, width: `${100 / childrenLength}%`}} key={children.length}>{children[0]}</span>
-      </span>
+        {elements}
+      </div>
     )
   }
 
   renderWrapper = () => {
-    const { childrenLength, transform, transitionTime } = this.state
+    const { perPage } = this.props
+    const { transitionTime, currentSlide } = this.state
 
     return (
-      <span style={{width: `${childrenLength * 100}%`, transform: `translateX(${transform}%)`, transition: `${transitionTime}ms`}} className='children-wrapper'>
+      <div ref={this.setRef} style={{transform: `translateX(-${currentSlide * 100 / perPage}%)`, transitionDuration: `${transitionTime}ms`}} className='children-wrapper'>
         {this.renderChildren()}
-      </span>
+      </div>
     )
   }
 
@@ -98,16 +158,16 @@ class Carousel extends React.PureComponent {
   }
 
   render () {
-    const { arrows, className, children, dots, ...passedProps } = this.props
+    const { arrows, className, children, dots, duration, ...passedProps } = this.props
 
     return (
       <div className={buildClassName(moduleName, className)} {...passedProps} >
         {this.renderWrapper()}
         {dots && this.renderDots()}
-        {arrows && <span className={buildClassName([moduleName, 'buttons'])}>
+        {arrows && <div className={buildClassName([moduleName, 'buttons'])}>
           <button onClick={this.handlerPrev}>Prev</button>
           <button onClick={this.handlerNext}>Next</button>
-        </span>}
+        </div>}
       </div>
     )
   }
@@ -117,11 +177,19 @@ Carousel.propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  slidesVisible: PropTypes.number
+  /** Number of visible elements in one slide */
+  slidesVisible: PropTypes.number,
+
+  /** Slides animation duration */
+  duration: PropTypes.number
+
+  /**  */
 }
 
 Carousel.defaultProps = {
-  children: []
+  children: [],
+  duration: 500,
+  perPage: 1
 }
 
 export default Carousel

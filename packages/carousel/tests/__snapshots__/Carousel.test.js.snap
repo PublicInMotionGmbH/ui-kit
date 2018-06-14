@@ -1,32 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Carousel /> renders children correctly 1`] = `
-<span
+<div
   className="talixo-carousel"
 >
   <span
     className="children-wrapper"
+    style={
+      Object {
+        "transform": "translateX(0%)",
+        "transition": "400ms",
+        "width": "100%",
+      }
+    }
   >
-    <CSSTransitionGroup
-      transitionAppear={false}
-      transitionEnter={true}
-      transitionEnterTimeout={900}
-      transitionLeave={true}
-      transitionLeaveTimeout={900}
-      transitionName={
+    <span
+      style={
         Object {
-          "enter": "enter-next",
-          "enterActive": "enter-active",
-          "leave": "leave",
-          "leaveActive": "leave-active-next",
+          "width": "100%",
         }
       }
     >
       <span
         className="one-slide"
         key="0"
+        style={
+          Object {
+            "order": 1,
+            "width": "100%",
+          }
+        }
       />
-    </CSSTransitionGroup>
+    </span>
   </span>
-</span>
+</div>
 `;

@@ -2,17 +2,17 @@
 
 @include module('carousel')
   position: relative
-  display: inline-block
+  display: block
   width: 100%
   height: 100%
   overflow: hidden
 
   .children-wrapper
     position: relative
-    display: flex
     width: 100%
     height: 100%
-    transition: 500ms transform ease-in;
+    transform: translateX(0)
+    transition: 500ms transform linear
 
   .one-slide
     display: inline-block
