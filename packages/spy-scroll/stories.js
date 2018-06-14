@@ -61,6 +61,23 @@ addStory('with all triggers', readme, () => (
   </div>
 ))
 
+addStory('with container', readme, () => (
+  <div style={{ position: 'relative', height: '200vh' }}>
+    <strong>Scroll down and up</strong>
+    <div
+      id='spy-container'
+      style={{ position: 'relative', backgroundColor: '#ddd', height: '50vh', overflow: 'scroll', top: '50vh' }}
+    >
+      <SpyScroll
+        onVisible={onVisible}
+        containerId='spy-container'
+      >
+        <Box style={{ marginBottom: '50vh' }} />
+      </SpyScroll>
+    </div>
+  </div>
+))
+
 addStory('onVisible', readme, () => (
   <div style={{ position: 'relative', height: '200vh' }}>
     <strong>Scroll down and up</strong>

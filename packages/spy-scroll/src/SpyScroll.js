@@ -9,6 +9,9 @@ const propTypes = {
   /** Spied element. */
   children: PropTypes.node.isRequired,
 
+  /** Id of spied container. */
+  containerId: PropTypes.object,
+
   /** Event triggered when element becomes visible. */
   onVisible: PropTypes.func,
 
@@ -175,19 +178,27 @@ class SpyScroll extends React.PureComponent {
     const elementTop = rect.top - offset
     const elementBottom = rect.bottom - offset
 
-    const { innerHeight } = this.getSpyContainer()
+    const container = this.getSpyContainer()
 
-    const over = elementBottom < 0
-    const top = elementTop < 0
-    const bottom = elementBottom > innerHeight
-    const under = elementTop > innerHeight
+    const containerHeight = container === window
+      ? container.innerHeight
+      : container.getBoundingClientRect().height + container.getBoundingClientRect().top
+
+    const containerTop = container === window
+      ? 0
+      : container.getBoundingClientRect().top
+
+    const over = elementBottom < containerTop
+    const top = elementTop < containerTop
+    const bottom = elementBottom > containerHeight
+    const under = elementTop > containerHeight
     const inside = !top && !bottom
-    const halfView = !(elementBottom < innerHeight / 2) && !(elementTop > innerHeight / 2)
+    const halfView = !(elementBottom < containerHeight / 2) && !(elementTop > containerHeight / 2)
 
     // If element is taller or equal to half of the viewport
     // it is visible if it takes half of the available viewport,
     // otherwise - if it is inside of the viewport.
-    const visible = elementHeight >= (innerHeight / 2)
+    const visible = elementHeight >= (containerHeight / 2)
       ? halfView
       : inside
 
@@ -195,12 +206,13 @@ class SpyScroll extends React.PureComponent {
   }
 
   /**
-   * Get the spy container.
+   * Get the spy containerId.
    */
   getSpyContainer = () => {
-    const { container } = this.props
+    const { containerId } = this.props
 
-    // Check if container is a node.
+    const container = document.getElementById(containerId)
+    // Check if containerId is a node.
     if (container && container.nodeType) {
       return container
     }

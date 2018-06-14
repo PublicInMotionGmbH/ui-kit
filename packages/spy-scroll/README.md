@@ -21,9 +21,20 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name       | Type      | Default | Description
+--------------------|-----------|:-------:|--------------------------------
+children            | node      | n/a     | Spied element.
+containerId         | object    | n/a     | Id of spied container.
+onVisible           | function  | n/a     | Event triggered when element becomes visible.
+onBeginningAppeared | function  | n/a     | Event triggered when elements appears on the bottom of the viewport.
+onBeginningVisible  | function  | n/a     | Event triggered when element is fully visible on the bottom of the viewport.
+onEndReached        | function  | n/a     | Event triggered when element reaches top of the viewport.
+onEndLost           | function  | n/a     | Event triggered when element disappears on the top of the viewport.
+onEndAppeared       | function  | n/a     | Event triggered when elements appears on the top of the viewport.
+onEndVisible        | function  | n/a     | Event triggered when element is fully visible on the top of the viewport.
+onBeginningReached  | function  | n/a     | Event triggered when element reaches bottom of the viewport.
+onBeginningLost     | function  | n/a     | Event triggered when element disappears on the bottom of the viewport.
+
 
 ## Changelog
 
