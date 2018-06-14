@@ -44,7 +44,7 @@ function Textarea (props) {
 
   return (
     <TextareaComponent
-      className={buildClassName('textarea', className, [resize ? null : 'no-resize', disabled ? 'disabled' : null])}
+      className={buildClassName('textarea', className, { 'no-resize': !resize, disabled })}
       disabled={disabled}
       maxLength={maxLength}
       placeholder={placeholder}
