@@ -30,8 +30,11 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | Additional class name passed to wrapper
 data          | DataType[]| n/a     | Data passed to component
 initialOpen   | bool      | `false` | Open tree on load
+onClick       | func      | n/a     | Function passed to trigger when click on node
 selectEnabled | bool      | `false` | Enable to select each node
 smooth        | bool      | `true`  | Animation of collapse
+
+## Property shapes
 
 ## DataType
 

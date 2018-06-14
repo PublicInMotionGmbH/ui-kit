@@ -128,10 +128,10 @@ class TreeNode extends React.Component {
   }
 
   render () {
-    const { children, node, smooth } = this.props
+    const { children, node, onClick, smooth } = this.props
     const { collapsed, selected } = this.state
     const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
-    const nodeNameCls = buildClassName([moduleName, 'node-name'])
+    const nodeNameCls = buildClassName([moduleName, 'node-name'], null, {'selectable': onClick})
     const childrenCls = buildClassName([moduleName, 'node-children'])
 
     return (

@@ -57,15 +57,11 @@ addStory('initially open', readme, () => (
   <Tree initiallyOpen data={data} />
 ))
 
-addStory('select enabled', readme, () => (
-  <Tree onClick={() => {}} data={data} />
-))
-
 addStory('not smooth animation', readme, () => (
   <Tree smooth={false} data={data} />
 ))
 
-addStory('onclick', readme, () => (
+addStory('select with onclick', readme, () => (
   <Tree onClick={click} data={data} />
 ))
 
