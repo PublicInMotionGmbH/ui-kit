@@ -3,35 +3,56 @@
 exports[`<Carousel /> renders children correctly 1`] = `
 <div
   className="talixo-carousel"
+  perPage={1}
 >
-  <span
+  <div
     className="children-wrapper"
     style={
       Object {
-        "transform": "translateX(0%)",
-        "transition": "400ms",
-        "width": "100%",
+        "transform": "translateX(-0%)",
+        "transitionDuration": "500ms",
       }
     }
   >
-    <span
+    <div
       style={
         Object {
-          "width": "100%",
+          "display": "flex",
+          "height": "100%",
         }
       }
     >
-      <span
+      <div
         className="one-slide"
-        key="0"
+        key="copy-0"
         style={
           Object {
-            "order": 1,
-            "width": "100%",
+            "maxWidth": "100%",
+            "minWidth": "100%",
           }
         }
       />
-    </span>
-  </span>
+      <div
+        className="one-slide"
+        key="copy-1"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      />
+      <div
+        className="one-slide"
+        key="copy-2"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      />
+    </div>
+  </div>
 </div>
 `;
