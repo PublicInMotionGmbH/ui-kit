@@ -1,6 +1,6 @@
 import React from 'react'
-import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { Icon } from '@talixo/icon'
 
 import SpyScroll from './src/SpyScroll'
 
@@ -18,38 +18,74 @@ const Box = ({className, ...rest}) => (
   </span>
 )
 
-const onBeginningAppeared = action('onBeginningAppeared')
-const onBeginningVisible = action('onBeginningVisible')
-const onEndReached = action('onEndReached')
-const onEndLost = action('onEndLost')
-const onEndAppeared = action('onEndAppeared')
-const onEndVisible = action('onEndVisible')
-const onBeginningReached = action('onBeginningReached')
-const onBeginningLost = action('onBeginningLost')
-const onVisible = action('onVisible')
-const onDisappearing = action('onDisappearing')
-
 // Stories
 
-addStory.controlled('initial', readme, (setState, state) => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+addStory.controlled('onVisible and onDisappearing', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <SpyScroll
       onVisible={() => setState({ visible: true })}
       onDisappearing={() => setState({ visible: false })}
     >
+      <Box />
+    </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
+  </div>
+), () => ({ visible: false }))
+
+addStory.controlled('horizontal', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '300vw',
+    height: '50vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll right</strong>
+      <Icon name='arrow_forward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
+    <SpyScroll
+      horizontal
+      onVisible={() => setState({ visible: true })}
+      onDisappearing={() => setState({ visible: false })}
+    >
       <Box style={{
-        backgroundColor: state.visible ? 'red' : 'blue',
-        padding: state.visible ? '2em' : '1em',
-        transition: '400ms all ease-in'
+        top: 0,
+        width: '50vw',
+        margin: 'auto 0'
       }} />
     </SpyScroll>
+    <div className='scroll-text'>
+      <strong>Scroll left</strong>
+      <Icon name='arrow_back' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
   </div>
 ), () => ({ visible: false }))
 
 addStory.controlled('with trigger', readme, (setState, state) => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+  <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', height: '200vh' }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <div
       id='trigger'
     />
@@ -64,6 +100,41 @@ addStory.controlled('with trigger', readme, (setState, state) => (
         transition: '400ms all ease-in'
       }} />
     </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
+  </div>
+), () => ({ triggered: false }))
+
+addStory.controlled('horizontal with trigger', readme, (setState, state) => (
+  <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', flexDirection: 'row', width: '300vw' }}>
+    <div className='scroll-text'>
+      <strong>Scroll right</strong>
+      <Icon name='arrow_forward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
+    <div
+      id='trigger-horizontal'
+    />
+    <SpyScroll
+      horizontal
+      triggerId='trigger-horizontal'
+      onTriggerReached={() => setState({ triggered: true })}
+      onTriggerRetreats={() => setState({ triggered: false })}
+    >
+      <Box style={{
+        top: 0,
+        margin: '0',
+        width: '50vw',
+        backgroundColor: state.triggered ? 'red' : 'blue',
+        padding: state.triggered ? '2em' : '3em',
+        transition: '400ms all ease-in'
+      }} />
+    </SpyScroll>
+    <div className='scroll-text'>
+      <strong>Scroll left</strong>
+      <Icon name='arrow_back' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
   </div>
 ), () => ({ triggered: false }))
 
@@ -73,12 +144,18 @@ addStory.controlled('with container', readme, (setState, state) => (
       id='spy-container'
       style={{
         position: 'relative',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
         backgroundColor: 'rgb(247, 247, 247)',
         height: '50vh',
         overflow: 'scroll'
       }}
     >
-      <strong>Scroll down and up</strong>
+      <div className='scroll-text'>
+        <strong>Scroll down</strong>
+        <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      </div>
       <SpyScroll
         onVisible={() => setState({ visible: true })}
         onDisappearing={() => setState({ visible: false })}
@@ -87,130 +164,162 @@ addStory.controlled('with container', readme, (setState, state) => (
         <Box style={{
           backgroundColor: state.visible ? 'red' : 'blue',
           transition: '400ms all ease-in',
+          marginTop: '50vh',
           marginBottom: '50vh'
         }} />
       </SpyScroll>
+      <div className='scroll-text'>
+        <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+        <strong>Scroll up</strong>
+      </div>
     </div>
   </div>
 ), () => ({ visible: false }))
 
-addStory('onVisible', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+addStory.controlled('horizontal with container', readme, (setState, state) => (
+  <div style={{ position: 'relative' }}>
+    <div
+      id='spy-container'
+      style={{
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        backgroundColor: 'rgb(247, 247, 247)',
+        height: '50vh',
+        overflow: 'scroll'
+      }}
+    >
+      <div className='scroll-text'>
+        <strong>Scroll right</strong>
+        <Icon name='arrow_forward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      </div>
+      <SpyScroll
+        horizontal
+        containerId='spy-container'
+        onVisible={() => setState({ visible: true })}
+        onDisappearing={() => setState({ visible: false })}
+      >
+        <Box style={{
+          backgroundColor: state.visible ? 'red' : 'blue',
+          transition: '400ms all ease-in',
+          margin: 'auto 0',
+          marginRight: '100vw',
+          marginLeft: '100vw'
+        }} />
+      </SpyScroll>
+      <div className='scroll-text'>
+        <strong>Scroll left</strong>
+        <Icon name='arrow_back' style={{fontSize: '64px', lineHeight: '64px'}} />
+      </div>
+    </div>
+  </div>
+), () => ({ visible: false }))
+
+addStory.controlled('onBeginningAppeared and onBeginningLost', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <SpyScroll
-      onVisible={onVisible}
+      onBeginningAppeared={() => setState({ visible: true })}
+      onBeginningLost={() => setState({ visible: false })}
     >
       <Box />
     </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
   </div>
-))
+), () => ({ visible: false }))
 
-addStory('onDisappearing', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+addStory.controlled('onBeginningVisible and onBeginningReached', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <SpyScroll
-      onDisappearing={onDisappearing}
+      onBeginningVisible={() => setState({ visible: true })}
+      onBeginningReached={() => setState({ visible: false })}
     >
       <Box />
     </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
   </div>
-))
+), () => ({ visible: false }))
 
-addStory('onVisible with large element', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+addStory.controlled('onEndVisible and onEndReached', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <SpyScroll
-      onVisible={onVisible}
-    >
-      <Box style={{ height: '60vh' }} />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onBeginningAppeared', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onBeginningAppeared={onBeginningAppeared}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onBeginningVisible', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onBeginningVisible={onBeginningVisible}
+      onEndVisible={() => setState({ visible: true })}
+      onEndReached={() => setState({ visible: false })}
     >
       <Box />
     </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
   </div>
-))
+), () => ({ visible: false }))
 
-addStory('onEndReached', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
+addStory.controlled('onEndAppeared and onEndLost', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.visible ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
     <SpyScroll
-      onEndReached={onEndReached}
+      onEndAppeared={() => setState({ visible: true })}
+      onEndLost={() => setState({ visible: false })}
     >
       <Box />
     </SpyScroll>
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
   </div>
-))
-
-addStory('onEndLost', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onEndLost={onEndLost}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onEndAppeared', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onEndAppeared={onEndAppeared}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onEndVisible', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onEndVisible={onEndVisible}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onBeginningReached', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onBeginningReached={onBeginningReached}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
-
-addStory('onBeginningLost', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <SpyScroll
-      onBeginningLost={onBeginningLost}
-    >
-      <Box />
-    </SpyScroll>
-  </div>
-))
+), () => ({ visible: false }))

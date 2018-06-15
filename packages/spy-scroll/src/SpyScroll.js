@@ -12,47 +12,56 @@ const propTypes = {
   /** Id of spied container. */
   containerId: PropTypes.string,
 
+  /** Switch scroll spy to horizontal. */
+  horizontal: PropTypes.bool,
+
   /** Event triggered when element becomes visible. */
   onVisible: PropTypes.func,
 
   /** Event triggered when element begins disappearing. */
   onDisappearing: PropTypes.func,
 
-  /** Event triggered when elements appears on the bottom of the viewport. */
+  /** Event triggered when elements appears on the beginning of the viewport. */
   onBeginningAppeared: PropTypes.func,
 
-  /** Event triggered when element is fully visible on the bottom of the viewport. */
+  /** Event triggered when element is fully visible on the beginning of the viewport. */
   onBeginningVisible: PropTypes.func,
 
-  /** Event triggered when element reaches top of the viewport. */
+  /** Event triggered when element reaches end of the viewport. */
   onEndReached: PropTypes.func,
 
-  /** Event triggered when element disappears on the top of the viewport. */
+  /** Event triggered when element disappears on the end of the viewport. */
   onEndLost: PropTypes.func,
 
-  /** Event triggered when elements appears on the top of the viewport. */
+  /** Event triggered when elements appears on the end of the viewport. */
   onEndAppeared: PropTypes.func,
 
-  /** Event triggered when element is fully visible on the top of the viewport. */
+  /** Event triggered when element is fully visible on the end of the viewport. */
   onEndVisible: PropTypes.func,
 
-  /** Event triggered when element reaches bottom of the viewport. */
+  /** Event triggered when element reaches beginning of the viewport. */
   onBeginningReached: PropTypes.func,
 
-  /** Event triggered when element disappears on the bottom of the viewport. */
+  /** Event triggered when element disappears on the beginning of the viewport. */
   onBeginningLost: PropTypes.func,
 
   /** Event triggered when element reaches trigger. */
   onTriggerReached: PropTypes.func,
 
-  /** Event triggered when element retreats over the trigger. */
+  /** Event triggered when element retreats ahead the trigger. */
   onTriggerRetreats: PropTypes.func,
 
-  /** Id of the trigger element */
+  /** Scroll offset for triggers. */
+  offset: PropTypes.number,
+
+  /** Id of the trigger element. */
   triggerId: PropTypes.string
 }
 
-const defaultProps = {}
+const defaultProps = {
+  horizontal: false,
+  offset: 0
+}
 
 /**
  * Compose handlers to create single handler which fire all of them.
@@ -72,6 +81,7 @@ function composeHandlers (...handlers) {
  * @property {object} props
  * @property {node} [props.children]
  * @property {string} [props.containerId]
+ * @property {boolean} [props.horizontal]
  * @property {function} [props.onVisible]
  * @property {function} [props.onDisappearing]
  * @property {function} [props.onBeginningAppeared]
@@ -84,25 +94,35 @@ function composeHandlers (...handlers) {
  * @property {function} [props.onBeginningLost]
  * @property {function} [props.onTriggerReached]
  * @property {function} [props.onTriggerRetreats]
+ * @property {number} [props.offset]
  * @property {string} [props.triggerId]
  *
  * @property {object} state
- * @property {null|boolean} state.over
- * @property {null|boolean} state.top
- * @property {null|boolean} state.bottom
- * @property {null|boolean} state.under
+ * @property {null|boolean} state.ahead
+ * @property {null|boolean} state.end
+ * @property {null|boolean} state.beginning
+ * @property {null|boolean} state.behind
  * @property {null|boolean} state.visible
+ * @property {null|boolean} state.triggered
  *
  * @class
  */
 class SpyScroll extends React.PureComponent {
-  state = {
-    over: null,
-    top: null,
-    bottom: null,
-    under: null,
-    visible: null,
-    triggered: null
+  constructor () {
+    super()
+    this.state = {
+      ahead: null,
+      end: null,
+      beginning: null,
+      behind: null,
+      visible: null,
+      triggered: null
+    }
+    this.updatePosition = this.updatePosition.bind(this)
+    this.getSpyContainer = this.getSpyContainer.bind(this)
+    this.getTrigger = this.getTrigger.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
+    this._handleScroll = throttle(this.handleScroll, 16)
   }
 
   /**
@@ -112,8 +132,9 @@ class SpyScroll extends React.PureComponent {
     if (typeof window === 'undefined') {
       return false
     }
+    this._container = this.getSpyContainer()
     this.updatePosition()
-    this.getSpyContainer().addEventListener('scroll', this.handleScroll, false)
+    this._container.addEventListener('scroll', this._handleScroll, false)
   }
 
   /**
@@ -124,7 +145,7 @@ class SpyScroll extends React.PureComponent {
       return false
     }
 
-    this.getSpyContainer().removeEventListener('scroll', this.handleScroll, false)
+    this._container.removeEventListener('scroll', this._handleScroll, false)
   }
 
   /**
@@ -146,46 +167,46 @@ class SpyScroll extends React.PureComponent {
       }
     }
 
-    if (prevState.bottom != null && prevState.bottom !== this.state.bottom) {
+    if (prevState.beginning != null && prevState.beginning !== this.state.beginning) {
       // Trigger onBeginningVisible
-      if (onBeginningVisible && !this.state.bottom) {
+      if (onBeginningVisible && !this.state.beginning) {
         onBeginningVisible()
       }
       // Trigger onBeginningReached
-      if (onBeginningReached && this.state.bottom) {
+      if (onBeginningReached && this.state.beginning) {
         onBeginningReached()
       }
     }
 
-    if (prevState.top != null && prevState.top !== this.state.top) {
+    if (prevState.end != null && prevState.end !== this.state.end) {
       // Trigger onEndReached
-      if (onEndReached && this.state.top) {
+      if (onEndReached && this.state.end) {
         onEndReached()
       }
       // Trigger onEndVisible
-      if (onEndVisible && !this.state.top) {
+      if (onEndVisible && !this.state.end) {
         onEndVisible()
       }
     }
 
-    if (prevState.over != null && prevState.over !== this.state.over) {
+    if (prevState.ahead != null && prevState.ahead !== this.state.ahead) {
       // Trigger onEndLost
-      if (onEndLost && this.state.over) {
+      if (onEndLost && this.state.ahead) {
         onEndLost()
       }
       // Trigger onEndAppeared
-      if (onEndAppeared && !this.state.over) {
+      if (onEndAppeared && !this.state.ahead) {
         onEndAppeared()
       }
     }
 
-    if (prevState.under != null && prevState.under !== this.state.under) {
+    if (prevState.behind != null && prevState.behind !== this.state.behind) {
       // Trigger onBeginningAppeared
-      if (onBeginningAppeared && !this.state.under) {
+      if (onBeginningAppeared && !this.state.behind) {
         onBeginningAppeared()
       }
       // Trigger onBeginningLost
-      if (onBeginningLost && this.state.under) {
+      if (onBeginningLost && this.state.behind) {
         onBeginningLost()
       }
     }
@@ -205,50 +226,70 @@ class SpyScroll extends React.PureComponent {
   /**
    * Update position of element.
    */
-  updatePosition = () => {
-    const { offset = 0 } = this.props
-    const rect = this._element.getBoundingClientRect()
+  updatePosition () {
+    const { horizontal, offset } = this.props
 
-    const elementHeight = rect.height
-    const elementTop = rect.top - offset
-    const elementBottom = rect.bottom - offset
+    const element = this._element.getBoundingClientRect()
+    const container = this._container
 
-    const container = this.getSpyContainer()
-    const trigger = this.getTrigger()
+    const elementHeight = element.height
+    const elementWidth = element.width
+    const elementTop = element.top - offset
+    const elementBottom = element.bottom - offset
+    const elementRight = element.right - offset
+    const elementLeft = element.left - offset
 
     const containerHeight = container === window
       ? container.innerHeight
       : container.getBoundingClientRect().height + container.getBoundingClientRect().top
 
+    const containerWidth = container === window
+      ? container.innerWidth
+      : container.getBoundingClientRect().width + container.getBoundingClientRect().left
+
     const containerTop = container === window
       ? 0
       : container.getBoundingClientRect().top
 
-    const triggerPoint = trigger && trigger.getBoundingClientRect().top
+    const containerLeft = container === window
+      ? 0
+      : container.getBoundingClientRect().left
 
-    const over = elementBottom < containerTop
-    const top = elementTop < containerTop
-    const bottom = elementBottom > containerHeight
-    const under = elementTop > containerHeight
-    const inside = !top && !bottom
-    const halfView = !(elementBottom < containerHeight / 2) && !(elementTop > containerHeight / 2)
+    const elementBeginning = horizontal ? elementLeft : elementTop
+    const elementEnd = horizontal ? elementRight : elementBottom
+    const elementLength = horizontal ? elementWidth : elementHeight
 
-    // If element is taller or equal to half of the viewport
+    const containerBeginning = horizontal ? containerLeft : containerTop
+    const containerLength = horizontal ? containerWidth : containerHeight
+
+    const ahead = elementEnd < containerBeginning
+    const end = elementBeginning < containerBeginning
+    const beginning = elementEnd > containerLength
+    const behind = elementBeginning > containerLength
+    const inside = !end && !beginning
+    const halfView = !(elementEnd < containerLength / 2) && !(elementBeginning > containerLength / 2)
+
+    // If element is larger or equal to half of the viewport
     // it is visible if it takes half of the available viewport,
     // otherwise - if it is inside of the viewport.
-    const visible = elementHeight >= (containerHeight / 2)
+    const visible = elementLength >= (containerLength / 2)
       ? halfView
       : inside
 
-    const triggered = trigger && elementTop > triggerPoint
+    const trigger = this.getTrigger()
+    const triggerPoint = horizontal
+      ? trigger && trigger.getBoundingClientRect().left
+      : trigger && trigger.getBoundingClientRect().top
 
-    this.setState({ over, top, bottom, under, visible, triggered })
+    const triggered = trigger && elementBeginning > triggerPoint
+
+    this.setState({ ahead, end, beginning, behind, visible, triggered })
   }
 
   /**
    * Get the spy container.
    */
-  getSpyContainer = () => {
+  getSpyContainer () {
     const { containerId } = this.props
 
     const container = document.getElementById(containerId)
@@ -263,7 +304,7 @@ class SpyScroll extends React.PureComponent {
   /**
    * Get the trigger.
    */
-  getTrigger = () => {
+  getTrigger () {
     const { triggerId } = this.props
 
     const trigger = document.getElementById(triggerId)
@@ -278,9 +319,9 @@ class SpyScroll extends React.PureComponent {
   /**
    * Handle scroll.
    */
-  handleScroll = throttle(() => {
+  handleScroll () {
     this.updatePosition()
-  }, 16)
+  }
 
   /**
    * Set element node.

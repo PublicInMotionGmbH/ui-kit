@@ -13,12 +13,15 @@ const createSpyWrapper = (props, childprops, style) => mount(<SpyScroll {...prop
   </span>
 </SpyScroll>)
 
-const createBoundingRect = (height, top, bottom) => {
+const createBoundingRect = (height, top, bottom, width, left, right) => {
   window.Element.prototype.getBoundingClientRect = jest.fn(() => {
     return {
       height,
       top,
-      bottom
+      bottom,
+      width,
+      left,
+      right
     }
   })
 }
@@ -66,10 +69,10 @@ describe('update position', () => {
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(false)
-    expect(wrapper.state().top).toEqual(false)
-    expect(wrapper.state().bottom).toEqual(false)
-    expect(wrapper.state().under).toEqual(false)
+    expect(wrapper.state().ahead).toEqual(false)
+    expect(wrapper.state().end).toEqual(false)
+    expect(wrapper.state().beginning).toEqual(false)
+    expect(wrapper.state().behind).toEqual(false)
     expect(wrapper.state().visible).toEqual(true)
 
     wrapper.unmount()
@@ -82,74 +85,74 @@ describe('update position', () => {
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(false)
-    expect(wrapper.state().top).toEqual(false)
-    expect(wrapper.state().bottom).toEqual(false)
-    expect(wrapper.state().under).toEqual(false)
+    expect(wrapper.state().ahead).toEqual(false)
+    expect(wrapper.state().end).toEqual(false)
+    expect(wrapper.state().beginning).toEqual(false)
+    expect(wrapper.state().behind).toEqual(false)
     expect(wrapper.state().visible).toEqual(true)
 
     wrapper.unmount()
     window.innerHeight = innerHeight
   })
 
-  it('updates position correctly when element is under', () => {
+  it('updates position correctly when element is behind', () => {
     createBoundingRect(50, 51, 101)
     window.innerHeight = 50
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(false)
-    expect(wrapper.state().top).toEqual(false)
-    expect(wrapper.state().bottom).toEqual(true)
-    expect(wrapper.state().under).toEqual(true)
+    expect(wrapper.state().ahead).toEqual(false)
+    expect(wrapper.state().end).toEqual(false)
+    expect(wrapper.state().beginning).toEqual(true)
+    expect(wrapper.state().behind).toEqual(true)
     expect(wrapper.state().visible).toEqual(false)
 
     wrapper.unmount()
     window.innerHeight = innerHeight
   })
 
-  it('updates position correctly when element on the bottom', () => {
+  it('updates position correctly when element on the beginning', () => {
     createBoundingRect(40, 40, 80)
     window.innerHeight = 50
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(false)
-    expect(wrapper.state().top).toEqual(false)
-    expect(wrapper.state().bottom).toEqual(true)
-    expect(wrapper.state().under).toEqual(false)
+    expect(wrapper.state().ahead).toEqual(false)
+    expect(wrapper.state().end).toEqual(false)
+    expect(wrapper.state().beginning).toEqual(true)
+    expect(wrapper.state().behind).toEqual(false)
     expect(wrapper.state().visible).toEqual(false)
 
     wrapper.unmount()
     window.innerHeight = innerHeight
   })
 
-  it('updates position correctly when element is over', () => {
+  it('updates position correctly when element is ahead', () => {
     createBoundingRect(50, -51, -1)
     window.innerHeight = 50
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(true)
-    expect(wrapper.state().top).toEqual(true)
-    expect(wrapper.state().bottom).toEqual(false)
-    expect(wrapper.state().under).toEqual(false)
+    expect(wrapper.state().ahead).toEqual(true)
+    expect(wrapper.state().end).toEqual(true)
+    expect(wrapper.state().beginning).toEqual(false)
+    expect(wrapper.state().behind).toEqual(false)
     expect(wrapper.state().visible).toEqual(false)
 
     wrapper.unmount()
     window.innerHeight = innerHeight
   })
 
-  it('updates position correctly when element is on the top', () => {
+  it('updates position correctly when element is on the end', () => {
     createBoundingRect(50, -51, -1)
     window.innerHeight = 50
 
     const wrapper = createSpyWrapper()
 
-    expect(wrapper.state().over).toEqual(true)
-    expect(wrapper.state().top).toEqual(true)
-    expect(wrapper.state().bottom).toEqual(false)
-    expect(wrapper.state().under).toEqual(false)
+    expect(wrapper.state().ahead).toEqual(true)
+    expect(wrapper.state().end).toEqual(true)
+    expect(wrapper.state().beginning).toEqual(false)
+    expect(wrapper.state().behind).toEqual(false)
     expect(wrapper.state().visible).toEqual(false)
 
     wrapper.unmount()
@@ -204,7 +207,7 @@ describe('triggers on scroll down', () => {
   it('triggers onBeginningVisible', () => {
     const onBeginningVisible = jest.fn()
     wrapper = createSpyWrapper({ onBeginningVisible })
-    wrapper.setState({ bottom: false })
+    wrapper.setState({ beginning: false })
 
     expect(onBeginningVisible).toHaveBeenCalledTimes(1)
   })
@@ -212,7 +215,7 @@ describe('triggers on scroll down', () => {
   it('triggers onEndReached', () => {
     const onEndReached = jest.fn()
     wrapper = createSpyWrapper({ onEndReached })
-    wrapper.setState({ top: true })
+    wrapper.setState({ end: true })
 
     expect(onEndReached).toHaveBeenCalledTimes(1)
   })
@@ -220,7 +223,7 @@ describe('triggers on scroll down', () => {
   it('triggers onEndLost', () => {
     const onEndLost = jest.fn()
     wrapper = createSpyWrapper({ onEndLost })
-    wrapper.setState({ over: true })
+    wrapper.setState({ ahead: true })
 
     expect(onEndLost).toHaveBeenCalledTimes(1)
   })
@@ -228,7 +231,7 @@ describe('triggers on scroll down', () => {
   it('triggers onBeginningAppeared', () => {
     const onBeginningAppeared = jest.fn()
     wrapper = createSpyWrapper({ onBeginningAppeared })
-    wrapper.setState({ under: false })
+    wrapper.setState({ behind: false })
 
     expect(onBeginningAppeared).toHaveBeenCalledTimes(1)
   })
@@ -284,7 +287,7 @@ describe('triggers on scroll up', () => {
   it('triggers onBeginningReached', () => {
     const onBeginningReached = jest.fn()
     wrapper = createSpyWrapper({ onBeginningReached })
-    wrapper.setState({ bottom: true })
+    wrapper.setState({ beginning: true })
 
     expect(onBeginningReached).toHaveBeenCalledTimes(1)
   })
@@ -292,7 +295,7 @@ describe('triggers on scroll up', () => {
   it('triggers onEndVisible', () => {
     const onEndVisible = jest.fn()
     wrapper = createSpyWrapper({ onEndVisible })
-    wrapper.setState({ top: false })
+    wrapper.setState({ end: false })
 
     expect(onEndVisible).toHaveBeenCalledTimes(1)
   })
@@ -300,7 +303,7 @@ describe('triggers on scroll up', () => {
   it('triggers onEndAppeared', () => {
     const onEndAppeared = jest.fn()
     wrapper = createSpyWrapper({ onEndAppeared })
-    wrapper.setState({ over: false })
+    wrapper.setState({ ahead: false })
 
     expect(onEndAppeared).toHaveBeenCalledTimes(1)
   })
@@ -308,7 +311,7 @@ describe('triggers on scroll up', () => {
   it('triggers onBeginningLost', () => {
     const onBeginningLost = jest.fn()
     wrapper = createSpyWrapper({ onBeginningLost })
-    wrapper.setState({ under: true })
+    wrapper.setState({ behind: true })
 
     expect(onBeginningLost).toHaveBeenCalledTimes(1)
   })

@@ -23,6 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@talixo/icon": "^0.1.1",
     "@talixo/shared": "^0.1.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.1",
@@ -31,11 +32,11 @@
     "react-instantiable-stateless": "^1.0.3"
   },
   "peerDependencies": {
+    "@talixo/shared": "^0.1.0",
+    "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "@talixo/shared": "^0.1.0",
-    "lodash.throttle": "^4.1.1",
     "react-instantiable-stateless": "^1.0.3"
   }
 }
