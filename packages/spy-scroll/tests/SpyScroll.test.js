@@ -166,6 +166,33 @@ describe('triggers on scroll down', () => {
   afterEach(() => {
     wrapper.unmount()
   })
+
+  it('triggers with container', () => {
+    const onVisible = jest.fn()
+    const containerId = 'trigger'
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+    div.id = containerId
+
+    div.getBoundingClientRect = jest.fn(() => {
+      return {
+        height: 80,
+        top: 10
+      }
+    })
+
+    wrapper = mount(<SpyScroll containerId={containerId} onVisible={onVisible}>
+      <span className='spied-element'>
+        Hello
+      </span>
+    </SpyScroll>, { attachTo: div })
+
+    wrapper.setState({ visible: true })
+
+    expect(onVisible).toHaveBeenCalledTimes(1)
+  })
+
   it('triggers onVisible', () => {
     const onVisible = jest.fn()
     wrapper = createSpyWrapper({ onVisible })
@@ -205,6 +232,34 @@ describe('triggers on scroll down', () => {
 
     expect(onBeginningAppeared).toHaveBeenCalledTimes(1)
   })
+
+  it('triggers onTriggerReached', () => {
+    const onTriggerReached = jest.fn()
+    const triggerId = 'trigger'
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
+    const trigger = document.createElement('span')
+    document.body.appendChild(trigger)
+    trigger.id = triggerId
+    trigger.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 50
+      }
+    })
+
+    wrapper = mount(<SpyScroll triggerId={triggerId} onTriggerReached={onTriggerReached}>
+      <span className='spied-element'>
+        Hello
+      </span>
+    </SpyScroll>, { attachTo: div })
+
+    wrapper.setState({ triggered: false })
+
+    expect(onTriggerReached).toHaveBeenCalledTimes(1)
+    wrapper.detach()
+  })
 })
 
 describe('triggers on scroll up', () => {
@@ -216,12 +271,14 @@ describe('triggers on scroll up', () => {
   afterEach(() => {
     wrapper.unmount()
   })
-  it('triggers onVisible', () => {
-    const onVisible = jest.fn()
-    wrapper = createSpyWrapper({ onVisible })
-    wrapper.setState({ visible: true })
 
-    expect(onVisible).toHaveBeenCalledTimes(1)
+  it('triggers onDisappearing', () => {
+    const onDisappearing = jest.fn()
+    createBoundingRect(50, 0, 50)
+    wrapper = createSpyWrapper({ onDisappearing })
+    wrapper.setState({ visible: false })
+
+    expect(onDisappearing).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onBeginningReached', () => {
@@ -254,5 +311,33 @@ describe('triggers on scroll up', () => {
     wrapper.setState({ under: true })
 
     expect(onBeginningLost).toHaveBeenCalledTimes(1)
+  })
+
+  it('triggers onTriggerRetreats', () => {
+    const onTriggerRetreats = jest.fn()
+    const triggerId = 'trigger'
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
+    const trigger = document.createElement('span')
+    document.body.appendChild(trigger)
+    trigger.id = triggerId
+    trigger.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 50
+      }
+    })
+
+    wrapper = mount(<SpyScroll triggerId={triggerId} onTriggerRetreats={onTriggerRetreats}>
+      <span className='spied-element'>
+        Hello
+      </span>
+    </SpyScroll>, { attachTo: div })
+
+    wrapper.setState({ triggered: true })
+
+    expect(onTriggerRetreats).toHaveBeenCalledTimes(1)
+    wrapper.detach()
   })
 })

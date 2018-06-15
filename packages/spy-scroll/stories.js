@@ -12,20 +12,8 @@ const addStory = createStoriesFactory('Spy Scroll', module, {
   propTables: [ SpyScroll ]
 })
 
-const boxStyles = {
-  display: 'block',
-  width: '50%',
-  margin: '0 auto',
-  textAlign: 'center',
-  position: 'relative',
-  padding: '2em',
-  top: '100vh',
-  backgroundColor: 'red',
-  color: '#FFFFFF'
-}
-
-const Box = ({ style, ...rest }) => (
-  <span style={{ ...boxStyles, ...style }} {...rest}>
+const Box = ({className, ...rest}) => (
+  <span className='box' {...rest}>
     Scroll
   </span>
 )
@@ -39,21 +27,77 @@ const onEndVisible = action('onEndVisible')
 const onBeginningReached = action('onBeginningReached')
 const onBeginningLost = action('onBeginningLost')
 const onVisible = action('onVisible')
+const onDisappearing = action('onDisappearing')
 
 // Stories
 
-addStory('with all triggers', readme, () => (
+addStory.controlled('initial', readme, (setState, state) => (
   <div style={{ position: 'relative', height: '200vh' }}>
     <strong>Scroll down and up</strong>
     <SpyScroll
-      onBeginningAppeared={onBeginningAppeared}
-      onBeginningVisible={onBeginningVisible}
-      onEndReached={onEndReached}
-      onEndLost={onEndLost}
-      onEndAppeared={onEndAppeared}
-      onEndVisible={onEndVisible}
-      onBeginningReached={onBeginningReached}
-      onBeginningLost={onBeginningLost}
+      onVisible={() => setState({ visible: true })}
+      onDisappearing={() => setState({ visible: false })}
+    >
+      <Box style={{
+        backgroundColor: state.visible ? 'red' : 'blue',
+        padding: state.visible ? '2em' : '1em',
+        transition: '400ms all ease-in'
+      }} />
+    </SpyScroll>
+  </div>
+), () => ({ visible: false }))
+
+addStory.controlled('with trigger', readme, (setState, state) => (
+  <div style={{ position: 'relative', height: '200vh' }}>
+    <strong>Scroll down and up</strong>
+    <div
+      id='trigger'
+    />
+    <SpyScroll
+      triggerId='trigger'
+      onTriggerReached={() => setState({ triggered: true })}
+      onTriggerRetreats={() => setState({ triggered: false })}
+    >
+      <Box style={{
+        backgroundColor: state.triggered ? 'red' : 'blue',
+        padding: state.triggered ? '2em' : '3em',
+        transition: '400ms all ease-in'
+      }} />
+    </SpyScroll>
+  </div>
+), () => ({ triggered: false }))
+
+addStory.controlled('with container', readme, (setState, state) => (
+  <div style={{ position: 'relative' }}>
+    <div
+      id='spy-container'
+      style={{
+        position: 'relative',
+        backgroundColor: 'rgb(247, 247, 247)',
+        height: '50vh',
+        overflow: 'scroll'
+      }}
+    >
+      <strong>Scroll down and up</strong>
+      <SpyScroll
+        onVisible={() => setState({ visible: true })}
+        onDisappearing={() => setState({ visible: false })}
+        containerId='spy-container'
+      >
+        <Box style={{
+          backgroundColor: state.visible ? 'red' : 'blue',
+          transition: '400ms all ease-in',
+          marginBottom: '50vh'
+        }} />
+      </SpyScroll>
+    </div>
+  </div>
+), () => ({ visible: false }))
+
+addStory('onVisible', readme, () => (
+  <div style={{ position: 'relative', height: '200vh' }}>
+    <strong>Scroll down and up</strong>
+    <SpyScroll
       onVisible={onVisible}
     >
       <Box />
@@ -61,28 +105,11 @@ addStory('with all triggers', readme, () => (
   </div>
 ))
 
-addStory('with container', readme, () => (
-  <div style={{ position: 'relative', height: '200vh' }}>
-    <strong>Scroll down and up</strong>
-    <div
-      id='spy-container'
-      style={{ position: 'relative', backgroundColor: '#ddd', height: '50vh', overflow: 'scroll', top: '50vh' }}
-    >
-      <SpyScroll
-        onVisible={onVisible}
-        containerId='spy-container'
-      >
-        <Box style={{ marginBottom: '50vh' }} />
-      </SpyScroll>
-    </div>
-  </div>
-))
-
-addStory('onVisible', readme, () => (
+addStory('onDisappearing', readme, () => (
   <div style={{ position: 'relative', height: '200vh' }}>
     <strong>Scroll down and up</strong>
     <SpyScroll
-      onVisible={onVisible}
+      onDisappearing={onDisappearing}
     >
       <Box />
     </SpyScroll>

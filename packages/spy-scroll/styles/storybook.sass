@@ -1,0 +1,23 @@
+.box
+  display: block
+  width: 50%
+  margin: 0 auto
+  text-align: center
+  position: relative
+  padding: 2em
+  top: 100vh
+  background-color: red
+  color: #FFFFFF
+
+#trigger
+  position: fixed
+  top: 50vh
+  height: 1px
+  width: 100%
+
+  &::before
+    content: 'trigger'
+    position: absolute
+    width: 100%
+    border: 1px solid blue
+    border-width: 1px 0 0 0
