@@ -5,3 +5,6 @@ export function getDataTransferFiles (event) {
     return event.target.files || null
   }
 }
+
+//
+// export function displaySize

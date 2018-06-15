@@ -1,6 +1,35 @@
 @import './config'
 
 @include module('file-input')
-  width: 50%
-  height: dp(5)
-  border: solid dp(.125) $color-talixo-gray
+  box-sizing: border-box
+  border: dashed dp(.125) $color-talixo-light-gray
+  border-radius: dp(.25)
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: dp(2)
+  width: 100%
+  min-height: dp(5)
+
+  *
+    box-sizing: border-box
+
+  &__children
+    width: fit-content
+
+  &__files-wrapper
+    display: flex
+    flex-direction: row
+    justify-content: center
+    flex-wrap: wrap
+    width: 100%
+
+  &__upload
+    cursor: pointer
+
+@include module('file')
+  flex-basis: 25%
+  padding: dp(2)
+
+  &__icon
+    cursor: pointer

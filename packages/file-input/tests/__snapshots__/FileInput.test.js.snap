@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileInput /> renders children correctly 1`] = `
+<div
+  className="talixo-file-input"
+  onDrop={[Function]}
+>
+  <div
+    className="talixo-file-input__children"
+  />
+  <div
+    className="talixo-file-input__upload"
+    onClick={[Function]}
+  >
+    Click here to upload
+  </div>
+  <div
+    className="talixo-file-input__files-wrapper"
+  />
+  <input
+    multiple={true}
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+</div>
+`;

@@ -14,5 +14,7 @@ const addStory = createStoriesFactory('File Input', module, {
 // Stories
 
 addStory('initial', readme, () => (
-  <FileInput />
+  <FileInput>
+    Drop files here
+  </FileInput>
 ))
