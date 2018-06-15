@@ -4,6 +4,7 @@ exports[`<Carousel /> renders children correctly 1`] = `
 <div
   className="talixo-carousel"
   perPage={1}
+  renderDots={[Function]}
 >
   <div
     className="children-wrapper"
@@ -54,5 +55,6 @@ exports[`<Carousel /> renders children correctly 1`] = `
       />
     </div>
   </div>
+  }
 </div>
 `;

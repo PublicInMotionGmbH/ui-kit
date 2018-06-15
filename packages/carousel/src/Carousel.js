@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+import Dots from './Dots'
+
 const moduleName = 'carousel'
 
 function reflow (node) {
@@ -22,24 +24,7 @@ class Carousel extends React.PureComponent {
     currentSlide: 0,
     childrenLength: this.props.children.length + 1,
     transform: 0,
-    transitionTime: this.props.duration,
-    lastSlide: false
-  }
-
-  componentDidUpdate () {
-    // const { currentSlide, childrenLength, lastSlide, transform } = this.state
-    // const { duration } = this.props
-    // if (lastSlide) {
-    //   this.setState({
-    //     transitionTime: 0,
-    //     currentSlide: currentSlide + 1,
-    //     transform: transform - (100 / childrenLength),
-    //     lastSlide: false
-    //   })
-    //   console.log('acompo did mount')
-    // }
-    console.log(this.state.currentSlide)
-    console.log('update')
+    transitionTime: this.props.duration
   }
 
   goImmediately (slide) {
@@ -74,7 +59,7 @@ class Carousel extends React.PureComponent {
       length += children.length
     }
 
-    while (index < 0 /* && length */) {
+    while (index < 0) {
       index = length + index
     }
 
@@ -104,6 +89,14 @@ class Carousel extends React.PureComponent {
     const { currentSlide } = this.state
 
     this.go(currentSlide - perPage, 'back')
+  }
+
+  handlerDot = (i) => {
+    const { perPage } = this.props
+
+    this.setState({
+      currentSlide: i * perPage
+    })
   }
 
   setRef = node => {
@@ -147,14 +140,12 @@ class Carousel extends React.PureComponent {
   }
 
   renderDots = () => {
-    const { children } = this.props
-    return (
-      children.map((el, i) => {
-        return (
-          <span key={i} className='dots'>{i}</span>
-        )
-      })
-    )
+    const { renderDots } = this.props
+
+    return renderDots({
+      ...this.props,
+      onChange: this.handlerDot
+    })
   }
 
   render () {
@@ -163,7 +154,7 @@ class Carousel extends React.PureComponent {
     return (
       <div className={buildClassName(moduleName, className)} {...passedProps} >
         {this.renderWrapper()}
-        {dots && this.renderDots()}
+        {dots && this.renderDots()}}
         {arrows && <div className={buildClassName([moduleName, 'buttons'])}>
           <button onClick={this.handlerPrev}>Prev</button>
           <button onClick={this.handlerNext}>Next</button>
@@ -189,7 +180,8 @@ Carousel.propTypes = {
 Carousel.defaultProps = {
   children: [],
   duration: 500,
-  perPage: 1
+  perPage: 1,
+  renderDots: Dots
 }
 
 export default Carousel

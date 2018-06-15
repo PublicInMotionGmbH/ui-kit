@@ -24,8 +24,21 @@
     bottom: 20px
     left: 30px
 
-  .dots
-    position: relative
-    font-size: 40px
-    left: 300px
-    bottom: 30px
+@include module('carousel-dots')
+  position: absolute
+  display: flex
+  width: 100%
+  bottom: 0
+  justify-content: center
+
+  &__single
+    display: inline-block
+    height: dp(1.5)
+    width: dp(5)
+    margin: dp(3) dp(1.5)
+    border-radius: dp(0.5)
+    cursor: pointer
+    background-color: $carousel-dots--single-background-color
+
+    &:hover
+      background-color: $carousel-dots--single-background-color-hover
