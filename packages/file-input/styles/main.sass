@@ -11,8 +11,19 @@
   width: 100%
   min-height: dp(5)
 
+  &dragover
+    opacity: .6
+
   *
     box-sizing: border-box
+
+  &__icon
+    color: $color-talixo-light-gray
+    font-size: dp(10)
+    height: fit-content
+    padding: dp(2) 0 dp(4)
+    pointer-events: none
+    user-select: none
 
   &__children
     width: fit-content
@@ -25,7 +36,8 @@
     width: 100%
 
   &__upload
-    cursor: pointer
+    > div
+      text-align: center
 
 @include module('file')
   flex-basis: 25%

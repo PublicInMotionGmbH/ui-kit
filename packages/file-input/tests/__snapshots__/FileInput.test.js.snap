@@ -3,16 +3,31 @@
 exports[`<FileInput /> renders children correctly 1`] = `
 <div
   className="talixo-file-input"
+  onDragEnd={[Function]}
+  onDragEnter={[Function]}
+  onDragLeave={[Function]}
+  onDragOver={[Function]}
   onDrop={[Function]}
 >
+  <div
+    className="talixo-file-input__icon"
+  >
+    <Icon
+      name="cloud_upload"
+    />
+  </div>
   <div
     className="talixo-file-input__children"
   />
   <div
     className="talixo-file-input__upload"
-    onClick={[Function]}
   >
-    Click here to upload
+    <Button
+      disabled={false}
+      onClick={[Function]}
+    >
+      Browse Files
+    </Button>
   </div>
   <div
     className="talixo-file-input__files-wrapper"
