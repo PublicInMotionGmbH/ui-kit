@@ -107,6 +107,40 @@ addStory.controlled('with trigger', readme, (setState, state) => (
   </div>
 ), () => ({ triggered: false }))
 
+addStory.controlled('with range', readme, (setState, state) => (
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '200vh',
+    backgroundColor: state.range ? '#ccc' : '#fff',
+    transition: '400ms all ease-in'
+  }}>
+    <div className='scroll-text'>
+      <strong>Scroll down</strong>
+      <Icon name='arrow_downward' style={{fontSize: '64px', lineHeight: '64px'}} />
+    </div>
+    <div
+      id='range-start'
+    />
+    <SpyScroll
+      range={['range-start', 'range-stop']}
+      onRangeEntered={() => setState({ range: true })}
+      onRangeLeft={() => setState({ range: false })}
+    >
+      <Box />
+    </SpyScroll>
+    <div
+      id='range-stop'
+    />
+    <div className='scroll-text'>
+      <Icon name='arrow_upward' style={{fontSize: '64px', lineHeight: '64px'}} />
+      <strong>Scroll up</strong>
+    </div>
+  </div>
+), () => ({ range: false }))
+
 addStory.controlled('horizontal with trigger', readme, (setState, state) => (
   <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', flexDirection: 'row', width: '300vw' }}>
     <div className='scroll-text'>

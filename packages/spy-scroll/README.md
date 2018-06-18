@@ -23,25 +23,28 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name       | Type      | Default | Description
---------------------|-----------|:-------:|--------------------------------
-children            | node      | n/a     | Spied element.
-containerId         | object    | n/a     | Id of spied container.
-horizontal          | boolean   | `false` | Switch scroll spy to horizontal.
-onVisible           | function  | n/a     | Event triggered when element becomes visible.
-onReached           | function  | n/a     | Event triggered when element begins disappearing.
-onBeginningAppeared | function  | n/a     | Event triggered when elements appears on the bottom of the viewport.
-onBeginningVisible  | function  | n/a     | Event triggered when element is fully visible on the bottom of the viewport.
-onEndReached        | function  | n/a     | Event triggered when element reaches top of the viewport.
-onEndLost           | function  | n/a     | Event triggered when element disappears on the top of the viewport.
-onEndAppeared       | function  | n/a     | Event triggered when elements appears on the top of the viewport.
-onEndVisible        | function  | n/a     | Event triggered when element is fully visible on the top of the viewport.
-onBeginningReached  | function  | n/a     | Event triggered when element reaches bottom of the viewport.
-onBeginningLost     | function  | n/a     | Event triggered when element disappears on the bottom of the viewport.
-onTriggerReached    | function  | n/a     | Event triggered when element reaches trigger.
-onTriggerRetreats   | function  | n/a     | Event triggered when element retreats over the trigger.
-offset              | number    | `0`     | Scroll offset for triggers.
-triggerId           | number    | n/a     | Id of the trigger element.
+Property name       | Type             | Default | Description
+--------------------|------------------|:-------:|--------------------------------
+children            | node             | n/a     | Spied element.
+containerId         | object           | n/a     | Id of spied container.
+horizontal          | boolean          | `false` | Switch scroll spy to horizontal.
+onVisible           | function         | n/a     | Event triggered when element becomes visible.
+onReached           | function         | n/a     | Event triggered when element begins disappearing.
+onBeginningAppeared | function         | n/a     | Event triggered when elements appears on the bottom of the viewport.
+onBeginningVisible  | function         | n/a     | Event triggered when element is fully visible on the bottom of the viewport.
+onEndReached        | function         | n/a     | Event triggered when element reaches top of the viewport.
+onEndLost           | function         | n/a     | Event triggered when element disappears on the top of the viewport.
+onEndAppeared       | function         | n/a     | Event triggered when elements appears on the top of the viewport.
+onEndVisible        | function         | n/a     | Event triggered when element is fully visible on the top of the viewport.
+onBeginningReached  | function         | n/a     | Event triggered when element reaches bottom of the viewport.
+onBeginningLost     | function         | n/a     | Event triggered when element disappears on the bottom of the viewport.
+onTriggerReached    | function         | n/a     | Event triggered when element reaches trigger.
+onTriggerRetreats   | function         | n/a     | Event triggered when element retreats over the trigger.
+onRangeEntered      | function         | n/a     | Event triggered when element enters range.
+onRangeLeft         | function         | n/a     | Event triggered when element leaves range.
+offset              | number           | `0`     | Scroll offset for triggers.
+range               | array of strings | `[]`    | Array of range elements' id's.
+triggerId           | number           | n/a     | Id of the trigger element.
 
 
 ## Changelog

@@ -51,8 +51,17 @@ const propTypes = {
   /** Event triggered when element retreats ahead the trigger. */
   onTriggerRetreats: PropTypes.func,
 
+  /** Event triggered when element enters range. */
+  onRangeEntered: PropTypes.func,
+
+  /** Event triggered when element leaves range. */
+  onRangeLeft: PropTypes.func,
+
   /** Scroll offset for triggers. */
   offset: PropTypes.number,
+
+  /** Array of range elements' id's. */
+  range: PropTypes.arrayOf(PropTypes.string),
 
   /** Id of the trigger element. */
   triggerId: PropTypes.string
@@ -60,7 +69,8 @@ const propTypes = {
 
 const defaultProps = {
   horizontal: false,
-  offset: 0
+  offset: 0,
+  range: []
 }
 
 /**
@@ -94,7 +104,10 @@ function composeHandlers (...handlers) {
  * @property {function} [props.onBeginningLost]
  * @property {function} [props.onTriggerReached]
  * @property {function} [props.onTriggerRetreats]
+ * @property {function} [props.onRangeEntered]
+ * @property {function} [props.onRangeLeft]
  * @property {number} [props.offset]
+ * @property {array} [props.range]
  * @property {string} [props.triggerId]
  *
  * @property {object} state
@@ -115,13 +128,15 @@ class SpyScroll extends React.PureComponent {
       end: null,
       beginning: null,
       behind: null,
-      visible: null,
-      triggered: null
+      inRange: null,
+      triggered: null,
+      visible: null
     }
     this.updatePosition = this.updatePosition.bind(this)
     this.getSpyContainer = this.getSpyContainer.bind(this)
     this.getTrigger = this.getTrigger.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
+    this.getRange = this.getRange.bind(this)
     this._handleScroll = throttle(this.handleScroll, 16)
   }
 
@@ -133,6 +148,9 @@ class SpyScroll extends React.PureComponent {
       return false
     }
     this._container = this.getSpyContainer()
+    this._trigger = this.getTrigger()
+    this._rangeStart = this.getRange(this.props.range, 0)
+    this._rangeEnd = this.getRange(this.props.range, 1)
     this.updatePosition()
     this._container.addEventListener('scroll', this._handleScroll, false)
   }
@@ -152,9 +170,9 @@ class SpyScroll extends React.PureComponent {
    * Trigger events when state changes.
    */
   componentDidUpdate (prevProps, prevState) {
-    const { onVisible, onDisappearing, onBeginningAppeared, onBeginningVisible,
-      onEndReached, onEndLost, onEndAppeared, onEndVisible, onBeginningReached,
-      onBeginningLost, onTriggerReached, onTriggerRetreats } = this.props
+    const { onVisible, onDisappearing, onBeginningAppeared, onBeginningVisible, onEndReached,
+      onEndLost, onEndAppeared, onEndVisible, onBeginningReached, onBeginningLost,
+      onTriggerReached, onTriggerRetreats, onRangeEntered, onRangeLeft } = this.props
 
     if (prevState.visible != null && prevState.visible !== this.state.visible) {
       // Trigger onDisappearing
@@ -221,6 +239,17 @@ class SpyScroll extends React.PureComponent {
         onTriggerRetreats()
       }
     }
+
+    if (prevState.inRange != null && prevState.inRange !== this.state.inRange) {
+      // Trigger onTriggerReached
+      if (onRangeEntered && !this.state.inRange) {
+        onRangeEntered()
+      }
+      // Trigger onTriggerRetreats
+      if (onRangeLeft && this.state.inRange) {
+        onRangeLeft()
+      }
+    }
   }
 
   /**
@@ -276,14 +305,23 @@ class SpyScroll extends React.PureComponent {
       ? halfView
       : inside
 
-    const trigger = this.getTrigger()
+    const trigger = this._trigger
     const triggerPoint = horizontal
       ? trigger && trigger.getBoundingClientRect().left
       : trigger && trigger.getBoundingClientRect().top
 
     const triggered = trigger && elementBeginning > triggerPoint
+    const rangeStart = horizontal
+      ? this._rangeStart && this._rangeStart.getBoundingClientRect().left
+      : this._rangeStart && this._rangeStart.getBoundingClientRect().top
 
-    this.setState({ ahead, end, beginning, behind, visible, triggered })
+    const rangeEnd = horizontal
+      ? this._rangeEnd && this._rangeEnd.getBoundingClientRect().left
+      : this._rangeEnd && this._rangeEnd.getBoundingClientRect().top
+
+    const inRange = elementBeginning >= rangeStart && elementEnd <= rangeEnd
+
+    this.setState({ ahead, end, beginning, behind, inRange, triggered, visible })
   }
 
   /**
@@ -299,6 +337,23 @@ class SpyScroll extends React.PureComponent {
     }
 
     return window
+  }
+
+  /**
+   * Get the range point.
+   * @param {array} range
+   * @param {number} index
+   *
+   * @returns {node|null}
+   */
+  getRange (range, index) {
+    const point = document.getElementById(range[index])
+
+    if (range.length !== 2 || point == null || !point.nodeType) {
+      return null
+    }
+
+    return point
   }
 
   /**

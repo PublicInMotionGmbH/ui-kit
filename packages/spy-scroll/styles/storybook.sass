@@ -14,19 +14,35 @@
   align-items: center
   justify-content: space-between
 
-#trigger
+#trigger, #range-start, #range-stop
   position: fixed
-  top: 50vh
   height: 1px
   width: 100%
   z-index: 1000
 
   &::before
-    content: 'trigger'
     position: absolute
     width: 100%
     border: 1px dotted blue
     border-width: 1px 0 0 0
+
+#trigger
+  top: 50vh
+
+  &::before
+    content: 'trigger'
+
+#range-start
+  top: 30vh
+
+  &::before
+    content: 'start'
+
+#range-stop
+  top: 70vh
+
+  &::before
+    content: 'stop'
 
 #trigger-horizontal
   position: fixed
