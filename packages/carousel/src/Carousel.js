@@ -2,6 +2,8 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
+import { Icon } from '@talixo/icon'
+
 import { buildClassName } from '@talixo/shared'
 
 import Dots from './Dots'
@@ -12,12 +14,52 @@ function reflow (node) {
   return node.offsetHeight
 }
 
+const propTypes = {
+  /** Show arrows to navigate */
+  arrows: PropTypes.bool,
+
+  /** Children passed as slides */
+  children: PropTypes.node,
+
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Show dots to navigate */
+  dots: PropTypes.bool,
+
+  /** Slides animation duration */
+  duration: PropTypes.number,
+
+  /** Number of slides visible in one time */
+  perPage: PropTypes.number,
+
+  /** Function which render custom dots */
+  renderDots: PropTypes.func,
+
+  /** Number of visible elements in one slide */
+  slidesVisible: PropTypes.number
+}
+
+const defaultProps = {
+  children: [],
+  duration: 500,
+  perPage: 1,
+  renderDots: Dots
+}
+
 /**
  * Component which represents Carousel.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {boolean} [props.arrows]
+ * @property {node} [props.children]
+ * @property {string} [props.className]
+ * @property {boolean} [props.dots]
+ * @property {number} [props.duration]
+ * @property {number} [props.perPage]
+ * @property {function} [props.rednerDots]
+ * @property {number} [props.slidesVisible]
+ * @class {React.Element}
  */
 class Carousel extends React.PureComponent {
   state = {
@@ -27,6 +69,11 @@ class Carousel extends React.PureComponent {
     transitionTime: this.props.duration
   }
 
+  /**
+   * Change immadiately to proper slide
+   * @param {number} slide
+   * @returns Promise
+   */
   goImmediately (slide) {
     const { currentSlide } = this.state
     const { duration } = this.props
@@ -49,6 +96,11 @@ class Carousel extends React.PureComponent {
     })
   }
 
+  /**
+   * Change to next or previous slide
+   * @param {number} index
+   * @param {string} type
+   */
   async go (index, type = 'forward') {
     const { children, perPage } = this.props
     const { currentSlide } = this.state
@@ -77,6 +129,9 @@ class Carousel extends React.PureComponent {
     this.setState({ currentSlide: next })
   }
 
+  /**
+   * Handle click next
+   */
   handlerNext = () => {
     const { perPage } = this.props
     const { currentSlide } = this.state
@@ -84,6 +139,9 @@ class Carousel extends React.PureComponent {
     this.go(currentSlide + perPage)
   }
 
+  /**
+   * Handle click prev
+   */
   handlerPrev = () => {
     const { perPage } = this.props
     const { currentSlide } = this.state
@@ -91,6 +149,9 @@ class Carousel extends React.PureComponent {
     this.go(currentSlide - perPage, 'back')
   }
 
+  /**
+   * Handle change slide when click on proper dot
+   */
   handlerDot = (i) => {
     const { perPage } = this.props
 
@@ -99,10 +160,17 @@ class Carousel extends React.PureComponent {
     })
   }
 
+  /**
+   * Set reference to node
+   */
   setRef = node => {
     this.wrapper = findDOMNode(node)
   }
 
+  /**
+   * Render children
+   * @returns Reac.Element
+   */
   renderChildren = () => {
     const { children, perPage } = this.props
 
@@ -128,6 +196,10 @@ class Carousel extends React.PureComponent {
     )
   }
 
+  /**
+  * Render wrapper for slides
+  * @returns React.Element
+  */
   renderWrapper = () => {
     const { perPage } = this.props
     const { transitionTime, currentSlide } = this.state
@@ -139,49 +211,36 @@ class Carousel extends React.PureComponent {
     )
   }
 
+  /**
+   * Render dots
+   * @returns {function}
+   */
   renderDots = () => {
-    const { renderDots } = this.props
+    const { renderDots, ...restProps } = this.props
 
     return renderDots({
-      ...this.props,
+      ...restProps,
       onChange: this.handlerDot
     })
   }
 
   render () {
-    const { arrows, className, children, dots, duration, ...passedProps } = this.props
+    const { arrows, className, dots } = this.props
 
     return (
-      <div className={buildClassName(moduleName, className)} {...passedProps} >
+      <div className={buildClassName(moduleName, className)}>
         {this.renderWrapper()}
-        {dots && this.renderDots()}}
-        {arrows && <div className={buildClassName([moduleName, 'buttons'])}>
-          <button onClick={this.handlerPrev}>Prev</button>
-          <button onClick={this.handlerNext}>Next</button>
+        {dots && this.renderDots()}
+        {arrows && <div className={buildClassName([moduleName, 'arrows'])}>
+          <div className={buildClassName([moduleName, 'arrows--prev'])} onClick={this.handlerPrev}><Icon name='chevron_left' /></div>
+          <div className={buildClassName([moduleName, 'arrows--next'])} onClick={this.handlerNext}><Icon name='chevron_right' /></div>
         </div>}
       </div>
     )
   }
 }
 
-Carousel.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Number of visible elements in one slide */
-  slidesVisible: PropTypes.number,
-
-  /** Slides animation duration */
-  duration: PropTypes.number
-
-  /**  */
-}
-
-Carousel.defaultProps = {
-  children: [],
-  duration: 500,
-  perPage: 1,
-  renderDots: Dots
-}
+Carousel.propTypes = propTypes
+Carousel.defaultProps = defaultProps
 
 export default Carousel

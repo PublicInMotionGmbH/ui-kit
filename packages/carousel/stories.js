@@ -52,6 +52,7 @@ const customDotsStyles = {
   lineHeight: '50px'
 }
 
+// Custom dots
 function customDots (props) {
   const { children, onChange } = props
   const dotsNumber = Math.ceil(children.length)
@@ -65,8 +66,28 @@ function customDots (props) {
   )
 }
 
-// Stories
+// Custom wrapper component with automatic sliding
+class CustomWrapperComponent extends React.PureComponent {
+  componentDidMount () {
+    if (this.child) {
+      setInterval(this.child.handlerNext, this.props.interval)
+    }
+  }
 
+  render () {
+    return (
+      <div style={wrapperStyle}>
+        <Carousel ref={instance => { this.child = instance }}>
+          <div style={imagesStyle}>SLIDE 1</div>
+          <div style={imagesStyle}>SLIDE 2</div>
+          <div style={imagesStyle}>SLIDE 3</div>
+        </Carousel>
+      </div>
+    )
+  }
+}
+
+// Stories
 addStory('initial', readme, () => (
   <div style={wrapperStyle}>
     <Carousel>
@@ -134,4 +155,8 @@ addStory('with custom dots', readme, () => (
       <div style={imagesStyle}>SLIDE 3</div>
     </Carousel>
   </div>
+))
+
+addStory('Custom wrapper component with automatic sliding', readme, () => (
+  <CustomWrapperComponent interval={2500} />
 ))

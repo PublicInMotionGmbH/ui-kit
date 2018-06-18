@@ -19,17 +19,39 @@
     height: 100%
     box-sizing: border-box
 
-  &__buttons
+  &__arrows
     position: absolute
-    bottom: 20px
-    left: 30px
+    display: flex
+    align-items: center
+    height: 100%
+    width: 100%
+    bottom: 0
+    font-size: dp(6)
+    color: $carousel-arrows-color
+    
+    &--prev
+      position: absolute
+      cursor: pointer
+      left: dp(3)
+
+      &:hover
+        color: $carousel-arrows-color--hover
+
+    &--next
+      position: absolute
+      cursor: pointer
+      right: dp(3)
+
+      &:hover
+        color: $carousel-arrows-color--hover
 
 @include module('carousel-dots')
   position: absolute
   display: flex
+  justify-content: center
   width: 100%
   bottom: 0
-  justify-content: center
+  z-index: 10
 
   &__single
     display: inline-block

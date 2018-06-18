@@ -5,6 +5,15 @@ import { buildClassName } from '@talixo/shared'
 
 const moduleName = 'carousel-dots'
 
+const propTypes = {
+  /** Children passed as slides */
+  children: PropTypes.node,
+
+  /** Additional class name */
+  className: PropTypes.string
+
+}
+
 /**
  * Component which represents Carousel.
  *
@@ -21,14 +30,10 @@ function Dots (props) {
     elements.push(<div key={i} className={buildClassName([moduleName, 'single'])} onClick={() => onChange(i)} />)
   }
   return (
-    <div className={buildClassName(moduleName)}> {elements} </div>
+    <div className={buildClassName(moduleName)}>{elements}</div>
   )
 }
 
-Dots.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string
-
-}
+Dots.propTypes = propTypes
 
 export default Dots

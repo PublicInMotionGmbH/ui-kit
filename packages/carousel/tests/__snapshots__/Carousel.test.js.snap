@@ -3,8 +3,6 @@
 exports[`<Carousel /> renders children correctly 1`] = `
 <div
   className="talixo-carousel"
-  perPage={1}
-  renderDots={[Function]}
 >
   <div
     className="children-wrapper"
@@ -25,6 +23,90 @@ exports[`<Carousel /> renders children correctly 1`] = `
     >
       <div
         className="one-slide"
+        key="0"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 1
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="1"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 2
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="2"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 3
+        </div>
+      </div>
+      <div
+        className="one-slide"
         key="copy-0"
         style={
           Object {
@@ -32,7 +114,25 @@ exports[`<Carousel /> renders children correctly 1`] = `
             "minWidth": "100%",
           }
         }
-      />
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 1
+        </div>
+      </div>
       <div
         className="one-slide"
         key="copy-1"
@@ -42,7 +142,25 @@ exports[`<Carousel /> renders children correctly 1`] = `
             "minWidth": "100%",
           }
         }
-      />
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 2
+        </div>
+      </div>
       <div
         className="one-slide"
         key="copy-2"
@@ -52,9 +170,194 @@ exports[`<Carousel /> renders children correctly 1`] = `
             "minWidth": "100%",
           }
         }
-      />
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 3
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-3"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 1
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-4"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 2
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-5"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 3
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-6"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 1
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-7"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 2
+        </div>
+      </div>
+      <div
+        className="one-slide"
+        key="copy-8"
+        style={
+          Object {
+            "maxWidth": "100%",
+            "minWidth": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#3da23d",
+              "border": "5px solid #000",
+              "boxSizing": "border-box",
+              "display": "inline-block",
+              "fontSize": "30px",
+              "height": "100%",
+              "padding": "30px",
+              "textAlign": "center",
+              "width": "100%",
+            }
+          }
+        >
+          SLIDE 3
+        </div>
+      </div>
     </div>
   </div>
-  }
 </div>
 `;
