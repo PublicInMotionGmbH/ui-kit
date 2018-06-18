@@ -358,7 +358,11 @@ class PhoneInput extends React.PureComponent {
     const { className, error, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
     const { hover, focus } = this.state
 
-    const clsName = buildClassName(moduleName, className, { error, hover, focus })
+    const clsName = buildClassName(moduleName, className, {
+      error,
+      hover: hover && hover.length,
+      focus: focus && focus.length
+    })
 
     return (
       <span className={clsName} {...passedProps}>
