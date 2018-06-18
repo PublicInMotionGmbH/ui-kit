@@ -18,18 +18,6 @@ describe('<Checkbox />', () => {
     expect(wrapper.hasClass(`${name}--error`)).toBe(true)
   })
 
-  it('should render with small size styling', () => {
-    const wrapper = shallow(<Checkbox size='small' />)
-
-    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
-  })
-
-  it('should render with large size styling', () => {
-    const wrapper = shallow(<Checkbox size='large' />)
-
-    expect(wrapper.hasClass(`${name}--large`)).toBe(true)
-  })
-
   it('should handle events on input', () => {
     const change = jest.fn()
 

@@ -18,9 +18,9 @@ describe('<Notification />', () => {
     expect(className).toContain('big')
   })
 
-  it('renders variant correctly', () => {
+  it('renders type correctly', () => {
     const wrapper = shallow(
-      <Notification variant='error'>
+      <Notification type='error'>
         Notification
       </Notification>
     )
@@ -29,9 +29,9 @@ describe('<Notification />', () => {
     expect(className).toContain(`${moduleName}--error`)
   })
 
-  it('calls onRemove when clicked', () => {
+  it('calls onClose when clicked', () => {
     const onClick = jest.fn()
-    const wrapper = mount(<Notification onRemove={onClick}>Notification</Notification>)
+    const wrapper = mount(<Notification onClose={onClick}>Notification</Notification>)
 
     wrapper.find(`span.${moduleName}__close`).simulate('click')
     expect(onClick).toHaveBeenCalledTimes(1)

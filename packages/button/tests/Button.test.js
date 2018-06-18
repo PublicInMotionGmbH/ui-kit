@@ -13,9 +13,9 @@ describe('<Button />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('handles `size` properly', () => {
+  it('handles `small` properly', () => {
     const wrapper = shallow(
-      <Button size='small'>
+      <Button small>
         Button
       </Button>
     )
@@ -23,14 +23,14 @@ describe('<Button />', () => {
     expect(wrapper.props().className).toMatch(/(^| )talixo-button--small( |$)/)
   })
 
-  it('handles `variant` properly', () => {
+  it('handles `wide` properly', () => {
     const wrapper = shallow(
-      <Button variant='full-width'>
+      <Button wide>
         Button
       </Button>
     )
 
-    expect(wrapper.props().className).toMatch(/(^| )talixo-button--full-width( |$)/)
+    expect(wrapper.props().className).toMatch(/(^| )talixo-button--wide( |$)/)
   })
 
   it('handles `className` properly', () => {
