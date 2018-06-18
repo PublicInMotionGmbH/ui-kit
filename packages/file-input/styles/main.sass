@@ -11,37 +11,64 @@
   width: 100%
   min-height: dp(5)
 
-  &dragover
+  &--dragover
     opacity: .6
+    *
+      pointer-events: none
 
   *
     box-sizing: border-box
 
-  &__icon
-    color: $color-talixo-light-gray
-    font-size: dp(10)
-    height: fit-content
-    padding: dp(2) 0 dp(4)
-    pointer-events: none
-    user-select: none
-
   &__children
     width: fit-content
+    //
+    //&__fade
+    //  &-enter
+    //    opacity: 0.01
+    //
+    //  &-enter-active
+    //    opacity: 1
+    //    transition: opacity 500ms ease-in
+    //
+    //  &-enter-exit
+    //    opacity: 1
+    //
+    //  &-enter-exit-active
+    //    opacity: 0.01
+    //    transition: opacity 500ms ease-in
+
 
   &__files-wrapper
     display: flex
     flex-direction: row
-    justify-content: center
     flex-wrap: wrap
     width: 100%
+    padding: dp(3) 0 0
 
   &__upload
     > div
       text-align: center
 
 @include module('file')
-  flex-basis: 25%
+  display: inline-flex
+  align-items: center
+  flex-basis: 33.3%
   padding: dp(2)
 
+  > div
+    padding: 0 dp(.6)
+
+  &__icon, &__remove
+    user-select: none
+
   &__icon
+    font-size: dp(6)
+
+  &__name
+    font-size: dp(1.75)
+    font-weight: $font-weight-semibold
+
+  &__remove
+    color: $color-talixo-error-red
     cursor: pointer
+    font-size: dp(3)

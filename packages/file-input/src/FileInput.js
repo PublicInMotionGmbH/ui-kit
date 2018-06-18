@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 import { Button } from '@talixo/button'
-import { Icon } from '@talixo/icon'
 
 import File from './File'
 import { getDataTransferFiles } from './utils'
@@ -23,7 +22,8 @@ const events = {
   end: 'onDragEnd',
   enter: 'onDragEnter',
   leave: 'onDragLeave',
-  over: 'onDragOver'
+  over: 'onDragOver',
+  start: 'onDragStart'
 }
 
 const propTypes = {
@@ -69,10 +69,9 @@ class FileInput extends React.Component {
 
   handleDrag = (type, e) => {
     e.preventDefault()
-    // e.stopPropagation()
     const files = getDataTransferFiles(e)
 
-    if (type === events.enter) {
+    if (type === events.enter || type === events.start) {
       this.setState({ dragover: true })
     }
 
@@ -91,14 +90,17 @@ class FileInput extends React.Component {
     const { files } = this.state
     const uploadedFiles = getDataTransferFiles(e)
 
-    if (!uploadedFiles) return
+    if (!uploadedFiles) {
+      this.setState({ dragover: false })
+      return
+    }
     const newFiles = files.concat([...uploadedFiles])
     const newIdStorage = registerElements(newFiles)
     if (onDrop) {
       onDrop(newFiles, e)
     }
 
-    this.setState({ files: newFiles, idStorage: newIdStorage })
+    this.setState({ files: newFiles, idStorage: newIdStorage, dragover: false })
   }
 
   handleRemove (file) {
@@ -111,8 +113,9 @@ class FileInput extends React.Component {
 
   getWrapperProps = () => {
     const { className } = this.props
+    const { dragover } = this.state
     const { handleDrag, handleDrop } = this
-    const wrapperCls = buildClassName(moduleName, className)
+    const wrapperCls = buildClassName(moduleName, className, { dragover })
 
     return {
       className: wrapperCls,
@@ -120,20 +123,34 @@ class FileInput extends React.Component {
       onDragEnd: handleDrag.bind(this, events.end),
       onDragLeave: handleDrag.bind(this, events.leave),
       onDragOver: handleDrag.bind(this, events.over),
+      onDragStart: handleDrag.bind(this, events.start),
       onDrop: handleDrop
     }
+  }
+
+  getFileElements = () => {
+    const { files, idStorage } = this.state
+    const { handleRemove } = this
+
+    return (
+      <React.Fragment>
+        {
+          files.map((file, index) => (
+            <File key={idStorage.get(file)} onRemove={handleRemove.bind(this, file)} file={file} />)
+          )
+        }
+      </React.Fragment>
+    )
   }
 
   setInputRef = node => { this.input = node }
 
   render () {
     const { buttonLabel, className, children, ...passedProps } = this.props
-    const { dragover, files, idStorage } = this.state
-    const { handleClick, handleDrop, handleRemove, getWrapperProps, setInputRef } = this
+    const { files } = this.state
+    const { handleClick, handleDrop, getFileElements, getWrapperProps, setInputRef } = this
     // Class names
     const childrenCls = buildClassName([moduleName, 'children'])
-    const iconCls = buildClassName([moduleName, 'icon'])
-    const shadowCls = buildClassName([moduleName, 'shadow'])
     const filesCls = buildClassName([moduleName, 'files-wrapper'])
     const uploadCls = buildClassName([moduleName, 'upload'])
     // Get props for wrapper
@@ -141,17 +158,9 @@ class FileInput extends React.Component {
 
     return (
       <div {...passedProps} {...wrapperProps}>
-        { dragover && <div className={shadowCls} /> }
-        <div className={iconCls}><Icon name='cloud_upload' /></div>
         <div className={childrenCls}>{ children }</div>
         <div className={uploadCls}><Button onClick={handleClick}>{ buttonLabel }</Button></div>
-        <div className={filesCls}>
-          {
-            files.map((file, index) => (
-              <File key={idStorage.get(file)} onRemove={handleRemove.bind(this, file)} file={file} />
-            ))
-          }
-        </div>
+        { files.length > 0 && <div className={filesCls}>{ getFileElements() }</div> }
         <input
           style={{ display: 'none' }}
           ref={setInputRef}
