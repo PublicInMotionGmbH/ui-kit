@@ -38,7 +38,7 @@ const propTypes = {
 const defaultProps = {
   items: [],
   sticky: false,
-  autoClose: true,
+  autoClose: false,
   horizontal: 'start',
   vertical: 'bottom'
 }

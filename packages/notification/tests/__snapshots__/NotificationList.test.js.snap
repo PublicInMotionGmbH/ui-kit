@@ -11,7 +11,38 @@ exports[`<NotificationsList /> renders correctly children 1`] = `
       childFactory={[Function]}
       className="talixo-notifications-list__content"
       component="div"
-    />
+    >
+      <Fade
+        key="2"
+      >
+        <Notification
+          onClose={[Function]}
+          type="error"
+        >
+          Notification 1
+        </Notification>
+      </Fade>
+      <Fade
+        key="3"
+      >
+        <Notification
+          onClose={[Function]}
+        >
+          Notification 2
+        </Notification>
+      </Fade>
+      <Fade
+        key="4"
+      >
+        <Notification
+          id="10"
+          onClose={[Function]}
+          type="success"
+        >
+          Notification 3
+        </Notification>
+      </Fade>
+    </TransitionGroup>
   </div>
 </div>
 `;

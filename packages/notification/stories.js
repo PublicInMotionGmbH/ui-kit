@@ -166,7 +166,7 @@ addStory('on smaller size', readme, () => (
 ))
 
 addStory('notifications list', readme, () => (
-  <NotificationsList items={notifications} />
+  <NotificationsList autoClose items={notifications} />
 ))
 
 addStory.controlled('sticky notifications list', readme, (setState, state) => (
@@ -201,6 +201,7 @@ addStory.controlled('sticky notifications list', readme, (setState, state) => (
     </button>
 
     <NotificationsList
+      autoClose
       sticky
       horizontal={state.horizontal}
       vertical={state.vertical}
@@ -245,6 +246,7 @@ addStory.controlled('RTL: sticky notifications list', readme, (setState, state) 
     </button>
 
     <NotificationsList
+      autoClose
       sticky
       horizontal={state.horizontal}
       vertical={state.vertical}
