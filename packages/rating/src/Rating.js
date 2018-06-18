@@ -12,6 +12,33 @@ const RIGHT_ARROW = 39
 const DOWN_ARROW = 40
 const ARROWS = [ LEFT_ARROW, DOWN_ARROW, UP_ARROW, RIGHT_ARROW ]
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Rating to show, between 0 and 1 */
+  value: PropTypes.number,
+
+  /** Number of icons */
+  size: PropTypes.number,
+
+  /** Icon name to use */
+  icon: PropTypes.string,
+
+  /** Allow changing through keyboard */
+  keyboard: PropTypes.bool,
+
+  /** Event to handle user input */
+  onChange: PropTypes.func
+}
+
+const defaultProps = {
+  size: 5,
+  value: 0,
+  keyboard: true,
+  icon: 'star'
+}
+
 /**
  * Component which represents Rating.
  *
@@ -219,31 +246,7 @@ class Rating extends React.PureComponent {
   }
 }
 
-Rating.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Rating to show, between 0 and 1 */
-  value: PropTypes.number,
-
-  /** Number of icons */
-  size: PropTypes.number,
-
-  /** Icon name to use */
-  icon: PropTypes.string,
-
-  /** Allow changing through keyboard */
-  keyboard: PropTypes.bool,
-
-  /** Event to handle user input */
-  onChange: PropTypes.func
-}
-
-Rating.defaultProps = {
-  size: 5,
-  value: 0,
-  keyboard: true,
-  icon: 'star'
-}
+Rating.propTypes = propTypes
+Rating.defaultProps = defaultProps
 
 export default Rating

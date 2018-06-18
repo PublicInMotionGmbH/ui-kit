@@ -5,6 +5,26 @@ import cls from 'classnames'
 // As it may be used too often, class names in Grid are simplified
 const name = '_'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Default number of columns (from small screen) */
+  size: PropTypes.number,
+
+  /** Number of columns from medium screen */
+  medium: PropTypes.number,
+
+  /** Number of columns from large screen */
+  large: PropTypes.number,
+
+  /** Number of columns from extra-large screen */
+  xlarge: PropTypes.number,
+
+  /** Children inside a segment */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Grid.
  *
@@ -29,24 +49,6 @@ function Segment (props) {
   )
 }
 
-Segment.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Default number of columns (from small screen) */
-  size: PropTypes.number,
-
-  /** Number of columns from medium screen */
-  medium: PropTypes.number,
-
-  /** Number of columns from large screen */
-  large: PropTypes.number,
-
-  /** Number of columns from extra-large screen */
-  xlarge: PropTypes.number,
-
-  /** Children inside a segment */
-  children: PropTypes.node
-}
+Segment.propTypes = propTypes
 
 export default Segment

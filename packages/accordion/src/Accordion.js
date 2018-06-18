@@ -5,6 +5,51 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Collapse } from '@talixo/collapse'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Should it collapse smoothly? */
+  smooth: PropTypes.bool,
+
+  /** Animation time (in ms), requires Collapse geometry CSS */
+  animationTime: PropTypes.number,
+
+  /** Options to show in accordion */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    /** Label to show in single option */
+    label: PropTypes.node.isRequired,
+
+    /** Content to show inside */
+    content: PropTypes.node.isRequired
+  })).isRequired,
+
+  /** IDs of currently opened element */
+  value: PropTypes.any,
+
+  /** Event fired when button is clicked */
+  onChange: PropTypes.func,
+
+  /** Render "open" icon for closed tab */
+  renderOpenIcon: PropTypes.func,
+
+  /** Render "close" icon for opened tab */
+  renderCloseIcon: PropTypes.func,
+
+  /** Function to build unique ID per option */
+  buildId: PropTypes.func,
+
+  /** Should allow opening many sections? */
+  multi: PropTypes.bool
+}
+
+const defaultProps = {
+  animationTime: 300,
+  smooth: true,
+  multi: false,
+  buildId: (option, index) => index
+}
+
 /**
  * Build element to show in accordion
  *
@@ -245,46 +290,7 @@ class Accordion extends React.PureComponent {
   }
 }
 
-Accordion.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Should it collapse smoothly? */
-  smooth: PropTypes.bool,
-
-  /** Animation time (in ms), requires Collapse geometry CSS */
-  animationTime: PropTypes.number,
-
-  /** Options to show in accordion */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.node.isRequired,
-    content: PropTypes.node.isRequired
-  })).isRequired,
-
-  /** IDs of currently opened element */
-  value: PropTypes.any,
-
-  /** Event fired when button is clicked */
-  onChange: PropTypes.func,
-
-  /** Render "open" icon for closed tab */
-  renderOpenIcon: PropTypes.func,
-
-  /** Render "close" icon for opened tab */
-  renderCloseIcon: PropTypes.func,
-
-  /** Function to build unique ID per option */
-  buildId: PropTypes.func,
-
-  /** Should allow opening many sections? */
-  multi: PropTypes.bool
-}
-
-Accordion.defaultProps = {
-  animationTime: 300,
-  smooth: true,
-  multi: false,
-  buildId: (option, index) => index
-}
+Accordion.propTypes = propTypes
+Accordion.defaultProps = defaultProps
 
 export default Accordion

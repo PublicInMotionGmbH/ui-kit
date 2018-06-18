@@ -3,28 +3,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-/**
- * Component which represents button.
- *
- * @param {object} props
- * @param {string} [props.className]
- * @param {*} [props.type]
- * @param {*} [props.size]
- * @returns {React.Element}
- */
-function Button (props) {
-  const { children, className, type, small, wide, submit, ghost, ...passedProps } = props
-
-  const clsName = buildClassName('button', className, [ type ], { ghost, small, wide })
-
-  return (
-    <button className={clsName} type={submit ? 'submit' : 'button'} {...passedProps}>
-      {children}
-    </button>
-  )
-}
-
-Button.propTypes = {
+const propTypes = {
   /** All nodes inside button */
   children: PropTypes.node,
 
@@ -47,10 +26,34 @@ Button.propTypes = {
   wide: PropTypes.bool
 }
 
-Button.defaultProps = {
+const defaultProps = {
   ghost: false,
   small: false,
   wide: false
 }
+
+/**
+ * Component which represents button.
+ *
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {*} [props.type]
+ * @param {*} [props.size]
+ * @returns {React.Element}
+ */
+function Button (props) {
+  const { children, className, type, small, wide, submit, ghost, ...passedProps } = props
+
+  const clsName = buildClassName('button', className, [ type ], { ghost, small, wide })
+
+  return (
+    <button className={clsName} type={submit ? 'submit' : 'button'} {...passedProps}>
+      {children}
+    </button>
+  )
+}
+
+Button.propTypes = propTypes
+Button.defaultProps = defaultProps
 
 export default Button

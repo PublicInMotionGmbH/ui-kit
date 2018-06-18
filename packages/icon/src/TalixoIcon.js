@@ -7,6 +7,14 @@ import icons from '@talixo/icon-pack'
 const iconPrefix = icons.classPrefix
 const iconsMap = icons.icons
 
+const propTypes = {
+  /** Icon name */
+  name: PropTypes.string.isRequired,
+
+  /** Additional class name */
+  className: PropTypes.string
+}
+
 /**
  * Component which represents icon from Talixo set
  *
@@ -25,12 +33,6 @@ function TalixoIcon (props) {
   )
 }
 
-TalixoIcon.propTypes = {
-  /** Icon name */
-  name: PropTypes.string.isRequired,
-
-  /** Additional class name */
-  className: PropTypes.string
-}
+TalixoIcon.propTypes = propTypes
 
 export default TalixoIcon
