@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NotificationList /> renders correctly children 1`] = `
+exports[`<NotificationsList /> renders correctly children 1`] = `
 <div
-  className="talixo-notifications__container"
+  className="talixo-notifications-list talixo-notifications-list--start talixo-notifications-list--bottom"
 >
   <div
-    className="talixo-notifications__wrapper"
+    className="talixo-notifications-list__wrapper"
   >
     <TransitionGroup
       childFactory={[Function]}
-      className="talixo-notifications"
+      className="talixo-notifications-list__content"
       component="div"
     />
   </div>
 </div>
 `;
 
-exports[`<NotificationList /> renders correctly one child 1`] = `
+exports[`<NotificationsList /> renders correctly one child 1`] = `
 <div
-  className="talixo-notifications__container"
+  className="talixo-notifications-list talixo-notifications-list--start talixo-notifications-list--bottom"
 >
   <div
-    className="talixo-notifications__wrapper"
+    className="talixo-notifications-list__wrapper"
   >
     <TransitionGroup
       childFactory={[Function]}
-      className="talixo-notifications"
+      className="talixo-notifications-list__content"
       component="div"
     />
   </div>

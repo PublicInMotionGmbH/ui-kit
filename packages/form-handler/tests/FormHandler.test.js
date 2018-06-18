@@ -21,7 +21,7 @@ const createWrapper = (props) => mount(
     <FormField>
       <TextInput />
     </FormField>
-    <Button type='submit'>Test</Button>
+    <Button submit>Test</Button>
   </FormHandler>
 )
 

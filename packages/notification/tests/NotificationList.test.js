@@ -1,13 +1,13 @@
 import React from 'react'
-import NotificationList from '../src/NotificationList'
+import NotificationsList from '../src/NotificationsList'
 import { shallow } from 'enzyme'
 
-describe('<NotificationList />', () => {
+describe('<NotificationsList />', () => {
   it('renders correctly one child', () => {
     const wrapper = shallow(
-      <NotificationList>
+      <NotificationsList>
         <div id={0}>Notification</div>
-      </NotificationList>
+      </NotificationsList>
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -15,11 +15,11 @@ describe('<NotificationList />', () => {
 
   it('renders correctly children', () => {
     const wrapper = shallow(
-      <NotificationList>
+      <NotificationsList>
         <div id={0}>Notification 1</div>
         <div id={1}>Notification 2</div>
         <div id={2}>Notification 3</div>
-      </NotificationList>
+      </NotificationsList>
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -27,12 +27,12 @@ describe('<NotificationList />', () => {
 
   it('renders .left correctly', () => {
     const wrapper = shallow(
-      <NotificationList className='left'>
+      <NotificationsList className='left'>
         <div id={0}>Notification</div>
-      </NotificationList>
+      </NotificationsList>
     )
 
-    const className = wrapper.props().children.props.className
+    const className = wrapper.props().className
     expect(className).toContain('left')
   })
 })

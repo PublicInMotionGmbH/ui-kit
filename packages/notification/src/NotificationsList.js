@@ -39,7 +39,7 @@ const defaultProps = {
   items: [],
   sticky: false,
   autoClose: true,
-  horizontal: 'left',
+  horizontal: 'start',
   vertical: 'bottom'
 }
 

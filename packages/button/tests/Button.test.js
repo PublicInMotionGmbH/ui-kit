@@ -45,11 +45,11 @@ describe('<Button />', () => {
 
   it('handles different `button` props properly', () => {
     const wrapper = shallow(
-      <Button type='button'>
+      <Button name='something'>
         Button
       </Button>
     )
 
-    expect(wrapper.props().type).toBe('button')
+    expect(wrapper.props().name).toBe('something')
   })
 })

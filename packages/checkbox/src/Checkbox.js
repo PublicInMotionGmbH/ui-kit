@@ -12,6 +12,9 @@ const propTypes = {
   /** Checkbox description */
   children: PropTypes.node,
 
+  /** Is checkbox checked? */
+  value: PropTypes.bool,
+
   /** Indicates that input has error */
   error: PropTypes.bool,
 
@@ -32,6 +35,7 @@ const defaultProps = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {boolean} [props.error]
+ * @property {boolean} [props.value]
  * @property {function} [props.onChange]
  * @property {node} [props.children]
  * @property {string} [props.size]
@@ -40,7 +44,7 @@ const defaultProps = {
  */
 class Checkbox extends React.PureComponent {
   state = {
-    value: this.props.value
+    value: !!this.props.value
   }
 
   componentWillReceiveProps (props) {
