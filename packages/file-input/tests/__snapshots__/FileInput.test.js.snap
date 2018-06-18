@@ -7,15 +7,9 @@ exports[`<FileInput /> renders children correctly 1`] = `
   onDragEnter={[Function]}
   onDragLeave={[Function]}
   onDragOver={[Function]}
+  onDragStart={[Function]}
   onDrop={[Function]}
 >
-  <div
-    className="talixo-file-input__icon"
-  >
-    <Icon
-      name="cloud_upload"
-    />
-  </div>
   <div
     className="talixo-file-input__children"
   />
@@ -29,9 +23,6 @@ exports[`<FileInput /> renders children correctly 1`] = `
       Browse Files
     </Button>
   </div>
-  <div
-    className="talixo-file-input__files-wrapper"
-  />
   <input
     multiple={true}
     onChange={[Function]}
