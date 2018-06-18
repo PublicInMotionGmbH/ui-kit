@@ -11,6 +11,7 @@ using `npm install @talixo/calendar --save` or `yarn add @talixo/calendar`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/icon: ^0.1.1`
 - `@talixo/shared: ^0.1.0`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
