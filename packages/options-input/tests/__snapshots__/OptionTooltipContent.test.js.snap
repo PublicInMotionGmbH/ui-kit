@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OptionTooltipContent /> renders advanced children correctly 1`] = `
+<React.Fragment>
+  <span
+    className="talixo-options-input-tooltip__title"
+  />
+</React.Fragment>
+`;
+
+exports[`<OptionTooltipContent /> renders children correctly 1`] = `
+<React.Fragment>
+  <span
+    className="talixo-options-input-tooltip__title"
+  />
+</React.Fragment>
+`;

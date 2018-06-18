@@ -52,4 +52,27 @@ describe('<Button />', () => {
 
     expect(wrapper.props().name).toBe('something')
   })
+
+  it('handles `submit` prop', () => {
+    const wrapper = shallow(
+      <Button submit>
+        Button
+      </Button>
+    )
+
+    expect(wrapper.props().type).toBe('submit')
+
+    wrapper.setProps({ submit: false })
+    expect(wrapper.props().type).toBe('button')
+  })
+
+  it('handles additional props', () => {
+    const wrapper = shallow(
+      <Button disabled>
+        Button
+      </Button>
+    )
+
+    expect(wrapper.props().disabled).toBe(true)
+  })
 })

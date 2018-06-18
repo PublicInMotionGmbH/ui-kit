@@ -30,4 +30,20 @@ describe('<Checkbox />', () => {
 
     wrapper.unmount()
   })
+
+  it('should work controlled from outside', () => {
+    const change = jest.fn()
+
+    const wrapper = mount(<Checkbox value={false} onChange={change} />)
+
+    expect(wrapper.find('input').prop('checked')).toBe(false)
+
+    wrapper.setProps({ value: true })
+    expect(wrapper.find('input').prop('checked')).toBe(true)
+
+    wrapper.setProps({ value: false })
+    expect(wrapper.find('input').prop('checked')).toBe(false)
+
+    wrapper.unmount()
+  })
 })
