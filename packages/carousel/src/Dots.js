@@ -39,7 +39,11 @@ function Dots (props) {
   const dotsNumber = Math.ceil(children.length / perPage)
   let elements = []
   for (let i = 0; i < dotsNumber; i++) {
-    elements.push(<div key={i} className={buildClassName([moduleName, 'single'])} onClick={() => onChange(i)} />)
+    elements.push(<div
+      key={i}
+      className={buildClassName([moduleName, 'single'])}
+      onClick={() => onChange(i)}
+    />)
   }
   return (
     <div className={buildClassName(moduleName)}>{elements}</div>

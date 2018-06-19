@@ -175,7 +175,10 @@ class Carousel extends React.PureComponent {
 
     for (let i = 0; i < Math.max(children.length, perPage) * 3; i++) {
       elements.push(
-        <div className='one-slide' style={style} key={'copy-' + i}>{children[i % children.length]}</div>
+        <div
+          className='one-slide'
+          style={style}
+          key={'copy-' + i}>{children[i % children.length]}</div>
       )
     }
 
@@ -183,7 +186,10 @@ class Carousel extends React.PureComponent {
       <div style={{display: 'flex', height: '100%'}}>
         {children.map((el, i) => {
           return (
-            <div className='one-slide' style={style} key={i}>{el}</div>
+            <div
+              className='one-slide'
+              style={style}
+              key={i}>{el}</div>
           )
         })}
         {elements}
@@ -200,7 +206,10 @@ class Carousel extends React.PureComponent {
     const { transitionTime, currentSlide } = this.state
 
     return (
-      <div ref={this.setRef} style={{transform: `translateX(-${currentSlide * 100 / perPage}%)`, transitionDuration: `${transitionTime}ms`}} className='children-wrapper'>
+      <div
+        ref={this.setRef}
+        style={{transform: `translateX(-${currentSlide * 100 / perPage}%)`, transitionDuration: `${transitionTime}ms`}}
+        className='children-wrapper'>
         {this.renderChildren()}
       </div>
     )
@@ -227,8 +236,12 @@ class Carousel extends React.PureComponent {
         {this.renderWrapper()}
         {dots && this.renderDots()}
         {arrows && <div className={buildClassName([moduleName, 'arrows'])}>
-          <div className={buildClassName([moduleName, 'arrows--prev'])} onClick={this.handlerPrev}><Icon name='chevron_left' /></div>
-          <div className={buildClassName([moduleName, 'arrows--next'])} onClick={this.handlerNext}><Icon name='chevron_right' /></div>
+          <div className={buildClassName([moduleName, 'arrows--prev'])} onClick={this.handlerPrev}>
+            <Icon name='chevron_left' />
+          </div>
+          <div className={buildClassName([moduleName, 'arrows--next'])} onClick={this.handlerNext}>
+            <Icon name='chevron_right' />
+          </div>
         </div>}
       </div>
     )
