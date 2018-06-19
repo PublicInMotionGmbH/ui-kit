@@ -2,14 +2,14 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Notification from './src/Notification'
-import NotificationsList from './src/NotificationsList'
+import NotificationList from './src/NotificationList'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Notification', module, {
-  propTables: [ Notification, NotificationsList ]
+  propTables: [ Notification, NotificationList ]
 })
 
 function random (arr) {
@@ -166,7 +166,7 @@ addStory('on smaller size', readme, () => (
 ))
 
 addStory('notifications list', readme, () => (
-  <NotificationsList autoClose items={notifications} />
+  <NotificationList autoClose items={notifications} />
 ))
 
 addStory.controlled('sticky notifications list', readme, (setState, state) => (
@@ -200,7 +200,7 @@ addStory.controlled('sticky notifications list', readme, (setState, state) => (
       Bottom
     </button>
 
-    <NotificationsList
+    <NotificationList
       autoClose
       sticky
       horizontal={state.horizontal}
@@ -245,7 +245,7 @@ addStory.controlled('RTL: sticky notifications list', readme, (setState, state) 
       Bottom
     </button>
 
-    <NotificationsList
+    <NotificationList
       autoClose
       sticky
       horizontal={state.horizontal}

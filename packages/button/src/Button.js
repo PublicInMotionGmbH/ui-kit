@@ -23,13 +23,13 @@ const propTypes = {
   small: PropTypes.bool,
 
   /** Should use full 100% width? */
-  wide: PropTypes.bool
+  fluid: PropTypes.bool
 }
 
 const defaultProps = {
   ghost: false,
   small: false,
-  wide: false
+  fluid: false
 }
 
 /**
@@ -42,9 +42,9 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Button (props) {
-  const { children, className, type, small, wide, submit, ghost, ...passedProps } = props
+  const { children, className, type, small, fluid, submit, ghost, ...passedProps } = props
 
-  const clsName = buildClassName('button', className, [ type ], { ghost, small, wide })
+  const clsName = buildClassName('button', className, [ type ], { ghost, small, fluid })
 
   return (
     <button className={clsName} type={submit ? 'submit' : 'button'} {...passedProps}>

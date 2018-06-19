@@ -127,19 +127,19 @@ addStory('small', readme, () => (
 
 addStory('full width', readme, () => (
   <div>
-    <Button onClick={click} wide>Default Full Width</Button>
-    <Button onClick={click} type='primary' wide>Primary Full Width</Button>
-    <Button onClick={click} type='error' wide>Error Full Width</Button>
-    <Button onClick={click} type='primary' wide disabled>Disabled Full Width</Button>
+    <Button onClick={click} fluid>Default Fluid</Button>
+    <Button onClick={click} type='primary' fluid>Primary Fluid</Button>
+    <Button onClick={click} type='error' fluid>Error Fluid</Button>
+    <Button onClick={click} type='primary' fluid disabled>Disabled Fluid</Button>
   </div>
 ))
 
 addStory('small & full width', readme, () => (
   <div>
-    <Button onClick={click} small wide>Default Full Width</Button>
-    <Button onClick={click} type='primary' small wide>Primary Full Width</Button>
-    <Button onClick={click} type='error' small wide>Error Full Width</Button>
-    <Button onClick={click} type='primary' small wide disabled>Disabled Full Width</Button>
+    <Button onClick={click} small fluid>Default Fluid</Button>
+    <Button onClick={click} type='primary' small fluid>Primary Fluid</Button>
+    <Button onClick={click} type='error' small fluid>Error Fluid</Button>
+    <Button onClick={click} type='primary' small fluid disabled>Disabled Fluid</Button>
   </div>
 ))
 
@@ -158,9 +158,9 @@ addStory('with icon', readme, () => (
     <Button onClick={click} small disabled><Icon name='do_not_disturb' /> Disabled</Button>
 
     <h2>Full width size button with icon</h2>
-    <Button onClick={click} wide><Icon name='home' /> <span>Home</span></Button>{' '}
-    <Button onClick={click} type='primary' wide><Icon name='settings' /> Settings</Button>{' '}
-    <Button onClick={click} type='success' wide><Icon name='cancel' /> Cancel</Button>{' '}
-    <Button onClick={click} wide disabled><Icon name='do_not_disturb' /> Disabled</Button>
+    <Button onClick={click} fluid><Icon name='home' /> <span>Home</span></Button>{' '}
+    <Button onClick={click} type='primary' fluid><Icon name='settings' /> Settings</Button>{' '}
+    <Button onClick={click} type='success' fluid><Icon name='cancel' /> Cancel</Button>{' '}
+    <Button onClick={click} fluid disabled><Icon name='do_not_disturb' /> Disabled</Button>
   </div>
 ))

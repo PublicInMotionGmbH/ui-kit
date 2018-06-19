@@ -23,14 +23,14 @@ describe('<Button />', () => {
     expect(wrapper.props().className).toMatch(/(^| )talixo-button--small( |$)/)
   })
 
-  it('handles `wide` properly', () => {
+  it('handles `fluid` properly', () => {
     const wrapper = shallow(
-      <Button wide>
+      <Button fluid>
         Button
       </Button>
     )
 
-    expect(wrapper.props().className).toMatch(/(^| )talixo-button--wide( |$)/)
+    expect(wrapper.props().className).toMatch(/(^| )talixo-button--fluid( |$)/)
   })
 
   it('handles `className` properly', () => {

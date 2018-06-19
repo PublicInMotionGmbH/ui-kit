@@ -33,6 +33,9 @@ const propTypes = {
   /** Week day format */
   weekDayFormat: PropTypes.string,
 
+  /** Which day of week is first? */
+  firstDayOfWeek: PropTypes.number,
+
   /** Moment.js object or formatted value */
   value: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
 
@@ -47,7 +50,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  displayFormat: 'YYYY-MM-DD'
+  displayFormat: 'YYYY-MM-DD',
+  firstDayOfWeek: 1
 }
 
 /**
@@ -119,7 +123,7 @@ class Calendar extends React.PureComponent {
   render () {
     const {
       className, dayAriaLabelFormat, displayFormat, monthFormat, phrases,
-      placeholder, weekDayFormat, onChange, onBlur, onFocus, ...passedProps
+      placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, ...passedProps
     } = this.props
     const { date, focused } = this.state
 
@@ -133,7 +137,7 @@ class Calendar extends React.PureComponent {
           dayAriaLabelFormat={dayAriaLabelFormat}
           displayFormat={displayFormat}
           focused={focused}
-          firstDayOfWeek={1}
+          firstDayOfWeek={firstDayOfWeek}
           monthFormat={monthFormat}
           onDateChange={this.onDateChange}
           onFocusChange={this.onFocusChange}

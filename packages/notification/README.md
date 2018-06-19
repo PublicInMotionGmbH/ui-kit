@@ -36,7 +36,7 @@ className     | string           | n/a     | Additional class name passed to not
 onClose       | function         | n/a     | Function that runs when close button is clicked
 type          | NotificationType | n/a     | Notification variant
 
-### NotificationsList
+### NotificationList
 
 It allows any props which are allowed for `div`.
 
@@ -63,7 +63,7 @@ VerticalPosition   | `top`, `bottom`
 
 ### NotificationItem
 
-Item which should be shown in `NotificationsList` accept all `Notification` properties, except `children` (renamed to `content`):
+Item which should be shown in `NotificationList` accept all `Notification` properties, except `children` (renamed to `content`):
 
 Property name | Type             | Default | Description
 --------------|------------------|:-------:|--------------------------------

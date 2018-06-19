@@ -3,19 +3,19 @@ import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
 
-import NotificationsList from '../src/NotificationsList'
+import NotificationList from '../src/NotificationList'
 
 const name = prefix('notifications-list')
 
-describe('<NotificationsList />', () => {
+describe('<NotificationList />', () => {
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
 
   it('renders correctly one child', () => {
     const wrapper = shallow(
-      <NotificationsList>
+      <NotificationList>
         <div id={0}>Notification</div>
-      </NotificationsList>
+      </NotificationList>
     )
 
     expect(wrapper).toMatchSnapshot()
@@ -23,7 +23,7 @@ describe('<NotificationsList />', () => {
 
   it('renders correctly children', () => {
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={[
           { content: 'Notification 1', type: 'error' },
           { content: 'Notification 2' },
@@ -37,9 +37,9 @@ describe('<NotificationsList />', () => {
 
   it('renders additional class correctly', () => {
     const wrapper = shallow(
-      <NotificationsList className='left'>
+      <NotificationList className='left'>
         <div id={0}>Notification</div>
-      </NotificationsList>
+      </NotificationList>
     )
 
     const className = wrapper.props().className
@@ -56,7 +56,7 @@ describe('<NotificationsList />', () => {
     const spy = jest.fn()
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
         onClose={spy}
       />
@@ -84,7 +84,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
         onClose={spy}
       />
@@ -113,7 +113,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
       />
     )
@@ -133,7 +133,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = mount(
-      <NotificationsList
+      <NotificationList
         items={items}
         autoClose
       />
@@ -154,7 +154,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = mount(
-      <NotificationsList
+      <NotificationList
         items={items}
       />
     )
@@ -174,7 +174,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
         autoClose
       />
@@ -197,7 +197,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
         sticky
       />
@@ -214,7 +214,7 @@ describe('<NotificationsList />', () => {
     ]
 
     const wrapper = shallow(
-      <NotificationsList
+      <NotificationList
         items={items}
         sticky
         horizontal='center'

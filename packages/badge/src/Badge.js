@@ -45,9 +45,9 @@ function Badge (props) {
   })
 
   const removeButton = onRemove ? (
-    <span className={buildClassName('badge__remove')} onClick={onRemove}>
+    <button className={buildClassName('badge__remove')} onClick={onRemove}>
       {removeText}
-    </span>
+    </button>
   ) : null
 
   return (

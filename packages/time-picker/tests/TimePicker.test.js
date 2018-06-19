@@ -11,7 +11,7 @@ jest.mock('moment', () => {
 let D = global.Date.now
 
 function mock (date) {
-  global.Date.now = jest.fn(() => date)
+  global.Date.now = jest.fn(() => +moment(date))
 }
 
 function unmock () {
@@ -106,11 +106,26 @@ describe('onChange', () => {
 
   it('is called when input is changed', () => {
     const inputHours = wrapper.find('input').at(0)
-    inputHours.simulate('change', { target: { value: '12' } })
+    const inputMinutes = wrapper.find('input').at(1)
+
+    // Set up initial date
+    inputHours.simulate('change', { target: { value: '11' } })
+    inputMinutes.simulate('change', { target: { value: '59' } })
+
+    // Accept first date
     inputHours.simulate('blur')
     expect(onChange).toHaveBeenCalledTimes(1)
 
-    const inputMinutes = wrapper.find('input').at(1)
+    // Reset mock for next calls
+    onChange.mockReset()
+
+    // Try to change hours
+    inputHours.simulate('change', { target: { value: '12' } })
+    inputHours.simulate('blur')
+
+    expect(onChange).toHaveBeenCalledTimes(1)
+
+    // Try to change minutes
     inputMinutes.simulate('change', { target: { value: '0' } })
     inputMinutes.simulate('blur')
     expect(onChange).toHaveBeenCalledTimes(2)

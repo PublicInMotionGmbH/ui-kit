@@ -8,6 +8,7 @@ import Calendar from '../src/Calendar'
 
 describe('<Calendar />', () => {
   it('renders children correctly', () => {
+    console.log(Calendar)
     const wrapper = mount(<Calendar />)
 
     expect(wrapper).toMatchSnapshot()

@@ -187,6 +187,7 @@ class PhoneInput extends React.PureComponent {
       this.el.focus()
 
       if (endPrefix) {
+        clearTimeout(this.caretTimeout)
         this.caretTimeout = setTimeout(() => setCaretPosition(this.el, endPrefix))
       }
     }
@@ -223,7 +224,21 @@ class PhoneInput extends React.PureComponent {
   }
 
   /**
-   * Set dis-hover state
+   * Set dis-hover state.
+   *
+   * This needs to be delayed by setTimeout,
+   * because 'mouseOut' will happen before 'mouseEnter'.
+   *
+   * Broken scenario without delay:
+   *
+   * Given: user who has hover on flags drop-down
+   * When: he moves cursor to input
+   * Then:
+   *   - handle 'mouseout' on flags drop-down
+   *   - lose hover status on PhoneInput
+   *   - handle 'mouseover' on input
+   *   - set hover status on PhoneInput
+   * Result: PhoneInput is blinking
    *
    * @param {string} what
    */
@@ -247,6 +262,11 @@ class PhoneInput extends React.PureComponent {
 
   /**
    * Set blur state
+   *
+   * This needs to be delayed by setTimeout,
+   * because 'blur' will happen before 'focus'.
+   *
+   * @see {PhoneInput.setMouseOutState}
    *
    * @param {string} what
    */

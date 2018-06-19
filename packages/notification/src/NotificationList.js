@@ -106,7 +106,7 @@ IdsContainer.prototype.set = function (element) {
  *
  * @class
  */
-class NotificationsList extends React.PureComponent {
+class NotificationList extends React.PureComponent {
   state = {
     items: this.props.items,
     hidden: []
@@ -195,7 +195,7 @@ class NotificationsList extends React.PureComponent {
   }
 }
 
-NotificationsList.propTypes = propTypes
-NotificationsList.defaultProps = defaultProps
+NotificationList.propTypes = propTypes
+NotificationList.defaultProps = defaultProps
 
-export default NotificationsList
+export default NotificationList

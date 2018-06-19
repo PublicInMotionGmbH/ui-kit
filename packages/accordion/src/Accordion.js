@@ -131,7 +131,10 @@ function buildElement (props, option, index) {
 }
 
 /**
- * Check if both lists contain same elements
+ * Check if both lists contain same elements.
+ * This function is intented for user only here,
+ * as it has some problems (which do not apply to Accordion),
+ * i.e. compare [ 1, 1, 2 ] with [ 1, 2, 2 ]
  *
  * @param {array} prevList
  * @param {array} nextList
