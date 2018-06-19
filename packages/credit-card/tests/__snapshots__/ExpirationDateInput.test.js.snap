@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExpirationDateInput /> renders children correctly 1`] = `
+<div
+  className="talixo-expiration-date-input"
+>
+  <RangeInput
+    autoComplete="cc-exp-month"
+    className="talixo-expiration-date-input__month"
+    max={12}
+    min={1}
+    minLength={2}
+    onChange={[Function]}
+    placeholder="MM"
+    value={null}
+  />
+  <RangeInput
+    autoComplete="cc-exp-year"
+    autoCompleteLength={2}
+    className="talixo-expiration-date-input__year"
+    max={2058}
+    min={2018}
+    minLength={1}
+    onChange={[Function]}
+    placeholder="YYYY"
+    value={null}
+  />
+</div>
+`;

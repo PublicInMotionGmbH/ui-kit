@@ -1,10 +1,18 @@
 import React from 'react'
-
-import Element from '../src/Element'
 import { shallow } from 'enzyme'
-import { prefix } from '@talixo/shared'
 
-const moduleName = prefix('navigation')
+import { buildClassName } from '@talixo/shared'
+
+import Element, { moduleName } from '../src/Element'
+
+describe('Module name', () => {
+  it('is passed correctly', () => {
+    const wrapper = shallow(<Element />)
+    const clsName = buildClassName([moduleName, 'element'])
+
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
+  })
+})
 
 describe('<Element />', () => {
   it('renders correctly', () => {
@@ -23,8 +31,20 @@ describe('<Element />', () => {
         Home
       </Element>
     )
+    const clsName = buildClassName([moduleName, 'element'], null, 'active')
 
-    expect(wrapper.hasClass(`${moduleName}__element--active`)).toEqual(true)
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
+  })
+
+  it('renders completed correctly', () => {
+    const wrapper = shallow(
+      <Element completed>
+        Home
+      </Element>
+    )
+    const clsName = buildClassName([moduleName, 'element'], null, 'completed')
+
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('renders disabled correctly', () => {
@@ -33,8 +53,9 @@ describe('<Element />', () => {
         Home
       </Element>
     )
+    const clsName = buildClassName([moduleName, 'element'], null, 'disabled')
 
-    expect(wrapper.hasClass(`${moduleName}__element--disabled`)).toEqual(true)
+    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
   })
 
   it('calls onClick when clicked', () => {

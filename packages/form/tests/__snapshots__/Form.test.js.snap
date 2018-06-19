@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> renders children correctly 1`] = `
+<form
+  className="talixo-form"
+>
+  <div
+    className="talixo-form__content"
+  >
+    <div>
+      Test children
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<Form /> should render footer componet correctly 1`] = `
+<form
+  className="talixo-form"
+>
+  <div
+    className="talixo-form__content"
+  >
+    <div>
+      Test children
+    </div>
+  </div>
+  <div
+    className="talixo-form__footer"
+  >
+    <div>
+      Footer
+    </div>
+  </div>
+</form>
+`;

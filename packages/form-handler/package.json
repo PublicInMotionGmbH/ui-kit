@@ -1,0 +1,55 @@
+{
+  "name": "@talixo/form-handler",
+  "version": "0.0.0",
+  "description": "UI Component which represents Form Handler",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only form-handler",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only form-handler"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/button": "^0.1.0",
+    "@talixo/calendar": "^0.1.1",
+    "@talixo/checkbox": "^0.1.0",
+    "@talixo/combo-box": "^0.1.0",
+    "@talixo/control-group": "^0.1.0",
+    "@talixo/fieldset": "^0.0.0",
+    "@talixo/form-field": "^0.0.0",
+    "@talixo/icon": "^0.1.1",
+    "@talixo/number-input": "^0.1.0",
+    "@talixo/phone-input": "^0.2.0",
+    "@talixo/radio-input": "^0.1.0",
+    "@talixo/shared": "^0.1.0",
+    "@talixo/switcher": "^0.1.0",
+    "@talixo/text-input": "^0.2.0",
+    "formik": "^0.11.11",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "yup": "^0.24.1"
+  },
+  "peerDependencies": {
+    "@talixo/form-field": "^0.0.0",
+    "@talixo/shared": "^0.1.0",
+    "formik": "^0.11.11",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "dependencies": {}
+}

@@ -118,7 +118,7 @@ class Accordion extends React.PureComponent {
    * @param {object} props
    */
   componentWillReceiveProps (props) {
-    if (props.value !== this.state.value) {
+    if (props.value !== undefined && props.value !== this.state.value) {
       this.setState({ value: props.value })
     }
   }
@@ -133,7 +133,7 @@ class Accordion extends React.PureComponent {
     const { value, onChange } = this.props
 
     // Update value when it's self-controlled
-    if (value == null) {
+    if (value === undefined) {
       this.setState({ value: nextValue })
     }
 

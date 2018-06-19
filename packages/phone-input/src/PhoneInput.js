@@ -19,6 +19,9 @@ const propTypes = {
   /** Additional class name for wrapper */
   className: PropTypes.string,
 
+  /** Indicates that input has error */
+  error: PropTypes.bool,
+
   /** Phone number to put inside (control from outside) */
   value: PropTypes.string,
 
@@ -33,6 +36,10 @@ const propTypes = {
 
   /** Event handler when input has been focused */
   onFocus: PropTypes.func
+}
+
+const defaultProps = {
+  error: false
 }
 
 /**
@@ -68,6 +75,7 @@ function renderCountryItem (country) {
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {boolean} [props.error]
  * @property {string} [props.value]
  * @property {string} [props.placeholder]
  * @property {function} [props.onChange]
@@ -238,10 +246,10 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
+    const { className, error, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
 
     return (
-      <span className={buildClassName(moduleName, className)} {...passedProps}>
+      <span className={buildClassName(moduleName, className, {error})} {...passedProps}>
         {this.renderCountryBox()}
         {this.renderInput()}
       </span>
@@ -250,5 +258,7 @@ class PhoneInput extends React.PureComponent {
 }
 
 PhoneInput.propTypes = propTypes
+
+PhoneInput.defaultProps = defaultProps
 
 export default PhoneInput

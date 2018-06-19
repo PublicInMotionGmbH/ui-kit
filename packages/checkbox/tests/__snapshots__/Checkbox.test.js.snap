@@ -5,6 +5,7 @@ exports[`<Checkbox /> renders children correctly 1`] = `
   className="talixo-checkbox"
 >
   <input
+    onChange={[Function]}
     type="checkbox"
   />
   <span />

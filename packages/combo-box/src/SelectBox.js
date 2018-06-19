@@ -84,7 +84,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} changes
    * @returns {object}
    */
-  stateReducer (state, changes) {
+  stateReducer = (state, changes) => {
     const { multi } = this.props
 
     switch (changes.type) {
@@ -122,7 +122,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} props
    * @returns {object|{ onClick: function }}
    */
-  getRemoveButtonProps (props) {
+  getRemoveButtonProps = (props) => {
     const { onClick, item, ...passedProps } = props || {}
 
     // Build handler for 'onClick' event
@@ -149,7 +149,7 @@ class SelectBox extends React.PureComponent {
    *
    * @param {object} item
    */
-  select (item) {
+  select = (item) => {
     const { onChange, multi, value } = this.props
 
     // Handle simple selection for single select-box
@@ -180,7 +180,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} _data
    * @returns {React.Element}
    */
-  renderComponent (_data) {
+  renderComponent = (_data) => {
     // Compose Downshift & our properties
     const data = this.getStateProps(_data)
 
@@ -216,12 +216,12 @@ class SelectBox extends React.PureComponent {
 
     return (
       <Downshift
-        stateReducer={this.stateReducer.bind(this)}
-        onChange={this.select.bind(this)}
+        stateReducer={this.stateReducer}
+        onChange={this.select}
         selectedItem={null}
         {...passedProps}
       >
-        {this.renderComponent.bind(this)}
+        {this.renderComponent}
       </Downshift>
     )
   }

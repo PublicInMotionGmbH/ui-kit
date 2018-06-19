@@ -20,6 +20,9 @@ addStory('default', readme, () => (
     <Checkbox onChange={change} defaultChecked disabled>
       Default checked and disabled
     </Checkbox>
+    <Checkbox onChange={change} error>
+      Default with error
+    </Checkbox>
   </div>
 ))
 
@@ -31,6 +34,9 @@ addStory('small label', readme, () => (
     <Checkbox onChange={change} size='small' defaultChecked disabled>
       Default checked and disabled
     </Checkbox>
+    <Checkbox onChange={change} size='small' error>
+      Default with error
+    </Checkbox>
   </div>
 ))
 
@@ -41,6 +47,9 @@ addStory('large label', readme, () => (
     <Checkbox onChange={change} size='large' disabled>Default disabled</Checkbox>
     <Checkbox onChange={change} size='large' defaultChecked disabled>
       Default checked and disabled
+    </Checkbox>
+    <Checkbox onChange={change} size='large' error>
+      Default with error
     </Checkbox>
   </div>
 ))

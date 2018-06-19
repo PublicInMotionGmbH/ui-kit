@@ -27,15 +27,7 @@ const TRANSFORM_END = [
  * @class
  */
 class Collapse extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.saveRef = this.saveRef.bind(this)
-    this.saveContentRef = this.saveContentRef.bind(this)
-    this.finishTransition = this.finishTransition.bind(this)
-
-    this.height = null
-  }
+  height = null
 
   componentWillReceiveProps (props) {
     // Do nothing special when component hasn't changed it's collapsing state
@@ -144,7 +136,7 @@ class Collapse extends React.PureComponent {
    *
    * @param {Event} event
    */
-  finishTransition (event) {
+  finishTransition = (event) => {
     // Ignore if transition has finished in different place
     if (event.target !== this.node) {
       return
@@ -172,7 +164,7 @@ class Collapse extends React.PureComponent {
    *
    * @param {Element} element
    */
-  saveRef (element) {
+  saveRef = (element) => {
     this.node = findDOMNode(element)
   }
 
@@ -181,7 +173,7 @@ class Collapse extends React.PureComponent {
    *
    * @param {Element} element
    */
-  saveContentRef (element) {
+  saveContentRef = (element) => {
     this.content = findDOMNode(element)
   }
 

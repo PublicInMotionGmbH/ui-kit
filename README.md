@@ -23,6 +23,12 @@ You can run scripts using `npm run NAME` or `yarn run NAME` commands.
 - `build` - build distributable version of all packages
 - `storybook` - run Storybook in development mode (available at `http://localhost:9009/`)
 - `build-storybook` - build static Storybook into `storybook-static` directory
+- `compare-own-versions` - compare local package versions with NPM ones, able to fix them by `--fix` param
+- `compare-dependencies` - compare dependencies in packages, able to fix some problems by `--fix` or update external dependencies by `--update`
+- `readme-dependencies` - list differences or update (`--fix`) peer dependencies in README files
+
+Last 3 commands can also use `--all` flag, which will list everything, not only problems and differences.
+Also, both these commands, `build` and `test` allow `--only` flag, where you can list packages which should be taken in action.
 
 ### Working with Lerna
 
@@ -189,3 +195,11 @@ Starting Storybook for development at different port         | `npm run storyboo
 Build static code for Storybook into `storybook-static`      | `npm run build-storybook`
 Remove all `node_modules`                                    | `find . -name "node_modules" -exec rm -rf '{}' +` in main directory
 Reinitializing everything                                    | `find . -name "node_modules" -exec rm -rf '{}' + && npm run init` in main directory
+Compare our packages versions to these on NPM (w/ problems)  | `npm run compare-own-versions`
+Compare our packages versions to these on NPM (list all)     | `npm run compare-own-versions -- --all`
+Update our packages versions to match these on NPM           | `npm run compare-own-versions -- --fix`
+Compare and list our dependencies (with problems)            | `npm run compare-dependencies`
+Compare and list our dependencies (list all)                 | `npm run compare-dependencies -- --all`
+List our dependencies and fix local problems                 | `npm run compare-dependencies -- --fix`
+List our dependencies and update external to our newest deps | `npm run compare-dependencies -- --update`
+Fix peer dependencies in README.md file                      | `npm run readme-dependencies -- --fix`

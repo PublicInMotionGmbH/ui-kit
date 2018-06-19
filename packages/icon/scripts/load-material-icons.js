@@ -60,7 +60,7 @@ function buildCodepointsMap (iconsList) {
  */
 function buildOverview (iconsMap) {
   const overview = {
-    custom: customIcons
+    custom: Object.keys(customIcons || {})
   }
 
   for (const name of Object.keys(iconsMap)) {

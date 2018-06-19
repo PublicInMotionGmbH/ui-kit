@@ -7,13 +7,14 @@ exports[`<Slider /> renders children correctly 1`] = `
   <span
     className="talixo-slider__value"
   >
-    50
+    0
   </span>
   <input
     className="talixo-slider__input"
+    min={0}
     onChange={[Function]}
     type="range"
-    value={50}
+    value={0}
   />
 </span>
 `;
