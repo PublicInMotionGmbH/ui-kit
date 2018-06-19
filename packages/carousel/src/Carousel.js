@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { Icon } from '@talixo/icon'
-
 import { buildClassName } from '@talixo/shared'
 
 import Dots from './Dots'
