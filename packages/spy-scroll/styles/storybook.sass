@@ -14,7 +14,7 @@
   align-items: center
   justify-content: space-between
 
-#trigger, #range-start, #range-stop
+#trigger, #range-start, #range-stop, .trigger-offset
   position: fixed
   height: 1px
   width: 100%
@@ -43,6 +43,15 @@
 
   &::before
     content: 'stop'
+
+.trigger-offset
+  top: calc(50vh + 100px)
+
+  &::before
+    content: 'offset'
+    color: red
+    border: 1px dotted red
+    border-width: 1px 0 0 0
 
 #trigger-horizontal
   position: fixed

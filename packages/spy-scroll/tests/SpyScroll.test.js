@@ -344,3 +344,89 @@ describe('triggers on scroll up', () => {
     wrapper.detach()
   })
 })
+
+describe('range', () => {
+  let wrapper
+  beforeEach(() => {
+    window.innerHeight = 100
+  })
+  afterEach(() => {
+    wrapper.unmount()
+  })
+
+  it('triggers onRangeLeft', () => {
+    createBoundingRect(50, 25, 75)
+    const onRangeLeft = jest.fn()
+    const range = ['range-start', 'range-end']
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
+    const rangeStart = document.createElement('span')
+    document.body.appendChild(rangeStart)
+    rangeStart.id = range[0]
+    rangeStart.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 25
+      }
+    })
+
+    const rangeEnd = document.createElement('span')
+    document.body.appendChild(rangeEnd)
+    rangeEnd.id = range[1]
+    rangeEnd.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 75
+      }
+    })
+
+    wrapper = mount(<SpyScroll range={range} onRangeLeft={onRangeLeft}>
+      <span className='spied-element'>
+        Hello
+      </span>
+    </SpyScroll>, { attachTo: div })
+
+    wrapper.setState({ inRange: false })
+
+    expect(onRangeLeft).toHaveBeenCalledTimes(1)
+    wrapper.detach()
+  })
+
+  it('triggers onRangeEntered', () => {
+    createBoundingRect(50, -75, -25)
+    const onRangeEntered = jest.fn()
+    const range = ['range-start', 'range-end']
+
+    const div = document.createElement('div')
+    document.body.appendChild(div)
+
+    const rangeStart = document.createElement('span')
+    document.body.appendChild(rangeStart)
+    rangeStart.id = range[0]
+    rangeStart.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 25
+      }
+    })
+
+    const rangeEnd = document.createElement('span')
+    document.body.appendChild(rangeEnd)
+    rangeEnd.id = range[1]
+    rangeEnd.getBoundingClientRect = jest.fn(() => {
+      return {
+        top: 75
+      }
+    })
+
+    wrapper = mount(<SpyScroll range={range} onRangeEntered={onRangeEntered}>
+      <span className='spied-element'>
+        Hello
+      </span>
+    </SpyScroll>, { attachTo: div })
+
+    wrapper.setState({ inRange: true })
+
+    expect(onRangeEntered).toHaveBeenCalledTimes(1)
+    wrapper.detach()
+  })
+})
