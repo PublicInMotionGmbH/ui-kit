@@ -23,7 +23,7 @@
       background-color: $accordion-header-background-color
       cursor: pointer
 
-      &__icon
+      &-icon
         display: inline-block
         position: absolute
         color: $accordion-arrow-color
@@ -36,7 +36,7 @@
         color: $accordion-header-hover-text-color
         background-color: $accordion-header-hover-background-color
 
-      &:hover #{prefix('accordion-element', 'toggle', 'icon')}
+      &:hover #{prefix('accordion-element', 'toggle-icon')}
         color: $accordion-arrow-hover-color
 
     & > #{prefix('collapse')} > #{prefix('collapse', 'content')}

@@ -104,14 +104,14 @@ function buildElement (props, option, index) {
 
   const renderIcon = collapsed ? renderOpenIcon : renderCloseIcon
   const icon = renderIcon ? (
-    <span className={prefix('accordion-element', 'toggle', 'icon')}>
+    <span className={prefix('accordion-element', 'toggle-icon')}>
       {renderIcon(option, { ...props, id, collapsed })}
     </span>
   ) : null
 
   // Build class name for inner elements
-  const buttonInnerClsName = prefix('accordion-element', 'toggle', 'inner')
-  const contentInnerClsName = prefix('accordion-element', 'content', 'inner')
+  const buttonInnerClsName = prefix('accordion-element', 'toggle-inner')
+  const contentInnerClsName = prefix('accordion-element', 'content-inner')
 
   return (
     <div className={className} key={`${index}--${id}`}>
