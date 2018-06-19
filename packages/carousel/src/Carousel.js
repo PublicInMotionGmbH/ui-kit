@@ -34,10 +34,7 @@ const propTypes = {
   perPage: PropTypes.number,
 
   /** Function which render custom dots */
-  renderDots: PropTypes.func,
-
-  /** Number of visible elements in one slide */
-  slidesVisible: PropTypes.number
+  renderDots: PropTypes.func
 }
 
 const defaultProps = {
@@ -58,7 +55,6 @@ const defaultProps = {
  * @property {number} [props.duration]
  * @property {number} [props.perPage]
  * @property {function} [props.rednerDots]
- * @property {number} [props.slidesVisible]
  * @class {React.Element}
  */
 class Carousel extends React.PureComponent {

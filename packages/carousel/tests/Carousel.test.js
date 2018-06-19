@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 import Carousel from '../src/Carousel'
 
@@ -57,6 +57,22 @@ describe('<Carousel />', () => {
     expect(wrapper.find(`.${name}-dots__single`).length).toBe(3)
   })
 
+  it('changes currentSlide when prev arrow clicked', () => {
+    const wrapper = shallow(
+      <Carousel dots>
+        <div style={imagesStyle}>SLIDE 1</div>
+        <div style={imagesStyle}>SLIDE 2</div>
+        <div style={imagesStyle}>SLIDE 3</div>
+      </Carousel>)
+
+    expect(wrapper.state('currentSlide')).toBe(0)
+
+    const dot = wrapper.find(`.${name}-dots__single`)
+    dot.at(2).simulate('click')
+
+    expect(wrapper.state('currentSlide')).toBe(2)
+  })
+
   it('changes currentSlide when next arrow clicked', async () => {
     const wrapper = shallow(
       <Carousel arrows>
@@ -87,36 +103,57 @@ describe('<Carousel />', () => {
     await prev.simulate('click')
 
     expect(wrapper.state().currentSlide).toBe(1)
+
+    wrapper.unmount()
   })
 
-  it('goes to last slide when prev arrow clicked on first', async () => {
-    const wrapper = shallow(
+  it('set ref to wrapper correctly', () => {
+    const wrapper = mount(
       <Carousel arrows>
         <div style={imagesStyle}>SLIDE 1</div>
         <div style={imagesStyle}>SLIDE 2</div>
         <div style={imagesStyle}>SLIDE 3</div>
       </Carousel>)
 
-    // const prev = wrapper.find(`.${name}__arrows--prev`)
-    // await prev.simulate('click')
-    console.log(wrapper.instance())
+    expect(wrapper.find('.children-wrapper')).toHaveLength(1)
+    expect(wrapper.instance().wrapper).toBeTruthy()
 
-    // expect(wrapper.state().currentSlide).toBe(3)
+    wrapper.unmount()
   })
 
-  it('changes currentSlide when prev arrow clicked', () => {
-    const wrapper = shallow(
-      <Carousel dots>
+  it('goes to last slide when prev arrow clicked on first', async () => {
+    const wrapper = mount(
+      <Carousel arrows>
         <div style={imagesStyle}>SLIDE 1</div>
         <div style={imagesStyle}>SLIDE 2</div>
         <div style={imagesStyle}>SLIDE 3</div>
       </Carousel>)
 
-    expect(wrapper.state('currentSlide')).toBe(0)
+    expect(wrapper.state().currentSlide).toBe(0)
 
-    const dot = wrapper.find(`.${name}-dots__single`)
-    dot.at(2).simulate('click')
+    const prev = wrapper.find(`.${name}__arrows--prev`)
+    await prev.simulate('click')
 
-    expect(wrapper.state('currentSlide')).toBe(2)
+    expect(wrapper.state().currentSlide).toBe(3)
+
+    wrapper.unmount()
+  })
+
+  it('goes to last slide when prev arrow clicked on first, in case perPage is greater than number of children', async () => {
+    const wrapper = mount(
+      <Carousel arrows perPage={4}>
+        <div style={imagesStyle}>SLIDE 1</div>
+        <div style={imagesStyle}>SLIDE 2</div>
+        <div style={imagesStyle}>SLIDE 3</div>
+      </Carousel>)
+
+    expect(wrapper.state().currentSlide).toBe(0)
+
+    const prev = wrapper.find(`.${name}__arrows--prev`)
+    await prev.simulate('click')
+
+    expect(wrapper.state().currentSlide).toBe(6)
+
+    wrapper.unmount()
   })
 })

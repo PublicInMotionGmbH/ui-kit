@@ -16,7 +16,6 @@ const wrapperStyle = {
   height: '200px',
   display: 'flex'
 }
-
 const imagesStyle = {
   display: 'inline-block',
   height: '100%',
@@ -35,7 +34,6 @@ const customDotsWrapperStyles = {
   bottom: '0',
   justifyContent: 'center'
 }
-
 const customDotsStyles = {
   display: 'inline-block',
   position: 'relative',
