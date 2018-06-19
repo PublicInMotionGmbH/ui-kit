@@ -96,9 +96,12 @@ function composeHandlers (...handlers) {
 * @returns {function}
 */
 function trigger (prevState, state, trueStateEvent, falseStateEvent) {
-  if (prevState != null && prevState !== state) {
-    if (trueStateEvent && state) { trueStateEvent() }
-    if (falseStateEvent && !state) { falseStateEvent() }
+  if (prevState === null || prevState === state) return
+
+  if (trueStateEvent && state) {
+    trueStateEvent()
+  } else if (falseStateEvent && !state) {
+    falseStateEvent()
   }
 }
 
@@ -206,7 +209,7 @@ class SpyScroll extends React.PureComponent {
     trigger(prevState.behind, this.state.behind, onBeginningLost, onBeginningAppeared)
 
     // Trigger onTriggerRetreats or onTriggerReached for state.triggered change
-    trigger(prevState.triggered, this.state.triggered, onTriggerRetreats, onTriggerReached)
+    trigger(prevState.triggered, this.state.triggered, onTriggerReached, onTriggerRetreats)
 
     // Trigger onRangeLeft or onRangeEntered for state.inRange change
     trigger(prevState.inRange, this.state.inRange, onRangeEntered, onRangeLeft)
@@ -230,7 +233,7 @@ class SpyScroll extends React.PureComponent {
     const inside = !end && !beginning
     const halfView = !(elementEnd < containerLength / 2) && !(elementBeginning > containerLength / 2)
     const visible = elementLength >= (containerLength / 2) ? halfView : inside
-    const triggered = this._trigger && elementBeginning > triggerPoint
+    const triggered = this._trigger && elementBeginning < triggerPoint
     const inRange = elementBeginning >= rangeStart && elementEnd <= rangeEnd
 
     this.setState({ ahead, end, beginning, behind, inRange, triggered, visible })
@@ -243,6 +246,7 @@ class SpyScroll extends React.PureComponent {
     const { containerId } = this.props
 
     const container = document.getElementById(containerId)
+
     // Check if container is a node.
     if (container && container.nodeType) {
       return container
@@ -261,6 +265,7 @@ class SpyScroll extends React.PureComponent {
   getRange (range, index) {
     const point = document.getElementById(range[index])
 
+    // Check if range point is a node.
     if (range.length !== 2 || point == null || !point.nodeType) {
       return null
     }

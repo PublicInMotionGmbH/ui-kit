@@ -263,8 +263,7 @@ addStory.controlled('with range', readme, (setState, state) => (
 ), () => ({ range: false }))
 
 addStory.controlled('with container', readme, (setState, state) => (
-  <div style={{
-    ...wrapperStyle, position: 'relative' }}>
+  <div style={{ position: 'relative' }}>
     <div
       id='spy-container'
       style={{

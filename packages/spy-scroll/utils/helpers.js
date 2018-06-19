@@ -6,23 +6,19 @@
  * @returns {object}
  */
 function getContainerRect (container, horizontal) {
-  const containerHeight = container === window
-    ? container.innerHeight
-    : container.getBoundingClientRect().height + container.getBoundingClientRect().top
+  let top, left, width, height
+  if (container === window) {
+    top = left = 0
+    width = container.innerWidth
+    height = container.innerHeight
+  } else {
+    ({ top, left, width, height } = container.getBoundingClientRect())
+  }
 
-  const containerWidth = container === window
-    ? container.innerWidth
-    : container.getBoundingClientRect().width + container.getBoundingClientRect().left
+  const containerHeight = height + top
+  const containerWidth = width + left
 
-  const containerTop = container === window
-    ? 0
-    : container.getBoundingClientRect().top
-
-  const containerLeft = container === window
-    ? 0
-    : container.getBoundingClientRect().left
-
-  const containerBeginning = horizontal ? containerLeft : containerTop
+  const containerBeginning = horizontal ? left : top
   const containerLength = horizontal ? containerWidth : containerHeight
 
   return { containerBeginning, containerLength }
@@ -39,8 +35,6 @@ function getContainerRect (container, horizontal) {
 function getElementRect (element, offset, horizontal) {
   const { height, width, top, bottom, right, left } = element.getBoundingClientRect()
 
-  const elementHeight = height
-  const elementWidth = width
   const elementTop = top - offset
   const elementBottom = bottom - offset
   const elementRight = right - offset
@@ -48,7 +42,7 @@ function getElementRect (element, offset, horizontal) {
 
   const elementBeginning = horizontal ? elementLeft : elementTop
   const elementEnd = horizontal ? elementRight : elementBottom
-  const elementLength = horizontal ? elementWidth : elementHeight
+  const elementLength = horizontal ? width : height
 
   return { elementBeginning, elementEnd, elementLength }
 }
@@ -62,13 +56,11 @@ function getElementRect (element, offset, horizontal) {
  * @returns {object}
  */
 function getRangePoints (start, end, horizontal) {
-  const rangeStart = horizontal
-    ? start && start.getBoundingClientRect().left
-    : start && start.getBoundingClientRect().top
+  const { left: startLeft, top: startTop } = !!start && start.getBoundingClientRect()
+  const { left: endLeft, top: endTop } = !!end && end.getBoundingClientRect()
 
-  const rangeEnd = horizontal
-    ? end && end.getBoundingClientRect().left
-    : end && end.getBoundingClientRect().top
+  const rangeStart = horizontal ? startLeft : startTop
+  const rangeEnd = horizontal ? endLeft : endTop
 
   return { rangeStart, rangeEnd }
 }
@@ -81,9 +73,9 @@ function getRangePoints (start, end, horizontal) {
  * @returns {number}
  */
 function getTriggerPoint (trigger, horizontal) {
-  const triggerPoint = horizontal
-    ? trigger && trigger.getBoundingClientRect().left
-    : trigger && trigger.getBoundingClientRect().top
+  const { left, top } = !!trigger && trigger.getBoundingClientRect()
+
+  const triggerPoint = horizontal ? left : top
 
   return triggerPoint
 }
