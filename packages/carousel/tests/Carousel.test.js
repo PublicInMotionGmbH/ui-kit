@@ -57,7 +57,7 @@ describe('<Carousel />', () => {
     expect(wrapper.find(`.${name}-dots__single`).length).toBe(3)
   })
 
-  it('changes currentSlide when arrow clicked', async () => {
+  it('changes currentSlide when next arrow clicked', async () => {
     const wrapper = shallow(
       <Carousel arrows>
         <div style={imagesStyle}>SLIDE 1</div>
@@ -69,5 +69,54 @@ describe('<Carousel />', () => {
     await arrow.simulate('click')
 
     expect(wrapper.state().currentSlide).toBe(1)
+  })
+
+  it('changes currentSlide when prev arrow clicked', async () => {
+    const wrapper = shallow(
+      <Carousel arrows>
+        <div style={imagesStyle}>SLIDE 1</div>
+        <div style={imagesStyle}>SLIDE 2</div>
+        <div style={imagesStyle}>SLIDE 3</div>
+      </Carousel>)
+
+    const arrow = wrapper.find(`.${name}__arrows--next`)
+    await arrow.simulate('click')
+    await arrow.simulate('click')
+
+    const prev = wrapper.find(`.${name}__arrows--prev`)
+    await prev.simulate('click')
+
+    expect(wrapper.state().currentSlide).toBe(1)
+  })
+
+  it('goes to last slide when prev arrow clicked on first', async () => {
+    const wrapper = shallow(
+      <Carousel arrows>
+        <div style={imagesStyle}>SLIDE 1</div>
+        <div style={imagesStyle}>SLIDE 2</div>
+        <div style={imagesStyle}>SLIDE 3</div>
+      </Carousel>)
+
+    // const prev = wrapper.find(`.${name}__arrows--prev`)
+    // await prev.simulate('click')
+    console.log(wrapper.instance())
+
+    // expect(wrapper.state().currentSlide).toBe(3)
+  })
+
+  it('changes currentSlide when prev arrow clicked', () => {
+    const wrapper = shallow(
+      <Carousel dots>
+        <div style={imagesStyle}>SLIDE 1</div>
+        <div style={imagesStyle}>SLIDE 2</div>
+        <div style={imagesStyle}>SLIDE 3</div>
+      </Carousel>)
+
+    expect(wrapper.state('currentSlide')).toBe(0)
+
+    const dot = wrapper.find(`.${name}-dots__single`)
+    dot.at(2).simulate('click')
+
+    expect(wrapper.state('currentSlide')).toBe(2)
   })
 })
