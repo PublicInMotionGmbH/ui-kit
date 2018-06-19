@@ -2,73 +2,83 @@
 
 @include module('file-input')
   box-sizing: border-box
-  border: dashed dp(.125) $color-talixo-light-gray
-  border-radius: dp(.25)
+  border: $file-input-border
+  border-radius: $file-input-border-radius
   display: flex
+  position: relative
   flex-direction: column
   align-items: center
-  padding: dp(2)
-  width: 100%
-  min-height: dp(5)
+  padding: $file-input-padding
+  transition: all $file-input-transition
 
   &--dragover
     opacity: .6
-    *
-      pointer-events: none
+    border: $file-input-border-drag
+    transition: all $file-input-transition
+
+  &__cover
+    top: 0
+    left: 0
+    background-color: $file-input-color-cover
+    position: absolute
+    width: calc(100% - 2 * #{$file-input-border-width})
+    height: calc(100% - 2 * #{$file-input-border-width})
+    opacity: 0.6
 
   *
     box-sizing: border-box
 
   &__children
     width: fit-content
-    //
-    //&__fade
-    //  &-enter
-    //    opacity: 0.01
-    //
-    //  &-enter-active
-    //    opacity: 1
-    //    transition: opacity 500ms ease-in
-    //
-    //  &-enter-exit
-    //    opacity: 1
-    //
-    //  &-enter-exit-active
-    //    opacity: 0.01
-    //    transition: opacity 500ms ease-in
-
 
   &__files-wrapper
     display: flex
     flex-direction: row
     flex-wrap: wrap
     width: 100%
-    padding: dp(3) 0 0
+    padding: $file-input-file-wrapper-padding
 
-  &__upload
+  &__button
+    padding: $file-input-file-button-padding
     > div
       text-align: center
 
 @include module('file')
   display: inline-flex
   align-items: center
-  flex-basis: 33.3%
+  flex-basis: 50%
+  min-width: 0
+  overflow: hidden
   padding: dp(2)
 
   > div
     padding: 0 dp(.6)
 
+  > div:first-child
+    width: $file-input-icon-wrapper-width
+
+  > div:nth-child(2)
+    white-space: nowrap
+    text-overflow: ellipsis
+    width: calc(100% - #{$file-input-icon-wrapper-width})
+
   &__icon, &__remove
     user-select: none
 
   &__icon
-    font-size: dp(6)
-
-  &__name
-    font-size: dp(1.75)
-    font-weight: $font-weight-semibold
+    font-size: $file-input-icon-file-font-size
 
   &__remove
-    color: $color-talixo-error-red
+    color: $file-input-color-remove
     cursor: pointer
-    font-size: dp(3)
+    font-size: $file-input-icon-remove-font-size
+
+  &__name
+    font-size: $file-input-name-font-size
+    font-weight: $file-input-name-font-weight
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  &__size
+    font-size: $file-input-size-font-size

@@ -11,7 +11,8 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('File Input', module, {
-  propTables: [ FileInput ]
+  propTables: [ FileInput ],
+  propTablesExclude: [ Icon ]
 })
 
 // Helpers
@@ -29,6 +30,24 @@ addStory('with custom header', readme, () => (
     <div className={wrapperCls}>
       <div className={iconCls}><Icon name='cloud_upload' /></div>
       <div>Drop files here or<br /><br /></div>
+    </div>
+  </FileInput>
+))
+
+addStory('single file upload', readme, () => (
+  <FileInput multiple={false}>
+    <div className={wrapperCls}>
+      <div className={iconCls}><Icon name='cloud_upload' /></div>
+      <div>Drop files here or<br /><br /></div>
+    </div>
+  </FileInput>
+))
+
+addStory('drag and drop disabled', readme, () => (
+  <FileInput dropEnabled={false}>
+    <div className={wrapperCls}>
+      <div className={iconCls}><Icon name='cloud_upload' /></div>
+      <div>Select files to upload<br /><br /></div>
     </div>
   </FileInput>
 ))

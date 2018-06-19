@@ -9,15 +9,26 @@ import { formatBytes } from './utils'
 const moduleName = 'file'
 
 const propTypes = {
-  /**  */
+  /** File information object. */
   file: PropTypes.object,
 
-  /**  */
+  /** File onRemove handler. */
   onRemove: PropTypes.func
 }
 
-const defaultProps = {}
+const defaultProps = {
+  onRemove: () => {}
+}
 
+/**
+ * Component which represents uploaded file.
+ *
+ * @param {object} props
+ * @param {object} props.file
+ * @param {function} [props.onRemove]
+ *
+ * @returns {Element|React.Element}
+ */
 const File = (props) => {
   const { file, onRemove } = props
   const iconCls = buildClassName([moduleName, 'icon'])
@@ -30,7 +41,7 @@ const File = (props) => {
     <div className={wrapperCls}>
       <div>
         <Icon name='clear' onClick={onRemove} className={removeCls} />
-        <Icon name='insert_drive_file' className={iconCls} />{' '}
+        <Icon name='insert_drive_file' className={iconCls} />
       </div>
       <div>
         <div className={nameCls}>{ file.name }</div>

@@ -27,14 +27,32 @@ const events = {
 }
 
 const propTypes = {
+  /** Label of browse file button. */
   buttonLabel: PropTypes.string,
 
-  /** Additional class name */
-  className: PropTypes.string
+  /** Content displayed in drop box. */
+  children: PropTypes.node,
+
+  /** Additional class name. */
+  className: PropTypes.string,
+
+  /** Enable drag and drop. */
+  dropEnabled: PropTypes.bool,
+
+  /** File component renderer. */
+  fileRender: PropTypes.func,
+
+  /**  */
+  multiple: PropTypes.bool,
+
+  /** onChange callback. Invoked when either files have been dropped or file input has changed. */
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
-  buttonLabel: 'Browse Files'
+  buttonLabel: 'Browse Files',
+  dropEnabled: true,
+  multiple: true
 }
 
 /**
@@ -44,9 +62,9 @@ const defaultProps = {
  * @param {string} [props.className]
  * @returns {React.Element}
  */
-class FileInput extends React.Component {
+class FileInput extends React.PureComponent {
   state = {
-    dragover: false,
+    draggingOver: false,
     files: [],
     idStorage: new Map()
   }
@@ -71,12 +89,15 @@ class FileInput extends React.Component {
     e.preventDefault()
     const files = getDataTransferFiles(e)
 
-    if (type === events.enter || type === events.start) {
-      this.setState({ dragover: true })
+    if (type === events.enter || (type === events.start && !e.currentTarget.contains(this.input))) {
+      this.setState({ draggingOver: true })
+    }
+    if (type === events.start && e.currentTarget.contains(this.input)) {
+      this.setState({ draggingOver: false })
     }
 
     if (type === events.leave || type === events.end) {
-      this.setState({ dragover: false })
+      this.setState({ draggingOver: false })
     }
 
     if (this.props[type]) {
@@ -86,21 +107,24 @@ class FileInput extends React.Component {
 
   handleDrop = (e) => {
     e.preventDefault()
-    const { onDrop } = this.props
+    e.stopPropagation()
+    const { multiple, onChange } = this.props
     const { files } = this.state
     const uploadedFiles = getDataTransferFiles(e)
+    const tooMany = (!multiple && files.length > 0) || (!multiple && uploadedFiles.length > 1)
 
-    if (!uploadedFiles) {
-      this.setState({ dragover: false })
+    if (uploadedFiles.length < 1 || tooMany) {
+      this.setState({ draggingOver: false })
       return
     }
+
     const newFiles = files.concat([...uploadedFiles])
     const newIdStorage = registerElements(newFiles)
-    if (onDrop) {
-      onDrop(newFiles, e)
+    if (onChange) {
+      onChange(newFiles, e)
     }
 
-    this.setState({ files: newFiles, idStorage: newIdStorage, dragover: false })
+    this.setState({ files: newFiles, idStorage: newIdStorage, draggingOver: false })
   }
 
   handleRemove (file) {
@@ -112,32 +136,46 @@ class FileInput extends React.Component {
   }
 
   getWrapperProps = () => {
-    const { className } = this.props
-    const { dragover } = this.state
+    const { className, dropEnabled } = this.props
+    const { draggingOver } = this.state
     const { handleDrag, handleDrop } = this
-    const wrapperCls = buildClassName(moduleName, className, { dragover })
+    const wrapperCls = buildClassName(moduleName, className, { dragover: draggingOver })
+    const dragProps = dropEnabled
+      ? {
+        onDragEnter: handleDrag.bind(this, events.enter),
+        onDragStart: handleDrag.bind(this, events.start),
+        onDrop: handleDrop
+      }
+      : {}
 
     return {
       className: wrapperCls,
-      onDragEnter: handleDrag.bind(this, events.enter),
-      onDragEnd: handleDrag.bind(this, events.end),
-      onDragLeave: handleDrag.bind(this, events.leave),
-      onDragOver: handleDrag.bind(this, events.over),
-      onDragStart: handleDrag.bind(this, events.start),
-      onDrop: handleDrop
+      ...dragProps
     }
   }
 
   getFileElements = () => {
+    const { filesRender } = this.props
     const { files, idStorage } = this.state
     const { handleRemove } = this
+    const filesCls = buildClassName([moduleName, 'files-wrapper'])
 
     return (
       <React.Fragment>
         {
-          files.map((file, index) => (
-            <File key={idStorage.get(file)} onRemove={handleRemove.bind(this, file)} file={file} />)
-          )
+          filesRender && typeof filesRender === 'function'
+            ? filesRender(files)
+            : <div className={filesCls}>
+              {
+                files.map((file, index) => (
+                  <File
+                    key={idStorage.get(file)}
+                    onRemove={handleRemove.bind(this, file)}
+                    file={file}
+                  />
+                ))
+              }
+            </div>
         }
       </React.Fragment>
     )
@@ -146,27 +184,36 @@ class FileInput extends React.Component {
   setInputRef = node => { this.input = node }
 
   render () {
-    const { buttonLabel, className, children, ...passedProps } = this.props
-    const { files } = this.state
-    const { handleClick, handleDrop, getFileElements, getWrapperProps, setInputRef } = this
+    const { buttonLabel, className, children, dropEnabled, fileRender, multiple, onChange, ...passedProps } = this.props
+    const { files, draggingOver } = this.state
+    const { handleClick, handleDrag, handleDrop, getFileElements, getWrapperProps, setInputRef } = this
     // Class names
     const childrenCls = buildClassName([moduleName, 'children'])
-    const filesCls = buildClassName([moduleName, 'files-wrapper'])
-    const uploadCls = buildClassName([moduleName, 'upload'])
+    const buttonCls = buildClassName([moduleName, 'button'])
+    const coverCls = buildClassName([moduleName, 'cover'])
     // Get props for wrapper
     const wrapperProps = getWrapperProps()
 
     return (
       <div {...passedProps} {...wrapperProps}>
+        {
+          dropEnabled && draggingOver &&
+          <div
+            onDrop={handleDrop}
+            onDragEnd={handleDrag.bind(this, events.end)}
+            onDragLeave={handleDrag.bind(this, events.leave)}
+            className={coverCls}
+          />
+        }
         <div className={childrenCls}>{ children }</div>
-        <div className={uploadCls}><Button onClick={handleClick}>{ buttonLabel }</Button></div>
-        { files.length > 0 && <div className={filesCls}>{ getFileElements() }</div> }
+        <div className={buttonCls}><Button onClick={handleClick}>{ buttonLabel }</Button></div>
+        { files.length > 0 && getFileElements() }
         <input
           style={{ display: 'none' }}
           ref={setInputRef}
           onChange={handleDrop}
           type='file'
-          multiple
+          multiple={multiple}
         />
       </div>
     )
