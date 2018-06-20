@@ -1,12 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FileInput /> renders children correctly 1`] = `
+exports[`<FileInput /> rendering renders children correctly 1`] = `
 <div
   className="talixo-file-input"
-  onDragEnd={[Function]}
   onDragEnter={[Function]}
-  onDragLeave={[Function]}
-  onDragOver={[Function]}
   onDragStart={[Function]}
   onDrop={[Function]}
 >
@@ -14,14 +11,15 @@ exports[`<FileInput /> renders children correctly 1`] = `
     className="talixo-file-input__children"
   />
   <div
-    className="talixo-file-input__upload"
+    className="talixo-file-input__button"
   >
-    <Button
+    <button
+      className="talixo-button"
       disabled={false}
       onClick={[Function]}
     >
       Browse Files
-    </Button>
+    </button>
   </div>
   <input
     multiple={true}

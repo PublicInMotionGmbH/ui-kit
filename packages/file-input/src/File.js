@@ -6,11 +6,11 @@ import { Icon } from '@talixo/icon'
 
 import { formatBytes } from './utils'
 
-const moduleName = 'file'
+export const moduleName = 'file'
 
 const propTypes = {
   /** File information object. */
-  file: PropTypes.object,
+  file: PropTypes.object.isRequired,
 
   /** File onRemove handler. */
   onRemove: PropTypes.func

@@ -22,7 +22,6 @@ const events = {
   end: 'onDragEnd',
   enter: 'onDragEnter',
   leave: 'onDragLeave',
-  over: 'onDragOver',
   start: 'onDragStart'
 }
 
@@ -78,6 +77,11 @@ class FileInput extends React.PureComponent {
     document.removeEventListener('drop', e => e.preventDefault())
     document.removeEventListener('dragover', e => e.preventDefault())
   }
+
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   if (nextState.draggingOver === this.state.draggingOver) return false
+  //   return true
+  // }
 
   handleClick = () => {
     if (this.input) {
@@ -193,6 +197,7 @@ class FileInput extends React.PureComponent {
     const coverCls = buildClassName([moduleName, 'cover'])
     // Get props for wrapper
     const wrapperProps = getWrapperProps()
+    console.log('render')
 
     return (
       <div {...passedProps} {...wrapperProps}>
