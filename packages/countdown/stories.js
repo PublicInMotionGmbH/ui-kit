@@ -14,9 +14,17 @@ const addStory = createStoriesFactory('Countdown', module, {
 // Stories
 
 addStory('initial', readme, () => (
-  <Countdown targetDate='2018-12-04T00:00:00+00:00' />
+  <Countdown targetDate='2018-06-21T00:00:00+00:00' />
 ))
 
 addStory('with custom format', readme, () => (
   <Countdown targetDate='2018-12-04T00:00:00+00:00' format='dd days hh hours mm minutes ss seconds' />
+))
+
+addStory('with optional format', readme, () => (
+  <Countdown targetDate='2018-06-21T00:00:00+00:00' format='[dd days] hh hours mm minutes ss seconds' />
+))
+
+addStory('with two optional format', readme, () => (
+  <Countdown targetDate='2018-06-21T00:00:00+00:00' format='[dd days hh hours] mm minutes ss seconds' />
 ))
