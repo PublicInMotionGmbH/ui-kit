@@ -38,7 +38,7 @@ const MINUTES = 'mm'
  * @returns {React.Element}
  */
 const HeaderAM = () => [
-  <Icon key='icon-am' name='brightness_3' />,
+  <Icon key='icon-am' name='moon_outline' />,
   <span key='label-am' style={{ marginLeft: '8px' }}>AM</span>
 ]
 
@@ -48,7 +48,7 @@ const HeaderAM = () => [
  * @returns {React.Element}
  */
 const HeaderPM = () => [
-  <Icon key='icon-pm' name='brightness_5' />,
+  <Icon key='icon-pm' name='sun_outline' />,
   <span key='label-pm' style={{ marginLeft: '8px' }}>PM</span>
 ]
 
