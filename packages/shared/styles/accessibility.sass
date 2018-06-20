@@ -46,3 +46,6 @@ $contrasted-light-default: #fff !default
   $result-color: mix($contrast-color, $background-color, 50%)
 
   @return 0 0 3px #{$result-color}
+
+@function round-near($value, $precision: 0.125)
+  @return round($value / $precision) * $precision

@@ -3,10 +3,8 @@
 @import 'config/basic'
 @import 'config/base-unit'
 @import 'config/colors'
-@import 'config/typography'
 @import 'config/grid'
 @import 'config/rwd'
-@import 'config/various'
 
 // Load important helpers
 
@@ -81,6 +79,18 @@ $x-input-placeholder-color: mix($x-input-text-color, $x-input-background-color, 
 $x-input-error-placeholder-color: mix($x-input-error-text-color, $x-input-background-color, 30%) !default
 $x-input-warning-placeholder-color: mix($x-input-warning-text-color, $x-input-background-color, 30%) !default
 
+// Typography sizes
+
+$x-font-size-base: dp(1.75) !default
+
+$x-font-size-smaller: round-near(0.775 * $x-font-size-base) !default
+$x-font-size-small: round-near(0.85 * $x-font-size-base) !default
+$x-font-size-medium: round-near(0.92 * $x-font-size-base) !default
+$x-font-size-big: round-near(1.15 * $x-font-size-base) !default
+$x-font-size-bigger: round-near(1.3 * $x-font-size-base) !default
+$x-font-size-large: round-near(1.7 * $x-font-size-base) !default
+$x-font-size-xlarge: round-near(2.3 * $x-font-size-base) !default
+
 // Borders
 
 $x-border-width: 1px !default
@@ -91,16 +101,16 @@ $x-border-radius: 3px !default
 
 $x-line-height-base: 1.428571429 !default // 20/14
 
-$x-padding-vertical-base: dp(2) !default
-$x-padding-vertical-very-small: dp(2) * ($x-line-height-base - 1) / 2 !default // use predefined-font-size
+$x-padding-vertical-base: $x-font-size-bigger !default
+$x-padding-vertical-very-small: $x-font-size-bigger * ($x-line-height-base - 1) / 2 !default // use predefined-font-size
 $x-padding-vertical-small: 0.5 * $x-padding-vertical-base !default
 $x-padding-vertical-bigger: 1.5 * $x-padding-vertical-base !default
 
-$x-padding-horizontal-base: dp(2) !default
+$x-padding-horizontal-base: $x-font-size-bigger !default
 $x-padding-horizontal-small: 0.5 * $x-padding-horizontal-base !default
 $x-padding-horizontal-bigger: 1.5 * $x-padding-horizontal-base !default
 
-$x-input-text-size: dp(1.75) !default
+$x-input-text-size: $x-font-size-base !default
 $x-input-padding-vertical: $x-padding-vertical-base !default
 $x-input-padding-horizontal: $x-padding-horizontal-base !default
 
@@ -110,6 +120,61 @@ $x-input-height: (2 * $x-input-padding-vertical) + $x-input-text-size * $x-line-
 
 $x-weight-normal: 400 !default
 $x-weight-semibold: 600 !default
+$x-weight-bold: 600 !default
+
+// Typography by intent
+
+// Font sizes
+
+$typography-base-font-size: $x-font-size-base !default
+$typography-base-line-height: 1em * $x-line-height-base !default
+
+$typography-lead-font-size: $x-font-size-bigger !default
+
+$typography-h1-font-size: $x-font-size-xlarge !default
+$typography-h2-font-size: $x-font-size-large !default
+$typography-h3-font-size: $x-font-size-bigger !default
+$typography-h4-font-size: $x-font-size-big !default
+$typography-h5-font-size: $x-font-size-base !default
+$typography-h6-font-size: $x-font-size-medium !default
+
+// Colors
+
+$typography-base-text-color: $x-color-text !default
+
+$typography-link-color: mix($x-color-primary, $x-color-background, 80%) !default
+$typography-link-hover-color: $x-color-primary !default
+
+$typography-lead-color: #555 !default
+
+$typography-mark-background-color: mix(#ffa500, $x-color-background, 30%) !default
+$typography-mark-text-color: inherit !default
+
+$typography-code-background-color: #eee !default
+$typography-code-text-color: #444 !default
+
+$typography-kbd-background-color: $x-color-background !default
+$typography-kbd-border-color: $x-color-calmer !default
+$typography-kbd-text-color: $x-color-text !default
+$typography-kbd-border-width: $x-border-width !default
+$typography-kbd-box-shadow: true !default
+$typography-kbd-box-shadow-color: transparentize(contrast-color($typography-kbd-background-color), 0.9) !default
+
+$typography-blockquote-background-color: bold-color($x-color-background, 3%) !default
+$typography-blockquote-text-color: $x-color-text !default
+$typography-blockquote-border-color: bold-color($typography-blockquote-background-color, 10%) !default
+$typography-blockquote-footer-text-color: mix($typography-blockquote-background-color, $typography-blockquote-text-color, 50%) !default
+
+// Font weights
+
+$typography-base-font-weight: 500 !default
+
+$typography-h1-font-weight: 300 !default
+$typography-h2-font-weight: 300 !default
+$typography-h3-font-weight: 500 !default
+$typography-h4-font-weight: 500 !default
+$typography-h5-font-weight: 600 !default
+$typography-h6-font-weight: 600 !default
 
 // Temporary settings
 
