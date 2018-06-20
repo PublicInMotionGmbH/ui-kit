@@ -1,17 +1,53 @@
 // Set up basic configuration variables
 
-@import 'config/basic'
-@import 'config/base-unit'
-@import 'config/colors'
-@import 'config/grid'
-@import 'config/rwd'
+// Modularity
+
+$prefix: talixo !default
+
+// Base unit
+
+$base-px: 8px !default
+$base-dp: 0.5rem !default // equivalent of 8px
+
+@function dp($multiplier)
+  @return $base-dp * $multiplier
+
+// Grid configuration
+
+$grid-columns: 12 !default
+$grid-gutter: dp(2) !default
+
+// RWD breakpoints
+
+$rwd-small-width: dp(72) !default
+$rwd-medium-width: dp(85) !default
+$rwd-large-width: dp(124) !default
+$rwd-xlarge-width: dp(150) !default
+
+// Legacy colors
+// TODO: Get rid of these colors
+
+$color-talixo-light-gray: #A5BFD9 !default
+$color-talixo-lighter-gray: #F0F5F7 !default
+
+$color-tab-border: #DAE0E6 !default
+$color-tab-inactive: #EBEFF2 !default
+
+$color-pill-yellow: #FFA500 !default
+$color-placeholder-text: #A9C7D9 !default
+
+$color-border: #A5BFD9 !default
+
+$navy: #3d4954 !default
+$navy-text: #273440 !default
+$offwhite: #adb9bc !default
+
+$sidebar-icon-color: #c2cbcd !default
 
 // Load important helpers
 
 @import 'prefixing'
 @import 'accessibility'
-
-// NEW CONFIGURATION
 
 // Colors base
 

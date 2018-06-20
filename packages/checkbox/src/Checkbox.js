@@ -26,7 +26,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  defaultChecked: false
 }
 
 /**
@@ -44,7 +45,7 @@ const defaultProps = {
  */
 class Checkbox extends React.PureComponent {
   state = {
-    value: !!this.props.value
+    value: this.props.value == null ? !!this.props.defaultChecked : !!this.props.value
   }
 
   componentWillReceiveProps (props) {
