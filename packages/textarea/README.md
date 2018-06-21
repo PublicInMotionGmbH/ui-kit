@@ -14,7 +14,6 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `react-textarea-autosize: ^6.1.0`
 - `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/textarea`, but you have to install them manually,
@@ -22,14 +21,18 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name    | Type            | Default       | Description                    
------------------|-----------------|:-------------:|--------------------------------
-className        | string          | n/a           | Additional class name passed to wrapper
-disabled         | bool            | n/a           | Read-only textarea
-maxLength        | number          | n/a           | Define max number of characters in texarea
-placeholder      | string          | n/a           | Custom placeholder to show in textarea
-resize           | bool            | `true`        | Allow to resize textarea
-TextareaComponent| string or node  | `'textarea'`  | Allow to use `'textarea'` tag or TextareaAutosize component
+This components allow any props which can be passed to `textarea` (or equivalent component).
+Also, handles some differently:
+
+Property name     | Type      | Default         | Description
+------------------|-----------|:---------------:|--------------------------------
+className         | string    | n/a             | Additional class name passed to wrapper
+disabled          | bool      | n/a             | Read-only textarea
+placeholder       | string    | n/a             | Custom placeholder to show in textarea
+resize            | bool      | `true`          | Allow to resize textarea
+TextareaComponent | component | `'textarea'`    | Allow to use custom component
+onChange          | function  | n/a             | Handler for change
+value             | string    | self-controlled | Value to show in textarea
 
 ## Changelog
 

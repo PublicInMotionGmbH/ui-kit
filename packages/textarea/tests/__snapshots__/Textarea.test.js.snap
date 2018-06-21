@@ -3,5 +3,7 @@
 exports[`<Textarea /> renders textarea correctly 1`] = `
 <textarea
   className="talixo-textarea"
+  onChange={[Function]}
+  value=""
 />
 `;

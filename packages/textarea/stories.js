@@ -22,6 +22,13 @@ addStory('placeholder', readme, () => (
   <Textarea placeholder='Write message here' />
 ))
 
+addStory.controlled('controlled', readme, (setState, state) => (
+  <Textarea
+    onChange={value => setState({ value })}
+    value={state.value}
+  />
+), () => ({ value: 'something' }))
+
 addStory('resize inactive', readme, () => (
   <Textarea resize={false} />
 ))
