@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import DataTable from '../src/DataTable'
+import DataTable, { registerElements, generateId } from '../src/DataTable'
 import { moduleName } from '../src/config'
-import { actions, columns, tableData, tableDataSort } from './fixtures/testData'
+import {actions, columns, tableData, tableData2, tableDataNoId, tableDataSort} from './fixtures/testData'
 import { buildClassName } from '@talixo/shared'
 
 const headerCls = buildClassName([ moduleName, 'header' ])
@@ -28,6 +28,64 @@ describe('<DataTable />', () => {
 
     it('renders children correctly', () => {
       expect(wrapper).toMatchSnapshot()
+    })
+
+    it('should apply empty string on sortColumn if not passed from props', () => {
+      expect(wrapper.state().sortColumn).toBe('')
+    })
+
+    it('should apply false on reversedOrder if not passed from props', () => {
+      expect(wrapper.state().reversedOrder).toBe(false)
+    })
+  })
+
+  describe('generating id map', () => {
+    describe('when collection with id is passed', () => {
+      const correctMap = registerElements(tableData, generateId)
+      const props = createProps({ data: tableData })
+      const wrapper = createWrapper(props)
+
+      it('should create map properly', () => {
+        expect(wrapper.state().idStorage).toEqual(correctMap)
+      })
+    })
+
+    describe('when collection without id is passed', () => {
+      const correctMap = registerElements(tableDataNoId, generateId)
+      const props = createProps({ data: tableDataNoId })
+      const wrapper = createWrapper(props)
+
+      it('should create map properly', () => {
+        expect(wrapper.state().idStorage).toEqual(correctMap)
+      })
+    })
+  })
+
+  describe('handling props changes', () => {
+    const props = createProps({
+      sortColumn: columns[1].id,
+      reversedOrder: false
+    })
+    let wrapper
+
+    beforeEach(() => {
+      wrapper = createWrapper(props)
+    })
+
+    it('should change state.sortedData when props.data changes', () => {
+      wrapper.setProps({ data: tableData2 })
+      expect(wrapper.state().sortedData).toBe(tableData2)
+    })
+
+    it('should change sort column when props.sortColumn changes', () => {
+      const newId = columns[2].id
+      wrapper.setProps({ sortColumn: newId })
+      expect(wrapper.state().sortColumn).toBe(newId)
+    })
+
+    it('should change reversedOrder when props.reversedOrder changes', () => {
+      wrapper.setProps({ reversedOrder: true })
+      expect(wrapper.state().reversedOrder).toBe(true)
     })
   })
 

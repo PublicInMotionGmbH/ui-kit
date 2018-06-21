@@ -1,14 +1,14 @@
 {
-  "name": "@talixo/data-table",
+  "name": "@talixo/textarea",
   "version": "0.0.0",
-  "description": "UI Component which represents DataTable",
+  "description": "UI Component which represents Textarea",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
   "scripts": {
-    "test": "node ../../scripts/runTests.js --only data-table",
+    "test": "node ../../scripts/runTests.js --only textarea",
     "prepublishOnly": "npm run build",
-    "build": "node ../../scripts/buildPackages.js --only data-table"
+    "build": "node ../../scripts/buildPackages.js --only textarea"
   },
   "publishConfig": {
     "access": "public"
@@ -23,22 +23,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon": "^0.1.1",
-    "@talixo/notification": "^0.1.0",
-    "@talixo/shared": "^0.1.0",
-    "@talixo/table": "^0.1.0",
-    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-textarea-autosize":"^6.1.0",
+    "@talixo/shared": "^0.1.0"
   },
   "peerDependencies": {
-    "@talixo/icon": "^0.1.1",
-    "@talixo/shared": "^0.1.0",
-    "@talixo/table": "^0.1.0",
-    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "@talixo/shared": "^0.1.0"
   }
 }

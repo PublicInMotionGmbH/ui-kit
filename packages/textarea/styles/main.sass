@@ -1,0 +1,18 @@
+@import './config'
+
+@include module('textarea')
+  padding: $textarea-padding
+  border: dp(0.125) solid $textarea-border-color
+  border-radius: $textarea-border-radius
+  background-color: $textarea-background-color
+  color: $textarea-text-color
+  outline: none
+  width: 100%
+  box-sizing: border-box
+  min-height: dp(6.25)
+
+  &--disabled
+    background-color: $textarea-background-color-disabled
+
+  &--no-resize
+    resize: none
