@@ -4,6 +4,7 @@ exports[`<FileInput /> rendering renders children correctly 1`] = `
 <div
   className="talixo-file-input"
   onDragEnter={[Function]}
+  onDragOver={[Function]}
   onDragStart={[Function]}
   onDrop={[Function]}
 >
