@@ -1,0 +1,66 @@
+@import './config'
+
+@include module('carousel')
+  position: relative
+  display: block
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+  .children-wrapper
+    position: relative
+    width: 100%
+    height: 100%
+    transform: translateX(0)
+    transition: 500ms transform linear
+
+  .one-slide
+    display: inline-block
+    height: 100%
+    box-sizing: border-box
+
+  &__arrows
+    position: absolute
+    display: flex
+    align-items: center
+    height: 100%
+    width: 100%
+    bottom: 0
+    font-size: dp(6)
+    color: $carousel-arrows-color
+    
+    &--prev
+      position: absolute
+      cursor: pointer
+      left: dp(3)
+
+      &:hover
+        color: $carousel-arrows-color--hover
+
+    &--next
+      position: absolute
+      cursor: pointer
+      right: dp(3)
+
+      &:hover
+        color: $carousel-arrows-color--hover
+
+@include module('carousel-dots')
+  position: absolute
+  display: flex
+  justify-content: center
+  width: 100%
+  bottom: 0
+  z-index: 10
+
+  &__single
+    display: inline-block
+    height: dp(1.5)
+    width: dp(5)
+    margin: dp(3) dp(1.5)
+    border-radius: dp(0.5)
+    cursor: pointer
+    background-color: $carousel-dots--single-background-color
+
+    &:hover
+      background-color: $carousel-dots--single-background-color-hover
