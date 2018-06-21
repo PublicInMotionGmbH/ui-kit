@@ -5,7 +5,13 @@ import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
+  className: PropTypes.string,
+
+  /** Format of displayed date */
+  format: PropTypes.string,
+
+  /** The date to which it will count down. */
+  targetDate: PropTypes.string.isRequired
 }
 
 const defaultProps = {
@@ -15,9 +21,11 @@ const defaultProps = {
 /**
  * Component which represents Countdown.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {string} props.format
+ * @property {string} props.targetDate
+ * @class {React.Element}
  */
 class Countdown extends React.PureComponent {
   state = {
@@ -27,10 +35,17 @@ class Countdown extends React.PureComponent {
     sec: 0
   }
 
+  /**
+   * Set interval to update counter
+   */
   componentDidMount () {
     setInterval(() => this.countTime(this.props.targetDate), 1000)
   }
 
+  /**
+   * Set each part of date in state
+   * @param {string} targetDate
+   */
   countTime = (targetDate) => {
     const time = Date.parse(targetDate) - Date.parse(new Date())
     const days = Math.floor(time / (1000 * 60 * 60 * 24))
@@ -41,13 +56,19 @@ class Countdown extends React.PureComponent {
     this.setState({days, hours, min, sec})
   }
 
+  /**
+   * Render parts of remaining time
+   * @param {number} num
+   * @param {string} time
+   *
+   * @returns {number | string}
+   */
   renderTime = (num, time) => {
     const { format } = this.props
-
-    // wyniesc do osobnej funkcji
     const regex = /\[.*?\]/
     const findOptional = regex.exec(format)
     let isOptional
+
     if (findOptional) {
       isOptional = findOptional[0].match(time)
     }
@@ -61,6 +82,12 @@ class Countdown extends React.PureComponent {
     return num < 10 ? '0' + num : num
   }
 
+  /**
+   * Render lables for each part od date
+   * @param {string} label
+   *
+   * @returns string
+   */
   renderLabels = (label) => {
     const { format } = this.props
     const { days, hours, min, sec } = this.state
@@ -69,14 +96,13 @@ class Countdown extends React.PureComponent {
     const regex = /\[.*?\]/
     const findOptional = regex.exec(format)
 
-    /// ////////////////////////////////////////////////////////
     function handleLabel (time, type, findLabel) {
       if (label === type) {
         if (time <= 0 && findOptional) {
           const isOptional = findOptional[0].match(type)
           if (isOptional) return
         }
-        result = findLabel.exec(format)
+        result = findLabel.exec(format.replace(/[[\]']+/g, ''))
       }
     }
 
@@ -89,41 +115,7 @@ class Countdown extends React.PureComponent {
     } else if (label === 'ss') {
       handleLabel(sec, 'ss', /(?<=\bss\s)(\S+)/)
     }
-    // //////////////////////////////////////////////////////////
-    // if (label === 'days') {
-    //   if (days <= 0 && findOptional) {
-    //     isOptional = findOptional[0].match('dd')
-    //   }
-    //   const findLabel = /(?<=\bdd\s)(\S+)/
-    //   result = findLabel.exec(format)
-    // }
 
-    // if (label === 'hours') {
-    //   if (hours <= 0 && findOptional) {
-    //     isOptional = findOptional[0].match('hh')
-    //   }
-    //   const findLabel = /(?<=\bhh\s)(\S+)/
-    //   result = findLabel.exec(format)
-    // }
-
-    // if (label === 'min') {
-    //   if (min <= 0 && findOptional) {
-    //     isOptional = findOptional[0].match('mm')
-    //   }
-    //   const findLabel = /(?<=\bmm\s)(\S+)/
-    //   result = findLabel.exec(format)
-    // }
-
-    // if (label === 'sec') {
-    //   if (sec <= 0 && findOptional) {
-    //     isOptional = findOptional[0].match('ss')
-    //   }
-    //   const findLabel = /(?<=\bss\s)(\S+)/
-    //   result = findLabel.exec(format)
-    //   if (!result) {
-    //     result = ''
-    //   }
-    // }
     if (!result) return
     return result[0]
   }
@@ -134,14 +126,33 @@ class Countdown extends React.PureComponent {
 
     return (
       <span className={buildClassName('countdown', className)} {...passedProps} >
-        <span>{this.renderTime(days, 'dd')} </span>
-        <span>{this.renderLabels('dd')} </span>
-        <span>{this.renderTime(hours, 'hh')} </span>
-        <span>{this.renderLabels('hh')} </span>
-        <span>{this.renderTime(min, 'mm')} </span>
-        <span>{this.renderLabels('mm')} </span>
-        <span>{this.renderTime(sec, 'ss')} </span>
-        <span>{this.renderLabels('ss')}</span>
+        {this.renderTime(days, 'dd') &&
+          <React.Fragment>
+            <span>{this.renderTime(days, 'dd')} </span>
+            <span>{this.renderLabels('dd')} </span>
+          </React.Fragment>
+        }
+
+        {this.renderTime(hours, 'hh') &&
+          <React.Fragment>
+            <span>{this.renderTime(hours, 'hh')} </span>
+            <span>{this.renderLabels('hh')} </span>
+          </React.Fragment>
+        }
+
+        {this.renderTime(min, 'mm') &&
+          <React.Fragment>
+            <span>{this.renderTime(min, 'mm')} </span>
+            <span>{this.renderLabels('mm')} </span>
+          </React.Fragment>
+        }
+
+        {this.renderTime(sec, 'ss') &&
+          <React.Fragment>
+            <span>{this.renderTime(sec, 'ss')} </span>
+            <span>{this.renderLabels('ss')}</span>
+          </React.Fragment>
+        }
       </span>
     )
   }

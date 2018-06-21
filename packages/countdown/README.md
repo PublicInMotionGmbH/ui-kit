@@ -21,9 +21,11 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name | Type    | Required  | Default              | Description                    
+--------------|---------|-----------|:--------------------:|--------------------------------
+className     | string  |   no      |         n/a          | Additional class name passed to wrapper
+format        | string  |   no      | `'dd : hh : mm : ss'`| Format of displayed date
+targetDate    | string  |   yes     |         n/a          | The date to which it will count down  
 
 ## Changelog
 

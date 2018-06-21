@@ -11,20 +11,27 @@ const addStory = createStoriesFactory('Countdown', module, {
   propTables: [ Countdown ]
 })
 
+const setDeadline = (addTime) => {
+  const dateNow = Date.now()
+  const deadline = dateNow + addTime
+  const deadlineConverted = new Date(deadline)
+  return deadlineConverted
+}
+
 // Stories
 
 addStory('initial', readme, () => (
-  <Countdown targetDate='2018-06-21T00:00:00+00:00' />
+  <Countdown targetDate={setDeadline(190000000)} />
 ))
 
 addStory('with custom format', readme, () => (
-  <Countdown targetDate='2018-12-04T00:00:00+00:00' format='dd days hh hours mm minutes ss seconds' />
+  <Countdown targetDate={setDeadline(190000000)} format='dd days hh hours mm minutes ss seconds' />
 ))
 
 addStory('with optional format', readme, () => (
-  <Countdown targetDate='2018-06-21T00:00:00+00:00' format='[dd days] hh hours mm minutes ss seconds' />
+  <Countdown targetDate={setDeadline(80008000)} format='[dd days] hh hours mm minutes ss seconds' />
 ))
 
 addStory('with two optional format', readme, () => (
-  <Countdown targetDate='2018-06-21T00:00:00+00:00' format='[dd days hh hours] mm minutes ss seconds' />
+  <Countdown targetDate={setDeadline(90008000)} format='[dd days hh hours] mm minutes ss seconds' />
 ))

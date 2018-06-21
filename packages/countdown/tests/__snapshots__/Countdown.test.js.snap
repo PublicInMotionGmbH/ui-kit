@@ -3,5 +3,44 @@
 exports[`<Countdown /> renders children correctly 1`] = `
 <span
   className="talixo-countdown"
-/>
+  format="dd : hh : mm : ss"
+>
+  <React.Fragment>
+    <span>
+      00
+       
+    </span>
+    <span>
+      :
+       
+    </span>
+  </React.Fragment>
+  <React.Fragment>
+    <span>
+      00
+       
+    </span>
+    <span>
+      :
+       
+    </span>
+  </React.Fragment>
+  <React.Fragment>
+    <span>
+      00
+       
+    </span>
+    <span>
+      :
+       
+    </span>
+  </React.Fragment>
+  <React.Fragment>
+    <span>
+      00
+       
+    </span>
+    <span />
+  </React.Fragment>
+</span>
 `;
