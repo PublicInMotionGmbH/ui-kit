@@ -301,7 +301,7 @@ class FileInput extends React.PureComponent {
 
   render () {
     const {
-      buttonLabel, className, children, dropDisabled, fileRender, multiple, onChange,
+      buttonLabel, className, children, dropDisabled, filesRender, multiple, onChange,
       onDragEnd, onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart,
       ...passedProps
     } = this.props
