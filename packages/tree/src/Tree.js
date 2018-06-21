@@ -8,22 +8,12 @@ import TreeNode from './TreeNode'
 const moduleName = 'tree'
 
 /**
- * Function to recursivly define propTypes
- * @param {function} f
- * @returns {function}
+ * Only way to handle recursive data types through PropTypes.
+ * https://github.com/facebook/react/issues/5676
  */
-function lazyFunction (f) {
-  return function () {
-    return f.apply(this, arguments)
-  }
-}
-
-const lazyDataType = lazyFunction(function () {
-  return dataType
-})
+const lazyDataType = (...args) => dataType(...args)
 
 const dataType = PropTypes.arrayOf(PropTypes.shape({
-  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   children: PropTypes.arrayOf(lazyDataType)
 }))
@@ -42,37 +32,48 @@ const propTypes = {
   onClick: PropTypes.func,
 
   /** Collapse tree with smooth effect */
-  smooth: PropTypes.bool
+  smooth: PropTypes.bool,
+
+  /** How the node should be rendered? */
+  renderNode: PropTypes.func
 }
 
 const defaultProps = {
   initiallyOpen: false,
-  smooth: true
+  smooth: true,
+  renderNode: x => x.name
 }
 /**
  * Component which represents Tree.
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {array} props.data
- * @param {boolean} [props.initiallyOpen]
- * @param {boolean} [props.smooth]
+ * @param {object[]} props.data
+ * @param {boolean} props.initiallyOpen
+ * @param {boolean} props.smooth
+ * @param {function} props.renderNode
  * @returns {React.Element}
  */
 function Tree (props) {
-  const { data, initiallyOpen, smooth, ...restProps } = props
+  const { data, initiallyOpen, smooth, renderNode, ...restProps } = props
+
+  function build (node, index) {
+    return (
+      <TreeNode
+        initiallyOpen={initiallyOpen}
+        key={index}
+        node={node}
+        render={renderNode}
+        children={node.children ? node.children.map(build) : node.children}
+        smooth={smooth}
+      />
+    )
+  }
+
   const clsName = buildClassName(moduleName)
-  const children = data.map((el, i) =>
-    <TreeNode
-      initiallyOpen={initiallyOpen}
-      key={i}
-      node={el}
-      children={el.children}
-      smooth={smooth}
-      {...restProps}
-    />
-  )
-  return (<ul className={clsName}>{children}</ul>)
+  const children = data.map(build)
+
+  return (<ul className={clsName} {...restProps}>{children}</ul>)
 }
 
 Tree.propTypes = propTypes

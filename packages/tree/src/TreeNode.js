@@ -5,32 +5,22 @@ import { buildClassName } from '@talixo/shared'
 import { Collapse } from '@talixo/collapse'
 import { Icon } from '@talixo/icon'
 
-const moduleName = 'tree'
+const moduleName = 'tree-node'
 
 /**
- * Function to recursivly define propTypes
- * @param {function} f
- * @returns {function}
+ * Only way to handle recursive data types through PropTypes.
+ * https://github.com/facebook/react/issues/5676
  */
-function lazyFunction (f) {
-  return function () {
-    return f.apply(this, arguments)
-  }
-}
+const lazyDataType = (...args) => dataType(...args)
 
-const lazyChildrenType = lazyFunction(function () {
-  return childrenType
-})
-
-const childrenType = PropTypes.arrayOf(PropTypes.shape({
-  id: PropTypes.number.isRequired,
+const dataType = PropTypes.arrayOf(PropTypes.shape({
   name: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(lazyChildrenType)
+  children: PropTypes.arrayOf(lazyDataType)
 }))
 
 const propTypes = {
   /** Children of node */
-  children: childrenType,
+  children: dataType,
 
   /** Additional class name */
   className: PropTypes.string,
@@ -42,21 +32,26 @@ const propTypes = {
   onClick: PropTypes.func,
 
   /** Collapse tree with smooth effect */
-  smooth: PropTypes.bool
+  smooth: PropTypes.bool,
+
+  /** Renderer for element */
+  render: PropTypes.func
 }
 
 const defaultProps = {
   initiallyOpen: false,
-  smooth: true
+  smooth: true,
+  render: x => x
 }
 
 /**
  * Component which represents TreeNode.
  *
  * @property {object} props
+ * @property {function} props.render
+ * @property {boolean} props.initiallyOpen
+ * @property {boolean} props.smooth
  * @property {string} [props.className]
- * @property {boolean} [props.initiallyOpen]
- * @property {boolean} [props.smooth]
  * @class {React.Element}
  */
 class TreeNode extends React.Component {
@@ -79,7 +74,7 @@ class TreeNode extends React.Component {
   }
 
   /**
-   * Function which handle toggle on node, change collaps
+   * Function which handle toggle on node, change collapse.
    */
   toggle = () => {
     this.setState({
@@ -87,68 +82,38 @@ class TreeNode extends React.Component {
     })
   }
 
-  /**
-   * Function which render icon
-   * @returns {*}
-   */
-  renderIcon = () => {
-    const iconCls = buildClassName([moduleName, 'node-icon'])
-    const icon = this.state.collapsed ? 'chevron_right' : 'expand_more'
-
-    return (
-      <span
-        className={iconCls}
-        onClick={this.toggle} >
-        {<Icon name={icon} />}
-      </span>
-    )
-  }
-
-  /**
-   * Function which render children
-   * @returns {React.Element}
-   */
-  renderChildren = () => {
-    const { children, initiallyOpen, smooth, onClick } = this.props
-
-    return (
-      children.map((el, i) => {
-        return (
-          <TreeNode
-            children={el.children}
-            initiallyOpen={initiallyOpen}
-            key={i}
-            node={el}
-            smooth={smooth}
-            onClick={onClick}
-          />
-        )
-      })
-    )
-  }
-
   render () {
-    const { children, node, onClick, smooth } = this.props
+    const { children, node, onClick, smooth, render } = this.props
     const { collapsed, selected } = this.state
-    const nodeCls = buildClassName([moduleName, 'node'], null, { selected, childless: !children })
-    const nodeNameCls = buildClassName([moduleName, 'node-name'], null, {'selectable': onClick})
-    const childrenCls = buildClassName([moduleName, 'node-children'])
+
+    const nodeCls = buildClassName(moduleName, null, { selected, childless: !children })
+    const nodeNameCls = buildClassName([ moduleName, 'name' ], null, { selectable: onClick })
+    const childrenCls = buildClassName([ moduleName, 'children' ])
+
+    const iconCls = buildClassName([ moduleName, 'icon' ])
+    const iconName = collapsed ? 'chevron_right' : 'expand_more'
+
+    const icon = (
+      <span className={iconCls} onClick={this.toggle}>
+        <Icon name={iconName} />
+      </span>
+    )
+
+    const element = (
+      <span className={nodeNameCls} onClick={this.handleClick}>
+        {render(node)}
+      </span>
+    )
 
     return (
-      <span>
-        <li className={nodeCls}>
-          {children && this.renderIcon()}
-          <span className={nodeNameCls} onClick={this.handleClick}>
-            {node && (node.render && typeof node.render ? node.render(node.name) : node.name) }
-          </span>
-        </li>
-        <Collapse
-          collapsed={collapsed}
-          smooth={smooth}
-          animationTime={100}>
-          <ul className={childrenCls}>{children && this.renderChildren()}</ul>
+      <li className={nodeCls}>
+        {icon}
+        {element}
+
+        <Collapse collapsed={collapsed} smooth={smooth} animationTime={100}>
+          <ul className={childrenCls}>{children}</ul>
         </Collapse>
-      </span>
+      </li>
     )
   }
 }

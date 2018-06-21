@@ -16,15 +16,26 @@ const addStory = createStoriesFactory('Tree', module, {
 
 const click = action('click')
 
-const data = [{id: 1,
-  name: 'animal',
-  children:
-  [{id: 2,
-    name: 'mammals',
-    children:
-    [{id: 3, name: 'tiger'},
-      {id: 4, name: 'cow'}]}]},
-{id: 5, name: 'people'}]
+const data = [
+  {
+    id: 1,
+    name: 'animal',
+    children: [
+      {
+        id: 2,
+        name: 'mammals',
+        children: [
+          { id: 3, name: 'tiger' },
+          { id: 4, name: 'cow' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 5,
+    name: 'people'
+  }
+]
 
 // Stories
 

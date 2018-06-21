@@ -6,36 +6,43 @@
   padding-left: dp(1)
   font-size: dp(3)
 
-  &__node
+  &-node
     box-sizing: border-box
     display: inline-block
     border-radius: dp(0.4)
     width: 100%
-    padding: dp(0.9)
     margin-top: dp(0.2)
-    margin-bottom: dp(0.2)
+    line-height: 1.25em
     user-select: none
 
-    &-name
+    #{prefix('collapse', 'content')}
+      padding: 0
+
+    > &__name
       display: inline-block
       margin-bottom: dp(0.375)
 
       &--selectable
         cursor: pointer
 
-    &-children
+    > &__children
       list-style-type: none
 
-    &-icon 
+    > &__icon
       padding: 0
       user-select: none
+      cursor: pointer
+
       span
-        cursor: pointer
         font-size: dp(4)
         padding: 0
-    
-    &--childless
-      padding-left: dp(5)
+
+    &--childless > &__icon
+      visibility: hidden
+      pointer-events: none
 
     &--selected
       color: $tree-node-name-selected
+
+  &-node &-node:last-child > &-node__name
+    margin-bottom: 0
