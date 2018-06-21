@@ -22,15 +22,17 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-arrows        | bool      | n/a     | Arrows to navigate between slides
-children      | node      | `[]`    | Elements in each slides
-className     | string    | n/a     | Additional class name passed to wrapper
-dots          | bool      | n/a     | Dots to navigate between slides
-duration      | number    | `500`   | Duration of animation in ms
-perPage       | number    | `1`     | Number of visible slides
-renderDots    | func      | `Dots`  | Function which render custom dots
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+arrows        | bool      | n/a             | Arrows to navigate between slides
+children      | nodes     | n/a             | Elements in each slides
+className     | string    | n/a             | Additional class name passed to wrapper
+dots          | bool      | n/a             | Dots to navigate between slides
+animationTime | number    | `500`           | Duration of animation (in ms)
+perPage       | number    | `1`             | Number of visible slides
+renderDots    | function  | `Dots`          | Function which render custom dots
+value         | number    | self-controlled | Index of currently selected slide element
+onChange      | function  | n/a             | Event handler for change of slide
 
 ## Changelog
 

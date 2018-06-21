@@ -28,19 +28,25 @@ const propTypes = {
   /** Show dots to navigate */
   dots: PropTypes.bool,
 
-  /** Slides animation duration */
-  duration: PropTypes.number,
+  /** Slides animation time */
+  animationTime: PropTypes.number,
 
   /** Number of slides visible in one time */
   perPage: PropTypes.number,
 
   /** Function which render custom dots */
-  renderDots: PropTypes.func
+  renderDots: PropTypes.func,
+
+  /** Index of current slide element */
+  value: PropTypes.number,
+
+  /** Event handler for active slide change */
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
   children: [],
-  duration: 500,
+  animationTime: 500,
   perPage: 1,
   renderDots: Dots
 }
@@ -53,17 +59,56 @@ const defaultProps = {
  * @property {node} [props.children]
  * @property {string} [props.className]
  * @property {boolean} [props.dots]
- * @property {number} [props.duration]
+ * @property {number} [props.animationTime]
  * @property {number} [props.perPage]
  * @property {function} [props.rednerDots]
  * @class {React.Element}
  */
 class Carousel extends React.PureComponent {
   state = {
-    currentSlide: 0,
-    childrenLength: this.props.children.length + 1,
-    transform: 0,
-    transitionTime: this.props.duration
+    slides: chunk(this.props.children, this.props.perPage),
+    currentSlide: this.props.value != null
+      ? this.props.value % this.props.children.length
+      : 0,
+    transitionTime: this.props.animationTime
+  }
+
+  componentWillReceiveProps (props) {
+    // Handle change of animation time
+    if (props.animationTime !== this.props.animationTime) {
+      this.setState({
+        transitionTime: props.animationTime
+      })
+    }
+
+    // Calculate number of slides available after changes
+    const slides = Math.ceil(props.children.length / props.perPage)
+
+    // Update value if it's controlled & changed
+    if (props.value != null && this.props.value !== props.value) {
+      const slide = props.value % props.children.length
+
+      const type = this.lastMovementIndex === slide
+        ? this.lastMovementType
+        : 'exact'
+
+      this.change(slide, type, true)
+    }
+
+    // Update current slide, if it's bigger than maximum slide
+    const currentSlide = this.state.currentSlide % this.props.children.length
+
+    if (currentSlide >= slides) {
+      this.setState({
+        currentSlide: slides - 1
+      })
+    }
+
+    if (props.children !== this.props.children || props.perPage !== this.props.perPage) {
+      this.setState({
+        slides: chunk(props.children, props.perPage)
+      })
+    }
   }
 
   /**
@@ -73,7 +118,7 @@ class Carousel extends React.PureComponent {
    */
   goImmediately (slide) {
     const { currentSlide } = this.state
-    const { duration } = this.props
+    const { animationTime } = this.props
 
     if (slide === currentSlide) {
       return Promise.resolve()
@@ -87,10 +132,37 @@ class Carousel extends React.PureComponent {
         reflow(this.wrapper)
 
         this.setState({
-          transitionTime: duration
+          transitionTime: animationTime
         }, resolve)
       })
     })
+  }
+
+  change = async (index, type = 'exact', force = false) => {
+    const { value, onChange, children } = this.props
+    const isImmediate = value == null || force
+
+    if (onChange) {
+      onChange(index, type)
+    }
+
+    if (!isImmediate) {
+      this.lastMovementType = type
+      this.lastMovementIndex = index % children.length
+      return
+    }
+
+    this.lastMovementType = null
+    this.lastMovementIndex = null
+
+    if (type === 'forward' || type === 'back') {
+      await this.go(index, type)
+    } else {
+      // FIXME: GET CLONES IN CASE
+      this.setState({
+        currentSlide: index
+      })
+    }
   }
 
   /**
@@ -133,7 +205,7 @@ class Carousel extends React.PureComponent {
     const { perPage } = this.props
     const { currentSlide } = this.state
 
-    this.go(currentSlide + perPage)
+    return this.change(currentSlide + perPage, 'forward')
   }
 
   /**
@@ -143,18 +215,14 @@ class Carousel extends React.PureComponent {
     const { perPage } = this.props
     const { currentSlide } = this.state
 
-    this.go(currentSlide - perPage, 'back')
+    return this.change(currentSlide - perPage, 'back')
   }
 
   /**
    * Handle change slide when click on proper dot
    */
-  handlerDot = (i) => {
-    const { perPage } = this.props
-
-    this.setState({
-      currentSlide: i * perPage
-    })
+  handlerDot = (index) => {
+    return this.change(index, 'exact')
   }
 
   /**
@@ -197,15 +265,17 @@ class Carousel extends React.PureComponent {
    */
   renderDots () {
     const { renderDots, children, perPage, ...restProps } = this.props
-    const { currentSlide } = this.state
+    const { currentSlide, slides } = this.state
 
-    const slides = chunk(children, perPage)
+    const slide = currentSlide % children.length
 
     return renderDots({
       ...restProps,
       slides: slides,
+      children: children,
       perPage: perPage,
-      value: currentSlide % slides.length,
+      index: slide,
+      value: Math.floor(slide / perPage),
       onChange: this.handlerDot
     })
   }

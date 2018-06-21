@@ -13,7 +13,7 @@ const addStory = createStoriesFactory('Carousel', module, {
 
 // Custom dots
 function renderNumberDots (props) {
-  const { slides, value, onChange } = props
+  const { slides, value, perPage, onChange } = props
 
   const clsName = 'tx-custom-dots__dot'
   const activeClsName = 'tx-custom-dots__dot tx-custom-dots__dot--active'
@@ -22,7 +22,7 @@ function renderNumberDots (props) {
 
   for (let i = 0; i < slides.length; i++) {
     elements.push(
-      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i)}>
+      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i * perPage)}>
         {i + 1}
       </div>
     )
@@ -36,7 +36,7 @@ function renderNumberDots (props) {
 }
 
 function renderThumbnails (props) {
-  const { slides, value, onChange } = props
+  const { slides, value, perPage, onChange } = props
 
   const clsName = 'tx-gallery-dots__dot'
   const activeClsName = 'tx-gallery-dots__dot tx-gallery-dots__dot--active'
@@ -45,7 +45,7 @@ function renderThumbnails (props) {
 
   for (let i = 0; i < slides.length; i++) {
     elements.push(
-      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i)}>
+      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i * perPage)}>
         {slides[i]}
       </div>
     )
@@ -134,6 +134,28 @@ addStory('with custom dots', readme, () => (
     <div className='tx-slide tx-slide--3'>SLIDE 3</div>
   </Carousel>
 ))
+
+addStory('hardcoded slide', readme, () => (
+  <Carousel dots arrows value={1} renderDots={renderNumberDots}>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <Carousel
+    dots
+    arrows
+    value={state.value}
+    onChange={value => setState({ value })}
+    renderDots={renderNumberDots}
+  >
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+), () => ({ value: 1 }))
 
 addStory('as a gallery', readme, () => (
   <div style={{ maxWidth: 1000, margin: '0 auto' }}>

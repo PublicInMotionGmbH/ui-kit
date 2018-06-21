@@ -36,7 +36,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Dots (props) {
-  const { slides, onChange, value } = props
+  const { slides, onChange, value, perPage } = props
 
   const clsName = buildClassName([ moduleName, 'dot' ])
   const activeClsName = buildClassName([ moduleName, 'dot' ], null, [ 'active' ])
@@ -47,7 +47,7 @@ function Dots (props) {
       <div
         key={i}
         className={i === value ? activeClsName : clsName}
-        onClick={() => onChange(i)}
+        onClick={() => onChange(i * perPage)}
       />
     )
   }
