@@ -17,7 +17,6 @@ const setDeadline = (addTime) => {
   const deadline = dateNow + addTime
   const deadlineConverted = new Date(deadline).toISOString()
 
-  console.log(deadline, deadlineConverted)
   return deadlineConverted
 }
 
