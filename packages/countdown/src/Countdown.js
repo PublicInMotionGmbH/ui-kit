@@ -23,7 +23,7 @@ const defaultProps = {
  *
  * @property {object} props
  * @property {string} [props.className]
- * @property {string} props.format
+ * @property {string} [props.format]
  * @property {string} props.targetDate
  * @class {React.Element}
  */
@@ -84,7 +84,7 @@ class Countdown extends React.PureComponent {
   }
 
   /**
-   * Render lables for each part od date
+   * Render lables for each part of date
    * @param {string} label
    *
    * @returns string
