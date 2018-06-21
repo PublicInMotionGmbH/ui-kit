@@ -28,16 +28,16 @@ describe('<FileInput />', () => {
   describe('rendering', () => {
     let wrapper
 
-    beforeEach(() => {
+    it('renders correctly', () => {
       wrapper = createWrapper()
-    })
-
-    afterEach(() => {
+      expect(wrapper).toMatchSnapshot()
       wrapper.unmount()
     })
 
     it('renders children correctly', () => {
+      wrapper = createWrapper({ children: <div>Test div</div> })
       expect(wrapper).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 

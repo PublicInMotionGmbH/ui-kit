@@ -9,6 +9,12 @@ import { getDataTransferFiles } from './utils'
 
 export const moduleName = 'file-input'
 
+/**
+ * Registers files in Map
+ *
+ * @param {array} rows
+ * @returns {Map<any, any>}
+ */
 export function registerElements (rows) {
   const newStorage = new Map()
 
@@ -41,13 +47,34 @@ const propTypes = {
   dropDisabled: PropTypes.bool,
 
   /** File component renderer. */
-  fileRender: PropTypes.func,
+  filesRender: PropTypes.func,
 
-  /**  */
+  /** Dropped files. */
+  files: PropTypes.array,
+
+  /** Allows multiple files uploading. */
   multiple: PropTypes.bool,
 
   /** onChange callback. Invoked when either files have been dropped or file input has changed. */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+
+  /** onDragEnd callback. Applies sent files and event. */
+  onDragEnd: PropTypes.func,
+
+  /** onDragEnter callback. Applies sent files and event. */
+  onDragEnter: PropTypes.func,
+
+  /** onDragExit callback. Applies sent files and event. */
+  onDragExit: PropTypes.func,
+
+  /** onDragLeave callback. Applies sent files and event. */
+  onDragLeave: PropTypes.func,
+
+  /** onDragOver callback. Applies sent files and event. */
+  onDragOver: PropTypes.func,
+
+  /** onDragEnd callback. Applies sent files and event. */
+  onDragStart: PropTypes.func
 }
 
 const defaultProps = {
@@ -59,9 +86,22 @@ const defaultProps = {
 /**
  * Component which represents File Input.
  *
- * @param {object} props
- * @param {string} [props.className]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {string} [props.buttonLabel]
+ * @property {*} [props.children]
+ * @property {string} [props.className]
+ * @property {boolean} [props.dropDisabled]
+ * @property {function} [props.filesRender]
+ * @property {string} [props.files]
+ * @property {boolean} [props.multiple]
+ * @property {function} [props.onChange]
+ * @property {function} [props.onDragEnd]
+ * @property {function} [props.onDragEnter]
+ * @property {function} [props.onDragExit]
+ * @property {function} [props.onDragLeave]
+ * @property {function} [props.onDragOver]
+ * @property {function} [props.onDragStart]
+ * @class
  */
 class FileInput extends React.PureComponent {
   state = {
@@ -70,17 +110,27 @@ class FileInput extends React.PureComponent {
     idStorage: this.props.files ? registerElements(this.props.files) : new Map()
   }
 
+  /**
+   * Prevents default drop and dragover actions.
+   */
   componentDidMount () {
     this.prevent = e => e.preventDefault()
     document.addEventListener('drop', this.prevent)
     document.addEventListener('dragover', this.prevent)
   }
 
+  /**
+   * Removes preventing default drop and dragover actions.
+   */
   componentWillUnmount () {
     document.removeEventListener('drop', this.prevent)
     document.removeEventListener('dragover', this.prevent)
   }
 
+  /**
+   * Handles exteranal file changes.
+   * @param {object} nextProps
+   */
   componentWillReceiveProps (nextProps) {
     if (nextProps.files != null && nextProps.files !== this.props.files) {
       this.setState({
@@ -90,12 +140,21 @@ class FileInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Opens file input dialog
+   */
   handleClick = () => {
     if (this.input) {
       this.input.click()
     }
   }
 
+  /**
+   * Handles drag actions.
+   *
+   * @param {string} type
+   * @param {Event|SyntheticEvent} e
+   */
   handleDrag = (type, e) => {
     e.preventDefault()
     const files = getDataTransferFiles(e)
@@ -117,14 +176,24 @@ class FileInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Handles file drop actions
+   * @param {Event|SyntheticEvent} e
+   */
   handleDrop = (e) => {
     e.preventDefault()
     e.stopPropagation()
     const { files: propsFiles, multiple, onChange } = this.props
     const { files } = this.state
     const uploadedFiles = getDataTransferFiles(e)
+    // Check if any files have been added
     const noFiles = !uploadedFiles || uploadedFiles.length < 1
+    // Check if user wants to send too many files
     const tooMany = (!multiple && files.length > 0) || (!multiple && uploadedFiles.length > 1)
+
+    if (onChange) {
+      onChange(uploadedFiles, e)
+    }
 
     if (noFiles || tooMany || propsFiles != null) {
       this.setState({ draggingOver: false })
@@ -132,15 +201,14 @@ class FileInput extends React.PureComponent {
     }
 
     const newFiles = files.concat([...uploadedFiles])
-
-    if (onChange) {
-      onChange(newFiles, e)
-    }
     const newIdStorage = registerElements(newFiles)
-
     this.setState({ files: newFiles, idStorage: newIdStorage, draggingOver: false })
   }
 
+  /**
+   * Handles files removing
+   * @param {object} file
+   */
   handleRemove (file) {
     const { files } = this.state
     const newFiles = files.filter(item => item !== file)
@@ -149,6 +217,10 @@ class FileInput extends React.PureComponent {
     this.setState({ files: newFiles, idStorage: newIdStorage })
   }
 
+  /**
+   * Generates wrapper props.
+   * @returns {}
+   */
   getWrapperProps = () => {
     const { className, dropDisabled } = this.props
     const { draggingOver } = this.state
@@ -169,6 +241,11 @@ class FileInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Generates file elements
+   *
+   * @returns {Element|ReactElement}
+   */
   getFileElements = () => {
     const { filesRender } = this.props
     const { files, idStorage } = this.state
@@ -193,6 +270,11 @@ class FileInput extends React.PureComponent {
     )
   }
 
+  /**
+   * Generates input covering element
+   *
+   * @returns {Element|ReactElement}
+   */
   getCoverElement = () => {
     const { handleDrop, handleDrag } = this
     const coverCls = buildClassName([moduleName, 'cover'])
@@ -210,6 +292,11 @@ class FileInput extends React.PureComponent {
     )
   }
 
+  /**
+   * Saves input reference.
+   *
+   * @param {Element|ReactElement} node
+   */
   setInputRef = node => { this.input = node }
 
   render () {

@@ -19,6 +19,22 @@ const addStory = createStoriesFactory('File Input', module, {
 const iconCls = prefix('file-input-storybook', 'icon')
 const wrapperCls = prefix('file-input-storybook', 'wrapper')
 
+const filesRender = (props) => {
+  const { file, onRemove } = props
+  return (
+    <div className='talixo-file-input-storybook-render'>
+      <div className='talixo-file-input-storybook-render__icon'>
+        <Icon name={'remove_circle'} onClick={onRemove} />
+      </div>
+      <div className='talixo-file-input-storybook-render__details'>
+        <span className='talixo-file-input-storybook-render__name'>{file.name} </span>
+        <span className='talixo-file-input-storybook-render__size'> ({file.size} B) </span>
+        <span className='talixo-file-input-storybook-render__type'> {file.type} </span>
+      </div>
+    </div>
+  )
+}
+
 // Stories
 
 addStory('initial', readme, () => (
@@ -44,7 +60,16 @@ addStory('single file upload', readme, () => (
 ))
 
 addStory('drag and drop disabled', readme, () => (
-  <FileInput dropEnabled={false}>
+  <FileInput dropDisabled>
+    <div className={wrapperCls}>
+      <div className={iconCls}><Icon name='cloud_upload' /></div>
+      <div>Select files to upload<br /><br /></div>
+    </div>
+  </FileInput>
+))
+
+addStory('custom file component', readme, () => (
+  <FileInput filesRender={filesRender}>
     <div className={wrapperCls}>
       <div className={iconCls}><Icon name='cloud_upload' /></div>
       <div>Select files to upload<br /><br /></div>

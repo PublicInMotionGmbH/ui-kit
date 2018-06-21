@@ -10,6 +10,45 @@ exports[`<FileInput /> rendering renders children correctly 1`] = `
 >
   <div
     className="talixo-file-input__children"
+  >
+    <div>
+      Test div
+    </div>
+  </div>
+  <div
+    className="talixo-file-input__button"
+  >
+    <button
+      className="talixo-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Browse Files
+    </button>
+  </div>
+  <input
+    multiple={true}
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+</div>
+`;
+
+exports[`<FileInput /> rendering renders correctly 1`] = `
+<div
+  className="talixo-file-input"
+  onDragEnter={[Function]}
+  onDragOver={[Function]}
+  onDragStart={[Function]}
+  onDrop={[Function]}
+>
+  <div
+    className="talixo-file-input__children"
   />
   <div
     className="talixo-file-input__button"
