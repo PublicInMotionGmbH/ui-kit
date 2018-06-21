@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Divider /> renders children correctly 1`] = `
+<div
+  className="talixo-divider"
+>
+  <span
+    className="talixo-divider__text"
+  >
+    Test divider
+  </span>
+</div>
+`;
+
+exports[`<Divider /> renders correctly 1`] = `
+<div
+  className="talixo-divider"
+/>
+`;
