@@ -2,20 +2,23 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Dots from '../src/Dots'
-import Carousel from '../src/Carousel'
 
 describe('<Dots />', () => {
   it('renders children correctly', () => {
-    const wrapperCarousel = shallow(
-      <Carousel>
-        <div>SLIDE 1</div>
-        <div>SLIDE 2</div>
-        <div>SLIDE 3</div>
-      </Carousel>)
+    const wrapper = shallow(<Dots slides={[
+      [ <div>Slide 1</div> ],
+      [ <div>Slide 2</div> ],
+      [ <div>Slide 3</div> ]
+    ]} />)
 
-    const children = wrapperCarousel.props().children
+    expect(wrapper).toMatchSnapshot()
+  })
 
-    const wrapper = shallow(<Dots children={children} perPage={1} />)
+  it('renders children correctly for different amount of elements per slide', () => {
+    const wrapper = shallow(<Dots slides={[
+      [ <div>Slide 1</div>, <div>Slide 2</div> ],
+      [ <div>Slide 3</div>, <div>Slide 4</div> ]
+    ]} />)
 
     expect(wrapper).toMatchSnapshot()
   })
