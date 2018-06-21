@@ -39,7 +39,8 @@ class Countdown extends React.PureComponent {
    * Set interval to update counter
    */
   componentDidMount () {
-    setInterval(() => this.countTime(this.props.targetDate), 1000)
+    const { targetDate } = this.props
+    setInterval(() => this.countTime(targetDate), 1000)
   }
 
   /**
@@ -121,11 +122,11 @@ class Countdown extends React.PureComponent {
   }
 
   render () {
-    const { className, ...passedProps } = this.props
+    const { className } = this.props
     const { days, hours, min, sec } = this.state
 
     return (
-      <span className={buildClassName('countdown', className)} {...passedProps} >
+      <span className={buildClassName('countdown', className)} >
         {this.renderTime(days, 'dd') &&
           <React.Fragment>
             <span>{this.renderTime(days, 'dd')} </span>

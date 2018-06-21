@@ -11,10 +11,13 @@ const addStory = createStoriesFactory('Countdown', module, {
   propTables: [ Countdown ]
 })
 
+// mock deadline in the future according to actual date
 const setDeadline = (addTime) => {
   const dateNow = Date.now()
   const deadline = dateNow + addTime
-  const deadlineConverted = new Date(deadline)
+  const deadlineConverted = new Date(deadline).toISOString()
+
+  console.log(deadline, deadlineConverted)
   return deadlineConverted
 }
 
