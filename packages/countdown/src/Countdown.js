@@ -108,17 +108,17 @@ class Countdown extends React.PureComponent {
     }
 
     if (label === 'dd') {
-      handleLabel(days, 'dd', /(?<=\bdd\s)(\S+)/)
+      handleLabel(days, 'dd', /(\bdd\s)(\S+)/)
     } else if (label === 'hh') {
-      handleLabel(hours, 'hh', /(?<=\bhh\s)(\S+)/)
+      handleLabel(hours, 'hh', /(\bhh\s)(\S+)/)
     } else if (label === 'mm') {
-      handleLabel(min, 'mm', /(?<=\bmm\s)(\S+)/)
+      handleLabel(min, 'mm', /(\bmm\s)(\S+)/)
     } else if (label === 'ss') {
-      handleLabel(sec, 'ss', /(?<=\bss\s)(\S+)/)
+      handleLabel(sec, 'ss', /(\bss\s)(\S+)/)
     }
 
     if (!result) return
-    return result[0]
+    return result[2]
   }
 
   render () {
