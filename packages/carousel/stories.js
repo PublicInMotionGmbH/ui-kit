@@ -11,56 +11,50 @@ const addStory = createStoriesFactory('Carousel', module, {
   propTables: [ Carousel ]
 })
 
-// Styles for stories
-const wrapperStyle = {
-  height: '200px',
-  display: 'flex'
-}
-const imagesStyle = {
-  display: 'inline-block',
-  height: '100%',
-  width: '100%',
-  textAlign: 'center',
-  fontSize: '30px',
-  padding: '30px',
-  boxSizing: 'border-box',
-  backgroundColor: '#3da23d',
-  border: '5px solid #000'
-}
-const customDotsWrapperStyles = {
-  position: 'absolute',
-  display: 'flex',
-  width: '100%',
-  bottom: '0',
-  justifyContent: 'center'
-}
-const customDotsStyles = {
-  display: 'inline-block',
-  position: 'relative',
-  height: '50px',
-  width: '50px',
-  margin: '15px',
-  borderRadius: '50%',
-  fontSize: '20px',
-  cursor: 'pointer',
-  backgroundColor: '#009de2',
-  border: '1px solid #0ff8ff',
-  color: '#4c0361',
-  textAlign: 'center',
-  lineHeight: '50px'
-}
-
 // Custom dots
-function customDots (props) {
-  const { children, onChange } = props
-  const dotsNumber = Math.ceil(children.length)
+function renderNumberDots (props) {
+  const { slides, value, onChange } = props
 
-  let elements = []
-  for (let i = 0; i < dotsNumber; i++) {
-    elements.push(<div key={i} style={customDotsStyles} onClick={() => onChange(i)}>{i + 1}</div>)
+  const clsName = 'tx-custom-dots__dot'
+  const activeClsName = 'tx-custom-dots__dot tx-custom-dots__dot--active'
+
+  const elements = []
+
+  for (let i = 0; i < slides.length; i++) {
+    elements.push(
+      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i)}>
+        {i + 1}
+      </div>
+    )
   }
+
   return (
-    <div style={customDotsWrapperStyles}>{elements}</div>
+    <div className='tx-custom-dots'>
+      {elements}
+    </div>
+  )
+}
+
+function renderThumbnails (props) {
+  const { slides, value, onChange } = props
+
+  const clsName = 'tx-gallery-dots__dot'
+  const activeClsName = 'tx-gallery-dots__dot tx-gallery-dots__dot--active'
+
+  const elements = []
+
+  for (let i = 0; i < slides.length; i++) {
+    elements.push(
+      <div key={i} className={value === i ? activeClsName : clsName} onClick={() => onChange(i)}>
+        {slides[i]}
+      </div>
+    )
+  }
+
+  return (
+    <div className='tx-gallery-dots'>
+      {elements}
+    </div>
   )
 }
 
@@ -74,83 +68,81 @@ class CustomWrapperComponent extends React.PureComponent {
 
   render () {
     return (
-      <div style={wrapperStyle}>
-        <Carousel ref={instance => { this.child = instance }}>
-          <div style={imagesStyle}>SLIDE 1</div>
-          <div style={imagesStyle}>SLIDE 2</div>
-          <div style={imagesStyle}>SLIDE 3</div>
-        </Carousel>
-      </div>
+      <Carousel ref={instance => { this.child = instance }}>
+        <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+        <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+        <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+      </Carousel>
     )
   }
 }
 
 // Stories
-addStory('initial', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
-    </Carousel>
-  </div>
 
+addStory('initial', readme, () => (
+  <Carousel>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
 ))
 
 addStory('with arrows', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel arrows>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
-    </Carousel>
-  </div>
+  <Carousel arrows>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
 ))
 
-addStory('with more elements in one slide', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel arrows perPage={3}>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
-      <div style={imagesStyle}>SLIDE 4</div>
-      <div style={imagesStyle}>SLIDE 5</div>
-      <div style={imagesStyle}>SLIDE 6</div>
-      <div style={imagesStyle}>SLIDE 7</div>
-    </Carousel>
-  </div>
+addStory('with more elements on one slide', readme, () => (
+  <Carousel arrows perPage={3}>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    <div className='tx-slide tx-slide--1'>SLIDE 4</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 5</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 6</div>
+    <div className='tx-slide tx-slide--1'>SLIDE 7</div>
+  </Carousel>
 ))
 
-addStory('with dots', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel arrows dots>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
-    </Carousel>
-  </div>
+addStory('with arrows and dots', readme, () => (
+  <Carousel arrows dots>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
 ))
 
 addStory('with more elements & dots', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel dots perPage={3}>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
-      <div style={imagesStyle}>SLIDE 4</div>
-      <div style={imagesStyle}>SLIDE 5</div>
-      <div style={imagesStyle}>SLIDE 6</div>
-      <div style={imagesStyle}>SLIDE 7</div>
-    </Carousel>
-  </div>
+  <Carousel dots perPage={3}>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    <div className='tx-slide tx-slide--1'>SLIDE 4</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 5</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 6</div>
+    <div className='tx-slide tx-slide--1'>SLIDE 7</div>
+  </Carousel>
 ))
 
 addStory('with custom dots', readme, () => (
-  <div style={wrapperStyle}>
-    <Carousel dots renderDots={customDots}>
-      <div style={imagesStyle}>SLIDE 1</div>
-      <div style={imagesStyle}>SLIDE 2</div>
-      <div style={imagesStyle}>SLIDE 3</div>
+  <Carousel dots renderDots={renderNumberDots}>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+))
+
+addStory('as a gallery', readme, () => (
+  <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+    <Carousel arrows dots renderDots={renderThumbnails}>
+      <img className='tx-gallery-item' src='https://placeimg.com/1000/480/any' />
+      <img className='tx-gallery-item' src='https://placeimg.com/1000/480/any?2' />
+      <img className='tx-gallery-item' src='https://placeimg.com/1000/480/any?3' />
+      <img className='tx-gallery-item' src='https://placeimg.com/1000/480/any?4' />
+      <img className='tx-gallery-item' src='https://placeimg.com/1000/480/any?5' />
     </Carousel>
   </div>
 ))

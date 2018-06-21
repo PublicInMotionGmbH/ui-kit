@@ -2,6 +2,8 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
+import chunk from 'lodash/chunk'
+
 import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
@@ -164,85 +166,100 @@ class Carousel extends React.PureComponent {
 
   /**
    * Render children
-   * @returns Reac.Element
+   * @returns {React.Element}
    */
-  renderChildren = () => {
+  renderSlides () {
     const { children, perPage } = this.props
 
+    const clsName = buildClassName([ moduleName, 'slide' ])
     const style = { minWidth: `${100 / perPage}%`, maxWidth: `${100 / perPage}%` }
 
-    const elements = []
+    const copies = []
 
-    for (let i = 0; i < Math.max(children.length, perPage) * 3; i++) {
-      elements.push(
-        <div
-          className='one-slide'
-          style={style}
-          key={'copy-' + i}>{children[i % children.length]}</div>
+    for (let i = 0; i < Math.max(children.length) + 3 * perPage; i++) {
+      copies.push(
+        <div className={clsName} style={style} key={'copy-' + i}>
+          {children[i % children.length]}
+        </div>
       )
     }
 
-    return (
-      <div style={{display: 'flex', height: '100%'}}>
-        {children.map((el, i) => {
-          return (
-            <div
-              className='one-slide'
-              style={style}
-              key={i}>{el}</div>
-          )
-        })}
-        {elements}
+    return children.map((el, i) => (
+      <div className={clsName} style={style} key={i}>
+        {el}
       </div>
-    )
-  }
-
-  /**
-  * Render wrapper for slides
-  * @returns React.Element
-  */
-  renderWrapper = () => {
-    const { perPage } = this.props
-    const { transitionTime, currentSlide } = this.state
-
-    return (
-      <div
-        ref={this.setRef}
-        style={{transform: `translateX(-${currentSlide * 100 / perPage}%)`, transitionDuration: `${transitionTime}ms`}}
-        className='children-wrapper'>
-        {this.renderChildren()}
-      </div>
-    )
+    )).concat(copies)
   }
 
   /**
    * Render dots
-   * @returns {function}
+   * @returns {React.Element}
    */
-  renderDots = () => {
-    const { renderDots, ...restProps } = this.props
+  renderDots () {
+    const { renderDots, children, perPage, ...restProps } = this.props
+    const { currentSlide } = this.state
+
+    const slides = chunk(children, perPage)
 
     return renderDots({
       ...restProps,
+      slides: slides,
+      perPage: perPage,
+      value: currentSlide % slides.length,
       onChange: this.handlerDot
     })
   }
 
-  render () {
-    const { arrows, className, dots } = this.props
+  renderArrows () {
+    const clsName = buildClassName([ moduleName, 'arrows' ])
+    const prevArrowClsName = buildClassName([ moduleName, 'arrow' ], null, [ 'prev' ])
+    const nextArrowClsName = buildClassName([ moduleName, 'arrow' ], null, [ 'next' ])
 
     return (
-      <div className={buildClassName(moduleName, className)}>
-        {this.renderWrapper()}
-        {dots && this.renderDots()}
-        {arrows && <div className={buildClassName([moduleName, 'arrows'])}>
-          <div className={buildClassName([moduleName, 'arrows--prev'])} onClick={this.handlerPrev}>
-            <Icon name='chevron_left' />
+      <div className={clsName}>
+        <button className={prevArrowClsName} onClick={this.handlerPrev}>
+          <Icon name='chevron_left' />
+        </button>
+        <button className={nextArrowClsName} onClick={this.handlerNext}>
+          <Icon name='chevron_right' />
+        </button>
+      </div>
+    )
+  }
+
+  render () {
+    const { arrows, className, dots, perPage } = this.props
+    const { currentSlide, transitionTime } = this.state
+
+    const clsName = buildClassName(moduleName, className)
+    const contentClsName = buildClassName([ moduleName, 'content' ])
+    const wrapperClsName = buildClassName([ moduleName, 'wrapper' ])
+    const innerClsName = buildClassName([ moduleName, 'inner' ])
+
+    const _dots = dots ? this.renderDots() : null
+    const _arrows = arrows ? this.renderArrows() : null
+
+    const wrapperProps = {
+      ref: this.setRef,
+      style: {
+        transform: `translateX(-${currentSlide * 100 / perPage}%)`,
+        transitionDuration: `${transitionTime}ms`
+      }
+    }
+
+    return (
+      <div className={clsName}>
+        <div className={contentClsName}>
+          {_arrows}
+
+          <div className={wrapperClsName} {...wrapperProps}>
+            <div className={innerClsName}>
+              {this.renderSlides()}
+            </div>
           </div>
-          <div className={buildClassName([moduleName, 'arrows--next'])} onClick={this.handlerNext}>
-            <Icon name='chevron_right' />
-          </div>
-        </div>}
+        </div>
+
+        {_dots}
       </div>
     )
   }
