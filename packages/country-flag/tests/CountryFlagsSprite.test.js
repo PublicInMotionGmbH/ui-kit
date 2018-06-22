@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import CountryFlagsSprite from '../src/CountryFlagsSprite'
+import CountryFlagsProvider from '../src/CountryFlagsSprite'
 
 describe('<CountryFlagsSprite />', () => {
   it('should attach to body and detach later', () => {
@@ -10,7 +10,7 @@ describe('<CountryFlagsSprite />', () => {
 
     const previousChildren = children.length
 
-    const wrapper = mount(<CountryFlagsSprite />)
+    const wrapper = mount(<CountryFlagsProvider />)
 
     expect(children.length).toBe(previousChildren + 1)
 
@@ -25,8 +25,8 @@ describe('<CountryFlagsSprite />', () => {
 
     const previousChildren = children.length
 
-    const wrapper = mount(<CountryFlagsSprite />)
-    const wrapper2 = mount(<CountryFlagsSprite />)
+    const wrapper = mount(<CountryFlagsProvider />)
+    const wrapper2 = mount(<CountryFlagsProvider />)
 
     expect(children.length).toBe(previousChildren + 1)
 
@@ -42,8 +42,8 @@ describe('<CountryFlagsSprite />', () => {
 
     const previousChildren = children.length
 
-    const wrapper = mount(<CountryFlagsSprite />)
-    const wrapper2 = mount(<CountryFlagsSprite />)
+    const wrapper = mount(<CountryFlagsProvider />)
+    const wrapper2 = mount(<CountryFlagsProvider />)
 
     wrapper.unmount()
 
@@ -59,7 +59,7 @@ describe('<CountryFlagsSprite />', () => {
 
     const previousSvgs = body.querySelectorAll('svg').length
 
-    const wrapper = mount(<CountryFlagsSprite />)
+    const wrapper = mount(<CountryFlagsProvider />)
 
     const nextSvgs = body.querySelectorAll('svg').length
 
