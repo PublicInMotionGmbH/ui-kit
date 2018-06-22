@@ -18,6 +18,7 @@ module.exports = wallaby => {
       'packages/shared/story/*.js',
       'packages/*/config.js',
       'packages/*/src/**/*.js',
+      'packages/*/propTypes/**/*.js',
       'packages/*/sprites/*.js',
       'packages/*/utils/**/*.js',
       'packages/*/tests/utils/**/*.js',
