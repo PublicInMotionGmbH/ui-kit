@@ -1,7 +1,23 @@
 @import '~@talixo/shared/styles/config'
 
-$color-active: $color-talixo-gray !default
-$color-inactive: $color-talixo-lighter-gray !default
+$data-table-color-active: $color-talixo-gray !default
+$data-table-color-inactive: $color-talixo-lighter-gray !default
 
-$sort-arrow-transition: all ease-out .2s
-$sort-arrow-margin: dp(-.75) dp(.25)
+$data-table-row-text-color: $color-black !default
+$data-table-row-background-color: #fff !default
+$data-table-row-background-hover-color: #f9f9f9 !default
+
+$data-table-even-row-text-color: $color-black !default
+$data-table-even-row-background-color: $color-tab-inactive !default
+$data-table-even-row-background-hover-color: darken($color-tab-inactive, 2%) !default
+
+$data-table-collapse-text-color: $data-table-row-text-color !default
+$data-table-collapse-background-color: $data-table-row-background-color !default
+$data-table-collapse-background-hover-color: $data-table-row-background-hover-color !default
+
+$data-table-even-collapse-text-color: $data-table-even-row-text-color !default
+$data-table-even-collapse-background-color: $data-table-even-row-background-color !default
+$data-table-even-collapse-background-hover-color: $data-table-even-row-background-hover-color !default
+
+$data-table-transition: ease-out .2s
+$data-table-sort-arrow-margin: dp(-.75) dp(.25)
