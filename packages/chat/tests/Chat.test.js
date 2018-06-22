@@ -27,32 +27,43 @@ const messages = [
   {
     time: 1528104696738,
     message: 'This is message',
-    name: 'John',
-    id: '2'
+    user: {
+      name: 'John',
+      id: '2'
+    }
   },
   {
     time: 1528104730633,
     message: 'This is reply',
-    name: 'Tom',
-    id: '3'
+    user: {
+      name: 'Tom',
+      id: '3'
+    }
   },
   {
     time: 1528104730633,
     message: 'This is reply',
-    name: 'Me',
-    id: '1'
+    user: {
+      name: 'Me',
+      id: '1'
+    }
   }
 ]
 
+const user = {
+  name: 'user',
+  id: '1'
+}
+
 describe('<Chat />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat user={user} messages={messages} />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('renders classNames correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
+    const wrapper = shallow(<Chat user={user} messages={messages} />)
 
     expect(wrapper.find(`.${name}`).length).toBe(1)
     expect(wrapper.find(`.${name}__messages`).length).toBe(1)
@@ -62,36 +73,36 @@ describe('<Chat />', () => {
   })
 
   it('renders user-typing className correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '1', status: true}]
+    const wrapper = shallow(<Chat user={user} messages={messages} />)
+    wrapper.setProps({typingUsers:
+      [{user: user, status: true}]
     })
 
     expect(wrapper.find(`.${name}__user-typing-container`).length).toBe(1)
   })
 
   it('renders renderMessages type chat correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
+    const wrapper = shallow(<Chat user={user} messages={messages} />)
 
     expect(wrapper.find(Message).at(0).props().className).toMatch(`${name}__message--chat`)
   })
 
   it('renders renderMessages type comments correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
+    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
 
     expect(wrapper.find(Message).at(0).props().className).toMatch(`${name}__message--comments`)
   })
 
   it('renders placeholder correctly', () => {
     const placeholder = 'custom placeholder'
-    const wrapper = shallow(<Chat id='1' placeholder={placeholder} />)
+    const wrapper = shallow(<Chat user={user} placeholder={placeholder} />)
     const input = wrapper.find('textarea')
 
     expect(input.props().placeholder).toEqual(placeholder)
   })
 
   it('sets margin-left correctly', () => {
-    const wrapper = shallow(<Chat id='1' messages={messages} />)
+    const wrapper = shallow(<Chat user={user} messages={messages} />)
 
     expect(wrapper.find(Message).get(0).props.style.marginLeft).toBe(false)
     expect(wrapper.find(Message).get(1).props.style.marginLeft).toBe(false)
@@ -99,37 +110,37 @@ describe('<Chat />', () => {
   })
 
   it('renders one typing user correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '2', status: true}]
+    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
+    wrapper.setProps({typingUsers:
+      [{user: { name: 'John', id: '2' }, status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
   })
 
   it('renders two typing users correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '2', status: true},
-        {name: 'Kenny', id: '3', status: true}]
+    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
+    wrapper.setProps({typingUsers:
+      [{user: { name: 'John', id: '2' }, status: true},
+        {user: { name: 'Kenny', id: '3' }, status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
   })
 
   it('renders more then two typing users correctly', () => {
-    const wrapper = shallow(<Chat id='1' type='comments' messages={messages} />)
-    wrapper.setProps({usersTyping:
-      [{name: 'John', id: '2', status: true},
-        {name: 'Kenny', id: '3', status: true},
-        {name: 'Benny', id: '4', status: true}]
+    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
+    wrapper.setProps({typingUsers:
+      [{user: { name: 'John', id: '2' }, status: true},
+        {user: { name: 'Kenny', id: '3' }, status: true},
+        {user: { name: 'Benny', id: '4' }, status: true}]
     })
 
     expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
   })
 
   it('sets messages ref correctly', () => {
-    const wrapper = mount(<Chat id='1' messages={messages} />)
+    const wrapper = mount(<Chat user={user} messages={messages} />)
     const messagesWrapper = wrapper.find(`.${name}__messages`)
     const refMessagesWrapper = wrapper.instance()._messages
 
@@ -138,7 +149,7 @@ describe('<Chat />', () => {
   })
 
   it('sets messages ref correctly', () => {
-    const wrapper = mount(<Chat id='1' placeholder='hello' messages={messages} />)
+    const wrapper = mount(<Chat user={user} placeholder='hello' messages={messages} />)
     const refInput = wrapper.instance()._input
 
     expect(refInput.placeholder).toEqual('hello')
@@ -147,19 +158,19 @@ describe('<Chat />', () => {
 })
 
 describe('componentDidUpdate', () => {
-  it('fires addTypingUser when state.typingStatus is updated', () => {
-    let user
-    const spy = jest.fn().mockImplementation(n => { user = n })
-    const wrapper = shallow(<Chat messages={messages} addTypingUser={spy} id='1' />)
+  it('triggers onTyping when state.typingStatus is updated', () => {
+    let spiedUser
+    const spy = jest.fn().mockImplementation(n => { spiedUser = n })
+    const wrapper = shallow(<Chat messages={messages} onTyping={spy} user={user} />)
 
     wrapper.setState({ typingStatus: true })
 
     expect(spy).toHaveBeenCalledTimes(1)
-    expect(user.status).toEqual(true)
+    expect(spiedUser.status).toEqual(true)
   })
 
-  it('fires scrollToBottom when new messages are provided', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+  it('triggers scrollToBottom when new messages are provided', () => {
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const scrollToBottom = jest.spyOn(wrapper.instance(), 'scrollToBottom').mockImplementation(n => n)
 
     wrapper.setProps({ messages: messages.concat(messages[0]) })
@@ -167,8 +178,8 @@ describe('componentDidUpdate', () => {
     expect(scrollToBottom).toHaveBeenCalledTimes(1)
   })
 
-  it('scrollToBottom fires scrollTo', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+  it('scrollToBottom triggers scrollTo', () => {
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const element = {
       scrollTo: jest.fn()
     }
@@ -185,7 +196,7 @@ describe('handleInputChange', () => {
   })
 
   it('changes state.typingStatus to true', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('textarea')
     const status = wrapper.state().typingStatus
 
@@ -195,7 +206,7 @@ describe('handleInputChange', () => {
   })
 
   it('changes state.typingStatus to false after 2000ms', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('textarea')
     const status = wrapper.state().typingStatus
 
@@ -211,7 +222,7 @@ describe('handleInputChange', () => {
   })
 
   it('clears timeout if state.typingStatus is true', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('textarea')
 
     wrapper.setState({ typingStatus: true })
@@ -225,7 +236,7 @@ describe('handleSubmit', () => {
   let event, form, message, onSubmit, wrapper
   beforeEach(() => {
     onSubmit = jest.fn().mockImplementation(n => { message = n })
-    wrapper = shallow(<Chat messages={messages} onSubmit={onSubmit} id='1' />)
+    wrapper = shallow(<Chat messages={messages} onSubmit={onSubmit} user={user} />)
     form = wrapper.find('form')
     event = {
       preventDefault: () => {},
@@ -257,16 +268,14 @@ describe('handleSubmit', () => {
 
   it('builds and submits message correctly', () => {
     mock(1483228800000)
-    const name = 'John'
-    wrapper.setProps({ name })
+    wrapper.setProps({ user })
     wrapper.setState({ inputValue: 'a' })
     form.simulate('submit', event)
 
     const expectedMessage = {
       time: 1483228800000,
       message: 'a',
-      name: name,
-      id: '1'
+      user: user
     }
 
     expect(onSubmit).toHaveBeenCalledTimes(1)

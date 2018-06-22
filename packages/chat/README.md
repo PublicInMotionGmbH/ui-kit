@@ -32,12 +32,12 @@ additionalButton      | node          | n/a                  | Additional button
 addTypingUser         | func          | n/a                  | Called when the user is typing.
 additionalInformation | node          | n/a                  | Information message.
 className             | string        | n/a                  | Additional class name.
-messages              | Messages[]    | `[]`                 | Array of messages.
+messages              | Message[]     | `[]`                 | Array of messages.
 messageRenderer       | func          | `message => message` | Message renderer.
 name                  | string        | `'user'`             | User name.
 onSubmit              | func          | n/a                  | Handler for onSubmit event.
 id                    | string        | Required             | User id.
-usersTyping           | UsersTyping[] | `[]`                 | Typing users.
+typingUsers           | TypingUser[]  | `[]`                 | Typing users.
 placeholder           | string        | `'reply'`            | Reply input placeholder.
 type                  | Type          | `'chat'`             | Message type.
 
@@ -49,7 +49,7 @@ Type      | 'chat', 'comments'
 
 ### Property shapes
 
-#### Messages
+#### Message
 
 Property name | Type      | Required | Default       | Description
 --------------|-----------|----------|:-------------:|------------------------------------------------
@@ -58,7 +58,7 @@ id            | string    | no       | n/a           | User id.
 message       | node      | no       | n/a           | Message content.
 time          | number    | no       | n/a           | Message time stamp.
 
-#### UsersTyping
+#### TypingUser
 
 Property name | Type      | Required | Default       | Description
 --------------|-----------|----------|:-------------:|------------------------------------------------
