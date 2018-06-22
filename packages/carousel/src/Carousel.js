@@ -100,7 +100,7 @@ class Carousel extends React.PureComponent {
 
     if (currentSlide >= slides) {
       this.setState({
-        currentSlide: slides - 1
+        currentSlide: props.children.length - 1
       })
     }
 
@@ -142,7 +142,7 @@ class Carousel extends React.PureComponent {
     const { value, onChange, children } = this.props
     const isImmediate = value == null || force
 
-    if (onChange) {
+    if (onChange && !force) {
       onChange(index, type)
     }
 
