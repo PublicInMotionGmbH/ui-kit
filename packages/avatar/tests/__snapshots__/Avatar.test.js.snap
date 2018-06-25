@@ -5,13 +5,14 @@ exports[`<Avatar /> renders children correctly 1`] = `
   className="talixo-avatar"
   style={
     Object {
-      "borderRadius": 0,
-      "fontSize": 24.72,
-      "height": 40,
-      "width": 40,
+      "fontSize": 40,
     }
   }
 >
-  H
+  <span
+    className="talixo-avatar__inner"
+  >
+    H
+  </span>
 </div>
 `;

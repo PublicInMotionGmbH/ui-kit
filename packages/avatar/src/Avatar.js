@@ -93,16 +93,18 @@ class Avatar extends React.Component {
     const { alt, children, defaultText, defaultIcon, icon, imgProps, src, srcSet } = this.props
     const { imageError } = this.state
 
+    const innerClsName = buildClassName([ 'avatar', 'inner' ])
+
     if (children) {
-      return children
+      return <span className={innerClsName}>{children}</span>
     } else if (icon) {
-      return <Icon name={icon} />
+      return <Icon className={innerClsName} name={icon} />
     } else if (imageError && defaultIcon) {
-      return <Icon name={defaultIcon} />
+      return <Icon className={innerClsName} name={defaultIcon} />
     } else if (imageError && defaultText) {
-      return defaultText
+      return <span className={innerClsName}>{defaultText}</span>
     } else if (imageError) {
-      return '?'
+      return <span className={innerClsName}>?</span>
     } else if (src || srcSet) {
       return (
         <img
@@ -135,17 +137,14 @@ class Avatar extends React.Component {
 
     // Build style for wrapper.
     const wrapperStyle = {
-      height: size,
-      width: size,
-      fontSize: size * 0.618,
-      borderRadius: rounded ? '50%' : 0,
+      fontSize: size,
       ...style
     }
 
     // Build avatar component
     return (
       <div
-        className={buildClassName('avatar', className)}
+        className={buildClassName('avatar', className, { rounded })}
         style={wrapperStyle}
         {...passedProps}
       >

@@ -69,32 +69,22 @@ describe('<Avatar />', () => {
     expect(wrapper.state().imageError).toEqual(true)
   })
 
-  it('renders square avatar by default', () => {
+  it('renders font size 40 by default', () => {
     const wrapper = shallow(<Avatar>H</Avatar>)
-    const width = wrapper.props().style.width
-    const height = wrapper.props().style.height
-    const borderRadius = wrapper.props().style.borderRadius
-    expect(width).toEqual(40)
-    expect(height).toEqual(40)
-    expect(borderRadius).toEqual(0)
+    const fontSize = wrapper.props().style.fontSize
+    expect(fontSize).toEqual(40)
   })
 
   it('renders rounded avatar correctly', () => {
     const wrapper = shallow(<Avatar rounded>H</Avatar>)
-    const width = wrapper.props().style.width
-    const height = wrapper.props().style.height
-    const borderRadius = wrapper.props().style.borderRadius
-    expect(width).toEqual(40)
-    expect(height).toEqual(40)
-    expect(borderRadius).toEqual('50%')
+    const className = wrapper.props().className
+    expect(className).toMatch(/(^| )talixo-avatar--rounded( |$)/)
   })
 
   it('renders size correctly', () => {
     const wrapper = shallow(<Avatar size={120}>H</Avatar>)
-    const width = wrapper.props().style.width
-    const height = wrapper.props().style.height
-    expect(width).toEqual(120)
-    expect(height).toEqual(120)
+    const fontSize = wrapper.props().style.fontSize
+    expect(fontSize).toEqual(120)
   })
 })
 
