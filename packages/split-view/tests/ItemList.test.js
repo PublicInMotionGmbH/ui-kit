@@ -12,7 +12,7 @@ const defaultProps = createProps()
 const createWrapper = (props = defaultProps) => shallow(<ItemList {...props} />)
 
 describe('<ItemList>', () => {
-  const props = createProps({ openItem: data[0] })
+  const props = createProps({ openedItem: data[0] })
   let wrapper
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('<ItemList>', () => {
   it('should pass active=true prop to opened children', () => {
     const items = wrapper.find('Item')
     items.forEach((node, index) => {
-      if (node.props().item === props.openItem) {
+      if (node.props().item === props.openedItem) {
         expect(node.props().active).toBe(true)
       } else {
         expect(node.props().active).toBe(false)

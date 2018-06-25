@@ -4,9 +4,9 @@ import { buildClassName } from '@talixo/shared'
 
 import Item from '../src/Item'
 import { moduleName } from '../src/config'
-import { dataItem, itemRender } from './fixtures/mocks'
+import { dataItem, renderItems } from './fixtures/mocks'
 
-const itemCls = buildClassName([moduleName, 'list', 'item'])
+const itemCls = buildClassName([moduleName, 'list-item'])
 
 const createProps = (props = {}) => ({
   item: dataItem,
@@ -38,8 +38,8 @@ describe('<Item>', () => {
     })
   })
 
-  describe('when itemRender is passed', () => {
-    const props = createProps({ itemRender })
+  describe('when renderItem is passed', () => {
+    const props = createProps({ renderItems })
     let wrapper
     beforeEach(() => {
       wrapper = createWrapper(props)

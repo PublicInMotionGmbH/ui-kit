@@ -35,13 +35,13 @@ describe('<DetailsView>', () => {
 
     it('should change state.openIndex to 1', () => {
       listItem1.simulate('click', {})
-      expect(wrapper.state().openItem).toBe(data[1])
+      expect(wrapper.state().openedItem).toBe(data[1])
     })
 
     it('should change state.openIndex to last data index', () => {
       const index = data.length - 1
       listItemLast.simulate('click', {})
-      expect(wrapper.state().openItem).toBe(data[index])
+      expect(wrapper.state().openedItem).toBe(data[index])
     })
 
     it('should invoke onSelect function from props', () => {
@@ -54,7 +54,7 @@ describe('<DetailsView>', () => {
       const index = data.length - 1
       props.onSelect.mockReset()
       listItemLast.simulate('click', {})
-      expect(props.onSelect).toHaveBeenCalledWith(data[index])
+      expect(props.onSelect).toHaveBeenCalledWith(data[index], expect.anything())
     })
   })
 
@@ -77,8 +77,8 @@ describe('<DetailsView>', () => {
 
   describe('when openIndex is controlled by props', () => {
     const openIndex = data.length - 2
-    const openItem = data[openIndex]
-    const props = createProps({ openItem })
+    const openedItem = data[openIndex]
+    const props = createProps({ openedItem })
     let wrapper
 
     beforeEach(() => {
@@ -86,13 +86,13 @@ describe('<DetailsView>', () => {
     })
 
     it('should set open index in state to give value when component is rendered', () => {
-      expect(wrapper.state().openItem).toBe(openItem)
+      expect(wrapper.state().openedItem).toBe(openedItem)
     })
 
     it('should update openIndex in state', () => {
       const newItem = data[1]
-      wrapper.setProps({ openItem: newItem })
-      expect(wrapper.state().openItem).toBe(newItem)
+      wrapper.setProps({ openedItem: newItem })
+      expect(wrapper.state().openedItem).toBe(newItem)
     })
 
     it('should not update openIndex when list item is clicked', () => {
@@ -100,7 +100,7 @@ describe('<DetailsView>', () => {
       listItemLast.simulate('click')
       listItemLast.simulate('click')
       listItemLast.simulate('click')
-      expect(wrapper.state().openItem).toBe(openItem)
+      expect(wrapper.state().openedItem).toBe(openedItem)
     })
   })
 })

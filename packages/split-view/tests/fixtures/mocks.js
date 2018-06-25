@@ -10,13 +10,13 @@ export const data = [
 export const dataItem = { name: 'Josh Smith I', value: 0, title: 'Title 1', subtitle: 'Subtitle 1' }
 
 // Render functions
-export function itemRender (item) {
+export function renderItems (item) {
   return (
     <span className='test-item'>{item.name}</span>
   )
 }
 
-export function detailsRender (item) {
+export function renderDetails (item) {
   return (
     <div className='test-detail'>
       <div>Name: {item.name}</div>

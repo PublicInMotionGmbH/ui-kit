@@ -14,8 +14,8 @@ exports[`<ItemList> should render properly 1`] = `
         "value": 0,
       }
     }
-    itemRender={[Function]}
     key="0"
+    renderItems={[Function]}
   />
   <Item
     active={false}
@@ -27,8 +27,8 @@ exports[`<ItemList> should render properly 1`] = `
         "value": 11,
       }
     }
-    itemRender={[Function]}
     key="1"
+    renderItems={[Function]}
   />
   <Item
     active={false}
@@ -40,8 +40,8 @@ exports[`<ItemList> should render properly 1`] = `
         "value": 22,
       }
     }
-    itemRender={[Function]}
     key="2"
+    renderItems={[Function]}
   />
   <Item
     active={false}
@@ -53,8 +53,8 @@ exports[`<ItemList> should render properly 1`] = `
         "value": 33,
       }
     }
-    itemRender={[Function]}
     key="3"
+    renderItems={[Function]}
   />
   <Item
     active={false}
@@ -66,8 +66,8 @@ exports[`<ItemList> should render properly 1`] = `
         "value": 44,
       }
     }
-    itemRender={[Function]}
     key="4"
+    renderItems={[Function]}
   />
 </div>
 `;

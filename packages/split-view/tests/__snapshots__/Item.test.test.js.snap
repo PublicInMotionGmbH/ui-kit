@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Item> when itemRender is passed should render children properly 1`] = `
+exports[`<Item> when renderItem is passed should render children properly 1`] = `
 <div
-  className="talixo-split-view__list__item"
+  className="talixo-split-view__list-item"
   onClick={[Function]}
 >
   <span
@@ -15,7 +15,7 @@ exports[`<Item> when itemRender is passed should render children properly 1`] = 
 
 exports[`<Item> when rendered should render properly 1`] = `
 <div
-  className="talixo-split-view__list__item"
+  className="talixo-split-view__list-item"
   onClick={[Function]}
 >
   <div>

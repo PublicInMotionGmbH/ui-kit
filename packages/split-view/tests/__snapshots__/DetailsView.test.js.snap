@@ -1,69 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DetailsView> when detailsRender is passed should render children properly 1`] = `
-<React.Fragment>
+exports[`<DetailsView> when renderDetails is passed should render children properly 1`] = `
+<div
+  className="talixo-split-view__details"
+>
   <div
-    className="talixo-split-view__details"
+    className="test-detail"
   >
-    <div
-      className="test-detail"
-    >
-      <div>
-        Name: 
-        Josh Smith I
-      </div>
-      <div>
-        Value: 
-        0
-      </div>
-      <div>
-        Title: 
-        Title 1
-      </div>
-      <div>
-        Subtitle: 
-        Subtitle 1
-      </div>
+    <div>
+      Name: 
+      Josh Smith I
+    </div>
+    <div>
+      Value: 
+      0
+    </div>
+    <div>
+      Title: 
+      Title 1
+    </div>
+    <div>
+      Subtitle: 
+      Subtitle 1
     </div>
   </div>
-</React.Fragment>
+</div>
 `;
 
 exports[`<DetailsView> when rendered should render properly 1`] = `
-<React.Fragment>
-  <div
-    className="talixo-split-view__details"
-  >
-    <div>
-      <div
-        key="name"
-      >
-        Name
-        : 
-        Josh Smith I
-      </div>
-      <div
-        key="value"
-      >
-        Value
-        : 
-        0
-      </div>
-      <div
-        key="title"
-      >
-        Title
-        : 
-        Title 1
-      </div>
-      <div
-        key="subtitle"
-      >
-        Subtitle
-        : 
-        Subtitle 1
-      </div>
+<div
+  className="talixo-split-view__details"
+>
+  <div>
+    <div
+      key="name"
+    >
+      Name
+      : 
+      Josh Smith I
+    </div>
+    <div
+      key="value"
+    >
+      Value
+      : 
+      0
+    </div>
+    <div
+      key="title"
+    >
+      Title
+      : 
+      Title 1
+    </div>
+    <div
+      key="subtitle"
+    >
+      Subtitle
+      : 
+      Subtitle 1
     </div>
   </div>
-</React.Fragment>
+</div>
 `;

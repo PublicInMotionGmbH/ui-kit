@@ -4,7 +4,7 @@ import { buildClassName } from '@talixo/shared'
 
 import DetailsView from '../src/DetailsView'
 import { moduleName } from '../src/config'
-import { dataItem, detailsRender } from './fixtures/mocks'
+import { dataItem, renderDetails } from './fixtures/mocks'
 
 const detailsCls = buildClassName([moduleName, 'details'])
 
@@ -16,7 +16,7 @@ const createWrapper = (props = defaultProps) => shallow(<DetailsView {...props} 
 
 describe('<DetailsView>', () => {
   describe('when rendered', () => {
-    const props = createProps({ item: dataItem })
+    const props = createProps({ openedItem: dataItem })
     let wrapper
 
     beforeEach(() => {
@@ -31,8 +31,8 @@ describe('<DetailsView>', () => {
     })
   })
 
-  describe('when detailsRender is passed', () => {
-    const props = createProps({ item: dataItem, detailsRender })
+  describe('when renderDetails is passed', () => {
+    const props = createProps({ openedItem: dataItem, renderDetails })
     let wrapper
     beforeEach(() => {
       wrapper = createWrapper(props)

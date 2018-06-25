@@ -110,7 +110,7 @@ class SplitView extends React.Component {
         </div>
         <DetailsView
           renderDetails={renderDetails}
-          item={openedItem}
+          openedItem={openedItem}
         />
       </div>
     )
