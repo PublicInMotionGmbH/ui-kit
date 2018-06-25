@@ -35,7 +35,7 @@ const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 function App () {
   return (
-    <CountryFlagsProvider>
+    <CountryFlagsProvider url={spriteUrl}>
       <div className='app'>
         <header className='header'>
           Language: <CountryFlag code='cz' /> Czech

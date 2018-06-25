@@ -77,7 +77,11 @@ class CountryFlagsProvider extends React.PureComponent {
     this.unload()
 
     this.loadedUrl = url
-    this.abortRequest = load(url, (err, content) => this.attach(content))
+    this.abortRequest = load(url, (err, content) => {
+      if (!err) {
+        this.attach(content)
+      }
+    })
   }
 
   attach (svg) {
