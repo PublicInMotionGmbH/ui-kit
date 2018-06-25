@@ -3,7 +3,7 @@
 exports[`<Button /> renders children correctly 1`] = `
 <button
   className="talixo-button"
-  disabled={false}
+  type="button"
 >
   Button
 </button>

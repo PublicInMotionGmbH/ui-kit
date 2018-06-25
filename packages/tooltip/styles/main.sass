@@ -1,2 +1,128 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('tooltip')
+  box-sizing: border-box
+  position: absolute
+  display: inline-block
+  padding: $tooltip-padding-vertical $tooltip-padding-horizontal
+  background-color: $tooltip-background-color
+  color: $tooltip-text-color
+  border: $tooltip-border-width solid $tooltip-border-color
+  border-radius: $tooltip-border-radius
+  font-size: $tooltip-font-size
+  line-height: $tooltip-line-height
+  top: 0
+  left: 0
+  z-index: 1000
+
+  @if $tooltip-box-shadow
+    box-shadow: 0 dp(0.5) dp(1) dp(0.25) $tooltip-box-shadow-color
+
+  &:before
+    display: none
+    position: absolute
+    content: ''
+    width: 0
+    height: 0
+    border-style: solid
+    z-index: -1
+
+  &:after
+    display: none
+    position: absolute
+    content: ''
+    width: 0
+    height: 0
+    border-style: solid
+    z-index: -1
+
+  &__fade-enter
+    opacity: 0.01
+
+  &__fade-enter-active
+    opacity: 1
+
+  &__fade-exit
+    opacity: 1
+
+  &__fade-exit-active
+    opacity: 0.01
+
+  $t-height: $tooltip-arrow-height
+  $t-width: $tooltip-arrow-width / 2
+  $t-minus-outer-height: calc(#{-1 * $t-height} - #{$tooltip-border-width * 2})
+  $t-outer-height: calc(#{$t-height} + #{$tooltip-border-width * 2})
+  $t-outer-width: calc(#{$t-width} + #{$tooltip-border-width})
+
+  &--right
+    transform: translateY(-50%) translateX(#{$t-outer-height})
+
+    &:before
+      top: 50%
+      right: 100%
+      border-width: $t-outer-width $t-outer-height $t-outer-width 0
+      border-color: transparent $tooltip-border-color transparent transparent
+      transform: translateY(-50%)
+
+    &:after
+      top: 50%
+      right: 100%
+      border-width: $t-width $t-height $t-width 0
+      border-color: transparent $tooltip-background-color transparent transparent
+      transform: translateY(-50%)
+
+  &--left
+    transform: translateY(-50%) translateX(-100%) translateX($t-minus-outer-height)
+
+    &:before
+      top: 50%
+      left: 100%
+      border-width: #{$t-outer-width} 0 #{$t-outer-width} #{$t-outer-height}
+      border-color: transparent transparent transparent $tooltip-border-color
+      transform: translateY(-50%)
+
+    &:after
+      top: 50%
+      left: 100%
+      border-width: #{$t-width} 0 #{$t-width} #{$t-height}
+      border-color: transparent transparent transparent $tooltip-background-color
+      transform: translateY(-50%)
+
+  &--bottom
+    transform: translateY($t-outer-height) translateX(-50%)
+
+    &:before
+      bottom: 100%
+      left: 50%
+      border-width: 0 #{$t-outer-width} #{$t-outer-height} #{$t-outer-width}
+      border-color: transparent transparent $tooltip-border-color transparent
+      transform: translateX(-50%)
+
+    &:after
+      bottom: 100%
+      left: 50%
+      border-width: 0 #{$t-width} #{$t-height} #{$t-width}
+      border-color: transparent transparent $tooltip-background-color transparent
+      transform: translateX(-50%)
+
+  &--top
+    transform: translateY(-100%) translateY($t-minus-outer-height) translateX(-50%)
+
+    &:before
+      top: 100%
+      left: 50%
+      border-width: #{$t-outer-height} #{$t-outer-width} 0 #{$t-outer-width}
+      border-color: $tooltip-border-color transparent transparent transparent
+      transform: translateX(-50%)
+
+    &:after
+      top: 100%
+      left: 50%
+      border-width: #{$t-height} #{$t-width} 0 #{$t-width}
+      border-color: $tooltip-background-color transparent transparent transparent
+      transform: translateX(-50%)
+
+  &--arrow
+    &:before,
+    &:after
+      display: inline-block

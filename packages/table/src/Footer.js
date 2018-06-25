@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Cells which should be included in table footer */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Table Footer.
  *
@@ -20,9 +25,6 @@ function Footer (props) {
   )
 }
 
-Footer.propTypes = {
-  /** Cells which should be included in table footer */
-  children: PropTypes.node
-}
+Footer.propTypes = propTypes
 
 export default Footer

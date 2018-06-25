@@ -3,47 +3,57 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-/**
- * Component which represents button.
- *
- * @param {object} props
- * @param {string} [props.className]
- * @param {*} [props.color]
- * @param {*} [props.size]
- * @param {*} [props.variant]
- * @returns {React.Element}
- */
-function Button (props) {
-  const { children, className, color, size, variant, ...passedProps } = props
-
-  const clsName = buildClassName('button', className, [ color, size, variant ])
-
-  return (
-    <button className={clsName} {...passedProps}>
-      {children}
-    </button>
-  )
-}
-
-Button.propTypes = {
+const propTypes = {
   /** All nodes inside button */
   children: PropTypes.node,
 
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Button color */
-  color: PropTypes.string,
+  /** Should this button have `submit` type? */
+  submit: PropTypes.bool,
 
-  /** Button size */
-  size: PropTypes.string,
+  /** Button styling type */
+  type: PropTypes.oneOf([ 'link', 'primary', 'secondary', 'tertiary', 'success', 'info', 'warning', 'error' ]),
 
-  /** Button variant */
-  variant: PropTypes.string
+  /** Is this button a ghost-button (with transparent background)? */
+  ghost: PropTypes.bool,
+
+  /** Should this button be small? */
+  small: PropTypes.bool,
+
+  /** Should use full 100% width? */
+  fluid: PropTypes.bool
 }
 
-Button.defaultProps = {
-  disabled: false
+const defaultProps = {
+  ghost: false,
+  small: false,
+  fluid: false
 }
+
+/**
+ * Component which represents button.
+ *
+ * @param {object} props
+ * @param {string} [props.className]
+ * @param {*} [props.type]
+ * @param {*} [props.size]
+ * @returns {React.Element}
+ */
+function Button (props) {
+  const { children, className, type, small, fluid, submit, ghost, ...passedProps } = props
+
+  const clsName = buildClassName('button', className, [ type ], { ghost, small, fluid })
+
+  return (
+    <button className={clsName} type={submit ? 'submit' : 'button'} {...passedProps}>
+      {children}
+    </button>
+  )
+}
+
+Button.propTypes = propTypes
+Button.defaultProps = defaultProps
 
 export default Button

@@ -5,6 +5,8 @@ exports[`<Switcher /> renders children correctly 1`] = `
   className="talixo-switcher"
 >
   <input
+    checked={false}
+    onChange={[Function]}
     type="checkbox"
   />
   <span>

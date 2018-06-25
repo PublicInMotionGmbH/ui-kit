@@ -3,14 +3,11 @@
 exports[`<Group /> renders correctly 1`] = `
 <Segment
   className="masonry"
-  size={12}
 >
   <Group
     spaced={false}
   >
-    <Segment
-      size={12}
-    >
+    <Segment>
       12
     </Segment>
   </Group>
@@ -20,7 +17,6 @@ exports[`<Group /> renders correctly 1`] = `
 exports[`<Group /> turns into Segment properly 1`] = `
 <Segment
   className="__"
-  size={12}
 >
   <Masonry
     size={3}
@@ -46,7 +42,6 @@ exports[`<Group /> turns into Segment properly 1`] = `
 exports[`<Group /> turns into Segment properly with any props 1`] = `
 <Segment
   className="__"
-  size={12}
 >
   <Masonry
     large={3}
@@ -57,9 +52,7 @@ exports[`<Group /> turns into Segment properly with any props 1`] = `
     <Group
       spaced={false}
     >
-      <Segment
-        size={12}
-      >
+      <Segment>
         12/6/3
       </Segment>
     </Group>
@@ -73,9 +66,7 @@ exports[`<Group /> turns into Segment properly with any props 1`] = `
     <Group
       spaced={false}
     >
-      <Segment
-        size={12}
-      >
+      <Segment>
         12/6/9
       </Segment>
     </Group>

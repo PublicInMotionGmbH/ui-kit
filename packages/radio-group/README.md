@@ -31,6 +31,7 @@ allowCustom       | boolean           | no        | n/a     | Enable custom opti
 className         | string            | no        | n/a     | Additional class name passed to wrapper.
 customComponent   | string            | no        | n/a     | Component which will be displayed as custom option.
 customPlaceholder | string            | no        | n/a     | Placeholder of default custom options input.
+error             | boolean           | `false`   | n/a     | Does it have any error
 name              | string            | yes       | n/a     | Name of radio group.
 options           | Option[]          | no        | n/a     | Array of objects which represent options.
 size              | string            | no        | n/a     | Checkbox label size ('small' or 'large').
@@ -41,7 +42,7 @@ vertical          | boolean           | no        | n/a     | Idicates if option
 
 Property name | Type              | Required  | Default | Description                    
 --------------|-------------------|-----------|:-------:|--------------------------------
-disabled      | boolean           | no        | n/a     | Idicates if option should be disabled.
+disabled      | boolean           | no        | `false` | Idicates if option should be disabled.
 label         | string            | yes       | n/a     | Option label.
 value         | string            | yes       | n/a     | Value of the option.
 

@@ -3,16 +3,11 @@
 exports[`<Group /> handles \`spaced \`prop\` 1`] = `
 <Segment
   className="__ __--spaced"
-  size={12}
 >
-  <Segment
-    size={12}
-  >
+  <Segment>
     3
   </Segment>
-  <Segment
-    size={12}
-  >
+  <Segment>
     9
   </Segment>
 </Segment>
@@ -21,11 +16,8 @@ exports[`<Group /> handles \`spaced \`prop\` 1`] = `
 exports[`<Group /> renders correctly 1`] = `
 <Segment
   className="__"
-  size={12}
 >
-  <Segment
-    size={12}
-  >
+  <Segment>
     12
   </Segment>
 </Segment>
@@ -34,15 +26,12 @@ exports[`<Group /> renders correctly 1`] = `
 exports[`<Group /> turns into Segment properly 1`] = `
 <Segment
   className="__"
-  size={12}
 >
   <Group
     size={3}
     spaced={false}
   >
-    <Segment
-      size={12}
-    >
+    <Segment>
       3
     </Segment>
   </Group>
@@ -50,9 +39,7 @@ exports[`<Group /> turns into Segment properly 1`] = `
     size={9}
     spaced={false}
   >
-    <Segment
-      size={12}
-    >
+    <Segment>
       9
     </Segment>
   </Group>
@@ -62,7 +49,6 @@ exports[`<Group /> turns into Segment properly 1`] = `
 exports[`<Group /> turns into Segment properly with any props 1`] = `
 <Segment
   className="__"
-  size={12}
 >
   <Group
     large={3}
@@ -71,9 +57,7 @@ exports[`<Group /> turns into Segment properly with any props 1`] = `
     spaced={false}
     xlarge={3}
   >
-    <Segment
-      size={12}
-    >
+    <Segment>
       12/6/3
     </Segment>
   </Group>
@@ -84,9 +68,7 @@ exports[`<Group /> turns into Segment properly with any props 1`] = `
     spaced={false}
     xlarge={9}
   >
-    <Segment
-      size={12}
-    >
+    <Segment>
       12/6/9
     </Segment>
   </Group>

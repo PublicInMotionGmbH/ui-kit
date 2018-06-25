@@ -1,6 +1,22 @@
 @import '~@talixo/shared/styles/config'
 
-$color-talixo-light-gray-hover: #8298ad
+$slider-border-width: $x-border-width !default
 
-$slider-thumb-size: dp(2.5)
-$slider-thumb-size-hover: dp(3.125)
+$slider-track-size: 3px !default
+
+$slider-thumb-background-color: $x-color-primary !default
+$slider-thumb-size: $x-input-text-size * $x-line-height-base !default
+
+$slider-thumb-active-size: $slider-thumb-size * 1.125 !default
+$slider-thumb-active-shadow: true !default
+$slider-thumb-active-shadow-first: $x-color-background !default
+$slider-thumb-active-shadow-second: $slider-thumb-background-color !default
+
+$slider-track-background-color: $slider-thumb-background-color !default
+$slider-track-background-color-upper: $x-color-calmer !default
+
+$slider-track-border-radius: $x-border-radius !default
+
+$slider-value-text-color: $x-color-text !default
+$slider-value-font-size: $x-font-size-small !default
+$slider-value-font-weight: $x-weight-semibold !default

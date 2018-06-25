@@ -7,6 +7,29 @@ import { buildClassName } from '@talixo/shared'
 
 import { Location } from './PropTypes'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Your Api Key from GoogleMaps */
+  apiKey: PropTypes.string.isRequired,
+
+  /** Zoom */
+  zoom: PropTypes.number,
+
+  /** Map center */
+  center: Location,
+
+  /** Is map interactive? */
+  interactive: PropTypes.bool
+}
+
+const defaultProps = {
+  zoom: 6,
+  interactive: true,
+  center: { lat: 52.5169974, lng: 13.2882608 }
+}
+
 /**
  * Map properties into understandable by react-google-maps
  *
@@ -76,27 +99,7 @@ const Map = decorate(props => {
 
 Map.displayName = 'Map'
 
-Map.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Your Api Key from GoogleMaps */
-  apiKey: PropTypes.string.isRequired,
-
-  /** Zoom */
-  zoom: PropTypes.number,
-
-  /** Map center */
-  center: Location,
-
-  /** Is map interactive? */
-  interactive: PropTypes.bool
-}
-
-Map.defaultProps = {
-  zoom: 6,
-  interactive: true,
-  center: { lat: 52.5169974, lng: 13.2882608 }
-}
+Map.propTypes = propTypes
+Map.defaultProps = defaultProps
 
 export default Map

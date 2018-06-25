@@ -5,6 +5,24 @@ import { Icon } from '@talixo/icon'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Icon name to represent action */
+  icon: PropTypes.string.isRequired,
+
+  /** Label to represent action */
+  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]).isRequired,
+
+  /** Should be handled carefully? Color change and maybe confirmation. */
+  warn: PropTypes.bool
+}
+
+const defaultProps = {
+  warn: false
+}
+
 /**
  * Component which represents action within table
  *
@@ -29,22 +47,7 @@ function Action (props) {
   )
 }
 
-Action.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Icon name to represent action */
-  icon: PropTypes.string.isRequired,
-
-  /** Label to represent action */
-  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]).isRequired,
-
-  /** Should be handled carefully? Color change and maybe confirmation. */
-  warn: PropTypes.bool
-}
-
-Action.defaultProps = {
-  warn: false
-}
+Action.propTypes = propTypes
+Action.defaultProps = defaultProps
 
 export default Action

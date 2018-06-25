@@ -26,7 +26,8 @@ Property name   | Type      | Default               | Description
 ----------------|-----------|:---------------------:|--------------------------------
 className       | string    | n/a                   | additional class name passed to wrapper
 smooth          | bool      | n/a                   | should elements be collapsed and opened smoothly?
-animationTime   | number    | n/a                   | time of smooth animation (in ms)
+multi           | bool      | n/a                   | should allow opening many elements at once?
+animationTime   | number    | `300`                 | time of smooth animation (in ms)
 options         | Option[]  | n/a                   | options to show in Accordion
 value           | any       | self-controlled       | ID of currently opened option
 onChange        | function  | n/a                   | Handler fired on possible change of opened container

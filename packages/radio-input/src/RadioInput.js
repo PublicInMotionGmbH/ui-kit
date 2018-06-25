@@ -13,14 +13,15 @@ const propTypes = {
   /** Indicates if option should be disabled. */
   disabled: PropTypes.bool,
 
-  /** Radio input label size ('small', 'large'). */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
+  /** Has radio input error? */
+  error: PropTypes.bool,
 
   /** Styles passed to radio button wrapper. */
   style: PropTypes.object
 }
 
 const defaultProps = {
+  error: false,
   disabled: false
 }
 
@@ -30,14 +31,14 @@ const defaultProps = {
  * @param {object} props
  * @param {*} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.size]
+ * @param {boolean} [props.error]
  * @param {object} [props.style]
  * @returns {React.Element}
  */
 function RadioInput (props) {
-  const { children, className, disabled, size, style, onChange, ...passedProps } = props
+  const { children, className, disabled, error, size, style, onChange, ...passedProps } = props
 
-  const wrapperClass = buildClassName('radio-input', className, [ size ], { disabled })
+  const wrapperClass = buildClassName('radio-input', className, { disabled, error })
   const inputClass = buildClassName(['radio-input', 'input'])
 
   const handleOnChange = e => {

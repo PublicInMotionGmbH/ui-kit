@@ -22,7 +22,10 @@ const propTypes = {
   /** Name of radio group. */
   name: PropTypes.string.isRequired,
 
-  /** Array of objects which represent options. */
+  /** Is this value incorrect? */
+  error: PropTypes.bool,
+
+  /** Array of objects which represent options */
   options: PropTypes.arrayOf(PropTypes.shape({
     /** Idicates if option should be disabled. */
     disabled: PropTypes.bool,
@@ -30,12 +33,9 @@ const propTypes = {
     /** Option label. */
     label: PropTypes.node.isRequired,
 
-    /** Value of the option. */
+    /** Value it represents */
     value: PropTypes.any.isRequired
-  })).isRequired,
-
-  /** Radio input label size ('small', 'large'). */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
+  })),
 
   /** Value of default option. */
   value: PropTypes.oneOfType([
@@ -168,7 +168,7 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element[]|React.Element[]}
    */
   generateOptions = () => {
-    const { name, options, size } = this.props
+    const { error, name, options, size } = this.props
     const { value } = this.state
 
     const optionsList = options.map(obj => (
@@ -178,6 +178,7 @@ class RadioGroup extends React.PureComponent {
         key={obj.value}
         name={name}
         onChange={this.onChange.bind(this, obj.value)}
+        error={error}
         size={size}
         value={obj.value}
       >
@@ -188,7 +189,7 @@ class RadioGroup extends React.PureComponent {
   }
 
   render () {
-    const { allowCustom, className, children, customComponent, name,
+    const { allowCustom, className, children, customComponent, error, name,
       options, value, size, onChange, vertical, ...passedProps
     } = this.props
     const { generateCustomOption, generateOptions } = this
