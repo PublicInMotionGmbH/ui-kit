@@ -35,3 +35,14 @@ addStory('with step', readme, () => (
 addStory('with small step', readme, () => (
   <Slider step={0.01} />
 ))
+
+addStory('forced value', readme, () => (
+  <Slider value={33} />
+))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <Slider
+    value={state.value}
+    onChange={value => setState({ value })}
+  />
+), () => ({ value: 0 }))
