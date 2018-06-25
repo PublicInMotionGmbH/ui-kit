@@ -10,7 +10,7 @@ exports[`<Message /> renders children correctly 1`] = `
     <span
       className="talixo-talixo-chat__message talixo-chat__message--chat__time"
     >
-      8 days ago 09:31
+      21 days ago 09:31
     </span>
     <span
       className="talixo-talixo-chat__message talixo-chat__message--chat__name"

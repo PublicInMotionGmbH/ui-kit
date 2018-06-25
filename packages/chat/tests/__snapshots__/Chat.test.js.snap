@@ -3,11 +3,6 @@
 exports[`<Chat /> renders children correctly 1`] = `
 <div
   className="talixo-chat"
-  style={
-    Object {
-      "display": "block",
-    }
-  }
 >
   <div
     className="talixo-chat__messages"
@@ -54,22 +49,25 @@ exports[`<Chat /> renders children correctly 1`] = `
     onSubmit={[Function]}
   >
     <span
+      className="talixo-chat__user-typing-container"
+    />
+    <span
       className="talixo-chat__input-container"
     >
       <span
         className="talixo-chat__input-container-inner"
       >
-        <textarea
+        <Textarea
+          TextareaComponent={[Function]}
+          className="talixo-chat__textarea"
+          inputRef={[Function]}
           onChange={[Function]}
+          onHeightChange={[Function]}
           onKeyDown={[Function]}
           onKeyPress={[Function]}
           onKeyUp={[Function]}
           placeholder="reply"
-          style={
-            Object {
-              "maxHeight": "5em",
-            }
-          }
+          resize={true}
           value=""
         />
       </span>
