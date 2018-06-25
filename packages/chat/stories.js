@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { action } from '@storybook/addon-actions'
 
 import { Button } from '@talixo/button'
 import { Icon } from '@talixo/icon'
@@ -25,14 +26,18 @@ const messages = [
   {
     time: 1528104730633,
     message: 'This is message',
-    name: 'John',
-    id: '1'
+    user: {
+      name: 'John',
+      id: '1'
+    }
   },
   {
     time: '2018-06-04T11:35:00+02:00',
     message: 'This is reply',
-    name: 'Tom',
-    id: '2'
+    user: {
+      name: 'Tom',
+      id: '2'
+    }
   }
 ]
 
@@ -59,25 +64,29 @@ function startSimulation (setState, state) {
 
   simulation = setInterval(() => {
     const randomUser = {
-      name: names[Math.floor(Math.random(names.length) * names.length)],
-      id: Math.floor(Math.random() * 10000).toString(),
+      user: {
+        name: names[Math.floor(Math.random(names.length) * names.length)],
+        id: Math.floor(Math.random() * 10000).toString()
+      },
       status: true
     }
 
     const randomMessage = () => ({
       time: moment().valueOf(),
       message: randomMessages[Math.floor(Math.random(randomMessages.length) * randomMessages.length)],
-      name: randomUser.name,
-      id: randomUser.id
+      user: {
+        name: randomUser.user.name,
+        id: randomUser.user.id
+      }
     })
 
     setState({
-      usersTyping: state.usersTyping.concat(randomUser)
+      typingUsers: state.typingUsers.concat(randomUser)
     })
 
     setTimeout(() => setState({
-      usersTyping: state.usersTyping
-        .filter(typingUser => typingUser.id !== randomUser.id)
+      typingUsers: state.typingUsers
+        .filter(typingUser => typingUser.user.user.id !== randomUser.user.id)
     }), 4000)
 
     setTimeout(() => setState({
@@ -97,16 +106,18 @@ function stopSimulation (setState, state) {
 const thumbup = {
   time: moment().valueOf(),
   message: <Icon name='thumb_up' />,
-  name: name,
-  id: '3'
+  user: {
+    name: name,
+    id: '3'
+  }
 }
 
-const addTypingUser = (user, setState, state) => {
+const onTyping = (user, setState, state) => {
   const updatedUsers = user.status
-    ? state.usersTyping.concat(user)
-    : state.usersTyping.filter(typingUser => typingUser.id !== user.id)
+    ? state.typingUsers.concat(user)
+    : state.typingUsers.filter(typingUser => typingUser.user.id !== user.user.id)
 
-  setState({ usersTyping: updatedUsers })
+  setState({ typingUsers: updatedUsers })
 }
 
 // Stories
@@ -115,62 +126,70 @@ addStory.controlled('initial', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onTyping={action('onTyping')}
     onSubmit={message => {
       setState({ messages: state.messages.concat(message) })
     }}
-    name={name}
-    id='3'
-    usersTyping={state.usersTyping}
+    user={{
+      name: name,
+      id: '3'
+    }}
+    typingUsers={state.typingUsers}
   />
 ), () => ({
   messages: messages,
-  usersTyping: []
+  typingUsers: []
 }))
 
 addStory.controlled('with custom message renderer', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onTyping={action('onTyping')}
     onSubmit={message => {
       setState({ messages: state.messages.concat(message) })
     }}
-    name={name}
-    id='3'
-    usersTyping={state.usersTyping}
+    user={{
+      name: name,
+      id: '3'
+    }}
+    typingUsers={state.typingUsers}
     messageRenderer={(n) => n.toUpperCase()}
   />
 ), () => ({
   messages: messages,
-  usersTyping: []
+  typingUsers: []
 }))
 
 addStory.controlled('with additional information', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onTyping={action('onTyping')}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    name={name}
-    id='3'
-    usersTyping={state.usersTyping}
+    user={{
+      name: name,
+      id: '3'
+    }}
+    typingUsers={state.typingUsers}
     additionalInformation={<span>This is additional message</span>}
   />
 ), () => ({
   messages: messages,
-  usersTyping: []
+  typingUsers: []
 }))
 
 addStory.controlled('with additional button', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onTyping={action('onTyping')}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    name={name}
-    id='3'
-    usersTyping={state.usersTyping}
+    user={{
+      name: name,
+      id: '3'
+    }}
+    typingUsers={state.typingUsers}
     additionalButton={<Icon
       style={{ cursor: 'pointer' }}
       name='thumb_up'
@@ -179,29 +198,35 @@ addStory.controlled('with additional button', readme, (setState, state) => (
   />
 ), () => ({
   messages: messages,
-  usersTyping: []
+  typingUsers: []
 }))
 
 addStory.controlled('multiple users typing', readme, (setState, state) => (
   <Chat
     style={chatStyle}
     messages={state.messages}
-    addTypingUser={(user) => addTypingUser(user, setState, state)}
+    onTyping={action('onTyping')}
     onSubmit={message => setState({ messages: state.messages.concat(message) })}
-    name={name}
-    id='3'
-    usersTyping={state.usersTyping}
+    user={{
+      name: name,
+      id: '3'
+    }}
+    typingUsers={state.typingUsers}
   />
 ), () => ({
   messages: messages,
-  usersTyping: [{
-    name: 'John',
-    id: 1,
+  typingUsers: [{
+    user: {
+      name: 'John',
+      id: 1
+    },
     status: true
   },
   {
-    name: 'Kennedy',
-    id: 4,
+    user: {
+      name: 'Kennedy',
+      id: 4
+    },
     status: true
   }]
 }))
@@ -223,18 +248,20 @@ addStory.controlled('change types', readme, (setState, state) => (
     <Chat
       style={chatStyle}
       messages={state.messages}
-      addTypingUser={(user) => addTypingUser(user, setState, state)}
+      onTyping={action('onTyping')}
       onSubmit={message => setState({ messages: state.messages.concat(message) })}
-      name={name}
-      id='3'
+      user={{
+        name: name,
+        id: '3'
+      }}
       type={state.type}
-      usersTyping={state.usersTyping}
+      typingUsers={state.typingUsers}
     />
   </div>
 ), () => ({
   messages: messages,
   type: 'chat',
-  usersTyping: []
+  typingUsers: []
 }))
 
 addStory.controlled('chat simulation', readme, (setState, state) => {
@@ -251,18 +278,20 @@ addStory.controlled('chat simulation', readme, (setState, state) => {
       <Chat
         style={chatStyle}
         messages={state.messages}
-        addTypingUser={(user) => addTypingUser(user, setState, state)}
+        onTyping={(user) => onTyping(user, setState, state)}
         onSubmit={message => {
           setState({ messages: state.messages.concat(message) })
         }}
-        name={name}
-        id='3'
-        usersTyping={state.usersTyping}
+        user={{
+          name: name,
+          id: '3'
+        }}
+        typingUsers={state.typingUsers}
       />
     </div>
   )
 }, () => ({
   simulation: false,
   messages: [],
-  usersTyping: []
+  typingUsers: []
 }))

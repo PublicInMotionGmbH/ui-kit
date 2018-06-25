@@ -19,7 +19,7 @@ const propTypes = {
   additionalInformation: PropTypes.node,
 
   /** Called when the user is typing. */
-  addTypingUser: PropTypes.func,
+  onTyping: PropTypes.func,
 
   /** Additional class name. */
   className: PropTypes.string,
@@ -27,11 +27,14 @@ const propTypes = {
   /** Additional class name. */
   messages: PropTypes.arrayOf(
     PropTypes.shape({
-      /** User name. */
-      name: PropTypes.string,
+      /** User info. */
+      user: PropTypes.shape({
+        /** User name. */
+        name: PropTypes.string,
 
-      /** User id. */
-      id: PropTypes.string,
+        /** User id. */
+        id: PropTypes.string.isRequired
+      }),
 
       /** Message content. */
       message: PropTypes.node,
@@ -47,23 +50,29 @@ const propTypes = {
   /** Message renderer. */
   messageRenderer: PropTypes.func,
 
-  /** User name. */
-  name: PropTypes.string,
+  /** User info. */
+  user: PropTypes.shape({
+    /** User name. */
+    name: PropTypes.string,
+
+    /** User id. */
+    id: PropTypes.string.isRequired
+  }).isRequired,
 
   /** Handler for onSubmit event. */
   onSubmit: PropTypes.func,
 
-  /** User id. */
-  id: PropTypes.string.isRequired,
-
   /** Typing users. */
-  usersTyping: PropTypes.arrayOf(
+  typingUsers: PropTypes.arrayOf(
     PropTypes.shape({
-      /** User name. */
-      name: PropTypes.string,
+      /** User info. */
+      user: PropTypes.shape({
+        /** User name. */
+        name: PropTypes.string,
 
-      /** User id. */
-      id: PropTypes.string,
+        /** User id. */
+        id: PropTypes.string.isRequired
+      }),
 
       /** Typing status. */
       status: PropTypes.boolean
@@ -81,9 +90,8 @@ const defaultProps = {
   messages: [],
   messageRenderer: message => typeof message === 'string' ? message.replace(/(?:\r\n|\r|\n)/g, '<br/>') : message,
   type: 'chat',
-  usersTyping: [],
-  placeholder: 'reply',
-  name: 'user'
+  typingUsers: [],
+  placeholder: 'reply'
 }
 
 /**
@@ -92,21 +100,16 @@ const defaultProps = {
  * @property {object} props
  * @property {*} [props.additionalButton]
  * @property {*} [props.additionalInformation]
- * @property {*} [props.addTypingUser]
+ * @property {*} [props.onTyping]
  * @property {string} [props.className]
- * @property {array} [props.messages]
- * @property {string} [props.messages.name]
- * @property {string} [props.messages.id]
- * @property {*} [props.messages.message]
+ * @property {Array<{ [user]: { [name]: string, [id]: string }, [status]: boolean }>} [props.messages]
  * @property {number} [props.messages.time]
  * @property {*} [props.messageRenderer]
- * @property {string} [props.name]
+ * @property {object} [props.user]
+ * @property {string} [props.user.id]
+ * @property {string} [props.user.name]
  * @property {*} [props.onSubmit]
- * @property {string} [props.id]
- * @property {array} [props.usersTyping]
- * @property {string} [props.usersTyping.name]
- * @property {string} [props.usersTyping.id]
- * @property {boolean} [props.usersTyping.status]
+ * @property {Array<{ [user]: { [name]: string, [id]: string }, [status]: boolean }>} [props.typingUsers]
  * @property {string} [props.placeholder]
  * @property {string} [props.type]
  *
@@ -124,21 +127,26 @@ class Chat extends React.PureComponent {
   }
 
   /**
-   * Fire addTypingUser when state.typingStatus is updated.
+   * Fire onTyping when state.typingStatus is updated.
    * Scroll messages continer to bottom if messages are updated.
    */
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.typingStatus !== this.state.typingStatus && this.props.addTypingUser) {
-      this.props.addTypingUser({
-        status: this.state.typingStatus,
-        name: this.props.name,
-        id: this.props.id
+    if (prevState.typingStatus !== this.state.typingStatus && this.props.onTyping) {
+      this.props.onTyping({
+        status: this.state.typingStatus
       })
     }
 
     if (this.props.messages !== prevProps.messages) {
       this.scrollToBottom(this._messages)
     }
+  }
+
+  /**
+   * Clear timeout on unmounting.
+   */
+  componentWillUnmount () {
+    clearTimeout(this._typingTimeout)
   }
 
   /**
@@ -164,7 +172,7 @@ class Chat extends React.PureComponent {
    * @param {SyntheticEvent} event
    */
   handleSubmit = (event) => {
-    const { onSubmit, name, id } = this.props
+    const { onSubmit, user: { name, id } } = this.props
     const { inputValue } = this.state
 
     this.mockHeightChange()
@@ -179,13 +187,19 @@ class Chat extends React.PureComponent {
     // Build message
     const message = {
       message: inputValue,
-      name: name,
-      id: id,
+      user: {
+        name: name,
+        id: id
+      },
       time: moment().valueOf()
     }
 
-    // Submit message if the inputValue is not empty
-    if (onSubmit && !/^(^$|\s+)$/.test(inputValue)) {
+    // Prevent from submitting message if the inputValue is empty
+    if (/^\s*$/.test(inputValue)) {
+      return
+    }
+
+    if (onSubmit) {
       onSubmit(message)
       this.mockHeightChange()
       this.setState({ inputValue: '' })
@@ -240,7 +254,7 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   renderMessages = () => {
-    const { id, messages, messageRenderer, type } = this.props
+    const { user: { id }, messages, messageRenderer, type } = this.props
 
     // Build class names
     const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
@@ -249,10 +263,10 @@ class Chat extends React.PureComponent {
       <Message
         className={messageClsName}
         key={i}
-        message={messageRenderer(message.message)}
-        name={message.name}
+        message={messageRenderer(message)}
+        name={message.user.name}
         time={message.time}
-        style={{ marginLeft: type === 'chat' && id === message.id && 'auto' }}
+        style={{ marginLeft: type === 'chat' && id === message.user.id && 'auto' }}
       />
     ))
   }
@@ -263,9 +277,10 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   renderTypingUsers = () => {
-    const { usersTyping, id } = this.props
-    const otherUsers = usersTyping.filter(user => user.id !== id)
-    const typingUsers = otherUsers
+    const { typingUsers, user: { id } } = this.props
+    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
+    const otherUsers = typingUsers.filter(user => user.user.id !== id)
+    const users = otherUsers
       .map((user, i) => {
         let moreUsers = ''
         if (i > 0) {
@@ -274,13 +289,13 @@ class Chat extends React.PureComponent {
             moreUsers = ' and '
           }
         }
-        return `${moreUsers}${user.name}`
+        return `${moreUsers}${user.user.name}`
       })
       .join('')
 
     return (
-      <React.Fragment>
-        {typingUsers}
+      <React.Fragment className={userTypingContainerCls}>
+        {users}
         {otherUsers.length > 0 && ` ${otherUsers.length > 1 ? 'are' : 'is'} typing`}
       </React.Fragment>
     )
@@ -311,7 +326,7 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { additionalButton, className, additionalInformation, id, messages, name, onSubmit, usersTyping, addTypingUser, messageRenderer, placeholder, type, ...passedProps } = this.props
+    const { additionalButton, className, additionalInformation, user, messages, onSubmit, typingUsers, onTyping, messageRenderer, placeholder, type, ...passedProps } = this.props
     const { inputValue } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)
@@ -334,9 +349,9 @@ class Chat extends React.PureComponent {
           className={formClsName}
           onSubmit={this.handleSubmit}
         >
-          <span className={userTypingContainerCls}>
-            {usersTyping.length > 0 && this.renderTypingUsers()}
-          </span>
+          <div className={userTypingContainerCls}>
+            {typingUsers.length > 0 && this.renderTypingUsers()}
+          </div>
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
             <span className={inputContainerInnerCls}>
