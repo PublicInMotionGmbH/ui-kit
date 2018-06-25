@@ -3,6 +3,25 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Should table be condensed (more content visible)? */
+  condensed: PropTypes.bool,
+
+  /** Should table have fixed layout? */
+  fixed: PropTypes.bool,
+
+  /** `Head`, `Body` and `Footer` components */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  condensed: false,
+  fixed: false
+}
+
 /**
  * Component which represents Table.
  *
@@ -25,23 +44,7 @@ function Table (props) {
   )
 }
 
-Table.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Should table be condensed (more content visible)? */
-  condensed: PropTypes.bool,
-
-  /** Should table have fixed layout? */
-  fixed: PropTypes.bool,
-
-  /** `Head`, `Body` and `Footer` components */
-  children: PropTypes.node
-}
-
-Table.defaultProps = {
-  condensed: false,
-  fixed: false
-}
+Table.propTypes = propTypes
+Table.defaultProps = defaultProps
 
 export default Table

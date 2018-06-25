@@ -1,0 +1,24 @@
+@import './config'
+
+@include module('divider')
+  clear: both
+  display: flex
+  align-items: center
+  white-space: nowrap
+  padding: $divider-padding 0
+
+  &:before, &:after
+    display: inline-block
+    content: ''
+    height: dp(.125)
+    width: 50%
+    vertical-align: middle
+    background-color: $divider-color
+    transform: rotate(360deg)
+
+  &--small
+    padding: $divider-padding-small 0
+
+  &__text
+    padding: $divider-text-padding
+    font-size: $divider-text-font-size

@@ -38,7 +38,7 @@ const MINUTES = 'mm'
  * @returns {React.Element}
  */
 const HeaderAM = () => [
-  <Icon key='icon-am' name='brightness_3' />,
+  <Icon key='icon-am' name='moon_outline' />,
   <span key='label-am' style={{ marginLeft: '8px' }}>AM</span>
 ]
 
@@ -48,7 +48,7 @@ const HeaderAM = () => [
  * @returns {React.Element}
  */
 const HeaderPM = () => [
-  <Icon key='icon-pm' name='brightness_5' />,
+  <Icon key='icon-pm' name='sun_outline' />,
   <span key='label-pm' style={{ marginLeft: '8px' }}>PM</span>
 ]
 
@@ -193,7 +193,7 @@ class TimePicker extends React.PureComponent {
   * @param {object} [props.value]
   */
   componentWillReceiveProps (props) {
-    if (props.value !== this.props.value) {
+    if (props.value !== this.props.value && props.value !== undefined) {
       const value = moment(props.value, 'HH:mm')
       this.setState({ value })
     }
@@ -224,6 +224,11 @@ class TimePicker extends React.PureComponent {
       .clone()
       .hour(formattedValue)
 
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
+
     this.setState({ value })
 
     if (onChange) {
@@ -246,6 +251,11 @@ class TimePicker extends React.PureComponent {
     const value = prevValue
       .clone()
       .minute(inputValue)
+
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
 
     this.setState({ value })
 

@@ -17,8 +17,12 @@ const addStory = createStoriesFactory('Country Flag', module, {
 addStory('initial', readme, () => (
   <div>
     <CountryFlag code='do' />
-    <CountryFlag code='de' style={{ fontSize: 32 }} />
-    <CountryFlag code='pl' style={{ fontSize: 48 }} />
+    <span style={{ fontSize: 32 }}>
+      <CountryFlag code='de' />
+    </span>
+    <span style={{ fontSize: 48 }}>
+      <CountryFlag code='de' />
+    </span>
   </div>
 ))
 

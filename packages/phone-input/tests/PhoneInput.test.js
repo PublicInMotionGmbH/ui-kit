@@ -147,4 +147,123 @@ describe('<PhoneInput />', () => {
 
     wrapper.unmount()
   })
+
+  it('should focus element when input is focused', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find('input').simulate('focus')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().focus.length).toBe(1)
+
+    wrapper.unmount()
+  })
+
+  it('should focus element when flags are open', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find(`.${prefix('combo-box')}__value`).simulate('click')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().focus.length).toBe(1)
+
+    wrapper.unmount()
+  })
+
+  it('should hover element when input is hovered', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find('input').simulate('mouseenter')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover.length).toBe(1)
+
+    wrapper.find('input').simulate('mouseleave')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('should hover element when flags are open', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find(`.${prefix('combo-box')}`).simulate('mouseenter')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover.length).toBe(1)
+
+    wrapper.find(`.${prefix('combo-box')}`).simulate('mouseleave')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('should correctly handle strange mouseOut events', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find(`.${prefix('combo-box')}`).simulate('mouseleave')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover).toBe(false)
+
+    wrapper.find('input').simulate('mouseleave')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().hover).toBe(false)
+    expect(wrapper.hasClass(`${name}--hover`)).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('should correctly handle strange blur events', () => {
+    const wrapper = mount(
+      <PhoneInput />
+    )
+
+    wrapper.find(`.${prefix('combo-box')}`).simulate('blur')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().focus).toBe(false)
+
+    wrapper.find('input').simulate('blur')
+
+    jest.runAllTimers()
+    wrapper.update()
+
+    expect(wrapper.state().focus).toBe(false)
+
+    wrapper.unmount()
+  })
 })

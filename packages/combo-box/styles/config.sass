@@ -1,1 +1,57 @@
 @import '~@talixo/shared/styles/config'
+
+$combo-box-font-size: $x-input-text-size !default
+$combo-box-height: $x-input-height !default
+$combo-box-padding-horizontal: $x-input-padding-horizontal !default
+
+$combo-box-text-color: $x-input-text-color !default
+$combo-box-background-color: $x-input-background-color !default
+$combo-box-border-color: $x-input-border-color !default
+
+$combo-box-border-width: $x-border-width !default
+$combo-box-border-radius: $x-border-radius !default
+
+$combo-box-hover-background-color: $x-input-hover-background-color !default
+$combo-box-hover-border-color: $x-input-hover-border-color !default
+$combo-box-hover-text-color: $x-input-hover-text-color !default
+
+$combo-box-focus-background-color: $combo-box-hover-background-color !default
+$combo-box-focus-border-color: $combo-box-hover-border-color !default
+$combo-box-focus-text-color: $combo-box-hover-text-color !default
+
+$combo-box-error-background-color: $x-input-error-background-color !default
+$combo-box-error-border-color: $x-input-error-border-color !default
+$combo-box-error-text-color: $x-input-error-text-color !default
+$combo-box-error-placeholder-color: $x-input-error-placeholder-color !default
+
+$combo-box-placeholder-color: $x-input-placeholder-color !default
+
+$combo-box-menu-separator-color: $combo-box-focus-border-color !default
+$combo-box-menu-separator-height: $combo-box-border-width !default
+$combo-box-menu-max-height: 50vh !default
+
+$combo-box-menu-item-text-color: $combo-box-text-color !default
+$combo-box-menu-item-background-color: $combo-box-background-color !default
+$combo-box-menu-item-hover-text-color: bold-color($combo-box-text-color, 3%) !default
+$combo-box-menu-item-hover-background-color: bold-color($combo-box-background-color, 3%) !default
+$combo-box-menu-item-padding-horizontal: $combo-box-padding-horizontal !default
+$combo-box-menu-item-padding-vertical: $x-padding-vertical-small !default
+
+$combo-box-icon-size: $combo-box-font-size * $x-line-height-base !default
+$combo-box-icon-color: transparentize($combo-box-text-color, 0.8) !default
+$combo-box-icon-hover-color: transparentize($combo-box-text-color, 0.6) !default
+
+$combo-box-tick-active-color: $combo-box-menu-item-text-color !default
+$combo-box-tick-highlighted-color: transparentize($combo-box-tick-active-color, 0.8) !default
+$combo-box-tick-inactive-color: transparentize($combo-box-tick-active-color, 0.9) !default
+
+$combo-box-tag-background-color: $x-input-focus-border-color !default
+$combo-box-tag-text-color: text-contrast($combo-box-tag-background-color) !default
+$combo-box-tag-border-color: bold-color($combo-box-tag-background-color, 5%) !default
+$combo-box-tag-border-width: $combo-box-border-width !default
+$combo-box-tag-border-radius: $combo-box-border-radius !default
+$combo-box-tag-padding-vertical: $combo-box-font-size * ($x-line-height-base - 1) !default
+$combo-box-tag-padding-horizontal: $combo-box-padding-horizontal / 2 !default
+$combo-box-tag-margin: $combo-box-tag-padding-horizontal / 2 !default
+$combo-box-tag-remove-active-color: $combo-box-tag-text-color !default
+$combo-box-tag-remove-inactive-color: transparentize($combo-box-tag-remove-active-color, 0.9) !default

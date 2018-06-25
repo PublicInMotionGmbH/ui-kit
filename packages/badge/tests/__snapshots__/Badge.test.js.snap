@@ -4,6 +4,10 @@ exports[`<Badge /> renders children correctly 1`] = `
 <span
   className="talixo-badge"
 >
-  Badge
+  <span
+    className="talixo-badge__content"
+  >
+    Badge
+  </span>
 </span>
 `;

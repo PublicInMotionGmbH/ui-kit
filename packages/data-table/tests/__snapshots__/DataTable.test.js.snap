@@ -97,6 +97,31 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
           },
         ]
       }
+      idStorage={
+        Map {
+          Object {
+            "assignee": "John Smith",
+            "date_of_ride": "18th Feb 2018",
+            "id": 0,
+            "opened": "16th Jan 2018",
+            "pickup": "Berlin SXF Alexanderplatz",
+          } => 0,
+          Object {
+            "assignee": "",
+            "date_of_ride": "19th Feb 2018",
+            "id": 1,
+            "opened": "17th Jan 2018",
+            "pickup": "Krakow",
+          } => 1,
+          Object {
+            "assignee": "Mickey Mouse",
+            "date_of_ride": "20th Feb 2018",
+            "id": 2,
+            "opened": "18th Jan 2018",
+            "pickup": "Warszawa",
+          } => 2,
+        }
+      }
       rowData={
         Array [
           Object {
