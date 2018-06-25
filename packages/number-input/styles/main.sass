@@ -1,29 +1,5 @@
 @import './config'
 
-$number-input-stepper-glue: $text-input-padding-horizontal / 4 !default
-$number-input-stepper-radius: $x-border-radius !default
-$number-input-stepper-height: $text-input-font-size * $x-line-height-base !default
-$number-input-stepper-width: $number-input-stepper-height * 1.25 !default
-$number-input-stepper-font-size: $number-input-stepper-height * 0.7 !default
-
-$number-input-stepper-border-width: $x-border-width !default
-$number-input-stepper-weight: $x-weight-semibold !default
-
-$number-input-stepper-background-color: transparent !default
-$number-input-stepper-border-color: transparentize($x-color-primary, 0.3) !default
-$number-input-stepper-text-color: $x-color-primary !default
-
-$number-input-stepper-hover-background-color: $number-input-stepper-background-color !default
-$number-input-stepper-hover-border-color: $x-color-primary !default
-$number-input-stepper-hover-text-color: $x-color-primary !default
-
-$number-input-stepper-active-background-color: $number-input-stepper-hover-border-color !default
-$number-input-stepper-active-border-color: $number-input-stepper-active-background-color !default
-$number-input-stepper-active-text-color: text-contrast($number-input-stepper-active-background-color) !default
-
-$number-input-full-stepper-width: 4 * $number-input-stepper-glue + 2 * $number-input-stepper-width !default
-$number-input-padding-with-stepper: $number-input-full-stepper-width + 1.5 * $text-input-padding-horizontal !default
-
 @include module('number-input')
   position: relative
 
