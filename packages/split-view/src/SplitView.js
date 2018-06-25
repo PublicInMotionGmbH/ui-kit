@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -16,10 +15,10 @@ const propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
 
   /** Render function of details section. */
-  detailsRender: PropTypes.func,
+  renderDetails: PropTypes.func,
 
   /** Render function of list section. */
-  itemRender: PropTypes.func,
+  renderItems: PropTypes.func,
 
   /** Header element of list section. */
   listHeader: PropTypes.node,
@@ -28,7 +27,7 @@ const propTypes = {
   onSelect: PropTypes.func,
 
   /** Opened element. */
-  openItem: PropTypes.object
+  openedItem: PropTypes.object
 }
 
 /**
@@ -37,31 +36,31 @@ const propTypes = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {object[]} props.data
- * @property {function} [props.detailsRender]
- * @property {function} [props.itemRender]
+ * @property {function} [props.renderDetails]
+ * @property {function} [props.renderItems]
  * @property {*} [props.listHeader]
  * @property {function} [props.onSelect]
- * @property {number} [props.openItem]
+ * @property {number} [props.openedItem]
  *
  * @property {object} state
- * @property {object} state.openItem
+ * @property {object} state.openedItem
  *
  * @class
  */
 class SplitView extends React.Component {
   state = {
-    openItem: this.props.openItem || this.props.data[0]
+    openedItem: this.props.openedItem || this.props.data[0]
   }
 
   /**
    * Update index of opened element if it has been changed.
    *
    * @param {object} nextProps
-   * @param {object} [nextProps.openItem]
+   * @param {object} [nextProps.openedItem]
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.openItem !== this.state.openItem) {
-      this.setState({ openItem: nextProps.openItem })
+    if (nextProps.openedItem !== this.state.openedItem) {
+      this.setState({ openedItem: nextProps.openedItem })
     }
   }
 
@@ -71,14 +70,13 @@ class SplitView extends React.Component {
    *
    * @param {object} item
    */
-  onClick = (item) => {
-    const { openItem } = this.state
-    const { data, onSelect, openItem: propsOpenItem } = this.props
-    const itemIndex = _.findIndex(data, item)
+  onClick = (item, ...args) => {
+    const { openedItem } = this.state
+    const { onSelect, openedItem: propsOpenedItem } = this.props
 
-    if (onSelect) { onSelect(item) }
-    if (propsOpenItem == null && openItem !== itemIndex) {
-      this.setState({ openItem: item })
+    if (onSelect) { onSelect(item, ...args) }
+    if (propsOpenedItem == null && openedItem !== item) {
+      this.setState({ openedItem: item })
     }
   }
   /**
@@ -92,8 +90,8 @@ class SplitView extends React.Component {
 
   render () {
     const { onClick, generateHeader } = this
-    const { openItem } = this.state
-    const { className, data, detailsRender, itemRender, listHeader, onSelect, openItem: propsOpenItem, ...passedProps } = this.props
+    const { openedItem } = this.state
+    const { className, data, renderDetails, renderItems, listHeader, onSelect, openedItem: propsOpenedItem, ...passedProps } = this.props
 
     // Class Names
     const wrapperCls = buildClassName(moduleName, className)
@@ -105,14 +103,14 @@ class SplitView extends React.Component {
           { listHeader && generateHeader() }
           <ItemList
             items={data}
-            itemRender={itemRender}
+            renderItems={renderItems}
             onClick={onClick}
-            openItem={openItem}
+            openedItem={openedItem}
           />
         </div>
         <DetailsView
-          detailsRender={detailsRender}
-          item={openItem}
+          renderDetails={renderDetails}
+          item={openedItem}
         />
       </div>
     )

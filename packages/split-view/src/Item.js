@@ -8,7 +8,7 @@ import { displayObject } from './utils'
 
 const propTypes = {
   /** Function used to render data item. */
-  itemRender: PropTypes.func,
+  renderItems: PropTypes.func,
 
   /** Object which contains data to be displayed. */
   item: PropTypes.object.isRequired,
@@ -18,7 +18,7 @@ const propTypes = {
 }
 const defaultProps = {
   active: false,
-  itemRender: item => displayObject(item)
+  renderItems: item => displayObject(item)
 }
 
 /**
@@ -27,14 +27,14 @@ const defaultProps = {
  * @param {object} props
  * @param {bool} [props.active]
  * @param {object} props.item
- * @param {function} [props.itemRender]
+ * @param {function} [props.renderItems]
  * @param {function} [props.onClick]
  *
  * @returns {React.Element}
  */
-const Item = (props) => {
-  const { active, item, itemRender, onClick } = props
-  const itemCls = buildClassName([moduleName, 'list', 'item'], null, { active })
+function Item (props) {
+  const { active, item, renderItems, onClick } = props
+  const itemCls = buildClassName([moduleName, 'list-item'], null, { active })
 
   // Invoke props.onCLick function if provided
   const onItemClick = (e) => {
@@ -45,7 +45,7 @@ const Item = (props) => {
 
   return (
     <div className={itemCls} onClick={onItemClick}>
-      { itemRender(item) }
+      { renderItems(item) }
     </div>
   )
 }

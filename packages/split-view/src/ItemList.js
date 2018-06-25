@@ -13,7 +13,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Function used to render data item. */
-  itemRender: PropTypes.func,
+  renderItems: PropTypes.func,
 
   /** Array of objects which contain data to be displayed. */
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -22,7 +22,7 @@ const propTypes = {
   onClick: PropTypes.func,
 
   /** Currently opened item. */
-  openItem: PropTypes.object
+  openedItem: PropTypes.object
 }
 
 /**
@@ -30,15 +30,15 @@ const propTypes = {
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {function} [props.itemRender]
+ * @param {function} [props.renderItems]
  * @param {object[]} props.items
  * @param {function} [props.onClick]
- * @param {number} [props.openItem]
+ * @param {number} [props.openedItem]
  *
  * @returns {React.Element}
  */
 function ItemList (props) {
-  const { className, itemRender, items, onClick, openItem } = props
+  const { className, renderItems, items, onClick, openedItem } = props
   const wrapperCls = buildClassName([moduleName, 'list'], className)
 
   return (
@@ -47,9 +47,9 @@ function ItemList (props) {
         items.map((item, index) => (
           <Item
             key={index}
-            active={openItem === item}
+            active={openedItem === item}
             item={item}
-            itemRender={itemRender}
+            renderItems={renderItems}
             onClick={onClick}
           />
         ))

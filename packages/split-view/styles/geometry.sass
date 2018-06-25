@@ -19,16 +19,14 @@
     flex-basis: $split-view-list-width
     overflow: auto
 
-  &__list
+  &__list-item
+    border-bottom: $split-view-border
+    height: $split-view-list-item-height
+    transition: $split-view-transition
+    cursor: pointer
 
-    &__item
-      border-bottom: $split-view-border
-      height: $split-view-list-item-height
-      transition: $split-view-transition
-      cursor: pointer
+    &:hover
+      background-color: $split-view-item-hover
 
-      &:hover
-        background-color: $split-view-item-hover
-
-      &--active
-        background-color: lighten($split-view-item-hover, 5)
+    &--active
+      background-color: lighten($split-view-item-hover, 5)

@@ -8,19 +8,19 @@ import { displayObject } from './utils'
 
 const propTypes = {
   /** Function used to render data details. */
-  detailsRender: PropTypes.func,
+  renderDetails: PropTypes.func,
 
   /** Object which contains data to be displayed. */
   item: PropTypes.object
 }
 
 const defaultProps = {
-  detailsRender: item => displayObject(item)
+  renderDetails: item => displayObject(item)
 }
 
 /**
  * Component which renders details about given data item
- * using provided detailsRender function.
+ * using provided renderDetails function.
  *
  * @param {object} props
  * @param {function} [props.datailsRender]
@@ -28,20 +28,14 @@ const defaultProps = {
  *
  * @returns {React.Element}
  */
-const DetailsView = (props) => {
-  const { detailsRender, item } = props
+function DetailsView (props) {
+  const { renderDetails, item } = props
   const detailsCls = buildClassName([moduleName, 'details'])
 
-  return (
-    <React.Fragment>
-      {
-        item
-          ? <div className={detailsCls}>
-            { item && detailsRender(item) }
-          </div>
-          : null
-      }
-    </React.Fragment>
+  return item != null && (
+    <div className={detailsCls}>
+      { renderDetails(item) }
+    </div>
   )
 }
 
