@@ -96,7 +96,7 @@ describe('<Chat />', () => {
   it('renders placeholder correctly', () => {
     const placeholder = 'custom placeholder'
     const wrapper = shallow(<Chat user={user} placeholder={placeholder} />)
-    const input = wrapper.find('textarea')
+    const input = wrapper.find('Textarea')
 
     expect(input.props().placeholder).toEqual(placeholder)
   })
@@ -196,7 +196,7 @@ describe('handleInputChange', () => {
   })
 
   it('changes state.typingStatus to true', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('Textarea')
     const status = wrapper.state().typingStatus
 
@@ -206,7 +206,7 @@ describe('handleInputChange', () => {
   })
 
   it('changes state.typingStatus to false after 2000ms', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('Textarea')
     const status = wrapper.state().typingStatus
 
@@ -222,7 +222,7 @@ describe('handleInputChange', () => {
   })
 
   it('clears timeout if state.typingStatus is true', () => {
-    const wrapper = shallow(<Chat messages={messages} id='1' />)
+    const wrapper = shallow(<Chat messages={messages} user={user} />)
     const input = wrapper.find('Textarea')
 
     wrapper.setState({ typingStatus: true })

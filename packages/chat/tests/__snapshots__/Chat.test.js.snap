@@ -10,7 +10,16 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="0"
-      message="This is message"
+      message={
+        Object {
+          "message": "This is message",
+          "time": 1528104696738,
+          "user": Object {
+            "id": "2",
+            "name": "John",
+          },
+        }
+      }
       name="John"
       style={
         Object {
@@ -22,7 +31,16 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="1"
-      message="This is reply"
+      message={
+        Object {
+          "message": "This is reply",
+          "time": 1528104730633,
+          "user": Object {
+            "id": "3",
+            "name": "Tom",
+          },
+        }
+      }
       name="Tom"
       style={
         Object {
@@ -34,7 +52,16 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="2"
-      message="This is reply"
+      message={
+        Object {
+          "message": "This is reply",
+          "time": 1528104730633,
+          "user": Object {
+            "id": "1",
+            "name": "Me",
+          },
+        }
+      }
       name="Me"
       style={
         Object {
@@ -48,8 +75,7 @@ exports[`<Chat /> renders children correctly 1`] = `
     className="talixo-chat__form"
     onSubmit={[Function]}
   >
-    <div />
-    <span
+    <div
       className="talixo-chat__user-typing-container"
     />
     <span

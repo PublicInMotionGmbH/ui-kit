@@ -278,7 +278,6 @@ class Chat extends React.PureComponent {
    */
   renderTypingUsers = () => {
     const { typingUsers, user: { id } } = this.props
-    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
     const otherUsers = typingUsers.filter(user => user.user.id !== id)
     const users = otherUsers
       .map((user, i) => {
@@ -294,7 +293,7 @@ class Chat extends React.PureComponent {
       .join('')
 
     return (
-      <React.Fragment className={userTypingContainerCls}>
+      <React.Fragment>
         {users}
         {otherUsers.length > 0 && ` ${otherUsers.length > 1 ? 'are' : 'is'} typing`}
       </React.Fragment>
