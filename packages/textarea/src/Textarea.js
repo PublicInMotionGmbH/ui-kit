@@ -73,6 +73,21 @@ class Textarea extends React.PureComponent {
     }
   }
 
+  /**
+   * Cache reference to input element
+   *
+   * @param {HTMLElement} el
+   */
+  textareaRef = (el) => {
+    const { textareaRef } = this.props
+
+    this.textarea = el
+
+    if (textareaRef) {
+      textareaRef(el)
+    }
+  }
+
   render () {
     const {
       className, disabled, placeholder, resize,
@@ -83,6 +98,7 @@ class Textarea extends React.PureComponent {
 
     return (
       <TextareaComponent
+        ref={this.textareaRef}
         className={clsName}
         disabled={disabled}
         placeholder={placeholder}

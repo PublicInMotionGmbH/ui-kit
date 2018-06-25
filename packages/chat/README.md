@@ -51,12 +51,12 @@ Type      | 'chat', 'comments'
 
 #### Messages
 
-Property name | Type      | Required | Default       | Description
---------------|-----------|----------|:-------------:|------------------------------------------------
-name          | string    | no       | n/a           | User name.
-id            | string    | no       | n/a           | User id.
-message       | node      | no       | n/a           | Message content.
-time          | number    | no       | n/a           | Message time stamp.
+Property name | Type               | Required | Default       | Description
+--------------|--------------------|----------|:-------------:|------------------------------------------------
+name          | string             | no       | n/a           | User name.
+id            | string             | no       | n/a           | User id.
+message       | node               | no       | n/a           | Message content.
+time          | number or string   | no       | n/a           | Message time stamp.
 
 #### UsersTyping
 

@@ -23,13 +23,13 @@ const chatStyle = {
 
 const messages = [
   {
-    time: 1528104696738,
+    time: 1528104730633,
     message: 'This is message',
     name: 'John',
     id: '1'
   },
   {
-    time: 1528104730633,
+    time: '2018-06-04T11:35:00+02:00',
     message: 'This is reply',
     name: 'Tom',
     id: '2'

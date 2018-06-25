@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
+import TextareaAutosize from 'react-textarea-autosize'
+
 import { buildClassName } from '@talixo/shared'
+import { Textarea } from '@talixo/textarea'
 
 import Message from './Message'
 
@@ -34,7 +37,10 @@ const propTypes = {
       message: PropTypes.node,
 
       /** Message time stamp. */
-      time: PropTypes.number
+      time: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ])
     })
   ),
 
@@ -73,7 +79,7 @@ const propTypes = {
 
 const defaultProps = {
   messages: [],
-  messageRenderer: message => message,
+  messageRenderer: message => typeof message === 'string' ? message.replace(/(?:\r\n|\r|\n)/g, '<br/>') : message,
   type: 'chat',
   usersTyping: [],
   placeholder: 'reply',
@@ -140,14 +146,14 @@ class Chat extends React.PureComponent {
    *
    * @param {string} inputValue
    */
-  handleInputChange = (e) => {
-    const inputValue = e.target.value
+  handleInputChange = (value) => {
+    this.setState({ inputValue: value })
 
     // If the user is typing clear the timeout
     if (this.state.typingStatus) {
       clearTimeout(this._typingTimeout)
     }
-    this.setState(state => ({ typingStatus: true, inputValue }), () => {
+    this.setState(state => ({ typingStatus: true, value }), () => {
       this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
     })
   }
@@ -160,6 +166,9 @@ class Chat extends React.PureComponent {
   handleSubmit = (event) => {
     const { onSubmit, name, id } = this.props
     const { inputValue } = this.state
+
+    this.mockHeightChange()
+
     // Prevent the form from being submitted
     event.preventDefault()
     // Prevent further propagation of the event
@@ -178,29 +187,20 @@ class Chat extends React.PureComponent {
     // Submit message if the inputValue is not empty
     if (onSubmit && !/^(^$|\s+)$/.test(inputValue)) {
       onSubmit(message)
+      this.mockHeightChange()
       this.setState({ inputValue: '' })
-      if (this._input) this._input.style.height = '1em'
     }
   }
 
   handleKeyDown = (event) => {
     const which = event.which || event.key
-    const segments = this._input.value.split('\n')
-    const segmentsLength = segments.length
 
-    let height
     if (which === 16) {
       this.setState({ shift: true })
-    } else if (this.state.shift && which === 13) {
-      height = segmentsLength + 1
-    } else if (which === 8 && segments.slice(-1)[0] === '' && segmentsLength > 1) {
-      height = segmentsLength - 1
     }
-    this._input.style.height = `${height}em`
 
     if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
       this.setState({ inputValue: '' })
-      this._input.style.height = '1em'
     }
   }
 
@@ -213,7 +213,6 @@ class Chat extends React.PureComponent {
 
     if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
       this.setState({ inputValue: '' })
-      this._input.style.height = '1em'
     }
   }
 
@@ -223,6 +222,16 @@ class Chat extends React.PureComponent {
     if (!this.state.shift && which === 13) {
       this._form.dispatchEvent(new window.Event('submit'))
     }
+
+    if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
+      event.preventDefault()
+      this.setState({ inputValue: '' })
+    }
+  }
+
+  mockHeightChange = (e) => {
+    if (this.state.shift) return
+    this.setState({ inputValue: '' })
   }
 
   /**
@@ -240,7 +249,7 @@ class Chat extends React.PureComponent {
       <Message
         className={messageClsName}
         key={i}
-        message={messageRenderer(message.message.replace(/(?:\r\n|\r|\n)/g, '<br/>'))}
+        message={messageRenderer(message.message)}
         name={message.name}
         time={message.time}
         style={{ marginLeft: type === 'chat' && id === message.id && 'auto' }}
@@ -255,7 +264,6 @@ class Chat extends React.PureComponent {
    */
   renderTypingUsers = () => {
     const { usersTyping, id } = this.props
-    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
     const otherUsers = usersTyping.filter(user => user.id !== id)
     const typingUsers = otherUsers
       .map((user, i) => {
@@ -271,10 +279,10 @@ class Chat extends React.PureComponent {
       .join('')
 
     return (
-      <span className={userTypingContainerCls}>
+      <React.Fragment>
         {typingUsers}
         {otherUsers.length > 0 && ` ${otherUsers.length > 1 ? 'are' : 'is'} typing`}
-      </span>
+      </React.Fragment>
     )
   }
 
@@ -312,10 +320,12 @@ class Chat extends React.PureComponent {
     const additionalInfoCls = buildClassName([moduleName, 'additional-info'])
     const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
     const inputContainerCls = buildClassName([moduleName, 'input-container'])
+    const textareaCls = buildClassName([moduleName, 'textarea'])
     const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
+    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
 
     return (
-      <div className={wrapperClsName} style={{ display: 'block' }} {...passedProps}>
+      <div className={wrapperClsName} {...passedProps}>
         <div className={messagesClsName} ref={(node) => this.setRef(node, '_messages')}>
           {messages.length > 0 && this.renderMessages()}
         </div>
@@ -324,22 +334,24 @@ class Chat extends React.PureComponent {
           className={formClsName}
           onSubmit={this.handleSubmit}
         >
-          {usersTyping.length > 0 && this.renderTypingUsers()}
+          <span className={userTypingContainerCls}>
+            {usersTyping.length > 0 && this.renderTypingUsers()}
+          </span>
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
             <span className={inputContainerInnerCls}>
               {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
-              <textarea
-                ref={(node) => this.setRef(node, '_input')}
-                onChange={this.handleInputChange}
+              <Textarea
+                className={textareaCls}
+                onChange={(value) => { this.handleInputChange(value) }}
                 onKeyDown={this.handleKeyDown}
                 onKeyUp={this.handleKeyUp}
                 onKeyPress={this.handleKeyPress}
                 placeholder={placeholder}
                 value={inputValue}
-                style={{
-                  maxHeight: '5em'
-                }}
+                TextareaComponent={TextareaAutosize}
+                inputRef={(node) => this.setRef(node, '_input')}
+                onHeightChange={this.mockHeightChange}
               />
             </span>
           </span>
