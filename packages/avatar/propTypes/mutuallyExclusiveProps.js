@@ -1,4 +1,6 @@
 /**
+ * Source: https://github.com/airbnb/prop-types/blob/master/src/mutuallyExclusiveProps.js
+ *
  * Copyright (c) 2016 Airbnb
  *
  * This source code is licensed under the MIT license
@@ -7,25 +9,12 @@
 function wrapValidator (validator, typeName, typeChecker = null) {
   return Object.assign(validator.bind(), {
     typeName,
-    typeChecker// ,
-    // isRequired: Object.assign(validator.isRequired.bind(), {
-    //   typeName,
-    //   typeChecker,
-    //   typeRequired: true
-    // })
+    typeChecker
   })
 }
 
 // Additional required field
-function mutuallyExclusiveProps (propType, required, ...exclusiveProps) {
-  // if (typeof propType !== 'function') {
-  //   throw new TypeError('a propType is required')
-  // }
-  //
-  // if (exclusiveProps.length < 1) {
-  //   throw new TypeError('at least one prop that is mutually exclusive with this propType is required')
-  // }
-
+function mutuallyExclusiveOfType (propType, required, ...exclusiveProps) {
   const propList = exclusiveProps.join(', or ')
 
   const map = exclusiveProps.reduce((acc, prop) => ({ ...acc, [prop]: true }), {})
@@ -45,22 +34,7 @@ function mutuallyExclusiveProps (propType, required, ...exclusiveProps) {
     return propType(props, propName, componentName, ...rest)
   }
 
-  // validator.isRequired = function mutuallyExclusivePropsRequired (
-  //   props,
-  //   propName,
-  //   componentName,
-  //   ...rest
-  // ) {
-  //   const exclusivePropCount = Object.keys(props)
-  //     .filter(prop => prop === propName || props[prop] != null)
-  //     .reduce(countProps, 0)
-  //   if (exclusivePropCount > 1) {
-  //     return new Error(`A ${componentName} cannot have more than one of these props: ${propList}`)
-  //   }
-  //   return propType(props, propName, componentName, ...rest)
-  // }
-
   return wrapValidator(validator, `mutuallyExclusiveProps:${propList}`, exclusiveProps)
 }
 
-export { mutuallyExclusiveProps }
+export { mutuallyExclusiveOfType }

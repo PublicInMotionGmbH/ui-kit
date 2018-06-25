@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 
-import { mutuallyExclusiveProps } from '../propTypes/mutuallyExclusiveProps'
+import { mutuallyExclusiveOfType } from '../propTypes/mutuallyExclusiveProps'
 
 const propTypes = {
   /** Alt attribute for the rendered `img` element. */
@@ -14,16 +14,16 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Text displayed inside avatar. */
-  children: mutuallyExclusiveProps(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
+  children: mutuallyExclusiveOfType(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
 
   /** Default icon displayed inside avatar. */
-  defaultIcon: mutuallyExclusiveProps(PropTypes.string, false, 'defaultText', 'defaultIcon'),
+  defaultIcon: mutuallyExclusiveOfType(PropTypes.string, false, 'defaultText', 'defaultIcon'),
 
   /** Default text displayed inside avatar. */
-  defaultText: mutuallyExclusiveProps(PropTypes.string, false, 'defaultText', 'defaultIcon'),
+  defaultText: mutuallyExclusiveOfType(PropTypes.string, false, 'defaultText', 'defaultIcon'),
 
   /** Icon displayed inside avatar. */
-  icon: mutuallyExclusiveProps(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
+  icon: mutuallyExclusiveOfType(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
 
   /** Additional props passed to rendered `img` element. */
   imgProps: PropTypes.object,
@@ -35,10 +35,10 @@ const propTypes = {
   size: PropTypes.number,
 
   /** Image displayed inside avatar. */
-  src: mutuallyExclusiveProps(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
+  src: mutuallyExclusiveOfType(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
 
   /** Image set displayed inside avatar. */
-  srcSet: mutuallyExclusiveProps(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
+  srcSet: mutuallyExclusiveOfType(PropTypes.string, true, 'children', 'icon', 'src', 'srcSet'),
 
   /** Style passed to wrapper. */
   style: PropTypes.object
@@ -96,23 +96,23 @@ class Avatar extends React.Component {
     if (children) {
       return children
     } else if (icon) {
-      return (<Icon name={icon} />)
+      return <Icon name={icon} />
     } else if (imageError && defaultIcon) {
-      return (<Icon name={defaultIcon} />)
+      return <Icon name={defaultIcon} />
     } else if (imageError && defaultText) {
       return defaultText
+    } else if (imageError) {
+      return '?'
     } else if (src || srcSet) {
-      return !imageError
-        ? (
-          <img
-            onError={this.handleImageError}
-            src={src}
-            srcSet={srcSet}
-            alt={alt}
-            {...imgProps}
-          />
-        )
-        : '?'
+      return (
+        <img
+          onError={this.handleImageError}
+          src={src}
+          srcSet={srcSet}
+          alt={alt}
+          {...imgProps}
+        />
+      )
     }
   }
 
