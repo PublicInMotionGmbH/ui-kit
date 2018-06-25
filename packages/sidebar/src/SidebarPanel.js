@@ -5,6 +5,20 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Children to put inside, may be anything (including SidebarElements) */
+  children: PropTypes.node,
+
+  /** Icon name to show next to header */
+  icon: PropTypes.string,
+
+  /** Panel header: title */
+  name: PropTypes.node
+}
+
 /**
  * Component which represents Sidebar.
  *
@@ -39,18 +53,6 @@ function SidebarPanel (props) {
   )
 }
 
-SidebarPanel.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Children to put inside, may be anything (including SidebarElements) */
-  children: PropTypes.node,
-
-  /** Icon name to show next to header */
-  icon: PropTypes.string,
-
-  /** Panel header: title */
-  name: PropTypes.node
-}
+SidebarPanel.propTypes = propTypes
 
 export default SidebarPanel

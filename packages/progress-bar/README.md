@@ -29,16 +29,16 @@ type          | ProgressType | n/a     | type of progress bar style
 size          | ProgressSize | n/a     | size of progress bar
 smooth        | boolean      | `true`  | should it smoothly change its width?
 striped       | boolean      | `false` | should it have stripes?
-value         | number       | n/a     | progress to show (between 0 and 1), otherwise it's indetermined
+value         | number       | n/a     | progress to show (between 0 and 1), otherwise it's indeterminated
 children      | node         | n/a     | label to show
 
-Remember, that progress bar without correct `value` will have stripes anyway in indetermined state.
+Remember, that progress bar without correct `value` will have stripes anyway in indeterminated state.
 
 ## Enum types
 
 Name          | Values
 --------------|---------------------------------------
-ProgressType  | `error`, `success`, `info`, `warning`
+ProgressType  | `error`, `success`, `info`, `warning`, `secondary`, `tertiary`
 ProgressSize  | `small`
 
 ## Changelog

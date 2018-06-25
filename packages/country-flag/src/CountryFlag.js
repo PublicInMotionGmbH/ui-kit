@@ -7,6 +7,14 @@ import config from '../config'
 
 import CountryFlagsSprite from './CountryFlagsSprite'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Country code */
+  code: PropTypes.string.isRequired
+}
+
 /**
  * Component which represents Flag.
  *
@@ -25,12 +33,6 @@ function CountryFlag (props) {
   )
 }
 
-CountryFlag.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Country code */
-  code: PropTypes.string.isRequired
-}
+CountryFlag.propTypes = propTypes
 
 export default CountryFlag

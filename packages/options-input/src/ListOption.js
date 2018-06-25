@@ -6,23 +6,35 @@ import { NumberInput } from '@talixo/number-input'
 import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
-  /** Data for generate ListOption */
+  /** Option to show */
   option: PropTypes.shape({
+    /** Id for option */
     id: PropTypes.string.isRequired,
+
+    /** Type of icon */
     icon: PropTypes.string,
+
+    /** Label for option */
     label: PropTypes.string,
+
+    /** Default value */
     default: PropTypes.number,
-    description: PropTypes.string,
+
+    /** Minimum value within the range */
     min: PropTypes.number,
+
+    /** Maximum value within the range */
     max: PropTypes.number
   }),
 
   /** Value of input */
   value: PropTypes.number,
 
-  /** onChange */
+  /** Event handler fired on value change */
   onChange: PropTypes.func
 }
+
+export const moduleName = 'options-input-list-option'
 
 /**
  * * Component which represents ListOption.
@@ -30,15 +42,15 @@ const propTypes = {
  * @param {object} props
  * @param {object} [props.option]
  * @param {number} [props.value]
- * @param {function} onChange
+ * @param {function} [props.onChange]
  *
  * @returns {React.Element}
  */
 function ListOption (props) {
   const { option, value, onChange } = props
 
-  const clsName = buildClassName('options-input__list-option', {
-    'options-input__list-option--active': value > 0
+  const clsName = buildClassName(moduleName, null, {
+    active: value > 0 || value < 0
   })
 
   const icon = (
@@ -46,9 +58,9 @@ function ListOption (props) {
   )
 
   const label = (
-    <div className='options-input__list-option__label'>
-      <span className='options-input__list-option__title'>{option.label}</span>
-      <span className='options-input__list-option__description'>{option.description}</span>
+    <div className={buildClassName([ moduleName, 'label' ])}>
+      <span className={buildClassName([ moduleName, 'title' ])}>{option.label}</span>
+      <span className={buildClassName([ moduleName, 'description' ])}>{option.description}</span>
     </div>
   )
 

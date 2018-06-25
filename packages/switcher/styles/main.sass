@@ -1,2 +1,65 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('switcher')
+  display: inline-block
+  width: $switcher-width
+  height: $switcher-height
+  font-size: $switcher-text-size
+  border-radius: $switcher-border-radius
+  cursor: pointer
+  white-space: nowrap
+
+  > input
+    display: none
+
+  > span
+    position: relative
+    display: inline-block
+    border-radius: $switcher-border-radius
+    box-shadow: inset 0 0 0 $switcher-border-width $switcher-border-color
+    width: $switcher-width
+    height: $switcher-height
+
+  > span > span
+    position: absolute
+    left: 0
+    top: 0
+    display: inline-block
+    line-height: $switcher-height
+    width: 50%
+    transform: translateX(0)
+    height: $switcher-height
+    border-radius: $switcher-border-radius 0 0 $switcher-border-radius
+    text-align: center
+    background: $switcher-not-selected-background-color
+    color: $switcher-not-selected-text-color
+    transition: 300ms all linear
+    opacity: 1
+    user-select: none
+
+  #{prefix('switcher', 'yes')}
+    opacity: 0
+    background: $switcher-selected-background-color
+    color: $switcher-selected-text-color
+
+  > input:checked + span > span
+    transform: translateX(100%)
+    border-radius: 0 $switcher-border-radius $switcher-border-radius 0
+
+  > input:checked + span > #{prefix('switcher', 'yes')}
+    opacity: 1
+
+  > input:checked + span > #{prefix('switcher', 'no')}
+    opacity: 0
+
+  &--disabled
+    background: $switcher-disabled-background-color
+    cursor: not-allowed
+
+    #{prefix('switcher', 'yes')}
+      background: $switcher-disabled-selected-background-color
+      color: $switcher-disabled-selected-text-color
+
+    #{prefix('switcher', 'no')}
+      background: $switcher-disabled-not-selected-background-color
+      color: $switcher-disabled-not-selected-text-color

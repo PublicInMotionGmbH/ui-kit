@@ -122,7 +122,7 @@ describe('<Tooltip />', () => {
 
   it('renders position correctly', () => {
     const wrapper = mount(
-      <Tooltip position='top' render={() => <span>Left</span>}>
+      <Tooltip lockPosition position='top' render={() => <span>Left</span>}>
         <span className={`${name}-target`}>Tooltip</span>
       </Tooltip>
     )

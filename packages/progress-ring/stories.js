@@ -16,15 +16,33 @@ const addStory = createStoriesFactory('Progress ring', module, {
 // Stories
 
 addStory('initial', readme, () => (
-  <ProgressRing />
+  <div>
+    <ProgressRing />
+    <ProgressRing style={{ fontSize: 20 }} />
+    <ProgressRing style={{ fontSize: 25 }} />
+    <ProgressRing style={{ fontSize: 30 }} />
+    <ProgressRing style={{ fontSize: 35 }} />
+    <ProgressRing style={{ fontSize: 40 }} />
+    <ProgressRing style={{ fontSize: 50 }} />
+  </div>
 ))
 
 addStory.controlled('controlled with children', readme, (setState, state) => (
-  <div>
+  <div style={{ fontSize: 30 }}>
     <div>
       <ProgressRing value={state.value / 100}><Icon name='done' /></ProgressRing>
       {' '}<ProgressRing value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
       {' '}<ProgressRing value={state.value / 100} />
+    </div>
+    <div>
+      <ProgressRing type='secondary' value={state.value / 100}><Icon name='done' /></ProgressRing>
+      {' '}<ProgressRing type='secondary' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
+      {' '}<ProgressRing type='secondary' value={state.value / 100} />
+    </div>
+    <div>
+      <ProgressRing type='tertiary' value={state.value / 100}><Icon name='done' /></ProgressRing>
+      {' '}<ProgressRing type='tertiary' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing>
+      {' '}<ProgressRing type='tertiary' value={state.value / 100} />
     </div>
     <div>
       <ProgressRing type='success' value={state.value / 100}><Icon name='done' /></ProgressRing>
@@ -53,24 +71,40 @@ addStory.controlled('controlled with children', readme, (setState, state) => (
 
 addStory.controlled('inside text', readme, (setState, state) => (
   <div>
-    There is already <ProgressRing type='success' value={state.value / 100}>{Math.floor(state.value)}</ProgressRing> percent loaded<br />
-    <ProgressRing type='success' value={state.value / 100}><Icon name='done' /></ProgressRing> {Math.floor(state.value)}% loaded<br />
-    <ProgressRing type='success' /> Loading data...<br />
+    There is already <ProgressRing value={state.value / 100}>{Math.floor(state.value)}</ProgressRing> percent loaded<br />
+    <ProgressRing value={state.value / 100}><Icon name='done' /></ProgressRing> {Math.floor(state.value)}% loaded<br />
+    <ProgressRing /> Loading data...<br />
 
     <div style={{ fontSize: 30 }}>
-      <ProgressRing type='success' /> Loading data...
+      <ProgressRing /> Loading data...
     </div>
 
     <div style={{ fontSize: 40 }}>
-      <ProgressRing type='success' /> Loading data...
+      <ProgressRing /> Loading data...
     </div>
 
     <div style={{ fontSize: 50 }}>
-      <ProgressRing type='success' /> Loading data...
+      <ProgressRing /> Loading data...
     </div>
 
     <div style={{ fontSize: 60 }}>
-      <ProgressRing type='success' /> Loading data...
+      <ProgressRing /> Loading data...
+    </div>
+
+    <div style={{ fontSize: 30 }}>
+      <ProgressRing><Icon name='done' /></ProgressRing> Loading data...
+    </div>
+
+    <div style={{ fontSize: 40 }}>
+      <ProgressRing><Icon name='done' /></ProgressRing> Loading data...
+    </div>
+
+    <div style={{ fontSize: 50 }}>
+      <ProgressRing><Icon name='done' /></ProgressRing> Loading data...
+    </div>
+
+    <div style={{ fontSize: 60 }}>
+      <ProgressRing><Icon name='done' /></ProgressRing> Loading data...
     </div>
 
     <input type='text' value={state.value} onChange={e => setState({ value: e.target.value })} />

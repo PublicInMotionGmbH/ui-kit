@@ -12,21 +12,27 @@ const propTypes = {
   /** Name of radio group */
   name: PropTypes.string.isRequired,
 
+  /** Is this value incorrect? */
+  error: PropTypes.bool,
+
   /** Array of objects which represent options */
   options: PropTypes.arrayOf(PropTypes.shape({
+    /** Label to show */
     label: PropTypes.node.isRequired,
+
+    /** Value it represents */
     value: PropTypes.any.isRequired,
+
+    /** Is this option disabled? */
     disabled: PropTypes.bool
   })),
 
-  /** Radio input label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
   /** Value of default option */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  value: PropTypes.any
+}
+
+const defaultProps = {
+  error: false
 }
 
 /**
@@ -66,18 +72,19 @@ class RadioGroup extends React.PureComponent {
   }
 
   render () {
-    const { className, children, name, options, value, size, onChange, ...passedProps } = this.props
+    const { className, children, name, options, error, value, onChange, ...passedProps } = this.props
     const _value = this.state.value
 
     const optionsList = options.map(obj => (
       <RadioInput
         checked={_value === obj.value}
         disabled={obj.disabled || false}
-        key={obj.label}
+        key={obj.value}
         name={name}
+        error={error}
         onChange={this.change.bind(this, obj.value)}
-        size={size}
-        value={obj.value}>
+        value={obj.value}
+      >
         {obj.label}
       </RadioInput>
     ))
@@ -91,5 +98,6 @@ class RadioGroup extends React.PureComponent {
 }
 
 RadioGroup.propTypes = propTypes
+RadioGroup.defaultProps = defaultProps
 
 export default RadioGroup
