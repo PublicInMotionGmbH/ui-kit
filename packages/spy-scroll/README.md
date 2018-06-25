@@ -30,14 +30,14 @@ containerId         | object           | n/a     | Id of spied container.
 horizontal          | boolean          | `false` | Switch scroll spy to horizontal.
 onVisible           | function         | n/a     | Event triggered when element becomes visible.
 onReached           | function         | n/a     | Event triggered when element begins disappearing.
-onBeginningAppeared | function         | n/a     | Event triggered when elements appears on the bottom of the viewport.
-onBeginningVisible  | function         | n/a     | Event triggered when element is fully visible on the bottom of the viewport.
-onEndReached        | function         | n/a     | Event triggered when element reaches top of the viewport.
-onEndLost           | function         | n/a     | Event triggered when element disappears on the top of the viewport.
-onEndAppeared       | function         | n/a     | Event triggered when elements appears on the top of the viewport.
-onEndVisible        | function         | n/a     | Event triggered when element is fully visible on the top of the viewport.
-onBeginningReached  | function         | n/a     | Event triggered when element reaches bottom of the viewport.
-onBeginningLost     | function         | n/a     | Event triggered when element disappears on the bottom of the viewport.
+onBeginningStart    | function         | n/a     | Event triggered when the beginning of the element appears on the viewport.
+onBeginningVisible  | function         | n/a     | Event triggered when element becomes fully visible, starting from element's beginning.
+onBeginningFinish   | function         | n/a     | Event triggered when the beginning of the element reaches the end of the viewport.
+onBeginningLost     | function         | n/a     | Event triggered when element fully disappears, starting from element's beginning.
+onEndStart          | function         | n/a     | Event triggered when the end of the element appears on the viewport.
+onEndVisible        | function         | n/a     | Event triggered when element becomes fully visible, starting from element's end.
+onEndFinish         | function         | n/a     | Event triggered when the end of the element reaches the end of the viewport.
+onEndLost           | function         | n/a     | Event triggered when element fully disappears, starting from element's end.
 onTriggerReached    | function         | n/a     | Event triggered when element reaches trigger.
 onTriggerRetreats   | function         | n/a     | Event triggered when element retreats over the trigger.
 onRangeEntered      | function         | n/a     | Event triggered when element enters range.

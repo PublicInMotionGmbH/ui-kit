@@ -22,29 +22,29 @@ const propTypes = {
   /** Event triggered when element begins disappearing. */
   onDisappearing: PropTypes.func,
 
-  /** Event triggered when elements appears on the beginning of the viewport. */
-  onBeginningAppeared: PropTypes.func,
+  /** Event triggered when the beginning of the element appears on the viewport. */
+  onBeginningStart: PropTypes.func,
 
-  /** Event triggered when element is fully visible on the beginning of the viewport. */
+  /** Event triggered when element becomes fully visible, starting from element's beginning. */
   onBeginningVisible: PropTypes.func,
 
-  /** Event triggered when element reaches end of the viewport. */
-  onEndReached: PropTypes.func,
+  /** Event triggered when the beginning of the element reaches the end of the viewport. */
+  onBeginningFinish: PropTypes.func,
 
-  /** Event triggered when element disappears on the end of the viewport. */
-  onEndLost: PropTypes.func,
+  /** Event triggered when element fully disappears, starting from element's beginning. */
+  onBeginningLost: PropTypes.func,
 
-  /** Event triggered when elements appears on the end of the viewport. */
-  onEndAppeared: PropTypes.func,
+  /** Event triggered when the end of the element appears on the viewport. */
+  onEndStart: PropTypes.func,
 
-  /** Event triggered when element is fully visible on the end of the viewport. */
+  /** Event triggered when element becomes fully visible, starting from element's end. */
   onEndVisible: PropTypes.func,
 
-  /** Event triggered when element reaches beginning of the viewport. */
-  onBeginningReached: PropTypes.func,
+  /** Event triggered when the end of the element reaches the end of the viewport. */
+  onEndFinish: PropTypes.func,
 
-  /** Event triggered when element disappears on the beginning of the viewport. */
-  onBeginningLost: PropTypes.func,
+  /** Event triggered when element fully disappears, starting from element's end. */
+  onEndLost: PropTypes.func,
 
   /** Event triggered when element reaches trigger. */
   onTriggerReached: PropTypes.func,
@@ -114,14 +114,14 @@ function trigger (prevState, state, trueStateEvent, falseStateEvent) {
  * @property {boolean} [props.horizontal]
  * @property {function} [props.onVisible]
  * @property {function} [props.onDisappearing]
- * @property {function} [props.onBeginningAppeared]
+ * @property {function} [props.onBeginningStart]
  * @property {function} [props.onBeginningVisible]
- * @property {function} [props.onEndReached]
- * @property {function} [props.onEndLost]
- * @property {function} [props.onEndAppeared]
- * @property {function} [props.onEndVisible]
- * @property {function} [props.onBeginningReached]
+ * @property {function} [props.onBeginningFinish]
  * @property {function} [props.onBeginningLost]
+ * @property {function} [props.onEndStart]
+ * @property {function} [props.onEndVisible]
+ * @property {function} [props.onEndFinish]
+ * @property {function} [props.onEndLost]
  * @property {function} [props.onTriggerReached]
  * @property {function} [props.onTriggerRetreats]
  * @property {function} [props.onRangeEntered]
@@ -189,24 +189,24 @@ class SpyScroll extends React.PureComponent {
    * Trigger events when state changes.
    */
   componentDidUpdate (prevProps, prevState) {
-    const { onVisible, onDisappearing, onBeginningAppeared, onBeginningVisible, onEndReached,
-      onEndLost, onEndAppeared, onEndVisible, onBeginningReached, onBeginningLost,
+    const { onVisible, onDisappearing, onBeginningStart, onBeginningVisible, onBeginningFinish,
+      onBeginningLost, onEndStart, onEndVisible, onEndFinish, onEndLost,
       onTriggerReached, onTriggerRetreats, onRangeEntered, onRangeLeft } = this.props
 
     // Trigger onVisible or onDisappearing for state.visible change
     trigger(prevState.visible, this.state.visible, onVisible, onDisappearing)
 
-    // Trigger onBeginningReached or onBeginningVisible for state.beginning change
-    trigger(prevState.beginning, this.state.beginning, onBeginningReached, onBeginningVisible)
+    // Trigger onEndFinish or onBeginningVisible for state.beginning change
+    trigger(prevState.beginning, this.state.beginning, onEndFinish, onBeginningVisible)
 
-    // Trigger onEndReached or onEndVisible for state.end change
-    trigger(prevState.end, this.state.end, onEndReached, onEndVisible)
+    // Trigger onBeginningFinish or onEndVisible for state.end change
+    trigger(prevState.end, this.state.end, onBeginningFinish, onEndVisible)
 
-    // Trigger onEndLost or onEndAppeared for state.ahead change
-    trigger(prevState.ahead, this.state.ahead, onEndLost, onEndAppeared)
+    // Trigger onBeginningLost or onEndStart for state.ahead change
+    trigger(prevState.ahead, this.state.ahead, onBeginningLost, onEndStart)
 
-    // Trigger onBeginningLost or onBeginningAppeared for state.behind change
-    trigger(prevState.behind, this.state.behind, onBeginningLost, onBeginningAppeared)
+    // Trigger onEndLost or onBeginningStart for state.behind change
+    trigger(prevState.behind, this.state.behind, onEndLost, onBeginningStart)
 
     // Trigger onTriggerRetreats or onTriggerReached for state.triggered change
     trigger(prevState.triggered, this.state.triggered, onTriggerReached, onTriggerRetreats)

@@ -213,28 +213,28 @@ describe('triggers on scroll down', () => {
     expect(onBeginningVisible).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndReached', () => {
-    const onEndReached = jest.fn()
-    wrapper = createSpyWrapper({ onEndReached })
+  it('triggers onBeginningFinish', () => {
+    const onBeginningFinish = jest.fn()
+    wrapper = createSpyWrapper({ onBeginningFinish })
     wrapper.setState({ end: true })
 
-    expect(onEndReached).toHaveBeenCalledTimes(1)
+    expect(onBeginningFinish).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndLost', () => {
-    const onEndLost = jest.fn()
-    wrapper = createSpyWrapper({ onEndLost })
+  it('triggers onBeginningLost', () => {
+    const onBeginningLost = jest.fn()
+    wrapper = createSpyWrapper({ onBeginningLost })
     wrapper.setState({ ahead: true })
 
-    expect(onEndLost).toHaveBeenCalledTimes(1)
+    expect(onBeginningLost).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningAppeared', () => {
-    const onBeginningAppeared = jest.fn()
-    wrapper = createSpyWrapper({ onBeginningAppeared })
+  it('triggers onBeginningStart', () => {
+    const onBeginningStart = jest.fn()
+    wrapper = createSpyWrapper({ onBeginningStart })
     wrapper.setState({ behind: false })
 
-    expect(onBeginningAppeared).toHaveBeenCalledTimes(1)
+    expect(onBeginningStart).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onTriggerReached', () => {
@@ -288,12 +288,12 @@ describe('triggers on scroll up', () => {
     expect(onDisappearing).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningReached', () => {
-    const onBeginningReached = jest.fn()
-    wrapper = createSpyWrapper({ onBeginningReached })
+  it('triggers onEndFinish', () => {
+    const onEndFinish = jest.fn()
+    wrapper = createSpyWrapper({ onEndFinish })
     wrapper.setState({ beginning: true })
 
-    expect(onBeginningReached).toHaveBeenCalledTimes(1)
+    expect(onEndFinish).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onEndVisible', () => {
@@ -304,20 +304,20 @@ describe('triggers on scroll up', () => {
     expect(onEndVisible).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndAppeared', () => {
-    const onEndAppeared = jest.fn()
-    wrapper = createSpyWrapper({ onEndAppeared })
+  it('triggers onEndStart', () => {
+    const onEndStart = jest.fn()
+    wrapper = createSpyWrapper({ onEndStart })
     wrapper.setState({ ahead: false })
 
-    expect(onEndAppeared).toHaveBeenCalledTimes(1)
+    expect(onEndStart).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningLost', () => {
-    const onBeginningLost = jest.fn()
-    wrapper = createSpyWrapper({ onBeginningLost })
+  it('triggers onEndLost', () => {
+    const onEndLost = jest.fn()
+    wrapper = createSpyWrapper({ onEndLost })
     wrapper.setState({ behind: true })
 
-    expect(onBeginningLost).toHaveBeenCalledTimes(1)
+    expect(onEndLost).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onTriggerRetreats', () => {
@@ -410,28 +410,28 @@ describe('triggers on scroll right', () => {
     expect(onBeginningVisible).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndReached', () => {
-    const onEndReached = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onEndReached })
+  it('triggers onBeginningFinish', () => {
+    const onBeginningFinish = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onBeginningFinish })
     wrapper.setState({ end: true })
 
-    expect(onEndReached).toHaveBeenCalledTimes(1)
+    expect(onBeginningFinish).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndLost', () => {
-    const onEndLost = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onEndLost })
+  it('triggers onBeginningLost', () => {
+    const onBeginningLost = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onBeginningLost })
     wrapper.setState({ ahead: true })
 
-    expect(onEndLost).toHaveBeenCalledTimes(1)
+    expect(onBeginningLost).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningAppeared', () => {
-    const onBeginningAppeared = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onBeginningAppeared })
+  it('triggers onBeginningStart', () => {
+    const onBeginningStart = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onBeginningStart })
     wrapper.setState({ behind: false })
 
-    expect(onBeginningAppeared).toHaveBeenCalledTimes(1)
+    expect(onBeginningStart).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onTriggerReached', () => {
@@ -486,12 +486,12 @@ describe('triggers on scroll left', () => {
     expect(onDisappearing).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningReached', () => {
-    const onBeginningReached = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onBeginningReached })
+  it('triggers onEndFinish', () => {
+    const onEndFinish = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onEndFinish })
     wrapper.setState({ beginning: true })
 
-    expect(onBeginningReached).toHaveBeenCalledTimes(1)
+    expect(onEndFinish).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onEndVisible', () => {
@@ -502,20 +502,20 @@ describe('triggers on scroll left', () => {
     expect(onEndVisible).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onEndAppeared', () => {
-    const onEndAppeared = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onEndAppeared })
+  it('triggers onEndStart', () => {
+    const onEndStart = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onEndStart })
     wrapper.setState({ ahead: false })
 
-    expect(onEndAppeared).toHaveBeenCalledTimes(1)
+    expect(onEndStart).toHaveBeenCalledTimes(1)
   })
 
-  it('triggers onBeginningLost', () => {
-    const onBeginningLost = jest.fn()
-    wrapper = createSpyWrapper({ horizontal: true, onBeginningLost })
+  it('triggers onEndLost', () => {
+    const onEndLost = jest.fn()
+    wrapper = createSpyWrapper({ horizontal: true, onEndLost })
     wrapper.setState({ behind: true })
 
-    expect(onBeginningLost).toHaveBeenCalledTimes(1)
+    expect(onEndLost).toHaveBeenCalledTimes(1)
   })
 
   it('triggers onTriggerRetreats', () => {

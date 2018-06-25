@@ -33,14 +33,14 @@ const iconStyle = {
 
 const onVisible = action('onVisible')
 const onDisappearing = action('onDisappearing')
-const onBeginningAppeared = action('onBeginningAppeared')
+const onBeginningStart = action('onBeginningStart')
 const onBeginningVisible = action('onBeginningVisible')
-const onEndReached = action('onEndReached')
-const onEndLost = action('onEndLost')
-const onEndAppeared = action('onEndAppeared')
-const onEndVisible = action('onEndVisible')
-const onBeginningReached = action('onBeginningReached')
+const onBeginningFinish = action('onBeginningFinish')
 const onBeginningLost = action('onBeginningLost')
+const onEndStart = action('onEndStart')
+const onEndVisible = action('onEndVisible')
+const onEndFinish = action('onEndFinish')
+const onEndLost = action('onEndLost')
 const onTriggerReached = action('onTriggerReached')
 const onTriggerRetreats = action('onTriggerRetreats')
 const onRangeEntered = action('onRangeEntered')
@@ -48,7 +48,7 @@ const onRangeLeft = action('onRangeLeft')
 
 // Stories
 
-addStory.controlled('onVisible and onDisappearing', readme, (setState, state) => (
+addStory.controlled('initial', readme, (setState, state) => (
   <div style={{
     ...wrapperStyle,
     flexDirection: 'column',
@@ -68,6 +68,14 @@ addStory.controlled('onVisible and onDisappearing', readme, (setState, state) =>
         onDisappearing()
         setState({ visible: false })
       }}
+      onBeginningStart={onBeginningStart}
+      onBeginningVisible={onBeginningVisible}
+      onBeginningFinish={onBeginningFinish}
+      onBeginningLost={onBeginningLost}
+      onEndStart={onEndStart}
+      onEndVisible={onEndVisible}
+      onEndFinish={onEndFinish}
+      onEndLost={onEndLost}
     >
       <Box />
     </SpyScroll>
@@ -100,6 +108,14 @@ addStory.controlled('horizontal', readme, (setState, state) => (
         onDisappearing()
         setState({ visible: false })
       }}
+      onBeginningStart={onBeginningStart}
+      onBeginningVisible={onBeginningVisible}
+      onBeginningFinish={onBeginningFinish}
+      onBeginningLost={onBeginningLost}
+      onEndStart={onEndStart}
+      onEndVisible={onEndVisible}
+      onEndFinish={onEndFinish}
+      onEndLost={onEndLost}
     >
       <Box style={{
         top: 0,
@@ -340,126 +356,6 @@ addStory.controlled('horizontal with container', readme, (setState, state) => (
         <strong>Scroll left</strong>
         <Icon name='arrow_back' style={iconStyle} />
       </div>
-    </div>
-  </div>
-), () => ({ visible: false }))
-
-addStory.controlled('onBeginningAppeared and onBeginningLost', readme, (setState, state) => (
-  <div style={{
-    ...wrapperStyle,
-    flexDirection: 'column',
-    height: '200vh',
-    backgroundColor: state.visible ? '#e7e7e7' : '#ffffff'
-  }}>
-    <div className='scroll-text'>
-      <strong>Scroll down</strong>
-      <Icon name='arrow_downward' style={iconStyle} />
-    </div>
-    <SpyScroll
-      onBeginningAppeared={() => {
-        onBeginningAppeared()
-        setState({ visible: true })
-      }}
-      onBeginningLost={() => {
-        onBeginningLost()
-        setState({ visible: false })
-      }}
-    >
-      <Box />
-    </SpyScroll>
-    <div className='scroll-text'>
-      <Icon name='arrow_upward' style={iconStyle} />
-      <strong>Scroll up</strong>
-    </div>
-  </div>
-), () => ({ visible: false }))
-
-addStory.controlled('onBeginningVisible and onBeginningReached', readme, (setState, state) => (
-  <div style={{
-    ...wrapperStyle,
-    flexDirection: 'column',
-    height: '200vh',
-    backgroundColor: state.visible ? '#e7e7e7' : '#ffffff'
-  }}>
-    <div className='scroll-text'>
-      <strong>Scroll down</strong>
-      <Icon name='arrow_downward' style={iconStyle} />
-    </div>
-    <SpyScroll
-      onBeginningVisible={() => {
-        onBeginningVisible()
-        setState({ visible: true })
-      }}
-      onBeginningReached={() => {
-        onBeginningReached()
-        setState({ visible: false })
-      }}
-    >
-      <Box />
-    </SpyScroll>
-    <div className='scroll-text'>
-      <Icon name='arrow_upward' style={iconStyle} />
-      <strong>Scroll up</strong>
-    </div>
-  </div>
-), () => ({ visible: false }))
-
-addStory.controlled('onEndVisible and onEndReached', readme, (setState, state) => (
-  <div style={{
-    ...wrapperStyle,
-    flexDirection: 'column',
-    height: '200vh',
-    backgroundColor: state.visible ? '#e7e7e7' : '#ffffff'
-  }}>
-    <div className='scroll-text'>
-      <strong>Scroll down</strong>
-      <Icon name='arrow_downward' style={iconStyle} />
-    </div>
-    <SpyScroll
-      onEndVisible={() => {
-        onEndVisible()
-        setState({ visible: true })
-      }}
-      onEndReached={() => {
-        onEndReached()
-        setState({ visible: false })
-      }}
-    >
-      <Box />
-    </SpyScroll>
-    <div className='scroll-text'>
-      <Icon name='arrow_upward' style={iconStyle} />
-      <strong>Scroll up</strong>
-    </div>
-  </div>
-), () => ({ visible: false }))
-
-addStory.controlled('onEndAppeared and onEndLost', readme, (setState, state) => (
-  <div style={{
-    ...wrapperStyle,
-    flexDirection: 'column',
-    height: '200vh',
-    backgroundColor: state.visible ? '#e7e7e7' : '#ffffff'
-  }}>
-    <div className='scroll-text'>
-      <strong>Scroll down</strong>
-      <Icon name='arrow_downward' style={iconStyle} />
-    </div>
-    <SpyScroll
-      onEndAppeared={() => {
-        onEndAppeared()
-        setState({ visible: true })
-      }}
-      onEndLost={() => {
-        onEndLost()
-        setState({ visible: false })
-      }}
-    >
-      <Box />
-    </SpyScroll>
-    <div className='scroll-text'>
-      <Icon name='arrow_upward' style={iconStyle} />
-      <strong>Scroll up</strong>
     </div>
   </div>
 ), () => ({ visible: false }))
