@@ -6,6 +6,8 @@ $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-siz
   position: relative
   min-height: $radio-input-box-size
   font-size: $radio-input-box-font-size
+  cursor: pointer
+  width: $radio-input-box-width
 
   > input
     display: none
@@ -14,6 +16,10 @@ $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-siz
     padding-left: $radio-input-box-margin + $radio-input-box-size
     padding-right: $radio-input-box-margin
     color: $radio-input-text-color
+    flex: 1 1 auto
+
+    > *
+      display: inline-block
 
   > input + span:before
     box-sizing: border-box

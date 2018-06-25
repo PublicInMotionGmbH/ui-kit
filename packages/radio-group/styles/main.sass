@@ -1,0 +1,9 @@
+@import './config'
+
+@include module('radio-group')
+  display: flex
+
+  &--vertical
+    flex-direction: column
+    > #{prefix('radio-input')}
+      margin: dp(1) 0
