@@ -88,7 +88,7 @@ const propTypes = {
 
 const defaultProps = {
   messages: [],
-  messageRenderer: message => typeof message === 'string' ? message.replace(/(?:\r\n|\r|\n)/g, '<br/>') : message,
+  messageRenderer: message => message,
   type: 'chat',
   typingUsers: [],
   placeholder: 'reply'
@@ -122,7 +122,6 @@ const defaultProps = {
 class Chat extends React.PureComponent {
   state = {
     inputValue: '',
-    shift: false,
     typingStatus: false
   }
 
@@ -155,13 +154,12 @@ class Chat extends React.PureComponent {
    * @param {string} inputValue
    */
   handleInputChange = (value) => {
-    this.setState({ inputValue: value })
-
     // If the user is typing clear the timeout
     if (this.state.typingStatus) {
       clearTimeout(this._typingTimeout)
     }
-    this.setState(state => ({ typingStatus: true, value }), () => {
+
+    this.setState(state => ({ inputValue: value, typingStatus: true }), () => {
       this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
     })
   }
@@ -174,8 +172,6 @@ class Chat extends React.PureComponent {
   handleSubmit = (event) => {
     const { onSubmit, user: { name, id } } = this.props
     const { inputValue } = this.state
-
-    this.mockHeightChange()
 
     // Prevent the form from being submitted
     event.preventDefault()
@@ -191,7 +187,7 @@ class Chat extends React.PureComponent {
         name: name,
         id: id
       },
-      time: moment().valueOf()
+      time: +moment()
     }
 
     // Prevent from submitting message if the inputValue is empty
@@ -199,53 +195,27 @@ class Chat extends React.PureComponent {
       return
     }
 
+    // Submit message
     if (onSubmit) {
       onSubmit(message)
-      this.mockHeightChange()
+      // Reset input value
       this.setState({ inputValue: '' })
     }
   }
 
-  handleKeyDown = (event) => {
-    const which = event.which || event.key
-
-    if (which === 16) {
-      this.setState({ shift: true })
-    }
-
-    if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
-      this.setState({ inputValue: '' })
-    }
-  }
-
-  handleKeyUp = (event) => {
-    const which = event.which || event.key
-
-    if (which === 16) {
-      this.setState({ shift: false })
-    }
-
-    if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
-      this.setState({ inputValue: '' })
-    }
-  }
-
+  /**
+   * Handle key press.
+   *
+   * @param {SyntheticEvent} event
+   */
   handleKeyPress = (event) => {
     const which = event.which || event.key
 
-    if (!this.state.shift && which === 13) {
+    // Dispatch submit event only if 'enter' key is pressed
+    if (which === 13 && event.shiftKey === false) {
+      event.preventDefault()
       this._form.dispatchEvent(new window.Event('submit'))
     }
-
-    if (!this.state.shift && which === 13 && /^(^$|\s+)$/.test(this._input.value)) {
-      event.preventDefault()
-      this.setState({ inputValue: '' })
-    }
-  }
-
-  mockHeightChange = (e) => {
-    if (this.state.shift) return
-    this.setState({ inputValue: '' })
   }
 
   /**
@@ -263,7 +233,7 @@ class Chat extends React.PureComponent {
       <Message
         className={messageClsName}
         key={i}
-        message={messageRenderer(message)}
+        message={messageRenderer(message.message)}
         name={message.user.name}
         time={message.time}
         style={{ marginLeft: type === 'chat' && id === message.user.id && 'auto' }}
@@ -357,15 +327,12 @@ class Chat extends React.PureComponent {
               {additionalInformation && <span className={additionalInfoCls}>{additionalInformation}</span>}
               <Textarea
                 className={textareaCls}
-                onChange={(value) => { this.handleInputChange(value) }}
-                onKeyDown={this.handleKeyDown}
-                onKeyUp={this.handleKeyUp}
+                onChange={this.handleInputChange}
                 onKeyPress={this.handleKeyPress}
                 placeholder={placeholder}
                 value={inputValue}
                 TextareaComponent={TextareaAutosize}
                 inputRef={(node) => this.setRef(node, '_input')}
-                onHeightChange={this.mockHeightChange}
               />
             </span>
           </span>

@@ -23,10 +23,6 @@ const propTypes = {
 
 const defaultProps = {}
 
-function createMarkup (message) {
-  return {__html: message}
-}
-
 function renderTime (time) {
   const fromNow = moment(time).fromNow()
   const hoursMinutes = moment(time).format('HH:mm')
@@ -49,7 +45,7 @@ function Message (props) {
         </span>
         <span className={nameClsName}>{name}</span>
       </div>
-      <span className={messageClsName} dangerouslySetInnerHTML={createMarkup(message)} />
+      <span className={messageClsName}>{message}</span>
     </div>
   )
 }

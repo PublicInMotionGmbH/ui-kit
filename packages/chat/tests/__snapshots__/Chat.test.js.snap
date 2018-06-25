@@ -10,16 +10,7 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="0"
-      message={
-        Object {
-          "message": "This is message",
-          "time": 1528104696738,
-          "user": Object {
-            "id": "2",
-            "name": "John",
-          },
-        }
-      }
+      message="This is message"
       name="John"
       style={
         Object {
@@ -31,16 +22,7 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="1"
-      message={
-        Object {
-          "message": "This is reply",
-          "time": 1528104730633,
-          "user": Object {
-            "id": "3",
-            "name": "Tom",
-          },
-        }
-      }
+      message="This is reply"
       name="Tom"
       style={
         Object {
@@ -52,16 +34,7 @@ exports[`<Chat /> renders children correctly 1`] = `
     <Message
       className="talixo-chat__message talixo-chat__message--chat"
       key="2"
-      message={
-        Object {
-          "message": "This is reply",
-          "time": 1528104730633,
-          "user": Object {
-            "id": "1",
-            "name": "Me",
-          },
-        }
-      }
+      message="This is reply"
       name="Me"
       style={
         Object {
@@ -89,10 +62,7 @@ exports[`<Chat /> renders children correctly 1`] = `
           className="talixo-chat__textarea"
           inputRef={[Function]}
           onChange={[Function]}
-          onHeightChange={[Function]}
-          onKeyDown={[Function]}
           onKeyPress={[Function]}
-          onKeyUp={[Function]}
           placeholder="reply"
           resize={true}
           value=""
