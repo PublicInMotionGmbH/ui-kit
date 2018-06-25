@@ -8,10 +8,10 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Label for "No" */
-  noLabel: PropTypes.string,
+  noLabel: PropTypes.node,
 
   /** Label for "Yes" */
-  yesLabel: PropTypes.string,
+  yesLabel: PropTypes.node,
 
   /** Is it checked? */
   value: PropTypes.bool,

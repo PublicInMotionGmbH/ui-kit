@@ -29,7 +29,7 @@ className     | string    | n/a     | additional class name passed to wrapper
 type          | string    | n/a     | button color, one of: `primary`, `secondary`, `tertiary`, `success`, `error`, `info`, `warning`, `link`
 ghost         | bool      | `false` | should this button be without solid background?
 small         | bool      | `false` | should this button be smaller than default?
-fluid          | bool      | `false` | should this button take full width?
+fluid         | bool      | `false` | should this button take full width?
 submit        | bool      | `false` | should this button have `type` set to `submit`?
 
 ## Changelog
