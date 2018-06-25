@@ -179,17 +179,18 @@ class TextInput extends React.PureComponent {
    */
   onInputChange = (e) => {
     const { value, onChange } = this.props
+    const nextValue = e.target.value
 
     // Update styles connected to suffix
     this.updateStyles()
 
     if (value == null) {
-      this.setState({ value })
+      this.setState({ value: nextValue })
     }
 
     // Trigger change to parent components
     if (onChange) {
-      onChange(e.target.value)
+      onChange(nextValue)
     }
   }
 

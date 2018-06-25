@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Textarea /> renders textarea correctly 1`] = `
+<textarea
+  className="talixo-textarea"
+  onChange={[Function]}
+  value=""
+/>
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dots /> renders children correctly 1`] = `
+<div
+  className="talixo-carousel-dots"
+>
+  <div
+    className="talixo-carousel-dots__single"
+    key="0"
+    onClick={[Function]}
+  />
+  <div
+    className="talixo-carousel-dots__single"
+    key="1"
+    onClick={[Function]}
+  />
+  <div
+    className="talixo-carousel-dots__single"
+    key="2"
+    onClick={[Function]}
+  />
+</div>
+`;

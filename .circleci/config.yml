@@ -64,8 +64,3 @@ jobs:
       - run:
           name: Test package dependencies
           command: npm run compare-dependencies -- --all
-
-      # check if all components are building properly
-      - run:
-          name: Trying to build
-          command: npm run build
