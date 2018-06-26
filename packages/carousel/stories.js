@@ -2,13 +2,14 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Carousel from './src/Carousel'
+import CarouselAutoplay from './src/CarouselAutoplay'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Carousel', module, {
-  propTables: [ Carousel ]
+  propTables: [ Carousel, CarouselAutoplay ]
 })
 
 // Custom dots
@@ -56,25 +57,6 @@ function renderThumbnails (props) {
       {elements}
     </div>
   )
-}
-
-// Custom wrapper component with automatic sliding
-class CustomWrapperComponent extends React.PureComponent {
-  componentDidMount () {
-    if (this.child) {
-      setInterval(this.child.handlerNext, this.props.interval)
-    }
-  }
-
-  render () {
-    return (
-      <Carousel ref={instance => { this.child = instance }}>
-        <div className='tx-slide tx-slide--1'>SLIDE 1</div>
-        <div className='tx-slide tx-slide--2'>SLIDE 2</div>
-        <div className='tx-slide tx-slide--3'>SLIDE 3</div>
-      </Carousel>
-    )
-  }
 }
 
 // Stories
@@ -184,6 +166,24 @@ addStory('as a gallery', readme, () => (
   </div>
 ))
 
-addStory('Custom wrapper component with automatic sliding', readme, () => (
-  <CustomWrapperComponent interval={2500} />
+addStory('Automatic sliding', readme, () => (
+  <CarouselAutoplay interval={2000}>
+    <Carousel>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    </Carousel>
+  </CarouselAutoplay>
+))
+
+addStory('Automatic sliding with dots', readme, () => (
+  <CarouselAutoplay interval={4000}>
+    <Carousel dots>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+      <div className='tx-slide tx-slide--4'>SLIDE 4</div>
+      <div className='tx-slide tx-slide--5'>SLIDE 5</div>
+    </Carousel>
+  </CarouselAutoplay>
 ))

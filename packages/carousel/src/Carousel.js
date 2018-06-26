@@ -11,6 +11,12 @@ import Dots from './Dots'
 
 const moduleName = 'carousel'
 
+/**
+ * Get offset height of DOM node, to immediately apply CSS style changes.
+ *
+ * @param {HTMLElement} node
+ * @returns {number}
+ */
 function reflow (node) {
   return node.offsetHeight
 }
@@ -41,14 +47,18 @@ const propTypes = {
   value: PropTypes.number,
 
   /** Event handler for active slide change */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+
+  /** Default behavior for changing slide (for controlled component) */
+  defaultMovement: PropTypes.oneOf([ 'exact', 'forward', 'back' ])
 }
 
 const defaultProps = {
   children: [],
   animationTime: 500,
   perPage: 1,
-  renderDots: Dots
+  renderDots: Dots,
+  defaultMovement: 'exact'
 }
 
 /**
@@ -61,7 +71,7 @@ const defaultProps = {
  * @property {boolean} [props.dots]
  * @property {number} [props.animationTime]
  * @property {number} [props.perPage]
- * @property {function} [props.rednerDots]
+ * @property {function} [props.renderDots]
  * @class {React.Element}
  */
 class Carousel extends React.PureComponent {
@@ -87,7 +97,7 @@ class Carousel extends React.PureComponent {
 
       const type = this.lastMovementIndex === slide
         ? this.lastMovementType
-        : 'exact'
+        : this.props.defaultMovement
 
       this.change(slide, type, true)
     }
@@ -295,7 +305,10 @@ class Carousel extends React.PureComponent {
   }
 
   render () {
-    const { arrows, className, dots, perPage } = this.props
+    const {
+      arrows, className, dots, perPage,
+      children, animationTime, renderDots, value, onChange, defaultMovement, ...passedProps
+    } = this.props
     const { currentSlide, transitionTime } = this.state
 
     const clsName = buildClassName(moduleName, className)
@@ -315,7 +328,7 @@ class Carousel extends React.PureComponent {
     }
 
     return (
-      <div className={clsName}>
+      <div className={clsName} {...passedProps}>
         <div className={contentClsName}>
           {_arrows}
 
