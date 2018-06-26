@@ -115,6 +115,24 @@ describe('<Carousel />', () => {
     wrapper.unmount()
   })
 
+  it('goes to first slide from the last one (with different perPage than 1)', () => {
+    const wrapper = mount(
+      <Carousel perPage={2} value={2} arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.state().currentSlide).toBe(2)
+
+    wrapper.setProps({ value: 0 })
+
+    expect(wrapper.state().currentSlide).toBe(0)
+
+    wrapper.unmount()
+  })
+
   it('goes to last slide when prev arrow clicked on first', () => {
     const wrapper = mount(
       <Carousel arrows>

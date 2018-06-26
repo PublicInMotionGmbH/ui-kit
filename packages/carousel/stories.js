@@ -157,6 +157,21 @@ addStory.controlled('controlled', readme, (setState, state) => (
   </Carousel>
 ), () => ({ value: 1 }))
 
+addStory.controlled('controlled with 2 per page', readme, (setState, state) => (
+  <Carousel
+    dots
+    arrows
+    perPage={2}
+    value={state.value}
+    onChange={value => setState({ value })}
+    renderDots={renderNumberDots}
+  >
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+), () => ({ value: 2 }))
+
 addStory('as a gallery', readme, () => (
   <div style={{ maxWidth: 1000, margin: '0 auto' }}>
     <Carousel arrows dots renderDots={renderThumbnails}>

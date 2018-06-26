@@ -81,9 +81,6 @@ class Carousel extends React.PureComponent {
       })
     }
 
-    // Calculate number of slides available after changes
-    const slides = Math.ceil(props.children.length / props.perPage)
-
     // Update value if it's controlled & changed
     if (props.value != null && this.props.value !== props.value) {
       const slide = props.value % props.children.length
@@ -98,7 +95,7 @@ class Carousel extends React.PureComponent {
     // Update current slide, if it's bigger than maximum slide
     const currentSlide = this.state.currentSlide % this.props.children.length
 
-    if (currentSlide >= slides) {
+    if (currentSlide >= props.children.length) {
       this.setState({
         currentSlide: props.children.length - 1
       })
