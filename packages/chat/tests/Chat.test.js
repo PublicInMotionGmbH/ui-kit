@@ -72,15 +72,6 @@ describe('<Chat />', () => {
     expect(wrapper.find(`.${name}__input-container-inner`).length).toBe(1)
   })
 
-  it('renders user-typing className correctly', () => {
-    const wrapper = shallow(<Chat user={user} messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: user, status: true}]
-    })
-
-    expect(wrapper.find(`.${name}__user-typing-container`).length).toBe(1)
-  })
-
   it('renders renderMessages type chat correctly', () => {
     const wrapper = shallow(<Chat user={user} messages={messages} />)
 

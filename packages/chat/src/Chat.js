@@ -274,7 +274,6 @@ class Chat extends React.PureComponent {
     const inputContainerCls = buildClassName([moduleName, 'input-container'])
     const textareaCls = buildClassName([moduleName, 'textarea'])
     const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
-    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
 
     return (
       <div className={wrapperClsName} {...passedProps}>
@@ -286,9 +285,7 @@ class Chat extends React.PureComponent {
           className={formClsName}
           onSubmit={this.handleSubmit}
         >
-          <div className={userTypingContainerCls}>
-            {typingUsers.length > 0 && <TypingUsers {...this.props} />}
-          </div>
+          <TypingUsers {...this.props} />
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
             <span className={inputContainerInnerCls}>

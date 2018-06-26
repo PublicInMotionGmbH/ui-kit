@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { buildClassName } from '@talixo/shared'
+
+const moduleName = 'chat'
+
 const propTypes = {
   /** Typing users. */
   typingUsers: PropTypes.arrayOf(
@@ -31,7 +35,7 @@ const propTypes = {
 
 function TypingUsers (props) {
   const { typingUsers, user: { id } } = props
-
+  const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
   const otherUsers = typingUsers.filter(user => user.user.id !== id)
   const users = otherUsers
     .map((user, i) => {
@@ -47,10 +51,10 @@ function TypingUsers (props) {
     .join('')
 
   return (
-    <React.Fragment>
+    <div className={userTypingContainerCls}>
       {users}
       {otherUsers.length > 0 && ` ${otherUsers.length > 1 ? 'are' : 'is'} typing`}
-    </React.Fragment>
+    </div>
   )
 }
 

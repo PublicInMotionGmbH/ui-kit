@@ -38,6 +38,12 @@ describe('<TypingUsers />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('renders no typing user correctly', () => {
+    const wrapper = shallow(<TypingUsers typingUsers={[]} user={user} />)
+
+    expect(wrapper.text()).toBe('')
+  })
+
   it('renders one typing user correctly', () => {
     const wrapper = shallow(<TypingUsers typingUsers={typingUser} user={user} />)
 

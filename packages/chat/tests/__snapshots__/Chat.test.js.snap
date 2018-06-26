@@ -33,8 +33,45 @@ exports[`<Chat /> renders children correctly 1`] = `
     className="talixo-chat__form"
     onSubmit={[Function]}
   >
-    <div
-      className="talixo-chat__user-typing-container"
+    <TypingUsers
+      messageRenderer={[Function]}
+      messages={
+        Array [
+          Object {
+            "message": "This is message",
+            "time": 1528104696738,
+            "user": Object {
+              "id": "2",
+              "name": "John",
+            },
+          },
+          Object {
+            "message": "This is reply",
+            "time": 1528104730633,
+            "user": Object {
+              "id": "3",
+              "name": "Tom",
+            },
+          },
+          Object {
+            "message": "This is reply",
+            "time": 1528104730633,
+            "user": Object {
+              "id": "1",
+              "name": "Me",
+            },
+          },
+        ]
+      }
+      placeholder="reply"
+      type="chat"
+      typingUsers={Array []}
+      user={
+        Object {
+          "id": "1",
+          "name": "user",
+        }
+      }
     />
     <span
       className="talixo-chat__input-container"
