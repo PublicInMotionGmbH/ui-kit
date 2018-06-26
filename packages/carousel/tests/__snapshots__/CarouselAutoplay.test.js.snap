@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Carousel /> renders children correctly 1`] = `
+<Carousel
+  animationTime={500}
+  defaultMovement="forward"
+  onChange={[Function]}
+  perPage={1}
+  renderDots={[Function]}
+  value={0}
+>
+  <div>
+    SLIDE 1
+  </div>
+  <div>
+    SLIDE 2
+  </div>
+  <div>
+    SLIDE 3
+  </div>
+</Carousel>
+`;

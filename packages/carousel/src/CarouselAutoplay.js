@@ -60,12 +60,11 @@ class CarouselAutoplay extends React.PureComponent {
   constructor (props) {
     super(props)
 
-    const carousel = React.Children.only(this.props.children)
-    const initialSlide = props.initialSlide == null ? carousel.props.value || 0 : 0
+    const carousel = this.buildCarousel(this.props, this.props.initialSlide)
 
     this.state = {
-      carousel: this.buildCarousel(this.props, initialSlide),
-      value: initialSlide
+      carousel: carousel,
+      value: carousel.props.value
     }
   }
 
@@ -120,10 +119,17 @@ class CarouselAutoplay extends React.PureComponent {
       slide = +carousel.props.value || 0
     }
 
+    const onChange = carousel.props.onChange
+
     return React.cloneElement(props.children, {
       value: slide || 0,
       defaultMovement: props.movement,
-      onChange: this.change
+      onChange: onChange == null
+        ? this.change
+        : (...args) => {
+          this.change(...args)
+          onChange(...args)
+        }
     })
   }
 
