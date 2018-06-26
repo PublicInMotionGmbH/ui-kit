@@ -148,11 +148,11 @@ describe('<Chat />', () => {
     wrapper.unmount()
   })
 
-  it('sets messages ref correctly', () => {
+  it('sets form ref correctly', () => {
     const wrapper = mount(<Chat user={user} placeholder='hello' messages={messages} />)
-    const refInput = wrapper.instance()._input
+    const refForm = wrapper.instance()._form
 
-    expect(refInput.placeholder).toEqual('hello')
+    expect(refForm.className).toMatch(`${name}__form`)
     wrapper.unmount()
   })
 })
@@ -169,17 +169,50 @@ describe('componentDidUpdate', () => {
     expect(spiedUser.status).toEqual(true)
   })
 
-  it('triggers scrollToBottom when new messages are provided', () => {
-    const wrapper = shallow(<Chat messages={messages} user={user} />)
+  it('triggers scrollToBottom when new messages are provided by the user', () => {
+    const wrapper = mount(<Chat messages={messages} user={messages[0].user} />)
     const scrollToBottom = jest.spyOn(wrapper.instance(), 'scrollToBottom').mockImplementation(n => n)
+
+    Object.defineProperty(window.Element.prototype, 'scrollHeight', {value: 200, writable: true})
+    Object.defineProperty(window.Element.prototype, 'scrollTop', {value: 0, writable: true})
+    Object.defineProperty(window.Element.prototype, 'clientHeight', {value: 100, writable: true})
 
     wrapper.setProps({ messages: messages.concat(messages[0]) })
 
     expect(scrollToBottom).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
+  it('triggers scrollToBottom when new messages are provided and the view is scrolled to the bottom', () => {
+    const wrapper = mount(<Chat messages={messages} user={user} />)
+    const scrollToBottom = jest.spyOn(wrapper.instance(), 'scrollToBottom').mockImplementation(n => n)
+
+    Object.defineProperty(window.Element.prototype, 'scrollHeight', {value: 200, writable: true})
+    Object.defineProperty(window.Element.prototype, 'scrollTop', {value: 200, writable: true})
+    Object.defineProperty(window.Element.prototype, 'clientHeight', {value: 100, writable: true})
+
+    wrapper.setProps({ messages: messages.concat(messages[0]) })
+
+    expect(scrollToBottom).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
+  it('doesn`t triggers scrollToBottom when new messages are provided and the view is not scrolled to the bottom', () => {
+    const wrapper = mount(<Chat messages={messages} user={user} />)
+    const scrollToBottom = jest.spyOn(wrapper.instance(), 'scrollToBottom').mockImplementation(n => n)
+
+    Object.defineProperty(window.Element.prototype, 'scrollHeight', {value: 200, writable: true})
+    Object.defineProperty(window.Element.prototype, 'scrollTop', {value: 0, writable: true})
+    Object.defineProperty(window.Element.prototype, 'clientHeight', {value: 100, writable: true})
+
+    wrapper.setProps({ messages: messages.concat(messages[0]) })
+
+    expect(scrollToBottom).toHaveBeenCalledTimes(0)
+    wrapper.unmount()
   })
 
   it('scrollToBottom triggers scrollTo', () => {
-    const wrapper = shallow(<Chat messages={messages} user={user} />)
+    const wrapper = mount(<Chat messages={messages} user={user} />)
     const element = {
       scrollTo: jest.fn()
     }
@@ -187,6 +220,7 @@ describe('componentDidUpdate', () => {
     wrapper.instance().scrollToBottom(element)
 
     expect(element.scrollTo).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
   })
 })
 
@@ -200,7 +234,7 @@ describe('handleInputChange', () => {
     const input = wrapper.find('Textarea')
     const status = wrapper.state().typingStatus
 
-    input.simulate('change', { target: { value: 'a' } })
+    input.simulate('change', 'a')
 
     expect(wrapper.state().typingStatus).toEqual(!status)
   })
@@ -210,7 +244,7 @@ describe('handleInputChange', () => {
     const input = wrapper.find('Textarea')
     const status = wrapper.state().typingStatus
 
-    input.simulate('change', { target: { value: 'a' } })
+    input.simulate('change', 'a')
 
     expect(setTimeout).toHaveBeenCalledTimes(1)
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000)
@@ -226,7 +260,7 @@ describe('handleInputChange', () => {
     const input = wrapper.find('Textarea')
 
     wrapper.setState({ typingStatus: true })
-    input.simulate('change', { target: { value: 'a' } })
+    input.simulate('change', 'a')
 
     expect(clearTimeout).toHaveBeenCalledTimes(1)
   })

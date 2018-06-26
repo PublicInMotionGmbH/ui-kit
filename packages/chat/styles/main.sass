@@ -1,6 +1,7 @@
 @import './config'
 
 @include module('chat')
+  position: relative
   border: dp(0.125) solid $color-talixo-light-gray
   padding: dp(4)
   border-radius: dp(0.5)
@@ -48,6 +49,12 @@
     padding-right: dp(2)
     white-space: pre-line
 
+  &__scroll-button
+    position: absolute
+    top: dp(6)
+    left: 50%
+    transform: translateX(-50%)
+
   &__message
     position: relative
     display: block
@@ -58,8 +65,7 @@
     box-sizing: border-box
     transition: width 400ms ease-in
     left: 0
-    word-wrap: break-word;
-
+    word-wrap: break-word
 
     &--chat
       margin-bottom: dp(3)

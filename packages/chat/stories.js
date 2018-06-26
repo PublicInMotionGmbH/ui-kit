@@ -86,7 +86,7 @@ function startSimulation (setState, state) {
 
     setTimeout(() => setState({
       typingUsers: state.typingUsers
-        .filter(typingUser => typingUser.user.user.id !== randomUser.user.id)
+        .filter(typingUser => typingUser.user.id !== randomUser.user.id)
     }), 4000)
 
     setTimeout(() => setState({
@@ -110,14 +110,6 @@ const thumbup = {
     name: name,
     id: '3'
   }
-}
-
-const onTyping = (user, setState, state) => {
-  const updatedUsers = user.status
-    ? state.typingUsers.concat(user)
-    : state.typingUsers.filter(typingUser => typingUser.user.id !== user.user.id)
-
-  setState({ typingUsers: updatedUsers })
 }
 
 // Stories
@@ -278,7 +270,7 @@ addStory.controlled('chat simulation', readme, (setState, state) => {
       <Chat
         style={chatStyle}
         messages={state.messages}
-        onTyping={(user) => onTyping(user, setState, state)}
+        onTyping={action('onTyping')}
         onSubmit={message => {
           setState({ messages: state.messages.concat(message) })
         }}

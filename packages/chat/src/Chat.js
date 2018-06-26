@@ -5,6 +5,7 @@ import moment from 'moment'
 import TextareaAutosize from 'react-textarea-autosize'
 
 import { buildClassName } from '@talixo/shared'
+import { Button } from '@talixo/button'
 import { Textarea } from '@talixo/textarea'
 
 import Message from './Message'
@@ -82,6 +83,9 @@ const propTypes = {
   /** Reply input placeholder. */
   placeholder: PropTypes.string,
 
+  /** Scroll button content. */
+  scrollButtonChildren: PropTypes.string,
+
   /** Message type. */
   type: PropTypes.oneOf(['chat', 'comments'])
 }
@@ -89,6 +93,7 @@ const propTypes = {
 const defaultProps = {
   messages: [],
   messageRenderer: message => message,
+  scrollButtonChildren: 'Scroll To Bottom',
   type: 'chat',
   typingUsers: [],
   placeholder: 'reply'
@@ -122,14 +127,21 @@ const defaultProps = {
 class Chat extends React.PureComponent {
   state = {
     inputValue: '',
+    scrollMessage: false,
     typingStatus: false
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    if (this.props.messages !== nextProps.messages) {
+      this._scrollHeight = this._messages.scrollHeight
+    }
   }
 
   /**
    * Fire onTyping when state.typingStatus is updated.
    * Scroll messages continer to bottom if messages are updated.
    */
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps, prevState, snapshot) {
     if (prevState.typingStatus !== this.state.typingStatus && this.props.onTyping) {
       this.props.onTyping({
         status: this.state.typingStatus
@@ -137,7 +149,7 @@ class Chat extends React.PureComponent {
     }
 
     if (this.props.messages !== prevProps.messages) {
-      this.scrollToBottom(this._messages)
+      this.handleMessagesScroll()
     }
   }
 
@@ -162,6 +174,27 @@ class Chat extends React.PureComponent {
     this.setState(state => ({ inputValue: value, typingStatus: true }), () => {
       this._typingTimeout = setTimeout(() => this.setState({ typingStatus: false }), 2000)
     })
+  }
+
+  /**
+   * Handle scroll im messages container.
+   *
+   */
+  handleMessagesScroll () {
+    const lastMessage = this.props.messages.slice(-1)[0]
+    const scrollTop = this._messages.scrollTop + this._messages.clientHeight
+    const scrollHeight = this._scrollHeight
+    const clippedOverflow = scrollHeight > this._messages.clientHeight
+    const isScrolled = scrollTop >= scrollHeight
+    const isOwnMessage = lastMessage.user.id === this.props.user.id
+
+    // Scroll to bottom of the container when new message appears,
+    // unless the message is from other user and the view wasn't scrolled to the bottom of the container.
+    if (clippedOverflow && (isScrolled || isOwnMessage)) {
+      this.scrollToBottom(this._messages)
+    } else if (clippedOverflow && !this.state.scrollMessage) {
+      this.setState({ scrollMessage: true })
+    }
   }
 
   /**
@@ -271,13 +304,21 @@ class Chat extends React.PureComponent {
   }
 
   /**
-  * Save base node element.
+  * Save base node element for messages wrapper.
   *
   * @param {Element} node
-  * @param {string} name
   */
-  setRef = (node, name) => {
-    this[name] = node
+  setMessagesRef = (node) => {
+    this._messages = node
+  }
+
+  /**
+  * Save base node element for form.
+  *
+  * @param {Element} node
+  */
+  setFormRef = (node) => {
+    this._form = node
   }
 
   /**
@@ -287,6 +328,7 @@ class Chat extends React.PureComponent {
    */
   scrollToBottom = (element) => {
     element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })
+    this.setState({ scrollMessage: false })
   }
 
   /**
@@ -295,8 +337,8 @@ class Chat extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { additionalButton, className, additionalInformation, user, messages, onSubmit, typingUsers, onTyping, messageRenderer, placeholder, type, ...passedProps } = this.props
-    const { inputValue } = this.state
+    const { additionalButton, className, additionalInformation, user, messages, onSubmit, scrollButtonChildren, typingUsers, onTyping, messageRenderer, placeholder, type, ...passedProps } = this.props
+    const { inputValue, scrollMessage } = this.state
 
     const wrapperClsName = buildClassName(moduleName, className)
     const messagesClsName = buildClassName([moduleName, 'messages'])
@@ -304,17 +346,26 @@ class Chat extends React.PureComponent {
     const additionalInfoCls = buildClassName([moduleName, 'additional-info'])
     const additionalBtnCls = buildClassName([moduleName, 'additional-button'])
     const inputContainerCls = buildClassName([moduleName, 'input-container'])
+    const scrollButtonClsName = buildClassName([moduleName, 'scroll-button'])
     const textareaCls = buildClassName([moduleName, 'textarea'])
     const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
     const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
 
     return (
       <div className={wrapperClsName} {...passedProps}>
-        <div className={messagesClsName} ref={(node) => this.setRef(node, '_messages')}>
+        <div className={messagesClsName} ref={this.setMessagesRef}>
           {messages.length > 0 && this.renderMessages()}
         </div>
+        {scrollMessage &&
+          <Button
+            className={scrollButtonClsName}
+            onClick={() => this.scrollToBottom(this._messages)}
+          >
+            {scrollButtonChildren}
+          </Button>
+        }
         <form
-          ref={(node) => this.setRef(node, '_form')}
+          ref={this.setFormRef}
           className={formClsName}
           onSubmit={this.handleSubmit}
         >
@@ -332,7 +383,6 @@ class Chat extends React.PureComponent {
                 placeholder={placeholder}
                 value={inputValue}
                 TextareaComponent={TextareaAutosize}
-                inputRef={(node) => this.setRef(node, '_input')}
               />
             </span>
           </span>

@@ -60,7 +60,6 @@ exports[`<Chat /> renders children correctly 1`] = `
         <Textarea
           TextareaComponent={[Function]}
           className="talixo-chat__textarea"
-          inputRef={[Function]}
           onChange={[Function]}
           onKeyPress={[Function]}
           placeholder="reply"

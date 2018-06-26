@@ -37,6 +37,7 @@ messageRenderer       | func          | `message => message` | Message renderer.
 name                  | string        | `'user'`             | User name.
 onSubmit              | func          | n/a                  | Handler for onSubmit event.
 id                    | string        | Required             | User id.
+scrollButtonChildren  | node          | `'Scroll To Bottom'` | Scroll button content.
 typingUsers           | TypingUser[]  | `[]`                 | Typing users.
 placeholder           | string        | `'reply'`            | Reply input placeholder.
 type                  | Type          | `'chat'`             | Message type.
