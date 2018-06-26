@@ -38,7 +38,8 @@
 
   &__user-typing-container
     display: block
-    padding: dp(2) 0
+    height: dp(5)
+    line-height: dp(5)
     color: $chat-typing-container-color
 
   &__messages
@@ -66,6 +67,9 @@
     transition: width 400ms ease-in
     left: 0
     word-wrap: break-word
+
+    &--auto:not(&--chat__name):not(&--comments__time)
+      margin-left: auto
 
     &--chat
       margin-bottom: dp(3)

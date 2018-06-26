@@ -72,15 +72,6 @@ describe('<Chat />', () => {
     expect(wrapper.find(`.${name}__input-container-inner`).length).toBe(1)
   })
 
-  it('renders user-typing className correctly', () => {
-    const wrapper = shallow(<Chat user={user} messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: user, status: true}]
-    })
-
-    expect(wrapper.find(`.${name}__user-typing-container`).length).toBe(1)
-  })
-
   it('renders renderMessages type chat correctly', () => {
     const wrapper = shallow(<Chat user={user} messages={messages} />)
 
@@ -99,44 +90,6 @@ describe('<Chat />', () => {
     const input = wrapper.find('Textarea')
 
     expect(input.props().placeholder).toEqual(placeholder)
-  })
-
-  it('sets margin-left correctly', () => {
-    const wrapper = shallow(<Chat user={user} messages={messages} />)
-
-    expect(wrapper.find(Message).get(0).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(1).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(2).props.style.marginLeft).toBe('auto')
-  })
-
-  it('renders one typing user correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
-  })
-
-  it('renders two typing users correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true},
-        {user: { name: 'Kenny', id: '3' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
-  })
-
-  it('renders more then two typing users correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true},
-        {user: { name: 'Kenny', id: '3' }, status: true},
-        {user: { name: 'Benny', id: '4' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
   })
 
   it('sets messages ref correctly', () => {

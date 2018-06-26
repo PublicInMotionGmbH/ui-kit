@@ -210,14 +210,14 @@ addStory.controlled('multiple users typing', readme, (setState, state) => (
   typingUsers: [{
     user: {
       name: 'John',
-      id: 1
+      id: '1'
     },
     status: true
   },
   {
     user: {
       name: 'Kennedy',
-      id: 4
+      id: '4'
     },
     status: true
   }]

@@ -9,6 +9,7 @@ import { Button } from '@talixo/button'
 import { Textarea } from '@talixo/textarea'
 
 import Message from './Message'
+import TypingUsers from './TypingUsers'
 
 const moduleName = 'chat'
 
@@ -259,17 +260,13 @@ class Chat extends React.PureComponent {
   renderMessages = () => {
     const { user: { id }, messages, messageRenderer, type } = this.props
 
-    // Build class names
-    const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
-
     return messages.map((message, i) => (
       <Message
-        className={messageClsName}
+        className={buildClassName([moduleName, 'message'], id === message.user.id && `talixo-${moduleName}__message--auto`, { [type]: type })}
         key={i}
         message={messageRenderer(message.message)}
         name={message.user.name}
         time={message.time}
-        style={{ marginLeft: type === 'chat' && id === message.user.id && 'auto' }}
       />
     ))
   }
@@ -349,7 +346,6 @@ class Chat extends React.PureComponent {
     const scrollButtonClsName = buildClassName([moduleName, 'scroll-button'])
     const textareaCls = buildClassName([moduleName, 'textarea'])
     const inputContainerInnerCls = buildClassName([moduleName, 'input-container-inner'])
-    const userTypingContainerCls = buildClassName([moduleName, 'user-typing-container'])
 
     return (
       <div className={wrapperClsName} {...passedProps}>
@@ -369,9 +365,7 @@ class Chat extends React.PureComponent {
           className={formClsName}
           onSubmit={this.handleSubmit}
         >
-          <div className={userTypingContainerCls}>
-            {typingUsers.length > 0 && this.renderTypingUsers()}
-          </div>
+          <TypingUsers {...this.props} />
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}
             <span className={inputContainerInnerCls}>
