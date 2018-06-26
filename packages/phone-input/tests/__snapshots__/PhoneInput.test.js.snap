@@ -9,7 +9,11 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     className="talixo-phone-input__country-box"
     itemToString={[Function]}
     multi={false}
+    onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     options={
       Array [
         Object {
@@ -1179,7 +1183,11 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
         },
       ]
     }
-    placeholder="..."
+    placeholder={
+      <span
+        className="talixo-phone-input__unknown-flag"
+      />
+    }
     renderItem={[Function]}
     renderValue={[Function]}
     value={null}
@@ -1215,6 +1223,9 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOut={[Function]}
     placeholderChar=" "
     render={[Function]}
     type="tel"

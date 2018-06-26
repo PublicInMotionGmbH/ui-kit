@@ -2,6 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Root node of portal */
+  attachTo: PropTypes.object,
+
+  /** Children */
+  children: PropTypes.node
+}
+
 /**
 * Component which represents Portal.
 *
@@ -46,12 +54,6 @@ class Portal extends React.PureComponent {
   }
 }
 
-Portal.propTypes = {
-  /** Root node of portal */
-  attachTo: PropTypes.object,
-
-  /** Children */
-  children: PropTypes.node
-}
+Portal.propTypes = propTypes
 
 export default Portal

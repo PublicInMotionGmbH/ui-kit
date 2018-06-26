@@ -83,7 +83,6 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   </div>
   <button
     className="talixo-button"
-    disabled={false}
     type="submit"
   >
     Test

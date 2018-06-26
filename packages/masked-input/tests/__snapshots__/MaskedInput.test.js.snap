@@ -6,6 +6,7 @@ exports[`<MaskedInput /> renders children correctly 1`] = `
 >
   <Calendar
     displayFormat="YYYY-MM-DD"
+    firstDayOfWeek={1}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}

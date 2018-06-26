@@ -5,6 +5,27 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Icon name */
+  icon: PropTypes.string.isRequired,
+
+  /** Label to show with icon */
+  label: PropTypes.node.isRequired,
+
+  /** Is this element already active? */
+  active: PropTypes.bool,
+
+  /** Additional handler for clicking on button */
+  onClick: PropTypes.func
+}
+
+const defaultProps = {
+  active: false
+}
+
 /**
  * Component which represents sidebar element,
  * which can be also opened.
@@ -167,25 +188,7 @@ class SidebarElement extends React.PureComponent {
   }
 }
 
-SidebarElement.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Icon name */
-  icon: PropTypes.string.isRequired,
-
-  /** Label to show with icon */
-  label: PropTypes.node.isRequired,
-
-  /** Is this element already active? */
-  active: PropTypes.bool,
-
-  /** Additional handler for clicking on button */
-  onClick: PropTypes.func
-}
-
-SidebarElement.defaultProps = {
-  active: false
-}
+SidebarElement.propTypes = propTypes
+SidebarElement.defaultProps = defaultProps
 
 export default SidebarElement

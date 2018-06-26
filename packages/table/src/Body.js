@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Rows to put inside */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Table Body.
  *
@@ -18,9 +23,6 @@ function Body (props) {
   )
 }
 
-Body.propTypes = {
-  /** Rows to put inside */
-  children: PropTypes.node
-}
+Body.propTypes = propTypes
 
 export default Body

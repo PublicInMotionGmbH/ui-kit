@@ -31,15 +31,15 @@ addStory('horizontal center', readme, () => (
   </ControlGroup>
 ))
 
-addStory('horizontal right', readme, () => (
-  <ControlGroup position='right'>
+addStory('horizontal end', readme, () => (
+  <ControlGroup position='end'>
     <Button>Left</Button>
     <Button>Middle</Button>
     <Button>Right</Button>
   </ControlGroup>
 ))
 
-addStory('vertical left', readme, () => (
+addStory('vertical start', readme, () => (
   <ControlGroup orientation='vertical'>
     <Button>Left</Button>
     <Button>Middle</Button>
@@ -56,7 +56,7 @@ addStory('vertical center', readme, () => (
 ))
 
 addStory('vertical right', readme, () => (
-  <ControlGroup orientation='vertical' position='right'>
+  <ControlGroup orientation='vertical' position='end'>
     <Button>Left</Button>
     <Button>Middle</Button>
     <Button>Right</Button>

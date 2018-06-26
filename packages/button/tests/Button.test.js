@@ -13,9 +13,9 @@ describe('<Button />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('handles `size` properly', () => {
+  it('handles `small` properly', () => {
     const wrapper = shallow(
-      <Button size='small'>
+      <Button small>
         Button
       </Button>
     )
@@ -23,14 +23,14 @@ describe('<Button />', () => {
     expect(wrapper.props().className).toMatch(/(^| )talixo-button--small( |$)/)
   })
 
-  it('handles `variant` properly', () => {
+  it('handles `fluid` properly', () => {
     const wrapper = shallow(
-      <Button variant='full-width'>
+      <Button fluid>
         Button
       </Button>
     )
 
-    expect(wrapper.props().className).toMatch(/(^| )talixo-button--full-width( |$)/)
+    expect(wrapper.props().className).toMatch(/(^| )talixo-button--fluid( |$)/)
   })
 
   it('handles `className` properly', () => {
@@ -45,11 +45,34 @@ describe('<Button />', () => {
 
   it('handles different `button` props properly', () => {
     const wrapper = shallow(
-      <Button type='button'>
+      <Button name='something'>
         Button
       </Button>
     )
 
+    expect(wrapper.props().name).toBe('something')
+  })
+
+  it('handles `submit` prop', () => {
+    const wrapper = shallow(
+      <Button submit>
+        Button
+      </Button>
+    )
+
+    expect(wrapper.props().type).toBe('submit')
+
+    wrapper.setProps({ submit: false })
     expect(wrapper.props().type).toBe('button')
+  })
+
+  it('handles additional props', () => {
+    const wrapper = shallow(
+      <Button disabled>
+        Button
+      </Button>
+    )
+
+    expect(wrapper.props().disabled).toBe(true)
   })
 })

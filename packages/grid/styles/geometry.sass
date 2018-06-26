@@ -60,6 +60,20 @@
   > .#{$group-class-name}--spaced:not(:empty) + .#{$group-class-name}--spaced:not(:empty)
     margin-top: #{$grid-gutter}
 
+[dir=rtl] .masonry,
+.masonry[dir=rtl]
+  > .#{$group-class-name}--spaced > .#{$segment-class-name}:not(:last-child)
+    margin-left: #{$grid-gutter}
+    margin-right: initial
+
+[dir=rtl] .#{$group-class-name}--spaced
+  > .#{$segment-class-name}
+    margin-right: 0
+    margin-left: $grid-gutter
+
+  > .#{$segment-class-name}:last-child
+    margin-left: 0
+
 @include masonry($grid-columns, $grid-gutter)
 
 @media only screen and (min-width: $rwd-small-width)

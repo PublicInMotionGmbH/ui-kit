@@ -7,6 +7,26 @@ import { Location } from './PropTypes'
 import getRoute from '../utils/getRoute'
 import hasPropsChanged from '../utils/hasPropsChanged'
 
+const propTypes = {
+  /** Start point */
+  startPoint: Location,
+
+  /** End point */
+  endPoint: Location,
+
+  /** Function fired when direction routing is loaded */
+  onLoad: PropTypes.func,
+
+  /** Function fired when direction routing caused error */
+  onError: PropTypes.func,
+
+  /** Waypoints */
+  via: PropTypes.oneOfType([
+    PropTypes.arrayOf(Location),
+    Location
+  ])
+}
+
 /**
  * Component which represents Directions.
  *
@@ -120,24 +140,6 @@ class Directions extends React.PureComponent {
   }
 }
 
-Directions.propTypes = {
-  /** Start point */
-  startPoint: Location,
-
-  /** End point */
-  endPoint: Location,
-
-  /** Function fired when direction routing is loaded */
-  onLoad: PropTypes.func,
-
-  /** Function fired when direction routing caused error */
-  onError: PropTypes.func,
-
-  /** Waypoints */
-  via: PropTypes.oneOfType([
-    PropTypes.arrayOf(Location),
-    Location
-  ])
-}
+Directions.propTypes = propTypes
 
 export default Directions
