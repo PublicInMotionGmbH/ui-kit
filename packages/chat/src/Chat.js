@@ -226,17 +226,13 @@ class Chat extends React.PureComponent {
   renderMessages = () => {
     const { user: { id }, messages, messageRenderer, type } = this.props
 
-    // Build class names
-    const messageClsName = buildClassName([moduleName, 'message'], null, { [type]: type })
-
     return messages.map((message, i) => (
       <Message
-        className={messageClsName}
+        className={buildClassName([moduleName, 'message'], id === message.user.id && `talixo-${moduleName}__message--auto`, { [type]: type })}
         key={i}
         message={messageRenderer(message.message)}
         name={message.user.name}
         time={message.time}
-        style={{ marginLeft: type === 'chat' && id === message.user.id && 'auto' }}
       />
     ))
   }
