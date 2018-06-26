@@ -14,6 +14,9 @@ const addStory = createStoriesFactory('RadioGroup', module, {
 
 // Helpers
 const change = action('onChange')
+function CustomComponent (props) {
+  return <input type='text' onFocus={props.onFocus} onChange={props.onChange} />
+}
 
 // Mocks
 const options = [{ value: 'option_1', label: 'one' }, { value: 'option_2', label: 'two' }, { value: 'option_3', label: 'three' }]
@@ -104,7 +107,7 @@ addStory.controlled('with custom option', readme, (setState, state) => (
 addStory.controlled('with custom option component', readme, (setState, state) => (
   <RadioGroup
     allowCustom
-    customComponent={<input type='text' />}
+    customComponent={CustomComponent}
     onChange={value => setState({ value })}
     name='radioCustomComponent'
     value={state.value}

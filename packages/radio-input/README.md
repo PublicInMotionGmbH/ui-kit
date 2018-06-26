@@ -25,10 +25,12 @@ It allows any props which are allowed for `input[type="radio"]`. Additionally, i
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
-children      | node      | n/a     | radio button description 
-className     | string    | n/a     | additional class name passed to wrapper
-error         | boolean   | `false` | has this radio input any error?
-style         | object    | n/a     | styles passed to wrapper
+children      | node      | n/a     | Radio button description .
+className     | string    | n/a     | Additional class name passed to wrapper.
+disabled      | boolean   | `false` | Indicates if option should be disabled.
+error         | boolean   | `false` | Does this radio input have any error?
+onChange      | function  | n/a     | Has this radio input any error?
+style         | object    | n/a     | Styles passed to wrapper.
 
 ## Changelog
 

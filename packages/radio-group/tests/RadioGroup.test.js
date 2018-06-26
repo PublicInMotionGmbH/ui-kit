@@ -10,6 +10,11 @@ const options = [
   { value: 3, label: 'three' }
 ]
 
+// Helpers
+function CustomComponent (props) {
+  return <input type='text' onChange={props.onChange} onFocus={props.onFocus} />
+}
+
 const createProps = (props) => ({
   options,
   name: 'radio-group',
@@ -139,17 +144,17 @@ describe('<RadioGroup />', () => {
 
     describe('custom component', () => {
       const customProps = { onChange: jest.fn(), onFocus: jest.fn() }
-      const CustomComponent = (props) => <input />
       const props = createProps({
         allowCustom: true,
         onChange: jest.fn(),
-        customComponent: <CustomComponent {...customProps} />
+        customComponent: CustomComponent
       })
-      let wrapper, custom
+      let wrapper, custom, input
 
       beforeEach(() => {
         wrapper = createWrapper(props)
         custom = wrapper.find(CustomComponent)
+        input = custom.dive().find('input')
       })
 
       it('should render custom component', () => {
@@ -160,12 +165,11 @@ describe('<RadioGroup />', () => {
         props.onChange.mockReset()
         customProps.onFocus.mockReset()
         const value = 'value'
-        custom.simulate('change', { target: { value } })
+        input.simulate('change', { target: { value } })
 
         expect(wrapper.state().custom).toBe(value)
         expect(props.onChange).toHaveBeenCalledTimes(1)
         expect(props.onChange).toHaveBeenCalledWith(value, expect.anything())
-        expect(customProps.onChange).toHaveBeenCalledTimes(1)
       })
 
       it('should properly invoke custom component onFocus function', () => {
@@ -174,7 +178,6 @@ describe('<RadioGroup />', () => {
         custom.simulate('focus', {})
 
         expect(props.onChange).toHaveBeenCalledTimes(1)
-        expect(customProps.onFocus).toHaveBeenCalledTimes(1)
       })
     })
   })

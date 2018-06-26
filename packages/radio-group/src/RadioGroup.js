@@ -14,20 +14,23 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Component which will be displayed as custom option. */
-  customComponent: PropTypes.node,
+  customComponent: PropTypes.func,
 
   /** Placeholder of default custom options input. */
   customPlaceholder: PropTypes.string,
 
-  /** Name of radio group. */
-  name: PropTypes.string.isRequired,
-
   /** Is this value incorrect? */
   error: PropTypes.bool,
 
+  /** Name of radio group. */
+  name: PropTypes.string.isRequired,
+
+  /** onChange callback. */
+  onChange: PropTypes.func,
+
   /** Array of objects which represent options */
   options: PropTypes.arrayOf(PropTypes.shape({
-    /** Idicates if option should be disabled. */
+    /** Indicates if option should be disabled. */
     disabled: PropTypes.bool,
 
     /** Option label. */
@@ -37,7 +40,7 @@ const propTypes = {
     value: PropTypes.any.isRequired
   })),
 
-  /** Value of default option. */
+  /** Option selected by user. Self-controlled by default. */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
@@ -60,12 +63,13 @@ const defaultProps = {
  * @property {string} [props.className]
  * @property {Element|ReactElement} [props.customComponent]
  * @property {string} [props.customPlaceholder]
+ * @property {boolean} [props.error]
  * @property {string} props.name
+ * @property {function} [props.onChange]
  * @property {array} props.options
  * @property {array} [props.options.disabled]
  * @property {array} props.options.label
  * @property {array} props.options.value
- * @property {string} [props.size]
  * @property {number|string} [props.value]
  * @property {boolean} [props.vertical]
  *
@@ -118,46 +122,34 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element|React.Element}
    */
   generateCustomOption = () => {
-    const { customComponent, customPlaceholder, name, size } = this.props
+    const { customComponent, customPlaceholder, error, name } = this.props
     const { custom, value } = this.state
     const { onChange } = this
 
+    const OptionComponent = customComponent || TextInput
+
     const change = (e, ...args) => {
       const value = e.target ? e.target.value : e
-
       this.setState({ custom: value })
       onChange(value, true, e)
-      if (customComponent && customComponent.props.onChange) {
-        customComponent.props.onChange(e, args)
-      }
     }
 
     const focus = (e, ...args) => {
       onChange(custom, true, e)
-      if (customComponent && customComponent.props.onFocus) {
-        customComponent.props.onFocus(e, args)
-      }
     }
 
     return (
       <RadioInput
         checked={value === custom}
+        error={error}
         name={name}
         onChange={onChange.bind(this, custom)}
-        size={size}
       >
-        {
-          customComponent
-            ? React.cloneElement(customComponent, {
-              onChange: change,
-              onFocus: focus
-            })
-            : <TextInput
-              placeholder={customPlaceholder}
-              onChange={change}
-              onFocus={focus}
-            />
-        }
+        <OptionComponent
+          placeholder={customPlaceholder}
+          onChange={change}
+          onFocus={focus}
+        />
       </RadioInput>
     )
   }
@@ -168,7 +160,7 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element[]|React.Element[]}
    */
   generateOptions = () => {
-    const { error, name, options, size } = this.props
+    const { error, name, options } = this.props
     const { value } = this.state
 
     const optionsList = options.map(obj => (
@@ -179,18 +171,17 @@ class RadioGroup extends React.PureComponent {
         name={name}
         onChange={this.onChange.bind(this, obj.value)}
         error={error}
-        size={size}
         value={obj.value}
       >
-        {obj.label}
+        { obj.label }
       </RadioInput>
     ))
     return optionsList
   }
 
   render () {
-    const { allowCustom, className, children, customComponent, error, name,
-      options, value, size, onChange, vertical, ...passedProps
+    const { allowCustom, className, customComponent, customPlaceholder,
+      error, name, onChange, options, value, vertical, ...passedProps
     } = this.props
     const { generateCustomOption, generateOptions } = this
     const wrapperCls = buildClassName('radio-group', className, { vertical })
