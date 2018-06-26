@@ -29,12 +29,12 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function DetailsView (props) {
-  const { renderDetails, openedItem } = props
+  const { renderDetails, value } = props
   const detailsCls = buildClassName([moduleName, 'details'])
 
-  return openedItem != null && (
+  return value != null && (
     <div className={detailsCls}>
-      { renderDetails(openedItem) }
+      { renderDetails(value) }
     </div>
   )
 }

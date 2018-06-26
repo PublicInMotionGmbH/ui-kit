@@ -33,12 +33,12 @@ const propTypes = {
  * @param {function} [props.renderItems]
  * @param {object[]} props.items
  * @param {function} [props.onClick]
- * @param {number} [props.openedItem]
+ * @param {number} [props.value]
  *
  * @returns {React.Element}
  */
 function ItemList (props) {
-  const { className, renderItems, items, onClick, openedItem } = props
+  const { className, renderItems, items, onClick, value } = props
   const wrapperCls = buildClassName([moduleName, 'list'], className)
 
   return (
@@ -47,7 +47,7 @@ function ItemList (props) {
         items.map((item, index) => (
           <Item
             key={index}
-            active={openedItem === item}
+            active={value === item}
             item={item}
             renderItems={renderItems}
             onClick={onClick}

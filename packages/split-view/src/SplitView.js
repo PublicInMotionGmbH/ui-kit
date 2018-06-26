@@ -23,11 +23,11 @@ const propTypes = {
   /** Header element of list section. */
   listHeader: PropTypes.node,
 
-  /** onSelect callback. */
-  onSelect: PropTypes.func,
+  /** onChange callback. */
+  onChange: PropTypes.func,
 
   /** Opened element. */
-  openedItem: PropTypes.object
+  value: PropTypes.object
 }
 
 /**
@@ -39,59 +39,59 @@ const propTypes = {
  * @property {function} [props.renderDetails]
  * @property {function} [props.renderItems]
  * @property {*} [props.listHeader]
- * @property {function} [props.onSelect]
- * @property {number} [props.openedItem]
+ * @property {function} [props.onChange]
+ * @property {number} [props.value]
  *
  * @property {object} state
- * @property {object} state.openedItem
+ * @property {object} state.value
  *
  * @class
  */
 class SplitView extends React.Component {
   state = {
-    openedItem: this.props.openedItem || this.props.data[0]
+    value: this.props.value || this.props.data[0]
   }
 
   /**
    * Update index of opened element if it has been changed.
    *
    * @param {object} nextProps
-   * @param {object} [nextProps.openedItem]
+   * @param {object} [nextProps.value]
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.openedItem !== this.state.openedItem) {
-      this.setState({ openedItem: nextProps.openedItem })
+    if (nextProps.value !== this.state.value) {
+      this.setState({ value: nextProps.value })
     }
   }
 
   /**
    * Update opnened element if it has been changed by clicking
-   * the list element and invoke props.onSelect function.
+   * the list element and invoke props.onChange function.
    *
    * @param {object} item
    */
   onClick = (item, ...args) => {
-    const { openedItem } = this.state
-    const { onSelect, openedItem: propsOpenedItem } = this.props
+    const { value } = this.state
+    const { onChange, value: propsValue } = this.props
 
-    if (onSelect) { onSelect(item, ...args) }
-    if (propsOpenedItem == null && openedItem !== item) {
-      this.setState({ openedItem: item })
+    if (onChange) { onChange(item, ...args) }
+    if (propsValue == null && value !== item) {
+      this.setState({ value: item })
     }
   }
   /**
    * Generates header component if provided.
    */
-  generateHeader = () => {
+  renderHeader = () => {
     const { listHeader } = this.props
     const headerCls = buildClassName([moduleName, 'header'], listHeader.props.className)
     return React.cloneElement(listHeader, { className: headerCls })
   }
 
   render () {
-    const { onClick, generateHeader } = this
-    const { openedItem } = this.state
-    const { className, data, renderDetails, renderItems, listHeader, onSelect, openedItem: propsOpenedItem, ...passedProps } = this.props
+    const { onClick, renderHeader } = this
+    const { value } = this.state
+    const { className, data, renderDetails, renderItems, listHeader, onChange, value: propsValue, ...passedProps } = this.props
 
     // Class Names
     const wrapperCls = buildClassName(moduleName, className)
@@ -100,17 +100,17 @@ class SplitView extends React.Component {
     return (
       <div className={wrapperCls} {...passedProps}>
         <div className={panelCls}>
-          { listHeader && generateHeader() }
+          { listHeader && renderHeader() }
           <ItemList
             items={data}
             renderItems={renderItems}
             onClick={onClick}
-            openedItem={openedItem}
+            value={value}
           />
         </div>
         <DetailsView
           renderDetails={renderDetails}
-          openedItem={openedItem}
+          value={value}
         />
       </div>
     )

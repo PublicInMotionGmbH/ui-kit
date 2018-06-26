@@ -43,7 +43,7 @@ exports[`<DetailsView> when rendered renders children correctly 1`] = `
         ]
       }
       onClick={[Function]}
-      openedItem={
+      value={
         Object {
           "name": "Josh Smith I",
           "subtitle": "Subtitle 1",
@@ -54,7 +54,8 @@ exports[`<DetailsView> when rendered renders children correctly 1`] = `
     />
   </div>
   <DetailsView
-    openedItem={
+    renderDetails={[Function]}
+    value={
       Object {
         "name": "Josh Smith I",
         "subtitle": "Subtitle 1",
@@ -62,7 +63,6 @@ exports[`<DetailsView> when rendered renders children correctly 1`] = `
         "value": 0,
       }
     }
-    renderDetails={[Function]}
   />
 </div>
 `;

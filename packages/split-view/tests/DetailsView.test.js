@@ -16,7 +16,7 @@ const createWrapper = (props = defaultProps) => shallow(<DetailsView {...props} 
 
 describe('<DetailsView>', () => {
   describe('when rendered', () => {
-    const props = createProps({ openedItem: dataItem })
+    const props = createProps({ value: dataItem })
     let wrapper
 
     beforeEach(() => {
@@ -32,7 +32,7 @@ describe('<DetailsView>', () => {
   })
 
   describe('when renderDetails is passed', () => {
-    const props = createProps({ openedItem: dataItem, renderDetails })
+    const props = createProps({ value: dataItem, renderDetails })
     let wrapper
     beforeEach(() => {
       wrapper = createWrapper(props)

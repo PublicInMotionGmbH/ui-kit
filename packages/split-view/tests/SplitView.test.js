@@ -24,7 +24,7 @@ describe('<DetailsView>', () => {
 
   describe('when list item is clicked', () => {
     let wrapper, listItem1, listItemLast, itemList
-    const props = createProps({ onSelect: jest.fn() })
+    const props = createProps({ onChange: jest.fn() })
 
     beforeEach(() => {
       wrapper = createWrapper(props)
@@ -35,26 +35,26 @@ describe('<DetailsView>', () => {
 
     it('should change state.openIndex to 1', () => {
       listItem1.simulate('click', {})
-      expect(wrapper.state().openedItem).toBe(data[1])
+      expect(wrapper.state().value).toBe(data[1])
     })
 
     it('should change state.openIndex to last data index', () => {
       const index = data.length - 1
       listItemLast.simulate('click', {})
-      expect(wrapper.state().openedItem).toBe(data[index])
+      expect(wrapper.state().value).toBe(data[index])
     })
 
-    it('should invoke onSelect function from props', () => {
-      props.onSelect.mockReset()
+    it('should invoke onChange function from props', () => {
+      props.onChange.mockReset()
       listItemLast.simulate('click', {})
-      expect(props.onSelect).toHaveBeenCalledTimes(1)
+      expect(props.onChange).toHaveBeenCalledTimes(1)
     })
 
-    it('should invoke onSelect function from props with proper value', () => {
+    it('should invoke onChange function from props with proper value', () => {
       const index = data.length - 1
-      props.onSelect.mockReset()
+      props.onChange.mockReset()
       listItemLast.simulate('click', {})
-      expect(props.onSelect).toHaveBeenCalledWith(data[index], expect.anything())
+      expect(props.onChange).toHaveBeenCalledWith(data[index], expect.anything())
     })
   })
 
@@ -77,8 +77,8 @@ describe('<DetailsView>', () => {
 
   describe('when openIndex is controlled by props', () => {
     const openIndex = data.length - 2
-    const openedItem = data[openIndex]
-    const props = createProps({ openedItem })
+    const value = data[openIndex]
+    const props = createProps({ value })
     let wrapper
 
     beforeEach(() => {
@@ -86,13 +86,13 @@ describe('<DetailsView>', () => {
     })
 
     it('should set open index in state to give value when component is rendered', () => {
-      expect(wrapper.state().openedItem).toBe(openedItem)
+      expect(wrapper.state().value).toBe(value)
     })
 
     it('should update openIndex in state', () => {
       const newItem = data[1]
-      wrapper.setProps({ openedItem: newItem })
-      expect(wrapper.state().openedItem).toBe(newItem)
+      wrapper.setProps({ value: newItem })
+      expect(wrapper.state().value).toBe(newItem)
     })
 
     it('should not update openIndex when list item is clicked', () => {
@@ -100,7 +100,7 @@ describe('<DetailsView>', () => {
       listItemLast.simulate('click')
       listItemLast.simulate('click')
       listItemLast.simulate('click')
-      expect(wrapper.state().openedItem).toBe(openedItem)
+      expect(wrapper.state().value).toBe(value)
     })
   })
 })

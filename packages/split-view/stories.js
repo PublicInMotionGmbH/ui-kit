@@ -22,7 +22,7 @@ const addStory = createStoriesFactory('Split View', module, {
 const approve = action('Approve')
 const change = action('Change')
 const delAction = action('Delete')
-const select = action('onSelect')
+const onChange = action('onChange')
 
 // Mock data
 const data = [
@@ -123,7 +123,7 @@ function ListHeader (props) {
 addStory('initial', readme, () => (
   <SplitView
     data={data}
-    onSelect={select}
+    onChange={onChange}
   />
 ))
 
@@ -132,7 +132,7 @@ addStory('customized', readme, () => (
     data={data}
     renderDetails={renderDetails}
     renderItems={renderItems}
-    onSelect={select}
+    onChange={onChange}
   />
 ))
 
@@ -142,7 +142,7 @@ addStory('with header', readme, () => (
     renderDetails={renderDetails}
     renderItems={renderItemsHeader}
     listHeader={<ListHeader className='storybook__split-view__header' />}
-    onSelect={select}
+    onChange={onChange}
   />
 ))
 
@@ -153,7 +153,7 @@ addStory('scrollable', readme, () => (
       renderDetails={renderDetails}
       renderItems={renderItems}
       listHeader={<ListHeader className='storybook__split-view__header' />}
-      onSelect={select}
+      onChange={onChange}
     />
   </div>
 ))
@@ -165,8 +165,8 @@ addStory.controlled('external control', readme, (setState, state) => (
       renderDetails={renderDetails}
       renderItems={renderItems}
       listHeader={<ListHeader className='storybook__split-view__header' />}
-      openedItem={state.openedItem}
-      onSelect={(item) => setState({ openedItem: item })}
+      value={state.value}
+      onChange={(item) => setState({ value: item })}
     />
   </div>
-), () => ({ openedItem: { name: 'Adam Gist', value: 3, rank: 'Not on the list', abb: 'NN', phone: '123 321 321123' } }))
+), () => ({ value: { name: 'Adam Gist', value: 3, rank: 'Not on the list', abb: 'NN', phone: '123 321 321123' } }))

@@ -7,6 +7,9 @@ import { moduleName } from './config'
 import { displayObject } from './utils'
 
 const propTypes = {
+  /** Indicates if this item details are displayed. */
+  active: PropTypes.bool,
+
   /** Function used to render data item. */
   renderItems: PropTypes.func,
 
@@ -17,7 +20,6 @@ const propTypes = {
   onClick: PropTypes.func
 }
 const defaultProps = {
-  active: false,
   renderItems: item => displayObject(item)
 }
 
