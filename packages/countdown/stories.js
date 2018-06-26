@@ -20,33 +20,19 @@ const setDeadline = (addTime) => {
   return deadlineConverted
 }
 
-// Custom format
-const arr = ['days', 'hours', 'minutes', 'seconds']
-
-function customFormat (props) {
-  arr.map(type => props[type]).join(':')
-}
-
-function getInitialState () {
-  return {
-    days: 0,
-    hours: 0,
-    min: 0,
-    sec: 0
-  }
-}
-
 // Stories
 
 addStory('initial', readme, () => (
   <Countdown targetDate={setDeadline(190000000)} />
 ))
 
-addStory.controlled('with custom format', readme, (setState, state) => {
-  return (
-    <Countdown
-      targetDate={setDeadline(190000000)}
-      render={customFormat(state)}
-    />
-  )
-}, getInitialState)
+addStory('with custom format', readme, () => (
+  <Countdown targetDate={setDeadline(190000000)}
+    render={(props) => {
+      const arr = Object.values(props)
+      const arrType = ['days', 'hours', 'minutes', 'seconds']
+      return (
+        arrType.map((type, i) => `${arr[i]} ${type} `)
+      )
+    }} />
+))
