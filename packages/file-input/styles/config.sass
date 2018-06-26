@@ -1,28 +1,30 @@
 @import '~@talixo/shared/styles/config'
 // Colors
-$file-input-color-border: $color-talixo-light-gray !default
-$file-input-color-cover: $color-white !default
-$file-input-color-remove: $color-talixo-error-red !default
+$file-input-border-color: $x-color-calm !default
+$file-input-cover-color: $x-color-calmer !default
+$file-input-remove-color: $x-color-error !default
 
 // Text styles
-$file-input-name-font-weight: $font-weight-semibold !default
+$file-input-name-font-weight: $x-weight-semibold !default
 
 // Animations
 $file-input-transition: .2s linear !default
 
 //Wrapper sizes
-$file-input-padding: dp(2) !default
-$file-input-border-width: dp(.125) !default
-$file-input-border: solid $file-input-border-width $file-input-color-border !default
-$file-input-border-drag: dashed $file-input-border-width $file-input-color-border !default
-$file-input-border-radius: $border-radius-m !default
+$file-input-padding: 0 !default
+$file-input-border-width: $x-border-width !default
+$file-input-border: dashed $file-input-border-width $file-input-border-color !default
+$file-input-border-drag: solid $file-input-border-width $file-input-border-color !default
+$file-input-border-radius: $x-border-radius !default
 
-$file-input-file-wrapper-padding: dp(3) 0 0 !default
-$file-input-file-button-padding: dp(2) 0 !default
+// Padding
+$file-input-file-button-padding: dp(1) 0 !default
+$file-input-file-wrapper-padding: dp(.5) dp(1) !default
+$file-input-file-padding: 0 dp(1) dp(.5) !default
 
 // File details sizes
-$file-input-icon-wrapper-width: dp(12) !default
-$file-input-icon-remove-font-size: dp(3) !default
-$file-input-icon-file-font-size: dp(6) !default
-$file-input-name-font-size: dp(1.75) !default
+$file-input-icon-wrapper-width: dp(7) !default
+$file-input-icon-remove-font-size: dp(1.5) !default
+$file-input-icon-file-font-size: dp(3) !default
+$file-input-name-font-size: dp(1.625) !default
 $file-input-size-font-size: dp(1.5) !default

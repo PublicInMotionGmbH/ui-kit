@@ -40,6 +40,9 @@ const filesRender = (props) => {
 addStory('initial', readme, () => (
   <FileInput />
 ))
+addStory('with upload label', readme, () => (
+  <FileInput uploadLabel={<span><Icon name='cloud_upload' /> Drop files here or </span>} />
+))
 
 addStory('with custom header', readme, () => (
   <FileInput>
@@ -51,12 +54,7 @@ addStory('with custom header', readme, () => (
 ))
 
 addStory('single file upload', readme, () => (
-  <FileInput multiple={false}>
-    <div className={wrapperCls}>
-      <div className={iconCls}><Icon name='cloud_upload' /></div>
-      <div>Drop files here or<br /><br /></div>
-    </div>
-  </FileInput>
+  <FileInput uploadLabel='Drop file here or ' multiple={false} />
 ))
 
 addStory('drag and drop disabled', readme, () => (

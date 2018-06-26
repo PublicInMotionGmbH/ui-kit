@@ -34,6 +34,7 @@ dropDisabled  | boolean   | `false`         | Disable drag and drop.
 filesRender   | function  | n/a             | File component renderer.
 files         | string    | n/a             | Dropped files.
 multiple      | boolean   | `true`          | Allows multiple files uploading.
+uploadLabel   | node      | n/a             | Label displayed alongside button.
 onChange      | function  | n/a             | onChange callback. Invoked when either files have been dropped or file input has changed.
 onDragEnd     | function  | n/a             | onDragEnd allback. Applies sent files and event.
 onDragEnter   | function  | n/a             | onDragEnter callback. Applies sent files and event.

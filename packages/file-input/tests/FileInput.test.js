@@ -177,6 +177,31 @@ describe('<FileInput />', () => {
   describe('props handling', () => {
     let wrapper
 
+    describe('labels handling', () => {
+      const props = {
+        buttonLabel: 'Test-button',
+        uploadLabel: 'Test-label'
+      }
+
+      beforeEach(() => {
+        wrapper = createWrapper(props)
+      })
+
+      afterEach(() => {
+        wrapper.unmount()
+      })
+
+      it('should add label to button', () => {
+        const button = wrapper.find('Button')
+        expect(button.text()).toBe(props.buttonLabel)
+      })
+
+      it('should add upload label', () => {
+        const button = wrapper.find(buttonCls)
+        expect(button.text()).toContain(props.uploadLabel)
+      })
+    })
+
     describe('file handling', () => {
       const props = {
         files: [file1]

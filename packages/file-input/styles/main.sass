@@ -17,7 +17,7 @@
   &__cover
     top: 0
     left: 0
-    background-color: $file-input-color-cover
+    background-color: $file-input-cover-color
     position: absolute
     width: 100%
     height: 100%
@@ -30,27 +30,21 @@
     width: fit-content
 
   &__files-wrapper
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
     width: 100%
     padding: $file-input-file-wrapper-padding
 
   &__button
     padding: $file-input-file-button-padding
-    > div
-      text-align: center
+    text-align: center
 
 @include module('file')
-  display: inline-flex
+  display: flex
   align-items: center
-  flex-basis: 50%
-  min-width: 0
   overflow: hidden
-  padding: dp(2)
+  padding: $file-input-file-padding
 
   > div
-    padding: 0 dp(.6)
+    //padding: $file-input-file-padding
 
   > div:first-child
     width: $file-input-icon-wrapper-width
@@ -67,7 +61,7 @@
     font-size: $file-input-icon-file-font-size
 
   &__remove
-    color: $file-input-color-remove
+    color: $file-input-remove-color
     cursor: pointer
     font-size: $file-input-icon-remove-font-size
 

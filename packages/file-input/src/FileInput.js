@@ -55,6 +55,9 @@ const propTypes = {
   /** Allows multiple files uploading. */
   multiple: PropTypes.bool,
 
+  /** Label displayed alongside button. */
+  uploadLabel: PropTypes.node,
+
   /** onChange callback. Invoked when either files have been dropped or file input has changed. */
   onChange: PropTypes.func,
 
@@ -301,7 +304,7 @@ class FileInput extends React.PureComponent {
 
   render () {
     const {
-      buttonLabel, className, children, dropDisabled, filesRender, multiple, onChange,
+      buttonLabel, className, children, uploadLabel, dropDisabled, filesRender, multiple, onChange,
       onDragEnd, onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart,
       ...passedProps
     } = this.props
@@ -317,7 +320,9 @@ class FileInput extends React.PureComponent {
       <div {...passedProps} {...wrapperProps}>
         { !dropDisabled && draggingOver && getCoverElement() }
         <div className={childrenCls}>{ children }</div>
-        <div className={buttonCls}><Button onClick={handleClick}>{ buttonLabel }</Button></div>
+        <div className={buttonCls}>
+          { uploadLabel } <Button onClick={handleClick} small>{ buttonLabel }</Button>
+        </div>
         { files.length > 0 && getFileElements() }
         <input
           style={{ display: 'none' }}

@@ -18,10 +18,11 @@ exports[`<FileInput /> rendering renders children correctly 1`] = `
   <div
     className="talixo-file-input__button"
   >
+     
     <button
-      className="talixo-button"
-      disabled={false}
+      className="talixo-button talixo-button--small"
       onClick={[Function]}
+      type="button"
     >
       Browse Files
     </button>
@@ -53,10 +54,11 @@ exports[`<FileInput /> rendering renders correctly 1`] = `
   <div
     className="talixo-file-input__button"
   >
+     
     <button
-      className="talixo-button"
-      disabled={false}
+      className="talixo-button talixo-button--small"
       onClick={[Function]}
+      type="button"
     >
       Browse Files
     </button>
