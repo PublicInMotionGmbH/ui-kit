@@ -86,7 +86,7 @@ function startSimulation (setState, state) {
 
     setTimeout(() => setState({
       typingUsers: state.typingUsers
-        .filter(typingUser => typingUser.user.user.id !== randomUser.user.id)
+        .filter(typingUser => typingUser.user.id !== randomUser.user.id)
     }), 4000)
 
     setTimeout(() => setState({
@@ -218,14 +218,14 @@ addStory.controlled('multiple users typing', readme, (setState, state) => (
   typingUsers: [{
     user: {
       name: 'John',
-      id: 1
+      id: '1'
     },
     status: true
   },
   {
     user: {
       name: 'Kennedy',
-      id: 4
+      id: '4'
     },
     status: true
   }]

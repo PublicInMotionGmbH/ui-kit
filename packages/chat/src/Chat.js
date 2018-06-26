@@ -8,6 +8,7 @@ import { buildClassName } from '@talixo/shared'
 import { Textarea } from '@talixo/textarea'
 
 import Message from './Message'
+import TypingUsers from './TypingUsers'
 
 const moduleName = 'chat'
 
@@ -238,35 +239,6 @@ class Chat extends React.PureComponent {
   }
 
   /**
-   * Render typing users.
-   *
-   * @returns {React.Element}
-   */
-  renderTypingUsers = () => {
-    const { typingUsers, user: { id } } = this.props
-    const otherUsers = typingUsers.filter(user => user.user.id !== id)
-    const users = otherUsers
-      .map((user, i) => {
-        let moreUsers = ''
-        if (i > 0) {
-          moreUsers = ', '
-          if (i === otherUsers.length - 1) {
-            moreUsers = ' and '
-          }
-        }
-        return `${moreUsers}${user.user.name}`
-      })
-      .join('')
-
-    return (
-      <React.Fragment>
-        {users}
-        {otherUsers.length > 0 && ` ${otherUsers.length > 1 ? 'are' : 'is'} typing`}
-      </React.Fragment>
-    )
-  }
-
-  /**
   * Save base node element.
   *
   * @param {Element} node
@@ -315,7 +287,7 @@ class Chat extends React.PureComponent {
           onSubmit={this.handleSubmit}
         >
           <div className={userTypingContainerCls}>
-            {typingUsers.length > 0 && this.renderTypingUsers()}
+            {typingUsers.length > 0 && <TypingUsers {...this.props} />}
           </div>
           <span className={inputContainerCls}>
             {additionalButton && <span className={additionalBtnCls}>{additionalButton}</span>}

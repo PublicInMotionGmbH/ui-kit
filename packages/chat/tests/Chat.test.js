@@ -101,44 +101,6 @@ describe('<Chat />', () => {
     expect(input.props().placeholder).toEqual(placeholder)
   })
 
-  it('sets margin-left correctly', () => {
-    const wrapper = shallow(<Chat user={user} messages={messages} />)
-
-    expect(wrapper.find(Message).get(0).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(1).props.style.marginLeft).toBe(false)
-    expect(wrapper.find(Message).get(2).props.style.marginLeft).toBe('auto')
-  })
-
-  it('renders one typing user correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/is typing/)
-  })
-
-  it('renders two typing users correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true},
-        {user: { name: 'Kenny', id: '3' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/are typing/)
-  })
-
-  it('renders more then two typing users correctly', () => {
-    const wrapper = shallow(<Chat user={user} type='comments' messages={messages} />)
-    wrapper.setProps({typingUsers:
-      [{user: { name: 'John', id: '2' }, status: true},
-        {user: { name: 'Kenny', id: '3' }, status: true},
-        {user: { name: 'Benny', id: '4' }, status: true}]
-    })
-
-    expect(wrapper.find('.talixo-chat__user-typing-container').text()).toMatch(/John, Kenny and Benny/)
-  })
-
   it('sets messages ref correctly', () => {
     const wrapper = mount(<Chat user={user} messages={messages} />)
     const messagesWrapper = wrapper.find(`.${name}__messages`)
