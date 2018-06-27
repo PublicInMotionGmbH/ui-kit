@@ -14,15 +14,15 @@ function formatNumber (num) {
   return num
 }
 
-function defaultFormat (state) {
-  const { days, hours, min, sec, finished } = state
+function defaultFormat (props) {
+  const { days, hours, min, sec, finished } = props
 
   return (
-    <span className={buildClassName('countdown', { finished })} >
-      <span className={buildClassName('countdown', 'days')}>{formatNumber(days)} </span>
-       : <span className={buildClassName('countdown', 'hours')}>{formatNumber(hours)} </span>
-       : <span className={buildClassName('countdown', 'minutes')}>{formatNumber(min)} </span>
-       : <span className={buildClassName('countdown', 'seconds')}>{formatNumber(sec)} </span>
+    <span className={buildClassName('countdown', null, { finished })} >
+      <span className={buildClassName('countdown', null, 'days')}>{formatNumber(days)} </span>
+       : <span className={buildClassName('countdown', null, 'hours')}>{formatNumber(hours)} </span>
+       : <span className={buildClassName('countdown', null, 'minutes')}>{formatNumber(min)} </span>
+       : <span className={buildClassName('countdown', null, 'seconds')}>{formatNumber(sec)} </span>
     </span>
   )
 }

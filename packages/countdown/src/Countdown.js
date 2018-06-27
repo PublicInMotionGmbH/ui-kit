@@ -29,10 +29,7 @@ const defaultProps = {
  */
 class Countdown extends React.PureComponent {
   state = {
-    days: 0,
-    hours: 0,
-    min: 0,
-    sec: 0
+    time: 0
   }
 
   /**
@@ -44,7 +41,7 @@ class Countdown extends React.PureComponent {
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.targetDate !== this.props.targetDate) {
-      this.setState({ targetDate: nextProps.targetDate })
+      this.tick()
     }
   }
 
@@ -57,6 +54,7 @@ class Countdown extends React.PureComponent {
 
     this.countTime(targetDate)
 
+    clearTimeout(this.tickTimeout)
     this.tickTimeout = setTimeout(this.tick, 300)
   }
 
@@ -65,19 +63,25 @@ class Countdown extends React.PureComponent {
    * @param {string} targetDate
    */
   countTime = (targetDate) => {
-    const time = Math.max(0, Date.parse(targetDate) - Date.now())
-    const days = Math.floor(time / (1000 * 60 * 60 * 24))
-    const sec = Math.floor((time / 1000) % 60)
-    const min = Math.floor((time / 1000 / 60) % 60)
-    const hours = Math.floor(time / (1000 * 60 * 60) % 24)
+    const convertedDate = Date.parse(targetDate)
 
-    this.setState({days, hours, min, sec})
+    this.setState({
+      time: Math.max(0, convertedDate - Date.now())
+    })
   }
 
   render () {
+    const { time } = this.state
+    const sec = Math.floor((time / 1000) % 60)
+    const min = Math.floor((time / 1000 / 60) % 60)
+    const hours = Math.floor(time / (1000 * 60 * 60) % 24)
+    const days = Math.floor(time / (1000 * 60 * 60 * 24))
+    const finished = !(sec + min + hours + days)
+    const timeObj = {days, hours, min, sec, finished}
+
     return (
       <React.Fragment>
-        {this.props.render(this.state)}
+        {this.props.render(timeObj)}
       </React.Fragment>
     )
   }

@@ -21,13 +21,12 @@ const setDeadline = (addTime) => {
 }
 
 // Stories
-
 addStory('initial', readme, () => (
-  <Countdown targetDate={setDeadline(190000000)} />
+  <Countdown targetDate={setDeadline(1000000000)} />
 ))
 
 addStory('with custom format', readme, () => (
-  <Countdown targetDate={setDeadline(190000000)}
+  <Countdown targetDate={setDeadline(1000000000)}
     render={(props) => {
       const arr = Object.values(props)
       const arrType = ['days', 'hours', 'minutes', 'seconds']
@@ -35,4 +34,8 @@ addStory('with custom format', readme, () => (
         arrType.map((type, i) => `${arr[i]} ${type} `)
       )
     }} />
+))
+
+addStory('change styles when finished', readme, () => (
+  <Countdown targetDate={setDeadline(6000)} />
 ))

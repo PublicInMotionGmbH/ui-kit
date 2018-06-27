@@ -6,30 +6,30 @@ exports[`<Countdown /> renders children correctly 1`] = `
     className="talixo-countdown"
   >
     <span
-      className="talixo-countdown days"
+      className="talixo-countdown talixo-countdown--days"
     >
-      00
+      11
        
     </span>
     : 
     <span
-      className="talixo-countdown hours"
+      className="talixo-countdown talixo-countdown--hours"
     >
-      00
+      13
        
     </span>
     : 
     <span
-      className="talixo-countdown minutes"
+      className="talixo-countdown talixo-countdown--minutes"
     >
-      00
+      46
        
     </span>
     : 
     <span
-      className="talixo-countdown seconds"
+      className="talixo-countdown talixo-countdown--seconds"
     >
-      00
+      39
        
     </span>
   </span>
