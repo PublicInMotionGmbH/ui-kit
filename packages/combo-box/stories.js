@@ -25,7 +25,12 @@ const optionsSimple = [
   'Skipper',
   'Private',
   'Kowalski',
-  'Rico'
+  'Rico',
+  'Alonso',
+  'Smith',
+  'Santosh',
+  'Medelina',
+  'Kyoksanto'
 ]
 
 const options = [
