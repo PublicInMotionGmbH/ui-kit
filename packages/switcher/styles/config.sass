@@ -1,1 +1,26 @@
 @import '~@talixo/shared/styles/config'
+
+$switcher-width: dp(15) !default
+$switcher-height: dp(4.5) !default
+
+$switcher-text-size: $x-input-text-size !default
+$switcher-border-radius: $x-border-radius !default
+$switcher-border-width: $x-border-width !default
+
+$switcher-selected-background-color: $x-color-primary !default
+$switcher-selected-text-color: $x-color-primary-opposite !default
+
+$switcher-not-selected-background-color: $x-input-hover-border-color !default
+$switcher-not-selected-text-color: $x-input-hover-text-color !default
+
+$switcher-border-color: $switcher-not-selected-background-color !default
+
+$switcher-background-color: $x-input-background-color !default
+
+$switcher-disabled-background-color: #f5f5f5 !default
+
+$switcher-disabled-selected-background-color: grayscale($switcher-selected-background-color) !default
+$switcher-disabled-selected-text-color: text-contrast($switcher-disabled-selected-background-color) !default
+
+$switcher-disabled-not-selected-background-color: grayscale($switcher-not-selected-background-color) !default
+$switcher-disabled-not-selected-text-color: text-contrast($switcher-disabled-not-selected-background-color) !default

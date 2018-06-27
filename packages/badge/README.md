@@ -27,6 +27,9 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | node element to display inside badge
+pill          | bool      | `false` | should this badge be a pill?
+onRemove      | function  | n/a     | handler for clicking on "remove" button (which will be shown when handler is used)
+removeText    | node      | `×`     | content of "remove" button
 
 ## Changelog
 

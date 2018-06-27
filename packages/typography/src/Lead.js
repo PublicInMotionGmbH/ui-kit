@@ -3,6 +3,14 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Lead content */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents article/page lead.
  *
@@ -21,12 +29,6 @@ function Lead (props) {
   )
 }
 
-Lead.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Lead content */
-  children: PropTypes.node
-}
+Lead.propTypes = propTypes
 
 export default Lead

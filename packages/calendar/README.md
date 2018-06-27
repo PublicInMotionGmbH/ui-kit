@@ -11,6 +11,7 @@ using `npm install @talixo/calendar --save` or `yarn add @talixo/calendar`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/icon: ^0.1.1`
 - `@talixo/shared: ^0.1.0`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
@@ -25,19 +26,19 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name      | Type                  | Default         | Description
--------------------|-----------------------|:---------------:|--------------------------------
-className          | string                | n/a             | additional class name passed to wrapper
-displayFormat      | string                | `'D MMM YYYY'`  | date display format
-dayAriaLabelFormat | string                | n/a             | day aria label format
-monthFormat        | string                | n/a             | month format
-phrases            | object                | n/a             | phrases for i18n
-weekDayFormat      | string                | n/a             | week day format
-placeholder        | string                | n/a             | placeholder text
-value              | string or Moment date | self-controlled | current date
-onChange           | function              | n/a             | event handler when date is changed
-onFocus            | function              | n/a             | event handler when calendar is focused
-onBlur             | function              | n/a             | event handler when calendar lost focus
+Property name      | Type                          | Default         | Description
+-------------------|-------------------------------|:---------------:|--------------------------------
+className          | string                        | n/a             | additional class name passed to wrapper
+displayFormat      | string                        | `'D MMM YYYY'`  | date display format
+dayAriaLabelFormat | string                        | n/a             | day aria label format
+monthFormat        | string                        | n/a             | month format
+phrases            | object                        | n/a             | phrases for i18n
+weekDayFormat      | string                        | n/a             | week day format
+placeholder        | string                        | n/a             | placeholder text
+value              | string in `YYYY-MM-DD` format | self-controlled | current date
+onChange           | function                      | n/a             | event handler when date is changed
+onFocus            | function                      | n/a             | event handler when calendar is focused
+onBlur             | function                      | n/a             | event handler when calendar lost focus
 
 ## Changelog
 

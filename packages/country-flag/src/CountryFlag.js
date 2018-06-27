@@ -5,6 +5,19 @@ import { buildClassName } from '@talixo/shared'
 
 import config from '../config'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Country code */
+  code: PropTypes.string.isRequired
+}
+
+const contextTypes = {
+  registerFlag: PropTypes.func,
+  unregisterFlag: PropTypes.func
+}
+
 /**
  * Component which represents Flag.
  *
@@ -36,17 +49,7 @@ class CountryFlag extends React.PureComponent {
   }
 }
 
-CountryFlag.contextTypes = {
-  registerFlag: PropTypes.func,
-  unregisterFlag: PropTypes.func
-}
-
-CountryFlag.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Country code */
-  code: PropTypes.string.isRequired
-}
+CountryFlag.contextTypes = contextTypes
+CountryFlag.propTypes = propTypes
 
 export default CountryFlag

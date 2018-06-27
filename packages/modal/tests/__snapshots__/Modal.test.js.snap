@@ -9,9 +9,13 @@ exports[`<Modal /> renders children correctly 1`] = `
       <div
         className="talixo-modal"
       >
-        <h2>
-          Modal
-        </h2>
+        <div
+          className="talixo-modal-content"
+        >
+          <h2>
+            Modal
+          </h2>
+        </div>
       </div>
     </div>
   </Portal>

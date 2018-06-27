@@ -3,6 +3,21 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Heading level */
+  level: PropTypes.oneOf([ 1, 2, 3, 4, 5, 6 ]),
+
+  /** Heading content */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  level: 2
+}
+
 /**
  * Component which represents heading in typography.
  *
@@ -22,19 +37,7 @@ function Heading (props) {
   )
 }
 
-Heading.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Heading level */
-  level: PropTypes.oneOf([ 1, 2, 3, 4, 5, 6 ]),
-
-  /** Heading content */
-  children: PropTypes.node
-}
-
-Heading.defaultProps = {
-  level: 2
-}
+Heading.propTypes = propTypes
+Heading.defaultProps = defaultProps
 
 export default Heading

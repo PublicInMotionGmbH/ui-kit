@@ -53,7 +53,11 @@ const defaultProps = {
  */
 class Slider extends React.PureComponent {
   state = {
-    value: this.props.value == null ? this.props.min : this.props.value
+    value: this.props.value != null
+      ? this.props.value
+      : this.props.defaultValue
+        ? this.props.defaultValue
+        : this.props.min
   }
 
   componentWillReceiveProps (props) {

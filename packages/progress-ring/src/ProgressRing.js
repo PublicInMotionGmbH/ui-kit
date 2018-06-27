@@ -5,6 +5,20 @@ import { buildClassName } from '@talixo/shared'
 
 import buildCirclePath from '../utils/buildCirclePath'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Current progress (between 0 and 1, or NaN for indeterminate) */
+  value: PropTypes.number,
+
+  /** Progress ring type */
+  type: PropTypes.string,
+
+  /** Progress ring content */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Progress ring.
  *
@@ -53,18 +67,6 @@ function ProgressRing (props) {
   )
 }
 
-ProgressRing.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Current progress (between 0 and 1, or NaN for indeterminate) */
-  value: PropTypes.number,
-
-  /** Progress ring type */
-  type: PropTypes.string,
-
-  /** Progress ring content */
-  children: PropTypes.node
-}
+ProgressRing.propTypes = propTypes
 
 export default ProgressRing

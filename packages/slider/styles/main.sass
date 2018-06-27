@@ -1,16 +1,53 @@
 @import './config'
 
+@mixin thumb-styles($browser: '')
+  cursor: pointer
+  border: none
+  height: $slider-thumb-size
+  width: $slider-thumb-size
+  border-radius: 50%
+  background: $slider-thumb-background-color
+
+  //&:hover
+  //  box-shadow: 0 0 0 $x-border-width $x-color-background, 0 0 0 #{$x-border-width * 2} $x-color-primary
+
+  // Hack for Chrome - Opera/Firefox will ignore this margin,
+  // Chrome will position a pointer correctly in center.
+  @if $browser != 'ms'
+    margin-top: #{-1 * $slider-thumb-size / 2}
+    margin-top: calc(#{-1 * $slider-thumb-size / 2} + #{$slider-track-size / 2})
+
+@mixin thumb-hover-styles($browser: '')
+  @if $slider-thumb-active-shadow
+    @if $slider-thumb-active-shadow-second
+      box-shadow: 0 0 0 $x-border-width $slider-thumb-active-shadow-first, 0 0 0 #{$x-border-width * 2} $slider-thumb-active-shadow-second
+    @else
+      box-shadow: 0 0 0 $x-border-width $slider-thumb-active-shadow-first
+
+@mixin range-track-styles($browser: '')
+  width: 100%
+  height: 3px
+  border-radius: $slider-track-border-radius
+
+  @if $browser == 'ms'
+    background: transparent
+    border-color: transparent
+    border-width: $slider-thumb-size 0
+    color: transparent
+  @else
+    background: $slider-track-background-color
+    border: none
+
 @include module('slider')
-  display: inline-block
+  display: block
   width: 100% 
- 
-  &__label
-    font-size: dp(2.5)
 
   &__value
     display: block
     text-align: center
-    font-size: dp(2.25)
+    font-size: $slider-value-font-size
+    font-weight: $slider-value-font-weight
+    color: $slider-value-text-color
 
   &__input 
     -webkit-appearance: none
@@ -24,6 +61,10 @@
       -webkit-appearance: none
       @include thumb-styles
 
+    &:focus::-webkit-slider-thumb,
+    &::-webkit-slider-thumb:hover
+      @include thumb-hover-styles
+
     &:focus 
       outline: none
 
@@ -36,20 +77,28 @@
     &::-moz-range-thumb 
       @include thumb-styles
 
+    &:focus::-moz-range-thumb,
+    &::-moz-range-thumb:hover
+      @include thumb-hover-styles
+
     &:-moz-focusring
-      outline: dp(0.125) solid white
-      outline-offset: dp(0.125)
+      outline: $slider-border-width solid $x-color-background
+      outline-offset: $slider-border-width
 
     &::-ms-track
       @include range-track-styles('ms')
 
     &::-ms-fill-lower 
       background: $slider-track-background-color
-      border-radius: dp(1.25)
+      border-radius: $slider-track-border-radius
 
     &::-ms-fill-upper 
       background: $slider-track-background-color-upper
-      border-radius: dp(1.25)
+      border-radius: $slider-track-border-radius
 
     &::-ms-thumb 
       @include thumb-styles('ms')
+
+    &:focus::-ms-thumb,
+    &::-ms-thumb:hover
+      @include thumb-hover-styles
