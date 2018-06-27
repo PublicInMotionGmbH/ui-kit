@@ -75,4 +75,21 @@ describe('<Menu />', () => {
     expect(wrapper.children().at(1).key()).toBe('def')
     expect(wrapper.children().at(2).key()).toBe('ghi')
   })
+
+  it('should render footer', () => {
+    const render = item => item
+    const getItemProps = () => ({})
+
+    const wrapper = shallow(
+      <Menu
+        options={[ 'abc', 'def', 'ghi' ]}
+        buildItemId={item => item}
+        getItemProps={getItemProps}
+        renderItem={render}
+        footer={<div>FOOTER</div>}
+      />
+    )
+
+    expect(wrapper.find('.talixo-combo-box__menu--footer').text()).toBe('FOOTER')
+  })
 })

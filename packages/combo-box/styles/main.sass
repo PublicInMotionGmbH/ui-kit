@@ -56,7 +56,13 @@
     border-top: 0
     color: $combo-box-menu-item-text-color
     background: $combo-box-menu-item-background-color
-    overflow: scroll
+    overflow: auto
+
+    &--footer
+      position: sticky
+      bottom: 0
+      background-color: $combo-box-background-color
+      padding: $combo-box-menu-item-padding-vertical $combo-box-menu-item-padding-horizontal
 
   &__arrow,
   &__clear

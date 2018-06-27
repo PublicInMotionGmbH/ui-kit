@@ -43,6 +43,12 @@ const options = [
   { id: 'sk', name: 'Slovakia', language: 'Slovak' }
 ]
 
+// Styles for autocomplete footer
+const autocompleteFooterStyles = {
+  textAlign: 'right',
+  color: '#e40909'
+}
+
 // Stories
 
 addStory.controlled('simple select box', readme, (setState, state) => (
@@ -233,6 +239,21 @@ addStory.controlled('auto complete', readme, (setState, state) => (
       options={filterOptions(state.value, optionsSimple)}
       onFocus={action('focus')}
       onBlur={action('blur')}
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({ value: '' }))
+
+addStory.controlled('auto complete with footer', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      footer={<div style={autocompleteFooterStyles}>Powered by Talixo</div>}
     >
       <TextInput value={state.value} onChange={value => setState({ value })} />
     </AutoComplete>

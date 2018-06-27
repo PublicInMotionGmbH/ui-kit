@@ -9,6 +9,9 @@ const propTypes = {
   /** Function to build item ID - used for 'key' properties */
   buildItemId: PropTypes.func.isRequired,
 
+  /** Footer for items list */
+  footer: PropTypes.node,
+
   /** List of options to show */
   options: PropTypes.array,
 
@@ -33,16 +36,18 @@ const defaultProps = {
  * Component which represents expandable menu used in this package.
  *
  * @param {object} props
+ * @param {node} props.footer
  * @param {array} props.options
  * @param {function} props.buildItemId
  *
  * @returns {React.Element}
  */
 function Menu (props) {
-  const { buildItemId, options } = props
+  const { buildItemId, footer, options } = props
 
   // Build class name for menu component
   const clsName = buildClassName([ 'combo-box', 'menu' ])
+  const footerMenuClsName = buildClassName([ 'combo-box', 'menu--footer' ])
 
   // Build elements for all possible options
   const elements = options.map((item, index) => (
@@ -57,6 +62,7 @@ function Menu (props) {
   return (
     <div className={clsName}>
       {elements}
+      {footer && <div className={footerMenuClsName}>{footer}</div>}
     </div>
   )
 }
