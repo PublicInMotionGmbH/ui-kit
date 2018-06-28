@@ -1,6 +1,6 @@
 {
   "name": "@talixo/charts",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "UI component for charts",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/checkbox": "1.0.0-alpha.3",
-    "@talixo/shared": "1.0.0-alpha.3",
+    "@talixo/checkbox": "^1.0.0-alpha.3",
+    "@talixo/shared": "^1.0.0-alpha.3",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -32,8 +32,8 @@
     "react-vis": "^1.9.2"
   },
   "peerDependencies": {
-    "@talixo/checkbox": "1.0.0-alpha.3",
-    "@talixo/shared": "1.0.0-alpha.3",
+    "@talixo/checkbox": "^1.0.0-alpha.4",
+    "@talixo/shared": "^1.0.0-alpha.4",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
