@@ -1,6 +1,7 @@
 import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { Icon } from '@talixo/icon'
 
 import NumberInput from './src/NumberInput'
 
@@ -92,6 +93,56 @@ addStory.controlled('without stepper', readme, (setState, state) => (
     <NumberInput
       onChange={value => setState({ value })}
       value={state.value}
+      stepper={false}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('with icon & without stepper', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with icon and without stepper buttons</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      left={<Icon name='credit_card' />}
+      stepper={false}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('with icon', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Number input with icon</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      left={<Icon name='credit_card' />}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('RTL: with icon', readme, (setState, state) => (
+  <div style={{ width: 300 }} dir='rtl'>
+    <h2>RTL: Number input with icon</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      left={<Icon name='credit_card' />}
+    />
+  </div>
+), () => ({ value: 0 }))
+
+addStory.controlled('RTL: with icon & without stepper', readme, (setState, state) => (
+  <div style={{ width: 300 }} dir='rtl'>
+    <h2>RTL: Number input with icon and without stepper buttons</h2>
+
+    <NumberInput
+      onChange={value => setState({ value })}
+      value={state.value}
+      left={<Icon name='credit_card' />}
       stepper={false}
     />
   </div>

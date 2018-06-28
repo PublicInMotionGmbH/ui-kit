@@ -24,11 +24,33 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
+### Modal
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-children      | string    | n/a     | content of modal
+children      | nodes     | n/a     | content of modal, including header and footer
 open          | bool      | `true`  | controls whether modal is open
+informational | bool      | `false` | it's simple, informational modal
+icon          | node      | n/a     | icon to show in informational modal
+type          | string    | n/a     | Type of informational modal for styling: `success`, `info`, `warning` or `error`
+attachTo      | Element   | `body`  | HTML element where open modal should be attached to
+
+### ModalHeader
+
+It allows any props which are allowed for `header`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
+
+### ModalFooter
+
+It allows any props which are allowed for `footer`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | additional class name passed to wrapper
 
 ## Changelog
 

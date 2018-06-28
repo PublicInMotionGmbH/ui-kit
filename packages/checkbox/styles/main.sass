@@ -1,2 +1,73 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+$checkbox-box-shadow-size: ($checkbox-box-size - $checkbox-box-tick-size) / 2
+
+@include module('checkbox')
+  position: relative
+  min-height: $checkbox-box-size
+  font-size: $checkbox-box-font-size
+
+  > input
+    display: none
+
+  > input + span
+    padding-left: $checkbox-box-margin + $checkbox-box-size
+    padding-right: $checkbox-box-margin
+    color: $checkbox-text-color
+
+  > input + span:before
+    box-sizing: border-box
+    content: ''
+    position: absolute
+    left: 0
+    top: calc(#{1em * $checkbox-box-line-height / 2} - #{$checkbox-box-size / 2})
+    display: inline-block
+    vertical-align: middle
+    width: $checkbox-box-size
+    height: $checkbox-box-size
+    border-radius: $checkbox-box-border-radius
+    border: $checkbox-box-border-width solid $checkbox-box-border-color
+    background-color: $checkbox-box-background-color
+
+    @if $checkbox-box-shadow-size != $checkbox-box-size
+      box-shadow: inset 0 0 0 $checkbox-box-shadow-size $checkbox-box-background-color
+
+  > input:checked + span:before
+    background-color: $checkbox-checked-box-background-color
+    border-color: $checkbox-checked-box-border-color
+
+  > input:checked + span
+    color: $checkbox-checked-text-color
+
+  > input:disabled + span:before
+    border-color: $checkbox-disabled-box-border-color
+    background-color: $checkbox-disabled-box-background-color
+
+    @if $checkbox-box-shadow-size != $checkbox-box-size
+      box-shadow: inset 0 0 0 $checkbox-box-shadow-size $checkbox-disabled-box-background-color
+
+  > input:disabled:checked + span:before
+    border-color: $checkbox-disabled-checked-box-border-color
+    background-color: $checkbox-disabled-checked-box-background-color
+
+  > input:disabled + span
+    color: $checkbox-disabled-text-color
+
+  > input:disabled:checked + span
+    color: $checkbox-disabled-checked-text-color
+
+  &--error > input + span,
+  &--error > input:disabled + span,
+  &--error > input:checked + span,
+  &--error > input:checked:disabled + span
+    color: $checkbox-error-text-color
+
+  &--error > input:not(:disabled) + span:before
+    border-color: $checkbox-error-box-border-color
+
+  &--error > input:checked:not(:disabled) + span:before
+    background-color: $checkbox-error-box-background-color
+
+  [dir=rtl] > input + span
+    padding-left: $checkbox-box-margin
+    padding-right: $checkbox-box-margin + $checkbox-box-size

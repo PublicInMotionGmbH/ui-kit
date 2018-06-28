@@ -53,7 +53,7 @@ describe('<Calendar />', () => {
     wrapper.find(SingleDatePicker).props().onDateChange(moment('2000-11-20'))
 
     expect(spy.mock.calls.length).toBe(1)
-    expect(spy.mock.calls[0][0].format('YYYY-MM-DD')).toBe('2000-11-20')
+    expect(spy.mock.calls[0][0]).toBe('2000-11-20')
   })
 
   it('should call onFocus event', () => {

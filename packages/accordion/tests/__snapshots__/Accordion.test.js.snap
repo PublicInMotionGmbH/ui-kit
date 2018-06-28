@@ -16,7 +16,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       type="button"
     >
       <div
-        className="talixo-accordion-element__toggle__inner"
+        className="talixo-accordion-element__toggle-inner"
       >
         First one
       </div>
@@ -30,7 +30,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       smooth={true}
     >
       <div
-        className="talixo-accordion-element__content__inner"
+        className="talixo-accordion-element__content-inner"
       >
         Something is there
       </div>
@@ -48,7 +48,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       type="button"
     >
       <div
-        className="talixo-accordion-element__toggle__inner"
+        className="talixo-accordion-element__toggle-inner"
       >
         Another
       </div>
@@ -62,7 +62,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       smooth={true}
     >
       <div
-        className="talixo-accordion-element__content__inner"
+        className="talixo-accordion-element__content-inner"
       >
         <strong>
           Also here we've got some content
@@ -82,7 +82,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       type="button"
     >
       <div
-        className="talixo-accordion-element__toggle__inner"
+        className="talixo-accordion-element__toggle-inner"
       >
         Third
       </div>
@@ -96,7 +96,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       smooth={true}
     >
       <div
-        className="talixo-accordion-element__content__inner"
+        className="talixo-accordion-element__content-inner"
       >
         Here we are
       </div>
@@ -114,7 +114,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       type="button"
     >
       <div
-        className="talixo-accordion-element__toggle__inner"
+        className="talixo-accordion-element__toggle-inner"
       >
         Multi
       </div>
@@ -128,7 +128,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       smooth={true}
     >
       <div
-        className="talixo-accordion-element__content__inner"
+        className="talixo-accordion-element__content-inner"
       >
         And there is multiple
       </div>
@@ -146,7 +146,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       type="button"
     >
       <div
-        className="talixo-accordion-element__toggle__inner"
+        className="talixo-accordion-element__toggle-inner"
       >
         Multi 2
       </div>
@@ -160,7 +160,7 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       smooth={true}
     >
       <div
-        className="talixo-accordion-element__content__inner"
+        className="talixo-accordion-element__content-inner"
       >
         element selected
       </div>

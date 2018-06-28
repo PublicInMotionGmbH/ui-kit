@@ -5,6 +5,31 @@ import { findDOMNode } from 'react-dom'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional styles for collapse container */
+  style: PropTypes.object,
+
+  /** Additional class name for collapse container */
+  className: PropTypes.string,
+
+  /** Should it collapse smoothly? */
+  smooth: PropTypes.bool,
+
+  /** Is it collapsed? */
+  collapsed: PropTypes.bool,
+
+  /** Animation time (in ms), requires geometry CSS */
+  animationTime: PropTypes.number,
+
+  /** Content for collapsed container */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  collapsed: true,
+  smooth: true
+}
+
 const TRANSFORM_END = [
   'webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend',
   'animationend', 'oAnimationEnd', 'webkitAnimationEnd'
@@ -32,7 +57,7 @@ class Collapse extends React.PureComponent {
   componentWillReceiveProps (props) {
     // Do nothing special when component hasn't changed it's collapsing state
     // Or it shouldn't be smooth
-    if (props.collapsed === this.props.collapsed || !props.smooth) {
+    if (props.collapsed === this.props.collapsed || !props.smooth || props.animationTime === 0) {
       return
     }
 
@@ -218,29 +243,7 @@ class Collapse extends React.PureComponent {
   }
 }
 
-Collapse.propTypes = {
-  /** Additional styles for collapse container */
-  style: PropTypes.object,
-
-  /** Additional class name for collapse container */
-  className: PropTypes.string,
-
-  /** Should it collapse smoothly? */
-  smooth: PropTypes.bool,
-
-  /** Is it collapsed? */
-  collapsed: PropTypes.bool,
-
-  /** Animation time (in ms), requires geometry CSS */
-  animationTime: PropTypes.number,
-
-  /** Content for collapsed container */
-  children: PropTypes.node
-}
-
-Collapse.defaultProps = {
-  collapsed: true,
-  smooth: true
-}
+Collapse.propTypes = propTypes
+Collapse.defaultProps = defaultProps
 
 export default Collapse

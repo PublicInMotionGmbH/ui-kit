@@ -1,32 +1,22 @@
 @import '~@talixo/shared/styles/config'
 
-$slider-track-background-color: $color-talixo-light-gray
-$slider-track-background-color-upper: #d7e6f3
-$slider-thumb-background-color: $color-talixo-red
+$slider-border-width: $x-border-width !default
 
-$slider-thumb-size: dp(2.5)
-$slider-thumb-size-hover: dp(3.125)
+$slider-track-size: 3px !default
 
-@mixin thumb-styles($browser: '')
-  border: none
-  height: 20px
-  width: 20px
-  border-radius: 50%
-  background: $slider-thumb-background-color
-  @if $browser == 'ms'
-    margin-top: -1px
-  @else
-    margin-top: -8px
+$slider-thumb-background-color: $x-color-primary !default
+$slider-thumb-size: $x-input-text-size * $x-line-height-base !default
 
-@mixin range-track-styles($browser: '')
-  width: 100%
-  height: 3px
-  @if $browser == 'ms'
-    background: transparent
-    border-color: transparent
-    border-width: 16px 0
-    color: transparent
-  @else
-    background: $slider-track-background-color
-    border: none
-    border-radius: 3px
+$slider-thumb-active-size: $slider-thumb-size * 1.125 !default
+$slider-thumb-active-shadow: true !default
+$slider-thumb-active-shadow-first: $x-color-background !default
+$slider-thumb-active-shadow-second: $slider-thumb-background-color !default
+
+$slider-track-background-color: $slider-thumb-background-color !default
+$slider-track-background-color-upper: $x-color-calmer !default
+
+$slider-track-border-radius: $x-border-radius !default
+
+$slider-value-text-color: $x-color-text !default
+$slider-value-font-size: $x-font-size-small !default
+$slider-value-font-weight: $x-weight-semibold !default

@@ -26,7 +26,7 @@ const iconStyle = {
 
 addStory('default', readme, () => (
   <div>
-    <Tooltip render={() => <span>Default</span>}>
+    <Tooltip position='right' render={() => <span>Default</span>}>
       <span style={tooltipStyle}>
         Tooltip right
       </span>
@@ -49,7 +49,7 @@ addStory('default', readme, () => (
   </div>
 ))
 
-addStory('with Icon component', readme, () => (
+addStory('with stateless component', readme, () => (
   <Tooltip position='right' render={() => <div>Hello world</div>}>
     <Icon name='person' style={iconStyle} />
   </Tooltip>
@@ -70,14 +70,14 @@ addStory('without arrow', readme, () => (
 addStory('fade', readme, () => (
   <div>
     <h2>Default fade time</h2>
-    <Tooltip fade render={() => <span>Fade</span>}>
+    <Tooltip position='right' fade render={() => <span>Fade</span>}>
       <span style={tooltipStyle}>
         Tooltip right
       </span>
     </Tooltip>
 
     <h2>Custom fade time</h2>
-    <Tooltip fade fadeTime={3000} render={() => <span>Fade 3s</span>}>
+    <Tooltip position='right' fade fadeTime={3000} render={() => <span>Fade 3s</span>}>
       <span style={tooltipStyle}>
         Tooltip right
       </span>
@@ -142,7 +142,7 @@ addStory('Popover fade', readme, () => (
 addStory('Popover with tooltip', readme, () => (
   <Tooltip position='right' triggerOn='click' arrow={false} render={() => (
     <Tooltip render={() => <div>Tooltip</div>}>
-      <span style={{...tooltipStyle, backgroundColor: 'transparent'}}>
+      <span style={{ ...tooltipStyle, backgroundColor: 'transparent' }}>
         Popover with Tooltip
       </span>
     </Tooltip>
@@ -152,6 +152,66 @@ addStory('Popover with tooltip', readme, () => (
     </span>
   </Tooltip>
 ))
+
+addStory('auto-changed position', readme, () => (
+  <div>
+    <Tooltip position='left' render={() => <div>Tooltip</div>}>
+      <span style={tooltipStyle}>
+        Tooltip left (but without enough place)
+      </span>
+    </Tooltip>
+
+    <div style={{ float: 'right' }}>
+      <Tooltip position='right' render={() => <div>Tooltip</div>}>
+        <span style={tooltipStyle}>
+          Tooltip right (but without enough place)
+        </span>
+      </Tooltip>
+    </div>
+  </div>
+))
+
+addStory.controlled('locked position', readme, (setState, state) => (
+  <div>
+    Left: <input
+      type='number'
+      value={state.left}
+      onChange={e => setState({ left: parseInt(e.target.value, 10) })}
+    />
+
+    <br />
+
+    <div style={{ position: 'relative', left: state.left + 'px' }}>
+      <Tooltip position='left' open render={() => <div>Tooltip</div>}>
+        <span style={tooltipStyle}>
+          Left: Unlocked
+        </span>
+      </Tooltip>
+
+      <br />
+
+      <Tooltip position='left' open lockPosition render={() => <div>Tooltip</div>}>
+        <span style={tooltipStyle}>
+          Left: Locked
+        </span>
+      </Tooltip>
+    </div>
+
+    <Tooltip position='left' open render={() => <div>Tooltip</div>}>
+      <div style={{ ...tooltipStyle, display: 'block', margin: '0 30px' }}>
+        Left: Unlocked
+      </div>
+    </Tooltip>
+
+    <br />
+
+    <Tooltip position='left' open lockPosition render={() => <div>Tooltip</div>}>
+      <div style={{ ...tooltipStyle, display: 'block', margin: '0 30px' }}>
+        Left: Locked
+      </div>
+    </Tooltip>
+  </div>
+), () => ({ left: 75 }))
 
 function render (setState, state) {
   return (

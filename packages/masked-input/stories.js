@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { action } from '@storybook/addon-actions'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
@@ -59,7 +60,7 @@ const options = [
 const renderDate = v => (
   <div className='storybook-mask-example'>
     <Icon className='storybook-mask-input__mask-icon' name='date_range' />
-    {v && v.format('DD MMMM, ddd')}
+    {v && moment(v).format('DD MMMM, ddd')}
   </div>
 )
 const renderCountry = v => (
@@ -90,12 +91,21 @@ addStory.controlled('default', readme, (setState, state) => (
   />
 ), () => ({ value: null }))
 
+// Styles for calendar
+const styles = {
+  left: '100px',
+  width: '1000px',
+  paddingLeft: '30px'
+}
+
 addStory('calendar', readme, () => (
-  <MaskedInput
-    renderInput={<Calendar placeholder='Choose date...' />}
-    renderMask={renderDate}
-    {...commonProps}
-  />
+  <div style={styles}>
+    <MaskedInput
+      renderInput={<Calendar placeholder='Choose date...' />}
+      renderMask={renderDate}
+      {...commonProps}
+    />
+  </div>
 ))
 
 addStory.controlled('autocomplete', readme, (setState, state) => (

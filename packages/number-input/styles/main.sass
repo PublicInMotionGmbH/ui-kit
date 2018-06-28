@@ -1,2 +1,55 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('number-input')
+  position: relative
+
+  &#{prefix('text-input')}--with-right #{prefix('text-input', 'input')}
+    padding-right: $number-input-padding-with-stepper
+
+  &#{prefix('text-input')}--with-right #{prefix('text-input', 'right')}
+    white-space: nowrap
+    font-size: 0
+    height: $number-input-stepper-height
+    line-height: $number-input-stepper-height
+    width: $number-input-full-stepper-width
+
+  #{inside('#{&}-stepper', 'button')}
+    display: inline-block
+    box-sizing: border-box
+    width: $number-input-stepper-width
+    height: $number-input-stepper-height
+    padding: 0
+    margin: 0 $number-input-stepper-glue
+    color: $number-input-stepper-text-color
+    border: $number-input-stepper-border-width solid $number-input-stepper-border-color
+    border-radius: $number-input-stepper-radius
+    background-color: $number-input-stepper-background-color
+    cursor: pointer
+    outline: none
+    vertical-align: middle
+    text-align: center
+    font-weight: $number-input-stepper-weight
+    font-size: $number-input-stepper-font-size
+    line-height: 1em
+    user-select: none
+
+    .tai
+      font-weight: $number-input-stepper-weight
+
+    &:hover, &:focus
+      border-color: $number-input-stepper-hover-border-color
+      color: $number-input-stepper-hover-text-color
+      background-color: $number-input-stepper-hover-background-color
+
+    &:active
+      border-color: $number-input-stepper-active-border-color
+      color: $number-input-stepper-active-text-color
+      background-color: $number-input-stepper-active-background-color
+
+  input[type=number]
+    appearance: none
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button
+    appearance: none
+    margin: 0

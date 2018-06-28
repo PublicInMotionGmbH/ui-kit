@@ -18,18 +18,6 @@ describe('<Checkbox />', () => {
     expect(wrapper.hasClass(`${name}--error`)).toBe(true)
   })
 
-  it('should render with small size styling', () => {
-    const wrapper = shallow(<Checkbox size='small' />)
-
-    expect(wrapper.hasClass(`${name}--small`)).toBe(true)
-  })
-
-  it('should render with large size styling', () => {
-    const wrapper = shallow(<Checkbox size='large' />)
-
-    expect(wrapper.hasClass(`${name}--large`)).toBe(true)
-  })
-
   it('should handle events on input', () => {
     const change = jest.fn()
 
@@ -39,6 +27,22 @@ describe('<Checkbox />', () => {
 
     input.simulate('change')
     expect(change).toHaveBeenCalledTimes(1)
+
+    wrapper.unmount()
+  })
+
+  it('should work controlled from outside', () => {
+    const change = jest.fn()
+
+    const wrapper = mount(<Checkbox value={false} onChange={change} />)
+
+    expect(wrapper.find('input').prop('checked')).toBe(false)
+
+    wrapper.setProps({ value: true })
+    expect(wrapper.find('input').prop('checked')).toBe(true)
+
+    wrapper.setProps({ value: false })
+    expect(wrapper.find('input').prop('checked')).toBe(false)
 
     wrapper.unmount()
   })

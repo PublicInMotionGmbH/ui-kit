@@ -12,18 +12,22 @@ const propTypes = {
   /** Checkbox description */
   children: PropTypes.node,
 
+  /** Is checkbox checked? */
+  value: PropTypes.bool,
+
   /** Indicates that input has error */
   error: PropTypes.bool,
 
-  /** Checkbox label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
   /** Additional styles for wrapper */
-  style: PropTypes.object
+  style: PropTypes.object,
+
+  /** Event handler for change of checked status */
+  onChange: PropTypes.func
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  defaultChecked: false
 }
 
 /**
@@ -32,6 +36,7 @@ const defaultProps = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {boolean} [props.error]
+ * @property {boolean} [props.value]
  * @property {function} [props.onChange]
  * @property {node} [props.children]
  * @property {string} [props.size]
@@ -40,7 +45,7 @@ const defaultProps = {
  */
 class Checkbox extends React.PureComponent {
   state = {
-    value: this.props.value
+    value: this.props.value == null ? !!this.props.defaultChecked : !!this.props.value
   }
 
   componentWillReceiveProps (props) {
@@ -62,10 +67,10 @@ class Checkbox extends React.PureComponent {
   }
 
   render () {
-    const { children, className, error, size, style, value, ...passedProps } = this.props
+    const { children, className, error, style, value, onChange, ...passedProps } = this.props
     const _value = this.state.value
 
-    const clsName = buildClassName(moduleName, className, {error, [size]: size})
+    const clsName = buildClassName(moduleName, className, { error })
 
     return (
       <label className={clsName} style={style}>

@@ -1,2 +1,64 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@mixin badge-color($name, $background-color, $text-color: text-contrast($background-color), $border-color: mix($background-color, $text-color, 90%))
+  @include module('badge--#{$name}')
+    background-color: $background-color
+    color: $text-color
+    border-color: $border-color
+
+    @if $badge-text-shadow
+      text-shadow: text-shadow-smoothness($text-color, $background-color)
+
+    @include module('badge__remove')
+      border-left-color: $border-color
+
+      &:hover
+        background: $border-color
+
+@include module('badge')
+  display: inline-flex
+  align-items: stretch
+  font-size: $badge-font-size
+  font-weight: $badge-font-weight
+  line-height: $badge-line-height
+  border: $badge-border-width solid $badge-border-color
+  border-radius: $badge-border-radius
+  background-color: $badge-background-color
+  color: $badge-text-color
+  overflow: hidden
+
+  @if $badge-text-shadow
+    text-shadow: text-shadow-smoothness($badge-text-color, $badge-background-color)
+
+  &__content
+    padding: $badge-padding-vertical $badge-padding-horizontal
+
+  &__remove
+    display: inline-flex
+    align-items: center
+    cursor: pointer
+    border: 0
+    background: transparent
+    color: inherit
+    font: inherit
+    padding: 0 $badge-padding-horizontal
+    border-left: $badge-border-width solid $badge-border-color
+    outline: none
+
+    &:hover
+      background: $badge-border-color
+
+  &--interactive
+    cursor: pointer
+
+  &--pill
+    border-width: $badge-pill-border-width
+    border-radius: $badge-pill-border-radius
+
+@include badge-color('primary', $badge-primary-background-color, $badge-primary-text-color, $badge-primary-border-color)
+@include badge-color('secondary', $badge-secondary-background-color, $badge-secondary-text-color, $badge-secondary-border-color)
+@include badge-color('tertiary', $badge-tertiary-background-color, $badge-tertiary-text-color, $badge-tertiary-border-color)
+@include badge-color('success', $badge-success-background-color, $badge-success-text-color, $badge-success-border-color)
+@include badge-color('info', $badge-info-background-color, $badge-info-text-color, $badge-info-border-color)
+@include badge-color('warning', $badge-warning-background-color, $badge-warning-text-color, $badge-warning-border-color)
+@include badge-color('error', $badge-error-background-color, $badge-error-text-color, $badge-error-border-color)

@@ -3,6 +3,14 @@ import PropTypes from 'prop-types'
 
 import { prefix, buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Sidebar elements */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Sidebar.
  *
@@ -23,12 +31,6 @@ function Sidebar (props) {
   )
 }
 
-Sidebar.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Sidebar elements */
-  children: PropTypes.node
-}
+Sidebar.propTypes = propTypes
 
 export default Sidebar

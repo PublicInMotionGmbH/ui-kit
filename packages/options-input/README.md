@@ -28,15 +28,18 @@ to avoid having different versions of these in your application.
 
 It allows any property which can be passed to `div`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | Additional class name passed to wrapper
-options       | Options   | `[]`    | Array with objects containing data passed to component
-value         | object    | n/a     | Value of option/options
+Property name | Type      | Default         | Description
+--------------|-----------|:---------------:|--------------------------------
+className     | string    | n/a             | Additional class name passed to wrapper
+options       | Option[]  | `[]`            | Array with objects containing data passed to component
+value         | object    | self-controlled | Value of option/options
+onChange      | function  | n/a             | Event handler fired on value change
+onFocus       | function  | n/a             | Event handler fired on input open
+onBlur        | function  | n/a             | Event handler fired on input blur
 
 ## Property shapes
 
-### Options
+### Option
 
 Property name | Type      | Required | Default | Description                    
 --------------|-----------|----------|:-------:|--------------------------------
