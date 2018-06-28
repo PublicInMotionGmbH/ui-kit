@@ -2,7 +2,7 @@
 
 exports[`<ControlGroup /> renders children correctly 1`] = `
 <div
-  className="talixo-control-group talixo-control-group--horizontal talixo-control-group--horizontal-left"
+  className="talixo-control-group talixo-control-group--horizontal talixo-control-group--horizontal-start"
 >
   <button>
     1

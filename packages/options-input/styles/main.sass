@@ -1,1 +1,138 @@
-@import './geometry'
+@import './config'
+
+@include module('options-input')
+  position: relative
+  display: block
+
+  &__toggle
+    box-sizing: border-box
+    display: flex
+    justify-content: space-between
+    width: 100%
+    outline: none
+    font: inherit
+    text-align: left
+    text-align: start
+    color: $options-input-text-color
+    background-color: $options-input-background-color
+    border: $options-input-border-width solid $options-input-border-color
+    border-radius: $options-input-border-radius
+
+    font-size: $options-input-font-size
+    height: $options-input-height
+    line-height: $options-input-height
+    padding: 0 $options-input-padding-horizontal
+
+    &:hover, &:focus
+      background-color: $options-input-hover-background-color
+      border-color: $options-input-hover-border-color
+      color: $options-input-hover-text-color
+
+    > #{prefix('icon')}
+      margin-left: $options-input-arrow-margin
+      font-size: $options-input-arrow-size
+
+  &-option
+    display: inline-flex
+    margin: 0 $options-input-option-margin
+
+    #{prefix('icon')}
+      font-size: $options-input-icon-size
+      margin-right: $options-input-icon-margin
+
+    &--dummy
+      visibility: hidden
+      width: 0 !important
+      margin: 0 !important
+      overflow: hidden
+
+  &-list
+    position: absolute
+    box-sizing: border-box
+    top: 100%
+    margin-top: -$options-input-border-width
+    display: none
+
+    min-width: $options-input-minimum-width
+    border: $options-input-border-width solid $options-input-focus-border-color
+    background-color: $options-input-focus-background-color
+    border-radius: $options-input-border-radius
+    border-top-left-radius: 0
+
+    @if $options-input-right-movement == 0
+      width: 100%
+      border-top-right-radius: 0
+    @else
+      width: 110%
+      width: calc(100% + #{$options-input-right-movement})
+
+    @if $options-input-with-box-shadow
+      box-shadow: 0 #{dp(1.25)} #{dp(2.5)} #{dp(0.5)} #{transparentize(text-contrast($x-color-background), 0.9)}
+
+  &-list-option
+    position: relative
+    margin-top: -$options-input-border-width
+    border: $options-input-border-width solid $options-input-hover-border-color
+    background-color: $options-input-inactive-background-color
+    border-left: 0
+    border-right: 0
+
+    &__label
+      display: block
+      font-size: $options-input-label-font-size
+
+    &__title,
+    &__description
+      display: block
+      line-height: $options-input-label-line-height
+      overflow: hidden
+      text-overflow: ellipsis
+
+    &__title
+      font-weight: $options-input-label-title-font-weight
+      color: $options-input-label-title-text-color
+
+    &__description
+      font-weight: $options-input-label-description-font-weight
+      color: $options-input-label-description-text-color
+
+    &:first-child
+      margin-top: 0
+      border-top: 0
+
+    &:last-child
+      border-bottom: 0
+
+    &--active
+      z-index: 1
+      border-color: $options-input-focus-border-color
+      background-color: transparent
+
+  &-tooltip__title
+    display: block
+    font-weight: $options-input-tooltip-title-font-weight
+    margin-bottom: $options-input-tooltip-title-margin
+
+  &-tooltip__description
+    display: block
+    font-weight: $options-input-tooltip-description-font-weight
+
+  @include module('text-input')
+    input, input:hover, input:focus
+      border-color: transparent
+      background-color: transparent
+
+  &--open &__toggle
+    &, &:hover, &:focus
+      position: relative
+      background-color: $options-input-focus-background-color
+      border-color: $options-input-focus-border-color
+      color: $options-input-focus-text-color
+      border-bottom-color: $options-input-focus-background-color
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+      z-index: 333
+
+  &--open &-list
+    display: block
+    z-index: 332

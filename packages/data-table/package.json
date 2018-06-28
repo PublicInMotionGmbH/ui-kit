@@ -24,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/icon": "^0.1.1",
+    "@talixo/notification": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "@talixo/table": "^0.1.0",
     "lodash": "^4.17.10",

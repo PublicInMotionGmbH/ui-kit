@@ -22,40 +22,44 @@ describe('getPositionNearElement', () => {
 
   it('returns right correctly', () => {
     const div = document.createElement('div')
-    let state = getPositionNearElement(div, 'right')
+    let state = getPositionNearElement(div, 'right', null, null, true)
     let expectedState = {
       top: '75px',
-      left: '150px'
+      left: '150px',
+      position: 'right'
     }
     expect(state).toEqual(expectedState)
   })
 
   it('returns left correctly', () => {
     const div = document.createElement('div')
-    let state = getPositionNearElement(div, 'left')
+    let state = getPositionNearElement(div, 'left', null, null, true)
     let expectedState = {
       top: '75px',
-      left: '50px'
+      left: '50px',
+      position: 'left'
     }
     expect(state).toEqual(expectedState)
   })
 
   it('returns top correctly', () => {
     const div = document.createElement('div')
-    let state = getPositionNearElement(div, 'top')
+    let state = getPositionNearElement(div, 'top', null, null, true)
     let expectedState = {
       top: '50px',
-      left: '100px'
+      left: '100px',
+      position: 'top'
     }
     expect(state).toEqual(expectedState)
   })
 
   it('returns bottom correctly', () => {
     const div = document.createElement('div')
-    let state = getPositionNearElement(div, 'bottom')
+    let state = getPositionNearElement(div, 'bottom', null, null, true)
     let expectedState = {
       top: '100px',
-      left: '100px'
+      left: '100px',
+      position: 'bottom'
     }
     expect(state).toEqual(expectedState)
   })

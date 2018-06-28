@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import moment from 'moment'
 
 import Calendar from './src/Calendar'
 
@@ -13,7 +14,7 @@ const addStory = createStoriesFactory('Calendar', module)
 const styles = {
   position: 'relative',
   display: 'inline-block',
-  left: '1px',
+  left: '100px',
   marginRight: '30px'
 }
 
@@ -22,6 +23,17 @@ const styles = {
 addStory('default', readme, () => (
   <Calendar style={styles} />
 ))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <div>
+    <Calendar
+      style={styles}
+      placeholder='DD-MM-YYYY'
+      onChange={value => setState({ value })}
+      value={state.value}
+    />
+  </div>
+), () => ({ value: moment().format('YYYY-MM-DD') }))
 
 addStory('custom date format', readme, () => (
   <div>

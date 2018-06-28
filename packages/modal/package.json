@@ -23,6 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@talixo/button": "^0.1.0",
+    "@talixo/control-group": "^0.1.0",
+    "@talixo/icon": "^0.1.1",
     "@talixo/portal": "^0.1.0",
     "@talixo/shared": "^0.1.0",
     "prop-types": "^15.6.1",

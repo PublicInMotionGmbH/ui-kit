@@ -25,7 +25,12 @@ const optionsSimple = [
   'Skipper',
   'Private',
   'Kowalski',
-  'Rico'
+  'Rico',
+  'Alonso',
+  'Smith',
+  'Santosh',
+  'Medelina',
+  'Kyoksanto'
 ]
 
 const options = [
@@ -43,6 +48,12 @@ const options = [
   { id: 'sk', name: 'Slovakia', language: 'Slovak' }
 ]
 
+// Styles for autocomplete footer
+const footerStyles = {
+  textAlign: 'right',
+  color: '#e40909'
+}
+
 // Stories
 
 addStory.controlled('simple select box', readme, (setState, state) => (
@@ -53,6 +64,19 @@ addStory.controlled('simple select box', readme, (setState, state) => (
       value={state.value}
       onChange={value => setState({ value })}
       options={optionsSimple}
+    />
+  </div>
+), () => ({ value: null }))
+
+addStory.controlled('select box with footer', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {state.value}</div>
+    <SelectBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
     />
   </div>
 ), () => ({ value: null }))
@@ -191,6 +215,20 @@ addStory.controlled('filtered combo box', readme, (setState, state) => (
   </div>
 ), () => ({ value: null, inputValue: '' }))
 
+addStory.controlled('combo box with footer', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      options={filterOptions(state.inputValue, optionsSimple)}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
+    />
+  </div>
+), () => ({ value: null, inputValue: '' }))
+
 addStory.controlled('filtered multi combo box', readme, (setState, state) => (
   <div>
     <div>Selected value: {JSON.stringify(state.value)}</div>
@@ -233,6 +271,21 @@ addStory.controlled('auto complete', readme, (setState, state) => (
       options={filterOptions(state.value, optionsSimple)}
       onFocus={action('focus')}
       onBlur={action('blur')}
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({ value: '' }))
+
+addStory.controlled('auto complete with footer', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
     >
       <TextInput value={state.value} onChange={value => setState({ value })} />
     </AutoComplete>

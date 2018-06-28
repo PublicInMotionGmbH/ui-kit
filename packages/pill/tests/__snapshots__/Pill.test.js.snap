@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Pill /> renders children correctly 1`] = `
-<span
-  className="talixo-pill"
->
-  label
-</span>
-`;

@@ -82,8 +82,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
     </div>
   </div>
   <button
-    className="talixo-button talixo-button--submit"
-    type="button"
+    className="talixo-button"
+    type="submit"
   >
     Test
   </button>

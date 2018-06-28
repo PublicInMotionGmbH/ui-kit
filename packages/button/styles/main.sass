@@ -1,2 +1,226 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+// Internal mixin for applying button colors
+
+@mixin _button-color($selector, $background, $border: $background, $text: text-contrast($background), $smoothness: $button-text-shadow)
+  #{$selector}
+    background-color: $background
+    border-color: $border
+    color: $text
+
+    @if $smoothness
+      text-shadow: text-shadow-smoothness($text, $background)
+    @else if $button-text-shadow
+      text-shadow: none
+
+// External mixin for applying colors
+
+@mixin button-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}', $background, $border, $text, $smoothness)
+
+@mixin button-hover-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:hover', $background, $border, $text, $smoothness)
+
+@mixin button-focus-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:focus', $background, $border, $text, $smoothness)
+
+@mixin button-active-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:active', $background, $border, $text, $smoothness)
+
+@mixin button-disabled-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  @include _button-color('#{prefix('button')}#{$selector}:disabled', $background, $border, $text, $smoothness)
+
+@mixin button-ghost-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
+  @include button-color($selector, $background, $border, $text, $smoothness)
+
+@mixin button-ghost-hover-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
+  @include button-hover-color($selector, $background, $border, $text, $smoothness)
+
+@mixin button-ghost-focus-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
+  @include button-focus-color($selector, $background, $border, $text, $smoothness)
+
+@mixin button-ghost-active-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
+  @include button-active-color($selector, $background, $border, $text, $smoothness)
+
+@mixin button-ghost-disabled-color($selector, $background, $border, $text, $smoothness: $button-text-shadow)
+  $selector: if($selector == '', '--ghost', '#{prefix('button')}--ghost#{prefix('button')}#{$selector}')
+  @include button-disabled-color($selector, $background, $border, $text, $smoothness)
+
+// Styling itself
+
+@include module('button')
+  box-sizing: border-box
+  display: inline-block
+  border-radius: $button-border-radius
+  font-size: $button-font-size
+  line-height: $x-line-height-base * $button-font-size
+  border: $button-border-width solid $button-border-color
+  padding: $button-padding-vertical $button-padding-horizontal
+  outline: none
+  text-align: center
+  cursor: pointer
+  vertical-align: middle
+
+  > *
+    vertical-align: middle
+
+  &--small
+    font-size: $button-small-font-size
+    border-radius: $button-small-border-radius
+    border-width: $button-small-border-width
+    padding: $button-small-padding-vertical $button-small-padding-horizontal
+
+  &--fluid
+    display: block
+    width: 100%
+
+  &--link
+    &:hover, &:focus
+      text-decoration: none
+
+  &--link
+    &, &:disabled
+      text-decoration: underline
+
+  &:disabled
+    cursor: not-allowed
+
+// Basic button colors
+
+@include button-color('', $button-background-color, $button-border-color, $button-text-color)
+@include button-hover-color('', $button-hover-background-color, $button-hover-border-color, $button-hover-text-color)
+@include button-focus-color('', $button-focus-background-color, $button-focus-border-color, $button-focus-text-color)
+@include button-active-color('', $button-active-background-color, $button-active-border-color, $button-active-text-color)
+@include button-disabled-color('', $button-disabled-background-color, $button-disabled-border-color, $button-disabled-text-color)
+
+// Basic ghost button colors
+
+@include button-ghost-color('', $button-ghost-background-color, $button-ghost-border-color, $button-ghost-text-color)
+@include button-ghost-hover-color('', $button-hover-ghost-background-color, $button-hover-ghost-border-color, $button-hover-ghost-text-color)
+@include button-ghost-focus-color('', $button-focus-ghost-background-color, $button-focus-ghost-border-color, $button-focus-ghost-text-color)
+@include button-ghost-active-color('', $button-active-ghost-background-color, $button-active-ghost-border-color, $button-active-ghost-text-color)
+@include button-ghost-disabled-color('', $button-disabled-ghost-background-color, $button-disabled-ghost-border-color, $button-disabled-ghost-text-color)
+
+// Primary button colors
+
+@include button-color('--primary', $button-primary-background-color, $button-primary-border-color, $button-primary-text-color)
+@include button-hover-color('--primary', $button-hover-primary-background-color, $button-hover-primary-border-color, $button-hover-primary-text-color)
+@include button-focus-color('--primary', $button-focus-primary-background-color, $button-focus-primary-border-color, $button-focus-primary-text-color)
+@include button-active-color('--primary', $button-active-primary-background-color, $button-active-primary-border-color, $button-active-primary-text-color)
+@include button-disabled-color('--primary', $button-disabled-primary-background-color, $button-disabled-primary-border-color, $button-disabled-primary-text-color)
+
+// Primary ghost button colors
+
+@include button-ghost-color('--primary', $button-ghost-primary-background-color, $button-ghost-primary-border-color, $button-ghost-primary-text-color)
+@include button-ghost-hover-color('--primary', $button-hover-ghost-primary-background-color, $button-hover-ghost-primary-border-color, $button-hover-ghost-primary-text-color)
+@include button-ghost-focus-color('--primary', $button-focus-ghost-primary-background-color, $button-focus-ghost-primary-border-color, $button-focus-ghost-primary-text-color)
+@include button-ghost-active-color('--primary', $button-active-ghost-primary-background-color, $button-active-ghost-primary-border-color, $button-active-ghost-primary-text-color)
+@include button-ghost-disabled-color('--primary', $button-disabled-ghost-primary-background-color, $button-disabled-ghost-primary-border-color, $button-disabled-ghost-primary-text-color)
+
+// Secondary button colors
+
+@include button-color('--secondary', $button-secondary-background-color, $button-secondary-border-color, $button-secondary-text-color)
+@include button-hover-color('--secondary', $button-hover-secondary-background-color, $button-hover-secondary-border-color, $button-hover-secondary-text-color)
+@include button-focus-color('--secondary', $button-focus-secondary-background-color, $button-focus-secondary-border-color, $button-focus-secondary-text-color)
+@include button-active-color('--secondary', $button-active-secondary-background-color, $button-active-secondary-border-color, $button-active-secondary-text-color)
+@include button-disabled-color('--secondary', $button-disabled-secondary-background-color, $button-disabled-secondary-border-color, $button-disabled-secondary-text-color)
+
+// Secondary ghost button colors
+
+@include button-ghost-color('--secondary', $button-ghost-secondary-background-color, $button-ghost-secondary-border-color, $button-ghost-secondary-text-color)
+@include button-ghost-hover-color('--secondary', $button-hover-ghost-secondary-background-color, $button-hover-ghost-secondary-border-color, $button-hover-ghost-secondary-text-color)
+@include button-ghost-focus-color('--secondary', $button-focus-ghost-secondary-background-color, $button-focus-ghost-secondary-border-color, $button-focus-ghost-secondary-text-color)
+@include button-ghost-active-color('--secondary', $button-active-ghost-secondary-background-color, $button-active-ghost-secondary-border-color, $button-active-ghost-secondary-text-color)
+@include button-ghost-disabled-color('--secondary', $button-disabled-ghost-secondary-background-color, $button-disabled-ghost-secondary-border-color, $button-disabled-ghost-secondary-text-color)
+
+// Tertiary button colors
+
+@include button-color('--tertiary', $button-tertiary-background-color, $button-tertiary-border-color, $button-tertiary-text-color)
+@include button-hover-color('--tertiary', $button-hover-tertiary-background-color, $button-hover-tertiary-border-color, $button-hover-tertiary-text-color)
+@include button-focus-color('--tertiary', $button-focus-tertiary-background-color, $button-focus-tertiary-border-color, $button-focus-tertiary-text-color)
+@include button-active-color('--tertiary', $button-active-tertiary-background-color, $button-active-tertiary-border-color, $button-active-tertiary-text-color)
+@include button-disabled-color('--tertiary', $button-disabled-tertiary-background-color, $button-disabled-tertiary-border-color, $button-disabled-tertiary-text-color)
+
+// Tertiary ghost button colors
+
+@include button-ghost-color('--tertiary', $button-ghost-tertiary-background-color, $button-ghost-tertiary-border-color, $button-ghost-tertiary-text-color)
+@include button-ghost-hover-color('--tertiary', $button-hover-ghost-tertiary-background-color, $button-hover-ghost-tertiary-border-color, $button-hover-ghost-tertiary-text-color)
+@include button-ghost-focus-color('--tertiary', $button-focus-ghost-tertiary-background-color, $button-focus-ghost-tertiary-border-color, $button-focus-ghost-tertiary-text-color)
+@include button-ghost-active-color('--tertiary', $button-active-ghost-tertiary-background-color, $button-active-ghost-tertiary-border-color, $button-active-ghost-tertiary-text-color)
+@include button-ghost-disabled-color('--tertiary', $button-disabled-ghost-tertiary-background-color, $button-disabled-ghost-tertiary-border-color, $button-disabled-ghost-tertiary-text-color)
+
+// Success button colors
+
+@include button-color('--success', $button-success-background-color, $button-success-border-color, $button-success-text-color)
+@include button-hover-color('--success', $button-hover-success-background-color, $button-hover-success-border-color, $button-hover-success-text-color)
+@include button-focus-color('--success', $button-focus-success-background-color, $button-focus-success-border-color, $button-focus-success-text-color)
+@include button-active-color('--success', $button-active-success-background-color, $button-active-success-border-color, $button-active-success-text-color)
+@include button-disabled-color('--success', $button-disabled-success-background-color, $button-disabled-success-border-color, $button-disabled-success-text-color)
+
+// Success ghost button colors
+
+@include button-ghost-color('--success', $button-ghost-success-background-color, $button-ghost-success-border-color, $button-ghost-success-text-color)
+@include button-ghost-hover-color('--success', $button-hover-ghost-success-background-color, $button-hover-ghost-success-border-color, $button-hover-ghost-success-text-color)
+@include button-ghost-focus-color('--success', $button-focus-ghost-success-background-color, $button-focus-ghost-success-border-color, $button-focus-ghost-success-text-color)
+@include button-ghost-active-color('--success', $button-active-ghost-success-background-color, $button-active-ghost-success-border-color, $button-active-ghost-success-text-color)
+@include button-ghost-disabled-color('--success', $button-disabled-ghost-success-background-color, $button-disabled-ghost-success-border-color, $button-disabled-ghost-success-text-color)
+
+// Info button colors
+
+@include button-color('--info', $button-info-background-color, $button-info-border-color, $button-info-text-color)
+@include button-hover-color('--info', $button-hover-info-background-color, $button-hover-info-border-color, $button-hover-info-text-color)
+@include button-focus-color('--info', $button-focus-info-background-color, $button-focus-info-border-color, $button-focus-info-text-color)
+@include button-active-color('--info', $button-active-info-background-color, $button-active-info-border-color, $button-active-info-text-color)
+@include button-disabled-color('--info', $button-disabled-info-background-color, $button-disabled-info-border-color, $button-disabled-info-text-color)
+
+// Info ghost button colors
+
+@include button-ghost-color('--info', $button-ghost-info-background-color, $button-ghost-info-border-color, $button-ghost-info-text-color)
+@include button-ghost-hover-color('--info', $button-hover-ghost-info-background-color, $button-hover-ghost-info-border-color, $button-hover-ghost-info-text-color)
+@include button-ghost-focus-color('--info', $button-focus-ghost-info-background-color, $button-focus-ghost-info-border-color, $button-focus-ghost-info-text-color)
+@include button-ghost-active-color('--info', $button-active-ghost-info-background-color, $button-active-ghost-info-border-color, $button-active-ghost-info-text-color)
+@include button-ghost-disabled-color('--info', $button-disabled-ghost-info-background-color, $button-disabled-ghost-info-border-color, $button-disabled-ghost-info-text-color)
+
+// Warning button colors
+
+@include button-color('--warning', $button-warning-background-color, $button-warning-border-color, $button-warning-text-color)
+@include button-hover-color('--warning', $button-hover-warning-background-color, $button-hover-warning-border-color, $button-hover-warning-text-color)
+@include button-focus-color('--warning', $button-focus-warning-background-color, $button-focus-warning-border-color, $button-focus-warning-text-color)
+@include button-active-color('--warning', $button-active-warning-background-color, $button-active-warning-border-color, $button-active-warning-text-color)
+@include button-disabled-color('--warning', $button-disabled-warning-background-color, $button-disabled-warning-border-color, $button-disabled-warning-text-color)
+
+// Warning ghost button colors
+
+@include button-ghost-color('--warning', $button-ghost-warning-background-color, $button-ghost-warning-border-color, $button-ghost-warning-text-color)
+@include button-ghost-hover-color('--warning', $button-hover-ghost-warning-background-color, $button-hover-ghost-warning-border-color, $button-hover-ghost-warning-text-color)
+@include button-ghost-focus-color('--warning', $button-focus-ghost-warning-background-color, $button-focus-ghost-warning-border-color, $button-focus-ghost-warning-text-color)
+@include button-ghost-active-color('--warning', $button-active-ghost-warning-background-color, $button-active-ghost-warning-border-color, $button-active-ghost-warning-text-color)
+@include button-ghost-disabled-color('--warning', $button-disabled-ghost-warning-background-color, $button-disabled-ghost-warning-border-color, $button-disabled-ghost-warning-text-color)
+
+// Error button colors
+
+@include button-color('--error', $button-error-background-color, $button-error-border-color, $button-error-text-color)
+@include button-hover-color('--error', $button-hover-error-background-color, $button-hover-error-border-color, $button-hover-error-text-color)
+@include button-focus-color('--error', $button-focus-error-background-color, $button-focus-error-border-color, $button-focus-error-text-color)
+@include button-active-color('--error', $button-active-error-background-color, $button-active-error-border-color, $button-active-error-text-color)
+@include button-disabled-color('--error', $button-disabled-error-background-color, $button-disabled-error-border-color, $button-disabled-error-text-color)
+
+// Error ghost button colors
+
+@include button-ghost-color('--error', $button-ghost-error-background-color, $button-ghost-error-border-color, $button-ghost-error-text-color)
+@include button-ghost-hover-color('--error', $button-hover-ghost-error-background-color, $button-hover-ghost-error-border-color, $button-hover-ghost-error-text-color)
+@include button-ghost-focus-color('--error', $button-focus-ghost-error-background-color, $button-focus-ghost-error-border-color, $button-focus-ghost-error-text-color)
+@include button-ghost-active-color('--error', $button-active-ghost-error-background-color, $button-active-ghost-error-border-color, $button-active-ghost-error-text-color)
+@include button-ghost-disabled-color('--error', $button-disabled-ghost-error-background-color, $button-disabled-ghost-error-border-color, $button-disabled-ghost-error-text-color)
+
+// Link button colors
+
+@include button-color('--link', $button-link-background-color, $button-link-border-color, $button-link-text-color, false)
+@include button-hover-color('--link', $button-hover-link-background-color, $button-hover-link-border-color, $button-hover-link-text-color, false)
+@include button-focus-color('--link', $button-focus-link-background-color, $button-focus-link-border-color, $button-focus-link-text-color, false)
+@include button-active-color('--link', $button-active-link-background-color, $button-active-link-border-color, $button-active-link-text-color, false)
+@include button-disabled-color('--link', $button-disabled-link-background-color, $button-disabled-link-border-color, $button-disabled-link-text-color, false)

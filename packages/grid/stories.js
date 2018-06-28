@@ -217,6 +217,58 @@ addStory('extended masonry', readme, () => (
   </Masonry>
 ))
 
+addStory('RTL: extended masonry', readme, () => (
+  <div dir='rtl'>
+    <Masonry>
+      <Group spaced>
+        <Group spaced size={3}>
+          <Masonry>
+            <Group spaced>
+              <Segment style={style}>3 Ver</Segment>
+              <Segment style={style}>3 ti</Segment>
+              <Segment style={style}>3 cal</Segment>
+            </Group>
+          </Masonry>
+        </Group>
+        <Group spaced size={9}>
+          <Segment style={style} size={9}>9 of 9/12</Segment>
+          <Segment style={style} size={3}>3 of 9/12</Segment>
+        </Group>
+      </Group>
+
+      <Group spaced>
+        <Group spaced size={9}>
+          <Segment style={style} size={9}>9 of 9/12</Segment>
+          <Segment style={style} size={3}>3 of 9/12</Segment>
+        </Group>
+        <Group spaced size={3}>
+          <Masonry>
+            <Group spaced>
+              <Segment style={style}>3 Ver</Segment>
+              <Segment style={style}>3 ti</Segment>
+              <Segment style={style}>3 cal</Segment>
+            </Group>
+          </Masonry>
+        </Group>
+      </Group>
+
+      <Group spaced>
+        <Segment style={style} size={3}>3</Segment>
+        <Group spaced size={3}>
+          <Masonry>
+            <Group spaced>
+              <Segment style={style}>3 Ver</Segment>
+              <Segment style={style}>3 ti</Segment>
+              <Segment style={style}>3 cal</Segment>
+            </Group>
+          </Masonry>
+        </Group>
+        <Segment style={style} size={6}>6</Segment>
+      </Group>
+    </Masonry>
+  </div>
+))
+
 addStory('responsive', readme, () => (
   <div>
     <Group>

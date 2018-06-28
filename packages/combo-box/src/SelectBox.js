@@ -87,15 +87,22 @@ class SelectBox extends React.PureComponent {
   stateReducer = (state, changes) => {
     const { multi } = this.props
 
-    switch (changes.type) {
-      case Downshift.stateChangeTypes.clickItem:
-        return {
-          ...changes,
-          isOpen: multi
-        }
-      default:
-        return changes
+    if (changes.type === Downshift.stateChangeTypes.clickItem) {
+      changes = {
+        ...changes,
+        isOpen: multi
+      }
     }
+
+    if ('isOpen' in changes) {
+      if (changes.isOpen && this.props.onFocus) {
+        this.props.onFocus()
+      } else if (!changes.isOpen && this.props.onBlur) {
+        this.props.onBlur()
+      }
+    }
+
+    return changes
   }
 
   /**
@@ -105,11 +112,11 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)
@@ -196,7 +203,12 @@ class SelectBox extends React.PureComponent {
 
     // Render component
     return (
-      <div className={clsName}>
+      <div
+        className={clsName}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseEnter={this.props.onMouseEnter}
+      >
         <SelectBoxValue {...data} />
         {open && <Menu {...data} />}
       </div>
@@ -210,7 +222,7 @@ class SelectBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange,
+      icon, multi, placeholder, value, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave, onMouseEnter,
       buildItemId, renderItem, renderValue, ...passedProps
     } = this.props
 

@@ -10,6 +10,44 @@ const isBrowser = typeof document !== 'undefined' && typeof window !== 'undefine
 
 const moduleName = 'text-input'
 
+const propTypes = {
+  /** Additional class name for text input wrapper */
+  className: PropTypes.string,
+
+  /** Indicates that input has error */
+  error: PropTypes.bool,
+
+  /** Ref passed to input element */
+  inputRef: PropTypes.func,
+
+  /** Callback for change event */
+  onChange: PropTypes.func,
+
+  /** Additional input wrapper styling */
+  style: PropTypes.object,
+
+  /** Suffix to show after input value */
+  suffix: PropTypes.any,
+
+  /** Left side icon or controls */
+  left: PropTypes.node,
+
+  /** Right side icon or controls */
+  right: PropTypes.node,
+
+  /** Value to put inside input */
+  value: PropTypes.string,
+
+  /** Component used for input below */
+  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
+}
+
+const defaultProps = {
+  InputComponent: 'input',
+  error: false,
+  type: 'text'
+}
+
 /**
  * Component which represents Text Input.
  *
@@ -141,17 +179,18 @@ class TextInput extends React.PureComponent {
    */
   onInputChange = (e) => {
     const { value, onChange } = this.props
+    const nextValue = e.target.value
 
     // Update styles connected to suffix
     this.updateStyles()
 
     if (value == null) {
-      this.setState({ value })
+      this.setState({ value: nextValue })
     }
 
     // Trigger change to parent components
     if (onChange) {
-      onChange(e.target.value)
+      onChange(nextValue)
     }
   }
 
@@ -327,42 +366,7 @@ class TextInput extends React.PureComponent {
   }
 }
 
-TextInput.propTypes = {
-  /** Additional class name for text input wrapper */
-  className: PropTypes.string,
-
-  /** Indicates that input has error */
-  error: PropTypes.bool,
-
-  /** Ref passed to input element */
-  inputRef: PropTypes.func,
-
-  /** Callback for change event */
-  onChange: PropTypes.func,
-
-  /** Additional input wrapper styling */
-  style: PropTypes.object,
-
-  /** Suffix to show after input value */
-  suffix: PropTypes.any,
-
-  /** Left side icon or controls */
-  left: PropTypes.node,
-
-  /** Right side icon or controls */
-  right: PropTypes.node,
-
-  /** Value to put inside input */
-  value: PropTypes.string,
-
-  /** Component used for input below */
-  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
-}
-
-TextInput.defaultProps = {
-  InputComponent: 'input',
-  error: false,
-  type: 'text'
-}
+TextInput.propTypes = propTypes
+TextInput.defaultProps = defaultProps
 
 export default TextInput

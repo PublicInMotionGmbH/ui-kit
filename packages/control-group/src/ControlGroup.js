@@ -6,6 +6,25 @@ import { prefix } from '@talixo/shared'
 
 const moduleName = prefix('control-group')
 
+const propTypes = {
+  /** Grouped elements */
+  children: PropTypes.node,
+
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Orientation of grouped elements */
+  orientation: PropTypes.oneOf([ 'horizontal', 'vertical' ]),
+
+  /** Position of the group */
+  position: PropTypes.oneOf([ 'start', 'center', 'end' ])
+}
+
+const defaultProps = {
+  orientation: 'horizontal',
+  position: 'start'
+}
+
 /**
  * Component which represents ControlGroup.
  *
@@ -31,23 +50,7 @@ function ControlGroup (props) {
   )
 }
 
-ControlGroup.propTypes = {
-  /** Grouped elements */
-  children: PropTypes.node,
-
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Orientation of grouped elements */
-  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
-  /** Position of the group */
-  position: PropTypes.oneOf(['left', 'center', 'right'])
-}
-
-ControlGroup.defaultProps = {
-  orientation: 'horizontal',
-  position: 'left'
-}
+ControlGroup.propTypes = propTypes
+ControlGroup.defaultProps = defaultProps
 
 export default ControlGroup

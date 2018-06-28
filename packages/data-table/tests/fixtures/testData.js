@@ -7,6 +7,18 @@ export const tableData = [
   { id: 2, opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Mickey Mouse', pickup: 'Warszawa' }
 ]
 
+export const tableData2 = [
+  { id: 0, opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: 'John Smith', pickup: 'Berlin SXF Alexanderplatz' },
+  { id: 1, opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: '', pickup: 'Krakow' },
+  { id: 2, opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Mickey Mouse', pickup: 'Warszawa' }
+]
+
+export const tableDataNoId = [
+  { opened: '16th Jan 2018', date_of_ride: '18th Feb 2018', assignee: 'John Smith', pickup: 'Berlin SXF Alexanderplatz' },
+  { opened: '17th Jan 2018', date_of_ride: '19th Feb 2018', assignee: '', pickup: 'Krakow' },
+  { opened: '18th Jan 2018', date_of_ride: '20th Feb 2018', assignee: 'Mickey Mouse', pickup: 'Warszawa' }
+]
+
 export const tableDataSort = (col, dir = 'asc') => orderBy(tableData, col, dir)
 
 export const columns = [

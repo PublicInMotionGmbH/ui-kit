@@ -8,6 +8,14 @@ import codepoints from '../meta/codepoints'
 
 const iconPrefix = icons.classPrefix
 
+const propTypes = {
+  /** Icon name */
+  name: PropTypes.string.isRequired,
+
+  /** Additional class name */
+  className: PropTypes.string
+}
+
 /**
  * Component which represents icon from Material UI set
  *
@@ -30,12 +38,6 @@ function MaterialIcon (props) {
   )
 }
 
-MaterialIcon.propTypes = {
-  /** Icon name */
-  name: PropTypes.string.isRequired,
-
-  /** Additional class name */
-  className: PropTypes.string
-}
+MaterialIcon.propTypes = propTypes
 
 export default MaterialIcon
