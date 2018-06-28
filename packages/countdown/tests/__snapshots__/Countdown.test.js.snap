@@ -1,37 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Countdown /> renders children correctly 1`] = `
-<React.Fragment>
-  <span
-    className="talixo-countdown talixo-countdown--finished"
-  >
-    <span
-      className="talixo-countdown talixo-countdown--days"
-    >
-      00
-       
-    </span>
-    : 
-    <span
-      className="talixo-countdown talixo-countdown--hours"
-    >
-      00
-       
-    </span>
-    : 
-    <span
-      className="talixo-countdown talixo-countdown--minutes"
-    >
-      00
-       
-    </span>
-    : 
-    <span
-      className="talixo-countdown talixo-countdown--seconds"
-    >
-      00
-       
-    </span>
-  </span>
-</React.Fragment>
+<BasicCountdownRenderer
+  days={0}
+  finished={true}
+  hours={0}
+  minutes={0}
+  seconds={0}
+  targetDate="2018-01-05T10:30:00.000Z"
+  time={0}
+/>
 `;
