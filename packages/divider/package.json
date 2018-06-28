@@ -1,6 +1,6 @@
 {
   "name": "@talixo/divider",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "UI Component which represents Divider",
   "main": "dist/index.js",
   "module": "index.js",

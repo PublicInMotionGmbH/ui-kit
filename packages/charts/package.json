@@ -1,6 +1,6 @@
 {
   "name": "@talixo/charts",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.2",
   "description": "UI component for charts",
   "main": "dist/index.js",
   "module": "index.js",

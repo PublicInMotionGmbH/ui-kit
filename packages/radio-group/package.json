@@ -1,6 +1,6 @@
 {
   "name": "@talixo/radio-group",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.2",
   "description": "UI component which represents RadioGroup",
   "main": "dist/index.js",
   "module": "index.js",

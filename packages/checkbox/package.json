@@ -1,6 +1,6 @@
 {
   "name": "@talixo/checkbox",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.2",
   "description": "UI component for checkbox",
   "main": "dist/index.js",
   "module": "index.js",
