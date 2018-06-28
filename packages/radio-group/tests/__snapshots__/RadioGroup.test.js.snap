@@ -7,6 +7,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
   <RadioInput
     checked={false}
     disabled={false}
+    error={false}
     key="one"
     name="RadioGroup"
     onChange={[Function]}
@@ -17,6 +18,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
   <RadioInput
     checked={false}
     disabled={false}
+    error={false}
     key="two"
     name="RadioGroup"
     onChange={[Function]}
@@ -27,6 +29,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
   <RadioInput
     checked={false}
     disabled={false}
+    error={false}
     key="three"
     name="RadioGroup"
     onChange={[Function]}
