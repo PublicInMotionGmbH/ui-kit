@@ -16,10 +16,6 @@ const propTypes = {
   onRemove: PropTypes.func
 }
 
-const defaultProps = {
-  onRemove: () => {}
-}
-
 /**
  * Component which represents uploaded file.
  *
@@ -29,7 +25,7 @@ const defaultProps = {
  *
  * @returns {Element|React.Element}
  */
-const File = (props) => {
+function File (props) {
   const { file, onRemove } = props
   const iconCls = buildClassName([moduleName, 'icon'])
   const nameCls = buildClassName([moduleName, 'name'])
@@ -37,10 +33,16 @@ const File = (props) => {
   const sizeCls = buildClassName([moduleName, 'size'])
   const wrapperCls = buildClassName(moduleName)
 
+  function onClick (e) {
+    if (onRemove) {
+      onRemove(file, e)
+    }
+  }
+
   return (
     <div className={wrapperCls}>
       <div>
-        <Icon name='clear' onClick={onRemove} className={removeCls} />
+        <Icon name='clear' onClick={onClick} className={removeCls} />
         <Icon name='insert_drive_file' className={iconCls} />
       </div>
       <div>
@@ -52,7 +54,5 @@ const File = (props) => {
 }
 
 File.propTypes = propTypes
-
-File.defaultProps = defaultProps
 
 export default File

@@ -9,21 +9,6 @@ import { getDataTransferFiles } from './utils'
 
 export const moduleName = 'file-input'
 
-/**
- * Registers files in Map
- *
- * @param {array} rows
- * @returns {Map<any, any>}
- */
-export function registerElements (rows) {
-  const newStorage = new Map()
-
-  for (let i = 0; i < rows.length; i++) {
-    newStorage.set(rows[i], i)
-  }
-  return newStorage
-}
-
 const events = {
   end: 'onDragEnd',
   enter: 'onDragEnter',
@@ -61,6 +46,9 @@ const propTypes = {
   /** onChange callback. Invoked when either files have been dropped or file input has changed. */
   onChange: PropTypes.func,
 
+  /** File onRemove callback. */
+  onRemove: PropTypes.func,
+
   /** onDragEnd callback. Applies sent files and event. */
   onDragEnd: PropTypes.func,
 
@@ -83,6 +71,7 @@ const propTypes = {
 const defaultProps = {
   buttonLabel: 'Browse Files',
   dropDisabled: false,
+  filesRender: File,
   multiple: true
 }
 
@@ -109,8 +98,7 @@ const defaultProps = {
 class FileInput extends React.PureComponent {
   state = {
     draggingOver: false,
-    files: this.props.files || [],
-    idStorage: this.props.files ? registerElements(this.props.files) : new Map()
+    files: this.props.files || []
   }
 
   /**
@@ -137,8 +125,7 @@ class FileInput extends React.PureComponent {
   componentWillReceiveProps (nextProps) {
     if (nextProps.files != null && nextProps.files !== this.props.files) {
       this.setState({
-        files: nextProps.files,
-        idStorage: registerElements(nextProps.files)
+        files: nextProps.files
       })
     }
   }
@@ -204,20 +191,28 @@ class FileInput extends React.PureComponent {
     }
 
     const newFiles = files.concat([...uploadedFiles])
-    const newIdStorage = registerElements(newFiles)
-    this.setState({ files: newFiles, idStorage: newIdStorage, draggingOver: false })
+    this.setState({ files: newFiles, draggingOver: false })
   }
 
   /**
    * Handles files removing
    * @param {object} file
    */
-  handleRemove (file) {
+  handleRemove = (file, e) => {
+    const { files: propsFiles, onRemove } = this.props
+
+    if (onRemove) {
+      onRemove(file, e)
+    }
+
+    if (propsFiles != null) {
+      return
+    }
+
     const { files } = this.state
     const newFiles = files.filter(item => item !== file)
-    const newIdStorage = registerElements(newFiles)
 
-    this.setState({ files: newFiles, idStorage: newIdStorage })
+    this.setState({ files: newFiles })
   }
 
   /**
@@ -251,10 +246,10 @@ class FileInput extends React.PureComponent {
    */
   getFileElements = () => {
     const { filesRender } = this.props
-    const { files, idStorage } = this.state
+    const { files } = this.state
     const { handleRemove } = this
     const filesCls = buildClassName([moduleName, 'files-wrapper'])
-    const FileComponent = filesRender || File
+    const FileComponent = filesRender
 
     return (
       <React.Fragment>
@@ -262,8 +257,8 @@ class FileInput extends React.PureComponent {
           {
             files.map((file, index) => (
               <FileComponent
-                key={idStorage.get(file)}
-                onRemove={handleRemove.bind(this, file)}
+                key={index}
+                onRemove={handleRemove}
                 file={file}
               />
             ))

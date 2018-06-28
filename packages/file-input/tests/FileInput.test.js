@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 
 import { buildClassName } from '@talixo/shared'
 
-import FileInput, { moduleName, registerElements } from '../src/FileInput'
+import FileInput, { moduleName } from '../src/FileInput'
 
 // Helpers
 
@@ -219,20 +219,9 @@ describe('<FileInput />', () => {
         expect(wrapper.state().files).toEqual([file1])
       })
 
-      it('should create map when files are passed via props', () => {
-        const newMap = registerElements([file1])
-        expect(wrapper.state().idStorage).toEqual(newMap)
-      })
-
       it('should add file to state.files', () => {
         wrapper.setProps({ files: [file1, file2] })
         expect(wrapper.state().files).toEqual([file1, file2])
-      })
-
-      it('should create new idStorage when new files are passed', () => {
-        wrapper.setProps({ files: [file1, file2] })
-        const newMap = registerElements([file1, file2])
-        expect(wrapper.state().idStorage).toEqual(newMap)
       })
     })
 
