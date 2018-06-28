@@ -1,6 +1,6 @@
 {
   "name": "@talixo/progress-bar",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "UI components for progress bars",
   "main": "dist/index.js",
   "module": "index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@talixo/typography",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "UI components and styles which represents typography",
   "main": "dist/index.js",
   "module": "index.js",
