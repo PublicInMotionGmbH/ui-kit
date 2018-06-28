@@ -56,7 +56,17 @@
     border-top: 0
     color: $combo-box-menu-item-text-color
     background: $combo-box-menu-item-background-color
-    overflow: scroll
+    display: flex
+    flex-direction: column
+  
+  &__list
+    flex: 1 1 auto
+    overflow: auto
+
+  &__footer
+    flex: 0 0 auto
+    background-color: $combo-box-footer-background-color
+    padding: $combo-box-footer-padding-vertical $combo-box-footer-padding-horizontal
 
   &__arrow,
   &__clear

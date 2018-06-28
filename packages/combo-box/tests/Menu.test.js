@@ -29,10 +29,10 @@ describe('<Menu />', () => {
       />
     )
 
-    expect(wrapper.children().length).toBe(3)
-    expect(wrapper.children().at(0).prop('item')).toBe('abc')
-    expect(wrapper.children().at(1).prop('item')).toBe('def')
-    expect(wrapper.children().at(2).prop('item')).toBe('ghi')
+    expect(wrapper.find('.talixo-combo-box__list').children().length).toBe(3)
+    expect(wrapper.find('MenuItem').at(0).prop('item')).toBe('abc')
+    expect(wrapper.find('MenuItem').at(1).prop('item')).toBe('def')
+    expect(wrapper.find('MenuItem').at(2).prop('item')).toBe('ghi')
   })
 
   it('should pass correct props to items', () => {
@@ -48,8 +48,8 @@ describe('<Menu />', () => {
       />
     )
 
-    expect(wrapper.children().at(0).prop('renderItem')).toBe(render)
-    expect(wrapper.children().at(0).prop('getItemProps')).toBe(getItemProps)
+    expect(wrapper.find('MenuItem').at(0).prop('renderItem')).toBe(render)
+    expect(wrapper.find('MenuItem').at(0).prop('getItemProps')).toBe(getItemProps)
   })
 
   it('should build keys for items', () => {
@@ -65,14 +65,31 @@ describe('<Menu />', () => {
       />
     )
 
-    expect(wrapper.children().at(0).key()).toBe('0')
-    expect(wrapper.children().at(1).key()).toBe('1')
-    expect(wrapper.children().at(2).key()).toBe('2')
+    expect(wrapper.find('MenuItem').at(0).key()).toBe('0')
+    expect(wrapper.find('MenuItem').at(1).key()).toBe('1')
+    expect(wrapper.find('MenuItem').at(2).key()).toBe('2')
 
     wrapper.setProps({ buildItemId: item => item })
 
-    expect(wrapper.children().at(0).key()).toBe('abc')
-    expect(wrapper.children().at(1).key()).toBe('def')
-    expect(wrapper.children().at(2).key()).toBe('ghi')
+    expect(wrapper.find('MenuItem').at(0).key()).toBe('abc')
+    expect(wrapper.find('MenuItem').at(1).key()).toBe('def')
+    expect(wrapper.find('MenuItem').at(2).key()).toBe('ghi')
+  })
+
+  it('should render footer', () => {
+    const render = item => item
+    const getItemProps = () => ({})
+
+    const wrapper = shallow(
+      <Menu
+        options={[ 'abc', 'def', 'ghi' ]}
+        buildItemId={item => item}
+        getItemProps={getItemProps}
+        renderItem={render}
+        footer={<div>FOOTER</div>}
+      />
+    )
+
+    expect(wrapper.find('.talixo-combo-box__footer').text()).toBe('FOOTER')
   })
 })

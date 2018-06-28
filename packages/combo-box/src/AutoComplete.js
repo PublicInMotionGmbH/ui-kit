@@ -14,6 +14,9 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Footer of items list */
+  footer: PropTypes.node,
+
   /** List of options to show */
   options: PropTypes.array.isRequired,
 
@@ -177,14 +180,14 @@ class AutoComplete extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
+    const { footer, icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
 
     // Compose function to get input props
     const getInputProps = composeInputProps(data, { onFocus, onBlur })
 
     return {
       ...data,
-      ...{ icon, options, buildItemId, renderItem, getInputProps }
+      ...{ footer, icon, options, buildItemId, renderItem, getInputProps }
     }
   }
 

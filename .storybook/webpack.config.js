@@ -27,11 +27,13 @@ function buildWebpackConfiguration (config) {
     use: [ 'html-loader', 'markdown-loader' ]
   })
 
-
   // Add loader for fonts
   config.module.rules.push({
     test: /\.(eot|ttf|svg|woff|woff2)$/,
-    loader: 'url-loader'
+    loader: 'url-loader',
+    options: {
+      limit: 8192
+    }
   })
 
   // Add loader for SASS files

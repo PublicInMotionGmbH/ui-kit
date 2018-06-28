@@ -114,9 +114,6 @@ describe('onChange', () => {
 
     // Accept first date
     inputHours.simulate('blur')
-    expect(onChange).toHaveBeenCalledTimes(1)
-
-    // Reset mock for next calls
     onChange.mockReset()
 
     // Try to change hours
