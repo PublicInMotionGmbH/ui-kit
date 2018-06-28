@@ -34,7 +34,7 @@ const propTypes = {
   })),
 
   /** Array of options IDs which will be displayed event if their value is 0. */
-  persistentOptions: PropTypes.array,
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
 
   /** Input value */
   value: PropTypes.object,
@@ -50,7 +50,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  options: []
+  options: [],
+  persistentOptions: []
 }
 
 export const moduleName = 'options-input'

@@ -31,7 +31,7 @@ const propTypes = {
   })),
 
   /** Array of options IDs which will be displayed event if their value is 0. */
-  persistentOptions: PropTypes.array,
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
 
   /** Input value */
   value: PropTypes.object.isRequired
@@ -63,7 +63,7 @@ function OptionsInputValue (props) {
   const { options, persistentOptions, value } = props
 
   const elements = options
-    .filter(x => value[x.id] || persistentOptions.indexOf(x.id) > -1)
+    .filter(x => value[x.id] || persistentOptions.indexOf(x.id) !== -1)
     .map(x => (
       <Option
         key={x.id}

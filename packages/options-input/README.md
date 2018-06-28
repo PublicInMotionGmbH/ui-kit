@@ -32,7 +32,7 @@ Property name     | Type      | Default         | Description
 ------------------|-----------|:---------------:|--------------------------------
 className         | string    | n/a             | Additional class name passed to wrapper
 options           | Option[]  | `[]`            | Array with objects containing data passed to component
-persistentOptions | array     | n/a             | Array of options IDs which will be displayed event if their value is 0.
+persistentOptions | string[]  | `[]`            | Array of options IDs which will be displayed event if their value is 0.
 value             | object    | self-controlled | Value of option/options
 onChange          | function  | n/a             | Event handler fired on value change
 onFocus           | function  | n/a             | Event handler fired on input open
