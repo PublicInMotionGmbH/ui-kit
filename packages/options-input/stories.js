@@ -52,7 +52,7 @@ addStory('with min and max values', readme, () => (
   />
 ))
 
-addStory('with persisted options', readme, () => (
+addStory('with persistent options', readme, () => (
   <OptionsInput
     style={styles}
     options={[
