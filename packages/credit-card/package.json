@@ -1,6 +1,6 @@
 {
   "name": "@talixo/credit-card",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Credit Card",
   "main": "dist/index.js",
   "module": "index.js",
@@ -27,7 +27,7 @@
     "@talixo/form-field": "1.0.0-alpha.1",
     "@talixo/form-handler": "1.0.0-alpha.1",
     "@talixo/icon": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "@talixo/text-input": "1.0.0-alpha.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

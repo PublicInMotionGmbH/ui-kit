@@ -1,6 +1,6 @@
 {
   "name": "@talixo/form-handler",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Form Handler",
   "main": "dist/index.js",
   "module": "index.js",
@@ -34,7 +34,7 @@
     "@talixo/number-input": "1.0.0-alpha.1",
     "@talixo/phone-input": "1.0.0-alpha.1",
     "@talixo/radio-input": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "@talixo/switcher": "1.0.0-alpha.1",
     "@talixo/text-input": "1.0.0-alpha.1",
     "formik": "^0.11.11",
@@ -50,6 +50,5 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "dependencies": {}
+  }
 }

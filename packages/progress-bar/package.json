@@ -1,6 +1,6 @@
 {
   "name": "@talixo/progress-bar",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI components for progress bars",
   "main": "dist/index.js",
   "module": "index.js",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@talixo/icon": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0"
   }

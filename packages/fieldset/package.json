@@ -1,6 +1,6 @@
 {
   "name": "@talixo/fieldset",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Fieldset",
   "main": "dist/index.js",
   "module": "index.js",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@talixo/checkbox": "1.0.0-alpha.1",
     "@talixo/icon": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "@talixo/text-input": "1.0.0-alpha.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -33,6 +33,5 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
-  },
-  "dependencies": {}
+  }
 }

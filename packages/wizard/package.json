@@ -1,6 +1,6 @@
 {
   "name": "@talixo/wizard",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Wizard",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,7 +23,7 @@
     "@talixo/checkbox": "1.0.0-alpha.1",
     "@talixo/form": "1.0.0-alpha.1",
     "@talixo/navigation": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "@talixo/text-input": "1.0.0-alpha.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

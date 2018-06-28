@@ -1,6 +1,6 @@
 {
   "name": "@talixo/text-input",
-  "version": "0.2.0",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Text Input",
   "main": "dist/index.js",
   "module": "index.js",
@@ -25,7 +25,7 @@
   "devDependencies": {
     "@talixo/icon": "1.0.0-alpha.1",
     "@talixo/progress-bar": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

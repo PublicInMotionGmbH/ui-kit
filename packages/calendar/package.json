@@ -1,6 +1,6 @@
 {
   "name": "@talixo/calendar",
-  "version": "0.1.1",
+  "version": "1.0.0-alpha.1",
   "description": "UI Component which represents Calendar",
   "main": "dist/index.js",
   "module": "index.js",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/icon": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/shared": "^1.0.0-alpha.1",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
