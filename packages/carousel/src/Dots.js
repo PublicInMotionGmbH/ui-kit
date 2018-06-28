@@ -6,11 +6,11 @@ import { buildClassName } from '@talixo/shared'
 const moduleName = 'carousel-dots'
 
 const propTypes = {
-  /** Children passed as slides */
-  children: PropTypes.node,
-
   /** Additional class name */
   className: PropTypes.string,
+
+  /** Grouped slides to show */
+  slides: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.node)),
 
   /** Number of slides visible in one time */
   perPage: PropTypes.number,
@@ -20,33 +20,46 @@ const propTypes = {
 }
 
 const defaultProps = {
-  children: [],
+  slides: [],
   perPage: 1
 }
+
+const emptyFn = () => {}
 
 /**
  * Component which represents Carousel.
  *
  * @param {object} props
- * @param {node} [props.children]
+ * @param {Array<Array<React.Element|string>>} [props.slides]
  * @param {string} [props.className]
  * @param {number} [props.perPage]
+ * @param {number} [props.value]
  * @param {func} [props.onChange]
  * @returns {React.Element}
  */
 function Dots (props) {
-  const { children, perPage, onChange } = props
-  const dotsNumber = Math.ceil(children.length / perPage)
-  let elements = []
-  for (let i = 0; i < dotsNumber; i++) {
-    elements.push(<div
-      key={i}
-      className={buildClassName([moduleName, 'single'])}
-      onClick={() => onChange(i)}
-    />)
+  const { slides, onChange, value, perPage } = props
+
+  const clsName = buildClassName([ moduleName, 'dot' ])
+  const activeClsName = buildClassName([ moduleName, 'dot' ], null, [ 'active' ])
+  const elements = []
+
+  for (let i = 0; i < slides.length; i++) {
+    const handler = onChange ? () => onChange(i * perPage) : emptyFn
+
+    elements.push(
+      <div
+        key={i}
+        className={i === value ? activeClsName : clsName}
+        onClick={handler}
+      />
+    )
   }
+
   return (
-    <div className={buildClassName(moduleName)}>{elements}</div>
+    <div className={buildClassName(moduleName)}>
+      {elements}
+    </div>
   )
 }
 
