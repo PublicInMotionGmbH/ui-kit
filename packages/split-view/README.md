@@ -11,7 +11,7 @@ using `npm install @talixo/split-view --save` or `yarn add @talixo/split-view`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
+- `@talixo/shared: ^1.0.0-alpha.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

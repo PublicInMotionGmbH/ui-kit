@@ -11,8 +11,8 @@ using `npm install @talixo/accordion --save` or `yarn add @talixo/accordion`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/collapse: ^0.1.1`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/collapse: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

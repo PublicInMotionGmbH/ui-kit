@@ -11,8 +11,8 @@ using `npm install @talixo/form-handler --save` or `yarn add @talixo/form-handle
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/form-field: ^0.0.0`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/form-field: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
 - `formik: ^0.11.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`

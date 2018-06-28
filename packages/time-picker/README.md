@@ -11,10 +11,10 @@ using `npm install @talixo/time-picker --save` or `yarn add @talixo/time-picker`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/button: ^0.1.0`
-- `@talixo/icon: ^0.1.1`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/text-input: ^0.2.0`
+- `@talixo/button: ^1.0.0-alpha.5`
+- `@talixo/icon: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/text-input: ^1.0.0-alpha.5`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
