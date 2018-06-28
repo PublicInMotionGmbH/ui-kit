@@ -1,6 +1,6 @@
 {
   "name": "@talixo/masked-input",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "UI Component which represents Masked Input",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,19 +23,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/calendar": "1.0.0-alpha.2",
-    "@talixo/combo-box": "1.0.0-alpha.2",
-    "@talixo/country-flag": "1.0.0-alpha.2",
-    "@talixo/icon": "1.0.0-alpha.2",
-    "@talixo/shared": "1.0.0-alpha.2",
-    "@talixo/text-input": "1.0.0-alpha.2",
+    "@talixo/calendar": "1.0.0-alpha.3",
+    "@talixo/combo-box": "1.0.0-alpha.3",
+    "@talixo/country-flag": "1.0.0-alpha.3",
+    "@talixo/icon": "1.0.0-alpha.3",
+    "@talixo/shared": "1.0.0-alpha.3",
+    "@talixo/text-input": "1.0.0-alpha.3",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "1.0.0-alpha.2",
+    "@talixo/shared": "1.0.0-alpha.3",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

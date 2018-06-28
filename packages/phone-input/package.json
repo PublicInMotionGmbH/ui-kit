@@ -1,6 +1,6 @@
 {
   "name": "@talixo/phone-input",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "UI component which represents input to provided phone number",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,9 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/combo-box": "1.0.0-alpha.2",
-    "@talixo/country-flag": "1.0.0-alpha.2",
-    "@talixo/shared": "1.0.0-alpha.2",
+    "@talixo/combo-box": "1.0.0-alpha.3",
+    "@talixo/country-flag": "1.0.0-alpha.3",
+    "@talixo/shared": "1.0.0-alpha.3",
     "country-telephone-data": "^0.5.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -33,9 +33,9 @@
     "react-text-mask": "5.4.1"
   },
   "peerDependencies": {
-    "@talixo/combo-box": "1.0.0-alpha.2",
-    "@talixo/country-flag": "1.0.0-alpha.2",
-    "@talixo/shared": "1.0.0-alpha.2",
+    "@talixo/combo-box": "1.0.0-alpha.3",
+    "@talixo/country-flag": "1.0.0-alpha.3",
+    "@talixo/shared": "1.0.0-alpha.3",
     "country-telephone-data": "^0.5.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
