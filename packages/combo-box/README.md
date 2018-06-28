@@ -70,6 +70,7 @@ itemToString       | function  | `item => item`    | Function to convert item to
 Property name      | Type      | Default           | Description
 -------------------|-----------|:-----------------:|--------------------------------
 className          | string    | n/a               | Additional class name passed to wrapper
+footer             | node      | n/a               | Footer for items list
 options            | array     | n/a               | Options to show
 children           | string    | self-controlled   | Input to show
 onChoose           | function  | n/a               | Handler fired when option is selected
