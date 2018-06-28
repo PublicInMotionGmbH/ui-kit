@@ -24,8 +24,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon-pack": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/icon-pack": "1.0.0-alpha.2",
+    "@talixo/shared": "1.0.0-alpha.2",
     "fs-extra": "^5.0.0",
     "progress": "^2.0.0",
     "prop-types": "^15.6.1",
@@ -36,8 +36,8 @@
     "wget-improved": "^1.5.0"
   },
   "peerDependencies": {
-    "@talixo/icon-pack": "1.0.0-alpha.1",
-    "@talixo/shared": "1.0.0-alpha.1",
+    "@talixo/icon-pack": "1.0.0-alpha.2",
+    "@talixo/shared": "1.0.0-alpha.2",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

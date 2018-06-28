@@ -26,12 +26,12 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "@talixo/shared": "1.0.0-alpha.1"
+    "@talixo/shared": "1.0.0-alpha.2"
   },
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "@talixo/shared": "1.0.0-alpha.1"
+    "@talixo/shared": "1.0.0-alpha.2"
   }
 }
