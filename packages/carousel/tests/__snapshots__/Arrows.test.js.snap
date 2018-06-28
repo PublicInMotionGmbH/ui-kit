@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Arrows /> renders children correctly 1`] = `
+<div
+  className="talixo-carousel-arrows"
+>
+  <button
+    className="talixo-carousel-arrows__arrow talixo-carousel-arrows__arrow--back"
+  >
+    <Icon
+      name="chevron_left"
+    />
+  </button>
+  <button
+    className="talixo-carousel-arrows__arrow talixo-carousel-arrows__arrow--forward"
+  >
+    <Icon
+      name="chevron_right"
+    />
+  </button>
+</div>
+`;
