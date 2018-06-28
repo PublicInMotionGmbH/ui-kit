@@ -6,6 +6,7 @@ exports[`<Carousel /> renders children correctly 1`] = `
   defaultMovement="forward"
   onChange={[Function]}
   perPage={1}
+  renderArrows={[Function]}
   renderDots={[Function]}
   value={0}
 >

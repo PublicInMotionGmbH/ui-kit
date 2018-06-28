@@ -35,6 +35,7 @@ dots            | bool      | n/a             | Dots to navigate between slides
 animationTime   | number    | `500`           | Duration of animation (in ms)
 perPage         | number    | `1`             | Number of visible slides
 renderDots      | function  | `Dots`          | Function which render custom dots
+renderArrows    | function  | `Arrows`        | Function which render custom arrows
 value           | number    | self-controlled | Index of currently selected slide element
 onChange        | function  | n/a             | Event handler for change of slide
 defaultMovement | string    | `"exact"`       | Default behavior of movement (for controlled component), when neither dots nor arrows were clicked, one of: `exact`, `forward`, `back`

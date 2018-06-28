@@ -26,6 +26,27 @@
     height: 100%
     box-sizing: border-box
 
+@include module('carousel-dots')
+  position: absolute
+  display: flex
+  justify-content: center
+  width: 100%
+  bottom: 0
+  z-index: 10
+
+  &__dot
+    display: inline-block
+    height: dp(1.5)
+    width: dp(5)
+    margin: dp(3) dp(1.5)
+    border-radius: dp(0.5)
+    cursor: pointer
+    background-color: transparentize($carousel-dots--single-background-color-hover, 0.5)
+
+    &:hover, &--active
+      background-color: $carousel-dots--single-background-color-hover
+
+@include module('carousel-arrows')
   &__arrow
     position: absolute
     top: 0
@@ -48,28 +69,8 @@
       color: $carousel-arrows-color--hover
       background-color: rgba(0, 0, 0, .1)
 
-    &--prev
+    &--back
       left: 0
 
-    &--next
+    &--forward
       right: 0
-
-@include module('carousel-dots')
-  position: absolute
-  display: flex
-  justify-content: center
-  width: 100%
-  bottom: 0
-  z-index: 10
-
-  &__dot
-    display: inline-block
-    height: dp(1.5)
-    width: dp(5)
-    margin: dp(3) dp(1.5)
-    border-radius: dp(0.5)
-    cursor: pointer
-    background-color: transparentize($carousel-dots--single-background-color-hover, 0.5)
-
-    &:hover, &--active
-      background-color: $carousel-dots--single-background-color-hover

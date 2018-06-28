@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 import chunk from 'lodash/chunk'
 
-import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
 import Dots from './Dots'
+import Arrows from './Arrows'
 
 const moduleName = 'carousel'
 
@@ -43,6 +43,9 @@ const propTypes = {
   /** Function which render custom dots */
   renderDots: PropTypes.func,
 
+  /** Function which render custom arrows */
+  renderArrows: PropTypes.func,
+
   /** Index of current slide element */
   value: PropTypes.number,
 
@@ -58,6 +61,7 @@ const defaultProps = {
   animationTime: 500,
   perPage: 1,
   renderDots: Dots,
+  renderArrows: Arrows,
   defaultMovement: 'exact'
 }
 
@@ -72,15 +76,25 @@ const defaultProps = {
  * @property {number} [props.animationTime]
  * @property {number} [props.perPage]
  * @property {function} [props.renderDots]
+ *
  * @class {React.Element}
  */
 class Carousel extends React.PureComponent {
+  mounted = false
   state = {
     slides: chunk(this.props.children, this.props.perPage),
     currentSlide: this.props.value != null
       ? this.props.value % this.props.children.length
       : 0,
     transitionTime: this.props.animationTime
+  }
+
+  componentDidMount () {
+    this.mounted = true
+  }
+
+  componentWillUnmount () {
+    this.mounted = false
   }
 
   componentWillReceiveProps (props) {
@@ -150,7 +164,7 @@ class Carousel extends React.PureComponent {
     const isImmediate = value == null || force
 
     if (onChange && !force) {
-      onChange(index, type)
+      onChange(index % children.length, type)
     }
 
     if (!isImmediate) {
@@ -173,7 +187,8 @@ class Carousel extends React.PureComponent {
   }
 
   /**
-   * Change to next or previous slide
+   * Change to next or previous slide.
+   *
    * @param {number} index
    * @param {string} type
    */
@@ -202,13 +217,18 @@ class Carousel extends React.PureComponent {
 
     await this.goImmediately(current)
 
+    // Do not update state if component has been unmounted meanwhile
+    if (!this.mounted) {
+      return
+    }
+
     this.setState({ currentSlide: next })
   }
 
   /**
-   * Handle click next
+   * Handle going to next slide.
    */
-  handlerNext = () => {
+  handleForward = () => {
     const { perPage } = this.props
     const { currentSlide } = this.state
 
@@ -216,9 +236,9 @@ class Carousel extends React.PureComponent {
   }
 
   /**
-   * Handle click prev
+   * Handle going to previous slide.
    */
-  handlerPrev = () => {
+  handleBack = () => {
     const { perPage } = this.props
     const { currentSlide } = this.state
 
@@ -226,21 +246,22 @@ class Carousel extends React.PureComponent {
   }
 
   /**
-   * Handle change slide when click on proper dot
+   * Handle changing slide when click on proper dot.
    */
-  handlerDot = (index) => {
+  handleExact = (index) => {
     return this.change(index, 'exact')
   }
 
   /**
-   * Set reference to node
+   * Set reference to wrapper node.
    */
   setRef = node => {
     this.wrapper = findDOMNode(node)
   }
 
   /**
-   * Render children
+   * Render slides inside.
+   *
    * @returns {React.Element}
    */
   renderSlides () {
@@ -267,47 +288,59 @@ class Carousel extends React.PureComponent {
   }
 
   /**
-   * Render dots
-   * @returns {React.Element}
+   * Build props required for movement helpers (dots, arrows).
+   *
+   * @returns {{ slides: (Array|*), children: node, perPage: number, index: number, value: number }}
    */
-  renderDots () {
-    const { renderDots, children, perPage, ...restProps } = this.props
+  buildMovementProps () {
+    const { renderDots, renderArrows, children, perPage, ...restProps } = this.props
     const { currentSlide, slides } = this.state
 
     const slide = currentSlide % children.length
 
-    return renderDots({
+    return {
       ...restProps,
       slides: slides,
       children: children,
       perPage: perPage,
       index: slide,
-      value: Math.floor(slide / perPage),
-      onChange: this.handlerDot
+      value: Math.floor(slide / perPage)
+    }
+  }
+
+  /**
+   * Render dots component.
+   *
+   * @returns {React.Element}
+   */
+  renderDots () {
+    const { renderDots } = this.props
+
+    return React.createElement(renderDots, {
+      ...this.buildMovementProps(),
+      onChange: this.handleExact
     })
   }
 
+  /**
+   * Render arrows component.
+   *
+   * @returns {React.Element}
+   */
   renderArrows () {
-    const clsName = buildClassName([ moduleName, 'arrows' ])
-    const prevArrowClsName = buildClassName([ moduleName, 'arrow' ], null, [ 'prev' ])
-    const nextArrowClsName = buildClassName([ moduleName, 'arrow' ], null, [ 'next' ])
+    const { renderArrows } = this.props
 
-    return (
-      <div className={clsName}>
-        <button className={prevArrowClsName} onClick={this.handlerPrev}>
-          <Icon name='chevron_left' />
-        </button>
-        <button className={nextArrowClsName} onClick={this.handlerNext}>
-          <Icon name='chevron_right' />
-        </button>
-      </div>
-    )
+    return React.createElement(renderArrows, {
+      ...this.buildMovementProps(),
+      onBack: this.handleBack,
+      onForward: this.handleForward
+    })
   }
 
   render () {
     const {
-      arrows, className, dots, perPage,
-      children, animationTime, renderDots, value, onChange, defaultMovement, ...passedProps
+      arrows, className, dots, perPage, children, animationTime,
+      renderArrows, renderDots, value, onChange, defaultMovement, ...passedProps
     } = this.props
     const { currentSlide, transitionTime } = this.state
 

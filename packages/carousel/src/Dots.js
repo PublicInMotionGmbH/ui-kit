@@ -24,6 +24,8 @@ const defaultProps = {
   perPage: 1
 }
 
+const emptyFn = () => {}
+
 /**
  * Component which represents Carousel.
  *
@@ -43,11 +45,13 @@ function Dots (props) {
   const elements = []
 
   for (let i = 0; i < slides.length; i++) {
+    const handler = onChange ? () => onChange(i * perPage) : emptyFn
+
     elements.push(
       <div
         key={i}
         className={i === value ? activeClsName : clsName}
-        onClick={() => onChange(i * perPage)}
+        onClick={handler}
       />
     )
   }

@@ -2,12 +2,18 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 
 import Carousel from '../src/Carousel'
+import Arrows from '../src/Arrows'
+import Dots from '../src/Dots'
 
 import { prefix } from '@talixo/shared'
 
 const moduleName = 'carousel'
 
 const name = prefix(moduleName)
+
+function Custom () {
+  return <div />
+}
 
 describe('<Carousel />', () => {
   it('renders children correctly', () => {
@@ -31,8 +37,8 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    expect(wrapper.find(`.${name}__arrow--prev`).length).toBe(1)
-    expect(wrapper.find(`.${name}__arrow--next`).length).toBe(1)
+    expect(wrapper.find(Arrows).length).toBe(1)
+    expect(wrapper.find(Dots).length).toBe(0)
   })
 
   it('renders dots correctly', () => {
@@ -44,7 +50,57 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    expect(wrapper.find(`.${name}-dots__dot`).length).toBe(3)
+    expect(wrapper.find(Dots).length).toBe(1)
+    expect(wrapper.find(Arrows).length).toBe(0)
+  })
+
+  it('renders both arrows and dots correctly', () => {
+    const wrapper = shallow(
+      <Carousel arrows dots>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.find(Arrows).length).toBe(1)
+    expect(wrapper.find(Dots).length).toBe(1)
+  })
+
+  it('renders custom arrows correctly', () => {
+    const wrapper = shallow(
+      <Carousel arrows renderArrows={Custom}>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.find(Custom).length).toBe(1)
+  })
+
+  it('renders custom dots correctly', () => {
+    const wrapper = shallow(
+      <Carousel dots renderDots={Custom}>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.find(Custom).length).toBe(1)
+  })
+
+  it('renders both custom dots and arrows correctly', () => {
+    const wrapper = shallow(
+      <Carousel dots renderDots={Custom} arrows renderArrows={Custom}>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.find(Custom).length).toBe(2)
   })
 
   it('changes currentSlide when prev arrow clicked', () => {
@@ -58,8 +114,7 @@ describe('<Carousel />', () => {
 
     expect(wrapper.state('currentSlide')).toBe(0)
 
-    const dot = wrapper.find(`.${name}-dots__dot`)
-    dot.at(2).simulate('click')
+    wrapper.find(Dots).prop('onChange')(2)
 
     expect(wrapper.state('currentSlide')).toBe(2)
   })
@@ -73,8 +128,7 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const arrow = wrapper.find(`.${name}__arrow--next`)
-    await arrow.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
 
     expect(wrapper.state().currentSlide).toBe(1)
   })
@@ -88,12 +142,10 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const arrow = wrapper.find(`.${name}__arrow--next`)
-    await arrow.simulate('click')
-    await arrow.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
+    await wrapper.find(Arrows).prop('onForward')()
 
-    const prev = wrapper.find(`.${name}__arrow--prev`)
-    await prev.simulate('click')
+    await wrapper.find(Arrows).prop('onBack')()
 
     expect(wrapper.state().currentSlide).toBe(1)
 
@@ -144,8 +196,7 @@ describe('<Carousel />', () => {
 
     expect(wrapper.state().currentSlide).toBe(0)
 
-    const prev = wrapper.find(`.${name}__arrow--prev`)
-    prev.simulate('click')
+    wrapper.find(Arrows).prop('onBack')()
 
     expect(wrapper.state().currentSlide).toBe(3)
 
@@ -163,10 +214,78 @@ describe('<Carousel />', () => {
 
     expect(wrapper.state().currentSlide).toBe(0)
 
-    const prev = wrapper.find(`.${name}__arrow--prev`)
-    prev.simulate('click')
+    wrapper.find(Arrows).prop('onBack')()
 
     expect(wrapper.state().currentSlide).toBe(6)
+
+    wrapper.unmount()
+  })
+
+  it('keeps on first slide when next arrow clicked on last, in case perPage is greater than number of children', () => {
+    const wrapper = mount(
+      <Carousel arrows perPage={4}>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.state().currentSlide).toBe(0)
+
+    wrapper.find(Arrows).prop('onForward')()
+
+    expect(wrapper.state().currentSlide).toBe(0)
+
+    wrapper.unmount()
+  })
+
+  it('goes to first slide when next arrow clicked on last', async () => {
+    const wrapper = mount(
+      <Carousel arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper.state().currentSlide).toBe(0)
+
+    await wrapper.find(Arrows).prop('onForward')()
+    await wrapper.find(Arrows).prop('onForward')()
+
+    expect(wrapper.state().currentSlide).toBe(2)
+
+    await wrapper.find(Arrows).prop('onForward')()
+    expect(wrapper.state().currentSlide).toBe(3)
+
+    wrapper.unmount()
+  })
+
+  it('calls correct onChange when next arrow clicked on last', async () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <Carousel onChange={spy} arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(spy).toHaveBeenCalledTimes(0)
+
+    await wrapper.find(Arrows).prop('onForward')()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(1, 'forward')
+    spy.mockReset()
+
+    await wrapper.find(Arrows).prop('onForward')()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(2, 'forward')
+    spy.mockReset()
+
+    await wrapper.find(Arrows).prop('onForward')()
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy).toHaveBeenCalledWith(0, 'forward')
 
     wrapper.unmount()
   })
@@ -182,8 +301,7 @@ describe('<Carousel />', () => {
 
     expect(wrapper.state().currentSlide).toBe(0)
 
-    const prev = wrapper.find(`.${name}__arrow--prev`)
-    prev.simulate('click')
+    wrapper.find(Arrows).prop('onBack')()
 
     expect(wrapper.state().currentSlide).toBe(0)
   })
@@ -275,8 +393,7 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const next = wrapper.find(`.${name}__arrow--next`)
-    next.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
 
     // Mock 'change' function in component
     const instance = wrapper.instance()
@@ -326,8 +443,7 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const next = wrapper.find(`.${name}__arrow--next`)
-    next.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith(2, 'forward')
@@ -344,8 +460,7 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const next = wrapper.find(`.${name}__arrow--next`)
-    next.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith(2, 'forward')
@@ -381,8 +496,7 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    const next = wrapper.find(`.${name}__arrow--next`)
-    next.simulate('click')
+    await wrapper.find(Arrows).prop('onForward')()
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy).toHaveBeenCalledWith(1, 'forward')
