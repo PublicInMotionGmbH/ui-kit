@@ -3,33 +3,33 @@
 exports[`<Countdown /> renders children correctly 1`] = `
 <React.Fragment>
   <span
-    className="talixo-countdown"
+    className="talixo-countdown talixo-countdown--finished"
   >
     <span
       className="talixo-countdown talixo-countdown--days"
     >
-      11
+      00
        
     </span>
     : 
     <span
       className="talixo-countdown talixo-countdown--hours"
     >
-      13
+      00
        
     </span>
     : 
     <span
       className="talixo-countdown talixo-countdown--minutes"
     >
-      46
+      00
        
     </span>
     : 
     <span
       className="talixo-countdown talixo-countdown--seconds"
     >
-      39
+      00
        
     </span>
   </span>
