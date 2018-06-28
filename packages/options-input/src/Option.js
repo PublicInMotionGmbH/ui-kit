@@ -69,7 +69,7 @@ function Option (props) {
     </Tooltip>
   ) : icon
 
-  const clsName = buildClassName(moduleName, className, { dummy })
+  const clsName = buildClassName(moduleName, className, { dummy, empty: value === 0 })
 
   return (
     <span className={clsName}>

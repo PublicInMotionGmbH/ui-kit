@@ -4,7 +4,14 @@ exports[`<OptionTooltipContent /> renders advanced children correctly 1`] = `
 <React.Fragment>
   <span
     className="talixo-options-input-tooltip__title"
-  />
+  >
+    Adults
+  </span>
+  <span
+    className="talixo-options-input-tooltip__description"
+  >
+    Older than 15
+  </span>
 </React.Fragment>
 `;
 
@@ -12,6 +19,8 @@ exports[`<OptionTooltipContent /> renders children correctly 1`] = `
 <React.Fragment>
   <span
     className="talixo-options-input-tooltip__title"
-  />
+  >
+    Adults
+  </span>
 </React.Fragment>
 `;

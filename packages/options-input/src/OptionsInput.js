@@ -33,6 +33,9 @@ const propTypes = {
     max: PropTypes.number
   })),
 
+  /** Array of options IDs which will be displayed event if their value is 0. */
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
+
   /** Input value */
   value: PropTypes.object,
 
@@ -47,7 +50,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  options: []
+  options: [],
+  persistentOptions: []
 }
 
 export const moduleName = 'options-input'
@@ -220,7 +224,7 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, onChange, onFocus, onBlur, ...restProps } = this.props
+    const { options, className, persistentOptions, onChange, onFocus, onBlur, ...restProps } = this.props
     const { value, open } = this.state
 
     const clsName = buildClassName(moduleName, className, {
@@ -239,6 +243,7 @@ class OptionsInput extends React.PureComponent {
         >
           <OptionsInputValue
             options={options}
+            persistentOptions={persistentOptions}
             value={value}
           />
 

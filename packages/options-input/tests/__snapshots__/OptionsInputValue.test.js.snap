@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OptionTooltipValue /> should render properly 1`] = `
+<div
+  className="talixo-options-input-value"
+>
+  <Option
+    dummy={true}
+    option={
+      Object {
+        "icon": "rocket",
+        "id": "abc",
+        "value": 0,
+      }
+    }
+    value={0}
+  />
+  <Option
+    key="person"
+    option={
+      Object {
+        "default": 1,
+        "description": "Older than 15",
+        "icon": "person",
+        "id": "person",
+        "label": "Adults",
+      }
+    }
+    value={1}
+  />
+  <Option
+    key="rocket"
+    option={
+      Object {
+        "icon": "rocket",
+        "id": "rocket",
+        "label": "Rockets",
+      }
+    }
+    value={1}
+  />
+</div>
+`;
+
+exports[`<OptionTooltipValue /> should render properly with persistent option 1`] = `
+<div
+  className="talixo-options-input-value"
+>
+  <Option
+    dummy={true}
+    option={
+      Object {
+        "icon": "rocket",
+        "id": "abc",
+        "value": 0,
+      }
+    }
+    value={0}
+  />
+  <Option
+    key="person"
+    option={
+      Object {
+        "default": 1,
+        "description": "Older than 15",
+        "icon": "person",
+        "id": "person",
+        "label": "Adults",
+      }
+    }
+    value={0}
+  />
+</div>
+`;
+
+exports[`<OptionTooltipValue /> should render properly with zero value 1`] = `
+<div
+  className="talixo-options-input-value"
+>
+  <Option
+    dummy={true}
+    option={
+      Object {
+        "icon": "rocket",
+        "id": "abc",
+        "value": 0,
+      }
+    }
+    value={0}
+  />
+   
+</div>
+`;
