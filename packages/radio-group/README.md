@@ -29,12 +29,12 @@ Property name     | Type              | Required  | Default | Description
 ------------------|-------------------|-----------|:-------:|--------------------------------
 allowCustom       | boolean           | no        | `false` | Enable custom option.
 className         | string            | no        | n/a     | Additional class name passed to wrapper.
-customComponent   | string            | no        | n/a     | Component which will be displayed as custom option.
 customPlaceholder | string            | no        | n/a     | Placeholder of default custom options input.
 error             | boolean           | `false`   | n/a     | Does it have any error
 name              | string            | yes       | n/a     | Name of radio group.
 onChange          | function          | no        | n/a     | onChange callback.
 options           | Option[]          | no        | n/a     | Array of objects which represent options.
+renderCustom      | string            | no        | n/a     | Component which will be displayed as custom option.
 value             | number or string  | no        | n/a     | Value of default option.
 vertical          | boolean           | no        | `false` | Idicates if options should be positioned vertically.
 

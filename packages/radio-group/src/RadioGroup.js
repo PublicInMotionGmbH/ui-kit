@@ -13,9 +13,6 @@ const propTypes = {
   /** Additional class name. */
   className: PropTypes.string,
 
-  /** Component which will be displayed as custom option. */
-  customComponent: PropTypes.func,
-
   /** Placeholder of default custom options input. */
   customPlaceholder: PropTypes.string,
 
@@ -40,6 +37,9 @@ const propTypes = {
     value: PropTypes.any.isRequired
   })),
 
+  /** Component which will be displayed as custom option. */
+  renderCustom: PropTypes.func,
+
   /** Option selected by user. Self-controlled by default. */
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -52,6 +52,7 @@ const propTypes = {
 
 const defaultProps = {
   allowCustom: false,
+  renderCustom: TextInput,
   vertical: false
 }
 
@@ -61,7 +62,7 @@ const defaultProps = {
  * @property {object} props
  * @property {boolean} [props.allowCustom]
  * @property {string} [props.className]
- * @property {Element|ReactElement} [props.customComponent]
+ * @property {Element|ReactElement} [props.renderCustom]
  * @property {string} [props.customPlaceholder]
  * @property {boolean} [props.error]
  * @property {string} props.name
@@ -122,11 +123,11 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element|React.Element}
    */
   generateCustomOption = () => {
-    const { customComponent, customPlaceholder, error, name } = this.props
+    const { renderCustom, customPlaceholder, error, name } = this.props
     const { custom, value } = this.state
     const { onChange } = this
 
-    const OptionComponent = customComponent || TextInput
+    const OptionComponent = renderCustom
 
     const change = (e, ...args) => {
       const value = e.target ? e.target.value : e
@@ -180,7 +181,7 @@ class RadioGroup extends React.PureComponent {
   }
 
   render () {
-    const { allowCustom, className, customComponent, customPlaceholder,
+    const { allowCustom, className, renderCustom, customPlaceholder,
       error, name, onChange, options, value, vertical, ...passedProps
     } = this.props
     const { generateCustomOption, generateOptions } = this

@@ -11,7 +11,7 @@ const options = [
 ]
 
 // Helpers
-function CustomComponent (props) {
+function RenderCustom (props) {
   return <input type='text' onChange={props.onChange} onFocus={props.onFocus} />
 }
 
@@ -147,13 +147,13 @@ describe('<RadioGroup />', () => {
       const props = createProps({
         allowCustom: true,
         onChange: jest.fn(),
-        customComponent: CustomComponent
+        renderCustom: RenderCustom
       })
       let wrapper, custom, input
 
       beforeEach(() => {
         wrapper = createWrapper(props)
-        custom = wrapper.find(CustomComponent)
+        custom = wrapper.find(RenderCustom)
         input = custom.dive().find('input')
       })
 
