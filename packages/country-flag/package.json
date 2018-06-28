@@ -27,13 +27,13 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.4",
+    "@talixo/shared": "^1.0.0-alpha.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.4",
+    "@talixo/shared": "^1.0.0-alpha.5",
     "find-node-modules": "^1.0.4",
     "flagkit-web": "0.0.3",
     "glob": "^7.1.2",
