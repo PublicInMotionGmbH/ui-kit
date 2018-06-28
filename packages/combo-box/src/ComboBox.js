@@ -169,13 +169,13 @@ class ComboBox extends React.PureComponent {
    */
   getStateProps (data) {
     const {
-      value, icon, options, multi, placeholder,
+      footer, value, icon, options, multi, placeholder,
       buildItemId, renderItem, renderValue, onFocus, onBlur
     } = this.props
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem },
       inputValue: this.state.inputValue,
       renderValue: renderValue || renderItem,
       getInputProps: props => data.getInputProps(this.getInputProps(props)),

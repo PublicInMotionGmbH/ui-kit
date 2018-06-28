@@ -112,11 +112,11 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)

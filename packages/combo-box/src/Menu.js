@@ -47,7 +47,7 @@ function Menu (props) {
 
   // Build class name for menu component
   const clsName = buildClassName([ 'combo-box', 'menu' ])
-  const footerMenuClsName = buildClassName([ 'combo-box', 'menu--footer' ])
+  const footerClsName = buildClassName([ 'combo-box', 'footer' ])
 
   // Build elements for all possible options
   const elements = options.map((item, index) => (
@@ -62,7 +62,7 @@ function Menu (props) {
   return (
     <div className={clsName}>
       {elements}
-      {footer && <div className={footerMenuClsName}>{footer}</div>}
+      {footer != null && <div className={footerClsName}>{footer}</div>}
     </div>
   )
 }

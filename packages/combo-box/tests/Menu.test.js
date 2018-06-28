@@ -90,6 +90,6 @@ describe('<Menu />', () => {
       />
     )
 
-    expect(wrapper.find('.talixo-combo-box__menu--footer').text()).toBe('FOOTER')
+    expect(wrapper.find('.talixo-combo-box__footer').text()).toBe('FOOTER')
   })
 })
