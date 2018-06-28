@@ -15,7 +15,7 @@
     width: 100%
     height: 100%
     transform: translateX(0)
-    transition: 500ms transform linear
+    transition: $carousel-animation-time transform linear
 
   &__inner
     display: flex
@@ -36,15 +36,18 @@
 
   &__dot
     display: inline-block
-    height: dp(1.5)
-    width: dp(5)
-    margin: dp(3) dp(1.5)
-    border-radius: dp(0.5)
+    height: $carousel-dots-height
+    width: $carousel-dots-width
+    margin: $carousel-dots-offset $carousel-dots-margin
+    border-radius: $carousel-dots-border-radius
     cursor: pointer
-    background-color: transparentize($carousel-dots--single-background-color-hover, 0.5)
+    background-color: $carousel-dots-color
 
-    &:hover, &--active
-      background-color: $carousel-dots--single-background-color-hover
+    &:hover
+      background-color: $carousel-dots-hover-color
+
+    &--active
+      background-color: $carousel-dots-active-color
 
 @include module('carousel-arrows')
   &__arrow
@@ -56,18 +59,18 @@
     align-items: center
     justify-content: center
     text-align: center
-    width: dp(8)
-    font-size: dp(6)
-    color: transparentize($carousel-arrows-color--hover, .5)
-    background-color: transparent
+    width: $carousel-arrows-width
+    font-size: $carousel-arrows-size
+    color: $carousel-arrows-color
+    background-color: $carousel-arrows-background-color
     cursor: pointer
     border: 0
     padding: 0
     outline: none
 
     &:hover
-      color: $carousel-arrows-color--hover
-      background-color: rgba(0, 0, 0, .1)
+      color: $carousel-arrows-hover-color
+      background-color: $carousel-arrows-hover-background-color
 
     &--back
       left: 0
