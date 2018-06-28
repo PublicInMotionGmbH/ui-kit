@@ -29,6 +29,7 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
           },
         ]
       }
+      persistentOptions={Array []}
       value={
         Object {
           "person": 1,

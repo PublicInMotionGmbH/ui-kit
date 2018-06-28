@@ -52,6 +52,18 @@ addStory('with min and max values', readme, () => (
   />
 ))
 
+addStory('with persisted options', readme, () => (
+  <OptionsInput
+    style={styles}
+    options={[
+      { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+      { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 0, max: 7', min: 0, max: 7, default: 0 },
+      { id: 'star', icon: 'star', label: 'Stars', description: 'min: -10, max: 10', min: -10, max: 10, default: 0 }
+    ]}
+    persistentOptions={['star']}
+  />
+))
+
 addStory.controlled('controlled', readme, (setState, state) => (
   <OptionsInput
     style={styles}
