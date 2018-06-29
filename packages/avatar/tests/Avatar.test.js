@@ -11,64 +11,6 @@ describe('<Avatar />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('renders text correctly', () => {
-    const wrapper = shallow(<Avatar>H</Avatar>)
-    const text = wrapper.text()
-    expect(text).toEqual('H')
-  })
-
-  it('renders icon correctly', () => {
-    const wrapper = shallow(<Avatar icon='avatar' />)
-    const icon = wrapper.find('Icon')
-    expect(icon.props().name).toEqual('avatar')
-  })
-
-  it('renders src correctly', () => {
-    const wrapper = shallow(<Avatar src='./avatar.jpg' alt='avatar' />)
-    const image = wrapper.find('img')
-    expect(image.props().src).toEqual('./avatar.jpg')
-    expect(image.props().alt).toEqual('avatar')
-  })
-
-  it('renders srcSet correctly', () => {
-    const srcSet = './avatar-320w.jpg 320w, ./avatar-480w.jpg 480w, ./avatar-800w.jpg 800w'
-    const wrapper = shallow(<Avatar srcSet={srcSet} alt='avatar' />)
-    const image = wrapper.find('img')
-    expect(image.props().srcSet).toEqual(srcSet)
-    expect(image.props().alt).toEqual('avatar')
-  })
-
-  it('renders `?` on image error', () => {
-    const wrapper = shallow(<Avatar src='./avatar.jpg' alt='avatar' />)
-    const image = wrapper.find('img')
-    image.simulate('error')
-    const text = wrapper.text()
-    expect(text).toEqual('?')
-  })
-
-  it('renders defaultText on image error', () => {
-    const wrapper = shallow(<Avatar defaultText='A' src='./avatar.jpg' alt='avatar' />)
-    const image = wrapper.find('img')
-    image.simulate('error')
-    const text = wrapper.text()
-    expect(text).toEqual('A')
-  })
-
-  it('renders defaultIcon on image error', () => {
-    const wrapper = shallow(<Avatar defaultIcon='avatar' src='./avatar.jpg' alt='avatar' />)
-    const image = wrapper.find('img')
-    image.simulate('error')
-    const icon = wrapper.find('Icon')
-    expect(icon.props().name).toEqual('avatar')
-  })
-
-  it('triggers handleImageError on `img` error', () => {
-    const wrapper = shallow(<Avatar src='./avatar.jpg' alt='avatar' />)
-    const image = wrapper.find('img')
-    image.simulate('error')
-    expect(wrapper.state().imageError).toEqual(true)
-  })
-
   it('renders font size 40 by default', () => {
     const wrapper = shallow(<Avatar>H</Avatar>)
     const fontSize = wrapper.props().style.fontSize
@@ -85,6 +27,37 @@ describe('<Avatar />', () => {
     const wrapper = shallow(<Avatar size={120}>H</Avatar>)
     const fontSize = wrapper.props().style.fontSize
     expect(fontSize).toEqual(120)
+  })
+
+  describe('passes \'childProps\' correctly', () => {
+    it('for \'src\'', () => {
+      const wrapper = shallow(<Avatar defaultIcon='avatar' src='./avatar.jpg' alt='avatar' />)
+      const child = wrapper.find('AvatarChildRenderer')
+      const childProps = {alt: 'avatar', defaultIcon: 'avatar', src: './avatar.jpg'}
+      expect(child.props()).toEqual(childProps)
+    })
+
+    it('for \'srcSet\'', () => {
+      const srcSet = './avatar-320w.jpg 320w, ./avatar-480w.jpg 480w, ./avatar-800w.jpg 800w'
+      const wrapper = shallow(<Avatar defaultIcon='avatar' srcSet={srcSet} alt='avatar' />)
+      const child = wrapper.find('AvatarChildRenderer')
+      const childProps = {alt: 'avatar', defaultIcon: 'avatar', srcSet}
+      expect(child.props()).toEqual(childProps)
+    })
+
+    it('for \'icon\'', () => {
+      const wrapper = shallow(<Avatar icon='avatar' />)
+      const child = wrapper.find('AvatarChildRenderer')
+      const childProps = { icon: 'avatar' }
+      expect(child.props()).toEqual(childProps)
+    })
+
+    it('for children', () => {
+      const wrapper = shallow(<Avatar>H</Avatar>)
+      const child = wrapper.find('AvatarChildRenderer')
+      const childProps = { children: 'H' }
+      expect(child.props()).toEqual(childProps)
+    })
   })
 })
 

@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
-import { Icon } from '@talixo/icon'
 
 import { mutuallyExclusiveOfType } from '../propTypes/mutuallyExclusiveProps'
+
+import AvatarChildRenderer from './AvatarChildRenderer'
 
 const propTypes = {
   /** Alt attribute for the rendered `img` element. */
@@ -28,6 +29,9 @@ const propTypes = {
   /** Additional props passed to rendered `img` element. */
   imgProps: PropTypes.object,
 
+  /** Format avatar's children. */
+  render: PropTypes.func,
+
   /** Controls whether avatar is circular or square. */
   rounded: PropTypes.bool,
 
@@ -45,113 +49,70 @@ const propTypes = {
 }
 
 const defaultProps = {
+  render: AvatarChildRenderer,
   rounded: false,
   size: 40
 }
 
 /**
+ * Build child props.
+ *
+ * @param {object} props
+ * @param {array} childProps
+ * @returns {object}
+ */
+const buildChildProps = (props, childProps) => {
+  let builtProps = {}
+  childProps.forEach((prop, i) => {
+    if (props[prop]) {
+      builtProps[childProps[i]] = props[prop]
+    }
+  })
+  return builtProps
+}
+
+/**
  * Component which represents Avatar.
  *
- * @property {object} props
- * @property {string} [props.alt]
- * @property {string} [props.className]
- * @property {string} [props.children]
- * @property {string} [props.defaultIcon]
- * @property {string} [props.defaultText]
- * @property {string} [props.icon]
- * @property {object} [props.imgProps]
- * @property {boolean} [props.rounded]
- * @property {number} [props.size]
- * @property {string} [props.src]
- * @property {string} [props.srcSet]
- * @property {object} [props.style]
+ * @param {object} props
+ * @param {string} [props.alt]
+ * @param {string} [props.className]
+ * @param {string} [props.children]
+ * @param {string} [props.defaultIcon]
+ * @param {string} [props.defaultText]
+ * @param {string} [props.icon]
+ * @param {object} [props.imgProps]
+ * @param {function} [props.render]
+ * @param {boolean} [props.rounded]
+ * @param {number} [props.size]
+ * @param {string} [props.src]
+ * @param {string} [props.srcSet]
+ * @param {object} [props.style]
  *
- * @property {object} [state]
- * @property {boolean} [state.imageError]
- *
- * @property {function} buildChild
- * @property {function} handleImageError
- *
- * @class
+ * @returns {React.Element}
  */
-class Avatar extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      imageError: false
-    }
-    this.buildChild = this.buildChild.bind(this)
-    this.handleImageError = this.handleImageError.bind(this)
+function Avatar (props) {
+  const { alt, children, className, defaultText, defaultIcon, icon, imgProps,
+    render: Renderer, rounded, size, src, srcSet, style, ...passedProps } = props
+
+  // Build style for wrapper.
+  const wrapperStyle = {
+    fontSize: size,
+    ...style
   }
 
-  /**
-   * Build avatar's child.
-   *
-   * @returns {React.Element}
-   */
-  buildChild () {
-    const { alt, children, defaultText, defaultIcon, icon, imgProps, src, srcSet } = this.props
-    const { imageError } = this.state
+  const childProps = buildChildProps(props, ['alt', 'children', 'defaultText', 'defaultIcon', 'icon', 'imgProps', 'src', 'srcSet'])
 
-    const innerClsName = buildClassName([ 'avatar', 'inner' ])
-
-    if (children) {
-      return <span className={innerClsName}>{children}</span>
-    } else if (icon) {
-      return <Icon className={innerClsName} name={icon} />
-    } else if (imageError && defaultIcon) {
-      return <Icon className={innerClsName} name={defaultIcon} />
-    } else if (imageError && defaultText) {
-      return <span className={innerClsName}>{defaultText}</span>
-    } else if (imageError) {
-      return <span className={innerClsName}>?</span>
-    } else if (src || srcSet) {
-      return (
-        <img
-          onError={this.handleImageError}
-          src={src}
-          srcSet={srcSet}
-          alt={alt}
-          {...imgProps}
-        />
-      )
-    }
-  }
-
-  /**
-   * Handle image error.
-   *
-   */
-  handleImageError () {
-    this.setState({ imageError: true })
-  }
-
-  /**
-   * Render avatar.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { alt, children, className, defaultText, defaultIcon, icon, imgProps,
-      rounded, size, src, srcSet, style, ...passedProps } = this.props
-
-    // Build style for wrapper.
-    const wrapperStyle = {
-      fontSize: size,
-      ...style
-    }
-
-    // Build avatar component
-    return (
-      <div
-        className={buildClassName('avatar', className, { rounded })}
-        style={wrapperStyle}
-        {...passedProps}
-      >
-        {this.buildChild()}
-      </div>
-    )
-  }
+  // Build avatar component
+  return (
+    <div
+      className={buildClassName('avatar', className, { rounded })}
+      style={wrapperStyle}
+      {...passedProps}
+    >
+      <Renderer {...childProps} />
+    </div>
+  )
 }
 
 Avatar.propTypes = propTypes

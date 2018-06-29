@@ -9,10 +9,8 @@ exports[`<Avatar /> renders children correctly 1`] = `
     }
   }
 >
-  <span
-    className="talixo-avatar__inner"
-  >
+  <AvatarChildRenderer>
     H
-  </span>
+  </AvatarChildRenderer>
 </div>
 `;

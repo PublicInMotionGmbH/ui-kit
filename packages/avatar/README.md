@@ -24,20 +24,21 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-alt           | string    | n/a     | Alt attribute for the rendered `img` element.
-className     | string    | n/a     | Additional class name.
-children      | string    | n/a     | Text displayed inside avatar.
-defaultIcon   | string    | n/a     | Default icon displayed inside avatar.
-defaultText   | string    | n/a     | Default text displayed inside avatar.
-icon          | string    | n/a     | Icon displayed inside avatar.
-imgProps      | object    | n/a     | Additional props passed to rendered `img` element.
-rounded       | boolean   | `false` | Controls whether avatar is circular or square.
-size          | number    | `40`    | Size of the avatar in pixels.
-src           | string    | n/a     | Image displayed inside avatar.
-srcSet        | string    | n/a     | Image set displayed inside avatar.
-style         | object    | n/a     | Style passed to wrapper.
+Property name | Type      | Default               | Description                    
+--------------|-----------|:---------------------:|--------------------------------
+alt           | string    | n/a                   | Alt attribute for the rendered `img` element.
+className     | string    | n/a                   | Additional class name.
+children      | string    | n/a                   | Text displayed inside avatar.
+defaultIcon   | string    | n/a                   | Default icon displayed inside avatar.
+defaultText   | string    | n/a                   | Default text displayed inside avatar.
+icon          | string    | n/a                   | Icon displayed inside avatar.
+imgProps      | object    | n/a                   | Additional props passed to rendered `img` element.
+render        | function  | `AvatarChildRenderer` | Format avatar's children.
+rounded       | boolean   | `false`               | Controls whether avatar is circular or square.
+size          | number    | `40`                  | Size of the avatar in pixels.
+src           | string    | n/a                   | Image displayed inside avatar.
+srcSet        | string    | n/a                   | Image set displayed inside avatar.
+style         | object    | n/a                   | Style passed to wrapper.
 
 ## Changelog
 
