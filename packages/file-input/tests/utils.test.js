@@ -46,11 +46,11 @@ describe('FileInput utils', () => {
       { target: {} }
     ]
     const result = [
-      null,
+      [],
       { name: 'Test', size: 123321 },
-      null,
+      [],
       { name: 'Test', size: 123321 },
-      null
+      []
     ]
 
     it('should return proper string', () => {

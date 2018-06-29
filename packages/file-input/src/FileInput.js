@@ -182,7 +182,7 @@ class FileInput extends React.PureComponent {
     const tooMany = (!multiple && files.length > 0) || (!multiple && uploadedFiles.length > 1)
 
     if (onChange) {
-      onChange(uploadedFiles, e)
+      onChange([...uploadedFiles], e)
     }
 
     if (noFiles || tooMany || propsFiles != null) {
@@ -200,6 +200,7 @@ class FileInput extends React.PureComponent {
    */
   handleRemove = (file, e) => {
     const { files: propsFiles, onRemove } = this.props
+    const { files } = this.state
 
     if (onRemove) {
       onRemove(file, e)
@@ -209,7 +210,6 @@ class FileInput extends React.PureComponent {
       return
     }
 
-    const { files } = this.state
     const newFiles = files.filter(item => item !== file)
 
     this.setState({ files: newFiles })
@@ -298,10 +298,8 @@ class FileInput extends React.PureComponent {
   setInputRef = node => { this.input = node }
 
   render () {
-    const {
-      buttonLabel, className, children, uploadLabel, dropDisabled, filesRender, multiple, onChange,
-      onDragEnd, onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart,
-      ...passedProps
+    const { buttonLabel, children, className, dropDisabled, files: propsFiles, filesRender, multiple, uploadLabel,
+      onChange, onRemove, onDragEnd, onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart, ...passedProps
     } = this.props
     const { files, draggingOver } = this.state
     const { handleClick, handleDrop, getCoverElement, getFileElements, getWrapperProps, setInputRef } = this

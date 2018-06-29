@@ -1,10 +1,10 @@
 export function getDataTransferFiles (event) {
   if (event.dataTransfer) {
-    return event.dataTransfer.files || null
+    return event.dataTransfer.files || []
   } else if (event.target) {
-    return event.target.files || null
+    return event.target.files || []
   } else {
-    return null
+    return []
   }
 }
 

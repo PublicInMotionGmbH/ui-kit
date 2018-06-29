@@ -74,3 +74,20 @@ addStory('custom file component', readme, () => (
     </div>
   </FileInput>
 ))
+
+addStory.controlled('controlled file input', readme, (setState, state) => {
+  function onChange (files) {
+    setState({ files: state.files.concat(files) })
+  }
+  function onRemove (file) {
+    setState({ files: state.files.filter(item => item !== file) })
+  }
+  return (
+    <FileInput files={state.files} onChange={onChange} onRemove={onRemove}>
+      <div className={wrapperCls}>
+        <div className={iconCls}><Icon name='cloud_upload' /></div>
+        <div>Select files to upload or<br /><br /></div>
+      </div>
+    </FileInput>
+  )
+}, () => ({ files: [] }))

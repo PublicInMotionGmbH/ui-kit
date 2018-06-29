@@ -43,11 +43,12 @@ describe('<FileInput />', () => {
 
   // File dropping / input changes
   describe('file uploading', () => {
-    const change = jest.fn()
+    const onChange = jest.fn()
+    const onRemove = jest.fn()
     let wrapper, input, button
 
     beforeEach(() => {
-      wrapper = createWrapper({ onChange: change })
+      wrapper = createWrapper({ onChange, onRemove })
       input = wrapper.find('input')
       button = wrapper.find(buttonCls)
     })
@@ -74,10 +75,10 @@ describe('<FileInput />', () => {
     })
 
     it('should invoke props.onChange if provided', () => {
-      change.mockReset()
+      onChange.mockReset()
       wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
-      expect(change).toHaveBeenCalledTimes(1)
-      expect(change).toHaveBeenCalledWith([file1], expect.anything())
+      expect(onChange).toHaveBeenCalledTimes(1)
+      expect(onChange).toHaveBeenCalledWith([file1], expect.anything())
     })
 
     it('should change dragging over to false when no file is dropped', () => {
@@ -92,6 +93,15 @@ describe('<FileInput />', () => {
       const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
       remove.first().simulate('click')
       expect(wrapper.state().files).toEqual([])
+    })
+
+    it('should invoke props.onRemove if provided', () => {
+      onRemove.mockReset()
+      wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
+      const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
+      remove.first().simulate('click', {})
+      expect(onRemove).toHaveBeenCalledTimes(1)
+      expect(onRemove).toHaveBeenCalledWith(file1, expect.anything())
     })
   })
 
@@ -223,6 +233,12 @@ describe('<FileInput />', () => {
         wrapper.setProps({ files: [file1, file2] })
         expect(wrapper.state().files).toEqual([file1, file2])
       })
+
+      it('should not change state.files if files are managed via props', () => {
+        const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
+        remove.first().simulate('click', {})
+        expect(wrapper.state().files).toEqual([file1])
+      })
     })
 
     describe('events handling', () => {
@@ -241,7 +257,7 @@ describe('<FileInput />', () => {
       it('should invoke onDragEnter passed from props', () => {
         wrapper.simulate('dragEnter', {})
         expect(props.onDragEnter).toHaveBeenCalledTimes(1)
-        expect(props.onDragEnter).toHaveBeenCalledWith(null, expect.anything())
+        expect(props.onDragEnter).toHaveBeenCalledWith([], expect.anything())
       })
     })
 
