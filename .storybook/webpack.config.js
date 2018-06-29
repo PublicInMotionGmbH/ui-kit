@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 /**
  * Build Webpack configuration for Storybook
  *
@@ -51,6 +53,13 @@ function buildWebpackConfiguration (config) {
   config.plugins = config.plugins.filter(plugin => {
     return DISABLED_PLUGINS.indexOf(plugin.constructor.name) === -1
   })
+
+  config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: function(module) {
+      return module.resource && /node_modules/.test(module.resource)
+    }
+  }))
 
   return config
 }
