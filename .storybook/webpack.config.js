@@ -54,12 +54,24 @@ function buildWebpackConfiguration (config) {
     return DISABLED_PLUGINS.indexOf(plugin.constructor.name) === -1
   })
 
+  // Add chunk with vendor libraries
   config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: function(module) {
-      return module.resource && /node_modules/.test(module.resource)
-    }
+    minChunks: module => module.resource && /node_modules/.test(module.resource)
   }))
+
+  // Fix manager to get vendor chunk as well
+  for (const plugin of config.plugins) {
+    if (plugin.constructor.name !== 'HtmlWebpackPlugin') {
+      continue
+    }
+
+    if (plugin.options.filename !== 'index.html') {
+      continue
+    }
+
+    plugin.options.chunks = [ 'manager', 'vendor' ]
+  }
 
   return config
 }
