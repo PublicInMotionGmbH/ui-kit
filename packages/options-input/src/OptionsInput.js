@@ -71,7 +71,7 @@ function buildValue (options, baseValue) {
 
   for (let i = 0; i < options.length; i++) {
     const option = options[i]
-    value[option.id] = currentValue[option.id] || option.default || 0
+    value[option.id] = (currentValue[option.id] == null ? option.default : currentValue[option.id]) || 0
   }
 
   return value
