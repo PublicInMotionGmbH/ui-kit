@@ -5,11 +5,13 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { AutoComplete } from '@talixo/combo-box'
 import { Calendar } from '@talixo/calendar'
-import { CountryFlag } from '@talixo/country-flag'
+import { CountryFlag, CountryFlagsProvider } from '@talixo/country-flag'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
 import MaskedInput from './src/MaskedInput'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -64,10 +66,12 @@ const renderDate = v => (
   </div>
 )
 const renderCountry = v => (
-  <div className='storybook-mask-example'>
-    <CountryFlag code={v.id} style={{ marginRight: 10 }} />
-    {v.name} <small>({v.language})</small>
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div className='storybook-mask-example'>
+      <CountryFlag code={v.id} style={{ marginRight: 10 }} />
+      {v.name} <small>({v.language})</small>
+    </div>
+  </CountryFlagsProvider>
 )
 
 // Stories

@@ -23,6 +23,28 @@ Your package should additionally have some extra dependencies:
 These packages are required by `@talixo/phone-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
+## How to use this component
+
+- You need to use `CountryFlagsProvider` to provide package with country flags
+- Sprite is available in `sprites/sprite.svg` directory
+
+### Example
+
+```jsx
+import React from 'react'
+import { CountryFlagsProvider } from '@talixo/country-flag'
+
+// Using `file-loader` or `url-loader` in Webpack
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
+
+function App () {
+  return (
+    <CountryFlagsProvider url={spriteUrl}>
+      <PhoneInput />
+    </CountryFlagsProvider>
+  )
+}
+
 ## Supported props
 
 This component allows any properties which can be added to `div` element. Additionally, handles some differently:

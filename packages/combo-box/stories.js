@@ -3,13 +3,15 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 import { action } from '@storybook/addon-actions'
 
 import { Icon } from '@talixo/icon'
-import { CountryFlag } from '@talixo/country-flag'
+import { CountryFlag, CountryFlagsProvider } from '@talixo/country-flag'
 import { ProgressRing } from '@talixo/progress-ring'
 import { TextInput } from '@talixo/text-input'
 
 import SelectBox from './src/SelectBox'
 import ComboBox from './src/ComboBox'
 import AutoComplete from './src/AutoComplete'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -109,22 +111,26 @@ addStory.controlled('placeholder with icon', readme, (setState, state) => (
 
 function renderCountry (x) {
   return (
-    <div style={{ display: 'flex', lineHeight: '1em' }}>
-      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10 }} />
-      <div>
-        <strong>{x.name}</strong><br />
-        <div style={{ color: '#999', fontSize: '0.8em' }}>{x.language}</div>
+    <CountryFlagsProvider url={spriteUrl}>
+      <div style={{ display: 'flex', lineHeight: '1em' }}>
+        <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10 }} />
+        <div>
+          <strong>{x.name}</strong><br />
+          <div style={{ color: '#999', fontSize: '0.8em' }}>{x.language}</div>
+        </div>
       </div>
-    </div>
+    </CountryFlagsProvider>
   )
 }
 
 function renderSimpleCountry (x) {
   return (
-    <div style={{ display: 'flex', lineHeight: '1em' }}>
-      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10, boxShadow: '0 0 10px 2px rgba(0, 0, 0, .1)' }} />
-      {x.name}
-    </div>
+    <CountryFlagsProvider url={spriteUrl}>
+      <div style={{ display: 'flex', lineHeight: '1em' }}>
+        <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10, boxShadow: '0 0 10px 2px rgba(0, 0, 0, .1)' }} />
+        {x.name}
+      </div>
+    </CountryFlagsProvider>
   )
 }
 
