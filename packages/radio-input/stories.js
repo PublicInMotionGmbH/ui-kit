@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import RadioInput from './src/RadioInput'
+import RadioGroup from "../radio-group/src/RadioGroup";
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -47,5 +48,9 @@ addStory('default', readme, () => (
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled>Option</RadioInput>
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled defaultChecked>Option default checked</RadioInput>
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled>Option disabled</RadioInput>
+
+    <h2>Radio with external label</h2>
+    <label htmlFor='radio-input'>Click me</label><br />
+    <RadioInput id='radio-input' onChange={change} name='external_labelled_input'>Option</RadioInput>
   </div>
 ))

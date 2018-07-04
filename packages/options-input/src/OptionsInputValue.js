@@ -60,7 +60,7 @@ const DUMMY_OPTION = {
  * @returns {React.Element}
  */
 function OptionsInputValue (props) {
-  const { options, persistentOptions, value } = props
+  const { className, options, persistentOptions, value, ...passedProps } = props
 
   const elements = options
     .filter(x => value[x.id] || persistentOptions.indexOf(x.id) !== -1)
@@ -73,7 +73,7 @@ function OptionsInputValue (props) {
     ))
 
   return (
-    <div className={buildClassName(moduleName)}>
+    <div className={buildClassName(moduleName, className)} {...passedProps}>
       <Option
         dummy
         option={DUMMY_OPTION}

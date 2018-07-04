@@ -42,7 +42,10 @@ const propTypes = {
   itemToString: PropTypes.func,
 
   /** Input which needs auto-complete behavior */
-  children: PropTypes.node
+  children: PropTypes.node,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -180,14 +183,14 @@ class AutoComplete extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
+    const { footer, icon, options, buildItemId, renderItem, onFocus, onBlur, id } = this.props
 
     // Compose function to get input props
     const getInputProps = composeInputProps(data, { onFocus, onBlur })
 
     return {
       ...data,
-      ...{ footer, icon, options, buildItemId, renderItem, getInputProps }
+      ...{ footer, icon, options, buildItemId, renderItem, getInputProps, id }
     }
   }
 
@@ -211,12 +214,15 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children } = this.props
-    const { getInputProps } = data
+    const { children, id } = this.props
 
     const input = React.Children.only(children)
 
-    const inputProps = getInputProps(input.props, data)
+    const inputProps = data.getInputProps(input.props, data)
+
+    if (id != null) {
+      inputProps.id = id
+    }
 
     return React.cloneElement(input, inputProps)
   }

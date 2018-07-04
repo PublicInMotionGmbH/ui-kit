@@ -350,3 +350,53 @@ addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) =
     />
   </div>
 ), () => ({ value: [], inputValue: '' }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='combo-box'>Click me (combo box)</label>
+    <ComboBox
+      id='combo-box'
+      placeholder='Select items...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='combo-box-multi'>Click me (multi combo box)</label>
+    <ComboBox
+      multi
+      id='combo-box-multi'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='select-box'>Click me (select box)</label>
+    <SelectBox
+      multi
+      id='select-box'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='select-box-multi'>Click me (multi select box)</label>
+    <SelectBox
+      multi
+      id='select-box-multi'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='autocomplete'>Click me (autocomplete)</label>
+    <AutoComplete
+      id='autocomplete'
+      options={optionsSimple}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
+    >
+      <TextInput />
+    </AutoComplete>
+  </div>
+))

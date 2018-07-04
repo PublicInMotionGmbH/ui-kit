@@ -48,7 +48,10 @@ const propTypes = {
   buildItemId: PropTypes.func,
 
   /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
+  itemToString: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -112,11 +115,11 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue, id } = this.props
 
     return {
       ...data,
-      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem, id },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)

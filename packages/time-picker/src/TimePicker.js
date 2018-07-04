@@ -21,7 +21,10 @@ const propTypes = {
   hourFormat: PropTypes.oneOf(['24', '12']),
 
   /** Time string in 'HH:mm' format passed to component. */
-  value: PropTypes.string
+  value: PropTypes.string,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -272,9 +275,8 @@ class TimePicker extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, hourFormat, onChange, value: propsValue, ...passedProps } = this.props
+    const { className, hourFormat, onChange, value: propsValue, id, ...passedProps } = this.props
     const { value } = this.state
-    const { handleHoursBlur, handleMinutesBlur } = this
 
     // Build class names
     const wrapperClsName = buildClassName(moduleName, className)
@@ -291,24 +293,25 @@ class TimePicker extends React.PureComponent {
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
+          id={id}
           className={inputHourClsName}
-          onBlur={handleHoursBlur}
+          onBlur={this.handleHoursBlur}
           format={format}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuHours(value, handleHoursBlur, format)}
+            {buildMenuHours(value, this.handleHoursBlur, format)}
           </div>
         </TimeInput>
         <span className={colonClsName}>:</span>
         <TimeInput
           className={inputMinutesClsName}
-          onBlur={handleMinutesBlur}
+          onBlur={this.handleMinutesBlur}
           format={MINUTES}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuMinutes(value, handleMinutesBlur)}
+            {buildMenuMinutes(value, this.handleMinutesBlur)}
           </div>
         </TimeInput>
       </div>

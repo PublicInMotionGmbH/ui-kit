@@ -47,3 +47,10 @@ addStory('with icons', readme, () => (
     <Switcher {...labels} onChange={change} disabled checked />
   </div>
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='switcher'>Click me</label>
+    <Switcher id='switcher' {...labels} onChange={change} />
+  </div>
+))

@@ -35,6 +35,7 @@ className     | string       | n/a             | Additional class name passed to
 onChange      | function     | n/a             | Event called after input value has been changed.
 hourFormat    | `12` or `24` | `24`            | Hour format.
 value         | string       | self-controlled | Time string in 'HH:mm' (24h) format passed to component.
+id            | string       | n/a             | ID passed to control element
 
 ## Changelog
 

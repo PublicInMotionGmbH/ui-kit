@@ -37,6 +37,7 @@ value             | object    | self-controlled | Value of option/options
 onChange          | function  | n/a             | Event handler fired on value change
 onFocus           | function  | n/a             | Event handler fired on input open
 onBlur            | function  | n/a             | Event handler fired on input blur
+id                | string    | n/a             | ID passed to control element
 
 ## Property shapes
 

@@ -27,7 +27,10 @@ const propTypes = {
   renderMask: PropTypes.func.isRequired,
 
   /** Value to be passed to render mask function.  */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -123,9 +126,10 @@ class MaskedInput extends React.Component {
    * @returns {{onBlur: void | any, onFocus: void | any, onChange: MaskedInput.handleChange}}
    */
   getInputProps = () => {
-    const { renderInput } = this.props
+    const { renderInput, id } = this.props
 
     const newProps = {
+      id: id,
       ...renderInput.props,
       onBlur: this.blur,
       onFocus: this.focus,
@@ -153,7 +157,7 @@ class MaskedInput extends React.Component {
   }
 
   render () {
-    const { className, error, onBlur, onFocus, onChange, renderInput, renderMask, ...passedProps } = this.props
+    const { className, error, onBlur, onFocus, onChange, renderInput, renderMask, id, ...passedProps } = this.props
     const { focused, value } = this.state
     const { getInputProps, maskRenderer } = this
 

@@ -44,3 +44,10 @@ addStory('disabled', readme, () => (
 addStory('auto grow', readme, () => (
   <Textarea TextareaComponent={TextareaAutosize} />
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='textarea'>Click me</label>
+    <Textarea id='textarea' />
+  </div>
+))

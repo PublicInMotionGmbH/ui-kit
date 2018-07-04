@@ -8,7 +8,13 @@ $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-siz
   font-size: $radio-input-box-font-size
 
   > input
-    display: none
+    position: absolute
+    left: 0
+    top: calc(#{1em * $radio-input-box-line-height / 2} - #{$radio-input-box-size / 2})
+    opacity: 0 !important
+    width: $radio-input-box-size
+    height: $radio-input-box-size
+    border: 0
 
   > input + span
     padding-left: $radio-input-box-margin + $radio-input-box-size

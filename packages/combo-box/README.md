@@ -43,6 +43,7 @@ renderItem    | function  | `item => item`    | Function to render item in menu 
 renderValue   | function  | uses `renderItem` | Function to render value in select box
 buildItemId   | function  | item index        | Function to build unique ID of item
 itemToString  | function  | `item => item`    | Function to convert item to string
+id            | string    | n/a               | ID passed to control element
 
 ### ComboBox
 
@@ -64,6 +65,7 @@ renderItem         | function  | `item => item`    | Function to render item in 
 renderValue        | function  | uses `renderItem` | Function to render value (or tag) in select box
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+id                 | string    | n/a               | ID passed to control element
 
 ### AutoComplete
 
@@ -80,6 +82,7 @@ onChange           | function  | n/a               | onChange event passed from 
 renderItem         | function  | `item => item`    | Function to render item in menu list
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+id                 | string    | n/a               | ID passed to control element
 
 ## Changelog
 

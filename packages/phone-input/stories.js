@@ -37,3 +37,10 @@ addStory('RTL: initial', readme, () => (
     <PhoneInput />
   </div>
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='phone-input'>Click me</label>
+    <PhoneInput id='phone-input' />
+  </div>
+))

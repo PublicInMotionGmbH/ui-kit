@@ -46,7 +46,10 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** Event handler when calendar has lost focus */
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -122,7 +125,7 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases,
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id,
       placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, ...passedProps
     } = this.props
     const { date, focused } = this.state
@@ -133,6 +136,7 @@ class Calendar extends React.PureComponent {
       <div className={clsName} {...passedProps}>
         <SingleDatePicker
           hideKeyboardShortcutsPanel
+          id={id}
           date={date}
           dayAriaLabelFormat={dayAriaLabelFormat}
           displayFormat={displayFormat}

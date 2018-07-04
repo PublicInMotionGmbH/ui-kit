@@ -60,7 +60,10 @@ const propTypes = {
   inputValue: PropTypes.string,
 
   /** Value for controlled component */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -244,13 +247,14 @@ class ComboBox extends React.PureComponent {
    * @returns {object|{ onClick: function }}
    */
   getInputProps (props) {
-    const { onFocus, onBlur } = this.props
+    const { onFocus, onBlur, id } = this.props
     const onKeyDown = props ? props.onKeyDown : null
 
     return {
       ...props,
       onFocus,
       onBlur,
+      id,
       onKeyDown: event => {
         this.handleInputKeyDown(event)
 

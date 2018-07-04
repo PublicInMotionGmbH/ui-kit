@@ -8,6 +8,8 @@ exports[`<RadioInput /> renders children correctly 1`] = `
     onChange={[Function]}
     type="radio"
   />
-  <span />
+  <span
+    tabIndex={-1}
+  />
 </label>
 `;

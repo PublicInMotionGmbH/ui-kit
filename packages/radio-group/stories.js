@@ -75,3 +75,17 @@ addStory('with disabled option', readme, () => (
     ]}
   />
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='radio-group'>Click me</label>
+    <RadioGroup
+      id='radio-group'
+      options={[
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))

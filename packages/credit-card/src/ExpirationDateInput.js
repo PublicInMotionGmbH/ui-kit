@@ -18,7 +18,10 @@ const propTypes = {
   value: PropTypes.shape({
     month: PropTypes.number,
     year: PropTypes.number
-  })
+  }),
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {}
@@ -134,7 +137,7 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className } = this.props
+    const { className, id } = this.props
     const { month, year } = this.state
 
     // Build class names.
@@ -147,6 +150,7 @@ class ExpirationDateInput extends React.PureComponent {
         <RangeInput
           className={monthClsName}
           autoComplete='cc-exp-month'
+          id={id}
           min={1}
           max={12}
           minLength={2}
