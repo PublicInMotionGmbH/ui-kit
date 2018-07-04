@@ -3,3 +3,4 @@ storybook-static/
 _gh-pages/
 dist/
 coverage/
+packages/*/lib/
