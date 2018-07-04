@@ -73,12 +73,6 @@ const renderCountry = v => (
 // Stories
 addStory.controlled('default', readme, (setState, state) => (
   <MaskedInput
-    renderInput={
-      <TextInput
-        onChange={value => { setState({ value }) }}
-        placeholder='Type something and click out of this box...'
-      />
-    }
     renderMask={(v) => (
       <div className='storybook-mask-example'>
         <Icon name='check_sign' className='storybook-mask-input__mask-icon storybook-mask-input__mask-icon--checked' />
@@ -88,7 +82,12 @@ addStory.controlled('default', readme, (setState, state) => (
     value={state.value}
     style={{ display: 'block' }}
     {...commonProps}
-  />
+  >
+    <TextInput
+      onChange={value => { setState({ value }) }}
+      placeholder='Type something and click out of this box...'
+    />
+  </MaskedInput>
 ), () => ({ value: null }))
 
 // Styles for calendar
@@ -100,11 +99,9 @@ const styles = {
 
 addStory('calendar', readme, () => (
   <div style={styles}>
-    <MaskedInput
-      renderInput={<Calendar placeholder='Choose date...' />}
-      renderMask={renderDate}
-      {...commonProps}
-    />
+    <MaskedInput renderMask={renderDate} {...commonProps}>
+      <Calendar placeholder='Choose date...' />
+    </MaskedInput>
   </div>
 ))
 
@@ -112,24 +109,23 @@ addStory.controlled('autocomplete', readme, (setState, state) => (
   <div>
     <div>State: {state.value && JSON.stringify(state.value)}</div>
     <MaskedInput
-      renderInput={
-        <AutoComplete
-          options={filterOptions(state.filterValue, options, 'name')}
-          renderItem={x => x.name}
-          onChoose={item => setState({ value: item })}
-          itemToString={v => v == null ? '' : v.name}
-        >
-          <TextInput
-            onChange={(v) => setState({ value: null, filterValue: v })}
-            placeholder='Start typing name of a country and select it from the list...'
-          />
-        </AutoComplete>
-      }
       renderMask={renderCountry}
       value={state.value}
       style={{ display: 'block' }}
       {...commonProps}
-    />
+    >
+      <AutoComplete
+        options={filterOptions(state.filterValue, options, 'name')}
+        renderItem={x => x.name}
+        onChoose={item => setState({ value: item })}
+        itemToString={v => v == null ? '' : v.name}
+      >
+        <TextInput
+          onChange={(v) => setState({ value: null, filterValue: v })}
+          placeholder='Start typing name of a country and select it from the list...'
+        />
+      </AutoComplete>
+    </MaskedInput>
   </div>
 
 ), () => ({ value: null }))

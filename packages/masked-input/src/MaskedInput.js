@@ -19,7 +19,7 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** Input element. */
-  renderInput: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 
   /** Function which returns masking element to render when input is blurred. First argument function is value passed
    * either by parent changing value prop or by children if `props.value` is undefined.
@@ -65,8 +65,10 @@ class MaskedInput extends React.Component {
    * @param {*} args
    */
   handleFocusChange = (focused, ...args) => {
-    const { onFocus, onBlur } = this.props
-    const { props: { onFocus: childOnFocus, onBlur: childOnBlur } } = this.props.renderInput
+    const { onFocus, onBlur, children } = this.props
+    const input = React.Children.only(children)
+
+    const { onFocus: childOnFocus, onBlur: childOnBlur } = input.props
 
     // Updated state when focus changes
     this.setState({ focused })
@@ -99,8 +101,9 @@ class MaskedInput extends React.Component {
    * @param args
    */
   handleChange = (v, ...args) => {
-    const { onChange, value } = this.props
-    const { props: { onChange: childOnChange } } = this.props.renderInput
+    const { onChange, value, children } = this.props
+    const input = React.Children.only(children)
+    const { onChange: childOnChange } = input.props
 
     // Invoke MaskInpu onChange callback if is set
     if (onChange) {
@@ -122,11 +125,12 @@ class MaskedInput extends React.Component {
    *
    * @returns {{onBlur: void | any, onFocus: void | any, onChange: MaskedInput.handleChange}}
    */
-  getInputProps = () => {
-    const { renderInput } = this.props
+  getInputProps () {
+    const { children } = this.props
+    const input = React.Children.only(children)
 
     const newProps = {
-      ...renderInput.props,
+      ...input.props,
       onBlur: this.blur,
       onFocus: this.focus,
       onChange: this.handleChange
@@ -140,12 +144,13 @@ class MaskedInput extends React.Component {
    *
    * @returns {object|null}
    */
-  maskRenderer = () => {
+  maskRenderer () {
     const { renderMask } = this.props
     const { value } = this.state
 
     // Only generate element if input is not focused and value inside state exists
     const element = renderMask(value)
+
     return React.cloneElement(element, {
       ...element.props,
       className: buildClassName([ moduleName, 'mask' ], element.props.className)
@@ -153,17 +158,19 @@ class MaskedInput extends React.Component {
   }
 
   render () {
-    const { className, error, onBlur, onFocus, onChange, renderInput, renderMask, ...passedProps } = this.props
+    const { className, error, onBlur, onFocus, onChange, children, renderMask, ...passedProps } = this.props
     const { focused, value } = this.state
-    const { getInputProps, maskRenderer } = this
+    const input = React.Children.only(children)
 
     const wrapperCls = buildClassName(moduleName, className)
-    const inputProps = getInputProps()
+    const inputProps = this.getInputProps()
+
+    const mask = !focused && value ? this.maskRenderer() : null
 
     return (
       <div className={wrapperCls} {...passedProps}>
-        { !focused && value && maskRenderer() }
-        { React.cloneElement(renderInput, inputProps) }
+        {mask}
+        {React.cloneElement(input, inputProps)}
       </div>
     )
   }
