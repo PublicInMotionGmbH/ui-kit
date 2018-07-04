@@ -20,17 +20,16 @@ function calculateInputStyles (inputEl, suffixEl) {
 
   // Calculate suffix dimensions
   const expectedSuffixWidth = width.input - width.left - width.right - Math.min(width.value, MINIMUM_INPUT_SPACE)
-  const suffixWidth = width.suffix === 0 ? expectedSuffixWidth : Math.min(width.suffix, expectedSuffixWidth)
 
   return {
     hash,
     input: {
-      [paddingEnd]: width[end] + suffixWidth
+      [paddingEnd]: width[end] + width.suffix
     },
     suffix: {
       ...styles,
       maxWidth: expectedSuffixWidth,
-      [start]: Math.min(width[start] + width.value, width.input - suffixWidth - width[end])
+      [start]: Math.min(width[start] + width.value, width.input - width.suffix - width[end])
     }
   }
 }
