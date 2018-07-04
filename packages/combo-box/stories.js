@@ -350,3 +350,36 @@ addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) =
     />
   </div>
 ), () => ({ value: [], inputValue: '' }))
+
+addStory('self-controlled', readme, () => (
+  <div>
+    <h2>Select box</h2>
+    <SelectBox
+      value='Skipper'
+      placeholder='Select item...'
+      options={optionsSimple}
+    />
+
+    <h2>Combo box</h2>
+    <ComboBox
+      placeholder='Select item...'
+      options={optionsSimple}
+    />
+
+    <h2>Combo box (multi)</h2>
+    <ComboBox
+      multi
+      placeholder='Select item...'
+      options={optionsSimple}
+    />
+
+    <h2>Auto-complete</h2>
+    <AutoComplete
+      options={optionsSimple}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+    >
+      <TextInput />
+    </AutoComplete>
+  </div>
+))

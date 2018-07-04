@@ -76,6 +76,16 @@ const defaultProps = {
  * @class
  */
 class SelectBox extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.value !== this.state.value && props.value !== undefined) {
+      this.setState({ value: props.value })
+    }
+  }
+
   /**
    * Handle state changes inside of Downshift component.
    * We need it to not close menu after element is clicked in multi-select.
@@ -112,7 +122,8 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { value } = this.state
 
     return {
       ...data,
@@ -157,10 +168,15 @@ class SelectBox extends React.PureComponent {
    * @param {object} item
    */
   select = (item) => {
-    const { onChange, multi, value } = this.props
+    const { onChange, multi } = this.props
+    const { value } = this.state
 
     // Handle simple selection for single select-box
     if (!multi) {
+      if (this.props.value === undefined) {
+        this.setState({ value: item })
+      }
+
       if (onChange) {
         onChange(item)
       }
@@ -174,6 +190,10 @@ class SelectBox extends React.PureComponent {
     const nextValue = _value.indexOf(item) !== -1
       ? _value.filter(x => x !== item)
       : _value.concat(item)
+
+    if (this.props.value === undefined) {
+      this.setState({ value: nextValue })
+    }
 
     // Trigger event with new value
     if (onChange) {
