@@ -19,7 +19,7 @@
     height: 100%
 
   circle 
-    transition: stroke-dashoffset 1s linear, fill 0.3s linear
+    transition: stroke-dashoffset $progress-ring-circle-stroke-transition-time $progress-ring-circle-stroke-transition-type, fill $progress-ring-circle-fill-transition-time $progress-ring-circle-fill-transition-type
     stroke-width: 7
 
   &__circle-bg
@@ -30,13 +30,16 @@
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    font-size: 1em * 5/12
-    transition: color 0.4s linear
+    font-size: 1em * $p1/$p2
+    transition: color $progress-ring-content-color-transition-time $progress-ring-content-color-transition-type
+
+    .tai:first-child
+      font-size: 1.45em
 
   &--indeterminate
     svg
       transform-origin: 50%
-      animation: indeterminateProgressRing 1s infinite linear
+      animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time $progress-ring-indeterminate-animation-count $progress-ring-indeterminate-animation-type
 
 @keyframes indeterminateProgressRing
   0%
@@ -55,8 +58,8 @@
 @include module('progress-ring')
   &--completed
     svg #{prefix('progress-ring')}__circle-stroke
-      fill: $progress-ring-success-color
-      stroke: $progress-ring-success-color
+      fill: $progress-ring-completed-color
+      stroke: $progress-ring-completed-color
 
   &--completed &__content
-    color: $progress-ring-success-text-color
+    color: $progress-ring-completed-text-color

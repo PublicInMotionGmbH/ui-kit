@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import drawStroke from './drawStroke'
 
 const propTypes = {
   /** Progress ring content */
@@ -28,23 +29,6 @@ const circleRadius = 26
 const viewBox = 60
 
 /**
- * Update value when is not in range or non-digital character.
- *
- * @param {number} value
- */
-function drawStroke (value) {
-  if (value < 0) {
-    value = 0
-  } else if (value > 100) {
-    value = 100
-  } else if (isNaN(value)) {
-    value = 25
-  }
-
-  return strokeDasharray - (strokeDasharray * (value / 100))
-}
-
-/**
  * Component which represents Progress ring.
  *
  * @param {object} props
@@ -55,17 +39,15 @@ function drawStroke (value) {
  * @returns {React.Element}
  */
 function ProgressRing (props) {
-  const { children, className, type, styles, value, ...passedProps } = props
-
-  const _value = value * 100
+  const { children, className, type, value, ...passedProps } = props
 
   // Build values used inside
-  const valueNow = isNaN(_value) ? null : _value
+  const valueNow = isNaN(value) ? null : value
 
   // Build class names for Progress Ring elements
   const clsName = buildClassName('progress-ring', className, [ type ], {
-    completed: _value >= 100,
-    indeterminate: isNaN(_value)
+    completed: value >= 1,
+    indeterminate: isNaN(value)
   })
 
   const svgContainerClsName = buildClassName([ 'progress-ring', 'progress' ])
@@ -108,7 +90,7 @@ function ProgressRing (props) {
             cy={circlePosition}
             fill='transparent'
             strokeDasharray={strokeDasharray}
-            strokeDashoffset={drawStroke(_value)} />
+            strokeDashoffset={drawStroke(value)} />
         </svg>
       </div>
       {content}

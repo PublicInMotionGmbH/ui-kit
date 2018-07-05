@@ -15,7 +15,15 @@ const addStory = createStoriesFactory('Progress ring', module, {
 
 // Stories
 addStory('initial', readme, () => (
-  <ProgressRing />
+  <div>
+    <ProgressRing />
+    <ProgressRing style={{fontSize: 20}} />
+    <ProgressRing style={{fontSize: 25}} />
+    <ProgressRing style={{fontSize: 30}} />
+    <ProgressRing style={{fontSize: 35}} />
+    <ProgressRing style={{fontSize: 40}} />
+    <ProgressRing style={{fontSize: 50}} />
+  </div>
 ))
 
 addStory.controlled('controlled with children', readme, (setState, state) => (
