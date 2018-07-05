@@ -22,6 +22,6 @@ describe('drawStroke function', () => {
   })
 
   it('returns correct value when pass string as parameter', () => {
-    expect(drawStroke('someText')).toBe(123)
+    expect(drawStroke('someText')).toBe(null)
   })
 })

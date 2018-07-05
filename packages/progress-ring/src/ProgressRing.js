@@ -3,6 +3,13 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 import drawStroke from './drawStroke'
+import {
+  strokeDasharray,
+  circlePosition,
+  circleRadius,
+  strokeWidth,
+  viewBox
+} from './constants'
 
 const propTypes = {
   /** Progress ring content */
@@ -15,34 +22,34 @@ const propTypes = {
   value: PropTypes.number,
 
   /** Progress ring type */
-  type: PropTypes.string
+  type: PropTypes.string,
+
+  /** Value of indeterminate stroke */
+  indeterminateValue: PropTypes.number
 }
 
 const defaultProps = {
-  type: 'primary'
+  type: 'primary',
+  indeterminateValue: 0.25
 }
-
-// Values for build svg
-const strokeDasharray = 164
-const circlePosition = 30
-const circleRadius = 26
-const viewBox = 60
 
 /**
  * Component which represents Progress ring.
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {string} [props.value]
+ * @param {number} [props.value]
+ * @param {number} [props.indeterminateValue]
  * @param {string} [props.type]
  * @param {string} [props.children]
  * @returns {React.Element}
  */
 function ProgressRing (props) {
-  const { children, className, type, value, ...passedProps } = props
+  const { children, className, type, value, indeterminateValue, ...passedProps } = props
+  const indeterminate = isNaN(value)
 
   // Build values used inside
-  const valueNow = isNaN(value) ? null : value
+  const valueNow = indeterminate ? null : value
 
   // Build class names for Progress Ring elements
   const clsName = buildClassName('progress-ring', className, [ type ], {
@@ -51,9 +58,7 @@ function ProgressRing (props) {
   })
 
   const svgContainerClsName = buildClassName([ 'progress-ring', 'progress' ])
-
   const svgCircleBgClsName = buildClassName([ 'progress-ring', 'circle-bg' ])
-
   const svgCircleStrokeClsName = buildClassName([ 'progress-ring', 'circle-stroke' ])
 
   const content = React.Children.count(children) === 0 ? null : (
@@ -80,8 +85,10 @@ function ProgressRing (props) {
             cx={circlePosition}
             cy={circlePosition}
             fill='transparent'
+            strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
-            strokeDashoffset='0' />
+            strokeDashoffset='0'
+          />
           <circle
             className={svgCircleStrokeClsName}
             transform={`rotate(-90 ${circlePosition} ${circlePosition})`}
@@ -89,8 +96,10 @@ function ProgressRing (props) {
             cx={circlePosition}
             cy={circlePosition}
             fill='transparent'
+            strokeWidth={strokeWidth}
             strokeDasharray={strokeDasharray}
-            strokeDashoffset={drawStroke(value)} />
+            strokeDashoffset={drawStroke(indeterminate ? indeterminateValue : value)}
+          />
         </svg>
       </div>
       {content}

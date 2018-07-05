@@ -86,18 +86,6 @@ describe('<ProgressRing />', () => {
     expect(wrapper.find('.talixo-progress-ring__circle-stroke').prop('strokeDashoffset')).toBe(drawStroke(1.5))
   })
 
-  it('should set value to 0.25 when value is empty', () => {
-    const wrapper = shallow(<ProgressRing />)
-
-    expect(wrapper.find('.talixo-progress-ring__circle-stroke').prop('strokeDashoffset')).toBe(drawStroke())
-  })
-
-  it('should handle incorrect value', () => {
-    const wrapper = shallow(<ProgressRing value='Not an Number' />)
-
-    expect(wrapper.find('.talixo-progress-ring__circle-stroke').prop('strokeDashoffset')).toBe(drawStroke('Not an Number'))
-  })
-
   it('should set proper value when props value is equal 0', () => {
     const wrapper = shallow(<ProgressRing value={0} />)
 

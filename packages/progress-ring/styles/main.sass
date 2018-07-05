@@ -19,8 +19,7 @@
     height: 100%
 
   circle 
-    transition: stroke-dashoffset $progress-ring-circle-stroke-transition-time $progress-ring-circle-stroke-transition-type, fill $progress-ring-circle-fill-transition-time $progress-ring-circle-fill-transition-type
-    stroke-width: 7
+    transition: stroke-dashoffset $progress-ring-circle-stroke-transition-time $progress-ring-circle-stroke-transition-easing, fill $progress-ring-circle-fill-transition-time $progress-ring-circle-fill-transition-easing
 
   &__circle-bg
     stroke: $progress-ring-empty-ring-color
@@ -31,7 +30,7 @@
     left: 50%
     transform: translate(-50%, -50%)
     font-size: 1em * $p1/$p2
-    transition: color $progress-ring-content-color-transition-time $progress-ring-content-color-transition-type
+    transition: color $progress-ring-content-color-transition-time $progress-ring-content-color-transition-easing
 
     .tai:first-child
       font-size: 1.45em
@@ -39,7 +38,7 @@
   &--indeterminate
     svg
       transform-origin: 50%
-      animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time $progress-ring-indeterminate-animation-count $progress-ring-indeterminate-animation-type
+      animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time infinite $progress-ring-indeterminate-animation-easing
 
 @keyframes indeterminateProgressRing
   0%

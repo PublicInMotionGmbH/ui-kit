@@ -27,17 +27,16 @@ $progress-ring-success-text-color: $x-color-success-opposite !default
 $p1: 5
 $p2: 12
 
-$progress-ring-circle-fill-transition-type: linear
+$progress-ring-circle-fill-transition-easing: linear
 $progress-ring-circle-fill-transition-time: 0.3s
-$progress-ring-circle-stroke-transition-type: $progress-ring-circle-fill-transition-type
+$progress-ring-circle-stroke-transition-easing: $progress-ring-circle-fill-transition-easing
 $progress-ring-circle-stroke-transition-time: 1s
 
-$progress-ring-content-color-transition-type: $progress-ring-circle-fill-transition-type
-$progress-ring-content-color-transition-time: $progress-ring-circle-fill-transition-time + ($progress-ring-circle-fill-transition-time * 0.33333) !default
+$progress-ring-content-color-transition-easing: $progress-ring-circle-fill-transition-easing
+$progress-ring-content-color-transition-time: $progress-ring-circle-fill-transition-time * 4/3 !default
 
 $progress-ring-indeterminate-animation-time: 1s
-$progress-ring-indeterminate-animation-type: linear
-$progress-ring-indeterminate-animation-count: infinite
+$progress-ring-indeterminate-animation-easing: linear
 
 $progress-ring-completed: true !default
 $progress-ring-completed-color: $progress-ring-success-color !default
