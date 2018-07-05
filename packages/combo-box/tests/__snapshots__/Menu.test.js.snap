@@ -3,5 +3,9 @@
 exports[`<Menu /> should render correctly 1`] = `
 <div
   className="talixo-combo-box__menu"
-/>
+>
+  <div
+    className="talixo-combo-box__list"
+  />
+</div>
 `;

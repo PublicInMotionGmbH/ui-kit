@@ -7,6 +7,26 @@ import { Location } from './PropTypes'
 import getRoute from '../utils/getRoute'
 import hasPropsChanged from '../utils/hasPropsChanged'
 
+const propTypes = {
+  /** Start point */
+  startPoint: Location,
+
+  /** End point */
+  endPoint: Location,
+
+  /** Function fired when direction routing is loaded */
+  onLoad: PropTypes.func,
+
+  /** Function fired when direction routing caused error */
+  onError: PropTypes.func,
+
+  /** Waypoints */
+  via: PropTypes.oneOfType([
+    PropTypes.arrayOf(Location),
+    Location
+  ])
+}
+
 /**
  * Component which represents Directions.
  *
@@ -21,23 +41,8 @@ import hasPropsChanged from '../utils/hasPropsChanged'
  * @class
  */
 class Directions extends React.PureComponent {
-  /**
-   * Update route when points has changed
-   *
-   * @param {object} props
-   * @param {object|{ lat: number, lng: number }} props.startPoint
-   * @param {object|{ lat: number, lng: number }} props.endPoint
-   * @param {object[]|Array<{ lat: number, lng: number }>} [props.via]
-   */
-  constructor (props) {
-    super(props)
-
-    this.handleRoute = this.handleRoute.bind(this)
-    this.handleError = this.handleError.bind(this)
-
-    this.state = {
-      directions: null
-    }
+  state = {
+    directions: null
   }
 
   /**
@@ -109,7 +114,7 @@ class Directions extends React.PureComponent {
    *
    * @param {*} error
    */
-  handleError (error) {
+  handleError = (error) => {
     const { onError } = this.props
 
     if (onError) {
@@ -135,24 +140,6 @@ class Directions extends React.PureComponent {
   }
 }
 
-Directions.propTypes = {
-  /** Start point */
-  startPoint: Location,
-
-  /** End point */
-  endPoint: Location,
-
-  /** Function fired when direction routing is loaded */
-  onLoad: PropTypes.func,
-
-  /** Function fired when direction routing caused error */
-  onError: PropTypes.func,
-
-  /** Waypoints */
-  via: PropTypes.oneOfType([
-    PropTypes.arrayOf(Location),
-    Location
-  ])
-}
+Directions.propTypes = propTypes
 
 export default Directions

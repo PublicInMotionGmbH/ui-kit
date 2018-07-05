@@ -1,0 +1,18 @@
+@import './config'
+
+@include module('masked-input')
+  position: relative
+  display: block
+
+  &__mask
+    position: absolute
+    display: flex
+    align-items: center
+    top: $mask-border
+    bottom: $mask-border
+    left: $mask-border
+    right: $mask-border
+    padding: 0 $mask-padding-horizontal
+    z-index: 2
+    background-color: $mask-background
+    pointer-events: none

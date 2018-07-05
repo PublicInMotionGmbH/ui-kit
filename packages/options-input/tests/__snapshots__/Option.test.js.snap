@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Option /> renders children correctly 1`] = `
+<span
+  className="talixo-options-input-option"
+>
+  <Tooltip
+    arrow={true}
+    fade={false}
+    fadeTime={600}
+    lockPosition={false}
+    position="top"
+    render={[Function]}
+    triggerOn="hover"
+  >
+    <span>
+      <Icon
+        name="person"
+      />
+    </span>
+  </Tooltip>
+  <span>
+    1
+  </span>
+</span>
+`;

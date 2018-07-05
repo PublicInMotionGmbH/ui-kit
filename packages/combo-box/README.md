@@ -11,13 +11,13 @@ using `npm install @talixo/combo-box --save` or `yarn add @talixo/combo-box`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/icon: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
+- `downshift: ^1.31.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
 - `react-input-autosize: ^2.2.1`
-- `downshift: ^1.31.11`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/icon: ^0.1.0`
 
 These packages are required by `@talixo/combo-box`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -64,14 +64,16 @@ renderItem         | function  | `item => item`    | Function to render item in 
 renderValue        | function  | uses `renderItem` | Function to render value (or tag) in select box
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+tabIndex           | number    | n/a               | Tab index passed to toggle button
 
 ### AutoComplete
 
 Property name      | Type      | Default           | Description
 -------------------|-----------|:-----------------:|--------------------------------
 className          | string    | n/a               | Additional class name passed to wrapper
+footer             | node      | n/a               | Footer for items list
 options            | array     | n/a               | Options to show
-children           | string    | self-controlled   | Input to show
+children           | node      | n/a               | Input to show
 onChoose           | function  | n/a               | Handler fired when option is selected
 onBlur             | function  | n/a               | onBlur event passed from input
 onFocus            | function  | n/a               | onFocus event passed from input

@@ -106,14 +106,14 @@ class ComboBoxMultiValue extends React.PureComponent {
    *
    * @param {HTMLElement} el
    */
-  saveInputRef (el) {
+  saveInputRef = (el) => {
     this.input = el
   }
 
   /**
    * Focus input if it is possible.
    */
-  focus () {
+  focus = () => {
     if (this.input) {
       this.input.focus()
     }
@@ -173,7 +173,7 @@ class ComboBoxMultiValue extends React.PureComponent {
     // Build auto sizing input
     return (
       <AutosizeInput
-        ref={this.saveInputRef.bind(this)}
+        ref={this.saveInputRef}
         {...inputProps}
       />
     )
@@ -192,8 +192,8 @@ class ComboBoxMultiValue extends React.PureComponent {
 
     // Get properties required by toggle button
     const passedProps = getToggleButtonProps({
-      onFocus: this.focus.bind(this),
-      onClick: this.focus.bind(this)
+      onFocus: this.focus,
+      onClick: this.focus
     })
 
     // Build class names for elements

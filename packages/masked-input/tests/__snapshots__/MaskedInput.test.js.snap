@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MaskedInput /> renders children correctly 1`] = `
+<div
+  className="talixo-masked-input"
+>
+  <Calendar
+    displayFormat="YYYY-MM-DD"
+    error={false}
+    firstDayOfWeek={1}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+  />
+</div>
+`;

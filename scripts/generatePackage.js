@@ -162,7 +162,7 @@ const questions = [
     type: 'input',
     name: 'version',
     message: 'Package version',
-    default: '1.0.0',
+    default: '0.1.0',
     validate: validateVersion
   },
   {

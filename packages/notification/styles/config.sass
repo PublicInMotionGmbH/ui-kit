@@ -1,1 +1,52 @@
 @import '~@talixo/shared/styles/config'
+
+$notification-font-size: $x-font-size-base !default
+$notification-line-height: $notification-font-size * $x-line-height-base !default
+
+$notification-border-width: $x-border-width !default
+$notification-border-radius: $x-border-radius !default
+
+$notification-padding-horizontal: $x-padding-horizontal-base !default
+$notification-padding-vertical: $x-padding-vertical-base !default
+$notification-close-button-margin: $x-padding-vertical-small !default
+
+$notifications-list-margin: dp(1.5) !default
+
+$notification-background-color: $x-color-calmer !default
+$notification-text-color: $x-color-calmer-opposite !default
+$notification-border-color: mix($notification-background-color, $notification-text-color, 90%) !default
+
+$notifications-list-sticky-sneak-size: dp(5) !default
+$notifications-list-sticky-width: dp(50) !default
+
+$notification-primary-background-color: $x-color-primary !default
+$notification-primary-text-color: $x-color-primary-opposite !default
+$notification-primary-border-color: $notification-primary-background-color !default
+
+$notification-secondary-background-color: $x-color-secondary !default
+$notification-secondary-text-color: $x-color-secondary-opposite !default
+$notification-secondary-border-color: $notification-secondary-background-color !default
+
+$notification-tertiary-background-color: $x-color-tertiary !default
+$notification-tertiary-text-color: $x-color-tertiary-opposite !default
+$notification-tertiary-border-color: $notification-tertiary-background-color !default
+
+$notification-success-background-color: $x-color-success !default
+$notification-success-text-color: $x-color-success-opposite !default
+$notification-success-border-color: $notification-success-background-color !default
+
+$notification-info-background-color: $x-color-info !default
+$notification-info-text-color: $x-color-info-opposite !default
+$notification-info-border-color: $notification-info-background-color !default
+
+$notification-warning-background-color: $x-color-warning !default
+$notification-warning-text-color: $x-color-warning-opposite !default
+$notification-warning-border-color: $notification-warning-background-color !default
+
+$notification-error-background-color: $x-color-error !default
+$notification-error-text-color: $x-color-error-opposite !default
+$notification-error-border-color: $notification-error-background-color !default
+
+$notification-toast-background-color: transparentize(text-contrast($x-color-background), .15) !default
+$notification-toast-text-color: text-contrast($notification-toast-background-color) !default
+$notification-toast-border-color: $notification-toast-background-color !default

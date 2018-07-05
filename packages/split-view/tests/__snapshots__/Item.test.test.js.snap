@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Item> when renderItem is passed should render children properly 1`] = `
+<div
+  className="talixo-split-view__list-item"
+  onClick={[Function]}
+>
+  <span
+    className="test-item"
+  >
+    Josh Smith I
+  </span>
+</div>
+`;
+
+exports[`<Item> when rendered should render properly 1`] = `
+<div
+  className="talixo-split-view__list-item"
+  onClick={[Function]}
+>
+  <div>
+    <div
+      key="name"
+    >
+      Name
+      : 
+      Josh Smith I
+    </div>
+    <div
+      key="value"
+    >
+      Value
+      : 
+      0
+    </div>
+    <div
+      key="title"
+    >
+      Title
+      : 
+      Title 1
+    </div>
+    <div
+      key="subtitle"
+    >
+      Subtitle
+      : 
+      Subtitle 1
+    </div>
+  </div>
+</div>
+`;

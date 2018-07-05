@@ -18,6 +18,13 @@ const styles = (stylesheet, options) => ({
     border: 0,
     padding: 0
   },
+  button: {
+    ...stylesheet.button,
+    base: {
+      ...(stylesheet.button && stylesheet.button.base),
+      zIndex: 1000000
+    }
+  },
   propTableHead: options.propTables && options.propTables.length > 1 ? {
 
   } : {

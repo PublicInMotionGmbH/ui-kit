@@ -5,15 +5,61 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Collapse } from '@talixo/collapse'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Should it collapse smoothly? */
+  smooth: PropTypes.bool,
+
+  /** Animation time (in ms), requires Collapse geometry CSS */
+  animationTime: PropTypes.number,
+
+  /** Options to show in accordion */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    /** Label to show in single option */
+    label: PropTypes.node.isRequired,
+
+    /** Content to show inside */
+    content: PropTypes.node.isRequired
+  })).isRequired,
+
+  /** IDs of currently opened element */
+  value: PropTypes.any,
+
+  /** Event fired when button is clicked */
+  onChange: PropTypes.func,
+
+  /** Render "open" icon for closed tab */
+  renderOpenIcon: PropTypes.func,
+
+  /** Render "close" icon for opened tab */
+  renderCloseIcon: PropTypes.func,
+
+  /** Function to build unique ID per option */
+  buildId: PropTypes.func,
+
+  /** Should allow opening many sections? */
+  multi: PropTypes.bool
+}
+
+const defaultProps = {
+  animationTime: 300,
+  smooth: true,
+  multi: false,
+  buildId: (option, index) => index
+}
+
 /**
  * Build element to show in accordion
  *
  * @param {object} props
- * @param {function} props.onChange
+ * @param {function} props.onOpen
+ * @param {function} props.onClose
  * @param {function} props.buildId
  * @param {function} [props.renderOpenIcon]
  * @param {function} [props.renderCloseIcon]
- * @param {*} [props.value]
+ * @param {array} [props.value]
  * @param {boolean} props.smooth
  * @param {number|null} props.animationTime
  * @param {object|{ label: *, content: * }} option
@@ -22,7 +68,7 @@ import { Collapse } from '@talixo/collapse'
  */
 function buildElement (props, option, index) {
   const {
-    buildId, onChange, value, smooth, animationTime,
+    buildId, onOpen, onClose, value, smooth, animationTime,
     renderOpenIcon, renderCloseIcon
   } = props
 
@@ -30,13 +76,10 @@ function buildElement (props, option, index) {
   const id = buildId(option, index)
 
   // Check if current block is collapsed
-  const collapsed = value !== id
-
-  // Find next value on toggle
-  const nextValue = collapsed ? id : null
+  const collapsed = value.indexOf(id) === -1
 
   // Build onClick handler
-  const change = () => onChange(nextValue)
+  const change = () => collapsed ? onOpen(id) : onClose(id)
 
   // Build class name for element
   const className = buildClassName('accordion-element', null, { collapsed })
@@ -61,14 +104,14 @@ function buildElement (props, option, index) {
 
   const renderIcon = collapsed ? renderOpenIcon : renderCloseIcon
   const icon = renderIcon ? (
-    <span className={prefix('accordion-element', 'toggle', 'icon')}>
+    <span className={prefix('accordion-element', 'toggle-icon')}>
       {renderIcon(option, { ...props, id, collapsed })}
     </span>
   ) : null
 
   // Build class name for inner elements
-  const buttonInnerClsName = prefix('accordion-element', 'toggle', 'inner')
-  const contentInnerClsName = prefix('accordion-element', 'content', 'inner')
+  const buttonInnerClsName = prefix('accordion-element', 'toggle-inner')
+  const contentInnerClsName = prefix('accordion-element', 'content-inner')
 
   return (
     <div className={className} key={`${index}--${id}`}>
@@ -88,6 +131,30 @@ function buildElement (props, option, index) {
 }
 
 /**
+ * Check if both lists contain same elements.
+ * This function is intented for user only here,
+ * as it has some problems (which do not apply to Accordion),
+ * i.e. compare [ 1, 1, 2 ] with [ 1, 2, 2 ]
+ *
+ * @param {array} prevList
+ * @param {array} nextList
+ * @returns {boolean}
+ */
+function isSameList (prevList, nextList) {
+  if (prevList.length !== nextList.length) {
+    return false
+  }
+
+  for (let i = 0; i < prevList.length; i++) {
+    if (nextList.indexOf(prevList[i]) === -1) {
+      return false
+    }
+  }
+
+  return true
+}
+
+/**
  * Component which represents checkbox.
  *
  * @property {object} props
@@ -97,18 +164,19 @@ function buildElement (props, option, index) {
  * @param {function} props.buildId
  * @param {function} [props.renderOpenIcon]
  * @param {function} [props.renderCloseIcon]
- * @param {*} [props.value]
+ * @param {*|array} [props.value]
  * @param {boolean} props.smooth
- * @param {number|null} props.animationTime
+ * @param {boolean} props.multi
+ * @param {number} props.animationTime
  *
  * @property {object} state
- * @property {*} state.value
+ * @property {array} state.value
  *
  * @class
  */
 class Accordion extends React.PureComponent {
   state = {
-    value: this.props.value
+    value: this.props.value == null ? [] : [].concat(this.props.value)
   }
 
   /**
@@ -118,8 +186,10 @@ class Accordion extends React.PureComponent {
    * @param {object} props
    */
   componentWillReceiveProps (props) {
-    if (props.value !== this.state.value) {
-      this.setState({ value: props.value })
+    if (props.value !== undefined && props.value !== this.state.value) {
+      this.setState({
+        value: props.value == null ? [] : [].concat(props.value)
+      })
     }
   }
 
@@ -129,12 +199,21 @@ class Accordion extends React.PureComponent {
    *
    * @param {*} nextValue
    */
-  onChange = nextValue => {
-    const { value, onChange } = this.props
+  change = nextValue => {
+    const { value, multi, onChange } = this.props
+    const { value: prevValue } = this.state
+
+    if (isSameList(prevValue, nextValue)) {
+      return
+    }
 
     // Update value when it's self-controlled
-    if (value == null) {
+    if (value === undefined) {
       this.setState({ value: nextValue })
+    }
+
+    if (!multi) {
+      nextValue = nextValue.length ? nextValue[0] : null
     }
 
     // Send event with new value
@@ -144,13 +223,41 @@ class Accordion extends React.PureComponent {
   }
 
   /**
+   * Open section
+   *
+   * @param {*} id
+   */
+  onOpen = id => {
+    const { multi } = this.props
+    const { value } = this.state
+
+    const nextValue = multi ? value.filter(x => x !== id).concat(id) : [ id ]
+
+    this.change(nextValue)
+  }
+
+  /**
+   * Close section
+   *
+   * @param {*} id
+   */
+  onClose = id => {
+    const { multi } = this.props
+    const { value } = this.state
+
+    const nextValue = multi ? value.filter(x => x !== id) : []
+
+    this.change(nextValue)
+  }
+
+  /**
    * Render accordion.
    *
    * @returns {React.Element}
    */
   render () {
     const {
-      options, className, smooth, animationTime, value,
+      options, className, smooth, animationTime, value, multi,
       buildId, onChange, renderOpenIcon, renderCloseIcon, ...passedProps
     } = this.props
 
@@ -165,7 +272,8 @@ class Accordion extends React.PureComponent {
 
     // Prepare accordion element factory
     const _buildElement = buildElement.bind(null, {
-      onChange: this.onChange,
+      onOpen: this.onOpen,
+      onClose: this.onClose,
       buildId: buildId,
       value: _value,
       smooth: smooth,
@@ -185,41 +293,7 @@ class Accordion extends React.PureComponent {
   }
 }
 
-Accordion.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Should it collapse smoothly? */
-  smooth: PropTypes.bool,
-
-  /** Animation time (in ms), requires Collapse geometry CSS */
-  animationTime: PropTypes.number,
-
-  /** Options to show in accordion */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.node.isRequired,
-    content: PropTypes.node.isRequired
-  })).isRequired,
-
-  /** ID of currently opened element */
-  value: PropTypes.any,
-
-  /** Event fired when button is clicked */
-  onChange: PropTypes.func,
-
-  /** Render "open" icon for closed tab */
-  renderOpenIcon: PropTypes.func,
-
-  /** Render "close" icon for opened tab */
-  renderCloseIcon: PropTypes.func,
-
-  /** Function to build unique ID per option */
-  buildId: PropTypes.func
-}
-
-Accordion.defaultProps = {
-  smooth: true,
-  buildId: (option, index) => index
-}
+Accordion.propTypes = propTypes
+Accordion.defaultProps = defaultProps
 
 export default Accordion

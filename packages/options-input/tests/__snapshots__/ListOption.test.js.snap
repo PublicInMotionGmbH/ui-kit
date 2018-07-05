@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListOption /> renders children correctly 1`] = `
+<div
+  className="talixo-options-input-list-option talixo-options-input-list-option--active"
+>
+  <NumberInput
+    error={false}
+    initialTime={700}
+    left={
+      <Icon
+        name="person"
+      />
+    }
+    max={Infinity}
+    min={-Infinity}
+    onChange={[Function]}
+    precision={0}
+    step={1}
+    stepTime={20}
+    stepper={true}
+    suffix={
+      <div
+        className="talixo-options-input-list-option__label"
+      >
+        <span
+          className="talixo-options-input-list-option__title"
+        >
+          Adults
+        </span>
+        <span
+          className="talixo-options-input-list-option__description"
+        >
+          Older than 15
+        </span>
+      </div>
+    }
+    value={1}
+  />
+</div>
+`;

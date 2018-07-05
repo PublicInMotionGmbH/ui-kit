@@ -5,6 +5,27 @@ import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Icon name */
+  icon: PropTypes.string.isRequired,
+
+  /** Label to show with icon */
+  label: PropTypes.node.isRequired,
+
+  /** Is this element already active? */
+  active: PropTypes.bool,
+
+  /** Additional handler for clicking on button */
+  onClick: PropTypes.func
+}
+
+const defaultProps = {
+  active: false
+}
+
 /**
  * Component which represents sidebar element,
  * which can be also opened.
@@ -24,18 +45,10 @@ import { Icon } from '@talixo/icon'
  * @class
  */
 class SidebarElement extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-    this.handleClose = this.handleClose.bind(this)
-    this.saveRef = this.saveRef.bind(this)
-
-    this.node = null
-    this.state = {
-      open: false
-    }
+  state = {
+    open: false
   }
+  node = null
 
   /**
    * Remove listeners when component is unmounted.
@@ -51,7 +64,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Element} node
    */
-  saveRef (node) {
+  saveRef = (node) => {
     this.node = node
   }
 
@@ -61,7 +74,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Event} e
    */
-  handleClose (e) {
+  handleClose = (e) => {
     // Ignore when there is no DOM element attached
     if (!this.node) {
       return
@@ -95,7 +108,7 @@ class SidebarElement extends React.PureComponent {
    *
    * @param {Event} e
    */
-  handleClick (e) {
+  handleClick = (e) => {
     const { children, onClick } = this.props
 
     // Toggle opening status when it could be open
@@ -175,25 +188,7 @@ class SidebarElement extends React.PureComponent {
   }
 }
 
-SidebarElement.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Icon name */
-  icon: PropTypes.string.isRequired,
-
-  /** Label to show with icon */
-  label: PropTypes.node.isRequired,
-
-  /** Is this element already active? */
-  active: PropTypes.bool,
-
-  /** Additional handler for clicking on button */
-  onClick: PropTypes.func
-}
-
-SidebarElement.defaultProps = {
-  active: false
-}
+SidebarElement.propTypes = propTypes
+SidebarElement.defaultProps = defaultProps
 
 export default SidebarElement

@@ -1,1 +1,31 @@
 @import '~@talixo/shared/styles/config'
+
+$checkbox-box-size: dp(2.5) !default
+$checkbox-box-margin: dp(1.5) !default
+$checkbox-box-font-size: $x-input-text-size !default
+$checkbox-box-tick-ratio: 0.4 !default
+$checkbox-box-tick-size: $checkbox-box-size * $checkbox-box-tick-ratio !default
+
+$checkbox-box-border-width: $x-border-width !default
+$checkbox-box-border-radius: $x-border-radius !default
+$checkbox-box-line-height: $x-line-height-base !default
+
+$checkbox-box-background-color: $x-color-background !default
+$checkbox-box-border-color: $x-color-primary !default
+$checkbox-text-color: $x-color-text !default
+
+$checkbox-checked-box-background-color: $checkbox-box-border-color !default
+$checkbox-checked-box-border-color: $checkbox-box-border-color !default
+$checkbox-checked-text-color: $checkbox-text-color !default
+
+$checkbox-disabled-box-background-color: #eee !default
+$checkbox-disabled-box-border-color: #ddd !default
+$checkbox-disabled-text-color: #888 !default
+
+$checkbox-disabled-checked-box-background-color: mix-keep-saturation($checkbox-checked-box-background-color, $checkbox-disabled-box-background-color, 50%) !default
+$checkbox-disabled-checked-box-border-color: $checkbox-disabled-box-border-color !default
+$checkbox-disabled-checked-text-color: $checkbox-disabled-text-color !default
+
+$checkbox-error-box-background-color: $x-color-error !default
+$checkbox-error-box-border-color: $checkbox-error-box-background-color !default
+$checkbox-error-text-color: $x-color-error !default

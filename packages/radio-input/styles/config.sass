@@ -1,1 +1,30 @@
 @import '~@talixo/shared/styles/config'
+
+$radio-input-box-size: dp(2.5) !default
+$radio-input-box-margin: dp(1.5) !default
+$radio-input-box-font-size: $x-font-size-base !default
+$radio-input-box-tick-ratio: 0.55 !default
+$radio-input-box-tick-size: $radio-input-box-size * $radio-input-box-tick-ratio !default
+
+$radio-input-box-border-width: $x-border-width !default
+$radio-input-box-line-height: $x-line-height-base !default
+
+$radio-input-box-background-color: $x-color-background !default
+$radio-input-box-border-color: $x-color-primary !default
+$radio-input-text-color: $x-color-text !default
+
+$radio-input-checked-box-background-color: $radio-input-box-border-color !default
+$radio-input-checked-box-border-color: $radio-input-box-border-color !default
+$radio-input-checked-text-color: $radio-input-text-color !default
+
+$radio-input-disabled-box-background-color: #eee !default
+$radio-input-disabled-box-border-color: #ddd !default
+$radio-input-disabled-text-color: #888 !default
+
+$radio-input-disabled-checked-box-background-color: mix-keep-saturation($radio-input-checked-box-background-color, $radio-input-disabled-box-background-color, 50%) !default
+$radio-input-disabled-checked-box-border-color: $radio-input-disabled-box-border-color !default
+$radio-input-disabled-checked-text-color: $radio-input-disabled-text-color !default
+
+$radio-input-error-box-background-color: $x-color-error !default
+$radio-input-error-box-border-color: $radio-input-error-box-background-color !default
+$radio-input-error-text-color: $x-color-error !default

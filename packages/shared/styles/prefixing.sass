@@ -9,6 +9,16 @@
   @return unquote('.#{$prefix}-#{toString($name, '__')}')
 
 /**
+ * Build selector for specific path inside, use it inside module
+ *
+ * i.e.
+ * @include module('something')
+ *   #{inside(&, 'input')}
+ */
+@function inside($name...)
+  @return toString($name, '__')
+
+/**
  * Build block for specific module
  */
 @mixin module ($name...)

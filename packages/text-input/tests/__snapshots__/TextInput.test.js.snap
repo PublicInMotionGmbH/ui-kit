@@ -9,6 +9,7 @@ exports[`<TextInput /> should render properly 1`] = `
     onChange={[Function]}
     style={null}
     type="text"
+    value=""
   />
 </div>
 `;

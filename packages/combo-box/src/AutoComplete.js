@@ -14,6 +14,9 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Footer of items list */
+  footer: PropTypes.node,
+
   /** List of options to show */
   options: PropTypes.array.isRequired,
 
@@ -157,7 +160,7 @@ class AutoComplete extends React.PureComponent {
    * @param {object} changes
    * @returns {object}
    */
-  stateReducer (state, changes) {
+  stateReducer = (state, changes) => {
     switch (changes.type) {
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
@@ -177,14 +180,14 @@ class AutoComplete extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
+    const { footer, icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
 
     // Compose function to get input props
     const getInputProps = composeInputProps(data, { onFocus, onBlur })
 
     return {
       ...data,
-      ...{ icon, options, buildItemId, renderItem, getInputProps }
+      ...{ footer, icon, options, buildItemId, renderItem, getInputProps }
     }
   }
 
@@ -193,7 +196,7 @@ class AutoComplete extends React.PureComponent {
    *
    * @param {object} item
    */
-  select (item) {
+  select = (item) => {
     const { onChoose } = this.props
 
     // Handle simple selection for single select-box
@@ -224,7 +227,7 @@ class AutoComplete extends React.PureComponent {
    * @param {object} _data
    * @returns {React.Element}
    */
-  renderComponent (_data) {
+  renderComponent = (_data) => {
     // Compose Downshift & our properties
     const data = this.getStateProps(_data)
 
@@ -258,17 +261,17 @@ class AutoComplete extends React.PureComponent {
   render () {
     const {
       icon, options, onChoose, buildItemId, renderItem,
-      children, onFocus, onBlur, ...passedProps
+      children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
     return (
       <Downshift
-        stateReducer={this.stateReducer.bind(this)}
-        onChange={this.select.bind(this)}
+        stateReducer={this.stateReducer}
+        onChange={this.select}
         selectedItem={null}
         {...passedProps}
       >
-        {this.renderComponent.bind(this)}
+        {this.renderComponent}
       </Downshift>
     )
   }

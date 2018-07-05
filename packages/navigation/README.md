@@ -11,11 +11,12 @@ using `npm install @talixo/navigation --save` or `yarn add @talixo/navigation`.
 
 Your package should additionally have some extra dependencies:
 
-- `classnames: ^2.2.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/tooltip: ^1.0.0-alpha.5`
+- `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `lodash: ^4.17.5`
-- `@talixo/shared: ^0.1.0`
+- `react-dom: ^16.2.0`
 
 These packages are required by `@talixo/navigation`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -42,6 +43,20 @@ Property name | Type           | Default        | Description
 active        | bool           | `false`        | Active state
 children      | node           | n/a            | Element items
 className     | string         | n/a            | Additional class name passed to element
+completed     | bool           | `false`        | Completed state
+disabled      | bool           | `false`        | Disabled state
+onClick       | func           | n/a            | Function passed to element
+
+### Step
+
+It allows any props which are allowed for `li`. Additionally, it handles some differently:
+
+Property name | Type           | Default        | Description
+--------------|----------------|:--------------:|--------------------------------
+active        | bool           | `false`        | Active state
+children      | node           | n/a            | Tooltips content
+className     | string         | n/a            | Additional class name passed to element
+completed     | bool           | `false`        | Completed state
 disabled      | bool           | `false`        | Disabled state
 onClick       | func           | n/a            | Function passed to element
 
@@ -58,17 +73,41 @@ previousLabel  | node   |          | `'Previous'` | Previous button label
 
 ### ControlledTabs
 
+Property name  | Type    | Required | Default  | Description
+---------------|---------|----------|:--------:|--------------------------------
+activeTab      | number  |          | `0`      | Active tab
+labels         | Label[] |          | `[]`     | List of tab labels
+onChange       | func    |          | n/a      | Function passed to page buttons
+
+### Steps
+
 Property name  | Type   | Required | Default  | Description
 ---------------|--------|----------|:--------:|--------------------------------
-activeTab      | number |          | `0`      | Active tab
-labels         | array  |          | `[{}]`   | List of tab labels
-onChange       | func   |          | n/a      | Function passed to page buttons
+current        | object |          | n/a      | Active step
+steps          | Step[] |          | `[]`     | List of steps
+onChange       | func   |          | n/a      | Function passed to step buttons
 
 #### Types
 
 Type name      | Enum options
 ---------------|---------------------------------------------------
 NavigationType | 'navigation', 'pagination', 'breadcrumbs', 'tabs'
+
+### Property shapes
+
+#### Label
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+id            | number    | yes      | n/a           | Label's id
+name          | string    | yes      | n/a           | Label's name
+
+#### Step
+
+Property name | Type      | Required | Default       | Description
+--------------|-----------|----------|:-------------:|------------------------------------------------
+name          | string    | yes      | n/a           | Step's name
+disabled      | boolean   | yes      | n/a           | Disabled state
 
 ## Changelog
 

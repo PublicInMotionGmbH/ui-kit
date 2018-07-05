@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TableRow /> rendering renders children correctly 1`] = `
+<React.Fragment>
+  <React.Fragment
+    key="0"
+  >
+    <Row
+      className="talixo-data-table__row"
+    >
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
+      >
+        0
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        16th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        >
+          John Smith
+        </span>
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        18th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Berlin SXF Alexanderplatz
+      </Cell>
+    </Row>
+  </React.Fragment>
+  <React.Fragment
+    key="1"
+  >
+    <Row
+      className="talixo-data-table__row talixo-data-table__row--even"
+    >
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
+      >
+        1
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        17th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        />
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        19th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Krakow
+      </Cell>
+    </Row>
+  </React.Fragment>
+  <React.Fragment
+    key="2"
+  >
+    <Row
+      className="talixo-data-table__row"
+    >
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
+      >
+        2
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        18th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        >
+          Mickey Mouse
+        </span>
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        20th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Warszawa
+      </Cell>
+    </Row>
+  </React.Fragment>
+</React.Fragment>
+`;

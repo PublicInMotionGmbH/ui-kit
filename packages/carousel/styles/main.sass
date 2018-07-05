@@ -1,0 +1,79 @@
+@import './config'
+
+@include module('carousel')
+  position: relative
+  display: block
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+  &__content
+    position: relative
+
+  &__wrapper
+    position: relative
+    width: 100%
+    height: 100%
+    transform: translateX(0)
+    transition: $carousel-animation-time transform linear
+
+  &__inner
+    display: flex
+    height: 100%
+
+  &__slide
+    display: inline-block
+    height: 100%
+    box-sizing: border-box
+
+@include module('carousel-dots')
+  position: absolute
+  display: flex
+  justify-content: center
+  width: 100%
+  bottom: 0
+  z-index: 10
+
+  &__dot
+    display: inline-block
+    height: $carousel-dots-height
+    width: $carousel-dots-width
+    margin: $carousel-dots-offset $carousel-dots-margin
+    border-radius: $carousel-dots-border-radius
+    cursor: pointer
+    background-color: $carousel-dots-color
+
+    &:hover
+      background-color: $carousel-dots-hover-color
+
+    &--active
+      background-color: $carousel-dots-active-color
+
+@include module('carousel-arrows')
+  &__arrow
+    position: absolute
+    top: 0
+    bottom: 0
+    z-index: 10
+    display: flex
+    align-items: center
+    justify-content: center
+    text-align: center
+    width: $carousel-arrows-width
+    font-size: $carousel-arrows-size
+    color: $carousel-arrows-color
+    background-color: $carousel-arrows-background-color
+    cursor: pointer
+    border: 0
+    padding: 0
+    outline: none
+
+    &:hover
+      color: $carousel-arrows-hover-color
+      background-color: $carousel-arrows-hover-background-color
+
+    &--back
+      left: 0
+
+    &--forward
+      right: 0

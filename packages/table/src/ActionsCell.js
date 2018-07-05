@@ -5,6 +5,21 @@ import { buildClassName } from '@talixo/shared'
 
 import Cell from './Cell'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Actions which should be shown inside */
+  children: PropTypes.node,
+
+  /** Should actions be aligned vertically? */
+  vertical: PropTypes.bool
+}
+
+const defaultProps = {
+  vertical: false
+}
+
 /**
  * Component which represents Table row cell with actions.
  *
@@ -26,19 +41,7 @@ function ActionsCell (props) {
   )
 }
 
-ActionsCell.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Actions which should be shown inside */
-  children: PropTypes.node,
-
-  /** Should actions be aligned vertically? */
-  vertical: PropTypes.bool
-}
-
-ActionsCell.defaultProps = {
-  vertical: false
-}
+ActionsCell.propTypes = propTypes
+ActionsCell.defaultProps = defaultProps
 
 export default ActionsCell

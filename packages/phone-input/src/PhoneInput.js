@@ -19,6 +19,9 @@ const propTypes = {
   /** Additional class name for wrapper */
   className: PropTypes.string,
 
+  /** Indicates that input has error */
+  error: PropTypes.bool,
+
   /** Phone number to put inside (control from outside) */
   value: PropTypes.string,
 
@@ -35,6 +38,10 @@ const propTypes = {
   onFocus: PropTypes.func
 }
 
+const defaultProps = {
+  error: false
+}
+
 /**
  * Trim value (including \u2000 placeholders).
  *
@@ -43,6 +50,23 @@ const propTypes = {
  */
 function trim (value) {
   return value.replace(/[\u2000]+/g, '').trim()
+}
+
+/**
+ * Set caret position in specified element.
+ *
+ * @param {HTMLElement} element
+ * @param {number} position
+ */
+function setCaretPosition (element, position) {
+  if (!element) {
+    return
+  }
+
+  if (element.setSelectionRange) {
+    element.focus()
+    element.setSelectionRange(position, position)
+  }
 }
 
 /**
@@ -68,6 +92,7 @@ function renderCountryItem (country) {
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {boolean} [props.error]
  * @property {string} [props.value]
  * @property {string} [props.placeholder]
  * @property {function} [props.onChange]
@@ -76,15 +101,23 @@ function renderCountryItem (country) {
  *
  * @property {object} state
  * @property {string} state.value
+ * @property {boolean} state.focused
  * @property {string|null} [state.country]
+ * @property {boolean|string[]} state.focus
+ * @property {boolean|string[]} state.hover
  *
  * @class
  */
 class PhoneInput extends React.PureComponent {
   state = {
     value: this.props.value || '',
-    focused: false,
-    country: detectCountry(this.props.value)
+    country: detectCountry(this.props.value),
+
+    hover: false,
+    focus: false,
+
+    // Hack for text-mask-input
+    focused: false
   }
 
   /**
@@ -100,6 +133,14 @@ class PhoneInput extends React.PureComponent {
         country: detectCountry(props.value)
       })
     }
+  }
+
+  /**
+   * Clear all timers when component is unmounted.
+   */
+  componentWillUnmount () {
+    clearTimeout(this.caretTimeout)
+    clearTimeout(this.focusTimeout)
   }
 
   /**
@@ -135,11 +176,20 @@ class PhoneInput extends React.PureComponent {
    * @param {object} country
    */
   changeCountry = (country) => {
-    this.change(replaceCountryPrefix(this.state.value, this.state.country, country))
+    const nextValue = replaceCountryPrefix(this.state.value, this.state.country, country)
+    const endPrefix = nextValue.indexOf(' ') + 1
 
-    // Focus input when it is possible
+    this.change(nextValue)
+
+    // Focus input when it is possible,
+    // and move cursor after prefix
     if (this.el) {
       this.el.focus()
+
+      if (endPrefix) {
+        clearTimeout(this.caretTimeout)
+        this.caretTimeout = setTimeout(() => setCaretPosition(this.el, endPrefix))
+      }
     }
   }
 
@@ -152,6 +202,81 @@ class PhoneInput extends React.PureComponent {
     this.el = findDOMNode(node)
   }
 
+  onInputMouseOver = () => this.setMouseOverState('input')
+  onInputMouseOut = () => this.setMouseOutState('input')
+  onInputFocus = () => this.setFocusState('input')
+  onInputBlur = () => this.setBlurState('input')
+
+  onListMouseOver = () => this.setMouseOverState('flags')
+  onListMouseOut = () => this.setMouseOutState('flags')
+  onListFocus = () => this.setFocusState('flags')
+  onListBlur = () => this.setBlurState('flags')
+
+  /**
+   * Set hover state
+   *
+   * @param {string} what
+   */
+  setMouseOverState (what) {
+    const hover = this.state.hover ? this.state.hover.filter(x => x !== what) : []
+    hover.push(what)
+    this.setState({ hover })
+  }
+
+  /**
+   * Set dis-hover state.
+   *
+   * This needs to be delayed by setTimeout,
+   * because 'mouseOut' will happen before 'mouseEnter'.
+   *
+   * Broken scenario without delay:
+   *
+   * Given: user who has hover on flags drop-down
+   * When: he moves cursor to input
+   * Then:
+   *   - handle 'mouseout' on flags drop-down
+   *   - lose hover status on PhoneInput
+   *   - handle 'mouseover' on input
+   *   - set hover status on PhoneInput
+   * Result: PhoneInput is blinking
+   *
+   * @param {string} what
+   */
+  setMouseOutState (what) {
+    setTimeout(() => {
+      const hover = this.state.hover ? this.state.hover.filter(x => x !== what) : []
+      this.setState({ hover: hover.length ? hover : false })
+    })
+  }
+
+  /**
+   * Set focus state
+   *
+   * @param {string} what
+   */
+  setFocusState (what) {
+    const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
+    focus.push(what)
+    this.setState({ focus })
+  }
+
+  /**
+   * Set blur state
+   *
+   * This needs to be delayed by setTimeout,
+   * because 'blur' will happen before 'focus'.
+   *
+   * @see {PhoneInput.setMouseOutState}
+   *
+   * @param {string} what
+   */
+  setBlurState (what) {
+    setTimeout(() => {
+      const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
+      this.setState({ focus: focus.length ? focus : false })
+    })
+  }
+
   /**
    * Render SelectBox with countries and prefixes.
    *
@@ -160,13 +285,19 @@ class PhoneInput extends React.PureComponent {
   renderCountryBox () {
     return (
       <SelectBox
+        tabIndex={-1}
         className={buildClassName([ moduleName, 'country-box' ])}
         options={countriesList}
         value={this.state.country}
+        placeholder={<span className={buildClassName([ moduleName, 'unknown-flag' ])} />}
         renderValue={country => <CountryFlag code={country.code} />}
         renderItem={renderCountryItem}
         buildItemId={country => country.code}
         onChange={this.changeCountry}
+        onFocus={this.onListFocus}
+        onBlur={this.onListBlur}
+        onMouseEnter={this.onListMouseOver}
+        onMouseLeave={this.onListMouseOut}
       />
     )
   }
@@ -178,6 +309,8 @@ class PhoneInput extends React.PureComponent {
    */
   focus = (event) => {
     const { onFocus } = this.props
+
+    this.onInputFocus()
 
     // Make sure that user can't click on some place in input, where it guides him
     // TODO: when react-text-mask will properly work with removing placeholder character, remove it
@@ -198,6 +331,8 @@ class PhoneInput extends React.PureComponent {
    */
   blur = (event) => {
     const { onBlur } = this.props
+
+    this.onInputBlur()
 
     this.setState({ focused: false })
 
@@ -226,6 +361,9 @@ class PhoneInput extends React.PureComponent {
         value={value}
         placeholder={placeholder}
         onChange={e => this.change(e.target.value)}
+        onMouseEnter={this.onInputMouseOver}
+        onMouseOut={this.onInputMouseOut}
+        onMouseLeave={this.onInputMouseOut}
         onFocus={this.focus}
         onBlur={this.blur}
       />
@@ -238,10 +376,17 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
+    const { className, error, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
+    const { hover, focus } = this.state
+
+    const clsName = buildClassName(moduleName, className, {
+      error,
+      hover: hover && hover.length,
+      focus: focus && focus.length
+    })
 
     return (
-      <span className={buildClassName(moduleName, className)} {...passedProps}>
+      <span className={clsName} {...passedProps}>
         {this.renderCountryBox()}
         {this.renderInput()}
       </span>
@@ -250,5 +395,7 @@ class PhoneInput extends React.PureComponent {
 }
 
 PhoneInput.propTypes = propTypes
+
+PhoneInput.defaultProps = defaultProps
 
 export default PhoneInput

@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OptionsInput /> renders children correctly 1`] = `
+<div
+  className="talixo-options-input"
+>
+  <button
+    aria-expanded={false}
+    className="talixo-options-input__toggle"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    role="button"
+    type="button"
+  >
+    <OptionsInputValue
+      options={
+        Array [
+          Object {
+            "default": 1,
+            "description": "Older than 15",
+            "icon": "person",
+            "id": "person",
+            "label": "Adults",
+          },
+          Object {
+            "icon": "rocket",
+            "id": "rocket",
+            "label": "Rockets",
+          },
+        ]
+      }
+      persistentOptions={Array []}
+      value={
+        Object {
+          "person": 1,
+          "rocket": 0,
+        }
+      }
+    />
+    <Icon
+      name="keyboard_arrow_down"
+    />
+  </button>
+  <OptionsInputList
+    onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "default": 1,
+          "description": "Older than 15",
+          "icon": "person",
+          "id": "person",
+          "label": "Adults",
+        },
+        Object {
+          "icon": "rocket",
+          "id": "rocket",
+          "label": "Rockets",
+        },
+      ]
+    }
+    value={
+      Object {
+        "person": 1,
+        "rocket": 0,
+      }
+    }
+  />
+</div>
+`;

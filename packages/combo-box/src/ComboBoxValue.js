@@ -75,14 +75,14 @@ class ComboBoxValue extends React.PureComponent {
    *
    * @param {HTMLElement} el
    */
-  saveInputRef (el) {
+  saveInputRef = (el) => {
     this.input = el
   }
 
   /**
    * Focus input if it is possible.
    */
-  focus () {
+  focus = () => {
     if (this.input) {
       this.input.focus()
     }
@@ -91,7 +91,7 @@ class ComboBoxValue extends React.PureComponent {
   /**
    * Focus input if it is possible (on next tick).
    */
-  delayedFocus () {
+  delayedFocus = () => {
     this.focusTimeout = setTimeout(() => this.focus(), 1)
   }
 
@@ -118,7 +118,7 @@ class ComboBoxValue extends React.PureComponent {
     const clearProps = getClearButtonProps({
       role: 'button',
       className: clearClsName,
-      onClick: this.delayedFocus.bind(this)
+      onClick: this.delayedFocus
     })
 
     return (
@@ -195,7 +195,7 @@ class ComboBoxValue extends React.PureComponent {
     })
 
     return (
-      <input ref={this.saveInputRef.bind(this)} {...inputProps} />
+      <input ref={this.saveInputRef} {...inputProps} />
     )
   }
 
@@ -212,8 +212,8 @@ class ComboBoxValue extends React.PureComponent {
 
     // Get properties required by toggle button
     const passedProps = getToggleButtonProps({
-      onFocus: this.focus.bind(this),
-      onClick: this.focus.bind(this)
+      onFocus: this.focus,
+      onClick: this.focus
     })
 
     // Build class names for elements

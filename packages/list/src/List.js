@@ -3,6 +3,21 @@ import PropTypes from 'prop-types'
 
 import { buildClassName, prefix } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Bullet to put before */
+  bullet: PropTypes.node,
+
+  /** List of elements */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  bullet: '-'
+}
+
 /**
  * Component which represents List.
  *
@@ -29,19 +44,7 @@ function List (props) {
   )
 }
 
-List.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
-  /** Bullet to put before */
-  bullet: PropTypes.node,
-
-  /** List of elements */
-  children: PropTypes.node
-}
-
-List.defaultProps = {
-  bullet: '-'
-}
+List.propTypes = propTypes
+List.defaultProps = defaultProps
 
 export default List

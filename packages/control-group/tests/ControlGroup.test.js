@@ -30,13 +30,13 @@ describe('<ControlGroup />', () => {
 
   it('renders position correctly', () => {
     const wrapper = shallow(
-      <ControlGroup position='right'>
+      <ControlGroup position='end'>
         <button>1</button>
         <button>2</button>
         <button>3</button>
       </ControlGroup>
     )
 
-    expect(wrapper.props().className).toContain('right')
+    expect(wrapper.props().className).toContain('end')
   })
 })

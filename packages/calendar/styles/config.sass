@@ -1,1 +1,73 @@
 @import '~@talixo/shared/styles/config'
+
+$calendar-font-size: $x-input-text-size !default
+$calendar-height: $x-input-height !default
+$calendar-padding-horizontal: $x-input-padding-horizontal !default
+
+$calendar-icon-width: dp(2.5) !default
+$calendar-icon-size: $calendar-icon-width !default
+
+$calendar-text-color: $x-input-text-color !default
+$calendar-background-color: $x-input-background-color !default
+$calendar-border-color: $x-input-border-color !default
+
+$calendar-border-width: $x-border-width !default
+$calendar-border-radius: $x-border-radius !default
+
+$calendar-hover-background-color: $x-input-hover-background-color !default
+$calendar-hover-border-color: $x-input-hover-border-color !default
+$calendar-hover-text-color: $x-input-hover-text-color !default
+
+$calendar-focus-background-color: $x-input-focus-background-color !default
+$calendar-focus-border-color: $x-input-focus-border-color !default
+$calendar-focus-text-color: $x-input-focus-text-color !default
+
+$calendar-error-background-color: $x-input-error-background-color !default
+$calendar-error-border-color: $x-input-error-border-color !default
+$calendar-error-text-color: $x-input-error-text-color !default
+$calendar-error-placeholder-color: $x-input-error-placeholder-color !default
+
+$calendar-placeholder-color: $x-input-placeholder-color !default
+$calendar-icon-color: $x-color-intense !default
+$calendar-icon-with-padding: 1.5 * $calendar-padding-horizontal + $calendar-icon-width !default
+
+$calendar-picker-background-color: $calendar-focus-background-color !default
+$calendar-picker-min-width: dp(60) !default
+$calendar-picker-padding-horizontal: $calendar-padding-horizontal !default
+$calendar-picker-padding-vertical: $x-padding-vertical-base !default
+$calendar-picker-left-movement: dp(3) !default
+$calendar-picker-with-box-shadow: true !default
+
+$calendar-picker-weekday-holiday-text-color: $x-color-error !default
+$calendar-picker-weekday-font-weight: $x-weight-normal !default
+$calendar-picker-weekday-color: text-contrast($calendar-picker-background-color) !default
+$calendar-picker-weekday-font-size: $x-font-size-small !default
+$calendar-picker-weekday-line-height: 2 !default
+
+$calendar-picker-month-font-weight: $x-weight-semibold !default
+$calendar-picker-month-font-size: $x-font-size-big !default
+$calendar-picker-month-margin: dp(2) !default
+$calendar-picker-month-color: text-contrast($calendar-picker-background-color) !default
+
+$calendar-picker-day-holiday-text-color: $calendar-picker-weekday-holiday-text-color !default
+$calendar-picker-day-font-weight: $x-weight-semibold !default
+$calendar-picker-day-background-color: $calendar-background-color !default
+$calendar-picker-day-text-color: text-contrast($calendar-picker-day-background-color) !default
+$calendar-picker-day-height: dp(2.75) !default
+$calendar-picker-day-gap: dp(0.75) !default
+
+$calendar-picker-hover-day-background-color: $calendar-hover-border-color !default
+$calendar-picker-hover-day-text-color: text-contrast($calendar-picker-hover-day-background-color) !default
+
+$calendar-picker-selected-day-background-color: $calendar-focus-border-color !default
+$calendar-picker-selected-day-text-color: text-contrast($calendar-picker-selected-day-background-color) !default
+
+$calendar-picker-disabled-day-font-weight: $x-weight-normal !default
+$calendar-picker-disabled-day-background-color: $calendar-picker-day-background-color !default
+$calendar-picker-disabled-day-text-color: transparentize(text-contrast($calendar-picker-disabled-day-background-color), .8) !default
+
+$calendar-picker-separator-width: $x-border-width-heavy !default
+$calendar-picker-separator-color: $calendar-hover-border-color !default
+
+$calendar-picker-hover-arrow-color: $calendar-focus-border-color !default
+$calendar-picker-arrow-color: transparentize($calendar-picker-hover-arrow-color, .5) !default

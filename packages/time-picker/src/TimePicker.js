@@ -21,11 +21,15 @@ const propTypes = {
   hourFormat: PropTypes.oneOf(['24', '12']),
 
   /** Time string in 'HH:mm' format passed to component. */
-  value: PropTypes.string
+  value: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
-  hourFormat: '24'
+  hourFormat: '24',
+  error: false
 }
 
 const HOURS_24 = 'HH'
@@ -38,7 +42,7 @@ const MINUTES = 'mm'
  * @returns {React.Element}
  */
 const HeaderAM = () => [
-  <Icon key='icon-am' name='brightness_3' />,
+  <Icon key='icon-am' name='moon_outline' />,
   <span key='label-am' style={{ marginLeft: '8px' }}>AM</span>
 ]
 
@@ -48,7 +52,7 @@ const HeaderAM = () => [
  * @returns {React.Element}
  */
 const HeaderPM = () => [
-  <Icon key='icon-pm' name='brightness_5' />,
+  <Icon key='icon-pm' name='sun_outline' />,
   <span key='label-pm' style={{ marginLeft: '8px' }}>PM</span>
 ]
 
@@ -193,7 +197,7 @@ class TimePicker extends React.PureComponent {
   * @param {object} [props.value]
   */
   componentWillReceiveProps (props) {
-    if (props.value !== this.props.value) {
+    if (props.value !== this.props.value && props.value !== undefined) {
       const value = moment(props.value, 'HH:mm')
       this.setState({ value })
     }
@@ -224,6 +228,11 @@ class TimePicker extends React.PureComponent {
       .clone()
       .hour(formattedValue)
 
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
+
     this.setState({ value })
 
     if (onChange) {
@@ -247,6 +256,11 @@ class TimePicker extends React.PureComponent {
       .clone()
       .minute(inputValue)
 
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
+
     this.setState({ value })
 
     if (onChange) {
@@ -262,12 +276,12 @@ class TimePicker extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, hourFormat, onChange, value: propsValue, ...passedProps } = this.props
+    const { className, hourFormat, onChange, value: propsValue, error, ...passedProps } = this.props
     const { value } = this.state
     const { handleHoursBlur, handleMinutesBlur } = this
 
     // Build class names
-    const wrapperClsName = buildClassName(moduleName, className)
+    const wrapperClsName = buildClassName(moduleName, className, { error })
     const inputHourClsName = buildClassName([moduleName, 'input-hour'])
     const inputMinutesClsName = buildClassName([moduleName, 'input-minutes'])
     const menuClsName = buildClassName([ moduleName, 'menu' ])
@@ -281,6 +295,7 @@ class TimePicker extends React.PureComponent {
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
+          error={error}
           className={inputHourClsName}
           onBlur={handleHoursBlur}
           format={format}
@@ -292,6 +307,7 @@ class TimePicker extends React.PureComponent {
         </TimeInput>
         <span className={colonClsName}>:</span>
         <TimeInput
+          error={error}
           className={inputMinutesClsName}
           onBlur={handleMinutesBlur}
           format={MINUTES}

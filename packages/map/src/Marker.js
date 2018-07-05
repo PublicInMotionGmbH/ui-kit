@@ -4,6 +4,23 @@ import { Marker as GoogleMarker, InfoWindow } from 'react-google-maps'
 
 import { Location } from './PropTypes'
 
+const propTypes = {
+  /** Marker position */
+  position: Location.isRequired,
+
+  /** Marker information window */
+  info: PropTypes.node,
+
+  /** Action on click on marker */
+  onClick: PropTypes.func,
+
+  /** Action on closing info window through X button */
+  onClose: PropTypes.func,
+
+  /** Is information window opened? */
+  open: PropTypes.bool
+}
+
 /**
  * Component which represents Marker on map.
  *
@@ -20,23 +37,8 @@ import { Location } from './PropTypes'
  * @class
  */
 class Marker extends React.PureComponent {
-  /**
-   * @param {object} props
-   * @param {object|{ lat: number, lng: number}} props.position
-   * @param {*} [props.info]
-   * @param {boolean} [props.open]
-   * @param {function} [props.onClick]
-   * @param {function} [props.onClose]
-   */
-  constructor (props) {
-    super(props)
-
-    this.onClick = this.onClick.bind(this)
-    this.onClose = this.onClose.bind(this)
-
-    this.state = {
-      open: props.open || false
-    }
+  state = {
+    open: this.props.open || false
   }
 
   /**
@@ -84,7 +86,7 @@ class Marker extends React.PureComponent {
    *
    * @param {*} event
    */
-  onClick (event) {
+  onClick = (event) => {
     const { onClick } = this.props
 
     // Toggle info window
@@ -108,7 +110,7 @@ class Marker extends React.PureComponent {
   /**
    * Handle event on closing info window
    */
-  onClose () {
+  onClose = () => {
     const { onClose } = this.props
 
     // Close info window
@@ -147,21 +149,6 @@ class Marker extends React.PureComponent {
   }
 }
 
-Marker.propTypes = {
-  /** Marker position */
-  position: Location.isRequired,
-
-  /** Marker information window */
-  info: PropTypes.node,
-
-  /** Action on click on marker */
-  onClick: PropTypes.func,
-
-  /** Action on closing info window through X button */
-  onClose: PropTypes.func,
-
-  /** Is information window opened? */
-  open: PropTypes.bool
-}
+Marker.propTypes = propTypes
 
 export default Marker

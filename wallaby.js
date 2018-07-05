@@ -21,10 +21,18 @@ module.exports = wallaby => {
       'packages/*/sprites/*.js',
       'packages/*/utils/**/*.js',
       'packages/*/tests/utils/**/*.js',
+      'packages/*/tests/fixtures/**/*.js',
       { pattern: 'packages/*/tests/**/*.test.js.snap', instrument: false }
     ],
 
     tests: [ 'packages/*/tests/**/*.test.js' ],
+
+    filesWithNoCoverageCalculated: [
+      'packages/country-flag/sprites/*.js',
+      'packages/country-flag/scripts/*.js',
+      'packages/country-flag/src/storybook/*.js',
+      'packages/icon/src/storybook/*.js'
+    ],
 
     env: {
       type: 'node',

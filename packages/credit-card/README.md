@@ -11,10 +11,16 @@ using `npm install @talixo/credit-card --save` or `yarn add @talixo/credit-card`
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/combo-box: ^1.0.0-alpha.5`
+- `@talixo/form-field: ^1.0.0-alpha.5`
+- `@talixo/form-handler: ^1.0.0-alpha.5`
+- `@talixo/icon: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/text-input: ^1.0.0-alpha.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
+- `react-text-mask: 5.4.1`
 
 These packages are required by `@talixo/credit-card`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -38,6 +44,8 @@ values                  | ValuesShape | `''|null`            | Values to be disp
 
 ### CreditCardNumberInput
 
+It allows also properties of [TextInput](../text-input/README.md).
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper.
@@ -58,11 +66,14 @@ value         | string    | n/a     | Value to be displayed inside input.
 
 ### ExpirationDateInput
 
+It allows also properties of `div`.
+
 Property name | Type            | Default | Description                    
 --------------|-----------------|:-------:|--------------------------------
 className     | string          | n/a     | Additional class name passed to wrapper.
 onChange      | function        | n/a     | Handler for onChange event.
 value         | ExpirationShape | n/a     | Value to be displayed inside inputs.
+error         | bool            | `false` | Does it have any error?
 
 ## Property shapes
 

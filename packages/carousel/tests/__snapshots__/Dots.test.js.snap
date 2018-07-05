@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dots /> renders children correctly 1`] = `
+<div
+  className="talixo-carousel-dots"
+>
+  <div
+    className="talixo-carousel-dots__dot"
+    key="0"
+    onClick={[Function]}
+  />
+  <div
+    className="talixo-carousel-dots__dot"
+    key="1"
+    onClick={[Function]}
+  />
+  <div
+    className="talixo-carousel-dots__dot"
+    key="2"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`<Dots /> renders children correctly for different amount of elements per slide 1`] = `
+<div
+  className="talixo-carousel-dots"
+>
+  <div
+    className="talixo-carousel-dots__dot"
+    key="0"
+    onClick={[Function]}
+  />
+  <div
+    className="talixo-carousel-dots__dot"
+    key="1"
+    onClick={[Function]}
+  />
+</div>
+`;

@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Nodes to include inside cell */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents simple Table row cell.
  *
@@ -18,9 +23,6 @@ function Cell (props) {
   )
 }
 
-Cell.propTypes = {
-  /** Nodes to include inside cell */
-  children: PropTypes.node
-}
+Cell.propTypes = propTypes
 
 export default Cell

@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chart> when rendered should render properly 1`] = `
+<FlexibleXYPlot
+  animation={true}
+  className="talixo-chart"
+  lineColors={Array []}
+  timeSeries={false}
+  xDomain={null}
+  xType="linear"
+>
+  <HorizontalGridLines
+    attr="y"
+    direction="horizontal"
+  />
+  <VerticalGridLines
+    attr="x"
+    direction="vertical"
+  />
+  <XAxis
+    attr="x"
+    attrAxis="y"
+    orientation="bottom"
+  />
+  <LineSeries
+    animate={true}
+    className="talixo-chart-series className talixo-chart-series--0"
+    color={null}
+    curve={null}
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 5,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 2,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 2,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getNull={[Function]}
+    key="Line 1-0"
+    opacity={1}
+    stack={false}
+    strokeStyle="solid"
+    style={
+      Object {
+        "fill": "none",
+      }
+    }
+  />
+  <LineSeries
+    animate={true}
+    className="talixo-chart-series className talixo-chart-series--1"
+    color={null}
+    curve={null}
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 5,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 2,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 2,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getNull={[Function]}
+    key="Line 2-1"
+    opacity={1}
+    stack={false}
+    strokeStyle="solid"
+    style={
+      Object {
+        "fill": "none",
+      }
+    }
+  />
+  <YAxis
+    attr="y"
+    attrAxis="x"
+    orientation="left"
+  />
+</FlexibleXYPlot>
+`;

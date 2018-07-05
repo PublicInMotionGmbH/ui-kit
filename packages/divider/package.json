@@ -1,0 +1,39 @@
+{
+  "name": "@talixo/divider",
+  "version": "1.0.0-alpha.5",
+  "description": "UI Component which represents Divider",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only divider",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only divider"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/button": "^1.0.0-alpha.5",
+    "@talixo/icon": "^1.0.0-alpha.5",
+    "@talixo/shared": "^1.0.0-alpha.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "@talixo/shared": "^1.0.0-alpha.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

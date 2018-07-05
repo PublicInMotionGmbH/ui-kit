@@ -91,11 +91,20 @@ function analyzePackage (dirPath) {
   // Build development/production output paths
   const devPath = fileName + (dev || '') + '.js'
   const prodPath = fileName + (productionNames[dev] || '') + '.min.js'
+  const srcPath = path.join(dirPath, 'src')
+  const libPath = path.join(dirPath, 'lib')
+  const isSrcAvailable = fs.existsSync(srcPath)
 
   // Add package to list
   return {
     id: name,
     name: config.name,
+    dirPath: dirPath,
+    srcPath: isSrcAvailable ? srcPath : null,
+    libPath: isSrcAvailable ? libPath : null,
+    readmePath: path.join(dirPath, 'README.md'),
+    configPath: path.join(dirPath, 'package.json'),
+    config: config,
     input: inputPath,
     dependencies: Object.keys(Object.assign({}, config.dependencies, config.peerDependencies)),
     omitBuild: !!config.omitBuild,

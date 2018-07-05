@@ -5,6 +5,7 @@ exports[`<RadioInput /> renders children correctly 1`] = `
   className="talixo-radio-input"
 >
   <input
+    onChange={[Function]}
     type="radio"
   />
   <span />

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Countdown /> renders children correctly 1`] = `
+<BasicCountdownRenderer
+  days={0}
+  finished={true}
+  hours={0}
+  minutes={0}
+  seconds={0}
+  targetDate="2018-01-05T10:30:00.000Z"
+  time={0}
+/>
+`;

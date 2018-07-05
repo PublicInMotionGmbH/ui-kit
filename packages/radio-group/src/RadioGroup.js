@@ -1,0 +1,103 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { RadioInput } from '@talixo/radio-input'
+
+import { buildClassName } from '@talixo/shared'
+
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Name of radio group */
+  name: PropTypes.string.isRequired,
+
+  /** Is this value incorrect? */
+  error: PropTypes.bool,
+
+  /** Array of objects which represent options */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    /** Label to show */
+    label: PropTypes.node.isRequired,
+
+    /** Value it represents */
+    value: PropTypes.any.isRequired,
+
+    /** Is this option disabled? */
+    disabled: PropTypes.bool
+  })),
+
+  /** Value of default option */
+  value: PropTypes.any
+}
+
+const defaultProps = {
+  error: false
+}
+
+/**
+ * Component which represents RadioGroup.
+ *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {string} [props.name]
+ * @property {array} [props.options]
+ * @property {string} [props.size]
+ * @property {string|number} [props.value]
+ * @class
+ */
+class RadioGroup extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.value !== undefined && props.value !== this.state.value) {
+      this.setState({ value: props.value })
+    }
+  }
+
+  change (value, checked) {
+    if (!checked) {
+      return
+    }
+
+    if (this.props.value === undefined) {
+      this.setState({ value })
+    }
+
+    if (this.props.onChange) {
+      this.props.onChange(value)
+    }
+  }
+
+  render () {
+    const { className, children, name, options, error, value, onChange, ...passedProps } = this.props
+    const _value = this.state.value
+
+    const optionsList = options.map(obj => (
+      <RadioInput
+        checked={_value === obj.value}
+        disabled={obj.disabled || false}
+        key={obj.value}
+        name={name}
+        error={error}
+        onChange={this.change.bind(this, obj.value)}
+        value={obj.value}
+      >
+        {obj.label}
+      </RadioInput>
+    ))
+
+    return (
+      <div className={buildClassName('radio-group', className)} {...passedProps} >
+        {optionsList}
+      </div>
+    )
+  }
+}
+
+RadioGroup.propTypes = propTypes
+RadioGroup.defaultProps = defaultProps
+
+export default RadioGroup

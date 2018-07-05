@@ -48,7 +48,10 @@ const propTypes = {
   buildItemId: PropTypes.func,
 
   /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
+  itemToString: PropTypes.func,
+
+  /** Tab index for toggle button */
+  tabIndex: PropTypes.number
 }
 
 const defaultProps = {
@@ -76,6 +79,16 @@ const defaultProps = {
  * @class
  */
 class SelectBox extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.value !== this.state.value && props.value !== undefined) {
+      this.setState({ value: props.value })
+    }
+  }
+
   /**
    * Handle state changes inside of Downshift component.
    * We need it to not close menu after element is clicked in multi-select.
@@ -84,18 +97,25 @@ class SelectBox extends React.PureComponent {
    * @param {object} changes
    * @returns {object}
    */
-  stateReducer (state, changes) {
+  stateReducer = (state, changes) => {
     const { multi } = this.props
 
-    switch (changes.type) {
-      case Downshift.stateChangeTypes.clickItem:
-        return {
-          ...changes,
-          isOpen: multi
-        }
-      default:
-        return changes
+    if (changes.type === Downshift.stateChangeTypes.clickItem) {
+      changes = {
+        ...changes,
+        isOpen: multi
+      }
     }
+
+    if ('isOpen' in changes) {
+      if (changes.isOpen && this.props.onFocus) {
+        this.props.onFocus()
+      } else if (!changes.isOpen && this.props.onBlur) {
+        this.props.onBlur()
+      }
+    }
+
+    return changes
   }
 
   /**
@@ -105,11 +125,12 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { value } = this.state
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)
@@ -122,7 +143,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} props
    * @returns {object|{ onClick: function }}
    */
-  getRemoveButtonProps (props) {
+  getRemoveButtonProps = (props) => {
     const { onClick, item, ...passedProps } = props || {}
 
     // Build handler for 'onClick' event
@@ -149,11 +170,16 @@ class SelectBox extends React.PureComponent {
    *
    * @param {object} item
    */
-  select (item) {
-    const { onChange, multi, value } = this.props
+  select = (item) => {
+    const { onChange, multi } = this.props
+    const { value } = this.state
 
     // Handle simple selection for single select-box
     if (!multi) {
+      if (this.props.value === undefined) {
+        this.setState({ value: item })
+      }
+
       if (onChange) {
         onChange(item)
       }
@@ -168,6 +194,10 @@ class SelectBox extends React.PureComponent {
       ? _value.filter(x => x !== item)
       : _value.concat(item)
 
+    if (this.props.value === undefined) {
+      this.setState({ value: nextValue })
+    }
+
     // Trigger event with new value
     if (onChange) {
       onChange(nextValue)
@@ -180,7 +210,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} _data
    * @returns {React.Element}
    */
-  renderComponent (_data) {
+  renderComponent = (_data) => {
     // Compose Downshift & our properties
     const data = this.getStateProps(_data)
 
@@ -196,7 +226,12 @@ class SelectBox extends React.PureComponent {
 
     // Render component
     return (
-      <div className={clsName}>
+      <div
+        className={clsName}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseEnter={this.props.onMouseEnter}
+      >
         <SelectBoxValue {...data} />
         {open && <Menu {...data} />}
       </div>
@@ -210,18 +245,18 @@ class SelectBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, ...passedProps
+      icon, multi, placeholder, value, tabIndex, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave,
+      onMouseEnter, buildItemId, renderItem, renderValue, ...passedProps
     } = this.props
 
     return (
       <Downshift
-        stateReducer={this.stateReducer.bind(this)}
-        onChange={this.select.bind(this)}
+        stateReducer={this.stateReducer}
+        onChange={this.select}
         selectedItem={null}
         {...passedProps}
       >
-        {this.renderComponent.bind(this)}
+        {this.renderComponent}
       </Downshift>
     )
   }

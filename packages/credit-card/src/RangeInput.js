@@ -177,7 +177,7 @@ class RangeInput extends React.PureComponent {
    *
    * @param {string} value
    */
-  onInputValueChange (value) {
+  onInputValueChange = (value) => {
     // If passed value is the same as in current state, return.
     if (value === this.state.inputValue) {
       return
@@ -191,7 +191,7 @@ class RangeInput extends React.PureComponent {
    *
    * @param {string} value
    */
-  onChange (value) {
+  onChange = (value) => {
     const { onChange } = this.props
 
     // Build value
@@ -217,7 +217,7 @@ class RangeInput extends React.PureComponent {
    * Handle focus.
    *
    */
-  focus () {
+  focus = () => {
     const { onFocus } = this.props
 
     this.setState({
@@ -233,7 +233,7 @@ class RangeInput extends React.PureComponent {
    * Handle blur.
    *
    */
-  blur () {
+  blur = () => {
     const { autoCompleteLength, onBlur, onChange } = this.props
     const { inputValue } = this.state
 
@@ -321,10 +321,10 @@ class RangeInput extends React.PureComponent {
           renderItem={(item) => formatValue(item, minLength)}
           value={value}
           inputValue={inputValue}
-          onInputValueChange={this.onInputValueChange.bind(this)}
-          onChange={this.onChange.bind(this)}
-          onFocus={this.focus.bind(this)}
-          onBlur={this.blur.bind(this)}
+          onInputValueChange={this.onInputValueChange}
+          onChange={this.onChange}
+          onFocus={this.focus}
+          onBlur={this.blur}
           itemToString={x => x == null ? '' : formatValue(x, minLength)}
         >
           <TextInput

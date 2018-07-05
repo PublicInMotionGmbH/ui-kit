@@ -11,10 +11,10 @@ using `npm install @talixo/radio-input --save` or `yarn add @talixo/radio-input`
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/shared: ^1.0.0-alpha.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/radio-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -27,7 +27,7 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 children      | node      | n/a     | radio button description 
 className     | string    | n/a     | additional class name passed to wrapper
-size          | string    | n/a     | checkbox label size ('small' or 'large')
+error         | boolean   | `false` | has this radio input any error?
 style         | object    | n/a     | styles passed to wrapper
 
 ## Changelog

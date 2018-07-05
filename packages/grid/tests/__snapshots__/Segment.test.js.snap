@@ -2,7 +2,7 @@
 
 exports[`<Segment /> renders correctly 1`] = `
 <div
-  className="_ _-12"
+  className="_"
 >
   12
 </div>
