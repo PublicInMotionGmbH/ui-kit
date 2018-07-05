@@ -74,7 +74,7 @@ class FormHandler extends React.PureComponent {
 
     // Check if any new errors are provided
     if (props.errors !== this.props.errors) {
-      this.formik.getFormikBag().setErrors(props.errors)
+      this.formik.getFormikBag().setErrors(props.errors || {})
     }
 
     // Check if any new value is provided
@@ -137,14 +137,15 @@ class FormHandler extends React.PureComponent {
           node.props.onChange(value)
         }
       }
+
       const onBlur = (e) => {
         handleBlur({ persist: () => {}, target: { name: name } })
         if (node.props.onBlur) {
           node.props.onBlur(e)
         }
       }
+
       return React.cloneElement(node, {
-        ...node.props,
         ref: node.ref,
         value: values[name],
         error: touched[name] ? errors[name] : null,
@@ -159,26 +160,21 @@ class FormHandler extends React.PureComponent {
     }
 
     // Check recursively if any child of given node is a FormField component
-    if (node.props.children) {
-      let isModified = false
+    let isModified = false
 
-      const children = React.Children.map(node.props.children, node => {
-        const nextNode = this.transformNode(node, props)
+    const children = React.Children.map(node.props.children, node => {
+      const nextNode = this.transformNode(node, props)
 
-        if (nextNode !== node) {
-          isModified = true
-        }
-
-        return nextNode
-      })
-
-      // if node was modified inside map return this node with modification
-      if (isModified) {
-        return React.cloneElement(node, {
-          ...node.props,
-          ref: node.ref
-        }, children)
+      if (nextNode !== node) {
+        isModified = true
       }
+
+      return nextNode
+    })
+
+    // if node was modified inside map return this node with modification
+    if (isModified) {
+      return React.cloneElement(node, { ref: node.ref }, children)
     }
 
     return node
