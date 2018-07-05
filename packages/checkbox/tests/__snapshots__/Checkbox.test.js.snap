@@ -8,7 +8,6 @@ exports[`<Checkbox /> renders children correctly 1`] = `
     checked={false}
     defaultChecked={false}
     onChange={[Function]}
-    onKeyDown={[Function]}
     type="checkbox"
   />
   <span

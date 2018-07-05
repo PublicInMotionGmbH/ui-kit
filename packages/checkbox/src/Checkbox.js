@@ -1,5 +1,4 @@
 import React from 'react'
-import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
@@ -65,42 +64,10 @@ class Checkbox extends React.PureComponent {
     if (this.props.onChange) {
       this.props.onChange(value)
     }
-
-    // Focus label if it was changed due to click
-    // To have separated styles for clicked and focused element by keyboard
-    if (!this.changeBySpacebar) {
-      this.label.focus()
-    }
-
-    // Reset "change by spacebar"
-    this.changeBySpacebar = false
-  }
-
-  /**
-   * Handle 'keyDown' event to get information if space-bar was clicked.
-   * When checkbox element is focused, after clicking space bar it will be (un)ticked.
-   * We would like to get styles for focused checkbox, but not including it for checkbox which was clicked.
-   * This behavior should be for keyboard-masters only, to show them focus on this element.
-   *
-   * @param {Event|SyntheticEvent} event
-   */
-  keyDown = (event) => {
-    const { onKeyDown } = this.props
-
-    // Space-bar - it's (un)ticking checkbox
-    this.changeBySpacebar = event.keyCode === 32
-
-    if (onKeyDown) {
-      onKeyDown(event)
-    }
-  }
-
-  saveLabelRef = ref => {
-    this.label = findDOMNode(ref)
   }
 
   render () {
-    const { children, className, error, style, value, onChange, onKeyDown, ...passedProps } = this.props
+    const { children, className, error, style, value, onChange, ...passedProps } = this.props
     const _value = this.state.value
 
     const clsName = buildClassName(moduleName, className, { error })
@@ -110,11 +77,10 @@ class Checkbox extends React.PureComponent {
         <input
           type='checkbox'
           onChange={this.change}
-          onKeyDown={this.keyDown}
           checked={_value}
           {...passedProps}
         />
-        <span ref={this.saveLabelRef} tabIndex={-1}>{children}</span>
+        <span tabIndex={-1}>{children}</span>
       </label>
     )
   }
