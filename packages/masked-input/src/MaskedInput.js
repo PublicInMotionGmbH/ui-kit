@@ -68,8 +68,10 @@ class MaskedInput extends React.Component {
    * @param {*} args
    */
   handleFocusChange = (focused, ...args) => {
-    const { onFocus, onBlur } = this.props
-    const { props: { onFocus: childOnFocus, onBlur: childOnBlur } } = this.props.renderInput
+    const { onFocus, onBlur, children } = this.props
+    const input = React.Children.only(children)
+
+    const { onFocus: childOnFocus, onBlur: childOnBlur } = input.props
 
     // Updated state when focus changes
     this.setState({ focused })
@@ -131,7 +133,7 @@ class MaskedInput extends React.Component {
     const input = React.Children.only(children)
 
     const newProps = {
-      id: id
+      id: id,
       ...input.props,
       onBlur: this.blur,
       onFocus: this.focus,
