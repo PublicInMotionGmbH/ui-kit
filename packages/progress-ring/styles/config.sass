@@ -1,1 +1,31 @@
 @import '~@talixo/shared/styles/config'
+
+$progress-ring-empty-ring-color: #dddbda !default
+
+$progress-ring-base-color: $x-color-primary !default
+$progress-ring-base-text-color: $x-color-primary !default
+
+$progress-ring-secondary-color: $x-color-secondary !default
+$progress-ring-secondary-text-color: $x-color-secondary !default
+
+$progress-ring-tertiary-color: $x-color-tertiary !default
+$progress-ring-tertiary-text-color: $x-color-tertiary !default
+
+$progress-ring-error-color: $x-color-error !default
+$progress-ring-error-text-color: $x-color-error !default
+
+$progress-ring-warn-color: $x-color-warning !default
+$progress-ring-warn-text-color: $x-color-warning !default
+
+$progress-ring-info-color: $x-color-info !default
+$progress-ring-info-text-color: $x-color-info !default
+
+$progress-ring-success-color: $x-color-success !default
+$progress-ring-success-text-color: $x-color-success !default
+
+@mixin progress-ring-color ($name, $color, $text-color)
+  #{prefix('progress-ring')}--#{$name}
+    #{prefix('progress-ring')}__circle-stroke
+      stroke: $color
+    #{prefix('progress-ring')}__content
+      color: $text-color

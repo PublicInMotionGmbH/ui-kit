@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import buildCirclePath from '../utils/buildCirclePath'
-
 const propTypes = {
+  /** Progress ring content */
+  children: PropTypes.node,
+
   /** Additional class name */
   className: PropTypes.string,
 
@@ -13,10 +14,11 @@ const propTypes = {
   value: PropTypes.number,
 
   /** Progress ring type */
-  type: PropTypes.string,
+  type: PropTypes.string
+}
 
-  /** Progress ring content */
-  children: PropTypes.node
+const defaultProps = {
+  type: 'primary'
 }
 
 /**
@@ -24,49 +26,95 @@ const propTypes = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {string} [props.value]
+ * @param {string} [props.type]
+ * @param {string} [props.children]
  * @returns {React.Element}
  */
 function ProgressRing (props) {
-  const { className, value, type, children, ...passedProps } = props
+  const { children, className, type, styles, value, ...passedProps } = props
 
-  // Normalize current progress
-  const _value = value == null || isNaN(+value)
-    ? NaN
-    : Math.max(0, Math.min(1, +value))
+  const _value = value * 100
 
   // Build values used inside
-  const valueNow = isNaN(_value) ? null : _value * 100
-  const valuePath = isNaN(_value) ? 0.3 : _value
+  const valueNow = isNaN(_value) ? null : _value
 
-  // Build path for SVG circle
-  const path = buildCirclePath(valuePath)
-
-  // Build class name for Progress Ring
+  // Build class names for Progress Ring elements
   const clsName = buildClassName('progress-ring', className, [ type ], {
-    completed: _value === 1,
+    completed: _value >= 100,
     indeterminate: isNaN(_value)
   })
 
+  const svgContainerClsName = buildClassName([ 'progress-ring', 'progress' ])
+
+  const svgCircleBgClsName = buildClassName([ 'progress-ring', 'circle-bg' ])
+
+  const svgCircleStrokeClsName = buildClassName([ 'progress-ring', 'circle-stroke' ])
+
+  // Values for build svg
+  const strokeDArray = 164
+  const circlePos = 30
+  const circleRad = 26
+  const viewBox = 60
+
+  /**
+   * Update value when is not in range or non-digital character
+   * @param {number} _value
+   */
+  const drawStroke = (_value) => {
+    if (_value < 0) {
+      _value = 0
+    } else if (_value > 100) {
+      _value = 100
+    } else if (isNaN(_value)) {
+      _value = 25
+    }
+
+    const result = strokeDArray - (strokeDArray * (_value / 100))
+
+    return result
+  }
+
   return (
-    <span className={clsName} {...passedProps}>
-      <span
-        className={buildClassName([ 'progress-ring', 'progress' ])}
+    <div style={styles} className={clsName} {...passedProps}>
+      <div
+        className={svgContainerClsName}
         role='progressbar'
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={valueNow}
       >
-        <svg viewBox='-1 -1 2 2' style={{ width: '100%' }}>
-          <path d={path} />
+        <svg
+          style={styles}
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox={`0 0 ${viewBox} ${viewBox}`}>
+          <circle
+            className={svgCircleBgClsName}
+            r={circleRad}
+            cx={circlePos}
+            cy={circlePos}
+            fill='transparent'
+            strokeDasharray={strokeDArray}
+            strokeDashoffset='0' />
+          <circle
+            className={svgCircleStrokeClsName}
+            transform={`rotate(-90 ${circlePos} ${circlePos})`}
+            r={circleRad}
+            cx={circlePos}
+            cy={circlePos}
+            fill='transparent'
+            strokeDasharray={strokeDArray}
+            strokeDashoffset={drawStroke(_value)} />
         </svg>
-      </span>
-      <span className={buildClassName([ 'progress-ring', 'content' ])}>
+      </div>
+      {children && <span className={buildClassName([ 'progress-ring', 'content' ])}>
         {children}
-      </span>
-    </span>
+      </span>}
+    </div>
   )
 }
 
 ProgressRing.propTypes = propTypes
+ProgressRing.defaultProps = defaultProps
 
 export default ProgressRing
