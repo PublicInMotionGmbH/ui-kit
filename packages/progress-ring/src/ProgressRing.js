@@ -21,6 +21,29 @@ const defaultProps = {
   type: 'primary'
 }
 
+// Values for build svg
+const strokeDasharray = 164
+const circlePosition = 30
+const circleRadius = 26
+const viewBox = 60
+
+/**
+ * Update value when is not in range or non-digital character.
+ *
+ * @param {number} value
+ */
+function drawStroke (value) {
+  if (value < 0) {
+    value = 0
+  } else if (value > 100) {
+    value = 100
+  } else if (isNaN(value)) {
+    value = 25
+  }
+
+  return strokeDasharray - (strokeDasharray * (value / 100))
+}
+
 /**
  * Component which represents Progress ring.
  *
@@ -51,32 +74,14 @@ function ProgressRing (props) {
 
   const svgCircleStrokeClsName = buildClassName([ 'progress-ring', 'circle-stroke' ])
 
-  // Values for build svg
-  const strokeDasharray = 164
-  const circlePosition = 30
-  const circleRadius = 26
-  const viewBox = 60
-
-  /**
-   * Update value when is not in range or non-digital character
-   * @param {number} _value
-   */
-  const drawStroke = (_value) => {
-    if (_value < 0) {
-      _value = 0
-    } else if (_value > 100) {
-      _value = 100
-    } else if (isNaN(_value)) {
-      _value = 25
-    }
-
-    const result = strokeDasharray - (strokeDasharray * (_value / 100))
-
-    return result
-  }
+  const content = React.Children.count(children) === 0 ? null : (
+    <span className={buildClassName([ 'progress-ring', 'content' ])}>
+      {children}
+    </span>
+  )
 
   return (
-    <div style={styles} className={clsName} {...passedProps}>
+    <div className={clsName} {...passedProps}>
       <div
         className={svgContainerClsName}
         role='progressbar'
@@ -85,7 +90,6 @@ function ProgressRing (props) {
         aria-valuenow={valueNow}
       >
         <svg
-          style={styles}
           xmlns='http://www.w3.org/2000/svg'
           viewBox={`0 0 ${viewBox} ${viewBox}`}>
           <circle
@@ -107,9 +111,7 @@ function ProgressRing (props) {
             strokeDashoffset={drawStroke(_value)} />
         </svg>
       </div>
-      {children && <span className={buildClassName([ 'progress-ring', 'content' ])}>
-        {children}
-      </span>}
+      {content}
     </div>
   )
 }

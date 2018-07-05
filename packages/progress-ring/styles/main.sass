@@ -1,35 +1,42 @@
 @import './config'
-  
+
+@mixin progress-ring-color ($name, $color, $text-color)
+  #{prefix('progress-ring')}--#{$name}
+    #{prefix('progress-ring')}__circle-stroke
+      stroke: $color
+    #{prefix('progress-ring')}__content
+      color: $text-color
+
 @include module('progress-ring')
   display: inline-block
   position: relative
-  width: 30px
-  height: 30px
+  width: 1em
+  height: 1em
   vertical-align: middle
 
-  & circle 
-    transition: stroke-dashoffset 1s linear
+  svg
+    width: 100%
+    height: 100%
+
+  circle 
+    transition: stroke-dashoffset 1s linear, fill 0.3s linear
     stroke-width: 7
 
   &__circle-bg
-      stroke: $progress-ring-empty-ring-color
-      
+    stroke: $progress-ring-empty-ring-color
+
   &__content
     position: absolute
     top: 50%
     left: 50%
-    transform: translate( -50%, -50%)
-    font-size: 1em
+    transform: translate(-50%, -50%)
+    font-size: 1em * 5/12
+    transition: color 0.4s linear
 
   &--indeterminate
-    & svg
+    svg
       transform-origin: 50%
       animation: indeterminateProgressRing 1s infinite linear
-
-  &--completed
-    svg #{prefix('progress-ring')}__circle-stroke
-      fill: $progress-ring-success-color
-      stroke: $progress-ring-success-color    
 
 @keyframes indeterminateProgressRing
   0%
@@ -37,10 +44,19 @@
   100%
     transform: rotate(360deg)
 
-@include progress-ring-color('primary', $progress-ring-base-color, $progress-ring-base-text-color)
-@include progress-ring-color('secondary', $progress-ring-secondary-color, $progress-ring-secondary-text-color)
-@include progress-ring-color('tertiary', $progress-ring-tertiary-color, $progress-ring-tertiary-text-color)
-@include progress-ring-color('success', $progress-ring-success-color, $progress-ring-success-text-color)
-@include progress-ring-color('error', $progress-ring-error-color, $progress-ring-error-text-color)
-@include progress-ring-color('info', $progress-ring-info-color, $progress-ring-info-text-color)
-@include progress-ring-color('warning', $progress-ring-warn-color, $progress-ring-warn-text-color)
+@include progress-ring-color('primary', $progress-ring-base-color, $progress-ring-base-color)
+@include progress-ring-color('secondary', $progress-ring-secondary-color, $progress-ring-secondary-color)
+@include progress-ring-color('tertiary', $progress-ring-tertiary-color, $progress-ring-tertiary-color)
+@include progress-ring-color('success', $progress-ring-success-color, $progress-ring-success-color)
+@include progress-ring-color('error', $progress-ring-error-color, $progress-ring-error-color)
+@include progress-ring-color('info', $progress-ring-info-color, $progress-ring-info-color)
+@include progress-ring-color('warning', $progress-ring-warning-color, $progress-ring-warning-color)
+
+@include module('progress-ring')
+  &--completed
+    svg #{prefix('progress-ring')}__circle-stroke
+      fill: $progress-ring-success-color
+      stroke: $progress-ring-success-color
+
+  &--completed &__content
+    color: $progress-ring-success-text-color
