@@ -2,6 +2,7 @@
 
 @include module('text-input')
   position: relative
+  box-sizing: border-box
   display: block
 
   #{inside(&, 'suffix')}
@@ -12,7 +13,9 @@
     transform: translateY(-50%)
     white-space: nowrap
     pointer-events: none
-    margin-left: $text-input-suffix-margin
+    padding-left: $text-input-suffix-margin
+    overflow: hidden
+    text-overflow: ellipsis
 
   &--empty #{inside(&, 'suffix')}
     display: none
@@ -97,5 +100,5 @@
     padding-left: $text-input-icon-with-padding
 
   [dir=rtl] #{inside(&, 'suffix')}
-    margin-left: 0
-    margin-right: $text-input-suffix-margin
+    padding-left: 0
+    padding-right: $text-input-suffix-margin
