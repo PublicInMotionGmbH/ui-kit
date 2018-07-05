@@ -57,6 +57,25 @@ function isSameList (prevList, nextList) {
 
   return true
 }
+
+/**
+ * Purify to target value.
+ *
+ * @param {array} [value]
+ * @param {object[]} options
+ */
+function buildValue (value, options) {
+  const availableOptions = options.map(x => x.value)
+
+  // Remove not existing options
+  value = value == null
+    ? []
+    : [].concat(value).filter(x => availableOptions.indexOf(x) !== -1)
+
+  // Remove duplicates
+  return value.filter((x, i) => value.indexOf(x) === i)
+}
+
 /**
  * Component which represents CheckboxGroup.
  *
@@ -70,12 +89,20 @@ function isSameList (prevList, nextList) {
  */
 class CheckboxGroup extends React.PureComponent {
   state = {
-    value: this.props.value == null ? [] : [].concat(this.props.value)
+    value: buildValue(this.props.value, this.props.options)
   }
 
   componentWillReceiveProps (props) {
-    if (props.value !== undefined && props.value !== this.state.value) {
-      const nextValue = props.value === null ? [] : [].concat(props.value)
+    if (props.value !== undefined && props.value !== this.props.value) {
+      const nextValue = buildValue(props.value, props.options)
+
+      if (!isSameList(this.state.value, nextValue)) {
+        this.setState({
+          value: nextValue
+        })
+      }
+    } else if (props.options !== this.props.options) {
+      const nextValue = buildValue(this.state.value, props.options)
 
       if (!isSameList(this.state.value, nextValue)) {
         this.setState({

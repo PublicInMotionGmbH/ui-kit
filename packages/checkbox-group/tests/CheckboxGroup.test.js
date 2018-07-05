@@ -109,14 +109,16 @@ describe('<CheckboxGroup />', () => {
   })
 
   it('should render label correctly', () => {
-    const wrapper = mount(<CheckboxGroup
-      name='CheckboxGroup5'
-      options={[
-        { value: 1, label: 'one' },
-        { value: 2, label: 'two' },
-        { value: 3, label: 'three' }
-      ]}
-    />)
+    const wrapper = mount(
+      <CheckboxGroup
+        name='CheckboxGroup5'
+        options={[
+          { value: 1, label: 'one' },
+          { value: 2, label: 'two' },
+          { value: 3, label: 'three' }
+        ]}
+      />
+    )
 
     expect(wrapper.find('Checkbox').at(1).find('span').text()).toEqual('two')
   })
@@ -126,17 +128,18 @@ describe('<CheckboxGroup />', () => {
       onChange: jest.fn(),
       name: 'CheckboxGroupOne'
     }
+
     let wrapper, input
 
     beforeAll(() => {
       wrapper = mount(
         <CheckboxGroup
+          {...props}
           options={[
             { value: 1, label: 'one' },
             { value: 2, label: 'two' },
             { value: 3, label: 'three' }
           ]}
-          {...props}
         />
       )
       input = wrapper.find('input[type="checkbox"]').at(0)
@@ -149,6 +152,147 @@ describe('<CheckboxGroup />', () => {
 
     it('should pass prop name to input', () => {
       expect(input.props().name).toMatch(props.name)
+    })
+
+    it('should select property', () => {
+      const spy = jest.fn()
+
+      wrapper = shallow(
+        <CheckboxGroup
+          {...props}
+          value={[ 1 ]}
+          onChange={spy}
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      )
+
+      expect(spy).toHaveBeenCalledTimes(0)
+
+      wrapper.find('Checkbox').at(1).prop('onChange')(true)
+
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy.mock.calls[0][0]).toEqual([ 1, 2 ])
+    })
+
+    it('should unselect property', () => {
+      const spy = jest.fn()
+
+      wrapper = shallow(
+        <CheckboxGroup
+          {...props}
+          value={[ 1, 2 ]}
+          onChange={spy}
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      )
+
+      expect(spy).toHaveBeenCalledTimes(0)
+
+      wrapper.find('Checkbox').at(0).prop('onChange')(false)
+
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy.mock.calls[0][0]).toEqual([ 2 ])
+    })
+
+    it('should ignore invalid values', () => {
+      const spy = jest.fn()
+
+      wrapper = shallow(
+        <CheckboxGroup
+          {...props}
+          value={[ 4, 5 ]}
+          onChange={spy}
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      )
+
+      expect(spy).toHaveBeenCalledTimes(0)
+
+      wrapper.find('Checkbox').at(0).prop('onChange')(true)
+
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(spy.mock.calls[0][0]).toEqual([ 1 ])
+    })
+
+    it('should change value correctly', () => {
+      const spy = jest.fn()
+
+      wrapper = shallow(
+        <CheckboxGroup
+          {...props}
+          value={[ 1, 2 ]}
+          onChange={spy}
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      )
+
+      wrapper.setProps({ value: [ 2 ] })
+
+      expect(wrapper.find('Checkbox').at(0).prop('value')).toBe(false)
+      expect(wrapper.find('Checkbox').at(1).prop('value')).toBe(true)
+      expect(wrapper.find('Checkbox').at(2).prop('value')).toBe(false)
+
+      wrapper.setProps({ value: [ 1 ] })
+
+      expect(wrapper.find('Checkbox').at(0).prop('value')).toBe(true)
+      expect(wrapper.find('Checkbox').at(1).prop('value')).toBe(false)
+      expect(wrapper.find('Checkbox').at(2).prop('value')).toBe(false)
+
+      wrapper.setProps({ value: [ 4 ] })
+
+      expect(wrapper.find('Checkbox').at(0).prop('value')).toBe(false)
+      expect(wrapper.find('Checkbox').at(1).prop('value')).toBe(false)
+      expect(wrapper.find('Checkbox').at(2).prop('value')).toBe(false)
+
+      wrapper.setProps({ value: [ 2, 3 ] })
+
+      expect(wrapper.find('Checkbox').at(0).prop('value')).toBe(false)
+      expect(wrapper.find('Checkbox').at(1).prop('value')).toBe(true)
+      expect(wrapper.find('Checkbox').at(2).prop('value')).toBe(true)
+    })
+
+    it('should change value when options are changed', () => {
+      const spy = jest.fn()
+
+      wrapper = shallow(
+        <CheckboxGroup
+          {...props}
+          value={[ 1, 3 ]}
+          onChange={spy}
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      )
+
+      expect(wrapper.state().value).toEqual([ 1, 3 ])
+
+      wrapper.setProps({
+        options: [
+          { value: 1, label: 'one' },
+          { value: 2, label: 'two' }
+        ]
+      })
+
+      expect(wrapper.state().value).toEqual([ 1 ])
     })
   })
 })
