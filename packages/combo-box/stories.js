@@ -355,15 +355,16 @@ addStory('self-controlled', readme, () => (
   <div>
     <h2>Select box</h2>
     <SelectBox
-      value='Skipper'
       placeholder='Select item...'
       options={optionsSimple}
+      onChange={action('change')}
     />
 
     <h2>Combo box</h2>
     <ComboBox
       placeholder='Select item...'
       options={optionsSimple}
+      onChange={action('change')}
     />
 
     <h2>Combo box (multi)</h2>
@@ -371,6 +372,7 @@ addStory('self-controlled', readme, () => (
       multi
       placeholder='Select item...'
       options={optionsSimple}
+      onChange={action('change')}
     />
 
     <h2>Auto-complete</h2>
@@ -378,6 +380,7 @@ addStory('self-controlled', readme, () => (
       options={optionsSimple}
       onFocus={action('focus')}
       onBlur={action('blur')}
+      onChange={action('change')}
     >
       <TextInput />
     </AutoComplete>
