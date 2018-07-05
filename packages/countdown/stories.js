@@ -28,10 +28,8 @@ addStory('initial', readme, () => (
 addStory('with custom format', readme, () => (
   <Countdown targetDate={setDeadline(1000000000)}
     render={(props) => {
-      const arrType = ['days', 'hours', 'minutes', 'seconds']
-      return (
-        arrType.map((type, i) => `${props[type]} ${type} `)
-      )
+      const types = ['days', 'hours', 'minutes', 'seconds']
+      return types.map(type => `${props[type]} ${type}`).join(' ')
     }} />
 ))
 
