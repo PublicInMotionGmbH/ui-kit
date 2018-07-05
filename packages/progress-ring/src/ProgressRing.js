@@ -52,9 +52,9 @@ function ProgressRing (props) {
   const svgCircleStrokeClsName = buildClassName([ 'progress-ring', 'circle-stroke' ])
 
   // Values for build svg
-  const strokeDArray = 164
-  const circlePos = 30
-  const circleRad = 26
+  const strokeDasharray = 164
+  const circlePosition = 30
+  const circleRadius = 26
   const viewBox = 60
 
   /**
@@ -70,7 +70,7 @@ function ProgressRing (props) {
       _value = 25
     }
 
-    const result = strokeDArray - (strokeDArray * (_value / 100))
+    const result = strokeDasharray - (strokeDasharray * (_value / 100))
 
     return result
   }
@@ -90,20 +90,20 @@ function ProgressRing (props) {
           viewBox={`0 0 ${viewBox} ${viewBox}`}>
           <circle
             className={svgCircleBgClsName}
-            r={circleRad}
-            cx={circlePos}
-            cy={circlePos}
+            r={circleRadius}
+            cx={circlePosition}
+            cy={circlePosition}
             fill='transparent'
-            strokeDasharray={strokeDArray}
+            strokeDasharray={strokeDasharray}
             strokeDashoffset='0' />
           <circle
             className={svgCircleStrokeClsName}
-            transform={`rotate(-90 ${circlePos} ${circlePos})`}
-            r={circleRad}
-            cx={circlePos}
-            cy={circlePos}
+            transform={`rotate(-90 ${circlePosition} ${circlePosition})`}
+            r={circleRadius}
+            cx={circlePosition}
+            cy={circlePosition}
             fill='transparent'
-            strokeDasharray={strokeDArray}
+            strokeDasharray={strokeDasharray}
             strokeDashoffset={drawStroke(_value)} />
         </svg>
       </div>
