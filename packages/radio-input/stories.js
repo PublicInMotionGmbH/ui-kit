@@ -52,5 +52,12 @@ addStory('default', readme, () => (
     <h2>Radio with external label</h2>
     <label htmlFor='radio-input'>Click me</label><br />
     <RadioInput id='radio-input' onChange={change} name='external_labelled_input'>Option</RadioInput>
+
+    <h2>Radio with long label</h2>
+    <div style={{ width: 300 }}>
+      <RadioInput>
+        Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
+    </RadioInput>
+    </div>
   </div>
 ))
