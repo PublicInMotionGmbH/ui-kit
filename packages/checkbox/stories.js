@@ -39,3 +39,11 @@ addStory('long checkbox label', readme, () => (
     </div>
   </div>
 ))
+
+addStory('RTL: long checkbox label', readme, () => (
+  <div dir='rtl'>
+    <div style={{ background: '#f5f5f5', padding: 20, width: 300 }}>
+      <Checkbox>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.</Checkbox>
+    </div>
+  </div>
+))
