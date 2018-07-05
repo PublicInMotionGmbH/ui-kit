@@ -111,26 +111,22 @@ addStory.controlled('placeholder with icon', readme, (setState, state) => (
 
 function renderCountry (x) {
   return (
-    <CountryFlagsProvider url={spriteUrl}>
-      <div style={{ display: 'flex', lineHeight: '1em' }}>
-        <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10 }} />
-        <div>
-          <strong>{x.name}</strong><br />
-          <div style={{ color: '#999', fontSize: '0.8em' }}>{x.language}</div>
-        </div>
+    <div style={{ display: 'flex', lineHeight: '1em' }}>
+      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10 }} />
+      <div>
+        <strong>{x.name}</strong><br />
+        <div style={{ color: '#999', fontSize: '0.8em' }}>{x.language}</div>
       </div>
-    </CountryFlagsProvider>
+    </div>
   )
 }
 
 function renderSimpleCountry (x) {
   return (
-    <CountryFlagsProvider url={spriteUrl}>
-      <div style={{ display: 'flex', lineHeight: '1em' }}>
-        <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10, boxShadow: '0 0 10px 2px rgba(0, 0, 0, .1)' }} />
-        {x.name}
-      </div>
-    </CountryFlagsProvider>
+    <div style={{ display: 'flex', lineHeight: '1em' }}>
+      <CountryFlag code={x.id} style={{ marginRight: 10, marginLeft: 10, boxShadow: '0 0 10px 2px rgba(0, 0, 0, .1)' }} />
+      {x.name}
+    </div>
   )
 }
 
@@ -150,7 +146,7 @@ function filterOptions (value, options, field) {
 }
 
 addStory.controlled('special select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -160,11 +156,11 @@ addStory.controlled('special select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('warning select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -175,11 +171,11 @@ addStory.controlled('warning select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('loading select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -190,11 +186,11 @@ addStory.controlled('loading select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('special multi select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       multi
@@ -205,7 +201,7 @@ addStory.controlled('special multi select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('filtered combo box', readme, (setState, state) => (
@@ -236,7 +232,7 @@ addStory.controlled('combo box with footer', readme, (setState, state) => (
 ), () => ({ value: null, inputValue: '' }))
 
 addStory.controlled('filtered multi combo box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <ComboBox
       multi
@@ -250,7 +246,7 @@ addStory.controlled('filtered multi combo box', readme, (setState, state) => (
       onFocus={action('focus')}
       onBlur={action('blur')}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [], inputValue: '' }))
 
 addStory.controlled('multi combo box with adding value', readme, (setState, state) => (
@@ -299,33 +295,37 @@ addStory.controlled('auto complete with footer', readme, (setState, state) => (
 ), () => ({ value: '' }))
 
 addStory.controlled('RTL: multi select box', readme, (setState, state) => (
-  <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
-    <SelectBox
-      multi
-      placeholder='בחר פריטים'
-      value={state.value}
-      onChange={value => setState({ value })}
-      renderItem={renderCountry}
-      renderValue={renderSimpleCountry}
-      options={options}
-    />
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <SelectBox
+        multi
+        placeholder='בחר פריטים'
+        value={state.value}
+        onChange={value => setState({ value })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={options}
+      />
+    </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('RTL: select box', readme, (setState, state) => (
-  <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
-    <SelectBox
-      placeholder='בחר פריט'
-      icon={<ProgressRing type='error' />}
-      value={state.value}
-      onChange={value => setState({ value })}
-      renderItem={renderCountry}
-      renderValue={renderSimpleCountry}
-      options={options}
-    />
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <SelectBox
+        placeholder='בחר פריט'
+        icon={<ProgressRing type='error' />}
+        value={state.value}
+        onChange={value => setState({ value })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={options}
+      />
+    </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
@@ -342,17 +342,19 @@ addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
 ), () => ({ value: null, inputValue: '' }))
 
 addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) => (
-  <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
-    <ComboBox
-      multi
-      placeholder='Select items...'
-      value={state.value}
-      onChange={value => setState({ value, inputValue: '' })}
-      onInputValueChange={inputValue => setState({ inputValue })}
-      renderItem={renderCountry}
-      renderValue={renderSimpleCountry}
-      options={filterOptions(state.inputValue, options, 'name')}
-    />
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <ComboBox
+        multi
+        placeholder='Select items...'
+        value={state.value}
+        onChange={value => setState({ value, inputValue: '' })}
+        onInputValueChange={inputValue => setState({ inputValue })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={filterOptions(state.inputValue, options, 'name')}
+      />
+    </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [], inputValue: '' }))

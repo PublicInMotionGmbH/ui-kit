@@ -23,27 +23,12 @@ Your package should additionally have some extra dependencies:
 These packages are required by `@talixo/phone-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
-## How to use this component
+## How to use this component with country flags
 
-- You need to use `CountryFlagsProvider` to provide package with country flags
+- If you want to use package with country flags you need to use `CountryFlagsProvider`
 - Sprite is available in `sprites/sprite.svg` directory
 
-### Example
-
-```jsx
-import React from 'react'
-import { CountryFlagsProvider } from '@talixo/country-flag'
-
-// Using `file-loader` or `url-loader` in Webpack
-const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
-
-function App () {
-  return (
-    <CountryFlagsProvider url={spriteUrl}>
-      <PhoneInput />
-    </CountryFlagsProvider>
-  )
-}
+To see how to use country flags package please see https://github.com/PublicInMotionGmbH/ui-kit/tree/master/packages/country-flag
 
 ## Supported props
 

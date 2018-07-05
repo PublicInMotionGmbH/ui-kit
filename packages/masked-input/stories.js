@@ -66,12 +66,10 @@ const renderDate = v => (
   </div>
 )
 const renderCountry = v => (
-  <CountryFlagsProvider url={spriteUrl}>
-    <div className='storybook-mask-example'>
-      <CountryFlag code={v.id} style={{ marginRight: 10 }} />
-      {v.name} <small>({v.language})</small>
-    </div>
-  </CountryFlagsProvider>
+  <div className='storybook-mask-example'>
+    <CountryFlag code={v.id} style={{ marginRight: 10 }} />
+    {v.name} <small>({v.language})</small>
+  </div>
 )
 
 // Stories
@@ -113,7 +111,7 @@ addStory('calendar', readme, () => (
 ))
 
 addStory.controlled('autocomplete', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>State: {state.value && JSON.stringify(state.value)}</div>
     <MaskedInput
       renderInput={
@@ -134,6 +132,5 @@ addStory.controlled('autocomplete', readme, (setState, state) => (
       style={{ display: 'block' }}
       {...commonProps}
     />
-  </div>
-
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
