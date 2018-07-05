@@ -37,7 +37,7 @@ const propTypes = {
   firstDayOfWeek: PropTypes.number,
 
   /** Moment.js object or formatted value */
-  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
   /** Event handler when date is changed */
   onChange: PropTypes.func,
@@ -49,12 +49,16 @@ const propTypes = {
   onBlur: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
   displayFormat: 'YYYY-MM-DD',
-  firstDayOfWeek: 1
+  firstDayOfWeek: 1,
+  error: false
 }
 
 /**
@@ -125,12 +129,12 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id,
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error,
       placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, ...passedProps
     } = this.props
     const { date, focused } = this.state
 
-    const clsName = buildClassName(moduleName, className, { focused })
+    const clsName = buildClassName(moduleName, className, { focused, error })
 
     return (
       <div className={clsName} {...passedProps}>

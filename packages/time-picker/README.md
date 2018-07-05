@@ -36,6 +36,7 @@ onChange      | function     | n/a             | Event called after input value 
 hourFormat    | `12` or `24` | `24`            | Hour format.
 value         | string       | self-controlled | Time string in 'HH:mm' (24h) format passed to component.
 id            | string       | n/a             | ID passed to control element
+error         | bool         | `false`         | Style component like it has errors.
 
 ## Changelog
 

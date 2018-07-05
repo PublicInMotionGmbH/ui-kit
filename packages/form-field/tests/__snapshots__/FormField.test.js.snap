@@ -12,7 +12,6 @@ exports[`<FormField /> renders children correctly 1`] = `
       className="talixo-form-field__input"
       error={false}
       id="form_field_1"
-      key=".0"
       onBlur={[Function]}
       onFocus={[Function]}
       type="text"

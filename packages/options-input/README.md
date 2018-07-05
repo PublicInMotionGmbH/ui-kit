@@ -38,6 +38,7 @@ onChange          | function  | n/a             | Event handler fired on value c
 onFocus           | function  | n/a             | Event handler fired on input open
 onBlur            | function  | n/a             | Event handler fired on input blur
 id                | string    | n/a             | ID passed to control element
+error             | bool      | `false`         | Should add class modifier for error?
 
 ## Property shapes
 
@@ -51,8 +52,6 @@ label         | string    | no       | n/a     | Label for option
 default       | number    | no       | n/a     | Default value
 min           | number    | no       | n/a     | Minimum value within the range
 max           | number    | no       | n/a     | Maxnimum value within the range
-
-
 
 ## Changelog
 

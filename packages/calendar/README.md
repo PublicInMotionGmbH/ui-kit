@@ -40,6 +40,7 @@ onChange           | function                      | n/a             | event han
 onFocus            | function                      | n/a             | event handler when calendar is focused
 onBlur             | function                      | n/a             | event handler when calendar lost focus
 id                 | string                        | n/a             | ID passed to control element
+error              | bool                          | `false`         | show error styles of calendar
 
 ## Changelog
 

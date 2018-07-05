@@ -1,7 +1,10 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
+import { CountryFlagsProvider } from '@talixo/country-flag'
 
 import PhoneInput from './src/PhoneInput'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -14,28 +17,38 @@ const addStory = createStoriesFactory('PhoneInput', module, {
 // Stories
 
 addStory('initial', readme, () => (
-  <PhoneInput />
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput />
+  </CountryFlagsProvider>
 ))
 
 addStory('with placeholder', readme, () => (
-  <PhoneInput placeholder='Type your phone number...' />
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput placeholder='Type your phone number...' />
+  </CountryFlagsProvider>
 ))
 
 addStory('with error', readme, () => (
-  <PhoneInput error />
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput error />
+  </CountryFlagsProvider>
 ))
 
 addStory.controlled('controlled', readme, (setState, state) => (
-  <PhoneInput
-    value={state.value}
-    onChange={value => setState({ value })}
-  />
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput
+      value={state.value}
+      onChange={value => setState({ value })}
+    />
+  </CountryFlagsProvider>
 ), () => ({ value: '' }))
 
 addStory('RTL: initial', readme, () => (
-  <div dir='rtl'>
-    <PhoneInput />
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <PhoneInput />
+    </div>
+  </CountryFlagsProvider>
 ))
 
 addStory('with label', readme, () => (

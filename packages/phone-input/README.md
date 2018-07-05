@@ -23,6 +23,13 @@ Your package should additionally have some extra dependencies:
 These packages are required by `@talixo/phone-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
+## How to use this component with country flags
+
+- If you want to use package with country flags you need to use `CountryFlagsProvider`
+- Sprite is available in `sprites/sprite.svg` directory
+
+To see how to use country flags package please see https://github.com/PublicInMotionGmbH/ui-kit/tree/master/packages/country-flag
+
 ## Supported props
 
 This component allows any properties which can be added to `div` element. Additionally, handles some differently:

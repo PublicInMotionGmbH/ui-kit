@@ -49,12 +49,16 @@ const propTypes = {
   onBlur: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Does it have error */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
-  persistentOptions: []
+  persistentOptions: [],
+  error: false
 }
 
 export const moduleName = 'options-input'
@@ -227,12 +231,10 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, ...restProps } = this.props
+    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, ...restProps } = this.props
     const { value, open } = this.state
 
-    const clsName = buildClassName(moduleName, className, {
-      open: open
-    })
+    const clsName = buildClassName(moduleName, className, { open, error })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>

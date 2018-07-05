@@ -44,6 +44,8 @@ values                  | ValuesShape | `''|null`            | Values to be disp
 
 ### CreditCardNumberInput
 
+It allows also properties of [TextInput](../text-input/README.md).
+
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | Additional class name passed to wrapper.
@@ -54,11 +56,14 @@ value         | string    | n/a     | Value to be displayed inside inputs.
 
 ### ExpirationDateInput
 
+It allows also properties of `div`.
+
 Property name | Type            | Default | Description                    
 --------------|-----------------|:-------:|--------------------------------
 className     | string          | n/a     | Additional class name passed to wrapper.
 onChange      | function        | n/a     | Handler for onChange event.
 value         | ExpirationShape | n/a     | Value to be displayed inside inputs.
+error         | bool            | `false` | Does it have any error?
 
 ## Property shapes
 

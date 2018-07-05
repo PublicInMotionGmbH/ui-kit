@@ -66,6 +66,7 @@ renderValue        | function  | uses `renderItem` | Function to render value (o
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
+tabIndex           | number    | n/a               | Tab index passed to toggle button
 
 ### AutoComplete
 

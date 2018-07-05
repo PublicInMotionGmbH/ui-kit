@@ -51,7 +51,10 @@ const propTypes = {
   itemToString: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Tab index for toggle button */
+  tabIndex: PropTypes.number
 }
 
 const defaultProps = {
@@ -115,11 +118,11 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue, id } = this.props
+    const { footer, value, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue, id } = this.props
 
     return {
       ...data,
-      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem, id },
+      ...{ footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, id },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)
@@ -225,8 +228,8 @@ class SelectBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave, onMouseEnter,
-      buildItemId, renderItem, renderValue, ...passedProps
+      icon, multi, placeholder, value, tabIndex, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave,
+      onMouseEnter, buildItemId, renderItem, renderValue, ...passedProps
     } = this.props
 
     return (

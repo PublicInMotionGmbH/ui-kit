@@ -24,11 +24,15 @@ const propTypes = {
   value: PropTypes.string,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
-  hourFormat: '24'
+  hourFormat: '24',
+  error: false
 }
 
 const HOURS_24 = 'HH'
@@ -275,15 +279,15 @@ class TimePicker extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, hourFormat, onChange, value: propsValue, id, ...passedProps } = this.props
+    const { className, hourFormat, onChange, value: propsValue, id, error, ...passedProps } = this.props
     const { value } = this.state
 
     // Build class names
-    const wrapperClsName = buildClassName(moduleName, className)
-    const inputHourClsName = buildClassName([moduleName, 'input-hour'])
-    const inputMinutesClsName = buildClassName([moduleName, 'input-minutes'])
+    const wrapperClsName = buildClassName(moduleName, className, { error })
+    const inputHourClsName = buildClassName([ moduleName, 'input-hour' ])
+    const inputMinutesClsName = buildClassName([ moduleName, 'input-minutes' ])
     const menuClsName = buildClassName([ moduleName, 'menu' ])
-    const colonClsName = buildClassName([moduleName, 'colon'])
+    const colonClsName = buildClassName([ moduleName, 'colon' ])
 
     // Convert format token
     const format = hourFormat === '24'
@@ -294,6 +298,7 @@ class TimePicker extends React.PureComponent {
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
           id={id}
+          error={error}
           className={inputHourClsName}
           onBlur={this.handleHoursBlur}
           format={format}
@@ -305,6 +310,7 @@ class TimePicker extends React.PureComponent {
         </TimeInput>
         <span className={colonClsName}>:</span>
         <TimeInput
+          error={error}
           className={inputMinutesClsName}
           onBlur={this.handleMinutesBlur}
           format={MINUTES}

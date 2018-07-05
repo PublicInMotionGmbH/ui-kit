@@ -34,10 +34,15 @@ const propTypes = {
   warning: PropTypes.node,
 
   /** Value passed to input. */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** Error message transformer. May be i.e. translation function */
+  formatErrorMessage: PropTypes.func
 }
 
-const defaultProps = {}
+const defaultProps = {
+  formatErrorMessage: x => x
+}
 
 // Set initial counter.
 let counter = 1
@@ -69,6 +74,7 @@ export function resetIdCounter () {
  * @property {*} [props.hint]
  * @property {string} [props.id]
  * @property {*} [props.label]
+ * @property {function} [props.formatErrorMessage]
  * @property {function} [props.onBlur]
  * @property {function} [props.onChange]
  * @property {function} [props.onFocus]
@@ -80,6 +86,7 @@ export function resetIdCounter () {
  * @class {React.Element}
  */
 class FormField extends React.Component {
+  uniqueId = `form_field_${generateUid().toString(36)}`
   state = {
     focus: false
   }
@@ -111,7 +118,7 @@ class FormField extends React.Component {
    * @param {function} eventHandler
    * @param {boolean} focus
    */
-  changeFocus = (e, eventHandler, focus) => {
+  changeFocus (e, eventHandler, focus) {
     this.setState({ focus })
 
     if (eventHandler) {
@@ -126,7 +133,7 @@ class FormField extends React.Component {
    *
    * @returns {React.Element}
    */
-  buildLabel = (uniqueId) => {
+  buildLabel (uniqueId) {
     const { label } = this.props
     // Build class names for label
     const labelClsName = buildClassName([ moduleName, 'label' ])
@@ -142,88 +149,79 @@ class FormField extends React.Component {
   /**
    * Build message for form field.
    *
-   * @param {node} type
+   * @param {node} message
    * @param {string} typeName
    *
    * @returns {React.Element}
    */
-  buildMessage = (type, typeName) => {
-    const { label } = this.props
+  buildMessage (message, typeName) {
+    const { label, formatErrorMessage } = this.props
+
     // Build class names for label
     const typeClsName = buildClassName([ moduleName, typeName ], null, { labeled: label != null })
 
+    // Use message formatter for warning & error messages
+    if (typeName !== 'hint') {
+      message = formatErrorMessage(message)
+    }
+
     // Build label
-    return <div className={typeClsName}>{type}</div>
+    return <div className={typeClsName}>{message}</div>
   }
 
   /**
    * Build input.
    *
    * @param {string} uniqueId
-   *
    * @returns {React.Element}
    */
-  buildInput = (uniqueId) => {
+  buildInput (uniqueId) {
     const { error, onChange, children, value } = this.props
-    const { handleBlur, handleFocus } = this
-    /**
-     * Build class names for input.
-     *
-     * @returns {string}
-     */
-    const buildInputClsName = (child) => {
-      return 'className' in child.props
-        ? buildClassName([ moduleName, 'input' ], child.props.className)
-        : buildClassName([ moduleName, 'input' ])
-    }
 
-    /**
-     * Build properties passed to input.
-     *
-     * @param {node} child
-     *
-     * @returns {object}
-     */
-    const buildPassedProps = (child) => ({
-      className: buildInputClsName(child),
+    const input = React.Children.only(children)
+
+    return React.cloneElement(input, {
+      className: buildClassName([ moduleName, 'input' ], input.props.className),
       error: error != null,
       id: uniqueId,
-      onBlur: handleBlur,
+      onBlur: this.handleBlur,
       onChange: onChange,
-      onFocus: handleFocus,
+      onFocus: this.handleFocus,
       value: value
-    })
-
-    // Build input with passed props
-    return React.Children.map(children, (child) => {
-      return React.cloneElement(child, buildPassedProps(child))
     })
   }
 
   render () {
-    const { children, className, error, hint, onBlur, onChange, onFocus, id, label, warning, ...passedProps } = this.props
+    const {
+      children, className, error, hint, onBlur, onChange, onFocus,
+      id, label, warning, formatErrorMessage, ...passedProps
+    } = this.props
     const { focus } = this.state
-    const { buildInput, buildLabel, buildMessage } = this
 
     // Build class names
     const fieldClsName = buildClassName(moduleName, className, { focus: focus, blur: !focus })
-    const inputWrapperClsName = buildClassName([moduleName, 'input-wrapper'])
+    const inputWrapperClsName = buildClassName([ moduleName, 'input-wrapper' ])
 
-    // Build uniquId if id is not provided.
-    const uniqueId = id || `form_field_${generateUid().toString(36)}`
+    // Build unique ID if id is not provided.
+    const uniqueId = id || this.uniqueId
 
     // Build input for passing props
-    const input = React.Children.only(children) && buildInput(uniqueId)
+    const input = this.buildInput(uniqueId)
+
+    const labelElement = label ? this.buildLabel(uniqueId) : null
+    const hintElement = hint ? this.buildMessage(hint, 'hint') : null
+    const errorElement = error ? this.buildMessage(error, 'error') : null
+    const warningElement = warning ? this.buildMessage(warning, 'warning') : null
 
     return (
       <div className={fieldClsName} {...passedProps}>
-        {label && buildLabel(uniqueId)}
+        {labelElement}
         <div className={inputWrapperClsName}>
           {input}
-          {hint && buildMessage(hint, 'hint')}
+          {hintElement}
         </div>
-        {error && buildMessage(error, 'error')}
-        {warning && buildMessage(warning, 'warning')}
+        {errorElement}
+        {warningElement}
       </div>
     )
   }

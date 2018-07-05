@@ -29,10 +29,11 @@ className     | string    | n/a     | Additional class name passed to wrapper.
 onBlur        | function  | n/a     | Event called when input has lost focus.
 onChange      | function  | n/a     | Event called when input inside has changed.
 onFocus       | function  | n/a     | Event called when input is focused.
-renderInput   | string    | n/a     | Input element.
+children      | node      | n/a     | Input element.
 renderMask    | function  | n/a     | Function which returns masking element to render when input is blurred. First argument function is value passed either by parent changing value prop or by children if `props.value` is undefined.
 value         | any       | n/a     | Masking element to render when input is blurred.
 id            | string    | n/a     | ID passed to control element.
+error         | bool      | `false` | Does it have error?
 
 ## Changelog
 
