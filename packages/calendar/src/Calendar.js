@@ -130,7 +130,7 @@ class Calendar extends React.PureComponent {
     const { date } = this.state
     const nextDate = date && date.isValid() ? date.format('YYYY-MM-DD') : null
 
-    if (value != null) {
+    if (value === undefined) {
       this.setState({ date: moment(this.props.value) })
     }
 
