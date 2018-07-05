@@ -39,6 +39,7 @@ value              | string in `YYYY-MM-DD` format | self-controlled | current d
 onChange           | function                      | n/a             | event handler when date is changed
 onFocus            | function                      | n/a             | event handler when calendar is focused
 onBlur             | function                      | n/a             | event handler when calendar lost focus
+error              | bool                          | `false`         | show error styles of calendar
 
 ## Changelog
 

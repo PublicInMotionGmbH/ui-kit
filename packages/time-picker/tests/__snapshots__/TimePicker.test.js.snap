@@ -6,6 +6,7 @@ exports[`<TimePicker /> renders correctly 1`] = `
 >
   <TimeInput
     className="talixo-time-picker__input-hour"
+    error={false}
     format="HH"
     onBlur={[Function]}
     value={"2017-01-01T00:00:00.000Z"}
@@ -55,6 +56,7 @@ exports[`<TimePicker /> renders correctly 1`] = `
   </span>
   <TimeInput
     className="talixo-time-picker__input-minutes"
+    error={false}
     format="mm"
     onBlur={[Function]}
     value={"2017-01-01T00:00:00.000Z"}

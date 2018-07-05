@@ -57,7 +57,9 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
         }
       }
     >
-      <ExpirationDateInput />
+      <ExpirationDateInput
+        error={false}
+      />
     </FormField>
     <FormField
       label="CVC*"
