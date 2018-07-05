@@ -67,7 +67,7 @@ class Checkbox extends React.PureComponent {
   }
 
   render () {
-    const { children, className, error, style, value, onChange, ...passedProps } = this.props
+    const { children, className, error, style, value, onChange, defaultChecked, ...passedProps } = this.props
     const _value = this.state.value
 
     const clsName = buildClassName(moduleName, className, { error })
