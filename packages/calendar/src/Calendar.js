@@ -46,12 +46,16 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** Event handler when calendar has lost focus */
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
   displayFormat: 'YYYY-MM-DD',
-  firstDayOfWeek: 1
+  firstDayOfWeek: 1,
+  error: false
 }
 
 /**
@@ -122,12 +126,12 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases,
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, error,
       placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, ...passedProps
     } = this.props
     const { date, focused } = this.state
 
-    const clsName = buildClassName(moduleName, className, { focused })
+    const clsName = buildClassName(moduleName, className, { focused, error })
 
     return (
       <div className={clsName} {...passedProps}>

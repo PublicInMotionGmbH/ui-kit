@@ -51,6 +51,12 @@
       border-bottom-right-radius: 0
       border-bottom-color: transparent
 
+  &--error .DateInput_input:not(.DateInput_input__focused)
+    &, &:hover
+      background-color: $calendar-error-background-color
+      border-color: $calendar-error-border-color
+      color: $calendar-error-text-color
+
   &--focused .SingleDatePicker,
   &--focused .SingleDatePickerInput
     position: relative

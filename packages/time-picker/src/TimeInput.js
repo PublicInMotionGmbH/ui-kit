@@ -22,10 +22,14 @@ const propTypes = {
   format: PropTypes.oneOf(['HH', 'hh A', 'mm']).isRequired,
 
   /** Time object. */
-  value: PropTypes.object.isRequired
+  value: PropTypes.object.isRequired,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
+  error: false
 }
 
 const HOURS_24 = 'HH'
@@ -193,6 +197,7 @@ class TimeInput extends React.Component {
    * @returns {React.Element}
    */
   renderInput = () => {
+    const { error } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
@@ -200,6 +205,7 @@ class TimeInput extends React.Component {
 
     return (
       <TextInput
+        error={error}
         className={inputClsName}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -215,7 +221,7 @@ class TimeInput extends React.Component {
   }
 
   render () {
-    const { className, children, format, onBlur, value, ...passedProps } = this.props
+    const { className, children, format, onBlur, value, error, ...passedProps } = this.props
     const { open } = this.state
 
     // Build class name for wrapper

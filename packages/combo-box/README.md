@@ -64,6 +64,7 @@ renderItem         | function  | `item => item`    | Function to render item in 
 renderValue        | function  | uses `renderItem` | Function to render value (or tag) in select box
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+tabIndex           | number    | n/a               | Tab index passed to toggle button
 
 ### AutoComplete
 

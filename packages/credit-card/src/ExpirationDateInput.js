@@ -18,10 +18,15 @@ const propTypes = {
   value: PropTypes.shape({
     month: PropTypes.number,
     year: PropTypes.number
-  })
+  }),
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
-const defaultProps = {}
+const defaultProps = {
+  error: false
+}
 
 // Set minimum year to be the current year.
 const minYear = new Date().getFullYear()
@@ -134,19 +139,20 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className } = this.props
+    const { className, error, onChange, value, ...passedProps } = this.props
     const { month, year } = this.state
 
     // Build class names.
-    const wrapperClsName = buildClassName(moduleName, className)
-    const monthClsName = buildClassName([moduleName, 'month'])
-    const yearClsName = buildClassName([moduleName, 'year'])
+    const wrapperClsName = buildClassName(moduleName, className, { error })
+    const monthClsName = buildClassName([ moduleName, 'month' ])
+    const yearClsName = buildClassName([ moduleName, 'year' ])
 
     return (
-      <div className={wrapperClsName}>
+      <div className={wrapperClsName} {...passedProps}>
         <RangeInput
           className={monthClsName}
           autoComplete='cc-exp-month'
+          error={error}
           min={1}
           max={12}
           minLength={2}
@@ -158,6 +164,7 @@ class ExpirationDateInput extends React.PureComponent {
         <RangeInput
           className={yearClsName}
           autoComplete='cc-exp-year'
+          error={error}
           min={minYear}
           max={maxYear}
           autoCompleteLength={2}
