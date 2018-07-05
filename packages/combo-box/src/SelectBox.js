@@ -125,7 +125,7 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue } = this.props
     const { value } = this.state
 
     return {
