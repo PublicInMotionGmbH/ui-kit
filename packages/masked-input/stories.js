@@ -5,11 +5,13 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { AutoComplete } from '@talixo/combo-box'
 import { Calendar } from '@talixo/calendar'
-import { CountryFlag } from '@talixo/country-flag'
+import { CountryFlag, CountryFlagsProvider } from '@talixo/country-flag'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 
 import MaskedInput from './src/MaskedInput'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -106,7 +108,7 @@ addStory('calendar', readme, () => (
 ))
 
 addStory.controlled('autocomplete', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>State: {state.value && JSON.stringify(state.value)}</div>
     <MaskedInput
       renderMask={renderCountry}
@@ -126,6 +128,6 @@ addStory.controlled('autocomplete', readme, (setState, state) => (
         />
       </AutoComplete>
     </MaskedInput>
-  </div>
+  </CountryFlagsProvider>
 
 ), () => ({ value: null }))
