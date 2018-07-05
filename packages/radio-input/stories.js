@@ -3,7 +3,6 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import RadioInput from './src/RadioInput'
-import RadioGroup from "../radio-group/src/RadioGroup";
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -57,7 +56,7 @@ addStory('default', readme, () => (
     <div style={{ width: 300 }}>
       <RadioInput>
         Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
-    </RadioInput>
+      </RadioInput>
     </div>
   </div>
 ))
