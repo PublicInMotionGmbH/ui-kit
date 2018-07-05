@@ -34,7 +34,7 @@ addStory('default', readme, () => (
     <h2>Radio with error</h2>
     <RadioInput onChange={change} name='default_error' error>Option</RadioInput>
     <RadioInput onChange={change} name='default_error' error defaultChecked>Option default checked</RadioInput>
-    <RadioInput onChange={change} name='default_error' error>Option disabled</RadioInput>
+    <RadioInput onChange={change} name='default_error' error disabled>Option disabled</RadioInput>
     <br /><br />
 
     <h2>Radio with all disabled options</h2>
