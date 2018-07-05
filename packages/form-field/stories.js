@@ -209,3 +209,28 @@ addStory.controlled('checkbox', readme, (setState, state) => (
     checked: false
   }
 })
+
+function formatErrorMessage (message) {
+  return message.toLowerCase().replace(
+    /..?/g,
+    x => x[0].toUpperCase() + (x[1] || '').toLowerCase()
+  )
+}
+
+addStory('Messages with formatter', readme, () => (
+  <div>
+    <strong>Formatter:</strong> <code style={{ display: 'block', whiteSpace: 'pre' }}>{formatErrorMessage.toString()}</code>
+
+    <br />
+
+    <FormField
+      formatErrorMessage={formatErrorMessage}
+      label='Element label'
+      error='Error message'
+      warning='Warning message'
+      hint='Hint message'
+    >
+      <TextInput />
+    </FormField>
+  </div>
+))

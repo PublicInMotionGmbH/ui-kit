@@ -2,6 +2,7 @@
 
 exports[`<CreditCardInput /> renders correctly 1`] = `
 <FormHandler
+  FormComponent="form"
   className="talixo-credit-card-input"
   values={
     Object {
@@ -24,6 +25,7 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
     className="talixo-credit-card-input__content"
   >
     <FormField
+      formatErrorMessage={[Function]}
       label="Name on card*"
       name="cardHolderName"
       onChange={[Function]}
@@ -37,6 +39,7 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </FormField>
     <FormField
+      formatErrorMessage={[Function]}
       label="Card number*"
       name="cardNumber"
       onChange={[Function]}
@@ -47,6 +50,7 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </FormField>
     <FormField
+      formatErrorMessage={[Function]}
       label="Expiration date*"
       name="cardExpirationDate"
       onChange={[Function]}
@@ -62,6 +66,7 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </FormField>
     <FormField
+      formatErrorMessage={[Function]}
       label="CVC*"
       name="cvc"
       onChange={[Function]}

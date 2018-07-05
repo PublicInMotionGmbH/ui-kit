@@ -25,13 +25,15 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `Formik` and `form`. Additionally, it handles some differently:
 
-Property name     | Type      | Default | Description                    
-------------------|-----------|:-------:|-------------------------------------------------------------------------
-className         | string    | n/a     | Additional class name passed to wrapper.
-errors            | object    | n/a     | Error object. Key is a name of a field.
-onSubmit          | function  | n/a     | onSubmit callback function.
-validationSchema  | object    | n/a     | Validation object. A Yup schema or a function that returns a Yup schema.
-values            | object    | n/a     | Initial values of form fields.
+Property name      | Type      | Default | Description                    
+-------------------|-----------|:-------:|-------------------------------------------------------------------------
+className          | string    | n/a     | Additional class name passed to wrapper.
+errors             | object    | n/a     | Error object. Key is a name of a field.
+onSubmit           | function  | n/a     | onSubmit callback function.
+validationSchema   | object    | n/a     | Validation object. A Yup schema or a function that returns a Yup schema.
+values             | object    | n/a     | Initial values of form fields.
+formatErrorMessage | function  | n/a     | Default formatter for error messages in `FormField`s inside.
+FormComponent      | component | `form`  | Component used as Form wrapper.
 
 ## Changelog
 
