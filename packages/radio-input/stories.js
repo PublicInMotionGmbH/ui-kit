@@ -58,5 +58,14 @@ addStory('default', readme, () => (
         Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
       </RadioInput>
     </div>
+
+    <h2>RTL: Radio with long label</h2>
+    <div dir='rtl'>
+      <div style={{ width: 300 }}>
+        <RadioInput>
+          Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
+        </RadioInput>
+      </div>
+    </div>
   </div>
 ))
