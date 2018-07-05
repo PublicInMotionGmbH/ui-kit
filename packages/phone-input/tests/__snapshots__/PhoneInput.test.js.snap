@@ -1190,6 +1190,7 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     }
     renderItem={[Function]}
     renderValue={[Function]}
+    tabIndex={-1}
     value={null}
   />
   <t

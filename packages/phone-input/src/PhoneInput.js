@@ -285,6 +285,7 @@ class PhoneInput extends React.PureComponent {
   renderCountryBox () {
     return (
       <SelectBox
+        tabIndex={-1}
         className={buildClassName([ moduleName, 'country-box' ])}
         options={countriesList}
         value={this.state.country}
