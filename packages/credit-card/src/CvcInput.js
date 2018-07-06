@@ -5,6 +5,8 @@ import { TextInput } from '@talixo/text-input'
 
 import { buildClassName } from '@talixo/shared'
 
+import { ALLOWED_KEYS } from './config'
+
 const moduleName = 'cvc-input'
 
 const propTypes = {
@@ -87,7 +89,8 @@ class CvcInput extends React.PureComponent {
   onKeyDown = (event) => {
     const charCode = event.which || event.keyCode
 
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 37 || charCode > 40)) {
+    // Check if key is allowed.
+    if (!(ALLOWED_KEYS.indexOf(charCode) > -1)) {
       event.preventDefault()
     }
   }
