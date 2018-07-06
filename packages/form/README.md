@@ -21,11 +21,43 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### Form
+
 Property name   | Type      | Default | Description                    
 ----------------|-----------|:-------:|--------------------------------
 children        | node      | n/a     | Children to be put inside form.
 className       | string    | n/a     | Additional class name passed to wrapper.
 footerComponent | node      | n/a     | Component to be displayed in footer.
+
+### FormHandler
+
+It allows any props which are allowed for `Formik` and `form`. Additionally, it handles some differently:
+
+Property name      | Type      | Default | Description                    
+-------------------|-----------|:-------:|-------------------------------------------------------------------------
+className          | string    | n/a     | Additional class name passed to wrapper.
+errors             | object    | n/a     | Error object. Key is a name of a field.
+onSubmit           | function  | n/a     | onSubmit callback function.
+validationSchema   | object    | n/a     | Validation object. A Yup schema or a function that returns a Yup schema.
+values             | object    | n/a     | Initial values of form fields.
+formatErrorMessage | function  | n/a     | Default formatter for error messages in `FormField`s inside.
+FormComponent      | component | `Form`  | Component used as Form wrapper.
+
+### FormField
+
+Property name      | Type      | Default  | Description
+-------------------|-----------|:--------:|--------------------------------
+className          | string    | n/a      | Additional class name passed to wrapper.
+error              | node      | n/a      | Displayed error message.
+hint               | node      | n/a      | Displayed hint message.
+id                 | string    | n/a      | Id for input.
+label              | node      | n/a      | Label for input.
+onBlur             | function  | n/a      | Event called after input has lost focus.
+onChange           | function  | n/a      | Event called after input has been changed.
+onFocus            | function  | n/a      | Event called after input has gained focus.
+warning            | node      | n/a      | Displayed warning message.
+value              | any       | n/a      | Value passed to input.
+formatErrorMessage | function  | `x => x` | Formatter for error & warning messages.
 
 ## Changelog
 

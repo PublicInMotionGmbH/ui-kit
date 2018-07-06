@@ -2,7 +2,7 @@
 
 exports[`<CreditCardInput /> renders correctly 1`] = `
 <FormHandler
-  FormComponent="form"
+  FormComponent={[Function]}
   className="talixo-credit-card-input"
   values={
     Object {

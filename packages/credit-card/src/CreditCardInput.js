@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { TextInput } from '@talixo/text-input'
-import { FormField } from '@talixo/form-field'
-import { FormHandler } from '@talixo/form-handler'
+import { FormHandler, FormField } from '@talixo/form'
 
 import { buildClassName } from '@talixo/shared'
 

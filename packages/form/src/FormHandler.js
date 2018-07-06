@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 
 import { Formik } from 'formik'
 
-import { FormField } from '@talixo/form-field'
 import { buildClassName } from '@talixo/shared'
+
+import Form from './Form'
+import FormField from './FormField'
 
 const moduleName = 'form-handler'
 
@@ -56,7 +58,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  FormComponent: 'form'
+  FormComponent: Form
 }
 
 /**

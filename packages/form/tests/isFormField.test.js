@@ -1,10 +1,10 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { FormField } from '@talixo/form-field'
 import { TextInput } from '@talixo/text-input'
 
 import { isFormField } from '../src/FormHandler'
+import FormField from '../src/FormField'
 
 describe('isFormField', () => {
   it('should return true if component is FormField', () => {

@@ -2,10 +2,10 @@ import React from 'react'
 import { mount } from 'enzyme'
 
 import { Button } from '@talixo/button'
-import { FormField } from '@talixo/form-field'
 import { TextInput } from '@talixo/text-input'
 
 import FormHandler from '../src/FormHandler'
+import FormField from '../src/FormField'
 
 const createWrapper = (props) => mount(
   <FormHandler {...props}>
