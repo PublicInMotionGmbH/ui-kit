@@ -29,7 +29,10 @@ const propTypes = {
   placeholder: PropTypes.string.isRequired,
 
   /** Input value. */
-  value: PropTypes.string
+  value: PropTypes.string,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -182,7 +185,7 @@ class InlineInput extends React.Component {
    * @returns {React.Element}
    */
   render () {
-    const { className, disabled, emptyValue, error, icon, onChange, placeholder, value, ...passedProps } = this.props
+    const { className, disabled, emptyValue, error, icon, onChange, placeholder, value, id, ...passedProps } = this.props
     const { editing, inputValue } = this.state
     const { setRef, handleBlur, handleInputChange, handleKeyPress, handleSpanClick } = this
 
@@ -200,6 +203,7 @@ class InlineInput extends React.Component {
       <div className={wrapperClsName} {...passedProps}>
         {editing && !disabled
           ? <TextInput
+            id={id}
             className={inputClsName}
             error={error}
             inputRef={setRef}
@@ -211,12 +215,13 @@ class InlineInput extends React.Component {
             right={icon}
             type='text'
           />
-          : <span
+          : <button
+            id={!editing || disabled ? id : null}
             className={spanClsName}
             onClick={handleSpanClick}
           >
             {spanValue}
-          </span>
+          </button>
         }
       </div>
     )

@@ -35,7 +35,10 @@ const propTypes = {
   onBlur: PropTypes.func,
 
   /** Event handler when input has been focused */
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -347,11 +350,12 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderInput () {
-    const { placeholder } = this.props
+    const { placeholder, id } = this.props
     const { value, country, focused } = this.state
 
     return (
       <TextMaskInput
+        id={id}
         guide={focused}
         keepCharPositions={false}
         mask={buildMaskForCountry(country)}
@@ -376,7 +380,7 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, onFocus, onBlur, placeholder, ...passedProps } = this.props
+    const { className, error, onChange, onFocus, onBlur, placeholder, id, ...passedProps } = this.props
     const { hover, focus } = this.state
 
     const clsName = buildClassName(moduleName, className, {

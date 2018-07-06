@@ -24,6 +24,9 @@ const propTypes = {
   /** Time object. */
   value: PropTypes.object.isRequired,
 
+  /** ID passed to control component */
+  id: PropTypes.string,
+
   /** Does it have error? */
   error: PropTypes.bool
 }
@@ -196,8 +199,8 @@ class TimeInput extends React.Component {
    *
    * @returns {React.Element}
    */
-  renderInput = () => {
-    const { error } = this.props
+  renderInput () {
+    const { id, error } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
@@ -205,6 +208,7 @@ class TimeInput extends React.Component {
 
     return (
       <TextInput
+        id={id}
         error={error}
         className={inputClsName}
         onChange={this.handleChange}
@@ -221,7 +225,7 @@ class TimeInput extends React.Component {
   }
 
   render () {
-    const { className, children, format, onBlur, value, error, ...passedProps } = this.props
+    const { className, children, format, onBlur, value, id, error, ...passedProps } = this.props
     const { open } = this.state
 
     // Build class name for wrapper

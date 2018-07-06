@@ -28,7 +28,10 @@ const propTypes = {
   })),
 
   /** Value of default option */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -72,11 +75,12 @@ class RadioGroup extends React.PureComponent {
   }
 
   render () {
-    const { className, children, name, options, error, value, onChange, ...passedProps } = this.props
+    const { className, children, name, options, error, value, onChange, id, ...passedProps } = this.props
     const _value = this.state.value
 
-    const optionsList = options.map(obj => (
+    const optionsList = options.map((obj, index) => (
       <RadioInput
+        id={index === 0 ? id : undefined}
         checked={_value === obj.value}
         disabled={obj.disabled || false}
         key={obj.value}

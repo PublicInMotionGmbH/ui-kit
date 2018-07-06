@@ -1,6 +1,7 @@
 @import './config'
 
 @include module('switcher')
+  position: relative
   display: inline-block
   width: $switcher-width
   height: $switcher-height
@@ -10,7 +11,10 @@
   white-space: nowrap
 
   > input
-    display: none
+    position: absolute
+    opacity: 0 !important
+    left: 0
+    top: 0
 
   > span
     position: relative

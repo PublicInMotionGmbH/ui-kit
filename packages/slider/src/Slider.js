@@ -28,7 +28,10 @@ const propTypes = {
   onBlur: PropTypes.func,
 
   /** Handler fired when input is focused */
-  onFocus: PropTypes.func
+  onFocus: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -84,7 +87,7 @@ class Slider extends React.PureComponent {
   }
 
   render () {
-    const { className, max, min, step, value, onChange, onFocus, onBlur, ...passedProps } = this.props
+    const { className, max, min, step, value, onChange, onFocus, onBlur, id, ...passedProps } = this.props
     const _value = this.state.value
 
     return (
@@ -92,6 +95,7 @@ class Slider extends React.PureComponent {
         <span className={buildClassName([ moduleName, 'value' ])}>{_value}</span>
         <input
           className={buildClassName([ moduleName, 'input' ])}
+          id={id}
           max={max}
           min={min}
           onChange={this.handleChange}

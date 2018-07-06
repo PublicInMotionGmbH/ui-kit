@@ -24,7 +24,7 @@ describe('<InlineInput />', () => {
   let span, wrapper
   beforeEach(() => {
     wrapper = createWrapper({ placeholder: '' })
-    span = wrapper.find('span')
+    span = wrapper.find('button')
   })
 
   it('renders correctly', () => {
@@ -45,7 +45,7 @@ describe('<InlineInput />', () => {
   it('should not change to input when disabled is set to true', () => {
     const wrapper = createWrapper({ disabled: true, placeholder: '' })
     span.simulate('click')
-    expect(wrapper.find('span').exists()).toEqual(true)
+    expect(wrapper.find('button').exists()).toEqual(true)
     expect(wrapper.find('TextInput').exists()).toEqual(false)
   })
 
@@ -57,7 +57,7 @@ describe('<InlineInput />', () => {
   it('should change span to input when span is clicked', () => {
     span.simulate('click')
     expect(wrapper).toMatchSnapshot()
-    expect(wrapper.find('span').exists()).toEqual(false)
+    expect(wrapper.find('button').exists()).toEqual(false)
     expect(wrapper.find('TextInput').exists()).toEqual(true)
   })
 
@@ -104,7 +104,7 @@ describe('<InlineInput />', () => {
     span.simulate('click')
     const input = wrapper.find('TextInput')
     input.simulate('blur')
-    expect(wrapper.find('span').exists()).toEqual(true)
+    expect(wrapper.find('button').exists()).toEqual(true)
     expect(wrapper.find('TextInput').exists()).toEqual(false)
   })
 
@@ -112,7 +112,7 @@ describe('<InlineInput />', () => {
     span.simulate('click')
     const input = wrapper.find('TextInput')
     input.simulate('keyPress', { key: 'Enter' })
-    expect(wrapper.find('span').exists()).toEqual(true)
+    expect(wrapper.find('button').exists()).toEqual(true)
     expect(wrapper.find('TextInput').exists()).toEqual(false)
   })
 })
@@ -120,7 +120,7 @@ describe('<InlineInput />', () => {
 describe('ref', () => {
   it('is passed correctly', () => {
     const wrapper = createWrapper({ placeholder: '' })
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     span.simulate('click')
 
     const input = wrapper.find('TextInput')
@@ -135,7 +135,7 @@ describe('componentDidUpdate', () => {
   it('triggers input focus if state.editing is set to true', () => {
     const wrapper = mount(<InlineInput placeholder='' />)
     const mock = jest.spyOn(wrapper.instance(), 'focusInput')
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     span.simulate('click')
     expect(mock).toHaveBeenCalled()
     wrapper.unmount()
@@ -146,28 +146,28 @@ describe('span value', () => {
   const expectedValue = 'Name'
   it('should equal to empty string by default', () => {
     let wrapper = createWrapper({ placeholder: expectedValue })
-    let span = wrapper.find('span')
+    let span = wrapper.find('button')
     let spanValue = span.props().children
     expect(spanValue).toEqual(expectedValue)
   })
 
   it('should equal to state.inputValue if it is not an empty string', () => {
     const wrapper = createWrapper({ placeholder: 'Placeholder', value: expectedValue })
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     const spanValue = span.props().children
     expect(spanValue).toEqual(expectedValue)
   })
 
   it('should equal to placeholder if input value is an empty string', () => {
     const wrapper = createWrapper({ placeholder: expectedValue, value: '' })
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     const spanValue = span.props().children
     expect(spanValue).toEqual(expectedValue)
   })
 
   it('should equal to emptyValue if input value is an empty string', () => {
     const wrapper = createWrapper({ emptyValue: expectedValue, placeholder: 'placeholder text', value: '' })
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     const spanValue = span.props().children
     expect(spanValue).toEqual(expectedValue)
   })
@@ -177,7 +177,7 @@ describe('handleInputChange', () => {
   it('should be called when typing inside input', () => {
     const onChange = jest.fn()
     const wrapper = createWrapper({ placeholder: '', onChange })
-    const span = wrapper.find('span')
+    const span = wrapper.find('button')
     span.simulate('click')
     const input = wrapper.find('TextInput')
     input.simulate('change', 'name')

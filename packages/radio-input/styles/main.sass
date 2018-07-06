@@ -1,6 +1,8 @@
 @import './config'
 
 $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-size) / 2
+$radio-input-box-focus-shadow-size: ($radio-input-box-size - $radio-input-box-focus-tick-size) / 2
+$radio-input-box-focus-checked-shadow-size: ($radio-input-box-size - $radio-input-box-focus-checked-tick-size) / 2
 
 @include module('radio-input')
   position: relative
@@ -8,12 +10,34 @@ $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-siz
   font-size: $radio-input-box-font-size
 
   > input
-    display: none
+    position: absolute
+    left: 0
+    top: calc(#{1em * $radio-input-box-line-height / 2} - #{$radio-input-box-size / 2})
+    opacity: 0 !important
+    width: $radio-input-box-size
+    height: $radio-input-box-size
+    border: 0
+
+  > input:focus:not(:checked) + span:before
+    background-color: $radio-input-box-focus-background-color
+
+    @if $radio-input-box-focus-shadow-size != $radio-input-box-size
+      box-shadow: inset 0 0 0 $radio-input-box-focus-shadow-size $radio-input-box-background-color
+    @else
+      box-shadow: none
+
+  > input:focus:checked + span:before
+    @if $radio-input-box-focus-checked-shadow-size != $radio-input-box-size
+      box-shadow: inset 0 0 0 $radio-input-box-focus-checked-shadow-size $radio-input-box-background-color
+    @else
+      box-shadow: none
 
   > input + span
+    display: inline-flex
     padding-left: $radio-input-box-margin + $radio-input-box-size
     padding-right: $radio-input-box-margin
     color: $radio-input-text-color
+    outline: none
 
   > input + span:before
     box-sizing: border-box
@@ -68,6 +92,10 @@ $radio-input-box-shadow-size: ($radio-input-box-size - $radio-input-box-tick-siz
   &--error > input:checked:not(:disabled) + span:before
     background-color: $radio-input-error-box-background-color
 
-  [dir=rtl] > input + span
+  [dir=rtl] & > input + span
     padding-left: $radio-input-box-margin
     padding-right: $radio-input-box-margin + $radio-input-box-size
+
+  [dir=rtl] & > input + span:before
+    left: auto
+    right: 0

@@ -48,6 +48,9 @@ const propTypes = {
   /** Event handler fired on blur */
   onBlur: PropTypes.func,
 
+  /** ID passed to control element */
+  id: PropTypes.string,
+
   /** Does it have error */
   error: PropTypes.bool
 }
@@ -228,7 +231,7 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, error, ...restProps } = this.props
+    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, ...restProps } = this.props
     const { value, open } = this.state
 
     const clsName = buildClassName(moduleName, className, { open, error })
@@ -236,6 +239,7 @@ class OptionsInput extends React.PureComponent {
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
         <button
+          id={id}
           type='button'
           className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}

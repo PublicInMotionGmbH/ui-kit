@@ -66,3 +66,15 @@ addStory('input change', readme, () => (
     />
   </div>
 ))
+
+addStory('input with label', readme, () => (
+  <div>
+    <label htmlFor='inline-input'>Click me</label>
+
+    <InlineInput
+      id='inline-input'
+      placeholder='Edit me'
+      onChange={change}
+    />
+  </div>
+))

@@ -30,6 +30,7 @@ name          | string   | n/a             | name of radio group
 options       | Option[] | n/a             | array of objects which represent options
 error         | boolean  | `false`         | has it any error
 value         | any      | self-controlled | value when it's controlled
+id            | string   | n/a             | ID passed to control element
 
 ## Types
 

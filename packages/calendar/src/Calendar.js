@@ -48,6 +48,9 @@ const propTypes = {
   /** Event handler when calendar has lost focus */
   onBlur: PropTypes.func,
 
+  /** ID passed to control element */
+  id: PropTypes.string,
+
   /** Does it have error? */
   error: PropTypes.bool
 }
@@ -145,7 +148,7 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, error,
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error,
       placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, ...passedProps
     } = this.props
     const { date, focused } = this.state
@@ -156,6 +159,7 @@ class Calendar extends React.PureComponent {
       <div className={clsName} {...passedProps}>
         <SingleDatePicker
           hideKeyboardShortcutsPanel
+          id={id}
           date={date}
           dayAriaLabelFormat={dayAriaLabelFormat}
           displayFormat={displayFormat}

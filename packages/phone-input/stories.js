@@ -50,3 +50,10 @@ addStory('RTL: initial', readme, () => (
     </div>
   </CountryFlagsProvider>
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='phone-input'>Click me</label>
+    <PhoneInput id='phone-input' />
+  </div>
+))

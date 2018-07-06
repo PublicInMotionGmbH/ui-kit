@@ -43,6 +43,7 @@ placeholder   | string    | n/a             | placeholder to show when there is 
 onChange      | function  | n/a             | event handler for changed value
 onFocus       | function  | n/a             | event handler fired when input has been focused
 onBlur        | function  | n/a             | event handler fired when input lost focus
+id            | string    | n/a             | ID passed to control element
 
 ## Changelog
 

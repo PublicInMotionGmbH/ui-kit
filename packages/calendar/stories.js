@@ -46,3 +46,10 @@ addStory('custom date format', readme, () => (
 addStory('custom placeholder', readme, () => (
   <Calendar style={styles} placeholder='Enter date' />
 ))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='calendar'>Click me</label>
+    <Calendar id='calendar' style={styles} placeholder='Enter date' />
+  </div>
+))

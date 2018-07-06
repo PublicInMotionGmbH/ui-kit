@@ -31,6 +31,7 @@ step          | number    | n/a             | size of each movement of the slide
 onFocus       | function  | n/a             | event handler when input is focused
 onBlur        | function  | n/a             | event handler when input lost focus
 onChange      | function  | n/a             | event handler when input is changed, with new value
+id            | string    | n/a             | ID passed to control element
 
 ## Changelog
 

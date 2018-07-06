@@ -154,3 +154,10 @@ addStory.controlled('RTL', readme, (setState, state) => (
     <NumberInput onChange={value => setState({ value })} value={state.value} />
   </div>
 ), () => ({ value: 0 }))
+
+addStory('with label', readme, () => (
+  <div style={{ width: 300 }}>
+    <label htmlFor='number-input'>Click me</label>
+    <NumberInput id='number-input' />
+  </div>
+))

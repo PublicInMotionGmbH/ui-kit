@@ -34,6 +34,7 @@ icon            | no       | node      | n/a     | Right side input icon or cont
 onInputChange   | no       | function  | n/a     | Callback for change event.
 placeholder     | yes      | string    | n/a     | Input placeholder.
 value           | no       | string    | `''`    | Input value.
+id              | no       | string    | n/a     | ID passed to control element.
 
 ## Changelog
 
