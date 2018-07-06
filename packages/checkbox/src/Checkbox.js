@@ -80,7 +80,7 @@ class Checkbox extends React.PureComponent {
           checked={_value}
           {...passedProps}
         />
-        <span>{children}</span>
+        <span tabIndex={-1}>{children}</span>
       </label>
     )
   }

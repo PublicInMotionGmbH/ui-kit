@@ -24,7 +24,7 @@ function analyzeInput (inputEl, suffixEl) {
   inputEl.style.paddingRight = ''
 
   // Compute styles for input
-  const computed = document.defaultView.getComputedStyle(inputEl)
+  const computed = window.getComputedStyle(inputEl)
 
   // Check if it's RTL text direction
   const isRTL = computed.direction === 'rtl'
@@ -40,16 +40,20 @@ function analyzeInput (inputEl, suffixEl) {
 
   // Gather information about text width inside input
   document.body.appendChild(element)
-  const value = element.offsetWidth
+  const value = element.clientWidth
   document.body.removeChild(element)
-
-  // Get width of input
-  const input = inputEl.offsetWidth
 
   // Calculate size of all input parts (in px)
   const left = parseInt(computed.paddingLeft, 10)
-  const suffix = suffixEl.offsetWidth
+
+  const suffixStyle = window.getComputedStyle(suffixEl)
+  const suffixWidth = parseInt(suffixStyle.width, 10)
+
+  const suffix = suffixWidth || 0
   const right = parseInt(computed.paddingRight, 10)
+
+  // Get width of input
+  const input = inputEl.clientWidth
 
   // Recover current padding set to input directly
   inputEl.style.paddingLeft = previousLeftPadding

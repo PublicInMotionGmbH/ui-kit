@@ -75,7 +75,7 @@ Property name      | Type      | Default           | Description
 className          | string    | n/a               | Additional class name passed to wrapper
 footer             | node      | n/a               | Footer for items list
 options            | array     | n/a               | Options to show
-children           | string    | self-controlled   | Input to show
+children           | node      | n/a               | Input to show
 onChoose           | function  | n/a               | Handler fired when option is selected
 onBlur             | function  | n/a               | onBlur event passed from input
 onFocus            | function  | n/a               | onFocus event passed from input

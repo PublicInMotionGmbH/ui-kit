@@ -408,3 +408,39 @@ addStory('with label', readme, () => (
     </AutoComplete>
   </div>
 ))
+
+addStory('self-controlled', readme, () => (
+  <div>
+    <h2>Select box</h2>
+    <SelectBox
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Combo box</h2>
+    <ComboBox
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Combo box (multi)</h2>
+    <ComboBox
+      multi
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Auto-complete</h2>
+    <AutoComplete
+      options={optionsSimple}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      onChange={action('change')}
+    >
+      <TextInput />
+    </AutoComplete>
+  </div>
+))

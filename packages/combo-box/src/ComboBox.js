@@ -92,6 +92,7 @@ const defaultProps = {
  */
 class ComboBox extends React.PureComponent {
   state = {
+    value: this.props.value,
     inputValue: this.props.inputValue || ''
   }
 
@@ -105,6 +106,12 @@ class ComboBox extends React.PureComponent {
     if (props.inputValue != null && this.state.inputValue !== props.inputValue) {
       this.setState({
         inputValue: props.inputValue
+      })
+    }
+
+    if (props.value !== this.state.value && props.value !== undefined) {
+      this.setState({
+        value: props.value
       })
     }
   }
@@ -172,9 +179,10 @@ class ComboBox extends React.PureComponent {
    */
   getStateProps (data) {
     const {
-      footer, value, icon, options, multi, placeholder,
+      footer, icon, options, multi, placeholder,
       buildItemId, renderItem, renderValue, onFocus, onBlur
     } = this.props
+    const { value } = this.state
 
     return {
       ...data,
@@ -271,8 +279,8 @@ class ComboBox extends React.PureComponent {
    * @param {SyntheticEvent|Event} event
    */
   handleInputKeyDown (event) {
-    const { inputValue } = this.state
-    const { value, multi, onNewValue } = this.props
+    const { inputValue, value } = this.state
+    const { multi, onNewValue } = this.props
 
     // Do not propagate space in input, as it will cause removing value
     if (event.which === SPACE_KEY) {
@@ -300,6 +308,10 @@ class ComboBox extends React.PureComponent {
 
       this.setState({ inputValue: '' })
 
+      if (this.props.value === undefined) {
+        this.setState({ value: (value || []).concat(inputValue) })
+      }
+
       if (onNewValue) {
         onNewValue(inputValue)
       }
@@ -312,13 +324,19 @@ class ComboBox extends React.PureComponent {
    * @param {object} item
    */
   select = (item) => {
-    const { onChange, multi, value } = this.props
+    const { onChange, multi } = this.props
+    const { value } = this.state
 
     // Handle simple selection for single select-box
     if (!multi) {
+      if (this.props.value === undefined) {
+        this.setState({ value: item })
+      }
+
       if (onChange) {
         onChange(item)
       }
+
       return
     }
 
@@ -329,6 +347,10 @@ class ComboBox extends React.PureComponent {
     const nextValue = _value.indexOf(item) !== -1
       ? _value.filter(x => x !== item)
       : _value.concat(item)
+
+    if (this.props.value === undefined) {
+      this.setState({ value: nextValue })
+    }
 
     // Trigger event with new value
     if (onChange) {

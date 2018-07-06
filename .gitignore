@@ -20,6 +20,7 @@ lerna-debug.log
 .idea
 
 # Generated directories
+packages/*/lib
 storybook-static
 dist
 _gh-pages
