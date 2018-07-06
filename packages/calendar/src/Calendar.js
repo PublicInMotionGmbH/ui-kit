@@ -65,12 +65,18 @@ const defaultProps = {
  * @property {string} [props.className]
  * @property {string} [props.displayFormat]
  * @property {string} [props.placeholder]
- * @class {React.Element}
+ *
+ * @property {number} [updateTimeout]
+ * @class
  */
 class Calendar extends React.PureComponent {
   state = {
     date: this.props.value == null ? null : moment(this.props.value),
     focused: false
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.updateTimeout)
   }
 
   /**
@@ -90,7 +96,6 @@ class Calendar extends React.PureComponent {
    * @param {*} date
    */
   onDateChange = (date) => {
-    const { value, onChange } = this.props
     const _date = this.state.date
 
     const previousDate = _date && _date.isValid() ? _date.format('YYYY-MM-DD') : null
@@ -100,13 +105,7 @@ class Calendar extends React.PureComponent {
       return
     }
 
-    if (value == null) {
-      this.setState({ date })
-    }
-
-    if (onChange) {
-      onChange(date && date.isValid() ? date.format('YYYY-MM-DD') : null)
-    }
+    this.setState({ date })
   }
 
   /**
@@ -121,6 +120,26 @@ class Calendar extends React.PureComponent {
 
     if (handler) {
       handler()
+    }
+
+    // Unfortunately, SingleDatePicker is blurring immediately after sending event of change.
+    // We have to update date on blur, because of other SingleDatePicker problems (especially value input)
+    if (!focused) {
+      this.updateTimeout = setTimeout(this.updateDateAfterBlur)
+    }
+  }
+
+  updateDateAfterBlur = () => {
+    const { value, onChange } = this.props
+    const { date } = this.state
+    const nextDate = date && date.isValid() ? date.format('YYYY-MM-DD') : null
+
+    if (value === undefined) {
+      this.setState({ date: moment(this.props.value) })
+    }
+
+    if (nextDate !== value && onChange) {
+      onChange(nextDate)
     }
   }
 
