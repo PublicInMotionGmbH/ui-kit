@@ -1,11 +1,19 @@
 @import './config'
 
-@mixin progress-ring-color ($name, $color, $text-color)
-  #{prefix('progress-ring')}--#{$name}
-    #{prefix('progress-ring')}__circle-stroke
+@mixin progress-ring-color ($name, $color, $text-color, $empty-color: mix($x-color-calmer, $color, 90%))
+  @include module('progress-ring')
+    &--#{$name} &__circle-stroke
       stroke: $color
-    #{prefix('progress-ring')}__content
-      color: $text-color
+
+    &--#{$name} &__circle-bg
+      stroke: $empty-color
+
+    @if $progress-ring-fill-completed
+      &--#{$name}#{&}--completed &__circle-stroke
+        fill: $color
+
+      &--#{$name}#{&}--completed &__content
+        color: $text-color
 
 @include module('progress-ring')
   display: inline-block
@@ -14,51 +22,47 @@
   height: 1em
   vertical-align: middle
 
-  svg
+  &__progress svg
     width: 100%
     height: 100%
 
-  circle 
+  &__progress circle
     transition: stroke-dashoffset $progress-ring-circle-stroke-transition-time $progress-ring-circle-stroke-transition-easing, fill $progress-ring-circle-fill-transition-time $progress-ring-circle-fill-transition-easing
 
   &__circle-bg
-    stroke: $progress-ring-empty-ring-color
+    fill: transparent
+    stroke: $progress-ring-base-empty-color
+
+  &__circle-stroke
+    fill: transparent
+    transform-origin: 50%
+    transform: rotate(-90deg)
 
   &__content
     position: absolute
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
-    font-size: 1em * $p1/$p2
+    font-size: 1em * $progress-ring-text-size-ratio
     transition: color $progress-ring-content-color-transition-time $progress-ring-content-color-transition-easing
+    color: inherit
 
     .tai:first-child
-      font-size: 1.45em
+      font-size: 1em * $progress-ring-content-icon-ratio
 
-  &--indeterminate
-    svg
-      transform-origin: 50%
-      animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time infinite $progress-ring-indeterminate-animation-easing
+  &--indeterminate &__progress &__circle-stroke
+    animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time infinite $progress-ring-indeterminate-animation-easing
 
 @keyframes indeterminateProgressRing
   0%
-    transform: rotate(0deg)
+    transform: rotate(-90deg)
   100%
-    transform: rotate(360deg)
+    transform: rotate(270deg)
 
-@include progress-ring-color('primary', $progress-ring-base-color, $progress-ring-base-color)
-@include progress-ring-color('secondary', $progress-ring-secondary-color, $progress-ring-secondary-color)
-@include progress-ring-color('tertiary', $progress-ring-tertiary-color, $progress-ring-tertiary-color)
-@include progress-ring-color('success', $progress-ring-success-color, $progress-ring-success-color)
-@include progress-ring-color('error', $progress-ring-error-color, $progress-ring-error-color)
-@include progress-ring-color('info', $progress-ring-info-color, $progress-ring-info-color)
-@include progress-ring-color('warning', $progress-ring-warning-color, $progress-ring-warning-color)
-
-@include module('progress-ring')
-  &--completed
-    svg #{prefix('progress-ring')}__circle-stroke
-      fill: $progress-ring-completed-color
-      stroke: $progress-ring-completed-color
-
-  &--completed &__content
-    color: $progress-ring-completed-text-color
+@include progress-ring-color('primary', $progress-ring-base-color, $progress-ring-base-text-color, $progress-ring-base-empty-color)
+@include progress-ring-color('secondary', $progress-ring-secondary-color, $progress-ring-secondary-text-color, $progress-ring-secondary-empty-color)
+@include progress-ring-color('tertiary', $progress-ring-tertiary-color, $progress-ring-tertiary-text-color, $progress-ring-tertiary-empty-color)
+@include progress-ring-color('success', $progress-ring-success-color, $progress-ring-success-text-color, $progress-ring-success-empty-color)
+@include progress-ring-color('error', $progress-ring-error-color, $progress-ring-error-text-color, $progress-ring-error-empty-color)
+@include progress-ring-color('info', $progress-ring-info-color, $progress-ring-info-text-color, $progress-ring-info-empty-color)
+@include progress-ring-color('warning', $progress-ring-warning-color, $progress-ring-warning-text-color, $progress-ring-warning-empty-color)

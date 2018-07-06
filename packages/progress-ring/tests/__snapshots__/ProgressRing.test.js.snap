@@ -19,7 +19,6 @@ exports[`<ProgressRing /> renders correctly 1`] = `
         className="talixo-progress-ring__circle-bg"
         cx={30}
         cy={30}
-        fill="transparent"
         r={26}
         strokeDasharray={164}
         strokeDashoffset="0"
@@ -29,12 +28,10 @@ exports[`<ProgressRing /> renders correctly 1`] = `
         className="talixo-progress-ring__circle-stroke"
         cx={30}
         cy={30}
-        fill="transparent"
         r={26}
         strokeDasharray={164}
         strokeDashoffset={123}
         strokeWidth={7}
-        transform="rotate(-90 30 30)"
       />
     </svg>
   </div>

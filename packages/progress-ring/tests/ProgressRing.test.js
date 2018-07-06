@@ -38,7 +38,7 @@ describe('<ProgressRing />', () => {
     const wrapper = shallow(<ProgressRing value={0.3} />)
     const bar = wrapper.find(`.${name}__progress`)
 
-    expect(bar.prop('aria-valuenow')).toBe(0.3)
+    expect(bar.prop('aria-valuenow')).toBe(30)
   })
 
   it('should show indeterminate value', () => {

@@ -1,43 +1,48 @@
 @import '~@talixo/shared/styles/config'
 
-$progress-ring-empty-ring-color: #dddbda !default
+@function empty-progress-ring-color($color)
+  @return mix($x-color-calmer, $color, 90%)
+
+$progress-ring-fill-completed: true !default
+
+$progress-ring-text-size-ratio: 5/12 !default
+$progress-ring-content-icon-ratio: 1.45 !default
 
 $progress-ring-base-color: $x-color-primary !default
 $progress-ring-base-text-color: $x-color-primary-opposite !default
+$progress-ring-base-empty-color: empty-progress-ring-color($progress-ring-base-color) !default
 
 $progress-ring-secondary-color: $x-color-secondary !default
 $progress-ring-secondary-text-color: $x-color-secondary-opposite !default
+$progress-ring-secondary-empty-color: empty-progress-ring-color($progress-ring-secondary-color) !default
 
 $progress-ring-tertiary-color: $x-color-tertiary !default
 $progress-ring-tertiary-text-color: $x-color-tertiary-opposite !default
+$progress-ring-tertiary-empty-color: empty-progress-ring-color($progress-ring-tertiary-color) !default
 
 $progress-ring-error-color: $x-color-error !default
 $progress-ring-error-text-color: $x-color-error-opposite !default
+$progress-ring-error-empty-color: empty-progress-ring-color($progress-ring-error-color) !default
 
 $progress-ring-warning-color: $x-color-warning !default
 $progress-ring-warning-text-color: $x-color-warning-opposite !default
+$progress-ring-warning-empty-color: empty-progress-ring-color($progress-ring-warning-color) !default
 
 $progress-ring-info-color: $x-color-info !default
 $progress-ring-info-text-color: $x-color-info-opposite !default
+$progress-ring-info-empty-color: empty-progress-ring-color($progress-ring-info-color) !default
 
 $progress-ring-success-color: $x-color-success !default
 $progress-ring-success-text-color: $x-color-success-opposite !default
+$progress-ring-success-empty-color: empty-progress-ring-color($progress-ring-success-color) !default
 
-// Scale
-$p1: 5
-$p2: 12
+$progress-ring-circle-fill-transition-easing: linear !default
+$progress-ring-circle-fill-transition-time: 0.3s !default
+$progress-ring-circle-stroke-transition-easing: $progress-ring-circle-fill-transition-easing !default
+$progress-ring-circle-stroke-transition-time: $progress-ring-circle-fill-transition-time !default
 
-$progress-ring-circle-fill-transition-easing: linear
-$progress-ring-circle-fill-transition-time: 0.3s
-$progress-ring-circle-stroke-transition-easing: $progress-ring-circle-fill-transition-easing
-$progress-ring-circle-stroke-transition-time: 1s
+$progress-ring-content-color-transition-easing: $progress-ring-circle-fill-transition-easing !default
+$progress-ring-content-color-transition-time: $progress-ring-circle-fill-transition-time !default
 
-$progress-ring-content-color-transition-easing: $progress-ring-circle-fill-transition-easing
-$progress-ring-content-color-transition-time: $progress-ring-circle-fill-transition-time * 4/3 !default
-
-$progress-ring-indeterminate-animation-time: 1s
-$progress-ring-indeterminate-animation-easing: linear
-
-$progress-ring-completed: true !default
-$progress-ring-completed-color: $progress-ring-success-color !default
-$progress-ring-completed-text-color: $progress-ring-success-text-color !default
+$progress-ring-indeterminate-animation-time: 1s !default
+$progress-ring-indeterminate-animation-easing: cubic-bezier(0.66, 0.28, 0.4, 0.67) !default
