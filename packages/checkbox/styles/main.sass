@@ -1,6 +1,8 @@
 @import './config'
 
 $checkbox-box-shadow-size: ($checkbox-box-size - $checkbox-box-tick-size) / 2
+$checkbox-box-focus-shadow-size: ($checkbox-box-size - $checkbox-box-focus-tick-size) / 2
+$checkbox-box-focus-checked-shadow-size: ($checkbox-box-size - $checkbox-box-focus-checked-tick-size) / 2
 
 @include module('checkbox')
   position: relative
@@ -8,13 +10,34 @@ $checkbox-box-shadow-size: ($checkbox-box-size - $checkbox-box-tick-size) / 2
   font-size: $checkbox-box-font-size
 
   > input
-    display: none
+    position: absolute
+    left: 0
+    top: calc(#{1em * $checkbox-box-line-height / 2} - #{$checkbox-box-size / 2})
+    opacity: 0 !important
+    width: $checkbox-box-size
+    height: $checkbox-box-size
+    border: 0
+
+  > input:focus:not(:checked) + span:before
+    background-color: $checkbox-box-focus-background-color
+
+    @if $checkbox-box-focus-shadow-size != $checkbox-box-size
+      box-shadow: inset 0 0 0 $checkbox-box-focus-shadow-size $checkbox-box-background-color
+    @else
+      box-shadow: none
+
+  > input:focus:checked + span:before
+    @if $checkbox-box-focus-checked-shadow-size != $checkbox-box-size
+      box-shadow: inset 0 0 0 $checkbox-box-focus-checked-shadow-size $checkbox-box-background-color
+    @else
+      box-shadow: none
 
   > input + span
     display: inline-flex
     padding-left: $checkbox-box-margin + $checkbox-box-size
     padding-right: $checkbox-box-margin
     color: $checkbox-text-color
+    outline: none
 
   > input + span:before
     box-sizing: border-box
