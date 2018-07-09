@@ -178,3 +178,30 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
   [dir=rtl] &__message-before
     padding-right: 0
     padding-left: $form-field-gutter
+
+// Fieldset
+
+$color-fieldset-line: #dbdbdb
+$color-fieldset-aside-legend: #a1a1a1
+
+$fieldset-margin: dp(5)
+
+@include module('fieldset')
+  margin-bottom: $fieldset-margin
+  border: none
+
+  &:not(:last-child):after
+    content: ''
+    display: inline-block
+    height: dp(0.2)
+    width: 100%
+    margin-top: $fieldset-margin
+
+  &__legend
+    display: inline-block
+    font-size: dp(3)
+    margin-bottom: $fieldset-margin
+
+  &__aside-legend
+    display: inline-block
+    margin-left: dp(6)

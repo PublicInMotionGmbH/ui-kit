@@ -1,8 +1,9 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import Fieldset from '../src/Fieldset'
 import { Icon } from '@talixo/icon'
+
+import Fieldset from '../src/Fieldset'
 
 describe('<Fieldset />', () => {
   it('renders children correctly', () => {

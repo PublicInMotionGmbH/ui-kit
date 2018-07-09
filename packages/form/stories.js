@@ -6,7 +6,6 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 import { Button } from '@talixo/button'
 import { Checkbox } from '@talixo/checkbox'
 import { ControlGroup } from '@talixo/control-group'
-import { Fieldset } from '@talixo/fieldset'
 import { Icon } from '@talixo/icon'
 import { TextInput } from '@talixo/text-input'
 import { PhoneInput } from '@talixo/phone-input'
@@ -20,6 +19,7 @@ import Form from './src/Form'
 import FormHandler from './src/FormHandler'
 import FormFooter from './src/FormFooter'
 import Field from './src/Field'
+import Fieldset from './src/Fieldset'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -674,5 +674,79 @@ addStory('RTL Field: compositions', readme, () => (
     >
       <TextInput />
     </Field>
+  </div>
+))
+
+// Fieldset
+
+addStory('Fieldset: default', readme, () => (
+  <Fieldset legend='Personal details'>
+    <h4>Please enter you name and surname</h4>
+
+    <Field label='Your name'>
+      <TextInput />
+    </Field>
+    <Field label='Your surname'>
+      <TextInput />
+    </Field>
+    <Field>
+      <Checkbox>
+        I'm not a robot
+      </Checkbox>
+    </Field>
+
+    <p>* all fields are required</p>
+  </Fieldset>
+))
+
+addStory('Fieldset: additional legend', readme, () => (
+  <Fieldset legend='Personal details' asideLegend={<span><Icon name='person' />user</span>}>
+    <h4>Please enter you name and surname</h4>
+    <Field label='Your name' hint='Type your fake name' horizontal>
+      <TextInput />
+    </Field>
+    <Field label='Your surname' hint='Type your surname' horizontal>
+      <TextInput />
+    </Field>
+    <Field spread horizontal>
+      <Checkbox>
+        I'm not a robot
+      </Checkbox>
+    </Field>
+
+    <p>* all fields are required</p>
+  </Fieldset>
+))
+
+addStory('Fieldset: two fieldsets', readme, () => (
+  <div>
+    <Fieldset legend='Personal details'>
+      <h4>Please enter you name and surname</h4>
+      <Field label='Your name' hint='Type your fake name' horizontal>
+        <TextInput />
+      </Field>
+      <Field label='Your surname' hint='Type your surname' horizontal>
+        <TextInput />
+      </Field>
+      <Field spread horizontal>
+        <Checkbox>
+          I'm not a robot
+        </Checkbox>
+      </Field>
+
+      <p>* all fields are required</p>
+    </Fieldset>
+    <Fieldset legend='Payments details'>
+      <Field label='Your bank name' hint='We need your bank name to handle your payment face to face' horizontal>
+        <TextInput />
+      </Field>
+      <Field spread horizontal>
+        <Checkbox>
+          Card payment
+        </Checkbox>
+      </Field>
+
+      <p>* all fields are required</p>
+    </Fieldset>
   </div>
 ))

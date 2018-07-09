@@ -32,14 +32,22 @@ const propTypes = {
 function Fieldset (props) {
   const { asideLegend, className, children, legend, ...passedProps } = props
 
+  const asideLegendElement = asideLegend == null ? null : (
+    <aside className={buildClassName([ moduleName, 'aside-legend' ])}>
+      {asideLegend}
+    </aside>
+  )
+
+  const legendElement = legend == null ? null : (
+    <legend className={buildClassName([ moduleName, 'legend' ])}>
+      {legend}
+      {asideLegendElement}
+    </legend>
+  )
+
   return (
     <fieldset className={buildClassName(moduleName, className)} {...passedProps}>
-      {legend && <legend className={buildClassName([moduleName, 'legend'])}>
-        {legend}
-        {asideLegend && <aside className={buildClassName([moduleName, 'aside-legend'])}>
-          {asideLegend}
-        </aside>}
-      </legend>}
+      {legendElement}
       {children}
     </fieldset>
   )

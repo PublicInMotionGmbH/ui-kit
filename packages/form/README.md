@@ -70,6 +70,17 @@ Property name      | Type      | Default  | Description
 className          | string    | n/a      | Additional class name passed to footer.
 children           | node      | n/a      | Elements to put inside footer.
 
+### Fieldset
+
+It allows any props which are allowed for `fieldset`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|------------------------------------
+asideLegend   | node      | n/a     | Aside legend of fieldset
+className     | string    | n/a     | Additional class name passed to wrapper.
+children      | node      | n/a     | Children node in fieldset like input or checkbox
+legend        | string    | n/a     | Legend of fieldset
+
 ## Changelog
 
 - **1.0.0** - initial version
