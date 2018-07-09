@@ -55,7 +55,7 @@ describe('<Field />', () => {
   it('passes value correctly', () => {
     const value = 'some value'
     const wrapper = createWrapper({ value })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
 
     expect(input.props().value).toEqual(value)
   })
@@ -141,7 +141,7 @@ describe('onChange', () => {
     const onChange = jest.fn()
     const value = 'name'
     const wrapper = createWrapper({ onChange })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('change', { target: { value } })
 
     expect(onChange).toHaveBeenCalled()
@@ -152,7 +152,7 @@ describe('onChange', () => {
     const onChange = jest.fn().mockImplementation(n => { typedValue = n })
     const value = 'name'
     const wrapper = createWrapper({ onChange })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('change', value)
 
     expect(typedValue).toEqual(value)
@@ -167,7 +167,7 @@ describe('onFocus', () => {
   it('is called', () => {
     const onFocus = jest.fn()
     const wrapper = createWrapper({ onFocus })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('focus')
 
     expect(onFocus).toHaveBeenCalled()
@@ -176,7 +176,7 @@ describe('onFocus', () => {
   it('sets class correctly', () => {
     const onFocus = jest.fn()
     const wrapper = createWrapper({ onFocus })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('focus')
 
     expect(wrapper.hasClass('talixo-field--focus')).toEqual(true)
@@ -191,7 +191,7 @@ describe('onBlur', () => {
   it('is called', () => {
     const onBlur = jest.fn()
     const wrapper = createWrapper({ onBlur })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('blur')
 
     expect(onBlur).toHaveBeenCalled()
@@ -200,7 +200,7 @@ describe('onBlur', () => {
   it('sets class correctly', () => {
     const onBlur = jest.fn()
     const wrapper = createWrapper({ onBlur })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
 
     expect(wrapper.hasClass('talixo-form-field--focus')).toEqual(false)
     input.simulate('focus')
