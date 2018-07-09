@@ -1,6 +1,6 @@
 # Talixo Form
 
-UI Component which represents Form
+UI Components which represents form elements, helpers and form itself.
 
 ## How to install
 
@@ -12,9 +12,11 @@ using `npm install @talixo/form --save` or `yarn add @talixo/form`.
 Your package should additionally have some extra dependencies:
 
 - `@talixo/shared: ^1.0.0-alpha.5`
+- `formik: ^0.11.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
+- `yup: ^0.24.1`
 
 These packages are required by `@talixo/form`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -76,10 +78,32 @@ It allows any props which are allowed for `fieldset`. Additionally, it handles s
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|------------------------------------
-asideLegend   | node      | n/a     | Aside legend of fieldset
 className     | string    | n/a     | Additional class name passed to wrapper.
 children      | node      | n/a     | Children node in fieldset like input or checkbox
-legend        | string    | n/a     | Legend of fieldset
+
+### Legend
+
+It allows any props which are allowed for `legend`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|------------------------------------
+className     | string    | n/a     | Additional class name passed to wrapper.
+children      | node      | n/a     | Legend content, i.e. title
+aside         | node      | n/a     | Aside legend, i.e. additional info
+
+### FormRow
+
+It's (virtually used in many places) wrapper for form elements composition.
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|------------------------------------
+className     | string    | n/a     | Additional class name passed to wrapper.
+children      | node      | n/a     | Basic content to put inside.
+start         | node      | n/a     | Content to put on left (top) side, i.e. label
+end           | node      | n/a     | Content to put on right (bottom) side, i.e. hint
+horizontal    | bool      | `false` | Should it have horizontal layout?
+spread        | bool      | `false` | Only for `horizontal`; should it expand input width, when there is no hint?
 
 ## Changelog
 

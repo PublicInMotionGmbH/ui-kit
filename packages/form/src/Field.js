@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+import FormRow from './FormRow'
+
 export const moduleName = 'field'
 
 const propTypes = {
@@ -158,30 +160,19 @@ class Field extends React.Component {
    * @returns {React.Element}
    */
   buildMessage (message, typeName) {
-    const { formatErrorMessage } = this.props
+    const { formatErrorMessage, horizontal, spread } = this.props
 
     // Build class names for label
     const messageClsName = buildClassName([ moduleName, 'message' ], null, [ typeName ])
-    const wrapperClsName = buildClassName([ moduleName, 'message-wrapper' ], null)
-    const innerClsName = buildClassName([ moduleName, 'message-inner' ], null)
-    const beforeClsName = buildClassName([ moduleName, 'message-before' ])
-    const afterClsName = buildClassName([ moduleName, 'message-after' ])
-    const contentClsName = buildClassName([ moduleName, 'message-content' ])
 
     // Use message formatter for warning & error messages
     message = formatErrorMessage(message)
 
     // Build label
     return (
-      <div className={messageClsName}>
-        <div className={beforeClsName} />
-        <div className={wrapperClsName}>
-          <div className={innerClsName}>
-            <div className={contentClsName}>{message}</div>
-          </div>
-          <div className={afterClsName} />
-        </div>
-      </div>
+      <FormRow className={messageClsName} horizontal={horizontal} spread={spread}>
+        {message}
+      </FormRow>
     )
   }
 
@@ -222,14 +213,9 @@ class Field extends React.Component {
 
     // Build class names
     const fieldClsName = buildClassName(moduleName, className, modifiers)
-    const innerClsName = buildClassName([ moduleName, 'inner' ])
     const inputWrapperClsName = buildClassName([ moduleName, 'input' ])
     const messagesClsName = buildClassName([ moduleName, 'messages' ])
-    const hintClsName = buildClassName([ moduleName, 'hint' ])
-    const wrapperClsName = buildClassName([ moduleName, 'wrapper' ])
-    const wrapperInnerClsName = buildClassName([ moduleName, 'wrapper-inner' ])
     const shallowLabelClsName = buildClassName([ moduleName, 'shallow-label' ])
-    const labelClsName = buildClassName([ moduleName, 'label' ])
 
     // Build unique ID if id is not provided.
     const uniqueId = id || this.uniqueId
@@ -243,25 +229,40 @@ class Field extends React.Component {
 
     return (
       <div className={fieldClsName} {...passedProps}>
-        <div className={innerClsName}>
-          <div className={labelClsName}>{labelElement}</div>
-          <div className={wrapperClsName}>
-            <div className={wrapperInnerClsName}>
-              <div className={shallowLabelClsName}>{labelElement}</div>
-              <div className={inputWrapperClsName}>
-                {input}
-              </div>
-            </div>
-            <div className={hintClsName}>{hint}</div>
+        <FormRow start={labelElement} end={hint} horizontal={horizontal} spread={spread}>
+          <div className={shallowLabelClsName}>{labelElement}</div>
+          <div className={inputWrapperClsName}>
+            {input}
           </div>
-        </div>
-
+        </FormRow>
         <div className={messagesClsName}>
           {errorElement}
           {warningElement}
         </div>
       </div>
     )
+
+    // return (
+    //   <div className={fieldClsName} {...passedProps}>
+    //     <div className={innerClsName}>
+    //       <div className={labelClsName}>{labelElement}</div>
+    //       <div className={wrapperClsName}>
+    //         <div className={wrapperInnerClsName}>
+    //           <div className={shallowLabelClsName}>{labelElement}</div>
+    //           <div className={inputWrapperClsName}>
+    //             {input}
+    //           </div>
+    //         </div>
+    //         <div className={hintClsName}>{hint}</div>
+    //       </div>
+    //     </div>
+    //
+    //     <div className={messagesClsName}>
+    //       {errorElement}
+    //       {warningElement}
+    //     </div>
+    //   </div>
+    // )
   }
 }
 

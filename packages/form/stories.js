@@ -20,15 +20,17 @@ import FormHandler from './src/FormHandler'
 import FormFooter from './src/FormFooter'
 import Field from './src/Field'
 import Fieldset from './src/Fieldset'
+import Legend from './src/Legend'
+import FormRow from './src/FormRow'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Form', module, {
-  propTables: [ Form, FormHandler, FormFooter, Field ],
+  propTables: [ Form, FormHandler, FormFooter, Field, Fieldset, Legend, FormRow ],
   propTablesExclude: [
-    Button, Calendar, ControlGroup, Checkbox, Fieldset,
+    Button, Calendar, ControlGroup, Checkbox,
     Icon, NumberInput, PhoneInput, TextInput, SelectBox
   ]
 })
@@ -60,14 +62,14 @@ function TestFooter (props) {
   return (
     <ControlGroup position='center'>
       <Button onClick={props.handleReset}>Clear</Button>
-      <Button type='submit'>Submit</Button>
+      <Button submit>Submit</Button>
     </ControlGroup>
   )
 }
 function createButton (label) {
   return (
     <ControlGroup position='center'>
-      <Button type='submit'>{label}</Button>
+      <Button submit>{label}</Button>
     </ControlGroup>
   )
 }
@@ -139,7 +141,8 @@ addStory('Form: spread order form', readme, () => (
     spread
     className='storybook__form'
     onSubmit={e => e.preventDefault()}>
-    <Fieldset legend='Personal details'>
+    <Fieldset>
+      <Legend>Personal details</Legend>
       <Field label='Name'>
         <TextInput />
       </Field>
@@ -153,7 +156,8 @@ addStory('Form: spread order form', readme, () => (
         <PhoneInput />
       </Field>
     </Fieldset>
-    <Fieldset legend='Address'>
+    <Fieldset>
+      <Legend>Address</Legend>
       <Field label='Street'>
         <TextInput />
       </Field>
@@ -167,7 +171,8 @@ addStory('Form: spread order form', readme, () => (
         <TextInput />
       </Field>
     </Fieldset>
-    <Fieldset legend='Company details'>
+    <Fieldset>
+      <Legend>Company details</Legend>
       <Field label='Name'>
         <TextInput />
       </Field>
@@ -199,7 +204,7 @@ addStory('FormHandler', readme, () => (
       <TextInput />
     </Field>
     <ControlGroup position='center'>
-      <Button type='submit'>Send</Button>
+      <Button submit>Send</Button>
     </ControlGroup>
   </FormHandler>
 ))
@@ -218,7 +223,7 @@ addStory.controlled('FormHandler: custom error', readme, (setState, state) => (
         <TextInput />
       </Field>
       <ControlGroup position='center'>
-        <Button type='submit'>Send</Button>
+        <Button submit>Send</Button>
       </ControlGroup>
     </FormHandler>
     <br />
@@ -261,14 +266,15 @@ addStory('FormHandler: login with yup validation', readme, () => (
       <TextInput type='password' />
     </Field>
     <ControlGroup position='center'>
-      <Button type='submit'>Login</Button>
+      <Button submit>Login</Button>
     </ControlGroup>
   </FormHandler>
 ))
 
 addStory('FormHandler: order', readme, () => (
   <FormHandler onSubmit={submit}>
-    <Fieldset legend='Order details'>
+    <Fieldset>
+      <Legend>Order details</Legend>
       <Field name='apple_juice' label='Apple juice' {...commonProps}>
         <NumberInput left={<Icon name='local_bar' />} suffix='bottle' />
       </Field>
@@ -279,7 +285,8 @@ addStory('FormHandler: order', readme, () => (
         <NumberInput left={<Icon name='ev_station' />} suffix='gallon' />
       </Field>
     </Fieldset>
-    <Fieldset legend='Personal Details'>
+    <Fieldset>
+      <Legend>Personal details</Legend>
       <Field name='name' label='Name' {...commonProps}>
         <TextInput />
       </Field>
@@ -294,7 +301,8 @@ addStory('FormHandler: order', readme, () => (
       </Field>
     </Fieldset>
 
-    <Fieldset legend='Address Information'>
+    <Fieldset>
+      <Legend>Address information</Legend>
       <Field name='street' label='Street' {...commonProps}>
         <TextInput />
       </Field>
@@ -314,7 +322,7 @@ addStory('FormHandler: order', readme, () => (
       </Field>
     </Fieldset>
     <ControlGroup position='center'>
-      <Button type='submit'>Order</Button>
+      <Button submit>Order</Button>
     </ControlGroup>
   </FormHandler>
 ))
@@ -331,7 +339,8 @@ const options = [
 ]
 addStory.controlled('FormHandler: booking', readme, (setState, state) => (
   <FormHandler horizontal spread onSubmit={submit}>
-    <Fieldset legend='Journey details'>
+    <Fieldset>
+      <Legend>Journey details</Legend>
       <Field name='start_point' label='From' {...commonProps}>
         <SelectBox
           placeholder='Choose city'
@@ -360,7 +369,7 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
       </Field>
     </Fieldset>
     <ControlGroup position='center'>
-      <Button type='submit'>Book</Button>
+      <Button submit>Book</Button>
     </ControlGroup>
   </FormHandler>
 ), () => ({ from: null, to: null }))
@@ -680,63 +689,72 @@ addStory('RTL Field: compositions', readme, () => (
 // Fieldset
 
 addStory('Fieldset: default', readme, () => (
-  <Fieldset legend='Personal details'>
-    <h4>Please enter you name and surname</h4>
+  <Form>
+    <Fieldset>
+      <Legend>Personal details</Legend>
+      <FormRow><h4>Please enter you name and surname</h4></FormRow>
 
-    <Field label='Your name'>
-      <TextInput />
-    </Field>
-    <Field label='Your surname'>
-      <TextInput />
-    </Field>
-    <Field>
-      <Checkbox>
-        I'm not a robot
-      </Checkbox>
-    </Field>
-
-    <p>* all fields are required</p>
-  </Fieldset>
-))
-
-addStory('Fieldset: additional legend', readme, () => (
-  <Fieldset legend='Personal details' asideLegend={<span><Icon name='person' />user</span>}>
-    <h4>Please enter you name and surname</h4>
-    <Field label='Your name' hint='Type your fake name' horizontal>
-      <TextInput />
-    </Field>
-    <Field label='Your surname' hint='Type your surname' horizontal>
-      <TextInput />
-    </Field>
-    <Field spread horizontal>
-      <Checkbox>
-        I'm not a robot
-      </Checkbox>
-    </Field>
-
-    <p>* all fields are required</p>
-  </Fieldset>
-))
-
-addStory('Fieldset: two fieldsets', readme, () => (
-  <div>
-    <Fieldset legend='Personal details'>
-      <h4>Please enter you name and surname</h4>
-      <Field label='Your name' hint='Type your fake name' horizontal>
+      <Field label='Your name'>
         <TextInput />
       </Field>
-      <Field label='Your surname' hint='Type your surname' horizontal>
+      <Field label='Your surname'>
         <TextInput />
       </Field>
-      <Field spread horizontal>
+      <Field>
         <Checkbox>
           I'm not a robot
         </Checkbox>
       </Field>
 
-      <p>* all fields are required</p>
+      <p style={{ fontSize: '0.9em', color: '#999' }}>* all fields are required</p>
     </Fieldset>
-    <Fieldset legend='Payments details'>
+  </Form>
+))
+
+addStory('Fieldset: additional legend', readme, () => (
+  <Form horizontal>
+    <Fieldset>
+      <Legend aside={<span><Icon name='person' />user</span>}>Personal details</Legend>
+
+      <Field label='Your name' hint='Type your fake name'>
+        <TextInput />
+      </Field>
+      <Field label='Your surname' hint='Type your surname'>
+        <TextInput />
+      </Field>
+      <Field spread>
+        <Checkbox>
+          I'm not a robot
+        </Checkbox>
+      </Field>
+
+      <p style={{ fontSize: '0.9em', color: '#999' }}>* all fields are required</p>
+    </Fieldset>
+  </Form>
+))
+
+addStory('Fieldset: two fieldsets', readme, () => (
+  <Form horizontal>
+    <Fieldset>
+      <Legend>Personal details</Legend>
+
+      <Field label='Your name' hint='Type your fake name'>
+        <TextInput />
+      </Field>
+      <Field label='Your surname' hint='Type your surname'>
+        <TextInput />
+      </Field>
+      <Field spread>
+        <Checkbox>
+          I'm not a robot
+        </Checkbox>
+      </Field>
+
+      <p style={{ fontSize: '0.9em', color: '#999' }}>* all fields are required</p>
+    </Fieldset>
+    <Fieldset>
+      <Legend>Payment details</Legend>
+
       <Field label='Your bank name' hint='We need your bank name to handle your payment face to face' horizontal>
         <TextInput />
       </Field>
@@ -746,7 +764,7 @@ addStory('Fieldset: two fieldsets', readme, () => (
         </Checkbox>
       </Field>
 
-      <p>* all fields are required</p>
+      <p style={{ fontSize: '0.9em', color: '#999' }}>* all fields are required</p>
     </Fieldset>
-  </div>
+  </Form>
 ))

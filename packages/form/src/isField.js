@@ -1,27 +1,17 @@
 import Field from './Field'
+import isElementOfType from './isElementOfType'
+
+const EXPECTED_TYPES = [ Field ]
 
 /**
  * Checks if node is a Field component
  *
- * @param node
+ * @param {*} node
+ * @param {function} Type
  * @returns {boolean}
  */
 function isField (node) {
-  if (!node || typeof node !== 'object' || typeof node.type !== 'function') {
-    return false
-  }
-
-  if (node.type === Field) {
-    return true
-  }
-
-  const Component = node.type
-  // This is required to work properly ith react-hot-loader
-  const CallComponent = Component.__reactstandin__getCurrent
-    ? Component.__reactstandin__getCurrent()
-    : Component
-
-  return CallComponent === Field
+  return isElementOfType(node, EXPECTED_TYPES)
 }
 
 export default isField

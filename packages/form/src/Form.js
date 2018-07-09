@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 
 import isField from './isField'
+import isRowWrappable from './isRowWrappable'
 import transformChildrenRecursively from './transformChildrenRecursively'
+
+import FormRow from './FormRow'
 
 export const moduleName = 'form'
 
@@ -20,6 +23,44 @@ const propTypes = {
 
   /** Only for 'horizontal': should spread Field input when there is no hint? */
   spread: PropTypes.bool
+}
+
+function wrapWithRow (node, props) {
+  const { horizontal, spread } = props
+
+  return (
+    <FormRow horizontal={horizontal} spread={spread}>{node}</FormRow>
+  )
+}
+
+function wrapChildrenWithRows (children, props) {
+  let isModified = false
+
+  const nextChildren = React.Children.map(children, node => {
+    if (isRowWrappable(node)) {
+      isModified = true
+      return wrapWithRow(node, props)
+    }
+
+    if (!node || !node.props || !node.props.children) {
+      return node
+    }
+
+    const innerChildren = wrapChildrenWithRows(node.props.children, props)
+
+    if (innerChildren === node.props.children) {
+      return node
+    }
+
+    isModified = true
+    return React.cloneElement(node, { ref: node.ref }, innerChildren)
+  })
+
+  return isModified ? nextChildren : children
+}
+
+function isConfigurableNode (node) {
+  return isField(node) || isField(node, FormRow)
 }
 
 /**
@@ -45,7 +86,10 @@ class Form extends React.Component {
       return children
     }
 
-    return transformChildrenRecursively(children, node => this.transformNode(node), isField)
+    return wrapChildrenWithRows(
+      transformChildrenRecursively(children, node => this.transformNode(node), isConfigurableNode),
+      this.props
+    )
   }
 
   /**
