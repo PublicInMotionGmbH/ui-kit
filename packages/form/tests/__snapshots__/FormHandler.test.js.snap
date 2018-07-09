@@ -14,41 +14,45 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
     name="test"
   >
     <div
-      className="talixo-field__inner"
+      className="talixo-form-row"
     >
       <div
-        className="talixo-field__label"
+        className="talixo-form-row__start"
       />
       <div
-        className="talixo-field__wrapper"
+        className="talixo-form-row__wrapper"
       >
         <div
-          className="talixo-field__wrapper-inner"
+          className="talixo-form-row__inner"
         >
           <div
-            className="talixo-field__shallow-label"
-          />
-          <div
-            className="talixo-field__input"
+            className="talixo-form-row__content"
           >
             <div
-              className="talixo-text-input talixo-text-input--empty"
+              className="talixo-field__shallow-label"
+            />
+            <div
+              className="talixo-field__input"
             >
-              <input
-                className="talixo-text-input__input"
-                id="form_field_1"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                style={null}
-                type="text"
-                value=""
-              />
+              <div
+                className="talixo-text-input talixo-text-input--empty"
+              >
+                <input
+                  className="talixo-text-input__input"
+                  id="form_field_1"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  style={null}
+                  type="text"
+                  value=""
+                />
+              </div>
             </div>
           </div>
         </div>
         <div
-          className="talixo-field__hint"
+          className="talixo-form-row__end"
         />
       </div>
     </div>
@@ -64,41 +68,45 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
       name="test2"
     >
       <div
-        className="talixo-field__inner"
+        className="talixo-form-row"
       >
         <div
-          className="talixo-field__label"
+          className="talixo-form-row__start"
         />
         <div
-          className="talixo-field__wrapper"
+          className="talixo-form-row__wrapper"
         >
           <div
-            className="talixo-field__wrapper-inner"
+            className="talixo-form-row__inner"
           >
             <div
-              className="talixo-field__shallow-label"
-            />
-            <div
-              className="talixo-field__input"
+              className="talixo-form-row__content"
             >
               <div
-                className="talixo-text-input talixo-text-input--empty"
+                className="talixo-field__shallow-label"
+              />
+              <div
+                className="talixo-field__input"
               >
-                <input
-                  className="talixo-text-input__input"
-                  id="form_field_2"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onFocus={[Function]}
-                  style={null}
-                  type="text"
-                  value=""
-                />
+                <div
+                  className="talixo-text-input talixo-text-input--empty"
+                >
+                  <input
+                    className="talixo-text-input__input"
+                    id="form_field_2"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    style={null}
+                    type="text"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
           </div>
           <div
-            className="talixo-field__hint"
+            className="talixo-form-row__end"
           />
         </div>
       </div>
@@ -111,41 +119,45 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
     className="talixo-field"
   >
     <div
-      className="talixo-field__inner"
+      className="talixo-form-row"
     >
       <div
-        className="talixo-field__label"
+        className="talixo-form-row__start"
       />
       <div
-        className="talixo-field__wrapper"
+        className="talixo-form-row__wrapper"
       >
         <div
-          className="talixo-field__wrapper-inner"
+          className="talixo-form-row__inner"
         >
           <div
-            className="talixo-field__shallow-label"
-          />
-          <div
-            className="talixo-field__input"
+            className="talixo-form-row__content"
           >
             <div
-              className="talixo-text-input talixo-text-input--empty"
+              className="talixo-field__shallow-label"
+            />
+            <div
+              className="talixo-field__input"
             >
-              <input
-                className="talixo-text-input__input"
-                id="form_field_3"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
-                style={null}
-                type="text"
-                value=""
-              />
+              <div
+                className="talixo-text-input talixo-text-input--empty"
+              >
+                <input
+                  className="talixo-text-input__input"
+                  id="form_field_3"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  style={null}
+                  type="text"
+                  value=""
+                />
+              </div>
             </div>
           </div>
         </div>
         <div
-          className="talixo-field__hint"
+          className="talixo-form-row__end"
         />
       </div>
     </div>

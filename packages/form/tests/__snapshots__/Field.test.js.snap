@@ -4,39 +4,25 @@ exports[`<Field /> renders children correctly 1`] = `
 <div
   className="talixo-field"
 >
-  <div
-    className="talixo-field__inner"
+  <FormRow
+    start={null}
   >
     <div
-      className="talixo-field__label"
+      className="talixo-field__shallow-label"
     />
     <div
-      className="talixo-field__wrapper"
+      className="talixo-field__input"
     >
-      <div
-        className="talixo-field__wrapper-inner"
-      >
-        <div
-          className="talixo-field__shallow-label"
-        />
-        <div
-          className="talixo-field__input"
-        >
-          <TextInput
-            InputComponent="input"
-            error={false}
-            id="form_field_1"
-            onBlur={[Function]}
-            onFocus={[Function]}
-            type="text"
-          />
-        </div>
-      </div>
-      <div
-        className="talixo-field__hint"
+      <TextInput
+        InputComponent="input"
+        error={false}
+        id="form_field_1"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        type="text"
       />
     </div>
-  </div>
+  </FormRow>
   <div
     className="talixo-field__messages"
   />

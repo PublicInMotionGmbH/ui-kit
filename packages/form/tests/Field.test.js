@@ -132,20 +132,6 @@ describe('warning', () => {
   })
 })
 
-describe('hint', () => {
-  beforeEach(() => {
-    resetIdCounter()
-  })
-
-  it('renders correctly', () => {
-    const hint = 'Random hint'
-    const wrapper = createWrapper({ hint })
-    const hintNode = wrapper.find('.talixo-field__hint')
-
-    expect(hintNode.exists()).toEqual(true)
-  })
-})
-
 describe('onChange', () => {
   beforeEach(() => {
     resetIdCounter()
