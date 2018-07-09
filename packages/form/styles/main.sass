@@ -1,2 +1,180 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+// Calculate required data
+
+$form-field-input-width: 100% - $form-field-label-width - $form-field-hint-width
+$form-field-wrapper-width: 100% - $form-field-label-width
+$form-field-minimum-input-width: 100% - $form-field-hint-width * 100% / $form-field-wrapper-width
+$form-field-relative-hint-width: $form-field-hint-width * 100% / $form-field-wrapper-width
+$form-field-relative-input-width: 100% - $form-field-relative-hint-width
+$form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form-field-wrapper-width
+
+@include module('form-footer')
+  border-top: 2px solid $form-footer-border-color
+  padding: $form-footer-padding-vertical $form-footer-padding-horizontal
+
+@include module('field')
+  box-sizing: border-box
+  margin: $form-field-margin 0
+
+  &__label,
+  &__shallow-label,
+  &__message-before
+    box-sizing: border-box
+    font-size: $form-field-label-font-size
+    font-weight: $form-field-label-font-weight
+
+  &__label,
+  &__shallow-label
+    color: $form-field-label-color
+    margin-bottom: $form-field-label-margin
+
+  &__shallow-label
+    display: none
+
+  &__message,
+  &__hint
+    box-sizing: border-box
+    margin-top: $form-field-label-margin
+
+  &__hint
+    font-size: $form-field-hint-font-size
+    font-weight: $form-field-hint-font-weight
+    color: $form-field-hint-color
+
+  &__message
+    font-size: $form-field-message-font-size
+    font-weight: $form-field-message-font-weight
+
+  &__message--error
+    color: $form-field-error-color
+
+  &__message--warning
+    color: $form-field-warning-color
+
+  &__message + &__message,
+  &--hint:not(&--horizontal) &__message
+    margin-top: 0
+
+  &__inner,
+  &__message,
+  &__wrapper,
+  &__message-wrapper,
+  &__message-inner
+    box-sizing: border-box
+
+@include module('field')
+  position: relative
+
+  &--horizontal &__inner,
+  &--horizontal &__message
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: stretch
+    width: 100%
+
+  &--horizontal &__hint,
+  &--horizontal &__label,
+  &--horizontal &__wrapper,
+  &--horizontal &__message-before,
+  &--horizontal &__message-wrapper,
+  &--horizontal &__message-after
+    flex: 1 1 $form-field-label-width
+
+  &--horizontal &__wrapper,
+  &--horizontal &__message-wrapper
+    flex: 1 1 $form-field-wrapper-width
+    min-width: $form-field-minimum-input-width
+
+  &--horizontal &__shallow-label
+    box-sizing: border-box
+    speak: none // FIXME: SHALLOW LABEL is a HACK!
+    display: flex
+    flex-direction: column
+    justify-content: center
+    position: absolute
+    left: 0
+    height: 100%
+    max-height: $form-field-base-height
+    text-align: right
+    width: $form-field-label-width
+    min-width: #{$form-field-label-minimum-width - $form-field-gutter}
+    margin: 0
+    padding: 0 $form-field-gutter 0 0
+
+  &--horizontal &__wrapper,
+  &--horizontal &__message-wrapper
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: stretch
+    width: 100%
+
+  &--horizontal &__hint,
+  &--horizontal &__message-after
+    flex: 1 1 $form-field-relative-hint-width
+    padding: 0 $form-field-gutter
+
+  &--horizontal &__hint
+    margin: $form-field-label-margin 0
+
+  &--horizontal &__wrapper-inner,
+  &--horizontal &__message-inner
+    flex: 1 1 $form-field-relative-input-width
+    min-width: $form-field-relative-input-width
+
+  &--horizontal &__label,
+  &--horizontal &__message-before
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    align-self: flex-start
+    max-height: $form-field-base-height
+    height: 100%
+
+  &--horizontal &__label:before,
+  &--horizontal &__hint:before,
+  &--horizontal &__message-before:before,
+  &--horizontal &__message-after:before
+    content: ''
+    display: block
+    height: 0
+
+  &--horizontal &__label:before,
+  &--horizontal &__message-before:before
+    width: #{$form-field-label-minimum-width - $form-field-gutter}
+
+  &--horizontal &__hint:before,
+  &--horizontal &__message-after:before
+    width: #{$form-field-hint-minimum-width - $form-field-gutter}
+
+  &--horizontal &__input,
+  &--horizontal &__shallow-label
+    background: $form-field-background-color
+
+  &--horizontal &__input
+    position: relative
+    z-index: 1
+
+  &--focus &__input
+    z-index: 2
+
+@include module('field')
+  &--spread:not(&--hint) &__hint
+    display: none
+
+// RTL
+
+@include module('field')
+  [dir=rtl] &__shallow-label
+    right: 0
+    left: auto
+    text-align: left
+
+  // Vertical
+  [dir=rtl] &__shallow-label,
+  [dir=rtl] &__message-before
+    padding-right: 0
+    padding-left: $form-field-gutter

@@ -5,22 +5,22 @@ import { Button } from '@talixo/button'
 import { TextInput } from '@talixo/text-input'
 
 import FormHandler from '../src/FormHandler'
-import FormField from '../src/FormField'
+import Field from '../src/Field'
 
 const createWrapper = (props) => mount(
   <FormHandler {...props}>
     <br />
-    <FormField name='test'>
+    <Field name='test'>
       <TextInput />
-    </FormField>
+    </Field>
     <div>
-      <FormField name='test2'>
+      <Field name='test2'>
         <TextInput />
-      </FormField>
+      </Field>
     </div>
-    <FormField>
+    <Field>
       <TextInput />
-    </FormField>
+    </Field>
     <Button submit>Test</Button>
   </FormHandler>
 )
@@ -38,7 +38,7 @@ describe('<FormHandler />', () => {
       expect(wrapper).toMatchSnapshot()
     })
     it('should render all children', () => {
-      expect(wrapper.find('.talixo-form-field')).toHaveLength(3)
+      expect(wrapper.find('.talixo-field')).toHaveLength(3)
       expect(wrapper.find('br')).toHaveLength(1)
       expect(wrapper.find('.talixo-button')).toHaveLength(1)
     })
@@ -51,9 +51,9 @@ describe('<FormHandler />', () => {
     beforeEach(() => {
       wrapper = mount(
         <FormHandler>
-          <FormField name='test' onChange={onChange} onBlur={onBlur}>
+          <Field name='test' onChange={onChange} onBlur={onBlur}>
             <TextInput />
-          </FormField>
+          </Field>
         </FormHandler>
       )
       input = wrapper.find('.talixo-text-input__input')

@@ -1,6 +1,8 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
+import { Field } from '@talixo/form'
+
 import CreditCardInput from '../src/CreditCardInput'
 
 const values = {
@@ -23,7 +25,7 @@ describe('<CreditCardInput />', () => {
   it('passes values correctly', () => {
     const wrapper = shallow(<CreditCardInput values={values} />)
 
-    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n.props().value)
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find(Field).map(n => n.props().value)
 
     expect(cardHolderName).toEqual(values.cardHolderName)
     expect(cardNumber).toEqual(values.cardNumber)
@@ -46,7 +48,7 @@ describe('<CreditCardInput />', () => {
       cvcLabel={customValues.cvcLabel}
     />)
 
-    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n)
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find(Field).map(n => n)
 
     expect(cardHolderName.props().label).toEqual(customValues.cardHolderNameLabel)
     expect(cardNumber.props().label).toEqual(customValues.cardNumberLabel)
@@ -70,7 +72,7 @@ describe('change', () => {
     const onChange = jest.fn().mockImplementation((value, name) => { output[name] = value })
     const wrapper = shallow(<CreditCardInput onChange={onChange} />)
 
-    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find('FormField').map(n => n)
+    const [ cardHolderName, cardNumber, cardExpirationDate, cvc ] = wrapper.find(Field).map(n => n)
 
     cardHolderName.simulate('change', values.cardHolderName)
     cardNumber.simulate('change', values.cardNumber)

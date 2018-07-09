@@ -1,9 +1,9 @@
 import Form from './src/Form'
 import FormHandler from './src/FormHandler'
-import FormField from './src/FormField'
+import Field from './src/Field'
 
 export {
   Form,
   FormHandler,
-  FormField
+  Field
 }

@@ -28,10 +28,12 @@ Property name   | Type      | Default | Description
 children        | node      | n/a     | Children to be put inside form.
 className       | string    | n/a     | Additional class name passed to wrapper.
 footerComponent | node      | n/a     | Component to be displayed in footer.
+horizontal      | bool      | n/a     | Default `horizontal` property passed to `Field`s inside
+spread          | bool      | n/a     | Default `spread` property passed to `Field`s inside
 
 ### FormHandler
 
-It allows any props which are allowed for `Formik` and `form`. Additionally, it handles some differently:
+It allows any props which are allowed for `Formik` and any props available in `FormComponent` (by default `Form`). Additionally, it handles some differently:
 
 Property name      | Type      | Default | Description                    
 -------------------|-----------|:-------:|-------------------------------------------------------------------------
@@ -43,7 +45,7 @@ values             | object    | n/a     | Initial values of form fields.
 formatErrorMessage | function  | n/a     | Default formatter for error messages in `FormField`s inside.
 FormComponent      | component | `Form`  | Component used as Form wrapper.
 
-### FormField
+### Field
 
 Property name      | Type      | Default  | Description
 -------------------|-----------|:--------:|--------------------------------
@@ -57,7 +59,16 @@ onChange           | function  | n/a      | Event called after input has been ch
 onFocus            | function  | n/a      | Event called after input has gained focus.
 warning            | node      | n/a      | Displayed warning message.
 value              | any       | n/a      | Value passed to input.
+horizontal         | bool      | `false`  | Should it have horizontal layout?
+spread             | bool      | `false`  | Only for `horizontal`; should it expand input width, when there is no hint?
 formatErrorMessage | function  | `x => x` | Formatter for error & warning messages.
+
+### FormFooter
+
+Property name      | Type      | Default  | Description
+-------------------|-----------|:--------:|--------------------------------
+className          | string    | n/a      | Additional class name passed to footer.
+children           | node      | n/a      | Elements to put inside footer.
 
 ## Changelog
 

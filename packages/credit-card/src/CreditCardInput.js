@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { TextInput } from '@talixo/text-input'
-import { FormHandler, FormField } from '@talixo/form'
+import { FormHandler, Field } from '@talixo/form'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -98,7 +98,7 @@ function CreditCardInput (props) {
     <FormHandler className={formhandlerClsName} onSubmit={onSubmit} values={values}>
       <legend><h3>{header}</h3></legend>
       <div className={contentClsName}>
-        <FormField
+        <Field
           name='cardHolderName'
           label={cardHolderNameLabel}
           onBlur={onBlur}
@@ -109,8 +109,8 @@ function CreditCardInput (props) {
           <TextInput
             autoComplete='cc-full-name'
           />
-        </FormField>
-        <FormField
+        </Field>
+        <Field
           name='cardNumber'
           label={cardNumberLabel}
           onBlur={onBlur}
@@ -121,8 +121,8 @@ function CreditCardInput (props) {
           <CreditCardNumberInput
             autoComplete='cc-number'
           />
-        </FormField>
-        <FormField
+        </Field>
+        <Field
           name='cardExpirationDate'
           label={cardExpirationDateLabel}
           onBlur={onBlur}
@@ -131,8 +131,8 @@ function CreditCardInput (props) {
           value={values.cardExpirationDate}
         >
           <ExpirationDateInput />
-        </FormField>
-        <FormField
+        </Field>
+        <Field
           name='cvc'
           label={cvcLabel}
           onBlur={onBlur}
@@ -145,7 +145,7 @@ function CreditCardInput (props) {
             maxLength={4}
             size={4}
           />
-        </FormField>
+        </Field>
       </div>
     </FormHandler>
   )

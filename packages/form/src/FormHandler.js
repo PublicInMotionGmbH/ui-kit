@@ -3,36 +3,9 @@ import PropTypes from 'prop-types'
 
 import { Formik } from 'formik'
 
-import { buildClassName } from '@talixo/shared'
-
 import Form from './Form'
-import FormField from './FormField'
-
-const moduleName = 'form-handler'
-
-/**
- * Checks if node is a FormField component
- *
- * @param node
- * @returns {boolean}
- */
-export function isFormField (node) {
-  if (!node || typeof node !== 'object' || typeof node.type !== 'function') {
-    return false
-  }
-
-  if (node.type === FormField) {
-    return true
-  }
-
-  const Component = node.type
-  // This is required to work properly ith react-hot-loader
-  const CallComponent = Component.__reactstandin__getCurrent
-    ? Component.__reactstandin__getCurrent()
-    : Component
-
-  return CallComponent === FormField
-}
+import isField from './isField'
+import transformChildrenRecursively from './transformChildrenRecursively'
 
 const propTypes = {
   /** Additional class name for form. */
@@ -50,7 +23,7 @@ const propTypes = {
   /** Initial values of form fields. */
   values: PropTypes.object,
 
-  /** Format error messages, passed to FormField */
+  /** Format error messages, passed to Field */
   formatErrorMessage: PropTypes.func,
 
   /** Component used for Form */
@@ -60,6 +33,8 @@ const propTypes = {
 const defaultProps = {
   FormComponent: Form
 }
+
+const noop = () => {}
 
 /**
  * Component which represents Form Handler
@@ -76,7 +51,7 @@ const defaultProps = {
  */
 class FormHandler extends React.PureComponent {
   /**
-   * Update errors and values if changed from props
+   * Update errors and values if changed from props.
    *
    * @param props
    */
@@ -113,86 +88,76 @@ class FormHandler extends React.PureComponent {
   }
 
   /**
-   * Transform nodes so they can be recognized by Formik
+   * Transform nodes so they can be recognized by Formik.
+   *
+   * @param {array} children
+   * @param {object} options
+   * @param {function} [options.formatErrorMessage]
+   * @param {function} options.setFieldValue
+   * @param {function} options.handleBlur
+   * @param {array} options.values
+   * @param {array} options.touched
+   * @param {array} options.errors
+   *
+   * @returns {array}
+   */
+  buildNodesList (children, options) {
+    return transformChildrenRecursively(
+      children,
+      node => this.transformNode(node, options),
+      isField
+    )
+  }
+
+  /**
+   * Transform single node, so they can be recognized by Formik.
    *
    * @param {*} node
-   * @param {object} props
-   * @param {function} [props.formatErrorMessage]
-   * @param {function} props.setFieldValue
-   * @param {function} props.handleBlur
-   * @param {array} props.values
-   * @param {array} props.touched
-   * @param {array} props.errors
+   * @param {object} options
+   * @param {function} [options.formatErrorMessage]
+   * @param {function} options.setFieldValue
+   * @param {function} options.handleBlur
+   * @param {array} options.values
+   * @param {array} options.touched
+   * @param {array} options.errors
    *
    * @returns {*}
    */
-  transformNode = (node, props) => {
-    const { setFieldValue, handleBlur, values, touched, errors, formatErrorMessage } = props
+  transformNode (node, options) {
+    const { setFieldValue, handleBlur, values, touched, errors, formatErrorMessage } = options
+    const { name, onChange, onBlur } = node.props
 
-    // Return if node is empty or type of string
-    if (!node || typeof node !== 'object') {
+    // Omit adding node to Formik if it has no name property
+    // but add it to children
+    if (name == null) {
       return node
     }
 
-    // Check if node is FormField component
-    if (isFormField(node)) {
-      const name = node.props.name
+    // Modify props of Field
+    function _onChange (value) {
+      setFieldValue(name, value)
 
-      // Omit adding node to Formik if it has no name property
-      // but add it to children
-      if (name == null) {
-        return node
+      if (onChange) {
+        onChange(value)
       }
-
-      // Modify props of FormField
-      const onChange = (value) => {
-        setFieldValue(name, value)
-        if (node.props.onChange) {
-          node.props.onChange(value)
-        }
-      }
-
-      const onBlur = (e) => {
-        handleBlur({ persist: () => {}, target: { name: name } })
-        if (node.props.onBlur) {
-          node.props.onBlur(e)
-        }
-      }
-
-      return React.cloneElement(node, {
-        ref: node.ref,
-        value: values[name],
-        error: touched[name] ? errors[name] : null,
-        formatErrorMessage: node.props.formatErrorMessage || formatErrorMessage,
-        onChange,
-        onBlur
-      })
     }
 
-    // If node is not a FormField component and has no children return node
-    if (!node.props.children) {
-      return node
+    function _onBlur (e) {
+      handleBlur({ persist: noop, target: { name } })
+
+      if (onBlur) {
+        onBlur(e)
+      }
     }
 
-    // Check recursively if any child of given node is a FormField component
-    let isModified = false
-
-    const children = React.Children.map(node.props.children, node => {
-      const nextNode = this.transformNode(node, props)
-
-      if (nextNode !== node) {
-        isModified = true
-      }
-
-      return nextNode
+    return React.cloneElement(node, {
+      ref: node.ref,
+      value: values[name],
+      error: touched[name] ? errors[name] : null,
+      formatErrorMessage: node.props.formatErrorMessage || formatErrorMessage,
+      onChange: _onChange,
+      onBlur: _onBlur
     })
-
-    // if node was modified inside map return this node with modification
-    if (isModified) {
-      return React.cloneElement(node, { ref: node.ref }, children)
-    }
-
-    return node
   }
 
   /**
@@ -218,14 +183,10 @@ class FormHandler extends React.PureComponent {
       }
     }
 
-    const formCls = buildClassName(moduleName, className)
-    const elements = React.Children.map(children, node => this.transformNode(node, props))
+    const elements = this.buildNodesList(children, props)
 
-    // TODO: Shouldn't it use @talixo/form instead?
-    // TODO: Couldn't it have onChange event as well?
     return (
       <FormComponent
-        className={formCls}
         method='POST'
         onSubmit={handleSubmit}
         {...passedProps}>

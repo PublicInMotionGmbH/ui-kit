@@ -18,14 +18,15 @@ import yup from 'yup'
 
 import Form from './src/Form'
 import FormHandler from './src/FormHandler'
-import FormField from './src/FormField'
+import FormFooter from './src/FormFooter'
+import Field from './src/Field'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Form', module, {
-  propTables: [ Form, FormHandler ],
+  propTables: [ Form, FormHandler, FormFooter, Field ],
   propTablesExclude: [
     Button, Calendar, ControlGroup, Checkbox, Fieldset,
     Icon, NumberInput, PhoneInput, TextInput, SelectBox
@@ -35,6 +36,7 @@ const addStory = createStoriesFactory('Form', module, {
 // Events
 const blur = action('blur')
 const change = action('change')
+const changeForm = action('changeForm')
 const focus = action('focus')
 const submit = action('submit')
 const commonProps = { onChange: change, onBlur: blur, onFocus: focus }
@@ -72,7 +74,7 @@ function createButton (label) {
 
 // Stories
 
-addStory('default', readme, () => (
+addStory('Form: default', readme, () => (
   <Form onSubmit={e => e.preventDefault()}>
     <h2>This is a default form wrapper</h2>
     <TextInput placeholder='Name' left={<Icon name='person' />} /><br />
@@ -81,116 +83,121 @@ addStory('default', readme, () => (
   </Form>
 ))
 
-addStory('with footer component', readme, () => (
-  <Form footerComponent={<TestFooter />} onSubmit={e => e.preventDefault()}>
+addStory('Form: with footer', readme, () => (
+  <Form onSubmit={e => e.preventDefault()}>
     <h2>This is a default form wrapper</h2>
     <TextInput placeholder='Name' left={<Icon name='person' />} /><br />
     <TextInput placeholder='Telephone number' left={<Icon name='phone' />} /><br />
     <TextInput placeholder='Email address' left={<Icon name='mail' />} /><br />
+    <FormFooter>
+      <TestFooter />
+    </FormFooter>
   </Form>
 ))
 
-addStory('login form', readme, () => (
-  <Form footerComponent={createButton('Login')}>
-    <FormField label='Username / Email' hint='Type in our email address' >
+addStory('Form: horizontal login', readme, () => (
+  <Form horizontal>
+    <Field label='Username / Email' hint='Type in your email address' >
       <TextInput />
-    </FormField>
-    <br />
-    <FormField
+    </Field>
+    <Field
       label='Password'
       hint='Type in your super strong password'
     >
       <TextInput type='password' />
-    </FormField>
+    </Field>
+    <FormFooter>
+      {createButton('Login')}
+    </FormFooter>
   </Form>
 ))
 
-addStory('register form', readme, () => (
-  <Form footerComponent={createButton('Register')} className='storybook__form' onSubmit={e => e.preventDefault()}>
-    <FormField label='Username / Email' hint='Type in our email address' >
+addStory('Form: horizontal register', readme, () => (
+  <Form
+    horizontal
+    className='storybook__form'
+    onSubmit={e => e.preventDefault()}
+  >
+    <Field label='Username / Email' hint='Type in your email address' >
       <TextInput />
-    </FormField>
-    <br />
-    <FormField label='Password' hint='Type in your super strong password'>
+    </Field>
+    <Field label='Password' hint='Type in your super strong password'>
       <TextInput type='password' />
-    </FormField>
-    <br />
-    <FormField label='Terms'>
+    </Field>
+    <Field spread>
       <Checkbox>By clicking Register, you agree to our Terms and Conditions</Checkbox>
-    </FormField>
+    </Field>
+    <FormFooter>
+      {createButton('Register')}
+    </FormFooter>
   </Form>
 ))
 
-addStory('order form', readme, () => (
-  <Form footerComponent={createButton('Confirm')} className='storybook__form' onSubmit={e => e.preventDefault()}>
+addStory('Form: spread order form', readme, () => (
+  <Form
+    horizontal
+    spread
+    className='storybook__form'
+    onSubmit={e => e.preventDefault()}>
     <Fieldset legend='Personal details'>
-      <FormField label='Name'>
+      <Field label='Name'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Surname'>
+      </Field>
+      <Field label='Surname'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Email address'>
+      </Field>
+      <Field label='Email address'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Phone number'>
+      </Field>
+      <Field label='Phone number'>
         <PhoneInput />
-      </FormField>
+      </Field>
     </Fieldset>
     <Fieldset legend='Address'>
-      <FormField label='Street'>
+      <Field label='Street'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='House number'>
+      </Field>
+      <Field label='House number'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='City'>
+      </Field>
+      <Field label='City'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='ZIP code'>
+      </Field>
+      <Field label='ZIP code'>
         <TextInput />
-      </FormField>
+      </Field>
     </Fieldset>
     <Fieldset legend='Company details'>
-      <FormField label='Name'>
+      <Field label='Name'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='TIN'>
+      </Field>
+      <Field label='TIN'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Address'>
+      </Field>
+      <Field label='Address'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='City'>
+      </Field>
+      <Field label='City'>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Invoice'>
+      </Field>
+      <Field>
         <Checkbox>Include VAT invoice</Checkbox>
-      </FormField>
+      </Field>
     </Fieldset>
+    <FormFooter>
+      {createButton('Confirm')}
+    </FormFooter>
   </Form>
 ))
 
 addStory('FormHandler', readme, () => (
-  <FormHandler onSubmit={submit}>
-    <FormField label='Name' name='name' {...commonProps}>
+  <FormHandler onChange={changeForm} onSubmit={submit}>
+    <Field label='Name' name='name' {...commonProps}>
       <TextInput />
-    </FormField>
-    <br />
-    <FormField label='Email' name='email' {...commonProps}>
+    </Field>
+    <Field label='Email' name='email' {...commonProps}>
       <TextInput />
-    </FormField>
-    <br />
+    </Field>
     <ControlGroup position='center'>
       <Button type='submit'>Send</Button>
     </ControlGroup>
@@ -204,14 +211,12 @@ addStory.controlled('FormHandler: custom error', readme, (setState, state) => (
       onSubmit={submit}
       errors={{ name: state.name, email: state.email }}
     >
-      <FormField label='Name' name='name' {...commonProps}>
+      <Field label='Name' name='name' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField label='Email' name='email' {...commonProps}>
+      </Field>
+      <Field label='Email' name='email' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
+      </Field>
       <ControlGroup position='center'>
         <Button type='submit'>Send</Button>
       </ControlGroup>
@@ -219,21 +224,20 @@ addStory.controlled('FormHandler: custom error', readme, (setState, state) => (
     <br />
     <br />
     <br />
-    <FormField
+    <Field
       label='Custom name error'
       hint='It will be added after corresponding field is blurred'
       onChange={value => { setState({ name: value }) }}
     >
       <TextInput />
-    </FormField>
-    <br />
-    <FormField
+    </Field>
+    <Field
       label='Custom email error'
       hint='It will be added after corresponding field is blurred'
       onChange={value => { setState({ email: value }) }}
     >
       <TextInput />
-    </FormField>
+    </Field>
   </div>
 ), () => ({
   name: ''
@@ -246,18 +250,16 @@ const loginSchema = yup.object().shape({
 
 addStory('FormHandler: login with yup validation', readme, () => (
   <FormHandler onSubmit={submit} validationSchema={loginSchema}>
-    <FormField
+    <Field
       name='name'
       label='Username / Email address'
       hint='Your super fancy username or email address'
       {...commonProps}>
       <TextInput />
-    </FormField>
-    <br />
-    <FormField name='password' label='Password' {...commonProps}>
+    </Field>
+    <Field name='password' label='Password' {...commonProps}>
       <TextInput type='password' />
-    </FormField>
-    <br />
+    </Field>
     <ControlGroup position='center'>
       <Button type='submit'>Login</Button>
     </ControlGroup>
@@ -267,57 +269,49 @@ addStory('FormHandler: login with yup validation', readme, () => (
 addStory('FormHandler: order', readme, () => (
   <FormHandler onSubmit={submit}>
     <Fieldset legend='Order details'>
-      <FormField name='apple_juice' label='Apple juice' {...commonProps}>
-        <NumberInput left={<Icon name='local_bar' />} suffix='bottle' style={{ width: '30%' }} />
-      </FormField>
-      <br />
-      <FormField name='pizza' label='Pizza' {...commonProps}>
-        <NumberInput left={<Icon name='restaurant' />} suffix='slice' style={{ width: '30%' }} />
-      </FormField>
-      <br />
-      <FormField name='fuel' label='Fuel' {...commonProps}>
-        <NumberInput left={<Icon name='ev_station' />} suffix='gallon' style={{ width: '30%' }} />
-      </FormField>
+      <Field name='apple_juice' label='Apple juice' {...commonProps}>
+        <NumberInput left={<Icon name='local_bar' />} suffix='bottle' />
+      </Field>
+      <Field name='pizza' label='Pizza' {...commonProps}>
+        <NumberInput left={<Icon name='restaurant' />} suffix='slices' />
+      </Field>
+      <Field name='fuel' label='Fuel' {...commonProps}>
+        <NumberInput left={<Icon name='ev_station' />} suffix='gallon' />
+      </Field>
     </Fieldset>
     <Fieldset legend='Personal Details'>
-      <FormField name='name' label='Name' {...commonProps}>
+      <Field name='name' label='Name' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='surname' label='Surname' {...commonProps}>
+      </Field>
+      <Field name='surname' label='Surname' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='email' label='Email' {...commonProps}>
+      </Field>
+      <Field name='email' label='Email' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='phone' label='Phone number' {...commonProps}>
+      </Field>
+      <Field name='phone' label='Phone number' {...commonProps}>
         <PhoneInput />
-      </FormField>
+      </Field>
     </Fieldset>
 
     <Fieldset legend='Address Information'>
-      <FormField name='street' label='Street' {...commonProps}>
+      <Field name='street' label='Street' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='house_number' label='Number' {...commonProps}>
+      </Field>
+      <Field name='house_number' label='Number' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='city' label='City' {...commonProps}>
+      </Field>
+      <Field name='city' label='City' {...commonProps}>
         <TextInput />
-      </FormField>
-      <br />
-      <FormField name='zip' label='ZIP code' {...commonProps}>
+      </Field>
+      <Field name='zip' label='ZIP code' {...commonProps}>
         <TextInput />
-      </FormField>
+      </Field>
     </Fieldset>
     <Fieldset>
-      <FormField name='terms' label='Terms'>
+      <Field name='terms' label='Terms'>
         <Checkbox onChange={({ taget: { checked } }) => checked}>I have read and accept Terms and Conditions</Checkbox>
-      </FormField>
+      </Field>
     </Fieldset>
     <ControlGroup position='center'>
       <Button type='submit'>Order</Button>
@@ -336,9 +330,9 @@ const options = [
   { name: 'Paris', country: 'France' }
 ]
 addStory.controlled('FormHandler: booking', readme, (setState, state) => (
-  <FormHandler onSubmit={submit}>
+  <FormHandler horizontal spread onSubmit={submit}>
     <Fieldset legend='Journey details'>
-      <FormField name='start_point' label='From' {...commonProps}>
+      <Field name='start_point' label='From' {...commonProps}>
         <SelectBox
           placeholder='Choose city'
           renderItem={renderCountry}
@@ -347,9 +341,8 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
           options={options}
           value={state.from}
         />
-      </FormField>
-      <br />
-      <FormField name='destination' label='to' {...commonProps}>
+      </Field>
+      <Field name='destination' label='to' {...commonProps}>
         <SelectBox
           placeholder='Choose city'
           renderItem={renderCountry}
@@ -358,15 +351,13 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
           options={options}
           value={state.to}
         />
-      </FormField>
-      <br />
-      <FormField name='date' label='Date' {...commonProps}>
+      </Field>
+      <Field name='date' label='Date' {...commonProps}>
         <Calendar />
-      </FormField>
-      <br />
-      <FormField name='passengers' label='Passengers' {...commonProps}>
-        <NumberInput min={0} max={4} style={{ width: '30%' }} />
-      </FormField>
+      </Field>
+      <Field name='passengers' label='Passengers' {...commonProps}>
+        <NumberInput min={0} max={4} style={{ width: '40%', minWidth: '200px' }} />
+      </Field>
     </Fieldset>
     <ControlGroup position='center'>
       <Button type='submit'>Book</Button>
@@ -374,30 +365,30 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
   </FormHandler>
 ), () => ({ from: null, to: null }))
 
-addStory.controlled('FormField: text-input', readme, (setState, state) => (
+addStory.controlled('Field: text-input', readme, (setState, state) => (
   <div>
     <h2>Default</h2>
-    <FormField>
+    <Field>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>With label</h2>
-    <FormField label='Name' id='name'>
+    <Field label='Name' id='name'>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>Error</h2>
-    <FormField error='Your password is too weak'>
+    <Field error='Your password is too weak'>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>Warning</h2>
-    <FormField warning='Your password is still weak'>
+    <Field warning='Your password is still weak'>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>Hint</h2>
-    <FormField hint='You will receive booking confirmation'>
+    <Field hint='You will receive booking confirmation'>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>With label, error, warning and hint</h2>
-    <FormField
+    <Field
       label='Name'
       id='name2'
       error='Your name is too short'
@@ -405,27 +396,27 @@ addStory.controlled('FormField: text-input', readme, (setState, state) => (
       hint='You will receive booking confirmation'
     >
       <TextInput />
-    </FormField>
+    </Field>
     <h2>With passed value</h2>
-    <FormField value='some value'>
+    <Field value='some value'>
       <TextInput />
-    </FormField>
+    </Field>
     <h2>Focus state</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       Focus status: {state.focus ? 'Focus' : 'No focus'}
     </span>
-    <FormField
+    <Field
       label='Name*'
       onBlur={() => { setState({ focus: false }) }}
       onFocus={() => { setState({ focus: true }) }}
     >
       <TextInput />
-    </FormField>
+    </Field>
     <h2>Controlled</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       You typed: {state.value}
     </span>
-    <FormField
+    <Field
       label='Name*'
       error={state.value.length < 5 ? 'Your name is too short' : undefined}
       warning={state.value.length > 8 ? 'Your name is getting too long' : undefined}
@@ -433,7 +424,7 @@ addStory.controlled('FormField: text-input', readme, (setState, state) => (
       onChange={(value) => { setState({value}) }}
     >
       <TextInput />
-    </FormField>
+    </Field>
   </div>
 ), () => {
   return {
@@ -442,30 +433,30 @@ addStory.controlled('FormField: text-input', readme, (setState, state) => (
   }
 })
 
-addStory.controlled('FormField: number-input', readme, (setState, state) => (
+addStory.controlled('Field: number-input', readme, (setState, state) => (
   <div>
     <h2>Default</h2>
-    <FormField>
+    <Field>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>With label</h2>
-    <FormField label='Cars' id='cars'>
+    <Field label='Cars' id='cars'>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>Error</h2>
-    <FormField error='You have to pick at least one car'>
+    <Field error='You have to pick at least one car'>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>Warning</h2>
-    <FormField warning='You picked a lot of cars'>
+    <Field warning='You picked a lot of cars'>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>Hint</h2>
-    <FormField hint='Pick as many cars as you wish'>
+    <Field hint='Pick as many cars as you wish'>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>With label, error, warning and hint</h2>
-    <FormField
+    <Field
       label='Cars'
       id='cars2'
       error='You have to pick at least one car'
@@ -473,27 +464,27 @@ addStory.controlled('FormField: number-input', readme, (setState, state) => (
       hint='Pick as many cars as you wish'
     >
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>Focus state</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       Focus status: {state.focus ? 'Focus' : 'No focus'}
     </span>
-    <FormField
+    <Field
       label='Age*'
       onBlur={() => { setState({ focus: false }) }}
       onFocus={() => { setState({ focus: true }) }}
     >
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>With passed value</h2>
-    <FormField value={23}>
+    <Field value={23}>
       <NumberInput />
-    </FormField>
+    </Field>
     <h2>Controlled</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       You chose: {state.value} cars
     </span>
-    <FormField
+    <Field
       label='Cars'
       error={state.value < 1 ? 'You chose no cars' : undefined}
       hint='Pick some cars'
@@ -501,7 +492,7 @@ addStory.controlled('FormField: number-input', readme, (setState, state) => (
       onChange={(value) => { setState({value}) }}
     >
       <NumberInput value={state.value} />
-    </FormField>
+    </Field>
   </div>
 ), () => {
   return {
@@ -509,30 +500,30 @@ addStory.controlled('FormField: number-input', readme, (setState, state) => (
   }
 })
 
-addStory.controlled('FormField: checkbox', readme, (setState, state) => (
+addStory.controlled('Field: checkbox', readme, (setState, state) => (
   <div>
     <h2>Default</h2>
-    <FormField>
+    <Field>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>With label</h2>
-    <FormField label='Terms' id='cars'>
+    <Field label='Terms' id='cars'>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>Error</h2>
-    <FormField error='You have to agree'>
+    <Field error='You have to agree'>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>Warning</h2>
-    <FormField warning='Remember to agree'>
+    <Field warning='Remember to agree'>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>Hint</h2>
-    <FormField hint='Agree to terms'>
+    <Field hint='Agree to terms'>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>With label, error, warning and hint</h2>
-    <FormField
+    <Field
       label='Terms'
       id='cars2'
       error='You have to agree'
@@ -540,25 +531,25 @@ addStory.controlled('FormField: checkbox', readme, (setState, state) => (
       hint='Agree to terms'
     >
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>Focus state</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       Focus status: {state.focus ? 'Focus' : 'No focus'}
     </span>
-    <FormField
+    <Field
       label='Agree*'
       onBlur={() => { setState({ focus: false }) }}
       onFocus={() => { setState({ focus: true }) }}
     >
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
     <h2>Controlled</h2>
     <span style={{ display: 'inline-block', marginBottom: '16px', fontWeight: '700' }}>
       You { state.checked ? 'agree' : 'disagree' }
     </span>
-    <FormField onChange={checked => { setState({ checked }) }}>
+    <Field onChange={checked => { setState({ checked }) }}>
       <Checkbox>Agree</Checkbox>
-    </FormField>
+    </Field>
   </div>
 ), () => {
   return {
@@ -573,13 +564,13 @@ function formatErrorMessage (message) {
   )
 }
 
-addStory('FormField: messages with formatter', readme, () => (
+addStory('Field: message formatter', readme, () => (
   <div>
     <strong>Formatter:</strong> <code style={{ display: 'block', whiteSpace: 'pre' }}>{formatErrorMessage.toString()}</code>
 
     <br />
 
-    <FormField
+    <Field
       formatErrorMessage={formatErrorMessage}
       label='Element label'
       error='Error message'
@@ -587,6 +578,101 @@ addStory('FormField: messages with formatter', readme, () => (
       hint='Hint message'
     >
       <TextInput />
-    </FormField>
+    </Field>
+  </div>
+))
+
+addStory('Field: compositions', readme, () => (
+  <div>
+    <h2>Basic</h2>
+    <Field
+      label='Element label'
+      error='Error message'
+      warning='Warning message'
+      hint='Hint message'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal</h2>
+    <Field
+      horizontal
+      label='Element label'
+      error='Error message'
+      warning='Warning message'
+      hint='Hint message'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal & spread</h2>
+    <Field
+      horizontal
+      spread
+      label='Element label'
+      error='Error message'
+      warning='Warning message'
+      hint='Hint message'
+    >
+      <TextInput />
+    </Field>
+  </div>
+))
+
+addStory('RTL Field: compositions', readme, () => (
+  <div dir='rtl'>
+    <h2>Basic</h2>
+    <Field
+      label='תווית רכיב'
+      error='הודעת שגיאה'
+      warning='הודעת אזהרה'
+      hint='רמז שדה נוסף'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal</h2>
+    <Field
+      horizontal
+      label='תווית רכיב'
+      error='הודעת שגיאה'
+      warning='הודעת אזהרה'
+      hint='רמז שדה נוסף'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal without hint</h2>
+    <Field
+      horizontal
+      label='תווית רכיב'
+      error='הודעת שגיאה'
+      warning='הודעת אזהרה'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal & spread</h2>
+    <Field
+      horizontal
+      spread
+      label='תווית רכיב'
+      error='הודעת שגיאה'
+      warning='הודעת אזהרה'
+      hint='רמז שדה נוסף'
+    >
+      <TextInput />
+    </Field>
+
+    <h2>Horizontal & spread without hint</h2>
+    <Field
+      horizontal
+      spread
+      label='תווית רכיב'
+      error='הודעת שגיאה'
+      warning='הודעת אזהרה'
+    >
+      <TextInput />
+    </Field>
   </div>
 ))

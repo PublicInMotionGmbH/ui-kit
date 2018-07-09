@@ -3,17 +3,17 @@ import { mount } from 'enzyme'
 
 import { TextInput } from '@talixo/text-input'
 
-import { isFormField } from '../src/FormHandler'
-import FormField from '../src/FormField'
+import isField from '../src/isField'
+import Field from '../src/Field'
 
 describe('isFormField', () => {
   it('should return true if component is FormField', () => {
-    const wrapper = mount(<FormField><TextInput /></FormField>)
-    expect(isFormField(wrapper.get(0))).toBe(true)
+    const wrapper = mount(<Field><TextInput /></Field>)
+    expect(isField(wrapper.get(0))).toBe(true)
   })
 
   it('should return false if component is not FormField', () => {
     const wrapper = mount(<TextInput />)
-    expect(isFormField(wrapper.get(0))).toBe(false)
+    expect(isField(wrapper.get(0))).toBe(false)
   })
 })
