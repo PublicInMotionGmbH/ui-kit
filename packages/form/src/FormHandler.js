@@ -170,7 +170,7 @@ class FormHandler extends React.PureComponent {
   renderForm = props => {
     const { handleSubmit } = props
     const {
-      children, className, onSubmit, onChange,
+      children, onSubmit, onChange,
       initialValues, values, validationSchema,
       FormComponent, ...passedProps
     } = this.props
