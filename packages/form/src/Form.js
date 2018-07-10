@@ -124,7 +124,7 @@ class Form extends React.Component {
   }
 
   render () {
-    const { children, className, horizontal, spread, ...passedProps } = this.props
+    const { children, className, horizontal, spread, formatErrorMessage, ...passedProps } = this.props
 
     const formCls = buildClassName(moduleName, className)
 
