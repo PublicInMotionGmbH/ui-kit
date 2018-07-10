@@ -49,7 +49,6 @@ const propTypes = {
 }
 
 const defaultProps = {
-  formatErrorMessage: x => x
 }
 
 // Set initial counter.
@@ -161,12 +160,13 @@ class Field extends React.Component {
    */
   buildMessage (message, typeName) {
     const { formatErrorMessage, horizontal, spread } = this.props
+    const format = formatErrorMessage || (x => x)
 
     // Build class names for label
     const messageClsName = buildClassName([ moduleName, 'message' ], null, [ typeName ])
 
     // Use message formatter for warning & error messages
-    message = formatErrorMessage(message)
+    message = format(message)
 
     // Build label
     return (
@@ -241,28 +241,6 @@ class Field extends React.Component {
         </div>
       </div>
     )
-
-    // return (
-    //   <div className={fieldClsName} {...passedProps}>
-    //     <div className={innerClsName}>
-    //       <div className={labelClsName}>{labelElement}</div>
-    //       <div className={wrapperClsName}>
-    //         <div className={wrapperInnerClsName}>
-    //           <div className={shallowLabelClsName}>{labelElement}</div>
-    //           <div className={inputWrapperClsName}>
-    //             {input}
-    //           </div>
-    //         </div>
-    //         <div className={hintClsName}>{hint}</div>
-    //       </div>
-    //     </div>
-    //
-    //     <div className={messagesClsName}>
-    //       {errorElement}
-    //       {warningElement}
-    //     </div>
-    //   </div>
-    // )
   }
 }
 
