@@ -159,7 +159,7 @@ class Carousel extends React.PureComponent {
     })
   }
 
-  change = async (index, type = 'exact', force = false) => {
+  change = (index, type = 'exact', force = false) => {
     const { value, onChange, children } = this.props
     const isImmediate = value == null || force
 
@@ -177,7 +177,7 @@ class Carousel extends React.PureComponent {
     this.lastMovementIndex = null
 
     if (type === 'forward' || type === 'back') {
-      await this.go(index, type)
+      return this.go(index, type)
     } else {
       // FIXME: GET CLONES IN CASE
       this.setState({
@@ -192,7 +192,7 @@ class Carousel extends React.PureComponent {
    * @param {number} index
    * @param {string} type
    */
-  async go (index, type = 'forward') {
+  go (index, type = 'forward') {
     const { children, perPage } = this.props
     const { currentSlide } = this.state
 
@@ -215,14 +215,14 @@ class Carousel extends React.PureComponent {
       current = next > current ? length + current : current
     }
 
-    await this.goImmediately(current)
+    this.goImmediately(current).then(() => {
+      // Do not update state if component has been unmounted meanwhile
+      if (!this.mounted) {
+        return
+      }
 
-    // Do not update state if component has been unmounted meanwhile
-    if (!this.mounted) {
-      return
-    }
-
-    this.setState({ currentSlide: next })
+      this.setState({ currentSlide: next })
+    })
   }
 
   /**
