@@ -205,6 +205,8 @@ class Field extends React.Component {
     const { focus } = this.state
 
     const modifiers = {
+      warning: warning != null,
+      error: error != null,
       hint: hint != null,
       horizontal,
       focus,
