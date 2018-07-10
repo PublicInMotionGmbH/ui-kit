@@ -200,7 +200,7 @@ class Field extends React.Component {
   render () {
     const {
       children, className, error, hint, onBlur, onChange, onFocus, horizontal, spread,
-      id, label, warning, formatErrorMessage, ...passedProps
+      id, label, warning, formatErrorMessage, value, ...passedProps
     } = this.props
     const { focus } = this.state
 
