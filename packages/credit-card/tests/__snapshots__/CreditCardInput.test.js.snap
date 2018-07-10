@@ -25,7 +25,6 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
     className="talixo-credit-card-input__content"
   >
     <Field
-      formatErrorMessage={[Function]}
       label="Name on card*"
       name="cardHolderName"
       onChange={[Function]}
@@ -39,7 +38,6 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </Field>
     <Field
-      formatErrorMessage={[Function]}
       label="Card number*"
       name="cardNumber"
       onChange={[Function]}
@@ -50,7 +48,6 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </Field>
     <Field
-      formatErrorMessage={[Function]}
       label="Expiration date*"
       name="cardExpirationDate"
       onChange={[Function]}
@@ -66,7 +63,6 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       />
     </Field>
     <Field
-      formatErrorMessage={[Function]}
       label="CVC*"
       name="cvc"
       onChange={[Function]}
