@@ -26,5 +26,9 @@ dist
 _gh-pages
 coverage
 
+# Generated files
+
+__publish.sh
+
 # Npm & Yarn Logs
 packages/card/yarn-error.log

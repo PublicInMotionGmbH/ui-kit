@@ -20,8 +20,8 @@ async function getNewestPackageVersion (name) {
 
 async function main () {
   // Get array of packages to build (if passed through CLI)
-  const props = yargs.array('only').string('tag').string('release').string('identifier').argv
-  const { only, tag, identifier, release } = props
+  const props = yargs.array('only').string('tag').string('release').string('identifier').boolean('yes').argv
+  const { only, tag, identifier, release, yes } = props
   const list = []
 
   if (!release) {
@@ -59,12 +59,12 @@ async function main () {
   let file = '#!/bin/bash\n\nset -e\n\n'
 
   file += list
-    .map(name => `lerna publish --force-publish=${name} --skip-git --scope=${name} --repo-version=${builtVersion} --preid=${tag} --npm-tag=${tag}`)
+    .map(name => `lerna publish --force-publish=${name} --skip-git --scope=${name} --repo-version=${builtVersion} --preid=${tag} --npm-tag=${tag}` + (yes ? ' --yes' : ''))
     .join('\n')
 
   file += '\n'
 
-  fs.writeFileSync(path.join(__dirname, '../publish.sh'), file)
+  fs.writeFileSync(path.join(__dirname, '..', '__publish.sh'), file)
 }
 
 // Run procedure
