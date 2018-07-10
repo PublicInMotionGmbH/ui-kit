@@ -124,7 +124,8 @@ class FormHandler extends React.PureComponent {
    * @returns {*}
    */
   transformNode (node, options) {
-    const { setFieldValue, handleBlur, values, touched, errors, formatErrorMessage } = options
+    const { formatErrorMessage } = this.props
+    const { setFieldValue, handleBlur, values, touched, errors } = options
     const { name, onChange, onBlur } = node.props
 
     // Omit adding node to Formik if it has no name property
