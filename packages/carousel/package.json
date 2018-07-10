@@ -1,6 +1,6 @@
 {
   "name": "@talixo/carousel",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "UI Component which represents Carousel",
   "main": "dist/index.js",
   "module": "index.js",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "@talixo/icon": "^1.0.0-alpha.7",
     "@talixo/shared": "^1.0.0-alpha.7",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
@@ -32,6 +33,7 @@
   "peerDependencies": {
     "@talixo/icon": "^1.0.0-alpha.7",
     "@talixo/shared": "^1.0.0-alpha.7",
+    "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
