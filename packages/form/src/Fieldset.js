@@ -6,17 +6,11 @@ import { buildClassName } from '@talixo/shared'
 const moduleName = 'fieldset'
 
 const propTypes = {
-  /** Aside Legend */
-  asideLegend: PropTypes.node,
-
   /** All nodes inside fieldset */
   children: PropTypes.node,
 
   /** Additional class name */
-  className: PropTypes.string,
-
-  /** Legend for fieldset */
-  legend: PropTypes.string
+  className: PropTypes.string
 }
 
 /**
@@ -30,16 +24,10 @@ const propTypes = {
  * @returns {React.Element}
  */
 function Fieldset (props) {
-  const { asideLegend, className, children, legend, ...passedProps } = props
+  const { className, children, ...passedProps } = props
 
   return (
     <fieldset className={buildClassName(moduleName, className)} {...passedProps}>
-      {legend && <legend className={buildClassName([moduleName, 'legend'])}>
-        {legend}
-        {asideLegend && <aside className={buildClassName([moduleName, 'aside-legend'])}>
-          {asideLegend}
-        </aside>}
-      </legend>}
       {children}
     </fieldset>
   )

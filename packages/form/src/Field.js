@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-export const moduleName = 'form-field'
+import FormRow from './FormRow'
+
+export const moduleName = 'field'
 
 const propTypes = {
   /** Additional class name. */
@@ -20,6 +22,12 @@ const propTypes = {
 
   /** Label for input. */
   label: PropTypes.node,
+
+  /** Should position elements horizontally? */
+  horizontal: PropTypes.bool,
+
+  /** Only for 'horizontal': should spread input when there is no hint? */
+  spread: PropTypes.bool,
 
   /** Event called after input has lost focus. */
   onBlur: PropTypes.func,
@@ -85,7 +93,7 @@ export function resetIdCounter () {
  *
  * @class {React.Element}
  */
-class FormField extends React.Component {
+class Field extends React.Component {
   uniqueId = `form_field_${generateUid().toString(36)}`
   state = {
     focus: false
@@ -93,36 +101,32 @@ class FormField extends React.Component {
 
   /**
    * Handle input blur.
-   *
-   * @param {SyntheticEvent} e
    */
-  handleBlur = (e) => {
+  handleBlur = (...args) => {
     const { onBlur } = this.props
-    this.changeFocus(e, onBlur, false)
+    this.changeFocus(args, onBlur, false)
   }
 
   /**
    * Handle input focus.
-   *
-   * @param {SyntheticEvent} e
    */
-  handleFocus = (e) => {
+  handleFocus = (...args) => {
     const { onFocus } = this.props
-    this.changeFocus(e, onFocus, true)
+    this.changeFocus(args, onFocus, true)
   }
 
   /**
    * Handle focus change.
    *
-   * @param {SyntheticEvent} e
+   * @param {array} args
    * @param {function} eventHandler
    * @param {boolean} focus
    */
-  changeFocus (e, eventHandler, focus) {
+  changeFocus (args, eventHandler, focus) {
     this.setState({ focus })
 
     if (eventHandler) {
-      eventHandler(e)
+      eventHandler(...args)
     }
   }
 
@@ -135,12 +139,13 @@ class FormField extends React.Component {
    */
   buildLabel (uniqueId) {
     const { label } = this.props
+
     // Build class names for label
     const labelClsName = buildClassName([ moduleName, 'label' ])
 
     // Build label
     return (
-      <div className={labelClsName} >
+      <div className={labelClsName}>
         <label htmlFor={uniqueId}>{label}</label>
       </div>
     )
@@ -155,18 +160,20 @@ class FormField extends React.Component {
    * @returns {React.Element}
    */
   buildMessage (message, typeName) {
-    const { label, formatErrorMessage } = this.props
+    const { formatErrorMessage, horizontal, spread } = this.props
 
     // Build class names for label
-    const typeClsName = buildClassName([ moduleName, typeName ], null, { labeled: label != null })
+    const messageClsName = buildClassName([ moduleName, 'message' ], null, [ typeName ])
 
     // Use message formatter for warning & error messages
-    if (typeName !== 'hint') {
-      message = formatErrorMessage(message)
-    }
+    message = formatErrorMessage(message)
 
     // Build label
-    return <div className={typeClsName}>{message}</div>
+    return (
+      <FormRow className={messageClsName} horizontal={horizontal} spread={spread}>
+        {message}
+      </FormRow>
+    )
   }
 
   /**
@@ -181,7 +188,6 @@ class FormField extends React.Component {
     const input = React.Children.only(children)
 
     return React.cloneElement(input, {
-      className: buildClassName([ moduleName, 'input' ], input.props.className),
       error: error != null,
       id: uniqueId,
       onBlur: this.handleBlur,
@@ -193,14 +199,23 @@ class FormField extends React.Component {
 
   render () {
     const {
-      children, className, error, hint, onBlur, onChange, onFocus,
+      children, className, error, hint, onBlur, onChange, onFocus, horizontal, spread,
       id, label, warning, formatErrorMessage, ...passedProps
     } = this.props
     const { focus } = this.state
 
+    const modifiers = {
+      hint: hint != null,
+      horizontal,
+      focus,
+      spread
+    }
+
     // Build class names
-    const fieldClsName = buildClassName(moduleName, className, { focus: focus, blur: !focus })
-    const inputWrapperClsName = buildClassName([ moduleName, 'input-wrapper' ])
+    const fieldClsName = buildClassName(moduleName, className, modifiers)
+    const inputWrapperClsName = buildClassName([ moduleName, 'input' ])
+    const messagesClsName = buildClassName([ moduleName, 'messages' ])
+    const shallowLabelClsName = buildClassName([ moduleName, 'shallow-label' ])
 
     // Build unique ID if id is not provided.
     const uniqueId = id || this.uniqueId
@@ -208,27 +223,50 @@ class FormField extends React.Component {
     // Build input for passing props
     const input = this.buildInput(uniqueId)
 
-    const labelElement = label ? this.buildLabel(uniqueId) : null
-    const hintElement = hint ? this.buildMessage(hint, 'hint') : null
-    const errorElement = error ? this.buildMessage(error, 'error') : null
-    const warningElement = warning ? this.buildMessage(warning, 'warning') : null
+    const labelElement = label != null ? <label htmlFor={uniqueId}>{label}</label> : null
+    const errorElement = error != null ? this.buildMessage(error, 'error') : null
+    const warningElement = warning != null ? this.buildMessage(warning, 'warning') : null
 
     return (
       <div className={fieldClsName} {...passedProps}>
-        {labelElement}
-        <div className={inputWrapperClsName}>
-          {input}
-          {hintElement}
+        <FormRow start={labelElement} end={hint} horizontal={horizontal} spread={spread}>
+          <div className={shallowLabelClsName}>{labelElement}</div>
+          <div className={inputWrapperClsName}>
+            {input}
+          </div>
+        </FormRow>
+        <div className={messagesClsName}>
+          {errorElement}
+          {warningElement}
         </div>
-        {errorElement}
-        {warningElement}
       </div>
     )
+
+    // return (
+    //   <div className={fieldClsName} {...passedProps}>
+    //     <div className={innerClsName}>
+    //       <div className={labelClsName}>{labelElement}</div>
+    //       <div className={wrapperClsName}>
+    //         <div className={wrapperInnerClsName}>
+    //           <div className={shallowLabelClsName}>{labelElement}</div>
+    //           <div className={inputWrapperClsName}>
+    //             {input}
+    //           </div>
+    //         </div>
+    //         <div className={hintClsName}>{hint}</div>
+    //       </div>
+    //     </div>
+    //
+    //     <div className={messagesClsName}>
+    //       {errorElement}
+    //       {warningElement}
+    //     </div>
+    //   </div>
+    // )
   }
 }
 
-FormField.propTypes = propTypes
+Field.propTypes = propTypes
+Field.defaultProps = defaultProps
 
-FormField.defaultProps = defaultProps
-
-export default FormField
+export default Field

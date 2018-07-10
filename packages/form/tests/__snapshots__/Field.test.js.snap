@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Field /> renders children correctly 1`] = `
+<div
+  className="talixo-field"
+>
+  <FormRow
+    start={null}
+  >
+    <div
+      className="talixo-field__shallow-label"
+    />
+    <div
+      className="talixo-field__input"
+    >
+      <TextInput
+        InputComponent="input"
+        error={false}
+        id="form_field_1"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        type="text"
+      />
+    </div>
+  </FormRow>
+  <div
+    className="talixo-field__messages"
+  />
+</div>
+`;

@@ -3,12 +3,12 @@ import { shallow } from 'enzyme'
 
 import { TextInput } from '@talixo/text-input'
 
-import FormField, { moduleName, resetIdCounter } from '../src/FormField'
+import Field, { moduleName, resetIdCounter } from '../src/Field'
 
 const createWrapper = (props, childProps) => shallow(
-  <FormField {...props}>
+  <Field {...props}>
     <TextInput {...childProps} />
-  </FormField>
+  </Field>
 )
 
 describe('module name', () => {
@@ -17,11 +17,11 @@ describe('module name', () => {
   })
 
   it('exports correctly', () => {
-    expect(moduleName).toEqual('form-field')
+    expect(moduleName).toEqual('field')
   })
 })
 
-describe('<FormField />', () => {
+describe('<Field />', () => {
   it('renders children correctly', () => {
     const wrapper = createWrapper()
 
@@ -29,17 +29,17 @@ describe('<FormField />', () => {
   })
 
   it('throws error when no child is proivided', () => {
-    const wrapper = () => shallow(<FormField />)
+    const wrapper = () => shallow(<Field />)
 
     expect(wrapper).toThrow()
   })
 
   it('throws error when multiple children are proivided', () => {
     const wrapper = () => shallow(
-      <FormField>
+      <Field>
         <TextInput />
         <TextInput />
-      </FormField>
+      </Field>
     )
 
     expect(wrapper).toThrow()
@@ -55,17 +55,9 @@ describe('<FormField />', () => {
   it('passes value correctly', () => {
     const value = 'some value'
     const wrapper = createWrapper({ value })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
 
     expect(input.props().value).toEqual(value)
-  })
-
-  it('doesn\'t override child\'s className', () => {
-    const className = 'surname'
-    const wrapper = createWrapper(null, { className })
-    const input = wrapper.find('.talixo-form-field__input-wrapper').childAt(0)
-
-    expect(input.hasClass(className)).toEqual(true)
   })
 })
 
@@ -88,7 +80,7 @@ describe('label', () => {
     const wrapper = createWrapper({ id, label })
     const labelNode = wrapper.find('label')
 
-    expect(labelNode.props().htmlFor).toEqual(id)
+    expect(labelNode.first().props().htmlFor).toEqual(id)
   })
 
   it('receives generated id when id is not provided', () => {
@@ -96,7 +88,7 @@ describe('label', () => {
     const wrapper = createWrapper({ label })
     const labelNode = wrapper.find('label')
 
-    expect(labelNode.props().htmlFor).toEqual('form_field_1')
+    expect(labelNode.first().props().htmlFor).toEqual('form_field_1')
   })
 })
 
@@ -108,16 +100,20 @@ describe('error', () => {
   it('renders correctly', () => {
     const error = 'Random error'
     const wrapper = createWrapper({ error })
-    const errorNode = wrapper.find('div.talixo-form-field__error')
+    const errorNode = wrapper.find('.talixo-field__message--error')
 
     expect(errorNode.exists()).toEqual(true)
   })
 
   it('is passed to input', () => {
     const error = 'Random error'
-    const wrapper = createWrapper({ error })
-    const input = wrapper.find('.talixo-form-field__input-wrapper').childAt(0)
+    const wrapper = shallow(
+      <Field error={error}>
+        <TextInput />
+      </Field>
+    )
 
+    const input = wrapper.find(TextInput)
     expect(input.props().error).toEqual(true)
   })
 })
@@ -130,23 +126,9 @@ describe('warning', () => {
   it('renders correctly', () => {
     const warning = 'Random warning'
     const wrapper = createWrapper({ warning })
-    const warningNode = wrapper.find('div.talixo-form-field__warning')
+    const warningNode = wrapper.find('.talixo-field__message--warning')
 
     expect(warningNode.exists()).toEqual(true)
-  })
-})
-
-describe('hint', () => {
-  beforeEach(() => {
-    resetIdCounter()
-  })
-
-  it('renders correctly', () => {
-    const hint = 'Random hint'
-    const wrapper = createWrapper({ hint })
-    const hintNode = wrapper.find('div.talixo-form-field__hint')
-
-    expect(hintNode.exists()).toEqual(true)
   })
 })
 
@@ -159,7 +141,7 @@ describe('onChange', () => {
     const onChange = jest.fn()
     const value = 'name'
     const wrapper = createWrapper({ onChange })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('change', { target: { value } })
 
     expect(onChange).toHaveBeenCalled()
@@ -170,7 +152,7 @@ describe('onChange', () => {
     const onChange = jest.fn().mockImplementation(n => { typedValue = n })
     const value = 'name'
     const wrapper = createWrapper({ onChange })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('change', value)
 
     expect(typedValue).toEqual(value)
@@ -185,7 +167,7 @@ describe('onFocus', () => {
   it('is called', () => {
     const onFocus = jest.fn()
     const wrapper = createWrapper({ onFocus })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('focus')
 
     expect(onFocus).toHaveBeenCalled()
@@ -194,10 +176,10 @@ describe('onFocus', () => {
   it('sets class correctly', () => {
     const onFocus = jest.fn()
     const wrapper = createWrapper({ onFocus })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('focus')
 
-    expect(wrapper.hasClass('talixo-form-field--focus')).toEqual(true)
+    expect(wrapper.hasClass('talixo-field--focus')).toEqual(true)
   })
 })
 
@@ -209,7 +191,7 @@ describe('onBlur', () => {
   it('is called', () => {
     const onBlur = jest.fn()
     const wrapper = createWrapper({ onBlur })
-    const input = wrapper.find('TextInput')
+    const input = wrapper.find(TextInput)
     input.simulate('blur')
 
     expect(onBlur).toHaveBeenCalled()
@@ -218,9 +200,11 @@ describe('onBlur', () => {
   it('sets class correctly', () => {
     const onBlur = jest.fn()
     const wrapper = createWrapper({ onBlur })
-    const input = wrapper.find('TextInput')
-    input.simulate('blur')
+    const input = wrapper.find(TextInput)
 
-    expect(wrapper.hasClass('talixo-form-field--blur')).toEqual(true)
+    expect(wrapper.hasClass('talixo-form-field--focus')).toEqual(false)
+    input.simulate('focus')
+    input.simulate('blur')
+    expect(wrapper.hasClass('talixo-form-field--focus')).toEqual(false)
   })
 })
