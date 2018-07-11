@@ -53,6 +53,8 @@ const TRANSFORM_END = [
  */
 class Collapse extends React.PureComponent {
   height = null
+  contentHeight = null
+  nextContentHeight = null
 
   componentWillReceiveProps (props) {
     // Do nothing special when component hasn't changed it's collapsing state
@@ -63,6 +65,7 @@ class Collapse extends React.PureComponent {
 
     // Change `maxHeight` of element
     this.makeTransition(props)
+    this.contentHeight = this.content.offsetHeight
   }
 
   componentWillUnmount () {
@@ -73,10 +76,15 @@ class Collapse extends React.PureComponent {
   }
 
   componentDidMount () {
+    this.contentHeight = this.content.offsetHeight
     this.mounted = true
 
     // Start listening for transition changes
     this.startListening()
+  }
+
+  componentDidUpdate (prevProps) {
+    this.nextContentHeight = this.content.offsetHeight
   }
 
   makeTransition (props) {
@@ -102,15 +110,12 @@ class Collapse extends React.PureComponent {
     // Update element maxHeight when it's mounted
     if (this.height != null) {
       this.node.style.maxHeight = this.height + 'px'
+      this.node.style.height = this.height + 'px'
 
       // Trigger reflow by using 'offsetHeight',
       // otherwise transition will not happen
       this.reflowHeight = this.node.offsetHeight
     }
-
-    // Try to update max-height dynamically again
-    clearTimeout(this.dynamicTransitionTimeout)
-    this.dynamicTransitionTimeout = setTimeout(() => this.makeTransition())
   }
 
   /**
@@ -152,7 +157,7 @@ class Collapse extends React.PureComponent {
       return null
     }
 
-    return this.content.offsetHeight
+    return Math.max(this.contentHeight, this.nextContentHeight)
   }
 
   /**
@@ -181,6 +186,7 @@ class Collapse extends React.PureComponent {
       // Or simply change `maxHeight` style in node
       this.height = null
       this.node.style.maxHeight = ''
+      this.node.style.height = ''
     }
   }
 
@@ -221,6 +227,7 @@ class Collapse extends React.PureComponent {
 
     if (height !== null) {
       collapseStyle.maxHeight = height
+      collapseStyle.height = height
     }
 
     // Apply animation time
