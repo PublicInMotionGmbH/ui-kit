@@ -70,12 +70,15 @@ function analyzeInput (inputEl, suffixEl, leftEl, rightEl) {
   document.body.removeChild(element)
 
   // Calculate size of all input parts (in px)
-  const left = offset.left !== 0
+  const paddingLeft = parseInt(computed.paddingLeft, 10)
+  const paddingRight = parseInt(computed.paddingRight, 10)
+
+  const left = offset.left > paddingLeft
     ? offset.left
-    : parseInt(computed.paddingLeft, 10)
-  const right = offset.right !== 0
+    : paddingLeft
+  const right = offset.right > paddingRight
     ? offset.right
-    : parseInt(computed.paddingRight, 10)
+    : paddingRight
 
   // Calculate suffix dimensions
   const suffixStyle = window.getComputedStyle(suffixEl)
