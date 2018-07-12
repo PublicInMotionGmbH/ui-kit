@@ -228,7 +228,7 @@ class TextInput extends React.PureComponent {
     }
 
     // Calculate styles for input & suffix
-    const s = calculateInputStyles(this.input, this.suffix)
+    const s = calculateInputStyles(this.input, this.suffix, this.left, this.right)
 
     // Ignore change if hash of dimensions is the same
     if (s.hash === this.state.hash) {
@@ -268,6 +268,15 @@ class TextInput extends React.PureComponent {
   }
 
   /**
+   * Cache reference to left/right element
+   *
+   * @param {HTMLElement} el
+   */
+  elementRef = (which, el) => {
+    this[which] = el
+  }
+
+  /**
    * Check if there is any value inside
    *
    * @returns {boolean}
@@ -291,7 +300,7 @@ class TextInput extends React.PureComponent {
    */
   buildAddon (which) {
     return (
-      <span className={buildClassName([ moduleName, which ])}>
+      <span ref={this.elementRef.bind(this, which)} className={buildClassName([ moduleName, which ])}>
         {this.props[which]}
       </span>
     )

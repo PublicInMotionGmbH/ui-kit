@@ -9,14 +9,15 @@ const MINIMUM_INPUT_SPACE = 30 // px
  * @param {HTMLElement} suffixEl
  * @returns {object|{ hash: string, suffix: object, input: object }}
  */
-function calculateInputStyles (inputEl, suffixEl) {
+function calculateInputStyles (inputEl, suffixEl, leftEl, rightEl) {
   // Analyze input and suffix dimensions
-  const { hash, rtl, width, styles } = analyzeInput(inputEl, suffixEl)
+  const { hash, rtl, width, styles } = analyzeInput(inputEl, suffixEl, leftEl, rightEl)
 
   // Build information about directions (according to RTL)
   const start = rtl ? 'right' : 'left'
   const end = rtl ? 'left' : 'right'
   const paddingEnd = rtl ? 'paddingLeft' : 'paddingRight'
+  const paddingStart = rtl ? 'paddingRight' : 'paddingLeft'
 
   // Calculate suffix dimensions
   const expectedSuffixWidth = width.input - width.left - width.right - Math.min(width.value, MINIMUM_INPUT_SPACE)
@@ -24,6 +25,7 @@ function calculateInputStyles (inputEl, suffixEl) {
   return {
     hash,
     input: {
+      [paddingStart]: width[start],
       [paddingEnd]: width[end] + width.suffix
     },
     suffix: {

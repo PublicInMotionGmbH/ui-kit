@@ -16,6 +16,11 @@ const styles = {
   left: '80px',
   width: 'auto'
 }
+const stylesRTL = {
+  display: 'inline-block',
+  right: '80%',
+  width: 'auto'
+}
 
 // Stories
 addStory('initial', readme, () => (
@@ -93,3 +98,17 @@ addStory('OptionsInput with label', readme, () => (
     />
   </div>
 ), () => ({ value: { product: 3 } }))
+
+addStory('RTL', readme, () => (
+  <div dir='rtl'>
+    <OptionsInput
+      style={stylesRTL}
+      options={[
+        { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+        { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
+        { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10 min max min max', min: 10, max: 10, default: 10 },
+        { id: 'rocket', icon: 'rocket', label: 'Rockets', description: 'min: 0', min: 0 }
+      ]}
+    />
+  </div>
+))
