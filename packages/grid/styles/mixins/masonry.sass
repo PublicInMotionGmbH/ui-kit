@@ -37,6 +37,6 @@
   @for $i from 1 to $cols + 1
     $width: calc(#{_masonry-width($i, $cols, $gutter)})
 
-    .masonry > #{$group-class-name}--spaced > .#{$prefix}#{$i}
+    .masonry > #{$group-class-name}--spaced > .#{$segment-class-name}-#{$prefix}#{$i}
       min-width: $width
       max-width: $width

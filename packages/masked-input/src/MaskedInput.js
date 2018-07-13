@@ -129,11 +129,14 @@ class MaskedInput extends React.Component {
    * @returns {{onBlur: void | any, onFocus: void | any, onChange: MaskedInput.handleChange}}
    */
   getInputProps () {
-    const { children, id } = this.props
+    const { children, id, placeholder } = this.props
+    const { value } = this.state
     const input = React.Children.only(children)
 
     const newProps = {
       id: id,
+      value: value,
+      placeholder: placeholder,
       ...input.props,
       onBlur: this.blur,
       onFocus: this.focus,
@@ -162,8 +165,12 @@ class MaskedInput extends React.Component {
   }
 
   render () {
-    const { className, error, onBlur, onFocus, onChange, children, renderMask, id, ...passedProps } = this.props
+    const {
+      className, error, onBlur, onFocus, onChange, children,
+      renderMask, id, placeholder, value: _value, ...passedProps
+    } = this.props
     const { focused, value } = this.state
+
     const input = React.Children.only(children)
 
     const wrapperCls = buildClassName(moduleName, className)

@@ -207,13 +207,13 @@ class PhoneInput extends React.PureComponent {
 
   onInputMouseOver = () => this.setMouseOverState('input')
   onInputMouseOut = () => this.setMouseOutState('input')
-  onInputFocus = () => this.setFocusState('input')
-  onInputBlur = () => this.setBlurState('input')
+  onInputFocus = (...args) => this.setFocusState('input', args)
+  onInputBlur = (...args) => this.setBlurState('input', args)
 
   onListMouseOver = () => this.setMouseOverState('flags')
   onListMouseOut = () => this.setMouseOutState('flags')
-  onListFocus = () => this.setFocusState('flags')
-  onListBlur = () => this.setBlurState('flags')
+  onListFocus = (...args) => this.setFocusState('flags', args)
+  onListBlur = (...args) => this.setBlurState('flags', args)
 
   /**
    * Set hover state
@@ -256,10 +256,19 @@ class PhoneInput extends React.PureComponent {
    * Set focus state
    *
    * @param {string} what
+   * @param {array} args
    */
-  setFocusState (what) {
+  setFocusState (what, args) {
+    const { onFocus } = this.props
+
     const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
     focus.push(what)
+
+    // Component changed state to focused, so fire Focus event
+    if (onFocus && (!this.state.focus || focus.length > this.state.focus.length)) {
+      onFocus(...args)
+    }
+
     this.setState({ focus })
   }
 
@@ -272,10 +281,19 @@ class PhoneInput extends React.PureComponent {
    * @see {PhoneInput.setMouseOutState}
    *
    * @param {string} what
+   * @param {array} args
    */
-  setBlurState (what) {
+  setBlurState (what, args) {
+    const { onBlur } = this.props
+
     setTimeout(() => {
       const focus = this.state.focus ? this.state.focus.filter(x => x !== what) : []
+
+      // Component changed state to blurred, so fire Blur event
+      if (onBlur && focus.length === 0 && this.state.focus && this.state.focus.length) {
+        onBlur()
+      }
+
       this.setState({ focus: focus.length ? focus : false })
     })
   }
@@ -311,9 +329,7 @@ class PhoneInput extends React.PureComponent {
    * @param {Event|SyntheticEvent} event
    */
   focus = (event) => {
-    const { onFocus } = this.props
-
-    this.onInputFocus()
+    this.onInputFocus(event)
 
     // Make sure that user can't click on some place in input, where it guides him
     // TODO: when react-text-mask will properly work with removing placeholder character, remove it
@@ -321,10 +337,6 @@ class PhoneInput extends React.PureComponent {
     this.focusTimeout = setTimeout(() => this.setState({
       focused: true
     }))
-
-    if (onFocus) {
-      onFocus(event)
-    }
   }
 
   /**
@@ -335,7 +347,7 @@ class PhoneInput extends React.PureComponent {
   blur = (event) => {
     const { onBlur } = this.props
 
-    this.onInputBlur()
+    this.onInputBlur(event)
 
     this.setState({ focused: false })
 
@@ -380,7 +392,7 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, onFocus, onBlur, placeholder, id, ...passedProps } = this.props
+    const { className, error, onChange, onFocus, onBlur, placeholder, id, value, ...passedProps } = this.props
     const { hover, focus } = this.state
 
     const clsName = buildClassName(moduleName, className, {
