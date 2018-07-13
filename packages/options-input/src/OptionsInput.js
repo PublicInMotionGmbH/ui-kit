@@ -231,7 +231,7 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, ...restProps } = this.props
+    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
     const { value, open } = this.state
 
     const clsName = buildClassName(moduleName, className, { open, error })

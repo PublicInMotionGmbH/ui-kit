@@ -17,7 +17,7 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `react-vis: ^1.9.2`
+- `react-vis: 1.10.1`
 
 These packages are required by `@talixo/charts`, but you have to install them manually,
 to avoid having different versions of these in your application.

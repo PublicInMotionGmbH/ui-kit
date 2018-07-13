@@ -12,7 +12,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Error object. Key is a name of a field. */
-  errors: PropTypes.objectOf(PropTypes.string),
+  errors: PropTypes.objectOf(PropTypes.oneOfType([ PropTypes.arrayOf(PropTypes.string), PropTypes.string ])),
 
   /** onSubmit callback function. */
   onSubmit: PropTypes.func,
@@ -170,7 +170,7 @@ class FormHandler extends React.PureComponent {
   renderForm = props => {
     const { handleSubmit } = props
     const {
-      children, onSubmit, onChange,
+      children, onSubmit, onChange, errors,
       initialValues, values, validationSchema,
       FormComponent, ...passedProps
     } = this.props
@@ -187,10 +187,7 @@ class FormHandler extends React.PureComponent {
     const elements = this.buildNodesList(children, props)
 
     return (
-      <FormComponent
-        method='POST'
-        onSubmit={handleSubmit}
-        {...passedProps}>
+      <FormComponent method='POST' onSubmit={handleSubmit} {...passedProps}>
         {elements}
       </FormComponent>
     )
