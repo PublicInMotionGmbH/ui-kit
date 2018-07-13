@@ -1,6 +1,6 @@
 {
   "name": "@talixo/modal",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.13",
   "description": "UI component for Modal",
   "main": "dist/index.js",
   "module": "index.js",
