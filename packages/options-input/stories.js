@@ -106,7 +106,7 @@ addStory('RTL', readme, () => (
       options={[
         { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
         { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
-        { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10 min max min max', min: 10, max: 10, default: 10 },
+        { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10 },
         { id: 'rocket', icon: 'rocket', label: 'Rockets', description: 'min: 0', min: 0 }
       ]}
     />

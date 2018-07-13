@@ -29,7 +29,6 @@
     background-color: $text-input-background-color
     border: $text-input-border-width solid $text-input-border-color
     border-radius: $text-input-border-radius
-
     font-size: $text-input-font-size
     height: $text-input-height
     line-height: $text-input-height
@@ -57,6 +56,12 @@
     &::placeholder
       color: $text-input-error-placeholder-color
 
+  &--with-left #{inside(&, 'input')}
+   padding-left: $text-input-icon-with-padding
+
+  &--with-right #{inside(&, 'input')}
+    padding-right: $text-input-icon-with-padding
+
   #{inside(&, 'left')},
   #{inside(&, 'right')}
     position: absolute
@@ -80,6 +85,18 @@
   [dir=rtl] & #{inside(&, 'right')}
     right: auto
     left: $text-input-padding-horizontal
+
+  [dir=rtl] &--with-left #{inside(&, 'input')}
+    padding-left: $text-input-padding-horizontal
+    padding-right: $text-input-icon-with-padding
+
+  [dir=rtl] &--with-right #{inside(&, 'input')}
+    padding-right: $text-input-padding-horizontal
+    padding-left: $text-input-icon-with-padding
+
+  [dir=rtl] &--with-right#{&}--with-left #{inside(&, 'input')}
+    padding-right: $text-input-icon-with-padding
+    padding-left: $text-input-icon-with-padding
 
   [dir=rtl] & #{inside(&, 'suffix')}
     padding-left: 0

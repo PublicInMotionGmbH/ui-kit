@@ -66,7 +66,7 @@ const defaultProps = {
  * @property {object|null} state.suffixStyle
  * @property {object|null} state.inputStyle
  *
- * @property {boolean} hasSuffixInitialized
+ * @property {boolean} hasElementsInitialized
  *
  * @class
  */
@@ -77,19 +77,19 @@ class TextInput extends React.PureComponent {
     suffixStyle: { position: 'absolute', visibility: 'hidden', pointerEvents: 'none' },
     inputStyle: null
   }
-  hasSuffixInitialized = false
+  hasElementsInitialized = false
 
   /**
-   * Initialize styles (and listeners) for suffix
+   * Initialize styles (and listeners) for elements (left, right, suffix)
    */
-  initializeSuffixStyles () {
+  initializeElementsStyles () {
     // Do not work with styles within Node.js environment
     if (!isBrowser) {
       return
     }
 
     // Do not try initializing suffix styles twice
-    if (this.hasSuffixInitialized) {
+    if (this.hasElementsInitialized) {
       return
     }
 
@@ -102,20 +102,20 @@ class TextInput extends React.PureComponent {
     window.addEventListener('resize', this.updateStyles)
 
     // Mark initialization as finished
-    this.hasSuffixInitialized = true
+    this.hasElementsInitialized = true
   }
 
   /**
    * Tear down styles (and listeners) for suffix
    */
-  deinitializeSuffixStyles () {
+  deinitializeElementsStyles () {
     // Do not work with styles within Node.js environment
     if (!isBrowser) {
       return
     }
 
     // Do not try de-initializing suffix styles when they are ready
-    if (!this.hasSuffixInitialized) {
+    if (!this.hasElementsInitialized) {
       return
     }
 
@@ -124,7 +124,7 @@ class TextInput extends React.PureComponent {
     window.removeEventListener('resize', this.updateStyles)
 
     // Mark initialization as not done
-    this.hasSuffixInitialized = false
+    this.hasElementsInitialized = false
 
     // Update styles to empty them
     this.setState({
@@ -144,8 +144,8 @@ class TextInput extends React.PureComponent {
    * Position suffix after component is mounted
    */
   componentDidMount () {
-    if (this.props.suffix != null) {
-      this.initializeSuffixStyles()
+    if (this.hasAdditionalElements()) {
+      this.initializeElementsStyles()
     }
   }
 
@@ -153,22 +153,22 @@ class TextInput extends React.PureComponent {
    * Remove listener on unmounting, which is waiting for loaded styles
    */
   componentWillUnmount () {
-    this.deinitializeSuffixStyles()
+    this.deinitializeElementsStyles()
   }
 
   /**
    * Update suffix when component is updated
    */
   componentDidUpdate () {
-    if (this.props.suffix == null) {
+    if (!this.hasAdditionalElements()) {
       // Try to de-initialize styles when there is no suffix
-      this.deinitializeSuffixStyles()
-    } else if (this.hasSuffixInitialized) {
+      this.deinitializeElementsStyles()
+    } else if (this.hasElementsInitialized) {
       // Update styles if there is already suffix initialized
       this.updateStyles()
     } else {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
-      this.initializeSuffixStyles()
+      this.initializeElementsStyles()
     }
   }
 
@@ -211,11 +211,19 @@ class TextInput extends React.PureComponent {
     }
 
     // Don't try to calculate styles when there is no suffix or input
-    if (!this.input || !this.suffix) {
+    if (!this.input || !(this.hasAdditionalElements())) {
       return false
     }
 
     return true
+  }
+
+  /**
+   * Check if any additional element is passed to input.
+   * @returns {boolean}
+   */
+  hasAdditionalElements () {
+    return this.props.suffix != null || this.props.left != null || this.props.right != null
   }
 
   /**

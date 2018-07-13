@@ -6,7 +6,7 @@ import createInvisibleElement from './createInvisibleElement'
  * @param {HTMLElement} leftEl
  * @param {HTMLElement} rightEl
  * @param {boolean} isRTL
- * @returns {object|{ hash: string, width: { input: number, left: number, value: number, suffix: number, right: number}, styles: object }}
+ * @returns {object}
  */
 function calculateOffsets (leftEl, rightEl, isRTL) {
   // Calculate offset when left or righ element is added
@@ -19,6 +19,19 @@ function calculateOffsets (leftEl, rightEl, isRTL) {
     : leftEl && leftEl.offsetParent ? leftEl.offsetParent.clientWidth - leftEl.offsetLeft : 0
 
   return { left, right }
+}
+
+/**
+ * callculate offsets of input and suffix
+ *
+ * @param {HTMLElement} element
+ * @returns {number}
+ */
+function getElementWidth (element) {
+  const elementStyle = window.getComputedStyle(element)
+  const elementWidth = parseInt(elementStyle.width, 10)
+
+  return elementWidth || 0
 }
 
 const copiedStyles = [
@@ -80,11 +93,7 @@ function analyzeInput (inputEl, suffixEl, leftEl, rightEl) {
     ? offset.right
     : paddingRight
 
-  // Calculate suffix dimensions
-  const suffixStyle = window.getComputedStyle(suffixEl)
-  const suffixWidth = parseInt(suffixStyle.width, 10)
-
-  const suffix = (suffixWidth || 0)
+  const suffix = suffixEl ? getElementWidth(suffixEl) : 0
 
   // Get width of input
   const input = inputEl.clientWidth
