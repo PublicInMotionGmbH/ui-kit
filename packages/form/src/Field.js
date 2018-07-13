@@ -166,7 +166,7 @@ class Field extends React.Component {
     const messageClsName = buildClassName([ moduleName, 'message' ], null, [ typeName ])
 
     // Use message formatter for warning & error messages
-    message = Array.isArray(message) ? message.map(format) : message
+    message = Array.isArray(message) ? message.map(format) : format(message)
 
     // Build label
     return (
