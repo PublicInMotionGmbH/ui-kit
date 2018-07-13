@@ -64,7 +64,7 @@ describe('<RadioGroup />', () => {
       options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
     />)
 
-    expect(wrapper.find('RadioInput').at(1).find('span').text()).toEqual('two')
+    expect(wrapper.find('RadioInput').at(1).find('span').first().text()).toEqual('two')
   })
 
   describe('when passing props', () => {

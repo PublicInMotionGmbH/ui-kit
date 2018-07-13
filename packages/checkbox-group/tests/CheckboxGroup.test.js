@@ -120,7 +120,7 @@ describe('<CheckboxGroup />', () => {
       />
     )
 
-    expect(wrapper.find('Checkbox').at(1).find('span').text()).toEqual('two')
+    expect(wrapper.find('Checkbox').at(1).find('span').first().text()).toEqual('two')
   })
 
   describe('when passing props', () => {
