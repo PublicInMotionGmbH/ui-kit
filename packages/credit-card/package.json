@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/combo-box": "^1.0.0-alpha.12",
-    "@talixo/form": "^1.0.0-alpha.12",
+    "@talixo/form": "^1.0.0-alpha.13",
     "@talixo/icon": "^1.0.0-alpha.12",
     "@talixo/shared": "^1.0.0-alpha.12",
     "@talixo/text-input": "^1.0.0-alpha.12",
@@ -35,7 +35,7 @@
   },
   "peerDependencies": {
     "@talixo/combo-box": "^1.0.0-alpha.12",
-    "@talixo/form": "^1.0.0-alpha.12",
+    "@talixo/form": "^1.0.0-alpha.13",
     "@talixo/icon": "^1.0.0-alpha.12",
     "@talixo/shared": "^1.0.0-alpha.12",
     "@talixo/text-input": "^1.0.0-alpha.12",
