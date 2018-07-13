@@ -1,4 +1,6 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
+
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
@@ -259,10 +261,10 @@ class TextInput extends React.PureComponent {
   inputRef = (el) => {
     const { inputRef } = this.props
 
-    this.input = el
+    this.input = findDOMNode(el)
 
     if (inputRef) {
-      inputRef(el)
+      inputRef(this.input)
     }
   }
 
@@ -272,7 +274,7 @@ class TextInput extends React.PureComponent {
    * @param {HTMLElement} el
    */
   suffixRef = (el) => {
-    this.suffix = el
+    this.suffix = findDOMNode(el)
   }
 
   /**
@@ -281,7 +283,7 @@ class TextInput extends React.PureComponent {
    * @param {HTMLElement} el
    */
   elementRef = (which, el) => {
-    this[which] = el
+    this[which] = findDOMNode(el)
   }
 
   /**

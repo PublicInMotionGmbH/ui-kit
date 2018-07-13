@@ -56,4 +56,18 @@ describe('analyzeInput', () => {
 
     expect(hash).toBe(`rtl*${width.input}*${width.left}*${width.value}*${width.suffix}*${width.right}`)
   })
+
+  it('should return correct hash when suffix is not passed and padding is applied, RTL', () => {
+    const input = document.createElement('input')
+    input.style.direction = 'rtl'
+    input.value = 'something'
+    input.style.paddingLeft = '10px'
+    input.style.paddingRight = '10px'
+
+    const left = document.createElement('span')
+    const right = document.createElement('span')
+
+    const { hash, width } = analyzeInput(input, null, left, right)
+    expect(hash).toBe(`rtl*${width.input}*${width.left}*${width.value}*${width.suffix}*${width.right}`)
+  })
 })
