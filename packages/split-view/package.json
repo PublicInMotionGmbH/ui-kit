@@ -25,7 +25,7 @@
   "devDependencies": {
     "@talixo/badge": "^1.0.0-alpha.12",
     "@talixo/button": "^1.0.0-alpha.12",
-    "@talixo/checkbox": "^1.0.0-alpha.12",
+    "@talixo/checkbox": "^1.0.0-alpha.13",
     "@talixo/icon": "^1.0.0-alpha.12",
     "@talixo/shared": "^1.0.0-alpha.12",
     "prop-types": "^15.6.1",

@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/checkbox": "^1.0.0-alpha.12",
+    "@talixo/checkbox": "^1.0.0-alpha.13",
     "@talixo/shared": "^1.0.0-alpha.12",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
@@ -32,7 +32,7 @@
     "react-vis": "1.10.1"
   },
   "peerDependencies": {
-    "@talixo/checkbox": "^1.0.0-alpha.12",
+    "@talixo/checkbox": "^1.0.0-alpha.13",
     "@talixo/shared": "^1.0.0-alpha.12",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
