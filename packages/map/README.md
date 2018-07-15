@@ -40,6 +40,7 @@ allowDevelopmentApi | string    | no       | `false` | Should load missing Googl
 zoom                | number    | no       | `6`     | zoom
 center              | Location  | no       | n/a     | centered position
 interactive         | boolean   | no       | `true`  | enable to move and zoom map
+options             | object    | no       | n/a     | MapOptions passed to Map object
 
 ### Directions
 

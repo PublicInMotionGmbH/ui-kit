@@ -32,7 +32,10 @@ const propTypes = {
   center: Location,
 
   /** Is map interactive? */
-  interactive: PropTypes.bool
+  interactive: PropTypes.bool,
+
+  /** Options passed to Google Maps */
+  options: PropTypes.object
 }
 
 const defaultProps = {
@@ -112,6 +115,7 @@ const getOptions = (interactive) => {
  * @param {string} [props.apiKey]
  * @param {number} [props.zoom]
  * @param {object} [props.center]
+ * @param {object} [props.options]
  * @returns {React.Element}
  */
 const Map = decorate(props => {
@@ -121,6 +125,7 @@ const Map = decorate(props => {
     <GoogleMap
       defaultZoom={props.zoom}
       defaultCenter={props.center}
+      options={props.options}
       defaultOptions={options}
     >
       {props.children}
