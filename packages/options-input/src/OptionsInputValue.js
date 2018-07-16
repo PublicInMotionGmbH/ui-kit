@@ -30,8 +30,15 @@ const propTypes = {
     max: PropTypes.number
   })),
 
+  /** Array of options IDs which will be displayed event if their value is 0. */
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
+
   /** Input value */
   value: PropTypes.object.isRequired
+}
+
+const defaultProps = {
+  persistentOptions: []
 }
 
 export const moduleName = 'options-input-value'
@@ -53,18 +60,20 @@ const DUMMY_OPTION = {
  * @returns {React.Element}
  */
 function OptionsInputValue (props) {
-  const { options, value } = props
+  const { className, options, persistentOptions, value, ...passedProps } = props
 
-  const elements = options.filter(x => value[x.id]).map(x => (
-    <Option
-      key={x.id}
-      option={x}
-      value={value[x.id]}
-    />
-  ))
+  const elements = options
+    .filter(x => value[x.id] || persistentOptions.indexOf(x.id) !== -1)
+    .map(x => (
+      <Option
+        key={x.id}
+        option={x}
+        value={value[x.id]}
+      />
+    ))
 
   return (
-    <div className={buildClassName(moduleName)}>
+    <div className={buildClassName(moduleName, className)} {...passedProps}>
       <Option
         dummy
         option={DUMMY_OPTION}
@@ -76,5 +85,6 @@ function OptionsInputValue (props) {
 }
 
 OptionsInputValue.propTypes = propTypes
+OptionsInputValue.defaultProps = defaultProps
 
 export default OptionsInputValue

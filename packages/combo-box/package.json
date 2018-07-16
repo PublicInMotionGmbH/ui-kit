@@ -1,6 +1,6 @@
 {
   "name": "@talixo/combo-box",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha.12",
   "description": "UI Component which represents Combo box",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,11 +23,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/country-flag": "^0.1.0",
-    "@talixo/icon": "^0.1.1",
-    "@talixo/progress-ring": "^0.1.0",
-    "@talixo/shared": "^0.1.0",
-    "@talixo/text-input": "^0.2.0",
+    "@talixo/country-flag": "^1.0.0-alpha.12",
+    "@talixo/icon": "^1.0.0-alpha.12",
+    "@talixo/progress-ring": "^1.0.0-alpha.12",
+    "@talixo/shared": "^1.0.0-alpha.12",
+    "@talixo/text-input": "^1.0.0-alpha.12",
     "downshift": "^1.31.11",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -35,8 +35,8 @@
     "react-input-autosize": "^2.2.1"
   },
   "peerDependencies": {
-    "@talixo/icon": "^0.1.1",
-    "@talixo/shared": "^0.1.0",
+    "@talixo/icon": "^1.0.0-alpha.12",
+    "@talixo/shared": "^1.0.0-alpha.12",
     "downshift": "^1.31.11",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

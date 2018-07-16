@@ -21,14 +21,12 @@ const advancedOption = {
 
 describe('<OptionTooltipContent />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<OptionTooltipContent option={option} />)
-
+    const wrapper = shallow(<OptionTooltipContent title={option.label} description={option.description} />)
     expect(wrapper).toMatchSnapshot()
   })
 
   it('renders advanced children correctly', () => {
-    const wrapper = shallow(<OptionTooltipContent option={advancedOption} />)
-
+    const wrapper = shallow(<OptionTooltipContent title={advancedOption.label} description={advancedOption.description} />)
     expect(wrapper).toMatchSnapshot()
   })
 })

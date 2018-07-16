@@ -114,9 +114,6 @@ describe('onChange', () => {
 
     // Accept first date
     inputHours.simulate('blur')
-    expect(onChange).toHaveBeenCalledTimes(1)
-
-    // Reset mock for next calls
     onChange.mockReset()
 
     // Try to change hours
@@ -133,6 +130,17 @@ describe('onChange', () => {
 
   it('is not called when input is not changed', () => {
     const inputHours = wrapper.find('input').at(0)
+    const inputMinutes = wrapper.find('input').at(1)
+
+    // Set up initial date
+    inputHours.simulate('change', { target: { value: '11' } })
+    inputHours.simulate('blur')
+
+    inputMinutes.simulate('change', { target: { value: '59' } })
+    inputMinutes.simulate('blur')
+
+    onChange.mockReset()
+
     inputHours.simulate('change', { target: { value: '12' } })
     inputHours.simulate('blur')
     expect(onChange).toHaveBeenCalledTimes(1)

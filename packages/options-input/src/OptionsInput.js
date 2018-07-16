@@ -33,6 +33,9 @@ const propTypes = {
     max: PropTypes.number
   })),
 
+  /** Array of options IDs which will be displayed event if their value is 0. */
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
+
   /** Input value */
   value: PropTypes.object,
 
@@ -43,11 +46,19 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** Event handler fired on blur */
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Does it have error */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
-  options: []
+  options: [],
+  persistentOptions: [],
+  error: false
 }
 
 export const moduleName = 'options-input'
@@ -67,7 +78,7 @@ function buildValue (options, baseValue) {
 
   for (let i = 0; i < options.length; i++) {
     const option = options[i]
-    value[option.id] = currentValue[option.id] || option.default || 0
+    value[option.id] = (currentValue[option.id] == null ? option.default : currentValue[option.id]) || 0
   }
 
   return value
@@ -220,16 +231,15 @@ class OptionsInput extends React.PureComponent {
   }
 
   render () {
-    const { options, className, onChange, onFocus, onBlur, ...restProps } = this.props
+    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
     const { value, open } = this.state
 
-    const clsName = buildClassName(moduleName, className, {
-      open: open
-    })
+    const clsName = buildClassName(moduleName, className, { open, error })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
         <button
+          id={id}
           type='button'
           className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
@@ -239,6 +249,7 @@ class OptionsInput extends React.PureComponent {
         >
           <OptionsInputValue
             options={options}
+            persistentOptions={persistentOptions}
             value={value}
           />
 

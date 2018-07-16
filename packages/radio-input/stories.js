@@ -34,7 +34,7 @@ addStory('default', readme, () => (
     <h2>Radio with error</h2>
     <RadioInput onChange={change} name='default_error' error>Option</RadioInput>
     <RadioInput onChange={change} name='default_error' error defaultChecked>Option default checked</RadioInput>
-    <RadioInput onChange={change} name='default_error' error>Option disabled</RadioInput>
+    <RadioInput onChange={change} name='default_error' error disabled>Option disabled</RadioInput>
     <br /><br />
 
     <h2>Radio with all disabled options</h2>
@@ -47,5 +47,25 @@ addStory('default', readme, () => (
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled>Option</RadioInput>
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled defaultChecked>Option default checked</RadioInput>
     <RadioInput onChange={change} name='default_all_disabled_error' error disabled>Option disabled</RadioInput>
+
+    <h2>Radio with external label</h2>
+    <label htmlFor='radio-input'>Click me</label><br />
+    <RadioInput id='radio-input' onChange={change} name='external_labelled_input'>Option</RadioInput>
+
+    <h2>Radio with long label</h2>
+    <div style={{ width: 300 }}>
+      <RadioInput>
+        Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
+      </RadioInput>
+    </div>
+
+    <h2>RTL: Radio with long label</h2>
+    <div dir='rtl'>
+      <div style={{ width: 300 }}>
+        <RadioInput>
+          Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
+        </RadioInput>
+      </div>
+    </div>
   </div>
 ))

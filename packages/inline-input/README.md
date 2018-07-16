@@ -11,8 +11,8 @@ using `npm install @talixo/inline-input --save` or `yarn add @talixo/inline-inpu
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
-- `@talixo/text-input: ^0.2.0`
+- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/text-input: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -34,6 +34,7 @@ icon            | no       | node      | n/a     | Right side input icon or cont
 onInputChange   | no       | function  | n/a     | Callback for change event.
 placeholder     | yes      | string    | n/a     | Input placeholder.
 value           | no       | string    | `''`    | Input value.
+id              | no       | string    | n/a     | ID passed to control element.
 
 ## Changelog
 

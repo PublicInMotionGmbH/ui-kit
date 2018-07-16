@@ -51,13 +51,17 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function SelectBoxValue (props) {
-  const { getToggleButtonProps, icon, multi, placeholder, isOpen, selectedItems, renderValue } = props
+  const { getToggleButtonProps, icon, multi, tabIndex, placeholder, isOpen, selectedItems, renderValue, id } = props
 
   // Get information about selection
   const isSelected = selectedItems.length > 0
 
   // Get properties required by toggle button
   const passedProps = getToggleButtonProps()
+
+  if (tabIndex != null) {
+    passedProps.tabIndex = tabIndex
+  }
 
   // Build class names for elements
   const controlsClsName = buildClassName([ 'combo-box', 'controls' ])
@@ -85,7 +89,7 @@ function SelectBoxValue (props) {
 
   // Render select-box value container
   return (
-    <button {...passedProps} className={clsName}>
+    <button {...passedProps} className={clsName} id={id}>
       <div className={innerClsName}>
         {value}
       </div>

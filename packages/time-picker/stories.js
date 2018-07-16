@@ -49,3 +49,10 @@ addStory.controlled('24', readme, (setState, state) => (
     />
   </div>
 ), () => ({ time: '' }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='time-picker'>Click me</label>
+    <TimePicker id='time-picker' onChange={change} />
+  </div>
+))

@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProgressRing /> renders correctly 1`] = `
-<span
-  className="talixo-progress-ring talixo-progress-ring--indeterminate"
+<div
+  className="talixo-progress-ring talixo-progress-ring--primary talixo-progress-ring--indeterminate"
 >
-  <span
+  <div
     aria-valuemax={100}
     aria-valuemin={0}
     aria-valuenow={null}
@@ -12,20 +12,28 @@ exports[`<ProgressRing /> renders correctly 1`] = `
     role="progressbar"
   >
     <svg
-      style={
-        Object {
-          "width": "100%",
-        }
-      }
-      viewBox="-1 -1 2 2"
+      viewBox="0 0 60 60"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M 1 0 A 1 1 0 0 1 -0.30901699437494734 0.9510565162951536 L 0 0"
+      <circle
+        className="talixo-progress-ring__circle-bg"
+        cx={30}
+        cy={30}
+        r={26}
+        strokeDasharray={164}
+        strokeDashoffset="0"
+        strokeWidth={7}
+      />
+      <circle
+        className="talixo-progress-ring__circle-stroke"
+        cx={30}
+        cy={30}
+        r={26}
+        strokeDasharray={164}
+        strokeDashoffset={123}
+        strokeWidth={7}
       />
     </svg>
-  </span>
-  <span
-    className="talixo-progress-ring__content"
-  />
-</span>
+  </div>
+</div>
 `;

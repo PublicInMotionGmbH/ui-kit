@@ -124,7 +124,7 @@ async function main () {
     }))
 
     const _ = (name, size, special) => (special ? chalk.bold(name) : name) + ' '.repeat(size - name.length)
-    const v = name => _(name == null ? '-' : name, 10)
+    const v = name => _(name == null ? '-' : name, 15)
 
     let hadHeader = false
     let hadSubheader = false

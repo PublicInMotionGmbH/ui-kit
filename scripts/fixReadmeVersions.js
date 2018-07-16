@@ -29,9 +29,9 @@ async function main () {
     }
 
     const readme = fs.readFileSync(pkg.readmePath, 'utf8')
-    const regexList = /(?:(\n(.+?)(?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+)(.+?))+/g
-    const regexDependencies = /\n(.+?)((?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+)(.+?)/g
-    const regexDependency = /\n(.+?)((?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+)(.+?)/
+    const regexList = /(?:(\n(.+?)(?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+(?:-alpha\.[0-9]+)?)(.+?))+/g
+    const regexDependencies = /\n(.+?)((?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+(?:-alpha\.[0-9]+)?)(.+?)/g
+    const regexDependency = /\n(.+?)((?:@[a-z0-9-]+\/)?[a-z0-9-.]+)(.+?)([\^~>=]?[0-9]+\.[0-9]+\.[0-9]+(?:-alpha\.[0-9]+)?)(.+?)/
 
     const match = readme.match(regexList)
 

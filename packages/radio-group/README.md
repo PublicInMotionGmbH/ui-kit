@@ -11,7 +11,8 @@ using `npm install @talixo/radio-group --save` or `yarn add @talixo/radio-group`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
+- `@talixo/radio-input: ^1.0.0-alpha.13`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -30,6 +31,7 @@ name          | string   | n/a             | name of radio group
 options       | Option[] | n/a             | array of objects which represent options
 error         | boolean  | `false`         | has it any error
 value         | any      | self-controlled | value when it's controlled
+id            | string   | n/a             | ID passed to control element
 
 ## Types
 

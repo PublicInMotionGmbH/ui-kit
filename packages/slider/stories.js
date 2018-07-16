@@ -46,3 +46,10 @@ addStory.controlled('controlled', readme, (setState, state) => (
     onChange={value => setState({ value })}
   />
 ), () => ({ value: 0 }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='slider'>Click me</label>
+    <Slider id='slider' />
+  </div>
+))

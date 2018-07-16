@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CheckboxGroup /> renders children correctly 1`] = `
+<div
+  className="talixo-checkbox-group"
+>
+  <Checkbox
+    defaultChecked={false}
+    disabled={false}
+    error={false}
+    key="1"
+    name="CheckboxGroup"
+    onChange={[Function]}
+    value={false}
+  >
+    one
+  </Checkbox>
+  <Checkbox
+    defaultChecked={false}
+    disabled={false}
+    error={false}
+    key="2"
+    name="CheckboxGroup"
+    onChange={[Function]}
+    value={false}
+  >
+    two
+  </Checkbox>
+  <Checkbox
+    defaultChecked={false}
+    disabled={false}
+    error={false}
+    key="3"
+    name="CheckboxGroup"
+    onChange={[Function]}
+    value={false}
+  >
+    three
+  </Checkbox>
+</div>
+`;

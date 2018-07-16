@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
-
-import buildCirclePath from '../utils/buildCirclePath'
+import drawStroke from './drawStroke'
+import { strokeDasharray, circlePosition, circleRadius, strokeWidth, viewBox } from './constants'
 
 const propTypes = {
+  /** Progress ring content */
+  children: PropTypes.node,
+
   /** Additional class name */
   className: PropTypes.string,
 
@@ -15,8 +18,13 @@ const propTypes = {
   /** Progress ring type */
   type: PropTypes.string,
 
-  /** Progress ring content */
-  children: PropTypes.node
+  /** Value of indeterminate stroke */
+  indeterminateValue: PropTypes.number
+}
+
+const defaultProps = {
+  type: 'primary',
+  indeterminateValue: 0.25
 }
 
 /**
@@ -24,49 +32,77 @@ const propTypes = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {number} [props.value]
+ * @param {number} [props.indeterminateValue]
+ * @param {string} [props.type]
+ * @param {string} [props.children]
  * @returns {React.Element}
  */
 function ProgressRing (props) {
-  const { className, value, type, children, ...passedProps } = props
+  const { children, className, type, value: _value, indeterminateValue, ...passedProps } = props
 
-  // Normalize current progress
-  const _value = value == null || isNaN(+value)
+  const indeterminate = isNaN(_value)
+  const value = indeterminate
     ? NaN
-    : Math.max(0, Math.min(1, +value))
+    : Math.min(1, Math.max(0, +_value))
 
   // Build values used inside
-  const valueNow = isNaN(_value) ? null : _value * 100
-  const valuePath = isNaN(_value) ? 0.3 : _value
+  const valueNow = indeterminate ? null : value * 100
 
-  // Build path for SVG circle
-  const path = buildCirclePath(valuePath)
-
-  // Build class name for Progress Ring
+  // Build class names for Progress Ring elements
   const clsName = buildClassName('progress-ring', className, [ type ], {
-    completed: _value === 1,
-    indeterminate: isNaN(_value)
+    completed: value === 1,
+    indeterminate: isNaN(value)
   })
 
+  const svgContainerClsName = buildClassName([ 'progress-ring', 'progress' ])
+  const svgCircleBgClsName = buildClassName([ 'progress-ring', 'circle-bg' ])
+  const svgCircleStrokeClsName = buildClassName([ 'progress-ring', 'circle-stroke' ])
+
+  const content = React.Children.count(children) === 0 ? null : (
+    <span className={buildClassName([ 'progress-ring', 'content' ])}>
+      {children}
+    </span>
+  )
+
   return (
-    <span className={clsName} {...passedProps}>
-      <span
-        className={buildClassName([ 'progress-ring', 'progress' ])}
+    <div className={clsName} {...passedProps}>
+      <div
+        className={svgContainerClsName}
         role='progressbar'
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={valueNow}
       >
-        <svg viewBox='-1 -1 2 2' style={{ width: '100%' }}>
-          <path d={path} />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox={`0 0 ${viewBox} ${viewBox}`}>
+          <circle
+            className={svgCircleBgClsName}
+            r={circleRadius}
+            cx={circlePosition}
+            cy={circlePosition}
+            strokeWidth={strokeWidth}
+            strokeDasharray={strokeDasharray}
+            strokeDashoffset='0'
+          />
+          <circle
+            className={svgCircleStrokeClsName}
+            r={circleRadius}
+            cx={circlePosition}
+            cy={circlePosition}
+            strokeWidth={strokeWidth}
+            strokeDasharray={strokeDasharray}
+            strokeDashoffset={drawStroke(indeterminate ? indeterminateValue : value)}
+          />
         </svg>
-      </span>
-      <span className={buildClassName([ 'progress-ring', 'content' ])}>
-        {children}
-      </span>
-    </span>
+      </div>
+      {content}
+    </div>
   )
 }
 
 ProgressRing.propTypes = propTypes
+ProgressRing.defaultProps = defaultProps
 
 export default ProgressRing

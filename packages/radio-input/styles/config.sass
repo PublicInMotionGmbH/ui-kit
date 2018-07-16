@@ -3,7 +3,16 @@
 $radio-input-box-size: dp(2.5) !default
 $radio-input-box-margin: dp(1.5) !default
 $radio-input-box-font-size: $x-font-size-base !default
-$radio-input-box-tick-size: $radio-input-box-size * 0.55 !default
+
+$radio-input-box-tick-ratio: 0.55 !default
+$radio-input-box-tick-size: $radio-input-box-size * $radio-input-box-tick-ratio !default
+
+$radio-input-box-focus-checked-tick-ratio: $radio-input-box-tick-ratio + if($radio-input-box-tick-ratio > 0.9, -0.1, 0.1) !default
+$radio-input-box-focus-checked-tick-size: $radio-input-box-size * $radio-input-box-focus-checked-tick-ratio !default
+
+$radio-input-box-focus-tick-ratio: 0.3 !default
+$radio-input-box-focus-tick-size: $radio-input-box-size * $radio-input-box-focus-tick-ratio !default
+$radio-input-box-focus-background-color: $x-color-calm !default
 
 $radio-input-box-border-width: $x-border-width !default
 $radio-input-box-line-height: $x-line-height-base !default

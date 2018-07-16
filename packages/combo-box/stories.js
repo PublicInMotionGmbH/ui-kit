@@ -3,13 +3,15 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 import { action } from '@storybook/addon-actions'
 
 import { Icon } from '@talixo/icon'
-import { CountryFlag } from '@talixo/country-flag'
+import { CountryFlag, CountryFlagsProvider } from '@talixo/country-flag'
 import { ProgressRing } from '@talixo/progress-ring'
 import { TextInput } from '@talixo/text-input'
 
 import SelectBox from './src/SelectBox'
 import ComboBox from './src/ComboBox'
 import AutoComplete from './src/AutoComplete'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -25,7 +27,12 @@ const optionsSimple = [
   'Skipper',
   'Private',
   'Kowalski',
-  'Rico'
+  'Rico',
+  'Alonso',
+  'Smith',
+  'Santosh',
+  'Medelina',
+  'Kyoksanto'
 ]
 
 const options = [
@@ -43,6 +50,12 @@ const options = [
   { id: 'sk', name: 'Slovakia', language: 'Slovak' }
 ]
 
+// Styles for autocomplete footer
+const footerStyles = {
+  textAlign: 'right',
+  color: '#e40909'
+}
+
 // Stories
 
 addStory.controlled('simple select box', readme, (setState, state) => (
@@ -53,6 +66,19 @@ addStory.controlled('simple select box', readme, (setState, state) => (
       value={state.value}
       onChange={value => setState({ value })}
       options={optionsSimple}
+    />
+  </div>
+), () => ({ value: null }))
+
+addStory.controlled('select box with footer', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {state.value}</div>
+    <SelectBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
     />
   </div>
 ), () => ({ value: null }))
@@ -120,7 +146,7 @@ function filterOptions (value, options, field) {
 }
 
 addStory.controlled('special select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -130,11 +156,11 @@ addStory.controlled('special select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('warning select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -145,11 +171,11 @@ addStory.controlled('warning select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('loading select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       placeholder='Select item...'
@@ -160,11 +186,11 @@ addStory.controlled('loading select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: null }))
 
 addStory.controlled('special multi select box', readme, (setState, state) => (
-  <div>
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <SelectBox
       multi
@@ -175,7 +201,7 @@ addStory.controlled('special multi select box', readme, (setState, state) => (
       renderValue={renderSimpleCountry}
       options={options}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('filtered combo box', readme, (setState, state) => (
@@ -191,8 +217,22 @@ addStory.controlled('filtered combo box', readme, (setState, state) => (
   </div>
 ), () => ({ value: null, inputValue: '' }))
 
-addStory.controlled('filtered multi combo box', readme, (setState, state) => (
+addStory.controlled('combo box with footer', readme, (setState, state) => (
   <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <ComboBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value, inputValue: '' })}
+      onInputValueChange={inputValue => setState({ inputValue })}
+      options={filterOptions(state.inputValue, optionsSimple)}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
+    />
+  </div>
+), () => ({ value: null, inputValue: '' }))
+
+addStory.controlled('filtered multi combo box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
     <div>Selected value: {JSON.stringify(state.value)}</div>
     <ComboBox
       multi
@@ -206,7 +246,7 @@ addStory.controlled('filtered multi combo box', readme, (setState, state) => (
       onFocus={action('focus')}
       onBlur={action('blur')}
     />
-  </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [], inputValue: '' }))
 
 addStory.controlled('multi combo box with adding value', readme, (setState, state) => (
@@ -239,34 +279,53 @@ addStory.controlled('auto complete', readme, (setState, state) => (
   </div>
 ), () => ({ value: '' }))
 
-addStory.controlled('RTL: multi select box', readme, (setState, state) => (
-  <div dir='rtl'>
+addStory.controlled('auto complete with footer', readme, (setState, state) => (
+  <div>
     <div>Selected value: {JSON.stringify(state.value)}</div>
-    <SelectBox
-      multi
-      placeholder='בחר פריטים'
-      value={state.value}
-      onChange={value => setState({ value })}
-      renderItem={renderCountry}
-      renderValue={renderSimpleCountry}
-      options={options}
-    />
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
   </div>
+), () => ({ value: '' }))
+
+addStory.controlled('RTL: multi select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <SelectBox
+        multi
+        placeholder='בחר פריטים'
+        value={state.value}
+        onChange={value => setState({ value })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={options}
+      />
+    </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('RTL: select box', readme, (setState, state) => (
-  <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
-    <SelectBox
-      placeholder='בחר פריט'
-      icon={<ProgressRing type='error' />}
-      value={state.value}
-      onChange={value => setState({ value })}
-      renderItem={renderCountry}
-      renderValue={renderSimpleCountry}
-      options={options}
-    />
-  </div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <SelectBox
+        placeholder='בחר פריט'
+        icon={<ProgressRing type='error' />}
+        value={state.value}
+        onChange={value => setState({ value })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={options}
+      />
+    </div>
+  </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
 addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
@@ -283,17 +342,105 @@ addStory.controlled('RTL: filtered combo box', readme, (setState, state) => (
 ), () => ({ value: null, inputValue: '' }))
 
 addStory.controlled('RTL: filtered multi combo box', readme, (setState, state) => (
-  <div dir='rtl'>
-    <div>Selected value: {JSON.stringify(state.value)}</div>
+  <CountryFlagsProvider url={spriteUrl}>
+    <div dir='rtl'>
+      <div>Selected value: {JSON.stringify(state.value)}</div>
+      <ComboBox
+        multi
+        placeholder='Select items...'
+        value={state.value}
+        onChange={value => setState({ value, inputValue: '' })}
+        onInputValueChange={inputValue => setState({ inputValue })}
+        renderItem={renderCountry}
+        renderValue={renderSimpleCountry}
+        options={filterOptions(state.inputValue, options, 'name')}
+      />
+    </div>
+  </CountryFlagsProvider>
+), () => ({ value: [], inputValue: '' }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='combo-box'>Click me (combo box)</label>
     <ComboBox
-      multi
+      id='combo-box'
       placeholder='Select items...'
-      value={state.value}
-      onChange={value => setState({ value, inputValue: '' })}
-      onInputValueChange={inputValue => setState({ inputValue })}
       renderItem={renderCountry}
       renderValue={renderSimpleCountry}
-      options={filterOptions(state.inputValue, options, 'name')}
+      options={options}
     />
+    <label htmlFor='combo-box-multi'>Click me (multi combo box)</label>
+    <ComboBox
+      multi
+      id='combo-box-multi'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='select-box'>Click me (select box)</label>
+    <SelectBox
+      multi
+      id='select-box'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='select-box-multi'>Click me (multi select box)</label>
+    <SelectBox
+      multi
+      id='select-box-multi'
+      placeholder='Select item...'
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+    <label htmlFor='autocomplete'>Click me (autocomplete)</label>
+    <AutoComplete
+      id='autocomplete'
+      options={optionsSimple}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      footer={<div style={footerStyles}>Powered by Talixo</div>}
+    >
+      <TextInput />
+    </AutoComplete>
   </div>
-), () => ({ value: [], inputValue: '' }))
+))
+
+addStory('self-controlled', readme, () => (
+  <div>
+    <h2>Select box</h2>
+    <SelectBox
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Combo box</h2>
+    <ComboBox
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Combo box (multi)</h2>
+    <ComboBox
+      multi
+      placeholder='Select item...'
+      options={optionsSimple}
+      onChange={action('change')}
+    />
+
+    <h2>Auto-complete</h2>
+    <AutoComplete
+      options={optionsSimple}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      onChange={action('change')}
+    >
+      <TextInput />
+    </AutoComplete>
+  </div>
+))

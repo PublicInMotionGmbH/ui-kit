@@ -10,6 +10,7 @@ module.exports = {
     '!packages/*/index.js',
     '!packages/*/stories.js',
     '!packages/*/dist/**/*.js',
+    '!packages/*/lib/**/*.js',
     '!packages/country-flag/sprites/*.js',
     '!packages/country-flag/scripts/*.js',
     '!packages/country-flag/src/storybook/*.js',
