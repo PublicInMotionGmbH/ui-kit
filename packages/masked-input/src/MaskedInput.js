@@ -156,7 +156,7 @@ class MaskedInput extends React.Component {
     const { value } = this.state
 
     // Only generate element if input is not focused and value inside state exists
-    const element = renderMask(value)
+    const element = renderMask({ value })
 
     return React.cloneElement(element, {
       ...element.props,

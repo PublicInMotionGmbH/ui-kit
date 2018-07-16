@@ -59,34 +59,34 @@ const options = [
 ]
 
 // Input mask renderer
-const renderDate = v => (
+const renderDate = ({ value }) => (
   <div className='storybook-mask-example'>
     <Icon className='storybook-mask-input__mask-icon' name='date_range' />
-    {v && moment(v).format('DD MMMM, ddd')}
+    {value && moment(value).format('DD MMMM, ddd')}
   </div>
 )
-const renderCountry = v => (
+const renderCountry = ({ value }) => (
   <div className='storybook-mask-example'>
-    <CountryFlag code={v.id} style={{ marginRight: 10 }} />
-    {v.name} <small>({v.language})</small>
+    <CountryFlag code={value.id} style={{ marginRight: 10 }} />
+    {value.name} <small>({value.language})</small>
   </div>
 )
 
 // Stories
 addStory.controlled('default', readme, (setState, state) => (
   <MaskedInput
-    renderMask={(v) => (
+    renderMask={({ value }) => (
       <div className='storybook-mask-example'>
         <Icon name='check_sign' className='storybook-mask-input__mask-icon storybook-mask-input__mask-icon--checked' />
-        {v}
+        {value}
       </div>
     )}
+    onChange={value => { setState({ value }) }}
     value={state.value}
     style={{ display: 'block' }}
     {...commonProps}
   >
     <TextInput
-      onChange={value => { setState({ value }) }}
       placeholder='Type something and click out of this box...'
     />
   </MaskedInput>
