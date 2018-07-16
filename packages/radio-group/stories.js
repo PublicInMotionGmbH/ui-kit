@@ -50,27 +50,6 @@ addStory.controlled('with default value', readme, (setState, state) => (
   />
 ), () => ({ value: 'option_1' }))
 
-addStory.controlled('with different size', readme, (setState, state) => (
-  <div>
-    <h2>Small size</h2>
-    <RadioGroup
-      onChange={value => setState({value})}
-      name='RadioName1'
-      size='small'
-      value={state.value}
-      options={options}
-    />
-    <h2>Large size</h2>
-    <RadioGroup
-      onChange={value2 => setState({ value2 })}
-      name='RadioName2'
-      size='large'
-      value={state.value2}
-      options={options}
-    />
-  </div>
-), () => ({ value: 'option_1', value2: 'option_2' }))
-
 addStory.controlled('with disabled option', readme, (setState, state) => (
   <RadioGroup
     onChange={value => setState({ value })}
@@ -120,6 +99,7 @@ addStory('with label', readme, () => (
     <label htmlFor='radio-group'>Click me</label>
     <RadioGroup
       id='radio-group'
+      name='with-label'
       options={[
         { value: 1, label: 'one' },
         { value: 2, label: 'two' },
