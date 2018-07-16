@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-import {action} from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions'
 
 import RadioGroup from './src/RadioGroup'
 
@@ -114,3 +114,17 @@ addStory.controlled('with custom option component', readme, (setState, state) =>
     options={options}
   />
 ), () => ({ value: 'option_3' }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='radio-group'>Click me</label>
+    <RadioGroup
+      id='radio-group'
+      options={[
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))

@@ -2,6 +2,7 @@
 
 @include module('text-input')
   position: relative
+  box-sizing: border-box
   display: block
 
   #{inside(&, 'suffix')}
@@ -12,7 +13,9 @@
     transform: translateY(-50%)
     white-space: nowrap
     pointer-events: none
-    margin-left: $text-input-suffix-margin
+    padding-left: $text-input-suffix-margin
+    overflow: hidden
+    text-overflow: ellipsis
 
   &--empty #{inside(&, 'suffix')}
     display: none
@@ -26,7 +29,6 @@
     background-color: $text-input-background-color
     border: $text-input-border-width solid $text-input-border-color
     border-radius: $text-input-border-radius
-
     font-size: $text-input-font-size
     height: $text-input-height
     line-height: $text-input-height
@@ -55,7 +57,7 @@
       color: $text-input-error-placeholder-color
 
   &--with-left #{inside(&, 'input')}
-    padding-left: $text-input-icon-with-padding
+   padding-left: $text-input-icon-with-padding
 
   &--with-right #{inside(&, 'input')}
     padding-right: $text-input-icon-with-padding
@@ -96,6 +98,6 @@
     padding-right: $text-input-icon-with-padding
     padding-left: $text-input-icon-with-padding
 
-  [dir=rtl] #{inside(&, 'suffix')}
-    margin-left: 0
-    margin-right: $text-input-suffix-margin
+  [dir=rtl] & #{inside(&, 'suffix')}
+    padding-left: 0
+    padding-right: $text-input-suffix-margin

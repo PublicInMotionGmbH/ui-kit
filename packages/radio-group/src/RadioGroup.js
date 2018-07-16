@@ -40,14 +40,14 @@ const propTypes = {
   /** Component which will be displayed as custom option. */
   renderCustom: PropTypes.func,
 
-  /** Option selected by user. Self-controlled by default. */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  /** Value of default option */
+  value: PropTypes.any,
 
   /** Idicates if options should be positioned vertically. */
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
+
+  /** ID passed to control element */
+  id: PropTypes.string
 }
 
 const defaultProps = {
@@ -73,6 +73,7 @@ const defaultProps = {
  * @property {array} props.options.value
  * @property {number|string} [props.value]
  * @property {boolean} [props.vertical]
+ * @property {string} [props.id]
  *
  * @property {object} state
  * @property {number|string} state.custom
@@ -161,11 +162,12 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element[]|React.Element[]}
    */
   generateOptions = () => {
-    const { error, name, options } = this.props
+    const { error, name, options, id } = this.props
     const { value } = this.state
 
-    const optionsList = options.map(obj => (
+    const optionsList = options.map((obj, index) => (
       <RadioInput
+        id={index === 0 ? id : undefined}
         checked={value === obj.value}
         disabled={obj.disabled || false}
         key={obj.value}
@@ -182,7 +184,7 @@ class RadioGroup extends React.PureComponent {
 
   render () {
     const { allowCustom, className, renderCustom, customPlaceholder,
-      error, name, onChange, options, value, vertical, ...passedProps
+      error, id, name, onChange, options, value, vertical, ...passedProps
     } = this.props
     const { generateCustomOption, generateOptions } = this
     const wrapperCls = buildClassName('radio-group', className, { vertical })

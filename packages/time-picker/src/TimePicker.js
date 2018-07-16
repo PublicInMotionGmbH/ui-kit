@@ -21,11 +21,18 @@ const propTypes = {
   hourFormat: PropTypes.oneOf(['24', '12']),
 
   /** Time string in 'HH:mm' format passed to component. */
-  value: PropTypes.string
+  value: PropTypes.string,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool
 }
 
 const defaultProps = {
-  hourFormat: '24'
+  hourFormat: '24',
+  error: false
 }
 
 const HOURS_24 = 'HH'
@@ -272,16 +279,15 @@ class TimePicker extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, hourFormat, onChange, value: propsValue, ...passedProps } = this.props
+    const { className, hourFormat, onChange, value: propsValue, id, error, ...passedProps } = this.props
     const { value } = this.state
-    const { handleHoursBlur, handleMinutesBlur } = this
 
     // Build class names
-    const wrapperClsName = buildClassName(moduleName, className)
-    const inputHourClsName = buildClassName([moduleName, 'input-hour'])
-    const inputMinutesClsName = buildClassName([moduleName, 'input-minutes'])
+    const wrapperClsName = buildClassName(moduleName, className, { error })
+    const inputHourClsName = buildClassName([ moduleName, 'input-hour' ])
+    const inputMinutesClsName = buildClassName([ moduleName, 'input-minutes' ])
     const menuClsName = buildClassName([ moduleName, 'menu' ])
-    const colonClsName = buildClassName([moduleName, 'colon'])
+    const colonClsName = buildClassName([ moduleName, 'colon' ])
 
     // Convert format token
     const format = hourFormat === '24'
@@ -291,24 +297,27 @@ class TimePicker extends React.PureComponent {
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
+          id={id}
+          error={error}
           className={inputHourClsName}
-          onBlur={handleHoursBlur}
+          onBlur={this.handleHoursBlur}
           format={format}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuHours(value, handleHoursBlur, format)}
+            {buildMenuHours(value, this.handleHoursBlur, format)}
           </div>
         </TimeInput>
         <span className={colonClsName}>:</span>
         <TimeInput
+          error={error}
           className={inputMinutesClsName}
-          onBlur={handleMinutesBlur}
+          onBlur={this.handleMinutesBlur}
           format={MINUTES}
           value={value}
         >
           <div className={menuClsName}>
-            {buildMenuMinutes(value, handleMinutesBlur)}
+            {buildMenuMinutes(value, this.handleMinutesBlur)}
           </div>
         </TimeInput>
       </div>

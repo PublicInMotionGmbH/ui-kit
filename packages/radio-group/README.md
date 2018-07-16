@@ -11,9 +11,9 @@ using `npm install @talixo/radio-group --save` or `yarn add @talixo/radio-group`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/radio-input: ^0.1.0`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/text-input: ^0.2.0`
+- `@talixo/radio-input: ^1.0.0-alpha.13`
+- `@talixo/shared: ^1.0.0-alpha.12
+- `@talixo/text-input: ^1.0.0-alpha.12
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -31,6 +31,7 @@ allowCustom       | boolean           | no        | `false` | Enable custom opti
 className         | string            | no        | n/a     | Additional class name passed to wrapper.
 customPlaceholder | string            | no        | n/a     | Placeholder of default custom options input.
 error             | boolean           | `false`   | n/a     | Does it have any error
+id                | string            | n/a       | n/a     | ID passed to control element
 name              | string            | yes       | n/a     | Name of radio group.
 onChange          | function          | no        | n/a     | onChange callback.
 options           | Option[]          | no        | n/a     | Array of objects which represent options.
@@ -38,7 +39,9 @@ renderCustom      | string            | no        | n/a     | Component which wi
 value             | number or string  | no        | n/a     | Value of default option.
 vertical          | boolean           | no        | `false` | Idicates if options should be positioned vertically.
 
-## Property shapes
+## Types
+
+### Option
 
 Property name | Type              | Required  | Default | Description                    
 --------------|-------------------|-----------|:-------:|--------------------------------
@@ -48,4 +51,4 @@ value         | string            | yes       | n/a     | Value of the option.
 
 ## Changelog
 
-- **0.1.0** - initial version
+- **1.0.0** - initial version

@@ -1,5 +1,39 @@
 import createInvisibleElement from './createInvisibleElement'
 
+/**
+ * callculate offsets of input and suffix
+ *
+ * @param {HTMLElement} leftEl
+ * @param {HTMLElement} rightEl
+ * @param {boolean} isRTL
+ * @returns {object}
+ */
+function calculateOffsets (leftEl, rightEl, isRTL) {
+  // Calculate offset when left or righ element is added
+  const left = !isRTL
+    ? leftEl ? (leftEl.offsetLeft + leftEl.clientWidth) : 0
+    : rightEl ? (rightEl.offsetLeft + rightEl.clientWidth) : 0
+
+  const right = !isRTL
+    ? rightEl && rightEl.offsetParent ? rightEl.offsetParent.clientWidth - rightEl.offsetLeft : 0
+    : leftEl && leftEl.offsetParent ? leftEl.offsetParent.clientWidth - leftEl.offsetLeft : 0
+
+  return { left, right }
+}
+
+/**
+ * callculate offsets of input and suffix
+ *
+ * @param {HTMLElement} element
+ * @returns {number}
+ */
+function getElementWidth (element) {
+  const elementStyle = window.getComputedStyle(element)
+  const elementWidth = parseInt(elementStyle.width, 10)
+
+  return elementWidth || 0
+}
+
 const copiedStyles = [
   'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
   'letterSpacing', 'textTransform', 'color'
@@ -10,9 +44,11 @@ const copiedStyles = [
  *
  * @param {HTMLElement} inputEl
  * @param {HTMLElement} suffixEl
+ * @param {HTMLElement} leftEl
+ * @param {HTMLElement} rightEl
  * @returns {object|{ hash: string, width: { input: number, left: number, value: number, suffix: number, right: number}, styles: object }}
  */
-function analyzeInput (inputEl, suffixEl) {
+function analyzeInput (inputEl, suffixEl, leftEl, rightEl) {
   // Create dummy element with preffered type
   const element = createInvisibleElement(inputEl.value)
 
@@ -24,10 +60,13 @@ function analyzeInput (inputEl, suffixEl) {
   inputEl.style.paddingRight = ''
 
   // Compute styles for input
-  const computed = document.defaultView.getComputedStyle(inputEl)
+  const computed = window.getComputedStyle(inputEl)
 
   // Check if it's RTL text direction
   const isRTL = computed.direction === 'rtl'
+
+  // Calculate offsets
+  const offset = calculateOffsets(leftEl, rightEl, isRTL)
 
   // Initialize styles for suffix
   const styles = {}
@@ -40,16 +79,24 @@ function analyzeInput (inputEl, suffixEl) {
 
   // Gather information about text width inside input
   document.body.appendChild(element)
-  const value = element.offsetWidth
+  const value = element.clientWidth
   document.body.removeChild(element)
 
-  // Get width of input
-  const input = inputEl.offsetWidth
-
   // Calculate size of all input parts (in px)
-  const left = parseInt(computed.paddingLeft, 10)
-  const suffix = suffixEl.offsetWidth
-  const right = parseInt(computed.paddingRight, 10)
+  const paddingLeft = parseInt(computed.paddingLeft, 10)
+  const paddingRight = parseInt(computed.paddingRight, 10)
+
+  const left = offset.left > paddingLeft
+    ? offset.left
+    : paddingLeft
+  const right = offset.right > paddingRight
+    ? offset.right
+    : paddingRight
+
+  const suffix = suffixEl ? getElementWidth(suffixEl) : 0
+
+  // Get width of input
+  const input = inputEl.clientWidth
 
   // Recover current padding set to input directly
   inputEl.style.paddingLeft = previousLeftPadding

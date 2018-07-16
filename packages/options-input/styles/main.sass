@@ -40,11 +40,18 @@
       font-size: $options-input-icon-size
       margin-right: $options-input-icon-margin
 
+      [dir=rtl] &
+        margin-right: 0
+        margin-left: $options-input-icon-margin
+
     &--dummy
       visibility: hidden
       width: 0 !important
       margin: 0 !important
       overflow: hidden
+
+    &--empty
+      color: $options-input-option-empty-color
 
   &-list
     position: absolute
@@ -111,11 +118,11 @@
   &-tooltip__title
     display: block
     font-weight: $options-input-tooltip-title-font-weight
-    margin-bottom: $options-input-tooltip-title-margin
 
   &-tooltip__description
     display: block
     font-weight: $options-input-tooltip-description-font-weight
+    margin-top: $options-input-tooltip-title-margin
 
   @include module('text-input')
     input, input:hover, input:focus

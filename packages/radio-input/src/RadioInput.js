@@ -41,28 +41,42 @@ const defaultProps = {
  *
  * @returns {React.Element}
  */
-function RadioInput (props) {
-  const { children, className, disabled, error, onChange, style, ...passedProps } = props
+class RadioInput extends React.PureComponent {
+  change = (event) => {
+    const value = event.target.checked
 
-  const wrapperClass = buildClassName('radio-input', className, { disabled, error })
-  const inputClass = buildClassName(['radio-input', 'input'])
+    if (this.props.value == null) {
+      this.setState({ value })
+    }
 
-  const handleOnChange = e => {
-    if (onChange) { onChange(e.target.checked, e) }
+    if (this.props.onChange) {
+      this.props.onChange(value)
+    }
   }
 
-  return (
-    <label className={wrapperClass} style={style}>
-      <input
-        className={inputClass}
-        disabled={disabled}
-        type='radio'
-        onChange={handleOnChange}
-        {...passedProps}
-      />
-      <span>{children}</span>
-    </label>
-  )
+  render () {
+    const { children, className, disabled, error, style, onChange, onKeyDown, ...passedProps } = this.props
+
+    const wrapperClass = buildClassName('radio-input', className, { disabled, error })
+    const inputClass = buildClassName(['radio-input', 'input'])
+
+    return (
+      <label className={wrapperClass} style={style}>
+        <input
+          className={inputClass}
+          disabled={disabled}
+          type='radio'
+          onChange={this.change}
+          {...passedProps}
+        />
+        <span tabIndex={-1}>
+          <span>
+            {children}
+          </span>
+        </span>
+      </label>
+    )
+  }
 }
 
 RadioInput.propTypes = propTypes

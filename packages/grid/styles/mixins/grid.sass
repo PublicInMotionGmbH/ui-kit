@@ -29,16 +29,16 @@
   W = 100% * N/C - N * G * (C - 1)/C + (N - 1) * G
  */
 
-@mixin grid($cols, $gutter, $prefix: '')
-  @function width($i)
-    @return '#{percentage($i/$cols)} + #{($i - 1) * $gutter - $i * $gutter * ($cols - 1) / $cols}'
+@function _grid-width($i, $cols, $gutter)
+  @return '#{percentage($i/$cols)} + #{($i - 1) * $gutter - $i * $gutter * ($cols - 1) / $cols}'
 
+@mixin grid($cols, $gutter, $prefix: '')
   @for $i from 1 to $cols + 1
     .#{$segment-class-name}.#{$segment-class-name}-#{$prefix}#{$i}
       min-width: percentage($i / $cols)
       max-width: percentage($i / $cols)
 
-    $width: calc(#{width($i)})
+    $width: calc(#{_grid-width($i, $cols, $gutter)})
 
     .#{$group-class-name}--spaced > .#{$segment-class-name}-#{$prefix}#{$i}
       min-width: $width

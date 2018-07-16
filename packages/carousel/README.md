@@ -11,11 +11,12 @@ using `npm install @talixo/carousel --save` or `yarn add @talixo/carousel`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/icon: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
+- `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/icon: ^0.1.1`
 
 These packages are required by `@talixo/carousel`, but you have to install them manually,
 to avoid having different versions of these in your application.

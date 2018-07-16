@@ -1,6 +1,8 @@
+const path = require('path')
 const fs = require('fs')
 const filesize = require('filesize')
 const yargs = require('yargs')
+const rimraf = require('rimraf').sync
 
 const rollup = require('rollup').rollup
 const commonjs = require('rollup-plugin-commonjs')
@@ -10,9 +12,13 @@ const resolve = require('rollup-plugin-node-resolve')
 const uglify = require('rollup-plugin-uglify')
 
 const getPackages = require('../utils/getPackages')
+const runCommand = require('./runCommand')
 
 // Set up environment to production (for building)
 process.env.NODE_ENV = 'production'
+
+const nodePath = process.argv[0]
+const babelCliPath = path.join(__dirname, '..', 'node_modules', '.bin', 'babel')
 
 /**
  * Build Rollup.js plugin for loading JSON files
@@ -87,17 +93,37 @@ async function main () {
 
   // Iterate over all packages
   for (const pack of packages) {
-    process.stdout.write(`Building ${pack.name}...\n  development: `)
+    process.stdout.write(`Building ${pack.name}...\n`)
 
     // Build development package
+    process.stdout.write('  development: ')
     const dev = await buildPackage(pack, 'development')
 
-    process.stdout.write(`${filesize(dev.size)}\n  production: `)
+    process.stdout.write(`${filesize(dev.size)}\n`)
 
     // Build production-ready package
+    process.stdout.write('  production: ')
     const prod = await buildPackage(pack, 'production')
 
     process.stdout.write(`${filesize(prod.size)}\n`)
+
+    // Building 'src' into 'lib' directory
+    process.stdout.write('  libs:')
+
+    if (pack.srcPath) {
+      await rimraf(pack.libPath)
+
+      const result = await runCommand.silent(
+        nodePath, babelCliPath, pack.srcPath,
+        '--out-dir', pack.libPath,
+        '--plugins', 'transform-es2015-modules-commonjs'
+      )
+
+      process.stdout.write('\n')
+      process.stdout.write('    ' + result.split('\n').join('\n    ').split(pack.dirPath).join('') + '\n')
+    } else {
+      process.stdout.write(' missing SRC directory\n')
+    }
   }
 }
 

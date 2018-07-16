@@ -3,7 +3,16 @@
 $checkbox-box-size: dp(2.5) !default
 $checkbox-box-margin: dp(1.5) !default
 $checkbox-box-font-size: $x-input-text-size !default
-$checkbox-box-tick-size: $checkbox-box-size * 0.4 !default
+
+$checkbox-box-tick-ratio: 0.4 !default
+$checkbox-box-tick-size: $checkbox-box-size * $checkbox-box-tick-ratio !default
+
+$checkbox-box-focus-checked-tick-ratio: $checkbox-box-tick-ratio + if($checkbox-box-tick-ratio > 0.9, -0.1, 0.1) !default
+$checkbox-box-focus-checked-tick-size: $checkbox-box-size * $checkbox-box-focus-checked-tick-ratio !default
+
+$checkbox-box-focus-tick-ratio: 0.3 !default
+$checkbox-box-focus-tick-size: $checkbox-box-size * $checkbox-box-focus-tick-ratio !default
+$checkbox-box-focus-background-color: $x-color-calm !default
 
 $checkbox-box-border-width: $x-border-width !default
 $checkbox-box-border-radius: $x-border-radius !default

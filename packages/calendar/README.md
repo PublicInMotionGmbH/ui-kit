@@ -11,8 +11,8 @@ using `npm install @talixo/calendar --save` or `yarn add @talixo/calendar`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^0.1.1`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/icon: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -39,6 +39,8 @@ value              | string in `YYYY-MM-DD` format | self-controlled | current d
 onChange           | function                      | n/a             | event handler when date is changed
 onFocus            | function                      | n/a             | event handler when calendar is focused
 onBlur             | function                      | n/a             | event handler when calendar lost focus
+id                 | string                        | n/a             | ID passed to control element
+error              | bool                          | `false`         | show error styles of calendar
 
 ## Changelog
 
