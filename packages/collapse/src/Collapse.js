@@ -18,8 +18,8 @@ const propTypes = {
   /** Is it collapsed? */
   collapsed: PropTypes.bool,
 
-  /** Animation time (in ms), requires geometry CSS */
-  animationTime: PropTypes.number,
+  /** Animation speed (in px/ms). */
+  speed: PropTypes.number,
 
   /** Content for collapsed container */
   children: PropTypes.node
@@ -27,24 +27,24 @@ const propTypes = {
 
 const defaultProps = {
   collapsed: true,
-  smooth: true
+  smooth: true,
+  speed: 200
 }
-
-const TRANSFORM_END = [
-  'webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend',
-  'animationend', 'oAnimationEnd', 'webkitAnimationEnd'
-]
 
 /**
  * Component which represents Collapse.
  *
  * @property {object} props
+ * @property {object} props.style
+ * @property {string} props.className
+ * @property {boolean} props.smooth
  * @property {boolean} props.collapsed
- * @property {number} props.heightBoost
- * @property {string} [props.className]
+ * @property {number} props.speed
+ * @property {*} props.children
  *
  * @property {number|null} height
  * @property {number|null} reflowHeight
+ * @property {function|null} raf
  *
  * @property {Element|null} node
  * @property {Element|null} content
@@ -53,141 +53,50 @@ const TRANSFORM_END = [
  */
 class Collapse extends React.PureComponent {
   height = null
-  contentHeight = null
-  nextContentHeight = null
-
-  componentWillReceiveProps (props) {
-    // Do nothing special when component hasn't changed it's collapsing state
-    // Or it shouldn't be smooth
-    if (props.collapsed === this.props.collapsed || !props.smooth || props.animationTime === 0) {
-      return
-    }
-
-    // Change `maxHeight` of element
-    this.makeTransition(props)
-    this.contentHeight = this.content.offsetHeight
-  }
-
-  componentWillUnmount () {
-    this.mounted = false
-
-    // Stop listening for transition changes
-    this.stopListening()
-  }
-
   componentDidMount () {
-    this.contentHeight = this.content.offsetHeight
-    this.mounted = true
-
-    // Start listening for transition changes
-    this.startListening()
+    this.updateHeight(this.props)
   }
 
   componentDidUpdate (prevProps) {
-    this.nextContentHeight = this.content.offsetHeight
+    this.raf = window.requestAnimationFrame(() => this.updateHeight(this.props))
   }
 
-  makeTransition (props) {
-    // Use either next or current props
+  componentWillUnmount () {
+    window.cancelAnimationFrame(this.raf)
+  }
+
+  updateHeight = (props) => {
+    // Use either passed props or current props
     props = props || this.props
 
-    // Do not transit when it is not mounted
-    if (!this.mounted) {
-      return
-    }
+    // Get desires height
+    const height = !props.collapsed
+      ? this.content.offsetHeight
+      : 0
 
-    // Get desired height
-    const nextHeight = this.getHeight()
+    // Update height when it is not the same
+    if (this.height !== height) {
+      const { smooth, speed } = this.props
 
-    // Do not update height when it is already the same
-    if (nextHeight === this.height) {
-      return
-    }
+      if (smooth && speed !== 0) {
+        const currentHeight = this.node.offsetHeight
+        const diff = Math.abs(currentHeight - height)
+        const transitionTime = diff * 1000 / speed
 
-    // Update with new height
-    this.height = nextHeight
+        this.node.style.transitionDuration = transitionTime + 'ms'
+      }
 
-    // Update element maxHeight when it's mounted
-    if (this.height != null) {
-      this.node.style.maxHeight = this.height + 'px'
-      this.node.style.height = this.height + 'px'
+      this.height = height
+      this.node.style.height = height + 'px'
 
       // Trigger reflow by using 'offsetHeight',
       // otherwise transition will not happen
-      this.reflowHeight = this.node.offsetHeight
-    }
-  }
-
-  /**
-   * Start listening for end of CSS transition/animation
-   */
-  startListening () {
-    if (!this.node || !this.mounted) {
-      return
+      this.reflow = this.node.offsetHeight
     }
 
-    for (let i = 0; i < TRANSFORM_END.length; i++) {
-      this.node.addEventListener(TRANSFORM_END[i], this.finishTransition)
-    }
-  }
-
-  /**
-   * Stop listening for end of CSS transition/animation
-   */
-  stopListening () {
-    if (!this.node) {
-      return
-    }
-
-    // Stop updating max-height dynamically in transition time
-    clearTimeout(this.dynamicTransitionTimeout)
-
-    for (let i = 0; i < TRANSFORM_END.length; i++) {
-      this.node.removeEventListener(TRANSFORM_END[i], this.finishTransition)
-    }
-  }
-
-  /**
-   * Get content desired height
-   *
-   * @returns {null|number}
-   */
-  getHeight () {
-    if (!this.mounted || !this.content) {
-      return null
-    }
-
-    return Math.max(this.contentHeight, this.nextContentHeight)
-  }
-
-  /**
-   * When transition is finished,
-   * remove 'maxHeight' to allow use component as normally
-   *
-   * @param {Event} event
-   */
-  finishTransition = (event) => {
-    // Ignore if transition has finished in different place
-    if (event.target !== this.node) {
-      return
-    }
-
-    // Get styles to check if default element is overriding max height
-    const { style } = this.props
-
-    // Stop updating max-height dynamically now
-    clearTimeout(this.dynamicTransitionTimeout)
-
-    if (style && style.maxHeight != null) {
-      // Render whole component if it's using `maxHeight`
-      this.height = null
-      this.forceUpdate()
-    } else {
-      // Or simply change `maxHeight` style in node
-      this.height = null
-      this.node.style.maxHeight = ''
-      this.node.style.height = ''
-    }
+    // Try to update height dynamically again
+    window.cancelAnimationFrame(this.raf)
+    this.raf = window.requestAnimationFrame(() => this.updateHeight(this.props))
   }
 
   /**
@@ -214,26 +123,11 @@ class Collapse extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, collapsed, smooth, children, style, animationTime, ...passedProps } = this.props
-    const height = this.height
-
-    // Calculate animation time
-    const time = parseInt(animationTime, 10) || null
+    const { className, collapsed, smooth, children, speed, style, ...passedProps } = this.props
 
     // Build styles for collapsible container
     const collapseStyle = {
       ...style
-    }
-
-    if (height !== null) {
-      collapseStyle.maxHeight = height
-      collapseStyle.height = height
-    }
-
-    // Apply animation time
-    if (smooth && time) {
-      collapseStyle.transitionDuration = time + 'ms'
-      collapseStyle.animationDuration = time + 'ms'
     }
 
     // Build correct class names

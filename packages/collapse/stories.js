@@ -73,7 +73,7 @@ addStory.controlled('different animation time', readme, (setState, state) => (
   <div>
     <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
 
-    <Collapse collapsed={state.collapsed} animationTime={100}>
+    <Collapse collapsed={state.collapsed} speed={100}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         There is also some text<br />
         As the example, that it can be long,<br />
