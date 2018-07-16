@@ -299,6 +299,25 @@ addStory('directions with many waypoints', readme, () => (
   </Map>
 ))
 
+addStory('directions with custom markers', readme, () => (
+  <Map style={{ height: '70vh' }} apiKey={apiKey}>
+    <Directions
+      startPoint={config.path.from}
+      via={config.path.via}
+      endPoint={config.path.to}
+      options={{ suppressMarkers: true }}
+    />
+    <Marker
+      position={config.path.from}
+      info='Yeah, it is start location'
+    />
+    <Marker
+      position={config.path.to}
+      info='Yeah, it is end location'
+    />
+  </Map>
+))
+
 addStory('two directions', readme, () => (
   <Map style={{ height: '70vh' }} apiKey={apiKey}>
     <Directions startPoint={config.path.from} endPoint={config.path.to} />
