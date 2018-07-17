@@ -18,8 +18,8 @@ const propTypes = {
   /** Is it collapsed? */
   collapsed: PropTypes.bool,
 
-  /** Animation speed (in px/ms). */
-  speed: PropTypes.number,
+  /** Animation animationSpeed (in px/ms). */
+  animationSpeed: PropTypes.number,
 
   /** Content for collapsed container */
   children: PropTypes.node
@@ -28,7 +28,7 @@ const propTypes = {
 const defaultProps = {
   collapsed: true,
   smooth: true,
-  speed: 200
+  animationSpeed: 200
 }
 
 /**
@@ -39,7 +39,7 @@ const defaultProps = {
  * @property {string} props.className
  * @property {boolean} props.smooth
  * @property {boolean} props.collapsed
- * @property {number} props.speed
+ * @property {number} props.animationSpeed
  * @property {*} props.children
  *
  * @property {number|null} height
@@ -57,8 +57,8 @@ class Collapse extends React.PureComponent {
     this.updateHeight(this.props)
   }
 
-  componentDidUpdate (prevProps) {
-    this.raf = window.requestAnimationFrame(() => this.updateHeight(this.props))
+  componentDidUpdate () {
+    this.updateHeight(this.props)
   }
 
   componentWillUnmount () {
@@ -69,6 +69,10 @@ class Collapse extends React.PureComponent {
     // Use either passed props or current props
     props = props || this.props
 
+    if (!this.node) {
+      return
+    }
+
     // Get desires height
     const height = !props.collapsed
       ? this.content.offsetHeight
@@ -76,13 +80,14 @@ class Collapse extends React.PureComponent {
 
     // Update height when it is not the same
     if (this.height !== height) {
-      const { smooth, speed } = this.props
+      const { smooth, animationSpeed } = this.props
 
-      if (smooth && speed !== 0) {
+      if (smooth && animationSpeed !== 0) {
         const currentHeight = this.node.offsetHeight
         const diff = Math.abs(currentHeight - height)
-        const transitionTime = diff * 1000 / speed
+        const transitionTime = diff * 1000 / animationSpeed
 
+        // Set transition duration
         this.node.style.transitionDuration = transitionTime + 'ms'
       }
 
@@ -92,6 +97,11 @@ class Collapse extends React.PureComponent {
       // Trigger reflow by using 'offsetHeight',
       // otherwise transition will not happen
       this.reflow = this.node.offsetHeight
+
+      // Reset transition duration
+      this.node.style.transitionDuration = ''
+      this.forceUpdate()
+      return
     }
 
     // Try to update height dynamically again
@@ -123,7 +133,7 @@ class Collapse extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, collapsed, smooth, children, speed, style, ...passedProps } = this.props
+    const { className, collapsed, smooth, children, animationSpeed, style, ...passedProps } = this.props
 
     // Build styles for collapsible container
     const collapseStyle = {

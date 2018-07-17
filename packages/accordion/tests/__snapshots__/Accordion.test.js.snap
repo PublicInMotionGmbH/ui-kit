@@ -22,12 +22,13 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       </div>
     </button>
     <Collapse
-      animationTime={100}
+      animationSpeed={100}
       aria-hidden={true}
       className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
+      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -54,12 +55,13 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       </div>
     </button>
     <Collapse
-      animationTime={100}
+      animationSpeed={100}
       aria-hidden={true}
       className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
+      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -88,12 +90,13 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       </div>
     </button>
     <Collapse
-      animationTime={100}
+      animationSpeed={100}
       aria-hidden={true}
       className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
+      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -120,12 +123,13 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       </div>
     </button>
     <Collapse
-      animationTime={100}
+      animationSpeed={100}
       aria-hidden={true}
       className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
+      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -152,12 +156,13 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       </div>
     </button>
     <Collapse
-      animationTime={100}
+      animationSpeed={100}
       aria-hidden={true}
       className="talixo-accordion-element__content"
       collapsed={true}
       role="tabpanel"
       smooth={true}
+      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
