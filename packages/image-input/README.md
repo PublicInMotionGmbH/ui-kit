@@ -21,9 +21,13 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+Property name | Type                        | Default | Description                    
+--------------|-----------------------------|:-------:|------------------------------------------------
+className     | string                      | n/a     | Additional class name passed to wrapper
+label         | string                      | n/a     | Upload button label.
+onChange      | function                    | n/a     | Function which handles image change. Receives URL data, ArrayBuffer, or File object.
+type          | string                      | `url`   | Type of data passed to onChange function: `url`, `binary`, `file`.
+value         | string, ArrayBuffer or File | n/a     | Image which can be controlled from outside component.
 
 ## Changelog
 
