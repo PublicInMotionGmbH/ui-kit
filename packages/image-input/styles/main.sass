@@ -2,17 +2,17 @@
 
 @include module('image-input')
   box-sizing: border-box
-  display: flex
   position: relative
-  justify-content: space-around
+  display: flex
   align-items: center
+  justify-content: space-around
   overflow: hidden
-  padding: $x-input-padding-vertical $x-input-padding-horizontal
-  border: dashed transparent $x-border-width
-  transition: border-color linear 0.1s
+  padding: $image-input-padding
+  border: $image-input-border-style $image-input-border-color $image-input-border-width
+  transition: border-color $image-input-transition
 
   &--dragover
-    border-color: $color-border
+    border: $image-input-border-style-dragover $image-input-border-color-dragover $image-input-border-width
 
     > *
       pointer-events: none
@@ -27,7 +27,7 @@
     background-position: center
     background-repeat: no-repeat
     background-size: contain
-    transition: transform linear 0.1s
+    transition: transform $image-input-transition
 
     &:hover
-      transform: scale(1.05)
+      transform: $image-input-image-transform
