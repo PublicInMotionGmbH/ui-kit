@@ -29,12 +29,13 @@ addStory.controlled('dynamic content', readme, (setState, state) => (
   <div>
     <button onClick={() => setState({ collapsed: !state.collapsed })}>Toggle</button>
     <button onClick={() => setState({ small: !state.small })}>Toggle size</button>
+    <button onClick={() => setState({ smooth: !state.smooth })}>Toggle content smooth</button>
 
     <Collapse collapsed={state.collapsed}>
       <div style={{ border: '2px solid #eee', padding: 20 }}>
         Something is there
 
-        <Collapse collapsed={state.small}>
+        <Collapse collapsed={state.small} smooth={state.smooth}>
           There is also some text<br />
           As the example, that it can be long,<br />
           Long and even longer, we are not keeping static CSS there.<br />
@@ -45,7 +46,7 @@ addStory.controlled('dynamic content', readme, (setState, state) => (
       </div>
     </Collapse>
   </div>
-), () => ({ collapsed: true, small: true }))
+), () => ({ collapsed: true, small: true, smooth: true }))
 
 addStory.controlled('not smooth', readme, (setState, state) => (
   <div>

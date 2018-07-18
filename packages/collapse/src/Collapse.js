@@ -6,10 +6,10 @@ import { findDOMNode } from 'react-dom'
 import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
-  /** Additional styles for collapse container */
+  /** Additional styles for collapse container. */
   style: PropTypes.object,
 
-  /** Additional class name for collapse container */
+  /** Additional class name for collapse container. */
   className: PropTypes.string,
 
   /** Should it collapse smoothly? */
@@ -18,10 +18,10 @@ const propTypes = {
   /** Is it collapsed? */
   collapsed: PropTypes.bool,
 
-  /** Animation animationSpeed (in px/ms). */
+  /** Animation speed (in px/ms). */
   animationSpeed: PropTypes.number,
 
-  /** Content for collapsed container */
+  /** Content for collapsed container. */
   children: PropTypes.node
 }
 
@@ -30,6 +30,37 @@ const defaultProps = {
   smooth: true,
   animationSpeed: 200
 }
+
+class Container {
+  instances = []
+  frame = null
+
+  unregister (instance) {
+    this.instances = this.instances.filter(x => x === instance)
+
+    if (this.instances.length === 0) {
+      window.cancelAnimationFrame(this.frame)
+    }
+  }
+
+  register (instance) {
+    this.instances.push(instance)
+
+    if (this.instances.length === 1) {
+      this.frame = window.requestAnimationFrame(this.tick)
+    }
+  }
+
+  tick = () => {
+    this.frame = window.requestAnimationFrame(this.tick)
+
+    for (let i = 0; i < this.instances.length; i++) {
+      this.instances[i].updateHeight()
+    }
+  }
+}
+
+const container = new Container()
 
 /**
  * Component which represents Collapse.
@@ -53,28 +84,31 @@ const defaultProps = {
  */
 class Collapse extends React.PureComponent {
   height = null
+  constructor () {
+    super()
+    this.updateHeight = this.updateHeight.bind(this)
+  }
+
   componentDidMount () {
-    this.updateHeight(this.props)
+    this.updateHeight()
+    container.register(this)
   }
 
   componentDidUpdate () {
-    this.updateHeight(this.props)
+    this.updateHeight()
   }
 
   componentWillUnmount () {
-    window.cancelAnimationFrame(this.raf)
+    container.unregister(this)
   }
 
-  updateHeight = (props) => {
-    // Use either passed props or current props
-    props = props || this.props
-
+  updateHeight () {
     if (!this.node) {
       return
     }
 
     // Get desires height
-    const height = !props.collapsed
+    const height = !this.props.collapsed
       ? this.content.offsetHeight
       : 0
 
@@ -83,7 +117,7 @@ class Collapse extends React.PureComponent {
       const { smooth, animationSpeed } = this.props
 
       if (smooth && animationSpeed !== 0) {
-        const currentHeight = this.node.offsetHeight
+        const currentHeight = this.height
         const diff = Math.abs(currentHeight - height)
         const transitionTime = diff * 1000 / animationSpeed
 
@@ -92,21 +126,9 @@ class Collapse extends React.PureComponent {
       }
 
       this.height = height
+      // Set height
       this.node.style.height = height + 'px'
-
-      // Trigger reflow by using 'offsetHeight',
-      // otherwise transition will not happen
-      this.reflow = this.node.offsetHeight
-
-      // Reset transition duration
-      this.node.style.transitionDuration = ''
-      this.forceUpdate()
-      return
     }
-
-    // Try to update height dynamically again
-    window.cancelAnimationFrame(this.raf)
-    this.raf = window.requestAnimationFrame(() => this.updateHeight(this.props))
   }
 
   /**
@@ -133,19 +155,14 @@ class Collapse extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, collapsed, smooth, children, animationSpeed, style, ...passedProps } = this.props
-
-    // Build styles for collapsible container
-    const collapseStyle = {
-      ...style
-    }
+    const { className, collapsed, smooth, children, animationSpeed, ...passedProps } = this.props
 
     // Build correct class names
     const clsName = buildClassName('collapse', className, { collapsed, smooth })
     const innerClsName = buildClassName([ 'collapse', 'content' ], null)
 
     return (
-      <div className={clsName} style={collapseStyle} {...passedProps} ref={this.saveRef}>
+      <div className={clsName} {...passedProps} ref={this.saveRef}>
         <div className={innerClsName} ref={this.saveContentRef}>
           {children}
         </div>
