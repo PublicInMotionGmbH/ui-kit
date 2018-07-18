@@ -11,6 +11,8 @@ exports[`<Checkbox /> renders children correctly 1`] = `
   />
   <span
     tabIndex={-1}
-  />
+  >
+    <span />
+  </span>
 </label>
 `;

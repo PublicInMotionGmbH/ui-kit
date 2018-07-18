@@ -11,7 +11,7 @@ using `npm install @talixo/map --save` or `yarn add @talixo/map`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.7`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -23,15 +23,24 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-### Maps
+### Map
 
-Property name | Type      | Required | Default | Description
---------------|-----------|----------|:-------:|----------------------------------------
-className     | string    | no       | n/a     | additional class name passed to wrapper
-apiKey        | string    | yes      | n/a     | your Api Key from GoogleMaps
-zoom          | number    | no       | `6`     | zoom
-center        | Location  | no       | n/a     | centered position
-interactive   | boolean   | no       | `true`  | enable to move and zoom map
+You've got few ways to authorize your Google Maps API:
+
+- Load Google Maps JS SDK by yourself
+- Pass `apiKey` or `clientId` to this component
+- Pass `allowDevelopmentApi` property, to load Google Maps JS SDK without credentials
+
+Property name       | Type      | Required | Default | Description
+--------------------|-----------|----------|:-------:|----------------------------------------
+className           | string    | no       | n/a     | additional class name passed to wrapper
+apiKey              | string    | no       | n/a     | Your API Key from Google Maps
+clientId            | string    | no       | n/a     | Your Client ID from Google Maps
+allowDevelopmentApi | string    | no       | `false` | Should load missing Google Maps API SDK without credentials?
+zoom                | number    | no       | `6`     | zoom
+center              | Location  | no       | n/a     | centered position
+interactive         | boolean   | no       | `true`  | enable to move and zoom map
+options             | object    | no       | n/a     | MapOptions passed to Map object
 
 ### Directions
 

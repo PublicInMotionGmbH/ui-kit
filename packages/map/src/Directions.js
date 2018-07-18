@@ -128,6 +128,7 @@ class Directions extends React.PureComponent {
    * @returns {React.Element|null}
    */
   render () {
+    const { startPoint, endPoint, via, onError, onLoad, ...passedProps } = this.props
     const { directions } = this.state
 
     if (!directions) {
@@ -135,7 +136,10 @@ class Directions extends React.PureComponent {
     }
 
     return (
-      <DirectionsRenderer directions={directions} />
+      <DirectionsRenderer
+        directions={directions}
+        {...passedProps}
+      />
     )
   }
 }

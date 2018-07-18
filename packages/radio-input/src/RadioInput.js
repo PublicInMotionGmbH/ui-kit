@@ -1,5 +1,4 @@
 import React from 'react'
-import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
@@ -45,10 +44,6 @@ class RadioInput extends React.PureComponent {
     }
   }
 
-  saveLabelRef = ref => {
-    this.label = findDOMNode(ref)
-  }
-
   render () {
     const { children, className, error, style, onChange, onKeyDown, ...passedProps } = this.props
 
@@ -61,7 +56,11 @@ class RadioInput extends React.PureComponent {
           onChange={this.change}
           {...passedProps}
         />
-        <span ref={this.saveLabelRef} tabIndex={-1}>{children}</span>
+        <span tabIndex={-1}>
+          <span>
+            {children}
+          </span>
+        </span>
       </label>
     )
   }

@@ -1,6 +1,6 @@
 {
   "name": "@talixo/maps",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.15",
   "description": "UI Component which represents Map",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.7",
+    "@talixo/shared": "^1.0.0-alpha.12",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -31,7 +31,7 @@
     "recompose": "0.26.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.7",
+    "@talixo/shared": "^1.0.0-alpha.12",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",

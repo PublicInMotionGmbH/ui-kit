@@ -12,7 +12,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Displayed error message. */
-  error: PropTypes.node,
+  error: PropTypes.oneOfType([ PropTypes.arrayOf(PropTypes.node), PropTypes.node ]),
 
   /** Displayed hint message. */
   hint: PropTypes.node,
@@ -153,7 +153,7 @@ class Field extends React.Component {
   /**
    * Build message for form field.
    *
-   * @param {node} message
+   * @param {node|node[]} message
    * @param {string} typeName
    *
    * @returns {React.Element}
@@ -166,7 +166,7 @@ class Field extends React.Component {
     const messageClsName = buildClassName([ moduleName, 'message' ], null, [ typeName ])
 
     // Use message formatter for warning & error messages
-    message = format(message)
+    message = Array.isArray(message) ? message.map(format) : format(message)
 
     // Build label
     return (
@@ -200,11 +200,13 @@ class Field extends React.Component {
   render () {
     const {
       children, className, error, hint, onBlur, onChange, onFocus, horizontal, spread,
-      id, label, warning, formatErrorMessage, value, ...passedProps
+      id, label, warning, formatErrorMessage, value, name, placeholder, ...passedProps
     } = this.props
     const { focus } = this.state
 
     const modifiers = {
+      warning: warning != null,
+      error: error != null,
       hint: hint != null,
       horizontal,
       focus,
