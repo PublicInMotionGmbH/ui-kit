@@ -1,6 +1,6 @@
 {
   "name": "@talixo/masked-input",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.13",
   "description": "UI Component which represents Masked Input",
   "main": "dist/index.js",
   "module": "index.js",

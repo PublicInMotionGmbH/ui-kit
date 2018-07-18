@@ -3,39 +3,11 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { Button } from '@talixo/button'
-
 import { buildClassName } from '@talixo/shared'
 
+import { events, getDataTransferFile, getImageUrl } from './helpers'
+
 export const moduleName = 'image-input'
-
-/**
- * Creates image URL which can e used to display image.
- *
- * @param {string|object} file
- * @param {string} type
- * @returns {string}
- */
-function getImageUrl (file, type) {
-  // Handle URL type.
-  if (type === 'url') {
-    return file
-  }
-
-  // Generate Blob and create preview URL
-  if (type === 'binary') {
-    const blob = new window.Blob([file])
-    const newUrl = window.URL.createObjectURL(blob)
-    return newUrl
-  }
-
-  // Create preview URL of file
-  if (type === 'file') {
-    const newUrl = window.URL.createObjectURL(file)
-    return newUrl
-  }
-
-  return null
-}
 
 const propTypes = {
   /** Additional class name. */
@@ -51,7 +23,25 @@ const propTypes = {
   type: PropTypes.oneOf(['url', 'binary', 'file']),
 
   /** Image which can be controlled from outside component */
-  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+  /** onDragEnd callback. Applies sent files and event. */
+  onDragEnd: PropTypes.func,
+
+  /** onDragEnter callback. Applies sent files and event. */
+  onDragEnter: PropTypes.func,
+
+  /** onDragExit callback. Applies sent files and event. */
+  onDragExit: PropTypes.func,
+
+  /** onDragLeave callback. Applies sent files and event. */
+  onDragLeave: PropTypes.func,
+
+  /** onDragOver callback. Applies sent files and event. */
+  onDragOver: PropTypes.func,
+
+  /** onDragEnd callback. Applies sent files and event. */
+  onDragStart: PropTypes.func
 }
 
 const defaultProps = {
@@ -67,27 +57,48 @@ const defaultProps = {
  * @property {function} [props.onChange]
  * @property {string} [props.type]
  * @property {object|string} [props.value]
+ * @property {function} [props.onDragEnd]
+ * @property {function} [props.onDragEnter]
+ * @property {function} [props.onDragExit]
+ * @property {function} [props.onDragLeave]
+ * @property {function} [props.onDragOver]
+ * @property {function} [props.onDragStart]
+ *
+ * @property {object} state
+ * @property {boolean} state.draggingOver
+ * @property {object|string} state.value
+ * @property {string} state.url
  *
  * @class {React.Element}
  */
 class ImageInput extends React.Component {
   state = {
+    draggingOver: false,
     value: this.props.value || null,
     url: this.props.value ? getImageUrl(this.props.value, this.props.type) : null
   }
 
   /**
-   * FileReader which is used to handle transfered files.
-   *
-   * @type {FileReader}
+   * Prevents default drop and dragover actions.
    */
-  reader = new window.FileReader()
-
   componentDidMount () {
-    // Add event listener to FileReader.
-    this.reader.onload = this.finishChange
+    this.prevent = e => e.preventDefault()
+    document.addEventListener('drop', this.prevent)
+    document.addEventListener('dragover', this.prevent)
   }
 
+  /**
+   * Removes preventing default drop and dragover actions.
+   */
+  componentWillUnmount () {
+    document.removeEventListener('drop', this.prevent)
+    document.removeEventListener('dragover', this.prevent)
+  }
+
+  /**
+   * Handles changes from props.
+   * @param {object} nextProps
+   */
   componentWillReceiveProps (nextProps) {
     if (nextProps.value !== undefined && nextProps.value !== this.props.value) {
       const newUrl = getImageUrl(nextProps.value, nextProps.type)
@@ -109,9 +120,16 @@ class ImageInput extends React.Component {
    * @param {Event|SyntheticEvent} e
    */
   onChange = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
     const { onChange, value: propsValue, type } = this.props
     const { value, url: stateUrl } = this.state
-    const file = e.target.files[0]
+    const file = getDataTransferFile(e)
+
+    const reader = new window.FileReader()
+    reader.onload = this.finishChange
+
+    this.setState({ draggingOver: false })
 
     // Check if file is the same or not of image type.
     if (!file || !(file.type.indexOf('image') > -1) || file === value) {
@@ -120,12 +138,12 @@ class ImageInput extends React.Component {
 
     // Handle image upload if type of returned value should be URL.
     if (type === 'url') {
-      this.reader.readAsDataURL(file)
+      reader.readAsDataURL(file)
     }
 
     // Handle image upload if type of returned value should be binary.
     if (type === 'binary') {
-      this.reader.readAsArrayBuffer(file)
+      reader.readAsArrayBuffer(file)
     }
 
     // Handle image upload if type of returned value should be File
@@ -159,6 +177,33 @@ class ImageInput extends React.Component {
   }
 
   /**
+   * Handles drag actions.
+   *
+   * @param {string} type
+   * @param {Event|SyntheticEvent} e
+   */
+  onDrag = (type, e) => {
+    e.preventDefault()
+    const files = getDataTransferFile(e)
+
+    if (this.props[type]) {
+      this.props[type](files, e)
+    }
+
+    if (type === events.enter) {
+      this.setState({ draggingOver: true })
+    }
+
+    if (type === events.start) {
+      return
+    }
+
+    if (type === events.end || type === events.leave || type === events.exit) {
+      this.setState({ draggingOver: false })
+    }
+  }
+
+  /**
    * Saves ref to file input.
    *
    * @param {Element} node
@@ -167,17 +212,46 @@ class ImageInput extends React.Component {
     this.input = findDOMNode(node)
   }
 
+  /**
+   * Generates file elements
+   *
+   * @returns {Element|ReactElement}
+   */
+  getWrapperProps () {
+    const { className } = this.props
+    const { draggingOver } = this.state
+    const { onDrag, onChange } = this
+
+    // Class names
+    const wrapperCls = buildClassName(moduleName, className, { dragover: draggingOver })
+    const wrapperProps = {
+      onDragEnter: onDrag.bind(this, events.enter),
+      onDragStart: onDrag.bind(this, events.start),
+      onDragOver: onDrag.bind(this, events.over),
+      onDragEnd: onDrag.bind(this, events.end),
+      onDragLeave: onDrag.bind(this, events.leave),
+      onDragExit: onDrag.bind(this, events.exit),
+      onDrop: onChange,
+      className: wrapperCls
+    }
+    return wrapperProps
+  }
+
   render () {
-    const { className, label, onChange, type, value: propsValue, ...passedProps } = this.props
+    const { className, label, onChange: change, type, value: propsValue, onDragEnd,
+      onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart, ...passedProps
+    } = this.props
     const { value, url } = this.state
 
     // Class names
-    const wrapperCls = buildClassName(moduleName, className)
-    const inputCls = buildClassName([moduleName, 'input'], className)
-    const imageCls = buildClassName([moduleName, 'image'], className)
+    const inputCls = buildClassName([moduleName, 'input'])
+    const imageCls = buildClassName([moduleName, 'image'])
+    const buttonCls = buildClassName([moduleName, 'button'])
+
+    const wrapperProps = this.getWrapperProps()
 
     return (
-      <div className={wrapperCls} {...passedProps}>
+      <div {...wrapperProps} {...passedProps}>
         <input onChange={this.onChange} className={inputCls} ref={this.setRef} type='file' />
         {
           value && url
@@ -186,7 +260,7 @@ class ImageInput extends React.Component {
               style={{ backgroundImage: `url(${url})` }}
               className={imageCls}
             />
-            : <Button onClick={this.onClick}>{label}</Button>
+            : <Button className={buttonCls} onClick={this.onClick}>{label}</Button>
         }
       </div>
     )

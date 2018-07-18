@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageInput /> rendering renders children correctly 1`] = `
+<div
+  className="talixo-image-input"
+  onDragEnd={[Function]}
+  onDragEnter={[Function]}
+  onDragExit={[Function]}
+  onDragLeave={[Function]}
+  onDragOver={[Function]}
+  onDragStart={[Function]}
+  onDrop={[Function]}
+>
+  <input
+    className="talixo-image-input__input"
+    onChange={[Function]}
+    type="file"
+  />
+  <button
+    className="talixo-button talixo-image-input__button"
+    onClick={[Function]}
+    type="button"
+  />
+</div>
+`;

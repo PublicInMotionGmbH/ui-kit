@@ -7,6 +7,15 @@
   justify-content: space-around
   align-items: center
   overflow: hidden
+  padding: $x-input-padding-vertical $x-input-padding-horizontal
+  border: dashed transparent $x-border-width
+  transition: border-color linear 0.1s
+
+  &--dragover
+    border-color: $color-border
+
+    > *
+      pointer-events: none
 
   &__input
     display: none
@@ -21,4 +30,4 @@
     transition: transform linear 0.1s
 
     &:hover
-      transform: scale(1.1)
+      transform: scale(1.05)
