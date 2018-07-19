@@ -11,8 +11,8 @@ using `npm install @talixo/combo-box --save` or `yarn add @talixo/combo-box`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.5`
-- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/icon: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `downshift: ^1.31.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -43,6 +43,7 @@ renderItem    | function  | `item => item`    | Function to render item in menu 
 renderValue   | function  | uses `renderItem` | Function to render value in select box
 buildItemId   | function  | item index        | Function to build unique ID of item
 itemToString  | function  | `item => item`    | Function to convert item to string
+id            | string    | n/a               | ID passed to control element
 
 ### ComboBox
 
@@ -64,6 +65,7 @@ renderItem         | function  | `item => item`    | Function to render item in 
 renderValue        | function  | uses `renderItem` | Function to render value (or tag) in select box
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+id                 | string    | n/a               | ID passed to control element
 tabIndex           | number    | n/a               | Tab index passed to toggle button
 
 ### AutoComplete
@@ -81,6 +83,7 @@ onChange           | function  | n/a               | onChange event passed from 
 renderItem         | function  | `item => item`    | Function to render item in menu list
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
+id                 | string    | n/a               | ID passed to control element
 
 ## Changelog
 

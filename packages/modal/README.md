@@ -11,8 +11,8 @@ using `npm install @talixo/modal --save` or `yarn add @talixo/modal`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/portal: ^1.0.0-alpha.5`
-- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/portal: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

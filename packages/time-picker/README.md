@@ -11,10 +11,10 @@ using `npm install @talixo/time-picker --save` or `yarn add @talixo/time-picker`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/button: ^1.0.0-alpha.5`
-- `@talixo/icon: ^1.0.0-alpha.5`
-- `@talixo/shared: ^1.0.0-alpha.5`
-- `@talixo/text-input: ^1.0.0-alpha.5`
+- `@talixo/button: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/text-input: ^1.0.0-alpha.12`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -35,6 +35,7 @@ className     | string       | n/a             | Additional class name passed to
 onChange      | function     | n/a             | Event called after input value has been changed.
 hourFormat    | `12` or `24` | `24`            | Hour format.
 value         | string       | self-controlled | Time string in 'HH:mm' (24h) format passed to component.
+id            | string       | n/a             | ID passed to control element
 error         | bool         | `false`         | Style component like it has errors.
 
 ## Changelog

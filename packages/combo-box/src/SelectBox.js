@@ -50,6 +50,9 @@ const propTypes = {
   /** Function passed to Downshift to make it working for objects */
   itemToString: PropTypes.func,
 
+  /** ID passed to control element */
+  id: PropTypes.string,
+
   /** Tab index for toggle button */
   tabIndex: PropTypes.number
 }
@@ -125,12 +128,12 @@ class SelectBox extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue } = this.props
+    const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue, id } = this.props
     const { value } = this.state
 
     return {
       ...data,
-      ...{ footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, id },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)

@@ -11,7 +11,7 @@ using `npm install @talixo/masked-input --save` or `yarn add @talixo/masked-inpu
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -32,6 +32,7 @@ onFocus       | function  | n/a     | Event called when input is focused.
 children      | node      | n/a     | Input element.
 renderMask    | function  | n/a     | Function which returns masking element to render when input is blurred. First argument function is value passed either by parent changing value prop or by children if `props.value` is undefined.
 value         | any       | n/a     | Masking element to render when input is blurred.
+id            | string    | n/a     | ID passed to control element.
 error         | bool      | `false` | Does it have error?
 
 ## Changelog

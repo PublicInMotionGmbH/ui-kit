@@ -11,9 +11,9 @@ using `npm install @talixo/phone-input --save` or `yarn add @talixo/phone-input`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/combo-box: ^1.0.0-alpha.5`
-- `@talixo/country-flag: ^1.0.0-alpha.5`
-- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/combo-box: ^1.0.0-alpha.12`
+- `@talixo/country-flag: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `country-telephone-data: ^0.5.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -43,6 +43,7 @@ placeholder   | string    | n/a             | placeholder to show when there is 
 onChange      | function  | n/a             | event handler for changed value
 onFocus       | function  | n/a             | event handler fired when input has been focused
 onBlur        | function  | n/a             | event handler fired when input lost focus
+id            | string    | n/a             | ID passed to control element
 
 ## Changelog
 

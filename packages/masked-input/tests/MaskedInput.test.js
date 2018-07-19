@@ -11,13 +11,13 @@ const createProps = props => ({
   ...props
 })
 const createCalendar = (props = createProps()) => shallow(
-  <MaskedInput {...props} renderMask={(v) => <div>{v.toString()}</div>}>
+  <MaskedInput {...props} renderMask={({ value }) => <div>{value.toString()}</div>}>
     <Calendar />
   </MaskedInput>
 )
 
 const createWrapper = (props, inputProps) => shallow(
-  <MaskedInput {...props} renderMask={x => (<div className='test-mask'>{x}</div>)}>
+  <MaskedInput {...props} renderMask={x => (<div className='test-mask'>{x.value}</div>)}>
     <input className='test-input' {...inputProps} />
   </MaskedInput>
 )

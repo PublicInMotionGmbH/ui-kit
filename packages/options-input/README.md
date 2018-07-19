@@ -11,10 +11,10 @@ using `npm install @talixo/options-input --save` or `yarn add @talixo/options-in
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.5`
-- `@talixo/number-input: ^1.0.0-alpha.5`
-- `@talixo/shared: ^1.0.0-alpha.5`
-- `@talixo/tooltip: ^1.0.0-alpha.5`
+- `@talixo/icon: ^1.0.0-alpha.12`
+- `@talixo/number-input: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/tooltip: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -37,6 +37,7 @@ value             | object    | self-controlled | Value of option/options
 onChange          | function  | n/a             | Event handler fired on value change
 onFocus           | function  | n/a             | Event handler fired on input open
 onBlur            | function  | n/a             | Event handler fired on input blur
+id                | string    | n/a             | ID passed to control element
 error             | bool      | `false`         | Should add class modifier for error?
 
 ## Property shapes

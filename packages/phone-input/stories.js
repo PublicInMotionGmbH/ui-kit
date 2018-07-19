@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { CountryFlagsProvider } from '@talixo/country-flag'
 
@@ -37,6 +38,8 @@ addStory('with error', readme, () => (
 addStory.controlled('controlled', readme, (setState, state) => (
   <CountryFlagsProvider url={spriteUrl}>
     <PhoneInput
+      onFocus={action('focus')}
+      onBlur={action('blur')}
       value={state.value}
       onChange={value => setState({ value })}
     />
@@ -49,4 +52,11 @@ addStory('RTL: initial', readme, () => (
       <PhoneInput />
     </div>
   </CountryFlagsProvider>
+))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='phone-input'>Click me</label>
+    <PhoneInput id='phone-input' />
+  </div>
 ))

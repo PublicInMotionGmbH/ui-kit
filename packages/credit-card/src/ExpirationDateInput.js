@@ -24,6 +24,9 @@ const propTypes = {
     year: PropTypes.number
   }),
 
+  /** ID passed to control element */
+  id: PropTypes.string,
+
   /** Does it have error? */
   error: PropTypes.bool
 }
@@ -144,7 +147,7 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, value, ...passedProps } = this.props
+    const { className, id, error, onChange, value, ...passedProps } = this.props
     const { month, year } = this.state
 
     // Build class names.
@@ -157,6 +160,7 @@ class ExpirationDateInput extends React.PureComponent {
         <RangeInput
           className={monthClsName}
           autoComplete='cc-exp-month'
+          id={id}
           error={error}
           min={1}
           max={12}

@@ -29,7 +29,6 @@
     background-color: $text-input-background-color
     border: $text-input-border-width solid $text-input-border-color
     border-radius: $text-input-border-radius
-
     font-size: $text-input-font-size
     height: $text-input-height
     line-height: $text-input-height
@@ -58,7 +57,7 @@
       color: $text-input-error-placeholder-color
 
   &--with-left #{inside(&, 'input')}
-    padding-left: $text-input-icon-with-padding
+   padding-left: $text-input-icon-with-padding
 
   &--with-right #{inside(&, 'input')}
     padding-right: $text-input-icon-with-padding
@@ -99,6 +98,6 @@
     padding-right: $text-input-icon-with-padding
     padding-left: $text-input-icon-with-padding
 
-  [dir=rtl] #{inside(&, 'suffix')}
+  [dir=rtl] & #{inside(&, 'suffix')}
     padding-left: 0
     padding-right: $text-input-suffix-margin

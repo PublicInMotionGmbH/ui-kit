@@ -9,6 +9,10 @@ exports[`<Checkbox /> renders children correctly 1`] = `
     onChange={[Function]}
     type="checkbox"
   />
-  <span />
+  <span
+    tabIndex={-1}
+  >
+    <span />
+  </span>
 </label>
 `;

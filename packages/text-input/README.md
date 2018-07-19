@@ -11,7 +11,7 @@ using `npm install @talixo/text-input --save` or `yarn add @talixo/text-input`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.5`
+- `@talixo/shared: ^1.0.0-alpha.12`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

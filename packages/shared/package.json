@@ -1,6 +1,6 @@
 {
   "name": "@talixo/shared",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.12",
   "description": "Talixo common configuration",
   "scripts": {
     "test": "node ../../scripts/runTests.js --only shared",

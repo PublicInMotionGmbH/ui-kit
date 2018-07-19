@@ -4,7 +4,7 @@ exports[`<InlineInput /> renders correctly 1`] = `
 <div
   className="talixo-inline-input"
 >
-  <span
+  <button
     className="talixo-inline-input__span"
     onClick={[Function]}
   />
