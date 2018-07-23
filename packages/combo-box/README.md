@@ -28,22 +28,23 @@ All of these components additionally allow some of `Downshift` props.
 
 ### SelectBox
 
-Property name | Type      | Default           | Description
---------------|-----------|:-----------------:|--------------------------------
-className     | string    | n/a               | Additional class name passed to wrapper
-options       | array     | n/a               | Options to show
-placeholder   | node      | n/a               | Placeholder to show when there is no value
-multi         | bool      | `false`           | Is it multi-select?
-value         | any       | self-controlled   | Value to show inside
-icon          | node      | n/a               | Icon shown next to select box
-onChange      | function  | n/a               | Handler for onChange event
-onBlur        | function  | n/a               | Handler for onBlur event
-onFocus       | function  | n/a               | Handler for onFocus event
-renderItem    | function  | `item => item`    | Function to render item in menu list
-renderValue   | function  | uses `renderItem` | Function to render value in select box
-buildItemId   | function  | item index        | Function to build unique ID of item
-itemToString  | function  | `item => item`    | Function to convert item to string
-id            | string    | n/a               | ID passed to control element
+Property name  | Type      | Default           | Description
+---------------|-----------|:-----------------:|--------------------------------
+className      | string    | n/a               | Additional class name passed to wrapper
+options        | array     | n/a               | Options to show
+placeholder    | node      | n/a               | Placeholder to show when there is no value
+multi          | bool      | `false`           | Is it multi-select?
+value          | any       | self-controlled   | Value to show inside
+icon           | node      | n/a               | Icon shown next to select box
+onChange       | function  | n/a               | Handler for onChange event
+onBlur         | function  | n/a               | Handler for onBlur event
+onFocus        | function  | n/a               | Handler for onFocus event
+renderItem     | function  | `item => item`    | Function to render item in menu list
+renderValue    | function  | uses `renderItem` | Function to render value in select box
+buildItemId    | function  | item index        | Function to build unique ID of item
+itemToString   | function  | `item => item`    | Function to convert item to string
+id             | string    | n/a               | ID passed to control element
+mobileFriendly | bool      | n/a               | Should it act more like native "select" button on mobile devices?
 
 ### ComboBox
 
