@@ -165,6 +165,7 @@ class AutoComplete extends React.PureComponent {
    */
   stateReducer = (state, changes) => {
     switch (changes.type) {
+      case Downshift.stateChangeTypes.touchStart:
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
         return {
