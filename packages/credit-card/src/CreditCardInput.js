@@ -7,6 +7,7 @@ import { FormHandler, Field } from '@talixo/form'
 import { buildClassName } from '@talixo/shared'
 
 import CreditCardNumberInput from './CreditCardNumberInput'
+import CvcInput from './CvcInput'
 import ExpirationDateInput from './ExpirationDateInput'
 
 const moduleName = 'credit-card-input'
@@ -44,12 +45,24 @@ const propTypes = {
 
   /** Values to be displayed inside inputs. */
   values: PropTypes.shape({
+
+    /** Card holder name. */
     cardHolderName: PropTypes.string,
+
+    /** Card number. */
     cardNumber: PropTypes.string,
+
+    /** Card expiration date object. */
     cardExpirationDate: PropTypes.shape({
+
+      /** Expiration month. */
       month: PropTypes.number,
+
+      /** Expiration year. */
       year: PropTypes.number
     }),
+
+    /** Cvc number */
     cvc: PropTypes.string
   })
 }
@@ -140,11 +153,7 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cvc}
         >
-          <TextInput
-            autoComplete='cc-csc'
-            maxLength={4}
-            size={4}
-          />
+          <CvcInput />
         </Field>
       </div>
     </FormHandler>

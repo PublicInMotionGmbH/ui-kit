@@ -7,6 +7,8 @@ import { AutoComplete } from '@talixo/combo-box'
 import { TextInput } from '@talixo/text-input'
 import { Icon } from '@talixo/icon'
 
+import { ALLOWED_KEYS } from './config'
+
 const moduleName = 'range-input'
 
 const propTypes = {
@@ -121,7 +123,7 @@ function range (min, max) {
 }
 
 /**
- * Component which represents expiration date input.
+ * Component which represents range input.
  *
  * @property {object} props
  * @property {number} [props.minLength]
@@ -196,20 +198,16 @@ class RangeInput extends React.PureComponent {
 
     // Build value
     value = buildEndValue(value, this.props.min, this.props.max)
+    let state = { focus: false }
 
     if (this.props.value === undefined) {
-      this.setState({
-        value,
-        inputValue: formatValue(value, this.props.minLength)
-      })
+      state.value = value
+      state.inputValue = formatValue(value, this.props.minLength)
     }
+    this.setState({ ...state })
 
     if (onChange) {
       onChange(value)
-    }
-
-    if (this.node) {
-      this.node.querySelector('input').blur()
     }
   }
 
@@ -280,18 +278,9 @@ class RangeInput extends React.PureComponent {
   onKeyDown = (event) => {
     const charCode = event.which || event.keyCode
 
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 37 || charCode > 40)) {
+    if (!(ALLOWED_KEYS.indexOf(charCode) > -1)) {
       event.preventDefault()
     }
-  }
-
-  /**
-  * Save base node element.
-  *
-  * @param {Element} node
-  */
-  saveRef = (node) => {
-    this.node = node
   }
 
   /**
@@ -314,27 +303,26 @@ class RangeInput extends React.PureComponent {
       : <Icon name='keyboard_arrow_down' />
 
     return (
-      <div className={wrapperClsName} ref={this.saveRef}>
-        <AutoComplete
-          options={options}
-          isOpen={focus}
-          renderItem={(item) => formatValue(item, minLength)}
-          value={value}
-          inputValue={inputValue}
-          onInputValueChange={this.onInputValueChange}
-          onChange={this.onChange}
-          onFocus={this.focus}
-          onBlur={this.blur}
-          itemToString={x => x == null ? '' : formatValue(x, minLength)}
-        >
-          <TextInput
-            onKeyDown={this.onKeyDown}
-            right={icon}
-            maxLength={Math.max(('' + max).length, minLength)}
-            {...passedProps}
-          />
-        </AutoComplete>
-      </div>
+      <AutoComplete
+        className={wrapperClsName}
+        options={options}
+        isOpen={focus}
+        renderItem={(item) => formatValue(item, minLength)}
+        value={value}
+        inputValue={inputValue}
+        onInputValueChange={this.onInputValueChange}
+        onChoose={this.onChange}
+        onFocus={this.focus}
+        onBlur={this.blur}
+        itemToString={x => x == null ? '' : formatValue(x, minLength)}
+      >
+        <TextInput
+          onKeyDown={this.onKeyDown}
+          right={icon}
+          maxLength={Math.max(('' + max).length, minLength)}
+          {...passedProps}
+        />
+      </AutoComplete>
     )
   }
 }

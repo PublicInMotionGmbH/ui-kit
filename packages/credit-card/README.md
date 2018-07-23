@@ -53,6 +53,16 @@ onChange      | function  | n/a     | Handler for onChange event.
 onFocus       | function  | n/a     | Handler for onFocus event.
 value         | string    | n/a     | Value to be displayed inside inputs.
 
+### CvcInput
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | Additional class name passed to input.
+onBlur        | function  | n/a     | Handler for onBlur event.
+onChange      | function  | n/a     | Handler for onChange event.
+onFocus       | function  | n/a     | Handler for onFocus event.
+value         | string    | n/a     | Value to be displayed inside input.
+
 ### ExpirationDateInput
 
 It allows also properties of `div`.

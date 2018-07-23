@@ -4,6 +4,7 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import CreditCardInput from './src/CreditCardInput'
 import CreditCardNumberInput from './src/CreditCardNumberInput'
+import CvcInput from './src/CvcInput'
 import ExpirationDateInput from './src/ExpirationDateInput'
 
 // Load first paragraph from README file
@@ -11,7 +12,7 @@ const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
 const addStory = createStoriesFactory('Credit Card', module, {
-  propTables: [ ExpirationDateInput ]
+  propTables: [ CreditCardInput, CreditCardNumberInput, CvcInput, ExpirationDateInput ]
 })
 
 const blur = action('blur')
@@ -95,4 +96,8 @@ addStory('expiration date input', readme, () => (
 
 addStory('expiration date input with passed value', readme, () => (
   <ExpirationDateInput value={{ month: 1, year: 2012 }} onChange={action('change')} />
+))
+
+addStory('cvc input', readme, () => (
+  <CvcInput onChange={action('change')} />
 ))
