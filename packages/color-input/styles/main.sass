@@ -1,0 +1,43 @@
+@import './config'
+
+@include module('color-input')
+  display: flex
+
+  &__picker
+    height: auto
+    border-radius: $color-input-picker-border-radius
+    border: none
+    width: $color-input-picker-width
+
+  &__display
+    display: inline-block
+    height: 100%
+    width: $color-input-display-width
+    border-radius: $color-input-display-border-radius
+
+    &--background
+      display: inline-block
+      height: auto
+      width: $color-input-display-background-width
+      border: $color-input-display-background-border-width solid $color-input-display-background-border-color
+      border-radius: $color-input-display-background-border-radius
+      background-image: linear-gradient(45deg, $color-input-display-background-gradient 25%, transparent 25%), linear-gradient(-45deg, $color-input-display-background-gradient 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, $color-input-display-background-gradient 75%),
+      linear-gradient(-45deg, transparent 75%, $color-input-display-background-gradient 75%)
+      background-size: dp(2.5) dp(2.5)
+      background-position: dp(-0.375) dp(-0.375), dp(-0.375) dp(0.875), dp(0.875) dp(-1.625), dp(-1.625) dp(-0.375)
+
+  &__text-input
+    margin: 0 $color-input-text-input-margin-horizontal
+
+  &__alpha
+    &-button
+      display: flex
+      justify-content: center
+      align-items: center
+      height: auto
+      width: $color-input-alpha-button-width
+      margin: 0 $color-input-alpha-button-margin-horizontal
+      border: $color-input-display-background-border-width solid $color-input-display-background-border-color
+      border-radius: $color-input-alpha-button-border-radius
+      
