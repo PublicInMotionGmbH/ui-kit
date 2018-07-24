@@ -30,7 +30,7 @@
     "@talixo/control-group": "^1.0.0-alpha.16",
     "@talixo/icon": "^1.0.0-alpha.16",
     "@talixo/number-input": "^1.0.0-alpha.16",
-    "@talixo/phone-input": "^1.0.0-alpha.16",
+    "@talixo/phone-input": "^1.0.0-alpha.17",
     "@talixo/shared": "^1.0.0-alpha.16",
     "@talixo/switcher": "^1.0.0-alpha.16",
     "@talixo/text-input": "^1.0.0-alpha.16",

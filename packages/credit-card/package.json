@@ -1,6 +1,6 @@
 {
   "name": "@talixo/credit-card",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "UI Component which represents Credit Card",
   "main": "dist/index.js",
   "module": "index.js",

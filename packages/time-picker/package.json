@@ -1,6 +1,6 @@
 {
   "name": "@talixo/time-picker",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "UI Component which represents Time Picker",
   "main": "dist/index.js",
   "module": "index.js",
