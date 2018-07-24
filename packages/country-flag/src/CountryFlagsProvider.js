@@ -20,7 +20,24 @@ function load (url, callback) {
 
   const xhr = new window.XMLHttpRequest()
   xhr.open('GET', url, true)
-  xhr.onload = () => callback(null, xhr.responseText)
+  xhr.onload = () => {
+    // Error happened
+    if (xhr.status >= 400) {
+      return
+    }
+
+    const div = document.createElement('div')
+    div.innerHTML = xhr.responseText
+    const svg = div.querySelector('svg')
+
+    // It is not SVG response
+    if (!svg || svg.parentNode !== div) {
+      return
+    }
+
+    // It is OK, return it
+    callback(null, xhr.responseText)
+  }
   xhr.send()
 
   return () => xhr.abort()
