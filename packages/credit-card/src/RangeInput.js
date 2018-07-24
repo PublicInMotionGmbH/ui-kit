@@ -8,6 +8,8 @@ import { TextInput } from '@talixo/text-input'
 import { Icon } from '@talixo/icon'
 import { DeviceSwap } from '@talixo/device-swap'
 
+import { ALLOWED_KEYS } from './config'
+
 const moduleName = 'range-input'
 
 const propTypes = {
@@ -126,7 +128,7 @@ function range (min, max) {
 }
 
 /**
- * Component which represents expiration date input.
+ * Component which represents range input.
  *
  * @property {object} props
  * @property {number} [props.minLength]
@@ -201,20 +203,17 @@ class RangeInput extends React.PureComponent {
 
     // Build value
     value = buildEndValue(value, this.props.min, this.props.max)
+    let state = { focus: false }
 
     if (this.props.value === undefined) {
-      this.setState({
-        value,
-        inputValue: formatValue(value, this.props.minLength)
-      })
+      state.value = value
+      state.inputValue = formatValue(value, this.props.minLength)
     }
+
+    this.setState({ ...state })
 
     if (onChange) {
       onChange(value)
-    }
-
-    if (this.node) {
-      this.node.querySelector('input').blur()
     }
   }
 
@@ -285,7 +284,7 @@ class RangeInput extends React.PureComponent {
   onKeyDown = (event) => {
     const charCode = event.which || event.keyCode
 
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 37 || charCode > 40)) {
+    if (!(ALLOWED_KEYS.indexOf(charCode) > -1)) {
       event.preventDefault()
     }
   }
@@ -319,7 +318,7 @@ class RangeInput extends React.PureComponent {
         value={value}
         inputValue={inputValue}
         onInputValueChange={this.onInputValueChange}
-        onChange={this.onChange}
+        onChoose={this.onChange}
         onFocus={this.focus}
         onBlur={this.blur}
         itemToString={x => x == null ? '' : formatValue(x, minLength)}

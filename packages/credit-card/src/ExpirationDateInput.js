@@ -16,7 +16,11 @@ const propTypes = {
 
   /** Value to be displayed inside inputs. */
   value: PropTypes.shape({
+
+    /** Expiration month. */
     month: PropTypes.number,
+
+    /** Expiration year. */
     year: PropTypes.number
   }),
 
@@ -38,7 +42,8 @@ const defaultProps = {
 // Set minimum year to be the current year.
 const minYear = new Date().getFullYear()
 // Set maximum year to be 40 years from the current year.
-const maxYear = minYear + 40
+const range = 40
+const maxYear = minYear + range
 
 /**
  * Component which represents expiration date input.

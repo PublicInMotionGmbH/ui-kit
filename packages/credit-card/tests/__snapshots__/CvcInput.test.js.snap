@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CvcInput /> renders children correctly 1`] = `
+<TextInput
+  InputComponent="input"
+  autoComplete="cc-csc"
+  className="talixo-cvc-input"
+  error={false}
+  maxLength={4}
+  onChange={[Function]}
+  onKeyDown={[Function]}
+  size={4}
+  type="text"
+  value=""
+/>
+`;
