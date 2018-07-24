@@ -267,7 +267,6 @@ describe('onKeyDown', () => {
   beforeEach(() => {
     jest.spyOn(event, 'preventDefault')
     wrapper = shallow(<RangeInput />)
-    console.log(wrapper.children())
     textInput = wrapper.find('TextInput')
   })
 

@@ -13,7 +13,6 @@ import { ALLOWED_KEYS } from './config'
 const moduleName = 'range-input'
 
 const propTypes = {
-
   /** Minimum input value length. */
   minLength: PropTypes.number,
 
@@ -36,13 +35,13 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Passed value. */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  value: PropTypes.oneOfType([ PropTypes.number, PropTypes.object ]),
 
   /** Input value length for auto complete. */
   autoCompleteLength: PropTypes.number,
 
   /** Should it render native select box on mobile? */
-  mobileFriendly: PropTypes.number
+  mobileFriendly: PropTypes.bool
 }
 
 const defaultProps = {

@@ -1195,6 +1195,7 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     value={null}
   />
   <t
+    autoComplete="off"
     guide={false}
     keepCharPositions={false}
     mask={

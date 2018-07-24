@@ -382,6 +382,9 @@ class PhoneInput extends React.PureComponent {
         onMouseLeave={this.onInputMouseOut}
         onFocus={this.focus}
         onBlur={this.blur}
+
+        // There is "tel" auto complete type defined for mobile phone with prefix, but unfortunately it's not including it in common browsers (Chrome, Safari etc)
+        autoComplete='off'
       />
     )
   }

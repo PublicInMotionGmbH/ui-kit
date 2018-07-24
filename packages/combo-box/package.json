@@ -23,8 +23,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/device-swap": "^1.0.0-alpha.16",
     "@talixo/country-flag": "^1.0.0-alpha.16",
+    "@talixo/device-swap": "^1.0.0-alpha.16",
     "@talixo/icon": "^1.0.0-alpha.16",
     "@talixo/progress-ring": "^1.0.0-alpha.16",
     "@talixo/shared": "^1.0.0-alpha.16",
