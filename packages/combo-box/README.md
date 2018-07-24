@@ -11,8 +11,8 @@ using `npm install @talixo/combo-box --save` or `yarn add @talixo/combo-box`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.16`
+- `@talixo/shared: ^1.0.0-alpha.16`
 - `downshift: ^1.31.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`

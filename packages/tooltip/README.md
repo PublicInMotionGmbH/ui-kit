@@ -11,8 +11,8 @@ using `npm install @talixo/tooltip --save` or `yarn add @talixo/tooltip`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/portal: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/portal: ^1.0.0-alpha.16`
+- `@talixo/shared: ^1.0.0-alpha.16`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
