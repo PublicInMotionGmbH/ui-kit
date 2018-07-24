@@ -12,6 +12,7 @@ using `npm install @talixo/credit-card --save` or `yarn add @talixo/credit-card`
 Your package should additionally have some extra dependencies:
 
 - `@talixo/combo-box: ^1.0.0-alpha.16`
+- `@talixo/device-swap: ^1.0.0-alpha.16`
 - `@talixo/form: ^1.0.0-alpha.16`
 - `@talixo/icon: ^1.0.0-alpha.16`
 - `@talixo/shared: ^1.0.0-alpha.16`
