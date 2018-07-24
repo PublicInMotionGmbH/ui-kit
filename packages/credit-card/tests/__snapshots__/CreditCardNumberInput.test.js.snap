@@ -6,6 +6,7 @@ exports[`<CreditCardNumberInput /> renders children correctly 1`] = `
   className="talixo-credit-card-number-input"
   error={false}
   guide={false}
+  inputMode="numeric"
   keepCharPositions={false}
   left={
     <Icon

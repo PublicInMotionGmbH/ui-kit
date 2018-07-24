@@ -20,8 +20,10 @@ exports[`<RangeInput /> renders correctly 1`] = `
     <TextInput
       InputComponent="input"
       error={false}
+      inputMode="numeric"
       maxLength={9}
       onKeyDown={[Function]}
+      pattern="[0-9]*"
       right={
         <Icon
           name="keyboard_arrow_down"
@@ -50,11 +52,13 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
         autoComplete="off"
         className="talixo-text-input__input"
         id="downshift-0-input"
+        inputMode="numeric"
         maxLength={9}
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
+        pattern="[0-9]*"
         role="combobox"
         style={
           Object {

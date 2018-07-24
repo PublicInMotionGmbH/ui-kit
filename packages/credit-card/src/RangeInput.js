@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { AutoComplete } from '@talixo/combo-box'
+import { AutoComplete, SelectBox } from '@talixo/combo-box'
 import { TextInput } from '@talixo/text-input'
 import { Icon } from '@talixo/icon'
+import { DeviceSwap } from '@talixo/device-swap'
 
 const moduleName = 'range-input'
 
@@ -36,11 +37,15 @@ const propTypes = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 
   /** Input value length for auto complete. */
-  autoCompleteLength: PropTypes.number
+  autoCompleteLength: PropTypes.number,
+
+  /** Should it render native select box on mobile? */
+  mobileFriendly: PropTypes.number
 }
 
 const defaultProps = {
-  minLength: 1
+  minLength: 1,
+  mobileFriendly: false
 }
 
 /**
@@ -294,19 +299,12 @@ class RangeInput extends React.PureComponent {
     this.node = node
   }
 
-  /**
-   * Render range input component.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { minLength, className, min, max, onBlur, onFocus, onChange, value: _value, autoCompleteLength, ...passedProps } = this.props
+  renderComboBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange,
+      value: _value, mobileFriendly, autoCompleteLength, ...passedProps
+    } = this.props
     const { focus, options, value, inputValue } = this.state
-
-    // Build class names.
-    const wrapperClsName = buildClassName(moduleName, className, {
-      focused: focus
-    })
 
     // Build icon.
     const icon = this.state.focus
@@ -314,26 +312,77 @@ class RangeInput extends React.PureComponent {
       : <Icon name='keyboard_arrow_down' />
 
     return (
+      <AutoComplete
+        options={options}
+        isOpen={focus}
+        renderItem={(item) => formatValue(item, minLength)}
+        value={value}
+        inputValue={inputValue}
+        onInputValueChange={this.onInputValueChange}
+        onChange={this.onChange}
+        onFocus={this.focus}
+        onBlur={this.blur}
+        itemToString={x => x == null ? '' : formatValue(x, minLength)}
+      >
+        <TextInput
+          onKeyDown={this.onKeyDown}
+          pattern='[0-9]*'
+          inputMode='numeric'
+          right={icon}
+          maxLength={Math.max(('' + max).length, minLength)}
+          {...passedProps}
+        />
+      </AutoComplete>
+    )
+  }
+
+  renderSelectBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange,
+      value: _value, autoCompleteLength, mobileFriendly, ...passedProps
+    } = this.props
+    const { focus, options, value } = this.state
+
+    return (
+      <SelectBox
+        {...passedProps}
+        mobileFriendly
+        options={options}
+        isOpen={focus}
+        renderItem={item => formatValue(item, minLength)}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+    )
+  }
+
+  /**
+   * Render range input component.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { className, mobileFriendly } = this.props
+    const { focus } = this.state
+
+    // Build class names.
+    const wrapperClsName = buildClassName(moduleName, className, {
+      focused: focus
+    })
+
+    const inner = mobileFriendly ? (
+      <DeviceSwap
+        defaultView='mobile'
+        renderMobile={this.renderSelectBox}
+        renderDesktop={this.renderComboBox}
+      />
+    ) : this.renderComboBox()
+
+    return (
       <div className={wrapperClsName} ref={this.saveRef}>
-        <AutoComplete
-          options={options}
-          isOpen={focus}
-          renderItem={(item) => formatValue(item, minLength)}
-          value={value}
-          inputValue={inputValue}
-          onInputValueChange={this.onInputValueChange}
-          onChange={this.onChange}
-          onFocus={this.focus}
-          onBlur={this.blur}
-          itemToString={x => x == null ? '' : formatValue(x, minLength)}
-        >
-          <TextInput
-            onKeyDown={this.onKeyDown}
-            right={icon}
-            maxLength={Math.max(('' + max).length, minLength)}
-            {...passedProps}
-          />
-        </AutoComplete>
+        {inner}
       </div>
     )
   }

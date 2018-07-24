@@ -153,6 +153,7 @@ class CreditCardNumberInput extends React.PureComponent {
     return (
       <TextInput
         className={clsName}
+        inputMode='numeric'
         guide={focused}
         keepCharPositions={false}
         mask={MASK}

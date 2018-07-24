@@ -42,6 +42,9 @@ const propTypes = {
   /** Handler for onSubmit event. */
   onSubmit: PropTypes.func,
 
+  /** Should it render native select boxes for mobile (expiration date input)? */
+  mobileFriendly: PropTypes.bool,
+
   /** Values to be displayed inside inputs. */
   values: PropTypes.shape({
     cardHolderName: PropTypes.string,
@@ -63,12 +66,10 @@ const defaultProps = {
   values: {
     cardHolderName: '',
     cardNumber: '',
-    cardExpirationDate: {
-      month: null,
-      year: null
-    },
+    cardExpirationDate: null,
     cvc: ''
-  }
+  },
+  mobileFriendly: false
 }
 
 /**
@@ -89,13 +90,16 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function CreditCardInput (props) {
-  const { cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className, cvcLabel, header, onBlur, onChange, onFocus, onSubmit, values } = props
+  const {
+    cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className,
+    cvcLabel, header, onBlur, onChange, onFocus, onSubmit, values, mobileFriendly
+  } = props
 
-  const formhandlerClsName = buildClassName(moduleName, className)
+  const formHandlerClsName = buildClassName(moduleName, className)
   const contentClsName = buildClassName([moduleName, 'content'])
 
   return (
-    <FormHandler className={formhandlerClsName} onSubmit={onSubmit} values={values}>
+    <FormHandler className={formHandlerClsName} onSubmit={onSubmit} values={values}>
       <legend><h3>{header}</h3></legend>
       <div className={contentClsName}>
         <Field
@@ -130,7 +134,7 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cardExpirationDate}
         >
-          <ExpirationDateInput />
+          <ExpirationDateInput mobileFriendly={mobileFriendly} />
         </Field>
         <Field
           name='cvc'

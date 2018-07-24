@@ -40,6 +40,7 @@ onBlur                  | function    | n/a                  | Handler for onBlu
 onChange                | function    | n/a                  | Handler for onChange event.
 onFocus                 | function    | n/a                  | Handler for onFocus event.
 values                  | ValuesShape | `''|null`            | Values to be displayed inside inputs.
+mobileFriendly          | bool        | `false`              | Should it show native select boxes for expiration date on mobile?
 
 ### CreditCardNumberInput
 
@@ -57,12 +58,13 @@ value         | string    | n/a     | Value to be displayed inside inputs.
 
 It allows also properties of `div`.
 
-Property name | Type            | Default | Description                    
---------------|-----------------|:-------:|--------------------------------
-className     | string          | n/a     | Additional class name passed to wrapper.
-onChange      | function        | n/a     | Handler for onChange event.
-value         | ExpirationShape | n/a     | Value to be displayed inside inputs.
-error         | bool            | `false` | Does it have any error?
+Property name  | Type            | Default | Description                    
+---------------|-----------------|:-------:|--------------------------------
+className      | string          | n/a     | Additional class name passed to wrapper.
+onChange       | function        | n/a     | Handler for onChange event.
+value          | ExpirationShape | n/a     | Value to be displayed inside inputs.
+error          | bool            | `false` | Does it have any error?
+mobileFriendly | bool            | `false` | Should it show native select boxes on mobile?
 
 ## Property shapes
 

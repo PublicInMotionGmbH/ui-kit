@@ -73,6 +73,14 @@ class DeviceDetector {
     return this.viewType
   }
 
+  reset () {
+    Object.defineProperty(this, 'viewType', {
+      enumerable: false,
+      configurable: true,
+      value: null
+    })
+  }
+
   isMobile () {
     return this.viewType === null ? null : this.viewType === 'mobile'
   }
