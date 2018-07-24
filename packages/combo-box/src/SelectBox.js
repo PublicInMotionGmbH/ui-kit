@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 
 import { buildClassName } from '@talixo/shared'
+import { DeviceSwap } from '@talixo/device-swap'
 
+import NativeSelect from './NativeSelect'
 import Menu from './Menu'
 import SelectBoxValue from './SelectBoxValue'
 
@@ -54,12 +56,16 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Tab index for toggle button */
-  tabIndex: PropTypes.number
+  tabIndex: PropTypes.number,
+
+  /** Should it act almost-like native "select" on mobile devices? */
+  mobileFriendly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   multi: false,
+  mobileFriendly: false,
   placeholder: '...',
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -186,6 +192,7 @@ class SelectBox extends React.PureComponent {
       if (onChange) {
         onChange(item)
       }
+
       return
     }
 
@@ -204,6 +211,47 @@ class SelectBox extends React.PureComponent {
     // Trigger event with new value
     if (onChange) {
       onChange(nextValue)
+    }
+  }
+
+  /**
+   * Select from native <select> element.
+   *
+   * @param {Event|SyntheticEvent} event
+   */
+  selectNative = (event) => {
+    const { onChange, multi, options } = this.props
+
+    const element = event.target
+    const selectedItems = []
+
+    for (const option of element.options) {
+      if (option.selected) {
+        selectedItems.push(options[option.value])
+      }
+    }
+
+    if (!multi) {
+      const value = selectedItems.length > 0 ? selectedItems[0] : null
+
+      if (this.props.value === undefined) {
+        this.setState({ value })
+      }
+
+      if (onChange) {
+        onChange(value)
+      }
+
+      return
+    }
+
+    if (this.props.value === undefined) {
+      this.setState({ value: selectedItems })
+    }
+
+    // Trigger event with new value
+    if (onChange) {
+      onChange(selectedItems)
     }
   }
 
@@ -242,11 +290,77 @@ class SelectBox extends React.PureComponent {
   }
 
   /**
-   * Render Downshift component with our wrappers.
+   * Choose which component should be rendered.
    *
    * @returns {React.Element}
    */
-  render () {
+  renderMobileFriendly () {
+    return (
+      <DeviceSwap
+        defaultView='mobile'
+        renderMobile={this.renderSimple}
+        renderDesktop={this.renderFullyFeatured}
+      />
+    )
+  }
+
+  /**
+   * Render simpler select box, which will not style menu/options.
+   *
+   * @returns {React.Element}
+   */
+  renderSimple = () => {
+    const { className, multi, icon, options, id, renderItem } = this.props
+    const { value } = this.state
+
+    const elements = options.map((option, index) => (
+      <option key={index} value={option}>{renderItem(option)}</option>
+    ))
+
+    // Build class name for wrapper
+    const clsName = buildClassName(
+      moduleName,
+      className,
+      [ 'simple-select' ],
+      { multi, 'with-info': icon }
+    )
+
+    const selectClsName = buildClassName([ moduleName, 'select' ])
+
+    const valueProps = {
+      ...this.getStateProps({}),
+      getToggleButtonProps: () => ({})
+    }
+
+    const select = (
+      <NativeSelect
+        id={id}
+        multiple={multi}
+        value={multi ? value == null ? [] : Array.isArray(value) ? value : [].concat(value) : value}
+        className={selectClsName}
+        onChange={this.selectNative}
+        onFocus={this.props.onFocus}
+        onBlur={this.props.onBlur}
+      >
+        {elements}
+      </NativeSelect>
+    )
+
+    // Render component
+    return (
+      <div
+        className={clsName}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseEnter={this.props.onMouseEnter}
+      >
+        <SelectBoxValue {...valueProps} />
+        {select}
+      </div>
+    )
+  }
+
+  renderFullyFeatured = () => {
     const {
       icon, multi, placeholder, value, tabIndex, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave,
       onMouseEnter, buildItemId, renderItem, renderValue, ...passedProps
@@ -262,6 +376,23 @@ class SelectBox extends React.PureComponent {
         {this.renderComponent}
       </Downshift>
     )
+  }
+
+  /**
+   * Render Downshift component with our wrappers.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { mobileFriendly } = this.props
+
+    // Assuming, that we can render simple select box without any problems,
+    // as by default it's only showing a string in options.
+    if (mobileFriendly) {
+      return this.renderMobileFriendly()
+    }
+
+    return this.renderFullyFeatured()
   }
 }
 

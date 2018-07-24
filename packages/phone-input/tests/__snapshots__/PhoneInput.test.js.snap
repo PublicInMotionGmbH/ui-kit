@@ -8,6 +8,7 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     buildItemId={[Function]}
     className="talixo-phone-input__country-box"
     itemToString={[Function]}
+    mobileFriendly={false}
     multi={false}
     onBlur={[Function]}
     onChange={[Function]}

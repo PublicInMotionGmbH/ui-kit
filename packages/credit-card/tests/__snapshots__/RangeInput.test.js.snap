@@ -1,74 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RangeInput /> renders correctly 1`] = `
-<AutoComplete
-  buildItemId={[Function]}
+<div
   className="talixo-range-input"
-  inputValue=""
-  isOpen={false}
-  itemToString={[Function]}
-  onBlur={[Function]}
-  onChoose={[Function]}
-  onFocus={[Function]}
-  onInputValueChange={[Function]}
-  options={Array []}
-  renderItem={[Function]}
-  value={null}
 >
-  <TextInput
-    InputComponent="input"
-    error={false}
-    maxLength={9}
-    onKeyDown={[Function]}
-    right={
-      <Icon
-        name="keyboard_arrow_down"
-      />
-    }
-    type="text"
-  />
-</AutoComplete>
+  <AutoComplete
+    buildItemId={[Function]}
+    inputValue=""
+    isOpen={false}
+    itemToString={[Function]}
+    onBlur={[Function]}
+    onChoose={[Function]}
+    onFocus={[Function]}
+    onInputValueChange={[Function]}
+    options={Array []}
+    renderItem={[Function]}
+    value={null}
+  >
+    <TextInput
+      InputComponent="input"
+      error={false}
+      inputMode="numeric"
+      maxLength={9}
+      onKeyDown={[Function]}
+      pattern="[0-9]*"
+      right={
+        <Icon
+          name="keyboard_arrow_down"
+        />
+      }
+      type="text"
+    />
+  </AutoComplete>
+</div>
 `;
 
 exports[`<RangeInput /> renders correctly mounted 1`] = `
 <div
-  className="talixo-combo-box talixo-range-input"
+  className="talixo-range-input"
 >
   <div
-    className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
+    className="talixo-combo-box"
   >
-    <input
-      aria-activedescendant={null}
-      aria-autocomplete="list"
-      aria-expanded={false}
-      autoComplete="off"
-      className="talixo-text-input__input"
-      id="downshift-0-input"
-      maxLength={9}
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      role="combobox"
-      style={
-        Object {
-          "paddingLeft": 1,
-          "paddingRight": 1,
-        }
-      }
-      type="text"
-      value=""
-    />
-    <span
-      className="talixo-text-input__right"
+    <div
+      className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
     >
+      <input
+        aria-activedescendant={null}
+        aria-autocomplete="list"
+        aria-expanded={false}
+        autoComplete="off"
+        className="talixo-text-input__input"
+        id="downshift-0-input"
+        inputMode="numeric"
+        maxLength={9}
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        pattern="[0-9]*"
+        role="combobox"
+        style={
+          Object {
+            "paddingLeft": 1,
+            "paddingRight": 1,
+          }
+        }
+        type="text"
+        value=""
+      />
       <span
-        aria-hidden="true"
-        className="talixo-icon tai tai--material"
+        className="talixo-text-input__right"
       >
-        
+        <span
+          aria-hidden="true"
+          className="talixo-icon tai tai--material"
+        >
+          
+        </span>
       </span>
-    </span>
+    </div>
   </div>
 </div>
 `;

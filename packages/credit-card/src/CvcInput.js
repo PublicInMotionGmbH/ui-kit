@@ -110,6 +110,8 @@ class CvcInput extends React.PureComponent {
       <TextInput
         className={clsName}
         autoComplete='cc-csc'
+        inputMode='numeric'
+        pattern='[0-9]*'
         maxLength={4}
         onChange={this.change}
         onFocus={onFocus}
