@@ -11,7 +11,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
       className="talixo-color-input__display"
       style={
         Object {
-          "background": "#e0e0e050",
+          "background": "rgb(200,200,200)",
         }
       }
     />
@@ -19,20 +19,35 @@ exports[`<ColorInput /> renders children correctly 1`] = `
   <TextInput
     InputComponent="input"
     className="talixo-color-input__text-input"
-    defaultAlpha={1}
-    defaultColor="#e0e0e050"
+    defaltPalette={Array []}
+    defaultColor="rgb(200,200,200)"
     error={false}
     onChange={[Function]}
-    placeholder="e.g. #e0e0e050"
+    placeholder="e.g. rgb(200,200,200)"
     type="text"
-    value="#e0e0e050"
+    value="rgb(200,200,200)"
   />
   <input
     className="talixo-color-input__picker"
     onChange={[Function]}
     type="color"
-    value="#e0e0e050"
+    value="rgb(200,200,200)"
   />
+  <Tooltip
+    arrow={false}
+    fade={false}
+    fadeTime={600}
+    lockPosition={false}
+    position="top"
+    render={[Function]}
+    triggerOn="click"
+  >
+    <span
+      className="talixo-color-input__alpha-button"
+    >
+      Alpha
+    </span>
+  </Tooltip>
   <Tooltip
     arrow={false}
     fade={false}
@@ -43,9 +58,9 @@ exports[`<ColorInput /> renders children correctly 1`] = `
     triggerOn="click"
   >
     <span
-      className="talixo-color-input__alpha-button"
+      className="talixo-color-input__palette"
     >
-      Alpha
+      Palette
     </span>
   </Tooltip>
 </div>
