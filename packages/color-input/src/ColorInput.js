@@ -13,8 +13,9 @@ const propTypes = {
 }
 
 const defaultProps = {
-  defaultColor: '#e0e0e050',
-  defaultAlpha: 1
+  defaultColor: /* '#e0e0e050', */ 'rgb(200,200,200)',
+  defaultAlpha: 255,
+  defaltPalette: []
 }
 
 /**
@@ -26,20 +27,71 @@ const defaultProps = {
  */
 class ColorInput extends React.PureComponent {
   state = {
-    color: this.props.defaultColor,
-    alpha: this.props.defaultAlpha
+    color: this.props.defaultColor
   }
 
-  handleChangeColor (e) {
-    this.setState({color: e})
+  // componentWillReceiveProps () {
+
+  // }
+
+  handleChangeColor (color) {
+    this.setState({color: color})
   }
 
   handleChangeAlpha (value) {
-    this.setState({alpha: value})
+    const color = this.state.color
+
+    if (color.startsWith('#')) {
+      this.setState({
+        color: color.length > 5 ? this.convertAlphaToLongHex(value) : this.convertAlphaToShortHex(value)
+      })
+    } else if (color.startsWith('rgb')) {
+      this.setState({
+        color: this.convertAlphaToRgba(value)
+      })
+    }
+  }
+
+  convertAlphaToRgba (value) {
+    const color = this.state.color
+
+    if (color.startsWith('rgb(')) {
+      const decimal = (value * 100 / 25500).toFixed(2)
+      const part = color.split(')')
+      const newColorRgb = `${part[0]},${decimal})`
+
+      return newColorRgb.replace('rgb', 'rgba')
+    }
+
+    if (color.startsWith('rgba(')) {
+      const decimal = (value * 100 / 25500).toFixed(2)
+      const part = color.split(',')
+
+      return `${part[0]},${part[1]},${part[2]},${decimal})`
+    }
+  }
+
+  convertAlphaToLongHex (value) {
+    const alphaToHex = value.toString(16) === '0' ? '00' : value.toString(16)
+    const color = this.state.color.substr(0, 7) + alphaToHex
+
+    return color
+  }
+
+  convertAlphaToShortHex (value) {
+    const alphaToHex = value.toString(16)
+    const newAlpha = alphaToHex.length < 2 ? 0 : alphaToHex.substr(0, 1)
+    const color = this.state.color.substr(0, 4) + newAlpha
+
+    return color
+  }
+
+  renderPalette () {
+
   }
 
   render () {
-    const { className, ...passedProps } = this.props
+    const { className, defaultAlpha, ...passedProps } = this.props
     const { color } = this.state
 
     const clsName = buildClassName('color-input', className)
@@ -48,6 +100,7 @@ class ColorInput extends React.PureComponent {
     const textInputColorClsName = buildClassName('color-input__text-input', className)
     const pickerClsName = buildClassName('color-input__picker', className)
     const alphaBtnClsName = buildClassName('color-input__alpha-button', className)
+    const paletteClsName = buildClassName('color-input__palette', className)
 
     return (
       <div className={clsName}>
@@ -73,13 +126,31 @@ class ColorInput extends React.PureComponent {
         />
 
         <Tooltip
-          position='right'
+          position='top'
           triggerOn='click'
           arrow={false}
-          render={() => <div><Slider onChange={value => this.handleChangeAlpha(value)} /></div>}
+          render={() =>
+            <Slider
+              onChange={value => this.handleChangeAlpha(value)}
+              min={0}
+              max={255}
+              defaultValue={defaultAlpha}
+            />
+          }
         >
           <span className={alphaBtnClsName}>
             Alpha
+          </span>
+        </Tooltip>
+
+        <Tooltip
+          position='right'
+          triggerOn='click'
+          arrow={false}
+          render={() => { this.renderPalette() }}
+        >
+          <span className={paletteClsName}>
+            Palette
           </span>
         </Tooltip>
       </div>

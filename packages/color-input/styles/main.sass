@@ -30,14 +30,26 @@
   &__text-input
     margin: 0 $color-input-text-input-margin-horizontal
 
-  &__alpha
-    &-button
-      display: flex
-      justify-content: center
-      align-items: center
-      height: auto
-      width: $color-input-alpha-button-width
-      margin: 0 $color-input-alpha-button-margin-horizontal
-      border: $color-input-display-background-border-width solid $color-input-display-background-border-color
-      border-radius: $color-input-alpha-button-border-radius
+  &__alpha-button
+    display: flex
+    justify-content: center
+    align-items: center
+    height: auto
+    width: $color-input-alpha-button-width
+    margin: 0 $color-input-alpha-button-margin-horizontal
+    border: $color-input-alpha-button-border-width solid $color-input-alpha-button-border-color
+    border-radius: $color-input-alpha-button-border-radius
+    cursor: pointer
+    background-color: $color-input-alpha-button-background-color
       
+  &__palette
+    display: flex
+    justify-content: center
+    align-items: center
+    height: auto
+    width: $color-input-palette-width
+    margin: 0 $color-input-palette-margin-horizontal
+    border: $color-input-palette-border-width solid $color-input-palette-border-color
+    border-radius: $color-input-palette-border-radius
+    cursor: pointer
+    background-color: $color-input-palette-background-color

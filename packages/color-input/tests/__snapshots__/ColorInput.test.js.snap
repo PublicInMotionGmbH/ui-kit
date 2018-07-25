@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColorInput /> renders children correctly 1`] = `
+<div
+  className="talixo-color-input"
+>
+  <div
+    className="talixo-color-input__display--background"
+  >
+    <div
+      className="talixo-color-input__display"
+      style={
+        Object {
+          "background": "#e0e0e050",
+        }
+      }
+    />
+  </div>
+  <TextInput
+    InputComponent="input"
+    className="talixo-color-input__text-input"
+    defaultAlpha={1}
+    defaultColor="#e0e0e050"
+    error={false}
+    onChange={[Function]}
+    placeholder="e.g. #e0e0e050"
+    type="text"
+    value="#e0e0e050"
+  />
+  <input
+    className="talixo-color-input__picker"
+    onChange={[Function]}
+    type="color"
+    value="#e0e0e050"
+  />
+  <Tooltip
+    arrow={false}
+    fade={false}
+    fadeTime={600}
+    lockPosition={false}
+    position="right"
+    render={[Function]}
+    triggerOn="click"
+  >
+    <span
+      className="talixo-color-input__alpha-button"
+    >
+      Alpha
+    </span>
+  </Tooltip>
+</div>
+`;
