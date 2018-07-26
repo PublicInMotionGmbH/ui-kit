@@ -27,6 +27,7 @@
     "@talixo/calendar": "^1.0.0-alpha.16",
     "@talixo/checkbox": "^1.0.0-alpha.16",
     "@talixo/combo-box": "^1.0.0-alpha.16",
+    "@talixo/country-flag": "^1.0.0-alpha.16",
     "@talixo/control-group": "^1.0.0-alpha.16",
     "@talixo/icon": "^1.0.0-alpha.16",
     "@talixo/number-input": "^1.0.0-alpha.16",
