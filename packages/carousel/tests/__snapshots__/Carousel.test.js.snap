@@ -61,6 +61,73 @@ exports[`<Carousel /> renders children correctly 1`] = `
             SLIDE 3
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Carousel /> renders children correctly with infinite 1`] = `
+<div
+  className="talixo-carousel"
+>
+  <div
+    className="talixo-carousel__content"
+  >
+    <div
+      className="talixo-carousel__wrapper"
+      style={
+        Object {
+          "transform": "translateX(-0%)",
+          "transitionDuration": "500ms",
+        }
+      }
+    >
+      <div
+        className="talixo-carousel__inner"
+      >
+        <div
+          className="talixo-carousel__slide"
+          key="0"
+          style={
+            Object {
+              "maxWidth": "100%",
+              "minWidth": "100%",
+            }
+          }
+        >
+          <div>
+            SLIDE 1
+          </div>
+        </div>
+        <div
+          className="talixo-carousel__slide"
+          key="1"
+          style={
+            Object {
+              "maxWidth": "100%",
+              "minWidth": "100%",
+            }
+          }
+        >
+          <div>
+            SLIDE 2
+          </div>
+        </div>
+        <div
+          className="talixo-carousel__slide"
+          key="2"
+          style={
+            Object {
+              "maxWidth": "100%",
+              "minWidth": "100%",
+            }
+          }
+        >
+          <div>
+            SLIDE 3
+          </div>
+        </div>
         <div
           className="talixo-carousel__slide"
           key="copy-0"

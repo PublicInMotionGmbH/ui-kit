@@ -34,6 +34,7 @@ children        | nodes     | n/a             | Elements in each slides
 className       | string    | n/a             | Additional class name passed to wrapper
 dots            | bool      | n/a             | Dots to navigate between slides
 animationTime   | number    | `500`           | Duration of animation (in ms)
+infinite        | bool      | `false`         | Infinite scroll
 perPage         | number    | `1`             | Number of visible slides
 renderDots      | function  | `Dots`          | Function which render custom dots
 renderArrows    | function  | `Arrows`        | Function which render custom arrows

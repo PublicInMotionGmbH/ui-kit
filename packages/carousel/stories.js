@@ -77,6 +77,14 @@ addStory('with arrows', readme, () => (
   </Carousel>
 ))
 
+addStory('infinite with arrows', readme, () => (
+  <Carousel infinite arrows>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+))
+
 addStory('with more elements on one slide', readme, () => (
   <Carousel arrows perPage={3}>
     <div className='tx-slide tx-slide--1'>SLIDE 1</div>
