@@ -11,7 +11,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
       className="talixo-color-input__display"
       style={
         Object {
-          "background": "#e0e0e050",
+          "background": "#e0e0e0",
         }
       }
     />
@@ -22,15 +22,15 @@ exports[`<ColorInput /> renders children correctly 1`] = `
     error={false}
     onChange={[Function]}
     palette={Array []}
-    placeholder="e.g. #e0e0e050"
+    placeholder="e.g. #e0e0e0"
     type="text"
-    value="#e0e0e050"
+    value="#e0e0e0"
   />
   <input
     className="talixo-color-input__picker"
     onChange={[Function]}
     type="color"
-    value="#ffffff"
+    value="#e0e0e0"
   />
   <Tooltip
     arrow={false}
@@ -52,7 +52,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
     fade={false}
     fadeTime={600}
     lockPosition={false}
-    position="right"
+    position="bottom"
     render={[Function]}
     triggerOn="click"
   >
@@ -60,6 +60,22 @@ exports[`<ColorInput /> renders children correctly 1`] = `
       className="talixo-color-input__palette-button"
     >
       Palette
+    </span>
+  </Tooltip>
+  <Tooltip
+    arrow={false}
+    fade={false}
+    fadeTime={600}
+    lockPosition={false}
+    position="right"
+    render={[Function]}
+    triggerOn="click"
+  >
+    <span
+      className="talixo-color-input__hsl-button"
+      onClick={[Function]}
+    >
+      HSL
     </span>
   </Tooltip>
 </div>
