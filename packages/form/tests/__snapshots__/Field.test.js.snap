@@ -17,6 +17,7 @@ exports[`<Field /> renders children correctly 1`] = `
     >
       <TextInput
         InputComponent="input"
+        endCaretOnFocus={false}
         error={false}
         id="form_field_1"
         onBlur={[Function]}

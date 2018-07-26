@@ -5,6 +5,7 @@ exports[`<CvcInput /> renders children correctly 1`] = `
   InputComponent="input"
   autoComplete="cc-csc"
   className="talixo-cvc-input"
+  endCaretOnFocus={false}
   error={false}
   inputMode="numeric"
   maxLength={4}

@@ -4,6 +4,7 @@ exports[`<NumberInput /> renders correctly 1`] = `
 <TextInput
   InputComponent="input"
   className="talixo-number-input talixo-number-input--stepper"
+  endCaretOnFocus={false}
   error={false}
   max={Infinity}
   min={-Infinity}

@@ -13,12 +13,14 @@ exports[`<RangeInput /> renders correctly 1`] = `
     onChoose={[Function]}
     onFocus={[Function]}
     onInputValueChange={[Function]}
+    openOnFocus={true}
     options={Array []}
     renderItem={[Function]}
     value={null}
   >
     <TextInput
       InputComponent="input"
+      endCaretOnFocus={false}
       error={false}
       inputMode="numeric"
       maxLength={9}

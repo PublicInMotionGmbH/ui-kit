@@ -8,6 +8,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
     InputComponent="input"
     autoComplete="off"
     className="talixo-time-picker__input"
+    endCaretOnFocus={false}
     error={false}
     onBlur={[Function]}
     onChange={[Function]}
