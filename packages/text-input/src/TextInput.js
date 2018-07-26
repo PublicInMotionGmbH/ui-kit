@@ -469,7 +469,7 @@ class TextInput extends React.PureComponent {
    */
   render () {
     const {
-      className, error, inputRef, onChange, onFocus, InputComponent,
+      className, error, inputRef, onChange, InputComponent,
       style, value, suffix, left, right, endCaretOnFocus, ...restProps
     } = this.props
     const _value = this.state.value
