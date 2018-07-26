@@ -9,13 +9,33 @@ import { Tooltip } from '@talixo/tooltip'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
+  className: PropTypes.string,
+
+  /** Color to show as default */
+  defaultColor: PropTypes.string,
+
+  /** Alpha to be set as default */
+  defaultAlpha: PropTypes.number,
+
+  /** Palette of predefined colors */
+  palette: PropTypes.arrayOf(
+    PropTypes.shape({
+      /**  Unique id of color */
+      id: PropTypes.string,
+
+      /**  Name of color */
+      name: PropTypes.string,
+
+      /** Color in hex, rgb or rgba format */
+      color: PropTypes.string
+    })
+  )
 }
 
 const defaultProps = {
-  defaultColor: /* '#e0e0e050', */ 'rgb(200,200,200)',
+  defaultColor: '#e0e0e050',
   defaultAlpha: 255,
-  defaltPalette: []
+  palette: []
 }
 
 /**
@@ -58,7 +78,7 @@ class ColorInput extends React.PureComponent {
     if (color.startsWith('rgb(')) {
       const decimal = (value * 100 / 25500).toFixed(2)
       const part = color.split(')')
-      const newColorRgb = `${part[0]},${decimal})`
+      const newColorRgb = `${part[0]}, ${decimal})`
 
       return newColorRgb.replace('rgb', 'rgba')
     }
@@ -67,7 +87,7 @@ class ColorInput extends React.PureComponent {
       const decimal = (value * 100 / 25500).toFixed(2)
       const part = color.split(',')
 
-      return `${part[0]},${part[1]},${part[2]},${decimal})`
+      return `${part[0]},${part[1]},${part[2]}, ${decimal})`
     }
   }
 
@@ -86,12 +106,31 @@ class ColorInput extends React.PureComponent {
     return color
   }
 
-  renderPalette () {
+  handleSelectColor (color) {
+    this.setState({
+      color: color
+    })
+  }
 
+  renderPalette () {
+    const { className } = this.props
+    const paletteClsName = buildClassName('color-input__palette', className)
+    const paletteItemClsName = buildClassName('color-input__palette-item', className)
+    const paletteItemTextClsName = buildClassName('color-input__palette-item-text', className)
+    const paletteItemColorClsName = buildClassName('color-input__palette-item-color', className)
+
+    const colorPalette = this.props.palette.map(el =>
+      <div className={paletteItemClsName} onClick={() => this.handleSelectColor(el.color)} key={el.id}>
+        <span className={paletteItemTextClsName}>{el.name}</span>
+        <span className={paletteItemColorClsName} style={{backgroundColor: el.color}} />
+      </div>
+    )
+
+    return <div className={paletteClsName}>{colorPalette}</div>
   }
 
   render () {
-    const { className, defaultAlpha, ...passedProps } = this.props
+    const { className, defaultAlpha, defaultColor, ...passedProps } = this.props
     const { color } = this.state
 
     const clsName = buildClassName('color-input', className)
@@ -100,7 +139,7 @@ class ColorInput extends React.PureComponent {
     const textInputColorClsName = buildClassName('color-input__text-input', className)
     const pickerClsName = buildClassName('color-input__picker', className)
     const alphaBtnClsName = buildClassName('color-input__alpha-button', className)
-    const paletteClsName = buildClassName('color-input__palette', className)
+    const paletteBtnClsName = buildClassName('color-input__palette-button', className)
 
     return (
       <div className={clsName}>
@@ -121,7 +160,7 @@ class ColorInput extends React.PureComponent {
         <input
           className={pickerClsName}
           type='color'
-          value={color}
+          value={color.length === 7 ? color : '#ffffff'}
           onChange={e => this.handleChangeColor(e.target.value)}
         />
 
@@ -147,9 +186,9 @@ class ColorInput extends React.PureComponent {
           position='right'
           triggerOn='click'
           arrow={false}
-          render={() => { this.renderPalette() }}
+          render={() => this.renderPalette()}
         >
-          <span className={paletteClsName}>
+          <span className={paletteBtnClsName}>
             Palette
           </span>
         </Tooltip>
