@@ -1,6 +1,6 @@
 {
   "name": "@talixo/grid",
-  "version": "1.0.0-alpha.19",
+  "version": "1.0.0-alpha.20",
   "description": "UI Component which represents grid",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,14 +23,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.19",
+    "@talixo/shared": "^1.0.0-alpha.20",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.19",
+    "@talixo/shared": "^1.0.0-alpha.20",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
