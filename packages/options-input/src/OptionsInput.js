@@ -129,8 +129,8 @@ class OptionsInput extends React.PureComponent {
   /**
    * This function set state.open
    */
-  toggle () {
-    const nextOpen = !this.state.open
+  toggle (state) {
+    const nextOpen = state == null ? !this.state.open : !!state
 
     this.setState({ open: nextOpen })
 
@@ -214,7 +214,7 @@ class OptionsInput extends React.PureComponent {
    * Handle focusing element.
    */
   focus = () => {
-    this.toggle()
+    this.toggle(true)
 
     if (this.props.onFocus) {
       this.props.onFocus()
@@ -230,8 +230,16 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
+  click = (...args) => {
+    this.focus(true)
+
+    if (this.props.onClick) {
+      this.props.onClick(...args)
+    }
+  }
+
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
+    const { options, className, persistentOptions, onClick, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
     const { value, open } = this.state
 
     const clsName = buildClassName(moduleName, className, { open, error })
@@ -243,6 +251,7 @@ class OptionsInput extends React.PureComponent {
           type='button'
           className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
+          onClick={this.click}
           onBlur={this.blur}
           aria-expanded={open}
           role='button'
