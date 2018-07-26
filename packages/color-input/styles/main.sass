@@ -24,8 +24,8 @@
       background-image: linear-gradient(45deg, $color-input-display-background-gradient 25%, transparent 25%), linear-gradient(-45deg, $color-input-display-background-gradient 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, $color-input-display-background-gradient 75%),
       linear-gradient(-45deg, transparent 75%, $color-input-display-background-gradient 75%)
-      background-size: dp(2.5) dp(2.5)
-      background-position: dp(-0.375) dp(-0.375), dp(-0.375) dp(0.875), dp(0.875) dp(-1.625), dp(-1.625) dp(-0.375)
+      background-size: $color-input-display-background-size-height $color-input-display-background-size-width
+      background-position: $color-input-display-background-position
 
   &__text-input
     margin: 0 $color-input-text-input-margin-horizontal
@@ -70,14 +70,47 @@
       height: dp(6)
       width: auto
       min-width: dp(12)
-      border: dp(0.125) solid #000
+      border: dp(0.125) solid $color-input-palette-item-border-color
       margin: dp(1) dp(1)
-      border-radius: dp(0.375)
+      border-radius: $color-input-palette-item-border-radius
 
       &-text
-        padding: dp(0.5)
+        padding: $color-input-palette-item-text-padding
 
       &-color
         display: inline-block
         height: 100%
         width: 100%
+        border-bottom: $color-input-palette-color-border-radius
+
+  &__hsl
+    width: $color-input-hsl-width
+
+    &-button
+      display: flex
+      justify-content: center
+      align-items: center
+      height: auto
+      width: $color-input-hsl-button-width
+      margin: 0 $color-input-hsl-button-margin-horizontal 0 0
+      border: $color-input-hsl-button-border-width solid $color-input-hsl-button-border-color
+      border-radius: $color-input-hsl-button-border-radius
+      cursor: pointer
+      background-color: $color-input-hsl-button-background-color
+      user-select: none
+
+    &-item
+      margin: $color-input-hsl-item-margin-top 0 $color-input-hsl-item-margin-bottom 0
+      &-spectrum
+        height: $color-input-hsl-item-spectrum-height
+        width: 100%
+        background-image: linear-gradient( to right, #F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00 )
+        border-radius: $color-input-hsl-item-spectrum-width
+
+      label
+        display: block
+        text-align: center
+
+      &--hue
+        .talixo-slider__value
+          display: none

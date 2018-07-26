@@ -33,7 +33,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  defaultColor: '#e0e0e050',
+  defaultColor: '#e0e0e0',
   defaultAlpha: 255,
   palette: []
 }
@@ -47,7 +47,12 @@ const defaultProps = {
  */
 class ColorInput extends React.PureComponent {
   state = {
-    color: this.props.defaultColor
+    color: this.props.defaultColor,
+    hsl: {
+      h: 0,
+      s: 100,
+      l: 50
+    }
   }
 
   // componentWillReceiveProps () {
@@ -73,12 +78,12 @@ class ColorInput extends React.PureComponent {
   }
 
   convertAlphaToRgba (value) {
-    const color = this.state.color
+    const { color } = this.state
 
     if (color.startsWith('rgb(')) {
       const decimal = (value * 100 / 25500).toFixed(2)
       const part = color.split(')')
-      const newColorRgb = `${part[0]}, ${decimal})`
+      const newColorRgb = `${part[0]},${decimal})`
 
       return newColorRgb.replace('rgb', 'rgba')
     }
@@ -112,6 +117,17 @@ class ColorInput extends React.PureComponent {
     })
   }
 
+  renderAplhaContainer () {
+    const { defaultAlpha } = this.props
+    return (
+      <Slider
+        onChange={value => this.handleChangeAlpha(value)}
+        max={255}
+        defaultValue={defaultAlpha}
+      />
+    )
+  }
+
   renderPalette () {
     const { className } = this.props
     const paletteClsName = buildClassName('color-input__palette', className)
@@ -129,6 +145,185 @@ class ColorInput extends React.PureComponent {
     return <div className={paletteClsName}>{colorPalette}</div>
   }
 
+  handleHslBtnClick () {
+    const { color } = this.state
+    let r, g, b
+
+    if (color.startsWith('#')) {
+      r = parseInt(color.substr(1, 2), 16)
+      g = parseInt(color.substr(3, 2), 16)
+      b = parseInt(color.substr(5, 2), 16)
+    } else if (color.startsWith('rgb')) {
+      const colorRgb = color.match(/\d+/g)
+      r = colorRgb[0]
+      g = colorRgb[1]
+      b = colorRgb[2]
+    } else {
+      return
+    }
+
+    r /= 255
+    g /= 255
+    b /= 255
+
+    let max = Math.max(r, g, b)
+    let min = Math.min(r, g, b)
+    let h = (max + min) / 2
+    let s = (max + min) / 2
+    let l = (max + min) / 2
+
+    if (max === min) {
+      h = s = 0
+    } else {
+      let d = max - min
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break
+        case g: h = (b - r) / d + 2; break
+        case b: h = (r - g) / d + 4; break
+      }
+      h /= 6
+    }
+
+    h = Math.floor(h * 360)
+    s = Math.floor(s * 100)
+    l = Math.floor(l * 100)
+
+    this.setState({
+      hsl: {
+        h: h,
+        s: s,
+        l: l
+      }
+    })
+  }
+
+  handleChangeHsl (h, s, l) {
+    this.setState({
+      hsl: {
+        h: h,
+        s: s,
+        l: l
+      }
+    })
+
+    const { color } = this.state
+    let r, g, b
+    h = parseFloat(h)
+    s = parseFloat(s)
+    l = parseFloat(l)
+
+    if (h < 0) h = 0
+    if (s < 0) s = 0
+    if (l < 0) l = 0
+    if (h >= 360) h = 359
+    if (s > 100) s = 100
+    if (l > 100) l = 100
+    s /= 100
+    l /= 100
+    let c = (1 - Math.abs(2 * l - 1)) * s
+    let hh = h / 60
+    let x = c * (1 - Math.abs(hh % 2 - 1))
+    r = g = b = 0
+    if (hh >= 0 && hh < 1) {
+      r = c
+      g = x
+    } else if (hh >= 1 && hh < 2) {
+      r = x
+      g = c
+    } else if (hh >= 2 && hh < 3) {
+      g = c
+      b = x
+    } else if (hh >= 3 && hh < 4) {
+      g = x
+      b = c
+    } else if (hh >= 4 && hh < 5) {
+      r = x
+      b = c
+    } else {
+      r = c
+      b = x
+    }
+    let m = l - c / 2
+    r += m
+    g += m
+    b += m
+    r *= 255
+    g *= 255
+    b *= 255
+    r = Math.floor(r)
+    g = Math.floor(g)
+    b = Math.floor(b)
+    let hex = r * 65536 + g * 256 + b
+    hex = hex.toString(16, 6)
+    let len = hex.length
+    if (len < 6) {
+      for (let i = 0; i < 6 - len; i++) {
+        hex = '0' + hex
+      }
+    }
+
+    if (color.startsWith('rgb')) {
+      this.setState({
+        color: `rgb(${r},${g},${b})`
+      })
+    } else if (color.startsWith('#')) {
+      this.setState({
+        color: `#${hex}`
+      })
+    }
+  }
+
+  renderHslManipulator () {
+    const { className } = this.props
+    const { h, s, l } = this.state.hsl
+    const hslClsName = buildClassName('color-input__hsl', className)
+    const hslItemClsName = buildClassName('color-input__hsl-item', className)
+    const hslItemHueClsName = buildClassName('color-input__hsl-item', className, ['hue'])
+    const hslItemHueSpectrumClsName = buildClassName('color-input__hsl-item-spectrum', className)
+    const hslItemLabelHueClsName = buildClassName('color-input__hsl-item-label', className, ['hue'])
+    const hslItemLabelSaturationClsName = buildClassName('color-input__hsl-item-label', className, ['saturation'])
+    const hslItemLabelLightnessClsName = buildClassName('color-input__hsl-item-label', className, ['lightness'])
+
+    return (
+      <div className={hslClsName}>
+        <div className={hslItemHueClsName}>
+          <label htmlFor={hslItemLabelHueClsName}>
+          Hue
+          </label>
+          <div className={hslItemHueSpectrumClsName} />
+          <Slider
+            max={360}
+            id={hslItemLabelHueClsName}
+            value={h}
+            onChange={value => this.handleChangeHsl(value, s, l)} />
+        </div>
+
+        <div className={hslItemClsName}>
+          <label htmlFor={hslItemLabelSaturationClsName}>
+          Saturation (%)
+          </label>
+          <Slider
+            id={hslItemLabelSaturationClsName}
+            value={s}
+            onChange={value => this.handleChangeHsl(h, value, l)}
+          />
+        </div>
+
+        <div className={hslItemClsName}>
+          <label htmlFor={hslItemLabelLightnessClsName}>
+            Lightness (%)
+          </label>
+          <Slider
+            id={hslItemLabelLightnessClsName}
+            value={l}
+            onChange={value => this.handleChangeHsl(h, s, value)}
+          />
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const { className, defaultAlpha, defaultColor, ...passedProps } = this.props
     const { color } = this.state
@@ -140,6 +335,7 @@ class ColorInput extends React.PureComponent {
     const pickerClsName = buildClassName('color-input__picker', className)
     const alphaBtnClsName = buildClassName('color-input__alpha-button', className)
     const paletteBtnClsName = buildClassName('color-input__palette-button', className)
+    const hslBtnClsName = buildClassName('color-input__hsl-button', className)
 
     return (
       <div className={clsName}>
@@ -168,14 +364,7 @@ class ColorInput extends React.PureComponent {
           position='top'
           triggerOn='click'
           arrow={false}
-          render={() =>
-            <Slider
-              onChange={value => this.handleChangeAlpha(value)}
-              min={0}
-              max={255}
-              defaultValue={defaultAlpha}
-            />
-          }
+          render={() => this.renderAplhaContainer()}
         >
           <span className={alphaBtnClsName}>
             Alpha
@@ -183,13 +372,24 @@ class ColorInput extends React.PureComponent {
         </Tooltip>
 
         <Tooltip
-          position='right'
+          position='bottom'
           triggerOn='click'
           arrow={false}
           render={() => this.renderPalette()}
         >
           <span className={paletteBtnClsName}>
             Palette
+          </span>
+        </Tooltip>
+
+        <Tooltip
+          position='right'
+          triggerOn='click'
+          arrow={false}
+          render={() => this.renderHslManipulator()}
+        >
+          <span className={hslBtnClsName} onClick={() => this.handleHslBtnClick()}>
+            HSL
           </span>
         </Tooltip>
       </div>
