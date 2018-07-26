@@ -8,6 +8,7 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
     aria-expanded={false}
     className="talixo-options-input__toggle"
     onBlur={[Function]}
+    onClick={[Function]}
     onFocus={[Function]}
     role="button"
     type="button"
