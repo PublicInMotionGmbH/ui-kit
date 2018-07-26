@@ -67,6 +67,7 @@ function ListOption (props) {
   return (
     <div className={clsName}>
       <NumberInput
+        endCaretOnFocus
         left={icon}
         suffix={label}
         value={value}

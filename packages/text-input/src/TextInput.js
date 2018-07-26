@@ -41,13 +41,17 @@ const propTypes = {
   value: PropTypes.string,
 
   /** Component used for input below */
-  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
+  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
+
+  /** Should put caret on end of input always when user focus it? */
+  endCaretOnFocus: PropTypes.bool
 }
 
 const defaultProps = {
   InputComponent: 'input',
   error: false,
-  type: 'text'
+  type: 'text',
+  endCaretOnFocus: false
 }
 
 /**
@@ -69,6 +73,9 @@ const defaultProps = {
  * @property {object|null} state.inputStyle
  *
  * @property {boolean} hasElementsInitialized
+ * @property {function} [endCaretListener]
+ * @property {HTMLElement} [input]
+ * @property {HTMLElement} [suffix]
  *
  * @class
  */
@@ -140,6 +147,10 @@ class TextInput extends React.PureComponent {
     if (props.value != null && props.value !== this.props.value) {
       this.setState({ value: props.value })
     }
+
+    if (props.endCaretOnFocus !== this.props.endCaretOnFocus) {
+      this.initializeEndCaretOnFocus()
+    }
   }
 
   /**
@@ -149,6 +160,8 @@ class TextInput extends React.PureComponent {
     if (this.hasAdditionalElements()) {
       this.initializeElementsStyles()
     }
+
+    this.initializeEndCaretOnFocus()
   }
 
   /**
@@ -156,6 +169,7 @@ class TextInput extends React.PureComponent {
    */
   componentWillUnmount () {
     this.deinitializeElementsStyles()
+    this.unregisterEndCaretOnFocus()
   }
 
   /**
@@ -171,6 +185,113 @@ class TextInput extends React.PureComponent {
     } else {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
       this.initializeElementsStyles()
+    }
+  }
+
+  /**
+   * Initialize focus event when it's needed, where caret is put on end.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.endCaretOnFocus]
+   */
+  initializeEndCaretOnFocus (props) {
+    const { endCaretOnFocus } = props || this.props
+
+    if (endCaretOnFocus) {
+      this.registerEndCaretOnFocus()
+    } else {
+      this.unregisterEndCaretOnFocus()
+    }
+  }
+
+  /**
+   * Register focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  registerEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (this.endCaretListener) {
+      return
+    }
+
+    this.endCaretListener = () => setTimeout(this.putCaretOnEnd.bind(this, input))
+    input.addEventListener('focus', this.endCaretListener)
+  }
+
+  /**
+   * Unregister focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  unregisterEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (!this.endCaretListener) {
+      return
+    }
+
+    input.removeEventListener('focus', this.endCaretListener)
+    this.endCaretListener = null
+  }
+
+  /**
+   * Put caret on end of input.
+   *
+   * @param {HTMLElement} input
+   */
+  putCaretOnEnd (input) {
+    const value = input.value
+    const length = value ? value.length : 0
+
+    // Don't do anything when it's empty anyway
+    if (length === 0) {
+      return
+    }
+
+    const previousType = input.type
+
+    // Types different than "text" may not support selection, i.e. "number"
+    if (previousType !== 'text') {
+      input.type = 'text'
+    }
+
+    if (input.setSelectionRange) {
+      input.setSelectionRange(length, length)
+    } else if (input.createTextRange) {
+      const range = input.createTextRange()
+      range.moveStart('character', length)
+      range.select()
+    } else {
+      input.value = ''
+      input.value = value
+    }
+
+    if (previousType !== 'text') {
+      input.type = previousType
     }
   }
 
@@ -261,7 +382,12 @@ class TextInput extends React.PureComponent {
   inputRef = (el) => {
     const { inputRef } = this.props
 
+    if (this.input) {
+      this.unregisterEndCaretOnFocus(this.input)
+    }
+
     this.input = findDOMNode(el)
+    this.initializeEndCaretOnFocus()
 
     if (inputRef) {
       inputRef(this.input)
@@ -342,7 +468,10 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, inputRef, onChange, InputComponent, style, value, suffix, left, right, ...restProps } = this.props
+    const {
+      className, error, inputRef, onChange, onFocus, InputComponent,
+      style, value, suffix, left, right, endCaretOnFocus, ...restProps
+    } = this.props
     const _value = this.state.value
 
     // Initialize helper variables

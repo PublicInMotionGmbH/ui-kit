@@ -23,7 +23,7 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type="number"]`. Additionally, it handles some differently:
+It allows any props which are allowed for `TextInput` (`@talixo/text-input`) or `input[type="number"]`. Additionally, it handles some differently:
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
