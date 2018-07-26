@@ -372,6 +372,7 @@ class PhoneInput extends React.PureComponent {
         keepCharPositions={false}
         mask={buildMaskForCountry(country)}
         placeholderChar={'\u2000'}
+        inputMode='numeric'
         type='tel'
         ref={this.saveRef}
         value={value}

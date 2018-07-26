@@ -149,7 +149,8 @@ class Calendar extends React.PureComponent {
   render () {
     const {
       className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error,
-      placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, value, ...passedProps
+      placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, value,
+      autoComplete, ...passedProps
     } = this.props
     const { date, focused } = this.state
 
