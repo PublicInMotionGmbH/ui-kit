@@ -6,7 +6,9 @@ exports[`<Switcher /> renders children correctly 1`] = `
 >
   <input
     checked={false}
+    disabled={false}
     onChange={[Function]}
+    readOnly={false}
     type="checkbox"
   />
   <span>

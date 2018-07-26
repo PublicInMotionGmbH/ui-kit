@@ -15,11 +15,6 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
     }
   }
 >
-  <legend>
-    <h3>
-      Payment
-    </h3>
-  </legend>
   <div
     className="talixo-credit-card-input__content"
   >
@@ -60,8 +55,10 @@ exports[`<CreditCardInput /> renders correctly 1`] = `
       value={null}
     >
       <ExpirationDateInput
+        disabled={false}
         error={false}
         mobileFriendly={false}
+        readOnly={false}
       />
     </Field>
     <Field

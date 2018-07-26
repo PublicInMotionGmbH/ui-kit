@@ -30,6 +30,8 @@ noLabel       | string    | `"No"`          | label for unchecked switcher
 yesLabel      | string    | `"Yes"`         | label for checked switcher
 value         | bool      | self-controlled | is it checked?
 onChange      | function  | n/a             | event handler for changing value
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 

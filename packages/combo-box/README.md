@@ -46,6 +46,8 @@ buildItemId    | function  | item index        | Function to build unique ID of 
 itemToString   | function  | `item => item`    | Function to convert item to string
 id             | string    | n/a               | ID passed to control element
 mobileFriendly | bool      | n/a               | Should it act more like native "select" button on mobile devices?
+disabled       | bool      | `false`           | Should it be disabled?
+readOnly       | bool      | `false`           | Should it be read-only?
 
 ### ComboBox
 
@@ -69,6 +71,8 @@ buildItemId        | function  | item index        | Function to build unique ID
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
 tabIndex           | number    | n/a               | Tab index passed to toggle button
+disabled           | bool      | `false`           | Should it be disabled?
+readOnly           | bool      | `false`           | Should it be read-only?
 
 ### AutoComplete
 
@@ -87,6 +91,8 @@ buildItemId        | function  | item index        | Function to build unique ID
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
 openOnFocus        | bool      | `false`           | Should open auto-complete on focus already?
+disabled           | bool      | `false`           | Should it be disabled?
+readOnly           | bool      | `false`           | Should it be read-only?
 
 ## Changelog
 

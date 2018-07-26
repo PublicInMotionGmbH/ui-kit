@@ -39,6 +39,8 @@ onFocus           | function  | n/a             | Event handler fired on input o
 onBlur            | function  | n/a             | Event handler fired on input blur
 id                | string    | n/a             | ID passed to control element
 error             | bool      | `false`         | Should add class modifier for error?
+disabled          | bool      | `false`         | Should it be disabled?
+readOnly          | bool      | `false`         | Should it be read-only?
 
 ## Property shapes
 

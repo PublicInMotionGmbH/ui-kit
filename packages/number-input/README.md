@@ -38,6 +38,8 @@ step          | number    | `1`             | step value for mouse whell, keyboa
 precision     | number    | `0`             | number of decimal places
 initialTime   | number    | `700`           | initial time to automatically de/increment when button is pressed
 stepTime      | number    | `20`            | time for each automated de/increment when button is pressed
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 

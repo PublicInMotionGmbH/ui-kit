@@ -41,6 +41,8 @@ onFocus            | function                      | n/a             | event han
 onBlur             | function                      | n/a             | event handler when calendar lost focus
 id                 | string                        | n/a             | ID passed to control element
 error              | bool                          | `false`         | show error styles of calendar
+disabled           | bool                          | `false`         | Should it be disabled?
+readOnly           | bool                          | `false`         | Should it be read-only?
 
 ## Changelog
 

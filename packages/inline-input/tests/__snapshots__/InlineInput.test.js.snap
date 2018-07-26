@@ -25,6 +25,7 @@ exports[`<InlineInput /> should change span to input when span is clicked 1`] = 
     onChange={[Function]}
     onKeyPress={[Function]}
     placeholder=""
+    readOnly={false}
     type="text"
     value=""
   />

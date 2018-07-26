@@ -32,6 +32,8 @@ options       | Option[] | n/a             | array of objects which represent op
 error         | boolean  | `false`         | has it any error
 value         | any      | self-controlled | value when it's controlled
 id            | string   | n/a             | ID passed to control element
+disabled      | bool     | `false`         | Should it be disabled?
+readOnly      | bool     | `false`         | Should it be read-only?
 
 ## Types
 

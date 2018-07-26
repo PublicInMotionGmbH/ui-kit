@@ -52,13 +52,21 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error? */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   displayFormat: 'YYYY-MM-DD',
   firstDayOfWeek: 1,
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -68,6 +76,8 @@ const defaultProps = {
  * @property {string} [props.className]
  * @property {string} [props.displayFormat]
  * @property {string} [props.placeholder]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {number} [updateTimeout]
  * @class
@@ -148,7 +158,7 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error,
+      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error, disabled, readOnly,
       placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, value,
       autoComplete, ...passedProps
     } = this.props
@@ -160,6 +170,8 @@ class Calendar extends React.PureComponent {
       <div className={clsName} {...passedProps}>
         <SingleDatePicker
           hideKeyboardShortcutsPanel
+          disabled={disabled}
+          readOnly={readOnly}
           id={id}
           date={date}
           dayAriaLabelFormat={dayAriaLabelFormat}

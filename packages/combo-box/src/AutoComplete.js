@@ -48,7 +48,13 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Should open menu list on focus? */
-  openOnFocus: PropTypes.bool
+  openOnFocus: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
@@ -56,7 +62,9 @@ const defaultProps = {
   options: [],
   renderItem: item => item,
   buildItemId: (item, index) => index,
-  itemToString: item => item
+  itemToString: item => item,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -155,6 +163,8 @@ function composeInputProps (downshift, additionalProps) {
  * @property {*} [props.placeholder]
  * @property {function} [props.renderValue]
  * @property {string} [props.className]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @class
  */
@@ -182,6 +192,20 @@ class AutoComplete extends React.PureComponent {
   }
 
   /**
+   * Check if component is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
+  }
+
+  /**
    * Get props which should be passed through our components below Downshift.
    *
    * @param {object} data
@@ -202,7 +226,7 @@ class AutoComplete extends React.PureComponent {
   focus = (...args) => {
     const { onFocus, openOnFocus } = this.props
 
-    if (this.downshift && openOnFocus) {
+    if (this.downshift && openOnFocus && !this.isDisabled()) {
       this.downshift.openMenu()
     }
 
@@ -219,6 +243,11 @@ class AutoComplete extends React.PureComponent {
   select = (item) => {
     const { onChoose } = this.props
 
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
+
     // Handle simple selection for single select-box
     if (onChoose) {
       onChoose(item)
@@ -231,11 +260,19 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children, id } = this.props
+    const { children, id, disabled, readOnly } = this.props
 
     const input = React.Children.only(children)
 
     const inputProps = data.getInputProps(input.props, data)
+
+    if (disabled) {
+      inputProps.disabled = disabled
+    }
+
+    if (readOnly) {
+      inputProps.readOnly = readOnly
+    }
 
     if (id != null) {
       inputProps.id = id
@@ -287,7 +324,7 @@ class AutoComplete extends React.PureComponent {
    */
   render () {
     const {
-      icon, options, onChoose, buildItemId, renderItem,
+      icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
       children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
@@ -297,6 +334,7 @@ class AutoComplete extends React.PureComponent {
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
+        disabled={this.isDisabled()}
         {...passedProps}
       >
         {this.renderComponent}

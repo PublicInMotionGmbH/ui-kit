@@ -43,6 +43,7 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
     />
   </button>
   <OptionsInputList
+    disabled={false}
     onChange={[Function]}
     options={
       Array [
@@ -60,6 +61,7 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
         },
       ]
     }
+    readOnly={false}
     value={
       Object {
         "person": 1,

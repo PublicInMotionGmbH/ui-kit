@@ -36,12 +36,13 @@ cardNumberLabel         | string      | `'Card number*'`     | Label for card nu
 cardExpirationDateLabel | string      | `'Expiration date*'` | Label for card expiration date input.
 className               | string      | n/a                  | Additional class name passed to wrapper.
 cvcLabel                | string      | `'CVC*'`             | Label for cvc input.
-header                  | node        | `'Payment'`          | Form header.
 onBlur                  | function    | n/a                  | Handler for onBlur event.
 onChange                | function    | n/a                  | Handler for onChange event.
 onFocus                 | function    | n/a                  | Handler for onFocus event.
 values                  | ValuesShape | `''|null`            | Values to be displayed inside inputs.
 mobileFriendly          | bool        | `false`              | Should it show native select boxes for expiration date on mobile?
+disabled                | bool        | `false`              | Should it be disabled?
+readOnly                | bool        | `false`              | Should it be read-only?
 
 ### CreditCardNumberInput
 
@@ -54,6 +55,8 @@ onBlur        | function  | n/a     | Handler for onBlur event.
 onChange      | function  | n/a     | Handler for onChange event.
 onFocus       | function  | n/a     | Handler for onFocus event.
 value         | string    | n/a     | Value to be displayed inside inputs.
+disabled      | bool      | `false` | Should it be disabled?
+readOnly      | bool      | `false` | Should it be read-only?
 
 ### CvcInput
 
@@ -64,6 +67,8 @@ onBlur        | function  | n/a     | Handler for onBlur event.
 onChange      | function  | n/a     | Handler for onChange event.
 onFocus       | function  | n/a     | Handler for onFocus event.
 value         | string    | n/a     | Value to be displayed inside input.
+disabled      | bool      | `false` | Should it be disabled?
+readOnly      | bool      | `false` | Should it be read-only?
 
 ### ExpirationDateInput
 
@@ -76,6 +81,8 @@ onChange       | function        | n/a     | Handler for onChange event.
 value          | ExpirationShape | n/a     | Value to be displayed inside inputs.
 error          | bool            | `false` | Does it have any error?
 mobileFriendly | bool            | `false` | Should it show native select boxes on mobile?
+disabled       | bool            | `false` | Should it be disabled?
+readOnly       | bool            | `false` | Should it be read-only?
 
 ## Property shapes
 

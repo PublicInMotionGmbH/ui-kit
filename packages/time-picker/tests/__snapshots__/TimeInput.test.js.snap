@@ -3,17 +3,21 @@
 exports[`<TimeInput /> renders correctly 1`] = `
 <div
   className="talixo-time-picker__input"
+  disabled={false}
+  readOnly={false}
 >
   <TextInput
     InputComponent="input"
     autoComplete="off"
     className="talixo-time-picker__input"
+    disabled={false}
     endCaretOnFocus={false}
     error={false}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    readOnly={false}
     right={
       <span
         className="talixo-time-picker__input talixo-time-picker__input--arrow"

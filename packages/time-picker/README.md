@@ -39,6 +39,8 @@ value          | string       | self-controlled | Time string in 'HH:mm' (24h) f
 id             | string       | n/a             | ID passed to control element
 error          | bool         | `false`         | Style component like it has errors.
 mobileFriendly | bool         | `false`         | Should it render native time picker on mobile?
+disabled       | bool         | `false`         | Should it be disabled?
+readOnly       | bool         | `false`         | Should it be read-only?
 
 ## Changelog
 

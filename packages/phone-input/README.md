@@ -44,6 +44,8 @@ onChange      | function  | n/a             | event handler for changed value
 onFocus       | function  | n/a             | event handler fired when input has been focused
 onBlur        | function  | n/a             | event handler fired when input lost focus
 id            | string    | n/a             | ID passed to control element
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 
