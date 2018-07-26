@@ -381,6 +381,44 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
   </FormHandler>
 ), () => ({ from: null, to: null }))
 
+addStory.controlled('FormHandler: disabled', readme, (setState, state) => (
+  <div>
+    <Checkbox value={state.disabled} onChange={disabled => setState({ disabled })}>
+      Make whole form below <strong>disabled</strong>
+    </Checkbox>
+    <FormHandler onChange={changeForm} disabled={state.disabled} onSubmit={submit}>
+      <Field label='Name' name='name' {...commonProps}>
+        <TextInput />
+      </Field>
+      <Field label='Email' name='email' {...commonProps}>
+        <TextInput />
+      </Field>
+      <ControlGroup position='center'>
+        <Button submit>Send</Button>
+      </ControlGroup>
+    </FormHandler>
+  </div>
+), () => ({ disabled: true }))
+
+addStory.controlled('FormHandler: read-only', readme, (setState, state) => (
+  <div>
+    <Checkbox value={state.readOnly} onChange={readOnly => setState({ readOnly })}>
+      Make whole form below <strong>read-only</strong>
+    </Checkbox>
+    <FormHandler onChange={changeForm} readOnly={state.readOnly} onSubmit={submit}>
+      <Field label='Name' name='name' {...commonProps}>
+        <TextInput />
+      </Field>
+      <Field label='Email' name='email' {...commonProps}>
+        <TextInput />
+      </Field>
+      <ControlGroup position='center'>
+        <Button submit>Send</Button>
+      </ControlGroup>
+    </FormHandler>
+  </div>
+), () => ({ readOnly: true }))
+
 addStory.controlled('Field: text-input', readme, (setState, state) => (
   <div>
     <h2>Default</h2>

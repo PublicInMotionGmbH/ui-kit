@@ -3,6 +3,8 @@
 exports[`<Field /> renders children correctly 1`] = `
 <div
   className="talixo-field"
+  disabled={false}
+  readOnly={false}
 >
   <FormRow
     start={null}
