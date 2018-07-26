@@ -86,6 +86,7 @@ renderItem         | function  | `item => item`    | Function to render item in 
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
+openOnFocus        | bool      | `false`           | Should open auto-complete on focus already?
 
 ## Changelog
 

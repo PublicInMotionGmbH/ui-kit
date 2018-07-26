@@ -45,10 +45,14 @@ const propTypes = {
   children: PropTypes.node,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should open menu list on focus? */
+  openOnFocus: PropTypes.bool
 }
 
 const defaultProps = {
+  openOnFocus: true,
   options: [],
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -184,14 +188,26 @@ class AutoComplete extends React.PureComponent {
    * @returns {object}
    */
   getStateProps (data) {
-    const { footer, icon, options, buildItemId, renderItem, onFocus, onBlur, id } = this.props
+    const { footer, icon, options, buildItemId, renderItem, onBlur, id } = this.props
 
     // Compose function to get input props
-    const getInputProps = composeInputProps(data, { onFocus, onBlur })
+    const getInputProps = composeInputProps(data, { onFocus: this.focus, onBlur })
 
     return {
       ...data,
       ...{ footer, icon, options, buildItemId, renderItem, getInputProps, id }
+    }
+  }
+
+  focus = (...args) => {
+    const { onFocus, openOnFocus } = this.props
+
+    if (this.downshift && openOnFocus) {
+      this.downshift.openMenu()
+    }
+
+    if (onFocus) {
+      onFocus(...args)
     }
   }
 
@@ -260,6 +276,10 @@ class AutoComplete extends React.PureComponent {
     )
   }
 
+  setDownshiftRef = ref => {
+    this.downshift = ref
+  }
+
   /**
    * Render Downshift component with our wrappers.
    *
@@ -273,6 +293,7 @@ class AutoComplete extends React.PureComponent {
 
     return (
       <Downshift
+        ref={this.setDownshiftRef}
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
