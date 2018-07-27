@@ -97,6 +97,20 @@ addStory('with more elements on one slide', readme, () => (
   </Carousel>
 ))
 
+addStory('RTL: with more elements on one slide', readme, () => (
+  <div dir='rtl'>
+    <Carousel arrows perPage={3}>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+      <div className='tx-slide tx-slide--1'>SLIDE 4</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 5</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 6</div>
+      <div className='tx-slide tx-slide--1'>SLIDE 7</div>
+    </Carousel>
+  </div>
+))
+
 addStory('with arrows and dots', readme, () => (
   <Carousel arrows dots>
     <div className='tx-slide tx-slide--1'>SLIDE 1</div>

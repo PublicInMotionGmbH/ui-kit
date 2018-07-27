@@ -36,6 +36,12 @@
     height: 100%
     box-sizing: border-box
 
+  [dir=rtl] &
+    transform: scaleX(-1)
+
+  [dir=rtl] &__inner
+    transform: scaleX(-1)
+
 @include module('carousel-dots')
   position: absolute
   display: flex
