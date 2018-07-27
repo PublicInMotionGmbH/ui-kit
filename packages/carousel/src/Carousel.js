@@ -165,8 +165,19 @@ class Carousel extends React.PureComponent {
   }
 
   change = (index, type = 'exact', force = false) => {
-    const { value, onChange, children } = this.props
+    const { value, onChange, children, infinite, perPage } = this.props
     const isImmediate = value == null || force
+
+    if (!infinite) {
+      const realIndex = index % children.length
+      const maxIndex = Math.max(0, children.length - perPage)
+
+      if (realIndex < 0) {
+        index -= realIndex
+      } else if (realIndex > maxIndex) {
+        index -= realIndex - maxIndex
+      }
+    }
 
     if (onChange && !force) {
       onChange(index % children.length, type)

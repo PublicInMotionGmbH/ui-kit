@@ -11,14 +11,14 @@
     position: relative
 
     &--first
-
-      .talixo-carousel-arrows__arrow--back
-        display: none
+      @include module('carousel-arrows')
+        &__arrow--back
+          display: none
 
     &--last
-
-      .talixo-carousel-arrows__arrow--forward
-        display: none
+      @include module('carousel-arrows')
+        &__arrow--forward
+          display: none
 
   &__wrapper
     position: relative
