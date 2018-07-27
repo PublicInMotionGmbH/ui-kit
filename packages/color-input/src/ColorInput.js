@@ -11,11 +11,14 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Color to show as default */
+  /** Alpha channel */
+  alpha: PropTypes.bool,
+
+  /** Default color */
   defaultColor: PropTypes.string,
 
-  /** Alpha to be set as default */
-  defaultAlpha: PropTypes.number,
+  /** HSL manipulation tool */
+  hsl: PropTypes.bool,
 
   /** Palette of predefined colors */
   palette: PropTypes.arrayOf(
@@ -33,9 +36,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  defaultColor: '#e0e0e0',
-  defaultAlpha: 255,
-  palette: []
+  defaultColor: '#ffffff'
 }
 
 /**
@@ -43,6 +44,10 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {bool} [props.alpha]
+ * @param {string} [props.defaultColor]
+ * @param {bool} [props.hsl]
+ * @param {array} [props.palette]
  * @returns {React.Element}
  */
 class ColorInput extends React.PureComponent {
@@ -50,19 +55,23 @@ class ColorInput extends React.PureComponent {
     color: this.props.defaultColor,
     hsl: {
       h: 0,
-      s: 100,
-      l: 50
+      s: 0,
+      l: 0
     }
   }
 
-  // componentWillReceiveProps () {
-
-  // }
-
+  /**
+   * Handle change of color
+   * @param {string} color
+   */
   handleChangeColor (color) {
     this.setState({color: color})
   }
 
+  /**
+   * Handle change of alpha channel
+   * @param {number} value
+   */
   handleChangeAlpha (value) {
     const color = this.state.color
 
@@ -77,6 +86,11 @@ class ColorInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Convert alpha channel to rgba format
+   * @param {number} value
+   * @returns {string}
+   */
   convertAlphaToRgba (value) {
     const { color } = this.state
 
@@ -96,6 +110,11 @@ class ColorInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Convert alpha channel to long hex
+   * @param {number} value
+   * @returns {string}
+   */
   convertAlphaToLongHex (value) {
     const alphaToHex = value.toString(16) === '0' ? '00' : value.toString(16)
     const color = this.state.color.substr(0, 7) + alphaToHex
@@ -103,6 +122,11 @@ class ColorInput extends React.PureComponent {
     return color
   }
 
+  /**
+   * Convert alpha channel to short hex
+   * @param {number} value
+   * @returns {string}
+   */
   convertAlphaToShortHex (value) {
     const alphaToHex = value.toString(16)
     const newAlpha = alphaToHex.length < 2 ? 0 : alphaToHex.substr(0, 1)
@@ -111,23 +135,34 @@ class ColorInput extends React.PureComponent {
     return color
   }
 
+  /**
+   * Handle select color
+   * @param {string} color
+   */
   handleSelectColor (color) {
     this.setState({
       color: color
     })
   }
 
+  /**
+   * Render alpha channel container
+   * @returns {React.Element}
+   */
   renderAplhaContainer () {
-    const { defaultAlpha } = this.props
     return (
       <Slider
         onChange={value => this.handleChangeAlpha(value)}
         max={255}
-        defaultValue={defaultAlpha}
+        defaultValue={255}
       />
     )
   }
 
+  /**
+   * Render palette container
+   * @returns {React.Element}
+   */
   renderPalette () {
     const { className } = this.props
     const paletteClsName = buildClassName('color-input__palette', className)
@@ -145,6 +180,9 @@ class ColorInput extends React.PureComponent {
     return <div className={paletteClsName}>{colorPalette}</div>
   }
 
+  /**
+   * Handle HSL button click
+   */
   handleHslBtnClick () {
     const { color } = this.state
     let r, g, b
@@ -198,6 +236,12 @@ class ColorInput extends React.PureComponent {
     })
   }
 
+  /**
+   * Handle HSL change
+   * @param {number} h
+   * @param {number} s
+   * @param {number} l
+   */
   handleChangeHsl (h, s, l) {
     this.setState({
       hsl: {
@@ -274,7 +318,11 @@ class ColorInput extends React.PureComponent {
     }
   }
 
-  renderHslManipulator () {
+  /**
+   * Render palette container
+   * @returns {React.Element}
+   */
+  renderHslManipulation () {
     const { className } = this.props
     const { h, s, l } = this.state.hsl
     const hslClsName = buildClassName('color-input__hsl', className)
@@ -324,8 +372,13 @@ class ColorInput extends React.PureComponent {
     )
   }
 
+  /**
+   * Render ColorInput component.
+   *
+   * @returns {React.Element}
+   */
   render () {
-    const { className, defaultAlpha, defaultColor, ...passedProps } = this.props
+    const { alpha, className, defaultColor, hsl, palette, ...passedProps } = this.props
     const { color } = this.state
 
     const clsName = buildClassName('color-input', className)
@@ -360,7 +413,7 @@ class ColorInput extends React.PureComponent {
           onChange={e => this.handleChangeColor(e.target.value)}
         />
 
-        <Tooltip
+        {alpha && <Tooltip
           position='top'
           triggerOn='click'
           arrow={false}
@@ -369,9 +422,9 @@ class ColorInput extends React.PureComponent {
           <span className={alphaBtnClsName}>
             Alpha
           </span>
-        </Tooltip>
+        </Tooltip>}
 
-        <Tooltip
+        {palette && <Tooltip
           position='bottom'
           triggerOn='click'
           arrow={false}
@@ -380,18 +433,18 @@ class ColorInput extends React.PureComponent {
           <span className={paletteBtnClsName}>
             Palette
           </span>
-        </Tooltip>
+        </Tooltip>}
 
-        <Tooltip
+        {hsl && <Tooltip
           position='right'
           triggerOn='click'
           arrow={false}
-          render={() => this.renderHslManipulator()}
+          render={() => this.renderHslManipulation()}
         >
           <span className={hslBtnClsName} onClick={() => this.handleHslBtnClick()}>
             HSL
           </span>
-        </Tooltip>
+        </Tooltip>}
       </div>
     )
   }

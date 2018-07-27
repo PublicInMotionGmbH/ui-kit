@@ -56,5 +56,21 @@ const palette = [
 // Stories
 
 addStory('initial', readme, () => (
+  <ColorInput />
+))
+
+addStory('with alpha channel', readme, () => (
+  <ColorInput alpha />
+))
+
+addStory('with HSL manipulation', readme, () => (
+  <ColorInput hsl />
+))
+
+addStory('with palette of colors', readme, () => (
   <ColorInput palette={palette} />
+))
+
+addStory('full version', readme, () => (
+  <ColorInput alpha hsl palette={palette} />
 ))

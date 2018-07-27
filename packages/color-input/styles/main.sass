@@ -8,6 +8,7 @@
     border-radius: $color-input-picker-border-radius
     border: none
     width: $color-input-picker-width
+    margin: 0 0 0 $color-input-picker-margin-horizontal
 
   &__display
     display: inline-block
@@ -28,7 +29,7 @@
       background-position: $color-input-display-background-position
 
   &__text-input
-    margin: 0 $color-input-text-input-margin-horizontal
+    margin: 0 0 0 $color-input-text-input-margin-horizontal
 
   &__alpha-button
     display: flex
@@ -36,7 +37,7 @@
     align-items: center
     height: auto
     width: $color-input-alpha-button-width
-    margin: 0 $color-input-alpha-button-margin-horizontal
+    margin: 0 0 0 $color-input-alpha-button-margin-horizontal
     border: $color-input-alpha-button-border-width solid $color-input-alpha-button-border-color
     border-radius: $color-input-alpha-button-border-radius
     cursor: pointer
@@ -48,7 +49,7 @@
     align-items: center
     justify-content: center
     flex-wrap: wrap
-    max-width: dp(58)
+    max-width: $color-input-palette-max-width
 
     &-button
       display: flex
@@ -56,7 +57,7 @@
       align-items: center
       height: auto
       width: $color-input-palette-button-width
-      margin: 0 $color-input-palette-button-margin-horizontal 0 0
+      margin: 0 0 0 $color-input-palette-button-margin-horizontal
       border: $color-input-palette-button-border-width solid $color-input-palette-button-border-color
       border-radius: $color-input-palette-button-border-radius
       cursor: pointer
@@ -67,11 +68,11 @@
       display: inline-flex
       flex-direction: column
       align-items: center
-      height: dp(6)
+      height: $color-input-palette-item-height
       width: auto
-      min-width: dp(12)
-      border: dp(0.125) solid $color-input-palette-item-border-color
-      margin: dp(1) dp(1)
+      min-width: $color-input-palette-item-min-width
+      border: $color-input-palette-item-border-width solid $color-input-palette-item-border-color
+      margin: $color-input-palette-item-margin-vertical $color-input-palette-item-margin-horizontal 
       border-radius: $color-input-palette-item-border-radius
 
       &-text
@@ -92,7 +93,7 @@
       align-items: center
       height: auto
       width: $color-input-hsl-button-width
-      margin: 0 $color-input-hsl-button-margin-horizontal 0 0
+      margin: 0 0 0 $color-input-hsl-button-margin-horizontal
       border: $color-input-hsl-button-border-width solid $color-input-hsl-button-border-color
       border-radius: $color-input-hsl-button-border-radius
       cursor: pointer

@@ -9,9 +9,10 @@ $color-input-hsl-button-width: dp(6.75) !default
 $color-input-hsl-width: dp(50) !default
 
 $color-input-display-background-border-width: dp(0.125) !default
-$color-input-alpha-button-border-width: $color-input-display-background-border-width !default
-$color-input-palette-button-border-width: $color-input-display-background-border-width !default
-$color-input-hsl-button-border-width: $color-input-display-background-border-width !default
+$color-input-alpha-button-border-width:  dp(0.125) !default
+$color-input-palette-button-border-width: $color-input-alpha-button-border-width !default
+$color-input-palette-item-border-width: dp(0.125) !default
+$color-input-hsl-button-border-width: $color-input-alpha-button-border-width !default
 
 $color-input-picker-border-radius: dp(0.375) !default
 $color-input-display-border-radius: dp(0.375) !default
@@ -26,16 +27,21 @@ $color-input-hsl-item-spectrum-width: dp(0.375) !default
 $color-input-display-background-size-height: dp(2.5)
 $color-input-display-background-size-width: $color-input-display-background-size-height
 $color-input-display-background-position: dp(-0.375) dp(-0.375), dp(-0.375) dp(0.875), dp(0.875) dp(-1.625), dp(-1.625) dp(-0.375) !default
-
+$color-input-palette-max-width: dp(58) !default
+$color-input-palette-item-height: dp(6) !default
+$color-input-palette-item-min-width: dp(12) !default
 $color-input-palette-item-text-padding: dp(0.5) !default
+
+$color-input-picker-margin-horizontal: dp(1) !default
+$color-input-text-input-margin-horizontal: $color-input-picker-margin-horizontal !default
+$color-input-alpha-button-margin-horizontal:  $color-input-picker-margin-horizontal !default
+$color-input-palette-button-margin-horizontal:  $color-input-picker-margin-horizontal !default
+$color-input-palette-item-margin-horizontal: dp(1) !default 
+$color-input-palette-item-margin-vertical: dp(1) !default
+$color-input-hsl-button-margin-horizontal:  $color-input-picker-margin-horizontal !default
 $color-input-hsl-item-margin-top: dp(1) !default
 $color-input-hsl-item-margin-bottom: dp(3) !default
 $color-input-hsl-item-spectrum-height: dp(2) !default
-
-$color-input-text-input-margin-horizontal: dp(1) !default
-$color-input-alpha-button-margin-horizontal: $color-input-text-input-margin-horizontal !default
-$color-input-palette-button-margin-horizontal: $color-input-text-input-margin-horizontal !default
-$color-input-hsl-button-margin-horizontal: $color-input-text-input-margin-horizontal !default
 
 $color-input-display-background-border-color: $x-input-text-color !default
 $color-input-alpha-button-border-color: $x-input-text-color !default
