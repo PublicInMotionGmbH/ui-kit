@@ -14,7 +14,10 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/shared: 1.0.0-alpha.12`
+- `@talixo/text-input: 1.0.0-alpha.12`
+- `@talixo/slider: 1.0.0-alpha.12`
+- `@talixo/tooltip: 1.0.0-alpha.12`
 
 These packages are required by `@talixo/color-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
