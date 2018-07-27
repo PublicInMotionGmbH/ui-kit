@@ -361,8 +361,14 @@ class Carousel extends React.PureComponent {
     } = this.props
     const { currentSlide, transitionTime } = this.state
 
+    const firstSlide = currentSlide === 0
+    const lastSlide = currentSlide >= (children.length - perPage)
+
     const clsName = buildClassName(moduleName, className)
-    const contentClsName = buildClassName([ moduleName, 'content' ])
+    const contentClsName = buildClassName([ moduleName, 'content' ], null, {
+      first: !infinite && firstSlide,
+      last: !infinite && lastSlide
+    })
     const wrapperClsName = buildClassName([ moduleName, 'wrapper' ])
     const innerClsName = buildClassName([ moduleName, 'inner' ])
 

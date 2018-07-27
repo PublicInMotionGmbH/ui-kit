@@ -5,7 +5,7 @@ exports[`<Carousel /> renders children correctly 1`] = `
   className="talixo-carousel"
 >
   <div
-    className="talixo-carousel__content"
+    className="talixo-carousel__content talixo-carousel__content--first"
   >
     <div
       className="talixo-carousel__wrapper"

@@ -91,6 +91,33 @@ describe('<Carousel />', () => {
     expect(wrapper.find(Carousel).prop('value')).toBe(0)
   })
 
+  it('should go to previous slide with movement set to \'back\' after specified interval', () => {
+    const wrapper = mount(
+      <CarouselAutoplay interval={111} movement='back'>
+        <Carousel>
+          <div>SLIDE 1</div>
+          <div>SLIDE 2</div>
+          <div>SLIDE 3</div>
+        </Carousel>
+      </CarouselAutoplay>
+    )
+
+    jest.runTimersToTime(111)
+    wrapper.update()
+
+    expect(wrapper.find(Carousel).prop('value')).toBe(2)
+
+    jest.runTimersToTime(111)
+    wrapper.update()
+
+    expect(wrapper.find(Carousel).prop('value')).toBe(1)
+
+    jest.runTimersToTime(111)
+    wrapper.update()
+
+    expect(wrapper.find(Carousel).prop('value')).toBe(0)
+  })
+
   it('should use perPage as step by default', () => {
     const wrapper = mount(
       <CarouselAutoplay interval={111} movement='exact'>
@@ -222,7 +249,7 @@ describe('<Carousel />', () => {
   it('should handle movement change', () => {
     const wrapper = shallow(
       <CarouselAutoplay>
-        <Carousel>
+        <Carousel infinite>
           <div>SLIDE 1</div>
           <div>SLIDE 2</div>
           <div>SLIDE 3</div>
