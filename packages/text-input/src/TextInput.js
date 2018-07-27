@@ -152,11 +152,6 @@ class TextInput extends React.PureComponent {
       this.initializeEndCaretOnFocus()
     }
 
-    if (this.hasSuffixInitialized) {
-      // Update styles if there is already suffix initialized
-      this.updateStyles()
-    }
-
     if (props.suffix == null) {
       this.deinitializeSuffixStyles()
     }
@@ -188,6 +183,9 @@ class TextInput extends React.PureComponent {
     if (!this.hasSuffixInitialized) {
       // Try to de-initialize styles when there is no suffix
       this.deinitializeSuffixStyles()
+    } else if (this.hasSuffixInitialized) {
+      // Update styles if there is already suffix initialized
+      this.updateStyles()
     } else {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
       this.initializeSuffixStyles()
@@ -312,8 +310,6 @@ class TextInput extends React.PureComponent {
 
     if (value == null) {
       // Update styles connected to suffix when value is not passed from props.
-      // It's here inside `if` block to avoid double rendering.
-      this.updateStyles()
       this.setState({ value: nextValue })
     }
 
