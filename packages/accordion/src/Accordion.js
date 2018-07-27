@@ -13,7 +13,7 @@ const propTypes = {
   smooth: PropTypes.bool,
 
   /** Animation time (in ms), requires Collapse geometry CSS */
-  animationTime: PropTypes.number,
+  animationSpeed: PropTypes.number,
 
   /** Options to show in accordion */
   options: PropTypes.arrayOf(PropTypes.shape({
@@ -44,7 +44,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  animationTime: 300,
+  animationSpeed: 200,
   smooth: true,
   multi: false,
   buildId: (option, index) => index
@@ -61,14 +61,14 @@ const defaultProps = {
  * @param {function} [props.renderCloseIcon]
  * @param {array} [props.value]
  * @param {boolean} props.smooth
- * @param {number|null} props.animationTime
+ * @param {number|null} props.animationSpeed
  * @param {object|{ label: *, content: * }} option
  * @param {number} index
  * @returns {*}
  */
 function buildElement (props, option, index) {
   const {
-    buildId, onOpen, onClose, value, smooth, animationTime,
+    buildId, onOpen, onClose, value, smooth, animationSpeed,
     renderOpenIcon, renderCloseIcon
   } = props
 
@@ -97,7 +97,7 @@ function buildElement (props, option, index) {
     role: 'tabpanel',
     className: prefix('accordion-element', 'content'),
     smooth: smooth,
-    animationTime: animationTime,
+    animationSpeed: animationSpeed,
     collapsed: collapsed,
     'aria-hidden': collapsed
   }
@@ -167,7 +167,7 @@ function isSameList (prevList, nextList) {
  * @param {*|array} [props.value]
  * @param {boolean} props.smooth
  * @param {boolean} props.multi
- * @param {number} props.animationTime
+ * @param {number} props.animationSpeed
  *
  * @property {object} state
  * @property {array} state.value
@@ -257,7 +257,7 @@ class Accordion extends React.PureComponent {
    */
   render () {
     const {
-      options, className, smooth, animationTime, value, multi,
+      options, className, smooth, animationSpeed, value, multi,
       buildId, onChange, renderOpenIcon, renderCloseIcon, ...passedProps
     } = this.props
 
@@ -265,7 +265,7 @@ class Accordion extends React.PureComponent {
     const _value = this.state.value
 
     // Calculate animation time
-    const time = parseInt(animationTime, 10) || null
+    const time = parseInt(animationSpeed, 10) || null
 
     // Build class name for Accordion
     const clsName = buildClassName('accordion', className)
@@ -277,7 +277,7 @@ class Accordion extends React.PureComponent {
       buildId: buildId,
       value: _value,
       smooth: smooth,
-      animationTime: time,
+      animationSpeed: time,
       renderOpenIcon: renderOpenIcon,
       renderCloseIcon: renderCloseIcon
     })

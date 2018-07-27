@@ -38,11 +38,11 @@ addStory('self-controlled', readme, () => (
   />
 ))
 
-addStory.controlled('different animation time', readme, (setState, state) => (
+addStory.controlled('different animation speed', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
+    animationSpeed={100}
     options={options}
   />
 ), () => ({ active: null }))
