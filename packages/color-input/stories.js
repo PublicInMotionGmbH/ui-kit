@@ -53,10 +53,15 @@ const palette = [
     color: 'rgb(2, 0, 5)'
   }
 ]
+
 // Stories
 
 addStory('initial', readme, () => (
   <ColorInput />
+))
+
+addStory('with set default color', readme, () => (
+  <ColorInput defaultColor='#ff0000' />
 ))
 
 addStory('with alpha channel', readme, () => (

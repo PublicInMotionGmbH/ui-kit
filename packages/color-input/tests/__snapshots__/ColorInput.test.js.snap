@@ -11,7 +11,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
       className="talixo-color-input__display"
       style={
         Object {
-          "background": "#ffffff",
+          "background": null,
         }
       }
     />
@@ -23,7 +23,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
     onChange={[Function]}
     placeholder="e.g. #ffffff"
     type="text"
-    value="#ffffff"
+    value={null}
   />
   <input
     className="talixo-color-input__picker"

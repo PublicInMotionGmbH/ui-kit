@@ -35,10 +35,6 @@ const propTypes = {
   )
 }
 
-const defaultProps = {
-  defaultColor: '#ffffff'
-}
-
 /**
  * Component which represents ColorInput.
  *
@@ -52,11 +48,21 @@ const defaultProps = {
  */
 class ColorInput extends React.PureComponent {
   state = {
-    color: this.props.defaultColor,
-    hsl: {
-      h: 0,
-      s: 0,
-      l: 0
+    color: this.props.defaultColor || null,
+    error: false,
+    h: 0,
+    s: 0,
+    l: 0
+  }
+
+  /**
+   * Update state when value is provided by props.
+   *
+   * @param {object} props
+   */
+  componentWillReceiveProps (props) {
+    if (props.defaultColor !== this.state.color && props.defaultColor !== undefined) {
+      this.setState({ color: props.defaultColor })
     }
   }
 
@@ -65,7 +71,10 @@ class ColorInput extends React.PureComponent {
    * @param {string} color
    */
   handleChangeColor (color) {
-    this.setState({color: color})
+    this.setState({
+      color: color,
+      error: false
+    })
   }
 
   /**
@@ -75,6 +84,8 @@ class ColorInput extends React.PureComponent {
   handleChangeAlpha (value) {
     const color = this.state.color
 
+    if (!color) return
+
     if (color.startsWith('#')) {
       this.setState({
         color: color.length > 5 ? this.convertAlphaToLongHex(value) : this.convertAlphaToShortHex(value)
@@ -82,6 +93,10 @@ class ColorInput extends React.PureComponent {
     } else if (color.startsWith('rgb')) {
       this.setState({
         color: this.convertAlphaToRgba(value)
+      })
+    } else {
+      this.setState({
+        error: true
       })
     }
   }
@@ -171,7 +186,10 @@ class ColorInput extends React.PureComponent {
     const paletteItemColorClsName = buildClassName('color-input__palette-item-color', className)
 
     const colorPalette = this.props.palette.map(el =>
-      <div className={paletteItemClsName} onClick={() => this.handleSelectColor(el.color)} key={el.id}>
+      <div
+        className={paletteItemClsName}
+        onClick={() => this.handleSelectColor(el.color)}
+        key={el.id}>
         <span className={paletteItemTextClsName}>{el.name}</span>
         <span className={paletteItemColorClsName} style={{backgroundColor: el.color}} />
       </div>
@@ -184,56 +202,75 @@ class ColorInput extends React.PureComponent {
    * Handle HSL button click
    */
   handleHslBtnClick () {
-    const { color } = this.state
-    let r, g, b
+    try {
+      const { color } = this.state
+      let r, g, b
 
-    if (color.startsWith('#')) {
-      r = parseInt(color.substr(1, 2), 16)
-      g = parseInt(color.substr(3, 2), 16)
-      b = parseInt(color.substr(5, 2), 16)
-    } else if (color.startsWith('rgb')) {
-      const colorRgb = color.match(/\d+/g)
-      r = colorRgb[0]
-      g = colorRgb[1]
-      b = colorRgb[2]
-    } else {
-      return
-    }
+      if (!color) return
 
-    r /= 255
-    g /= 255
-    b /= 255
+      if (color.startsWith('#')) {
+        const colorLen = color.length
 
-    let max = Math.max(r, g, b)
-    let min = Math.min(r, g, b)
-    let h = (max + min) / 2
-    let s = (max + min) / 2
-    let l = (max + min) / 2
+        if (colorLen === 7 || colorLen === 9) {
+          r = parseInt(color.substr(1, 2), 16)
+          g = parseInt(color.substr(3, 2), 16)
+          b = parseInt(color.substr(5, 2), 16)
+        } else if (colorLen === 4 || colorLen === 5) {
+          r = parseInt(color.substr(1, 1), 16)
+          g = parseInt(color.substr(2, 2), 16)
+          b = parseInt(color.substr(3, 3), 16)
+        } else return
+      } else if (color.startsWith('rgb')) {
+        const colorRgb = color.match(/\d+/g)
+        r = colorRgb[0]
+        g = colorRgb[1]
+        b = colorRgb[2]
+      } else return
 
-    if (max === min) {
-      h = s = 0
-    } else {
-      let d = max - min
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break
-        case g: h = (b - r) / d + 2; break
-        case b: h = (r - g) / d + 4; break
+      if (isNaN(r + g + b)) {
+        this.setState({
+          error: true
+        })
+        return
       }
-      h /= 6
-    }
 
-    h = Math.floor(h * 360)
-    s = Math.floor(s * 100)
-    l = Math.floor(l * 100)
+      r /= 255
+      g /= 255
+      b /= 255
 
-    this.setState({
-      hsl: {
+      let max = Math.max(r, g, b)
+      let min = Math.min(r, g, b)
+      let h = (max + min) / 2
+      let s = (max + min) / 2
+      let l = (max + min) / 2
+
+      if (max === min) {
+        h = s = 0
+      } else {
+        let d = max - min
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break
+          case g: h = (b - r) / d + 2; break
+          case b: h = (r - g) / d + 4; break
+        }
+        h /= 6
+      }
+
+      h = Math.floor(h * 360)
+      s = Math.floor(s * 100)
+      l = Math.floor(l * 100)
+
+      this.setState({
         h: h,
         s: s,
         l: l
-      }
-    })
+      })
+    } catch (e) {
+      this.setState({
+        error: true
+      })
+    }
   }
 
   /**
@@ -244,14 +281,13 @@ class ColorInput extends React.PureComponent {
    */
   handleChangeHsl (h, s, l) {
     this.setState({
-      hsl: {
-        h: h,
-        s: s,
-        l: l
-      }
+      h: h,
+      s: s,
+      l: l
     })
 
     const { color } = this.state
+
     let r, g, b
     h = parseFloat(h)
     s = parseFloat(s)
@@ -269,6 +305,7 @@ class ColorInput extends React.PureComponent {
     let hh = h / 60
     let x = c * (1 - Math.abs(hh % 2 - 1))
     r = g = b = 0
+
     if (hh >= 0 && hh < 1) {
       r = c
       g = x
@@ -307,13 +344,17 @@ class ColorInput extends React.PureComponent {
       }
     }
 
-    if (color.startsWith('rgb')) {
+    if (!color || color.startsWith('#')) {
+      this.setState({
+        color: `#${hex}`
+      })
+    } else if (color.startsWith('rgb')) {
       this.setState({
         color: `rgb(${r},${g},${b})`
       })
-    } else if (color.startsWith('#')) {
+    } else {
       this.setState({
-        color: `#${hex}`
+        error: true
       })
     }
   }
@@ -324,7 +365,7 @@ class ColorInput extends React.PureComponent {
    */
   renderHslManipulation () {
     const { className } = this.props
-    const { h, s, l } = this.state.hsl
+    const { h, s, l } = this.state
     const hslClsName = buildClassName('color-input__hsl', className)
     const hslItemClsName = buildClassName('color-input__hsl-item', className)
     const hslItemHueClsName = buildClassName('color-input__hsl-item', className, ['hue'])
@@ -379,7 +420,7 @@ class ColorInput extends React.PureComponent {
    */
   render () {
     const { alpha, className, defaultColor, hsl, palette, ...passedProps } = this.props
-    const { color } = this.state
+    const { color, error } = this.state
 
     const clsName = buildClassName('color-input', className)
     const displayClsName = buildClassName('color-input__display', className)
@@ -402,14 +443,15 @@ class ColorInput extends React.PureComponent {
 
         <TextInput
           className={textInputColorClsName} {...passedProps}
-          placeholder={`e.g. ${this.props.defaultColor}`}
+          placeholder='e.g. #ffffff'
           value={color}
+          error={error}
           onChange={e => this.handleChangeColor(e)}
         />
         <input
           className={pickerClsName}
           type='color'
-          value={color.length === 7 ? color : '#ffffff'}
+          value={color && color.length === 7 ? color : '#ffffff'}
           onChange={e => this.handleChangeColor(e.target.value)}
         />
 
@@ -451,6 +493,5 @@ class ColorInput extends React.PureComponent {
 }
 
 ColorInput.propTypes = propTypes
-ColorInput.defaultProps = defaultProps
 
 export default ColorInput
