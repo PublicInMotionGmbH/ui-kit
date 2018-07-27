@@ -63,18 +63,16 @@ function Modal (props) {
   ) : null
 
   return (
-    <div>
-      <Portal attachTo={attachTo}>
-        <div className={backdropClasses}>
-          <div className={modalClasses} {...rest}>
-            {iconElement}
-            <div className={contentClasses}>
-              {children}
-            </div>
+    <Portal attachTo={attachTo}>
+      <div className={backdropClasses}>
+        <div className={modalClasses} {...rest}>
+          {iconElement}
+          <div className={contentClasses}>
+            {children}
           </div>
         </div>
-      </Portal>
-    </div>
+      </div>
+    </Portal>
   )
 }
 

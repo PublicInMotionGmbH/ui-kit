@@ -4,6 +4,8 @@ import moment from 'moment'
 
 import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
+import { TextInput } from '@talixo/text-input'
+import { DeviceSwap } from '@talixo/device-swap'
 
 import TimeInput from './TimeInput'
 import TimeMenu from './TimeMenu'
@@ -18,7 +20,7 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Hour format. */
-  hourFormat: PropTypes.oneOf(['24', '12']),
+  hourFormat: PropTypes.oneOf([ '24', '12' ]),
 
   /** Time string in 'HH:mm' format passed to component. */
   value: PropTypes.string,
@@ -27,12 +29,24 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error? */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it render native time picker on mobile? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   hourFormat: '24',
-  error: false
+  error: false,
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 const HOURS_24 = 'HH'
@@ -181,6 +195,8 @@ const buildMenuMinutes = (value, handleMinutesBlur) => {
  * @property {string} [props.hourFormat]
  * @property {function} [props.onChange]
  * @property {string} [props.value]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {object} [state.value]
@@ -212,9 +228,14 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleHoursBlur = (inputValue, suffix) => {
-    const { hourFormat, onChange } = this.props
+    const { hourFormat, onChange, disabled, readOnly } = this.props
     const { value: prevValue } = this.state
     let formattedValue
+
+    // Do not update when field shouldn't be changed
+    if (disabled || readOnly) {
+      return
+    }
 
     // If hour format is 'AM/PM' we need to convert 12 to 0. This is because moment treats 0 as 12am and 12 as 12pm
     formattedValue = hourFormat === '12' && inputValue === '12'
@@ -251,8 +272,13 @@ class TimePicker extends React.PureComponent {
    * @param {object} value
    */
   handleMinutesBlur = (inputValue) => {
-    const { onChange } = this.props
+    const { onChange, disabled, readOnly } = this.props
     const { value: prevValue } = this.state
+
+    // Do not update when field shouldn't be changed
+    if (disabled || readOnly) {
+      return
+    }
 
     // Format time output
     const value = prevValue
@@ -273,17 +299,81 @@ class TimePicker extends React.PureComponent {
     }
   }
 
-  /**
-   * Render TimeInput components wrapped in a div.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { className, hourFormat, onChange, value: propsValue, id, error, ...passedProps } = this.props
+  handleChange = (inputValue) => {
+    const { onChange, disabled, readOnly } = this.props
+    const { value: prevValue } = this.state
+
+    // Do not update when field shouldn't be changed
+    if (disabled || readOnly) {
+      return
+    }
+
+    const split = (inputValue || '').split(':')
+    const hour = split[0] == null || isNaN(split[0]) ? null : +split[0]
+    const minute = split[1] == null || isNaN(split[1]) ? null : +split[1]
+
+    let value = prevValue.clone()
+
+    if (hour !== null) {
+      value = value.hour(hour)
+    }
+
+    if (minute !== null) {
+      value = value.minute(minute)
+    }
+
+    // Stop when nothing has changed
+    if (+prevValue === +value) {
+      return
+    }
+
+    this.setState({ value })
+
+    if (onChange) {
+      // Format value to 'HH:mm' format
+      const formattedValue = moment(value).format('HH:mm')
+      onChange(formattedValue)
+    }
+  }
+
+  renderSimple = () => {
+    const {
+      className, hourFormat, onChange, onBlur, onFocus, disabled, readOnly,
+      value: propsValue, id, error, mobileFriendly, ...passedProps
+    } = this.props
     const { value } = this.state
 
     // Build class names
     const wrapperClsName = buildClassName(moduleName, className, { error })
+    const inputClsName = buildClassName([ moduleName, 'input' ])
+
+    return (
+      <div className={wrapperClsName} {...passedProps}>
+        <TextInput
+          type='time'
+          id={id}
+          disabled={disabled}
+          readOnly={readOnly}
+          error={error}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          onChange={this.handleChange}
+          value={value && value.isValid() ? value.format('HH:mm') : value}
+          className={inputClsName}
+        />
+      </div>
+    )
+  }
+
+  renderFullyFeatured = () => {
+    const {
+      className, hourFormat, onChange, value: propsValue, disabled, readOnly,
+      id, error, mobileFriendly, ...passedProps
+    } = this.props
+    const { value } = this.state
+
+    // Build class names
+    const wrapperClsName = buildClassName(moduleName, className, { error, disabled, 'read-only': readOnly })
     const inputHourClsName = buildClassName([ moduleName, 'input-hour' ])
     const inputMinutesClsName = buildClassName([ moduleName, 'input-minutes' ])
     const menuClsName = buildClassName([ moduleName, 'menu' ])
@@ -297,6 +387,8 @@ class TimePicker extends React.PureComponent {
     return (
       <div className={wrapperClsName} {...passedProps}>
         <TimeInput
+          disabled={disabled}
+          readOnly={readOnly}
           id={id}
           error={error}
           className={inputHourClsName}
@@ -310,6 +402,8 @@ class TimePicker extends React.PureComponent {
         </TimeInput>
         <span className={colonClsName}>:</span>
         <TimeInput
+          disabled={disabled}
+          readOnly={readOnly}
           error={error}
           className={inputMinutesClsName}
           onBlur={this.handleMinutesBlur}
@@ -322,6 +416,26 @@ class TimePicker extends React.PureComponent {
         </TimeInput>
       </div>
     )
+  }
+
+  /**
+   * Render TimeInput components wrapped in a div.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { mobileFriendly } = this.props
+
+    if (mobileFriendly) {
+      return (
+        <DeviceSwap
+          renderDesktop={this.renderFullyFeatured}
+          renderMobile={this.renderSimple}
+        />
+      )
+    }
+
+    return this.renderFullyFeatured()
   }
 }
 

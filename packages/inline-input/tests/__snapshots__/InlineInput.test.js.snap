@@ -18,12 +18,14 @@ exports[`<InlineInput /> should change span to input when span is clicked 1`] = 
   <TextInput
     InputComponent="input"
     className="talixo-inline-input__input"
+    endCaretOnFocus={false}
     error={false}
     inputRef={[Function]}
     onBlur={[Function]}
     onChange={[Function]}
     onKeyPress={[Function]}
     placeholder=""
+    readOnly={false}
     type="text"
     value=""
   />

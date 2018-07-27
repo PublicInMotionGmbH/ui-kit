@@ -7,24 +7,30 @@ exports[`<ExpirationDateInput /> renders children correctly 1`] = `
   <RangeInput
     autoComplete="cc-exp-month"
     className="talixo-expiration-date-input__month"
+    disabled={false}
     error={false}
     max={12}
     min={1}
     minLength={2}
+    mobileFriendly={false}
     onChange={[Function]}
     placeholder="MM"
+    readOnly={false}
     value={null}
   />
   <RangeInput
     autoComplete="cc-exp-year"
     autoCompleteLength={2}
     className="talixo-expiration-date-input__year"
+    disabled={false}
     error={false}
     max={2058}
     min={2018}
     minLength={1}
+    mobileFriendly={false}
     onChange={[Function]}
     placeholder="YYYY"
+    readOnly={false}
     value={null}
   />
 </div>

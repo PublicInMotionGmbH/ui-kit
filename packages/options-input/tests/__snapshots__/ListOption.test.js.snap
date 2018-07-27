@@ -5,6 +5,8 @@ exports[`<ListOption /> renders children correctly 1`] = `
   className="talixo-options-input-list-option talixo-options-input-list-option--active"
 >
   <NumberInput
+    disabled={false}
+    endCaretOnFocus={true}
     error={false}
     initialTime={700}
     left={
@@ -16,6 +18,7 @@ exports[`<ListOption /> renders children correctly 1`] = `
     min={-Infinity}
     onChange={[Function]}
     precision={0}
+    readOnly={false}
     step={1}
     stepTime={20}
     stepper={true}

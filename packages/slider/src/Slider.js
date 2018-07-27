@@ -31,11 +31,19 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  min: 0
+  min: 0,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -48,6 +56,8 @@ const defaultProps = {
  * @property {number} [props.max]
  * @property {number} [props.min]
  * @property {number} [props.step]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {number} state.value
@@ -87,14 +97,21 @@ class Slider extends React.PureComponent {
   }
 
   render () {
-    const { className, max, min, step, value, onChange, onFocus, onBlur, id, ...passedProps } = this.props
+    const {
+      className, max, min, step, value, onChange, onFocus, onBlur,
+      id, disabled, readOnly, ...passedProps
+    } = this.props
+
     const _value = this.state.value
+    const clsName = buildClassName(moduleName, className, { disabled, 'read-only': readOnly })
 
     return (
-      <span className={buildClassName(moduleName, className)} {...passedProps}>
+      <span className={clsName} {...passedProps}>
         <span className={buildClassName([ moduleName, 'value' ])}>{_value}</span>
         <input
           className={buildClassName([ moduleName, 'input' ])}
+          disabled={disabled}
+          readOnly={readOnly}
           id={id}
           max={max}
           min={min}

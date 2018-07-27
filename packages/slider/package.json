@@ -1,6 +1,6 @@
 {
   "name": "@talixo/slider",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.20",
   "description": "UI Component which represents Slider",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.12",
+    "@talixo/shared": "^1.0.0-alpha.20",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.12",
+    "@talixo/shared": "^1.0.0-alpha.20",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

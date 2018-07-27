@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { AutoComplete } from '@talixo/combo-box'
+import { AutoComplete, SelectBox } from '@talixo/combo-box'
 import { TextInput } from '@talixo/text-input'
 import { Icon } from '@talixo/icon'
+import { DeviceSwap } from '@talixo/device-swap'
+
+import { ALLOWED_KEYS } from './config'
 
 const moduleName = 'range-input'
 
 const propTypes = {
-
   /** Minimum input value length. */
   minLength: PropTypes.number,
 
@@ -33,14 +35,26 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Passed value. */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  value: PropTypes.oneOfType([ PropTypes.number, PropTypes.object ]),
 
   /** Input value length for auto complete. */
-  autoCompleteLength: PropTypes.number
+  autoCompleteLength: PropTypes.number,
+
+  /** Should it render native select box on mobile? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  minLength: 1
+  minLength: 1,
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -121,7 +135,7 @@ function range (min, max) {
 }
 
 /**
- * Component which represents expiration date input.
+ * Component which represents range input.
  *
  * @property {object} props
  * @property {number} [props.minLength]
@@ -135,6 +149,8 @@ function range (min, max) {
  * @property {number} [props.value.month]
  * @property {number} [props.value.year]
  * @property {number} [props.autoCompleteLength]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {object|null} state.inputValue
@@ -196,20 +212,17 @@ class RangeInput extends React.PureComponent {
 
     // Build value
     value = buildEndValue(value, this.props.min, this.props.max)
+    let state = { focus: false }
 
     if (this.props.value === undefined) {
-      this.setState({
-        value,
-        inputValue: formatValue(value, this.props.minLength)
-      })
+      state.value = value
+      state.inputValue = formatValue(value, this.props.minLength)
     }
+
+    this.setState({ ...state })
 
     if (onChange) {
       onChange(value)
-    }
-
-    if (this.node) {
-      this.node.querySelector('input').blur()
     }
   }
 
@@ -280,7 +293,7 @@ class RangeInput extends React.PureComponent {
   onKeyDown = (event) => {
     const charCode = event.which || event.keyCode
 
-    if (charCode > 31 && (charCode < 48 || charCode > 57) && (charCode < 37 || charCode > 40)) {
+    if (!(ALLOWED_KEYS.indexOf(charCode) > -1)) {
       event.preventDefault()
     }
   }
@@ -294,19 +307,12 @@ class RangeInput extends React.PureComponent {
     this.node = node
   }
 
-  /**
-   * Render range input component.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { minLength, className, min, max, onBlur, onFocus, onChange, value: _value, autoCompleteLength, ...passedProps } = this.props
+  renderComboBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange, disabled, readOnly,
+      value: _value, mobileFriendly, autoCompleteLength, ...passedProps
+    } = this.props
     const { focus, options, value, inputValue } = this.state
-
-    // Build class names.
-    const wrapperClsName = buildClassName(moduleName, className, {
-      focused: focus
-    })
 
     // Build icon.
     const icon = this.state.focus
@@ -314,26 +320,81 @@ class RangeInput extends React.PureComponent {
       : <Icon name='keyboard_arrow_down' />
 
     return (
+      <AutoComplete
+        disabled={disabled}
+        readOnly={readOnly}
+        options={options}
+        isOpen={focus}
+        renderItem={(item) => formatValue(item, minLength)}
+        value={value}
+        inputValue={inputValue}
+        onInputValueChange={this.onInputValueChange}
+        onChoose={this.onChange}
+        onFocus={this.focus}
+        onBlur={this.blur}
+        itemToString={x => x == null ? '' : formatValue(x, minLength)}
+      >
+        <TextInput
+          onKeyDown={this.onKeyDown}
+          pattern='[0-9]*'
+          inputMode='numeric'
+          right={icon}
+          maxLength={Math.max(('' + max).length, minLength)}
+          disabled={disabled}
+          readOnly={readOnly}
+          {...passedProps}
+        />
+      </AutoComplete>
+    )
+  }
+
+  renderSelectBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange,
+      value: _value, autoCompleteLength, mobileFriendly, ...passedProps
+    } = this.props
+    const { focus, options, value } = this.state
+
+    return (
+      <SelectBox
+        {...passedProps}
+        mobileFriendly
+        options={options}
+        isOpen={focus}
+        renderItem={item => formatValue(item, minLength)}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+    )
+  }
+
+  /**
+   * Render range input component.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { className, mobileFriendly } = this.props
+    const { focus } = this.state
+
+    // Build class names.
+    const wrapperClsName = buildClassName(moduleName, className, {
+      focused: focus
+    })
+
+    const inner = mobileFriendly ? (
+      <DeviceSwap
+        defaultView='mobile'
+        renderMobile={this.renderSelectBox}
+        renderDesktop={this.renderComboBox}
+      />
+    ) : this.renderComboBox()
+
+    return (
       <div className={wrapperClsName} ref={this.saveRef}>
-        <AutoComplete
-          options={options}
-          isOpen={focus}
-          renderItem={(item) => formatValue(item, minLength)}
-          value={value}
-          inputValue={inputValue}
-          onInputValueChange={this.onInputValueChange}
-          onChange={this.onChange}
-          onFocus={this.focus}
-          onBlur={this.blur}
-          itemToString={x => x == null ? '' : formatValue(x, minLength)}
-        >
-          <TextInput
-            onKeyDown={this.onKeyDown}
-            right={icon}
-            maxLength={Math.max(('' + max).length, minLength)}
-            {...passedProps}
-          />
-        </AutoComplete>
+        {inner}
       </div>
     )
   }

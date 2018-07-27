@@ -11,8 +11,8 @@ using `npm install @talixo/radio-group --save` or `yarn add @talixo/radio-group`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/radio-input: ^1.0.0-alpha.13`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/radio-input: ^1.0.0-alpha.20`
+- `@talixo/shared: ^1.0.0-alpha.20`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -32,6 +32,8 @@ options       | Option[] | n/a             | array of objects which represent op
 error         | boolean  | `false`         | has it any error
 value         | any      | self-controlled | value when it's controlled
 id            | string   | n/a             | ID passed to control element
+disabled      | bool     | `false`         | Should it be disabled?
+readOnly      | bool     | `false`         | Should it be read-only?
 
 ## Types
 

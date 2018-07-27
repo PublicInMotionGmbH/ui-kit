@@ -55,15 +55,6 @@ describe('<CreditCardInput />', () => {
     expect(cardExpirationDate.props().label).toEqual(customValues.cardExpirationDateLabel)
     expect(cvc.props().label).toEqual(customValues.cvcLabel)
   })
-
-  it('handles custom header', () => {
-    const header = 'Custom header'
-    const wrapper = shallow(<CreditCardInput header={header} />)
-
-    const legendHeader = wrapper.children().at(0).text()
-
-    expect(legendHeader).toEqual(header)
-  })
 })
 
 describe('change', () => {
