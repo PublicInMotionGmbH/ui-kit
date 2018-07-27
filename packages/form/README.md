@@ -11,7 +11,7 @@ using `npm install @talixo/form --save` or `yarn add @talixo/form`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.20`
 - `formik: ^0.11.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -46,6 +46,8 @@ validationSchema   | object    | n/a     | Validation object. A Yup schema or a 
 values             | object    | n/a     | Initial values of form fields.
 formatErrorMessage | function  | n/a     | Default formatter for error messages in `FormField`s inside.
 FormComponent      | component | `Form`  | Component used as Form wrapper.
+disabled           | bool      | `false` | Should disable all fields in form?
+readOnly           | bool      | `false` | Should set all fields in form as read-only?
 
 ### Field
 
@@ -64,6 +66,8 @@ value              | any       | n/a      | Value passed to input.
 horizontal         | bool      | `false`  | Should it have horizontal layout?
 spread             | bool      | `false`  | Only for `horizontal`; should it expand input width, when there is no hint?
 formatErrorMessage | function  | `x => x` | Formatter for error & warning messages.
+disabled           | bool      | `false`  | Should force this field to be disabled?
+readOnly           | bool      | `false`  | Should force this field as read-only?
 
 ### FormFooter
 

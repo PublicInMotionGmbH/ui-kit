@@ -11,6 +11,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   />
   <div
     className="talixo-field"
+    disabled={false}
+    readOnly={false}
   >
     <div
       className="talixo-form-row"
@@ -64,6 +66,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   >
     <div
       className="talixo-field"
+      disabled={false}
+      readOnly={false}
     >
       <div
         className="talixo-form-row"
@@ -115,6 +119,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   </div>
   <div
     className="talixo-field"
+    disabled={false}
+    readOnly={false}
   >
     <div
       className="talixo-form-row"

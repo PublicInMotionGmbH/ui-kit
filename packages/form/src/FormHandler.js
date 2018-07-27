@@ -27,11 +27,19 @@ const propTypes = {
   formatErrorMessage: PropTypes.func,
 
   /** Component used for Form */
-  FormComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
+  FormComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
+
+  /** Should disable the form fully? **/
+  disabled: PropTypes.bool,
+
+  /** Should the form be read-only fully? **/
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  FormComponent: Form
+  FormComponent: Form,
+  disabled: false,
+  readOnly: false
 }
 
 const noop = () => {}
@@ -46,6 +54,8 @@ const noop = () => {}
  * @property {function} [props.onSubmit]
  * @property {object} [props.validationSchema]
  * @property {string} [props.values]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @class
  */
@@ -124,7 +134,7 @@ class FormHandler extends React.PureComponent {
    * @returns {*}
    */
   transformNode (node, options) {
-    const { formatErrorMessage } = this.props
+    const { formatErrorMessage, disabled, readOnly } = this.props
     const { setFieldValue, handleBlur, values, touched, errors } = options
     const { name, onChange, onBlur } = node.props
 
@@ -151,14 +161,24 @@ class FormHandler extends React.PureComponent {
       }
     }
 
-    return React.cloneElement(node, {
+    const nodeProps = {
       ref: node.ref,
       value: values[name],
       error: touched[name] ? errors[name] : null,
       formatErrorMessage: node.props.formatErrorMessage || formatErrorMessage,
       onChange: _onChange,
       onBlur: _onBlur
-    })
+    }
+
+    if (disabled) {
+      nodeProps.disabled = true
+    }
+
+    if (readOnly) {
+      nodeProps.readOnly = true
+    }
+
+    return React.cloneElement(node, nodeProps)
   }
 
   /**
@@ -172,7 +192,7 @@ class FormHandler extends React.PureComponent {
     const {
       children, onSubmit, onChange, errors,
       initialValues, values, validationSchema,
-      FormComponent, ...passedProps
+      FormComponent, disabled, readOnly, ...passedProps
     } = this.props
 
     if (this.formik && onChange) {
@@ -216,7 +236,7 @@ class FormHandler extends React.PureComponent {
 
   render () {
     const {
-      children, className, onSubmit, values,
+      children, className, onSubmit, values, disabled, readOnly,
       formatErrorMessage, FormComponent, ...passedProps
     } = this.props
 

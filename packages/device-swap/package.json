@@ -1,0 +1,36 @@
+{
+  "name": "@talixo/device-swap",
+  "version": "1.0.0-alpha.20",
+  "description": "UI Component which helps to render different components on different devices",
+  "main": "dist/index.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "scripts": {
+    "test": "node ../../scripts/runTests.js --only device-swap",
+    "prepublishOnly": "npm run build",
+    "build": "node ../../scripts/buildPackages.js --only device-swap"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Public in Motion GmbH",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PublicInMotionGmbH/ui-kit/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@talixo/shared": "^1.0.0-alpha.20",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}

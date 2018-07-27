@@ -52,13 +52,21 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   persistentOptions: [],
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 export const moduleName = 'options-input'
@@ -129,8 +137,8 @@ class OptionsInput extends React.PureComponent {
   /**
    * This function set state.open
    */
-  toggle () {
-    const nextOpen = !this.state.open
+  toggle (state) {
+    const nextOpen = state == null ? !this.state.open : !!state
 
     this.setState({ open: nextOpen })
 
@@ -192,6 +200,12 @@ class OptionsInput extends React.PureComponent {
    * @param {number} value
    */
   change = (id, value) => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     const nextValue = {
       ...this.state.value,
       [id]: value
@@ -214,7 +228,7 @@ class OptionsInput extends React.PureComponent {
    * Handle focusing element.
    */
   focus = () => {
-    this.toggle()
+    this.toggle(true)
 
     if (this.props.onFocus) {
       this.props.onFocus()
@@ -230,11 +244,22 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
+  click = (...args) => {
+    this.focus(true)
+
+    if (this.props.onClick) {
+      this.props.onClick(...args)
+    }
+  }
+
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
+    const {
+      options, className, persistentOptions, onClick, onChange, onFocus, onBlur,
+      id, error, disabled, readOnly, value: _value, ...restProps
+    } = this.props
     const { value, open } = this.state
 
-    const clsName = buildClassName(moduleName, className, { open, error })
+    const clsName = buildClassName(moduleName, className, { open, error, disabled, 'read-only': readOnly })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
@@ -243,6 +268,7 @@ class OptionsInput extends React.PureComponent {
           type='button'
           className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
+          onClick={this.click}
           onBlur={this.blur}
           aria-expanded={open}
           role='button'
@@ -259,6 +285,8 @@ class OptionsInput extends React.PureComponent {
           options={options}
           value={value}
           onChange={this.change}
+          disabled={disabled}
+          readOnly={readOnly}
         />
       </div>
     )

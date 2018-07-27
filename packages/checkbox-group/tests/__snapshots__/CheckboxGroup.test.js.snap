@@ -11,6 +11,7 @@ exports[`<CheckboxGroup /> renders children correctly 1`] = `
     key="1"
     name="CheckboxGroup"
     onChange={[Function]}
+    readOnly={false}
     value={false}
   >
     one
@@ -22,6 +23,7 @@ exports[`<CheckboxGroup /> renders children correctly 1`] = `
     key="2"
     name="CheckboxGroup"
     onChange={[Function]}
+    readOnly={false}
     value={false}
   >
     two
@@ -33,6 +35,7 @@ exports[`<CheckboxGroup /> renders children correctly 1`] = `
     key="3"
     name="CheckboxGroup"
     onChange={[Function]}
+    readOnly={false}
     value={false}
   >
     three
