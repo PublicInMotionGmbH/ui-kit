@@ -10,6 +10,16 @@
   &__content
     position: relative
 
+    &--first
+      @include module('carousel-arrows')
+        &__arrow--back
+          display: none
+
+    &--last
+      @include module('carousel-arrows')
+        &__arrow--forward
+          display: none
+
   &__wrapper
     position: relative
     width: 100%

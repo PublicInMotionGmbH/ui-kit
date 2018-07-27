@@ -37,6 +37,9 @@ const propTypes = {
   /** Slides animation time */
   animationTime: PropTypes.number,
 
+  /** Infinite scroll */
+  infinite: PropTypes.bool,
+
   /** Number of slides visible in one time */
   perPage: PropTypes.number,
 
@@ -59,6 +62,7 @@ const propTypes = {
 const defaultProps = {
   children: [],
   animationTime: 500,
+  infinite: false,
   perPage: 1,
   renderDots: Dots,
   renderArrows: Arrows,
@@ -74,6 +78,7 @@ const defaultProps = {
  * @property {string} [props.className]
  * @property {boolean} [props.dots]
  * @property {number} [props.animationTime]
+ * @property {boolean} [props.infinite]
  * @property {number} [props.perPage]
  * @property {function} [props.renderDots]
  *
@@ -160,8 +165,19 @@ class Carousel extends React.PureComponent {
   }
 
   change = (index, type = 'exact', force = false) => {
-    const { value, onChange, children } = this.props
+    const { value, onChange, children, infinite, perPage } = this.props
     const isImmediate = value == null || force
+
+    if (!infinite) {
+      const realIndex = index % children.length
+      const maxIndex = Math.max(0, children.length - perPage)
+
+      if (realIndex < 0) {
+        index -= realIndex
+      } else if (realIndex > maxIndex) {
+        index -= realIndex - maxIndex
+      }
+    }
 
     if (onChange && !force) {
       onChange(index % children.length, type)
@@ -265,19 +281,21 @@ class Carousel extends React.PureComponent {
    * @returns {React.Element}
    */
   renderSlides () {
-    const { children, perPage } = this.props
+    const { children, infinite, perPage } = this.props
 
     const clsName = buildClassName([ moduleName, 'slide' ])
     const style = { minWidth: `${100 / perPage}%`, maxWidth: `${100 / perPage}%` }
 
     const copies = []
 
-    for (let i = 0; i < Math.max(children.length) + 3 * perPage; i++) {
-      copies.push(
-        <div className={clsName} style={style} key={'copy-' + i}>
-          {children[i % children.length]}
-        </div>
-      )
+    if (infinite) {
+      for (let i = 0; i < Math.max(children.length) + 3 * perPage; i++) {
+        copies.push(
+          <div className={clsName} style={style} key={'copy-' + i}>
+            {children[i % children.length]}
+          </div>
+        )
+      }
     }
 
     return children.map((el, i) => (
@@ -328,24 +346,40 @@ class Carousel extends React.PureComponent {
    * @returns {React.Element}
    */
   renderArrows () {
-    const { renderArrows } = this.props
+    const { children, infinite, perPage, renderArrows } = this.props
+    const { currentSlide } = this.state
 
-    return React.createElement(renderArrows, {
-      ...this.buildMovementProps(),
-      onBack: this.handleBack,
-      onForward: this.handleForward
-    })
+    const firstSlide = currentSlide === 0
+    const lastSlide = currentSlide >= (children.length - perPage)
+
+    const props = { ...this.buildMovementProps() }
+
+    if (!firstSlide || infinite) {
+      props.onBack = this.handleBack
+    }
+
+    if (!lastSlide || infinite) {
+      props.onForward = this.handleForward
+    }
+
+    return React.createElement(renderArrows, props)
   }
 
   render () {
     const {
-      arrows, className, dots, perPage, children, animationTime,
+      arrows, className, dots, perPage, children, animationTime, infinite,
       renderArrows, renderDots, value, onChange, defaultMovement, ...passedProps
     } = this.props
     const { currentSlide, transitionTime } = this.state
 
+    const firstSlide = currentSlide === 0
+    const lastSlide = currentSlide >= (children.length - perPage)
+
     const clsName = buildClassName(moduleName, className)
-    const contentClsName = buildClassName([ moduleName, 'content' ])
+    const contentClsName = buildClassName([ moduleName, 'content' ], null, {
+      first: !infinite && firstSlide,
+      last: !infinite && lastSlide
+    })
     const wrapperClsName = buildClassName([ moduleName, 'wrapper' ])
     const innerClsName = buildClassName([ moduleName, 'inner' ])
 
