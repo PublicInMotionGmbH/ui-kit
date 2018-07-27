@@ -28,7 +28,6 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       collapsed={true}
       role="tabpanel"
       smooth={true}
-      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -61,7 +60,6 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       collapsed={true}
       role="tabpanel"
       smooth={true}
-      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -96,7 +94,6 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       collapsed={true}
       role="tabpanel"
       smooth={true}
-      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -129,7 +126,6 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       collapsed={true}
       role="tabpanel"
       smooth={true}
-      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
@@ -162,7 +158,6 @@ exports[`<Accordion /> renders closed accordion correctly 1`] = `
       collapsed={true}
       role="tabpanel"
       smooth={true}
-      speed={200}
     >
       <div
         className="talixo-accordion-element__content-inner"
