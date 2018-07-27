@@ -39,7 +39,8 @@
   [dir=rtl] &
     transform: scaleX(-1)
 
-  [dir=rtl] &__inner
+  [dir=rtl] &__inner,
+  [dir=rtl] &__content ~ * // Dots
     transform: scaleX(-1)
 
 @include module('carousel-dots')
