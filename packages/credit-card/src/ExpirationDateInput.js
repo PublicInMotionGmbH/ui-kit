@@ -31,11 +31,19 @@ const propTypes = {
   error: PropTypes.bool,
 
   /** Should it render native select boxes for mobile? */
-  mobileFriendly: PropTypes.bool
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   error: false,
+  disabled: false,
+  readOnly: false,
   mobileFriendly: false
 }
 
@@ -151,7 +159,7 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, id, error, onChange, value, mobileFriendly, ...passedProps } = this.props
+    const { className, id, error, onChange, value, mobileFriendly, disabled, readOnly, ...passedProps } = this.props
     const { month, year } = this.state
 
     // Build class names.
@@ -165,6 +173,8 @@ class ExpirationDateInput extends React.PureComponent {
           className={monthClsName}
           mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-month'
+          disabled={disabled}
+          readOnly={readOnly}
           id={id}
           error={error}
           min={1}
@@ -179,6 +189,8 @@ class ExpirationDateInput extends React.PureComponent {
           className={yearClsName}
           mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-year'
+          disabled={disabled}
+          readOnly={readOnly}
           error={error}
           min={minYear}
           max={maxYear}

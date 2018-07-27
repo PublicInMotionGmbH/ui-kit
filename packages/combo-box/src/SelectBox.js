@@ -59,13 +59,21 @@ const propTypes = {
   tabIndex: PropTypes.number,
 
   /** Should it act almost-like native "select" on mobile devices? */
-  mobileFriendly: PropTypes.bool
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   multi: false,
   mobileFriendly: false,
+  disabled: false,
+  readOnly: false,
   placeholder: '...',
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -128,6 +136,20 @@ class SelectBox extends React.PureComponent {
   }
 
   /**
+   * Check if component is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
+  }
+
+  /**
    * Get props which should be passed through our components below Downshift.
    *
    * @param {object} data
@@ -183,6 +205,11 @@ class SelectBox extends React.PureComponent {
     const { onChange, multi } = this.props
     const { value } = this.state
 
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
+
     // Handle simple selection for single select-box
     if (!multi) {
       if (this.props.value === undefined) {
@@ -221,6 +248,11 @@ class SelectBox extends React.PureComponent {
    */
   selectNative = (event) => {
     const { onChange, multi, options } = this.props
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     const element = event.target
     const selectedItems = []
@@ -310,7 +342,7 @@ class SelectBox extends React.PureComponent {
    * @returns {React.Element}
    */
   renderSimple = () => {
-    const { className, multi, icon, options, id, renderItem } = this.props
+    const { className, multi, icon, options, id, renderItem, disabled, readOnly } = this.props
     const { value } = this.state
 
     const elements = options.map((option, index) => (
@@ -335,6 +367,8 @@ class SelectBox extends React.PureComponent {
     const select = (
       <NativeSelect
         id={id}
+        disabled={disabled}
+        readOnly={readOnly}
         multiple={multi}
         value={multi ? value == null ? [] : Array.isArray(value) ? value : [].concat(value) : value}
         className={selectClsName}
@@ -363,7 +397,7 @@ class SelectBox extends React.PureComponent {
   renderFullyFeatured = () => {
     const {
       icon, multi, placeholder, value, tabIndex, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave,
-      onMouseEnter, buildItemId, renderItem, renderValue, ...passedProps
+      onMouseEnter, buildItemId, renderItem, renderValue, disabled, readOnly, ...passedProps
     } = this.props
 
     return (
@@ -371,6 +405,7 @@ class SelectBox extends React.PureComponent {
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
+        disabled={this.isDisabled()}
         {...passedProps}
       >
         {this.renderComponent}

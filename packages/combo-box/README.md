@@ -11,9 +11,9 @@ using `npm install @talixo/combo-box --save` or `yarn add @talixo/combo-box`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/device-swap: ^1.0.0-alpha.16`
-- `@talixo/icon: ^1.0.0-alpha.16`
-- `@talixo/shared: ^1.0.0-alpha.16`
+- `@talixo/device-swap: ^1.0.0-alpha.20`
+- `@talixo/icon: ^1.0.0-alpha.20`
+- `@talixo/shared: ^1.0.0-alpha.20`
 - `downshift: ^1.31.11`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -46,6 +46,8 @@ buildItemId    | function  | item index        | Function to build unique ID of 
 itemToString   | function  | `item => item`    | Function to convert item to string
 id             | string    | n/a               | ID passed to control element
 mobileFriendly | bool      | n/a               | Should it act more like native "select" button on mobile devices?
+disabled       | bool      | `false`           | Should it be disabled?
+readOnly       | bool      | `false`           | Should it be read-only?
 
 ### ComboBox
 
@@ -69,6 +71,8 @@ buildItemId        | function  | item index        | Function to build unique ID
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
 tabIndex           | number    | n/a               | Tab index passed to toggle button
+disabled           | bool      | `false`           | Should it be disabled?
+readOnly           | bool      | `false`           | Should it be read-only?
 
 ### AutoComplete
 
@@ -86,6 +90,9 @@ renderItem         | function  | `item => item`    | Function to render item in 
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string
 id                 | string    | n/a               | ID passed to control element
+openOnFocus        | bool      | `false`           | Should open auto-complete on focus already?
+disabled           | bool      | `false`           | Should it be disabled?
+readOnly           | bool      | `false`           | Should it be read-only?
 
 ## Changelog
 

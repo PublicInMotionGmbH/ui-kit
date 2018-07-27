@@ -63,12 +63,20 @@ const propTypes = {
   value: PropTypes.any,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   multi: false,
+  disabled: false,
+  readOnly: false,
   placeholder: '...',
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -87,6 +95,8 @@ const defaultProps = {
  * @property {*} [props.placeholder]
  * @property {function} [props.renderValue]
  * @property {string} [props.className]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @class
  */
@@ -114,6 +124,20 @@ class ComboBox extends React.PureComponent {
         value: props.value
       })
     }
+  }
+
+  /**
+   * Check if this input is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
   }
 
   /**
@@ -263,6 +287,7 @@ class ComboBox extends React.PureComponent {
       onFocus,
       onBlur,
       id,
+      disabled: this.isDisabled(),
       onKeyDown: event => {
         this.handleInputKeyDown(event)
 
@@ -281,6 +306,11 @@ class ComboBox extends React.PureComponent {
   handleInputKeyDown (event) {
     const { inputValue, value } = this.state
     const { multi, onNewValue } = this.props
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Do not propagate space in input, as it will cause removing value
     if (event.which === SPACE_KEY) {
@@ -326,6 +356,11 @@ class ComboBox extends React.PureComponent {
   select = (item) => {
     const { onChange, multi } = this.props
     const { value } = this.state
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Handle simple selection for single select-box
     if (!multi) {
@@ -400,7 +435,7 @@ class ComboBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange,
+      icon, multi, placeholder, value, options, onChange, readOnly, disabled,
       buildItemId, renderItem, renderValue, children, ...passedProps
     } = this.props
 
@@ -409,6 +444,7 @@ class ComboBox extends React.PureComponent {
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
+        disabled={this.isDisabled()}
         {...passedProps}
       >
         {this.renderComponent}

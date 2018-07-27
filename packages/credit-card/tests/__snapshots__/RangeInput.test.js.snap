@@ -6,6 +6,7 @@ exports[`<RangeInput /> renders correctly 1`] = `
 >
   <AutoComplete
     buildItemId={[Function]}
+    disabled={false}
     inputValue=""
     isOpen={false}
     itemToString={[Function]}
@@ -13,17 +14,22 @@ exports[`<RangeInput /> renders correctly 1`] = `
     onChoose={[Function]}
     onFocus={[Function]}
     onInputValueChange={[Function]}
+    openOnFocus={true}
     options={Array []}
+    readOnly={false}
     renderItem={[Function]}
     value={null}
   >
     <TextInput
       InputComponent="input"
+      disabled={false}
+      endCaretOnFocus={false}
       error={false}
       inputMode="numeric"
       maxLength={9}
       onKeyDown={[Function]}
       pattern="[0-9]*"
+      readOnly={false}
       right={
         <Icon
           name="keyboard_arrow_down"
@@ -51,6 +57,7 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
         aria-expanded={false}
         autoComplete="off"
         className="talixo-text-input__input"
+        disabled={false}
         id="downshift-0-input"
         inputMode="numeric"
         maxLength={9}
@@ -59,6 +66,7 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
         onFocus={[Function]}
         onKeyDown={[Function]}
         pattern="[0-9]*"
+        readOnly={false}
         role="combobox"
         style={
           Object {

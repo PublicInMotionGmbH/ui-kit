@@ -41,12 +41,20 @@ const propTypes = {
   autoCompleteLength: PropTypes.number,
 
   /** Should it render native select box on mobile? */
-  mobileFriendly: PropTypes.bool
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   minLength: 1,
-  mobileFriendly: false
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -141,6 +149,8 @@ function range (min, max) {
  * @property {number} [props.value.month]
  * @property {number} [props.value.year]
  * @property {number} [props.autoCompleteLength]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {object|null} state.inputValue
@@ -299,7 +309,7 @@ class RangeInput extends React.PureComponent {
 
   renderComboBox = () => {
     const {
-      minLength, className, min, max, onBlur, onFocus, onChange,
+      minLength, className, min, max, onBlur, onFocus, onChange, disabled, readOnly,
       value: _value, mobileFriendly, autoCompleteLength, ...passedProps
     } = this.props
     const { focus, options, value, inputValue } = this.state
@@ -311,6 +321,8 @@ class RangeInput extends React.PureComponent {
 
     return (
       <AutoComplete
+        disabled={disabled}
+        readOnly={readOnly}
         options={options}
         isOpen={focus}
         renderItem={(item) => formatValue(item, minLength)}
@@ -328,6 +340,8 @@ class RangeInput extends React.PureComponent {
           inputMode='numeric'
           right={icon}
           maxLength={Math.max(('' + max).length, minLength)}
+          disabled={disabled}
+          readOnly={readOnly}
           {...passedProps}
         />
       </AutoComplete>

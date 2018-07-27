@@ -38,11 +38,19 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -101,6 +109,8 @@ function renderCountryItem (country) {
  * @property {function} [props.onChange]
  * @property {function} [props.onFocus]
  * @property {function} [props.onBlur]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {string} state.value
@@ -152,6 +162,12 @@ class PhoneInput extends React.PureComponent {
    * @param {string} value
    */
   change (value) {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     value = trim(value)
 
     // Update state immediately, when component is self-controlled
@@ -179,6 +195,12 @@ class PhoneInput extends React.PureComponent {
    * @param {object} country
    */
   changeCountry = (country) => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     const nextValue = replaceCountryPrefix(this.state.value, this.state.country, country)
     const endPrefix = nextValue.indexOf(' ') + 1
 
@@ -304,9 +326,13 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderCountryBox () {
+    const { disabled, readOnly } = this.props
+
     return (
       <SelectBox
         tabIndex={-1}
+        disabled={disabled}
+        readOnly={readOnly}
         className={buildClassName([ moduleName, 'country-box' ])}
         options={countriesList}
         value={this.state.country}
@@ -362,16 +388,19 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderInput () {
-    const { placeholder, id } = this.props
+    const { placeholder, id, disabled, readOnly } = this.props
     const { value, country, focused } = this.state
 
     return (
       <TextMaskInput
         id={id}
+        disabled={disabled}
+        readOnly={readOnly}
         guide={focused}
         keepCharPositions={false}
         mask={buildMaskForCountry(country)}
         placeholderChar={'\u2000'}
+        inputMode='numeric'
         type='tel'
         ref={this.saveRef}
         value={value}
@@ -395,13 +424,18 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, onFocus, onBlur, placeholder, id, value, ...passedProps } = this.props
+    const {
+      className, error, onChange, onFocus, onBlur,
+      placeholder, id, value, disabled, readOnly, ...passedProps
+    } = this.props
     const { hover, focus } = this.state
 
     const clsName = buildClassName(moduleName, className, {
       error,
       hover: hover && hover.length,
-      focus: focus && focus.length
+      focus: focus && focus.length,
+      disabled: disabled,
+      'read-only': readOnly
     })
 
     return (

@@ -1,6 +1,6 @@
 {
   "name": "@talixo/options-input",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.20",
   "description": "UI Component which represents OptionsInput",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,19 +23,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon": "^1.0.0-alpha.16",
-    "@talixo/number-input": "^1.0.0-alpha.16",
-    "@talixo/shared": "^1.0.0-alpha.16",
-    "@talixo/tooltip": "^1.0.0-alpha.16",
+    "@talixo/icon": "^1.0.0-alpha.20",
+    "@talixo/number-input": "^1.0.0-alpha.20",
+    "@talixo/shared": "^1.0.0-alpha.20",
+    "@talixo/tooltip": "^1.0.0-alpha.20",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/icon": "^1.0.0-alpha.16",
-    "@talixo/number-input": "^1.0.0-alpha.16",
-    "@talixo/shared": "^1.0.0-alpha.16",
-    "@talixo/tooltip": "^1.0.0-alpha.16",
+    "@talixo/icon": "^1.0.0-alpha.20",
+    "@talixo/number-input": "^1.0.0-alpha.20",
+    "@talixo/shared": "^1.0.0-alpha.20",
+    "@talixo/tooltip": "^1.0.0-alpha.20",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

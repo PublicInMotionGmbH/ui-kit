@@ -4,6 +4,7 @@ exports[`<CreditCardNumberInput /> renders children correctly 1`] = `
 <TextInput
   InputComponent={[Function]}
   className="talixo-credit-card-number-input"
+  endCaretOnFocus={false}
   error={false}
   guide={false}
   inputMode="numeric"
