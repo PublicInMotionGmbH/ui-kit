@@ -30,6 +30,7 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | nodes     | n/a     | content of modal, including header and footer
+onClick       | function  | n/a     | controls whether modal is open
 open          | bool      | `true`  | controls whether modal is open
 informational | bool      | `false` | it's simple, informational modal
 icon          | node      | n/a     | icon to show in informational modal

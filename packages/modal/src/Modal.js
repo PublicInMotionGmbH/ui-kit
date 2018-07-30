@@ -5,12 +5,17 @@ import { buildClassName } from '@talixo/shared'
 
 import { Portal } from '@talixo/portal'
 
+export const moduleName = 'modal'
+
 const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
   /** Content of modal */
   children: PropTypes.node,
+
+  /** Handles clicking on backdrop. */
+  onClick: PropTypes.func,
 
   /** Controls whether modal is open */
   open: PropTypes.bool,
@@ -37,6 +42,7 @@ const defaultProps = {
  * Component which represents modal.
  *
  * @param {object} props
+ * @param {function} [props.onClick]
  * @param {boolean} props.open
  * @param {boolean} props.informational
  * @param {string} [props.className]
@@ -46,7 +52,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Modal (props) {
-  const { children, className, open, attachTo, informational, icon, type, ...rest } = props
+  const { children, className, open, onClick, attachTo, informational, icon, type, ...rest } = props
 
   const backdropClasses = buildClassName('modal-backdrop', null, {
     entered: open,
@@ -56,6 +62,13 @@ function Modal (props) {
   const modalClasses = buildClassName('modal', className, { informational }, [ type ])
   const contentClasses = buildClassName('modal-content')
 
+  const backdropClick = e => {
+    if (e.target !== e.currentTarget) { return }
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
   const iconElement = informational && icon ? (
     <div className={buildClassName('modal-icon')}>
       {icon}
@@ -64,7 +77,7 @@ function Modal (props) {
 
   return (
     <Portal attachTo={attachTo}>
-      <div className={backdropClasses}>
+      <div onClick={backdropClick} className={backdropClasses}>
         <div className={modalClasses} {...rest}>
           {iconElement}
           <div className={contentClasses}>
