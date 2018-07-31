@@ -15,7 +15,7 @@ const propTypes = {
   children: PropTypes.node,
 
   /** Handles clicking on backdrop. */
-  onClick: PropTypes.func,
+  onOverlayClick: PropTypes.func,
 
   /** Controls whether modal is open */
   open: PropTypes.bool,
@@ -42,7 +42,7 @@ const defaultProps = {
  * Component which represents modal.
  *
  * @param {object} props
- * @param {function} [props.onClick]
+ * @param {function} [props.onOverlayClick]
  * @param {boolean} props.open
  * @param {boolean} props.informational
  * @param {string} [props.className]
@@ -52,7 +52,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Modal (props) {
-  const { children, className, open, onClick, attachTo, informational, icon, type, ...rest } = props
+  const { children, className, open, onOverlayClick, attachTo, informational, icon, type, ...rest } = props
 
   const backdropClasses = buildClassName('modal-backdrop', null, {
     entered: open,
@@ -62,11 +62,16 @@ function Modal (props) {
   const modalClasses = buildClassName('modal', className, { informational }, [ type ])
   const contentClasses = buildClassName('modal-content')
 
-  const backdropClick = e => {
-    if (e.target !== e.currentTarget) { return }
-    if (onClick) {
-      onClick(e)
+  const backdropProps = {
+    className: backdropClasses
+  }
+
+  if (onOverlayClick) {
+    const backdropClick = e => {
+      if (e.target !== e.currentTarget) { return }
+      onOverlayClick(e)
     }
+    backdropProps.onClick = backdropClick
   }
 
   const iconElement = informational && icon ? (
@@ -77,7 +82,7 @@ function Modal (props) {
 
   return (
     <Portal attachTo={attachTo}>
-      <div onClick={backdropClick} className={backdropClasses}>
+      <div {...backdropProps}>
         <div className={modalClasses} {...rest}>
           {iconElement}
           <div className={contentClasses}>

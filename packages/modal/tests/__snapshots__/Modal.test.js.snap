@@ -4,7 +4,6 @@ exports[`<Modal /> renders children correctly 1`] = `
 <Portal>
   <div
     className="talixo-modal-backdrop talixo-modal-backdrop--exiting"
-    onClick={[Function]}
   >
     <div
       className="talixo-modal"

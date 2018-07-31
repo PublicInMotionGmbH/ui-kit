@@ -73,10 +73,10 @@ describe('<Modal />', () => {
     expect(wrapper.find('#test').length).toBe(0)
   })
 
-  it('should invoke onClick when backdrop is clicked', () => {
+  it('should invoke onOverlayClick when backdrop is clicked', () => {
     const click = jest.fn()
     const wrapper = shallow(
-      <Modal onClick={click} icon={<span id='test' />}>
+      <Modal onOverlayClick={click} icon={<span id='test' />}>
         <h2>Modal</h2>
       </Modal>
     )
@@ -85,10 +85,10 @@ describe('<Modal />', () => {
     expect(click).toHaveBeenCalledTimes(1)
   })
 
-  it('should invoke onClick when backdrop is clicked', () => {
+  it('should invoke onOverlayClick when backdrop is clicked', () => {
     const click = jest.fn()
     const wrapper = shallow(
-      <Modal onClick={click} icon={<span id='test' />}>
+      <Modal onOverlayClick={click} icon={<span id='test' />}>
         <h2>Modal</h2>
       </Modal>
     )
