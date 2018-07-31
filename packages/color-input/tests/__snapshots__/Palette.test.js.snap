@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Palette /> renders children correctly 1`] = `
+<div
+  className="talixo-color-input__palette"
+>
+  <div
+    className="talixo-color-input__palette-item"
+    key="red1"
+    onClick={[Function]}
+  >
+    <span
+      className="talixo-color-input__palette-item-text"
+    >
+      awesome-red
+    </span>
+    <span
+      className="talixo-color-input__palette-item-color"
+      style={
+        Object {
+          "backgroundColor": "#ec0000",
+        }
+      }
+    />
+  </div>
+  <div
+    className="talixo-color-input__palette-item"
+    key="blue2"
+    onClick={[Function]}
+  >
+    <span
+      className="talixo-color-input__palette-item-text"
+    >
+      fantastic-blue
+    </span>
+    <span
+      className="talixo-color-input__palette-item-color"
+      style={
+        Object {
+          "backgroundColor": "#0004d0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="talixo-color-input__palette-item"
+    key="green3"
+    onClick={[Function]}
+  >
+    <span
+      className="talixo-color-input__palette-item-text"
+    >
+      fresh-green
+    </span>
+    <span
+      className="talixo-color-input__palette-item-color"
+      style={
+        Object {
+          "backgroundColor": "#00c41c",
+        }
+      }
+    />
+  </div>
+</div>
+`;

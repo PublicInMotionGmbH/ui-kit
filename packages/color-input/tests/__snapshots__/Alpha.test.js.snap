@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Alpha /> renders children correctly 1`] = `
+<span
+  className="talixo-color-input__alpha"
+>
+  <Slider
+    defaultValue={255}
+    max={255}
+    min={0}
+    onChange={[Function]}
+  />
+</span>
+`;
