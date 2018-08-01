@@ -120,4 +120,32 @@ describe('<ColorInput />', () => {
 
     wrapper.unmount()
   })
+
+  it('handle hsl', () => {
+    const wrapper = mount(<ColorInput hsl />)
+
+    dispatchEvent(wrapper.find(`.${name}__hsl-button`).getDOMNode(), 'click', true)
+    wrapper.update()
+
+    wrapper.find('.talixo-slider__input').at(0).simulate('change', {
+      target: {
+        value: 0
+      }
+    })
+
+    wrapper.find('.talixo-slider__input').at(1).simulate('change', {
+      target: {
+        value: 100
+      }
+    })
+
+    wrapper.find('.talixo-slider__input').at(2).simulate('change', {
+      target: {
+        value: 50
+      }
+    })
+    expect(wrapper.state('color')).toBe('#ff0000')
+
+    wrapper.unmount()
+  })
 })

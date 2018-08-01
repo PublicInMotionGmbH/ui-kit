@@ -5,7 +5,7 @@ import Hsl from '../src/Hsl'
 
 // Color value to be changed when callback invoked
 let colorValue
-let errorValue
+let errorValue = false
 
 // Callback fo Alpha
 function handleHsl (value, error) {
@@ -14,6 +14,10 @@ function handleHsl (value, error) {
 }
 
 describe('<Hsl />', () => {
+  beforeEach(() => {
+    colorValue = undefined
+    errorValue = false
+  })
   it('renders children correctly', () => {
     const wrapper = shallow(<Hsl />)
 
@@ -169,6 +173,164 @@ describe('<Hsl />', () => {
 
     expect(colorValue).toBe('red')
     expect(errorValue).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse down on slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(0).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse up on slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(0).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.find('.talixo-slider__input').at(0).simulate('mouseup')
+
+    expect(wrapper.state('controlledInside')).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse down on Hue slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(1).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse up on slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(1).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.find('.talixo-slider__input').at(1).simulate('mouseup')
+
+    expect(wrapper.state('controlledInside')).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse down on slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(2).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse up on slider in Hsl', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(2).simulate('mousedown')
+
+    expect(wrapper.state('controlledInside')).toBe(true)
+
+    wrapper.find('.talixo-slider__input').at(2).simulate('mouseup')
+
+    expect(wrapper.state('controlledInside')).toBe(false)
+
+    wrapper.unmount()
+  })
+
+  it('handle set new hsl values with short hex format', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    expect(wrapper.state('l')).toBe(0)
+
+    wrapper.setProps({
+      color: '#ffa'
+    })
+
+    expect(wrapper.state('l')).toBe(50)
+
+    wrapper.unmount()
+  })
+
+  it('handle set new hsl values with wrong hex format', () => {
+    const wrapper = mount(
+      <Hsl
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    expect(wrapper.state('l')).toBe(0)
+
+    wrapper.setProps({
+      color: '#f'
+    })
+
+    expect(wrapper.state('l')).toBe(0)
+
+    wrapper.unmount()
+  })
+
+  it('handle set new hsl values without set color', () => {
+    const wrapper = mount(
+      <Hsl
+        color='rgb(200,200,err)'
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+    expect(errorValue).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle error with wrong rgb color', () => {
+    const wrapper = mount(
+      <Hsl
+        color='rgbwrong)'
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+    expect(errorValue).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('handle hsl values with blue color', () => {
+    const wrapper = mount(
+      <Hsl
+        color='#0000ff'
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    expect(wrapper.state('l')).toBe(50)
 
     wrapper.unmount()
   })
