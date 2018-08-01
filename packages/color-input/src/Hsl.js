@@ -28,7 +28,6 @@ const propTypes = {
 class Hsl extends React.Component {
   state = {
     controlledInside: false,
-    color: this.props.color,
     h: 0,
     s: 0,
     l: 0
@@ -41,9 +40,6 @@ class Hsl extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.color !== this.props.color && !this.state.controlledInside) {
       this.handleHslCalculation(nextProps.color)
-      this.setState({
-        color: nextProps.color
-      })
     }
   }
 
@@ -72,7 +68,7 @@ class Hsl extends React.Component {
       l: l
     })
 
-    const { color } = this.state
+    const { color } = this.props
 
     let r, g, b
     h = parseFloat(h)
