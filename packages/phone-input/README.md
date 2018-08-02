@@ -36,7 +36,7 @@ This component allows any properties which can be added to `div` element. Additi
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
-autoComplete  | string    | `tel`           | additional class name passed to wrapper
+autoComplete  | string    | `off`           | additional class name passed to wrapper
 className     | string    | n/a             | additional class name passed to wrapper
 error         | boolean   | `false`         | indicates that input has error
 value         | string    | self-controlled | phone number to show
