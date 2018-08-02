@@ -16,6 +16,9 @@ import buildMaskForCountry from '../utils/buildMaskForCountry'
 export const moduleName = 'phone-input'
 
 const propTypes = {
+  /** Input autocomplete attribute name */
+  autoComplete: PropTypes.string,
+
   /** Additional class name for wrapper */
   className: PropTypes.string,
 
@@ -48,6 +51,8 @@ const propTypes = {
 }
 
 const defaultProps = {
+  // There is "tel" auto complete type defined for mobile phone with prefix, but unfortunately it's not including it in common browsers (Chrome, Safari etc)
+  autoComplete: 'off',
   error: false,
   disabled: false,
   readOnly: false
@@ -102,6 +107,7 @@ function renderCountryItem (country) {
  * Component which represents input to provided phone number.
  *
  * @property {object} props
+ * @property {string} [props.autoComplete]
  * @property {string} [props.className]
  * @property {boolean} [props.error]
  * @property {string} [props.value]
@@ -388,7 +394,7 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderInput () {
-    const { placeholder, id, disabled, readOnly } = this.props
+    const { autoComplete, placeholder, id, disabled, readOnly } = this.props
     const { value, country, focused } = this.state
 
     return (
@@ -411,9 +417,7 @@ class PhoneInput extends React.PureComponent {
         onMouseLeave={this.onInputMouseOut}
         onFocus={this.focus}
         onBlur={this.blur}
-
-        // There is "tel" auto complete type defined for mobile phone with prefix, but unfortunately it's not including it in common browsers (Chrome, Safari etc)
-        autoComplete='off'
+        autoComplete={autoComplete}
       />
     )
   }
@@ -425,7 +429,7 @@ class PhoneInput extends React.PureComponent {
    */
   render () {
     const {
-      className, error, onChange, onFocus, onBlur,
+      autoComplete, className, error, onChange, onFocus, onBlur,
       placeholder, id, value, disabled, readOnly, ...passedProps
     } = this.props
     const { hover, focus } = this.state
