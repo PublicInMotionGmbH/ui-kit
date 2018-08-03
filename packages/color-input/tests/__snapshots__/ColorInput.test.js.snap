@@ -19,6 +19,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
   <TextInput
     InputComponent="input"
     className="talixo-color-input__text-input"
+    endCaretOnFocus={false}
     error={false}
     onChange={[Function]}
     placeholder="e.g. #ffffff"

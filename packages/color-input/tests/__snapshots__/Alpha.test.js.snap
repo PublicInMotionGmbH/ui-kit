@@ -6,9 +6,11 @@ exports[`<Alpha /> renders children correctly 1`] = `
 >
   <Slider
     defaultValue={255}
+    disabled={false}
     max={255}
     min={0}
     onChange={[Function]}
+    readOnly={false}
   />
 </span>
 `;
