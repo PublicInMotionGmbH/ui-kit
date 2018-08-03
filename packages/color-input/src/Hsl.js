@@ -107,16 +107,21 @@ class Hsl extends React.Component {
       r = c
       b = x
     }
-    let m = l - c / 2
+
+    const m = (l - c / 2) < 0 ? 0 : l - c / 2
+
     r += m
     g += m
     b += m
+
     r *= 255
     g *= 255
     b *= 255
+
     r = Math.floor(r)
     g = Math.floor(g)
     b = Math.floor(b)
+
     let hex = r * 65536 + g * 256 + b
     hex = hex.toString(16, 6)
     let len = hex.length

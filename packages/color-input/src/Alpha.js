@@ -101,6 +101,10 @@ function Alpha (props) {
       props.onAlphaChange(newColor)
     } else if (color.startsWith('rgb')) {
       const colorValue = color.split('(')
+      if (!colorValue[1]) {
+        props.onAlphaChange(color, true)
+        return
+      }
       const colorValuePure = colorValue[1].split(')')
       const colorValueSplited = colorValuePure[0].split(',')
       const testRgb = colorValueSplited.every((value) => {
