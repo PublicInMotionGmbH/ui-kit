@@ -252,6 +252,11 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
+  handleClickIcon (e) {
+    e.stopPropagation()
+    this.toggle()
+  }
+
   render () {
     const {
       options, className, persistentOptions, onClick, onChange, onFocus, onBlur,
@@ -279,7 +284,10 @@ class OptionsInput extends React.PureComponent {
             value={value}
           />
 
-          <Icon name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />
+          <Icon
+            name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+            onClick={(e) => this.handleClickIcon(e)}
+          />
         </button>
         <OptionsInputList
           options={options}
