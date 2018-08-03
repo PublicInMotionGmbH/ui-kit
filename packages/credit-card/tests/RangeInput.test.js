@@ -1,6 +1,8 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 
+import { detector } from '@talixo/device-swap'
+
 import RangeInput from '../src/RangeInput'
 
 function createKeyEvent (keyCode, fn) {
@@ -11,6 +13,9 @@ function createKeyEvent (keyCode, fn) {
 }
 
 describe('<RangeInput />', () => {
+  beforeEach(() => detector.setViewType('desktop'))
+  afterEach(() => detector.reset())
+
   it('renders correctly', () => {
     const wrapper = shallow(<RangeInput />)
 

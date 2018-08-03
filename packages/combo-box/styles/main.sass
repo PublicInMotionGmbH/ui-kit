@@ -171,6 +171,22 @@
     .tai
       display: block
 
+  &--simple-select &__select
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    z-index: 0
+
+  &--simple-select &__value
+    z-index: 1
+    pointer-events: none
+
+  &--simple-select &__remove
+    pointer-events: all
+
   &--multi &__item__tick
     display: inline-block
 

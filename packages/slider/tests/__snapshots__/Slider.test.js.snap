@@ -11,8 +11,10 @@ exports[`<Slider /> renders children correctly 1`] = `
   </span>
   <input
     className="talixo-slider__input"
+    disabled={false}
     min={0}
     onChange={[Function]}
+    readOnly={false}
     type="range"
     value={0}
   />

@@ -128,4 +128,16 @@ describe('<OptionsInput />', () => {
 
     wrapper.unmount()
   })
+
+  it('close options input when click on arrow', () => {
+    const wrapper = mount(<OptionsInput options={options} />)
+
+    expect(wrapper.state('open')).toBe(false)
+
+    wrapper.find('.talixo-icon').at(2).simulate('click')
+
+    expect(wrapper.state('open')).toBe(true)
+
+    wrapper.unmount()
+  })
 })

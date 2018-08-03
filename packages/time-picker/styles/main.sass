@@ -6,6 +6,12 @@
   flex-direction: row
   align-items: center
 
+  &__input
+    width: 100%
+
+  input[type='time']
+    appearance: none
+
   &__input-hour,
   &__input-minutes
     flex-basis: $time-picker-input-width-basis
@@ -16,6 +22,7 @@
 
     input[type=number]
       appearance: none
+      min-width: $time-picker-input-min-width
 
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button

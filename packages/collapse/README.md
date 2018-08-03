@@ -11,7 +11,7 @@ using `npm install @talixo/collapse --save` or `yarn add @talixo/collapse`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.20`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -21,14 +21,14 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-style         | object    | n/a     | additional styles passed to wrapper
-collapsed     | bool      | n/a     | should it be collapsed?
-smooth        | bool      | n/a     | should it collapse and open smoothly?
-animationTime | number    | n/a     | smooth animation time (in ms)
-children      | nodes     | n/a     | content of collapsible container
+Property name  | Type      | Default | Description                    
+---------------|-----------|:-------:|--------------------------------
+className      | string    | n/a     | Additional class name passed to wrapper.
+style          | object    | n/a     | Additional styles passed to wrapper.
+collapsed      | bool      | n/a     | Should it be collapsed?
+smooth         | bool      | n/a     | Should it collapse and open smoothly?
+animationSpeed | number    | n/a     | Animation speed (in px/ms).
+children       | node      | n/a     | Content of collapsible container.
 
 ## Changelog
 

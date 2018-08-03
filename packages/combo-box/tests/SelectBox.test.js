@@ -4,6 +4,7 @@ import { mount } from 'enzyme'
 import Downshift from 'downshift'
 
 import { prefix } from '@talixo/shared'
+import { detector } from '@talixo/device-swap'
 
 import SelectBox from '../src/SelectBox'
 
@@ -14,6 +15,9 @@ describe('<SelectBox />', () => {
 
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
+
+  beforeEach(() => detector.setViewType('desktop'))
+  afterEach(() => detector.reset())
 
   it('should render correctly', () => {
     const wrapper = mount(

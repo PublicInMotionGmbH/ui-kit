@@ -11,8 +11,8 @@ using `npm install @talixo/modal --save` or `yarn add @talixo/modal`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/portal: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/portal: ^1.0.0-alpha.20`
+- `@talixo/shared: ^1.0.0-alpha.20`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -26,15 +26,16 @@ It allows any props which are allowed for `div`. Additionally, it handles some d
 
 ### Modal
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-children      | nodes     | n/a     | content of modal, including header and footer
-open          | bool      | `true`  | controls whether modal is open
-informational | bool      | `false` | it's simple, informational modal
-icon          | node      | n/a     | icon to show in informational modal
-type          | string    | n/a     | Type of informational modal for styling: `success`, `info`, `warning` or `error`
-attachTo      | Element   | `body`  | HTML element where open modal should be attached to
+Property name   | Type      | Default | Description                    
+----------------|-----------|:-------:|--------------------------------
+className       | string    | n/a     | additional class name passed to wrapper
+children        | nodes     | n/a     | content of modal, including header and footer
+onOverlayClick  | function  | n/a     | controls whether modal is open
+open            | bool      | `true`  | controls whether modal is open
+informational   | bool      | `false` | it's simple, informational modal
+icon            | node      | n/a     | icon to show in informational modal
+type            | string    | n/a     | Type of informational modal for styling: `success`, `info`, `warning` or `error`
+attachTo        | Element   | `body`  | HTML element where open modal should be attached to
 
 ### ModalHeader
 

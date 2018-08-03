@@ -28,11 +28,23 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error? */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it render native select boxes for mobile? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false,
+  mobileFriendly: false
 }
 
 // Set minimum year to be the current year.
@@ -147,7 +159,7 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, id, error, onChange, value, ...passedProps } = this.props
+    const { className, id, error, onChange, value, mobileFriendly, disabled, readOnly, ...passedProps } = this.props
     const { month, year } = this.state
 
     // Build class names.
@@ -159,7 +171,10 @@ class ExpirationDateInput extends React.PureComponent {
       <div className={wrapperClsName} {...passedProps}>
         <RangeInput
           className={monthClsName}
+          mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-month'
+          disabled={disabled}
+          readOnly={readOnly}
           id={id}
           error={error}
           min={1}
@@ -172,7 +187,10 @@ class ExpirationDateInput extends React.PureComponent {
 
         <RangeInput
           className={yearClsName}
+          mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-year'
+          disabled={disabled}
+          readOnly={readOnly}
           error={error}
           min={minYear}
           max={maxYear}

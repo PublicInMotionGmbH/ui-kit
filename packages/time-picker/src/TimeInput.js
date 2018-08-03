@@ -28,11 +28,19 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error? */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 const HOURS_24 = 'HH'
@@ -47,6 +55,8 @@ const MINUTES = 'mm'
  * @property {function} [props.onBlur]
  * @property {string} [props.format]
  * @property {object} [props.value]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {boolean} [state.open]
@@ -69,6 +79,10 @@ class TimeInput extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
       this.formatValue(nextProps)
+    }
+
+    if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+      this.setState({ open: false })
     }
   }
 
@@ -166,6 +180,12 @@ class TimeInput extends React.Component {
    * Handles input focus.
    */
   handleFocus = () => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     this.setState({ open: true })
   }
 
@@ -200,15 +220,17 @@ class TimeInput extends React.Component {
    * @returns {React.Element}
    */
   renderInput () {
-    const { id, error } = this.props
+    const { id, error, disabled, readOnly } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open })
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open, disabled, 'read-only': readOnly })
 
     return (
       <TextInput
         id={id}
+        disabled={disabled}
+        readOnly={readOnly}
         error={error}
         className={inputClsName}
         onChange={this.handleChange}

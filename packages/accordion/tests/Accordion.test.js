@@ -20,7 +20,7 @@ describe('<Accordion />', () => {
     const wrapper = shallow(
       <Accordion
         value={null}
-        animationTime={100}
+        animationSpeed={100}
         options={options}
       />
     )
@@ -32,7 +32,7 @@ describe('<Accordion />', () => {
     const wrapper = shallow(
       <Accordion
         value={1}
-        animationTime={100}
+        animationSpeed={100}
         options={options}
       />
     )

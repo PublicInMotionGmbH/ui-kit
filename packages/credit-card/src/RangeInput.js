@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { AutoComplete } from '@talixo/combo-box'
+import { AutoComplete, SelectBox } from '@talixo/combo-box'
 import { TextInput } from '@talixo/text-input'
 import { Icon } from '@talixo/icon'
+import { DeviceSwap } from '@talixo/device-swap'
 
 import { ALLOWED_KEYS } from './config'
 
 const moduleName = 'range-input'
 
 const propTypes = {
-
   /** Minimum input value length. */
   minLength: PropTypes.number,
 
@@ -35,14 +35,26 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /** Passed value. */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  value: PropTypes.oneOfType([ PropTypes.number, PropTypes.object ]),
 
   /** Input value length for auto complete. */
-  autoCompleteLength: PropTypes.number
+  autoCompleteLength: PropTypes.number,
+
+  /** Should it render native select box on mobile? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  minLength: 1
+  minLength: 1,
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -137,6 +149,8 @@ function range (min, max) {
  * @property {number} [props.value.month]
  * @property {number} [props.value.year]
  * @property {number} [props.autoCompleteLength]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {object|null} state.inputValue
@@ -204,6 +218,7 @@ class RangeInput extends React.PureComponent {
       state.value = value
       state.inputValue = formatValue(value, this.props.minLength)
     }
+
     this.setState({ ...state })
 
     if (onChange) {
@@ -284,18 +299,20 @@ class RangeInput extends React.PureComponent {
   }
 
   /**
-   * Render range input component.
-   *
-   * @returns {React.Element}
-   */
-  render () {
-    const { minLength, className, min, max, onBlur, onFocus, onChange, value: _value, autoCompleteLength, ...passedProps } = this.props
-    const { focus, options, value, inputValue } = this.state
+  * Save base node element.
+  *
+  * @param {Element} node
+  */
+  saveRef = (node) => {
+    this.node = node
+  }
 
-    // Build class names.
-    const wrapperClsName = buildClassName(moduleName, className, {
-      focused: focus
-    })
+  renderComboBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange, disabled, readOnly,
+      value: _value, mobileFriendly, autoCompleteLength, ...passedProps
+    } = this.props
+    const { focus, options, value, inputValue } = this.state
 
     // Build icon.
     const icon = this.state.focus
@@ -304,7 +321,8 @@ class RangeInput extends React.PureComponent {
 
     return (
       <AutoComplete
-        className={wrapperClsName}
+        disabled={disabled}
+        readOnly={readOnly}
         options={options}
         isOpen={focus}
         renderItem={(item) => formatValue(item, minLength)}
@@ -318,11 +336,66 @@ class RangeInput extends React.PureComponent {
       >
         <TextInput
           onKeyDown={this.onKeyDown}
+          pattern='[0-9]*'
+          inputMode='numeric'
           right={icon}
           maxLength={Math.max(('' + max).length, minLength)}
+          disabled={disabled}
+          readOnly={readOnly}
           {...passedProps}
         />
       </AutoComplete>
+    )
+  }
+
+  renderSelectBox = () => {
+    const {
+      minLength, className, min, max, onBlur, onFocus, onChange,
+      value: _value, autoCompleteLength, mobileFriendly, ...passedProps
+    } = this.props
+    const { focus, options, value } = this.state
+
+    return (
+      <SelectBox
+        {...passedProps}
+        mobileFriendly
+        options={options}
+        isOpen={focus}
+        renderItem={item => formatValue(item, minLength)}
+        value={value}
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+      />
+    )
+  }
+
+  /**
+   * Render range input component.
+   *
+   * @returns {React.Element}
+   */
+  render () {
+    const { className, mobileFriendly } = this.props
+    const { focus } = this.state
+
+    // Build class names.
+    const wrapperClsName = buildClassName(moduleName, className, {
+      focused: focus
+    })
+
+    const inner = mobileFriendly ? (
+      <DeviceSwap
+        defaultView='mobile'
+        renderMobile={this.renderSelectBox}
+        renderDesktop={this.renderComboBox}
+      />
+    ) : this.renderComboBox()
+
+    return (
+      <div className={wrapperClsName} ref={this.saveRef}>
+        {inner}
+      </div>
     )
   }
 }

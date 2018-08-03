@@ -28,9 +28,6 @@ const propTypes = {
   /** Label for cvc input. */
   cvcLabel: PropTypes.string,
 
-  /** Form header. */
-  header: PropTypes.node,
-
   /** Handler for onBlur event. */
   onBlur: PropTypes.func,
 
@@ -42,6 +39,9 @@ const propTypes = {
 
   /** Handler for onSubmit event. */
   onSubmit: PropTypes.func,
+
+  /** Should it render native select boxes for mobile (expiration date input)? */
+  mobileFriendly: PropTypes.bool,
 
   /** Values to be displayed inside inputs. */
   values: PropTypes.shape({
@@ -64,7 +64,13 @@ const propTypes = {
 
     /** Cvc number */
     cvc: PropTypes.string
-  })
+  }),
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
@@ -76,12 +82,12 @@ const defaultProps = {
   values: {
     cardHolderName: '',
     cardNumber: '',
-    cardExpirationDate: {
-      month: null,
-      year: null
-    },
+    cardExpirationDate: null,
     cvc: ''
-  }
+  },
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -98,18 +104,29 @@ const defaultProps = {
  * @param {func} [props.onFocus]
  * @param {func} [props.onSubmit]
  * @param {string} [props.values]
+ * @param {boolean} [props.disabled]
+ * @param {boolean} [props.readOnly]
  *
  * @returns {React.Element}
  */
 function CreditCardInput (props) {
-  const { cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className, cvcLabel, header, onBlur, onChange, onFocus, onSubmit, values } = props
+  const {
+    cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className,
+    cvcLabel, onBlur, onChange, onFocus, onSubmit, values, mobileFriendly,
+    disabled, readOnly
+  } = props
 
-  const formhandlerClsName = buildClassName(moduleName, className)
+  const formHandlerClsName = buildClassName(moduleName, className)
   const contentClsName = buildClassName([moduleName, 'content'])
 
   return (
-    <FormHandler className={formhandlerClsName} onSubmit={onSubmit} values={values}>
-      <legend><h3>{header}</h3></legend>
+    <FormHandler
+      className={formHandlerClsName}
+      onSubmit={onSubmit}
+      values={values}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
       <div className={contentClsName}>
         <Field
           name='cardHolderName'
@@ -143,7 +160,7 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cardExpirationDate}
         >
-          <ExpirationDateInput />
+          <ExpirationDateInput mobileFriendly={mobileFriendly} />
         </Field>
         <Field
           name='cvc'
