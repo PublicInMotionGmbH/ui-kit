@@ -5,6 +5,7 @@ exports[`<ListOption /> renders children correctly 1`] = `
   className="talixo-options-input-list-option talixo-options-input-list-option--active"
 >
   <NumberInput
+    data-hj-whitelist={true}
     disabled={false}
     endCaretOnFocus={true}
     error={false}
