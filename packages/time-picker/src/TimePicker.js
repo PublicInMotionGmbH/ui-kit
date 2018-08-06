@@ -343,6 +343,9 @@ class TimePicker extends React.PureComponent {
     } = this.props
     const { value } = this.state
 
+    const hotjarWhitelist = passedProps['data-hj-whitelist']
+    delete passedProps['data-hj-whitelist']
+
     // Build class names
     const wrapperClsName = buildClassName(moduleName, className, { error })
     const inputClsName = buildClassName([ moduleName, 'input' ])
@@ -360,6 +363,7 @@ class TimePicker extends React.PureComponent {
           onChange={this.handleChange}
           value={value && value.isValid() ? value.format('HH:mm') : value}
           className={inputClsName}
+          data-hj-whitelist={hotjarWhitelist}
         />
       </div>
     )
@@ -379,6 +383,9 @@ class TimePicker extends React.PureComponent {
     const menuClsName = buildClassName([ moduleName, 'menu' ])
     const colonClsName = buildClassName([ moduleName, 'colon' ])
 
+    const hotjarWhitelist = passedProps['data-hj-whitelist']
+    delete passedProps['data-hj-whitelist']
+
     // Convert format token
     const format = hourFormat === '24'
       ? HOURS_24
@@ -392,6 +399,7 @@ class TimePicker extends React.PureComponent {
           id={id}
           error={error}
           className={inputHourClsName}
+          data-hj-whitelist={hotjarWhitelist}
           onBlur={this.handleHoursBlur}
           format={format}
           value={value}
@@ -406,6 +414,7 @@ class TimePicker extends React.PureComponent {
           readOnly={readOnly}
           error={error}
           className={inputMinutesClsName}
+          data-hj-whitelist={hotjarWhitelist}
           onBlur={this.handleMinutesBlur}
           format={MINUTES}
           value={value}

@@ -68,6 +68,7 @@ function ListOption (props) {
     <div className={clsName}>
       <NumberInput
         endCaretOnFocus
+        data-hj-whitelist
         left={icon}
         suffix={label}
         value={value}

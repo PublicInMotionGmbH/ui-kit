@@ -242,6 +242,7 @@ class TimeInput extends React.Component {
         suffix={suffix}
         value={inputValue}
         autoComplete='off'
+        data-hj-whitelist={this.props['data-hj-whitelist']}
       />
     )
   }
@@ -249,6 +250,8 @@ class TimeInput extends React.Component {
   render () {
     const { className, children, format, onBlur, value, id, error, ...passedProps } = this.props
     const { open } = this.state
+
+    delete passedProps['data-hj-whitelist']
 
     // Build class name for wrapper
     const wrapperClsName = buildClassName([ moduleName, 'input' ], className)
