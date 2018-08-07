@@ -191,7 +191,7 @@ class Field extends React.Component {
    * @returns {React.Element}
    */
   buildInput (uniqueId) {
-    const { error, onChange, children, value, disabled, readOnly } = this.props
+    const { error, onChange, children, value, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
@@ -201,7 +201,8 @@ class Field extends React.Component {
       onBlur: this.handleBlur,
       onChange: onChange,
       onFocus: this.handleFocus,
-      value: value
+      value: value,
+      name: name
     }
 
     if (disabled) {
