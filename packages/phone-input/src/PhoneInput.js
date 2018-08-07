@@ -451,6 +451,8 @@ class PhoneInput extends React.PureComponent {
   }
 }
 
+PhoneInput.displayName = 'PhoneInput'
+
 PhoneInput.propTypes = propTypes
 
 PhoneInput.defaultProps = defaultProps

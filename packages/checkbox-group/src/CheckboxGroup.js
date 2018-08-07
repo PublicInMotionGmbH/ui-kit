@@ -167,6 +167,8 @@ class CheckboxGroup extends React.PureComponent {
   }
 }
 
+CheckboxGroup.displayName = 'CheckboxGroup'
+
 CheckboxGroup.propTypes = propTypes
 CheckboxGroup.defaultProps = defaultProps
 

@@ -149,6 +149,8 @@ class Marker extends React.PureComponent {
   }
 }
 
+Marker.displayName = 'Marker'
+
 Marker.propTypes = propTypes
 
 export default Marker

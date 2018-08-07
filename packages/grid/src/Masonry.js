@@ -47,6 +47,8 @@ function Masonry (props) {
   )
 }
 
+Masonry.displayName = 'Masonry'
+
 Masonry.propTypes = propTypes
 
 export default Masonry

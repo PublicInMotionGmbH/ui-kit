@@ -94,6 +94,8 @@ class Switcher extends React.PureComponent {
   }
 }
 
+Switcher.displayName = 'Switcher'
+
 Switcher.propTypes = propTypes
 Switcher.defaultProps = defaultProps
 

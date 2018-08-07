@@ -204,6 +204,8 @@ class ExpirationDateInput extends React.PureComponent {
   }
 }
 
+ExpirationDateInput.displayName = 'ExpirationDateInput'
+
 ExpirationDateInput.propTypes = propTypes
 
 ExpirationDateInput.defaultProps = defaultProps

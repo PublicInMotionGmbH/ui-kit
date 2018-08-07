@@ -70,6 +70,8 @@ function MenuItem (props) {
   )
 }
 
+MenuItem.displayName = 'MenuItem'
+
 MenuItem.propTypes = propTypes
 MenuItem.defaultProps = defaultProps
 

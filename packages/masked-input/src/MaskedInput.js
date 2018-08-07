@@ -187,6 +187,8 @@ class MaskedInput extends React.Component {
   }
 }
 
+MaskedInput.displayName = 'MaskedInput'
+
 MaskedInput.propTypes = propTypes
 
 MaskedInput.defaultProps = defaultProps

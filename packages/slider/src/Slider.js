@@ -127,6 +127,8 @@ class Slider extends React.PureComponent {
   }
 }
 
+Slider.displayName = 'Slider'
+
 Slider.propTypes = propTypes
 Slider.defaultProps = defaultProps
 

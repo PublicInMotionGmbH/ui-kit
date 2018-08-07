@@ -239,6 +239,8 @@ class InlineInput extends React.Component {
   }
 }
 
+InlineInput.displayName = 'InlineInput'
+
 InlineInput.propTypes = propTypes
 
 InlineInput.defaultProps = defaultProps

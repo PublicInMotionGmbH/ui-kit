@@ -240,6 +240,8 @@ class TableRow extends React.Component {
   }
 }
 
+TableRow.displayName = 'TableRow'
+
 TableRow.propTypes = propTypes
 
 TableRow.defaultProps = defaultProps

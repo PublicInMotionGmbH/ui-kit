@@ -25,6 +25,8 @@ function Footer (props) {
   )
 }
 
+Footer.displayName = 'Footer'
+
 Footer.propTypes = propTypes
 
 export default Footer

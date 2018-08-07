@@ -41,6 +41,8 @@ function ActionsCell (props) {
   )
 }
 
+ActionsCell.displayName = 'ActionsCell'
+
 ActionsCell.propTypes = propTypes
 ActionsCell.defaultProps = defaultProps
 

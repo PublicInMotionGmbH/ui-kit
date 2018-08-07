@@ -117,6 +117,8 @@ class SplitView extends React.Component {
   }
 }
 
+SplitView.displayName = 'SplitView'
+
 SplitView.propTypes = propTypes
 
 export default SplitView

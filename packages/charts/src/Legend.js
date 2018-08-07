@@ -85,4 +85,6 @@ Legend.propTypes = propTypes
 
 Legend.defaultProps = defaultProps
 
+Legend.displayName = 'Legend'
+
 export default Legend

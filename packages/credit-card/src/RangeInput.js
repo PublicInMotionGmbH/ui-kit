@@ -400,6 +400,8 @@ class RangeInput extends React.PureComponent {
   }
 }
 
+RangeInput.displayName = 'RangeInput'
+
 RangeInput.propTypes = propTypes
 
 RangeInput.defaultProps = defaultProps

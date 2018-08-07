@@ -33,6 +33,8 @@ function Icon (props) {
   return <MaterialIcon {...props} />
 }
 
+Icon.displayName = 'Icon'
+
 Icon.propTypes = propTypes
 
 export default Icon

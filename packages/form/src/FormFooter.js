@@ -32,6 +32,8 @@ function FormFooter (props) {
   )
 }
 
+FormFooter.displayName = 'FormFooter'
+
 FormFooter.propTypes = propTypes
 
 export default FormFooter

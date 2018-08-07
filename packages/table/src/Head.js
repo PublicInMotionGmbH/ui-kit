@@ -25,6 +25,8 @@ function Head (props) {
   )
 }
 
+Head.displayName = 'Head'
+
 Head.propTypes = propTypes
 
 export default Head

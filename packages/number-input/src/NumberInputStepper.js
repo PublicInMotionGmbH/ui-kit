@@ -200,6 +200,8 @@ class NumberInputStepper extends React.PureComponent {
   }
 }
 
+NumberInputStepper.displayName = 'NumberInputStepper'
+
 NumberInputStepper.propTypes = propTypes
 
 NumberInputStepper.defaultProps = defaultProps

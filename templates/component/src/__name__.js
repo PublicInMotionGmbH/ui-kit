@@ -3,6 +3,14 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string
+}
+
+const defaultProps = {
+}
+
 /**
  * Component which represents __title__.
  *
@@ -18,12 +26,9 @@ function __name__ (props) {
   )
 }
 
-__name__.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string
-}
+__name__.displayName = '__name__'
 
-__name__.defaultProps = {
-}
+__name__.propTypes = propTypes
+__name__.defaultProps = defaultProps
 
 export default __name__

@@ -252,6 +252,8 @@ class FormHandler extends React.PureComponent {
   }
 }
 
+FormHandler.displayName = 'FormHandler'
+
 FormHandler.propTypes = propTypes
 FormHandler.defaultProps = defaultProps
 

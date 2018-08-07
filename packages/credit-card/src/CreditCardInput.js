@@ -177,6 +177,8 @@ function CreditCardInput (props) {
   )
 }
 
+CreditCardInput.displayName = 'CreditCardInput'
+
 CreditCardInput.propTypes = propTypes
 
 CreditCardInput.defaultProps = defaultProps

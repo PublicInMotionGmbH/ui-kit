@@ -301,6 +301,8 @@ class OptionsInput extends React.PureComponent {
   }
 }
 
+OptionsInput.displayName = 'OptionsInput'
+
 OptionsInput.propTypes = propTypes
 OptionsInput.defaultProps = defaultProps
 

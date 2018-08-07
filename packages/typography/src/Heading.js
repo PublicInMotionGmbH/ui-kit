@@ -37,6 +37,8 @@ function Heading (props) {
   )
 }
 
+Heading.displayName = 'Heading'
+
 Heading.propTypes = propTypes
 Heading.defaultProps = defaultProps
 

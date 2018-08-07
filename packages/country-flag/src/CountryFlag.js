@@ -49,6 +49,8 @@ class CountryFlag extends React.PureComponent {
   }
 }
 
+CountryFlag.displayName = 'CountryFlag'
+
 CountryFlag.contextTypes = contextTypes
 CountryFlag.propTypes = propTypes
 

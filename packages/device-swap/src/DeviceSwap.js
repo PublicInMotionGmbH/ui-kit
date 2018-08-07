@@ -3,6 +3,21 @@ import PropTypes from 'prop-types'
 
 import detector from './detector'
 
+const propTypes = {
+  /** Default view to render before device type is detected */
+  defaultView: PropTypes.oneOf([ 'mobile', 'desktop' ]),
+
+  /** Mobile view to render */
+  renderMobile: PropTypes.func,
+
+  /** Desktop view to render */
+  renderDesktop: PropTypes.func
+}
+
+const defaultProps = {
+  defaultView: 'desktop'
+}
+
 function getCurrentView (props) {
   return detector.isDetermined() ? detector.getViewType() : props.defaultView
 }
@@ -98,19 +113,9 @@ class DeviceSwap extends React.Component {
   }
 }
 
-DeviceSwap.propTypes = {
-  /** Default view to render before device type is detected */
-  defaultView: PropTypes.oneOf([ 'mobile', 'desktop' ]),
+DeviceSwap.displayName = 'DeviceSwap'
 
-  /** Mobile view to render */
-  renderMobile: PropTypes.func,
-
-  /** Desktop view to render */
-  renderDesktop: PropTypes.func
-}
-
-DeviceSwap.defaultProps = {
-  defaultView: 'desktop'
-}
+DeviceSwap.propTypes = propTypes
+DeviceSwap.defaultProps = defaultProps
 
 export default DeviceSwap

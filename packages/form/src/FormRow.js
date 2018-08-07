@@ -70,6 +70,8 @@ function FormRow (props) {
   )
 }
 
+FormRow.displayName = 'FormRow'
+
 FormRow.propTypes = propTypes
 FormRow.defaultProps = defaultProps
 

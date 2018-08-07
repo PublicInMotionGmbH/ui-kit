@@ -200,6 +200,8 @@ class NumberInput extends React.PureComponent {
   }
 }
 
+NumberInput.displayName = 'NumberInput'
+
 NumberInput.propTypes = propTypes
 
 NumberInput.defaultProps = defaultProps

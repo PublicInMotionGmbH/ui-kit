@@ -211,6 +211,8 @@ class CarouselAutoplay extends React.PureComponent {
   }
 }
 
+CarouselAutoplay.displayName = 'CarouselAutoplay'
+
 CarouselAutoplay.propTypes = propTypes
 CarouselAutoplay.defaultProps = defaultProps
 

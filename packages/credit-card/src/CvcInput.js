@@ -125,6 +125,8 @@ class CvcInput extends React.PureComponent {
   }
 }
 
+CvcInput.displayName = 'CvcInput'
+
 CvcInput.propTypes = propTypes
 
 CvcInput.defaultProps = defaultProps

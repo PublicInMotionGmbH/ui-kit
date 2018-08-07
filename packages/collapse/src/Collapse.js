@@ -171,6 +171,8 @@ class Collapse extends React.PureComponent {
   }
 }
 
+Collapse.displayName = 'Collapse'
+
 Collapse.propTypes = propTypes
 Collapse.defaultProps = defaultProps
 

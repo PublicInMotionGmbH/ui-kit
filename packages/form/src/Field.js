@@ -264,6 +264,8 @@ class Field extends React.Component {
   }
 }
 
+Field.displayName = 'Field'
+
 Field.propTypes = propTypes
 Field.defaultProps = defaultProps
 
