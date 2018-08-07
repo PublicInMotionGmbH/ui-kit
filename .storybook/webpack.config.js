@@ -7,6 +7,9 @@ const webpack = require('webpack')
  * @returns {object}
  */
 function buildWebpackConfiguration (config) {
+  // Fix problems with building production build
+  delete config.optimization
+
   // Set 'cache' property
   config.cache = true
 
