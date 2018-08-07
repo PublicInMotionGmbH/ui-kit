@@ -68,12 +68,7 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
         pattern="[0-9]*"
         readOnly={false}
         role="combobox"
-        style={
-          Object {
-            "paddingLeft": 1,
-            "paddingRight": 1,
-          }
-        }
+        style={null}
         type="text"
         value=""
       />
