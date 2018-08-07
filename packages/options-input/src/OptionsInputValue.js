@@ -84,6 +84,8 @@ function OptionsInputValue (props) {
   )
 }
 
+OptionsInputValue.displayName = 'OptionsInputValue'
+
 OptionsInputValue.propTypes = propTypes
 OptionsInputValue.defaultProps = defaultProps
 

@@ -98,6 +98,8 @@ function SelectBoxValue (props) {
   )
 }
 
+SelectBoxValue.displayName = 'SelectBoxValue'
+
 SelectBoxValue.propTypes = propTypes
 SelectBoxValue.defaultProps = defaultProps
 

@@ -144,6 +144,8 @@ class Directions extends React.PureComponent {
   }
 }
 
+Directions.displayName = 'Directions'
+
 Directions.propTypes = propTypes
 
 export default Directions

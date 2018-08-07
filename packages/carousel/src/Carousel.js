@@ -412,6 +412,8 @@ class Carousel extends React.PureComponent {
   }
 }
 
+Carousel.displayName = 'Carousel'
+
 Carousel.propTypes = propTypes
 Carousel.defaultProps = defaultProps
 

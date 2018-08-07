@@ -102,6 +102,8 @@ function ProgressRing (props) {
   )
 }
 
+ProgressRing.displayName = 'ProgressRing'
+
 ProgressRing.propTypes = propTypes
 ProgressRing.defaultProps = defaultProps
 

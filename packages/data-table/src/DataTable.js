@@ -245,6 +245,9 @@ class DataTable extends React.Component {
     )
   }
 }
+
+DataTable.displayName = 'DataTable'
+
 DataTable.propTypes = propTypes
 
 DataTable.defaultProps = defaultProps

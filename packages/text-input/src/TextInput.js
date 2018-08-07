@@ -516,6 +516,8 @@ class TextInput extends React.PureComponent {
   }
 }
 
+TextInput.displayName = 'TextInput'
+
 TextInput.propTypes = propTypes
 TextInput.defaultProps = defaultProps
 

@@ -246,6 +246,8 @@ class Rating extends React.PureComponent {
   }
 }
 
+Rating.displayName = 'Rating'
+
 Rating.propTypes = propTypes
 Rating.defaultProps = defaultProps
 

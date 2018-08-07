@@ -431,6 +431,8 @@ class SelectBox extends React.PureComponent {
   }
 }
 
+SelectBox.displayName = 'SelectBox'
+
 SelectBox.propTypes = propTypes
 SelectBox.defaultProps = defaultProps
 

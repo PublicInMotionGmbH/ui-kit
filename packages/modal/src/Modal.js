@@ -94,6 +94,8 @@ function Modal (props) {
   )
 }
 
+Modal.displayName = 'Modal'
+
 Modal.propTypes = propTypes
 Modal.defaultProps = defaultProps
 

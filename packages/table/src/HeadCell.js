@@ -23,6 +23,8 @@ function HeadCell (props) {
   )
 }
 
+HeadCell.displayName = 'HeadCell'
+
 HeadCell.propTypes = propTypes
 
 export default HeadCell

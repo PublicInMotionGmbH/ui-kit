@@ -277,6 +277,8 @@ class Tooltip extends React.Component {
   }
 }
 
+Tooltip.displayName = 'Tooltip'
+
 Tooltip.propTypes = propTypes
 Tooltip.defaultProps = defaultProps
 

@@ -18,6 +18,8 @@ function __name__ (props) {
   )
 }
 
+__name__.displayName = '__name__'
+
 __name__.propTypes = {
   /** Additional class name */
   className: PropTypes.string

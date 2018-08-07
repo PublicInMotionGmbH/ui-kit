@@ -43,6 +43,8 @@ function ControlledTabs (props) {
   ))
 }
 
+ControlledTabs.displayName = 'ControlledTabs'
+
 ControlledTabs.propTypes = propTypes
 
 ControlledTabs.defaultProps = defaultProps

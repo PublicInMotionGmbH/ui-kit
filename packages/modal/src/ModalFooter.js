@@ -31,6 +31,8 @@ function ModalFooter (props) {
   )
 }
 
+ModalFooter.displayName = 'ModalFooter'
+
 ModalFooter.propTypes = propTypes
 
 export default ModalFooter

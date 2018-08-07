@@ -23,6 +23,8 @@ function Cell (props) {
   )
 }
 
+Cell.displayName = 'Cell'
+
 Cell.propTypes = propTypes
 
 export default Cell

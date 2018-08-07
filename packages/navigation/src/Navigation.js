@@ -78,6 +78,8 @@ function Navigation (props) {
   )
 }
 
+Navigation.displayName = 'Navigation'
+
 Navigation.propTypes = propTypes
 
 Navigation.defaultProps = defaultProps

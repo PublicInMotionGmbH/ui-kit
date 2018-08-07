@@ -1,6 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const childContextTypes = {
+  registerFlag: PropTypes.func,
+  unregisterFlag: PropTypes.func
+}
+
+const propTypes = {
+  /** URL to sprite with country flags */
+  url: PropTypes.string.isRequired,
+
+  /** Children to pass down */
+  children: PropTypes.node
+}
+
 function load (url, callback) {
   if (url.match(/^data:/)) {
     // Handle Data URI Scheme
@@ -137,17 +150,9 @@ class CountryFlagsProvider extends React.PureComponent {
   }
 }
 
-CountryFlagsProvider.childContextTypes = {
-  registerFlag: PropTypes.func,
-  unregisterFlag: PropTypes.func
-}
+CountryFlagsProvider.displayName = 'CountryFlagsProvider'
 
-CountryFlagsProvider.propTypes = {
-  /** URL to sprite with country flags */
-  url: PropTypes.string.isRequired,
-
-  /** Children to pass down */
-  children: PropTypes.node
-}
+CountryFlagsProvider.childContextTypes = childContextTypes
+CountryFlagsProvider.propTypes = propTypes
 
 export default CountryFlagsProvider

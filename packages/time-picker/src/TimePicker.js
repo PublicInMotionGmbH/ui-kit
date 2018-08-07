@@ -448,6 +448,8 @@ class TimePicker extends React.PureComponent {
   }
 }
 
+TimePicker.displayName = 'TimePicker'
+
 TimePicker.propTypes = propTypes
 
 TimePicker.defaultProps = defaultProps

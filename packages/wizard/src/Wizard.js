@@ -69,6 +69,8 @@ class Wizard extends React.PureComponent {
   }
 }
 
+Wizard.displayName = 'Wizard'
+
 Wizard.propTypes = propTypes
 
 export default Wizard

@@ -87,6 +87,8 @@ function ProgressBar (props) {
   )
 }
 
+ProgressBar.displayName = 'ProgressBar'
+
 ProgressBar.propTypes = propTypes
 ProgressBar.defaultProps = defaultProps
 

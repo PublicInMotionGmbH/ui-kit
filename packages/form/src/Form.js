@@ -136,6 +136,8 @@ class Form extends React.Component {
   }
 }
 
+Form.displayName = 'Form'
+
 Form.propTypes = propTypes
 
 export default Form

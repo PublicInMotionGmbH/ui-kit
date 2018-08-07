@@ -293,6 +293,8 @@ class Accordion extends React.PureComponent {
   }
 }
 
+Accordion.displayName = 'Accordion'
+
 Accordion.propTypes = propTypes
 Accordion.defaultProps = defaultProps
 

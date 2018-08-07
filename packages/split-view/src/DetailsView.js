@@ -39,6 +39,8 @@ function DetailsView (props) {
   )
 }
 
+DetailsView.displayName = 'DetailsView'
+
 DetailsView.propTypes = propTypes
 
 DetailsView.defaultProps = defaultProps

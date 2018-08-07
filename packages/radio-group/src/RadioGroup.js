@@ -113,6 +113,8 @@ class RadioGroup extends React.PureComponent {
   }
 }
 
+RadioGroup.displayName = 'RadioGroup'
+
 RadioGroup.propTypes = propTypes
 RadioGroup.defaultProps = defaultProps
 

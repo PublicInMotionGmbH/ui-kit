@@ -171,6 +171,8 @@ class CreditCardNumberInput extends React.PureComponent {
   }
 }
 
+CreditCardNumberInput.displayName = 'CreditCardNumberInput'
+
 CreditCardNumberInput.propTypes = propTypes
 
 CreditCardNumberInput.defaultProps = defaultProps

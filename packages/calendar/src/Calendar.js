@@ -193,6 +193,8 @@ class Calendar extends React.PureComponent {
   }
 }
 
+Calendar.displayName = 'Calendar'
+
 Calendar.propTypes = propTypes
 Calendar.defaultProps = defaultProps
 

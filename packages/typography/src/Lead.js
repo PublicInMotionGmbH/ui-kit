@@ -29,6 +29,8 @@ function Lead (props) {
   )
 }
 
+Lead.displayName = 'Lead'
+
 Lead.propTypes = propTypes
 
 export default Lead

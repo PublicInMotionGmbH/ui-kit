@@ -95,6 +95,8 @@ function TimeMenu (props) {
   )
 }
 
+TimeMenu.displayName = 'TimeMenu'
+
 TimeMenu.propTypes = propTypes
 
 TimeMenu.defaultProps = defaultProps

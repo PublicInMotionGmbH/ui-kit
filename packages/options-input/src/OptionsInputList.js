@@ -72,6 +72,8 @@ function OptionsInputList (props) {
   )
 }
 
+OptionsInputList.displayName = 'OptionsInputList'
+
 OptionsInputList.propTypes = propTypes
 OptionsInputList.defaultProps = defaultProps
 

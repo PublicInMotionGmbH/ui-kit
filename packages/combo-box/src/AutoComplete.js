@@ -343,6 +343,8 @@ class AutoComplete extends React.PureComponent {
   }
 }
 
+AutoComplete.displayName = 'AutoComplete'
+
 AutoComplete.propTypes = propTypes
 AutoComplete.defaultProps = defaultProps
 

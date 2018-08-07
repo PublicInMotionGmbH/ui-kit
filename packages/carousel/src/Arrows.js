@@ -42,6 +42,8 @@ function Arrows (props) {
   )
 }
 
+Arrows.displayName = 'Arrows'
+
 Arrows.propTypes = propTypes
 
 export default Arrows

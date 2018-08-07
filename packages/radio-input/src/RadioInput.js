@@ -66,6 +66,8 @@ class RadioInput extends React.PureComponent {
   }
 }
 
+RadioInput.displayName = 'RadioInput'
+
 RadioInput.propTypes = propTypes
 RadioInput.defaultProps = defaultProps
 

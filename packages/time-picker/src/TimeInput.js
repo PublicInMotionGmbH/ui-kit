@@ -265,6 +265,8 @@ class TimeInput extends React.Component {
   }
 }
 
+TimeInput.displayName = 'TimeInput'
+
 TimeInput.propTypes = propTypes
 
 TimeInput.defaultProps = defaultProps

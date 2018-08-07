@@ -54,6 +54,8 @@ function Group (props) {
   )
 }
 
+Group.displayName = 'Group'
+
 Group.propTypes = propTypes
 Group.defaultProps = defaultProps
 

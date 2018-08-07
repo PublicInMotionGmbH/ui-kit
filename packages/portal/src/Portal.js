@@ -54,6 +54,8 @@ class Portal extends React.PureComponent {
   }
 }
 
+Portal.displayName = 'Portal'
+
 Portal.propTypes = propTypes
 
 export default Portal

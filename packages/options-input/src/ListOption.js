@@ -80,6 +80,8 @@ function ListOption (props) {
   )
 }
 
+ListOption.displayName = 'ListOption'
+
 ListOption.propTypes = propTypes
 
 export default ListOption
