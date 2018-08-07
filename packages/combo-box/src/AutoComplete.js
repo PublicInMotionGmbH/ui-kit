@@ -260,7 +260,7 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children, id, disabled, readOnly } = this.props
+    const { children, id, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
@@ -276,6 +276,10 @@ class AutoComplete extends React.PureComponent {
 
     if (id != null) {
       inputProps.id = id
+    }
+
+    if (name != null) {
+      inputProps.name = name
     }
 
     return React.cloneElement(input, inputProps)
