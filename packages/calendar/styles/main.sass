@@ -93,8 +93,7 @@
     justify-content: space-between
 
   .DayPicker_weekHeader,
-  .CalendarMonthGrid_month__horizontal,
-  .CalendarMonth_caption
+  .CalendarMonthGrid_month__horizontal
     flex: 1 0
     width: 45%
     max-width: 45%
@@ -124,13 +123,18 @@
     justify-content: space-between
     outline: none
 
+  .CalendarMonth
+    position: relative
+
   .CalendarMonth_caption
     text-align: center
     text-transform: uppercase
     font-size: $calendar-picker-month-font-size
     line-height: 1em
     position: absolute
-    top: $calendar-picker-padding-vertical
+    bottom: 100%
+    width: 100%
+    margin-bottom: $calendar-picker-weekday-line-height * $calendar-picker-weekday-font-size + $calendar-picker-month-font-size
 
     > strong
       font-weight: $calendar-picker-month-font-weight
