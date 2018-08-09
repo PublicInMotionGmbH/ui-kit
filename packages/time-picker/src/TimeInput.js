@@ -109,6 +109,37 @@ class TimeInput extends React.Component {
   }
 
   /**
+   * Handle mosue down on arrow
+   *
+   * @param {SyntheticEvent|Event} e
+   */
+  handleMouseDownArrow = (e) => {
+    const input = this.inputRef.input
+
+    input.focus()
+    e.preventDefault()
+
+    if (this.state.open) {
+      this.setState({
+        open: false
+      })
+    } else {
+      this.setState({
+        open: true
+      })
+    }
+  }
+
+  /**
+   * Set ref to TextInput
+   *
+   * @param {node} node
+   */
+  setInputRef = (node) => {
+    this.inputRef = node
+  }
+
+  /**
    * Build control arrow.
    *
    * @returns {React.Element}
@@ -120,7 +151,7 @@ class TimeInput extends React.Component {
     const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName}>
+      <span className={arrowClsName} onMouseDown={(e) => this.handleMouseDownArrow(e)} >
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
@@ -243,6 +274,7 @@ class TimeInput extends React.Component {
         value={inputValue}
         autoComplete='off'
         data-hj-whitelist={this.props['data-hj-whitelist']}
+        ref={this.setInputRef}
       />
     )
   }
