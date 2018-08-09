@@ -61,13 +61,12 @@
   &__colon
     padding: $time-picker-colon-margin
 
+  #{prefix('text-input','input')}:focus
+    ~ #{prefix('text-input','right')}
+        cursor: pointer
+        pointer-events: auto
 
-  .talixo-text-input__input:focus 
-      ~ .talixo-text-input__right
-          cursor: pointer
-          pointer-events: auto
-
-  .talixo-text-input__right
+  #{prefix('text-input','right')}
     pointer-events: none
 
   // FIXME: AM/PM is put too much down
