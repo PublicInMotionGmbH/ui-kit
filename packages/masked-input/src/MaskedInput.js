@@ -129,7 +129,7 @@ class MaskedInput extends React.Component {
    * @returns {{onBlur: void | any, onFocus: void | any, onChange: MaskedInput.handleChange}}
    */
   getInputProps () {
-    const { children, id, placeholder } = this.props
+    const { children, id, placeholder, name } = this.props
     const { value } = this.state
     const input = React.Children.only(children)
 
@@ -137,6 +137,7 @@ class MaskedInput extends React.Component {
       id: id,
       value: value,
       placeholder: placeholder,
+      name: name,
       ...input.props,
       onBlur: this.blur,
       onFocus: this.focus,

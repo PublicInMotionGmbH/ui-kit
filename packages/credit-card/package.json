@@ -23,9 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/combo-box": "^1.0.0-alpha.20",
+    "@talixo/combo-box": "^1.0.0-alpha.21",
     "@talixo/device-swap": "^1.0.0-alpha.20",
-    "@talixo/form": "^1.0.0-alpha.20",
+    "@talixo/form": "^1.0.0-alpha.21",
     "@talixo/icon": "^1.0.0-alpha.20",
     "@talixo/shared": "^1.0.0-alpha.20",
     "@talixo/text-input": "^1.0.0-alpha.21",
@@ -35,9 +35,9 @@
     "react-text-mask": "5.4.1"
   },
   "peerDependencies": {
-    "@talixo/combo-box": "^1.0.0-alpha.20",
+    "@talixo/combo-box": "^1.0.0-alpha.21",
     "@talixo/device-swap": "^1.0.0-alpha.20",
-    "@talixo/form": "^1.0.0-alpha.20",
+    "@talixo/form": "^1.0.0-alpha.21",
     "@talixo/icon": "^1.0.0-alpha.20",
     "@talixo/shared": "^1.0.0-alpha.20",
     "@talixo/text-input": "^1.0.0-alpha.21",
