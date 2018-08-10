@@ -133,7 +133,7 @@ class TimeInput extends React.Component {
     const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName} onMouseDown={(e) => this.handleMouseDownArrow(e)} >
+      <span className={arrowClsName} onMouseDown={this.handleMouseDownArrow}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
