@@ -109,34 +109,16 @@ class TimeInput extends React.Component {
   }
 
   /**
-   * Handle mosue down on arrow
+   * Handle mouse down on arrow
    *
    * @param {SyntheticEvent|Event} e
    */
   handleMouseDownArrow = (e) => {
-    const input = this.inputRef.input
-
-    input.focus()
     e.preventDefault()
 
-    if (this.state.open) {
-      this.setState({
-        open: false
-      })
-    } else {
-      this.setState({
-        open: true
-      })
-    }
-  }
-
-  /**
-   * Set ref to TextInput
-   *
-   * @param {node} node
-   */
-  setInputRef = (node) => {
-    this.inputRef = node
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   /**
@@ -274,7 +256,6 @@ class TimeInput extends React.Component {
         value={inputValue}
         autoComplete='off'
         data-hj-whitelist={this.props['data-hj-whitelist']}
-        ref={this.setInputRef}
       />
     )
   }
