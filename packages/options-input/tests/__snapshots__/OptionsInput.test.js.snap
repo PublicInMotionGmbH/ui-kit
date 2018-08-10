@@ -41,6 +41,7 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
     <Icon
       name="keyboard_arrow_down"
       onClick={[Function]}
+      onMouseDown={[Function]}
     />
   </button>
   <OptionsInputList
