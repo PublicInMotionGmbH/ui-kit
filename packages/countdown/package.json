@@ -1,6 +1,6 @@
 {
   "name": "@talixo/countdown",
-  "version": "1.0.0-alpha.20",
+  "version": "1.0.0-alpha.24",
   "description": "UI Component which represents Countdown",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.20",
+    "@talixo/shared": "^1.0.0-alpha.24",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.20",
+    "@talixo/shared": "^1.0.0-alpha.24",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
