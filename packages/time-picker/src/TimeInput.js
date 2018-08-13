@@ -109,6 +109,19 @@ class TimeInput extends React.Component {
   }
 
   /**
+   * Handle mouse down on arrow
+   *
+   * @param {SyntheticEvent|Event} e
+   */
+  handleMouseDownArrow = (e) => {
+    e.preventDefault()
+
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
+  /**
    * Build control arrow.
    *
    * @returns {React.Element}
@@ -120,7 +133,7 @@ class TimeInput extends React.Component {
     const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName}>
+      <span className={arrowClsName} onMouseDown={this.handleMouseDownArrow}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
