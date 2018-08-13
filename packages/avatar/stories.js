@@ -23,26 +23,26 @@ addStory('image', readme, () => (
     }}>
       <Avatar
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?1'
       />
       <Avatar
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?1'
         size={24}
       />
       <Avatar
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?1'
         size={32}
       />
       <Avatar
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?1'
         size={48}
       />
       <Avatar
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?1'
         size={64}
       />
     </div>
@@ -58,30 +58,30 @@ addStory('image', readme, () => (
       <Avatar
         rounded
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?2'
       />
       <Avatar
         rounded
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?2'
         size={24}
       />
       <Avatar
         rounded
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?2'
         size={32}
       />
       <Avatar
         rounded
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?2'
         size={48}
       />
       <Avatar
         rounded
         alt='js-logo'
-        src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png'
+        src='http://i.pravatar.cc/300?2'
         size={64}
       />
     </div>
