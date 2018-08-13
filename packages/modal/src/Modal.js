@@ -14,6 +14,9 @@ const propTypes = {
   /** Content of modal */
   children: PropTypes.node,
 
+  /** Handles pressing key. */
+  onEscKeyDown: PropTypes.func,
+
   /** Handles clicking on backdrop. */
   onOverlayClick: PropTypes.func,
 
@@ -41,57 +44,83 @@ const defaultProps = {
 /**
  * Component which represents modal.
  *
- * @param {object} props
- * @param {function} [props.onOverlayClick]
- * @param {boolean} props.open
- * @param {boolean} props.informational
- * @param {string} [props.className]
- * @param {*} [props.children]
- * @param {*} [props.icon]
- * @param {HTMLElement} [props.attachTo]
- * @returns {React.Element}
+ * @property {object} props
+ * @property {function} [props.onOverlayClick]
+ * @property {function} [props.onEscKeyDown]
+ * @property {boolean} props.open
+ * @property {boolean} props.informational
+ * @property {string} [props.className]
+ * @property {*} [props.children]
+ * @property {*} [props.icon]
+ * @property {HTMLElement} [props.attachTo]
+ * @class
  */
-function Modal (props) {
-  const { children, className, open, onOverlayClick, attachTo, informational, icon, type, ...rest } = props
-
-  const backdropClasses = buildClassName('modal-backdrop', null, {
-    entered: open,
-    exiting: !open
-  }, [ type ])
-
-  const modalClasses = buildClassName('modal', className, { informational }, [ type ])
-  const contentClasses = buildClassName('modal-content')
-
-  const backdropProps = {
-    className: backdropClasses
-  }
-
-  if (onOverlayClick) {
-    const backdropClick = e => {
-      if (e.target !== e.currentTarget) { return }
-      onOverlayClick(e)
+class Modal extends React.Component {
+  componentDidMount () {
+    if (this.props.onEscKeyDown) {
+      document.addEventListener('keydown', this.handleEscKeyDown)
     }
-    backdropProps.onClick = backdropClick
   }
 
-  const iconElement = informational && icon ? (
-    <div className={buildClassName('modal-icon')}>
-      {icon}
-    </div>
-  ) : null
+  componentWillUnmount () {
+    if (this.props.onEscKeyDown) {
+      document.removeEventListener('keydown', this.handleEscKeyDown)
+    }
+  }
 
-  return (
-    <Portal attachTo={attachTo}>
-      <div {...backdropProps}>
-        <div className={modalClasses} {...rest}>
-          {iconElement}
-          <div className={contentClasses}>
-            {children}
+  /**
+   * Handles pressing Escape key.
+   * @param {Event|SyntheticEvent} e
+   */
+  handleEscKeyDown = (e) => {
+    const conditions =
+      !!this.props.onEscKeyDown &&
+      this.props.open &&
+      !e.isDefaultPrevented &&
+      e.keyCode === 27
+
+    if (conditions) {
+      this.props.onEscKeyDown(e)
+    }
+  }
+
+  handleOverlayClick = (e) => {
+    if (e.target !== e.currentTarget) { return }
+
+    if (this.props.onOverlayClick) {
+      this.props.onOverlayClick(e)
+    }
+  }
+
+  render () {
+    const { attachTo, children, className, open, onEscKeyDown, onOverlayClick, informational, icon, type, ...rest } = this.props
+
+    const modalClasses = buildClassName('modal', className, { informational }, [ type ])
+    const contentClasses = buildClassName('modal-content')
+    const backdropClasses = buildClassName('modal-backdrop', null, {
+      entered: open,
+      exiting: !open
+    }, [ type ])
+
+    const iconElement = informational && icon ? (
+      <div className={buildClassName('modal-icon')}>
+        {icon}
+      </div>
+    ) : null
+
+    return (
+      <Portal attachTo={attachTo}>
+        <div className={backdropClasses} onClick={this.handleOverlayClick}>
+          <div className={modalClasses} {...rest}>
+            {iconElement}
+            <div className={contentClasses}>
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-    </Portal>
-  )
+      </Portal>
+    )
+  }
 }
 
 Modal.displayName = 'Modal'
