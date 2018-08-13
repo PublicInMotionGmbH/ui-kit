@@ -9,6 +9,7 @@ describe('<Fieldset />', () => {
     const wrapper = mount(<Fieldset legend='Personal info' asideLegend={<span><Icon name='credit-card' /> Credit Card</span>} />)
 
     expect(wrapper).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('passes prop legend correctly', () => {
@@ -20,10 +21,12 @@ describe('<Fieldset />', () => {
   it('passes prop asideLegend correctly', () => {
     const wrapper = mount(<Fieldset legend='Personal info' asideLegend={<span><Icon name='credit-card' />Credit Card</span>} />)
     expect(wrapper.prop('asideLegend').props.children[0].props.name).toMatch(/credit-card/)
+    wrapper.unmount()
   })
 
   it('shouldn`t render asideLegend when prop legend is not passed', () => {
     const wrapper = mount(<Fieldset asideLegend={<span><Icon name='credit-card' />Credit Card</span>} />)
     expect(wrapper.html()).not.toMatch(/Credit/)
+    wrapper.unmount()
   })
 })

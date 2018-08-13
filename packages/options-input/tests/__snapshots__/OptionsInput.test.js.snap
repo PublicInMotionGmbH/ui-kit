@@ -6,63 +6,70 @@ exports[`<OptionsInput /> renders children correctly 1`] = `
 >
   <button
     aria-expanded={false}
-    className="options-input__toggle"
+    className="talixo-options-input__toggle"
     onBlur={[Function]}
+    onClick={[Function]}
     onFocus={[Function]}
     role="button"
     type="button"
   >
-    <div
-      className="options-input__value"
-    >
-      <Option
-        key="person"
-        option={
+    <OptionsInputValue
+      options={
+        Array [
           Object {
             "default": 1,
             "description": "Older than 15",
             "icon": "person",
             "id": "person",
             "label": "Adults",
-          }
+          },
+          Object {
+            "icon": "rocket",
+            "id": "rocket",
+            "label": "Rockets",
+          },
+        ]
+      }
+      persistentOptions={Array []}
+      value={
+        Object {
+          "person": 1,
+          "rocket": 0,
         }
-        value={1}
-      />
-    </div>
+      }
+    />
     <Icon
       name="keyboard_arrow_down"
+      onClick={[Function]}
+      onMouseDown={[Function]}
     />
   </button>
-  <div
-    aria-hidden={true}
-    className="options-input__list"
-  >
-    <ListOption
-      key="person"
-      onChange={[Function]}
-      option={
+  <OptionsInputList
+    disabled={false}
+    onChange={[Function]}
+    options={
+      Array [
         Object {
           "default": 1,
           "description": "Older than 15",
           "icon": "person",
           "id": "person",
           "label": "Adults",
-        }
-      }
-      value={1}
-    />
-    <ListOption
-      key="rocket"
-      onChange={[Function]}
-      option={
+        },
         Object {
           "icon": "rocket",
           "id": "rocket",
           "label": "Rockets",
-        }
+        },
+      ]
+    }
+    readOnly={false}
+    value={
+      Object {
+        "person": 1,
+        "rocket": 0,
       }
-      value={0}
-    />
-  </div>
+    }
+  />
 </div>
 `;

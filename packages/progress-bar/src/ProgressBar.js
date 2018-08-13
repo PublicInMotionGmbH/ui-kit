@@ -3,6 +3,34 @@ import PropTypes from 'prop-types'
 
 import { prefix, buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Progress bar style type */
+  type: PropTypes.oneOf([ 'error', 'success', 'info', 'warning', 'secondary', 'tertiary' ]),
+
+  /** Progress, between 0 and 1 */
+  value: PropTypes.number,
+
+  /** Should progress bar be striped? */
+  striped: PropTypes.bool,
+
+  /** Should it be smoothly animated? */
+  smooth: PropTypes.bool,
+
+  /** Progress bar size */
+  size: PropTypes.oneOf([ 'small' ]),
+
+  /** Label */
+  children: PropTypes.node
+}
+
+const defaultProps = {
+  striped: false,
+  smooth: true
+}
+
 /**
  * Component which represents Progress Bar.
  *
@@ -59,32 +87,9 @@ function ProgressBar (props) {
   )
 }
 
-ProgressBar.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
+ProgressBar.displayName = 'ProgressBar'
 
-  /** Progress bar style type */
-  type: PropTypes.oneOf([ 'error', 'success', 'info', 'warning' ]),
-
-  /** Progress, between 0 and 1 */
-  value: PropTypes.number,
-
-  /** Should progress bar be striped? */
-  striped: PropTypes.bool,
-
-  /** Should it be smoothly animated? */
-  smooth: PropTypes.bool,
-
-  /** Progress bar size */
-  size: PropTypes.oneOf([ 'small' ]),
-
-  /** Label */
-  children: PropTypes.node
-}
-
-ProgressBar.defaultProps = {
-  striped: false,
-  smooth: true
-}
+ProgressBar.propTypes = propTypes
+ProgressBar.defaultProps = defaultProps
 
 export default ProgressBar

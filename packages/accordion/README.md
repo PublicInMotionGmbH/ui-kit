@@ -11,8 +11,8 @@ using `npm install @talixo/accordion --save` or `yarn add @talixo/accordion`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/collapse: ^0.1.1`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/collapse: ^1.0.0-alpha.24`
+- `@talixo/shared: ^1.0.0-alpha.24`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -26,7 +26,8 @@ Property name   | Type      | Default               | Description
 ----------------|-----------|:---------------------:|--------------------------------
 className       | string    | n/a                   | additional class name passed to wrapper
 smooth          | bool      | n/a                   | should elements be collapsed and opened smoothly?
-animationTime   | number    | n/a                   | time of smooth animation (in ms)
+multi           | bool      | n/a                   | should allow opening many elements at once?
+animationSpeed  | number    | `300`                 | Animation speed (in px/ms)
 options         | Option[]  | n/a                   | options to show in Accordion
 value           | any       | self-controlled       | ID of currently opened option
 onChange        | function  | n/a                   | Handler fired on possible change of opened container

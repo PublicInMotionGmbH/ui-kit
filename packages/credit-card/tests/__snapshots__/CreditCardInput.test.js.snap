@@ -2,78 +2,75 @@
 
 exports[`<CreditCardInput /> renders correctly 1`] = `
 <FormHandler
+  FormComponent={[Function]}
   className="talixo-credit-card-input"
+  disabled={false}
+  readOnly={false}
   values={
     Object {
-      "cardExpirationDate": Object {
-        "month": null,
-        "year": null,
-      },
+      "cardExpirationDate": null,
       "cardHolderName": "",
       "cardNumber": "",
       "cvc": "",
     }
   }
 >
-  <legend>
-    <h3>
-      Payment
-    </h3>
-  </legend>
   <div
     className="talixo-credit-card-input__content"
   >
-    <FormField
+    <Field
+      disabled={false}
       label="Name on card*"
       name="cardHolderName"
       onChange={[Function]}
+      readOnly={false}
       value=""
     >
       <TextInput
         InputComponent="input"
         autoComplete="cc-full-name"
+        endCaretOnFocus={false}
         error={false}
         type="text"
       />
-    </FormField>
-    <FormField
+    </Field>
+    <Field
+      disabled={false}
       label="Card number*"
       name="cardNumber"
       onChange={[Function]}
+      readOnly={false}
       value=""
     >
       <CreditCardNumberInput
         autoComplete="cc-number"
       />
-    </FormField>
-    <FormField
+    </Field>
+    <Field
+      disabled={false}
       label="Expiration date*"
       name="cardExpirationDate"
       onChange={[Function]}
-      value={
-        Object {
-          "month": null,
-          "year": null,
-        }
-      }
+      readOnly={false}
+      value={null}
     >
-      <ExpirationDateInput />
-    </FormField>
-    <FormField
+      <ExpirationDateInput
+        disabled={false}
+        error={false}
+        mobileFriendly={false}
+        readOnly={false}
+      />
+    </Field>
+    <Field
+      disabled={false}
       label="CVC*"
       name="cvc"
       onChange={[Function]}
+      readOnly={false}
       value=""
     >
-      <TextInput
-        InputComponent="input"
-        autoComplete="cc-csc"
-        error={false}
-        maxLength={4}
-        size={4}
-        type="text"
-      />
-    </FormField>
+      <CvcInput />
+    </Field>
   </div>
 </FormHandler>
 `;

@@ -25,6 +25,7 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
         aria-autocomplete="list"
         aria-expanded={true}
         autoComplete="off"
+        disabled={false}
         id="downshift-0-input"
         onBlur={[Function]}
         onChange={[Function]}
@@ -78,6 +79,7 @@ exports[`<ComboBox /> should render correctly 1`] = `
         aria-autocomplete="list"
         aria-expanded={false}
         autoComplete="off"
+        disabled={false}
         id="downshift-0-input"
         onBlur={[Function]}
         onChange={[Function]}
@@ -131,6 +133,7 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
         aria-autocomplete="list"
         aria-expanded={true}
         autoComplete="off"
+        disabled={false}
         id="downshift-0-input"
         onBlur={[Function]}
         onChange={[Function]}
@@ -160,49 +163,53 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
     className="talixo-combo-box__menu"
   >
     <div
-      className="talixo-combo-box__item"
-      id="downshift-0-item-0"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
+      className="talixo-combo-box__list"
     >
       <div
-        className="talixo-combo-box__item__tick"
+        className="talixo-combo-box__item"
+        id="downshift-0-item-0"
+        onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseMove={[Function]}
       >
-        <span
-          aria-hidden="true"
-          className="talixo-icon tai tai--material"
+        <div
+          className="talixo-combo-box__item__tick"
         >
-          
-        </span>
-      </div>
-      <div
-        className="talixo-combo-box__item__inner"
-      >
-        abc
-      </div>
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-0-item-1"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      <div
-        className="talixo-combo-box__item__tick"
-      >
-        <span
-          aria-hidden="true"
-          className="talixo-icon tai tai--material"
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+        </div>
+        <div
+          className="talixo-combo-box__item__inner"
         >
-          
-        </span>
+          abc
+        </div>
       </div>
       <div
-        className="talixo-combo-box__item__inner"
+        className="talixo-combo-box__item"
+        id="downshift-0-item-1"
+        onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseMove={[Function]}
       >
-        def
+        <div
+          className="talixo-combo-box__item__tick"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+        </div>
+        <div
+          className="talixo-combo-box__item__inner"
+        >
+          def
+        </div>
       </div>
     </div>
   </div>
@@ -291,6 +298,7 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
           aria-autocomplete="list"
           aria-expanded={false}
           autoComplete="off"
+          disabled={false}
           id="downshift-0-input"
           onBlur={[Function]}
           onChange={[Function]}

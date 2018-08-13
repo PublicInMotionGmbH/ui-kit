@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Cells to put inside row */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Table content row.
  *
@@ -18,9 +23,8 @@ function Row (props) {
   )
 }
 
-Row.propTypes = {
-  /** Cells to put inside row */
-  children: PropTypes.node
-}
+Row.displayName = 'Row'
+
+Row.propTypes = propTypes
 
 export default Row

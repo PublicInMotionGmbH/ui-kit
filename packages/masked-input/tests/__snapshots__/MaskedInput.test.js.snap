@@ -5,10 +5,15 @@ exports[`<MaskedInput /> renders children correctly 1`] = `
   className="talixo-masked-input"
 >
   <Calendar
+    disabled={false}
     displayFormat="YYYY-MM-DD"
+    error={false}
+    firstDayOfWeek={1}
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
+    readOnly={false}
+    value={null}
   />
 </div>
 `;

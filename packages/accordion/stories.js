@@ -38,11 +38,11 @@ addStory('self-controlled', readme, () => (
   />
 ))
 
-addStory.controlled('different animation time', readme, (setState, state) => (
+addStory.controlled('different animation speed', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
+    animationSpeed={100}
     options={options}
   />
 ), () => ({ active: null }))
@@ -51,7 +51,6 @@ addStory.controlled('with special arrow', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
     options={options}
     renderOpenIcon={() => <Icon name='keyboard_arrow_down' />}
     renderCloseIcon={() => <Icon name='keyboard_arrow_up' />}
@@ -67,11 +66,20 @@ addStory.controlled('not smooth', readme, (setState, state) => (
   />
 ), () => ({ active: null }))
 
-addStory.controlled('multiple items (different IDs)', readme, (setState, state) => (
+addStory.controlled('multiple items with same IDs', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    smooth={false}
+    options={optionsById}
+    buildId={option => option.id}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('multiple items open at once', readme, (setState, state) => (
+  <Accordion
+    multi
+    value={state.active}
+    onChange={x => setState({ active: x })}
     options={optionsById}
     buildId={option => option.id}
   />

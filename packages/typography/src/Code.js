@@ -3,6 +3,17 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Code which should be shown there */
+  children: PropTypes.node,
+
+  /** Code language, ignored for now */
+  language: PropTypes.string
+}
+
 /**
  * Component which represents code in typography.
  * TODO: Make possibility of syntax highlighting with optional dependency.
@@ -23,15 +34,8 @@ function Code (props) {
   )
 }
 
-Code.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
+Code.displayName = 'Code'
 
-  /** Code which should be shown there */
-  children: PropTypes.node,
-
-  /** Code language, ignored for now */
-  language: PropTypes.string
-}
+Code.propTypes = propTypes
 
 export default Code

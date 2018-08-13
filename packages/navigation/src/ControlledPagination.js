@@ -178,6 +178,8 @@ function Pagination (props) {
   return createPagination()
 }
 
+Pagination.displayName = 'Pagination'
+
 Pagination.propTypes = propTypes
 
 Pagination.defaultProps = defaultProps

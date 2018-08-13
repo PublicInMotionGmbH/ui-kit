@@ -20,7 +20,7 @@ describe('<Accordion />', () => {
     const wrapper = shallow(
       <Accordion
         value={null}
-        animationTime={100}
+        animationSpeed={100}
         options={options}
       />
     )
@@ -32,7 +32,7 @@ describe('<Accordion />', () => {
     const wrapper = shallow(
       <Accordion
         value={1}
-        animationTime={100}
+        animationSpeed={100}
         options={options}
       />
     )
@@ -126,11 +126,33 @@ describe('<Accordion />', () => {
       />
     )
 
+    // Open 3rd element
+
     wrapper.find(`.${moduleName}-element__toggle`).at(2).simulate('click')
 
     expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
     expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
     expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
+
+    // Open 4th element
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
+
+    // Close 4th element
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(true)
     expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(true)
     expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
   })
@@ -182,5 +204,72 @@ describe('<Accordion />', () => {
 
     expect(wrapper.find('#open-test').length).toBe(4)
     expect(wrapper.find('#close-test').length).toBe(1)
+  })
+
+  it('should self-control for multi-accordion', () => {
+    const wrapper = shallow(
+      <Accordion
+        multi
+        smooth={false}
+        options={options}
+      />
+    )
+
+    // Open 3rd element
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(2).simulate('click')
+
+    expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
+
+    // Open 4th element
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
+
+    // Close 4th element
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(wrapper.find('Collapse').at(0).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(1).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(2).prop('collapsed')).toBe(false)
+    expect(wrapper.find('Collapse').at(3).prop('collapsed')).toBe(true)
+    expect(wrapper.find('Collapse').at(4).prop('collapsed')).toBe(true)
+  })
+
+  it('should trigger onChange for multi-accordion', () => {
+    const spy = jest.fn()
+    const wrapper = shallow(
+      <Accordion
+        multi
+        smooth={false}
+        options={options}
+        onChange={spy}
+      />
+    )
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(2).simulate('click')
+
+    expect(spy.mock.calls.length).toBe(1)
+    expect(spy.mock.calls[0]).toEqual([ [ 2 ] ])
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(spy.mock.calls.length).toBe(2)
+    expect(spy.mock.calls[1]).toEqual([ [ 2, 3 ] ])
+
+    wrapper.find(`.${moduleName}-element__toggle`).at(3).simulate('click')
+
+    expect(spy.mock.calls.length).toBe(3)
+    expect(spy.mock.calls[2]).toEqual([ [ 2 ] ])
   })
 })

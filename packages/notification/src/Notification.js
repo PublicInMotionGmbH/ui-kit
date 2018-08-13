@@ -4,30 +4,7 @@ import PropTypes from 'prop-types'
 import { buildClassName, prefix } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 
-/**
- * Component which represents Notification.
- *
- * @param {object} props
- * @param {*} [props.children]
- * @param {string} [props.className]
- * @param {function} [props.handleRemove]
- * @param {string} [props.variant]
- * @returns {React.Element}
- */
-const Notification = props => {
-  const { children, className, handleRemove, variant, ...passedProps } = props
-
-  const clsNames = buildClassName('notification', className, [ variant ])
-
-  return (
-    <div className={clsNames} {...passedProps}>
-      {children}
-      <Icon name='close' className={prefix('notification', 'close')} onClick={handleRemove} />
-    </div>
-  )
-}
-
-Notification.propTypes = {
+const propTypes = {
   /** Notification content */
   children: PropTypes.node,
 
@@ -35,10 +12,43 @@ Notification.propTypes = {
   className: PropTypes.string,
 
   /** Function that runs when close button is clicked */
-  handleRemove: PropTypes.func,
+  onClose: PropTypes.func,
 
-  /** Notification variant */
-  variant: PropTypes.oneOf([ 'primary', 'success', 'error', 'warning', 'information' ])
+  /** Notification type */
+  type: PropTypes.oneOf([ 'toast', 'primary', 'secondary', 'tertiary', 'success', 'error', 'warning', 'info' ])
 }
+
+/**
+ * Component which represents Notification.
+ *
+ * @param {object} props
+ * @param {*} [props.children]
+ * @param {string} [props.className]
+ * @param {function} [props.onClose]
+ * @param {string} [props.type]
+ * @returns {React.Element}
+ */
+function Notification (props) {
+  const { children, className, onClose, type, ...passedProps } = props
+
+  const clsNames = buildClassName('notification', className, [ type ])
+
+  return (
+    <div className={clsNames} {...passedProps}>
+      <div className={buildClassName('notification__content')}>
+        {children}
+      </div>
+      <Icon
+        name='close'
+        className={prefix('notification', 'close')}
+        onClick={onClose}
+      />
+    </div>
+  )
+}
+
+Notification.displayName = 'Notification'
+
+Notification.propTypes = propTypes
 
 export default Notification

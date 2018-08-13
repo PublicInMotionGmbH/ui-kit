@@ -4,6 +4,23 @@ import { Marker as GoogleMarker, InfoWindow } from 'react-google-maps'
 
 import { Location } from './PropTypes'
 
+const propTypes = {
+  /** Marker position */
+  position: Location.isRequired,
+
+  /** Marker information window */
+  info: PropTypes.node,
+
+  /** Action on click on marker */
+  onClick: PropTypes.func,
+
+  /** Action on closing info window through X button */
+  onClose: PropTypes.func,
+
+  /** Is information window opened? */
+  open: PropTypes.bool
+}
+
 /**
  * Component which represents Marker on map.
  *
@@ -132,21 +149,8 @@ class Marker extends React.PureComponent {
   }
 }
 
-Marker.propTypes = {
-  /** Marker position */
-  position: Location.isRequired,
+Marker.displayName = 'Marker'
 
-  /** Marker information window */
-  info: PropTypes.node,
-
-  /** Action on click on marker */
-  onClick: PropTypes.func,
-
-  /** Action on closing info window through X button */
-  onClose: PropTypes.func,
-
-  /** Is information window opened? */
-  open: PropTypes.bool
-}
+Marker.propTypes = propTypes
 
 export default Marker

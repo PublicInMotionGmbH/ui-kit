@@ -6,6 +6,14 @@ import { icons } from '@talixo/icon-pack'
 import MaterialIcon from './MaterialIcon'
 import TalixoIcon from './TalixoIcon'
 
+const propTypes = {
+  /** Icon name */
+  name: PropTypes.string.isRequired,
+
+  /** Additional class name */
+  className: PropTypes.string
+}
+
 /**
  * Component which represents icon
  *
@@ -25,12 +33,8 @@ function Icon (props) {
   return <MaterialIcon {...props} />
 }
 
-Icon.propTypes = {
-  /** Icon name */
-  name: PropTypes.string.isRequired,
+Icon.displayName = 'Icon'
 
-  /** Additional class name */
-  className: PropTypes.string
-}
+Icon.propTypes = propTypes
 
 export default Icon

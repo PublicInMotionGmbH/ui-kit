@@ -221,6 +221,8 @@ class ComboBoxMultiValue extends React.PureComponent {
   }
 }
 
+ComboBoxMultiValue.displayName = 'ComboBoxMultiValue'
+
 ComboBoxMultiValue.propTypes = propTypes
 ComboBoxMultiValue.defaultProps = defaultProps
 

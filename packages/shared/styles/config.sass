@@ -1,14 +1,218 @@
 // Set up basic configuration variables
 
-@import 'config/basic'
-@import 'config/base-unit'
-@import 'config/colors'
-@import 'config/typography'
-@import 'config/grid'
-@import 'config/rwd'
-@import 'config/various'
+// Modularity
+
+$prefix: talixo !default
+
+// Base unit
+
+$base-px: 8px !default
+$base-dp: 0.5rem !default // equivalent of 8px
+
+@function dp($multiplier)
+  @return $base-dp * $multiplier
+
+// Grid configuration
+
+$grid-columns: 12 !default
+$grid-gutter: dp(2) !default
+
+// RWD breakpoints
+
+$rwd-small-width: dp(72) !default
+$rwd-medium-width: dp(85) !default
+$rwd-large-width: dp(124) !default
+$rwd-xlarge-width: dp(150) !default
+
+// Legacy colors
+// TODO: Get rid of these colors
+
+$color-talixo-light-gray: #A5BFD9 !default
+$color-talixo-lighter-gray: #F0F5F7 !default
+
+$color-tab-border: #DAE0E6 !default
+$color-tab-inactive: #EBEFF2 !default
+
+$color-pill-yellow: #FFA500 !default
+$color-placeholder-text: #A9C7D9 !default
+
+$color-border: #A5BFD9 !default
+
+$navy: #3d4954 !default
+$navy-text: #273440 !default
+$offwhite: #adb9bc !default
+
+$sidebar-icon-color: #c2cbcd !default
 
 // Load important helpers
 
 @import 'prefixing'
 @import 'accessibility'
+
+// Colors base
+
+$x-color-primary: #3f43a1 !default
+$x-color-primary-opposite: text-contrast($x-color-primary) !default
+
+$x-color-secondary: #f5770e !default
+$x-color-secondary-opposite: text-contrast($x-color-secondary) !default
+
+$x-color-tertiary: #00b989 !default
+$x-color-tertiary-opposite: text-contrast($x-color-tertiary) !default
+
+$x-color-background: #fff !default
+$x-color-text: text-contrast($x-color-background) !default
+
+// Colors by goal
+
+$x-color-intense: darken($x-color-primary, 30%) !default
+$x-color-intense-opposite: text-contrast($x-color-intense) !default
+
+$x-color-intenser: darken($x-color-intense, 12%) !default
+$x-color-intenser-opposite: text-contrast($x-color-intenser) !default
+
+$x-color-calm: #a4a5b2 !default
+$x-color-calm-opposite: text-contrast($x-color-calm) !default
+
+$x-color-calmer: #f4f5f8 !default
+$x-color-calmer-opposite: text-contrast($x-color-calmer) !default
+
+$x-color-success: #00b989 !default
+$x-color-success-opposite: text-contrast($x-color-success) !default
+
+$x-color-warning: #f5c623 !default
+$x-color-warning-opposite: text-contrast($x-color-warning) !default
+
+$x-color-error: #ff4055 !default
+$x-color-error-opposite: text-contrast($x-color-error) !default
+
+$x-color-info: #1660ff !default
+$x-color-info-opposite: text-contrast($x-color-info) !default
+
+// Colors by general purpose
+
+$x-input-border-color: $x-color-calmer !default
+$x-input-background-color: $x-color-background !default
+$x-input-text-color: $x-color-text !default
+
+$x-input-hover-border-color: darken($x-input-border-color, 5%) !default
+$x-input-hover-background-color: $x-input-background-color !default
+$x-input-hover-text-color: $x-input-text-color !default
+
+$x-input-focus-border-color: $x-color-primary !default
+$x-input-focus-background-color: $x-input-background-color !default
+$x-input-focus-text-color: $x-input-text-color !default
+
+$x-input-error-border-color: $x-color-error !default
+$x-input-error-background-color: $x-input-background-color !default
+$x-input-error-text-color: mix($x-input-text-color, $x-input-error-border-color, 70%) !default
+
+$x-input-warning-border-color: $x-color-warning !default
+$x-input-warning-background-color: $x-input-background-color !default
+$x-input-warning-text-color: mix($x-input-text-color, $x-input-warning-border-color, 70%) !default
+
+$x-input-placeholder-color: mix($x-input-text-color, $x-input-background-color, 30%) !default
+$x-input-error-placeholder-color: mix($x-input-error-text-color, $x-input-background-color, 30%) !default
+$x-input-warning-placeholder-color: mix($x-input-warning-text-color, $x-input-background-color, 30%) !default
+
+// Typography sizes
+
+$x-font-size-base: dp(1.75) !default
+
+$x-font-size-smaller: round-near(0.775 * $x-font-size-base) !default
+$x-font-size-small: round-near(0.85 * $x-font-size-base) !default
+$x-font-size-medium: round-near(0.92 * $x-font-size-base) !default
+$x-font-size-big: round-near(1.15 * $x-font-size-base) !default
+$x-font-size-bigger: round-near(1.3 * $x-font-size-base) !default
+$x-font-size-large: round-near(1.7 * $x-font-size-base) !default
+$x-font-size-xlarge: round-near(2.3 * $x-font-size-base) !default
+
+// Borders
+
+$x-border-width: 1px !default
+$x-border-width-heavy: 2 * $x-border-width !default
+$x-border-radius: 3px !default
+
+// Sizes
+
+$x-line-height-base: 1.428571429 !default // 20/14
+
+$x-padding-vertical-base: $x-font-size-bigger !default
+$x-padding-vertical-very-small: $x-font-size-bigger * ($x-line-height-base - 1) / 2 !default // use predefined-font-size
+$x-padding-vertical-small: 0.5 * $x-padding-vertical-base !default
+$x-padding-vertical-bigger: 1.5 * $x-padding-vertical-base !default
+
+$x-padding-horizontal-base: $x-font-size-bigger !default
+$x-padding-horizontal-small: 0.5 * $x-padding-horizontal-base !default
+$x-padding-horizontal-bigger: 1.5 * $x-padding-horizontal-base !default
+
+$x-input-text-size: $x-font-size-base !default
+$x-input-padding-vertical: $x-padding-vertical-base !default
+$x-input-padding-horizontal: $x-padding-horizontal-base !default
+
+$x-input-height: (2 * $x-input-padding-vertical) + $x-input-text-size * $x-line-height-base !default
+
+// Weights
+
+$x-weight-lighter: 300 !default
+$x-weight-normal: 400 !default
+$x-weight-semibold: 600 !default
+$x-weight-bold: 600 !default
+
+// Typography by intent
+
+// Font sizes
+
+$typography-base-font-size: $x-font-size-base !default
+$typography-base-line-height: 1em * $x-line-height-base !default
+
+$typography-lead-font-size: $x-font-size-bigger !default
+
+$typography-h1-font-size: $x-font-size-xlarge !default
+$typography-h2-font-size: $x-font-size-large !default
+$typography-h3-font-size: $x-font-size-bigger !default
+$typography-h4-font-size: $x-font-size-big !default
+$typography-h5-font-size: $x-font-size-base !default
+$typography-h6-font-size: $x-font-size-medium !default
+
+// Colors
+
+$typography-base-text-color: $x-color-text !default
+
+$typography-link-color: mix($x-color-primary, $x-color-background, 80%) !default
+$typography-link-hover-color: $x-color-primary !default
+
+$typography-lead-color: #555 !default
+
+$typography-mark-background-color: mix(#ffa500, $x-color-background, 30%) !default
+$typography-mark-text-color: inherit !default
+
+$typography-code-background-color: #eee !default
+$typography-code-text-color: #444 !default
+
+$typography-kbd-background-color: $x-color-background !default
+$typography-kbd-border-color: $x-color-calmer !default
+$typography-kbd-text-color: $x-color-text !default
+$typography-kbd-border-width: $x-border-width !default
+$typography-kbd-box-shadow: true !default
+$typography-kbd-box-shadow-color: transparentize(contrast-color($typography-kbd-background-color), 0.9) !default
+
+$typography-blockquote-background-color: bold-color($x-color-background, 3%) !default
+$typography-blockquote-text-color: $x-color-text !default
+$typography-blockquote-border-color: bold-color($typography-blockquote-background-color, 10%) !default
+$typography-blockquote-footer-text-color: mix($typography-blockquote-background-color, $typography-blockquote-text-color, 50%) !default
+
+// Font weights
+
+$typography-base-font-weight: 500 !default
+
+$typography-h1-font-weight: 300 !default
+$typography-h2-font-weight: 300 !default
+$typography-h3-font-weight: 500 !default
+$typography-h4-font-weight: 500 !default
+$typography-h5-font-weight: 600 !default
+$typography-h6-font-weight: 600 !default
+
+// Temporary settings
+
+$combo-box-menu-separator-height: 0 !default

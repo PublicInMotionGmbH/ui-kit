@@ -1,4 +1,6 @@
 import React from 'react'
+import { findDOMNode } from 'react-dom'
+
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
@@ -9,6 +11,48 @@ import calculateInputStyles from '../utils/calculateInputStyles'
 const isBrowser = typeof document !== 'undefined' && typeof window !== 'undefined'
 
 const moduleName = 'text-input'
+
+const propTypes = {
+  /** Additional class name for text input wrapper */
+  className: PropTypes.string,
+
+  /** Indicates that input has error */
+  error: PropTypes.bool,
+
+  /** Ref passed to input element */
+  inputRef: PropTypes.func,
+
+  /** Callback for change event */
+  onChange: PropTypes.func,
+
+  /** Additional input wrapper styling */
+  style: PropTypes.object,
+
+  /** Suffix to show after input value */
+  suffix: PropTypes.any,
+
+  /** Left side icon or controls */
+  left: PropTypes.node,
+
+  /** Right side icon or controls */
+  right: PropTypes.node,
+
+  /** Value to put inside input */
+  value: PropTypes.string,
+
+  /** Component used for input below */
+  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
+
+  /** Should put caret on end of input always when user focus it? */
+  endCaretOnFocus: PropTypes.bool
+}
+
+const defaultProps = {
+  InputComponent: 'input',
+  error: false,
+  type: 'text',
+  endCaretOnFocus: false
+}
 
 /**
  * Component which represents Text Input.
@@ -29,6 +73,9 @@ const moduleName = 'text-input'
  * @property {object|null} state.inputStyle
  *
  * @property {boolean} hasSuffixInitialized
+ * @property {function} [endCaretListener]
+ * @property {HTMLElement} [input]
+ * @property {HTMLElement} [suffix]
  *
  * @class
  */
@@ -42,7 +89,7 @@ class TextInput extends React.PureComponent {
   hasSuffixInitialized = false
 
   /**
-   * Initialize styles (and listeners) for suffix
+   * Initialize styles (and listeners) for elements (left, right, suffix)
    */
   initializeSuffixStyles () {
     // Do not work with styles within Node.js environment
@@ -100,6 +147,14 @@ class TextInput extends React.PureComponent {
     if (props.value != null && props.value !== this.props.value) {
       this.setState({ value: props.value })
     }
+
+    if (props.endCaretOnFocus !== this.props.endCaretOnFocus) {
+      this.initializeEndCaretOnFocus()
+    }
+
+    if (props.suffix == null) {
+      this.deinitializeSuffixStyles()
+    }
   }
 
   /**
@@ -109,6 +164,8 @@ class TextInput extends React.PureComponent {
     if (this.props.suffix != null) {
       this.initializeSuffixStyles()
     }
+
+    this.initializeEndCaretOnFocus()
   }
 
   /**
@@ -116,13 +173,14 @@ class TextInput extends React.PureComponent {
    */
   componentWillUnmount () {
     this.deinitializeSuffixStyles()
+    this.unregisterEndCaretOnFocus()
   }
 
   /**
    * Update suffix when component is updated
    */
   componentDidUpdate () {
-    if (this.props.suffix == null) {
+    if (!this.hasSuffixInitialized) {
       // Try to de-initialize styles when there is no suffix
       this.deinitializeSuffixStyles()
     } else if (this.hasSuffixInitialized) {
@@ -135,23 +193,129 @@ class TextInput extends React.PureComponent {
   }
 
   /**
+   * Initialize focus event when it's needed, where caret is put on end.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.endCaretOnFocus]
+   */
+  initializeEndCaretOnFocus (props) {
+    const { endCaretOnFocus } = props || this.props
+
+    if (endCaretOnFocus) {
+      this.registerEndCaretOnFocus()
+    } else {
+      this.unregisterEndCaretOnFocus()
+    }
+  }
+
+  /**
+   * Register focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  registerEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (this.endCaretListener) {
+      return
+    }
+
+    this.endCaretListener = () => setTimeout(this.putCaretOnEnd.bind(this, input))
+    input.addEventListener('focus', this.endCaretListener)
+  }
+
+  /**
+   * Unregister focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  unregisterEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (!this.endCaretListener) {
+      return
+    }
+
+    input.removeEventListener('focus', this.endCaretListener)
+    this.endCaretListener = null
+  }
+
+  /**
+   * Put caret on end of input.
+   *
+   * @param {HTMLElement} input
+   */
+  putCaretOnEnd (input) {
+    const value = input.value
+    const length = value ? value.length : 0
+
+    // Don't do anything when it's empty anyway
+    if (length === 0) {
+      return
+    }
+
+    const previousType = input.type
+
+    // Types different than "text" may not support selection, i.e. "number"
+    if (previousType !== 'text') {
+      input.type = 'text'
+    }
+
+    if (input.setSelectionRange) {
+      input.setSelectionRange(length, length)
+    } else if (input.createTextRange) {
+      const range = input.createTextRange()
+      range.moveStart('character', length)
+      range.select()
+    } else {
+      input.value = ''
+      input.value = value
+    }
+
+    if (previousType !== 'text') {
+      input.type = previousType
+    }
+  }
+
+  /**
    * Handle input change
    *
    * @param {SyntheticEvent} e
    */
   onInputChange = (e) => {
     const { value, onChange } = this.props
-
-    // Update styles connected to suffix
-    this.updateStyles()
+    const nextValue = e.target.value
 
     if (value == null) {
-      this.setState({ value })
+      // Update styles connected to suffix when value is not passed from props.
+      this.setState({ value: nextValue })
     }
 
     // Trigger change to parent components
     if (onChange) {
-      onChange(e.target.value)
+      onChange(nextValue)
     }
   }
 
@@ -172,11 +336,19 @@ class TextInput extends React.PureComponent {
     }
 
     // Don't try to calculate styles when there is no suffix or input
-    if (!this.input || !this.suffix) {
+    if (!this.input || !(this.hasAdditionalElements())) {
       return false
     }
 
     return true
+  }
+
+  /**
+   * Check if any additional element is passed to input.
+   * @returns {boolean}
+   */
+  hasAdditionalElements () {
+    return this.props.suffix != null || this.props.left != null || this.props.right != null
   }
 
   /**
@@ -189,7 +361,7 @@ class TextInput extends React.PureComponent {
     }
 
     // Calculate styles for input & suffix
-    const s = calculateInputStyles(this.input, this.suffix)
+    const s = calculateInputStyles(this.input, this.suffix, this.left, this.right)
 
     // Ignore change if hash of dimensions is the same
     if (s.hash === this.state.hash) {
@@ -212,10 +384,15 @@ class TextInput extends React.PureComponent {
   inputRef = (el) => {
     const { inputRef } = this.props
 
-    this.input = el
+    if (this.input) {
+      this.unregisterEndCaretOnFocus(this.input)
+    }
+
+    this.input = findDOMNode(el)
+    this.initializeEndCaretOnFocus()
 
     if (inputRef) {
-      inputRef(el)
+      inputRef(this.input)
     }
   }
 
@@ -225,7 +402,16 @@ class TextInput extends React.PureComponent {
    * @param {HTMLElement} el
    */
   suffixRef = (el) => {
-    this.suffix = el
+    this.suffix = findDOMNode(el)
+  }
+
+  /**
+   * Cache reference to left/right element
+   *
+   * @param {HTMLElement} el
+   */
+  elementRef = (which, el) => {
+    this[which] = findDOMNode(el)
   }
 
   /**
@@ -252,7 +438,7 @@ class TextInput extends React.PureComponent {
    */
   buildAddon (which) {
     return (
-      <span className={buildClassName([ moduleName, which ])}>
+      <span ref={this.elementRef.bind(this, which)} className={buildClassName([ moduleName, which ])}>
         {this.props[which]}
       </span>
     )
@@ -284,7 +470,10 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, inputRef, onChange, InputComponent, style, value, suffix, left, right, ...restProps } = this.props
+    const {
+      className, error, inputRef, onChange, InputComponent,
+      style, value, suffix, left, right, endCaretOnFocus, ...restProps
+    } = this.props
     const _value = this.state.value
 
     // Initialize helper variables
@@ -327,42 +516,9 @@ class TextInput extends React.PureComponent {
   }
 }
 
-TextInput.propTypes = {
-  /** Additional class name for text input wrapper */
-  className: PropTypes.string,
+TextInput.displayName = 'TextInput'
 
-  /** Indicates that input has error */
-  error: PropTypes.bool,
-
-  /** Ref passed to input element */
-  inputRef: PropTypes.func,
-
-  /** Callback for change event */
-  onChange: PropTypes.func,
-
-  /** Additional input wrapper styling */
-  style: PropTypes.object,
-
-  /** Suffix to show after input value */
-  suffix: PropTypes.any,
-
-  /** Left side icon or controls */
-  left: PropTypes.node,
-
-  /** Right side icon or controls */
-  right: PropTypes.node,
-
-  /** Value to put inside input */
-  value: PropTypes.string,
-
-  /** Component used for input below */
-  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
-}
-
-TextInput.defaultProps = {
-  InputComponent: 'input',
-  error: false,
-  type: 'text'
-}
+TextInput.propTypes = propTypes
+TextInput.defaultProps = defaultProps
 
 export default TextInput

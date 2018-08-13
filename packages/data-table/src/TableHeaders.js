@@ -108,6 +108,8 @@ function TableHeaders (props) {
   )
 }
 
+TableHeaders.displayName = 'TableHeaders'
+
 TableHeaders.propTypes = propTypes
 
 export default TableHeaders

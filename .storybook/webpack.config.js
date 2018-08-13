@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 /**
  * Build Webpack configuration for Storybook
  *
@@ -5,6 +7,9 @@
  * @returns {object}
  */
 function buildWebpackConfiguration (config) {
+  // Fix problems with building production build
+  delete config.optimization
+
   // Set 'cache' property
   config.cache = true
 
@@ -13,8 +18,10 @@ function buildWebpackConfiguration (config) {
 
   // Parse JavaScript files from @talixo/ packages
   config.module.rules = config.module.rules.map(rule => {
-    if (rule.test.toString() === '/\\.jsx?$/') {
-      rule.test = /\.js$/
+    if (rule.test.toString() === '/\\.js$/') {
+      rule.use[0].options.babelrc = true
+      delete rule.use[0].options.presets
+      delete rule.use[0].options.plugins
     }
 
     return rule
@@ -27,11 +34,13 @@ function buildWebpackConfiguration (config) {
     use: [ 'html-loader', 'markdown-loader' ]
   })
 
-
   // Add loader for fonts
   config.module.rules.push({
     test: /\.(eot|ttf|svg|woff|woff2)$/,
-    loader: 'url-loader'
+    loader: 'url-loader',
+    options: {
+      limit: 8192
+    }
   })
 
   // Add loader for SASS files
@@ -49,6 +58,25 @@ function buildWebpackConfiguration (config) {
   config.plugins = config.plugins.filter(plugin => {
     return DISABLED_PLUGINS.indexOf(plugin.constructor.name) === -1
   })
+
+  // Add chunk with vendor libraries
+  // config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'vendor',
+  //   minChunks: module => module.resource && /node_modules/.test(module.resource)
+  // }))
+
+  // Fix manager to get vendor chunk as well
+  for (const plugin of config.plugins) {
+    if (plugin.constructor.name !== 'HtmlWebpackPlugin') {
+      continue
+    }
+
+    if (plugin.options.filename !== 'index.html') {
+      continue
+    }
+
+    plugin.options.chunks = [ 'manager', 'vendor' ]
+  }
 
   return config
 }

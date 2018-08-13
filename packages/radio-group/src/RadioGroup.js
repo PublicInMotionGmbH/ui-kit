@@ -12,21 +12,38 @@ const propTypes = {
   /** Name of radio group */
   name: PropTypes.string.isRequired,
 
+  /** Is this value incorrect? */
+  error: PropTypes.bool,
+
   /** Array of objects which represent options */
   options: PropTypes.arrayOf(PropTypes.shape({
+    /** Label to show */
     label: PropTypes.node.isRequired,
+
+    /** Value it represents */
     value: PropTypes.any.isRequired,
+
+    /** Is this option disabled? */
     disabled: PropTypes.bool
   })),
 
-  /** Radio input label size ('small', 'large') */
-  size: PropTypes.oneOf([ 'small', 'large' ]),
-
   /** Value of default option */
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  value: PropTypes.any,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
+}
+
+const defaultProps = {
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -66,30 +83,39 @@ class RadioGroup extends React.PureComponent {
   }
 
   render () {
-    const { className, children, name, options, value, size, onChange, ...passedProps } = this.props
+    const {
+      className, children, name, options, error, value,
+      onChange, id, disabled, readOnly, ...passedProps
+    } = this.props
     const _value = this.state.value
 
-    const optionsList = options.map(obj => (
+    const optionsList = options.map((obj, index) => (
       <RadioInput
+        id={index === 0 ? id : undefined}
         checked={_value === obj.value}
-        disabled={obj.disabled || false}
-        key={obj.label}
+        disabled={obj.disabled || disabled}
+        readOnly={obj.readOnly || readOnly}
+        key={obj.value}
         name={name}
+        error={error}
         onChange={this.change.bind(this, obj.value)}
-        size={size}
-        value={obj.value}>
+        value={obj.value}
+      >
         {obj.label}
       </RadioInput>
     ))
 
     return (
-      <div className={buildClassName('radio-group', className)} {...passedProps} >
+      <div className={buildClassName('radio-group', className, { disabled, 'read-only': readOnly })} {...passedProps}>
         {optionsList}
       </div>
     )
   }
 }
 
+RadioGroup.displayName = 'RadioGroup'
+
 RadioGroup.propTypes = propTypes
+RadioGroup.defaultProps = defaultProps
 
 export default RadioGroup

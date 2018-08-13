@@ -21,7 +21,7 @@ describe('<Map />', () => {
     const wrapper = mount(<Map apiKey='this_is_api_key' interactive={false} />)
 
     // Simulate loading Google Maps API JS
-    wrapper.children().instance().handleLoaded()
+    wrapper.children().instance().loadGoogleMapsApi()
     wrapper.update()
 
     // Find google Map
@@ -34,11 +34,11 @@ describe('<Map />', () => {
     const wrapper = mount(<Map apiKey='this_is_api_key' />)
 
     // Simulate loading Google Maps API JS
-    wrapper.children().instance().handleLoaded()
+    wrapper.children().instance().loadGoogleMapsApi()
     wrapper.update()
 
     // Find google Map
-    const map = wrapper.find('withScriptjs(withGoogleMap(Component))')
+    const map = wrapper.find('withGoogleMapsApi(withGoogleMap(Component))')
 
     expect(map.props().loadingElement.props.className).toMatch(`talixo-map`)
   })

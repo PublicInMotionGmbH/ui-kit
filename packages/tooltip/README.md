@@ -11,8 +11,8 @@ using `npm install @talixo/tooltip --save` or `yarn add @talixo/tooltip`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/portal: ^0.1.0`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/portal: ^1.0.0-alpha.24`
+- `@talixo/shared: ^1.0.0-alpha.24`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -32,17 +32,18 @@ className     | string       | n/a     | Additional class name passed to the too
 fade          | bool         | `false` | Fade in / out animation
 fadeTime      | number       | n/a     | Fadetime
 open          | bool         | n/a     | Controls whether tooltip is open
-position      | Position     | `right` | Tooltip position
+position      | Position     | `top`   | Preferred tooltip position
+lockPosition  | bool         | `false` | Lock tooltip position to specified one - otherwise, it will change position when there is not enough place
 attachTo      | node         | n/a     | node of tooltip portal
 render        | function     | n/a     | Renders tooltip content
 style         | object       | n/a     | Additional styles passed to the tooltip
 arrow         | bool         | `true`  | Show arrow next to tooltip
-triggerOn     | Trigger      | `hover` | Type of event to open tooltip
+triggerOn     | TriggerType  | `hover` | Type of event to open tooltip
 
 Type name    | Enum options
 -------------|--------------------------------------
 Position     | 'left', 'right', 'top', 'bottom'
-Trriger      | 'hover', 'click'
+TriggerType  | 'hover', 'click'
 
 ## Changelog
 

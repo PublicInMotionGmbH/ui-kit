@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { TextInput } from '@talixo/text-input'
-import { FormField } from '@talixo/form-field'
-import { FormHandler } from '@talixo/form-handler'
+import { FormHandler, Field } from '@talixo/form'
 
 import { buildClassName } from '@talixo/shared'
 
 import CreditCardNumberInput from './CreditCardNumberInput'
+import CvcInput from './CvcInput'
 import ExpirationDateInput from './ExpirationDateInput'
 
 const moduleName = 'credit-card-input'
@@ -28,9 +28,6 @@ const propTypes = {
   /** Label for cvc input. */
   cvcLabel: PropTypes.string,
 
-  /** Form header. */
-  header: PropTypes.node,
-
   /** Handler for onBlur event. */
   onBlur: PropTypes.func,
 
@@ -43,16 +40,37 @@ const propTypes = {
   /** Handler for onSubmit event. */
   onSubmit: PropTypes.func,
 
+  /** Should it render native select boxes for mobile (expiration date input)? */
+  mobileFriendly: PropTypes.bool,
+
   /** Values to be displayed inside inputs. */
   values: PropTypes.shape({
+
+    /** Card holder name. */
     cardHolderName: PropTypes.string,
+
+    /** Card number. */
     cardNumber: PropTypes.string,
+
+    /** Card expiration date object. */
     cardExpirationDate: PropTypes.shape({
+
+      /** Expiration month. */
       month: PropTypes.number,
+
+      /** Expiration year. */
       year: PropTypes.number
     }),
+
+    /** Cvc number */
     cvc: PropTypes.string
-  })
+  }),
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
@@ -64,12 +82,12 @@ const defaultProps = {
   values: {
     cardHolderName: '',
     cardNumber: '',
-    cardExpirationDate: {
-      month: null,
-      year: null
-    },
+    cardExpirationDate: null,
     cvc: ''
-  }
+  },
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -86,20 +104,31 @@ const defaultProps = {
  * @param {func} [props.onFocus]
  * @param {func} [props.onSubmit]
  * @param {string} [props.values]
+ * @param {boolean} [props.disabled]
+ * @param {boolean} [props.readOnly]
  *
  * @returns {React.Element}
  */
 function CreditCardInput (props) {
-  const { cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className, cvcLabel, header, onBlur, onChange, onFocus, onSubmit, values } = props
+  const {
+    cardHolderNameLabel, cardNumberLabel, cardExpirationDateLabel, className,
+    cvcLabel, onBlur, onChange, onFocus, onSubmit, values, mobileFriendly,
+    disabled, readOnly
+  } = props
 
-  const formhandlerClsName = buildClassName(moduleName, className)
+  const formHandlerClsName = buildClassName(moduleName, className)
   const contentClsName = buildClassName([moduleName, 'content'])
 
   return (
-    <FormHandler className={formhandlerClsName} onSubmit={onSubmit} values={values}>
-      <legend><h3>{header}</h3></legend>
+    <FormHandler
+      className={formHandlerClsName}
+      onSubmit={onSubmit}
+      values={values}
+      disabled={disabled}
+      readOnly={readOnly}
+    >
       <div className={contentClsName}>
-        <FormField
+        <Field
           name='cardHolderName'
           label={cardHolderNameLabel}
           onBlur={onBlur}
@@ -110,8 +139,8 @@ function CreditCardInput (props) {
           <TextInput
             autoComplete='cc-full-name'
           />
-        </FormField>
-        <FormField
+        </Field>
+        <Field
           name='cardNumber'
           label={cardNumberLabel}
           onBlur={onBlur}
@@ -122,8 +151,8 @@ function CreditCardInput (props) {
           <CreditCardNumberInput
             autoComplete='cc-number'
           />
-        </FormField>
-        <FormField
+        </Field>
+        <Field
           name='cardExpirationDate'
           label={cardExpirationDateLabel}
           onBlur={onBlur}
@@ -131,9 +160,9 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cardExpirationDate}
         >
-          <ExpirationDateInput />
-        </FormField>
-        <FormField
+          <ExpirationDateInput mobileFriendly={mobileFriendly} />
+        </Field>
+        <Field
           name='cvc'
           label={cvcLabel}
           onBlur={onBlur}
@@ -141,16 +170,14 @@ function CreditCardInput (props) {
           onFocus={onFocus}
           value={values.cvc}
         >
-          <TextInput
-            autoComplete='cc-csc'
-            maxLength={4}
-            size={4}
-          />
-        </FormField>
+          <CvcInput />
+        </Field>
       </div>
     </FormHandler>
   )
 }
+
+CreditCardInput.displayName = 'CreditCardInput'
 
 CreditCardInput.propTypes = propTypes
 

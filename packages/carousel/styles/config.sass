@@ -1,0 +1,23 @@
+@import '~@talixo/shared/styles/config'
+
+$carousel-animation-time: 500ms !default
+
+$carousel-arrows-size: dp(6) !default
+$carousel-arrows-width: dp(8) !default
+
+$carousel-arrows-color: transparentize($x-color-text, 0.5) !default
+$carousel-arrows-hover-color: if(alpha($carousel-arrows-color) == 0, bold-color($carousel-arrows-color, 5%), rgba($carousel-arrows-color, 1)) !default
+
+$carousel-arrows-background-color: transparent !default
+$carousel-arrows-hover-background-color: transparentize($x-color-text, 0.9) !default
+
+$carousel-dots-color: $carousel-arrows-color !default
+$carousel-dots-hover-color: if(alpha($carousel-dots-color) == 0, bold-color($carousel-dots-color, 5%), rgba($carousel-dots-color, 1)) !default
+$carousel-dots-active-color: $carousel-dots-hover-color !default
+
+$carousel-dots-width: $x-font-size-base * 2 !default
+$carousel-dots-height: $x-font-size-base !default
+
+$carousel-dots-offset: $x-padding-vertical-base !default
+$carousel-dots-margin: $x-padding-horizontal-base / 2 !default
+$carousel-dots-border-radius: $x-border-radius !default

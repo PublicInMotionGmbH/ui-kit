@@ -22,10 +22,25 @@ const propTypes = {
   format: PropTypes.oneOf(['HH', 'hh A', 'mm']).isRequired,
 
   /** Time object. */
-  value: PropTypes.object.isRequired
+  value: PropTypes.object.isRequired,
+
+  /** ID passed to control component */
+  id: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 const HOURS_24 = 'HH'
@@ -40,6 +55,8 @@ const MINUTES = 'mm'
  * @property {function} [props.onBlur]
  * @property {string} [props.format]
  * @property {object} [props.value]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {boolean} [state.open]
@@ -62,6 +79,10 @@ class TimeInput extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
       this.formatValue(nextProps)
+    }
+
+    if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+      this.setState({ open: false })
     }
   }
 
@@ -88,6 +109,19 @@ class TimeInput extends React.Component {
   }
 
   /**
+   * Handle mouse down on arrow
+   *
+   * @param {SyntheticEvent|Event} e
+   */
+  handleMouseDownArrow = (e) => {
+    e.preventDefault()
+
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
+  /**
    * Build control arrow.
    *
    * @returns {React.Element}
@@ -99,7 +133,7 @@ class TimeInput extends React.Component {
     const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName}>
+      <span className={arrowClsName} onMouseDown={this.handleMouseDownArrow}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
@@ -159,6 +193,12 @@ class TimeInput extends React.Component {
    * Handles input focus.
    */
   handleFocus = () => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     this.setState({ open: true })
   }
 
@@ -192,14 +232,19 @@ class TimeInput extends React.Component {
    *
    * @returns {React.Element}
    */
-  renderInput = () => {
+  renderInput () {
+    const { id, error, disabled, readOnly } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open })
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open, disabled, 'read-only': readOnly })
 
     return (
       <TextInput
+        id={id}
+        disabled={disabled}
+        readOnly={readOnly}
+        error={error}
         className={inputClsName}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
@@ -210,13 +255,16 @@ class TimeInput extends React.Component {
         suffix={suffix}
         value={inputValue}
         autoComplete='off'
+        data-hj-whitelist={this.props['data-hj-whitelist']}
       />
     )
   }
 
   render () {
-    const { className, children, format, onBlur, value, ...passedProps } = this.props
+    const { className, children, format, onBlur, value, id, error, ...passedProps } = this.props
     const { open } = this.state
+
+    delete passedProps['data-hj-whitelist']
 
     // Build class name for wrapper
     const wrapperClsName = buildClassName([ moduleName, 'input' ], className)
@@ -229,6 +277,8 @@ class TimeInput extends React.Component {
     )
   }
 }
+
+TimeInput.displayName = 'TimeInput'
 
 TimeInput.propTypes = propTypes
 

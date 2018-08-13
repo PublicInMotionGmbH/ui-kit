@@ -121,4 +121,6 @@ FilterableChart.propTypes = propTypes
 
 FilterableChart.defaultProps = defaultProps
 
+FilterableChart.displayName = 'FilterableChart'
+
 export default FilterableChart

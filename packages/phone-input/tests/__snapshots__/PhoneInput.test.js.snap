@@ -7,9 +7,15 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
   <SelectBox
     buildItemId={[Function]}
     className="talixo-phone-input__country-box"
+    disabled={false}
     itemToString={[Function]}
+    mobileFriendly={false}
     multi={false}
+    onBlur={[Function]}
     onChange={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     options={
       Array [
         Object {
@@ -1179,13 +1185,22 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
         },
       ]
     }
-    placeholder="..."
+    placeholder={
+      <span
+        className="talixo-phone-input__unknown-flag"
+      />
+    }
+    readOnly={false}
     renderItem={[Function]}
     renderValue={[Function]}
+    tabIndex={-1}
     value={null}
   />
   <t
+    autoComplete="off"
+    disabled={false}
     guide={false}
+    inputMode="numeric"
     keepCharPositions={false}
     mask={
       Array [
@@ -1215,7 +1230,11 @@ exports[`<PhoneInput /> renders children correctly 1`] = `
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onMouseOut={[Function]}
     placeholderChar=" "
+    readOnly={false}
     render={[Function]}
     type="tel"
     value=""

@@ -1,8 +1,30 @@
 @import '~@talixo/shared/styles/config'
 
-$accordion-button-text-color: inherit !default
-$accordion-button-background: $color-pill-gray !default
-$accordion-button-background-hover: darken($color-pill-gray, 5%) !default
+$accordion-border-width: $x-border-width !default
+$accordion-border-radius: $x-border-radius !default
 
-$accordion-border-color: mix(#000, $accordion-button-background, 5%) !default
-$accordion-border-radius: 2px !default
+$accordion-header-padding-horizontal: $x-padding-horizontal-base !default
+$accordion-header-padding-vertical: $x-padding-vertical-base !default
+
+$accordion-content-padding-horizontal: $accordion-header-padding-horizontal !default
+$accordion-content-padding-vertical: $accordion-header-padding-vertical !default
+
+// TODO: Think if it should use input-border?
+$accordion-border-color: $x-input-border-color !default
+
+$accordion-header-text-color: $x-color-text !default
+$accordion-header-background-color: $x-color-background !default
+$accordion-header-font-weight: $x-weight-normal !default
+$accordion-header-font-size: $x-font-size-bigger !default
+
+$accordion-header-hover-text-color: $accordion-header-text-color !default
+$accordion-header-hover-background-color: $accordion-header-background-color !default
+
+$accordion-content-font-weight: $x-weight-normal !default
+$accordion-content-font-size: $x-font-size-base !default
+$accordion-content-text-color: $accordion-header-hover-text-color !default
+$accordion-content-background-color: $accordion-header-hover-background-color !default
+
+$accordion-arrow-size: $x-font-size-large !default
+$accordion-arrow-hover-color: $accordion-header-text-color !default
+$accordion-arrow-color: mix($accordion-header-background-color, $accordion-arrow-hover-color, 70%) !default

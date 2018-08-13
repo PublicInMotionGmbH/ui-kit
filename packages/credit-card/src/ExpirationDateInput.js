@@ -16,17 +16,42 @@ const propTypes = {
 
   /** Value to be displayed inside inputs. */
   value: PropTypes.shape({
+
+    /** Expiration month. */
     month: PropTypes.number,
+
+    /** Expiration year. */
     year: PropTypes.number
-  })
+  }),
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Does it have error? */
+  error: PropTypes.bool,
+
+  /** Should it render native select boxes for mobile? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
-const defaultProps = {}
+const defaultProps = {
+  error: false,
+  disabled: false,
+  readOnly: false,
+  mobileFriendly: false
+}
 
 // Set minimum year to be the current year.
 const minYear = new Date().getFullYear()
 // Set maximum year to be 40 years from the current year.
-const maxYear = minYear + 40
+const range = 40
+const maxYear = minYear + range
 
 /**
  * Component which represents expiration date input.
@@ -134,19 +159,24 @@ class ExpirationDateInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className } = this.props
+    const { className, id, error, onChange, value, mobileFriendly, disabled, readOnly, ...passedProps } = this.props
     const { month, year } = this.state
 
     // Build class names.
-    const wrapperClsName = buildClassName(moduleName, className)
-    const monthClsName = buildClassName([moduleName, 'month'])
-    const yearClsName = buildClassName([moduleName, 'year'])
+    const wrapperClsName = buildClassName(moduleName, className, { error })
+    const monthClsName = buildClassName([ moduleName, 'month' ])
+    const yearClsName = buildClassName([ moduleName, 'year' ])
 
     return (
-      <div className={wrapperClsName}>
+      <div className={wrapperClsName} {...passedProps}>
         <RangeInput
           className={monthClsName}
+          mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-month'
+          disabled={disabled}
+          readOnly={readOnly}
+          id={id}
+          error={error}
           min={1}
           max={12}
           minLength={2}
@@ -157,7 +187,11 @@ class ExpirationDateInput extends React.PureComponent {
 
         <RangeInput
           className={yearClsName}
+          mobileFriendly={mobileFriendly}
           autoComplete='cc-exp-year'
+          disabled={disabled}
+          readOnly={readOnly}
+          error={error}
           min={minYear}
           max={maxYear}
           autoCompleteLength={2}
@@ -169,6 +203,8 @@ class ExpirationDateInput extends React.PureComponent {
     )
   }
 }
+
+ExpirationDateInput.displayName = 'ExpirationDateInput'
 
 ExpirationDateInput.propTypes = propTypes
 

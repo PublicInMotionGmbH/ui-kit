@@ -7,6 +7,9 @@ import { SingleDatePicker } from 'react-dates'
 import Calendar from '../src/Calendar'
 
 describe('<Calendar />', () => {
+  beforeEach(() => jest.useFakeTimers())
+  afterEach(() => jest.useRealTimers())
+
   it('renders children correctly', () => {
     const wrapper = mount(<Calendar />)
 
@@ -50,10 +53,17 @@ describe('<Calendar />', () => {
       <Calendar onChange={spy} />
     )
 
+    // Change date
     wrapper.find(SingleDatePicker).props().onDateChange(moment('2000-11-20'))
 
+    // Blur element
+    wrapper.find(SingleDatePicker).props().onFocusChange({ focused: false })
+
+    // Wait a while
+    jest.runTimersToTime(1)
+
     expect(spy.mock.calls.length).toBe(1)
-    expect(spy.mock.calls[0][0].format('YYYY-MM-DD')).toBe('2000-11-20')
+    expect(spy.mock.calls[0][0]).toBe('2000-11-20')
   })
 
   it('should call onFocus event', () => {
