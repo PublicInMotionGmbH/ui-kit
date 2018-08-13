@@ -14,7 +14,7 @@ const propTypes = {
   /** Content of modal */
   children: PropTypes.node,
 
-  /** Handles pressing key. */
+  /** Handles pressing escape key. */
   onEscKeyDown: PropTypes.func,
 
   /** Handles clicking on backdrop. */
