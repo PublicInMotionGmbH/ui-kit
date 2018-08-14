@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 import { Slider } from '@talixo/slider'
 
+import convertHslToRgbHex from '../utils/convertHslToRgbHex'
+import convertRgbToHsl from '../utils/convertRgbToHsl'
+
 const moduleName = 'color-input__hsl'
 
 const propTypes = {
@@ -14,7 +17,10 @@ const propTypes = {
   color: PropTypes.string,
 
   /** Send color back to parent component */
-  onHslChange: PropTypes.func
+  onHslChange: PropTypes.func,
+
+  /** Output format */
+  outputFormat: PropTypes.string
 }
 
 /**
@@ -68,74 +74,19 @@ class Hsl extends React.Component {
       l: l
     })
 
-    const { color } = this.props
+    const { color, outputFormat } = this.props
 
-    let r, g, b
-    h = parseFloat(h)
-    s = parseFloat(s)
-    l = parseFloat(l)
-
-    if (h < 0) h = 0
-    if (s < 0) s = 0
-    if (l < 0) l = 0
-    if (h >= 360) h = 359
-    if (s > 100) s = 100
-    if (l > 100) l = 100
-    s /= 100
-    l /= 100
-    let c = (1 - Math.abs(2 * l - 1)) * s
-    let hh = h / 60
-    let x = c * (1 - Math.abs(hh % 2 - 1))
-    r = g = b = 0
-
-    if (hh >= 0 && hh < 1) {
-      r = c
-      g = x
-    } else if (hh >= 1 && hh < 2) {
-      r = x
-      g = c
-    } else if (hh >= 2 && hh < 3) {
-      g = c
-      b = x
-    } else if (hh >= 3 && hh < 4) {
-      g = x
-      b = c
-    } else if (hh >= 4 && hh < 5) {
-      r = x
-      b = c
-    } else {
-      r = c
-      b = x
+    if (color && (color.startsWith('hsl') || outputFormat === 'hsl')) {
+      this.props.onHslChange(`hsl(${h},${s}%,${l}%)`)
+      return
     }
 
-    const m = (l - c / 2) < 0 ? 0 : l - c / 2
+    const newColor = convertHslToRgbHex(h, s, l, color, outputFormat)
 
-    r += m
-    g += m
-    b += m
-
-    r *= 255
-    g *= 255
-    b *= 255
-
-    r = Math.floor(r)
-    g = Math.floor(g)
-    b = Math.floor(b)
-
-    let hex = r * 65536 + g * 256 + b
-    hex = hex.toString(16, 6)
-    let len = hex.length
-    if (len < 6) {
-      for (let i = 0; i < 6 - len; i++) {
-        hex = '0' + hex
-      }
-    }
-    if (!color || color.startsWith('#')) {
-      this.props.onHslChange(`#${hex}`)
-    } else if (color.startsWith('rgb')) {
-      this.props.onHslChange(`rgb(${r},${g},${b})`)
-    } else {
+    if (!newColor) {
       this.props.onHslChange(color, true)
+    } else {
+      this.props.onHslChange(newColor)
     }
   }
 
@@ -159,12 +110,29 @@ class Hsl extends React.Component {
           r = parseInt(color.substr(1, 1), 16)
           g = parseInt(color.substr(2, 2), 16)
           b = parseInt(color.substr(3, 3), 16)
-        } else return
+        }
       } else if (color.startsWith('rgb')) {
         const colorRgb = color.match(/\d+/g)
         r = colorRgb[0]
         g = colorRgb[1]
         b = colorRgb[2]
+      } else if (color.startsWith('hsl')) {
+        const colorHsl = color.match(/\d+/g)
+        const h = parseInt(colorHsl[0])
+        const s = parseInt(colorHsl[1])
+        const l = parseInt(colorHsl[2])
+
+        if (isNaN(r + g + b)) {
+          this.props.onHslChange(color, true)
+          return
+        }
+
+        this.setState({
+          h: h,
+          s: s,
+          l: l
+        })
+        return
       } else return
 
       if (isNaN(r + g + b)) {
@@ -172,37 +140,12 @@ class Hsl extends React.Component {
         return
       }
 
-      r /= 255
-      g /= 255
-      b /= 255
-
-      let max = Math.max(r, g, b)
-      let min = Math.min(r, g, b)
-      let h = (max + min) / 2
-      let s = (max + min) / 2
-      let l = (max + min) / 2
-
-      if (max === min) {
-        h = s = 0
-      } else {
-        let d = max - min
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
-        switch (max) {
-          case r: h = (g - b) / d + (g < b ? 6 : 0); break
-          case g: h = (b - r) / d + 2; break
-          case b: h = (r - g) / d + 4; break
-        }
-        h /= 6
-      }
-
-      h = Math.floor(h * 360)
-      s = Math.floor(s * 100)
-      l = Math.floor(l * 100)
+      const hslValue = convertRgbToHsl(r, g, b)
 
       this.setState({
-        h: h,
-        s: s,
-        l: l
+        h: hslValue[0],
+        s: hslValue[1],
+        l: hslValue[2]
       })
     } catch (e) {
       this.props.onHslChange(color, true)

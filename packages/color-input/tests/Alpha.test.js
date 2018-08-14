@@ -68,7 +68,7 @@ describe('<Alpha />', () => {
       }
     })
 
-    expect(colorValue).toBe('#fff3')
+    expect(colorValue).toBe('#ffffff32')
 
     wrapper.unmount()
   })

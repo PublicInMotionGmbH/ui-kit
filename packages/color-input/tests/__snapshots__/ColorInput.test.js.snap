@@ -21,6 +21,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
     className="talixo-color-input__text-input"
     endCaretOnFocus={false}
     error={false}
+    onBlur={[Function]}
     onChange={[Function]}
     placeholder="e.g. #ffffff"
     type="text"
@@ -29,6 +30,7 @@ exports[`<ColorInput /> renders children correctly 1`] = `
   <input
     className="talixo-color-input__picker"
     onChange={[Function]}
+    onFocus={[Function]}
     type="color"
     value="#ffffff"
   />

@@ -10,14 +10,20 @@ import Alpha from './Alpha'
 import Palette from './Palette'
 import Hsl from './Hsl'
 
+import convertHexToRgb from '../utils/convertHexToRgb'
+import convertRgbToHex from '../utils/convertRgbToHex'
+import convertShortHexToLong from '../utils/convertShortHexToLong'
+import convertHslToRgbHex from '../utils/convertHslToRgbHex'
+import convertRgbToHsl from '../utils/convertRgbToHsl'
+
 const moduleName = 'color-input'
 
 const propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
-
   /** Alpha channel */
   alpha: PropTypes.bool,
+
+  /** Additional class name */
+  className: PropTypes.string,
 
   /** Default color */
   defaultColor: PropTypes.string,
@@ -37,7 +43,10 @@ const propTypes = {
       /** Color in hex, rgb or rgba format */
       color: PropTypes.string
     })
-  )
+  ),
+
+  /** Output format */
+  outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl'])
 }
 
 /**
@@ -55,10 +64,7 @@ const propTypes = {
 class ColorInput extends React.PureComponent {
   state = {
     color: this.props.defaultColor || null,
-    error: false,
-    h: 0,
-    s: 0,
-    l: 0
+    error: false
   }
 
   /**
@@ -70,6 +76,80 @@ class ColorInput extends React.PureComponent {
     if (props.defaultColor !== this.state.color && props.defaultColor !== undefined) {
       this.setState({ color: props.defaultColor })
     }
+  }
+
+  convertFormat (passedColor) {
+    const { outputFormat } = this.props
+    const color = passedColor || this.state.color
+
+    if (color && outputFormat === 'rgb') {
+      if (color.startsWith('#')) {
+        this.setState({
+          color: color.length > 6
+            ? convertHexToRgb(color)
+            : convertHexToRgb(convertShortHexToLong(color))
+        })
+        return
+      } else if (color.startsWith('hsl')) {
+        const colorHsl = color.match(/\d+/g)
+        const h = colorHsl[0]
+        const s = colorHsl[1]
+        const l = colorHsl[2]
+
+        this.setState({
+          color: convertHslToRgbHex(h, s, l, color, 'rgb')
+        })
+        return
+      }
+    } else if (color && outputFormat === 'hex') {
+      if (color.startsWith('rgb')) {
+        this.setState({
+          color: convertRgbToHex(color)
+        })
+        return
+      } else if (color.startsWith('hsl')) {
+        const colorHsl = color.match(/\d+/g)
+        const h = colorHsl[0]
+        const s = colorHsl[1]
+        const l = colorHsl[2]
+
+        this.setState({
+          color: convertHslToRgbHex(h, s, l, color, 'hex')
+        })
+        return
+      }
+    } else if (color && outputFormat === 'hsl') {
+      if (color.startsWith('#')) {
+        let longHex = color
+        if (color.length < 5) {
+          longHex = convertShortHexToLong(color)
+        }
+        const r = parseInt(longHex.substring(1, 3), 16)
+        const g = parseInt(longHex.substring(3, 5), 16)
+        const b = parseInt(longHex.substring(5, 7), 16)
+
+        const hslValue = convertRgbToHsl(r, g, b)
+        const newColor = `hsl(${hslValue[0]},${hslValue[1]}%,${hslValue[2]}%)`
+        this.setState({
+          color: newColor
+        })
+        return
+      } else if (color.startsWith('rgb')) {
+        const colorRgb = color.match(/\d+/g)
+        const r = colorRgb[0]
+        const g = colorRgb[1]
+        const b = colorRgb[2]
+        const hslValue = convertRgbToHsl(r, g, b)
+        const newColor = `hsl(${hslValue[0]},${hslValue[1]},${hslValue[2]})`
+        this.setState({
+          color: newColor
+        })
+        return
+      }
+    }
+    this.setState({
+      color: color
+    })
   }
 
   /**
@@ -103,9 +183,7 @@ class ColorInput extends React.PureComponent {
    * @param {string} color
    */
   handlePalette (color) {
-    this.setState({
-      color: color
-    })
+    this.convertFormat(color)
   }
 
   /**
@@ -126,7 +204,7 @@ class ColorInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { alpha, className, defaultColor, hsl, palette, ...passedProps } = this.props
+    const { alpha, className, defaultColor, hsl, palette, outputFormat, ...passedProps } = this.props
     const { color, error } = this.state
 
     const clsName = buildClassName(moduleName, className)
@@ -154,19 +232,26 @@ class ColorInput extends React.PureComponent {
           value={color}
           error={error}
           onChange={e => this.handleChangeColor(e)}
+          onBlur={() => this.convertFormat()}
         />
         <input
           className={pickerClsName}
           type='color'
           value={color && color.length === 7 ? color : '#ffffff'}
           onChange={e => this.handleChangeColor(e.target.value)}
+          onFocus={() => this.convertFormat()}
         />
 
         {alpha && <Tooltip
           position='top'
           triggerOn='click'
           arrow={false}
-          render={() => <Alpha color={color} onAlphaChange={(value, error) => this.handleAlpha(value, error)} />}
+          render={() =>
+            <Alpha
+              color={color}
+              onAlphaChange={(value, error) => this.handleAlpha(value, error)}
+              outputFormat={outputFormat}
+            />}
         >
           <span className={alphaBtnClsName}>
             Alpha
@@ -194,6 +279,7 @@ class ColorInput extends React.PureComponent {
               <Hsl
                 color={color}
                 onHslChange={this.handleHsl}
+                outputFormat={outputFormat}
                 ref={instance => { this.child = instance }}
               />}
           >

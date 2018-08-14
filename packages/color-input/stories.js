@@ -15,7 +15,7 @@ const palette = [
   {
     id: 'red1',
     name: 'awesome-red',
-    color: '#ec0000'
+    color: '#f00'
   },
   {
     id: 'blue2',
@@ -35,7 +35,7 @@ const palette = [
   {
     id: 'violet5',
     name: 'elegant-violet',
-    color: 'rgb(169, 0, 205)'
+    color: 'hsl(278,100%,50%)'
   },
   {
     id: 'cyan6',
@@ -78,4 +78,16 @@ addStory('with palette of colors', readme, () => (
 
 addStory('full version', readme, () => (
   <ColorInput alpha hsl palette={palette} />
+))
+
+addStory('rgb as output format', readme, () => (
+  <ColorInput outputFormat='rgb' alpha hsl palette={palette} />
+))
+
+addStory('hex as output format', readme, () => (
+  <ColorInput outputFormat='hex' alpha hsl palette={palette} />
+))
+
+addStory('hsl as output format', readme, () => (
+  <ColorInput outputFormat='hsl' alpha hsl palette={palette} defaultColor='hsl(0, 100%, 50%)' />
 ))
