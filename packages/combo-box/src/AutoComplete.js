@@ -260,7 +260,7 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children, id, disabled, readOnly, name } = this.props
+    const { children, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
@@ -272,10 +272,6 @@ class AutoComplete extends React.PureComponent {
 
     if (readOnly) {
       inputProps.readOnly = readOnly
-    }
-
-    if (id != null) {
-      inputProps.id = id
     }
 
     if (name != null) {
