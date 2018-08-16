@@ -188,8 +188,6 @@ function Alpha (props) {
         props.onAlphaChange(convertHexToRgb(color))
       } else if (color.startsWith('rgb') && outputFormat === 'hex') {
         props.onAlphaChange(convertRgbToHex(color))
-      } else if (color.startsWith('hsl') && outputFormat === 'rgb') {
-        // updateHslAlpha(value)
       } else {
         props.onAlphaChange(color, true)
       }
