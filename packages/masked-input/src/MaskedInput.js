@@ -167,7 +167,7 @@ class MaskedInput extends React.Component {
 
   render () {
     const {
-      className, error, onBlur, onFocus, onChange, children,
+      className, error, onBlur, onFocus, onChange, children, name,
       renderMask, id, placeholder, value: _value, ...passedProps
     } = this.props
     const { focused, value } = this.state

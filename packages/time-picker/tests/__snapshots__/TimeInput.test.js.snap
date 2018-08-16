@@ -21,6 +21,7 @@ exports[`<TimeInput /> renders correctly 1`] = `
     right={
       <span
         className="talixo-time-picker__input talixo-time-picker__input--arrow"
+        onMouseDown={[Function]}
       >
         <Icon
           name="expand_more"

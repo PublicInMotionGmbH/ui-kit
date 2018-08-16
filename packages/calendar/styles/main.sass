@@ -93,8 +93,7 @@
     justify-content: space-between
 
   .DayPicker_weekHeader,
-  .CalendarMonthGrid_month__horizontal,
-  .CalendarMonth_caption
+  .CalendarMonthGrid_month__horizontal
     flex: 1 0
     width: 45%
     max-width: 45%
@@ -114,6 +113,7 @@
     flex: 1 0
     text-align: center
     height: $calendar-picker-weekday-line-height * $calendar-picker-weekday-font-size !important
+    padding: 0 $calendar-picker-weekday-padding-horizontal
 
     > small
       font-size: $calendar-picker-weekday-font-size
@@ -124,13 +124,18 @@
     justify-content: space-between
     outline: none
 
+  .CalendarMonth
+    position: relative
+
   .CalendarMonth_caption
     text-align: center
     text-transform: uppercase
     font-size: $calendar-picker-month-font-size
-    line-height: 1em
+    line-height: $calendar-picker-month-line-height
     position: absolute
-    top: $calendar-picker-padding-vertical
+    bottom: 100%
+    width: 100%
+    margin-bottom: $calendar-picker-weekday-line-height * $calendar-picker-weekday-font-size + $calendar-picker-month-font-size
 
     > strong
       font-weight: $calendar-picker-month-font-weight
@@ -151,9 +156,10 @@
     color: $calendar-picker-day-text-color
     background-color: $calendar-picker-day-background-color
     font-weight: $calendar-picker-day-font-weight
-    height: $calendar-picker-day-height !important
     cursor: pointer
     outline: none
+    padding: $calendar-picker-day-padding-vertical $calendar-picker-day-padding-horizontal
+    border-radius: $calendar-picker-day-border-radius
 
   .CalendarDay__lastDayOfWeek
     color: $calendar-picker-day-holiday-text-color

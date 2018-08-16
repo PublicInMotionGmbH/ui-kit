@@ -131,6 +131,7 @@ class OptionsInput extends React.PureComponent {
    * This function detach events
    */
   componentWillUnmount () {
+    clearTimeout(this.arrowClickTimeout)
     this.detachCloseEvents()
   }
 
@@ -138,6 +139,10 @@ class OptionsInput extends React.PureComponent {
    * This function set state.open
    */
   toggle (state) {
+    if (this.freezeToggling) {
+      return
+    }
+
     const nextOpen = state == null ? !this.state.open : !!state
 
     this.setState({ open: nextOpen })
@@ -179,6 +184,7 @@ class OptionsInput extends React.PureComponent {
     if (!this.el) {
       return
     }
+
     const body = event.currentTarget
 
     let element = event.target
@@ -230,6 +236,10 @@ class OptionsInput extends React.PureComponent {
   focus = () => {
     this.toggle(true)
 
+    this.setState({
+      focused: true
+    })
+
     if (this.props.onFocus) {
       this.props.onFocus()
     }
@@ -239,6 +249,10 @@ class OptionsInput extends React.PureComponent {
    * Handle losing focus on element.
    */
   blur = () => {
+    this.setState({
+      focused: false
+    })
+
     if (this.props.onBlur) {
       this.props.onBlur()
     }
@@ -252,9 +266,27 @@ class OptionsInput extends React.PureComponent {
     }
   }
 
-  handleClickIcon (e) {
-    e.stopPropagation()
-    this.toggle()
+  handleArrowClick = (e) => {
+    if (this.nextStateAfterArrowClick != null) {
+      this.toggle(this.nextStateAfterArrowClick)
+
+      // It should ignore focus/blur events which are on same time
+      this.freezeToggling = true
+      this.arrowClickTimeout = setTimeout(() => {
+        this.freezeToggling = false
+      })
+    }
+  }
+
+  handleArrowClickStart = (e) => {
+    this.nextStateAfterArrowClick = null
+
+    // Keep default behavior when it's not focused
+    if (!this.state.focused) {
+      return
+    }
+
+    this.nextStateAfterArrowClick = !this.state.open
   }
 
   render () {
@@ -286,7 +318,8 @@ class OptionsInput extends React.PureComponent {
 
           <Icon
             name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-            onClick={(e) => this.handleClickIcon(e)}
+            onMouseDown={this.handleArrowClickStart}
+            onClick={this.handleArrowClick}
           />
         </button>
         <OptionsInputList

@@ -1,0 +1,31 @@
+@import './config'
+
+@include module('avatar')
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-shrink: 0
+  font-size: 1.5em
+  width: 1em
+  height: 1em
+  line-height: 1em
+  text-align: center
+  border: 1px solid transparent
+  overflow: hidden
+  user-select: none
+  color: $avatar-color
+  background-color: $avatar-background-color
+
+  &--rounded
+    border-radius: 50%
+
+  & > img
+    display: block
+    width: 1em
+    height: 1em
+    object-fit: cover
+
+  & > &__inner
+    line-height: 1.25em
+    font-size: 0.8em
