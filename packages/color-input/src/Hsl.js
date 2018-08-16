@@ -20,7 +20,7 @@ const propTypes = {
   onHslChange: PropTypes.func,
 
   /** Output format */
-  outputFormat: PropTypes.string
+  outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl'])
 }
 
 /**

@@ -19,7 +19,10 @@ const propTypes = {
   color: PropTypes.string,
 
   /** Send color back to parent component */
-  onAlphaChange: PropTypes.func
+  onAlphaChange: PropTypes.func,
+
+  /** Output format */
+  outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl'])
 }
 
 /**

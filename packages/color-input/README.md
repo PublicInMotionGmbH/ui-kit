@@ -33,6 +33,7 @@ alpha         | boolean   | n/a         | Show alpha channel
 defaultColor  | string    | n/a         | Set default color to be shown at the beginning
 hsl           | boolean   | n/a         | Show HSL manipulation tool
 palette       | Palette[] | n/a         | Palette of predefined colors
+outputFormat  | string    | n/a         | output format, one of: `hex`, `rgb`, `hsl`
 
 ### Palette
 
