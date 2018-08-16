@@ -23,21 +23,23 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@talixo/portal": "^1.0.0-alpha.24",
+    "@talixo/shared": "^1.0.0-alpha.24",
+    "@talixo/slider": "^1.0.0-alpha.24",
+    "@talixo/text-input": "^1.0.0-alpha.24",
+    "@talixo/tooltip": "^1.0.0-alpha.24",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "@talixo/shared": "1.0.0-alpha.12",
-    "@talixo/text-input": "1.0.0-alpha.12",
-    "@talixo/slider": "1.0.0-alpha.12",
-    "@talixo/tooltip": "1.0.0-alpha.12"
+    "react-dom": "^16.2.0"
   },
   "peerDependencies": {
+    "@talixo/portal": "^1.0.0-alpha.24",
+    "@talixo/shared": "^1.0.0-alpha.24",
+    "@talixo/slider": "^1.0.0-alpha.24",
+    "@talixo/text-input": "^1.0.0-alpha.24",
+    "@talixo/tooltip": "^1.0.0-alpha.24",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "@talixo/shared": "1.0.0-alpha.12",
-    "@talixo/text-input": "1.0.0-alpha.12",
-    "@talixo/slider": "1.0.0-alpha.12",
-    "@talixo/tooltip": "1.0.0-alpha.12"
+    "react-dom": "^16.2.0"
   }
 }
