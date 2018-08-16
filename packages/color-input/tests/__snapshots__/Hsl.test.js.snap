@@ -16,14 +16,12 @@ exports[`<Hsl /> renders children correctly 1`] = `
       className="talixo-color-input__hsl-item-spectrum"
     />
     <Slider
-      disabled={false}
       id="talixo-color-input__hsl-item-label talixo-color-input__hsl-item-label--hue"
       max={360}
       min={0}
       onChange={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      readOnly={false}
       value={0}
     />
   </div>
@@ -36,13 +34,11 @@ exports[`<Hsl /> renders children correctly 1`] = `
       Saturation (%)
     </label>
     <Slider
-      disabled={false}
       id="talixo-color-input__hsl-item-label talixo-color-input__hsl-item-label--saturation"
       min={0}
       onChange={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      readOnly={false}
       value={0}
     />
   </div>
@@ -55,13 +51,11 @@ exports[`<Hsl /> renders children correctly 1`] = `
       Lightness (%)
     </label>
     <Slider
-      disabled={false}
       id="talixo-color-input__hsl-item-label talixo-color-input__hsl-item-label--lightness"
       min={0}
       onChange={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      readOnly={false}
       value={0}
     />
   </div>
