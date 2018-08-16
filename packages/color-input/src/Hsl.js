@@ -122,7 +122,7 @@ class Hsl extends React.Component {
         const s = parseInt(colorHsl[1])
         const l = parseInt(colorHsl[2])
 
-        if (isNaN(r + g + b)) {
+        if (isNaN(h + s + l)) {
           this.props.onHslChange(color, true)
           return
         }

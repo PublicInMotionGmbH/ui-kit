@@ -42,6 +42,12 @@ describe('<ColorInput />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('handle defaultColor ', () => {
+    const wrapper = shallow(<ColorInput defaultColor='#eeeeee' />)
+
+    expect(wrapper.state('color')).toBe('#eeeeee')
+  })
+
   it('Change color when new color is provided', () => {
     const wrapper = mount(<ColorInput />)
 
@@ -145,6 +151,126 @@ describe('<ColorInput />', () => {
       }
     })
     expect(wrapper.state('color')).toBe('#ff0000')
+
+    wrapper.unmount()
+  })
+
+  it('changes hex color to rgb output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='rgb' />)
+
+    wrapper.setState({
+      color: '#0a0a0a'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('rgb(10,10,10)')
+
+    wrapper.unmount()
+  })
+
+  it('changes short hex color to rgb output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='rgb' />)
+
+    wrapper.setState({
+      color: '#0a0'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('rgb(0,170,0)')
+
+    wrapper.unmount()
+  })
+
+  it('changes hsl color to rgb output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='rgb' />)
+
+    wrapper.setState({
+      color: 'hsl(200,100%,50%)'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('rgb(0,169,255)')
+
+    wrapper.unmount()
+  })
+
+  it('changes rgb color to hex output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='hex' />)
+
+    wrapper.setState({
+      color: 'rgb(10,10,10)'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('#0a0a0a')
+
+    wrapper.unmount()
+  })
+
+  it('changes hsl color to hex output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='hex' />)
+
+    wrapper.setState({
+      color: 'hsl(200,100%,50%)'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('#00a9ff')
+
+    wrapper.unmount()
+  })
+
+  it('changes hex color to hsl output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='hsl' />)
+
+    wrapper.setState({
+      color: '#00a9ff'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('hsl(200,100%,50%)')
+
+    wrapper.unmount()
+  })
+
+  it('changes short hex color to hsl output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='hsl' />)
+
+    wrapper.setState({
+      color: '#00a'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('hsl(240,100%,33%)')
+
+    wrapper.unmount()
+  })
+
+  it('changes rgb color to hsl output color ', () => {
+    const wrapper = mount(<ColorInput outputFormat='hsl' />)
+
+    wrapper.setState({
+      color: 'rgb(100,100,100)'
+    })
+
+    wrapper.find('input').at(0).simulate('focus')
+    wrapper.find('input').at(0).simulate('blur')
+
+    expect(wrapper.state('color')).toBe('hsl(0,0%,39%)')
 
     wrapper.unmount()
   })

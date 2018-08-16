@@ -140,7 +140,7 @@ class ColorInput extends React.PureComponent {
         const g = colorRgb[1]
         const b = colorRgb[2]
         const hslValue = convertRgbToHsl(r, g, b)
-        const newColor = `hsl(${hslValue[0]},${hslValue[1]},${hslValue[2]})`
+        const newColor = `hsl(${hslValue[0]},${hslValue[1]}%,${hslValue[2]}%)`
         this.setState({
           color: newColor
         })

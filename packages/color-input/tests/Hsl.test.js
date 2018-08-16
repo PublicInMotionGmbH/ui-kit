@@ -334,4 +334,40 @@ describe('<Hsl />', () => {
 
     wrapper.unmount()
   })
+
+  it('handle change hsl value ', () => {
+    const wrapper = mount(
+      <Hsl
+        color='hsl(80,85%,90%)'
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(0).simulate('change', {
+      target: {
+        value: 100
+      }
+    })
+
+    expect(colorValue).toBe('hsl(100,85%,90%)')
+
+    wrapper.unmount()
+  })
+
+  it('handle wrong hsl value', () => {
+    const wrapper = mount(
+      <Hsl
+        color='hsl(mmm,85%,90%)'
+        onHslChange={(value, error) => handleHsl(value, error)}
+      />)
+
+    wrapper.find('.talixo-slider__input').at(1).simulate('change', {
+      target: {
+        value: 100
+      }
+    })
+
+    expect(colorValue).toBe('hsl(0,100%,0%)')
+
+    wrapper.unmount()
+  })
 })

@@ -89,5 +89,5 @@ addStory('hex as output format', readme, () => (
 ))
 
 addStory('hsl as output format', readme, () => (
-  <ColorInput outputFormat='hsl' alpha hsl palette={palette} defaultColor='hsl(0, 100%, 50%)' />
+  <ColorInput outputFormat='hsl' alpha hsl palette={palette} />
 ))
