@@ -38,8 +38,8 @@ expandedRows        | array     | no        | n/a               | Array should c
 onClick             | function  | no        | n/a               | Row onClick callback function.
 onSort              | function  | no        | n/a               | onSort function callback.
 sortable            | boolean   | no        | `false`           | Indicates if table is sortable.
-sortColumn          | string    | no        | self-constrolled  | ID of the column according to which data is sorted.
-reversedOrder       | boolean   | no        | self-constrolled  | Indicates if table is sortable.
+sortColumn          | string    | no        | self-controlled   | ID of the column according to which data is sorted.
+reversedOrder       | boolean   | no        | self-controlled   | Indicates if table is sortable.
 verticalActionCell  | string    | no        | n/a               | Indicates if actions should be displayed vertically or horizontally.
 
 ## Property shapes

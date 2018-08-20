@@ -225,7 +225,7 @@ class TableRow extends React.Component {
                 {
                   cols.map(({ id, render }) => (
                     <Cell className={cellCls} onClick={onClick.bind(this, row)} key={id}>
-                      { render && typeof render === 'function' ? render(row[id]) : row[id] }
+                      { render && typeof render === 'function' ? render(row[id], row, id) : row[id] }
                     </Cell>)
                   )
                 }
