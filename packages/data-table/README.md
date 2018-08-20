@@ -41,6 +41,8 @@ sortable            | boolean   | no        | `false`           | Indicates if t
 sortColumn          | string    | no        | self-controlled   | ID of the column according to which data is sorted.
 reversedOrder       | boolean   | no        | self-controlled   | Indicates if table is sortable.
 verticalActionCell  | string    | no        | n/a               | Indicates if actions should be displayed vertically or horizontally.
+children            | nodes     | no        | n/a               | Other nodes put after data-table body.
+footer              | node      | no        | n/a               | Full-width footer on end of table.
 
 ## Property shapes
 

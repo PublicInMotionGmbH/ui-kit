@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import { Icon } from '@talixo/icon'
 import { Notification } from '@talixo/notification'
+import { Footer, Cell } from '@talixo/table'
 
 import DataTable from './src/DataTable'
 
@@ -163,6 +164,29 @@ addStory('custom cells', readme, () => (
     columns={columnsCustomCells}
     data={tableData}
   />
+))
+
+addStory('with footer', readme, () => (
+  <DataTable
+    actions={actions}
+    columns={columnsCustomCells}
+    data={tableData}
+    footer={'Some footer content over there'}
+  />
+))
+
+addStory('custom footer', readme, () => (
+  <DataTable
+    actions={actions}
+    columns={columnsCustomCells}
+    data={tableData}
+  >
+    <Footer>
+      <Cell colSpan={4}>1</Cell>
+      <Cell>2</Cell>
+      <Cell>3</Cell>
+    </Footer>
+  </DataTable>
 ))
 
 addStory('custom headers', readme, () => (
