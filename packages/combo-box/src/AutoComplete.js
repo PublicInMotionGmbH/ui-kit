@@ -324,12 +324,20 @@ class AutoComplete extends React.PureComponent {
    */
   render () {
     const {
-      icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
+      id, icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
       children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
+    const idProps = {}
+
+    if (id) {
+      idProps.inputId = id
+      idProps.id = 'container_' + id
+    }
+
     return (
       <Downshift
+        {...idProps}
         ref={this.setDownshiftRef}
         stateReducer={this.stateReducer}
         onChange={this.select}

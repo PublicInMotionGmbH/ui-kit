@@ -1,14 +1,14 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import Downshift from 'downshift'
+import { resetIdCounter } from 'downshift'
 
 import { TextInput } from '@talixo/text-input'
 
 import AutoComplete from '../src/AutoComplete'
 
 describe('<AutoComplete />', () => {
-  beforeEach(() => Downshift.resetIdCounter())
+  beforeEach(() => resetIdCounter())
 
   it('should render correctly', () => {
     const wrapper = mount(

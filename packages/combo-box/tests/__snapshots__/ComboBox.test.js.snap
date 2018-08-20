@@ -2,10 +2,14 @@
 
 exports[`<ComboBox /> should not render menu when select box is opened and has no options 1`] = `
 <div
+  aria-expanded={true}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns="downshift-0-menu"
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={true}
     aria-haspopup={true}
     aria-label="close menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -14,6 +18,7 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
     onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -23,7 +28,8 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
       <input
         aria-activedescendant={null}
         aria-autocomplete="list"
-        aria-expanded={true}
+        aria-controls="downshift-0-menu"
+        aria-labelledby="downshift-0-label"
         autoComplete="off"
         disabled={false}
         id="downshift-0-input"
@@ -31,7 +37,6 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="..."
-        role="combobox"
         type="text"
         value=""
       />
@@ -56,10 +61,14 @@ exports[`<ComboBox /> should not render menu when select box is opened and has n
 
 exports[`<ComboBox /> should render correctly 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -68,6 +77,7 @@ exports[`<ComboBox /> should render correctly 1`] = `
     onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -77,7 +87,8 @@ exports[`<ComboBox /> should render correctly 1`] = `
       <input
         aria-activedescendant={null}
         aria-autocomplete="list"
-        aria-expanded={false}
+        aria-controls={null}
+        aria-labelledby="downshift-0-label"
         autoComplete="off"
         disabled={false}
         id="downshift-0-input"
@@ -85,7 +96,6 @@ exports[`<ComboBox /> should render correctly 1`] = `
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="..."
-        role="combobox"
         type="text"
         value=""
       />
@@ -110,10 +120,14 @@ exports[`<ComboBox /> should render correctly 1`] = `
 
 exports[`<ComboBox /> should render menu when select box is opened and has options 1`] = `
 <div
+  aria-expanded={true}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns="downshift-0-menu"
   className="talixo-combo-box talixo-combo-box--open"
+  role="combobox"
 >
   <button
-    aria-expanded={true}
     aria-haspopup={true}
     aria-label="close menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -122,6 +136,7 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
     onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -131,7 +146,8 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
       <input
         aria-activedescendant={null}
         aria-autocomplete="list"
-        aria-expanded={true}
+        aria-controls="downshift-0-menu"
+        aria-labelledby="downshift-0-label"
         autoComplete="off"
         disabled={false}
         id="downshift-0-input"
@@ -139,7 +155,6 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
         onChange={[Function]}
         onKeyDown={[Function]}
         placeholder="..."
-        role="combobox"
         type="text"
         value=""
       />
@@ -166,11 +181,13 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
       className="talixo-combo-box__list"
     >
       <div
+        aria-selected={false}
         className="talixo-combo-box__item"
         id="downshift-0-item-0"
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseMove={[Function]}
+        role="option"
       >
         <div
           className="talixo-combo-box__item__tick"
@@ -189,11 +206,13 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
         </div>
       </div>
       <div
+        aria-selected={false}
         className="talixo-combo-box__item"
         id="downshift-0-item-1"
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseMove={[Function]}
+        role="option"
       >
         <div
           className="talixo-combo-box__item__tick"
@@ -218,10 +237,14 @@ exports[`<ComboBox /> should render menu when select box is opened and has optio
 
 exports[`<ComboBox /> should show multi-select box with many values 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box talixo-combo-box--multi"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value"
@@ -230,6 +253,7 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
     onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -296,7 +320,8 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
         <input
           aria-activedescendant={null}
           aria-autocomplete="list"
-          aria-expanded={false}
+          aria-controls={null}
+          aria-labelledby="downshift-0-label"
           autoComplete="off"
           disabled={false}
           id="downshift-0-input"
@@ -304,7 +329,6 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
           onChange={[Function]}
           onKeyDown={[Function]}
           placeholder={null}
-          role="combobox"
           style={
             Object {
               "boxSizing": "content-box",
@@ -349,10 +373,14 @@ exports[`<ComboBox /> should show multi-select box with many values 1`] = `
 
 exports[`<ComboBox /> should show select box with selected value 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value"
@@ -361,6 +389,7 @@ exports[`<ComboBox /> should show select box with selected value 1`] = `
     onClick={[Function]}
     onFocus={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
