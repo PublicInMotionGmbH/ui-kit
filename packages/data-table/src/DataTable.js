@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 import { buildClassName } from '@talixo/shared'
-import { Table, Body } from '@talixo/table'
+import { Table, Body, Footer, Cell } from '@talixo/table'
 
 import TableHeaders from './TableHeaders'
 import TableRow from './TableRow'
@@ -69,6 +69,9 @@ const propTypes = {
     /** Render function of given header. */
     renderHeader: PropTypes.func
   })).isRequired,
+
+  /** Nodes which should be put into data table footer */
+  footer: PropTypes.node,
 
   /** Data to be populated inside table. Require the same keys as in columns objects. */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -180,9 +183,11 @@ class DataTable extends React.Component {
 
     // Check if column has already been used to sort.
     const _reversedOrder = sortColumn === columnID ? !reversedOrder : false
+
     // Set direction of sorting.
     const direction = !_reversedOrder ? 'asc' : 'desc'
-    // Oreder data using lodash sort function.
+
+    // Order data using lodash sort function.
     const newData = _.orderBy(sortedData, columnID, direction)
 
     this.setState({
@@ -201,7 +206,8 @@ class DataTable extends React.Component {
     const { columns, onSort, sortable } = this.props
     const { sortColumn, reversedOrder } = this.state
     const { sort } = this
-    // Pass sorting order to allow propper sorting arrow hightlight.
+
+    // Pass sorting order to allow proper sorting arrow highlight.
     const sortOrder = !reversedOrder ? 'asc' : 'desc'
 
     const headersProps = {
@@ -219,16 +225,24 @@ class DataTable extends React.Component {
   render (props) {
     const {
       actions, buildId, columns, className, expandRender, expandedRows, data,
-      onClick, onSort, sortable, verticalActionCell, ...passedProps
+      onClick, onSort, sortable, verticalActionCell, footer, children, ...passedProps
     } = this.props
     const { sortedData, idStorage } = this.state
     const { buildHeaders } = this
 
     const wrapperCls = buildClassName(moduleName, className)
 
+    const footerElement = footer == null ? null : (
+      <Footer>
+        <Cell colSpan={columns.length}>
+          {footer}
+        </Cell>
+      </Footer>
+    )
+
     return (
       <Table className={wrapperCls} {...passedProps}>
-        { buildHeaders() }
+        {buildHeaders()}
         <Body>
           <TableRow
             actions={actions}
@@ -241,6 +255,8 @@ class DataTable extends React.Component {
             verticalActionCell={verticalActionCell}
           />
         </Body>
+        {children}
+        {footerElement}
       </Table>
     )
   }

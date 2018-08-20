@@ -89,9 +89,13 @@ class RadioGroup extends React.PureComponent {
     } = this.props
     const _value = this.state.value
 
-    const optionsList = options.map((obj, index) => (
+    const selectedOption = options.filter(obj => _value === obj.value)[0]
+
+    const focusableOption = selectedOption || options[0]
+
+    const optionsList = options.map(obj => (
       <RadioInput
-        id={index === 0 ? id : undefined}
+        id={focusableOption === obj ? id : undefined}
         checked={_value === obj.value}
         disabled={obj.disabled || disabled}
         readOnly={obj.readOnly || readOnly}
