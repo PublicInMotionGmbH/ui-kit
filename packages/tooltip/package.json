@@ -1,6 +1,6 @@
 {
   "name": "@talixo/tooltip",
-  "version": "1.0.0-alpha.24",
+  "version": "1.0.0-alpha.27",
   "description": "UI Component which represents Tooltip",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,9 +23,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon": "^1.0.0-alpha.24",
-    "@talixo/portal": "^1.0.0-alpha.24",
-    "@talixo/shared": "^1.0.0-alpha.24",
+    "@talixo/icon": "^1.0.0-alpha.27",
+    "@talixo/portal": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.27",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -34,8 +34,8 @@
     "react-transition-group": "^2.2.1"
   },
   "peerDependencies": {
-    "@talixo/portal": "^1.0.0-alpha.24",
-    "@talixo/shared": "^1.0.0-alpha.24",
+    "@talixo/portal": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.27",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
