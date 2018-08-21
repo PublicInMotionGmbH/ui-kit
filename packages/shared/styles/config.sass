@@ -31,18 +31,15 @@ $color-talixo-light-gray: #A5BFD9 !default
 $color-talixo-lighter-gray: #F0F5F7 !default
 
 $color-tab-border: #DAE0E6 !default
-$color-tab-inactive: #EBEFF2 !default
 
 $color-pill-yellow: #FFA500 !default
 $color-placeholder-text: #A9C7D9 !default
 
 $color-border: #A5BFD9 !default
 
-$navy: #3d4954 !default
-$navy-text: #273440 !default
 $offwhite: #adb9bc !default
 
-$sidebar-icon-color: #c2cbcd !default
+$sidebar-icon-color: #eeeeee !default
 
 // Load important helpers
 
@@ -64,6 +61,8 @@ $x-color-background: #fff !default
 $x-color-text: text-contrast($x-color-background) !default
 
 // Colors by goal
+
+$x-color-pastel: mix($x-color-text, mix($x-color-primary, $x-color-background, 5%), 2%) !default
 
 $x-color-intense: darken($x-color-primary, 30%) !default
 $x-color-intense-opposite: text-contrast($x-color-intense) !default
