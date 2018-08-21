@@ -154,4 +154,30 @@ describe('<Modal />', () => {
     expect(onEscKeyDown).toHaveBeenCalledTimes(0)
     wrapper.unmount()
   })
+
+  it('should add event listener when onEscDown prop is added', () => {
+    const onEscKeyDown = () => {}
+    const wrapper = mount(
+      <Modal open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    expect(wrapper.instance().escEventAdded).toBeFalsy()
+    wrapper.setProps({ onEscKeyDown })
+    expect(wrapper.instance().escEventAdded).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should remove event listener when onEscDown prop is removed', () => {
+    const onEscKeyDown = () => {}
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    expect(wrapper.instance().escEventAdded).toBe(true)
+    wrapper.setProps({ onEscKeyDown: undefined })
+    expect(wrapper.instance().escEventAdded).toBeFalsy()
+    wrapper.unmount()
+  })
 })

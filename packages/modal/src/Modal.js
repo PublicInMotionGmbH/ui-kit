@@ -58,14 +58,40 @@ const defaultProps = {
 class Modal extends React.Component {
   componentDidMount () {
     if (this.props.onEscKeyDown) {
-      document.addEventListener('keydown', this.handleEscKeyDown)
+      this.addEscListener()
+      this.escEventAdded = true
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.onEscKeyDown && !this.escEventAdded) {
+      this.addEscListener()
+      this.escEventAdded = true
+    } else if (!nextProps.onEscKeyDown && this.escEventAdded) {
+      this.addEscListener()
+      this.escEventAdded = false
     }
   }
 
   componentWillUnmount () {
     if (this.props.onEscKeyDown) {
-      document.removeEventListener('keydown', this.handleEscKeyDown)
+      this.removeEscListener()
+      this.escEventAdded = false
     }
+  }
+
+  /**
+   * Add event listener for pressing escape key.
+   */
+  addEscListener () {
+    document.addEventListener('keydown', this.handleEscKeyDown)
+  }
+
+  /**
+   * Remove event listener for pressing escape key.
+   */
+  removeEscListener () {
+    document.removeEventListener('keydown', this.handleEscKeyDown)
   }
 
   /**
