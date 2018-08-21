@@ -1,7 +1,16 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
-
+import sinon from 'sinon'
+import createStub, { replaceRaf } from 'raf-stub'
 import Collapse from '../src/Collapse'
+
+jest.useFakeTimers()
+replaceRaf([window, global])
+
+afterAll(() => {
+  global.requestAnimationFrame.reset()
+  jest.useRealTimers()
+})
 
 describe('<Collapse />', () => {
   it('renders children correctly', () => {
@@ -63,227 +72,188 @@ describe('<Collapse />', () => {
 
     expect(wrapper.hasClass('talixo-collapse--smooth')).toBeFalsy()
   })
+})
 
-  it('should get element height correctly', () => {
+describe('updateHeight', () => {
+  let stub
+
+  beforeEach(() => {
+    stub = createStub()
+    sinon.stub(global, 'requestAnimationFrame').callsFake(stub.add)
+  })
+
+  afterEach(() => {
+    global.requestAnimationFrame.restore()
+  })
+
+  it('calls \'updateHeight\' when component mounts', () => {
+    const spy = jest.spyOn(Collapse.prototype, 'updateHeight')
     const wrapper = mount(
-      <Collapse collapsed>
+      <Collapse>
         There is some content inside
       </Collapse>
     )
 
-    expect(wrapper.instance().getHeight()).toBe(wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight)
+    expect(spy).toHaveBeenCalled()
+    wrapper.unmount()
+    spy.mockClear()
+  })
 
+  it('changes this.height to content.offsetHeight when collapsed', () => {
+    const wrapper = mount(
+      <Collapse>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
+      </Collapse>
+    )
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: 100 })
+
+    expect(wrapper.instance().height).toEqual(0)
+    stub.step()
+    expect(wrapper.instance().height).toEqual(0)
     wrapper.unmount()
   })
 
-  it('should return no height when it\'s not mounted', () => {
+  it('changes this.height to content.offsetHeight when not collapsed', () => {
     const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
+      <Collapse collapsed={false}>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
       </Collapse>
     )
+    const height = 100
 
-    const instance = wrapper.instance()
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: height })
 
-    wrapper.unmount()
+    expect(wrapper.instance().height).toEqual(0)
 
-    expect(instance.getHeight()).toBe(null)
-  })
+    // Simulate height change
+    wrapper.instance().updateHeight()
 
-  it('should return no height when it\'s not mounted', () => {
-    const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
-      </Collapse>
-    )
-
-    const instance = wrapper.instance()
-
-    wrapper.unmount()
-
-    expect(instance.getHeight()).toBe(null)
-  })
-
-  it('should not set max-height after first initialization', () => {
-    const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
-      </Collapse>
-    )
-
-    const instance = wrapper.instance()
-
-    expect(instance.height).toBe(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
+    expect(wrapper.instance().height).toEqual(100)
 
     wrapper.unmount()
   })
+})
 
-  it('should start transition with height', () => {
+describe('transition', () => {
+  let stub
+
+  beforeEach(() => {
+    stub = createStub()
+    sinon.stub(global, 'requestAnimationFrame').callsFake(stub.add)
+  })
+
+  afterEach(() => {
+    global.requestAnimationFrame.restore()
+  })
+
+  it('changes transition time correctly', () => {
     const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
+      <Collapse collapsed={false}>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
       </Collapse>
     )
+    const height = 100
+    const animationSpeed = wrapper.props().animationSpeed
+    const transitionTime = height * 1000 / animationSpeed
 
-    const instance = wrapper.instance()
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: height })
+    // Simulate height change
+    wrapper.instance().updateHeight()
 
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
-
-    expect(instance.height).toBe(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
-
+    expect(wrapper.instance().node.style.transitionDuration).toEqual(`${transitionTime}ms`)
     wrapper.unmount()
   })
 
-  it('should not start transition when it is not smooth', () => {
+  it('changes transition time with different animationSpeed correctly', () => {
     const wrapper = mount(
-      <Collapse collapsed smooth={false}>
-        There is some content inside
+      <Collapse collapsed={false} animationSpeed={500}>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
       </Collapse>
     )
+    const height = 100
+    const animationSpeed = wrapper.props().animationSpeed
+    const transitionTime = height * 1000 / animationSpeed
 
-    const instance = wrapper.instance()
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: height })
+    // Simulate height change
+    wrapper.instance().updateHeight()
 
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    expect(instance.height).toBe(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
-
+    expect(wrapper.instance().node.style.transitionDuration).toEqual(`${transitionTime}ms`)
     wrapper.unmount()
   })
 
-  it('should finish transition with height', () => {
+  it('should not change tansition time when props.smooth is set it false', () => {
     const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
+      <Collapse collapsed={false} smooth={false}>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
       </Collapse>
     )
 
-    const instance = wrapper.instance()
+    const height = 100
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: height })
+    // Simulate height change
+    wrapper.instance().updateHeight()
 
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
-
-    expect(instance.height).toBe(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
-
-    // Check after finishing transition
-
-    instance.finishTransition({ target: instance.node })
-
-    expect(instance.height).toBe(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
-
+    expect(wrapper.instance().node.style.transitionDuration).toEqual(undefined)
     wrapper.unmount()
   })
 
-  it('should finish transition overriding maxHeight style', () => {
+  it('should not change tansition time when props.smooth is changed to false', () => {
     const wrapper = mount(
-      <Collapse collapsed style={{ maxHeight: 10, background: 'red' }}>
+      <Collapse collapsed={false}>
+        <div style={{ height: '100px' }}>
+          There is some content inside
+        </div>
+      </Collapse>
+    )
+
+    const height = 100
+    // Mock content offsetHeight
+    Object.defineProperty(wrapper.instance().content, 'offsetHeight', { value: height })
+    // Simulate height change
+    wrapper.setProps({ smooth: false })
+
+    expect(wrapper.instance().node.style.transitionDuration).toEqual('0ms')
+    wrapper.unmount()
+  })
+})
+
+describe('ref', () => {
+  it('saves node ref correctly', () => {
+    const wrapper = mount(
+      <Collapse>
         There is some content inside
       </Collapse>
     )
 
-    const instance = wrapper.instance()
-
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
-
-    expect(instance.height).toBe(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
-    expect(wrapper.getDOMNode().style.background).toBe('red')
-
-    // Check after finishing transition
-
-    instance.finishTransition({ target: instance.node })
-    instance.forceUpdate()
-
-    expect(instance.height).toBe(null)
-
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('10px')
-    expect(wrapper.getDOMNode().style.background).toBe('red')
-
+    expect(wrapper.instance().node).toEqual(wrapper.getDOMNode())
     wrapper.unmount()
   })
 
-  it('should finish transition not overriding styles', () => {
+  it('saves content ref correctly', () => {
     const wrapper = mount(
-      <Collapse collapsed style={{ background: 'red' }}>
+      <Collapse>
         There is some content inside
       </Collapse>
     )
+    const content = wrapper.childAt(0).childAt(0).getDOMNode()
 
-    const instance = wrapper.instance()
-
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
-
-    expect(instance.height).toBe(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
-    expect(wrapper.getDOMNode().style.background).toBe('red')
-
-    // Check after finishing transition
-
-    instance.finishTransition({ target: instance.node })
-
-    expect(instance.height).toBe(null)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('')
-    expect(wrapper.getDOMNode().style.background).toBe('red')
-
-    wrapper.unmount()
-  })
-
-  it('should not finish transition of different element', () => {
-    const wrapper = mount(
-      <Collapse collapsed>
-        There is some content inside
-      </Collapse>
-    )
-
-    const instance = wrapper.instance()
-
-    // Check after starting transition
-
-    wrapper.setProps({ collapsed: false })
-
-    const height = wrapper.find('.talixo-collapse__content').getDOMNode().offsetHeight
-
-    // Check after try to finishing transition
-
-    instance.finishTransition({ target: wrapper.find('.talixo-collapse__content').getDOMNode() })
-
-    expect(instance.height).toBe(height)
-    expect(wrapper.getDOMNode().style.maxHeight).toBe('' + height)
-
-    wrapper.unmount()
-  })
-
-  it('should allow changing transition animation time', () => {
-    const wrapper = mount(
-      <Collapse collapsed animationTime={1000}>
-        There is some content inside
-      </Collapse>
-    )
-
-    expect(wrapper.getDOMNode().style.transitionDuration).toBe('1000ms')
-    expect(wrapper.getDOMNode().style.animationDuration).toBe('1000ms')
-
+    expect(wrapper.instance().content).toEqual(content)
     wrapper.unmount()
   })
 })

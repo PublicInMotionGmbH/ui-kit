@@ -33,6 +33,8 @@ function TalixoIcon (props) {
   )
 }
 
+TalixoIcon.displayName = 'TalixoIcon'
+
 TalixoIcon.propTypes = propTypes
 
 export default TalixoIcon

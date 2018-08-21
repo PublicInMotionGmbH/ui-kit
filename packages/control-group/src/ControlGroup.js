@@ -50,6 +50,8 @@ function ControlGroup (props) {
   )
 }
 
+ControlGroup.displayName = 'ControlGroup'
+
 ControlGroup.propTypes = propTypes
 ControlGroup.defaultProps = defaultProps
 

@@ -75,6 +75,7 @@ describe('<RadioGroup />', () => {
     })
 
     it('should render label correctly', () => {
+      console.log(radioInput.at(1).dive().find('span').debug())
       expect(radioInput.at(1).dive().find('span').text()).toEqual('two')
     })
   })

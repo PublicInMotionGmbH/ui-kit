@@ -67,6 +67,8 @@ function ListOption (props) {
   return (
     <div className={clsName}>
       <NumberInput
+        endCaretOnFocus
+        data-hj-whitelist
         left={icon}
         suffix={label}
         value={value}
@@ -77,6 +79,8 @@ function ListOption (props) {
     </div>
   )
 }
+
+ListOption.displayName = 'ListOption'
 
 ListOption.propTypes = propTypes
 

@@ -47,6 +47,8 @@ function Action (props) {
   )
 }
 
+Action.displayName = 'Action'
+
 Action.propTypes = propTypes
 Action.defaultProps = defaultProps
 

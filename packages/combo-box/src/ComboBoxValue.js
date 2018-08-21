@@ -239,6 +239,8 @@ class ComboBoxValue extends React.PureComponent {
   }
 }
 
+ComboBoxValue.displayName = 'ComboBoxValue'
+
 ComboBoxValue.propTypes = propTypes
 ComboBoxValue.defaultProps = defaultProps
 

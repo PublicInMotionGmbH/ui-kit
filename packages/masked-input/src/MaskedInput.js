@@ -129,7 +129,7 @@ class MaskedInput extends React.Component {
    * @returns {{onBlur: void | any, onFocus: void | any, onChange: MaskedInput.handleChange}}
    */
   getInputProps () {
-    const { children, id, placeholder } = this.props
+    const { children, id, placeholder, name } = this.props
     const { value } = this.state
     const input = React.Children.only(children)
 
@@ -137,6 +137,7 @@ class MaskedInput extends React.Component {
       id: id,
       value: value,
       placeholder: placeholder,
+      name: name,
       ...input.props,
       onBlur: this.blur,
       onFocus: this.focus,
@@ -156,7 +157,7 @@ class MaskedInput extends React.Component {
     const { value } = this.state
 
     // Only generate element if input is not focused and value inside state exists
-    const element = renderMask(value)
+    const element = renderMask({ value })
 
     return React.cloneElement(element, {
       ...element.props,
@@ -166,7 +167,7 @@ class MaskedInput extends React.Component {
 
   render () {
     const {
-      className, error, onBlur, onFocus, onChange, children,
+      className, error, onBlur, onFocus, onChange, children, name,
       renderMask, id, placeholder, value: _value, ...passedProps
     } = this.props
     const { focused, value } = this.state
@@ -186,6 +187,8 @@ class MaskedInput extends React.Component {
     )
   }
 }
+
+MaskedInput.displayName = 'MaskedInput'
 
 MaskedInput.propTypes = propTypes
 

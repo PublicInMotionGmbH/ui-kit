@@ -115,6 +115,8 @@ class CarouselAutoplay extends React.PureComponent {
   buildCarousel (props, slide) {
     const carousel = React.Children.only(props.children)
 
+    const movement = carousel.props.infinite ? props.movement : 'exact'
+
     if (slide == null) {
       slide = +carousel.props.value || 0
     }
@@ -123,7 +125,7 @@ class CarouselAutoplay extends React.PureComponent {
 
     return React.cloneElement(props.children, {
       value: slide || 0,
-      defaultMovement: props.movement,
+      defaultMovement: movement,
       onChange: onChange == null
         ? this.change
         : (...args) => {
@@ -159,10 +161,12 @@ class CarouselAutoplay extends React.PureComponent {
    * Go to next slide.
    */
   next () {
+    const { movement } = this.props
     const { value, carousel } = this.state
 
+    const dir = movement === 'back' ? -1 : 1
     const step = this.props.step == null ? +carousel.props.perPage || 1 : this.props.step
-    const nextValue = (value + step) % carousel.props.children.length
+    const nextValue = (carousel.props.children.length + value + dir * step) % carousel.props.children.length
 
     this.setState({
       carousel: this.buildCarousel(this.props, nextValue),
@@ -206,6 +210,8 @@ class CarouselAutoplay extends React.PureComponent {
     return this.state.carousel
   }
 }
+
+CarouselAutoplay.displayName = 'CarouselAutoplay'
 
 CarouselAutoplay.propTypes = propTypes
 CarouselAutoplay.defaultProps = defaultProps

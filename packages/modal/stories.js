@@ -33,6 +33,23 @@ addStory.controlled('initial', readme, (setState, state) => (
   </div>
 ), () => ({ open: false }))
 
+addStory.controlled('closing modal after clicking on backdrop', readme, (setState, state) => (
+  <div>
+    <button onClick={() => { setState({ open: !state.open }) }}>
+      Open Modal
+    </button>
+    <Modal onOverlayClick={() => { setState({ open: false }) }} open={state.open} attachTo={modalRoot}>
+      We would like to show you your own modal. Treat it well.
+
+      <ModalFooter>
+        <Button onClick={() => { setState({ open: false }) }}>
+          Close Modal
+        </Button>
+      </ModalFooter>
+    </Modal>
+  </div>
+), () => ({ open: false }))
+
 addStory('with header', readme, () => (
   <Modal open attachTo={modalRoot}>
     <ModalHeader>

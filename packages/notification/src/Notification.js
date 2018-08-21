@@ -47,6 +47,8 @@ function Notification (props) {
   )
 }
 
+Notification.displayName = 'Notification'
+
 Notification.propTypes = propTypes
 
 export default Notification

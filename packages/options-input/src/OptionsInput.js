@@ -52,13 +52,21 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   persistentOptions: [],
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 export const moduleName = 'options-input'
@@ -123,14 +131,19 @@ class OptionsInput extends React.PureComponent {
    * This function detach events
    */
   componentWillUnmount () {
+    clearTimeout(this.arrowClickTimeout)
     this.detachCloseEvents()
   }
 
   /**
    * This function set state.open
    */
-  toggle () {
-    const nextOpen = !this.state.open
+  toggle (state) {
+    if (this.freezeToggling) {
+      return
+    }
+
+    const nextOpen = state == null ? !this.state.open : !!state
 
     this.setState({ open: nextOpen })
 
@@ -171,6 +184,7 @@ class OptionsInput extends React.PureComponent {
     if (!this.el) {
       return
     }
+
     const body = event.currentTarget
 
     let element = event.target
@@ -192,6 +206,12 @@ class OptionsInput extends React.PureComponent {
    * @param {number} value
    */
   change = (id, value) => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     const nextValue = {
       ...this.state.value,
       [id]: value
@@ -214,7 +234,11 @@ class OptionsInput extends React.PureComponent {
    * Handle focusing element.
    */
   focus = () => {
-    this.toggle()
+    this.toggle(true)
+
+    this.setState({
+      focused: true
+    })
 
     if (this.props.onFocus) {
       this.props.onFocus()
@@ -225,16 +249,54 @@ class OptionsInput extends React.PureComponent {
    * Handle losing focus on element.
    */
   blur = () => {
+    this.setState({
+      focused: false
+    })
+
     if (this.props.onBlur) {
       this.props.onBlur()
     }
   }
 
+  click = (...args) => {
+    this.focus(true)
+
+    if (this.props.onClick) {
+      this.props.onClick(...args)
+    }
+  }
+
+  handleArrowClick = (e) => {
+    if (this.nextStateAfterArrowClick != null) {
+      this.toggle(this.nextStateAfterArrowClick)
+
+      // It should ignore focus/blur events which are on same time
+      this.freezeToggling = true
+      this.arrowClickTimeout = setTimeout(() => {
+        this.freezeToggling = false
+      })
+    }
+  }
+
+  handleArrowClickStart = (e) => {
+    this.nextStateAfterArrowClick = null
+
+    // Keep default behavior when it's not focused
+    if (!this.state.focused) {
+      return
+    }
+
+    this.nextStateAfterArrowClick = !this.state.open
+  }
+
   render () {
-    const { options, className, persistentOptions, onChange, onFocus, onBlur, id, error, value: _value, ...restProps } = this.props
+    const {
+      options, className, persistentOptions, onClick, onChange, onFocus, onBlur,
+      id, error, disabled, readOnly, value: _value, ...restProps
+    } = this.props
     const { value, open } = this.state
 
-    const clsName = buildClassName(moduleName, className, { open, error })
+    const clsName = buildClassName(moduleName, className, { open, error, disabled, 'read-only': readOnly })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
@@ -243,6 +305,7 @@ class OptionsInput extends React.PureComponent {
           type='button'
           className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
+          onClick={this.click}
           onBlur={this.blur}
           aria-expanded={open}
           role='button'
@@ -253,17 +316,25 @@ class OptionsInput extends React.PureComponent {
             value={value}
           />
 
-          <Icon name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />
+          <Icon
+            name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+            onMouseDown={this.handleArrowClickStart}
+            onClick={this.handleArrowClick}
+          />
         </button>
         <OptionsInputList
           options={options}
           value={value}
           onChange={this.change}
+          disabled={disabled}
+          readOnly={readOnly}
         />
       </div>
     )
   }
 }
+
+OptionsInput.displayName = 'OptionsInput'
 
 OptionsInput.propTypes = propTypes
 OptionsInput.defaultProps = defaultProps

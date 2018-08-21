@@ -11,9 +11,9 @@ using `npm install @talixo/phone-input --save` or `yarn add @talixo/phone-input`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/combo-box: ^1.0.0-alpha.12`
-- `@talixo/country-flag: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/combo-box: ^1.0.0-alpha.24`
+- `@talixo/country-flag: ^1.0.0-alpha.24`
+- `@talixo/shared: ^1.0.0-alpha.24`
 - `country-telephone-data: ^0.5.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -36,6 +36,7 @@ This component allows any properties which can be added to `div` element. Additi
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
+autoComplete  | string    | `off`           | additional class name passed to wrapper
 className     | string    | n/a             | additional class name passed to wrapper
 error         | boolean   | `false`         | indicates that input has error
 value         | string    | self-controlled | phone number to show
@@ -44,6 +45,8 @@ onChange      | function  | n/a             | event handler for changed value
 onFocus       | function  | n/a             | event handler fired when input has been focused
 onBlur        | function  | n/a             | event handler fired when input lost focus
 id            | string    | n/a             | ID passed to control element
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 

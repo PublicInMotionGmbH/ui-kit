@@ -63,6 +63,8 @@ function Dots (props) {
   )
 }
 
+Dots.displayName = 'Dots'
+
 Dots.propTypes = propTypes
 Dots.defaultProps = defaultProps
 

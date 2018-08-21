@@ -55,6 +55,8 @@ function Element (props) {
   )
 }
 
+Element.displayName = 'Element'
+
 Element.propTypes = propTypes
 
 Element.defaultProps = defaultProps

@@ -195,6 +195,8 @@ class NotificationList extends React.PureComponent {
   }
 }
 
+NotificationList.displayName = 'NotificationList'
+
 NotificationList.propTypes = propTypes
 NotificationList.defaultProps = defaultProps
 

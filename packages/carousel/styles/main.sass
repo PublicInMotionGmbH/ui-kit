@@ -10,6 +10,16 @@
   &__content
     position: relative
 
+    &--first
+      @include module('carousel-arrows')
+        &__arrow--back
+          display: none
+
+    &--last
+      @include module('carousel-arrows')
+        &__arrow--forward
+          display: none
+
   &__wrapper
     position: relative
     width: 100%
@@ -25,6 +35,13 @@
     display: inline-block
     height: 100%
     box-sizing: border-box
+
+  [dir=rtl] &
+    transform: scaleX(-1)
+
+  [dir=rtl] &__inner,
+  [dir=rtl] &__content ~ * // Dots
+    transform: scaleX(-1)
 
 @include module('carousel-dots')
   position: absolute

@@ -47,13 +47,22 @@ const propTypes = {
   vertical: PropTypes.bool,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   allowCustom: false,
   renderCustom: TextInput,
-  vertical: false
+  vertical: false,
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -162,32 +171,37 @@ class RadioGroup extends React.PureComponent {
    * @returns {Element[]|React.Element[]}
    */
   generateOptions = () => {
-    const { error, name, options, id } = this.props
+    const { disabled, error, name, options, id, readOnly } = this.props
     const { value } = this.state
 
-    const optionsList = options.map((obj, index) => (
+    const selectedOption = options.filter(obj => value === obj.value)[0]
+
+    const focusableOption = selectedOption || options[0]
+
+    const optionsList = options.map(obj => (
       <RadioInput
-        id={index === 0 ? id : undefined}
+        id={focusableOption === obj ? id : undefined}
         checked={value === obj.value}
-        disabled={obj.disabled || false}
+        disabled={obj.disabled || disabled}
+        readOnly={obj.readOnly || readOnly}
         key={obj.value}
         name={name}
         onChange={this.onChange.bind(this, obj.value)}
         error={error}
         value={obj.value}
       >
-        { obj.label }
+        {obj.label}
       </RadioInput>
     ))
     return optionsList
   }
 
   render () {
-    const { allowCustom, className, renderCustom, customPlaceholder,
+    const { allowCustom, className, disabled, readOnly, renderCustom, customPlaceholder,
       error, id, name, onChange, options, value, vertical, ...passedProps
     } = this.props
     const { generateCustomOption, generateOptions } = this
-    const wrapperCls = buildClassName('radio-group', className, { vertical })
+    const wrapperCls = buildClassName('radio-group', className, { disabled, 'read-only': readOnly, vertical })
 
     return (
       <div className={wrapperCls} {...passedProps} >
@@ -198,8 +212,9 @@ class RadioGroup extends React.PureComponent {
   }
 }
 
-RadioGroup.propTypes = propTypes
+RadioGroup.displayName = 'RadioGroup'
 
+RadioGroup.propTypes = propTypes
 RadioGroup.defaultProps = defaultProps
 
 export default RadioGroup

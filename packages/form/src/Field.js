@@ -45,10 +45,18 @@ const propTypes = {
   value: PropTypes.any,
 
   /** Error message transformer. May be i.e. translation function */
-  formatErrorMessage: PropTypes.func
+  formatErrorMessage: PropTypes.func,
+
+  /** Should this field be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should this field be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
+  disabled: false,
+  readOnly: false
 }
 
 // Set initial counter.
@@ -183,18 +191,29 @@ class Field extends React.Component {
    * @returns {React.Element}
    */
   buildInput (uniqueId) {
-    const { error, onChange, children, value } = this.props
+    const { error, onChange, children, value, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
-    return React.cloneElement(input, {
+    const inputProps = {
       error: error != null,
       id: uniqueId,
       onBlur: this.handleBlur,
       onChange: onChange,
       onFocus: this.handleFocus,
-      value: value
-    })
+      value: value,
+      name: name
+    }
+
+    if (disabled) {
+      inputProps.disabled = true
+    }
+
+    if (readOnly) {
+      inputProps.readOnly = true
+    }
+
+    return React.cloneElement(input, inputProps)
   }
 
   render () {
@@ -245,6 +264,8 @@ class Field extends React.Component {
     )
   }
 }
+
+Field.displayName = 'Field'
 
 Field.propTypes = propTypes
 Field.defaultProps = defaultProps

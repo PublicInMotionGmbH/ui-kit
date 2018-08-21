@@ -1,6 +1,6 @@
 {
   "name": "@talixo/radio-group",
-  "version": "1.0.0-alpha.12",
+  "version": "1.0.0-alpha.27",
   "description": "UI component which represents RadioGroup",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,17 +23,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/radio-input": "^1.0.0-alpha.13",
-    "@talixo/shared": "^1.0.0-alpha.12",
-    "@talixo/text-input": "^1.0.0-alpha.12",
+    "@talixo/radio-input": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/text-input": "^1.0.0-alpha.27",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/radio-input": "^1.0.0-alpha.13",
-    "@talixo/shared": "^1.0.0-alpha.12",
-    "@talixo/text-input": "^1.0.0-alpha.12",
+    "@talixo/radio-input": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/text-input": "^1.0.0-alpha.27",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

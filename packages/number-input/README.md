@@ -11,9 +11,9 @@ using `npm install @talixo/number-input --save` or `yarn add @talixo/number-inpu
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
-- `@talixo/text-input: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.24`
+- `@talixo/shared: ^1.0.0-alpha.24`
+- `@talixo/text-input: ^1.0.0-alpha.24`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -23,7 +23,7 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-It allows any props which are allowed for `input[type="number"]`. Additionally, it handles some differently:
+It allows any props which are allowed for `TextInput` (`@talixo/text-input`) or `input[type="number"]`. Additionally, it handles some differently:
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
@@ -38,6 +38,8 @@ step          | number    | `1`             | step value for mouse whell, keyboa
 precision     | number    | `0`             | number of decimal places
 initialTime   | number    | `700`           | initial time to automatically de/increment when button is pressed
 stepTime      | number    | `20`            | time for each automated de/increment when button is pressed
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 

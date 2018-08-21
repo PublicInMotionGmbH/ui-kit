@@ -41,13 +41,17 @@ const propTypes = {
   value: PropTypes.string,
 
   /** Component used for input below */
-  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ])
+  InputComponent: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
+
+  /** Should put caret on end of input always when user focus it? */
+  endCaretOnFocus: PropTypes.bool
 }
 
 const defaultProps = {
   InputComponent: 'input',
   error: false,
-  type: 'text'
+  type: 'text',
+  endCaretOnFocus: false
 }
 
 /**
@@ -68,7 +72,10 @@ const defaultProps = {
  * @property {object|null} state.suffixStyle
  * @property {object|null} state.inputStyle
  *
- * @property {boolean} hasElementsInitialized
+ * @property {boolean} hasSuffixInitialized
+ * @property {function} [endCaretListener]
+ * @property {HTMLElement} [input]
+ * @property {HTMLElement} [suffix]
  *
  * @class
  */
@@ -79,19 +86,19 @@ class TextInput extends React.PureComponent {
     suffixStyle: { position: 'absolute', visibility: 'hidden', pointerEvents: 'none' },
     inputStyle: null
   }
-  hasElementsInitialized = false
+  hasSuffixInitialized = false
 
   /**
    * Initialize styles (and listeners) for elements (left, right, suffix)
    */
-  initializeElementsStyles () {
+  initializeSuffixStyles () {
     // Do not work with styles within Node.js environment
     if (!isBrowser) {
       return
     }
 
     // Do not try initializing suffix styles twice
-    if (this.hasElementsInitialized) {
+    if (this.hasSuffixInitialized) {
       return
     }
 
@@ -104,20 +111,20 @@ class TextInput extends React.PureComponent {
     window.addEventListener('resize', this.updateStyles)
 
     // Mark initialization as finished
-    this.hasElementsInitialized = true
+    this.hasSuffixInitialized = true
   }
 
   /**
    * Tear down styles (and listeners) for suffix
    */
-  deinitializeElementsStyles () {
+  deinitializeSuffixStyles () {
     // Do not work with styles within Node.js environment
     if (!isBrowser) {
       return
     }
 
     // Do not try de-initializing suffix styles when they are ready
-    if (!this.hasElementsInitialized) {
+    if (!this.hasSuffixInitialized) {
       return
     }
 
@@ -126,7 +133,7 @@ class TextInput extends React.PureComponent {
     window.removeEventListener('resize', this.updateStyles)
 
     // Mark initialization as not done
-    this.hasElementsInitialized = false
+    this.hasSuffixInitialized = false
 
     // Update styles to empty them
     this.setState({
@@ -140,37 +147,155 @@ class TextInput extends React.PureComponent {
     if (props.value != null && props.value !== this.props.value) {
       this.setState({ value: props.value })
     }
+
+    if (props.endCaretOnFocus !== this.props.endCaretOnFocus) {
+      this.initializeEndCaretOnFocus()
+    }
+
+    if (props.suffix == null) {
+      this.deinitializeSuffixStyles()
+    }
   }
 
   /**
    * Position suffix after component is mounted
    */
   componentDidMount () {
-    if (this.hasAdditionalElements()) {
-      this.initializeElementsStyles()
+    if (this.props.suffix != null) {
+      this.initializeSuffixStyles()
     }
+
+    this.initializeEndCaretOnFocus()
   }
 
   /**
    * Remove listener on unmounting, which is waiting for loaded styles
    */
   componentWillUnmount () {
-    this.deinitializeElementsStyles()
+    this.deinitializeSuffixStyles()
+    this.unregisterEndCaretOnFocus()
   }
 
   /**
    * Update suffix when component is updated
    */
   componentDidUpdate () {
-    if (!this.hasAdditionalElements()) {
+    if (!this.hasSuffixInitialized) {
       // Try to de-initialize styles when there is no suffix
-      this.deinitializeElementsStyles()
-    } else if (this.hasElementsInitialized) {
+      this.deinitializeSuffixStyles()
+    } else if (this.hasSuffixInitialized) {
       // Update styles if there is already suffix initialized
       this.updateStyles()
     } else {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
-      this.initializeElementsStyles()
+      this.initializeSuffixStyles()
+    }
+  }
+
+  /**
+   * Initialize focus event when it's needed, where caret is put on end.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.endCaretOnFocus]
+   */
+  initializeEndCaretOnFocus (props) {
+    const { endCaretOnFocus } = props || this.props
+
+    if (endCaretOnFocus) {
+      this.registerEndCaretOnFocus()
+    } else {
+      this.unregisterEndCaretOnFocus()
+    }
+  }
+
+  /**
+   * Register focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  registerEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (this.endCaretListener) {
+      return
+    }
+
+    this.endCaretListener = () => setTimeout(this.putCaretOnEnd.bind(this, input))
+    input.addEventListener('focus', this.endCaretListener)
+  }
+
+  /**
+   * Unregister focus event, where caret is put on end.
+   *
+   * @param {HTMLElement} [input]
+   */
+  unregisterEndCaretOnFocus (input) {
+    // Do not work with events within Node.js environment
+    if (!isBrowser) {
+      return
+    }
+
+    if (!input) {
+      input = this.input
+    }
+
+    if (!input) {
+      return
+    }
+
+    if (!this.endCaretListener) {
+      return
+    }
+
+    input.removeEventListener('focus', this.endCaretListener)
+    this.endCaretListener = null
+  }
+
+  /**
+   * Put caret on end of input.
+   *
+   * @param {HTMLElement} input
+   */
+  putCaretOnEnd (input) {
+    const value = input.value
+    const length = value ? value.length : 0
+
+    // Don't do anything when it's empty anyway
+    if (length === 0) {
+      return
+    }
+
+    const previousType = input.type
+
+    // Types different than "text" may not support selection, i.e. "number"
+    if (previousType !== 'text') {
+      input.type = 'text'
+    }
+
+    if (input.setSelectionRange) {
+      input.setSelectionRange(length, length)
+    } else if (input.createTextRange) {
+      const range = input.createTextRange()
+      range.moveStart('character', length)
+      range.select()
+    } else {
+      input.value = ''
+      input.value = value
+    }
+
+    if (previousType !== 'text') {
+      input.type = previousType
     }
   }
 
@@ -183,10 +308,8 @@ class TextInput extends React.PureComponent {
     const { value, onChange } = this.props
     const nextValue = e.target.value
 
-    // Update styles connected to suffix
-    this.updateStyles()
-
     if (value == null) {
+      // Update styles connected to suffix when value is not passed from props.
       this.setState({ value: nextValue })
     }
 
@@ -261,7 +384,12 @@ class TextInput extends React.PureComponent {
   inputRef = (el) => {
     const { inputRef } = this.props
 
+    if (this.input) {
+      this.unregisterEndCaretOnFocus(this.input)
+    }
+
     this.input = findDOMNode(el)
+    this.initializeEndCaretOnFocus()
 
     if (inputRef) {
       inputRef(this.input)
@@ -342,7 +470,10 @@ class TextInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, inputRef, onChange, InputComponent, style, value, suffix, left, right, ...restProps } = this.props
+    const {
+      className, error, inputRef, onChange, InputComponent,
+      style, value, suffix, left, right, endCaretOnFocus, ...restProps
+    } = this.props
     const _value = this.state.value
 
     // Initialize helper variables
@@ -384,6 +515,8 @@ class TextInput extends React.PureComponent {
     )
   }
 }
+
+TextInput.displayName = 'TextInput'
 
 TextInput.propTypes = propTypes
 TextInput.defaultProps = defaultProps

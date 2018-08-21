@@ -37,7 +37,9 @@ function Divider (props) {
   )
 }
 
-Divider.propTypes = propTypes
+Divider.displayName = 'Divider'
 
+Divider.propTypes = propTypes
 Divider.defaultProps = defaultProps
+
 export default Divider

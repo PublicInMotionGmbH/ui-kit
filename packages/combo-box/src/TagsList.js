@@ -58,6 +58,8 @@ function TagsList (props) {
   )
 }
 
+TagsList.displayName = 'TagsList'
+
 TagsList.propTypes = propTypes
 TagsList.defaultProps = defaultProps
 

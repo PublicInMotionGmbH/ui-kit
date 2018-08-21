@@ -13,6 +13,7 @@ import { PhoneInput } from '@talixo/phone-input'
 import { Calendar } from '@talixo/calendar'
 import { NumberInput } from '@talixo/number-input'
 import { SelectBox } from '@talixo/combo-box'
+import { CountryFlagsProvider } from '@talixo/country-flag'
 import yup from 'yup'
 
 import Form from './src/Form'
@@ -22,6 +23,8 @@ import Field from './src/Field'
 import Fieldset from './src/Fieldset'
 import Legend from './src/Legend'
 import FormRow from './src/FormRow'
+
+const spriteUrl = require('@talixo/country-flag/sprites/sprite.svg')
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -136,63 +139,65 @@ addStory('Form: horizontal register', readme, () => (
 ))
 
 addStory('Form: spread order form', readme, () => (
-  <Form
-    horizontal
-    spread
-    className='storybook__form'
-    onSubmit={e => e.preventDefault()}>
-    <Fieldset>
-      <Legend>Personal details</Legend>
-      <Field label='Name'>
-        <TextInput />
-      </Field>
-      <Field label='Surname'>
-        <TextInput />
-      </Field>
-      <Field label='Email address'>
-        <TextInput />
-      </Field>
-      <Field label='Phone number'>
-        <PhoneInput />
-      </Field>
-    </Fieldset>
-    <Fieldset>
-      <Legend>Address</Legend>
-      <Field label='Street'>
-        <TextInput />
-      </Field>
-      <Field label='House number'>
-        <TextInput />
-      </Field>
-      <Field label='City'>
-        <TextInput />
-      </Field>
-      <Field label='ZIP code'>
-        <TextInput />
-      </Field>
-    </Fieldset>
-    <Fieldset>
-      <Legend>Company details</Legend>
-      <Field label='Name'>
-        <TextInput />
-      </Field>
-      <Field label='TIN'>
-        <TextInput />
-      </Field>
-      <Field label='Address'>
-        <TextInput />
-      </Field>
-      <Field label='City'>
-        <TextInput />
-      </Field>
-      <Field>
-        <Checkbox>Include VAT invoice</Checkbox>
-      </Field>
-    </Fieldset>
-    <FormFooter>
-      {createButton('Confirm')}
-    </FormFooter>
-  </Form>
+  <CountryFlagsProvider url={spriteUrl}>
+    <Form
+      horizontal
+      spread
+      className='storybook__form'
+      onSubmit={e => e.preventDefault()}>
+      <Fieldset>
+        <Legend>Personal details</Legend>
+        <Field label='Name'>
+          <TextInput />
+        </Field>
+        <Field label='Surname'>
+          <TextInput />
+        </Field>
+        <Field label='Email address'>
+          <TextInput />
+        </Field>
+        <Field label='Phone number'>
+          <PhoneInput />
+        </Field>
+      </Fieldset>
+      <Fieldset>
+        <Legend>Address</Legend>
+        <Field label='Street'>
+          <TextInput />
+        </Field>
+        <Field label='House number'>
+          <TextInput />
+        </Field>
+        <Field label='City'>
+          <TextInput />
+        </Field>
+        <Field label='ZIP code'>
+          <TextInput />
+        </Field>
+      </Fieldset>
+      <Fieldset>
+        <Legend>Company details</Legend>
+        <Field label='Name'>
+          <TextInput />
+        </Field>
+        <Field label='TIN'>
+          <TextInput />
+        </Field>
+        <Field label='Address'>
+          <TextInput />
+        </Field>
+        <Field label='City'>
+          <TextInput />
+        </Field>
+        <Field>
+          <Checkbox>Include VAT invoice</Checkbox>
+        </Field>
+      </Fieldset>
+      <FormFooter>
+        {createButton('Confirm')}
+      </FormFooter>
+    </Form>
+  </CountryFlagsProvider>
 ))
 
 addStory('FormHandler', readme, () => (
@@ -272,59 +277,61 @@ addStory('FormHandler: login with yup validation', readme, () => (
 ))
 
 addStory('FormHandler: order', readme, () => (
-  <FormHandler onSubmit={submit}>
-    <Fieldset>
-      <Legend>Order details</Legend>
-      <Field name='apple_juice' label='Apple juice' {...commonProps}>
-        <NumberInput left={<Icon name='local_bar' />} suffix='bottle' />
-      </Field>
-      <Field name='pizza' label='Pizza' {...commonProps}>
-        <NumberInput left={<Icon name='restaurant' />} suffix='slices' />
-      </Field>
-      <Field name='fuel' label='Fuel' {...commonProps}>
-        <NumberInput left={<Icon name='ev_station' />} suffix='gallon' />
-      </Field>
-    </Fieldset>
-    <Fieldset>
-      <Legend>Personal details</Legend>
-      <Field name='name' label='Name' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='surname' label='Surname' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='email' label='Email' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='phone' label='Phone number' {...commonProps}>
-        <PhoneInput />
-      </Field>
-    </Fieldset>
+  <CountryFlagsProvider url={spriteUrl}>
+    <FormHandler onSubmit={submit}>
+      <Fieldset>
+        <Legend>Order details</Legend>
+        <Field name='apple_juice' label='Apple juice' {...commonProps}>
+          <NumberInput left={<Icon name='local_bar' />} suffix='bottle' />
+        </Field>
+        <Field name='pizza' label='Pizza' {...commonProps}>
+          <NumberInput left={<Icon name='restaurant' />} suffix='slices' />
+        </Field>
+        <Field name='fuel' label='Fuel' {...commonProps}>
+          <NumberInput left={<Icon name='ev_station' />} suffix='gallon' />
+        </Field>
+      </Fieldset>
+      <Fieldset>
+        <Legend>Personal details</Legend>
+        <Field name='name' label='Name' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='surname' label='Surname' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='email' label='Email' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='phone' label='Phone number' {...commonProps}>
+          <PhoneInput />
+        </Field>
+      </Fieldset>
 
-    <Fieldset>
-      <Legend>Address information</Legend>
-      <Field name='street' label='Street' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='house_number' label='Number' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='city' label='City' {...commonProps}>
-        <TextInput />
-      </Field>
-      <Field name='zip' label='ZIP code' {...commonProps}>
-        <TextInput />
-      </Field>
-    </Fieldset>
-    <Fieldset>
-      <Field name='terms' label='Terms'>
-        <Checkbox onChange={({ taget: { checked } }) => checked}>I have read and accept Terms and Conditions</Checkbox>
-      </Field>
-    </Fieldset>
-    <ControlGroup position='center'>
-      <Button submit>Order</Button>
-    </ControlGroup>
-  </FormHandler>
+      <Fieldset>
+        <Legend>Address information</Legend>
+        <Field name='street' label='Street' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='house_number' label='Number' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='city' label='City' {...commonProps}>
+          <TextInput />
+        </Field>
+        <Field name='zip' label='ZIP code' {...commonProps}>
+          <TextInput />
+        </Field>
+      </Fieldset>
+      <Fieldset>
+        <Field name='terms' label='Terms'>
+          <Checkbox onChange={({ taget: { checked } }) => checked}>I have read and accept Terms and Conditions</Checkbox>
+        </Field>
+      </Fieldset>
+      <ControlGroup position='center'>
+        <Button submit>Order</Button>
+      </ControlGroup>
+    </FormHandler>
+  </CountryFlagsProvider>
 ))
 
 const options = [
@@ -373,6 +380,44 @@ addStory.controlled('FormHandler: booking', readme, (setState, state) => (
     </ControlGroup>
   </FormHandler>
 ), () => ({ from: null, to: null }))
+
+addStory.controlled('FormHandler: disabled', readme, (setState, state) => (
+  <div>
+    <Checkbox value={state.disabled} onChange={disabled => setState({ disabled })}>
+      Make whole form below <strong>disabled</strong>
+    </Checkbox>
+    <FormHandler onChange={changeForm} disabled={state.disabled} onSubmit={submit}>
+      <Field label='Name' name='name' {...commonProps}>
+        <TextInput />
+      </Field>
+      <Field label='Email' name='email' {...commonProps}>
+        <TextInput />
+      </Field>
+      <ControlGroup position='center'>
+        <Button submit>Send</Button>
+      </ControlGroup>
+    </FormHandler>
+  </div>
+), () => ({ disabled: true }))
+
+addStory.controlled('FormHandler: read-only', readme, (setState, state) => (
+  <div>
+    <Checkbox value={state.readOnly} onChange={readOnly => setState({ readOnly })}>
+      Make whole form below <strong>read-only</strong>
+    </Checkbox>
+    <FormHandler onChange={changeForm} readOnly={state.readOnly} onSubmit={submit}>
+      <Field label='Name' name='name' {...commonProps}>
+        <TextInput />
+      </Field>
+      <Field label='Email' name='email' {...commonProps}>
+        <TextInput />
+      </Field>
+      <ControlGroup position='center'>
+        <Button submit>Send</Button>
+      </ControlGroup>
+    </FormHandler>
+  </div>
+), () => ({ readOnly: true }))
 
 addStory.controlled('Field: text-input', readme, (setState, state) => (
   <div>

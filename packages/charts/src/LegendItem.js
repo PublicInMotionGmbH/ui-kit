@@ -72,4 +72,6 @@ LegendItem.propTypes = propTypes
 
 LegendItem.defaultProps = defaultProps
 
+LegendItem.displayName = 'LegendItem'
+
 export default LegendItem
