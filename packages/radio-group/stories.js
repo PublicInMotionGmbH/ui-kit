@@ -81,7 +81,7 @@ addStory.controlled('with custom option', readme, (setState, state) => (
       vertical
     />
   </div>
-), () => ({ value: 'option_3' }))
+), () => ({ value: 'option_4' }))
 
 addStory.controlled('with custom option component', readme, (setState, state) => (
   <RadioGroup
