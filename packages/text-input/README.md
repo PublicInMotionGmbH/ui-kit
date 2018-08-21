@@ -34,6 +34,8 @@ suffix          | node      | n/a             | element or text to show after cu
 InputComponent  | component | `'input'`       | component used for input below
 value           | string    | self-controlled | value to set up
 endCaretOnFocus | bool      | `false`         | put cursor caret always on end of input, when it's focused
+disabled        | bool      | `false`         | indicates that input is disabled
+readOnly        | bool      | `false`         | indicates that input is read only
 
 ## Changelog
 

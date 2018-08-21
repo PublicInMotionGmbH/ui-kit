@@ -19,6 +19,9 @@ const propTypes = {
   /** Indicates that input has error */
   error: PropTypes.bool,
 
+  /** Indicates that input is disabled */
+  disabled: PropTypes.bool,
+
   /** Ref passed to input element */
   inputRef: PropTypes.func,
 
@@ -36,6 +39,9 @@ const propTypes = {
 
   /** Right side icon or controls */
   right: PropTypes.node,
+
+  /** Indicates that input is read only */
+  readOnly: PropTypes.bool,
 
   /** Value to put inside input */
   value: PropTypes.string,
@@ -471,8 +477,8 @@ class TextInput extends React.PureComponent {
    */
   render () {
     const {
-      className, error, inputRef, onChange, InputComponent,
-      style, value, suffix, left, right, endCaretOnFocus, ...restProps
+      className, disabled, error, inputRef, onChange, InputComponent,
+      style, value, suffix, left, right, endCaretOnFocus, readOnly, ...restProps
     } = this.props
     const _value = this.state.value
 
@@ -487,7 +493,8 @@ class TextInput extends React.PureComponent {
       'with-right': hasRight,
       'with-suffix': hasSuffix,
       'empty': this.isEmpty(),
-      'error': error
+      'error': error,
+      'disabled': disabled
     })
 
     // Build available and required elements
@@ -506,9 +513,10 @@ class TextInput extends React.PureComponent {
           ref={this.inputRef}
           style={this.state.inputStyle}
           value={_value}
+          disabled={disabled}
+          readOnly={readOnly}
           {...restProps}
         />
-
         {suffixElement}
         {rightElement}
       </div>

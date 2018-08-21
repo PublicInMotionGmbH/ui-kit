@@ -19,6 +19,14 @@
 
   &--empty #{inside(&, 'suffix')}
     display: none
+    
+  &--disabled
+    & > span#{prefix('text-input', 'left')},
+    & > span#{prefix('text-input', 'right')}
+      background-color: $text-input-disabled-background-color
+      border-color: $text-input-disabled-border-color
+      color: $text-input-placeholder-color
+      cursor: not-allowed
 
   #{inside(&, 'input')}
     box-sizing: border-box
@@ -55,6 +63,16 @@
 
     &::placeholder
       color: $text-input-error-placeholder-color
+
+  &--disabled #{inside(&, 'input')}
+    &, &:hover
+      background-color: $text-input-disabled-background-color
+      border-color: $text-input-disabled-border-color
+      color: $text-input-disabled-text-color
+      cursor: not-allowed
+
+    &::placeholder
+      color: $text-input-disabled-placeholder-color
 
   &--with-left #{inside(&, 'input')}
    padding-left: $text-input-icon-with-padding

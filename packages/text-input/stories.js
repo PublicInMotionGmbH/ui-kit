@@ -40,6 +40,32 @@ addStory('default', readme, () => (
       onChange={change}
       error
     />
+    <h2>Default text input readonly </h2>
+    <TextInput
+      placeholder="You can't write here"
+      style={additionalStyling}
+      onChange={change}
+      readOnly
+      value="You can't change this text"
+    />
+  </div>
+))
+
+addStory('disabled', readme, () => (
+  <div>
+    <h2>Default text input disabled </h2>
+    <TextInput
+      placeholder='Default disabled input'
+      style={additionalStyling}
+      disabled
+    />
+    <h2>Text input disabled with icon</h2>
+    <TextInput
+      left={<Icon name='credit_card' />}
+      placeholder='Not allowed to type here'
+      style={additionalStyling}
+      disabled
+    />
   </div>
 ))
 

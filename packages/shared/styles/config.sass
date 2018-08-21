@@ -84,6 +84,9 @@ $x-color-warning-opposite: text-contrast($x-color-warning) !default
 $x-color-error: #ff4055 !default
 $x-color-error-opposite: text-contrast($x-color-error) !default
 
+$x-color-disabled: #e4e7ee !default
+$x-color-disabled-opposite: text-contrast($x-color-disabled) !default
+
 $x-color-info: #1660ff !default
 $x-color-info-opposite: text-contrast($x-color-info) !default
 
@@ -105,6 +108,10 @@ $x-input-error-border-color: $x-color-error !default
 $x-input-error-background-color: $x-input-background-color !default
 $x-input-error-text-color: mix($x-input-text-color, $x-input-error-border-color, 70%) !default
 
+$x-input-disabled-border-color: $x-color-disabled !default
+$x-input-disabled-background-color: $x-color-calmer !default
+$x-input-disabled-text-color: mix($x-input-text-color, $x-input-disabled-border-color, 70%) !default
+
 $x-input-warning-border-color: $x-color-warning !default
 $x-input-warning-background-color: $x-input-background-color !default
 $x-input-warning-text-color: mix($x-input-text-color, $x-input-warning-border-color, 70%) !default
@@ -112,6 +119,7 @@ $x-input-warning-text-color: mix($x-input-text-color, $x-input-warning-border-co
 $x-input-placeholder-color: mix($x-input-text-color, $x-input-background-color, 30%) !default
 $x-input-error-placeholder-color: mix($x-input-error-text-color, $x-input-background-color, 30%) !default
 $x-input-warning-placeholder-color: mix($x-input-warning-text-color, $x-input-background-color, 30%) !default
+$x-input-disabled-placeholder-color: mix($x-input-disabled-text-color, $x-input-background-color, 40%) !default
 
 // Typography sizes
 
