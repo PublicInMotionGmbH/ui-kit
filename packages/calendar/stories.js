@@ -24,6 +24,14 @@ addStory('default', readme, () => (
   <Calendar style={styles} />
 ))
 
+addStory('disabled', readme, () => (
+  <Calendar style={styles} disabled value={moment().format('YYYY-MM-DD')} />
+))
+
+addStory('read-only', readme, () => (
+  <Calendar style={styles} readOnly value={moment().format('YYYY-MM-DD')} />
+))
+
 addStory.controlled('controlled', readme, (setState, state) => (
   <div>
     <Calendar

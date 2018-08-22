@@ -298,14 +298,14 @@ class SelectBox extends React.PureComponent {
     const data = this.getStateProps(_data)
 
     // Get required data to render component
-    const { className } = this.props
+    const { className, disabled } = this.props
     const { isOpen, options, multi, icon } = data
 
     // Check if menu should be visible
-    const open = isOpen && options.length > 0
+    const open = !disabled && isOpen && options.length > 0
 
     // Build class name for wrapper
-    const clsName = buildClassName(moduleName, className, { open, multi, 'with-info': icon })
+    const clsName = buildClassName(moduleName, className, { open, multi, 'with-info': icon, 'disabled': disabled })
 
     // Render component
     return (
@@ -315,7 +315,7 @@ class SelectBox extends React.PureComponent {
         onMouseLeave={this.props.onMouseLeave}
         onMouseEnter={this.props.onMouseEnter}
       >
-        <SelectBoxValue {...data} />
+        <SelectBoxValue disabled={disabled} {...data} />
         {open && <Menu {...data} />}
       </div>
     )

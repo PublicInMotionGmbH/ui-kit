@@ -70,6 +70,53 @@ addStory.controlled('simple select box', readme, (setState, state) => (
   </div>
 ), () => ({ value: null }))
 
+addStory.controlled('disabled select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+      disabled
+    />
+  </CountryFlagsProvider>
+), () => ({ value: options[0] }))
+
+addStory.controlled('disabled special multi select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+      disabled
+    />
+  </CountryFlagsProvider>
+), () => ({ value: [options[0], options[1], options[6]] }))
+
+addStory.controlled('read-only special multi select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={renderCountry}
+      renderValue={renderSimpleCountry}
+      options={options}
+      readOnly
+    />
+  </CountryFlagsProvider>
+), () => ({ value: [options[0], options[8], options[5]] }))
+
 addStory.controlled('select box with footer', readme, (setState, state) => (
   <div>
     <div>Selected value: {state.value}</div>

@@ -31,6 +31,36 @@ addStory('credit card input', readme, () => (
   />
 ))
 
+addStory('credit card input disabled', readme, () => (
+  <CreditCardInput
+    onChange={change}
+    onBlur={blur}
+    onFocus={focus}
+    onSubmit={submit}
+    disabled
+  />
+))
+
+addStory('credit card input read-only', readme, () => (
+  <CreditCardInput
+    onChange={change}
+    onBlur={blur}
+    onFocus={focus}
+    onSubmit={submit}
+    readOnly
+    values={{
+      cardHolderName: 'Credit Card',
+      cardNumber: '101010101011010101010101',
+      cardExpirationDate: {
+        'month': 3,
+        'year': 2044
+      },
+      cvc: 123
+    }
+    }
+  />
+))
+
 addStory('custom credit card input', readme, () => (
   <CreditCardInput
     onChange={change}

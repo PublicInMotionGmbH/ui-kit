@@ -22,6 +22,14 @@ addStory('initial', readme, () => (
   <TimePicker onChange={change} />
 ))
 
+addStory('disabled', readme, () => (
+  <TimePicker onChange={change} disabled />
+))
+
+addStory('read-only', readme, () => (
+  <TimePicker onChange={change} readOnly />
+))
+
 addStory('with passed value', readme, () => (
   <TimePicker value='13:25' onChange={change} />
 ))

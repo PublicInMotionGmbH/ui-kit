@@ -38,7 +38,7 @@
     &::placeholder
       color: $calendar-placeholder-color
 
-    &:not(.DateInput_input__focused):hover
+    &:not(.DateInput_input__focused):hover, &:not(.DateInput_input__disabled:hover)
       background-color: $calendar-hover-background-color
       border-color: $calendar-hover-border-color
       color: $calendar-hover-text-color
@@ -50,6 +50,14 @@
       border-bottom-left-radius: 0
       border-bottom-right-radius: 0
       border-bottom-color: transparent
+
+    &__disabled , &__disabled:hover
+      color: $calendar-disabled-text-color
+      border-color: $calendar-disabled-border-color
+      background-color: $calendar-disabled-background-color
+
+      &:placeholder
+        color: $calendar-disabled-placeholder-color
 
   &--error .DateInput_input:not(.DateInput_input__focused)
     &, &:hover

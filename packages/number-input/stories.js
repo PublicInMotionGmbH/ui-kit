@@ -28,6 +28,24 @@ addStory('default', readme, () => (
   </div>
 ))
 
+addStory('disabled', readme, () => (
+  <div>
+    <h2>Disabled number input</h2>
+    <NumberInput onChange={change} disabled />
+    <h2>Disabled number input with initial value</h2>
+    <NumberInput onChange={change} value={15} disabled />
+  </div>
+))
+
+addStory('read-only', readme, () => (
+  <div>
+    <h2>Disabled number input</h2>
+    <NumberInput onChange={change} readOnly />
+    <h2>Disabled number input with initial value</h2>
+    <NumberInput onChange={change} value={15} readOnly />
+  </div>
+))
+
 addStory.controlled('controlled', readme, (setState, state) => (
   <div style={{ width: 300 }}>
     <h2>Controlled number input</h2>

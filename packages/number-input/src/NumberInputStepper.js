@@ -176,6 +176,7 @@ class NumberInputStepper extends React.PureComponent {
         className={buttonClsName}
         onMouseDown={() => this.callAction(action)}
         onKeyDown={event => this.callKeyAction(action, event)}
+        disabled={this.props.disabled}
       >
         <Icon name={icon} />
       </button>

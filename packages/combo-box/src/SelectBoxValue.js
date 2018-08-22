@@ -51,7 +51,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function SelectBoxValue (props) {
-  const { getToggleButtonProps, icon, multi, tabIndex, placeholder, isOpen, selectedItems, renderValue, id } = props
+  const { disabled, getToggleButtonProps, icon, multi, tabIndex, placeholder, isOpen, selectedItems, renderValue, id } = props
 
   // Get information about selection
   const isSelected = selectedItems.length > 0
@@ -89,11 +89,11 @@ function SelectBoxValue (props) {
 
   // Render select-box value container
   return (
-    <button {...passedProps} className={clsName} id={id}>
+    <button {...passedProps} className={clsName} id={id} disabled={disabled}>
       <div className={innerClsName}>
         {value}
       </div>
-      {controls}
+      {disabled ? null : controls}
     </button>
   )
 }

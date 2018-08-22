@@ -234,6 +234,8 @@ class OptionsInput extends React.PureComponent {
    * Handle focusing element.
    */
   focus = () => {
+    if (this.props.disabled) return
+
     this.toggle(true)
 
     this.setState({
@@ -315,12 +317,11 @@ class OptionsInput extends React.PureComponent {
             persistentOptions={persistentOptions}
             value={value}
           />
-
-          <Icon
+          {disabled ? null : <Icon
             name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
             onMouseDown={this.handleArrowClickStart}
             onClick={this.handleArrowClick}
-          />
+          />}
         </button>
         <OptionsInputList
           options={options}

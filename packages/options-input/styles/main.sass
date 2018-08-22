@@ -125,6 +125,12 @@
     font-weight: $options-input-tooltip-description-font-weight
     margin-top: $options-input-tooltip-title-margin
 
+  &--disabled &__toggle
+    background: $options-input-disabled-background-color
+    border-color: $options-input-disabled-border-color
+    color: $options-input-disabled-text-color
+    cursor: not-allowed
+
   @include module('text-input')
     input, input:hover, input:focus
       border-color: transparent

@@ -164,8 +164,8 @@
     text-align: center
     opacity: 0.3
 
-    &:hover,
-    &:focus
+    &:hover:not(&--disabled &__remove),
+    &:focus:not(&--disabled &__remove)
       opacity: 1
 
     .tai
@@ -199,11 +199,11 @@
     margin-right: auto
 
   // &--open is equivalent of :focus
-  &:not(&--open):hover &__value
+  &:not(&--open):not(&--disabled):hover &__value
     background-color: $combo-box-hover-background-color
     border-color: $combo-box-hover-border-color
 
-  &:not(&--open):hover &__value:not(&__value--placeholder)
+  &:not(&--open):not(&--disabled):hover &__value:not(&__value--placeholder)
     color: $combo-box-hover-text-color
 
   &--open &__value
@@ -212,3 +212,20 @@
 
   &--open &__value:not(&__value--placeholder)
     color: $combo-box-focus-text-color
+
+  &--disabled &__value
+    &, &:hover
+      background: $combo-box-disabled-background-color
+      border-color: $combo-box-disabled-border-color
+      color: $combo-box-disabled-text-color
+      cursor: not-allowed
+
+      #{prefix('country-flag')}
+        filter: grayscale(92%)
+      
+      #{prefix('combo-box', 'tag')}
+        background: $combo-box-disabled-tag-background-color
+        border-color: $combo-box-disabled-tag-border-color
+
+        #{prefix('combo-box', 'remove')}
+          cursor: not-allowed

@@ -34,6 +34,30 @@ addStory('initial', readme, () => (
   />
 ))
 
+addStory('disabled', readme, () => (
+  <OptionsInput
+    style={styles}
+    disabled
+    options={[
+      { id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15', default: 6 },
+      { id: 'rocket', icon: 'rocket', label: 'Rockets', default: 99 },
+      { id: 'children', icon: 'face', label: 'Children', description: 'Younger than 15', default: 1.5 }
+    ]}
+  />
+))
+
+addStory('read-only', readme, () => (
+  <OptionsInput
+    style={styles}
+    readOnly
+    options={[
+      { id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15', default: 6 },
+      { id: 'rocket', icon: 'rocket', label: 'Rockets', default: 99 },
+      { id: 'children', icon: 'face', label: 'Children', description: 'Younger than 15', default: 1.5 }
+    ]}
+  />
+))
+
 addStory('with default values', readme, () => (
   <OptionsInput
     style={styles}

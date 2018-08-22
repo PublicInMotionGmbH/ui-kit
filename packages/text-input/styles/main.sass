@@ -17,17 +17,6 @@
     overflow: hidden
     text-overflow: ellipsis
 
-  &--empty #{inside(&, 'suffix')}
-    display: none
-    
-  &--disabled
-    & > span#{prefix('text-input', 'left')},
-    & > span#{prefix('text-input', 'right')}
-      background-color: $text-input-disabled-background-color
-      border-color: $text-input-disabled-border-color
-      color: $text-input-placeholder-color
-      cursor: not-allowed
-
   #{inside(&, 'input')}
     box-sizing: border-box
     width: 100%
@@ -95,6 +84,13 @@
 
   #{inside(&, 'right')}
     right: $text-input-padding-horizontal
+
+  &--empty #{inside(&, 'suffix')}
+    display: none
+
+  &--disabled #{inside(&, 'left')},
+  &--disabled #{inside(&, 'right')}
+    color: $text-input-disabled-icon-color
 
   [dir=rtl] & #{inside(&, 'left')}
     left: auto
