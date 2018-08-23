@@ -6,6 +6,7 @@ exports[`<NumberInputStepper /> renders correctly 1`] = `
 >
   <button
     className="talixo-number-input-stepper__button"
+    disabled={false}
     onKeyDown={[Function]}
     onMouseDown={[Function]}
     type="button"
@@ -16,6 +17,7 @@ exports[`<NumberInputStepper /> renders correctly 1`] = `
   </button>
   <button
     className="talixo-number-input-stepper__button"
+    disabled={false}
     onKeyDown={[Function]}
     onMouseDown={[Function]}
     type="button"
