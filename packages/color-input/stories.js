@@ -54,6 +54,29 @@ const palette = [
   }
 ]
 
+// Styles for elements
+const additionalStyling = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 400,
+  height: 70,
+  fontSize: '2em',
+  borderSize: 0.1,
+  borderStyle: 'solid',
+  borderRadius: 7,
+  marginBottom: 8
+}
+
+const buttonStyle = {
+  height: 60,
+  width: 90,
+  borderStyle: 'none',
+  borderRadius: 4,
+  marginRight: 7,
+  marginBottom: 12
+}
+
 // Stories
 
 addStory('initial', readme, () => (
@@ -91,3 +114,68 @@ addStory('hex as output format', readme, () => (
 addStory('hsl as output format', readme, () => (
   <ColorInput outputFormat='hsl' alpha hsl palette={palette} />
 ))
+
+addStory.controlled('retrieve color from outside', readme, (setState, state) => (
+  <div>
+    <div style={{
+      ...additionalStyling,
+      color: state.value,
+      borderColor: state.value
+    }}>
+      I'm outside the component
+    </div>
+    <ColorInput
+      alpha
+      hsl
+      palette={palette}
+      onChange={value => setState({ value })}
+    />
+  </div>
+), () => ({ value: '#654321' }))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <div>
+    <button
+      style={{
+        ...buttonStyle,
+        backgroundColor: '#ff4422'
+      }}
+      onClick={() => setState({
+        value: '#ff4422'
+      })
+      }
+    >
+      Click me
+    </button>
+    <button
+      style={{
+        ...buttonStyle,
+        backgroundColor: 'rgb(100, 217, 100)'
+      }}
+      onClick={() => setState({
+        value: 'rgb(100, 217, 100)'
+      })
+      }
+    >
+      Click me
+    </button>
+    <button
+      style={{
+        ...buttonStyle,
+        backgroundColor: 'hsl(278,100%,50%)'
+      }}
+      onClick={() => setState({
+        value: 'hsl(278,100%,50%)'
+      })
+      }
+    >
+      Click me
+    </button>
+    <ColorInput
+      alpha
+      hsl
+      palette={palette}
+      value={state.value}
+    />
+  </div>
+), () => ({ value: '#abcdef' }))

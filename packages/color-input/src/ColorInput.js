@@ -46,7 +46,10 @@ const propTypes = {
   ),
 
   /** Output format */
-  outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl'])
+  outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl']),
+
+  /** Value passed from outside */
+  value: PropTypes.string
 }
 
 /**
@@ -63,7 +66,7 @@ const propTypes = {
  */
 class ColorInput extends React.PureComponent {
   state = {
-    color: this.props.defaultColor || null,
+    color: this.props.value || this.props.defaultColor || null,
     error: false
   }
 
@@ -73,6 +76,10 @@ class ColorInput extends React.PureComponent {
    * @param {object} props
    */
   componentWillReceiveProps (props) {
+    if (props.value !== this.state.color && props.value !== undefined) {
+      this.setState({ color: props.value })
+    }
+
     if (props.defaultColor !== this.state.color && props.defaultColor !== undefined) {
       this.setState({ color: props.defaultColor })
     }
@@ -157,10 +164,15 @@ class ColorInput extends React.PureComponent {
    * @param {string} color
    */
   handleChangeColor (color) {
+    const { onChange } = this.props
     this.setState({
       color: color,
       error: false
     })
+
+    if (onChange) {
+      onChange(color)
+    }
   }
 
   /**
@@ -169,6 +181,8 @@ class ColorInput extends React.PureComponent {
    * @param {boolean} error
    */
   handleAlpha (color, error) {
+    const { onChange } = this.props
+
     if (!color) {
       error = true
     }
@@ -176,6 +190,10 @@ class ColorInput extends React.PureComponent {
       color: color,
       error: error
     })
+
+    if (onChange) {
+      onChange(color)
+    }
   }
 
   /**
@@ -183,7 +201,13 @@ class ColorInput extends React.PureComponent {
    * @param {string} color
    */
   handlePalette (color) {
+    const { onChange } = this.props
+
     this.convertFormat(color)
+
+    if (onChange) {
+      onChange(color)
+    }
   }
 
   /**
@@ -192,10 +216,16 @@ class ColorInput extends React.PureComponent {
    * @param {boolean} error
    */
   handleHsl = (color, error) => {
+    const { onChange } = this.props
+
     this.setState({
       color: color,
       error: error
     })
+
+    if (onChange) {
+      onChange(color)
+    }
   }
 
   /**

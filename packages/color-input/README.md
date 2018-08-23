@@ -35,6 +35,7 @@ defaultColor  | string    | n/a         | Set default color to be shown at the b
 hsl           | boolean   | n/a         | Show HSL manipulation tool
 palette       | Palette[] | n/a         | Palette of predefined colors
 outputFormat  | string    | n/a         | output format, one of: `hex`, `rgb`, `hsl`
+value         | string    | n/a         | input format, one of: `hex`, `rgb`, `hsl`
 
 ### Palette
 
