@@ -68,6 +68,10 @@ class Hsl extends React.Component {
    * @param {number} l
    */
   handleChangeHsl (h, s, l) {
+    h = h < 0 ? 0 : (h > 360 ? 360 : h)
+    s = s < 0 ? 0 : (s > 100 ? 100 : s)
+    l = l < 0 ? 0 : (l > 100 ? 100 : l)
+
     this.setState({
       h: h,
       s: s,
@@ -76,7 +80,10 @@ class Hsl extends React.Component {
 
     const { color, outputFormat } = this.props
 
-    if (color && (color.startsWith('hsl') || outputFormat === 'hsl')) {
+    if ((!color && outputFormat === 'hsl') ||
+    (!color && !outputFormat) ||
+    (color && color.startsWith('hsl')) ||
+    (color && color.startsWith('hsl') && outputFormat === 'hsl')) {
       this.props.onHslChange(`hsl(${h},${s}%,${l}%)`)
       return
     }

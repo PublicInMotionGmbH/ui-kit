@@ -34,7 +34,7 @@ describe('<Hsl />', () => {
     })
 
     expect(wrapper.state('color')).toBe(undefined)
-    expect(colorValue).toBe('#ffffff')
+    expect(colorValue).toBe('hsl(0,0%,100%)')
 
     wrapper.unmount()
   })
@@ -90,7 +90,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#000000')
+    expect(colorValue).toBe('hsl(100,0%,0%)')
 
     wrapper.setState({
       h: 400,
@@ -104,7 +104,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#ffffff')
+    expect(colorValue).toBe('hsl(360,100%,100%)')
 
     wrapper.find('.talixo-slider__input').at(2).simulate('change', {
       target: {
@@ -112,7 +112,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#000000')
+    expect(colorValue).toBe('hsl(360,100%,0%)')
 
     wrapper.unmount()
   })
@@ -137,7 +137,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#00ffa9')
+    expect(colorValue).toBe('hsl(160,100%,50%)')
 
     wrapper.find('.talixo-slider__input').at(0).simulate('change', {
       target: {
@@ -145,7 +145,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#00a9ff')
+    expect(colorValue).toBe('hsl(200,100%,50%)')
 
     wrapper.find('.talixo-slider__input').at(0).simulate('change', {
       target: {
@@ -153,7 +153,7 @@ describe('<Hsl />', () => {
       }
     })
 
-    expect(colorValue).toBe('#7f00ff')
+    expect(colorValue).toBe('hsl(270,100%,50%)')
 
     wrapper.unmount()
   })

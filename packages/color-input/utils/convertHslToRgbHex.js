@@ -69,6 +69,8 @@ function convertHslToRgbHex (h, s, l, color, outputFormat) {
     }
   }
 
+  console.log(color)
+
   if (!outputFormat) {
     if (!color || color.startsWith('#')) {
       return `#${hex}`

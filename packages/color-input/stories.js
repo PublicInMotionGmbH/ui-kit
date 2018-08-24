@@ -84,7 +84,7 @@ addStory('initial', readme, () => (
 ))
 
 addStory('with set default color', readme, () => (
-  <ColorInput defaultColor='#ff0000' />
+  <ColorInput value='#ff0000' />
 ))
 
 addStory('with alpha channel', readme, () => (

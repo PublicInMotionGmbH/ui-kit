@@ -25,9 +25,6 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Default color */
-  defaultColor: PropTypes.string,
-
   /** HSL manipulation tool */
   hsl: PropTypes.bool,
 
@@ -48,6 +45,9 @@ const propTypes = {
   /** Output format */
   outputFormat: PropTypes.oneOf(['hex', 'rgb', 'hsl']),
 
+  /** Callback for change event */
+  onChange: PropTypes.func,
+
   /** Value passed from outside */
   value: PropTypes.string
 }
@@ -58,7 +58,7 @@ const propTypes = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {bool} [props.alpha]
- * @property {string} [props.defaultColor]
+ * @property {string} [props.value]
  * @property {bool} [props.hsl]
  * @property {array} [props.palette]
  *
@@ -66,7 +66,7 @@ const propTypes = {
  */
 class ColorInput extends React.PureComponent {
   state = {
-    color: this.props.value || this.props.defaultColor || null,
+    color: this.props.value || null,
     error: false
   }
 
@@ -78,10 +78,6 @@ class ColorInput extends React.PureComponent {
   componentWillReceiveProps (props) {
     if (props.value !== this.state.color && props.value !== undefined) {
       this.setState({ color: props.value })
-    }
-
-    if (props.defaultColor !== this.state.color && props.defaultColor !== undefined) {
-      this.setState({ color: props.defaultColor })
     }
   }
 
@@ -234,7 +230,7 @@ class ColorInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { alpha, className, defaultColor, hsl, palette, outputFormat, ...passedProps } = this.props
+    const { alpha, className, value, hsl, palette, outputFormat, ...passedProps } = this.props
     const { color, error } = this.state
 
     const clsName = buildClassName(moduleName, className)

@@ -42,8 +42,8 @@ describe('<ColorInput />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('handle defaultColor ', () => {
-    const wrapper = shallow(<ColorInput defaultColor='#eeeeee' />)
+  it('handle passed color as value', () => {
+    const wrapper = shallow(<ColorInput value='#eeeeee' />)
 
     expect(wrapper.state('color')).toBe('#eeeeee')
   })
@@ -51,7 +51,7 @@ describe('<ColorInput />', () => {
   it('Change color when new color is provided', () => {
     const wrapper = mount(<ColorInput />)
 
-    wrapper.setProps({defaultColor: '#eee'})
+    wrapper.setProps({value: '#eee'})
 
     expect(wrapper.state('color')).toBe('#eee')
 
@@ -150,7 +150,7 @@ describe('<ColorInput />', () => {
         value: 50
       }
     })
-    expect(wrapper.state('color')).toBe('#ff0000')
+    expect(wrapper.state('color')).toBe('hsl(0,100%,50%)')
 
     wrapper.unmount()
   })

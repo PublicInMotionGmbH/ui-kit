@@ -31,11 +31,11 @@ Property name | Type      | Default     | Description
 --------------|-----------|:-----------:|--------------------------------
 className     | string    | n/a         | Additional class name passed to wrapper
 alpha         | boolean   | n/a         | Show alpha channel
-defaultColor  | string    | n/a         | Set default color to be shown at the beginning
 hsl           | boolean   | n/a         | Show HSL manipulation tool
 palette       | Palette[] | n/a         | Palette of predefined colors
 outputFormat  | string    | n/a         | output format, one of: `hex`, `rgb`, `hsl`
 value         | string    | n/a         | input format, one of: `hex`, `rgb`, `hsl`
+onChange      | function  | n/a         | Callback for change event
 
 ### Palette
 
