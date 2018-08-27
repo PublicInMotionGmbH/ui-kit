@@ -19,7 +19,7 @@ const addStory = createStoriesFactory('Timeline', module, {
 // Example of time
 const startTime = '12:10'
 const endTime = '16:38'
-const rideTime = '1:38'
+const rideTime = '1:45'
 
 // Stories
 

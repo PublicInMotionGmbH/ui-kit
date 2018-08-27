@@ -7,10 +7,13 @@ const moduleName = 'timeline-point'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
-}
+  className: PropTypes.string,
 
-const defaultProps = {
+  /** Chidren inside Timeline */
+  children: PropTypes.node,
+
+  /** Line has special styles */
+  special: PropTypes.bool
 }
 
 /**
@@ -18,6 +21,8 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {node} [props.children]
+ * @param {bool} [props.special]
  * @returns {React.Element}
  */
 function TimelinePoint (props) {
@@ -35,6 +40,5 @@ function TimelinePoint (props) {
 TimelinePoint.displayName = 'TimelinePoint'
 
 TimelinePoint.propTypes = propTypes
-TimelinePoint.defaultProps = defaultProps
 
 export default TimelinePoint

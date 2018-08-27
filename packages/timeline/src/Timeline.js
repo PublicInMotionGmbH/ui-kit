@@ -7,10 +7,10 @@ const moduleName = 'timeline'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
-}
+  className: PropTypes.string,
 
-const defaultProps = {
+  /** Chidren inside Timeline */
+  children: PropTypes.node
 }
 
 /**
@@ -18,15 +18,16 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {node} [props.children]
  * @returns {React.Element}
  */
 function Timeline (props) {
-  const { className, ...passedProps } = props
+  const { className, children, ...passedProps } = props
   const clsName = buildClassName(moduleName, className)
 
   return (
     <div className={clsName} {...passedProps} >
-      {/* {children} */}
+      {children}
     </div>
   )
 }
@@ -34,6 +35,5 @@ function Timeline (props) {
 Timeline.displayName = 'Timeline'
 
 Timeline.propTypes = propTypes
-Timeline.defaultProps = defaultProps
 
 export default Timeline

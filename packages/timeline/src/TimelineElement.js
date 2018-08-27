@@ -7,10 +7,13 @@ const moduleName = 'timeline-element'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
-}
+  className: PropTypes.string,
 
-const defaultProps = {
+  /** Chidren inside Timeline */
+  children: PropTypes.node,
+
+  /** Time to render in component */
+  time: PropTypes.string
 }
 
 /**
@@ -18,6 +21,8 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {node} [props.children]
+ * @param {string} [props.time]
  * @returns {React.Element}
  */
 function TimelineElement (props) {
@@ -33,12 +38,11 @@ function TimelineElement (props) {
       <div className={clsNameIcon}>
         {children}
       </div>
-
       <div className={clsNamePointer} />
-
-      <div className={clsNameTime}>
-        {time}
-      </div>
+      {time &&
+        <div className={clsNameTime}>
+          {time}
+        </div>}
     </div>
   )
 }
@@ -46,6 +50,5 @@ function TimelineElement (props) {
 TimelineElement.displayName = 'TimelineElement'
 
 TimelineElement.propTypes = propTypes
-TimelineElement.defaultProps = defaultProps
 
 export default TimelineElement

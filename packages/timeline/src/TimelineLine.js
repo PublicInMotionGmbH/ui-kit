@@ -7,10 +7,13 @@ const moduleName = 'timeline-line'
 
 const propTypes = {
   /** Additional class name */
-  className: PropTypes.string
-}
+  className: PropTypes.string,
 
-const defaultProps = {
+  /** Short version of timeline line */
+  short: PropTypes.bool,
+
+  /** Line has special styles */
+  special: PropTypes.bool
 }
 
 /**
@@ -18,6 +21,8 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {bool} [props.short]
+ * @param {bool} [props.special]
  * @returns {React.Element}
  */
 function TimelineLine (props) {
@@ -33,6 +38,5 @@ function TimelineLine (props) {
 TimelineLine.displayName = 'TimelineLine'
 
 TimelineLine.propTypes = propTypes
-TimelineLine.defaultProps = defaultProps
 
 export default TimelineLine

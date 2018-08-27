@@ -1,19 +1,19 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Timeline from '../src/Timeline'
+import TimelinePoint from '../src/TimelinePoint'
 
-const moduleName = 'talixo-timeline'
+const moduleName = 'talixo-timeline-point'
 
-describe('<Timeline />', () => {
+describe('<TimelineLine />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Timeline />)
+    const wrapper = shallow(<TimelinePoint />)
 
     expect(wrapper).toMatchSnapshot()
   })
 
   it('renders class name correctly', () => {
-    const wrapper = shallow(<Timeline />)
+    const wrapper = shallow(<TimelinePoint />)
 
     expect(wrapper.prop('className')).toBe(moduleName)
   })
