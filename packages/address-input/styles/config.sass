@@ -1,1 +1,45 @@
 @import '~@talixo/shared/styles/config'
+
+/** Address Input **/
+
+$combo-box-menu-separator-color: $x-input-hover-border-color !default
+$combo-box-menu-separator-height: $x-border-width !default
+$combo-box-menu-max-height: 50vh !default
+
+$address-input-mobile-view-background-color: $x-color-background
+
+/** Address **/
+
+$address-font-size: $x-font-size-medium !default
+$address-font-size: $x-font-size-medium !default
+$address-line-height: 1.2em !default
+$address-base-icon-width: $address-font-size * 1.15 !default
+$address-icon-margin: $x-padding-vertical-small !default
+$address-icon-size: 1.2em !default
+$address-airport-margin: $address-icon-margin !default
+$address-airport-border-radius: $x-border-radius !default
+$address-airport-border-color: $x-color-calm !default
+$address-airport-border-width: $x-border-width !default
+$address-airport-font-size: 0.825em !default
+$address-airport-font-weight: $x-weight-bold !default
+$address-base-airport-width: 3 * $address-font-size * 1.1 !default // 3 characters
+$address-title-margin: dp(0.25) !default
+$address-title-font-weight: $x-weight-semibold !default
+$address-title-color: inherit !default
+$address-description-color: #666 !default
+
+/** Address path **/
+
+$address-icon-font-size-calculated: if(unit($address-icon-size) == 'em', $address-font-size * $address-icon-size / 1em, $address-icon-size)
+$address-line-height-calculated: if(unit($address-line-height) == 'em', $address-font-size * $address-line-height / 1em, $address-line-height)
+
+// 4 lines of text + margin below title + half of line
+$address-path-height: 4.5 * $address-line-height-calculated + $address-title-margin !default
+$address-path-offset: $address-icon-margin + $address-icon-font-size-calculated !default
+$address-path-rotation: 50deg !default
+
+$address-path-arrow-width: dp(1.5) !default
+$address-path-pointer-width: dp(1) !default
+$address-path-pointer-height: dp(0.75) !default
+$address-path-arrow-color: contrast-color($x-color-background) !default
+$address-path-arrow-stroke-size: $x-border-width !default

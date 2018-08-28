@@ -1,2 +1,228 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+/** Address Input **/
+
+@include module('address-input')
+  #{prefix('address')}
+    align-items: center
+
+    &__airport 
+      margin-top: 0
+
+  @include module('combo-box') 
+    &__footer 
+      border-top: $combo-box-menu-separator-height solid $combo-box-menu-separator-color
+
+      img 
+        display: block
+        float: right
+        max-height: dp(1)
+
+  &__transition
+    &-enter-active 
+      animation: show-address-input-modal 200ms
+
+    &-exit-active 
+      animation: show-address-input-modal 200ms
+      animation-direction: alternate-reverse
+
+  &__mobile-modal 
+    box-sizing: content-box
+    position: fixed
+    display: flex
+    flex-direction: column
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 1000
+    background: $address-input-mobile-view-background-color
+
+    &-header 
+      > div 
+        padding: $x-input-padding-vertical 0 #{1.5 * $x-input-padding-vertical}
+        text-align: center
+        font-weight: $x-weight-bold
+
+      @include module('button')
+        position: absolute
+        right: #{.5 * $x-input-padding-vertical}
+        top: #{.5 * $x-input-padding-horizontal}
+
+    @include module('text-input') 
+      margin: 0 $x-input-padding-horizontal
+
+      @include module('icon')
+        cursor: pointer
+
+    @include module('combo-box') 
+      flex: 1 auto
+      display: flex
+      flex-direction: column
+
+      &__menu 
+        position: relative
+        max-height: initial
+        flex: 1 auto
+        border-left-width: 0
+        border-right-width: 0
+
+  &__fake-input 
+    display: flex
+    align-items: center
+    cursor: pointer
+    position: relative
+    box-sizing: border-box
+    width: 100%
+    color: $x-input-text-color
+    background-color: $x-input-background-color
+    border: $x-border-width solid $x-input-border-color
+    border-radius: $x-border-radius
+    font-size: $x-input-text-size
+    height: $x-input-height
+    line-height: $x-input-height
+    padding: 0 $x-input-padding-horizontal
+
+[dir=rtl] #{prefix('address-input')}
+  @include module('combo-box') 
+    &__footer img 
+      float: left
+
+  &__mobile-modal 
+    &-header 
+      @include module('button') 
+        left: #{.5 * $x-input-padding-vertical}
+        right: auto
+
+@keyframes show-address-input-modal 
+  0%
+    top: 100%
+  100%
+    top: 0
+
+/** Address **/
+
+@include module('address')
+  display: flex
+  align-items: flex-start
+  font-size: $address-font-size
+  line-height: $address-line-height
+  vertical-align: middle
+
+  &__icon 
+    width: $address-base-icon-width
+    margin-right: $address-icon-margin
+
+    @include module('icon') 
+      font-size: $address-icon-size
+
+  &__short
+    margin-top: -1 * $address-airport-border-width
+    margin-right: $address-airport-margin
+    display: inline-block
+    font-size: $address-airport-font-size
+    font-weight: $address-airport-font-weight
+    text-align: center
+    border-radius: $address-airport-border-radius
+    border: $address-airport-border-width solid $address-airport-border-color
+    min-width: $address-base-airport-width
+
+  &__details 
+    > strong 
+      color: $address-title-color
+      font-weight: $address-title-font-weight
+
+    > span 
+      display: block
+      color: $address-description-color
+      margin-top: $address-title-margin
+
+[dir=rtl] #{prefix('address')}
+  &__icon 
+    margin-right: 0
+    margin-left: $address-icon-margin
+
+
+  &__airport 
+    margin-right: 0
+    margin-left: $address-airport-margin
+
+/** Address path **/
+
+@include module('address-path')
+  position: relative
+  margin-left: $address-path-offset
+
+  &__point 
+    position: relative
+
+
+  #{prefix('address')}, &__path
+    height: $address-path-height
+
+
+  &__point:last-child #{prefix('address')}
+    height: auto
+
+
+  &__path 
+    position: absolute
+    margin: 0
+    top: $address-icon-font-size-calculated / 2
+    left: -1 * $address-path-offset
+    width: $address-path-arrow-width
+    overflow: hidden
+
+    // Arrow
+    &:before 
+      content: ''
+      position: absolute
+      display: block
+      border-radius: 50%
+      left: 0
+      top: 0
+      bottom: 0
+      right: -200%
+      border: $address-path-arrow-stroke-size dashed $address-path-arrow-color
+  
+
+    // Arrow cursor
+    &:after 
+      content: ''
+      position: absolute
+      display: block
+      z-index: 2
+      top: 100%
+      left: 100%
+      width: 0
+      height: 0
+      transform: rotate($address-path-rotation)
+      // FIXME: calculate position correctly (according to size and rotation)
+      margin-top: -1 * $address-icon-font-size-calculated / 2
+      margin-left: dp(-0.6)
+      border-style: solid
+      border-width: #{$address-path-pointer-width / 2} 0 #{$address-path-pointer-width / 2} #{$address-path-pointer-height}
+      border-color: transparent transparent transparent $address-path-arrow-color
+  
+
+
+
+[dir=rtl] #{prefix(address-path)}
+  &__path 
+    left: auto
+    right: -1 * $address-path-offset
+
+    // Arrow
+    &:before 
+      left: -200%
+      right: 0
+  
+
+    // Arrow cursor
+    &:after 
+      left: auto
+      right: 100%
+      transform: rotate(#{$address-path-rotation + 90deg})
+      // FIXME: calculate position correctly (according to size and rotation)
+      margin-left: auto
+      margin-right: dp(-0.6)
