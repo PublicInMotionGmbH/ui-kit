@@ -1,0 +1,23 @@
+@import './config'
+
+@include module('columns')
+  display: flex
+  flex-wrap: wrap
+  width: 100%
+
+@include module('columns-element')
+  display: flex
+  // flex-direction: column
+  flex-basis: 0
+  flex-grow: 1
+  flex-shrink: 1
+  box-sizing: border-box
+  padding: 20px
+
+  &__content
+  
+  &__icon
+    text-align: center
+    padding: 10px
+
+  
