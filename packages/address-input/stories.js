@@ -132,6 +132,7 @@ addStory.controlled('initial', readme, (setState, state) => (
     onChange={(value) => setState({ value })}
     onLoadRequest={(value) => onLoadRequest(value).then((locations) => setState({ locations }))}
     onStopRequest={() => setState({ locations: [] })}
+    placeholder='Start typing "ber"'
   />
 ), () => ({
   value: null,

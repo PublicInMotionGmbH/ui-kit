@@ -53,7 +53,7 @@ const propTypes = {
   /** You can provide here your custom mapping of Icon component names. Remember to add fallback icon under `default` key. */
   iconProvider: PropTypes.object,
 
-  /** Place name abbreviation. It can be e.g. IATA code of an airport */
+  /** Place name abbreviation. It can be e.g. IATA code of an airport. */
   short: PropTypes.string
 }
 

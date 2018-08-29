@@ -32,28 +32,14 @@ const locationProp = {
   /** Icon displayed next to the address. */
   icon: PropTypes.string,
 
-  /** Metadata of each location. */
+  /** Metadata of location. */
   meta: PropTypes.shape({
 
     /** Description of a place. If provided it will be displayed inside AddressInput. */
-    description: PropTypes.string,
-
-    /** Geometrical data of location. */
-    geometry: PropTypes.shape({
-
-      /** Geolocation data of a place. */
-      locations: PropTypes.shape({
-
-        /** Latitude of a place. */
-        lat: PropTypes.number,
-
-        /** Longitude of a place. */
-        lng: PropTypes.number
-      })
-    })
+    description: PropTypes.string
   }),
 
-  /** Place name abbreviation. It can be e.g. IATA code of an airport */
+  /** Place name abbreviation. It can be e.g. IATA code of an airport. */
   short: PropTypes.string
 }
 
@@ -61,7 +47,7 @@ const propsTypes = {
   /** Additional className passed to wrapper. */
   className: PropTypes.string,
 
-  /** Autocompletes list footer. */
+  /** AutoComplete list footer. */
   footer: PropTypes.node,
 
   /** Mobile view input label. */
@@ -70,7 +56,7 @@ const propsTypes = {
   /** Indicates if loader should be displayed inside input. */
   loading: PropTypes.bool,
 
-  /** Location to be displayed inside autocomlete. */
+  /** Locations to be displayed inside AutoComlete. */
   locations: PropTypes.arrayOf(PropTypes.shape({...locationProp})),
 
   /** onBlur callback. */
@@ -95,7 +81,7 @@ const propsTypes = {
   /** AdressInput placeholder. */
   placeholder: PropTypes.string,
 
-  /** Current location value. */
+  /** Chosen location value. */
   value: PropTypes.shape({...locationProp})
 }
 
@@ -116,6 +102,11 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Handle user typing.
+   *
+   * @param {string} value
+   */
   onInputValueChange (value) {
     const { onLoadRequest, onStopRequest } = this.props
     if (value === this.state.inputValue) {
@@ -125,6 +116,7 @@ class AddressInput extends React.PureComponent {
     this.setState({ inputValue: value })
     this.onChange(null)
 
+    // Invoke find request only when at least 3 chars are provided.
     if (value.length < 3) {
       if (onStopRequest) {
         onStopRequest()
@@ -135,15 +127,28 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   *
+   * @type {Function}
+   */
   load = debounce(value => {
     this.props.onLoadRequest(value)
   }, 300)
 
+  /**
+   * Handle choosing element from the autocomplete list on mobile devices.
+   *
+   * @param {object} value
+   */
   onChoose (value) {
     this.setState({ focus: false })
     this.onChange(value)
   }
 
+  /**
+   * Handle choosing element from autocomplete list.
+   * @param value
+   */
   onChange (value) {
     if (this.props.value === undefined) {
       this.setState({ value })
@@ -154,6 +159,9 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Handle input focusing.
+   */
   focus () {
     this.setState({
       focus: true
@@ -164,6 +172,9 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Handle input blur event.
+   */
   blur () {
     const state = { focus: false }
     const { locations, onChange, onBlur } = this.props
@@ -180,6 +191,7 @@ class AddressInput extends React.PureComponent {
       }
     }
 
+    // Set proper search query to input.
     if (this.state.value) {
       state.inputValue = this.getDescription(this.state.value)
     }
@@ -191,7 +203,9 @@ class AddressInput extends React.PureComponent {
     }
   }
 
-  // Clear input and location search. Focus current input if possible.
+  /**
+   * Clear input and location search. Focus current input if possible.
+   */
   onInputClear = () => {
     this.onInputValueChange('')
 
@@ -200,6 +214,10 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Handle tab pressing. It will set first location as value if locations array is provided.
+   * @param {Event|SyntheticEvent} event
+   */
   onKeyDown = (event) => {
     const { locations } = this.props
 
@@ -209,6 +227,12 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Get description either from meta data or from address property of value.
+   *
+   * @param {object} value
+   * @returns {string}
+   */
   getDescription (value) {
     if (value) {
       if (value.meta) {
@@ -220,6 +244,11 @@ class AddressInput extends React.PureComponent {
     }
   }
 
+  /**
+   * Render desktop version of AddressInput.
+   *
+   * @returns {React.Element}
+   */
   renderDesktop = () => {
     const {
       className, footer, locations, loading, onBlur, onChange, onFocus,
@@ -246,7 +275,6 @@ class AddressInput extends React.PureComponent {
           footer={footer}
         >
           <TextInput
-            data-hj-whitelist
             autoComplete='nope'
             spellCheck='false'
             onKeyDown={this.onKeyDown}
@@ -258,10 +286,20 @@ class AddressInput extends React.PureComponent {
     )
   }
 
+  /**
+   * Get reference to mobile version of AddressInput
+   *
+   * @param {HTMLElement} node
+   */
   getMobileInputRef = (node) => {
     this.input = findDOMNode(node)
   }
 
+  /**
+   * Render mobile version of AddressInput.
+   *
+   * @returns {*}
+   */
   renderMobile = () => {
     const { footer, label, locations, loading, placeholder } = this.props
     const fakeCls = buildClassName([moduleName, 'fake-input'])
@@ -299,7 +337,6 @@ class AddressInput extends React.PureComponent {
                   footer={footer}
                 >
                   <TextInput
-                    data-hj-whitelist
                     autoComplete='nope'
                     spellCheck='false'
                     onKeyDown={this.onKeyDown}

@@ -6,7 +6,7 @@ import { buildClassName } from '@talixo/shared'
 const moduleName = 'address-path'
 
 const propTypes = {
-  /** Address Elements to be displayed inside path. */
+  /** E.x. steps of a journey. Works best with Address component. */
   children: PropTypes.node.isRequired,
 
   /** Additional class name passed to wrapper. */
