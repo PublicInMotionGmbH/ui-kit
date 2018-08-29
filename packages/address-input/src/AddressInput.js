@@ -117,6 +117,7 @@ class AddressInput extends React.PureComponent {
   }
 
   onInputValueChange (value) {
+    const { onLoadRequest, onStopRequest } = this.props
     if (value === this.state.inputValue) {
       return
     }
@@ -125,9 +126,11 @@ class AddressInput extends React.PureComponent {
     this.onChange(null)
 
     if (value.length < 3) {
-      this.props.onStopRequest()
+      if (onStopRequest) {
+        onStopRequest()
+      }
       this.load.cancel()
-    } else {
+    } else if (onLoadRequest) {
       this.load(value)
     }
   }

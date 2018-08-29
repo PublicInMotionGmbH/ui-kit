@@ -111,16 +111,31 @@ const locations = [
 
 const detailsFormatter = x => (<div><Icon name='streetview' /> {x}</div>)
 
-// Stories
+async function onLoadRequest (value) {
+  const filterLocations = new Promise((resolve, reject) => {
+    const _locations = locations.filter((location) => {
+      const query = value.toLowerCase()
+      const address = location.address.toLowerCase()
+      return address.indexOf(query) !== -1
+    })
+    setTimeout(resolve(_locations), 100)
+  })
+  const result = await filterLocations
+  return result
+}
 
+// Stories
 addStory.controlled('initial', readme, (setState, state) => (
   <AddressInput
     value={state.value}
-    locations={locations}
+    locations={state.locations}
     onChange={(value) => setState({ value })}
+    onLoadRequest={(value) => onLoadRequest(value).then((locations) => setState({ locations }))}
+    onStopRequest={() => setState({ locations: [] })}
   />
 ), () => ({
-  value: locations[0]
+  value: null,
+  locations: []
 }))
 
 addStory('address', readme, () => (
