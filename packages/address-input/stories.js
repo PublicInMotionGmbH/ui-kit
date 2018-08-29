@@ -125,7 +125,7 @@ async function onLoadRequest (value) {
 }
 
 // Stories
-addStory.controlled('initial', readme, (setState, state) => (
+addStory.controlled('address input', readme, (setState, state) => (
   <AddressInput
     value={state.value}
     locations={state.locations}

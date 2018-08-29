@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddressInput /> rendering renders children correctly 1`] = `
+<div
+  className="talixo-address-input"
+>
+  <DeviceSwap
+    defaultView="desktop"
+    renderDesktop={[Function]}
+    renderMobile={[Function]}
+  />
+</div>
+`;
+
+exports[`<AddressInput /> renders children correctly 1`] = `
+<div
+  className="talixo-address-input"
+>
+  <DeviceSwap
+    defaultView="desktop"
+    renderDesktop={[Function]}
+    renderMobile={[Function]}
+  />
+</div>
+`;

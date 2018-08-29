@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
-const moduleName = 'address'
+export const moduleName = 'address'
 
 const defaultProvider = {
   bar: 'local_bar',
@@ -75,7 +75,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function Address (props) {
-  const { address, className, details, detailsFormatter, icon, iconProvider, short, ...passedProps } = props
+  const { address, className, details, detailsFormatter, icon, iconProvider, meta, short, ...passedProps } = props
 
   // Get classNames
   const shortCls = buildClassName([moduleName, 'short'])

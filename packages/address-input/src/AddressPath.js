@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-const moduleName = 'address-path'
+export const moduleName = 'address-path'
 
 const propTypes = {
   /** E.x. steps of a journey. Works best with Address component. */

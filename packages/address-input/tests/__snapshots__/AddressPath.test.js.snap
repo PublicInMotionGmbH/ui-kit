@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddressPath /> rendering should render properly 1`] = `
+<div
+  className="talixo-address-path"
+>
+  <div
+    className="talixo-address-path__point"
+    key=".0"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Berlin Brandenburg Airport (BER)"
+      details="Berlin"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Berlin Brandenburg Airport (BER)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 52.366667,
+              "lng": 13.503333,
+            },
+          },
+        }
+      }
+      short="BER"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key=".1"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Bern Airport (BRN)"
+      details="Berne"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Bern Airport (BRN)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 46.911728,
+              "lng": 7.50356,
+            },
+          },
+        }
+      }
+      short="BRN"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key=".2"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Puerto Berrio Airport (PBE)"
+      details="Puerto Berrio"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Puerto Berrio Airport (PBE)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 6.483333,
+              "lng": -74.483333,
+            },
+          },
+        }
+      }
+      short="PBE"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key=".3"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Berz-Macomb Airport (UIZ)"
+      details="Utica"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Berz-Macomb Airport (UIZ)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 42.616667,
+              "lng": -83.05,
+            },
+          },
+        }
+      }
+      short="UIZ"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point talixo-address-path__point--last-path"
+    key=".4"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Roumanieres Airport (EGC)"
+      details="Bergerac"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Roumanieres Airport (EGC)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 44.85,
+              "lng": 0.483333,
+            },
+          },
+        }
+      }
+      short="EGC"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key=".5"
+  >
+    <Address
+      address="Bindlacher-Berg Airport (BYU)"
+      details="Bayreuth"
+      detailsFormatter={[Function]}
+      icon="airport"
+      iconProvider={
+        Object {
+          "activity": "local_play",
+          "airport": "local_airport",
+          "atm": "local_atm",
+          "bar": "local_bar",
+          "bus_station": "directions_bus",
+          "cafe": "local_cafe",
+          "car_wash": "local_car_wash",
+          "central_train_station": "train",
+          "default": "location_on",
+          "drink": "local_drink",
+          "food": "local_dining",
+          "gas_station": "local_gas_station",
+          "hospital": "local_hospital",
+          "hotel": "local_hotel",
+          "light_rail_station": "train",
+          "parking": "local_parking",
+          "pharmacy": "local_pharmacy",
+          "poi_train_station": "train",
+          "restaurant": "local_dining",
+          "store": "local_grocery_store",
+          "subway_station": "train",
+          "taxi_stand": "local_taxi",
+          "train_station": "train",
+          "transit_station": "train",
+        }
+      }
+      meta={
+        Object {
+          "description": "Bindlacher-Berg Airport (BYU)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 49.985556,
+              "lng": 11.64,
+            },
+          },
+        }
+      }
+      short="BYU"
+    />
+  </div>
+</div>
+`;

@@ -16,7 +16,7 @@ import { buildClassName } from '@talixo/shared'
 
 import Address from './Address'
 
-const moduleName = 'address-input'
+export const moduleName = 'address-input'
 
 function renderAddress (item) {
   return <Address {...item} />
