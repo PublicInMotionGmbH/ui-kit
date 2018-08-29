@@ -24,30 +24,6 @@ exports[`<Address /> rendering should render properly 1`] = `
 </div>
 `;
 
-exports[`<Address /> rendering should render properly 2`] = `
-<div
-  className="talixo-address"
->
-  <span
-    className="talixo-address__icon"
-  >
-    <Icon
-      name="location_on"
-    />
-  </span>
-  <span
-    className="talixo-address__details"
-  >
-    <strong>
-      Test address
-    </strong>
-    <span>
-      Test details
-    </span>
-  </span>
-</div>
-`;
-
 exports[`<Address /> rendering should render properly with short element 1`] = `
 <div
   className="talixo-address"
