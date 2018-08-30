@@ -9,11 +9,11 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Columns elements passed as children */
+  children: PropTypes.node,
+
   /** Max columns number in row */
   maxColumns: PropTypes.number
-}
-
-const defaultProps = {
 }
 
 /**
@@ -21,6 +21,8 @@ const defaultProps = {
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {node} [props.children]
+ * @param {number} [props.maxColumns]
  * @returns {React.Element}
  */
 function Columns (props) {
@@ -39,6 +41,5 @@ function Columns (props) {
 Columns.displayName = 'Columns'
 
 Columns.propTypes = propTypes
-Columns.defaultProps = defaultProps
 
 export default Columns

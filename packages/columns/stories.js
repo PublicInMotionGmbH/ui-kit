@@ -15,8 +15,9 @@ const addStory = createStoriesFactory('Columns', module, {
 })
 
 // Styles
-const iconStyle = {
-  fontSize: '2em'
+const style = {
+  fontSize: '2em',
+  color: '#3f42a0'
 }
 
 // Stories
@@ -84,26 +85,26 @@ addStory('with max columns number', readme, () => (
 
 addStory('with icon in header', readme, () => (
   <Columns>
-    <ColumnsElement withIcon={<Icon name='beenhere' style={iconStyle} />}>
-      <span style={{fontSize: '2em'}}>Amet</span>
+    <ColumnsElement headerIcon={<Icon name='beenhere' style={style} />}>
+      <span style={style}>Amet</span>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
     </ColumnsElement>
-    <ColumnsElement withIcon={<Icon name='dog' style={iconStyle} />}>
-      <h3>Cillum deserunt.</h3>
+    <ColumnsElement headerIcon={<Icon name='dog' style={style} />}>
+      <span style={style}>Cillum deserunt.</span>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
     </ColumnsElement>
-    <ColumnsElement withIcon={<Icon name='pan_tool' style={iconStyle} />} >
-      <h3>Amet cillum deserunt.</h3>
+    <ColumnsElement headerIcon={<Icon name='pan_tool' style={style} />} >
+      <span style={style}>Amet cillum.</span>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
     </ColumnsElement>
-    <ColumnsElement withIcon={<Icon name='adb' style={iconStyle} />}>
-      <h3>Amet cillum.</h3>
+    <ColumnsElement headerIcon={<Icon name='adb' style={style} />}>
+      <span style={style}>Amet cillum.</span>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>
       <p>Amet cillum deserunt fugiat duis ullamco.</p>

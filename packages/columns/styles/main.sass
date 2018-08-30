@@ -3,21 +3,13 @@
 @include module('columns')
   display: flex
   flex-wrap: wrap
-  width: 100%
 
 @include module('columns-element')
   display: flex
-  // flex-direction: column
-  flex-basis: 0
-  flex-grow: 1
-  flex-shrink: 1
+  flex-basis: $columns-element-flex-basis
+  flex-grow: $columns-element-flex-grow
   box-sizing: border-box
-  padding: 20px
-
-  &__content
+  padding: $columns-element-padding
   
   &__icon
-    text-align: center
-    padding: 10px
-
-  
+    padding: $columns-element-icon-padding-vertical $columns-element-icon-padding-horizontal

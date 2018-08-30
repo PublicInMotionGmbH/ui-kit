@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Columns /> renders children correctly 1`] = `
+<div
+  className="talixo-columns"
+>
+  <h2
+    key=".0"
+  >
+    1. Amet cillum deserunt.
+  </h2>
+</div>
+`;
