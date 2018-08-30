@@ -21,7 +21,10 @@ const propTypes = {
     label: PropTypes.node.isRequired,
 
     /** Content to show inside */
-    content: PropTypes.node.isRequired
+    content: PropTypes.node.isRequired,
+
+    /** Custom animation time (in ms), requires Collapse geometry CSS */
+    customAnimationSpeed: PropTypes.number
   })).isRequired,
 
   /** IDs of currently opened element */
@@ -62,7 +65,7 @@ const defaultProps = {
  * @param {array} [props.value]
  * @param {boolean} props.smooth
  * @param {number|null} props.animationSpeed
- * @param {object|{ label: *, content: * }} option
+ * @param {object|{ label: *, content: *, customAnimationSpeed: number }} option
  * @param {number} index
  * @returns {*}
  */
@@ -84,6 +87,9 @@ function buildElement (props, option, index) {
   // Build class name for element
   const className = buildClassName('accordion-element', null, { collapsed })
 
+  // Custom animation speed
+  const customAnimationSpeed = parseInt(option.customAnimationSpeed, 10) || null
+
   // Build props for elements
   const buttonProps = {
     role: 'tab',
@@ -97,7 +103,7 @@ function buildElement (props, option, index) {
     role: 'tabpanel',
     className: prefix('accordion-element', 'content'),
     smooth: smooth,
-    animationSpeed: animationSpeed,
+    animationSpeed: customAnimationSpeed || animationSpeed,
     collapsed: collapsed,
     'aria-hidden': collapsed
   }

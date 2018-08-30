@@ -29,6 +29,14 @@ const optionsById = [
   { id: 'multiple', label: 'Multi 2', content: 'element selected' }
 ]
 
+const optionsCustomAnimationSpeed = [
+  { id: 1, customAnimationSpeed: 30, label: 'Very Slow Animation', content: 'I`m slow as sloth' },
+  { id: 'another', customAnimationSpeed: 80, label: 'Slow Animation', content: <strong>I`m slow as turtle</strong> },
+  { id: 'third', customAnimationSpeed: 900, label: 'Quick Animation', content: 'I`m quick as gazelle' },
+  { id: 'multiple', label: 'Default Animation', content: 'I have default animation speed' },
+  { id: 'multiple', label: 'Default Animation', content: 'I have default animation speed' }
+]
+
 // Stories
 
 addStory('self-controlled', readme, () => (
@@ -82,5 +90,13 @@ addStory.controlled('multiple items open at once', readme, (setState, state) => 
     onChange={x => setState({ active: x })}
     options={optionsById}
     buildId={option => option.id}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('custom animation speed', readme, (setState, state) => (
+  <Accordion
+    value={state.active}
+    onChange={x => setState({ active: x })}
+    options={optionsCustomAnimationSpeed}
   />
 ), () => ({ active: null }))
