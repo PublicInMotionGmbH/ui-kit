@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Optional /> renders children correctly 1`] = `
-<span
+<div
   className="talixo-optional"
-/>
+  value={null}
+>
+  <Textarea
+    TextareaComponent="textarea"
+    onChange={[Function]}
+    resize={true}
+    value={null}
+  />
+</div>
 `;
