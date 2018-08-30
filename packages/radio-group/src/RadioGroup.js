@@ -21,7 +21,7 @@ const propTypes = {
     label: PropTypes.node.isRequired,
 
     /** Value it represents */
-    value: PropTypes.any.isRequired,
+    value: PropTypes.any,
 
     /** Is this option disabled? */
     disabled: PropTypes.bool
@@ -103,7 +103,7 @@ class RadioGroup extends React.PureComponent {
         name={name}
         error={error}
         onChange={this.change.bind(this, obj.value)}
-        value={obj.value}
+        value={obj.value || ''}
       >
         {obj.label}
       </RadioInput>

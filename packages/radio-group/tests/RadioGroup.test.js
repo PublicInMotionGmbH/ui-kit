@@ -91,4 +91,17 @@ describe('<RadioGroup />', () => {
       expect(input.props().name).toMatch(props.name)
     })
   })
+
+  it('should handle null value passed to option', () => {
+    const wrapper = mount(<RadioGroup
+      name='RadioGroup4'
+      options={[{value: null, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    />)
+
+    let RadioInput = wrapper.find('RadioInput')
+
+    expect(RadioInput.at(0).prop('value')).toBe('')
+    expect(RadioInput.at(1).prop('value')).toBe(2)
+    expect(RadioInput.at(2).prop('value')).toBe(3)
+  })
 })
