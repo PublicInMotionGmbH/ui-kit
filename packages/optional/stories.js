@@ -62,12 +62,12 @@ addStory('disabled collapsible', readme, () => (
   />
 ))
 
-addStory('read only collapsible', readme, () => (
+addStory('read only', readme, () => (
   <Optional
     name='request'
     label='I have a special request'
     placeholder='Write your request here...'
-    value='Read only text'
+    value='Can`t change this text'
     readOnly
   />
 ))
