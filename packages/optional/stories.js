@@ -24,3 +24,67 @@ addStory('collapsible', readme, () => (
     label='I have a special request'
   />
 ))
+
+addStory('collapsible and initially open', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    collapsible
+    open
+  />
+))
+
+addStory('with placeholder', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    placeholder='Write your request here...'
+  />
+))
+
+addStory('disabled', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    placeholder='Write your request here...'
+    disabled
+  />
+))
+
+addStory('disabled collapsible', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    placeholder='Write your request here...'
+    collapsible
+    open
+    disabled
+  />
+))
+
+addStory('read only collapsible', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    placeholder='Write your request here...'
+    value='Read only text'
+    readOnly
+  />
+))
+
+addStory('with initial value', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    value='Please be on time'
+  />
+))
+
+addStory.controlled('handle on change', readme, (setState, state) => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    value={state.active}
+    onChange={(value) => setState({ value })}
+  />
+), () => ({ value: null }))
