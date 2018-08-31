@@ -26,6 +26,8 @@ describe('<Optional />', () => {
 
     expect(wrapper.find(`.${moduleName}__label`)).toHaveLength(1)
     expect(wrapper.find(`.${moduleName}__label`).prop('children')).toBe('This is label')
+
+    wrapper.unmount()
   })
 
   it('handle recevie new value from props', () => {
@@ -57,6 +59,8 @@ describe('<Optional />', () => {
 
     expect(wrapper.state('visible')).toBe(true)
     expect(wrapper.find('.talixo-textarea')).toHaveLength(1)
+
+    wrapper.unmount()
   })
 
   it('should handle `onChange` event properly', () => {
@@ -72,5 +76,7 @@ describe('<Optional />', () => {
     expect(spy.mock.calls.length).toBe(1)
     expect(spy.mock.calls[0]).toEqual([ 'random text' ])
     expect(wrapper.state('value')).toBe('random text')
+
+    wrapper.unmount()
   })
 })
