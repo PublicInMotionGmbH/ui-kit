@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/country-flag": "^1.0.0-alpha.27",
-    "@talixo/device-swap": "^1.0.0-alpha.27",
+    "@talixo/device-swap": "^1.0.0-alpha.28",
     "@talixo/icon": "^1.0.0-alpha.27",
     "@talixo/progress-ring": "^1.0.0-alpha.27",
     "@talixo/shared": "^1.0.0-alpha.27",
@@ -36,7 +36,7 @@
     "react-input-autosize": "^2.2.1"
   },
   "peerDependencies": {
-    "@talixo/device-swap": "^1.0.0-alpha.27",
+    "@talixo/device-swap": "^1.0.0-alpha.28",
     "@talixo/icon": "^1.0.0-alpha.27",
     "@talixo/shared": "^1.0.0-alpha.27",
     "downshift": "^1.31.11",
