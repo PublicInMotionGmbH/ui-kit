@@ -13,7 +13,7 @@ Your package should additionally have some extra dependencies:
 
 - `@talixo/combo-box: ^1.0.0-alpha.27`
 - `@talixo/device-swap: ^1.0.0-alpha.28`
-- `@talixo/form: ^1.0.0-alpha.27`
+- `@talixo/form: ^1.0.0-alpha.28`
 - `@talixo/icon: ^1.0.0-alpha.27`
 - `@talixo/shared: ^1.0.0-alpha.27`
 - `@talixo/text-input: ^1.0.0-alpha.27`
