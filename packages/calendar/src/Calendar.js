@@ -96,11 +96,14 @@ class Calendar extends React.PureComponent {
    * Update state when value is provided by props.
    *
    * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.props.value) {
-      this.setState({ date: moment(props.value) })
-    }
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.date) {
+      return ({ date: moment(props.value) })
+    } else return null
   }
 
   /**

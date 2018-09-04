@@ -48,10 +48,10 @@ class Checkbox extends React.PureComponent {
     value: this.props.value == null ? !!this.props.defaultChecked : !!this.props.value
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value !== this.state.value && props.value != null) {
-      this.setState({ value: props.value })
-    }
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== state.value && props.value != null) {
+      return { value: props.value }
+    } else return null
   }
 
   change = (event) => {

@@ -184,13 +184,16 @@ class Accordion extends React.PureComponent {
    * when value is controlled.
    *
    * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
-    if (props.value !== undefined && props.value !== this.state.value) {
-      this.setState({
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== undefined && props.value !== state.value) {
+      return ({
         value: props.value == null ? [] : [].concat(props.value)
       })
-    }
+    } else return null
   }
 
   /**

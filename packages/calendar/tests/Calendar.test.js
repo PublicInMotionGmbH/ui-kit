@@ -99,4 +99,12 @@ describe('<Calendar />', () => {
 
     expect(wrapper.find(SingleDatePicker).prop('date').format('YYYY-MM-DD')).toEqual('2000-11-20')
   })
+
+  it('should return new state correctly when receive new props', () => {
+    const givenProps = { value: '2002-02-02' }
+    const givenState = { date: '2003-03-03' }
+    const newState = Calendar.getDerivedStateFromProps(givenProps, givenState)
+
+    expect(newState.date).toEqual(moment('2002-02-02'))
+  })
 })

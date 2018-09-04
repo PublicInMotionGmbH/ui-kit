@@ -91,7 +91,8 @@ class Carousel extends React.PureComponent {
     currentSlide: this.props.value != null
       ? this.props.value % this.props.children.length
       : 0,
-    transitionTime: this.props.animationTime
+    transitionTime: this.props.animationTime,
+    perPage: this.props.perPage
   }
 
   componentDidMount () {
@@ -102,38 +103,44 @@ class Carousel extends React.PureComponent {
     this.mounted = false
   }
 
-  componentWillReceiveProps (props) {
+  static getDerivedStateFromProps (props, state) {
+    const composedState = {}
+
     // Handle change of animation time
-    if (props.animationTime !== this.props.animationTime) {
-      this.setState({
-        transitionTime: props.animationTime
-      })
+    if (state.transitionTime !== 0 && props.animationTime !== state.transitionTime) {
+      composedState['transitionTime'] = props.animationTime
     }
 
-    // Update value if it's controlled & changed
-    if (props.value != null && this.props.value !== props.value) {
-      const slide = props.value % props.children.length
+    // Update current slide, if it's bigger than maximum slide
+    const currentSlide = state.currentSlide % state.slides.length
 
+    if (currentSlide >= props.children.length) {
+      composedState['currentSlide'] = props.children.length - 1
+    }
+
+    if (props.children !== state.slides || props.perPage !== state.perPage) {
+      composedState['slides'] = chunk(props.children, props.perPage)
+    }
+
+    function isEmpty (obj) {
+      for (const item in obj) {
+        return false
+      }
+      return true
+    }
+
+    return isEmpty(composedState) ? null : composedState
+  }
+
+  componentDidUpdate (props) {
+    // Update value if it's controlled & changed
+    if (this.props.value != null && this.props.value !== props.value) {
+      const slide = this.props.value % this.props.children.length
       const type = this.lastMovementIndex === slide
         ? this.lastMovementType
         : this.props.defaultMovement
 
       this.change(slide, type, true)
-    }
-
-    // Update current slide, if it's bigger than maximum slide
-    const currentSlide = this.state.currentSlide % this.props.children.length
-
-    if (currentSlide >= props.children.length) {
-      this.setState({
-        currentSlide: props.children.length - 1
-      })
-    }
-
-    if (props.children !== this.props.children || props.perPage !== this.props.perPage) {
-      this.setState({
-        slides: chunk(props.children, props.perPage)
-      })
     }
   }
 

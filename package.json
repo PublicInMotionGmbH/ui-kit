@@ -82,6 +82,7 @@
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.1.3",
     "prop-types": "^15.6.1",
+    "react-test-renderer": "^16.4.2",
     "rimraf": "^2.6.2",
     "rollup": "^0.57.1",
     "rollup-plugin-babel": "^3.0.3",
@@ -92,14 +93,14 @@
     "sass-loader": "^6.0.7",
     "semver": "^5.5.0",
     "semver-compare-range": "0.0.3",
+    "sinon": "^6.1.3",
     "style-loader": "^0.20.3",
-    "yargs": "^11.0.0",
-    "sinon": "^6.1.3"
+    "yargs": "^11.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-textarea-autosize": "^6.1.0"
   }
 }
