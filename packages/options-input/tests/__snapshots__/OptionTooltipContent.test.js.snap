@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<OptionTooltipContent /> renders advanced children correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <span
     className="talixo-options-input-tooltip__title"
   >
@@ -12,15 +12,15 @@ exports[`<OptionTooltipContent /> renders advanced children correctly 1`] = `
   >
     Older than 15
   </span>
-</React.Fragment>
+</Fragment>
 `;
 
 exports[`<OptionTooltipContent /> renders children correctly 1`] = `
-<React.Fragment>
+<Fragment>
   <span
     className="talixo-options-input-tooltip__title"
   >
     Adults
   </span>
-</React.Fragment>
+</Fragment>
 `;

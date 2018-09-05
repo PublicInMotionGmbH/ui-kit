@@ -489,3 +489,16 @@ addStory('self-controlled', readme, () => (
     </AutoComplete>
   </div>
 ))
+
+addStory.controlled('dfgrdder', readme, (setState, state) => (
+
+  <SelectBox
+    multi
+    mobileFriendly
+    placeholder='Select item...'
+    value={state.value}
+    onChange={value => setState({ value })}
+    renderItem={value => `${value.name}, ${value.language}`}
+    options={options}
+  />
+), () => ({ value: [] }))

@@ -50,18 +50,18 @@ exports[`<DataTable /> rendering renders children correctly 1`] = `
           Object {
             "icon": "control_point_duplicate",
             "label": "Duplicate",
-            "onClick": [Function],
+            "onClick": [MockFunction],
           },
           Object {
             "icon": "clear",
             "label": "Remove",
-            "onClick": [Function],
+            "onClick": [MockFunction],
           },
           Object {
             "condition": [Function],
             "icon": "done",
             "label": "Assign",
-            "onClick": [Function],
+            "onClick": [MockFunction],
           },
         ]
       }

@@ -58,6 +58,20 @@ const defaultProps = {
 }
 
 /**
+ * Function checks whether the object is empty
+ *
+ * @param {*} obj
+ *
+ * @returns {bool}
+ */
+function isEmpty (obj) {
+  for (const item in obj) {
+    return false
+  }
+  return true
+}
+
+/**
  * Format value.
  *
  * @param {number} value
@@ -165,27 +179,36 @@ class RangeInput extends React.PureComponent {
     inputValue: formatValue(this.props.value, this.props.minLength),
     value: this.props.value || null,
     focus: false,
-    options: range(this.props.min, this.props.max)
+    options: range(this.props.min, this.props.max),
+    minLength: this.props.minLength,
+    min: this.props.min,
+    max: this.props.max
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value !== this.props.value && props.value !== undefined) {
-      this.setState({
-        value: props.value
-      })
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    const composedState = {}
+
+    if (props.value !== state.value && props.value !== undefined) {
+      composedState['value'] = props.value
     }
 
-    if (!this.state.focus && props.value !== undefined && (props.value !== this.state.inputValue || props.minLength !== this.props.minLength)) {
-      this.setState({
-        inputValue: formatValue(props.value, props.minLength)
-      })
+    if (!state.focus && props.value !== undefined && (props.value !== state.inputValue || props.minLength !== state.minLength)) {
+      composedState['inputValue'] = formatValue(props.value, props.minLength)
     }
 
-    if (props.min !== this.props.min || props.max !== this.props.max) {
-      this.setState({
-        options: range(props.min, props.max)
-      })
+    if (props.min !== state.min || props.max !== state.max) {
+      composedState['options'] = range(props.min, props.max)
     }
+
+    return isEmpty(composedState) ? null : composedState
   }
 
   /**

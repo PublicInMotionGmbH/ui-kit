@@ -7,6 +7,14 @@ Array [
   >
     Tooltip
   </span>,
-  <div />,
+  <Portal
+    containerInfo={
+      <div>
+        <div />
+      </div>
+    }
+  >
+    <div />
+  </Portal>,
 ]
 `;

@@ -52,11 +52,14 @@ class CvcInput extends React.PureComponent {
    * Update current value in component state,
    * when value is controlled.
    *
-   * @param {object} nextProps
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.props.value && nextProps.value != null) {
-      this.setState({ value: nextProps.value })
+  static getDerivedStateFromProps (nextProps, state) {
+    if (nextProps.value !== state.value && nextProps.value != null) {
+      return { value: nextProps.value }
     }
   }
 

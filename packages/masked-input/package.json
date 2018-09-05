@@ -31,13 +31,13 @@
     "@talixo/text-input": "^1.0.0-alpha.27",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "peerDependencies": {
     "@talixo/shared": "^1.0.0-alpha.27",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   }
 }

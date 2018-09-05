@@ -100,10 +100,18 @@ class SelectBox extends React.PureComponent {
     value: this.props.value
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value !== this.state.value && props.value !== undefined) {
-      this.setState({ value: props.value })
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== state.value && props.value !== undefined) {
+      return { value: props.value }
+    } else return null
   }
 
   /**

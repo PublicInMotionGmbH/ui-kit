@@ -79,8 +79,8 @@ class CountryFlagsProvider extends React.PureComponent {
     this.unload()
   }
 
-  componentWillReceiveProps (props) {
-    this.load(props.url)
+  componentDidUpdate () {
+    this.load(this.props.url)
   }
 
   registerFlag = () => {

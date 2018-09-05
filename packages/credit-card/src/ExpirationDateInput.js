@@ -82,21 +82,29 @@ class ExpirationDateInput extends React.PureComponent {
    * when value is controlled.
    *
    * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
+  static getDerivedStateFromProps (props, state) {
     const { value } = props
 
     // If passed value is undefined or the same as in current state, return.
-    if (value == null || value === undefined) { return }
-    if (value === this.state.value) { return }
+    if (value == null || value === undefined) { return null }
+    if (value === state.value) { return null }
 
     const { value: { month, year } } = props
 
     // If passed month or year are different than in current state, change them.
-    if (month !== this.state.month) { value.month = month }
-    if (year !== this.state.year) { value.year = year }
+    if (month !== state.month) {
+      value.month = month
+    } else return null
+    if (year !== state.year) {
+      value.year = year
+    } else return null
 
-    this.setState({ value })
+    // console.log(value)
+    return { value: value || null }
   }
 
   /**

@@ -60,11 +60,12 @@ describe('onChange', () => {
   })
 
   it('sets value if it was passed in props', () => {
-    const wrapper = shallow(<ExpirationDateInput value={{ month: 1, year: 2022 }} />)
+    const wrapper = shallow(<ExpirationDateInput value={{ month: 1, year: 2023 }} />)
 
     const inputMonth = wrapper.find('RangeInput').at(0)
     inputMonth.simulate('change', 2)
-    expect(wrapper.state().value).toEqual({ month: 2, year: 2022 })
+
+    expect(wrapper.state().value).toEqual({ month: 2, year: 2023 })
   })
 })
 

@@ -13,14 +13,24 @@ const testData = [
     color: null,
     title: 'Line 1',
     disabled: false,
-    dataItems: [{ x: 1495490400000, y: 5 }, { x: 1496008800000, y: 2 }, { x: 1496181600000, y: 2 }, { x: 1497304800000, y: 2 }]
+    dataItems: [
+      { x: 1495490400000, y: 1 },
+      { x: 1496008800000, y: 2 },
+      { x: 1496181600000, y: 3 },
+      { x: 1497304800000, y: 4 }
+    ]
   },
   {
     className: 'className',
     color: null,
     title: 'Line 2',
     disabled: false,
-    dataItems: [{ x: 1495490400000, y: 5 }, { x: 1496008800000, y: 2 }, { x: 1496181600000, y: 2 }, { x: 1497304800000, y: 2 }]
+    dataItems: [
+      { x: 1495490400000, y: 5 },
+      { x: 1496008800000, y: 6 },
+      { x: 1496181600000, y: 7 },
+      { x: 1497304800000, y: 8 }
+    ]
   }
 ]
 const testDataDisabled = [
@@ -29,14 +39,24 @@ const testDataDisabled = [
     color: null,
     title: 'Line 1',
     disabled: false,
-    dataItems: [{ x: 1495490400000, y: 5 }, { x: 1496008800000, y: 2 }, { x: 1496181600000, y: 2 }, { x: 1497304800000, y: 2 }]
+    dataItems: [
+      { x: 1495490400000, y: 2 },
+      { x: 1496008800000, y: 3 },
+      { x: 1496181600000, y: 4 },
+      { x: 1497304800000, y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     title: 'Line 2',
     disabled: true,
-    dataItems: [{ x: 1495490400000, y: 5 }, { x: 1496008800000, y: 2 }, { x: 1496181600000, y: 2 }, { x: 1497304800000, y: 2 }]
+    dataItems: [
+      { x: 1495490400000, y: 2 },
+      { x: 1496008800000, y: 3 },
+      { x: 1496181600000, y: 4 },
+      { x: 1497304800000, y: 5 }
+    ]
   }
 ]
 

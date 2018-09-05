@@ -50,9 +50,9 @@ class Countdown extends React.PureComponent {
    *
    * @param {object} nextProps
    */
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.targetDate !== this.props.targetDate) {
-      this.tick(nextProps)
+  componentDidUpdate (prevProps) {
+    if (prevProps.targetDate !== this.props.targetDate) {
+      this.tick(this.props)
     }
   }
 

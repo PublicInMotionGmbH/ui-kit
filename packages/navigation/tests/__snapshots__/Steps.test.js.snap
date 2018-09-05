@@ -8,20 +8,26 @@ Array [
     disabled={false}
     key="0"
     onClick={[Function]}
-  />,
+  >
+    Cart
+  </Step>,
   <Step
     active={false}
     completed={false}
     disabled={false}
     key="1"
     onClick={[Function]}
-  />,
+  >
+    Shipping
+  </Step>,
   <Step
     active={false}
     completed={false}
     disabled={false}
     key="2"
     onClick={[Function]}
-  />,
+  >
+    Billing
+  </Step>,
 ]
 `;

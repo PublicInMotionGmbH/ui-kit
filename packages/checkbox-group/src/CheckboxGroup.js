@@ -99,27 +99,24 @@ function buildValue (value, options) {
  */
 class CheckboxGroup extends React.PureComponent {
   state = {
-    value: buildValue(this.props.value, this.props.options)
+    value: buildValue(this.props.value, this.props.options),
+    options: this.props.options
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value !== undefined && props.value !== this.props.value) {
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== undefined && props.value !== state.value) {
       const nextValue = buildValue(props.value, props.options)
 
-      if (!isSameList(this.state.value, nextValue)) {
-        this.setState({
-          value: nextValue
-        })
-      }
-    } else if (props.options !== this.props.options) {
-      const nextValue = buildValue(this.state.value, props.options)
+      if (!isSameList(state.value, nextValue)) {
+        return {value: nextValue}
+      } else return null
+    } else if (props.options !== state.options) {
+      const nextValue = buildValue(state.value, props.options)
 
-      if (!isSameList(this.state.value, nextValue)) {
-        this.setState({
-          value: nextValue
-        })
-      }
-    }
+      if (!isSameList(state.value, nextValue)) {
+        return {value: nextValue}
+      } else return null
+    } else return null
   }
 
   change (value, checked) {

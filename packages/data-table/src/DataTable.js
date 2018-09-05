@@ -11,6 +11,20 @@ import TableRow from './TableRow'
 import { moduleName } from './config'
 
 /**
+ * Function checks whether the object is empty
+ *
+ * @param {*} obj
+ *
+ * @returns {bool}
+ */
+function isEmpty (obj) {
+  for (const item in obj) {
+    return false
+  }
+  return true
+}
+
+/**
  * Checks if data has ID property. If not it generates it according to data item index.
  *
  * @param {object[]} collection
@@ -143,29 +157,35 @@ class DataTable extends React.Component {
     sortedData: this.props.data,
     sortColumn: this.props.sortColumn || '',
     idStorage: registerElements(this.props.data, this.props.buildId),
-    reversedOrder: this.props.reversedOrder || false
+    reversedOrder: this.props.reversedOrder || false,
+    buildId: this.props.buildId
   }
 
   /**
    * Checks if data, sort column or sorting order has changed.
    *
-   * @param nextProps
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
+  static getDerivedStateFromProps (nextProps, state) {
     const { data: newData, sortColumn: newSortCol, reversedOrder: newOrder } = nextProps
-    const { data, buildId } = this.props
-    const { sortColumn, reversedOrder } = this.state
+    const { sortColumn, reversedOrder, sortedData, buildId } = state
+    const composedState = {}
 
-    if (data !== newData) {
+    if (newData !== undefined && sortedData !== newData) {
       registerElements(newData, buildId)
-      this.setState({ sortedData: newData })
+      composedState['sortedData'] = newData
     }
-    if (sortColumn !== newSortCol) {
-      this.setState({ sortColumn: newSortCol })
+    if (newSortCol !== undefined && sortColumn !== newSortCol) {
+      composedState['sortColumn'] = newSortCol
     }
-    if (reversedOrder !== newOrder) {
-      this.setState({ reversedOrder: newOrder })
+    if (newOrder !== undefined && reversedOrder !== newOrder) {
+      composedState['reversedOrder'] = newOrder
     }
+
+    return isEmpty(composedState) ? null : composedState
   }
 
   /**

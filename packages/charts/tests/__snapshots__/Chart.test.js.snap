@@ -31,7 +31,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       Array [
         Object {
           "x": 1495490400000,
-          "y": 5,
+          "y": 1,
         },
         Object {
           "x": 1496008800000,
@@ -39,11 +39,11 @@ exports[`<Chart> when rendered should render properly 1`] = `
         },
         Object {
           "x": 1496181600000,
-          "y": 2,
+          "y": 3,
         },
         Object {
           "x": 1497304800000,
-          "y": 2,
+          "y": 4,
         },
       ]
     }
@@ -71,15 +71,15 @@ exports[`<Chart> when rendered should render properly 1`] = `
         },
         Object {
           "x": 1496008800000,
-          "y": 2,
+          "y": 6,
         },
         Object {
           "x": 1496181600000,
-          "y": 2,
+          "y": 7,
         },
         Object {
           "x": 1497304800000,
-          "y": 2,
+          "y": 8,
         },
       ]
     }

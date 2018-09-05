@@ -16,6 +16,20 @@ const BACKSPACE_KEY = 8
 const TAB_KEY = 9
 const COMMA_KEY = 188
 
+/**
+ * Function checks whether the object is empty
+ *
+ * @param {*} obj
+ *
+ * @returns {bool}
+ */
+function isEmpty (obj) {
+  for (const item in obj) {
+    return false
+  }
+  return true
+}
+
 const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
@@ -110,20 +124,22 @@ class ComboBox extends React.PureComponent {
    * Update input value if it's provided from outside.
    *
    * @param {object} props
+   * @param {object} state
    * @param {string} [props.inputValue]
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
-    if (props.inputValue != null && this.state.inputValue !== props.inputValue) {
-      this.setState({
-        inputValue: props.inputValue
-      })
+  static getDerivedStateFromProps (props, state) {
+    const composedState = {}
+
+    if (props.inputValue != null && state.inputValue !== props.inputValue) {
+      composedState['inputValue'] = props.inputValue
     }
 
-    if (props.value !== this.state.value && props.value !== undefined) {
-      this.setState({
-        value: props.value
-      })
+    if (props.value !== state.value && props.value !== undefined) {
+      composedState['value'] = props.value
     }
+    return isEmpty(composedState) ? null : composedState
   }
 
   /**

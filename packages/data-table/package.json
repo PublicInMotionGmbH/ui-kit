@@ -29,8 +29,8 @@
     "@talixo/table": "^1.0.0-alpha.27",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "peerDependencies": {
     "@talixo/icon": "^1.0.0-alpha.27",
@@ -38,7 +38,7 @@
     "@talixo/table": "^1.0.0-alpha.27",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   }
 }

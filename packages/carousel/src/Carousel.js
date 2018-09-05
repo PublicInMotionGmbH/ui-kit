@@ -21,6 +21,20 @@ function reflow (node) {
   return node.offsetHeight
 }
 
+/**
+ * Function checks whether the object is empty
+ *
+ * @param {*} obj
+ *
+ * @returns {bool}
+ */
+function isEmpty (obj) {
+  for (const item in obj) {
+    return false
+  }
+  return true
+}
+
 const propTypes = {
   /** Show arrows to navigate */
   arrows: PropTypes.bool,
@@ -120,13 +134,6 @@ class Carousel extends React.PureComponent {
 
     if (props.children !== state.slides || props.perPage !== state.perPage) {
       composedState['slides'] = chunk(props.children, props.perPage)
-    }
-
-    function isEmpty (obj) {
-      for (const item in obj) {
-        return false
-      }
-      return true
     }
 
     return isEmpty(composedState) ? null : composedState

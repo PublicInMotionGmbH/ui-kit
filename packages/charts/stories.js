@@ -35,15 +35,15 @@ const pieData = {
   title: 'Pie Data',
   dataItems: [
     { label: 'Cats', value: 35, color: '', className: '', disabled: false },
-    { label: 'Dogs', value: 40, color: '', className: '', disabled: false },
-    { label: 'Birds', value: 55, color: '', className: '', disabled: false },
+    { label: 'Lions2', value: 35, color: '', className: '', disabled: false },
     { label: 'Cats1', value: 35, color: '', className: '', disabled: false },
-    { label: 'Dogs1', value: 40, color: '', className: '', disabled: false },
-    { label: 'Birds1', value: 55, color: '', className: '', disabled: false },
     { label: 'Cats2', value: 35, color: '', className: '', disabled: false },
+    { label: 'Dogs', value: 40, color: '', className: '', disabled: false },
+    { label: 'Dogs1', value: 40, color: '', className: '', disabled: false },
     { label: 'Dogs2', value: 40, color: '', className: '', disabled: false },
-    { label: 'Birds2', value: 55, color: '', className: '', disabled: false },
-    { label: 'Lions2', value: 35, color: '', className: '', disabled: false }
+    { label: 'Birds', value: 55, color: '', className: '', disabled: false },
+    { label: 'Birds1', value: 55, color: '', className: '', disabled: false },
+    { label: 'Birds2', value: 55, color: '', className: '', disabled: false }
   ]
 }
 
@@ -53,14 +53,24 @@ const lineData = [
     color: null,
     label: 'Line 1',
     disabled: false,
-    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 5 }, { x: new Date('May 29 2017').getTime(), y: 2 }, { x: new Date('May 31 2017').getTime(), y: 2 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+    dataItems: [
+      { x: new Date('May 23 2017').getTime(), y: 2 },
+      { x: new Date('May 29 2017').getTime(), y: 3 },
+      { x: new Date('May 31 2017').getTime(), y: 4 },
+      { x: new Date('June 13 2017').getTime(), y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Line 2',
     disabled: false,
-    dataItems: [{ x: new Date('May 23 2017').getTime(), y: 3 }, { x: new Date('May 29 2017').getTime(), y: 8 }, { x: new Date('May 31 2017').getTime(), y: 1 }, { x: new Date('June 13 2017').getTime(), y: 2 }]
+    dataItems: [
+      { x: new Date('May 23 2017').getTime(), y: 1 },
+      { x: new Date('May 29 2017').getTime(), y: 3 },
+      { x: new Date('May 31 2017').getTime(), y: 6 },
+      { x: new Date('June 13 2017').getTime(), y: 7 }
+    ]
   }
 ]
 
@@ -70,126 +80,232 @@ const barData = [
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'BarGroup 2',
     disabled: false,
-    dataItems: [{ x: 'January', y: 2 }, { x: 'February', y: 8 }, { x: 'March', y: 0 }, { x: 'April', y: 4 }, { x: 'May', y: 7 }]
+    dataItems: [
+      { x: 'March', y: 0 },
+      { x: 'January', y: 2 },
+      { x: 'April', y: 4 },
+      { x: 'May', y: 7 },
+      { x: 'February', y: 8 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'BarGroup 2',
     disabled: false,
-    dataItems: [{ x: 'January', y: 2 }, { x: 'February', y: 8 }, { x: 'March', y: 0 }, { x: 'April', y: 4 }, { x: 'May', y: 7 }]
+    dataItems: [
+      { x: 'March', y: 0 },
+      { x: 'January', y: 2 },
+      { x: 'April', y: 4 },
+      { x: 'May', y: 7 },
+      { x: 'February', y: 8 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }]
   },
   {
     className: 'className',
     color: null,
     label: 'BarGroup 2',
     disabled: false,
-    dataItems: [{ x: 'January', y: 2 }, { x: 'February', y: 8 }, { x: 'March', y: 0 }, { x: 'April', y: 4 }, { x: 'May', y: 7 }]
+    dataItems: [
+      { x: 'March', y: 0 },
+      { x: 'January', y: 2 },
+      { x: 'April', y: 4 },
+      { x: 'May', y: 7 },
+      { x: 'February', y: 8 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   },
   {
     className: 'className',
     color: null,
     label: 'Bar Group 1',
     disabled: false,
-    dataItems: [{ x: 'January', y: 3 }, { x: 'February', y: 4 }, { x: 'March', y: 1 }, { x: 'April', y: 2 }, { x: 'May', y: 5 }]
+    dataItems: [
+      { x: 'March', y: 1 },
+      { x: 'April', y: 2 },
+      { x: 'January', y: 3 },
+      { x: 'February', y: 4 },
+      { x: 'May', y: 5 }
+    ]
   }
 ]
 
