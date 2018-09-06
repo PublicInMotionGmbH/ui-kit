@@ -83,10 +83,19 @@ class InlineInput extends React.Component {
     selection: defaultSelection
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.state.inputValue) {
-      this.setState({ inputValue: props.value })
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.inputValue) {
+      return { inputValue: props.value || state.inputValue }
     }
+    return null
   }
 
   /**

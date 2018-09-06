@@ -25,11 +25,9 @@ class Portal extends React.PureComponent {
     this.el = document.createElement('div')
   }
 
-  componentWillReceiveProps (props) {
-    // When Portal is already mounted and root node has changed,
-    // Immediately move it to another container
-    if (this.mounted && props.attachTo !== this.props.attachTo) {
-      const attachTo = props.attachTo || document.body
+  componentDidUpdate (props) {
+    if (this.mounted && this.props.attachTo !== props.attachTo) {
+      const attachTo = this.props.attachTo || document.body
 
       attachTo.appendChild(this.el)
     }

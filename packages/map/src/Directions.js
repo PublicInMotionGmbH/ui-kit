@@ -60,10 +60,10 @@ class Directions extends React.PureComponent {
    * @param {object|{ lat: number, lng: number }} nextProps.endPoint
    * @param {object[]|Array<{ lat: number, lng: number }>} nextProps.via
    */
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (nextProps) {
     // When any point has changed, load directions again
-    if (hasPropsChanged(this.props, nextProps)) {
-      this.loadDirections(nextProps)
+    if (hasPropsChanged(nextProps, this.props)) {
+      this.loadDirections(this.props)
     }
   }
 

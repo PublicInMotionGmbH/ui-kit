@@ -50,13 +50,16 @@ class Marker extends React.PureComponent {
    * @param {boolean} [props.open]
    * @param {function} [props.onClick]
    * @param {function} [props.onClose]
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
+  static getDerivedStateFromProps (props, state) {
     let nextOpen = null
 
     // When component is switching to controlled, we keep current open status
-    if (this.props.open != null && props.open == null) {
-      nextOpen = this.props.open
+    if (state.open != null && props.open == null) {
+      nextOpen = state.open
     }
 
     // When component doesn't have info window, do not open it anytime
@@ -65,11 +68,10 @@ class Marker extends React.PureComponent {
     }
 
     // When opening status has changed, update it
-    if (nextOpen == null && nextOpen !== this.state.open) {
-      this.setState({
-        open: nextOpen
-      })
+    if (nextOpen !== null && nextOpen !== state.open) {
+      return { open: nextOpen }
     }
+    return null
   }
 
   /**

@@ -86,11 +86,19 @@ class NumberInput extends React.PureComponent {
     value: this.props.value || 0
   }
 
-  componentWillReceiveProps (props) {
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
     const nextValue = props.value || 0
-    if (props.value != null && nextValue !== this.state.value) {
-      this.setState({ value: nextValue })
-    }
+    if (props.value != null && nextValue !== state.value) {
+      return { value: nextValue }
+    } else return null
   }
 
   /**

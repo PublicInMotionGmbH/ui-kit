@@ -50,10 +50,18 @@ class Switcher extends React.PureComponent {
     value: this.props.value == null ? !!this.props.defaultChecked : !!this.props.value
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.props.value) {
-      this.setState({ value: props.value })
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.value) {
+      return { value: props.value }
+    } else return null
   }
 
   change = (event) => {

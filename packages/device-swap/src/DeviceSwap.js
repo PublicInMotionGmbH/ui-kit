@@ -37,21 +37,22 @@ function getCurrentView (props) {
  */
 class DeviceSwap extends React.Component {
   state = {
-    view: getCurrentView(this.props)
+    view: getCurrentView(this.props),
+    defaultView: this.props.defaultView
   }
 
   /**
    * Update view to new default, when device type is not determined yet.
    *
    * @param {object} props
-   * @param {string} props.defaultView
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
-    if (!detector.isDetermined() && props.defaultView !== this.props.defaultView) {
-      this.setState({
-        view: props.defaultView
-      })
-    }
+  static getDerivedStateFromProps (props, state) {
+    if (!detector.isDetermined() && props.defaultView !== state.defaultView) {
+      return {view: props.defaultView}
+    } else return null
   }
 
   /**

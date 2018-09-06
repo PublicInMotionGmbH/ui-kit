@@ -50,13 +50,16 @@ class MaskedInput extends React.Component {
   }
 
   /**
-   * Update value inside state if it was updateed
+   * Update state when new props came
    *
-   * @param nextProps
+   * @param {object} nextProps
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== undefined && nextProps.value !== this.state.value) {
-      this.setState({ value: nextProps.value })
+  static getDerivedStateFromProps (nextProps, state) {
+    if (nextProps.value !== undefined && nextProps.value !== state.value) {
+      return { value: nextProps.value }
     }
   }
 

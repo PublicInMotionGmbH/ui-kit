@@ -69,20 +69,35 @@ class TimeInput extends React.Component {
   state = {
     open: false,
     inputValue: '',
-    suffix: null
+    suffix: null,
+    disabled: this.props.disabled
   }
 
   componentDidMount () {
     this.formatValue(this.props)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
-      this.formatValue(nextProps)
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (nextProps, state) {
+    // if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
+    //   this.formatValue(nextProps)
+    // }
 
-    if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
-      this.setState({ open: false })
+    if (state.disabled !== nextProps.disabled && nextProps.disabled) {
+      return { open: false }
+    } else return null
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.value !== undefined && (prevProps.value !== this.props.value || prevProps.format !== this.props.format)) {
+      // this.formatValue(this.props.value)
     }
   }
 
@@ -94,6 +109,7 @@ class TimeInput extends React.Component {
    */
   formatValue = (props) => {
     const { format, value } = props
+    console.log(value)
 
     // Format value according to provided format
     const inputValue = format === HOURS_12

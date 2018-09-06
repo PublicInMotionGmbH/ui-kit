@@ -144,14 +144,17 @@ class PhoneInput extends React.PureComponent {
    *
    * @param {object} props
    * @param {string} [props.value]
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.state.value) {
-      this.setState({
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.value) {
+      return {
         value: props.value,
         country: detectCountry(props.value)
-      })
-    }
+      }
+    } else return null
   }
 
   /**

@@ -143,18 +143,18 @@ class TextInput extends React.PureComponent {
     })
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.props.value) {
-      this.setState({ value: props.value })
-    }
-
-    if (props.endCaretOnFocus !== this.props.endCaretOnFocus) {
-      this.initializeEndCaretOnFocus()
-    }
-
-    if (props.suffix == null) {
-      this.deinitializeSuffixStyles()
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.value) {
+      return { value: props.value }
+    } else return null
   }
 
   /**
@@ -179,7 +179,7 @@ class TextInput extends React.PureComponent {
   /**
    * Update suffix when component is updated
    */
-  componentDidUpdate () {
+  componentDidUpdate (props) {
     if (!this.hasSuffixInitialized) {
       // Try to de-initialize styles when there is no suffix
       this.deinitializeSuffixStyles()
@@ -189,6 +189,14 @@ class TextInput extends React.PureComponent {
     } else {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
       this.initializeSuffixStyles()
+    }
+
+    if (this.props.endCaretOnFocus !== props.endCaretOnFocus) {
+      this.initializeEndCaretOnFocus()
+    }
+
+    if (this.props.suffix == null) {
+      this.deinitializeSuffixStyles()
     }
   }
 

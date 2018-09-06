@@ -103,28 +103,32 @@ function buildValue (options, baseValue) {
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: buildValue(this.props.options, this.props.value)
+    value: buildValue(this.props.options, this.props.value),
+    options: this.props.options
   }
 
   /**
    * Update value according to provided value and options.
    *
-   * @param {object} nextProps
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
-    let value = this.state.value
+  static getDerivedStateFromProps (nextProps, state) {
+    let value = state.value
 
-    if (this.state.value !== nextProps.value && nextProps.value !== undefined) {
+    if (state.value !== nextProps.value && nextProps.value !== undefined) {
       value = buildValue(nextProps.options, nextProps.value)
     }
 
-    if (this.props.options !== nextProps.options) {
+    if (state.options !== nextProps.options) {
       value = buildValue(nextProps.options, value)
     }
 
-    if (value !== this.state.value) {
-      this.setState({ value })
-    }
+    if (value !== state.value) {
+      return { value }
+    } else return null
   }
 
   /**

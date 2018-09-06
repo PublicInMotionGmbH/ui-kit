@@ -63,36 +63,36 @@ class FormHandler extends React.PureComponent {
   /**
    * Update errors and values if changed from props.
    *
-   * @param props
+   * @param prevProps
    */
-  componentWillReceiveProps (props) {
+  componentDidUpdate (prevProps) {
     if (!this.formik) {
       return
     }
 
     // Check if any new errors are provided
-    if (props.errors !== this.props.errors) {
-      this.formik.getFormikBag().setErrors(props.errors || {})
+    if (this.props.errors !== prevProps.errors) {
+      this.formik.getFormikBag().setErrors(this.props.errors || {})
     }
 
     // Check if any new value is provided
-    if (props.values !== this.props.values && props.values != null) {
-      const previous = this.props.values || {}
+    if (this.props.values !== prevProps.values && this.props.values != null) {
+      const previous = prevProps.values || {}
       const bag = this.formik.getFormikBag()
 
-      for (const key in props.values) {
+      for (const key in this.props.values) {
         // User has changed value manually, so do not fill it.
         if (previous[key] !== bag.values[key]) {
           continue
         }
 
         // Initial value is not changed or next value is empty
-        if (props.values[key] === previous[key] || props.values[key] === undefined) {
+        if (this.props.values[key] === previous[key] || this.props.values[key] === undefined) {
           continue
         }
 
         // Update value
-        bag.setFieldValue(key, props.values[key])
+        bag.setFieldValue(key, this.props.values[key])
       }
     }
   }

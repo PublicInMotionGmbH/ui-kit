@@ -61,11 +61,18 @@ class RadioGroup extends React.PureComponent {
   state = {
     value: this.props.value
   }
-
-  componentWillReceiveProps (props) {
-    if (props.value !== undefined && props.value !== this.state.value) {
-      this.setState({ value: props.value })
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== undefined && props.value !== state.value) {
+      return { value: props.value }
+    } else return null
   }
 
   change (value, checked) {

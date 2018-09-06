@@ -100,6 +100,13 @@ describe('<InlineInput />', () => {
     expect(wrapper.state().inputValue).toEqual('name')
   })
 
+  it('should change inputValue when new value received from props', () => {
+    wrapper.setProps({
+      value: 'newName'
+    })
+    expect(wrapper.state().inputValue).toEqual('newName')
+  })
+
   it('should change to span on blur', () => {
     span.simulate('click')
     const input = wrapper.find('TextInput')

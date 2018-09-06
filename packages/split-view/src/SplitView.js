@@ -57,11 +57,14 @@ class SplitView extends React.Component {
    *
    * @param {object} nextProps
    * @param {object} [nextProps.value]
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.state.value) {
-      this.setState({ value: nextProps.value })
-    }
+  static getDerivedStateFromProps (nextProps, state) {
+    if (nextProps.value !== undefined && nextProps.value !== state.value) {
+      return { value: nextProps.value }
+    } else return null
   }
 
   /**

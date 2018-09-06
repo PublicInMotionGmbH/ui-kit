@@ -73,10 +73,18 @@ class Slider extends React.PureComponent {
         : this.props.min
   }
 
-  componentWillReceiveProps (props) {
-    if (props.value != null && props.value !== this.state.value) {
-      this.setState({ value: props.value })
-    }
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (props, state) {
+    if (props.value != null && props.value !== state.value) {
+      return { value: props.value }
+    } else return null
   }
 
   /**
