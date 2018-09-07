@@ -186,10 +186,10 @@ class CarouselAutoplay extends React.PureComponent {
    * @param {number} [props.step]
    * @param {number} [props.initialSlide]
    */
-  componentDidUpdate (props, state) {
+  componentDidUpdate (props) {
     if (props.children !== this.props.children || props.movement !== this.props.movement) {
       this.setState({
-        carousel: this.buildCarousel(props, this.state.value)
+        carousel: this.buildCarousel(this.props, this.state.value)
       })
     }
 
