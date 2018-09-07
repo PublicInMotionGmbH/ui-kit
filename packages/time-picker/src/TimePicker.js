@@ -215,9 +215,9 @@ class TimePicker extends React.PureComponent {
   * @param {object} props
   * @param {object} [props.value]
   */
-  componentWillReceiveProps (props) {
-    if (props.value !== this.props.value && props.value !== undefined) {
-      const value = moment(props.value, 'HH:mm')
+  componentDidUpdate (props) {
+    if (props.value !== this.props.value && this.props.value !== undefined) {
+      const value = moment(this.props.value, 'HH:mm')
       this.setState({ value })
     }
   }

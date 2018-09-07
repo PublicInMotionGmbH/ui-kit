@@ -85,19 +85,15 @@ class TimeInput extends React.Component {
    *
    * @returns {object || null}
    */
-  static getDerivedStateFromProps (nextProps, state) {
-    // if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
-    //   this.formatValue(nextProps)
-    // }
-
-    if (state.disabled !== nextProps.disabled && nextProps.disabled) {
-      return { open: false }
-    } else return null
-  }
-
   componentDidUpdate (prevProps) {
-    if (this.props.value !== undefined && (prevProps.value !== this.props.value || prevProps.format !== this.props.format)) {
-      // this.formatValue(this.props.value)
+    const { props: nextProps } = this
+
+    if (prevProps.value !== nextProps.value || prevProps.format !== nextProps.format) {
+      this.formatValue(nextProps)
+    }
+
+    if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+      this.setState({ open: false })
     }
   }
 
@@ -109,7 +105,6 @@ class TimeInput extends React.Component {
    */
   formatValue = (props) => {
     const { format, value } = props
-    console.log(value)
 
     // Format value according to provided format
     const inputValue = format === HOURS_12

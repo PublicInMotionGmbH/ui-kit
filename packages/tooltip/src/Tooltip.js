@@ -126,13 +126,17 @@ class Tooltip extends React.Component {
   }
 
   /**
-   * Update position and state.open when props has changed
-   * @param {*} nextProps
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
    */
-  componentWillReceiveProps (nextProps) {
-    if (this.props.position !== nextProps.position) this.updatePosition(nextProps)
-    if (this.props.open !== nextProps.open) this.setState({ open: nextProps.open })
-    this.addListeners()
+  static getDerivedStateFromProps (nextProps, state) {
+    if (nextProps.open !== undefined && state.open !== nextProps.open) {
+      return { open: nextProps.open }
+    } else return null
   }
 
   /**
@@ -231,7 +235,13 @@ class Tooltip extends React.Component {
     element.removeEventListener('mouseover', this.handleMouseOver)
   }
 
-  componentDidUpdate () {
+  /**
+   * Update position when props has changed
+   * @param {*} nextProps
+   */
+  componentDidUpdate (nextProps) {
+    if (this.props.position !== nextProps.position) this.updatePosition(nextProps)
+    this.addListeners()
     this.updatePosition()
   }
 

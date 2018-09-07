@@ -44,8 +44,18 @@ class Wizard extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
+  /**
+   * Update state when new props came
+   *
+   * @param {object} props
+   * @param {object} state
+   *
+   * @returns {object || null}
+   */
+  static getDerivedStateFromProps (nextProps, state) {
+    if (nextProps.step !== undefined && nextProps.step !== state.currentStep) {
+      return { currentStep: nextProps.step }
+    } else return null
   }
 
   render () {
