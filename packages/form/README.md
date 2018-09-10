@@ -14,8 +14,8 @@ Your package should additionally have some extra dependencies:
 - `@talixo/shared: ^1.0.0-alpha.27`
 - `formik: ^0.11.11`
 - `prop-types: ^15.6.1`
-- `react: ^16.2.0`
-- `react-dom: ^16.2.0`
+- `react: ^16.4.2`
+- `react-dom: ^16.4.2`
 - `yup: ^0.24.1`
 
 These packages are required by `@talixo/form`, but you have to install them manually,

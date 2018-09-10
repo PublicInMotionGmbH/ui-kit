@@ -15,8 +15,8 @@ Your package should additionally have some extra dependencies:
 - `@talixo/shared: ^1.0.0-alpha.27`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
-- `react: ^16.2.0`
-- `react-dom: ^16.2.0`
+- `react: ^16.4.2`
+- `react-dom: ^16.4.2`
 - `react-instantiable-stateless: ^1.0.3`
 - `react-transition-group: ^2.2.1`
 

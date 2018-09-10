@@ -41,7 +41,7 @@ describe('<Highlight>', () => {
     beforeEach(() => {
       props = { onBrushEnd: jest.fn(), onBrush: jest.fn(), onBrushStart: jest.fn() }
       wrapper = createWrapper(props)
-      highlight = wrapper.find('Highlight')
+      highlight = wrapper.find('HighlightOverlay')
       plot = wrapper.find('.rv-xy-plot__inner')
       plot.simulate('mousedown', { nativeEvent: { offsetX: 100 } })
     })
@@ -99,7 +99,7 @@ describe('<Highlight>', () => {
         it('should reset drawing area', () => {
           expect(highlight.instance().state.drawArea).toEqual({ top: 0, right: 0, bottom: 0, left: 0 })
         })
-        it('should call onBrushStart', () => {
+        it('should call onBrushStHighlightrt', () => {
           expect(props.onBrushEnd).toHaveBeenCalledTimes(1)
         })
       })
@@ -112,7 +112,7 @@ describe('<Highlight>', () => {
     beforeEach(() => {
       props = { onBrushEnd: jest.fn(), onBrush: jest.fn(), onBrushStart: jest.fn() }
       wrapper = createWrapper(props)
-      highlight = wrapper.find('Highlight')
+      highlight = wrapper.find('HighlightOverlay')
       plot = wrapper.find('.rv-xy-plot__inner')
       plot.simulate('mousedown', { nativeEvent: { pageX: 200, type: 'touchstart' } })
     })
@@ -197,7 +197,7 @@ describe('<Highlight>', () => {
     beforeEach(() => {
       props = { onBrushEnd: jest.fn() }
       wrapper = createWrapper(props)
-      highlight = wrapper.find('Highlight')
+      highlight = wrapper.find('HighlightOverlay')
       plot = wrapper.find('.rv-xy-plot__inner')
       plot.simulate('mousedown', { nativeEvent: { offsetX: 100 } })
       expect(highlight.instance().state.drawing).toBe(true)
@@ -216,7 +216,7 @@ describe('<Highlight>', () => {
     beforeEach(() => {
       props = { onBrushEnd: jest.fn() }
       wrapper = createWrapper(props)
-      highlight = wrapper.find('Highlight')
+      highlight = wrapper.find('HighlightOverlay')
       highlight.simulate('mouseup')
     })
     afterEach(() => {

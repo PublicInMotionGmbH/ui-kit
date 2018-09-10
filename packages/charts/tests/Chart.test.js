@@ -2,7 +2,7 @@ import React from 'react'
 import Chart from '../src/Chart'
 import { shallow } from 'enzyme'
 
-const HIGHLIGHT = 'Highlight'
+const HIGHLIGHT = 'HighlightOverlay'
 const PLOT = 'FlexibleXYPlot'
 const BAR_SERIES = 'VerticalBarSeries'
 const LINE_SERIES = 'LineSeries'
