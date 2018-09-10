@@ -185,7 +185,6 @@ class DataTable extends React.Component {
 
     // Order data using lodash sort function.
     const newData = _.orderBy(sortedData, columnID, direction)
-    console.log('setState', newData)
 
     this.setState({
       sortedData: newData,
