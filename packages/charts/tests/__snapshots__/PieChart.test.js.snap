@@ -42,6 +42,7 @@ exports[`<PieChart> when rendered without disabled items should render properly 
       ]
     }
     key="talixo-chart-series talixo-chart-series--0"
+    padAngle={0}
     stack={false}
     style={Object {}}
   />
@@ -70,6 +71,7 @@ exports[`<PieChart> when rendered without disabled items should render properly 
       ]
     }
     key="talixo-chart-series talixo-chart-series--1"
+    padAngle={0}
     stack={false}
     style={Object {}}
   />
@@ -98,6 +100,7 @@ exports[`<PieChart> when rendered without disabled items should render properly 
       ]
     }
     key="talixo-chart-series talixo-chart-series--2"
+    padAngle={0}
     stack={false}
     style={Object {}}
   />
