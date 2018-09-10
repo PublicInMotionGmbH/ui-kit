@@ -11,20 +11,6 @@ import TableRow from './TableRow'
 import { moduleName } from './config'
 
 /**
- * Function checks whether the object is empty
- *
- * @param {*} obj
- *
- * @returns {bool}
- */
-function isEmpty (obj) {
-  for (const item in obj) {
-    return false
-  }
-  return true
-}
-
-/**
  * Checks if data has ID property. If not it generates it according to data item index.
  *
  * @param {object[]} collection
@@ -161,31 +147,21 @@ class DataTable extends React.Component {
     buildId: this.props.buildId
   }
 
-  /**
-   * Checks if data, sort column or sorting order has changed.
-   *
-   * @param {object} props
-   * @param {object} state
-   *
-   * @returns {object || null}
-   */
-  static getDerivedStateFromProps (nextProps, state) {
-    const { data: newData, sortColumn: newSortCol, reversedOrder: newOrder } = nextProps
-    const { sortColumn, reversedOrder, sortedData, buildId } = state
-    const composedState = {}
+  componentDidUpdate (prevProps) {
+    const { data: newData, sortColumn: newSortCol, reversedOrder: newOrder } = this.props
+    const { data, buildId } = prevProps
+    const { sortColumn, reversedOrder } = this.state
 
-    if (newData !== undefined && sortedData !== newData) {
+    if (data !== newData) {
       registerElements(newData, buildId)
-      composedState['sortedData'] = newData
+      this.setState({ sortedData: newData })
     }
     if (newSortCol !== undefined && sortColumn !== newSortCol) {
-      composedState['sortColumn'] = newSortCol
+      this.setState({ sortColumn: newSortCol })
     }
     if (newOrder !== undefined && reversedOrder !== newOrder) {
-      composedState['reversedOrder'] = newOrder
+      this.setState({ reversedOrder: newOrder })
     }
-
-    return isEmpty(composedState) ? null : composedState
   }
 
   /**
@@ -209,6 +185,7 @@ class DataTable extends React.Component {
 
     // Order data using lodash sort function.
     const newData = _.orderBy(sortedData, columnID, direction)
+    console.log('setState', newData)
 
     this.setState({
       sortedData: newData,
