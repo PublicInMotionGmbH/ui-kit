@@ -12,7 +12,7 @@ using `npm install @talixo/wizard --save` or `yarn add @talixo/wizard`.
 Your package should additionally have some extra dependencies:
 
 - `@talixo/checkbox: ^1.0.0-alpha.27`
-- `@talixo/form: ^1.0.0-alpha.27`
+- `@talixo/form: ^1.0.0-alpha.28`
 - `@talixo/navigation: ^1.0.0-alpha.27`
 - `@talixo/shared: ^1.0.0-alpha.27`
 - `@talixo/text-input: ^1.0.0-alpha.27`
