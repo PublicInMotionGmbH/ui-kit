@@ -1,7 +1,432 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<HowItWorks /> renders children correctly 1`] = `
-<span
-  className="talixo-how-it-works"
-/>
+<div
+  className="talixo-how-it-works__container"
+>
+  <div
+    className="talixo-how-it-works"
+  >
+    <React.Fragment
+      key="0"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 1
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="1"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 2
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="2"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 3
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="3"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 4
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="4"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 5
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="5"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 6
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="6"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 7
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="7"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 8
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="8"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 9
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="9"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 10
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="10"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 11
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="11"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 12
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="12"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 13
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+    <React.Fragment
+      key="13"
+    >
+      <section>
+        <div
+          className="talixo-how-it-works__tile"
+        >
+          <div
+            className="talixo-how-it-works__image"
+          >
+            <img />
+          </div>
+          <div
+            className="talixo-how-it-works__title"
+          >
+            <strong>
+              Title 14
+            </strong>
+          </div>
+          <div
+            className="talixo-how-it-works__description"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+          </div>
+        </div>
+        <div
+          className="talixo-how-it-works__divider"
+        />
+      </section>
+    </React.Fragment>
+  </div>
+</div>
 `;

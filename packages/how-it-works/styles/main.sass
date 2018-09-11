@@ -1,2 +1,89 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('how-it-works')
+  position: relative
+  display: flex
+  flex-wrap: wrap
+  height: 100%
+  width: calc(100% + #{2 * $how-it-works-divider-width})
+  margin-left: -$how-it-works-divider-width
+
+  &__container
+    width: 100%
+    overflow: hidden
+    position: relative
+
+  & *
+    box-sizing: border-box
+
+  section
+    position: relative
+    margin: 0 $how-it-works-divider-width
+    flex-grow: 1
+    justify-content: center
+
+  &__tile
+    display: flex
+    flex-direction: column
+    max-width: $how-it-works-section-max-width
+    min-width: $how-it-works-section-min-width
+    margin: 0 auto
+    padding: $how-it-works-section-margin-vertical $how-it-works-section-margin-horizontal
+
+  &__image
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-basis: $how-it-works-image-height
+    margin-bottom: $how-it-works-image-margin
+
+    .primary-color__fill
+      fill: $x-color-primary
+
+
+    .primary-color__stroke
+      stroke: $x-color-primary
+
+
+    img
+      max-height: 100%
+
+  &__title
+    font-size: $how-it-works-title-font-size
+    line-height: 1em * $how-it-works-line-height-base
+    margin-bottom: 0.35em
+
+  &__description
+    font-size: $x-font-size-base
+
+  &__divider
+    position: absolute
+    height: $how-it-works-image-height + $how-it-works-image-margin
+    width: $how-it-works-divider-width + $how-it-works-section-margin-horizontal
+    top: 0
+    left: 100%
+
+    &:before
+      content: ''
+      position: absolute
+      left: 0
+      right: 0
+      margin-top: $how-it-works-title-font-size * $how-it-works-line-height-base
+      top: 100%
+      width: 100%
+      height: $how-it-works-divider-height
+      background-image: linear-gradient(to right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -webkit-gradient(linear, 0 0, 100% 0, from($how-it-works-divider-gradient-from), to($how-it-works-divider-gradient-to))
+      background-image: -webkit-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -moz-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -o-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+
+[dir=rtl] #{prefix('how-it-works')}
+  &__divider:before 
+    background-image: linear-gradient(to left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+    background-image: -webkit-gradient(linear, 0 0, 100% 0, from($how-it-works-divider-gradient-to), to($how-it-works-divider-gradient-from))
+    background-image: -webkit-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+    background-image: -moz-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+    background-image: -o-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+
+

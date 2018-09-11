@@ -23,7 +23,16 @@ to avoid having different versions of these in your application.
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+className     | string    | n/a     | Additional class name passed to wrapper.
+steps         | Step[]    | `[]`    | An array of steps containing the explanation of how it works.
+
+## Property shapes 
+
+Property name | Type      | Default | Description                    
+--------------|-----------|:-------:|--------------------------------
+description   | string    | n/a     | Description of a step.
+image         | Element   | n/a     | Image element which will be displayed above step.
+title         | string    | n/a     | Title of a step.
 
 ## Changelog
 
