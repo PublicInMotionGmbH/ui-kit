@@ -8,6 +8,19 @@ import { locations } from './fixtures/locations'
 
 const createWrapper = props => mount(<AddressInput {...props} />)
 
+jest.mock('lodash/debounce', () => (fn, time) => {
+  let timeout
+
+  const debounced = (...args) => {
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => fn(...args), time)
+  }
+
+  debounced.cancel = () => clearTimeout(timeout)
+  return debounced
+})
+
 describe('<AddressInput />', () => {
   describe('rendering', () => {
     let wrapper
@@ -54,10 +67,13 @@ describe('<AddressInput />', () => {
     beforeEach(() => {
       wrapper = createWrapper(props)
       input = wrapper.find('input')
+      jest.useFakeTimers()
     })
 
     afterEach(() => {
       wrapper.unmount()
+      jest.clearAllTimers()
+      jest.useRealTimers()
     })
 
     it('should invoke onChange', () => {
@@ -79,12 +95,12 @@ describe('<AddressInput />', () => {
       expect(props.onBlur).toHaveBeenCalledTimes(1)
     })
 
-    // TODO: try to test invoking debounced function
     it('should invoke onLoadRequest', () => {
       props.onLoadRequest.mockReset()
       input.simulate('change', { target: { value: testValue } })
-      // expect(props.onLoadRequest).toHaveBeenCalledTimes(1)
-      // expect(props.onLoadRequest).toHaveBeenCalledWith(testValue)
+      jest.runAllTimers()
+      expect(props.onLoadRequest).toHaveBeenCalledTimes(1)
+      expect(props.onLoadRequest).toHaveBeenCalledWith(testValue)
     })
 
     it('should invoke onStopRequest', () => {
