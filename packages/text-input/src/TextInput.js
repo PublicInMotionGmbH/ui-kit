@@ -180,13 +180,10 @@ class TextInput extends React.PureComponent {
    * Update suffix when component is updated
    */
   componentDidUpdate () {
-    if (!this.hasSuffixInitialized) {
-      // Try to de-initialize styles when there is no suffix
-      this.deinitializeSuffixStyles()
-    } else if (this.hasSuffixInitialized) {
+    if (this.hasSuffixInitialized) {
       // Update styles if there is already suffix initialized
       this.updateStyles()
-    } else {
+    } else if (this.props.suffix != null) {
       // Initialize suffix styles when suffix has been added, but it's not initialized yet
       this.initializeSuffixStyles()
     }
