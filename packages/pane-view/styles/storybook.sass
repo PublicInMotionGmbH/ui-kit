@@ -1,0 +1,12 @@
+@import './config'
+
+@include module('pane-view')
+  border: 1px solid black
+  margin: 20px
+
+@include module('pane')
+  background-color: #efefef
+
+  & > div
+    margin: 0 auto
+    margin-top: 10px

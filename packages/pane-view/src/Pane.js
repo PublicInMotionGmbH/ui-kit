@@ -37,9 +37,8 @@ class Pane extends React.PureComponent {
     const height = split === 'horizontal' && size
     const width = split === 'vertical' && size
     const display = split === 'vertical' && 'flex'
-    const flex = 'none'
 
-    return { height, width, display, flex }
+    return { height: `${height}%`, width: `${width}%`, display }
   }
 
   render () {
