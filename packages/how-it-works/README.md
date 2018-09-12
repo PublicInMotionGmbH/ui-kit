@@ -11,10 +11,10 @@ using `npm install @talixo/how-it-works --save` or `yarn add @talixo/how-it-work
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/how-it-works`, but you have to install them manually,
 to avoid having different versions of these in your application.
