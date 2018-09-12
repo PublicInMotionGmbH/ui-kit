@@ -20,6 +20,9 @@ const propTypes = {
   /** Should the currency be displayed before price? */
   displayBefore: PropTypes.bool,
 
+  /** This placeholder is displayed if provided value is not a number (isNaN returns true). */
+  errorPlaceholder: PropTypes.node,
+
   /** Locale code of user. */
   locale: PropTypes.string,
 
@@ -35,6 +38,7 @@ const propTypes = {
 
 const defaultProps = {
   displayBefore: false,
+  errorPlaceholder: '-',
   precision: 2
 }
 
@@ -42,19 +46,21 @@ const defaultProps = {
  * Component which represents Price.
  *
  * @param {object} props
- * @param {*} [props.approximateLabel]
  * @param {string} [props.className]
  * @param {string} [props.currency]
  * @param {object} [props.currencyToSymbol]
  * @param {boolean} [props.displayBefore]
+ * @param {*} [props.errorPlaceholder]
  * @param {string} [props.locale]
  * @param {number} [props.precision]
+ * @param {*} [props.prefix]
  * @param {string|number} [props.value]
+ *
  * @returns {React.Element}
  */
 function Price (props) {
   const {
-    className, currency, currencyToSymbol, decimal,
+    className, currency, currencyToSymbol, decimal, errorPlaceholder,
     displayBefore, locale, prefix, precision, value, ...passedProps
   } = props
   const wrapperCls = buildClassName(moduleName, className)
@@ -66,11 +72,13 @@ function Price (props) {
   })
 
   // Generate price element
-  const priceElement = <span>
-    {displayBefore && price.symbol}
-    {price.value}
-    {!displayBefore && price.symbol}
-  </span>
+  const priceElement = price.error
+    ? <span>{errorPlaceholder}</span>
+    : <span>
+      {displayBefore && price.symbol}
+      {price.value}
+      {!displayBefore && price.symbol}
+    </span>
 
   return (
     <span className={wrapperCls} {...passedProps}>

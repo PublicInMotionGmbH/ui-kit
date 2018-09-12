@@ -70,6 +70,9 @@ addStory('initial', readme, () => (
     <br /><br />
     <h3>EUR currency with 'displayBefore' parameter</h3>
     <Price currency='EUR' value={getRandomPrice()} displayBefore />
+    <br /><br />
+    <h3>With value which is not a number</h3>
+    <Price currency='EUR' value='GBP' errorPlaceholder={'Wrong Value'} displayBefore />
   </div>
 ))
 

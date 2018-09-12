@@ -6,7 +6,7 @@
  * @returns {string}
  */
 export function valueToFixedPrecision (value, precision = 2) {
-  return Number.parseFloat(value).toFixed(precision)
+  return parseFloat(value).toFixed(precision)
 }
 
 /**
@@ -17,14 +17,13 @@ export function valueToFixedPrecision (value, precision = 2) {
  * @param {number} precision
  * @returns {string}
  */
-function fomatNumber (value, locale, precision) {
-  let price
+export function fomatNumber (value, locale, precision) {
   try {
-    price = new Intl.NumberFormat(locale, {
+    const price = new Intl.NumberFormat(locale, {
       minimumFractionDigits: precision,
       maximumFractionDigits: precision }).format(value)
-  } catch (e) { price = value }
-  return price
+    return price
+  } catch (e) { return value }
 }
 
 /**
@@ -38,10 +37,16 @@ function fomatNumber (value, locale, precision) {
  * @param {string} [config.locale]
  * @returns {object}
  */
-export function generatePrice (value, config) {
+export function generatePrice (value, config = {}) {
   const { currency, currencyToSymbol, locale, precision } = config
 
   value = valueToFixedPrecision(value, precision)
+
+  if (isNaN(value)) {
+    return {
+      value: value, symbol: currency, error: true
+    }
+  }
 
   // If user provides own mapping, use it.
   if (currencyToSymbol) {
