@@ -21,9 +21,16 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | Additional class name passed to wrapper.
+Property name     | Type            | Default | Description                    
+------------------|-----------------|:-------:|--------------------------------------------------------------
+className         | string          | n/a     | Additional class name passed to wrapper.
+currency          | string          | n/a     | Currency of a price.
+currencyToSymbol  | object          | n/a     | Mapping which provides will be used to convert currency to provided symbol.
+displayBefore     | boolean         | n/a     | Should the currency be displayed before price?
+locale            | string          | n/a     | Locale code of user.
+precision         | number          | n/a     | Price precision.
+prefix            | node            | n/a     | Prefix whoich will be displayed before the price. Can be to e.g. indicate that price is aproximate.
+value             | string / number | n/a     | Given price.
 
 ## Changelog
 
