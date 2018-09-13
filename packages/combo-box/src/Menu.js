@@ -68,6 +68,8 @@ function Menu (props) {
   )
 }
 
+Menu.displayName = 'Menu'
+
 Menu.propTypes = propTypes
 Menu.defaultProps = defaultProps
 

@@ -52,6 +52,8 @@ function Item (props) {
   )
 }
 
+Item.displayName = 'Item'
+
 Item.propTypes = propTypes
 
 Item.defaultProps = defaultProps

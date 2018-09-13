@@ -22,10 +22,17 @@ class Portal extends React.PureComponent {
   constructor (props) {
     super(props)
 
-    this.el = document.createElement('div')
+    this.el = typeof document !== 'undefined'
+      ? document.createElement('div')
+      : null
   }
 
   componentWillReceiveProps (props) {
+    // Do not do anything on Node.js environment
+    if (typeof document === 'undefined') {
+      return
+    }
+
     // When Portal is already mounted and root node has changed,
     // Immediately move it to another container
     if (this.mounted && props.attachTo !== this.props.attachTo) {
@@ -50,9 +57,16 @@ class Portal extends React.PureComponent {
   }
 
   render () {
+    // Do not use portals in Node.js environment
+    if (typeof document === 'undefined') {
+      return null
+    }
+
     return ReactDOM.createPortal(this.props.children, this.el)
   }
 }
+
+Portal.displayName = 'Portal'
 
 Portal.propTypes = propTypes
 

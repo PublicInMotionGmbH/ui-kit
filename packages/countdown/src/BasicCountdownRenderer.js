@@ -77,6 +77,8 @@ function BasicCountdownRenderer (props) {
   )
 }
 
+BasicCountdownRenderer.displayName = 'BasicCountdownRenderer'
+
 BasicCountdownRenderer.propTypes = propTypes
 
 export default BasicCountdownRenderer

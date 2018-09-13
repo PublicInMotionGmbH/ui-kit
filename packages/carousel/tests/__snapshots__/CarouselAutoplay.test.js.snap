@@ -3,7 +3,8 @@
 exports[`<Carousel /> renders children correctly 1`] = `
 <Carousel
   animationTime={500}
-  defaultMovement="forward"
+  defaultMovement="exact"
+  infinite={false}
   onChange={[Function]}
   perPage={1}
   renderArrows={[Function]}

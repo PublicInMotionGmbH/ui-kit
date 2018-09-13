@@ -204,6 +204,51 @@ addStory.controlled('special multi select box', readme, (setState, state) => (
   </CountryFlagsProvider>
 ), () => ({ value: [] }))
 
+addStory.controlled('simple mobile friendly select box', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {state.value}</div>
+    <SelectBox
+      mobileFriendly
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      options={optionsSimple}
+    />
+  </div>
+), () => ({ value: null }))
+
+addStory.controlled('advanced mobile friendly select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      mobileFriendly
+      placeholder='Select items...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={value => `${value.name}, ${value.language}`}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </CountryFlagsProvider>
+), () => ({ value: null }))
+
+addStory.controlled('multi mobile friendly select box', readme, (setState, state) => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <SelectBox
+      multi
+      mobileFriendly
+      placeholder='Select item...'
+      value={state.value}
+      onChange={value => setState({ value })}
+      renderItem={value => `${value.name}, ${value.language}`}
+      renderValue={renderSimpleCountry}
+      options={options}
+    />
+  </CountryFlagsProvider>
+), () => ({ value: [] }))
+
 addStory.controlled('filtered combo box', readme, (setState, state) => (
   <div>
     <div>Selected value: {JSON.stringify(state.value)}</div>

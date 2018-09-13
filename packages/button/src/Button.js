@@ -53,6 +53,8 @@ function Button (props) {
   )
 }
 
+Button.displayName = 'Button'
+
 Button.propTypes = propTypes
 Button.defaultProps = defaultProps
 

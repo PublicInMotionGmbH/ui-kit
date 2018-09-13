@@ -1,6 +1,8 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 
+import { detector } from '@talixo/device-swap'
+
 import RangeInput from '../src/RangeInput'
 
 function createKeyEvent (keyCode, fn) {
@@ -11,6 +13,9 @@ function createKeyEvent (keyCode, fn) {
 }
 
 describe('<RangeInput />', () => {
+  beforeEach(() => detector.setViewType('desktop'))
+  afterEach(() => detector.reset())
+
   it('renders correctly', () => {
     const wrapper = shallow(<RangeInput />)
 
@@ -74,7 +79,7 @@ describe('buildEndValue', () => {
   it('builds end value correctly', () => {
     const wrapper = shallow(<RangeInput />)
     const autoComplete = wrapper.find('AutoComplete')
-    autoComplete.simulate('change', '1')
+    autoComplete.simulate('choose', '1')
     expect(wrapper.state().value).toEqual(1)
   })
 
@@ -116,7 +121,7 @@ describe('buildEndValue', () => {
     const inputValue = '15'
     const wrapper = shallow(<RangeInput />)
     const autoComplete = wrapper.find('AutoComplete')
-    autoComplete.simulate('change', inputValue)
+    autoComplete.simulate('choose', inputValue)
     expect(wrapper.state().inputValue).toEqual('15')
   })
 })
@@ -160,7 +165,7 @@ describe('change', () => {
     const change = jest.fn()
     const wrapper = shallow(<RangeInput onChange={change} />)
     const autoComplete = wrapper.find('AutoComplete')
-    autoComplete.simulate('change')
+    autoComplete.simulate('choose')
 
     expect(change).toHaveBeenCalledTimes(1)
   })
@@ -207,7 +212,7 @@ describe('blur', () => {
   it('formats inputValue', () => {
     const wrapper = shallow(<RangeInput minLength={3} />)
     const autoComplete = wrapper.find('AutoComplete')
-    autoComplete.simulate('change', 12)
+    autoComplete.simulate('choose', 12)
     autoComplete.simulate('blur')
 
     expect(wrapper.state().inputValue).toEqual('012')

@@ -23,6 +23,8 @@ function Row (props) {
   )
 }
 
+Row.displayName = 'Row'
+
 Row.propTypes = propTypes
 
 export default Row

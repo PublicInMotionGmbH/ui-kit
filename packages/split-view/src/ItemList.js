@@ -58,6 +58,8 @@ function ItemList (props) {
   )
 }
 
+ItemList.displayName = 'ItemList'
+
 ItemList.propTypes = propTypes
 
 export default ItemList

@@ -45,6 +45,8 @@ function OptionTooltipContent (props) {
   )
 }
 
+OptionTooltipContent.displayName = 'OptionTooltipContent'
+
 OptionTooltipContent.propTypes = propTypes
 
 export default OptionTooltipContent

@@ -326,3 +326,15 @@ addStory.controlled('RTL: with icon and suffix', readme, (setState, state) => {
     </div>
   )
 }, () => ({ value: '2' }))
+
+addStory('put caret always on end', readme, () => (
+  <div>
+    <h2>Text input with caret on end on focus</h2>
+    <TextInput
+      placeholder='Default input'
+      style={additionalStyling}
+      onChange={change}
+      endCaretOnFocus
+    />
+  </div>
+))

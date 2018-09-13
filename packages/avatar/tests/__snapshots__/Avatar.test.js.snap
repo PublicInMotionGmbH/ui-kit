@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar /> renders children correctly 1`] = `
+<div
+  className="talixo-avatar"
+  style={
+    Object {
+      "fontSize": 40,
+    }
+  }
+>
+  <AvatarChildRenderer>
+    H
+  </AvatarChildRenderer>
+</div>
+`;

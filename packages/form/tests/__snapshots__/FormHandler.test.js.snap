@@ -11,6 +11,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   />
   <div
     className="talixo-field"
+    disabled={false}
+    readOnly={false}
   >
     <div
       className="talixo-form-row"
@@ -39,6 +41,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
                 <input
                   className="talixo-text-input__input"
                   id="form_field_1"
+                  name="test"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
@@ -64,6 +67,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   >
     <div
       className="talixo-field"
+      disabled={false}
+      readOnly={false}
     >
       <div
         className="talixo-form-row"
@@ -92,6 +97,7 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
                   <input
                     className="talixo-text-input__input"
                     id="form_field_2"
+                    name="test2"
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
@@ -115,6 +121,8 @@ exports[`<FormHandler /> rendering renders children correctly 1`] = `
   </div>
   <div
     className="talixo-field"
+    disabled={false}
+    readOnly={false}
   >
     <div
       className="talixo-form-row"

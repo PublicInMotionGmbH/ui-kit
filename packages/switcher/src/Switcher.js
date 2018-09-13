@@ -17,12 +17,20 @@ const propTypes = {
   value: PropTypes.bool,
 
   /** Callback for change event */
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   yesLabel: 'Yes',
-  noLabel: 'No'
+  noLabel: 'No',
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -85,6 +93,8 @@ class Switcher extends React.PureComponent {
     )
   }
 }
+
+Switcher.displayName = 'Switcher'
 
 Switcher.propTypes = propTypes
 Switcher.defaultProps = defaultProps

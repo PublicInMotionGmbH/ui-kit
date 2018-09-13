@@ -31,6 +31,8 @@ function ModalHeader (props) {
   )
 }
 
+ModalHeader.displayName = 'ModalHeader'
+
 ModalHeader.propTypes = propTypes
 
 export default ModalHeader

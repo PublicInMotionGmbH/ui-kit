@@ -43,6 +43,12 @@
       color: $number-input-stepper-active-text-color
       background-color: $number-input-stepper-active-background-color
 
+  #{inside('#{&}-stepper--disabled', 'button')}
+    &, &:hover, &:focus, &:active
+      border-color: $number-input-stepper-disabled-border-color
+      color: $number-input-stepper-disabled-text-color
+      background-color: $number-input-stepper-disabled-background-color
+
   input[type=number]
     appearance: none
 

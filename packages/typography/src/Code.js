@@ -34,6 +34,8 @@ function Code (props) {
   )
 }
 
+Code.displayName = 'Code'
+
 Code.propTypes = propTypes
 
 export default Code

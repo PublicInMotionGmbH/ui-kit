@@ -11,8 +11,8 @@ using `npm install @talixo/carousel --save` or `yarn add @talixo/carousel`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -34,6 +34,7 @@ children        | nodes     | n/a             | Elements in each slides
 className       | string    | n/a             | Additional class name passed to wrapper
 dots            | bool      | n/a             | Dots to navigate between slides
 animationTime   | number    | `500`           | Duration of animation (in ms)
+infinite        | bool      | `false`         | Infinite scroll
 perPage         | number    | `1`             | Number of visible slides
 renderDots      | function  | `Dots`          | Function which render custom dots
 renderArrows    | function  | `Arrows`        | Function which render custom arrows

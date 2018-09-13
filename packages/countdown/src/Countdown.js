@@ -118,6 +118,8 @@ class Countdown extends React.PureComponent {
   }
 }
 
+Countdown.displayName = 'Countdown'
+
 Countdown.propTypes = propTypes
 Countdown.defaultProps = defaultProps
 

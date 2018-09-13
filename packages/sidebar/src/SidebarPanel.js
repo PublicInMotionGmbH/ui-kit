@@ -53,6 +53,8 @@ function SidebarPanel (props) {
   )
 }
 
+SidebarPanel.displayName = 'SidebarPanel'
+
 SidebarPanel.propTypes = propTypes
 
 export default SidebarPanel
