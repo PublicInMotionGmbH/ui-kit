@@ -20,29 +20,32 @@ const propTypes = {
   /** Function which handles image change. Receives URL data, ArrayBuffer, or File object. */
   onChange: PropTypes.func,
 
+  /** onDragEnd callback. */
+  onDragEnd: PropTypes.func,
+
+  /** onDragEnter callback. */
+  onDragEnter: PropTypes.func,
+
+  /** onDragExit callback. */
+  onDragExit: PropTypes.func,
+
+  /** onDragLeave callback. */
+  onDragLeave: PropTypes.func,
+
+  /** onDragOver callback. */
+  onDragOver: PropTypes.func,
+
+  /** onDragEnd callback. */
+  onDragStart: PropTypes.func,
+
+  /** onRemove callback. */
+  onRemove: PropTypes.func,
+
   /** Type of data passed to onChange function: `url`, `binary`, `file`. */
   type: PropTypes.oneOf(['url', 'binary', 'file']),
 
   /** Image which can be controlled from outside component */
-  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-
-  /** onDragEnd callback. Applies sent files and event. */
-  onDragEnd: PropTypes.func,
-
-  /** onDragEnter callback. Applies sent files and event. */
-  onDragEnter: PropTypes.func,
-
-  /** onDragExit callback. Applies sent files and event. */
-  onDragExit: PropTypes.func,
-
-  /** onDragLeave callback. Applies sent files and event. */
-  onDragLeave: PropTypes.func,
-
-  /** onDragOver callback. Applies sent files and event. */
-  onDragOver: PropTypes.func,
-
-  /** onDragEnd callback. Applies sent files and event. */
-  onDragStart: PropTypes.func
+  value: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 }
 
 const defaultProps = {
@@ -56,14 +59,14 @@ const defaultProps = {
  * @property {string} [props.className]
  * @property {string} [props.label]
  * @property {function} [props.onChange]
- * @property {string} [props.type]
- * @property {object|string} [props.value]
  * @property {function} [props.onDragEnd]
  * @property {function} [props.onDragEnter]
  * @property {function} [props.onDragExit]
  * @property {function} [props.onDragLeave]
  * @property {function} [props.onDragOver]
  * @property {function} [props.onDragStart]
+ * @property {string} [props.type]
+ * @property {object|string} [props.value]
  *
  * @property {object} state
  * @property {boolean} state.draggingOver
@@ -265,7 +268,7 @@ class ImageInput extends React.Component {
 
   render () {
     const { className, label, onChange: change, type, value: propsValue, onDragEnd,
-      onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart, ...passedProps
+      onDragEnter, onDragExit, onDragLeave, onDragOver, onDragStart, onRemove, ...passedProps
     } = this.props
     const { value, url } = this.state
 

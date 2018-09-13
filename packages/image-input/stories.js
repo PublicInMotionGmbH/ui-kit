@@ -51,6 +51,7 @@ addStory.controlled('url controlled', readme, (setState, state) => (
     style={style}
     value={state.value}
     onChange={(value) => { setState({ value }) }}
+    onRemove={() => setState({ value: null })}
   />
 ), () => ({ value: image }))
 
@@ -61,6 +62,7 @@ addStory.controlled('binary controlled', readme, (setState, state) => (
     style={style}
     value={state.value}
     onChange={(value) => { setState({ value }) }}
+    onRemove={() => setState({ value: null })}
   />
 ), () => ({ value: null }))
 
@@ -71,5 +73,6 @@ addStory.controlled('file controlled', readme, (setState, state) => (
     style={style}
     value={state.value}
     onChange={(value) => { setState({ value }) }}
+    onRemove={() => setState({ value: null })}
   />
 ), () => ({ value: null }))
