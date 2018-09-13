@@ -21,6 +21,7 @@ const revokeObjectUrl = jest.fn()
 
 const buttonCls = `.${buildClassName([moduleName, 'button'])}`
 const inputCls = `.${buildClassName([moduleName, 'input'])}`
+const removeIconCls = `.${buildClassName([moduleName, 'remove'])}`
 
 const createWrapper = (props = {}) => mount(<ImageInput {...props} />)
 
@@ -51,7 +52,7 @@ describe('<ImageInput />', () => {
 
   // Uploading using button
   describe('button uploading', () => {
-    const props = { onChange: jest.fn() }
+    const props = { onChange: jest.fn(), onRemove: jest.fn() }
     let wrapper
     beforeEach(() => {
       wrapper = createWrapper(props)
@@ -128,6 +129,17 @@ describe('<ImageInput />', () => {
 
       expect(revokeObjectUrl).toHaveBeenCalledTimes(1)
     })
+
+    it('should clear state.value and state.url after clicking remove icon', () => {
+      props.onRemove.mockReset()
+      const input = wrapper.find(inputCls)
+      input.simulate('change', { target: { files: [img1] } })
+
+      const removeIcon = wrapper.find(removeIconCls).at(0)
+      removeIcon.simulate('click')
+      expect(wrapper.state().value).toBe(null)
+      expect(wrapper.state().url).toBe(null)
+    })
   })
 
   // Drag & drop behaviour
@@ -202,6 +214,16 @@ describe('<ImageInput />', () => {
 
       expect(wrapper.state().value).toBe(img1)
       expect(wrapper.state().url).toBe(null)
+    })
+
+    it('should clear state.value and state.url after clicking remove icon', () => {
+      const input = wrapper.find(inputCls)
+      input.simulate('change', { target: { files: [img1] } })
+
+      const removeIcon = wrapper.find(removeIconCls).at(0)
+      removeIcon.simulate('click')
+      expect(wrapper.state().value).toBe(props.value)
+      expect(wrapper.state().url).toBe(props.value)
     })
   })
 

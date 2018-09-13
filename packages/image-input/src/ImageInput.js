@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import { Button } from '@talixo/button'
+import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
 import { events, getDataTransferFile, getImageUrl } from './helpers'
@@ -181,9 +182,10 @@ class ImageInput extends React.Component {
    * @param {object} file
    * @param {Event|SyntheticEvent} e
    */
-  handleRemove = (e) => {
+  onRemove = (e) => {
     const { value: propsValue, onRemove } = this.props
     const { value } = this.state
+    e.stopPropagation()
 
     if (onRemove) {
       onRemove(value, e)
@@ -239,11 +241,15 @@ class ImageInput extends React.Component {
    */
   getWrapperProps () {
     const { className } = this.props
-    const { draggingOver } = this.state
+    const { draggingOver, value } = this.state
     const { onDrag, onChange } = this
 
     // Class names
-    const wrapperCls = buildClassName(moduleName, className, { dragover: draggingOver })
+    const wrapperCls = buildClassName(moduleName, className, {
+      dragover: draggingOver,
+      'not-empty': value
+    })
+
     const wrapperProps = {
       onDragEnter: onDrag.bind(this, events.enter),
       onDragStart: onDrag.bind(this, events.start),
@@ -266,6 +272,7 @@ class ImageInput extends React.Component {
     // Class names
     const inputCls = buildClassName([moduleName, 'input'])
     const imageCls = buildClassName([moduleName, 'image'])
+    const iconRemoveCls = buildClassName([moduleName, 'remove'])
     const buttonCls = buildClassName([moduleName, 'button'])
 
     const wrapperProps = this.getWrapperProps()
@@ -279,7 +286,9 @@ class ImageInput extends React.Component {
               onClick={this.onClick}
               style={{ backgroundImage: `url(${url})` }}
               className={imageCls}
-            />
+            >
+              <Icon className={iconRemoveCls} name='clear' onClick={this.onRemove} />
+            </div>
             : <Button className={buttonCls} onClick={this.onClick}>{label}</Button>
         }
       </div>

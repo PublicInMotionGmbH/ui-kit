@@ -17,10 +17,25 @@
     > *
       pointer-events: none
 
+  &--not-empty
+    border-color: transparent
+
+
   &__input
     display: none
 
+  &__remove
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    font-size: $image-input-icon-remove-font-size
+    color: $image-input-icon-remove-color
+    cursor: pointer
+    z-index: 100
+
   &__image
+    position: relative
     cursor: pointer
     width: 100%
     height: 100%
@@ -28,6 +43,3 @@
     background-repeat: no-repeat
     background-size: contain
     transition: transform $image-input-transition
-
-    &:hover
-      transform: $image-input-image-transform
