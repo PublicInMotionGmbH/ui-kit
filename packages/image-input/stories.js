@@ -20,7 +20,7 @@ const image = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25
 const style = { width: 500, height: 300 }
 
 // Stories
-addStory('initial', readme, () => (
+addStory('url', readme, () => (
   <ImageInput
     label='Browse files'
     style={style}
