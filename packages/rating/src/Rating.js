@@ -36,10 +36,10 @@ const propTypes = {
 }
 
 const defaultProps = {
-  size: 5,
-  value: 0,
+  icon: 'star',
   keyboard: true,
-  icon: 'star'
+  size: 5,
+  value: 0
 }
 
 /**
@@ -47,6 +47,7 @@ const defaultProps = {
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {boolean} [props.hidePlaceholder]
  * @property {string} [props.icon]
  * @property {boolean} [props.keyboard]
  * @property {function} [props.onChange]
