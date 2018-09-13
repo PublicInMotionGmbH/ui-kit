@@ -1,2 +1,31 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('rating')
+  position: relative
+  display: inline-block
+  color: $rating-color-not-selected
+  white-space: nowrap
+  cursor: default
+  user-select: none
+  font-size: 1.1rem
+  line-height: 1em
+  vertical-align: middle
+  outline: none
+
+  &__outer--hidden
+    visibility: hidden
+
+  &__inner
+    max-width: 100%
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    color: $rating-color-selected
+    overflow: hidden
+
+  &--selectable
+    cursor: pointer
+
+  &--hover &__inner
+    color: $rating-color-changing
