@@ -177,6 +177,26 @@ class ImageInput extends React.Component {
   }
 
   /**
+   * Handles image removing
+   * @param {object} file
+   * @param {Event|SyntheticEvent} e
+   */
+  handleRemove = (e) => {
+    const { value: propsValue, onRemove } = this.props
+    const { value } = this.state
+
+    if (onRemove) {
+      onRemove(value, e)
+    }
+
+    if (propsValue != null) {
+      return
+    }
+
+    this.setState({ value: null, url: null })
+  }
+
+  /**
    * Handles drag actions.
    *
    * @param {string} type
