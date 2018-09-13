@@ -215,8 +215,6 @@ class Rating extends React.PureComponent {
       ? propsValue * propsSize / size
       : propsValue
 
-    console.log(size, value)
-
     // Build icons to show
     const icons = Array.apply(null, new Array(size)).map((x, index) => this.renderIcon(index))
 
