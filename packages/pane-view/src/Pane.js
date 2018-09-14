@@ -34,15 +34,15 @@ class Pane extends React.PureComponent {
   buildStyle (size, split) {
     if (size === undefined) return {}
 
-    const height = split === 'horizontal' && size
-    const width = split === 'vertical' && size
-    const display = split === 'vertical' && 'flex'
+    const height = split === 'vertical' && size
+    const width = split === 'horizontal' && size
+    // const display = split === 'horizontal' && 'flex'
 
-    return { height: `${height}%`, width: `${width}%`, display }
+    return { height: `${height}%`, width: `${width}%` }
   }
 
   render () {
-    const { children, className, size, split, style, ...passedProps } = this.props
+    const { children, className, defaultSize, size, split, style, ...passedProps } = this.props
 
     const clsName = buildClassName('pane', className)
     const wrapperStyle = {

@@ -7,22 +7,19 @@
   outline: none
   overflow: hidden
   user-select: text
-  // flex-wrap: wrap //TODO: make as option
   
-  &--vertical
+  &--horizontal
     flex-direction: row
     left: 0
     right: 0
 
-  &--horizontal
+  &--vertical
     bottom: 0
     flex-direction: column
     min-height: 100%
     top: 0
-    width: 100%
     
 @include module('pane')
-  // flex: 1
   flex-grow: 1
   flex-shrink: 1
   position: relative
@@ -39,7 +36,7 @@
   z-index: 1
   background-clip: padding-box
 
-  &--horizontal
+  &--vertical
     height: 11px
     border-top: 5px solid rgba(0, 0, 0, 0.1)
     border-bottom: 5px solid rgba(0, 0, 0, 0.1)
@@ -57,7 +54,7 @@
     &:active
       background: #bbbbbb
 
-  &--vertical
+  &--horizontal
     width: 12px
     border-left: 5px solid rgba(0, 0, 0, 0.1)
     border-right: 5px solid rgba(0, 0, 0, 0.1)
