@@ -1,6 +1,6 @@
 {
   "name": "@talixo/text-input",
-  "version": "1.0.0-alpha.28",
+  "version": "1.0.0-alpha.29",
   "description": "UI Component which represents Text Input",
   "main": "dist/index.js",
   "module": "index.js",
