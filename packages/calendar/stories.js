@@ -1,4 +1,5 @@
 import React from 'react'
+import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 import moment from 'moment'
 
@@ -18,17 +19,19 @@ const styles = {
   marginRight: '30px'
 }
 
+const change = action('change')
+
 // Stories
 
 addStory('default', readme, () => (
-  <Calendar style={styles} />
+  <Calendar style={styles} onChange={change} />
 ))
 
 addStory.controlled('controlled', readme, (setState, state) => (
   <div>
     <Calendar
       style={styles}
-      placeholder='DD-MM-YYYY'
+      placeholder='YYYY-MM-DD'
       onChange={value => setState({ value })}
       value={state.value}
     />
@@ -37,19 +40,24 @@ addStory.controlled('controlled', readme, (setState, state) => (
 
 addStory('custom date format', readme, () => (
   <div>
-    <Calendar style={styles} displayFormat='YYYY/MM/D' />
-    <Calendar style={styles} displayFormat='DD-MM-YYYY' />
-    <Calendar style={styles} displayFormat='ddd MM YY' />
+    <Calendar style={styles} displayFormat='YYYY/MM/DD' onChange={change} />
+    <Calendar style={styles} displayFormat='DD-MM-YYYY' onChange={change} />
+    <Calendar style={styles} displayFormat='ddd MM YY' onChange={change} />
   </div>
 ))
 
 addStory('custom placeholder', readme, () => (
-  <Calendar style={styles} placeholder='Enter date' />
+  <Calendar style={styles} placeholder='Enter date (YYYY-MM-DD)' onChange={change} />
 ))
 
 addStory('with label', readme, () => (
   <div>
     <label htmlFor='calendar'>Click me</label>
-    <Calendar id='calendar' style={styles} placeholder='Enter date' />
+    <Calendar
+      id='calendar'
+      style={styles}
+      placeholder='Enter date (YYYY-MM-DD)'
+      onChange={change}
+    />
   </div>
 ))

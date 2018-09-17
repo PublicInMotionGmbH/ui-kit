@@ -7,9 +7,6 @@ import { SingleDatePicker } from 'react-dates'
 import Calendar from '../src/Calendar'
 
 describe('<Calendar />', () => {
-  beforeEach(() => jest.useFakeTimers())
-  afterEach(() => jest.useRealTimers())
-
   it('renders children correctly', () => {
     const wrapper = mount(<Calendar />)
 
@@ -59,11 +56,30 @@ describe('<Calendar />', () => {
     // Blur element
     wrapper.find(SingleDatePicker).props().onFocusChange({ focused: false })
 
-    // Wait a while
-    jest.runTimersToTime(1)
-
     expect(spy.mock.calls.length).toBe(1)
     expect(spy.mock.calls[0][0]).toBe('2000-11-20')
+
+    // Change date again with same value
+    wrapper.find(SingleDatePicker).props().onDateChange(moment('2000-11-20'))
+    expect(spy.mock.calls.length).toBe(1)
+  })
+
+  it('should call onChange event with null when invalid date is passed', () => {
+    const spy = jest.fn()
+
+    const wrapper = shallow(
+      <Calendar onChange={spy} />
+    )
+
+    // Change date
+    wrapper.find(SingleDatePicker).props().onDateChange(moment('2000-11-12'))
+    wrapper.find(SingleDatePicker).props().onDateChange(moment('2000-11-a'))
+
+    // Blur element
+    wrapper.find(SingleDatePicker).props().onFocusChange({ focused: false })
+
+    expect(spy.mock.calls.length).toBe(2)
+    expect(spy.mock.calls[1][0]).toBe(null)
   })
 
   it('should call onFocus event', () => {
@@ -101,10 +117,13 @@ describe('<Calendar />', () => {
   })
 
   it('should return new state correctly when receive new props', () => {
-    const givenProps = { value: '2002-02-02' }
-    const givenState = { date: '2003-03-03' }
-    const newState = Calendar.getDerivedStateFromProps(givenProps, givenState)
+    const value = '2002-02-02'
+    const newValue = '2003-03-03'
+    const wrapper = shallow(
+      <Calendar value={value} />
+    )
+    wrapper.setProps({ value: newValue })
 
-    expect(newState.date).toEqual(moment('2002-02-02'))
+    expect(wrapper.state().date).toEqual(moment(newValue))
   })
 })

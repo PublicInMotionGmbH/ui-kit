@@ -101,7 +101,7 @@ class Calendar extends React.PureComponent {
    * @returns {object || null}
    */
   static getDerivedStateFromProps (props, state) {
-    if (props.value != null && props.value !== state.date) {
+    if (props.value !== undefined && props.value !== state.date) {
       return ({ date: moment(props.value) })
     } else return null
   }
@@ -122,6 +122,10 @@ class Calendar extends React.PureComponent {
     }
 
     this.setState({ date })
+
+    if (nextDate !== this.props.value && this.props.onChange) {
+      this.props.onChange(nextDate)
+    }
   }
 
   /**
@@ -136,26 +140,6 @@ class Calendar extends React.PureComponent {
 
     if (handler) {
       handler()
-    }
-
-    // Unfortunately, SingleDatePicker is blurring immediately after sending event of change.
-    // We have to update date on blur, because of other SingleDatePicker problems (especially value input)
-    if (!focused) {
-      this.updateTimeout = setTimeout(this.updateDateAfterBlur)
-    }
-  }
-
-  updateDateAfterBlur = () => {
-    const { value, onChange } = this.props
-    const { date } = this.state
-    const nextDate = date && date.isValid() ? date.format('YYYY-MM-DD') : null
-
-    if (value === undefined) {
-      this.setState({ date: moment(this.props.value) })
-    }
-
-    if (nextDate !== value && onChange) {
-      onChange(nextDate)
     }
   }
 
