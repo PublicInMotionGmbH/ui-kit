@@ -1,14 +1,14 @@
 @import './config'
 
 @include module('pane-view')
-  border: 1px solid black
-  margin: 20px
+  border: dp(0.125) solid #000000
+  margin: dp(2.5)
 
   & > div
     text-align: center
 
   &--vertical
-    height: 600px
+    height: dp(75)
 
 
 @include module('pane')
@@ -16,4 +16,4 @@
 
   & > div
     margin: 0 auto
-    margin-top: 10px
+    margin-top: dp(1.25)

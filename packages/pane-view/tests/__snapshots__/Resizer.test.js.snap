@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Resizer /> renders children correctly 1`] = `
+<span
+  className="talixo-pane-view-resizer"
+/>
+`;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pane /> renders children correctly 1`] = `
+<div
+  className="talixo-pane"
+  style={Object {}}
+>
+  <div>
+    LEFT SIDE
+  </div>
+</div>
+`;

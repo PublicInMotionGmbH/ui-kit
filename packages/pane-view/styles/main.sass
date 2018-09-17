@@ -26,20 +26,20 @@
   outline: none
   overflow: hidden
   
-@include module('resizer')
+@include module('pane-view-resizer')
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative
   box-sizing: border-box
-  opacity: 0.5
+  opacity: $pane-view-resizer-opacity
   z-index: 1
   background-clip: padding-box
 
   &--vertical
-    height: 11px
-    border-top: 5px solid rgba(0, 0, 0, 0.1)
-    border-bottom: 5px solid rgba(0, 0, 0, 0.1)
+    height: $pane-view-resizer-vertical-before-height
+    border-top: $pane-view-resizer-vertical-border-width solid $pane-view-resizer-vertical-border-color
+    border-bottom: $pane-view-resizer-vertical-border-width solid $pane-view-resizer-vertical-border-color
     cursor: row-resize
     width: 100%
 
@@ -47,26 +47,26 @@
       content: ''
       position: absolute
       display: block
-      height: 1px
+      height: $pane-view-resizer-vertical-before-height
       width: 100%
-      background-color: #000000
+      background-color: $pane-view-resizer-vertical-before-background-color
 
     &:active
-      background: #bbbbbb
+      background: $pane-view-resizer-vertical-active-background-color
 
   &--horizontal
-    width: 12px
-    border-left: 5px solid rgba(0, 0, 0, 0.1)
-    border-right: 5px solid rgba(0, 0, 0, 0.1)
+    width: $pane-view-resizer-horizontal-height
+    border-left: $pane-view-resizer-horizontal-border-width solid $pane-view-resizer-horizontal-border-color
+    border-right: $pane-view-resizer-horizontal-border-width solid $pane-view-resizer-horizontal-border-color
     cursor: col-resize
 
     &:before
       content: ''
       position: absolute
       display: block
-      width: 1px
+      width: $pane-view-resizer-horizontal-before-width
       height: 100%
-      background-color: #000000
+      background-color: $pane-view-resizer-horizontal-before-background-color
 
     &:active
-      background: #bbbbbb
+      background: $pane-view-resizer-horizonatal-active-background-color

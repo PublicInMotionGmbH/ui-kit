@@ -2,6 +2,38 @@
 
 exports[`<PaneView /> renders children correctly 1`] = `
 <div
-  className="talixo-pane-view"
-/>
+  className="talixo-pane-view talixo-pane-view--horizontal"
+>
+  <React.Fragment
+    key="0"
+  >
+    <Pane
+      key="pane_0"
+      size={50}
+      split="horizontal"
+    >
+      <div>
+        LEFT SIDE
+      </div>
+    </Pane>
+    <Resizer
+      key="resizer_0"
+      onMouseDown={[Function]}
+      split="horizontal"
+    />
+  </React.Fragment>
+  <React.Fragment
+    key="1"
+  >
+    <Pane
+      key="pane_1"
+      size={50}
+      split="horizontal"
+    >
+      <div>
+        RIGHT SIDE
+      </div>
+    </Pane>
+  </React.Fragment>
+</div>
 `;

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+const moduleName = 'pane-view-resizer'
+
 const propTypes = {
   /** Resizer content */
   children: PropTypes.node,
@@ -31,7 +33,7 @@ class Resizer extends React.PureComponent {
   render () {
     const { children, className, split, ...passedProps } = this.props
 
-    const clsName = buildClassName('resizer', className, [split])
+    const clsName = buildClassName(moduleName, className, [split])
 
     return (
       <span className={clsName} {...passedProps} />

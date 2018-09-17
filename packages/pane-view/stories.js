@@ -42,7 +42,7 @@ addStory('horizontal', readme, () => (
 ))
 
 addStory('vertical', readme, () => (
-  <PaneView size={100 / 6} split='vertical'>
+  <PaneView split='vertical'>
     <Pane>
       <div style={paneStyle}>hello world</div>
     </Pane>
@@ -86,3 +86,26 @@ addStory('with custom size', readme, () => (
     </Pane>
   </PaneView>
 ))
+
+addStory.controlled('with mode state sent to parent', readme, (setState, state) => (
+  <PaneView split='horizontal' onMouseDown={x => setState({ mode: x })}>
+    <Pane>
+      <div style={paneStyle}>hello world</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>witaj świecie</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>bonjour monde</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>hola mundo</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>ciao mondo</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>hallo welt</div>
+    </Pane>
+  </PaneView>
+), () => ({ mode: null }))

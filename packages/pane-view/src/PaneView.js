@@ -6,12 +6,17 @@ import { buildClassName } from '@talixo/shared'
 
 import Resizer from './Resizer'
 
+const moduleName = 'pane-view'
+
 const propTypes = {
   /** Array of pane content */
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
 
   /** Additional class name */
   className: PropTypes.string,
+
+  /** Event fired when mouse button is clicked */
+  onMouseDown: PropTypes.func,
 
   /** Split direction */
   split: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -21,6 +26,7 @@ const propTypes = {
 }
 
 const defaultProps = {
+  split: 'horizontal'
 }
 
 /**
@@ -36,7 +42,8 @@ class PaneView extends React.Component {
 
     this.state = {
       current: null,
-      paneArr: []
+      paneArr: [],
+      mode: null
     }
 
     this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -54,7 +61,6 @@ class PaneView extends React.Component {
     const paneArr = []
     let defaultSizeAll = 0
     let numberOfNotDefaults = 0
-    const defaultSizeSingle = (100 - defaultSizeAll) / numberOfNotDefaults
 
     children.map((el) => {
       if (el.props.defaultSize !== undefined) {
@@ -64,13 +70,15 @@ class PaneView extends React.Component {
       }
     })
 
-    children.map((el, i) =>
+    const defaultSizeSingle = (100 - defaultSizeAll) / numberOfNotDefaults
+
+    children.map((el, i) => {
       paneArr.push({
         paneId: i,
         size: el.props.defaultSize !== undefined
           ? el.props.defaultSize
           : defaultSizeSingle})
-    )
+    })
 
     this.setState({
       paneArr
@@ -91,19 +99,34 @@ class PaneView extends React.Component {
     document.removeEventListener('mouseup', this.handleMouseUp)
   }
 
-  handleMouseDown (index, e) {
+  handleMouseDown (index) {
+    const { onMouseDown } = this.props
     const current = index
-    this.setState({ current })
+    this.setState({
+      current,
+      mode: 'start'
+    })
+
+    if (onMouseDown) {
+      onMouseDown('start')
+    }
 
     this.bindEventListeners()
   }
 
   handleMouseUp () {
+    const { onMouseDown } = this.props
+
     this.unbindEventListeners()
 
     this.setState({
-      current: null
+      current: null,
+      mode: 'stop'
     })
+
+    if (onMouseDown) {
+      onMouseDown('stop')
+    }
   }
 
   convertToPercent (size, paneViewWidth) {
@@ -117,35 +140,32 @@ class PaneView extends React.Component {
   }
 
   roundDecimals (num) {
-    return Math.round(num * 1000) / 1000
+    return Math.round(num * 100000) / 100000
   }
 
   handleMouseMove (e) {
     const { current, paneArr: newPaneArr } = this.state
-    const { split } = this.props
+    const { split, children, onMouseDown } = this.props
     const paneView = ReactDOM.findDOMNode(this['pane_view'])
     const activePane = ReactDOM.findDOMNode(this[`pane_${current}`])
     const nextPane = ReactDOM.findDOMNode(this[`pane_${current + 1}`])
-
-    const {
-      width: paneViewWidth,
-      height: paneViewHeight
-    } = paneView.getBoundingClientRect()
+    const resizer = ReactDOM.findDOMNode(this[`resizer_0`])
+    const {width: resizerWidth, height: resizerHeight} = resizer.getBoundingClientRect()
+    const {width: paneViewWidth, height: paneViewHeight} = paneView.getBoundingClientRect()
+    const {width: nextWidth, height: nextHeight} = nextPane.getBoundingClientRect()
     const {
       left: activeLeft,
       width: activeWidth,
       top: activeTop,
       height: activeHeight
     } = activePane.getBoundingClientRect()
-    const {
-      width: nextWidth,
-      height: nextHeight
-    } = nextPane.getBoundingClientRect()
-
+    const resizersNumber = children.length - 1
+    const realPaneViewWidth = paneViewWidth - (resizersNumber * resizerWidth)
+    const realPaneViewHeight = paneViewHeight - (resizersNumber * resizerHeight)
     const currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
     const currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
-    const activeOffsetWidthPercent = this.convertToPercent(activePane.offsetWidth, paneViewWidth)
-    const activeOffsetHeightPercent = this.convertToPercent(activePane.offsetHeight, paneViewHeight)
+    const activeOffsetWidthPercent = this.convertToPercent(activePane.offsetWidth, realPaneViewWidth)
+    const activeOffsetHeightPercent = this.convertToPercent(activePane.offsetHeight, realPaneViewHeight)
     const widthCombined = this.roundDecimals(activeWidth) +
       this.roundDecimals(nextWidth) -
       this.roundDecimals(currentSizeHorizontal)
@@ -153,18 +173,22 @@ class PaneView extends React.Component {
       this.roundDecimals(nextHeight) -
       this.roundDecimals(currentSizeVertical)
 
+    if (onMouseDown) {
+      onMouseDown('resize')
+    }
+
     if (current === null) return
 
     if (split === 'horizontal') {
       newPaneArr.map((el, i) => {
         if (i === current) {
           el.size = currentSizeHorizontal > 0 ? currentSizeHorizontal : 0
-          el.size = this.convertToPercent(el.size, paneViewWidth)
+          el.size = this.convertToPercent(el.size, realPaneViewWidth)
           if (widthCombined < 0) {
             el.size = activeOffsetWidthPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(widthCombined, paneViewWidth)
+          el.size = this.convertToPercent(widthCombined, realPaneViewWidth)
         }
       })
     }
@@ -173,12 +197,12 @@ class PaneView extends React.Component {
       newPaneArr.map((el, i) => {
         if (i === current) {
           el.size = currentSizeVertical > 0 ? currentSizeVertical : 0
-          el.size = this.convertToPercent(el.size, paneViewHeight)
+          el.size = this.convertToPercent(el.size, realPaneViewHeight)
           if (heightCombined < 0) {
             el.size = activeOffsetHeightPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(heightCombined, paneViewHeight)
+          el.size = this.convertToPercent(heightCombined, realPaneViewHeight)
         }
       })
     }
@@ -186,7 +210,8 @@ class PaneView extends React.Component {
     this.setState({
       paneArr: newPaneArr,
       currentSizeVertical,
-      currentSizeHorizontal
+      currentSizeHorizontal,
+      mode: 'resize'
     })
   }
 
@@ -194,7 +219,7 @@ class PaneView extends React.Component {
     const { children, className, split, style } = this.props
     const { paneArr } = this.state
 
-    const clsName = buildClassName('pane-view', className, [split])
+    const clsName = buildClassName(moduleName, className, [split])
 
     return (
       <div style={style} className={clsName} ref={node => { this[`pane_view`] = node }}>
@@ -210,6 +235,7 @@ class PaneView extends React.Component {
             })}
             {(i < children.length - 1) &&
               <Resizer
+                ref={node => { this[`resizer_${i}`] = node }}
                 key={`resizer_${i}`}
                 onMouseDown={this.handleMouseDown.bind(this, i)}
                 split={split}
