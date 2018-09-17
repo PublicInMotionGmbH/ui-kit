@@ -6,7 +6,7 @@ import { Button } from '@talixo/button'
 import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
-import { events, getDataTransferFile, getImageUrl } from './helpers'
+import { events, getDataTransferFile, getImageUrl, prevent } from './helpers'
 
 export const moduleName = 'image-input'
 
@@ -86,17 +86,16 @@ class ImageInput extends React.Component {
    * Prevents default drop and dragover actions.
    */
   componentDidMount () {
-    this.prevent = e => e.preventDefault()
-    document.addEventListener('drop', this.prevent)
-    document.addEventListener('dragover', this.prevent)
+    document.addEventListener('drop', prevent)
+    document.addEventListener('dragover', prevent)
   }
 
   /**
    * Removes preventing default drop and dragover actions.
    */
   componentWillUnmount () {
-    document.removeEventListener('drop', this.prevent)
-    document.removeEventListener('dragover', this.prevent)
+    document.removeEventListener('drop', prevent)
+    document.removeEventListener('dragover', prevent)
   }
 
   /**

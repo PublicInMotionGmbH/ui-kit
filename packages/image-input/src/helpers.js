@@ -1,4 +1,12 @@
 /**
+ * Prevents default behaviour of event.
+ * @param e
+ */
+export function prevent (e) {
+  e.preventDefault()
+}
+
+/**
  * Creates image URL which can e used to display image.
  *
  * @param {string|object} file
