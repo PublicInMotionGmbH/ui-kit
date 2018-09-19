@@ -34,7 +34,6 @@ const defaultProvider = {
 }
 
 const propTypes = {
-
   /** Address of a place. */
   address: PropTypes.string,
 
@@ -58,7 +57,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  detailsFormatter: (x) => (x),
+  detailsFormatter: x => x,
   iconProvider: defaultProvider
 }
 
@@ -66,11 +65,13 @@ const defaultProps = {
  * This is a component which represents a place Address.
  *
  * @param props
- * @param {string} [props.abbreviation]
  * @param {string} [props.address]
  * @param {string} [props.className]
  * @param {string} [props.details]
- * @param {string} [props.type]
+ * @param {function} [props.detailsFormatter]
+ * @param {string} [props.icon]
+ * @param {function} [props.iconProvider]
+ * @param {string} [props.short]
  *
  * @returns {React.Element}
  */

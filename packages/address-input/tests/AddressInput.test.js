@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 
 import { buildClassName } from '@talixo/shared'
 
-import AddressInput, { moduleName } from '../src/AddressInput'
+import AddressInput, { moduleName, getDescription, itemToString } from '../src/AddressInput'
 import { locations } from './fixtures/locations'
 
 const createWrapper = props => mount(<AddressInput {...props} />)
@@ -252,6 +252,49 @@ describe('<AddressInput />', () => {
         fakeInput.simulate('click')
         wrapper.setProps({ loading: true })
         expect(wrapper.find('ProgressRing').exists()).toBe(true)
+      })
+    })
+  })
+
+  describe('helpers functions', () => {
+    const meta = 'test-meta-description'
+    const addr = 'test-address'
+    const withAddrAndMeta = { address: addr, meta: { description: meta } }
+    const withAddr = { address: addr }
+    const withMeta = { meta: { description: meta } }
+    const withoutBoth = {}
+
+    describe('getDescription', () => {
+      it('should return meta when address and meta is provided', () => {
+        const result = getDescription(withAddrAndMeta)
+        expect(result).toBe(meta)
+      })
+
+      it('should return meta when only meta is provided', () => {
+        const result = getDescription(withMeta)
+        expect(result).toBe(meta)
+      })
+
+      it('should return address when only address is provided', () => {
+        const result = getDescription(withAddr)
+        expect(result).toBe(addr)
+      })
+
+      it('should return empty string when nothing is provided', () => {
+        const result = getDescription(withoutBoth)
+        expect(result).toBe('')
+      })
+    })
+
+    describe('itemToString', () => {
+      it('should return result of getDescription when argument is neither null nor undefined', () => {
+        const result = itemToString(withAddrAndMeta)
+        expect(result).toBe(meta)
+      })
+
+      it('should return empty string when argument is either null or undefined', () => {
+        const result = itemToString()
+        expect(result).toBe('')
       })
     })
   })

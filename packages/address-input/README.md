@@ -11,10 +11,17 @@ using `npm install @talixo/address-input --save` or `yarn add @talixo/address-in
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/button: ^1.0.0-alpha.27`
+- `@talixo/combo-box: ^1.0.0-alpha.27`
+- `@talixo/device-swap: ^1.0.0-alpha.27`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/masked-input: ^1.0.0-alpha.27`
+- `@talixo/progress-ring: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/text-input: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/address-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -23,26 +30,27 @@ to avoid having different versions of these in your application.
 
 ### Address Input
 
-Property name | Type        | Default | Description                    
---------------|-------------|:-------:|--------------------------------
-className     | string      | n/a     | Address of location.
-footer        | node        | n/a     | AutoComplete list footer.
-label         | string      | n/a     | Mobile view input label.
-loading       | boolean     | n/a     | Indicates if loader should be displayed inside input.
-locations     | Location[]  | n/a     | Locations to be displayed inside AutoComlete.
-onBlur        | function    | n/a     | onBlur callback.
-onChange      | function    | n/a     | onChange callback.
-onFocus       | function    | n/a     | onFocus callback.
-onLoadRequest | function    | n/a     | This function is called when changes input value, at has typed in at least 3 letters. It can be used to load locations from external API.
-onStopRequest | function    | n/a     | This function is called when changes input value, at has typed less than 3 letters.
-placeholder   | string      | n/a     | AdressInput placeholder
-value         | Location    | n/a     | Chosen location value.
+Property name | Type        | Default                           | Description                    
+--------------|-------------|:---------------------------------:|--------------------------------
+className     | string      | n/a                               | Address of location.
+footer        | node        | n/a                               | AutoComplete list footer.
+label         | string      | n/a                               | Mobile view input label.
+loading       | boolean     | n/a                               | Indicates if loader should be displayed inside input.
+locations     | Location[]  | n/a                               | Locations to be displayed inside AutoComlete.
+onBlur        | function    | n/a                               | onBlur callback.
+onChange      | function    | n/a                               | onChange callback.
+onFocus       | function    | n/a                               | onFocus callback.
+onLoadRequest | function    | n/a                               | This function is called when changes input value, at has typed in at least 3 letters. It can be used to load locations from external API.
+onStopRequest | function    | n/a                               | This function is called when changes input value, at has typed less than 3 letters.
+placeholder   | string      | n/a                               | AdressInput placeholder.
+renderAddress | function    | (props) => <Address {...props} /> | Address component which will be displayed inside autocomplete list.
+value         | Location    | n/a                               | Chosen location value.
 
 ### Address
 
-Property name     | Type        | Required |Default | Description                    
+Property name     | Type        | Default   | Description                    
 ------------------|-------------|:---------:|--------------------------------
-address           | string      | true      | Address of a place.
+address           | string      | n/a       | Address of a place.
 className         | string      | n/a       | Additional class name passed to wrapper.
 details           | string      | n/a       | Place details.
 detailsFormatter  | function    | `x => x`  | Format details.

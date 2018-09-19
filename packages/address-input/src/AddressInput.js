@@ -18,8 +18,49 @@ import Address from './Address'
 
 export const moduleName = 'address-input'
 
-function renderAddress (item) {
-  return <Address {...item} />
+/**
+ * Get description either from meta data or from address property of value.
+ *
+ * @param {object} value
+ * @returns {string}
+ */
+export function getDescription (value) {
+  if (value) {
+    if (value.meta) {
+      return value.meta.description
+    } else if (value.address) {
+      return value.address
+    }
+    return ''
+  }
+}
+
+/**
+ * Get string from an object. To use with AutoComplete component.
+ *
+ * @param {object} item
+ *
+ * @returns {string}
+ */
+export function itemToString (item) {
+  return item == null ? '' : getDescription(item)
+}
+
+/**
+ *
+ * @param props
+ * @param {string} [props.address]
+ * @param {string} [props.className]
+ * @param {string} [props.details]
+ * @param {function} [props.detailsFormatter]
+ * @param {string} [props.icon]
+ * @param {function} [props.iconProvider]
+ * @param {string} [props.short]
+ *
+ * @returns {Element|ReactElement}
+ */
+function _renderAddress (props) {
+  return <Address {...props} />
 }
 
 const locationProp = {
@@ -34,7 +75,6 @@ const locationProp = {
 
   /** Metadata of location. */
   meta: PropTypes.shape({
-
     /** Description of a place. If provided it will be displayed inside AddressInput. */
     description: PropTypes.string
   }),
@@ -57,7 +97,7 @@ const propsTypes = {
   loading: PropTypes.bool,
 
   /** Locations to be displayed inside AutoComlete. */
-  locations: PropTypes.arrayOf(PropTypes.shape({...locationProp})),
+  locations: PropTypes.arrayOf(PropTypes.shape(locationProp)),
 
   /** onBlur callback. */
   onBlur: PropTypes.func,
@@ -81,16 +121,51 @@ const propsTypes = {
   /** AdressInput placeholder. */
   placeholder: PropTypes.string,
 
+  /** Address component which will be displayed inside autocomplete list. */
+  renderAddress: PropTypes.string,
+
   /** Chosen location value. */
-  value: PropTypes.shape({...locationProp})
+  value: PropTypes.shape(locationProp)
+}
+
+const defaultProps = {
+  renderAddress: _renderAddress
 }
 
 /**
+ * Component which represents AddressInput.
  *
+ * @property {object} props
+ * @property {string} [props.className]
+ * @property {*} [props.footer]
+ * @property {string} [props.label]
+ * @property {boolean} [props.loading]
+ * @property {Array<{ [address]: string, [details]: string, [icon]: string, [meta]: { [description]: string }, [short]: string}>} [props.locations]
+ * @property {function} [props.onBlur]
+ * @property {function} [props.onChange]
+ * @property {function} [props.onFocus]
+ * @property {function} [props.onLoadRequest]
+ * @property {function} [props.onStopRequest]
+ * @property {function} [props.placeholder]
+ * @property {function} [props.renderAddress]
+ *
+ * @property {object} [props.value]
+ * @property {string} [props.value.address]
+ * @property {string} [props.value.details]
+ * @property {string} [props.value.icon]
+ * @property {object} [props.value.meta]
+ * @property {string} [props.value.meta.description]
+ * @property {string} [props.value.short]
+ *
+ * @property {string} state
+ * @property {string} state.inputValue
+ * @property {object} state.value
+ *
+ * @class
  */
 class AddressInput extends React.PureComponent {
   state = {
-    inputValue: this.getDescription(this.props.value),
+    inputValue: getDescription(this.props.value),
     value: this.props.value || null
   }
 
@@ -107,7 +182,7 @@ class AddressInput extends React.PureComponent {
    *
    * @param {string} value
    */
-  onInputValueChange (value) {
+  onInputValueChange = value => {
     const { onLoadRequest, onStopRequest } = this.props
     if (value === this.state.inputValue) {
       return
@@ -140,7 +215,7 @@ class AddressInput extends React.PureComponent {
    *
    * @param {object} value
    */
-  onChoose (value) {
+  onChoose = value => {
     this.setState({ focus: false })
     this.onChange(value)
   }
@@ -149,7 +224,7 @@ class AddressInput extends React.PureComponent {
    * Handle choosing element from autocomplete list.
    * @param value
    */
-  onChange (value) {
+  onChange = value => {
     if (this.props.value === undefined) {
       this.setState({ value })
     }
@@ -162,7 +237,7 @@ class AddressInput extends React.PureComponent {
   /**
    * Handle input focusing.
    */
-  focus () {
+  focus = () => {
     this.setState({
       focus: true
     })
@@ -175,7 +250,7 @@ class AddressInput extends React.PureComponent {
   /**
    * Handle input blur event.
    */
-  blur () {
+  blur = () => {
     const state = { focus: false }
     const { locations, onChange, onBlur } = this.props
 
@@ -184,7 +259,7 @@ class AddressInput extends React.PureComponent {
       const firstValue = locations[0]
 
       state.value = firstValue
-      state.inputValue = this.getDescription(firstValue)
+      state.inputValue = getDescription(firstValue)
 
       if (onChange) {
         onChange(firstValue)
@@ -193,7 +268,7 @@ class AddressInput extends React.PureComponent {
 
     // Set proper search query to input.
     if (this.state.value) {
-      state.inputValue = this.getDescription(this.state.value)
+      state.inputValue = getDescription(this.state.value)
     }
 
     this.setState(state)
@@ -228,23 +303,6 @@ class AddressInput extends React.PureComponent {
   }
 
   /**
-   * Get description either from meta data or from address property of value.
-   *
-   * @param {object} value
-   * @returns {string}
-   */
-  getDescription (value) {
-    if (value) {
-      if (value.meta) {
-        return value.meta.description
-      } else if (value.address) {
-        return value.address
-      }
-      return ''
-    }
-  }
-
-  /**
    * Render desktop version of AddressInput.
    *
    * @returns {React.Element}
@@ -252,26 +310,26 @@ class AddressInput extends React.PureComponent {
   renderDesktop = () => {
     const {
       className, footer, locations, loading, onBlur, onChange, onFocus,
-      onLoadRequest, onStopRequest, placeholder, value, ...passedProps
+      onLoadRequest, onStopRequest, placeholder, renderAddress, value, ...passedProps
     } = this.props
 
     // FIXME: pass props down
     return (
       <MaskedInput
         value={this.state.value}
-        renderMask={() => <Address {...this.state.value} />}
+        renderMask={() => renderAddress(this.state.value)}
         {...passedProps}
       >
         <AutoComplete
           openOnFocus
           options={locations}
-          onChoose={this.onChange.bind(this)}
-          onFocus={this.focus.bind(this)}
-          onBlur={this.blur.bind(this)}
+          onChoose={this.onChange}
+          onFocus={this.focus}
+          onBlur={this.blur}
           renderItem={renderAddress}
           inputValue={this.state.inputValue}
-          onInputValueChange={this.onInputValueChange.bind(this)}
-          itemToString={x => x == null ? '' : this.getDescription(x)}
+          onInputValueChange={this.onInputValueChange}
+          itemToString={itemToString}
           footer={footer}
         >
           <TextInput
@@ -301,16 +359,18 @@ class AddressInput extends React.PureComponent {
    * @returns {*}
    */
   renderMobile = () => {
-    const { footer, label, locations, loading, placeholder } = this.props
+    const { footer, label, locations, loading, placeholder, renderAddress } = this.props
     const fakeCls = buildClassName([moduleName, 'fake-input'])
     const transitionCls = buildClassName([moduleName, 'transition'])
     const mobileModal = buildClassName([moduleName, 'mobile-modal'])
     const mobileModalHeader = buildClassName([moduleName, 'mobile-modal-header'])
 
+    const renderAddressProps = { ...this.state.value }
+
     return (
       <div>
-        <div className={fakeCls} onClick={this.focus.bind(this)}>
-          { this.state.value && <Address {...this.state.value} onClick={this.focus.bind(this)} /> }
+        <div className={fakeCls} onClick={this.focus}>
+          { this.state.value ? renderAddress(renderAddressProps) : placeholder }
         </div>
         <TransitionGroup>
           {
@@ -322,18 +382,18 @@ class AddressInput extends React.PureComponent {
               <div className={mobileModal}>
                 <div className={mobileModalHeader}>
                   <div>{label}</div>
-                  <Button small onClick={this.blur.bind(this)}>Close</Button>
+                  <Button small onClick={this.blur}>Close</Button>
                 </div>
                 <AutoComplete
                   openOnFocus
                   isOpen
                   options={locations}
-                  onChoose={this.onChoose.bind(this)}
-                  onFocus={this.focus.bind(this)}
+                  onChoose={this.onChoose}
+                  onFocus={this.focus}
                   renderItem={renderAddress}
                   inputValue={this.state.inputValue}
-                  onInputValueChange={this.onInputValueChange.bind(this)}
-                  itemToString={x => x == null ? '' : this.getDescription(x)}
+                  onInputValueChange={this.onInputValueChange}
+                  itemToString={itemToString}
                   footer={footer}
                 >
                   <TextInput
@@ -373,5 +433,6 @@ class AddressInput extends React.PureComponent {
 }
 
 AddressInput.propsTypes = propsTypes
+AddressInput.defaultProps = defaultProps
 
 export default AddressInput

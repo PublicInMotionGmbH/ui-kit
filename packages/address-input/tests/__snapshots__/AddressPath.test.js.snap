@@ -6,7 +6,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
 >
   <div
     className="talixo-address-path__point"
-    key=".0"
+    key="0/.0"
   >
     <span
       className="talixo-address-path__path"
@@ -60,7 +60,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
   </div>
   <div
     className="talixo-address-path__point"
-    key=".1"
+    key="1/.1"
   >
     <span
       className="talixo-address-path__path"
@@ -114,7 +114,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
   </div>
   <div
     className="talixo-address-path__point"
-    key=".2"
+    key="2/.2"
   >
     <span
       className="talixo-address-path__path"
@@ -168,7 +168,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
   </div>
   <div
     className="talixo-address-path__point"
-    key=".3"
+    key="3/.3"
   >
     <span
       className="talixo-address-path__path"
@@ -222,7 +222,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
   </div>
   <div
     className="talixo-address-path__point talixo-address-path__point--last-path"
-    key=".4"
+    key="4/.4"
   >
     <span
       className="talixo-address-path__path"
@@ -276,7 +276,7 @@ exports[`<AddressPath /> rendering should render properly 1`] = `
   </div>
   <div
     className="talixo-address-path__point"
-    key=".5"
+    key="5/.5"
   >
     <Address
       address="Bindlacher-Berg Airport (BYU)"

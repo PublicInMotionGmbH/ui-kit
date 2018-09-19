@@ -33,7 +33,7 @@ function AddressPath (props) {
 
   // Generate Address elements and apply path styles
   const elements = React.Children.map(children, (element, index) => (
-    <div className={elementCls(index)}>
+    <div key={index} className={elementCls(index)}>
       {index === lastIndex ? null : <span className={pathCls} />}
       {element}
     </div>
