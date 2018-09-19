@@ -23,13 +23,17 @@ const propTypes = {
 }
 
 const defaultProps = {
+  split: 'horizontal'
 }
 
 /**
  * Component which represents Pane View.
  *
  * @param {object} props
+ * @param {node} [props.children]
  * @param {string} [props.className]
+ * @param {string} [props.split]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 class Pane extends React.PureComponent {

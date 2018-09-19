@@ -39,7 +39,7 @@ describe('<PaneView />', () => {
 
   it('handle prop onMouseDown', () => {
     const spy = jest.fn()
-    const wrapper = mount(
+    const wrapper = shallow(
       <PaneView onMouseDown={spy}>
         <Pane>
           <div>LEFT SIDE</div>
@@ -73,8 +73,139 @@ describe('<PaneView />', () => {
       </PaneView>
     )
 
-    wrapper.instance().handleMouseUp()
+    wrapper.find('Resizer').simulate('mousedown', {
+      nativeEvent: {
+        clientX: 200,
+        clientY: 200
+      }
+    })
+
+    document.dispatchEvent(new window.MouseEvent('mouseup', {
+      clientX: 222,
+      clientY: 222
+    }))
 
     expect(wrapper.state('mode')).toBe('stop')
+  })
+
+  it('handle conversion to percentage', () => {
+    const wrapper = shallow(
+      <PaneView>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    expect(wrapper.instance().convertToPercent(700, 1400)).toBe(50)
+  })
+
+  it('handle conversion to percentage with extreme dimensions', () => {
+    const wrapper = shallow(
+      <PaneView>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    expect(wrapper.instance().convertToPercent(1600, 1400)).toBe(100)
+    expect(wrapper.instance().convertToPercent(-10, 1400)).toBe(0)
+  })
+
+  it('handle mouse move horizontal', () => {
+    const wrapper = mount(
+      <PaneView split='horizontal'>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    wrapper.find('Resizer').simulate('mousedown', {
+      nativeEvent: {
+        clientX: 200,
+        clientY: 200
+      }
+    })
+
+    document.dispatchEvent(new window.MouseEvent('mousemove', {
+      clientX: 222,
+      clientY: 222
+    }))
+
+    expect(wrapper.state('mode')).toBe('resize')
+  })
+
+  it('handle mouse move vertical', () => {
+    const wrapper = mount(
+      <PaneView split='vertical'>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    wrapper.find('Resizer').simulate('mousedown', {
+      nativeEvent: {
+        clientX: 200,
+        clientY: 200
+      }
+    })
+
+    document.dispatchEvent(new window.MouseEvent('mousemove', {
+      clientX: 222,
+      clientY: 222
+    }))
+
+    expect(wrapper.state('mode')).toBe('resize')
+  })
+
+  it('handle mouse move with onMouseDown', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <PaneView onMouseDown={spy} split='horizontal'>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    wrapper.find('Resizer').simulate('mousedown')
+    wrapper.find('Resizer').simulate('mouseup')
+    wrapper.find('Resizer').simulate('mousedown')
+
+    expect(spy).toHaveBeenCalledTimes(2)
+  })
+
+  it('should handle defualt sizes', () => {
+    const wrapper = shallow(
+      <PaneView split='horizontal'>
+        <Pane defaultSize={20}>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    expect(wrapper.find(Pane).at(0).prop('size')).toBe(20)
+    expect(wrapper.find(Pane).at(1).prop('size')).toBe(80)
   })
 })

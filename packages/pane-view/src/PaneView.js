@@ -33,7 +33,11 @@ const defaultProps = {
  * Component which represents PaneView.
  *
  * @param {object} props
+ * @param {node} props.children
  * @param {string} [props.className]
+ * @param {function} [props.onMouseDown]
+ * @param {string} [props.split]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 class PaneView extends React.Component {
@@ -53,6 +57,9 @@ class PaneView extends React.Component {
     this.unbindEventListeners = this.unbindEventListeners.bind(this)
   }
 
+  /**
+   * Set sizes for all childrens
+   */
   componentDidMount () {
     const { children } = this.props
 
@@ -85,20 +92,33 @@ class PaneView extends React.Component {
     })
   }
 
+  /**
+   * Handle componentWillUnmount
+   */
   componentWillUnmount () {
     this.unbindEventListeners()
   }
 
+  /**
+   * Bind event listeners
+   */
   bindEventListeners () {
     document.addEventListener('mousemove', this.handleMouseMove)
     document.addEventListener('mouseup', this.handleMouseUp)
   }
 
+  /**
+   * Unbind event listeners
+   */
   unbindEventListeners () {
     document.removeEventListener('mousemove', this.handleMouseMove)
     document.removeEventListener('mouseup', this.handleMouseUp)
   }
 
+  /**
+   * Handle mouse down
+   * @param {number} index
+   */
   handleMouseDown (index) {
     const { onMouseDown } = this.props
     const current = index
@@ -114,6 +134,9 @@ class PaneView extends React.Component {
     this.bindEventListeners()
   }
 
+  /**
+   * Handle mouse up
+   */
   handleMouseUp () {
     const { onMouseDown } = this.props
 
@@ -129,8 +152,15 @@ class PaneView extends React.Component {
     }
   }
 
-  convertToPercent (size, paneViewWidth) {
-    let result = size * 100 / paneViewWidth
+  /**
+   * Convert to percent
+   *
+   * @param {number} size
+   * @param {number} paneViewDimension
+   * @returns {number}
+   */
+  convertToPercent (size, paneViewDimension) {
+    let result = size * 100 / paneViewDimension
     if (result < 0) {
       result = 0
     } else if (result > 100) {
@@ -139,10 +169,21 @@ class PaneView extends React.Component {
     return this.roundDecimals(result)
   }
 
+  /**
+   * Round number
+   *
+   * @param {number} num
+   * @returns {number}
+   */
   roundDecimals (num) {
-    return Math.round(num * 100000) / 100000
+    return Math.round(num * 10000) / 10000
   }
 
+  /**
+   * Handle mouse move
+   *
+   * @param {*} e
+   */
   handleMouseMove (e) {
     const { current, paneArr: newPaneArr } = this.state
     const { split, children, onMouseDown } = this.props
@@ -185,10 +226,10 @@ class PaneView extends React.Component {
           el.size = currentSizeHorizontal > 0 ? currentSizeHorizontal : 0
           el.size = this.convertToPercent(el.size, realPaneViewWidth)
           if (widthCombined < 0) {
-            el.size = activeOffsetWidthPercent
+            el.size = activeOffsetWidthPercent + 0.07
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(widthCombined, realPaneViewWidth)
+          el.size = this.convertToPercent(widthCombined, realPaneViewWidth) + 0.07
         }
       })
     }
@@ -198,11 +239,11 @@ class PaneView extends React.Component {
         if (i === current) {
           el.size = currentSizeVertical > 0 ? currentSizeVertical : 0
           el.size = this.convertToPercent(el.size, realPaneViewHeight)
-          if (heightCombined < 0) {
+          if (heightCombined <= 0) {
             el.size = activeOffsetHeightPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(heightCombined, realPaneViewHeight)
+          el.size = this.convertToPercent(heightCombined, realPaneViewHeight) + 0.07
         }
       })
     }

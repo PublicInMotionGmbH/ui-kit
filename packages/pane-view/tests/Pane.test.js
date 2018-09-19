@@ -13,4 +13,13 @@ describe('<Pane />', () => {
 
     expect(wrapper).toMatchSnapshot()
   })
+
+  it('should handle build styles', () => {
+    const wrapper = shallow(
+      <Pane>
+        <div>LEFT SIDE</div>
+      </Pane>
+    )
+    expect(wrapper.instance().buildStyle(20, 'vertical')).toEqual({ height: '20%', width: 'false%' })
+  })
 })

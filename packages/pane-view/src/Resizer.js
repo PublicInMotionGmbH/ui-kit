@@ -6,9 +6,6 @@ import { buildClassName } from '@talixo/shared'
 const moduleName = 'pane-view-resizer'
 
 const propTypes = {
-  /** Resizer content */
-  children: PropTypes.node,
-
   /** Additional class name */
   className: PropTypes.string,
 
@@ -19,14 +16,13 @@ const propTypes = {
   style: PropTypes.object
 }
 
-const defaultProps = {
-}
-
 /**
  * Component which represents Resizer View.
  *
  * @param {object} props
  * @param {string} [props.className]
+ * @param {string} [props.split]
+ * @param {object} [props.style]
  * @returns {React.Element}
  */
 class Resizer extends React.PureComponent {
@@ -44,6 +40,5 @@ class Resizer extends React.PureComponent {
 Resizer.displayName = 'Resizer'
 
 Resizer.propTypes = propTypes
-Resizer.defaultProps = defaultProps
 
 export default Resizer

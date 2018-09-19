@@ -87,7 +87,7 @@ addStory('with custom size', readme, () => (
   </PaneView>
 ))
 
-addStory.controlled('with mode state sent to parent', readme, (setState, state) => (
+addStory.controlled('with mode sent to parent', readme, (setState, state) => (
   <PaneView split='horizontal' onMouseDown={x => setState({ mode: x })}>
     <Pane>
       <div style={paneStyle}>hello world</div>
