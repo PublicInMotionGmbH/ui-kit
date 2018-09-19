@@ -10,7 +10,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** An array of steps containing the explanation of how it works. */
-  steps: PropTypes.shape({
+  steps: PropTypes.arrayOf(PropTypes.shape({
     /** Description of a step. */
     description: PropTypes.string,
 
@@ -19,7 +19,7 @@ const propTypes = {
 
     /** Title of a step. */
     title: PropTypes.string
-  })
+  }))
 }
 
 const defaultProps = {
