@@ -10,14 +10,3 @@ exports[`<Pane /> renders children correctly 1`] = `
   </div>
 </div>
 `;
-
-exports[`<Pane /> renders children correctly 2`] = `
-<div
-  className="talixo-pane"
-  style={Object {}}
->
-  <div>
-    LEFT SIDE
-  </div>
-</div>
-`;
