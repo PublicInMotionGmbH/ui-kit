@@ -28,6 +28,18 @@ describe('<Carousel />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('renders children correctly with infinite', () => {
+    const wrapper = shallow(
+      <Carousel infinite>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    expect(wrapper).toMatchSnapshot()
+  })
+
   it('renders arrows correctly', () => {
     const wrapper = shallow(
       <Carousel arrows>
@@ -133,7 +145,56 @@ describe('<Carousel />', () => {
     expect(wrapper.state().currentSlide).toBe(1)
   })
 
-  it('changes currentSlide when prev arrow clicked', async () => {
+  it('doesn\'t change currentSlide when it is the last one and next arrow is clicked', () => {
+    const wrapper = shallow(
+      <Carousel arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    wrapper.setState({ currentSlide: 2 })
+
+    const onForward = wrapper.find(Arrows).prop('onForward')
+
+    expect(onForward).toEqual()
+  })
+
+  it('changes currentSlide when it is the last one, infinite is set to true and next arrow is clicked', async () => {
+    const wrapper = shallow(
+      <Carousel infinite arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+
+    wrapper.setState({ currentSlide: 2 })
+
+    await wrapper.find(Arrows).prop('onForward')()
+
+    expect(wrapper.state().currentSlide).toBe(3)
+  })
+
+  it('changes currentSlide when prev arrow is clicked', async () => {
+    const wrapper = mount(
+      <Carousel arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
+    wrapper.setState({ currentSlide: 2 })
+
+    await wrapper.find(Arrows).prop('onBack')()
+
+    expect(wrapper.state().currentSlide).toBe(1)
+
+    wrapper.unmount()
+  })
+
+  it('doesn\'t change currentSlide when it is the first one prev arrow is clicked', () => {
     const wrapper = mount(
       <Carousel arrows>
         <div>SLIDE 1</div>
@@ -142,12 +203,25 @@ describe('<Carousel />', () => {
       </Carousel>
     )
 
-    await wrapper.find(Arrows).prop('onForward')()
-    await wrapper.find(Arrows).prop('onForward')()
+    const onBack = wrapper.find(Arrows).prop('onBack')
+
+    expect(onBack).toBe()
+
+    wrapper.unmount()
+  })
+
+  it('changes currentSlide when it is the first one, infinite is set to true and prev arrow is clicked', async () => {
+    const wrapper = mount(
+      <Carousel infinite arrows>
+        <div>SLIDE 1</div>
+        <div>SLIDE 2</div>
+        <div>SLIDE 3</div>
+      </Carousel>
+    )
 
     await wrapper.find(Arrows).prop('onBack')()
 
-    expect(wrapper.state().currentSlide).toBe(1)
+    expect(wrapper.state().currentSlide).toBe(2)
 
     wrapper.unmount()
   })
@@ -185,9 +259,9 @@ describe('<Carousel />', () => {
     wrapper.unmount()
   })
 
-  it('goes to last slide when prev arrow clicked on first', () => {
+  it('goes to last slide when infinite is set to true and prev arrow clicked on first', () => {
     const wrapper = mount(
-      <Carousel arrows>
+      <Carousel infinite arrows>
         <div>SLIDE 1</div>
         <div>SLIDE 2</div>
         <div>SLIDE 3</div>
@@ -203,9 +277,9 @@ describe('<Carousel />', () => {
     wrapper.unmount()
   })
 
-  it('goes to last slide when prev arrow clicked on first, in case perPage is greater than number of children', () => {
+  it('goes to last slide when infinite is set to true and prev arrow clicked on first, in case perPage is greater than number of children', () => {
     const wrapper = mount(
-      <Carousel arrows perPage={4}>
+      <Carousel infinite arrows perPage={4}>
         <div>SLIDE 1</div>
         <div>SLIDE 2</div>
         <div>SLIDE 3</div>
@@ -221,9 +295,9 @@ describe('<Carousel />', () => {
     wrapper.unmount()
   })
 
-  it('keeps on first slide when next arrow clicked on last, in case perPage is greater than number of children', () => {
+  it('keeps on first slide when next arrow clicked on last, infinite is set to true and perPage is greater than number of children', () => {
     const wrapper = mount(
-      <Carousel arrows perPage={4}>
+      <Carousel infinite arrows perPage={4}>
         <div>SLIDE 1</div>
         <div>SLIDE 2</div>
         <div>SLIDE 3</div>
@@ -292,18 +366,18 @@ describe('<Carousel />', () => {
 
   it('should not change automatically a controlled carousel', () => {
     const wrapper = mount(
-      <Carousel value={0} arrows>
+      <Carousel value={1} arrows>
         <div>SLIDE 1</div>
         <div>SLIDE 2</div>
         <div>SLIDE 3</div>
       </Carousel>
     )
 
-    expect(wrapper.state().currentSlide).toBe(0)
+    expect(wrapper.state().currentSlide).toBe(1)
 
     wrapper.find(Arrows).prop('onBack')()
 
-    expect(wrapper.state().currentSlide).toBe(0)
+    expect(wrapper.state().currentSlide).toBe(1)
   })
 
   it('should change a controlled carousel', () => {

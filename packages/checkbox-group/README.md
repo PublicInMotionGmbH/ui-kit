@@ -11,8 +11,8 @@ using `npm install @talixo/checkbox-group --save` or `yarn add @talixo/checkbox-
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/checkbox: ^1.0.0-alpha.13`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/checkbox: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -31,6 +31,8 @@ name          | string   | n/a             | name of checkbox group
 options       | Option[] | n/a             | array of objects which represent options
 error         | boolean  | `false`         | has it any error
 value         | array    | self-controlled | selected values when it's controlled
+disabled      | bool     | `false`         | Should whole group be disabled?
+readOnly      | bool     | `false`         | Should whole group be read-only?
 
 ## Types
 
@@ -43,7 +45,7 @@ Property name | Type      | Default | Description
 label         | node      | n/a     | Label to show next to checkbox element
 value         | any       | n/a     | Value which it represents
 disabled      | boolean   | `false` | Is it disabled?
-
+readOnly      | boolean   | `false` | Is it read-only?
 
 ## Changelog
 

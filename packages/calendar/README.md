@@ -11,8 +11,8 @@ using `npm install @talixo/calendar --save` or `yarn add @talixo/calendar`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `moment: ^2.22.1`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -41,6 +41,8 @@ onFocus            | function                      | n/a             | event han
 onBlur             | function                      | n/a             | event handler when calendar lost focus
 id                 | string                        | n/a             | ID passed to control element
 error              | bool                          | `false`         | show error styles of calendar
+disabled           | bool                          | `false`         | Should it be disabled?
+readOnly           | bool                          | `false`         | Should it be read-only?
 
 ## Changelog
 

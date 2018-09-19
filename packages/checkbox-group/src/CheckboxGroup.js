@@ -28,11 +28,19 @@ const propTypes = {
   })),
 
   /** Value of default option */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 /**
  * Check if both lists contain same elements.
@@ -85,6 +93,8 @@ function buildValue (value, options) {
  * @property {array} [props.options]
  * @property {string} [props.size]
  * @property {array} [props.value]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  * @class
  */
 class CheckboxGroup extends React.PureComponent {
@@ -129,13 +139,17 @@ class CheckboxGroup extends React.PureComponent {
   }
 
   render () {
-    const { className, children, name, options, error, value, onChange, ...passedProps } = this.props
+    const {
+      className, children, name, options, error,
+      value, onChange, disabled, readOnly, ...passedProps
+    } = this.props
     const _value = this.state.value
 
     const optionsList = options.map(obj => (
       <Checkbox
         value={_value.indexOf(obj.value) !== -1}
-        disabled={obj.disabled || false}
+        disabled={obj.disabled || disabled}
+        readOnly={obj.readOnly || readOnly}
         key={obj.value}
         name={name}
         error={error}
@@ -146,12 +160,14 @@ class CheckboxGroup extends React.PureComponent {
     ))
 
     return (
-      <div className={buildClassName('checkbox-group', className)} {...passedProps} >
+      <div className={buildClassName('checkbox-group', className, { disabled, 'read-only': readOnly })} {...passedProps}>
         {optionsList}
       </div>
     )
   }
 }
+
+CheckboxGroup.displayName = 'CheckboxGroup'
 
 CheckboxGroup.propTypes = propTypes
 CheckboxGroup.defaultProps = defaultProps

@@ -23,6 +23,8 @@ function Body (props) {
   )
 }
 
+Body.displayName = 'Body'
+
 Body.propTypes = propTypes
 
 export default Body

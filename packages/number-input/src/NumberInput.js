@@ -41,7 +41,13 @@ const propTypes = {
   initialTime: PropTypes.number,
 
   /** Time in ms, in which we make another tick when pressing a button */
-  stepTime: PropTypes.number
+  stepTime: PropTypes.number,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
@@ -52,7 +58,9 @@ const defaultProps = {
   max: Infinity,
   step: 1,
   initialTime: 700,
-  stepTime: 20
+  stepTime: 20,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -69,6 +77,8 @@ const defaultProps = {
  * @property {number} props.precision
  * @property {number} props.initialTime
  * @property {number} props.stepTime
+ * @property {boolean} props.disabled
+ * @property {boolean} props.readOnly
  * @class
  */
 class NumberInput extends React.PureComponent {
@@ -157,15 +167,16 @@ class NumberInput extends React.PureComponent {
    */
   render () {
     const {
-      className, error, stepper, onChange, precision,
+      className, error, stepper, onChange, precision, disabled, readOnly,
       initialTime, stepTime, right, value: _value, ...passedProps
     } = this.props
     const { value } = this.state
 
-    const wrapperClass = buildClassName(moduleName, className, { error, stepper })
+    const wrapperClass = buildClassName(moduleName, className, { error, stepper, disabled, 'read-only': readOnly })
 
     const stepperElement = stepper ? (
       <NumberInputStepper
+        disabled={disabled || readOnly}
         onIncrement={this.increment}
         onDecrement={this.decrement}
         initialTime={initialTime}
@@ -181,11 +192,15 @@ class NumberInput extends React.PureComponent {
         onChange={this.onChange}
         value={'' + value}
         error={error}
+        disabled={disabled}
+        readOnly={readOnly}
         {...passedProps}
       />
     )
   }
 }
+
+NumberInput.displayName = 'NumberInput'
 
 NumberInput.propTypes = propTypes
 

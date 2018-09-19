@@ -188,6 +188,8 @@ class SidebarElement extends React.PureComponent {
   }
 }
 
+SidebarElement.displayName = 'SidebarElement'
+
 SidebarElement.propTypes = propTypes
 SidebarElement.defaultProps = defaultProps
 

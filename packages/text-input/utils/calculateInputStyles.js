@@ -17,7 +17,6 @@ function calculateInputStyles (inputEl, suffixEl, leftEl, rightEl) {
   const start = rtl ? 'right' : 'left'
   const end = rtl ? 'left' : 'right'
   const paddingEnd = rtl ? 'paddingLeft' : 'paddingRight'
-  const paddingStart = rtl ? 'paddingRight' : 'paddingLeft'
 
   // Calculate suffix dimensions
   const expectedSuffixWidth = width.input - width.left - width.right - Math.min(width.value, MINIMUM_INPUT_SPACE)
@@ -25,7 +24,6 @@ function calculateInputStyles (inputEl, suffixEl, leftEl, rightEl) {
   return {
     hash,
     input: {
-      [paddingStart]: width[start],
       [paddingEnd]: width[end] + width.suffix
     },
     suffix: {

@@ -33,6 +33,8 @@ function Fieldset (props) {
   )
 }
 
+Fieldset.displayName = 'Fieldset'
+
 Fieldset.propTypes = propTypes
 
 export default Fieldset

@@ -56,6 +56,8 @@ function Step (props) {
   )
 }
 
+Step.displayName = 'Step'
+
 Step.propTypes = propTypes
 
 Step.defaultProps = defaultProps

@@ -28,11 +28,19 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Does it have error? */
-  error: PropTypes.bool
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 const HOURS_24 = 'HH'
@@ -47,6 +55,8 @@ const MINUTES = 'mm'
  * @property {function} [props.onBlur]
  * @property {string} [props.format]
  * @property {object} [props.value]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {boolean} [state.open]
@@ -58,17 +68,16 @@ const MINUTES = 'mm'
 class TimeInput extends React.Component {
   state = {
     open: false,
-    inputValue: '',
-    suffix: null
-  }
-
-  componentDidMount () {
-    this.formatValue(this.props)
+    ...this.formatValue(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
-      this.formatValue(nextProps)
+      this.setState(this.formatValue(nextProps))
+    }
+
+    if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
+      this.setState({ open: false })
     }
   }
 
@@ -78,7 +87,7 @@ class TimeInput extends React.Component {
    * @param {object} props
    * @returns {React.Element}
    */
-  formatValue = (props) => {
+  formatValue (props) {
     const { format, value } = props
 
     // Format value according to provided format
@@ -91,7 +100,23 @@ class TimeInput extends React.Component {
       ? null
       : moment(value).format('A')
 
-    this.setState({ inputValue, suffix })
+    return {
+      inputValue: inputValue,
+      suffix: suffix
+    }
+  }
+
+  /**
+   * Handle mouse down on arrow
+   *
+   * @param {SyntheticEvent|Event} e
+   */
+  handleMouseDownArrow = (e) => {
+    e.preventDefault()
+
+    this.setState({
+      open: !this.state.open
+    })
   }
 
   /**
@@ -99,14 +124,14 @@ class TimeInput extends React.Component {
    *
    * @returns {React.Element}
    */
-  buildControl = () => {
+  buildControl () {
     const { open } = this.state
 
     // Build class name for arrow
     const arrowClsName = buildClassName([ moduleName, 'input' ], null, 'arrow')
 
     return (
-      <span className={arrowClsName}>
+      <span className={arrowClsName} onMouseDown={this.handleMouseDownArrow}>
         <Icon name={open ? 'expand_less' : 'expand_more'} />
       </span>
     )
@@ -166,6 +191,12 @@ class TimeInput extends React.Component {
    * Handles input focus.
    */
   handleFocus = () => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     this.setState({ open: true })
   }
 
@@ -200,15 +231,17 @@ class TimeInput extends React.Component {
    * @returns {React.Element}
    */
   renderInput () {
-    const { id, error } = this.props
+    const { id, error, disabled, readOnly } = this.props
     const { inputValue, open, suffix } = this.state
 
     // Build class name for input
-    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open })
+    const inputClsName = buildClassName([ moduleName, 'input' ], null, { open, disabled, 'read-only': readOnly })
 
     return (
       <TextInput
         id={id}
+        disabled={disabled}
+        readOnly={readOnly}
         error={error}
         className={inputClsName}
         onChange={this.handleChange}
@@ -220,6 +253,7 @@ class TimeInput extends React.Component {
         suffix={suffix}
         value={inputValue}
         autoComplete='off'
+        data-hj-whitelist={this.props['data-hj-whitelist']}
       />
     )
   }
@@ -227,6 +261,8 @@ class TimeInput extends React.Component {
   render () {
     const { className, children, format, onBlur, value, id, error, ...passedProps } = this.props
     const { open } = this.state
+
+    delete passedProps['data-hj-whitelist']
 
     // Build class name for wrapper
     const wrapperClsName = buildClassName([ moduleName, 'input' ], className)
@@ -239,6 +275,8 @@ class TimeInput extends React.Component {
     )
   }
 }
+
+TimeInput.displayName = 'TimeInput'
 
 TimeInput.propTypes = propTypes
 

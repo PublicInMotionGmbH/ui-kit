@@ -48,6 +48,8 @@ function Legend (props) {
   )
 }
 
+Legend.displayName = 'Legend'
+
 Legend.propTypes = propTypes
 
 export default Legend

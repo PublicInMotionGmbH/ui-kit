@@ -88,6 +88,8 @@ class Checkbox extends React.PureComponent {
   }
 }
 
+Checkbox.displayName = 'Checkbox'
+
 Checkbox.propTypes = propTypes
 
 Checkbox.defaultProps = defaultProps

@@ -11,9 +11,9 @@ using `npm install @talixo/data-table --save` or `yarn add @talixo/data-table`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.12`
-- `@talixo/shared: ^1.0.0-alpha.12`
-- `@talixo/table: ^1.0.0-alpha.12`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/table: ^1.0.0-alpha.27`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -38,9 +38,11 @@ expandedRows        | array     | no        | n/a               | Array should c
 onClick             | function  | no        | n/a               | Row onClick callback function.
 onSort              | function  | no        | n/a               | onSort function callback.
 sortable            | boolean   | no        | `false`           | Indicates if table is sortable.
-sortColumn          | string    | no        | self-constrolled  | ID of the column according to which data is sorted.
-reversedOrder       | boolean   | no        | self-constrolled  | Indicates if table is sortable.
+sortColumn          | string    | no        | self-controlled   | ID of the column according to which data is sorted.
+reversedOrder       | boolean   | no        | self-controlled   | Indicates if table is sortable.
 verticalActionCell  | string    | no        | n/a               | Indicates if actions should be displayed vertically or horizontally.
+children            | nodes     | no        | n/a               | Other nodes put after data-table body.
+footer              | node      | no        | n/a               | Full-width footer on end of table.
 
 ## Property shapes
 

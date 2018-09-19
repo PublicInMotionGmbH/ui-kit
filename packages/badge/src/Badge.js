@@ -60,6 +60,8 @@ function Badge (props) {
   )
 }
 
+Badge.displayName = 'Badge'
+
 Badge.propTypes = propTypes
 Badge.defaultProps = defaultProps
 

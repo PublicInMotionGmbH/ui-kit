@@ -11,7 +11,7 @@ using `npm install @talixo/text-input --save` or `yarn add @talixo/text-input`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.12`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -22,17 +22,18 @@ to avoid having different versions of these in your application.
 ## Supported props
 It allows any props which are allowed for `input[type=text]`. Additionally, it handles some differently:
 
-Property name  | Type      | Default         | Description
----------------|-----------|:---------------:|--------------------------------
-className      | string    | n/a             | additional class name passed to wrapper
-error          | bool      | `false`         | indicates that input has error
-onChange       | function  | n/a             | callback for change event
-style          | object    | n/a             | additional input wrapper styling
-left           | node      | n/a             | icon/element to put on starting side
-right          | node      | n/a             | icon/element to put on ending side
-suffix         | node      | n/a             | element or text to show after current input value
-InputComponent | component | `'input'`       | component used for input below
-value          | string    | self-controlled | value to set up
+Property name   | Type      | Default         | Description
+----------------|-----------|:---------------:|--------------------------------
+className       | string    | n/a             | additional class name passed to wrapper
+error           | bool      | `false`         | indicates that input has error
+onChange        | function  | n/a             | callback for change event
+style           | object    | n/a             | additional input wrapper styling
+left            | node      | n/a             | icon/element to put on starting side
+right           | node      | n/a             | icon/element to put on ending side
+suffix          | node      | n/a             | element or text to show after current input value
+InputComponent  | component | `'input'`       | component used for input below
+value           | string    | self-controlled | value to set up
+endCaretOnFocus | bool      | `false`         | put cursor caret always on end of input, when it's focused
 
 ## Changelog
 

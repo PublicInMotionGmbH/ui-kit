@@ -1,6 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const childContextTypes = {
+  registerFlag: PropTypes.func,
+  unregisterFlag: PropTypes.func
+}
+
+const propTypes = {
+  /** URL to sprite with country flags */
+  url: PropTypes.string.isRequired,
+
+  /** Children to pass down */
+  children: PropTypes.node
+}
+
 function load (url, callback) {
   if (url.match(/^data:/)) {
     // Handle Data URI Scheme
@@ -20,7 +33,24 @@ function load (url, callback) {
 
   const xhr = new window.XMLHttpRequest()
   xhr.open('GET', url, true)
-  xhr.onload = () => callback(null, xhr.responseText)
+  xhr.onload = () => {
+    // Error happened
+    if (xhr.status >= 400) {
+      return
+    }
+
+    const div = document.createElement('div')
+    div.innerHTML = xhr.responseText
+    const svg = div.querySelector('svg')
+
+    // It is not SVG response
+    if (!svg || svg.parentNode !== div) {
+      return
+    }
+
+    // It is OK, return it
+    callback(null, xhr.responseText)
+  }
   xhr.send()
 
   return () => xhr.abort()
@@ -120,17 +150,9 @@ class CountryFlagsProvider extends React.PureComponent {
   }
 }
 
-CountryFlagsProvider.childContextTypes = {
-  registerFlag: PropTypes.func,
-  unregisterFlag: PropTypes.func
-}
+CountryFlagsProvider.displayName = 'CountryFlagsProvider'
 
-CountryFlagsProvider.propTypes = {
-  /** URL to sprite with country flags */
-  url: PropTypes.string.isRequired,
-
-  /** Children to pass down */
-  children: PropTypes.node
-}
+CountryFlagsProvider.childContextTypes = childContextTypes
+CountryFlagsProvider.propTypes = propTypes
 
 export default CountryFlagsProvider

@@ -16,6 +16,9 @@ import buildMaskForCountry from '../utils/buildMaskForCountry'
 export const moduleName = 'phone-input'
 
 const propTypes = {
+  /** Input autocomplete attribute name */
+  autoComplete: PropTypes.string,
+
   /** Additional class name for wrapper */
   className: PropTypes.string,
 
@@ -38,11 +41,21 @@ const propTypes = {
   onFocus: PropTypes.func,
 
   /** ID passed to control element */
-  id: PropTypes.string
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  error: false
+  // There is "tel" auto complete type defined for mobile phone with prefix, but unfortunately it's not including it in common browsers (Chrome, Safari etc)
+  autoComplete: 'off',
+  error: false,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -94,6 +107,7 @@ function renderCountryItem (country) {
  * Component which represents input to provided phone number.
  *
  * @property {object} props
+ * @property {string} [props.autoComplete]
  * @property {string} [props.className]
  * @property {boolean} [props.error]
  * @property {string} [props.value]
@@ -101,6 +115,8 @@ function renderCountryItem (country) {
  * @property {function} [props.onChange]
  * @property {function} [props.onFocus]
  * @property {function} [props.onBlur]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @property {object} state
  * @property {string} state.value
@@ -152,6 +168,12 @@ class PhoneInput extends React.PureComponent {
    * @param {string} value
    */
   change (value) {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     value = trim(value)
 
     // Update state immediately, when component is self-controlled
@@ -179,6 +201,12 @@ class PhoneInput extends React.PureComponent {
    * @param {object} country
    */
   changeCountry = (country) => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     const nextValue = replaceCountryPrefix(this.state.value, this.state.country, country)
     const endPrefix = nextValue.indexOf(' ') + 1
 
@@ -304,9 +332,13 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderCountryBox () {
+    const { disabled, readOnly } = this.props
+
     return (
       <SelectBox
         tabIndex={-1}
+        disabled={disabled}
+        readOnly={readOnly}
         className={buildClassName([ moduleName, 'country-box' ])}
         options={countriesList}
         value={this.state.country}
@@ -362,16 +394,19 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   renderInput () {
-    const { placeholder, id } = this.props
+    const { autoComplete, placeholder, id, disabled, readOnly } = this.props
     const { value, country, focused } = this.state
 
     return (
       <TextMaskInput
         id={id}
+        disabled={disabled}
+        readOnly={readOnly}
         guide={focused}
         keepCharPositions={false}
         mask={buildMaskForCountry(country)}
         placeholderChar={'\u2000'}
+        inputMode='numeric'
         type='tel'
         ref={this.saveRef}
         value={value}
@@ -382,6 +417,7 @@ class PhoneInput extends React.PureComponent {
         onMouseLeave={this.onInputMouseOut}
         onFocus={this.focus}
         onBlur={this.blur}
+        autoComplete={autoComplete}
       />
     )
   }
@@ -392,13 +428,18 @@ class PhoneInput extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, error, onChange, onFocus, onBlur, placeholder, id, value, ...passedProps } = this.props
+    const {
+      autoComplete, className, error, onChange, onFocus, onBlur,
+      placeholder, id, value, disabled, readOnly, ...passedProps
+    } = this.props
     const { hover, focus } = this.state
 
     const clsName = buildClassName(moduleName, className, {
       error,
       hover: hover && hover.length,
-      focus: focus && focus.length
+      focus: focus && focus.length,
+      disabled: disabled,
+      'read-only': readOnly
     })
 
     return (
@@ -409,6 +450,8 @@ class PhoneInput extends React.PureComponent {
     )
   }
 }
+
+PhoneInput.displayName = 'PhoneInput'
 
 PhoneInput.propTypes = propTypes
 

@@ -94,6 +94,8 @@ class Textarea extends React.PureComponent {
   }
 }
 
+Textarea.displayName = 'Textarea'
+
 Textarea.propTypes = propTypes
 Textarea.defaultProps = defaultProps
 

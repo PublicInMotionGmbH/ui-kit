@@ -44,6 +44,8 @@ function List (props) {
   )
 }
 
+List.displayName = 'List'
+
 List.propTypes = propTypes
 List.defaultProps = defaultProps
 

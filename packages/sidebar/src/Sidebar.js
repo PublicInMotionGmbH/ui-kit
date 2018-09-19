@@ -31,6 +31,8 @@ function Sidebar (props) {
   )
 }
 
+Sidebar.displayName = 'Sidebar'
+
 Sidebar.propTypes = propTypes
 
 export default Sidebar

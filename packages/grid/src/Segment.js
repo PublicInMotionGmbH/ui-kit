@@ -49,6 +49,8 @@ function Segment (props) {
   )
 }
 
+Segment.displayName = 'Segment'
+
 Segment.propTypes = propTypes
 
 export default Segment

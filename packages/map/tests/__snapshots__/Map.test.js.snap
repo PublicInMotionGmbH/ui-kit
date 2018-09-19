@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Map /> renders children correctly 1`] = `
-<withScriptjs(withGoogleMap(Component))
+<withGoogleMapsApi(withGoogleMap(Component))
+  allowDevelopmentApi={false}
   apiKey="this_is_api_key"
   center={
     Object {
@@ -15,6 +16,7 @@ exports[`<Map /> renders children correctly 1`] = `
     />
   }
   googleMapURL="https://maps.googleapis.com/maps/api/js?key=this_is_api_key&v=3.exp&libraries=geometry,drawing,places"
+  googleMapsApiUrl="https://maps.googleapis.com/maps/api"
   interactive={true}
   loadingElement={
     <div

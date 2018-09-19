@@ -79,6 +79,8 @@ function Option (props) {
   )
 }
 
+Option.displayName = 'Option'
+
 Option.propTypes = propTypes
 
 export default Option

@@ -77,6 +77,14 @@ addStory('with arrows', readme, () => (
   </Carousel>
 ))
 
+addStory('infinite with arrows', readme, () => (
+  <Carousel infinite arrows>
+    <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+    <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+    <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+  </Carousel>
+))
+
 addStory('with more elements on one slide', readme, () => (
   <Carousel arrows perPage={3}>
     <div className='tx-slide tx-slide--1'>SLIDE 1</div>
@@ -87,6 +95,20 @@ addStory('with more elements on one slide', readme, () => (
     <div className='tx-slide tx-slide--3'>SLIDE 6</div>
     <div className='tx-slide tx-slide--1'>SLIDE 7</div>
   </Carousel>
+))
+
+addStory('RTL: with more elements on one slide', readme, () => (
+  <div dir='rtl'>
+    <Carousel arrows perPage={3}>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+      <div className='tx-slide tx-slide--1'>SLIDE 4</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 5</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 6</div>
+      <div className='tx-slide tx-slide--1'>SLIDE 7</div>
+    </Carousel>
+  </div>
 ))
 
 addStory('with arrows and dots', readme, () => (
@@ -169,6 +191,36 @@ addStory('as a gallery', readme, () => (
 addStory('Automatic sliding', readme, () => (
   <CarouselAutoplay interval={2000}>
     <Carousel>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    </Carousel>
+  </CarouselAutoplay>
+))
+
+addStory('Automatic sliding backwards', readme, () => (
+  <CarouselAutoplay interval={2000} movement='back'>
+    <Carousel>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    </Carousel>
+  </CarouselAutoplay>
+))
+
+addStory('Automatic sliding infinite', readme, () => (
+  <CarouselAutoplay interval={2000}>
+    <Carousel infinite>
+      <div className='tx-slide tx-slide--1'>SLIDE 1</div>
+      <div className='tx-slide tx-slide--2'>SLIDE 2</div>
+      <div className='tx-slide tx-slide--3'>SLIDE 3</div>
+    </Carousel>
+  </CarouselAutoplay>
+))
+
+addStory('Automatic sliding backwards infinite', readme, () => (
+  <CarouselAutoplay interval={2000} movement='back'>
+    <Carousel infinite>
       <div className='tx-slide tx-slide--1'>SLIDE 1</div>
       <div className='tx-slide tx-slide--2'>SLIDE 2</div>
       <div className='tx-slide tx-slide--3'>SLIDE 3</div>
