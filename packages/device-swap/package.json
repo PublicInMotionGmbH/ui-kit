@@ -1,6 +1,6 @@
 {
   "name": "@talixo/device-swap",
-  "version": "1.0.0-alpha.27",
+  "version": "1.0.0-alpha.28",
   "description": "UI Component which helps to render different components on different devices",
   "main": "dist/index.js",
   "module": "index.js",
