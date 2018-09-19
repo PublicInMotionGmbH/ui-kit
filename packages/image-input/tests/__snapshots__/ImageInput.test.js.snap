@@ -20,6 +20,8 @@ exports[`<ImageInput /> rendering renders children correctly 1`] = `
     className="talixo-button talixo-image-input__button"
     onClick={[Function]}
     type="button"
-  />
+  >
+    Browse files
+  </button>
 </div>
 `;

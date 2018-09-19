@@ -22,14 +22,12 @@ const style = { width: 500, height: 300 }
 // Stories
 addStory('url', readme, () => (
   <ImageInput
-    label='Browse files'
     style={style}
   />
 ))
 
 addStory('binary', readme, () => (
   <ImageInput
-    label='Browse files'
     type='binary'
     style={style}
     onChange={action('change')}
@@ -38,7 +36,6 @@ addStory('binary', readme, () => (
 
 addStory('file', readme, () => (
   <ImageInput
-    label='Browse files'
     type='file'
     style={style}
     onChange={action('change')}
@@ -47,7 +44,6 @@ addStory('file', readme, () => (
 
 addStory.controlled('url controlled', readme, (setState, state) => (
   <ImageInput
-    label='Browse files'
     style={style}
     value={state.value}
     onChange={(value) => { setState({ value }) }}
@@ -57,7 +53,6 @@ addStory.controlled('url controlled', readme, (setState, state) => (
 
 addStory.controlled('binary controlled', readme, (setState, state) => (
   <ImageInput
-    label='Browse files'
     type='binary'
     style={style}
     value={state.value}
@@ -68,7 +63,6 @@ addStory.controlled('binary controlled', readme, (setState, state) => (
 
 addStory.controlled('file controlled', readme, (setState, state) => (
   <ImageInput
-    label='Browse files'
     type='file'
     style={style}
     value={state.value}

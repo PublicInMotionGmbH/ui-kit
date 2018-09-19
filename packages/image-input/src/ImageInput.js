@@ -11,7 +11,7 @@ import { events, getDataTransferFile, getImageUrl, prevent } from './helpers'
 export const moduleName = 'image-input'
 
 const propTypes = {
-  /** Additional class name. */
+  /** Additional class name passed to wrapper. */
   className: PropTypes.string,
 
   /** Upload button label. */
@@ -49,6 +49,7 @@ const propTypes = {
 }
 
 const defaultProps = {
+  label: 'Browse files',
   type: 'url'
 }
 
@@ -65,6 +66,7 @@ const defaultProps = {
  * @property {function} [props.onDragLeave]
  * @property {function} [props.onDragOver]
  * @property {function} [props.onDragStart]
+ * @property {function} [props.onRemove]
  * @property {string} [props.type]
  * @property {object|string} [props.value]
  *
@@ -246,22 +248,22 @@ class ImageInput extends React.Component {
     const { draggingOver, value } = this.state
     const { onDrag, onChange } = this
 
+    const wrapperProps = {}
+
     // Class names
-    const wrapperCls = buildClassName(moduleName, className, {
+    wrapperProps.className = buildClassName(moduleName, className, {
       dragover: draggingOver,
       'not-empty': value
     })
 
-    const wrapperProps = {
-      onDragEnter: onDrag.bind(this, events.enter),
-      onDragStart: onDrag.bind(this, events.start),
-      onDragOver: onDrag.bind(this, events.over),
-      onDragEnd: onDrag.bind(this, events.end),
-      onDragLeave: onDrag.bind(this, events.leave),
-      onDragExit: onDrag.bind(this, events.exit),
-      onDrop: onChange,
-      className: wrapperCls
+    for (const event in events) {
+      if (events.hasOwnProperty(event)) {
+        const currEvent = events[event]
+        wrapperProps[currEvent] = onDrag.bind(this, currEvent)
+      }
     }
+    wrapperProps.onDrop = onChange
+
     return wrapperProps
   }
 
