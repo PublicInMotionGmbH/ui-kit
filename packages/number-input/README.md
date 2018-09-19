@@ -11,9 +11,9 @@ using `npm install @talixo/number-input --save` or `yarn add @talixo/number-inpu
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.24`
-- `@talixo/shared: ^1.0.0-alpha.24`
-- `@talixo/text-input: ^1.0.0-alpha.24`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/text-input: ^1.0.0-alpha.29`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
