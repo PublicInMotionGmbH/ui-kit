@@ -109,16 +109,16 @@ addStory('using currency-to-symbol mapping', readme, () => (
 addStory('with approximate symbol', readme, () => (
   <div>
     <h4>GBP</h4>
-    <Price locale='en' currency='GBP' value={getRandomPrice()} approximateLabel='about' />
+    <Price locale='en' currency='GBP' value={getRandomPrice()} prefix='about' />
     <br /><br />
     <h3>USD</h3>
-    <Price locale='us' currency='USD' value={getRandomPrice()} approximateLabel='~' />
+    <Price locale='us' currency='USD' value={getRandomPrice()} prefix='~' />
     <br /><br />
     <h3>PLN</h3>
-    <Price locale='pl' currency='PLN' value={getRandomPrice()} approximateLabel='około' />
+    <Price locale='pl' currency='PLN' value={getRandomPrice()} prefix='około' />
     <br /><br />
     <h3>EUR</h3>
-    <Price locale='eu' currency='EUR' value={getRandomPrice()} approximateLabel='more or less' />
+    <Price locale='eu' currency='EUR' value={getRandomPrice()} prefix='more or less' />
   </div>
 ))
 
@@ -130,7 +130,7 @@ addStory('different precision', readme, () => (
           <h4>Precision {item}</h4>
           <Price
             currency='GBP' value={getRandomPrice() / getRandomPrice()}
-            approximateLabel='about'
+            prefix='about'
             precision={item}
           />
           <br /><br />

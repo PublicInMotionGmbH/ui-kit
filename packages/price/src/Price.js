@@ -29,7 +29,7 @@ const propTypes = {
   /** Price precision. */
   precision: PropTypes.number,
 
-  /** Prefix whoich will be displayed before the price. Can be to e.g. indicate that price is aproximate. */
+  /** Prefix which will be displayed before the price. Can be to e.g. indicate that price is approximate. */
   prefix: PropTypes.node,
 
   /** Given price. */
@@ -60,7 +60,7 @@ const defaultProps = {
  */
 function Price (props) {
   const {
-    className, currency, currencyToSymbol, decimal, errorPlaceholder,
+    className, currency, currencyToSymbol, errorPlaceholder,
     displayBefore, locale, prefix, precision, value, ...passedProps
   } = props
   const wrapperCls = buildClassName(moduleName, className)

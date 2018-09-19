@@ -30,7 +30,7 @@ displayBefore     | boolean         | `false` | Should the currency be displayed
 errorPlaceholder  | node            | `-`     | This placeholder is displayed if provided value is not a number (isNaN returns true).
 locale            | string          | n/a     | Locale code of user.
 precision         | number          | `2`     | Price precision.
-prefix            | node            | n/a     | Prefix whoich will be displayed before the price. Can be to e.g. indicate that price is aproximate.
+prefix            | node            | n/a     | Prefix which will be displayed before the price. Can be to e.g. indicate that price is approximate.
 value             | string / number | n/a     | Given price.
 
 ## Changelog
