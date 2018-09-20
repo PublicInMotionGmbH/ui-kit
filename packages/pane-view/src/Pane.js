@@ -13,7 +13,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Size of the pane */
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.number,
 
   /** Split direction */
   split: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -27,11 +27,12 @@ const defaultProps = {
 }
 
 /**
- * Component which represents Pane View.
+ * Component which represents Pane.
  *
  * @param {object} props
  * @param {node} [props.children]
  * @param {string} [props.className]
+ * @param {string} [props.size]
  * @param {string} [props.split]
  * @param {object} [props.style]
  * @returns {React.Element}
@@ -48,7 +49,6 @@ class Pane extends React.PureComponent {
 
   render () {
     const { children, className, defaultSize, size, split, style, ...passedProps } = this.props
-
     const clsName = buildClassName(moduleName, className)
     const wrapperStyle = {
       ...style,

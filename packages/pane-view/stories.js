@@ -69,7 +69,7 @@ addStory('with custom size', readme, () => (
     <Pane defaultSize={30}>
       <div style={paneStyle}>hello world</div>
     </Pane>
-    <Pane defaultSize={30}>
+    <Pane defaultSize={40}>
       <div style={paneStyle}>witaj świecie</div>
     </Pane>
     <Pane defaultSize={0}>
@@ -88,7 +88,41 @@ addStory('with custom size', readme, () => (
 ))
 
 addStory.controlled('with mode sent to parent', readme, (setState, state) => (
-  <PaneView split='horizontal' onMouseDown={x => setState({ mode: x })}>
+  <PaneView
+    split='horizontal'
+    onDragStart={(i) => setState({ index: i, mode: 'start' })}
+    onDragResize={(i) => setState({ index: i, mode: 'resize' })}
+    onDragStop={(i) => setState({ index: i, mode: 'stop' })}
+  >
+    <Pane>
+      <div style={paneStyle}>hello world</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>witaj świecie</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>bonjour monde</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>hola mundo</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>ciao mondo</div>
+    </Pane>
+    <Pane>
+      <div style={paneStyle}>hallo welt</div>
+    </Pane>
+  </PaneView>
+), () => ({ mode: null }))
+
+addStory.controlled('with size sent to parent', readme, (setState, state) => (
+  <PaneView
+    split='horizontal'
+    onResize={(i, dimension) => setState({
+      index: i,
+      width: dimension.width,
+      height: dimension.height})
+    }>
     <Pane>
       <div style={paneStyle}>hello world</div>
     </Pane>

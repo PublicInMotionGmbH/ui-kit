@@ -9,14 +9,23 @@ import Resizer from './Resizer'
 const moduleName = 'pane-view'
 
 const propTypes = {
-  /** Array of pane content */
+  /** Array of Pane components */
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
 
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Event fired when mouse button is clicked */
-  onMouseDown: PropTypes.func,
+  /** Function fired when Pane is resized */
+  onResize: PropTypes.func,
+
+  /** Function fired when Pane is started to drag */
+  onDragStart: PropTypes.func,
+
+  /** Function fired when Pane is dragged */
+  onDragResize: PropTypes.func,
+
+  /** Function fired when Pane is stopped to drag */
+  onDragStop: PropTypes.func,
 
   /** Split direction */
   split: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -35,7 +44,10 @@ const defaultProps = {
  * @param {object} props
  * @param {node} props.children
  * @param {string} [props.className]
- * @param {function} [props.onMouseDown]
+ * @param {function} [props.onResize]
+ * @param {function} [props.onDragStart]
+ * @param {function} [props.onDragResize]
+ * @param {function} [props.onDragStop]
  * @param {string} [props.split]
  * @param {object} [props.style]
  * @returns {React.Element}
@@ -46,8 +58,7 @@ class PaneView extends React.Component {
 
     this.state = {
       current: null,
-      paneArr: [],
-      mode: null
+      paneArr: []
     }
 
     this.handleMouseDown = this.handleMouseDown.bind(this)
@@ -120,15 +131,14 @@ class PaneView extends React.Component {
    * @param {number} index
    */
   handleMouseDown (index) {
-    const { onMouseDown } = this.props
+    const { onDragStart } = this.props
     const current = index
     this.setState({
-      current,
-      mode: 'start'
+      current
     })
 
-    if (onMouseDown) {
-      onMouseDown('start')
+    if (onDragStart) {
+      onDragStart(current)
     }
 
     this.bindEventListeners()
@@ -138,18 +148,18 @@ class PaneView extends React.Component {
    * Handle mouse up
    */
   handleMouseUp () {
-    const { onMouseDown } = this.props
+    const { onDragStop } = this.props
+    const { current } = this.state
 
     this.unbindEventListeners()
 
-    this.setState({
-      current: null,
-      mode: 'stop'
-    })
-
-    if (onMouseDown) {
-      onMouseDown('stop')
+    if (onDragStop) {
+      onDragStop(current)
     }
+
+    this.setState({
+      current: null
+    })
   }
 
   /**
@@ -186,14 +196,14 @@ class PaneView extends React.Component {
    */
   handleMouseMove (e) {
     const { current, paneArr: newPaneArr } = this.state
-    const { split, children, onMouseDown } = this.props
+    const { split, children, onDragResize, onResize } = this.props
     const paneView = ReactDOM.findDOMNode(this['pane_view'])
     const activePane = ReactDOM.findDOMNode(this[`pane_${current}`])
     const nextPane = ReactDOM.findDOMNode(this[`pane_${current + 1}`])
     const resizer = ReactDOM.findDOMNode(this[`resizer_0`])
-    const {width: resizerWidth, height: resizerHeight} = resizer.getBoundingClientRect()
-    const {width: paneViewWidth, height: paneViewHeight} = paneView.getBoundingClientRect()
-    const {width: nextWidth, height: nextHeight} = nextPane.getBoundingClientRect()
+    const { width: resizerWidth, height: resizerHeight } = resizer.getBoundingClientRect()
+    const { width: paneViewWidth, height: paneViewHeight } = paneView.getBoundingClientRect()
+    const { width: nextWidth, height: nextHeight } = nextPane.getBoundingClientRect()
     const {
       left: activeLeft,
       width: activeWidth,
@@ -213,10 +223,6 @@ class PaneView extends React.Component {
     const heightCombined = this.roundDecimals(activeHeight) +
       this.roundDecimals(nextHeight) -
       this.roundDecimals(currentSizeVertical)
-
-    if (onMouseDown) {
-      onMouseDown('resize')
-    }
 
     if (current === null) return
 
@@ -248,11 +254,18 @@ class PaneView extends React.Component {
       })
     }
 
+    if (onDragResize) {
+      onDragResize()
+    }
+
+    if (onResize) {
+      onResize(current, { width: activeWidth, height: activeHeight })
+    }
+
     this.setState({
       paneArr: newPaneArr,
       currentSizeVertical,
-      currentSizeHorizontal,
-      mode: 'resize'
+      currentSizeHorizontal
     })
   }
 

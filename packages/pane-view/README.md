@@ -14,16 +14,36 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/shared: ^1.0.0-alpha.24`
 
 These packages are required by `@talixo/pane-view`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
+### Pane View
+
+It handles all props which can be passed to `div`. Also, handles some differently:
+
+Property name | Type      | Required | Default | Description                    
+--------------|-----------|----------|:-------:|--------------------------------
+className     | string    |    no    | n/a     | additional class name passed to wrapper
+children      | node      |    yes   | n/a     | array of Pane components
+onMouseDown   | function  |    no    | n/a     | event fired when mouse button is clicked
+split         | string    |    no    | n/a     | one of type `horizontal`, `vertical`
+style         | object    |    no    | n/a     | additional styles for wrapper
+
+### Pane
+
+It handles all props which can be passed to `div`. Also, handles some differently:
+
+Property name | Type    | Required | Default | Description                    
+--------------|---------|----------|:-------:|--------------------------------
+className     | string  |    no    | n/a     | additional class name passed to wrapper
+children      | node    |    no    | n/a     | Pane content
+split         | string  |    no    | n/a     | one of type `horizontal`, `vertical`
+style         | object  |    no    | n/a     | additional styles for wrapper
+size          | number  |    no    | n/a     | Size of Pane
 
 ## Changelog
 
