@@ -27,11 +27,11 @@ It handles all props which can be passed to `div`. Also, handles some differentl
 
 Property name | Type      | Required | Default | Description                    
 --------------|-----------|----------|:-------:|--------------------------------
-className     | string    |    no    | n/a     | additional class name passed to wrapper
-children      | node      |    yes   | n/a     | array of Pane components
-onMouseDown   | function  |    no    | n/a     | event fired when mouse button is clicked
-split         | string    |    no    | n/a     | one of type `horizontal`, `vertical`
-style         | object    |    no    | n/a     | additional styles for wrapper
+className     | string    |    no    | n/a     | Additional class name passed to wrapper.
+children      | node      |    yes   | n/a     | Array of Pane components.
+onMouseDown   | function  |    no    | n/a     | Event fired when mouse button is clicked.
+split         | string    |    no    | n/a     | One of type `horizontal`, `vertical`.
+style         | object    |    no    | n/a     | Additional styles for wrapper.
 
 ### Pane
 
@@ -39,11 +39,11 @@ It handles all props which can be passed to `div`. Also, handles some differentl
 
 Property name | Type    | Required | Default | Description                    
 --------------|---------|----------|:-------:|--------------------------------
-className     | string  |    no    | n/a     | additional class name passed to wrapper
-children      | node    |    no    | n/a     | Pane content
-split         | string  |    no    | n/a     | one of type `horizontal`, `vertical`
-style         | object  |    no    | n/a     | additional styles for wrapper
-size          | number  |    no    | n/a     | Size of Pane
+className     | string  |    no    | n/a     | Additional class name passed to wrapper.
+children      | node    |    no    | n/a     | Pane content.
+split         | string  |    no    | n/a     | One of type `horizontal`, `vertical`.
+style         | object  |    no    | n/a     | Additional styles for wrapper.
+size          | number  |    no    | n/a     | Size of Pane.
 
 ## Changelog
 

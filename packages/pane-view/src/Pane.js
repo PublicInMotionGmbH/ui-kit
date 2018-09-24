@@ -32,7 +32,7 @@ const defaultProps = {
  * @param {object} props
  * @param {node} [props.children]
  * @param {string} [props.className]
- * @param {string} [props.size]
+ * @param {number} [props.size]
  * @param {string} [props.split]
  * @param {object} [props.style]
  * @returns {React.Element}

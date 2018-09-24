@@ -65,7 +65,7 @@ describe('<PaneView />', () => {
 
     expect(spy.mock.calls.length).toBe(1)
     expect(spy.mock.calls[0][0]).toBe(0)
-    // expect(spy.mock.calls[0][1]).toBe({"height": 0, "width": 0})
+    expect(spy.mock.calls[0][1]).toEqual({'height': 0, 'width': 0})
   })
 
   it('should handle mouse up', () => {
@@ -80,19 +80,13 @@ describe('<PaneView />', () => {
       </PaneView>
     )
 
-    wrapper.find('Resizer').simulate('mousedown', {
-      nativeEvent: {
-        clientX: 200,
-        clientY: 200
-      }
-    })
+    wrapper.find('Resizer').simulate('mousedown')
 
-    document.dispatchEvent(new window.MouseEvent('mouseup', {
-      clientX: 222,
-      clientY: 222
-    }))
+    expect(wrapper.state('current')).toBe(0)
 
-    // expect(wrapper.state('mode')).toBe('stop')
+    document.dispatchEvent(new window.MouseEvent('mouseup'))
+
+    expect(wrapper.state('current')).toBe(null)
   })
 
   it('handle conversion to percentage', () => {
@@ -145,12 +139,21 @@ describe('<PaneView />', () => {
       }
     })
 
+    expect(wrapper.state('currentSizeHorizontal')).toBe(undefined)
+
     document.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 222,
       clientY: 222
     }))
 
-    // expect(wrapper.state('mode')).toBe('resize')
+    expect(wrapper.state('currentSizeHorizontal')).toBe(222)
+
+    document.dispatchEvent(new window.MouseEvent('mousemove', {
+      clientX: 270,
+      clientY: 270
+    }))
+
+    expect(wrapper.state('currentSizeHorizontal')).toBe(270)
 
     wrapper.unmount()
   })
@@ -174,20 +177,29 @@ describe('<PaneView />', () => {
       }
     })
 
+    expect(wrapper.state('currentSizeVertical')).toBe(undefined)
+
     document.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 222,
       clientY: 222
     }))
 
-    // expect(wrapper.state('mode')).toBe('resize')
+    expect(wrapper.state('currentSizeVertical')).toBe(222)
+
+    document.dispatchEvent(new window.MouseEvent('mousemove', {
+      clientX: 299,
+      clientY: 299
+    }))
+
+    expect(wrapper.state('currentSizeVertical')).toBe(299)
 
     wrapper.unmount()
   })
 
-  it('handle mouse move with onMouseDown', () => {
+  it('handle mousedown with onDragStart', () => {
     const spy = jest.fn()
     const wrapper = mount(
-      <PaneView onMouseDown={spy} split='horizontal'>
+      <PaneView onDragStart={spy} split='horizontal'>
         <Pane>
           <div>LEFT SIDE</div>
         </Pane>
@@ -198,11 +210,54 @@ describe('<PaneView />', () => {
     )
 
     wrapper.find('Resizer').simulate('mousedown')
-    wrapper.find('Resizer').simulate('mouseup')
-    wrapper.find('Resizer').simulate('mousedown')
 
-    // expect(spy).toHaveBeenCalledTimes(2)
-    // expect(spy.mock.calls[0][0]).toBe('start')
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy.mock.calls[0][0]).toBe(0)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouseup with onDragStop', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <PaneView onDragStop={spy} split='horizontal'>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    wrapper.find('Resizer').simulate('mousedown')
+    document.dispatchEvent(new window.MouseEvent('mouseup'))
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spy.mock.calls[0][0]).toBe(0)
+
+    wrapper.unmount()
+  })
+
+  it('handle mouse move with onDragResize', () => {
+    const spy = jest.fn()
+    const wrapper = mount(
+      <PaneView onDragResize={spy} split='horizontal'>
+        <Pane>
+          <div>LEFT SIDE</div>
+        </Pane>
+        <Pane>
+          <div>RIGHT SIDE</div>
+        </Pane>
+      </PaneView>
+    )
+
+    wrapper.find('Resizer').simulate('mousedown')
+    document.dispatchEvent(new window.MouseEvent('mousemove', {
+      clientX: 299,
+      clientY: 299
+    }))
+    expect(spy).toHaveBeenCalledTimes(1)
 
     wrapper.unmount()
   })

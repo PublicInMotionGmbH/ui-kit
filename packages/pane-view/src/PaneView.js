@@ -88,7 +88,7 @@ class PaneView extends React.Component {
       }
     })
 
-    const defaultSizeSingle = (100 - defaultSizeAll) / numberOfNotDefaults
+    const defaultSizeSingle = this.roundDecimals((100 - defaultSizeAll) / numberOfNotDefaults)
 
     children.map((el, i) => {
       paneArr.push({
@@ -158,7 +158,9 @@ class PaneView extends React.Component {
     }
 
     this.setState({
-      current: null
+      current: null,
+      currentSizeVertical: null,
+      currentSizeHorizontal: null
     })
   }
 
@@ -231,11 +233,11 @@ class PaneView extends React.Component {
         if (i === current) {
           el.size = currentSizeHorizontal > 0 ? currentSizeHorizontal : 0
           el.size = this.convertToPercent(el.size, realPaneViewWidth)
-          if (widthCombined < 0) {
-            el.size = activeOffsetWidthPercent + 0.07
+          if (widthCombined <= 0) {
+            el.size = activeOffsetWidthPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(widthCombined, realPaneViewWidth) + 0.07
+          el.size = this.convertToPercent(widthCombined, realPaneViewWidth)
         }
       })
     }
@@ -249,7 +251,7 @@ class PaneView extends React.Component {
             el.size = activeOffsetHeightPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(heightCombined, realPaneViewHeight) + 0.07
+          el.size = this.convertToPercent(heightCombined, realPaneViewHeight)
         }
       })
     }
@@ -282,9 +284,7 @@ class PaneView extends React.Component {
             {React.cloneElement(child, {
               ref: node => { this[`pane_${i}`] = node },
               key: `pane_${i}`,
-              size: paneArr[i] && paneArr[i].size !== undefined
-                ? paneArr[i].size
-                : this.roundDecimals(100 / children.length),
+              size: paneArr[i] && paneArr[i].size,
               split: split
             })}
             {(i < children.length - 1) &&
