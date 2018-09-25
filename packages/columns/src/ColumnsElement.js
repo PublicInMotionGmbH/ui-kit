@@ -35,7 +35,7 @@ function ColumnsElement (props) {
   const clsName = buildClassName(moduleName, className, {'header-icon': headerIcon})
   const clsIconName = buildClassName([moduleName, 'icon'])
   const clsContentName = buildClassName([moduleName, 'content'])
-  const columnsWidth = maxColumns ? `${100 / maxColumns}%` : 'auto'
+  const columnsWidth = maxColumns ? `${100 / maxColumns}%` : null
 
   /**
    * Render icon container

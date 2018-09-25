@@ -29,7 +29,8 @@ function Columns (props) {
   const { className, children, maxColumns, ...passedProps } = props
 
   const childrenWithProps = React.Children.map(children, child =>
-    React.cloneElement(child, { maxColumns: maxColumns }))
+    React.cloneElement(child, { maxColumns: maxColumns })
+  )
 
   return (
     <div className={buildClassName(moduleName, className)} {...passedProps}>
