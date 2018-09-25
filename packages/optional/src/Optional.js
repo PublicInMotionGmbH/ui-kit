@@ -26,6 +26,9 @@ const propTypes = {
   /** Should be open initially when collapsible */
   open: PropTypes.bool,
 
+  /** Optional element */
+  optionalElement: PropTypes.node,
+
   /** Send value to parent component */
   onChange: PropTypes.func,
 
@@ -37,6 +40,10 @@ const propTypes = {
 
   /** Value passed to component */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+}
+
+const defaultProps = {
+  optionalElement: <Textarea />
 }
 
 /**
@@ -60,8 +67,7 @@ class Optional extends React.PureComponent {
   state = {
     value: this.props.value || null,
     visible: !this.props.collapsible ||
-     (this.props.collapsible && this.props.open) ||
-     false
+     (this.props.collapsible && this.props.open)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -75,69 +81,66 @@ class Optional extends React.PureComponent {
    *
    * @param {SyntheticEvent} e
    */
-  handleChange = (e) => {
+  handleChange = (value) => {
     const { onChange } = this.props
-    const newValue = e.target.value
+    const { visible } = this.state
 
-    if (onChange) {
-      onChange(newValue)
-    }
-  }
-
-  /**
-   * Handle Textarea change
-   * @param {*} value
-   */
-  handleTextareaChange (value) {
     this.setState({
       value: value
     })
+
+    if (!visible) {
+      value = null
+    }
+
+    if (onChange) {
+      onChange(value)
+    }
   }
 
   /**
    * Handle Checkbox change
    * @param {*} value
    */
-  handleCheckboxChange (value) {
+  handleCheckboxChange = (value) => {
     this.setState({
       visible: value
     })
   }
 
   render () {
-    const { className, collapsible, disabled, label, name, open, placeholder, readOnly, ...passedProps } = this.props
+    const { className, collapsible, disabled, label, name, open, optionalElement, placeholder, readOnly, onChange, ...passedProps } = this.props
     const { value, visible } = this.state
 
     const clsName = buildClassName(moduleName, className)
-    const clsLabelName = buildClassName([moduleName, 'label'], className)
-    const clsCheckboxName = buildClassName([moduleName, 'checkbox'], className)
+    const clsLabelName = buildClassName([moduleName, 'label'])
+    const clsCheckboxName = buildClassName([moduleName, 'checkbox'])
 
     return (
       <div
         className={clsName} {...passedProps}
-        name={name}
-        label={label}
-        value={value}
-        onChange={this.handleChange}
       >
         {collapsible &&
           <Checkbox
             className={clsCheckboxName}
-            onChange={(value) => this.handleCheckboxChange(value)}
+            onChange={this.handleCheckboxChange}
             value={visible}
             disabled={disabled}
           >
-            {<span className={clsLabelName}>{label}</span>}
+            <span className={clsLabelName}>{label}</span>
           </Checkbox>}
         {!collapsible && label && <span className={clsLabelName}>{label}</span>}
         {visible &&
-          <Textarea
-            value={value}
-            onChange={(value) => this.handleTextareaChange(value)}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          />}
+          React.cloneElement(
+            optionalElement, {
+              value: value,
+              onChange: this.handleChange,
+              placeholder,
+              disabled,
+              readOnly
+            }
+          )
+        }
       </div>
     )
   }
@@ -145,6 +148,7 @@ class Optional extends React.PureComponent {
 
 Optional.displayName = 'Optional'
 
+Optional.defaultProps = defaultProps
 Optional.propTypes = propTypes
 
 export default Optional

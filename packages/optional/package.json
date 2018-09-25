@@ -26,6 +26,7 @@
     "@talixo/shared": "^1.0.0-alpha.27",
     "@talixo/textarea": "^1.0.0-alpha.27",
     "@talixo/checkbox": "^1.0.0-alpha.27",
+    "@talixo/number-input": "^1.0.0-alpha.27",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
@@ -34,6 +35,7 @@
     "@talixo/shared": "^1.0.0-alpha.27",
     "@talixo/textarea": "^1.0.0-alpha.27",
     "@talixo/checkbox": "^1.0.0-alpha.27",
+    "@talixo/number-input": "^1.0.0-alpha.27",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

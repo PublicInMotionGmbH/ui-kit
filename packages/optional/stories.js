@@ -2,6 +2,7 @@ import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import Optional from './src/Optional'
+import { NumberInput } from '@talixo/number-input'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -77,6 +78,14 @@ addStory('with initial value', readme, () => (
     name='request'
     label='I have a special request'
     value='Please be on time'
+  />
+))
+
+addStory('with custom element', readme, () => (
+  <Optional
+    name='request'
+    label='I have a special request'
+    optionalElement={<NumberInput />}
   />
 ))
 
