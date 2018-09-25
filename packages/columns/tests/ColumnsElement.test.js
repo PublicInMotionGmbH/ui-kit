@@ -53,7 +53,7 @@ describe('<ColumnsElement />', () => {
       </ColumnsElement>
     )
 
-    expect(wrapper.prop('style').flexBasis).toBe('auto')
+    expect(wrapper.prop('style').flexBasis).toBe(null)
   })
 
   it('render icon container when prop headerIcon not passed', () => {

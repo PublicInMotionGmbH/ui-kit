@@ -5,7 +5,7 @@ exports[`<ColumnsElement /> renders children correctly 1`] = `
   className="talixo-columns-element"
   style={
     Object {
-      "flexBasis": "auto",
+      "flexBasis": null,
     }
   }
 >
