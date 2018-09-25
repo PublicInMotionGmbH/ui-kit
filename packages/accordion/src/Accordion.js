@@ -88,7 +88,7 @@ function buildElement (props, option, index) {
   const className = buildClassName('accordion-element', null, { collapsed })
 
   // Custom animation speed
-  const customAnimationSpeed = parseInt(option.customAnimationSpeed, 10) || null
+  const elementAnimationSpeed = parseInt(option.customAnimationSpeed, 10) || animationSpeed
 
   // Build props for elements
   const buttonProps = {
@@ -103,7 +103,7 @@ function buildElement (props, option, index) {
     role: 'tabpanel',
     className: prefix('accordion-element', 'content'),
     smooth: smooth,
-    animationSpeed: customAnimationSpeed || animationSpeed,
+    animationSpeed: elementAnimationSpeed,
     collapsed: collapsed,
     'aria-hidden': collapsed
   }

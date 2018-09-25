@@ -34,7 +34,10 @@ const optionsCustomAnimationSpeed = [
   { id: 'another', customAnimationSpeed: 80, label: 'Slow Animation', content: <strong>I`m slow as turtle</strong> },
   { id: 'third', customAnimationSpeed: 900, label: 'Quick Animation', content: 'I`m quick as gazelle' },
   { id: 'multiple', label: 'Default Animation', content: 'I have default animation speed' },
-  { id: 'multiple', label: 'Default Animation', content: 'I have default animation speed' }
+  { id: 'last',
+    customAnimationSpeed: 9000,
+    label: 'Rocket Speed',
+    content: <span><Icon name='rocket' /><Icon name='rocket' /><Icon name='rocket' /></span>}
 ]
 
 // Stories
