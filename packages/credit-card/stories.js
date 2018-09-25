@@ -55,7 +55,7 @@ addStory('credit card input read-only', readme, () => (
         'month': 3,
         'year': 2044
       },
-      cvc: 123
+      cvc: '123'
     }
     }
   />

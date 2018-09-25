@@ -498,9 +498,9 @@ class TextInput extends React.PureComponent {
     })
 
     // Build available and required elements
-    const leftElement = hasLeft ? this.buildAddon('left') : null
-    const rightElement = hasRight ? this.buildAddon('right') : null
-    const suffixElement = hasSuffix ? this.buildSuffix() : null
+    const leftElement = hasLeft && !readOnly ? this.buildAddon('left') : null
+    const rightElement = hasRight && !readOnly ? this.buildAddon('right') : null
+    const suffixElement = hasSuffix && !readOnly ? this.buildSuffix() : null
 
     // Build text input component
     return (

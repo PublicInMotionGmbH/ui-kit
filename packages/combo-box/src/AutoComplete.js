@@ -296,7 +296,7 @@ class AutoComplete extends React.PureComponent {
     const data = this.getStateProps(_data)
 
     // Get required data to render component
-    const { className } = this.props
+    const { className, readOnly } = this.props
     const { isOpen, options, icon } = data
 
     // Check if menu should be visible
@@ -306,7 +306,7 @@ class AutoComplete extends React.PureComponent {
     const clsName = buildClassName(moduleName, className, { open, 'with-info': icon })
 
     // Build menu component
-    const menu = open ? <Menu {...data} /> : null
+    const menu = open && !readOnly ? <Menu {...data} /> : null
 
     // Render component
     return (

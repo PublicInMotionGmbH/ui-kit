@@ -5,6 +5,15 @@
   flex-direction: row
   width: 100%
 
+  &--disabled
+    &.talixo-phone-input > input,
+    &.talixo-phone-input--hover > input,
+    &.talixo-phone-input--hover > input:hover
+      background-color: $phone-input-disabled-background-color
+      border-color: $phone-input-disabled-border-color
+      color: $phone-input-disabled-text-color
+      cursor: not-allowed
+
   input
     flex: 1 auto
     box-sizing: border-box
@@ -100,6 +109,10 @@
     &__arrow
       font-size: $phone-input-arrow-size
 
+    &--disabled
+      > button.talixo-combo-box__value--placeholder, > button.talixo-combo-box__value--placeholder:hover
+        background-color: $phone-input-disabled-background-color 
+    
   &__country
     display: flex
     width: 100%

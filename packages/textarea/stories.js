@@ -41,6 +41,10 @@ addStory('disabled', readme, () => (
   <Textarea disabled placeholder="Sorry, but you can't write here..." />
 ))
 
+addStory('read-only', readme, () => (
+  <Textarea readOnly />
+))
+
 addStory('auto grow', readme, () => (
   <Textarea TextareaComponent={TextareaAutosize} />
 ))

@@ -10,6 +10,9 @@ const propTypes = {
   /** Disabled textarea */
   disabled: PropTypes.bool,
 
+  /** Read-only textarea */
+  readOnly: PropTypes.bool,
+
   /** Placeholder for textarea */
   placeholder: PropTypes.string,
 
@@ -36,6 +39,7 @@ const defaultProps = {
  * @property {object} props
  * @property {string} [props.className]
  * @property {bool} [props.disabled]
+ * @property {bool} [props.readOnly]
  * @property {string} [props.placeholder]
  * @property {bool} [props.resize]
  * @property {function} [props.onChange]
@@ -75,7 +79,7 @@ class Textarea extends React.PureComponent {
 
   render () {
     const {
-      className, disabled, placeholder, resize,
+      className, disabled, placeholder, resize, readOnly,
       TextareaComponent, value, onChange, ...passedProps
     } = this.props
 
@@ -85,6 +89,7 @@ class Textarea extends React.PureComponent {
       <TextareaComponent
         className={clsName}
         disabled={disabled}
+        readOnly={readOnly}
         placeholder={placeholder}
         value={this.state.value}
         onChange={this.change}

@@ -69,6 +69,24 @@ addStory('disabled', readme, () => (
   </div>
 ))
 
+addStory('read-only', readme, () => (
+  <div>
+    <h2>Default text input read-only </h2>
+    <TextInput
+      placeholder='Default read-only input'
+      style={additionalStyling}
+      readOnly
+    />
+    <h2>Text input read-only with icon</h2>
+    <TextInput
+      left={<Icon name='credit_card' />}
+      placeholder='This input is read-only'
+      style={additionalStyling}
+      readOnly
+    />
+  </div>
+))
+
 addStory.controlled('masked / different input', readme, (setState, state) => (
   <div>
     <h2>Masked input</h2>

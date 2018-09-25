@@ -23,6 +23,18 @@ addStory('initial', readme, () => (
   </CountryFlagsProvider>
 ))
 
+addStory('disabled', readme, () => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput disabled />
+  </CountryFlagsProvider>
+))
+
+addStory('read-only', readme, () => (
+  <CountryFlagsProvider url={spriteUrl}>
+    <PhoneInput readOnly />
+  </CountryFlagsProvider>
+))
+
 addStory('with placeholder', readme, () => (
   <CountryFlagsProvider url={spriteUrl}>
     <PhoneInput placeholder='Type your phone number...' />

@@ -371,6 +371,36 @@ addStory.controlled('auto complete', readme, (setState, state) => (
   </div>
 ), () => ({ value: '' }))
 
+addStory.controlled('auto complete disabled', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      disabled
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({ value: '' }))
+
+addStory.controlled('auto complete read-only', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={filterOptions(state.value, optionsSimple)}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      readOnly
+    >
+      <TextInput value={state.value} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({ value: '' }))
+
 addStory.controlled('auto complete with footer', readme, (setState, state) => (
   <div>
     <div>Selected value: {JSON.stringify(state.value)}</div>
