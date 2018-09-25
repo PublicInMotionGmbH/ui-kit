@@ -29,9 +29,9 @@ function TimelineElement (props) {
   const { time, children, className } = props
 
   const clsName = buildClassName(moduleName, className)
-  const clsNameIcon = buildClassName([moduleName, 'icon'], className)
-  const clsNamePointer = buildClassName([moduleName, 'pointer'], className)
-  const clsNameTime = buildClassName([moduleName, 'time'], className)
+  const clsNameIcon = buildClassName([moduleName, 'icon'])
+  const clsNamePointer = buildClassName([moduleName, 'pointer'])
+  const clsNameTime = buildClassName([moduleName, 'time'])
 
   return (
     <div className={clsName}>
