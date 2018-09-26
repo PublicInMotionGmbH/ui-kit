@@ -26,6 +26,11 @@ class Portal extends React.PureComponent {
   }
 
   componentDidUpdate (props) {
+    // Do not do anything on Node.js environment
+    if (typeof document === 'undefined') {
+      return
+    }
+
     if (this.mounted && this.props.attachTo !== props.attachTo) {
       const attachTo = this.props.attachTo || document.body
 

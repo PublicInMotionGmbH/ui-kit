@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import memoizeOne from 'memoize-one'
+
 import { buildClassName } from '@talixo/shared'
 
 import { AutoComplete, SelectBox } from '@talixo/combo-box'
@@ -99,6 +101,8 @@ function formatValue (value, minLength) {
   return value
 }
 
+const memoizedFormatValue = memoizeOne(formatValue)
+
 /**
  * Build end value.
  *
@@ -148,6 +152,8 @@ function range (min, max) {
   return arr
 }
 
+const memoizedRange = memoizeOne(range)
+
 /**
  * Component which represents range input.
  *
@@ -176,13 +182,10 @@ function range (min, max) {
  */
 class RangeInput extends React.PureComponent {
   state = {
-    inputValue: formatValue(this.props.value, this.props.minLength),
+    inputValue: memoizedFormatValue(this.props.value, this.props.minLength),
     value: this.props.value || null,
     focus: false,
-    options: range(this.props.min, this.props.max),
-    minLength: this.props.minLength,
-    min: this.props.min,
-    max: this.props.max
+    options: memoizedRange(this.props.min, this.props.max)
   }
 
   /**
@@ -195,17 +198,19 @@ class RangeInput extends React.PureComponent {
    */
   static getDerivedStateFromProps (props, state) {
     const composedState = {}
+    const newValue = memoizedFormatValue(props.value, props.minLength)
+    const newOptions = memoizedRange(props.min, props.max)
 
     if (props.value !== state.value && props.value !== undefined) {
       composedState['value'] = props.value
     }
 
-    if (!state.focus && props.value !== undefined && (props.value !== state.inputValue || props.minLength !== state.minLength)) {
-      composedState['inputValue'] = formatValue(props.value, props.minLength)
+    if (!state.focus && props.value !== undefined && newValue !== state.inputValue) {
+      composedState['inputValue'] = newValue
     }
 
-    if (props.min !== state.min || props.max !== state.max) {
-      composedState['options'] = range(props.min, props.max)
+    if (state.options !== newOptions) {
+      composedState['options'] = newOptions
     }
 
     return isEmpty(composedState) ? null : composedState
@@ -239,7 +244,7 @@ class RangeInput extends React.PureComponent {
 
     if (this.props.value === undefined) {
       state.value = value
-      state.inputValue = formatValue(value, this.props.minLength)
+      state.inputValue = memoizedFormatValue(value, this.props.minLength)
     }
 
     this.setState({ ...state })

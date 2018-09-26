@@ -60,7 +60,7 @@ class MaskedInput extends React.Component {
   static getDerivedStateFromProps (nextProps, state) {
     if (nextProps.value !== undefined && nextProps.value !== state.value) {
       return { value: nextProps.value }
-    }
+    } else return null
   }
 
   /**

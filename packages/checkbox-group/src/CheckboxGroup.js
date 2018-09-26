@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import memoizeOne from 'memoize-one'
+
 import { Checkbox } from '@talixo/checkbox'
 
 import { buildClassName } from '@talixo/shared'
@@ -84,6 +86,8 @@ function buildValue (value, options) {
   return value.filter((x, i) => value.indexOf(x) === i)
 }
 
+const memoizedBuildValue = memoizeOne(buildValue)
+
 /**
  * Component which represents CheckboxGroup.
  *
@@ -99,24 +103,17 @@ function buildValue (value, options) {
  */
 class CheckboxGroup extends React.PureComponent {
   state = {
-    value: buildValue(this.props.value, this.props.options),
-    options: this.props.options
+    value: memoizedBuildValue(this.props.value, this.props.options)
   }
 
   static getDerivedStateFromProps (props, state) {
-    if (props.value !== undefined && props.value !== state.value) {
-      const nextValue = buildValue(props.value, props.options)
+    const nextValue = memoizedBuildValue(props.value, props.options)
 
+    if (props.value !== undefined && state.value !== nextValue) {
       if (!isSameList(state.value, nextValue)) {
-        return {value: nextValue}
+        return { value: nextValue }
       } else return null
-    } else if (props.options !== state.options) {
-      const nextValue = buildValue(state.value, props.options)
-
-      if (!isSameList(state.value, nextValue)) {
-        return {value: nextValue}
-      } else return null
-    } else return null
+    }
   }
 
   change (value, checked) {

@@ -39,5 +39,8 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
+  },
+  "dependencies": {
+    "memoize-one": "^4.0.2"
   }
 }

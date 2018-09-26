@@ -69,8 +69,7 @@ class TimeInput extends React.Component {
   state = {
     open: false,
     inputValue: '',
-    suffix: null,
-    disabled: this.props.disabled
+    suffix: null
   }
 
   componentDidMount () {

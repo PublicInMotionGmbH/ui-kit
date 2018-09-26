@@ -31,6 +31,8 @@ class NativeSelect extends React.Component {
   static getDerivedStateFromProps (props, state) {
     if (state.value !== props.value || state.children !== props.children) {
       this.setState(prepareOptions(props))
+    } else {
+      return null
     }
   }
 

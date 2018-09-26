@@ -81,7 +81,7 @@ class CreditCardNumberInput extends React.PureComponent {
   static getDerivedStateFromProps (nextProps, state) {
     if (nextProps.value !== state.value && nextProps.value != null) {
       return { value: nextProps.value }
-    }
+    } else return null
   }
 
   /**

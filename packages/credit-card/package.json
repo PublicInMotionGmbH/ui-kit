@@ -45,5 +45,8 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-text-mask": "5.4.1"
+  },
+  "dependencies": {
+    "memoize-one": "^4.0.2"
   }
 }

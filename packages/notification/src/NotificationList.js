@@ -6,20 +6,6 @@ import { buildClassName, prefix } from '@talixo/shared'
 
 import Notification from './Notification'
 
-/**
- * Function checks whether the object is empty
- *
- * @param {*} obj
- *
- * @returns {bool}
- */
-function isEmpty (obj) {
-  for (const item in obj) {
-    return false
-  }
-  return true
-}
-
 const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
@@ -123,8 +109,7 @@ IdsContainer.prototype.set = function (element) {
 class NotificationList extends React.PureComponent {
   state = {
     items: this.props.items,
-    hidden: [],
-    autoClose: this.props.autoClose
+    hidden: []
   }
 
   container = new IdsContainer()
@@ -133,21 +118,19 @@ class NotificationList extends React.PureComponent {
    * Update items & hidden items
    *
    * @param {object} props
-   * @param {object} state
-   *
-   * @returns {object || null}
    */
-  static getDerivedStateFromProps (props, state) {
-    const composedState = {}
-
-    if (props.items !== state.items) {
-      composedState['items'] = props.items
-    }
-    if (state.autoClose && !props.autoClose) {
-      composedState['hidden'] = []
+  componentDidUpdate (props) {
+    if (props.items !== this.props.items) {
+      this.setState({
+        items: this.props.items
+      })
     }
 
-    return isEmpty(composedState) ? null : composedState
+    if (!this.props.autoClose && props.autoClose) {
+      this.setState({
+        hidden: []
+      })
+    }
   }
 
   /**

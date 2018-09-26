@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import memoizeOne from 'memoize-one'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -92,6 +93,8 @@ function buildValue (options, baseValue) {
   return value
 }
 
+const memoizedBuildValue = memoizeOne(buildValue)
+
 /**
  * * Component which represents input where you can select some numeric options.
  *
@@ -103,8 +106,7 @@ function buildValue (options, baseValue) {
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: buildValue(this.props.options, this.props.value),
-    options: this.props.options
+    value: memoizedBuildValue(this.props.options, this.props.value)
   }
 
   /**
@@ -115,20 +117,12 @@ class OptionsInput extends React.PureComponent {
    *
    * @returns {object || null}
    */
-  static getDerivedStateFromProps (nextProps, state) {
-    let value = state.value
+  componentDidUpdate (prevProps, prevState) {
+    const newValue = memoizedBuildValue(this.props.options, this.props.value)
 
-    if (state.value !== nextProps.value && nextProps.value !== undefined) {
-      value = buildValue(nextProps.options, nextProps.value)
+    if (this.props.value !== undefined && prevProps.value !== prevState) {
+      this.setState({ value: newValue })
     }
-
-    if (state.options !== nextProps.options) {
-      value = buildValue(nextProps.options, value)
-    }
-
-    if (value !== state.value) {
-      return { value }
-    } else return null
   }
 
   /**

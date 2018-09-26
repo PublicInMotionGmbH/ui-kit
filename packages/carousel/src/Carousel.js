@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
 import chunk from 'lodash/chunk'
+import memoizeOne from 'memoize-one'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -10,6 +11,8 @@ import Dots from './Dots'
 import Arrows from './Arrows'
 
 const moduleName = 'carousel'
+
+const memoizedChunk = memoizeOne(chunk)
 
 /**
  * Get offset height of DOM node, to immediately apply CSS style changes.
@@ -101,12 +104,11 @@ const defaultProps = {
 class Carousel extends React.PureComponent {
   mounted = false
   state = {
-    slides: chunk(this.props.children, this.props.perPage),
+    slides: memoizedChunk(this.props.children, this.props.perPage),
     currentSlide: this.props.value != null
       ? this.props.value % this.props.children.length
       : 0,
-    transitionTime: this.props.animationTime,
-    perPage: this.props.perPage
+    transitionTime: this.props.animationTime
   }
 
   componentDidMount () {
@@ -119,6 +121,7 @@ class Carousel extends React.PureComponent {
 
   static getDerivedStateFromProps (props, state) {
     const composedState = {}
+    const newSlides = memoizedChunk(props.children, props.perPage)
 
     // Handle change of animation time
     if (state.transitionTime !== 0 && props.animationTime !== state.transitionTime) {
@@ -132,8 +135,8 @@ class Carousel extends React.PureComponent {
       composedState['currentSlide'] = props.children.length - 1
     }
 
-    if (props.children !== state.slides || props.perPage !== state.perPage) {
-      composedState['slides'] = chunk(props.children, props.perPage)
+    if (props.children !== state.slides && state.slides !== newSlides) {
+      composedState['slides'] = newSlides
     }
 
     return isEmpty(composedState) ? null : composedState
