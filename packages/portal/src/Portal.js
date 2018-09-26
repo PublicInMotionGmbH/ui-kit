@@ -22,7 +22,9 @@ class Portal extends React.PureComponent {
   constructor (props) {
     super(props)
 
-    this.el = document.createElement('div')
+    this.el = typeof document !== 'undefined'
+      ? document.createElement('div')
+      : null
   }
 
   componentDidUpdate (props) {
@@ -53,6 +55,11 @@ class Portal extends React.PureComponent {
   }
 
   render () {
+    // Do not use portals in Node.js environment
+    if (typeof document === 'undefined') {
+      return null
+    }
+
     return ReactDOM.createPortal(this.props.children, this.el)
   }
 }
