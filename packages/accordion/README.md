@@ -41,11 +41,11 @@ buildId         | function  | `(x, index) => index` | Function to build unique I
 
 Option which should be shown in Accordion has few required properties:
 
-Property name        | Type      | Default | Description
----------------------|-----------|:-------:|--------------------------------
-label                | node      | n/a     | Label to show in button
-content              | nodes     | n/a     | Content to put inside collapsible element
-customAnimationSpeed | number    | n/a     | Animation speed (in px/ms)
+Property name        | Type      | Default         | Description
+---------------------|-----------|:---------------:|--------------------------------
+label                | node      | n/a             | Label to show in button
+content              | nodes     | n/a             | Content to put inside collapsible element
+animationSpeed       | number    | accordion speed | Animation speed (in px/ms)
 
 ## Changelog
 

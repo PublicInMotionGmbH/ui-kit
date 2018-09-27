@@ -24,7 +24,7 @@ const propTypes = {
     content: PropTypes.node.isRequired,
 
     /** Custom animation time (in ms), requires Collapse geometry CSS */
-    customAnimationSpeed: PropTypes.number
+    animationSpeed: PropTypes.number
   })).isRequired,
 
   /** IDs of currently opened element */
@@ -65,7 +65,7 @@ const defaultProps = {
  * @param {array} [props.value]
  * @param {boolean} props.smooth
  * @param {number|null} props.animationSpeed
- * @param {object|{ label: *, content: *, customAnimationSpeed: number }} option
+ * @param {object|{ label: *, content: *, animationSpeed: number }} option
  * @param {number} index
  * @returns {*}
  */
@@ -88,7 +88,9 @@ function buildElement (props, option, index) {
   const className = buildClassName('accordion-element', null, { collapsed })
 
   // Custom animation speed
-  const elementAnimationSpeed = parseInt(option.customAnimationSpeed, 10) || animationSpeed
+  const elementAnimationSpeed = 'animationSpeed' in option
+    ? option.animationSpeed
+    : animationSpeed
 
   // Build props for elements
   const buttonProps = {
