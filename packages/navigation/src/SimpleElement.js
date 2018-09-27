@@ -1,6 +1,7 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
+import debounce from 'lodash/debounce'
 
 import { buildClassName } from '@talixo/shared'
 
@@ -177,6 +178,19 @@ class Element extends React.Component {
     }
   }
 
+  handleMouseEnter = (e) => {
+    this.close.cancel()
+    this.setState({ open: true })
+  }
+
+  handleMouseLeave = (e) => {
+    this.close()
+  }
+
+  close = debounce(() => {
+    this.setState({ open: false })
+  }, 100)
+
   attachListener () {
     // Ignore when there is no DOM element attached
     // As it may be running in Node.js environment
@@ -223,7 +237,14 @@ class Element extends React.Component {
     const renderElement = render(this.props)
 
     return (
-      <div className={elementCls} onClick={this.handleClick} ref={this.saveRef} {...restProps}>
+      <div
+        className={elementCls}
+        onClick={this.handleClick}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        ref={this.saveRef}
+        {...restProps}
+      >
         <div className={contentCls}>{ renderElement }</div>
         <div className={menuCls}>
           <div className={subtitleCls}>{subtitle}</div>

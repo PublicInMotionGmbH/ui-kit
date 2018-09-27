@@ -2,29 +2,33 @@
 
 @include module('navigation')
   box-sizing: border-box
-  display: inline-flex
-  justify-content: space-between
+  display: inline-block
+
+  &__divider
+    padding: $navigation-padding-vertical 0
 
   /***** Common styles for navigation type: breadcrumbs, navbar *****/
   &--navbar,
   &--breadcrumbs
     // Parent elements styles
     &#{$sel-nav-parent}
+      display: inline-flex
+      justify-content: space-between
       padding: $navigation-padding-vertical 0
       border-radius: $navigation-element-border-radius
-      font-weight: 600
 
     // Navbar elements displayed inside dropdowns
     #{$sel-nav-elem}
       display: block
       position: relative
       margin: $navigation-padding-vertical 0
+      font-weight: 600
       user-select: none
-      cursor: pointer
 
     // Element content
     #{$sel-nav-elem-content}
       padding: $navigation-padding-vertical $navigation-padding-horizontal
+      cursor: pointer
 
     // Dropdown which will be shown after element is clicked
     #{$sel-nav-elem-menu}
@@ -34,13 +38,12 @@
       flex-direction: column
       height: 0
       top: 0
-      left: calc(100% + #{$navigation-padding-horizontal})
+      left: 100% // calc(100% + #{$navigation-padding-horizontal})
       overflow: hidden
       box-shadow: -3px 3px 6px rgba(0,0,0,0.16), -3px 3px 6px rgba(0,0,0,0.23)
 
     // Subtitle displayed at the top of each dropdown, specific for each.
     #{$sel-nav-elem-subtitle}
-      pointer-events: none
       font-size: $navigation-subtitle-font-size
       white-space: nowrap
       margin: $navigation-padding-vertical $navigation-padding-horizontal #{2 * $navigation-padding-vertical}
@@ -54,7 +57,7 @@
 
         // Set position of first menu under navbar/breadcrumbs elements
         > #{$sel-nav-elem-menu}
-          top: calc(100% + #{$navigation-padding-vertical})
+          top: 100% // calc(100% + #{$navigation-padding-vertical})
           left: 0
 
     // Styles for active/open/hovered element
@@ -87,10 +90,10 @@
     #{$sel-nav-elem-menu}
       background-color: $navigation-breadcrumbs-menu-background-color
 
-    // Styles for active/open/hovered element
-    #{$sel-nav-elem}
-      &:hover, &--active
-        background-color: $navigation-breadcrumbs-base-color
+      // Styles for active/open/hovered element
+      #{$sel-nav-elem}
+        &:hover, &--active
+          background-color: $navigation-breadcrumbs-element-active-color
 
 @keyframes show-overflow
   0%, 100%

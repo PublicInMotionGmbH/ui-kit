@@ -49,7 +49,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /**  */
-  divider: PropTypes.any,
+  divider: PropTypes.node,
 
   /**  */
   elements: PropTypes.arrayOf(PropTypes.shape({
@@ -92,9 +92,25 @@ const defaultProps = {
  *
  */
 class Navigation extends React.Component {
-  buildElements = () => {
-    const { elements, type } = this.props
-    const renderElements = elements.map(element => getElements(element, type))
+  buildDivider () {
+    const { divider } = this.props
+    const dividerCls = buildClassName([moduleName, 'divider'])
+
+    return <div className={dividerCls}>{divider}</div>
+  }
+
+  buildElements () {
+    const { divider, elements, type } = this.props
+    const elementsLastIndex = elements.length - 1
+
+    const dividerElement = type === 'breadcrumbs' && divider != null
+      ? this.buildDivider()
+      : null
+
+    const renderElements = elements.map((element, index) => [
+      getElements(element, type),
+      index !== elementsLastIndex && dividerElement
+    ])
     return renderElements
   }
 

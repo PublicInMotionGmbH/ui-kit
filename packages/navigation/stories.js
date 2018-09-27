@@ -191,7 +191,7 @@ addStory('simple nav with subelements', readme, () => (
     <SimpleNavigation elements={withSubelements} />
     <br />
     <br />
-    <SimpleNavigation elements={withSubelements} type={'breadcrumbs'} />
+    <SimpleNavigation elements={withSubelements} type={'breadcrumbs'} divider='/' />
     {/* <br /> */}
     {/* <br /> */}
     {/* <SimpleNavigation elements={withSubelements} type={'pagination'} /> */}
