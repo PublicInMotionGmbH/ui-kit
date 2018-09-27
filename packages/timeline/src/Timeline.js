@@ -9,12 +9,12 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Chidren inside Timeline */
+  /** Timeline elements - points and lines */
   children: PropTypes.node
 }
 
 /**
- * Component which represents Timeline.
+ * Component which represents timeline.
  *
  * @param {object} props
  * @param {string} [props.className]
@@ -26,7 +26,7 @@ function Timeline (props) {
   const clsName = buildClassName(moduleName, className)
 
   return (
-    <div className={clsName} {...passedProps} >
+    <div className={clsName} {...passedProps}>
       {children}
     </div>
   )

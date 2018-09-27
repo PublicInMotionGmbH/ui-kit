@@ -9,7 +9,7 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Chidren inside Timeline */
+  /** Content to put inside */
   children: PropTypes.node,
 
   /** Time to render in component */
@@ -17,7 +17,7 @@ const propTypes = {
 }
 
 /**
- * Component which represents Timeline.
+ * Component which represents timeline extended elements.
  *
  * @param {object} props
  * @param {string} [props.className]
@@ -33,16 +33,19 @@ function TimelineElement (props) {
   const clsNamePointer = buildClassName([moduleName, 'pointer'])
   const clsNameTime = buildClassName([moduleName, 'time'])
 
+  const timeElement = time ? (
+    <div className={clsNameTime}>
+      {time}
+    </div>
+  ) : null
+
   return (
     <div className={clsName}>
       <div className={clsNameIcon}>
         {children}
       </div>
       <div className={clsNamePointer} />
-      {time &&
-        <div className={clsNameTime}>
-          {time}
-        </div>}
+      {timeElement}
     </div>
   )
 }

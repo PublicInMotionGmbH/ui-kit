@@ -18,12 +18,45 @@ const addStory = createStoriesFactory('Timeline', module, {
 
 // Example of time
 const startTime = '12:10'
+const middleTime = '14:10'
 const endTime = '16:38'
 const rideTime = '1:45'
 
 // Stories
 
-addStory('initial', readme, () => (
+addStory('simple', readme, () => (
+  <Timeline>
+    <TimelinePoint>
+      <TimelineElement time={startTime}>
+        <Icon name='directions_car' />
+      </TimelineElement>
+    </TimelinePoint>
+
+    <TimelineLine />
+
+    <TimelinePoint>
+      <TimelineElement time={middleTime}>
+        Restaurant
+      </TimelineElement>
+    </TimelinePoint>
+
+    <TimelineLine />
+
+    <TimelinePoint>
+      <Icon name='local_airport' />
+    </TimelinePoint>
+
+    <TimelineLine />
+
+    <TimelinePoint>
+      <TimelineElement time={endTime}>
+        <Icon name='check' />
+      </TimelineElement>
+    </TimelinePoint>
+  </Timeline>
+))
+
+addStory('two-point ride', readme, () => (
   <Timeline>
     <TimelinePoint>
       <TimelineElement time={startTime}>

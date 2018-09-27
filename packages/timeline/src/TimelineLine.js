@@ -9,7 +9,7 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Short version of timeline line */
+  /** Should it be short version of timeline line? */
   short: PropTypes.bool,
 
   /** Line has special styles */

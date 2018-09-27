@@ -9,7 +9,7 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Chidren inside Timeline */
+  /** Either content or timeline element */
   children: PropTypes.node,
 
   /** Line has special styles */
@@ -17,7 +17,7 @@ const propTypes = {
 }
 
 /**
- * Component which represents Timeline.
+ * Component which represents point on timeline.
  *
  * @param {object} props
  * @param {string} [props.className]
