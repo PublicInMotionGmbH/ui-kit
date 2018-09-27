@@ -57,26 +57,27 @@ const defaultProps = {
  */
 class Modal extends React.Component {
   componentDidMount () {
-    if (this.props.onEscKeyDown) {
-      this.addEscListener()
-      this.escEventAdded = true
-    }
+    this.reinitializeEscListener(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.onEscKeyDown && !this.escEventAdded) {
-      this.addEscListener()
-      this.escEventAdded = true
-    } else if (!nextProps.onEscKeyDown && this.escEventAdded) {
-      this.addEscListener()
-      this.escEventAdded = false
-    }
+    this.reinitializeEscListener(nextProps)
   }
 
   componentWillUnmount () {
-    if (this.props.onEscKeyDown) {
+    this.removeEscListener()
+  }
+
+  /**
+   * Make sure that we have or removed unneeded esc key listener.
+   *
+   * @param {object} props
+   */
+  reinitializeEscListener (props) {
+    if (props.onEscKeyDown) {
+      this.addEscListener()
+    } else {
       this.removeEscListener()
-      this.escEventAdded = false
     }
   }
 
@@ -84,14 +85,20 @@ class Modal extends React.Component {
    * Add event listener for pressing escape key.
    */
   addEscListener () {
-    document.addEventListener('keydown', this.handleEscKeyDown)
+    if (!this.escEventAdded) {
+      this.escEventAdded = true
+      document.addEventListener('keydown', this.handleEscKeyDown)
+    }
   }
 
   /**
    * Remove event listener for pressing escape key.
    */
   removeEscListener () {
-    document.removeEventListener('keydown', this.handleEscKeyDown)
+    if (this.escEventAdded) {
+      this.escEventAdded = false
+      document.removeEventListener('keydown', this.handleEscKeyDown)
+    }
   }
 
   /**
