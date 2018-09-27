@@ -107,7 +107,7 @@ describe('<RadioGroup />', () => {
     const EXAMPLE_OBJECT = { ab: 'd' }
     let wrapper, input, props
 
-    beforeAll(() => {
+    beforeEach(() => {
       props = {
         onChange: jest.fn(),
         name: 'RadioGroupOne'
@@ -125,6 +125,8 @@ describe('<RadioGroup />', () => {
         />
       )
     })
+
+    afterEach(() => wrapper.unmount())
 
     it('should call onChange function', () => {
       input = wrapper.find('input[type="radio"]').at(0)
