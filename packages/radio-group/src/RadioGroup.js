@@ -93,7 +93,7 @@ class RadioGroup extends React.PureComponent {
 
     const focusableOption = selectedOption || options[0]
 
-    const optionsList = options.map(obj => (
+    const optionsList = options.map((obj, index) => (
       <RadioInput
         id={focusableOption === obj ? id : undefined}
         checked={_value === obj.value}
@@ -103,7 +103,7 @@ class RadioGroup extends React.PureComponent {
         name={name}
         error={error}
         onChange={this.change.bind(this, obj.value)}
-        value={obj.value || ''}
+        value={index}
       >
         {obj.label}
       </RadioInput>
