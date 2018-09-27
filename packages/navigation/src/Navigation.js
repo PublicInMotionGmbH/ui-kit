@@ -1,81 +1,114 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
-
 import { buildClassName } from '@talixo/shared'
+
+import NavigationWrapper from './NavigationWrapper'
+import Element from './SimpleElement'
 
 export const moduleName = 'navigation'
 
-const propTypes = {
-  /** Navigation items */
-  children: PropTypes.node,
+function clickHandler (element, e) {
+  const { id, onClick } = element
+  if (onClick) {
+    onClick(id, e)
+  }
+}
+function onMouseOverHandler (element, e) {
+  const { id, onMouseOver } = element
+  if (onMouseOver) {
+    onMouseOver(id, e)
+  }
+}
 
-  /** Additional class name */
+function getElements (element, type) {
+  const { subelements } = element
+
+  const children = Array.isArray(subelements) && subelements.length > 0
+    ? <NavigationWrapper type={type}>
+      { subelements.map(subelement => getElements(subelement, type)) }
+    </NavigationWrapper>
+    : null
+
+  const hasChildren = !!children
+
+  return (
+    <Element
+      key={element.id}
+      hasChildren={hasChildren}
+      {...element}
+      onClick={(e) => clickHandler(element, e)}
+      onMouseOver={(e) => onMouseOverHandler(element, e)}
+    >
+      { children }
+    </Element>
+  )
+}
+
+const propTypes = {
+  /**  */
   className: PropTypes.string,
 
-  /** Divider */
-  divider: PropTypes.node,
+  /**  */
+  divider: PropTypes.any,
 
-  /** Type of navigation */
-  type: PropTypes.oneOf(['navigation', 'pagination', 'breadcrumbs', 'steps', 'tabs'])
+  /**  */
+  elements: PropTypes.arrayOf(PropTypes.shape({
+    /**  */
+    active: PropTypes.bool,
+
+    /**  */
+    disabled: PropTypes.bool,
+
+    /**  */
+    id: PropTypes.number,
+
+    /**  */
+    name: PropTypes.string,
+
+    /**  */
+    subelements: PropTypes.array,
+
+    /**  */
+    onClick: PropTypes.func,
+
+    /**  */
+    onHover: PropTypes.func,
+
+    /**  */
+    render: PropTypes.func
+  })),
+
+  /**  */
+  type: PropTypes.oneOf(['breadcrumbs', 'navbar', 'pagination', 'sidebar', 'steps', 'tabs', 'tree'])
 }
 
 const defaultProps = {
-  type: 'navigation'
+  elements: [],
+  type: 'navbar'
 }
 
 /**
-* Method that inserts divider between children.
-*
-* @param {*} children
-* @param {*} divider
-* @returns {array}
-*/
-const childrenWithDividers = (children, divider) => {
-  const arrayOfChildren = React.Children.toArray(children)
-
-  /**
-  * Method that inserts element between array of elements.
-  *
-  * @param {*} value
-  * @param {number} index
-  * @param {array} array
-  * @returns {*}
-  */
-  const insertDivider = (value, index, array) => {
-    const clsName = buildClassName(moduleName, 'divider')
-    const dividerElement = (<div key={`divider--${index}`} className={clsName}>{divider}</div>)
-
-    return array.length - 1 !== index
-      ? [value, dividerElement]
-      : value
+ * Component which represents Simple Navigation.
+ *
+ */
+class Navigation extends React.Component {
+  buildElements = () => {
+    const { elements, type } = this.props
+    const renderElements = elements.map(element => getElements(element, type))
+    return renderElements
   }
 
-  return _.flatMap(arrayOfChildren, insertDivider)
-}
+  render () {
+    const { className, divider, elements, type, ...passedProps } = this.props
 
-/**
- * Component which represents Navigation.
- *
- * @param {object} props
- * @param {*} [props.children]
- * @param {string} [props.className]
- * @param {*} [props.divider]
- * @param {string} [props.type]
- * @returns {React.Element}
- */
-function Navigation (props) {
-  const { children, className, divider, type, ...passedProps } = props
+    const wrapperCls = buildClassName([`${moduleName}-parent`])
 
-  const mappedChildren = divider ? childrenWithDividers(children, divider) : children
-
-  const clsName = buildClassName(moduleName, className, type)
-
-  return (
-    <ul className={clsName} {...passedProps}>
-      {mappedChildren}
-    </ul>
-  )
+    return (
+      <NavigationWrapper className={wrapperCls} type={type} {...passedProps}>
+        { this.buildElements() }
+      </NavigationWrapper>
+    )
+  }
 }
 
 Navigation.displayName = 'Navigation'

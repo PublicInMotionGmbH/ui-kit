@@ -1,0 +1,155 @@
+@import './config'
+
+@include module('navigation')
+  $n: &
+  display: inline-block
+  list-style: none
+
+  &--pagination
+    > #{$n}__element
+      display: inline-flex
+      padding: dp(0.5) dp(1.5)
+      border: $x-border-width solid
+      border-radius: $x-border-radius
+      font-size: $x-font-size-base
+      line-height: dp(3)
+      font-weight: $x-weight-normal
+      align-items: center
+      cursor: pointer
+      user-select: none
+      background-color: $pagination-element-background
+      border-color: $pagination-element-border-color
+      color: $pagination-element-text-color
+
+      > *
+        margin: 0 dp(0.5)
+        display: inline-flex
+        flex-direction: row
+        align-items: center
+
+      &:hover
+        background-color: $pagination-hover-element-background-color
+        border-color: $pagination-hover-element-border-color
+        color: $pagination-element-text-color
+
+      &:active
+        background-color: $pagination-active-element-background
+        border-color: $pagination-active-element-border-color
+        color: $pagination-active-element-text-color
+
+      &--active
+        background-color: $pagination-active-element-background
+        border-color: $pagination-active-element-border-color
+        color: $pagination-active-element-text-color
+
+      &--disabled
+        cursor: default
+
+  &--tabs
+    > #{$n}__element
+      padding: dp(1) dp(1.5)
+      border: $x-border-width solid $color-tab-border
+      border-bottom-width: 0
+      border-radius: $x-border-radius $x-border-radius 0 0
+      font-size: $x-font-size-small
+      cursor: pointer
+      display: inline-flex
+      align-items: center
+      background-color: $tabs-element-background
+      color: $tabs-element-text-color
+
+      & + &
+        margin-left: $x-border-width
+
+      > *
+        margin: 0 dp(0.5)
+
+      &:active
+        font-weight: $x-weight-bold
+
+      & > a
+        text-decoration: none
+
+      &:hover
+        background-color: $tabs-hover-element-background
+
+      &:active
+        background-color: $tabs-active-element-background
+
+      &--active
+        font-weight: $x-weight-bold
+        background-color: $tabs-active-element-background
+
+  &--breadcrumbs
+    > #{$n}__element
+      display: inline-block
+      margin: 0 dp(0.5) 0
+
+      & > a
+        color: #4183c4
+        text-decoration: none
+        cursor: pointer
+
+      &--active, &--active > a
+        color: #000
+        font-weight: $x-weight-bold
+
+  &--steps
+    position: relative
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    margin: auto
+    padding: 0 !important
+    max-width: 70%
+
+    &:before
+      content: ''
+      position: absolute
+      display: block
+      top: 50%
+      margin-top: dp(-0.125)
+      height: dp(0.25)
+      border: 0
+      width: 100%
+      box-sizing: border-box
+      z-index: -1
+      background: $step-background
+
+    #{$n}__step
+      position: relative
+      padding: dp(0.5)
+      cursor: pointer
+      outline: inherit !important
+      border-width: dp(0.5)
+      border-style: solid
+      border-radius: dp(1)
+      background: $step-background
+      border-color: $step-border-color
+
+      &--active, &:active
+        font-weight: $x-weight-bold
+        background-color: $step-active-background
+        border-color: $step-active-border-color
+
+      &--disabled, &--disabled:active
+        font-weight: $x-weight-bold
+        background-color: $step-disabled-background-color
+        border-color: $step-disabled-border-color
+
+      &--completed, &--completed:active
+        background-color: $step-completed-background-color
+        border-color: red
+
+  &--navigation
+    > #{$n}__element
+      display: inline-block
+      margin: 0 dp(0.5) 0
+
+  &__divider
+    display: inline-block
+    opacity: 0.7
+    margin: 0 dp(0.5) 0
+    color: rgba(0, 0, 0, 0.4)
+    vertical-align: baseline

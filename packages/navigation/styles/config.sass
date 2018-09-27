@@ -1,31 +1,55 @@
 @import '~@talixo/shared/styles/config'
 
-$pagination-element-background: $x-color-background !default
-$pagination-element-border-color: $pagination-element-background !default
-$pagination-element-text-color: $typography-link-color !default
+// Elements
+$sel-nav: #{prefix('navigation')}
+$sel-nav-parent: #{prefix('navigation-parent')}
+$sel-nav-elem: #{prefix('navigation', 'element')}
+$sel-nav-elem-content: #{prefix('navigation', 'element-content')}
+$sel-nav-elem-menu: #{prefix('navigation', 'element-menu')}
+$sel-nav-elem-subtitle: #{prefix('navigation', 'element-subtitle')}
 
-$pagination-active-element-background: $x-color-secondary !default
-$pagination-active-element-border-color: $pagination-active-element-background !default
-$pagination-active-element-text-color: $x-color-background !default
+// Navigation
+$navigation-base-color: $x-color-primary !default
+$navigation-background: darken($navigation-base-color, 20%) !default
+$navigation-menu-background: darken($navigation-base-color, 10%) !default
+$navigation-text-color: $x-color-primary-opposite !default
 
-$pagination-hover-element-background-color: $x-color-pastel !default
-$pagination-hover-element-border-color: $pagination-hover-element-background-color !default
+$navigation-padding-horizontal: $x-padding-horizontal-small !default
+$navigation-padding-vertical: $x-padding-vertical-very-small !default
 
+$navigation-transition-time: 400ms !default
+
+// Navigation elements
+$navigation-element-text-color: $typography-link-color !default
+$navigation-element-active-background: $x-color-secondary !default
+$navigation-element-active-border-color: $navigation-element-active-background !default
+$navigation-element-active-text-color: $x-color-background !default
+$navigation-element-hover-background-color: $x-color-pastel !default
+$navigation-element-hover-border-color: $navigation-element-hover-background-color !default
+
+$navigation-element-padding-horizontal: $x-padding-horizontal-small !default
+$navigation-element-padding-vertical: $x-padding-vertical-small !default
+$navigation-element-border-radius: $x-border-radius !default
+
+// Navigation subtitle
+$navigation-subtitle-font-size: $x-font-size-big !default
+
+// Breadcrumbs
+$navigation-breadcrumbs-base-color: $x-color-calmer !default
+$navigation-breadcrumbs-menu-background-color: $navigation-breadcrumbs-base-color !default
+
+// Tabs
 $tabs-element-background: $x-color-pastel !default
 $tabs-element-text-color: $x-color-text !default
-
 $tabs-active-element-background: $x-color-background !default
-
 $tabs-hover-element-background: $x-color-background !default
 
+// Stepper
 $step-background: $x-color-secondary !default
 $step-border-color: $x-color-background !default
-
 $step-active-background: $x-color-background !default
 $step-active-border-color: $x-color-secondary !default
-
 $step-disabled-background-color: $color-talixo-light-gray !default
 $step-disabled-border-color: $x-color-background !default
-
 $step-completed-background-color: $x-color-secondary !default
 $step-completed-border-color: $step-completed-background-color !default

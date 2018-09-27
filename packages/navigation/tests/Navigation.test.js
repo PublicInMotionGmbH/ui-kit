@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Navigation, { moduleName } from '../src/Navigation'
+import NavigationWrapper, { moduleName } from '../src/NavigationWrapper'
 
 const includesClassName = (wrapper, className) => {
   const clsName = wrapper.props().className
@@ -10,7 +10,7 @@ const includesClassName = (wrapper, className) => {
 
 describe('Module name', () => {
   it('is passed correctly', () => {
-    const wrapper = shallow(<Navigation />)
+    const wrapper = shallow(<NavigationWrapper />)
 
     includesClassName(wrapper, moduleName)
   })
@@ -21,11 +21,11 @@ describe('<Navigation />', () => {
 
   it('renders children correctly', () => {
     const wrapper = shallow(
-      <Navigation>
+      <NavigationWrapper>
         <span>Home</span>
         <span>Issues</span>
         <span>Major</span>
-      </Navigation>
+      </NavigationWrapper>
     )
 
     expect(wrapper.props().className.includes('navigation')).toEqual(true)
@@ -33,11 +33,11 @@ describe('<Navigation />', () => {
 
   it('renders types correctly', () => {
     const wrappers = {
-      navigation: shallow(<Navigation type='navigation' />),
-      pagination: shallow(<Navigation type='pagination' />),
-      breadcrumbs: shallow(<Navigation type='breadcrumbs' />),
-      tabs: shallow(<Navigation type='tabs' />),
-      steps: shallow(<Navigation type='steps' />)
+      navigation: shallow(<NavigationWrapper type='navigation' />),
+      pagination: shallow(<NavigationWrapper type='pagination' />),
+      breadcrumbs: shallow(<NavigationWrapper type='breadcrumbs' />),
+      tabs: shallow(<NavigationWrapper type='tabs' />),
+      steps: shallow(<NavigationWrapper type='steps' />)
     }
 
     Object.keys(wrappers).forEach(key => {
@@ -47,17 +47,17 @@ describe('<Navigation />', () => {
 
   it('inserts dividers correctly', () => {
     const wrappers = {
-      empty: shallow(<Navigation divider={customDivider} />),
+      empty: shallow(<NavigationWrapper divider={customDivider} />),
       single: shallow(
-        <Navigation divider={customDivider}>
+        <NavigationWrapper divider={customDivider}>
           <span>Home</span>
-        </Navigation>
+        </NavigationWrapper>
       ),
       multiple: shallow(
-        <Navigation divider={customDivider}>
+        <NavigationWrapper divider={customDivider}>
           <span>Home</span>
           <span>Issues</span>
-        </Navigation>
+        </NavigationWrapper>
       )
     }
 
@@ -68,11 +68,11 @@ describe('<Navigation />', () => {
 
   it('inserts dividers between children elements', () => {
     const wrapper = shallow(
-      <Navigation divider={customDivider}>
+      <NavigationWrapper divider={customDivider}>
         <span>1</span>
         <span>2</span>
         <span>3</span>
-      </Navigation>
+      </NavigationWrapper>
     )
 
     expect(wrapper.childAt(0).contains(customDivider)).toEqual(false)
