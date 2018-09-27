@@ -131,15 +131,15 @@ describe('<RadioGroup />', () => {
     it('should call onChange function', () => {
       input = wrapper.find('input[type="radio"]').at(0)
       input.simulate('change', { target: { checked: true } })
-      expect(props.onChange).toHaveBeenCalled()
-      expect(props.onChange.mock.calls.length).toBe(1)
+
+      expect(props.onChange).toHaveBeenCalledTimes(1)
     })
 
     it('should correctly use nullable value', () => {
       input = wrapper.find('input[type="radio"]').at(0)
       input.simulate('change', { target: { checked: true } })
 
-      expect(props.onChange.mock.calls.length).toBe(1)
+      expect(props.onChange).toHaveBeenCalledTimes(1)
       expect(props.onChange.mock.calls[0][0]).toEqual(null)
     })
 
@@ -147,7 +147,7 @@ describe('<RadioGroup />', () => {
       input = wrapper.find('input[type="radio"]').at(1)
       input.simulate('change', { target: { checked: true } })
 
-      expect(props.onChange.mock.calls.length).toBe(1)
+      expect(props.onChange).toHaveBeenCalledTimes(1)
       expect(props.onChange.mock.calls[0][0]).toEqual(2)
     })
 
@@ -155,7 +155,7 @@ describe('<RadioGroup />', () => {
       input = wrapper.find('input[type="radio"]').at(3)
       input.simulate('change', { target: { checked: true } })
 
-      expect(props.onChange.mock.calls.length).toBe(1)
+      expect(props.onChange).toHaveBeenCalledTimes(1)
       expect(props.onChange.mock.calls[0][0]).toEqual(EXAMPLE_OBJECT)
     })
 
