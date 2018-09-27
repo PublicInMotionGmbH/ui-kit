@@ -260,7 +260,7 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children, id, disabled, readOnly, name } = this.props
+    const { children, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
@@ -272,10 +272,6 @@ class AutoComplete extends React.PureComponent {
 
     if (readOnly) {
       inputProps.readOnly = readOnly
-    }
-
-    if (id != null) {
-      inputProps.id = id
     }
 
     if (name != null) {
@@ -328,12 +324,20 @@ class AutoComplete extends React.PureComponent {
    */
   render () {
     const {
-      icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
+      id, icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
       children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
+    const idProps = {}
+
+    if (id) {
+      idProps.inputId = id
+      idProps.id = 'container_' + id
+    }
+
     return (
       <Downshift
+        {...idProps}
         ref={this.setDownshiftRef}
         stateReducer={this.stateReducer}
         onChange={this.select}
