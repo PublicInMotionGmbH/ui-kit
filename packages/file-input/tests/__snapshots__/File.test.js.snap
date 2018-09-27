@@ -2,29 +2,36 @@
 
 exports[`<File /> should render properly 1`] = `
 <div
-  className="talixo-file"
+  className="talixo-file-input-file"
 >
-  <div>
+  <button
+    className="talixo-file-input-file__remove"
+    onClick={[Function]}
+  >
     <Icon
-      className="talixo-file__remove"
       name="clear"
-      onClick={[Function]}
     />
+  </button>
+  <div
+    className="talixo-file-input-file__info"
+  >
     <Icon
-      className="talixo-file__icon"
+      className="talixo-file-input-file__icon"
       name="insert_drive_file"
     />
-  </div>
-  <div>
     <div
-      className="talixo-file__name"
+      className="talixo-file-input-file__description"
     >
-      Test
-    </div>
-    <div
-      className="talixo-file__size"
-    >
-      120.43 KB
+      <strong
+        className="talixo-file-input-file__name"
+      >
+        Test
+      </strong>
+      <span
+        className="talixo-file-input-file__size"
+      >
+        120.43 KB
+      </span>
     </div>
   </div>
 </div>

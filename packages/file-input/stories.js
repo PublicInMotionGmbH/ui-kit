@@ -19,7 +19,7 @@ const addStory = createStoriesFactory('File Input', module, {
 const iconCls = prefix('file-input-storybook', 'icon')
 const wrapperCls = prefix('file-input-storybook', 'wrapper')
 
-const filesRender = (props) => {
+const renderFile = (props) => {
   const { file, onRemove } = props
   return (
     <div className='talixo-file-input-storybook-render'>
@@ -67,7 +67,7 @@ addStory('drag and drop disabled', readme, () => (
 ))
 
 addStory('custom file component', readme, () => (
-  <FileInput filesRender={filesRender}>
+  <FileInput renderFile={renderFile}>
     <div className={wrapperCls}>
       <div className={iconCls}><Icon name='cloud_upload' /></div>
       <div>Select files to upload<br /><br /></div>
@@ -76,14 +76,8 @@ addStory('custom file component', readme, () => (
 ))
 
 addStory.controlled('controlled file input', readme, (setState, state) => {
-  function onChange (files) {
-    setState({ files: state.files.concat(files) })
-  }
-  function onRemove (file) {
-    setState({ files: state.files.filter(item => item !== file) })
-  }
   return (
-    <FileInput files={state.files} onChange={onChange} onRemove={onRemove}>
+    <FileInput files={state.files} onChange={files => setState({ files })}>
       <div className={wrapperCls}>
         <div className={iconCls}><Icon name='cloud_upload' /></div>
         <div>Select files to upload or<br /><br /></div>

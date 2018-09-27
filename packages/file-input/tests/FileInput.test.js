@@ -7,13 +7,13 @@ import FileInput, { moduleName } from '../src/FileInput'
 
 // Helpers
 
-const file1 = new File(['test'], 'test.txt', { type: 'text/plain' }) // eslint-disable-line
-const file2 = new File(['test2'], 'test2.txt', { type: 'text/plain' }) // eslint-disable-line
+const file1 = new window.File([ 'test' ], 'test.txt', { type: 'text/plain' })
+const file2 = new window.File([ 'test2' ], 'test2.txt', { type: 'text/plain' })
 
-const buttonCls = `.${buildClassName([moduleName, 'button'])}`
-const coverCls = `.${buildClassName([moduleName, 'cover'])}`
+const buttonCls = `.${buildClassName([ moduleName, 'button' ])}`
+const coverCls = `.${buildClassName([ moduleName, 'cover' ])}`
 
-const filesRender = ({ file }) => (
+const renderFile = ({ file }) => (
   <div className='test-wrapper'>
     <span className='test-name'>{file.name}</span>
     <span className='test-size'>{file.size}</span>
@@ -60,46 +60,46 @@ describe('<FileInput />', () => {
     it('should open input[type="file"] dialog when button is clicked', () => {
       const mockClick = jest.fn()
       wrapper.instance().input.click = mockClick
-      button.find('button').simulate('click', {})
+      button.find('button').simulate('click')
       expect(mockClick).toHaveBeenCalledTimes(1)
     })
 
     it('should add files to state when input has changed', () => {
-      input.simulate('change', { target: { files: [file1] } })
-      expect(wrapper.state().files).toEqual([file1])
+      input.simulate('change', { target: { files: [ file1 ] } })
+      expect(wrapper.state().files).toEqual([ file1 ])
     })
 
     it('should add files onDrop', () => {
-      wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
-      expect(wrapper.state().files).toEqual([file1])
+      wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
+      expect(wrapper.state().files).toEqual([ file1 ])
     })
 
     it('should invoke props.onChange if provided', () => {
       onChange.mockReset()
-      wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
+      wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
       expect(onChange).toHaveBeenCalledTimes(1)
-      expect(onChange).toHaveBeenCalledWith([file1], expect.anything())
+      expect(onChange).toHaveBeenCalledWith([ file1 ], expect.anything())
     })
 
     it('should change dragging over to false when no file is dropped', () => {
       wrapper.simulate('dragEnter')
       expect(wrapper.state().draggingOver).toBe(true)
-      wrapper.simulate('drop', {})
+      wrapper.simulate('drop')
       expect(wrapper.state().files).toEqual([])
     })
 
     it('should remove files when clicking on remove button', () => {
-      wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
-      const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
+      wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
+      const remove = wrapper.find(`.${buildClassName(['file-input-file', 'remove'])}`)
       remove.first().simulate('click')
       expect(wrapper.state().files).toEqual([])
     })
 
     it('should invoke props.onRemove if provided', () => {
       onRemove.mockReset()
-      wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
-      const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
-      remove.first().simulate('click', {})
+      wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
+      const remove = wrapper.find(`.${buildClassName(['file-input-file', 'remove'])}`)
+      remove.first().simulate('click')
       expect(onRemove).toHaveBeenCalledTimes(1)
       expect(onRemove).toHaveBeenCalledWith(file1, expect.anything())
     })
@@ -214,7 +214,7 @@ describe('<FileInput />', () => {
 
     describe('file handling', () => {
       const props = {
-        files: [file1]
+        files: [ file1 ]
       }
 
       beforeEach(() => {
@@ -226,24 +226,24 @@ describe('<FileInput />', () => {
       })
 
       it('should pass files to state when mounted', () => {
-        expect(wrapper.state().files).toEqual([file1])
+        expect(wrapper.state().files).toEqual([ file1 ])
       })
 
       it('should add file to state.files', () => {
-        wrapper.setProps({ files: [file1, file2] })
-        expect(wrapper.state().files).toEqual([file1, file2])
+        wrapper.setProps({ files: [ file1, file2 ] })
+        expect(wrapper.state().files).toEqual([ file1, file2 ])
       })
 
       it('should not change state.files if files are managed via props', () => {
-        const remove = wrapper.find(`.${buildClassName(['file', 'remove'])}`)
-        remove.first().simulate('click', {})
-        expect(wrapper.state().files).toEqual([file1])
+        const remove = wrapper.find(`.${buildClassName([ 'file-input-file', 'remove' ])}`)
+        remove.first().simulate('click')
+        expect(wrapper.state().files).toEqual([ file1 ])
       })
     })
 
     describe('events handling', () => {
       const props = {
-        files: [file1],
+        files: [ file1 ],
         onDragEnter: jest.fn()
       }
       beforeEach(() => {
@@ -255,7 +255,7 @@ describe('<FileInput />', () => {
       })
 
       it('should invoke onDragEnter passed from props', () => {
-        wrapper.simulate('dragEnter', {})
+        wrapper.simulate('dragEnter')
         expect(props.onDragEnter).toHaveBeenCalledTimes(1)
         expect(props.onDragEnter).toHaveBeenCalledWith([], expect.anything())
       })
@@ -278,22 +278,22 @@ describe('<FileInput />', () => {
       })
 
       it('should allow to drop one file', () => {
-        input.simulate('change', { target: { files: [file1] } })
-        expect(wrapper.state().files).toEqual([file1])
+        input.simulate('change', { target: { files: [ file1 ] } })
+        expect(wrapper.state().files).toEqual([ file1 ])
       })
 
       it('should not allow to drop more than one file', () => {
-        input.simulate('change', { target: { files: [file1, file2] } })
+        input.simulate('change', { target: { files: [ file1, file2 ] } })
         expect(wrapper.state().files).toEqual([])
       })
 
       it('should allow to pass one file', () => {
-        wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
-        expect(wrapper.state().files).toEqual([file1])
+        wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
+        expect(wrapper.state().files).toEqual([ file1 ])
       })
 
       it('should not allow to pass more than one file', () => {
-        wrapper.simulate('drop', { dataTransfer: { files: [file1, file2] } })
+        wrapper.simulate('drop', { dataTransfer: { files: [ file1, file2 ] } })
         expect(wrapper.state().files).toEqual([])
       })
     })
@@ -314,30 +314,30 @@ describe('<FileInput />', () => {
       })
 
       it('should allow to drop one file', () => {
-        input.simulate('change', { target: { files: [file1] } })
-        expect(wrapper.state().files).toEqual([file1])
+        input.simulate('change', { target: { files: [ file1 ] } })
+        expect(wrapper.state().files).toEqual([ file1 ])
       })
 
       it('should not allow to drop more than one file', () => {
-        input.simulate('change', { target: { files: [file1, file2] } })
-        expect(wrapper.state().files).toEqual([file1, file2])
+        input.simulate('change', { target: { files: [ file1, file2 ] } })
+        expect(wrapper.state().files).toEqual([ file1, file2 ])
       })
 
       it('should not allow to pass one file', () => {
-        wrapper.simulate('drop', { dataTransfer: { files: [file1] } })
+        wrapper.simulate('drop', { dataTransfer: { files: [ file1 ] } })
         expect(wrapper.state().files).toEqual([])
       })
 
       it('should not allow to pass more than one file', () => {
-        wrapper.simulate('drop', { dataTransfer: { files: [file1, file2] } })
+        wrapper.simulate('drop', { dataTransfer: { files: [ file1, file2 ] } })
         expect(wrapper.state().files).toEqual([])
       })
     })
 
-    describe('filesRender', () => {
+    describe('renderFile', () => {
       const props = {
-        files: [file1],
-        filesRender
+        files: [ file1 ],
+        renderFile
       }
 
       beforeEach(() => {

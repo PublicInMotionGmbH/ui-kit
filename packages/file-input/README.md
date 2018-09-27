@@ -32,7 +32,7 @@ children      | nodes     | n/a             | Content displayed in drop box.
 className     | string    | n/a             | Additional class name.
 dropDisabled  | boolean   | `false`         | Disable drag and drop.
 files         | string    | n/a             | Dropped files.
-filesRender   | function  | `File`          | File component renderer.
+renderFile   | function  | `File`          | File component renderer.
 multiple      | boolean   | `true`          | Allows multiple files uploading.
 uploadLabel   | node      | n/a             | Label displayed alongside button.
 onChange      | function  | n/a             | onChange callback. Invoked when either files have been dropped or file input has changed.

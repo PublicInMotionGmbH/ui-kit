@@ -6,7 +6,7 @@ import { Icon } from '@talixo/icon'
 
 import { formatBytes } from './utils'
 
-export const moduleName = 'file'
+export const moduleName = 'file-input-file'
 
 const propTypes = {
   /** File information object. */
@@ -27,10 +27,13 @@ const propTypes = {
  */
 function File (props) {
   const { file, onRemove } = props
-  const iconCls = buildClassName([moduleName, 'icon'])
-  const nameCls = buildClassName([moduleName, 'name'])
-  const removeCls = buildClassName([moduleName, 'remove'])
-  const sizeCls = buildClassName([moduleName, 'size'])
+
+  const iconCls = buildClassName([ moduleName, 'icon' ])
+  const infoCls = buildClassName([ moduleName, 'info' ])
+  const descriptionCls = buildClassName([ moduleName, 'description' ])
+  const nameCls = buildClassName([ moduleName, 'name' ])
+  const removeCls = buildClassName([ moduleName, 'remove' ])
+  const sizeCls = buildClassName([ moduleName, 'size' ])
   const wrapperCls = buildClassName(moduleName)
 
   function onClick (e) {
@@ -41,13 +44,15 @@ function File (props) {
 
   return (
     <div className={wrapperCls}>
-      <div>
-        <Icon name='clear' onClick={onClick} className={removeCls} />
+      <button className={removeCls} onClick={onClick}>
+        <Icon name='clear' />
+      </button>
+      <div className={infoCls}>
         <Icon name='insert_drive_file' className={iconCls} />
-      </div>
-      <div>
-        <div className={nameCls}>{ file.name }</div>
-        <div className={sizeCls}>{ formatBytes(file.size) }</div>
+        <div className={descriptionCls}>
+          <strong className={nameCls}>{file.name}</strong>
+          <span className={sizeCls}>{formatBytes(file.size)}</span>
+        </div>
       </div>
     </div>
   )
