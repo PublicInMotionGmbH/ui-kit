@@ -22,7 +22,7 @@ describe('<ColumnsElement />', () => {
 
   it('renders icon correctly', () => {
     const wrapper = shallow(
-      <ColumnsElement headerIcon={<Icon name='beenhere' />}>
+      <ColumnsElement header='bla' icon={<Icon name='beenhere' />}>
         <h2>1. Amet cillum deserunt.</h2>
       </ColumnsElement>
     )
@@ -56,17 +56,27 @@ describe('<ColumnsElement />', () => {
     expect(wrapper.prop('style').flexBasis).toBe(null)
   })
 
-  it('render icon container when prop headerIcon not passed', () => {
+  it('render icon container when prop icon not passed', () => {
     const wrapper = shallow(
-      <ColumnsElement headerIcon={<Icon name='beenhere' />}>
+      <ColumnsElement header='bla' icon={<Icon name='beenhere' />}>
         <h2>1. Amet cillum deserunt.</h2>
       </ColumnsElement>
     )
 
-    expect(wrapper.find(`.${name}__icon`).exists()).toBe(true)
+    expect(wrapper.find(Icon).exists()).toBe(true)
   })
 
-  it('does not render icon container when prop headerIcon not passed', () => {
+  it('doesnt render icon container when header is not passed', () => {
+    const wrapper = shallow(
+      <ColumnsElement icon={<Icon name='beenhere' />}>
+        <h2>1. Amet cillum deserunt.</h2>
+      </ColumnsElement>
+    )
+
+    expect(wrapper.find(Icon).exists()).toBe(false)
+  })
+
+  it('does not render icon container when prop icon not passed', () => {
     const wrapper = shallow(
       <ColumnsElement>
         <h2>1. Amet cillum deserunt.</h2>

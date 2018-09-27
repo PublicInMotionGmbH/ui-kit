@@ -15,8 +15,11 @@ const propTypes = {
   /** Max columns number in row */
   maxColumns: PropTypes.number,
 
-  /** Icon in header with indent content */
-  headerIcon: PropTypes.node
+  /** Header to show on top of section */
+  header: PropTypes.node,
+
+  /** Icon to show next to section */
+  icon: PropTypes.node
 }
 
 /**
@@ -24,52 +27,52 @@ const propTypes = {
  *
  * @param {object} props
  * @param {string} [props.className]
- * @param {node} [props.children]
+ * @param {*} [props.children]
  * @param {number} [props.maxColumns]
- * @param {node} [props.headerIcon]
+ * @param {*} [props.header]
+ * @param {*} [props.icon]
  * @returns {React.Element}
  */
 function ColumnsElement (props) {
-  const { className, children, maxColumns, headerIcon, ...passedProps } = props
+  const { className, children, maxColumns, header, icon, style, ...passedProps } = props
 
-  const clsName = buildClassName(moduleName, className, {'header-icon': headerIcon})
-  const clsIconName = buildClassName([moduleName, 'icon'])
-  const clsContentName = buildClassName([moduleName, 'content'])
+  const clsName = buildClassName(moduleName, className, {
+    'with-header': header != null,
+    'with-icon': header != null && icon != null
+  })
+  const iconClsName = buildClassName([ moduleName, 'icon' ])
+  const contentClsName = buildClassName([ moduleName, 'content' ])
+  const headerClsName = buildClassName([ moduleName, 'header' ])
+
   const columnsWidth = maxColumns ? `${100 / maxColumns}%` : null
 
-  /**
-   * Render icon container
-   * @returns {React.Element}
-   */
-  const renderIcon = () => {
-    return (
-      <div className={clsIconName}>
-        {headerIcon}
-      </div>
-    )
-  }
+  const iconElement = icon == null ? null : (
+    <div className={iconClsName}>
+      {icon}
+    </div>
+  )
 
-  /**
-   * Render content container
-   * @returns {React.Element}
-   */
-  const renderContent = () => {
-    return (
-      <div className={clsContentName}>
-        {children}
-      </div>
-    )
-  }
+  const headerElement = header == null ? null : (
+    <header className={headerClsName}>
+      {iconElement}
+      <h3>{header}</h3>
+    </header>
+  )
+
+  const content = children == null ? null : (
+    <div className={contentClsName}>
+      {children}
+    </div>
+  )
 
   return (
     <div
-      className={clsName} {...passedProps}
-      style={{
-        flexBasis: columnsWidth
-      }}
+      className={clsName}
+      style={{ ...style, flexBasis: columnsWidth }}
+      {...passedProps}
     >
-      {headerIcon && renderIcon()}
-      {children && renderContent()}
+      {headerElement}
+      {content}
     </div>
   )
 }

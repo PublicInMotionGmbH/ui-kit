@@ -39,7 +39,7 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | content to display in component
 maxColumns    | number    | n/a     | max columns number in row
-headerIcon    | node      | n/a     | icon in header with indent content
+icon          | node      | n/a     | icon in header with indent content
 
 ## Changelog
 
