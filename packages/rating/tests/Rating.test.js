@@ -21,6 +21,11 @@ describe('<Rating />', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('should render basic rating without placeholders', () => {
+    const wrapper = shallow(<Rating value={3} size={5} hidePlaceholder />)
+    expect(wrapper).toMatchSnapshot()
+  })
+
   it('allows changing number of icons', () => {
     const wrapper = shallow(<Rating size={5} />)
 
