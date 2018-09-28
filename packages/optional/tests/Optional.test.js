@@ -2,54 +2,58 @@ import React from 'react'
 import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
+import { Textarea } from '@talixo/textarea'
 
 import Optional from '../src/Optional'
 
-const moduleName = prefix('optional')
-
 describe('<Optional />', () => {
   it('renders children correctly', () => {
-    const wrapper = shallow(<Optional />)
+    const wrapper = shallow(
+      <Optional>
+        <Textarea />
+      </Optional>
+    )
 
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('renders collapsible correctly', () => {
-    const wrapper = shallow(<Optional collapsible />)
-
-    expect(wrapper.find(`.${moduleName}__checkbox`)).toHaveLength(1)
-    expect(wrapper.find('talixo-textarea')).toHaveLength(0)
-  })
-
-  it('render label correclty', () => {
-    const wrapper = mount(<Optional label='This is label' />)
-
-    expect(wrapper.find(`.${moduleName}__label`)).toHaveLength(1)
-    expect(wrapper.find(`.${moduleName}__label`).prop('children')).toBe('This is label')
-
-    wrapper.unmount()
-  })
-
-  it('handle recevie new value from props', () => {
-    const wrapper = shallow(<Optional value='value1' />)
+  it('handle receive new value from props', () => {
+    const wrapper = shallow(
+      <Optional value='value1'>
+        <Textarea />
+      </Optional>
+    )
 
     wrapper.setProps({
       value: 'value2'
     })
 
     expect(wrapper.state('value')).toBe('value2')
+    expect(wrapper.find(Textarea).prop('value')).toBe('value2')
   })
 
   it('handle Textarea change', () => {
-    const wrapper = shallow(<Optional value='value1' />)
+    const onChange = jest.fn()
 
-    wrapper.find('Textarea').simulate('change', 'Some text')
+    const wrapper = mount(
+      <Optional value='value1' onChange={onChange}>
+        <Textarea />
+      </Optional>
+    )
 
-    expect(wrapper.state('value')).toBe('Some text')
+    wrapper.find('textarea').simulate('change', { target: { value: 'Some text' } })
+
+    expect(onChange.mock.calls.length).toBe(1)
+    expect(onChange.mock.calls[0][0]).toBe('Some text')
+    expect(wrapper.state('value')).toBe('value1')
   })
 
   it('handle Checkbox change', () => {
-    const wrapper = mount(<Optional collapsible />)
+    const wrapper = mount(
+      <Optional>
+        <Textarea />
+      </Optional>
+    )
 
     wrapper.find('input').simulate('change', {
       target: {
@@ -58,24 +62,7 @@ describe('<Optional />', () => {
     })
 
     expect(wrapper.state('visible')).toBe(true)
-    expect(wrapper.find('.talixo-textarea')).toHaveLength(1)
-
-    wrapper.unmount()
-  })
-
-  it('should handle `onChange` event properly', () => {
-    const spy = jest.fn()
-    const wrapper = mount(<Optional onChange={spy} />)
-
-    wrapper.find('textarea').simulate('change', {
-      target: {
-        value: 'random text'
-      }
-    })
-
-    expect(spy.mock.calls.length).toBe(1)
-    expect(spy.mock.calls[0]).toEqual([ 'random text' ])
-    expect(wrapper.state('value')).toBe('random text')
+    expect(wrapper.find(`.${prefix('textarea')}`)).toHaveLength(1)
 
     wrapper.unmount()
   })
