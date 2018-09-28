@@ -30,40 +30,24 @@ to avoid having different versions of these in your application.
 
 ### Address Input
 
-Property name | Type        | Default                           | Description                    
---------------|-------------|:---------------------------------:|--------------------------------
-className     | string      | n/a                               | Address of location.
-footer        | node        | n/a                               | AutoComplete list footer.
-label         | string      | n/a                               | Mobile view input label.
-loading       | boolean     | n/a                               | Indicates if loader should be displayed inside input.
-locations     | Location[]  | n/a                               | Locations to be displayed inside AutoComlete.
-onBlur        | function    | n/a                               | onBlur callback.
-onChange      | function    | n/a                               | onChange callback.
-onFocus       | function    | n/a                               | onFocus callback.
-onLoadRequest | function    | n/a                               | This function is called when changes input value, at has typed in at least 3 letters. It can be used to load locations from external API.
-onStopRequest | function    | n/a                               | This function is called when changes input value, at has typed less than 3 letters.
-placeholder   | string      | n/a                               | AdressInput placeholder.
-renderAddress | function    | (props) => <Address {...props} /> | Address component which will be displayed inside autocomplete list.
-value         | Location    | n/a                               | Chosen location value.
-
-### Address
-
-Property name     | Type        | Default   | Description                    
-------------------|-------------|:---------:|--------------------------------
-address           | string      | n/a       | Address of a place.
-className         | string      | n/a       | Additional class name passed to wrapper.
-details           | string      | n/a       | Place details.
-detailsFormatter  | function    | `x => x`  | Format details.
-icon              | string      | n/a       | Icon displayed next to the address.
-iconProvider      | object      | n/a       | You can provide your custom mapping of Icon component names here. Remember to add fallback icon under `default` key.
-short             | string      | n/a       | Place name abbreviation. It can be e.g. IATA code of an airport.
-
-### Address Path
-
-Property name | Type        | Required  | Default | Description                    
---------------|-------------|-----------|:-------:|--------------------------------
-children      | node        | true      | n/a     | E.x. steps of a journey. Works best with Address component.
-className     | string      | false     | n/a     | AutoComplete list footer.
+Property name  | Type        | Default                           | Description                    
+---------------|-------------|:---------------------------------:|--------------------------------
+className      | string      | n/a                               | Address of location.
+footer         | node        | n/a                               | AutoComplete list footer.
+label          | string      | n/a                               | Mobile view input label.
+loading        | boolean     | n/a                               | Indicates if loader should be displayed inside input.
+locations      | Location[]  | n/a                               | Locations to be displayed inside AutoComlete.
+onBlur         | function    | n/a                               | onBlur callback.
+onChange       | function    | n/a                               | onChange callback.
+onFocus        | function    | n/a                               | onFocus callback.
+onLoadRequest  | function    | n/a                               | This function is called when changes input value, at has typed in at least 3 letters. It can be used to load locations from external API.
+onStopRequest  | function    | n/a                               | This function is called when changes input value, at has typed less than 3 letters.
+placeholder    | string      | n/a                               | AddressInput placeholder.
+minLetters     | number      | `3`                               | Minimum number of letters to request load/stop procedure.
+writingDelay   | number      | `300`                             | Debounce delay (in milliseconds) for writing, to not request `load` procedure.
+mobileFriendly | boolean     | `true`                            | Should it try to show it better way on mobile?
+renderAddress  | function    | (props) => <Address {...props} /> | Address component which will be displayed inside autocomplete list.
+value          | Location    | n/a                               | Chosen location value.
 
 ### Property shapes
 
@@ -71,9 +55,9 @@ className     | string      | false     | n/a     | AutoComplete list footer.
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | Address of location.
+address       | string    | n/a     | Basic address information.
 details       | string    | n/a     | Additional information about place.
-icon          | string    | n/a     | Icon displayed next to the address.
+type          | string    | n/a     | Address type to determine icon displayed next to the address.
 meta          | Meta      | n/a     | Metadata of location.
 short         | string    | n/a     | Place name abbreviation. It can be e.g. IATA code of an airport.
 

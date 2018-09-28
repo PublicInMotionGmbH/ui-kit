@@ -15,9 +15,9 @@ const propTypes = {
 
 /**
  *
- * @param props
- * @param {*} children
- * @param {string} className
+ * @param {object} props
+ * @param {*} props.children
+ * @param {string} props.className
  * @returns {React.Element}
  */
 function AddressPath (props) {
@@ -28,8 +28,8 @@ function AddressPath (props) {
 
   // Generate classNames
   const wrapper = buildClassName(moduleName, className)
-  const pathCls = buildClassName([moduleName, 'path'])
-  const elementCls = index => buildClassName([moduleName, 'point'], null, { 'last-path': lastPathIndex === index })
+  const pathCls = buildClassName([ moduleName, 'path' ])
+  const elementCls = index => buildClassName([ moduleName, 'point' ], null, { 'last-path': lastPathIndex === index })
 
   // Generate Address elements and apply path styles
   const elements = React.Children.map(children, (element, index) => (

@@ -14,7 +14,7 @@ import { Button } from '@talixo/button'
 import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
-import Address from './Address'
+import { Address } from '@talixo/address'
 
 export const moduleName = 'address-input'
 
@@ -48,16 +48,15 @@ export function itemToString (item) {
 
 /**
  *
- * @param props
+ * @param {object} props
  * @param {string} [props.address]
  * @param {string} [props.className]
  * @param {string} [props.details]
- * @param {function} [props.detailsFormatter]
- * @param {string} [props.icon]
- * @param {function} [props.iconProvider]
+ * @param {function} [props.formatDetails]
+ * @param {string} [props.type]
  * @param {string} [props.short]
  *
- * @returns {Element|ReactElement}
+ * @returns {React.Element}
  */
 function _renderAddress (props) {
   return <Address {...props} />
@@ -71,7 +70,7 @@ const locationProp = {
   details: PropTypes.string,
 
   /** Icon displayed next to the address. */
-  icon: PropTypes.string,
+  type: PropTypes.string,
 
   /** Metadata of location. */
   meta: PropTypes.shape({
@@ -83,7 +82,7 @@ const locationProp = {
   short: PropTypes.string
 }
 
-const propsTypes = {
+const propTypes = {
   /** Additional className passed to wrapper. */
   className: PropTypes.string,
 
@@ -108,28 +107,42 @@ const propsTypes = {
   /** onFocus callback. */
   onFocus: PropTypes.func,
 
-  /** This function is called when changes input value, at has typed in at least 3 letters.
+  /**
+   * This function is called when changes input value, at has typed in at least 3 (minLetters) letters.
    * It should be used to load locations from external API.
    */
   onLoadRequest: PropTypes.func,
 
-  /** This function is called when changes input value, at has typed less than 3 letters.
+  /**
+   * This function is called when changes input value, at has typed less than 3 (minLetters) letters.
    * It should be used to prevent request to API.
    */
   onStopRequest: PropTypes.func,
 
-  /** AdressInput placeholder. */
+  /** Minimum number of letters to run load/stop helpers */
+  minLetters: PropTypes.number,
+
+  /** Delay time for writing message */
+  writingDelay: PropTypes.number,
+
+  /** AddressInput placeholder. */
   placeholder: PropTypes.string,
 
   /** Address component which will be displayed inside autocomplete list. */
   renderAddress: PropTypes.string,
 
   /** Chosen location value. */
-  value: PropTypes.shape(locationProp)
+  value: PropTypes.shape(locationProp),
+
+  /** Should it be optimized for mobile? */
+  mobileFriendly: PropTypes.bool
 }
 
 const defaultProps = {
-  renderAddress: _renderAddress
+  renderAddress: _renderAddress,
+  mobileFriendly: true,
+  minLetters: 3,
+  writingDelay: 300
 }
 
 /**
@@ -140,7 +153,7 @@ const defaultProps = {
  * @property {*} [props.footer]
  * @property {string} [props.label]
  * @property {boolean} [props.loading]
- * @property {Array<{ [address]: string, [details]: string, [icon]: string, [meta]: { [description]: string }, [short]: string}>} [props.locations]
+ * @property {Array<{ [address]: string, [details]: string, [type]: string, [meta]: { [description]: string }, [short]: string}>} [props.locations]
  * @property {function} [props.onBlur]
  * @property {function} [props.onChange]
  * @property {function} [props.onFocus]
@@ -183,7 +196,8 @@ class AddressInput extends React.PureComponent {
    * @param {string} value
    */
   onInputValueChange = value => {
-    const { onLoadRequest, onStopRequest } = this.props
+    const { onLoadRequest, onStopRequest, minLetters } = this.props
+
     if (value === this.state.inputValue) {
       return
     }
@@ -192,11 +206,12 @@ class AddressInput extends React.PureComponent {
     this.onChange(null)
 
     // Invoke find request only when at least 3 chars are provided.
-    if (value.length < 3) {
+    if (value.length < minLetters) {
+      this.load.cancel()
+
       if (onStopRequest) {
         onStopRequest()
       }
-      this.load.cancel()
     } else if (onLoadRequest) {
       this.load(value)
     }
@@ -208,7 +223,7 @@ class AddressInput extends React.PureComponent {
    */
   load = debounce(value => {
     this.props.onLoadRequest(value)
-  }, 300)
+  }, this.props.writingDelay)
 
   /**
    * Handle choosing element from the autocomplete list on mobile devices.
@@ -309,8 +324,9 @@ class AddressInput extends React.PureComponent {
    */
   renderDesktop = () => {
     const {
-      className, footer, locations, loading, onBlur, onChange, onFocus,
-      onLoadRequest, onStopRequest, placeholder, renderAddress, value, ...passedProps
+      className, footer, locations, loading, onBlur, onChange, onFocus, writingDelay,
+      onLoadRequest, onStopRequest, placeholder, renderAddress, value, minLetters, mobileFriendly,
+      ...passedProps
     } = this.props
 
     // FIXME: pass props down
@@ -367,72 +383,77 @@ class AddressInput extends React.PureComponent {
 
     const renderAddressProps = { ...this.state.value }
 
+    const input = this.state.focus ? (
+      <CSSTransition
+        classNames={transitionCls}
+        timeout={200}
+      >
+        <div className={mobileModal}>
+          <div className={mobileModalHeader}>
+            <div>{label}</div>
+            <Button small onClick={this.blur}>Close</Button>
+          </div>
+          <AutoComplete
+            openOnFocus
+            isOpen
+            options={locations}
+            onChoose={this.onChoose}
+            onFocus={this.focus}
+            renderItem={renderAddress}
+            inputValue={this.state.inputValue}
+            onInputValueChange={this.onInputValueChange}
+            itemToString={itemToString}
+            footer={footer}
+          >
+            <TextInput
+              autoComplete='nope'
+              spellCheck='false'
+              onKeyDown={this.onKeyDown}
+              placeholder={placeholder}
+              right={loading ? <ProgressRing /> : <Icon name='clear' onClick={this.onInputClear} />}
+              inputRef={this.getMobileInputRef}
+              autoFocus
+            />
+          </AutoComplete>
+        </div>
+      </CSSTransition>
+    ) : null
+
     return (
       <div>
         <div className={fakeCls} onClick={this.focus}>
-          { this.state.value ? renderAddress(renderAddressProps) : placeholder }
+          {this.state.value ? renderAddress(renderAddressProps) : placeholder}
         </div>
         <TransitionGroup>
-          {
-            this.state.focus &&
-            <CSSTransition
-              classNames={transitionCls}
-              timeout={200}
-            >
-              <div className={mobileModal}>
-                <div className={mobileModalHeader}>
-                  <div>{label}</div>
-                  <Button small onClick={this.blur}>Close</Button>
-                </div>
-                <AutoComplete
-                  openOnFocus
-                  isOpen
-                  options={locations}
-                  onChoose={this.onChoose}
-                  onFocus={this.focus}
-                  renderItem={renderAddress}
-                  inputValue={this.state.inputValue}
-                  onInputValueChange={this.onInputValueChange}
-                  itemToString={itemToString}
-                  footer={footer}
-                >
-                  <TextInput
-                    autoComplete='nope'
-                    spellCheck='false'
-                    onKeyDown={this.onKeyDown}
-                    placeholder={placeholder}
-                    right={loading ? <ProgressRing /> : <Icon name='clear' onClick={this.onInputClear} />}
-                    inputRef={this.getMobileInputRef}
-                    autoFocus
-                  />
-                </AutoComplete>
-              </div>
-            </CSSTransition>
-          }
+          {input}
         </TransitionGroup>
       </div>
     )
   }
 
   render () {
-    const { className } = this.props
+    const { className, mobileFriendly } = this.props
 
     const clsName = buildClassName(moduleName, className, {
       focused: this.state.focus
     })
 
+    const input = mobileFriendly ? (
+      <DeviceSwap
+        renderDesktop={this.renderDesktop}
+        renderMobile={this.renderMobile}
+      />
+    ) : this.renderDesktop()
+
     return (
       <div className={clsName}>
-        <DeviceSwap
-          renderDesktop={this.renderDesktop}
-          renderMobile={this.renderMobile}
-        />
+        {input}
       </div>
     )
   }
 }
 
-AddressInput.propsTypes = propsTypes
+AddressInput.propTypes = propTypes
 AddressInput.defaultProps = defaultProps
 
 export default AddressInput

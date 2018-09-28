@@ -1,16 +1,18 @@
 import React from 'react'
 
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
-import { Address, AddressPath } from '@talixo/address'
+import { Icon } from '@talixo/icon'
 
-import AddressInput from './src/AddressInput'
+import AddressPath from './src/AddressPath'
+import Address from './src/Address'
+import AddressIconsProvider from './src/AddressIconsProvider'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('AddressInput', module, {
-  propTables: [ AddressInput, Address, AddressPath ]
+const addStory = createStoriesFactory('Address', module, {
+  propTables: [ Address, AddressPath, AddressIconsProvider ]
 })
 
 // Helpers
@@ -107,34 +109,50 @@ const locations = [
   }
 ]
 
-function onLoadRequest (value) {
-  return new Promise(resolve => {
-    const _locations = locations.filter(location => {
-      const query = value.toLowerCase()
-      const address = location.address.toLowerCase()
-      return address.indexOf(query) !== -1
-    })
+const formatDetails = x => <div><Icon name='streetview' /> {x}</div>
 
-    setTimeout(() => resolve(_locations), 500)
-  })
-}
-
-// Stories
-addStory.controlled('address input', readme, (setState, state) => (
-  <AddressInput
-    loading={state.loading}
-    value={state.value}
-    locations={state.locations}
-    onChange={(value) => setState({ value })}
-    onLoadRequest={(value) => {
-      setState({ loading: true })
-      return onLoadRequest(value).then((locations) => setState({ loading: false, locations }))
-    }}
-    onStopRequest={() => setState({ loading: false, locations: [] })}
-    placeholder='Start typing "ber"'
+addStory('address', readme, () => (
+  <Address
+    type='garden'
+    details='Look at this garden!'
+    address='Hokkaido Garden Airport'
   />
-), () => ({
-  value: null,
-  loading: false,
-  locations: []
-}))
+))
+
+addStory('address with details formatter', readme, () => (
+  <Address
+    type='place'
+    details='Oh my garden!'
+    formatDetails={formatDetails}
+    address='Hokkaido Garden Airport'
+  />
+))
+
+addStory('custom address icons', readme, () => (
+  <AddressIconsProvider types={{
+    default: 'star',
+    place: 'local_hospital',
+    'food-is-amazing': 'local_dining'
+  }}>
+    <Address
+      type='place'
+      details='Look at this garden!'
+      address='Hokkaido Garden Airport'
+    />
+    <div style={{ padding: 20 }}>
+      <Address
+        type='food-is-amazing'
+        details='Delicious Street, Some city, Some country'
+        address='The best restaurant'
+      />
+    </div>
+  </AddressIconsProvider>
+))
+
+addStory('address path', readme, () => (
+  <AddressPath>
+    {locations.map((location, index) => (
+      <Address key={index} {...location} />
+    ))}
+  </AddressPath>
+))
