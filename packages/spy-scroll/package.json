@@ -23,20 +23,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/icon": "^0.1.1",
-    "@talixo/shared": "^0.1.0",
+    "@talixo/icon": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.27",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-instantiable-stateless": "^1.0.3"
+    "react-instantiable-stateless": "^1.0.4"
   },
   "peerDependencies": {
-    "@talixo/shared": "^0.1.0",
+    "@talixo/shared": "^1.0.0-alpha.27",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-instantiable-stateless": "^1.0.3"
+    "react-instantiable-stateless": "^1.0.4"
   }
 }

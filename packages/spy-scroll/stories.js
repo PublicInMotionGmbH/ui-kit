@@ -13,8 +13,8 @@ const addStory = createStoriesFactory('Spy Scroll', module, {
   propTables: [ SpyScroll ]
 })
 
-const Box = ({className, ...rest}) => (
-  <span className='box' {...rest}>
+const Box = ({ className, ...rest }) => (
+  <span className='box' { ...rest }>
     Scroll
   </span>
 )
@@ -143,6 +143,7 @@ addStory.controlled('with trigger', readme, (setState, state) => (
     </div>
     <div
       id='trigger'
+      style={{ border: '1px solid #000' }}
     />
     <SpyScroll
       triggerId='trigger'
@@ -177,6 +178,7 @@ addStory.controlled('horizontal with trigger', readme, (setState, state) => (
     </div>
     <div
       id='trigger-horizontal'
+      style={{ border: '1px solid #000' }}
     />
     <SpyScroll
       horizontal
@@ -216,6 +218,7 @@ addStory.controlled('with trigger and offset', readme, (setState, state) => (
     </div>
     <div
       id='trigger'
+      style={{ borderBottom: '2px solid #000' }}
     />
     <div
       className='trigger-offset'
@@ -254,6 +257,7 @@ addStory.controlled('with range', readme, (setState, state) => (
     </div>
     <div
       id='range-start'
+      style={{ border: '1px solid #000' }}
     />
     <SpyScroll
       range={['range-start', 'range-stop']}
@@ -270,6 +274,7 @@ addStory.controlled('with range', readme, (setState, state) => (
     </SpyScroll>
     <div
       id='range-stop'
+      style={{ border: '1px solid #000' }}
     />
     <div className='scroll-text'>
       <Icon name='arrow_upward' style={iconStyle} />
