@@ -68,17 +68,12 @@ const MINUTES = 'mm'
 class TimeInput extends React.Component {
   state = {
     open: false,
-    inputValue: '',
-    suffix: null
-  }
-
-  componentDidMount () {
-    this.formatValue(this.props)
+    ...this.formatValue(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value || this.props.format !== nextProps.format) {
-      this.formatValue(nextProps)
+      this.setState(this.formatValue(nextProps))
     }
 
     if (this.props.disabled !== nextProps.disabled && nextProps.disabled) {
@@ -92,7 +87,7 @@ class TimeInput extends React.Component {
    * @param {object} props
    * @returns {React.Element}
    */
-  formatValue = (props) => {
+  formatValue (props) {
     const { format, value } = props
 
     // Format value according to provided format
@@ -105,7 +100,10 @@ class TimeInput extends React.Component {
       ? null
       : moment(value).format('A')
 
-    this.setState({ inputValue, suffix })
+    return {
+      inputValue: inputValue,
+      suffix: suffix
+    }
   }
 
   /**
@@ -126,7 +124,7 @@ class TimeInput extends React.Component {
    *
    * @returns {React.Element}
    */
-  buildControl = () => {
+  buildControl () {
     const { open } = this.state
 
     // Build class name for arrow

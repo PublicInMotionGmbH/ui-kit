@@ -1,0 +1,103 @@
+@import './config'
+
+@include module('file-input')
+  border: $file-input-border-width $file-input-border-style $file-input-border-color
+  border-radius: $file-input-border-radius
+  display: flex
+  position: relative
+  flex-direction: column
+  align-items: center
+  padding: $file-input-padding-vertical $file-input-padding-horizontal
+
+  &--dragover
+    opacity: .6
+    border-style: $file-input-drag-border-style
+    border-color: $file-input-border-color
+
+  &__cover
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: $file-input-cover-background-color
+    opacity: $file-input-cover-opacity
+
+  &__children
+    width: fit-content
+
+  &__files-wrapper
+    width: 100%
+    padding: $file-input-wrapper-margin-vertical $file-input-wrapper-margin-horizontal
+    margin-bottom: -1 * $file-input-padding-vertical
+
+  &__button
+    margin: $file-input-button-margin-vertical $file-input-button-margin-horizontal
+    text-align: center
+
+@include module('file-input-file')
+  display: flex
+  align-items: center
+  overflow: hidden
+  padding: $file-input-file-padding-vertical $file-input-file-padding-horizontal
+
+  & + &
+    border-top: $file-input-file-divider-size $file-input-file-divider-style $file-input-file-divider-color
+
+  &__remove
+    appearance: none
+    border: 0
+    background: transparent
+    padding: 0 $file-input-remove-margin
+    margin: 0
+    height: auto
+    width: auto
+    cursor: pointer
+    outline: none
+
+    @include module('icon')
+      border-radius: $file-input-remove-border-radius
+      padding: $file-input-remove-padding-vertical $file-input-remove-padding-horizontal
+
+    &:hover
+      @include module('icon')
+        background: $file-input-remove-hover-background-color
+        color: $file-input-remove-hover-icon-color
+
+  &__info
+    display: flex
+    align-items: center
+    white-space: nowrap
+    text-overflow: ellipsis
+
+  &__description
+    padding-left: $file-input-file-description-margin
+
+    [dir=rtl] &
+      padding-left: 0
+      padding-right: $file-input-file-description-margin
+
+  &__description > strong
+    display: block
+
+  &__icon, &__remove
+    user-select: none
+
+  &__icon
+    font-size: $file-input-file-icon-size
+
+  &__remove
+    color: $file-input-remove-icon-color
+    background: $file-input-remove-background-color
+    cursor: pointer
+    font-size: $file-input-remove-icon-size
+
+  &__name
+    font-size: $file-input-file-name-font-size
+    font-weight: $file-input-file-name-font-weight
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  &__size
+    font-size: $file-input-file-size-font-size
