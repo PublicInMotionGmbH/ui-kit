@@ -98,7 +98,12 @@ addStory('using currency-to-symbol mapping', readme, () => (
       examples.map(example => (
         <div key={example.currency}>
           <h4>{example.name}</h4>
-          <Price value={Math.random() * 1000000000} currency={example.currency} currencyToSymbol={currencyToSymbol} />
+
+          <Price
+            value={Math.random() * 1000000000}
+            currency={example.currency}
+            currencyToSymbol={currencyToSymbol}
+          />
           <br /><br />
         </div>
       ))

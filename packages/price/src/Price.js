@@ -63,26 +63,31 @@ function Price (props) {
     className, currency, currencyToSymbol, errorPlaceholder,
     displayBefore, locale, prefix, precision, value, ...passedProps
   } = props
+
   const wrapperCls = buildClassName(moduleName, className)
-  const prefixElem = prefix ? <small>{prefix}</small> : null
+  const prefixElement = prefix ? <small>{prefix}</small> : null
 
   // Get formatted price and symbol if needed.
   const price = generatePrice(value, {
     locale, currency, currencyToSymbol, precision
   })
 
+  const shouldDisplayBefore = 'displayBefore' in price ? price.displayBefore : displayBefore
+
+  const symbol = price.symbol ? <abbr title={currency || price.symbol}>{price.symbol}</abbr> : null
+  const symbolBefore = shouldDisplayBefore ? symbol : null
+  const symbolAfter = shouldDisplayBefore ? null : symbol
+
   // Generate price element
   const priceElement = price.error
-    ? <span>{errorPlaceholder}</span>
-    : <span>
-      {displayBefore && price.symbol}
-      {price.value}
-      {!displayBefore && price.symbol}
-    </span>
+    ? <React.Fragment>{errorPlaceholder}</React.Fragment>
+    : <React.Fragment>
+      {symbolBefore} {price.value} {symbolAfter}
+    </React.Fragment>
 
   return (
     <span className={wrapperCls} {...passedProps}>
-      {prefixElem}
+      {prefixElement}
       {priceElement}
     </span>
   )

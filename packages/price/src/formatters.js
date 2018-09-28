@@ -44,7 +44,9 @@ export function generatePrice (value, config = {}) {
 
   if (isNaN(value)) {
     return {
-      value: value, symbol: currency, error: true
+      value: value,
+      symbol: currency,
+      error: true
     }
   }
 
@@ -64,11 +66,29 @@ export function generatePrice (value, config = {}) {
         maximumFractionDigits: precision
       }).format(value)
 
+      // Try to extract symbol and value
+      const matchedValue = formattedValue.match(/^(.*?)((?:[0-9.,-]|\s)+)(.*)$/)
+
+      if (matchedValue) {
+        const symbolBefore = matchedValue[1].trim()
+        const value = matchedValue[2].trim()
+        const symbolAfter = matchedValue[3].trim()
+
+        if (value && (symbolAfter || symbolBefore)) {
+          return {
+            value: value,
+            symbol: symbolAfter || symbolBefore,
+            displayBefore: !!symbolBefore
+          }
+        }
+      }
+
       return { value: formattedValue, symbol: null }
     } catch (e) {
+      console.log(e)
       // Fallback if js Intl is not supported by a browser
       const price = fomatNumber(value, locale, precision)
-      return {value: price, symbol: currency}
+      return { value: price, symbol: currency }
     }
   } else {
     const price = fomatNumber(value, locale, precision)
