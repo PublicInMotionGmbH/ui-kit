@@ -11,7 +11,7 @@ using `npm install @talixo/button --save` or `yarn add @talixo/button`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -21,15 +21,16 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-
 It allows any properties which are allowed in `button`. Additionally, it handles some differently:
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
-color         | string    | n/a     | button color
-size          | string    | n/a     | button size
-variant       | string    | n/a     | button variant
+type          | string    | n/a     | button color, one of: `primary`, `secondary`, `tertiary`, `success`, `error`, `info`, `warning`, `link`
+ghost         | bool      | `false` | should this button be without solid background?
+small         | bool      | `false` | should this button be smaller than default?
+fluid         | bool      | `false` | should this button take full width?
+submit        | bool      | `false` | should this button have `type` set to `submit`?
 
 ## Changelog
 

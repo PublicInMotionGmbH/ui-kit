@@ -30,13 +30,13 @@
   W = 100% * N/C - G
  */
 
+@function _masonry-width($i, $cols, $gutter)
+  @return '#{percentage($i/$cols)} - #{$gutter}'
+
 @mixin masonry($cols, $gutter, $prefix: '')
-  @function width($i)
-    @return '#{percentage($i/$cols)} - #{$gutter}'
-
   @for $i from 1 to $cols + 1
-    $width: calc(#{width($i)})
+    $width: calc(#{_masonry-width($i, $cols, $gutter)})
 
-    .masonry > #{$group-class-name}--spaced > .#{$prefix}#{$i}
+    .masonry > #{$group-class-name}--spaced > .#{$segment-class-name}-#{$prefix}#{$i}
       min-width: $width
       max-width: $width

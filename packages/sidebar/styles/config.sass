@@ -1,20 +1,26 @@
 @import '~@talixo/shared/styles/config'
 
-$sidebar-size: dp(10) !default
+$sidebar-size: dp(16) !default
+$sidebar-element-height: dp(11) !default
 $sidebar-label-size: dp(1.5) !default
-$sidebar-icon-size: dp(3) !default
+$sidebar-icon-size: dp(3.4) !default
+$sidebar-icon-margin-bottom: dp(1) !default
 $sidebar-panel-width: dp(27) !default
-$sidebar-box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.09) !default
+$sidebar-box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.2) !default
 
-$sidebar-nested-background: #eee !default
-$sidebar-panel-background: $navy !default
-$sidebar-panel-color: #fff !default
+$sidebar-panel-background: $x-color-primary !default
+$sidebar-background-color: darken($sidebar-panel-background, 20%) !default
+$sidebar-nested-background: darken($sidebar-panel-background, 10%) !default
+$sidebar-panel-color: #eeeeee !default
+$sidebar-panel-icon-color: $sidebar-icon-color !default
+$sidebar-panel-header-color: $sidebar-panel-color !default
+$sidebar-panel-header-icon-color: $sidebar-panel-header-color !default
 $sidebar-active-button-background: $sidebar-panel-background !default
 $sidebar-active-button-color: $sidebar-panel-color !default
-$sidebar-panel-color: $navy-inverse-text !default
-$sidebar-button-text-color: $navy-text !default
-$sidebar-button-icon-color: $sidebar-icon-color !default
-$sidebar-panel-header-color: $offwhite !default
+$sidebar-active-button-icon-color: $sidebar-active-button-color !default
+$sidebar-button-text-color: lighten($x-color-primary, 35%) !default
+$sidebar-button-icon-color: $sidebar-button-text-color !default
+$sidebar-button-border-color: darken($sidebar-panel-background, 2%) !default
 
 $sidebar-transition-time: 400ms !default
 

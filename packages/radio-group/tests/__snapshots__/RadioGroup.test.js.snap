@@ -7,30 +7,36 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
   <RadioInput
     checked={false}
     disabled={false}
-    key="one"
+    error={false}
+    key="1"
     name="RadioGroup"
     onChange={[Function]}
-    value={1}
+    readOnly={false}
+    value={0}
   >
     one
   </RadioInput>
   <RadioInput
     checked={false}
     disabled={false}
-    key="two"
+    error={false}
+    key="2"
     name="RadioGroup"
     onChange={[Function]}
-    value={2}
+    readOnly={false}
+    value={1}
   >
     two
   </RadioInput>
   <RadioInput
     checked={false}
     disabled={false}
-    key="three"
+    error={false}
+    key="3"
     name="RadioGroup"
     onChange={[Function]}
-    value={3}
+    readOnly={false}
+    value={2}
   >
     three
   </RadioInput>

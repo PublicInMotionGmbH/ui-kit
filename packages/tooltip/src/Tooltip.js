@@ -33,6 +33,9 @@ const propTypes = {
   /** Tooltip position */
   position: PropTypes.oneOf([ 'left', 'right', 'top', 'bottom' ]),
 
+  /** By default tooltip will go to different place, when there is not enough space - you can lock position by this property */
+  lockPosition: PropTypes.bool,
+
   /** Renders tooltip content */
   render: PropTypes.func.isRequired,
 
@@ -42,7 +45,7 @@ const propTypes = {
   /** Additional styles passed to the tooltip */
   style: PropTypes.object,
 
-  /* Show arrow next to tolltip */
+  /** Show arrow next to tooltip */
   arrow: PropTypes.bool,
 
   /** Type of event to open tooltip  */
@@ -53,6 +56,8 @@ const defaultProps = {
   fade: false,
   position: 'top',
   arrow: true,
+  lockPosition: false,
+  fadeTime: 600,
   triggerOn: 'hover'
 }
 
@@ -107,6 +112,7 @@ class Tooltip extends React.Component {
   componentDidMount () {
     this.updatePosition()
     window.addEventListener('resize', this.updatePosition)
+    window.addEventListener('scroll', this.updatePosition)
     this.addListeners(this.el)
   }
 
@@ -115,6 +121,7 @@ class Tooltip extends React.Component {
    */
   componentWillUnmount () {
     window.removeEventListener('resize', this.updatePosition)
+    window.removeEventListener('scroll', this.updatePosition)
     this.removeListeners(this.el)
   }
 
@@ -135,9 +142,21 @@ class Tooltip extends React.Component {
   updatePosition = throttle((nextProps) => {
     if (!this.el) return
 
-    const { top, left } = getPositionNearElement(this.el, (nextProps && nextProps.position) || this.props.position)
-    this.setState({ top, left })
-  }, 10)
+    const { lockPosition } = this.props
+
+    const el = this.el
+    const position = (nextProps && nextProps.position) || this.props.position
+    const tooltip = this.tooltip
+    const rect = tooltip && tooltip.getBoundingClientRect()
+
+    const nextState = rect
+      ? getPositionNearElement(el, position, rect.width + 15, rect.height + 15, lockPosition)
+      : getPositionNearElement(el, position, null, null, lockPosition)
+
+    if (nextState.position !== this.state.position || nextState.top !== this.state.top || nextState.left !== this.state.left) {
+      this.setState(nextState)
+    }
+  }, 20)
 
   /**
    * Handle mouse enter event
@@ -181,6 +200,10 @@ class Tooltip extends React.Component {
     this.addListeners(this.el)
   }
 
+  setTooltipRef = (node) => {
+    this.tooltip = findDOMNode(node)
+  }
+
   addListeners = (element) => {
     if (!element) {
       return
@@ -208,17 +231,18 @@ class Tooltip extends React.Component {
     element.removeEventListener('mouseover', this.handleMouseOver)
   }
 
+  componentDidUpdate () {
+    this.updatePosition()
+  }
+
   /**
   * @returns {React.Element}
   */
   render () {
-    const {
-      children, className, fade, fadeTime,
-      position, render, attachTo, style, triggerOn, arrow
-    } = this.props
+    const { children, className, fade, fadeTime, render, attachTo, style, arrow } = this.props
+    const { position, top, left } = this.state
 
-    const defaultFadeTime = 600
-    const transition = fade ? { transition: `opacity ${fadeTime || defaultFadeTime}ms` } : null
+    const transition = fade ? { transition: `opacity ${fadeTime}ms` } : null
 
     const element = React.Children.only(children)
 
@@ -227,11 +251,11 @@ class Tooltip extends React.Component {
     })
 
     const fadeClasses = buildClassName([ moduleName, 'fade' ])
-    const nameClasses = buildClassName(moduleName, className, [ position, triggerOn ], { arrow })
+    const nameClasses = buildClassName(moduleName, className, [ position ], { arrow })
 
     const tooltipStyle = {
-      top: this.state.top,
-      left: this.state.left,
+      top: top,
+      left: left,
       ...transition,
       ...style
     }
@@ -241,8 +265,8 @@ class Tooltip extends React.Component {
       <Portal attachTo={attachTo}>
         <TransitionGroup>
           {this.state.open ? (
-            <CSSTransition timeout={fade ? fadeTime || defaultFadeTime : 0} classNames={fadeClasses}>
-              <span className={nameClasses} style={tooltipStyle}>
+            <CSSTransition timeout={fade ? fadeTime : 0} classNames={fadeClasses}>
+              <span ref={this.setTooltipRef} className={nameClasses} style={tooltipStyle}>
                 {render(this.state)}
               </span>
             </CSSTransition>
@@ -252,6 +276,8 @@ class Tooltip extends React.Component {
     </React.Fragment>
   }
 }
+
+Tooltip.displayName = 'Tooltip'
 
 Tooltip.propTypes = propTypes
 Tooltip.defaultProps = defaultProps

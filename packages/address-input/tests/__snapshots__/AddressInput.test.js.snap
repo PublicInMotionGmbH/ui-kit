@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddressInput /> mobile version rendering should render mobile input 1`] = `
+<div
+  className="talixo-address-input talixo-address-input--focused"
+>
+  <div>
+    <div
+      className="talixo-address-input__fake-input"
+      onClick={[Function]}
+    />
+    <div>
+      <div
+        className="talixo-address-input__mobile-modal"
+      >
+        <div
+          className="talixo-address-input__mobile-modal-header"
+        >
+          <div />
+          <button
+            className="talixo-button talixo-button--small"
+            onClick={[Function]}
+            type="button"
+          >
+            Close
+          </button>
+        </div>
+        <div
+          className="talixo-combo-box"
+        >
+          <div
+            className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
+          >
+            <input
+              aria-activedescendant={null}
+              aria-autocomplete="list"
+              aria-expanded={true}
+              autoComplete="nope"
+              autoFocus={true}
+              className="talixo-text-input__input"
+              id="downshift-16-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="combobox"
+              spellCheck="false"
+              style={null}
+              type="text"
+              value=""
+            />
+            <span
+              className="talixo-text-input__right"
+            >
+              <span
+                aria-hidden="true"
+                className="talixo-icon tai tai--material"
+                onClick={[Function]}
+              >
+                
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<AddressInput /> mobile version rendering should render properly 1`] = `
+<div
+  className="talixo-address-input"
+>
+  <div>
+    <div
+      className="talixo-address-input__fake-input"
+      onClick={[Function]}
+    />
+    <div />
+  </div>
+</div>
+`;
+
+exports[`<AddressInput /> rendering renders children correctly 1`] = `
+<div
+  className="talixo-address-input"
+>
+  <div
+    className="talixo-masked-input"
+  >
+    <div
+      className="talixo-combo-box"
+    >
+      <div
+        className="talixo-text-input talixo-text-input--empty"
+      >
+        <input
+          aria-activedescendant={null}
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="nope"
+          className="talixo-text-input__input"
+          id="downshift-0-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          role="combobox"
+          spellCheck="false"
+          style={null}
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

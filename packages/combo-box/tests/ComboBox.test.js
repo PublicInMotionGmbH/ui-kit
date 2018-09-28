@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import Downshift from 'downshift'
+import { resetIdCounter } from 'downshift'
 
 import { prefix } from '@talixo/shared'
 
@@ -10,7 +10,7 @@ import ComboBox from '../src/ComboBox'
 const moduleName = prefix('combo-box')
 
 describe('<ComboBox />', () => {
-  beforeEach(() => Downshift.resetIdCounter())
+  beforeEach(() => resetIdCounter())
 
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())

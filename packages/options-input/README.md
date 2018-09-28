@@ -11,10 +11,10 @@ using `npm install @talixo/options-input --save` or `yarn add @talixo/options-in
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^0.1.1`
-- `@talixo/number-input: ^0.1.0`
-- `@talixo/shared: ^0.1.0`
-- `@talixo/tooltip: ^0.1.0`
+- `@talixo/icon: ^1.0.0-alpha.27`
+- `@talixo/number-input: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/tooltip: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -28,15 +28,23 @@ to avoid having different versions of these in your application.
 
 It allows any property which can be passed to `div`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
---------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | Additional class name passed to wrapper
-options       | Options   | `[]`    | Array with objects containing data passed to component
-value         | object    | n/a     | Value of option/options
+Property name     | Type      | Default         | Description
+------------------|-----------|:---------------:|--------------------------------
+className         | string    | n/a             | Additional class name passed to wrapper
+options           | Option[]  | `[]`            | Array with objects containing data passed to component
+persistentOptions | string[]  | `[]`            | Array of options IDs which will be displayed event if their value is 0.
+value             | object    | self-controlled | Value of option/options
+onChange          | function  | n/a             | Event handler fired on value change
+onFocus           | function  | n/a             | Event handler fired on input open
+onBlur            | function  | n/a             | Event handler fired on input blur
+id                | string    | n/a             | ID passed to control element
+error             | bool      | `false`         | Should add class modifier for error?
+disabled          | bool      | `false`         | Should it be disabled?
+readOnly          | bool      | `false`         | Should it be read-only?
 
 ## Property shapes
 
-### Options
+### Option
 
 Property name | Type      | Required | Default | Description                    
 --------------|-----------|----------|:-------:|--------------------------------
@@ -46,8 +54,6 @@ label         | string    | no       | n/a     | Label for option
 default       | number    | no       | n/a     | Default value
 min           | number    | no       | n/a     | Minimum value within the range
 max           | number    | no       | n/a     | Maxnimum value within the range
-
-
 
 ## Changelog
 

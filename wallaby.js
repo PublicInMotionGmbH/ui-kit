@@ -18,6 +18,7 @@ module.exports = wallaby => {
       'packages/shared/story/*.js',
       'packages/*/config.js',
       'packages/*/src/**/*.js',
+      'packages/*/propTypes/**/*.js',
       'packages/*/sprites/*.js',
       'packages/*/utils/**/*.js',
       'packages/*/tests/utils/**/*.js',
@@ -26,6 +27,13 @@ module.exports = wallaby => {
     ],
 
     tests: [ 'packages/*/tests/**/*.test.js' ],
+
+    filesWithNoCoverageCalculated: [
+      'packages/country-flag/sprites/*.js',
+      'packages/country-flag/scripts/*.js',
+      'packages/country-flag/src/storybook/*.js',
+      'packages/icon/src/storybook/*.js'
+    ],
 
     env: {
       type: 'node',

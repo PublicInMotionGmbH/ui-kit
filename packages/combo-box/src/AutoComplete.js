@@ -14,6 +14,9 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
+  /** Footer of items list */
+  footer: PropTypes.node,
+
   /** List of options to show */
   options: PropTypes.array.isRequired,
 
@@ -39,14 +42,29 @@ const propTypes = {
   itemToString: PropTypes.func,
 
   /** Input which needs auto-complete behavior */
-  children: PropTypes.node
+  children: PropTypes.node,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Should open menu list on focus? */
+  openOnFocus: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
+  openOnFocus: true,
   options: [],
   renderItem: item => item,
   buildItemId: (item, index) => index,
-  itemToString: item => item
+  itemToString: item => item,
+  disabled: false,
+  readOnly: false
 }
 
 /**
@@ -145,6 +163,8 @@ function composeInputProps (downshift, additionalProps) {
  * @property {*} [props.placeholder]
  * @property {function} [props.renderValue]
  * @property {string} [props.className]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @class
  */
@@ -159,6 +179,7 @@ class AutoComplete extends React.PureComponent {
    */
   stateReducer = (state, changes) => {
     switch (changes.type) {
+      case Downshift.stateChangeTypes.touchStart:
       case Downshift.stateChangeTypes.blurInput:
       case Downshift.stateChangeTypes.mouseUp:
         return {
@@ -171,20 +192,46 @@ class AutoComplete extends React.PureComponent {
   }
 
   /**
+   * Check if component is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
+  }
+
+  /**
    * Get props which should be passed through our components below Downshift.
    *
    * @param {object} data
    * @returns {object}
    */
   getStateProps (data) {
-    const { icon, options, buildItemId, renderItem, onFocus, onBlur } = this.props
+    const { footer, icon, options, buildItemId, renderItem, onBlur, id } = this.props
 
     // Compose function to get input props
-    const getInputProps = composeInputProps(data, { onFocus, onBlur })
+    const getInputProps = composeInputProps(data, { onFocus: this.focus, onBlur })
 
     return {
       ...data,
-      ...{ icon, options, buildItemId, renderItem, getInputProps }
+      ...{ footer, icon, options, buildItemId, renderItem, getInputProps, id }
+    }
+  }
+
+  focus = (...args) => {
+    const { onFocus, openOnFocus } = this.props
+
+    if (this.downshift && openOnFocus && !this.isDisabled()) {
+      this.downshift.openMenu()
+    }
+
+    if (onFocus) {
+      onFocus(...args)
     }
   }
 
@@ -195,6 +242,11 @@ class AutoComplete extends React.PureComponent {
    */
   select = (item) => {
     const { onChoose } = this.props
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Handle simple selection for single select-box
     if (onChoose) {
@@ -208,12 +260,23 @@ class AutoComplete extends React.PureComponent {
    * @param {object} data
    */
   buildInput (data) {
-    const { children } = this.props
-    const { getInputProps } = data
+    const { children, disabled, readOnly, name } = this.props
 
     const input = React.Children.only(children)
 
-    const inputProps = getInputProps(input.props, data)
+    const inputProps = data.getInputProps(input.props, data)
+
+    if (disabled) {
+      inputProps.disabled = disabled
+    }
+
+    if (readOnly) {
+      inputProps.readOnly = readOnly
+    }
+
+    if (name != null) {
+      inputProps.name = name
+    }
 
     return React.cloneElement(input, inputProps)
   }
@@ -250,6 +313,10 @@ class AutoComplete extends React.PureComponent {
     )
   }
 
+  setDownshiftRef = ref => {
+    this.downshift = ref
+  }
+
   /**
    * Render Downshift component with our wrappers.
    *
@@ -257,15 +324,25 @@ class AutoComplete extends React.PureComponent {
    */
   render () {
     const {
-      icon, options, onChoose, buildItemId, renderItem,
+      id, icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
       children, onFocus, onBlur, onChange, ...passedProps
     } = this.props
 
+    const idProps = {}
+
+    if (id) {
+      idProps.inputId = id
+      idProps.id = 'container_' + id
+    }
+
     return (
       <Downshift
+        {...idProps}
+        ref={this.setDownshiftRef}
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
+        disabled={this.isDisabled()}
         {...passedProps}
       >
         {this.renderComponent}
@@ -273,6 +350,8 @@ class AutoComplete extends React.PureComponent {
     )
   }
 }
+
+AutoComplete.displayName = 'AutoComplete'
 
 AutoComplete.propTypes = propTypes
 AutoComplete.defaultProps = defaultProps

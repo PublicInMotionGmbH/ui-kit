@@ -1,19 +1,23 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import Downshift from 'downshift'
+import { resetIdCounter } from 'downshift'
 
 import { prefix } from '@talixo/shared'
+import { detector } from '@talixo/device-swap'
 
 import SelectBox from '../src/SelectBox'
 
 const moduleName = prefix('combo-box')
 
 describe('<SelectBox />', () => {
-  beforeEach(() => Downshift.resetIdCounter())
+  beforeEach(() => resetIdCounter())
 
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
+
+  beforeEach(() => detector.setViewType('desktop'))
+  afterEach(() => detector.reset())
 
   it('should render correctly', () => {
     const wrapper = mount(

@@ -16,40 +16,34 @@ addStory('default', readme, () => (
   <div>
     <Checkbox onChange={change}>Default</Checkbox>
     <Checkbox onChange={change} defaultChecked>Default checked</Checkbox>
+    <Checkbox onChange={change} error>
+      Default with error
+    </Checkbox>
     <Checkbox onChange={change} disabled>Default disabled</Checkbox>
     <Checkbox onChange={change} defaultChecked disabled>
       Default checked and disabled
     </Checkbox>
-    <Checkbox onChange={change} error>
-      Default with error
+    <Checkbox onChange={change} disabled error>
+      Disabled with error
+    </Checkbox>
+    <Checkbox onChange={change} disabled defaultChecked error>
+      Disabled and checked with error
     </Checkbox>
   </div>
 ))
 
-addStory('small label', readme, () => (
+addStory('long checkbox label', readme, () => (
   <div>
-    <Checkbox onChange={change} size='small'>Default</Checkbox>
-    <Checkbox onChange={change} size='small' defaultChecked>Default checked</Checkbox>
-    <Checkbox onChange={change} size='small' disabled>Default disabled</Checkbox>
-    <Checkbox onChange={change} size='small' defaultChecked disabled>
-      Default checked and disabled
-    </Checkbox>
-    <Checkbox onChange={change} size='small' error>
-      Default with error
-    </Checkbox>
+    <div style={{ background: '#f5f5f5', padding: 20, width: 300 }}>
+      <Checkbox>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.</Checkbox>
+    </div>
   </div>
 ))
 
-addStory('large label', readme, () => (
-  <div>
-    <Checkbox onChange={change} size='large'>Default</Checkbox>
-    <Checkbox onChange={change} size='large' defaultChecked>Default checked</Checkbox>
-    <Checkbox onChange={change} size='large' disabled>Default disabled</Checkbox>
-    <Checkbox onChange={change} size='large' defaultChecked disabled>
-      Default checked and disabled
-    </Checkbox>
-    <Checkbox onChange={change} size='large' error>
-      Default with error
-    </Checkbox>
+addStory('RTL: long checkbox label', readme, () => (
+  <div dir='rtl'>
+    <div style={{ background: '#f5f5f5', padding: 20, width: 300 }}>
+      <Checkbox>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.</Checkbox>
+    </div>
   </div>
 ))

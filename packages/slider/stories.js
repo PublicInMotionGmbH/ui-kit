@@ -17,18 +17,39 @@ addStory('initial', readme, () => (
   <Slider />
 ))
 
-addStory('with label', readme, () => (
-  <Slider label='Range input value:' />
-))
-
 addStory('with default value', readme, () => (
-  <Slider defaultValue={33} label='Default value: 33' />
+  <Slider defaultValue={33} />
 ))
 
 addStory('with min & max values', readme, () => (
-  <Slider min={20} max={40} label='Min: 20, Max: 40' />
+  <div>
+    Min: 20, max: 40
+    <Slider min={20} max={40} />
+  </div>
 ))
 
 addStory('with step', readme, () => (
-  <Slider step={10} label='Step = 10' />
+  <Slider step={10} />
+))
+
+addStory('with small step', readme, () => (
+  <Slider step={0.01} />
+))
+
+addStory('forced value', readme, () => (
+  <Slider value={33} />
+))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <Slider
+    value={state.value}
+    onChange={value => setState({ value })}
+  />
+), () => ({ value: 0 }))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='slider'>Click me</label>
+    <Slider id='slider' />
+  </div>
 ))

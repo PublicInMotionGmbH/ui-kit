@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 
 import { buildClassName } from '@talixo/shared'
+import { DeviceSwap } from '@talixo/device-swap'
 
+import NativeSelect from './NativeSelect'
 import Menu from './Menu'
 import SelectBoxValue from './SelectBoxValue'
 
@@ -48,12 +50,30 @@ const propTypes = {
   buildItemId: PropTypes.func,
 
   /** Function passed to Downshift to make it working for objects */
-  itemToString: PropTypes.func
+  itemToString: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Tab index for toggle button */
+  tabIndex: PropTypes.number,
+
+  /** Should it act almost-like native "select" on mobile devices? */
+  mobileFriendly: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   multi: false,
+  mobileFriendly: false,
+  disabled: false,
+  readOnly: false,
   placeholder: '...',
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -76,6 +96,16 @@ const defaultProps = {
  * @class
  */
 class SelectBox extends React.PureComponent {
+  state = {
+    value: this.props.value
+  }
+
+  componentWillReceiveProps (props) {
+    if (props.value !== this.state.value && props.value !== undefined) {
+      this.setState({ value: props.value })
+    }
+  }
+
   /**
    * Handle state changes inside of Downshift component.
    * We need it to not close menu after element is clicked in multi-select.
@@ -87,15 +117,36 @@ class SelectBox extends React.PureComponent {
   stateReducer = (state, changes) => {
     const { multi } = this.props
 
-    switch (changes.type) {
-      case Downshift.stateChangeTypes.clickItem:
-        return {
-          ...changes,
-          isOpen: multi
-        }
-      default:
-        return changes
+    if (changes.type === Downshift.stateChangeTypes.clickItem) {
+      changes = {
+        ...changes,
+        isOpen: multi
+      }
     }
+
+    if ('isOpen' in changes) {
+      if (changes.isOpen && this.props.onFocus) {
+        this.props.onFocus()
+      } else if (!changes.isOpen && this.props.onBlur) {
+        this.props.onBlur()
+      }
+    }
+
+    return changes
+  }
+
+  /**
+   * Check if component is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
   }
 
   /**
@@ -104,12 +155,13 @@ class SelectBox extends React.PureComponent {
    * @param {object} data
    * @returns {object}
    */
-  getStateProps (data) {
-    const { value, icon, options, multi, placeholder, buildItemId, renderItem, renderValue } = this.props
+  getStateProps (data = {}) {
+    const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue, id } = this.props
+    const { value } = this.state
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, id },
       renderValue: renderValue || renderItem,
       getRemoveButtonProps: this.getRemoveButtonProps.bind(this),
       selectedItems: value == null ? [] : [].concat(value)
@@ -150,13 +202,24 @@ class SelectBox extends React.PureComponent {
    * @param {object} item
    */
   select = (item) => {
-    const { onChange, multi, value } = this.props
+    const { onChange, multi } = this.props
+    const { value } = this.state
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Handle simple selection for single select-box
     if (!multi) {
+      if (this.props.value === undefined) {
+        this.setState({ value: item })
+      }
+
       if (onChange) {
         onChange(item)
       }
+
       return
     }
 
@@ -168,9 +231,59 @@ class SelectBox extends React.PureComponent {
       ? _value.filter(x => x !== item)
       : _value.concat(item)
 
+    if (this.props.value === undefined) {
+      this.setState({ value: nextValue })
+    }
+
     // Trigger event with new value
     if (onChange) {
       onChange(nextValue)
+    }
+  }
+
+  /**
+   * Select from native <select> element.
+   *
+   * @param {Event|SyntheticEvent} event
+   */
+  selectNative = (event) => {
+    const { onChange, multi, options } = this.props
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
+
+    const element = event.target
+    const selectedItems = []
+
+    for (const option of element.options) {
+      if (option.selected) {
+        selectedItems.push(options[option.value])
+      }
+    }
+
+    if (!multi) {
+      const value = selectedItems.length > 0 ? selectedItems[0] : null
+
+      if (this.props.value === undefined) {
+        this.setState({ value })
+      }
+
+      if (onChange) {
+        onChange(value)
+      }
+
+      return
+    }
+
+    if (this.props.value === undefined) {
+      this.setState({ value: selectedItems })
+    }
+
+    // Trigger event with new value
+    if (onChange) {
+      onChange(selectedItems)
     }
   }
 
@@ -196,10 +309,108 @@ class SelectBox extends React.PureComponent {
 
     // Render component
     return (
-      <div className={clsName}>
+      <div
+        className={clsName}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseEnter={this.props.onMouseEnter}
+      >
         <SelectBoxValue {...data} />
         {open && <Menu {...data} />}
       </div>
+    )
+  }
+
+  /**
+   * Choose which component should be rendered.
+   *
+   * @returns {React.Element}
+   */
+  renderMobileFriendly () {
+    return (
+      <DeviceSwap
+        defaultView='mobile'
+        renderMobile={this.renderSimple}
+        renderDesktop={this.renderFullyFeatured}
+      />
+    )
+  }
+
+  /**
+   * Render simpler select box, which will not style menu/options.
+   *
+   * @returns {React.Element}
+   */
+  renderSimple = () => {
+    const { className, multi, icon, options, id, renderItem, disabled, readOnly } = this.props
+    const { value } = this.state
+
+    const elements = options.map((option, index) => (
+      <option key={index} value={option}>{renderItem(option)}</option>
+    ))
+
+    // Build class name for wrapper
+    const clsName = buildClassName(
+      moduleName,
+      className,
+      [ 'simple-select' ],
+      { multi, 'with-info': icon }
+    )
+
+    const selectClsName = buildClassName([ moduleName, 'select' ])
+
+    const valueProps = {
+      ...this.getStateProps(),
+      getToggleButtonProps: () => ({})
+    }
+    delete valueProps.id
+
+    const select = (
+      <NativeSelect
+        id={id}
+        disabled={disabled}
+        readOnly={readOnly}
+        multiple={multi}
+        value={multi ? value == null ? [] : Array.isArray(value) ? value : [].concat(value) : value}
+        className={selectClsName}
+        onChange={this.selectNative}
+        onFocus={this.props.onFocus}
+        onBlur={this.props.onBlur}
+      >
+        {elements}
+      </NativeSelect>
+    )
+
+    // Render component
+    return (
+      <div
+        className={clsName}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        onMouseEnter={this.props.onMouseEnter}
+      >
+        <SelectBoxValue {...valueProps} />
+        {select}
+      </div>
+    )
+  }
+
+  renderFullyFeatured = () => {
+    const {
+      icon, multi, placeholder, value, tabIndex, options, onChange, onFocus, onBlur, onMouseOver, onMouseLeave,
+      onMouseEnter, buildItemId, renderItem, renderValue, disabled, readOnly, ...passedProps
+    } = this.props
+
+    return (
+      <Downshift
+        stateReducer={this.stateReducer}
+        onChange={this.select}
+        selectedItem={null}
+        disabled={this.isDisabled()}
+        {...passedProps}
+      >
+        {this.renderComponent}
+      </Downshift>
     )
   }
 
@@ -209,23 +420,19 @@ class SelectBox extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const {
-      icon, multi, placeholder, value, options, onChange,
-      buildItemId, renderItem, renderValue, ...passedProps
-    } = this.props
+    const { mobileFriendly } = this.props
 
-    return (
-      <Downshift
-        stateReducer={this.stateReducer}
-        onChange={this.select}
-        selectedItem={null}
-        {...passedProps}
-      >
-        {this.renderComponent}
-      </Downshift>
-    )
+    // Assuming, that we can render simple select box without any problems,
+    // as by default it's only showing a string in options.
+    if (mobileFriendly) {
+      return this.renderMobileFriendly()
+    }
+
+    return this.renderFullyFeatured()
   }
 }
+
+SelectBox.displayName = 'SelectBox'
 
 SelectBox.propTypes = propTypes
 SelectBox.defaultProps = defaultProps

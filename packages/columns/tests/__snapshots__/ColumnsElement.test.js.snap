@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ColumnsElement /> renders children correctly 1`] = `
+<div
+  className="talixo-columns-element"
+  style={
+    Object {
+      "flexBasis": null,
+    }
+  }
+>
+  <div
+    className="talixo-columns-element__content"
+  >
+    <h2>
+      1. Amet cillum deserunt.
+    </h2>
+  </div>
+</div>
+`;

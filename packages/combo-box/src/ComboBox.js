@@ -60,12 +60,23 @@ const propTypes = {
   inputValue: PropTypes.string,
 
   /** Value for controlled component */
-  value: PropTypes.any
+  value: PropTypes.any,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
   options: [],
   multi: false,
+  disabled: false,
+  readOnly: false,
   placeholder: '...',
   renderItem: item => item,
   buildItemId: (item, index) => index,
@@ -84,11 +95,14 @@ const defaultProps = {
  * @property {*} [props.placeholder]
  * @property {function} [props.renderValue]
  * @property {string} [props.className]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.readOnly]
  *
  * @class
  */
 class ComboBox extends React.PureComponent {
   state = {
+    value: this.props.value,
     inputValue: this.props.inputValue || ''
   }
 
@@ -104,6 +118,26 @@ class ComboBox extends React.PureComponent {
         inputValue: props.inputValue
       })
     }
+
+    if (props.value !== this.state.value && props.value !== undefined) {
+      this.setState({
+        value: props.value
+      })
+    }
+  }
+
+  /**
+   * Check if this input is disabled.
+   *
+   * @param {object} [props]
+   * @param {boolean} [props.disabled]
+   * @param {boolean} [props.readOnly]
+   * @returns {boolean}
+   */
+  isDisabled (props) {
+    const { disabled, readOnly } = props || this.props
+
+    return disabled || readOnly
   }
 
   /**
@@ -169,13 +203,14 @@ class ComboBox extends React.PureComponent {
    */
   getStateProps (data) {
     const {
-      value, icon, options, multi, placeholder,
+      footer, icon, options, multi, placeholder,
       buildItemId, renderItem, renderValue, onFocus, onBlur
     } = this.props
+    const { value } = this.state
 
     return {
       ...data,
-      ...{ icon, options, multi, placeholder, buildItemId, renderItem },
+      ...{ footer, icon, options, multi, placeholder, buildItemId, renderItem },
       inputValue: this.state.inputValue,
       renderValue: renderValue || renderItem,
       getInputProps: props => data.getInputProps(this.getInputProps(props)),
@@ -251,6 +286,7 @@ class ComboBox extends React.PureComponent {
       ...props,
       onFocus,
       onBlur,
+      disabled: this.isDisabled(),
       onKeyDown: event => {
         this.handleInputKeyDown(event)
 
@@ -267,8 +303,13 @@ class ComboBox extends React.PureComponent {
    * @param {SyntheticEvent|Event} event
    */
   handleInputKeyDown (event) {
-    const { inputValue } = this.state
-    const { value, multi, onNewValue } = this.props
+    const { inputValue, value } = this.state
+    const { multi, onNewValue } = this.props
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Do not propagate space in input, as it will cause removing value
     if (event.which === SPACE_KEY) {
@@ -296,6 +337,10 @@ class ComboBox extends React.PureComponent {
 
       this.setState({ inputValue: '' })
 
+      if (this.props.value === undefined) {
+        this.setState({ value: (value || []).concat(inputValue) })
+      }
+
       if (onNewValue) {
         onNewValue(inputValue)
       }
@@ -308,13 +353,24 @@ class ComboBox extends React.PureComponent {
    * @param {object} item
    */
   select = (item) => {
-    const { onChange, multi, value } = this.props
+    const { onChange, multi } = this.props
+    const { value } = this.state
+
+    // Don't handle it when it's disabled
+    if (this.isDisabled()) {
+      return
+    }
 
     // Handle simple selection for single select-box
     if (!multi) {
+      if (this.props.value === undefined) {
+        this.setState({ value: item })
+      }
+
       if (onChange) {
         onChange(item)
       }
+
       return
     }
 
@@ -325,6 +381,10 @@ class ComboBox extends React.PureComponent {
     const nextValue = _value.indexOf(item) !== -1
       ? _value.filter(x => x !== item)
       : _value.concat(item)
+
+    if (this.props.value === undefined) {
+      this.setState({ value: nextValue })
+    }
 
     // Trigger event with new value
     if (onChange) {
@@ -374,22 +434,33 @@ class ComboBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange,
+      id, icon, multi, placeholder, value, options, onChange, readOnly, disabled,
       buildItemId, renderItem, renderValue, children, ...passedProps
     } = this.props
+
+    const idProps = {}
+
+    if (id) {
+      idProps.id = 'container_' + id
+      idProps.inputId = id
+    }
 
     return (
       <Downshift
         stateReducer={this.stateReducer}
         onChange={this.select}
         selectedItem={null}
+        disabled={this.isDisabled()}
         {...passedProps}
+        {...idProps}
       >
         {this.renderComponent}
       </Downshift>
     )
   }
 }
+
+ComboBox.displayName = 'ComboBox'
 
 ComboBox.propTypes = propTypes
 ComboBox.defaultProps = defaultProps

@@ -1,0 +1,161 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddressPath /> rendering should render properly 1`] = `
+<div
+  className="talixo-address-path"
+>
+  <div
+    className="talixo-address-path__point"
+    key="0/.0"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Berlin Brandenburg Airport (BER)"
+      details="Berlin"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Berlin Brandenburg Airport (BER)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 52.366667,
+              "lng": 13.503333,
+            },
+          },
+        }
+      }
+      short="BER"
+      type="airport"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key="1/.1"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Bern Airport (BRN)"
+      details="Berne"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Bern Airport (BRN)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 46.911728,
+              "lng": 7.50356,
+            },
+          },
+        }
+      }
+      short="BRN"
+      type="airport"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key="2/.2"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Puerto Berrio Airport (PBE)"
+      details="Puerto Berrio"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Puerto Berrio Airport (PBE)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 6.483333,
+              "lng": -74.483333,
+            },
+          },
+        }
+      }
+      short="PBE"
+      type="airport"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key="3/.3"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Berz-Macomb Airport (UIZ)"
+      details="Utica"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Berz-Macomb Airport (UIZ)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 42.616667,
+              "lng": -83.05,
+            },
+          },
+        }
+      }
+      short="UIZ"
+      type="airport"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point talixo-address-path__point--last-path"
+    key="4/.4"
+  >
+    <span
+      className="talixo-address-path__path"
+    />
+    <Address
+      address="Roumanieres Airport (EGC)"
+      details="Bergerac"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Roumanieres Airport (EGC)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 44.85,
+              "lng": 0.483333,
+            },
+          },
+        }
+      }
+      short="EGC"
+      type="airport"
+    />
+  </div>
+  <div
+    className="talixo-address-path__point"
+    key="5/.5"
+  >
+    <Address
+      address="Bindlacher-Berg Airport (BYU)"
+      details="Bayreuth"
+      formatDetails={[Function]}
+      meta={
+        Object {
+          "description": "Bindlacher-Berg Airport (BYU)",
+          "geometry": Object {
+            "location": Object {
+              "lat": 49.985556,
+              "lng": 11.64,
+            },
+          },
+        }
+      }
+      short="BYU"
+      type="airport"
+    />
+  </div>
+</div>
+`;

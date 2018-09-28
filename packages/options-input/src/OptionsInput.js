@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
-import ListOption from './ListOption'
-import Option from './Option'
+import { Icon } from '@talixo/icon'
+
+import OptionsInputList from './OptionsInputList'
+import OptionsInputValue from './OptionsInputValue'
 
 const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Data for generate ListOption */
+  /** Options to show */
   options: PropTypes.arrayOf(PropTypes.shape({
-
     /** Id for option */
     id: PropTypes.string.isRequired,
 
@@ -33,37 +33,81 @@ const propTypes = {
     max: PropTypes.number
   })),
 
-  /** Value of option */
-  value: PropTypes.object
+  /** Array of options IDs which will be displayed event if their value is 0. */
+  persistentOptions: PropTypes.arrayOf(PropTypes.string),
+
+  /** Input value */
+  value: PropTypes.object,
+
+  /** Event handler fired on change of value */
+  onChange: PropTypes.func,
+
+  /** Event handler fired on focus */
+  onFocus: PropTypes.func,
+
+  /** Event handler fired on blur */
+  onBlur: PropTypes.func,
+
+  /** ID passed to control element */
+  id: PropTypes.string,
+
+  /** Does it have error */
+  error: PropTypes.bool,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool,
+
+  /** Should it be read-only? */
+  readOnly: PropTypes.bool
 }
 
 const defaultProps = {
-  options: []
+  options: [],
+  persistentOptions: [],
+  error: false,
+  disabled: false,
+  readOnly: false
+}
+
+export const moduleName = 'options-input'
+
+/**
+ * Build value according to options list and sent value.
+ *
+ * @param {object[]} options
+ * @param {object} baseValue
+ *
+ * @returns {number}
+ */
+function buildValue (options, baseValue) {
+  const currentValue = baseValue || {}
+
+  const value = {}
+
+  for (let i = 0; i < options.length; i++) {
+    const option = options[i]
+    value[option.id] = (currentValue[option.id] == null ? option.default : currentValue[option.id]) || 0
+  }
+
+  return value
 }
 
 /**
- * * Component which represents OptionsInput.
+ * * Component which represents input where you can select some numeric options.
  *
  * @property {*} props
  * @property {string} [props.className]
- * @property {array} [props.options]
- * @property {string} [props.options.id]
- * @property {string} [props.options.icon]
- * @property {string} [props.options.label]
- * @property {number} [props.options.default]
- * @property {number} [props.options.min]
- * @property {number} [props.options.max]
- *
- * @class {React.Element}
+ * @property {object} [props.value]
+ * @property {object[]|Array<{ id: string, [icon]: string, [label]: string, [default]: number, [min]: number, [max]: number}>} [props.options]
  */
 class OptionsInput extends React.PureComponent {
   state = {
     open: false,
-    value: this.buildValue(this.props.options, this.props.value)
+    value: buildValue(this.props.options, this.props.value)
   }
 
   /**
-   * This function set state value
+   * Update value according to provided value and options.
    *
    * @param {object} nextProps
    */
@@ -71,11 +115,11 @@ class OptionsInput extends React.PureComponent {
     let value = this.state.value
 
     if (this.state.value !== nextProps.value && nextProps.value !== undefined) {
-      value = this.buildValue(nextProps.options, nextProps.value)
+      value = buildValue(nextProps.options, nextProps.value)
     }
 
     if (this.props.options !== nextProps.options) {
-      value = this.buildValue(nextProps.options, value)
+      value = buildValue(nextProps.options, value)
     }
 
     if (value !== this.state.value) {
@@ -87,35 +131,19 @@ class OptionsInput extends React.PureComponent {
    * This function detach events
    */
   componentWillUnmount () {
+    clearTimeout(this.arrowClickTimeout)
     this.detachCloseEvents()
-  }
-
-  /**
-   * This function set value of value
-   *
-   * @param {array} options
-   * @param {number} baseValue
-   *
-   * @returns {number}
-   */
-  buildValue (options, baseValue) {
-    const currentValue = baseValue || {}
-
-    const value = {}
-
-    for (let i = 0; i < options.length; i++) {
-      const option = options[i]
-      value[option.id] = currentValue[option.id] || option.default || 0
-    }
-
-    return value
   }
 
   /**
    * This function set state.open
    */
-  toggle () {
-    const nextOpen = !this.state.open
+  toggle (state) {
+    if (this.freezeToggling) {
+      return
+    }
+
+    const nextOpen = state == null ? !this.state.open : !!state
 
     this.setState({ open: nextOpen })
 
@@ -156,6 +184,7 @@ class OptionsInput extends React.PureComponent {
     if (!this.el) {
       return
     }
+
     const body = event.currentTarget
 
     let element = event.target
@@ -171,11 +200,18 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function set state.value
+   * Update value.
+   *
    * @param {string} id
    * @param {number} value
    */
   change = (id, value) => {
+    const { disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
+
     const nextValue = {
       ...this.state.value,
       [id]: value
@@ -195,10 +231,14 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function handle focus
+   * Handle focusing element.
    */
   focus = () => {
-    this.toggle()
+    this.toggle(true)
+
+    this.setState({
+      focused: true
+    })
 
     if (this.props.onFocus) {
       this.props.onFocus()
@@ -206,61 +246,95 @@ class OptionsInput extends React.PureComponent {
   }
 
   /**
-   * This function handle blur
+   * Handle losing focus on element.
    */
   blur = () => {
+    this.setState({
+      focused: false
+    })
+
     if (this.props.onBlur) {
       this.props.onBlur()
     }
   }
 
+  click = (...args) => {
+    this.focus(true)
+
+    if (this.props.onClick) {
+      this.props.onClick(...args)
+    }
+  }
+
+  handleArrowClick = (e) => {
+    if (this.nextStateAfterArrowClick != null) {
+      this.toggle(this.nextStateAfterArrowClick)
+
+      // It should ignore focus/blur events which are on same time
+      this.freezeToggling = true
+      this.arrowClickTimeout = setTimeout(() => {
+        this.freezeToggling = false
+      })
+    }
+  }
+
+  handleArrowClickStart = (e) => {
+    this.nextStateAfterArrowClick = null
+
+    // Keep default behavior when it's not focused
+    if (!this.state.focused) {
+      return
+    }
+
+    this.nextStateAfterArrowClick = !this.state.open
+  }
+
   render () {
-    const { options, className, ...restProps } = this.props
-    const { value } = this.state
-    const elements = options.filter(x => value[x.id]).map(x => (
-      <Option
-        key={x.id}
-        option={x}
-        value={value[x.id]}
-      />
-    ))
+    const {
+      options, className, persistentOptions, onClick, onChange, onFocus, onBlur,
+      id, error, disabled, readOnly, value: _value, ...restProps
+    } = this.props
+    const { value, open } = this.state
 
-    const listElements = options.map(x => (
-      <ListOption
-        key={x.id}
-        option={x}
-        value={value[x.id]}
-        onChange={this.change}
-      />
-    ))
-
-    const clsName = buildClassName('options-input', className, {
-      'open': this.state.open
-    })
+    const clsName = buildClassName(moduleName, className, { open, error, disabled, 'read-only': readOnly })
 
     return (
       <div className={clsName} ref={this.saveRef} {...restProps}>
         <button
+          id={id}
           type='button'
-          className='options-input__toggle'
+          className={buildClassName([ moduleName, 'toggle' ])}
           onFocus={this.focus}
+          onClick={this.click}
           onBlur={this.blur}
-          aria-expanded={this.state.open}
+          aria-expanded={open}
           role='button'
         >
-          <div className='options-input__value'>
-            {elements}
-          </div>
+          <OptionsInputValue
+            options={options}
+            persistentOptions={persistentOptions}
+            value={value}
+          />
 
-          <Icon name={this.state.open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'} />
+          <Icon
+            name={open ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+            onMouseDown={this.handleArrowClickStart}
+            onClick={this.handleArrowClick}
+          />
         </button>
-        <div className='options-input__list' aria-hidden={!this.state.open}>
-          {listElements}
-        </div>
+        <OptionsInputList
+          options={options}
+          value={value}
+          onChange={this.change}
+          disabled={disabled}
+          readOnly={readOnly}
+        />
       </div>
     )
   }
 }
+
+OptionsInput.displayName = 'OptionsInput'
 
 OptionsInput.propTypes = propTypes
 OptionsInput.defaultProps = defaultProps

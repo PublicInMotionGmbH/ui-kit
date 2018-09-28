@@ -1,2 +1,231 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('calendar')
+  position: relative
+
+  // Hacks to make it working correctly because of react-dates implementation...
+  .DayPicker,
+  .DayPicker > div > div,
+  .CalendarMonthGrid,
+  .DayPicker_transitionContainer,
+  .CalendarDay,
+  .DayPicker_weekHeader_li
+    width: auto !important
+    height: auto !important
+
+  .SingleDatePicker_picker
+    top: 100% !important
+    left: -1 * $calendar-picker-left-movement !important
+
+  .CalendarMonthGrid
+    transform: none !important
+  // End of hacks
+
+  .DateInput_input
+    box-sizing: border-box
+    width: 100%
+    outline: none
+    font: inherit
+    color: $calendar-text-color
+    background-color: $calendar-background-color
+    border: $calendar-border-width solid $calendar-border-color
+    border-radius: $calendar-border-radius
+    font-size: $calendar-font-size
+    height: $calendar-height
+    line-height: $calendar-height
+    padding: 0 $calendar-padding-horizontal
+
+    &::placeholder
+      color: $calendar-placeholder-color
+
+    &:not(.DateInput_input__focused):hover
+      background-color: $calendar-hover-background-color
+      border-color: $calendar-hover-border-color
+      color: $calendar-hover-text-color
+
+    &__focused
+      background-color: $calendar-focus-background-color
+      border-color: $calendar-focus-border-color
+      color: $calendar-focus-text-color
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+      border-bottom-color: transparent
+
+  &--error .DateInput_input:not(.DateInput_input__focused)
+    &, &:hover
+      background-color: $calendar-error-background-color
+      border-color: $calendar-error-border-color
+      color: $calendar-error-text-color
+
+  &--focused .SingleDatePicker,
+  &--focused .SingleDatePickerInput
+    position: relative
+    z-index: 2
+
+  .DateInput_screenReaderMessage,
+  .DateInput_fang
+    display: none
+
+  .SingleDatePicker_picker
+    display: block
+    position: absolute
+    box-sizing: border-box
+    border-radius: $calendar-border-radius
+    top: 100%
+    left: -1 * $calendar-picker-left-movement
+    margin-top: -$calendar-border-width
+    min-width: $calendar-picker-min-width
+    padding: #{$calendar-picker-padding-vertical} #{$calendar-padding-horizontal} #{$calendar-picker-padding-vertical - $calendar-picker-month-font-size * 0.5}
+    width: 100%
+    width: calc(100% + #{2 * $calendar-picker-left-movement})
+    background-color: $calendar-picker-background-color
+    border: $calendar-border-width solid $calendar-focus-border-color
+    z-index: 1
+
+    @if $calendar-picker-with-box-shadow
+      box-shadow: 0 #{dp(1.25)} #{dp(2.5)} #{dp(0.5)} #{transparentize(text-contrast($x-color-background), 0.9)}
+
+    @if $calendar-picker-left-movement == 0
+      border-top-left-radius: 0
+
+  .DayPicker_weekHeaders
+    display: flex
+    justify-content: space-between
+
+  .DayPicker_weekHeader,
+  .CalendarMonthGrid_month__horizontal
+    flex: 1 0
+    width: 45%
+    max-width: 45%
+    min-width: 45%
+    width: calc(50% - #{$calendar-picker-padding-horizontal})
+    max-width: calc(50% - #{$calendar-picker-padding-horizontal})
+    min-width: calc(50% - #{$calendar-picker-padding-horizontal})
+
+  .DayPicker_weekHeader_ul
+    display: flex
+    list-style: none
+    justify-content: stretch
+    margin: 0
+    padding: 0
+
+  .DayPicker_weekHeader_li
+    flex: 1 0
+    text-align: center
+    height: $calendar-picker-weekday-line-height * $calendar-picker-weekday-font-size !important
+    padding: 0 $calendar-picker-weekday-padding-horizontal
+
+    > small
+      font-size: $calendar-picker-weekday-font-size
+      font-weight: $calendar-picker-weekday-font-weight
+
+  .CalendarMonthGrid
+    display: flex
+    justify-content: space-between
+    outline: none
+
+  .CalendarMonth
+    position: relative
+
+  .CalendarMonth_caption
+    text-align: center
+    text-transform: uppercase
+    font-size: $calendar-picker-month-font-size
+    line-height: $calendar-picker-month-line-height
+    position: absolute
+    bottom: 100%
+    width: 100%
+    margin-bottom: $calendar-picker-weekday-line-height * $calendar-picker-weekday-font-size + $calendar-picker-month-font-size
+
+    > strong
+      font-weight: $calendar-picker-month-font-weight
+
+  .DayPicker_weekHeaders
+    margin-top: $calendar-picker-month-font-size + $calendar-picker-month-margin
+
+  .DayPicker_weekHeader_li:last-child
+    color: $calendar-picker-weekday-holiday-text-color
+
+  .CalendarMonth_table
+    width: 100%
+    border-collapse: separate
+    border-spacing: $calendar-picker-day-gap
+
+  .CalendarDay
+    text-align: center
+    color: $calendar-picker-day-text-color
+    background-color: $calendar-picker-day-background-color
+    font-weight: $calendar-picker-day-font-weight
+    cursor: pointer
+    outline: none
+    padding: $calendar-picker-day-padding-vertical $calendar-picker-day-padding-horizontal
+    border-radius: $calendar-picker-day-border-radius
+
+  .CalendarDay__lastDayOfWeek
+    color: $calendar-picker-day-holiday-text-color
+
+  .CalendarDay__blocked_out_of_range,
+  .CalendarDay__blocked_calendar
+    background-color: $calendar-picker-disabled-day-background-color
+    color: $calendar-picker-disabled-day-text-color
+    font-weight: $calendar-picker-disabled-day-font-weight
+    cursor: default
+    pointer-events: none
+
+  .CalendarDay__selected
+    background: $calendar-picker-selected-day-background-color
+    color: $calendar-picker-selected-day-text-color
+    font-weight: $calendar-picker-day-font-weight
+
+  .CalendarDay:not(.CalendarDay__selected):hover,
+  .CalendarDay:not(.CalendarDay__selected):focus
+    color: $calendar-picker-hover-day-text-color
+    background: $calendar-picker-hover-day-background-color
+
+  .CalendarMonthGrid_month__hidden,
+  .DayPickerKeyboardShortcuts_buttonReset
+    display: none
+
+  .DayPicker_focusRegion:focus
+    outline: none
+
+  .DayPickerNavigation_leftButton__horizontal,
+  .DayPickerNavigation_rightButton__horizontal
+    display: flex
+    position: absolute
+    color: $calendar-picker-arrow-color
+    top: $calendar-picker-padding-vertical - $calendar-picker-month-font-size * 0.25
+    height: $calendar-picker-month-font-size * 1.5
+    align-items: center
+    border: 0
+    background: transparent
+    padding: 0
+    margin: 0
+    font-size: $calendar-picker-month-font-size * 1.5
+    z-index: 10
+    cursor: pointer
+    outline: none
+
+    &:hover,
+    &:focus
+      opacity: 1
+      color: $calendar-picker-hover-arrow-color
+
+  .DayPickerNavigation_leftButton__horizontal
+    left: $calendar-picker-padding-vertical
+
+  .DayPickerNavigation_rightButton__horizontal
+    right: $calendar-picker-padding-vertical
+
+  .CalendarMonthGrid
+    @if $calendar-picker-separator-width != 0
+      &:before
+        content: ''
+        position: absolute
+        display: block
+        left: 50%
+        margin-left: -1 * $calendar-picker-separator-width / 2
+        top: $calendar-picker-padding-vertical + $calendar-picker-month-font-size / 2
+        bottom: $calendar-picker-padding-vertical + $calendar-picker-month-font-size / 2
+        width: $calendar-picker-separator-width
+        background: $calendar-picker-separator-color

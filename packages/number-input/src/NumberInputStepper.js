@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { prefix } from '@talixo/shared'
+import { prefix, buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
@@ -20,12 +20,16 @@ const propTypes = {
   initialTime: PropTypes.number,
 
   /** Time in ms, in which we make another tick when pressing a button */
-  stepTime: PropTypes.number
+  stepTime: PropTypes.number,
+
+  /** Should it be disabled? */
+  disabled: PropTypes.bool
 }
 
 const defaultProps = {
   initialTime: 700,
-  stepTime: 20
+  stepTime: 20,
+  disabled: false
 }
 
 /**
@@ -57,7 +61,11 @@ class NumberInputStepper extends React.PureComponent {
    * @param {string} method  name of method out of props (onIncrement or onDecrement)
    */
   start (method) {
-    const { initialTime } = this.props
+    const { initialTime, disabled, readOnly } = this.props
+
+    if (disabled || readOnly) {
+      return
+    }
 
     // Set up timeout which will start automated behavior
     this.timeout = setTimeout(() => this.tick(method), initialTime)
@@ -180,7 +188,8 @@ class NumberInputStepper extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const clsName = prefix(moduleName)
+    const { disabled } = this.props
+    const clsName = buildClassName(moduleName, null, { disabled })
 
     return (
       <div className={clsName} ref={this.containerRef}>
@@ -190,6 +199,8 @@ class NumberInputStepper extends React.PureComponent {
     )
   }
 }
+
+NumberInputStepper.displayName = 'NumberInputStepper'
 
 NumberInputStepper.propTypes = propTypes
 

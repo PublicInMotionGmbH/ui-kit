@@ -11,7 +11,7 @@ using `npm install @talixo/badge --save` or `yarn add @talixo/badge`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -27,6 +27,9 @@ Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
 className     | string    | n/a     | additional class name passed to wrapper
 children      | node      | n/a     | node element to display inside badge
+pill          | bool      | `false` | should this badge be a pill?
+onRemove      | function  | n/a     | handler for clicking on "remove" button (which will be shown when handler is used)
+removeText    | node      | `×`     | content of "remove" button
 
 ## Changelog
 

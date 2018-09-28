@@ -11,9 +11,9 @@ using `npm install @talixo/phone-input --save` or `yarn add @talixo/phone-input`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/combo-box: ^0.1.0`
-- `@talixo/country-flag: ^0.1.0`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/combo-box: ^1.0.0-alpha.27`
+- `@talixo/country-flag: ^1.0.0-alpha.27`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `country-telephone-data: ^0.5.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
@@ -23,12 +23,20 @@ Your package should additionally have some extra dependencies:
 These packages are required by `@talixo/phone-input`, but you have to install them manually,
 to avoid having different versions of these in your application.
 
+## How to use this component with country flags
+
+- If you want to use package with country flags you need to use `CountryFlagsProvider`
+- Sprite is available in `sprites/sprite.svg` directory
+
+To see how to use country flags package please see https://github.com/PublicInMotionGmbH/ui-kit/tree/master/packages/country-flag
+
 ## Supported props
 
 This component allows any properties which can be added to `div` element. Additionally, handles some differently:
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
+autoComplete  | string    | `off`           | additional class name passed to wrapper
 className     | string    | n/a             | additional class name passed to wrapper
 error         | boolean   | `false`         | indicates that input has error
 value         | string    | self-controlled | phone number to show
@@ -36,6 +44,9 @@ placeholder   | string    | n/a             | placeholder to show when there is 
 onChange      | function  | n/a             | event handler for changed value
 onFocus       | function  | n/a             | event handler fired when input has been focused
 onBlur        | function  | n/a             | event handler fired when input lost focus
+id            | string    | n/a             | ID passed to control element
+disabled      | bool      | `false`         | Should it be disabled?
+readOnly      | bool      | `false`         | Should it be read-only?
 
 ## Changelog
 

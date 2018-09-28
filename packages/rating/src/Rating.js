@@ -12,16 +12,47 @@ const RIGHT_ARROW = 39
 const DOWN_ARROW = 40
 const ARROWS = [ LEFT_ARROW, DOWN_ARROW, UP_ARROW, RIGHT_ARROW ]
 
+const propTypes = {
+  /** Additional class name */
+  className: PropTypes.string,
+
+  /** Should icon placeholders be displayed? */
+  hidePlaceholder: PropTypes.bool,
+
+  /** Icon name to use */
+  icon: PropTypes.string,
+
+  /** Allow changing through keyboard */
+  keyboard: PropTypes.bool,
+
+  /** Event to handle user input */
+  onChange: PropTypes.func,
+
+  /** Number of icons */
+  size: PropTypes.number,
+
+  /** Rating to show, between 0 and 1 */
+  value: PropTypes.number
+}
+
+const defaultProps = {
+  icon: 'star',
+  keyboard: true,
+  size: 5,
+  value: 0
+}
+
 /**
  * Component which represents Rating.
  *
  * @property {object} props
  * @property {string} [props.className]
+ * @property {boolean} [props.hidePlaceholder]
  * @property {string} [props.icon]
- * @property {number} [props.value]
- * @property {number} [props.size]
  * @property {boolean} [props.keyboard]
  * @property {function} [props.onChange]
+ * @property {number} [props.size]
+ * @property {number} [props.value]
  *
  * @property {object} state
  * @property {number|null} state.current
@@ -174,8 +205,16 @@ class Rating extends React.PureComponent {
    * @returns {React.Element}
    */
   render () {
-    const { className, size, icon, value, onChange, keyboard, ...passedProps } = this.props
+    const { className, hidePlaceholder, icon, keyboard, onChange, size: propsSize, value: propsValue, ...passedProps } = this.props
     const { current } = this.state
+
+    const size = hidePlaceholder
+      ? Math.min(Math.ceil(propsSize * propsValue), propsSize)
+      : propsSize
+
+    const value = hidePlaceholder
+      ? propsValue * propsSize / size
+      : propsValue
 
     // Build icons to show
     const icons = Array.apply(null, new Array(size)).map((x, index) => this.renderIcon(index))
@@ -191,6 +230,9 @@ class Rating extends React.PureComponent {
 
     // Build class name of inner component
     const innerClsName = buildClassName([ 'rating', 'inner' ])
+    const outerClsName = buildClassName([ 'rating', 'outer' ], null, {
+      hidden: hidePlaceholder
+    })
 
     // Build basic properties for rating
     const props = {
@@ -210,7 +252,7 @@ class Rating extends React.PureComponent {
 
     return (
       <span {...props} {...passedProps}>
-        {icons}
+        <span className={outerClsName}>{icons}</span>
         <span className={innerClsName} style={{ width: percentage + '%' }}>
           {icons}
         </span>
@@ -219,31 +261,9 @@ class Rating extends React.PureComponent {
   }
 }
 
-Rating.propTypes = {
-  /** Additional class name */
-  className: PropTypes.string,
+Rating.displayName = 'Rating'
 
-  /** Rating to show, between 0 and 1 */
-  value: PropTypes.number,
-
-  /** Number of icons */
-  size: PropTypes.number,
-
-  /** Icon name to use */
-  icon: PropTypes.string,
-
-  /** Allow changing through keyboard */
-  keyboard: PropTypes.bool,
-
-  /** Event to handle user input */
-  onChange: PropTypes.func
-}
-
-Rating.defaultProps = {
-  size: 5,
-  value: 0,
-  keyboard: true,
-  icon: 'star'
-}
+Rating.propTypes = propTypes
+Rating.defaultProps = defaultProps
 
 export default Rating

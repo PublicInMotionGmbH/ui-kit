@@ -2,10 +2,14 @@
 
 exports[`<SelectBox /> should not render menu when select box is opened and has no options 1`] = `
 <div
+  aria-expanded={true}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns="downshift-0-menu"
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={true}
     aria-haspopup={true}
     aria-label="close menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -13,6 +17,7 @@ exports[`<SelectBox /> should not render menu when select box is opened and has 
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -41,10 +46,14 @@ exports[`<SelectBox /> should not render menu when select box is opened and has 
 
 exports[`<SelectBox /> should render correctly 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -52,6 +61,7 @@ exports[`<SelectBox /> should render correctly 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -80,10 +90,14 @@ exports[`<SelectBox /> should render correctly 1`] = `
 
 exports[`<SelectBox /> should render menu when select box is opened and has options 1`] = `
 <div
+  aria-expanded={true}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns="downshift-0-menu"
   className="talixo-combo-box talixo-combo-box--open"
+  role="combobox"
 >
   <button
-    aria-expanded={true}
     aria-haspopup={true}
     aria-label="close menu"
     className="talixo-combo-box__value talixo-combo-box__value--placeholder"
@@ -91,6 +105,7 @@ exports[`<SelectBox /> should render menu when select box is opened and has opti
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -118,49 +133,57 @@ exports[`<SelectBox /> should render menu when select box is opened and has opti
     className="talixo-combo-box__menu"
   >
     <div
-      className="talixo-combo-box__item"
-      id="downshift-0-item-0"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
+      className="talixo-combo-box__list"
     >
       <div
-        className="talixo-combo-box__item__tick"
+        aria-selected={false}
+        className="talixo-combo-box__item"
+        id="downshift-0-item-0"
+        onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseMove={[Function]}
+        role="option"
       >
-        <span
-          aria-hidden="true"
-          className="talixo-icon tai tai--material"
+        <div
+          className="talixo-combo-box__item__tick"
         >
-          
-        </span>
-      </div>
-      <div
-        className="talixo-combo-box__item__inner"
-      >
-        abc
-      </div>
-    </div>
-    <div
-      className="talixo-combo-box__item"
-      id="downshift-0-item-1"
-      onClick={[Function]}
-      onMouseDown={[Function]}
-      onMouseMove={[Function]}
-    >
-      <div
-        className="talixo-combo-box__item__tick"
-      >
-        <span
-          aria-hidden="true"
-          className="talixo-icon tai tai--material"
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+        </div>
+        <div
+          className="talixo-combo-box__item__inner"
         >
-          
-        </span>
+          abc
+        </div>
       </div>
       <div
-        className="talixo-combo-box__item__inner"
+        aria-selected={false}
+        className="talixo-combo-box__item"
+        id="downshift-0-item-1"
+        onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseMove={[Function]}
+        role="option"
       >
-        def
+        <div
+          className="talixo-combo-box__item__tick"
+        >
+          <span
+            aria-hidden="true"
+            className="talixo-icon tai tai--material"
+          >
+            
+          </span>
+        </div>
+        <div
+          className="talixo-combo-box__item__inner"
+        >
+          def
+        </div>
       </div>
     </div>
   </div>
@@ -169,10 +192,14 @@ exports[`<SelectBox /> should render menu when select box is opened and has opti
 
 exports[`<SelectBox /> should show multi-select box with many values 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box talixo-combo-box--multi"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value"
@@ -180,6 +207,7 @@ exports[`<SelectBox /> should show multi-select box with many values 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >
@@ -255,10 +283,14 @@ exports[`<SelectBox /> should show multi-select box with many values 1`] = `
 
 exports[`<SelectBox /> should show select box with selected value 1`] = `
 <div
+  aria-expanded={false}
+  aria-haspopup="listbox"
+  aria-labelledby="downshift-0-label"
+  aria-owns={null}
   className="talixo-combo-box"
+  role="combobox"
 >
   <button
-    aria-expanded={false}
     aria-haspopup={true}
     aria-label="open menu"
     className="talixo-combo-box__value"
@@ -266,6 +298,7 @@ exports[`<SelectBox /> should show select box with selected value 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
+    onKeyUp={[Function]}
     role="button"
     type="button"
   >

@@ -5,9 +5,14 @@ exports[`<Checkbox /> renders children correctly 1`] = `
   className="talixo-checkbox"
 >
   <input
+    checked={false}
     onChange={[Function]}
     type="checkbox"
   />
-  <span />
+  <span
+    tabIndex={-1}
+  >
+    <span />
+  </span>
 </label>
 `;

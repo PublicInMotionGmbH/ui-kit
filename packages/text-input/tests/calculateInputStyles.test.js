@@ -59,21 +59,28 @@ describe('calculateInputStyles', () => {
     const input = document.createElement('input')
     const suffix = document.createElement('span')
 
+    input.style.paddingLeft = '0px'
+    input.style.paddingRight = '0px'
+    suffix.style.width = '3px'
+
     const result = calculateInputStyles(input, suffix)
 
-    expect(result.input.paddingRight).toBeTruthy()
+    expect(result.input.paddingRight).toBe(3)
     expect(result.input.paddingLeft).toBeFalsy()
   })
 
-  it('should calculate padding for RTL input', () => {
+  it('should calculate padding for input', () => {
     const input = document.createElement('input')
-    input.style.direction = 'rtl'
     const suffix = document.createElement('span')
+
+    input.style.paddingLeft = '0px'
+    input.style.paddingRight = '4px'
+    suffix.style.width = '3px'
 
     const result = calculateInputStyles(input, suffix)
 
-    expect(result.input.paddingRight).toBeFalsy()
-    expect(result.input.paddingLeft).toBeTruthy()
+    expect(result.input.paddingRight).toBe(7)
+    expect(result.input.paddingLeft).toBeFalsy()
   })
 
   it('should calculate suffix position', () => {

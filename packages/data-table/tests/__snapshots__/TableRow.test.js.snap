@@ -2,102 +2,144 @@
 
 exports[`<TableRow /> rendering renders children correctly 1`] = `
 <React.Fragment>
-  <Row
+  <React.Fragment
     key="0"
   >
-    <Cell
-      key="id"
+    <Row
+      className="talixo-data-table__row"
     >
-      0
-    </Cell>
-    <Cell
-      key="opened"
-    >
-      16th Jan 2018
-    </Cell>
-    <Cell
-      key="assignee"
-    >
-      <span
-        className="test-span"
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
       >
-        John Smith
-      </span>
-    </Cell>
-    <Cell
-      key="date_of_ride"
-    >
-      18th Feb 2018
-    </Cell>
-    <Cell
-      key="pickup"
-    >
-      Berlin SXF Alexanderplatz
-    </Cell>
-  </Row>
-  <Row
+        0
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        16th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        >
+          John Smith
+        </span>
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        18th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Berlin SXF Alexanderplatz
+      </Cell>
+    </Row>
+  </React.Fragment>
+  <React.Fragment
     key="1"
   >
-    <Cell
-      key="id"
+    <Row
+      className="talixo-data-table__row talixo-data-table__row--even"
     >
-      1
-    </Cell>
-    <Cell
-      key="opened"
-    >
-      17th Jan 2018
-    </Cell>
-    <Cell
-      key="assignee"
-    >
-      <span
-        className="test-span"
-      />
-    </Cell>
-    <Cell
-      key="date_of_ride"
-    >
-      19th Feb 2018
-    </Cell>
-    <Cell
-      key="pickup"
-    >
-      Krakow
-    </Cell>
-  </Row>
-  <Row
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
+      >
+        1
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        17th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        />
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        19th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Krakow
+      </Cell>
+    </Row>
+  </React.Fragment>
+  <React.Fragment
     key="2"
   >
-    <Cell
-      key="id"
+    <Row
+      className="talixo-data-table__row"
     >
-      2
-    </Cell>
-    <Cell
-      key="opened"
-    >
-      18th Jan 2018
-    </Cell>
-    <Cell
-      key="assignee"
-    >
-      <span
-        className="test-span"
+      <Cell
+        className="talixo-data-table__cell"
+        key="id"
+        onClick={[Function]}
       >
-        Mickey Mouse
-      </span>
-    </Cell>
-    <Cell
-      key="date_of_ride"
-    >
-      20th Feb 2018
-    </Cell>
-    <Cell
-      key="pickup"
-    >
-      Warszawa
-    </Cell>
-  </Row>
+        2
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="opened"
+        onClick={[Function]}
+      >
+        18th Jan 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="assignee"
+        onClick={[Function]}
+      >
+        <span
+          className="test-span"
+        >
+          Mickey Mouse
+        </span>
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="date_of_ride"
+        onClick={[Function]}
+      >
+        20th Feb 2018
+      </Cell>
+      <Cell
+        className="talixo-data-table__cell"
+        key="pickup"
+        onClick={[Function]}
+      >
+        Warszawa
+      </Cell>
+    </Row>
+  </React.Fragment>
 </React.Fragment>
 `;

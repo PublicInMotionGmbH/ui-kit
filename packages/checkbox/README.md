@@ -11,7 +11,7 @@ using `npm install @talixo/checkbox --save` or `yarn add @talixo/checkbox`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^0.1.0`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -25,12 +25,12 @@ It allows any props which are allowed for `input[type=checkbox]`. Additionally, 
 
 Property name | Type      | Default         | Description
 --------------|-----------|:---------------:|--------------------------------
-className     | string    | n/a             | additional class name passed to wrapper
+className     | string    | n/a             | Additional class name passed to wrapper
 children      | node      | n/a             | Checkbox description
-error         | boolean   | `false`         | indicates that input has error
-size          | string    | n/a             | checkbox label size ('small' or 'large')
-style         | object    | n/a             | additional styles
-value         | boolean   | self-controlled | is it checked?
+error         | boolean   | `false`         | Indicates that input has error
+style         | object    | n/a             | Additional styles
+value         | boolean   | self-controlled | Is it checked?
+onChange      | function  | n/a             | Event handler for change of checked status
 
 ## Changelog
 

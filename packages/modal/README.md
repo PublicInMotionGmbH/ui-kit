@@ -11,8 +11,8 @@ using `npm install @talixo/modal --save` or `yarn add @talixo/modal`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/portal: ^0.1.0`
-- `@talixo/shared: ^0.1.0`
+- `@talixo/portal: ^1.0.0-alpha.28`
+- `@talixo/shared: ^1.0.0-alpha.27`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -24,11 +24,35 @@ to avoid having different versions of these in your application.
 
 It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type      | Default | Description                    
+### Modal
+
+Property name   | Type      | Default | Description                    
+----------------|-----------|:-------:|--------------------------------
+className       | string    | n/a     | Additional class name passed to wrapper.
+children        | nodes     | n/a     | Content of modal, including header and footer.
+onEscKeyDown    | function  | n/a     | Handles pressing escape key.
+onOverlayClick  | function  | n/a     | Controls whether modal is open.
+open            | bool      | `true`  | Controls whether modal is open.
+informational   | bool      | `false` | It's simple, informational modal.
+icon            | node      | n/a     | Icon to show in informational modal
+type            | string    | n/a     | Type of informational modal for styling: `success`, `info`, `warning` or `error`.
+attachTo        | Element   | `body`  | HTML element where open modal should be attached to.
+
+### ModalHeader
+
+It allows any props which are allowed for `header`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description
 --------------|-----------|:-------:|--------------------------------
-className     | string    | n/a     | additional class name passed to wrapper
-children      | string    | n/a     | content of modal
-open          | bool      | `true`  | controls whether modal is open
+className     | string    | n/a     | Additional class name passed to wrapper.
+
+### ModalFooter
+
+It allows any props which are allowed for `footer`. Additionally, it handles some differently:
+
+Property name | Type      | Default | Description
+--------------|-----------|:-------:|--------------------------------
+className     | string    | n/a     | Additional class name passed to wrapper.
 
 ## Changelog
 

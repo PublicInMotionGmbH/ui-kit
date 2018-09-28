@@ -2,11 +2,13 @@
 
 exports[`<Option /> renders children correctly 1`] = `
 <span
-  className="options-input__option"
+  className="talixo-options-input-option"
 >
   <Tooltip
     arrow={true}
     fade={false}
+    fadeTime={600}
+    lockPosition={false}
     position="top"
     render={[Function]}
     triggerOn="hover"

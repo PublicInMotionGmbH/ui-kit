@@ -1,2 +1,214 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('combo-box')
+  position: relative
+  display: block
+
+  &__value
+    position: relative
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    text-align: inherit
+    text-align: start
+    font: inherit
+    color: $combo-box-text-color
+    border: $combo-box-border-width solid $combo-box-border-color
+    background: $combo-box-background-color
+    width: 100%
+    min-height: $combo-box-height
+    padding: $combo-box-tag-margin $combo-box-padding-horizontal
+    border-radius: $combo-box-border-radius
+    outline: none
+    margin: 0
+
+  &__inner
+    flex: 1
+
+  &__inner > input,
+  &__inner > div > input
+    outline: none
+    border: 0
+    padding: 0
+    font: inherit
+
+  &__value--placeholder
+    &, input::placeholder
+      color: $combo-box-placeholder-color
+
+  &__value--placeholder
+    user-select: none
+
+  &--open &__value
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+  &__menu
+    box-sizing: border-box
+    position: absolute
+    left: 0
+    right: 0
+    z-index: 999
+    top: 100%
+    width: 100%
+    max-height: 50vh
+    border: $combo-box-border-width solid $combo-box-focus-border-color
+    border-top: 0
+    color: $combo-box-menu-item-text-color
+    background: $combo-box-menu-item-background-color
+    display: flex
+    flex-direction: column
+  
+  &__list
+    flex: 1 1 auto
+    overflow: auto
+
+  &__footer
+    flex: 0 0 auto
+    background-color: $combo-box-footer-background-color
+    padding: $combo-box-footer-padding-vertical $combo-box-footer-padding-horizontal
+
+  &__arrow,
+  &__clear
+    display: inline-block
+    font-size: $combo-box-icon-size
+    line-height: 1em
+    border: 0
+    background: transparent
+    color: $combo-box-icon-color
+
+  &__arrow
+    pointer-events: none
+
+  &__clear:hover
+    cursor: pointer
+    color: $combo-box-icon-hover-color
+
+  &__controls
+    display: flex
+    align-items: center
+    margin-left: auto
+    white-space: nowrap
+
+  &__icon
+    display: inline-block
+    font-size: $combo-box-icon-size
+    line-height: 1em
+    color: $combo-box-icon-color
+
+  &__item
+    display: flex
+    align-items: center
+    padding: $combo-box-menu-item-padding-vertical $combo-box-menu-item-padding-horizontal
+    cursor: pointer
+    border-bottom: $combo-box-menu-separator-height solid $combo-box-menu-separator-color
+
+    &:last-child
+      border-bottom: 0
+
+  &__item__tick
+    display: none
+    width: 1.75em
+    text-align: start
+    color: $combo-box-tick-inactive-color
+
+  &__item--highlighted
+    color: $combo-box-menu-item-hover-text-color
+    background: $combo-box-menu-item-hover-background-color
+
+  &__item--highlighted &__item__tick
+    color: $combo-box-tick-highlighted-color
+
+  &__item--selected &__item__tick
+    color: $combo-box-tick-active-color
+
+  &__tags
+    display: inline
+    margin: 0 $combo-box-tag-margin 0 0
+    padding-top: $combo-box-tag-margin
+
+  [dir=rtl] &__tags
+    margin-right: 0
+    margin-left: $combo-box-tag-margin
+
+  &__tag
+    box-sizing: border-box
+    display: inline-flex
+    vertical-align: middle
+    justify-content: center
+    align-items: center
+    white-space: nowrap
+    overflow: hidden
+    max-width: 100%
+    font-size: 1em
+    line-height: 1
+    width: auto
+    text-overflow: ellipsis
+    margin: #{$combo-box-tag-margin / 2} $combo-box-tag-margin #{$combo-box-tag-margin / 2} 0
+    padding: $combo-box-tag-padding-vertical $combo-box-tag-padding-horizontal
+    color: $combo-box-tag-text-color
+    background: $combo-box-tag-background-color
+    border: $combo-box-tag-border-width solid $combo-box-tag-border-color
+    border-radius: $combo-box-tag-border-radius
+
+  &__remove
+    padding: 0
+    margin-left: 0.3em
+    border: 0
+    outline: none
+    background: transparent
+    font: inherit
+    color: inherit
+    cursor: pointer
+    vertical-align: middle
+    text-align: center
+    opacity: 0.3
+
+    &:hover,
+    &:focus
+      opacity: 1
+
+    .tai
+      display: block
+
+  &--simple-select &__select
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    z-index: 0
+
+  &--simple-select &__value
+    z-index: 1
+    pointer-events: none
+
+  &--simple-select &__remove
+    pointer-events: all
+
+  &--multi &__item__tick
+    display: inline-block
+
+  [dir=rtl] &__remove
+    margin-left: initial
+    margin-right: 0.3em
+
+  [dir=rtl] &__controls
+    margin-left: initial
+    margin-right: auto
+
+  // &--open is equivalent of :focus
+  &:not(&--open):hover &__value
+    background-color: $combo-box-hover-background-color
+    border-color: $combo-box-hover-border-color
+
+  &:not(&--open):hover &__value:not(&__value--placeholder)
+    color: $combo-box-hover-text-color
+
+  &--open &__value
+    background-color: $combo-box-focus-background-color
+    border-color: $combo-box-focus-border-color
+
+  &--open &__value:not(&__value--placeholder)
+    color: $combo-box-focus-text-color

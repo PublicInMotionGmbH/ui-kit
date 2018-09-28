@@ -13,49 +13,94 @@ const addStory = createStoriesFactory('RadioGroup', module, {
 
 // Stories
 
-addStory.controlled('initial', readme, (setState, state) => (
+addStory('initial', readme, () => (
   <RadioGroup
-    onChange={value => setState({ value })}
-    name='RadioName' value={state.value}
-    options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    name='RadioName'
+    options={[
+      { value: 1, label: 'one' },
+      { value: 2, label: 'two' },
+      { value: 3, label: 'three' }
+    ]}
   />
 ))
 
-addStory.controlled('with default value', readme, (setState, state) => (
+addStory.controlled('controlled', readme, (setState, state) => (
   <RadioGroup
     onChange={value => setState({ value })}
     name='RadioNameChecked'
     value={state.value}
-    options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    options={[
+      { value: 1, label: 'one' },
+      { value: 2, label: 'two' },
+      { value: 3, label: 'three' }
+    ]}
   />
-), () => ({value: 1}))
+), () => ({ value: 1 }))
 
-addStory.controlled('with different size', readme, (setState, state) => (
+addStory('with error', readme, () => (
   <div>
-    <h2>Small size</h2>
     <RadioGroup
-      onChange={value => setState({ value })}
+      error
       name='RadioName1'
-      size='small'
-      value={state.value}
-      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
-    />
-    <h2>Large size</h2>
-    <RadioGroup
-      onChange={value2 => setState({ value2 })}
-      name='RadioName2'
-      size='large'
-      value={state.value2}
-      options={[{value: 1, label: 'one'}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+      options={[
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
     />
   </div>
-), () => ({value: 1, value2: 2}))
+))
 
-addStory.controlled('with disabled option', readme, (setState, state) => (
+addStory('with fixed value', readme, () => (
+  <div>
+    <RadioGroup
+      value={1}
+      name='RadioName1'
+      options={[
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))
+
+addStory('with disabled option', readme, () => (
   <RadioGroup
-    onChange={value => setState({ value })}
     name='RadioNameDisabled'
-    value={state.value}
-    options={[{value: 1, label: 'one', disabled: true}, {value: 2, label: 'two'}, {value: 3, label: 'three'}]}
+    options={[
+      { value: 1, label: 'one', disabled: true },
+      { value: 2, label: 'two' },
+      { value: 3, label: 'three' }
+    ]}
   />
-), () => ({value: 3}))
+))
+
+addStory('with label', readme, () => (
+  <div>
+    <label htmlFor='radio-group'>Click me</label>
+    <RadioGroup
+      id='radio-group'
+      options={[
+        { value: 1, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))
+
+addStory('with null value', readme, () => (
+  <div>
+    <label htmlFor='radio-group'>Click me</label>
+    <RadioGroup
+      id='radio-group'
+      name='RadioGroupNullValue'
+      options={[
+        { value: null, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))

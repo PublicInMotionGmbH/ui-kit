@@ -11,24 +11,104 @@ const addStory = createStoriesFactory('OptionsInput', module, {
   propTables: [ OptionsInput ]
 })
 
+const styles = {
+  display: 'inline-block',
+  left: '80px',
+  width: 'auto'
+}
+const stylesRTL = {
+  display: 'inline-block',
+  right: '80%',
+  width: 'auto'
+}
+
 // Stories
 addStory('initial', readme, () => (
   <OptionsInput
-    options={[{id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15'},
-      {id: 'rocket', icon: 'rocket', label: 'Rockets'},
-      {id: 'children', icon: 'face', label: 'Children', description: 'Younger than 15'}]} />
+    style={styles}
+    options={[
+      { id: 'person', icon: 'person', label: 'Adults', description: 'Older than 15' },
+      { id: 'rocket', icon: 'rocket', label: 'Rockets' },
+      { id: 'children', icon: 'face', label: 'Children', description: 'Younger than 15' }
+    ]}
+  />
 ))
 
 addStory('with default values', readme, () => (
   <OptionsInput
-    options={[{id: 'android', icon: 'android', label: 'Androids', description: 'Operation system', default: 5},
-      {id: 'battery', icon: 'battery_charging_full', label: 'Batteries', default: 100},
-      {id: 'phone', icon: 'phone_android', label: 'Phones', default: 999}]} />
+    style={styles}
+    options={[
+      { id: 'android', icon: 'android', label: 'Androids', description: 'Operation system', default: 5 },
+      { id: 'battery', icon: 'battery_charging_full', label: 'Batteries', default: 100 },
+      { id: 'phone', icon: 'phone_android', label: 'Phones', default: 999 },
+      { id: 'rocket', icon: 'rocket', label: 'Rockets' }
+    ]}
+  />
 ))
 
 addStory('with min and max values', readme, () => (
   <OptionsInput
-    options={[{id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1},
-      {id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6},
-      {id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10}]} />
+    style={styles}
+    options={[
+      { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+      { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
+      { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10 }
+    ]}
+  />
+))
+
+addStory('with persistent options', readme, () => (
+  <OptionsInput
+    style={styles}
+    options={[
+      { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+      { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 0, max: 7', min: 0, max: 7, default: 0 },
+      { id: 'star', icon: 'star', label: 'Stars', description: 'min: -10, max: 10', min: -10, max: 10, default: 0 }
+    ]}
+    persistentOptions={['star']}
+  />
+))
+
+addStory.controlled('controlled', readme, (setState, state) => (
+  <OptionsInput
+    style={styles}
+    value={state.value}
+    onChange={value => setState({ value })}
+    options={[
+      { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+      { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
+      { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10 },
+      { id: 'rocket', icon: 'rocket', label: 'Rockets', description: 'min: 0', min: 0 }
+    ]}
+  />
+), () => ({ value: { product: 3 } }))
+
+addStory('OptionsInput with label', readme, () => (
+  <div>
+    <label htmlFor='options-input'>Click me</label>
+    <OptionsInput
+      id='options-input'
+      style={styles}
+      options={[
+        { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+        { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
+        { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10 },
+        { id: 'rocket', icon: 'rocket', label: 'Rockets', description: 'min: 0', min: 0 }
+      ]}
+    />
+  </div>
+), () => ({ value: { product: 3 } }))
+
+addStory('RTL', readme, () => (
+  <div dir='rtl'>
+    <OptionsInput
+      style={stylesRTL}
+      options={[
+        { id: 'product', icon: 'shopping_cart', label: 'Products', description: 'min: 1, max: 10', min: 1, max: 10, default: 1 },
+        { id: 'luggage', icon: 'work', label: 'Luggages', description: 'min: 5, max: 7', min: 5, max: 7, default: 6 },
+        { id: 'star', icon: 'star', label: 'Stars', description: 'min: 10, max: 10', min: 10, max: 10, default: 10 },
+        { id: 'rocket', icon: 'rocket', label: 'Rockets', description: 'min: 0', min: 0 }
+      ]}
+    />
+  </div>
 ))

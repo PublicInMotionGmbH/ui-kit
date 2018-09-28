@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const propTypes = {
+  /** Head cell content */
+  children: PropTypes.node
+}
+
 /**
  * Component which represents Table Head column.
  *
@@ -18,9 +23,8 @@ function HeadCell (props) {
   )
 }
 
-HeadCell.propTypes = {
-  /** Head cell content */
-  children: PropTypes.node
-}
+HeadCell.displayName = 'HeadCell'
+
+HeadCell.propTypes = propTypes
 
 export default HeadCell

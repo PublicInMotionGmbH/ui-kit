@@ -49,6 +49,8 @@ function Tag (props) {
   )
 }
 
+Tag.displayName = 'Tag'
+
 Tag.propTypes = propTypes
 
 export default Tag

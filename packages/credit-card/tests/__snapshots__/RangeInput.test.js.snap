@@ -6,22 +6,30 @@ exports[`<RangeInput /> renders correctly 1`] = `
 >
   <AutoComplete
     buildItemId={[Function]}
+    disabled={false}
     inputValue=""
     isOpen={false}
     itemToString={[Function]}
     onBlur={[Function]}
-    onChange={[Function]}
+    onChoose={[Function]}
     onFocus={[Function]}
     onInputValueChange={[Function]}
+    openOnFocus={true}
     options={Array []}
+    readOnly={false}
     renderItem={[Function]}
     value={null}
   >
     <TextInput
       InputComponent="input"
+      disabled={false}
+      endCaretOnFocus={false}
       error={false}
+      inputMode="numeric"
       maxLength={9}
       onKeyDown={[Function]}
+      pattern="[0-9]*"
+      readOnly={false}
       right={
         <Icon
           name="keyboard_arrow_down"
@@ -38,7 +46,12 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
   className="talixo-range-input"
 >
   <div
+    aria-expanded={false}
+    aria-haspopup="listbox"
+    aria-labelledby="downshift-0-label"
+    aria-owns={null}
     className="talixo-combo-box"
+    role="combobox"
   >
     <div
       className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
@@ -46,16 +59,20 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
       <input
         aria-activedescendant={null}
         aria-autocomplete="list"
-        aria-expanded={false}
+        aria-controls={null}
+        aria-labelledby="downshift-0-label"
         autoComplete="off"
         className="talixo-text-input__input"
+        disabled={false}
         id="downshift-0-input"
+        inputMode="numeric"
         maxLength={9}
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         onKeyDown={[Function]}
-        role="combobox"
+        pattern="[0-9]*"
+        readOnly={false}
         style={null}
         type="text"
         value=""

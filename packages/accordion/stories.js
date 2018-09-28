@@ -29,6 +29,19 @@ const optionsById = [
   { id: 'multiple', label: 'Multi 2', content: 'element selected' }
 ]
 
+const optionsCustomAnimationSpeed = [
+  { id: 1, animationSpeed: 30, label: 'Very Slow Animation', content: `I'm slow as sloth` },
+  { id: 'another', animationSpeed: 80, label: 'Slow Animation', content: <strong>I'm slow as turtle</strong> },
+  { id: 'third', animationSpeed: 900, label: 'Quick Animation', content: `I'm quick as gazelle` },
+  { id: 'multiple', label: 'Default Animation', content: 'I have default animation speed' },
+  {
+    id: 'last',
+    animationSpeed: 9000,
+    label: 'Rocket Speed',
+    content: <span><Icon name='rocket' /><Icon name='rocket' /><Icon name='rocket' /></span>
+  }
+]
+
 // Stories
 
 addStory('self-controlled', readme, () => (
@@ -38,11 +51,11 @@ addStory('self-controlled', readme, () => (
   />
 ))
 
-addStory.controlled('different animation time', readme, (setState, state) => (
+addStory.controlled('different animation speed', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
+    animationSpeed={100}
     options={options}
   />
 ), () => ({ active: null }))
@@ -51,7 +64,6 @@ addStory.controlled('with special arrow', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    animationTime={100}
     options={options}
     renderOpenIcon={() => <Icon name='keyboard_arrow_down' />}
     renderCloseIcon={() => <Icon name='keyboard_arrow_up' />}
@@ -67,12 +79,29 @@ addStory.controlled('not smooth', readme, (setState, state) => (
   />
 ), () => ({ active: null }))
 
-addStory.controlled('multiple items (different IDs)', readme, (setState, state) => (
+addStory.controlled('multiple items with same IDs', readme, (setState, state) => (
   <Accordion
     value={state.active}
     onChange={x => setState({ active: x })}
-    smooth={false}
     options={optionsById}
     buildId={option => option.id}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('multiple items open at once', readme, (setState, state) => (
+  <Accordion
+    multi
+    value={state.active}
+    onChange={x => setState({ active: x })}
+    options={optionsById}
+    buildId={option => option.id}
+  />
+), () => ({ active: null }))
+
+addStory.controlled('custom animation speed', readme, (setState, state) => (
+  <Accordion
+    value={state.active}
+    onChange={x => setState({ active: x })}
+    options={optionsCustomAnimationSpeed}
   />
 ), () => ({ active: null }))
