@@ -7,7 +7,7 @@ import HowItWorks from './src/HowItWorks'
 const readme = getReadmeDescription(require('./README.md'))
 
 // Create factories for story
-const addStory = createStoriesFactory('HowItWorks', module, {
+const addStory = createStoriesFactory('How It Works', module, {
   propTables: [ HowItWorks ]
 })
 

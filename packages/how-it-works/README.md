@@ -1,6 +1,6 @@
-# Talixo HowItWorks
+# Talixo - How It Works
 
-UI Component which represents HowItWorks
+UI Component which represents "how it works" element, to show step by step what will happen.
 
 ## How to install
 
@@ -26,7 +26,9 @@ Property name | Type      | Default | Description
 className     | string    | n/a     | Additional class name passed to wrapper.
 steps         | Step[]    | `[]`    | An array of steps containing the explanation of how it works.
 
-## Property shapes 
+## Property shapes
+
+### Step
 
 Property name | Type      | Default | Description                    
 --------------|-----------|:-------:|--------------------------------

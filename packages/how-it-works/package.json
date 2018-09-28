@@ -1,7 +1,7 @@
 {
   "name": "@talixo/how-it-works",
   "version": "0.0.0",
-  "description": "UI Component which represents HowItWorks",
+  "description": "UI Component which represents 'how it works' element, to show step by step what will happen.",
   "main": "dist/index.js",
   "module": "index.js",
   "jsnext:main": "index.js",
