@@ -100,8 +100,9 @@ describe('<Price />', () => {
 
       it('should return $100,000.12 given locale, value and currency', () => {
         const result = generatePrice('100000.12', { locale: 'en', currency: 'USD' })
-        expect(result.value).toBe('$100,000.12')
-        expect(result.symbol).toBe(null)
+        expect(result.value).toBe('100,000.12')
+        expect(result.symbol).toBe('$')
+        expect(result.displayBefore).toBe(true)
         expect(result.error).toBe(undefined)
       })
 

@@ -4,10 +4,16 @@ exports[`<Price /> <Price /> comoponent should render children correctly 1`] = `
 <span
   className="talixo-price"
 >
-  <span>
+  <React.Fragment>
+     
     1,000.00
-    PLN
-  </span>
+     
+    <abbr
+      title="PLN"
+    >
+      PLN
+    </abbr>
+  </React.Fragment>
 </span>
 `;
 
@@ -15,9 +21,9 @@ exports[`<Price /> <Price /> comoponent should render errorPlaceholder when wron
 <span
   className="talixo-price"
 >
-  <span>
+  <React.Fragment>
     -
-  </span>
+  </React.Fragment>
 </span>
 `;
 
@@ -28,10 +34,16 @@ exports[`<Price /> <Price /> comoponent should render prefix correctly 1`] = `
   <small>
     about
   </small>
-  <span>
+  <React.Fragment>
+     
     1,000.00
-    PLN
-  </span>
+     
+    <abbr
+      title="PLN"
+    >
+      PLN
+    </abbr>
+  </React.Fragment>
 </span>
 `;
 
@@ -39,9 +51,15 @@ exports[`<Price /> <Price /> comoponent should render price with curency before 
 <span
   className="talixo-price"
 >
-  <span>
-    GBP
+  <React.Fragment>
+    <abbr
+      title="GBP"
+    >
+      GBP
+    </abbr>
+     
     1,000.00
-  </span>
+     
+  </React.Fragment>
 </span>
 `;
