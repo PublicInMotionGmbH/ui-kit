@@ -13,9 +13,6 @@
     overflow: hidden
     position: relative
 
-  & *
-    box-sizing: border-box
-
   section
     position: relative
     margin: 0 $how-it-works-divider-width
@@ -23,6 +20,7 @@
     justify-content: center
 
   &__tile
+    box-sizing: border-box
     display: flex
     flex-direction: column
     max-width: $how-it-works-section-max-width

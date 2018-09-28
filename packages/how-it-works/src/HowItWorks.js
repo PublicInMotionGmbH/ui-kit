@@ -37,36 +37,34 @@ function HowItWorks (props) {
   const { className, steps, ...passedProps } = props
 
   const wrapperCls = buildClassName(moduleName)
-  const containerCls = buildClassName([moduleName, 'container'], className)
-  const descriptionCls = buildClassName([moduleName, 'description'])
-  const dividerCls = buildClassName([moduleName, 'divider'])
-  const imageCls = buildClassName([moduleName, 'image'])
-  const tileCls = buildClassName([moduleName, 'tile'])
-  const titleCls = buildClassName([moduleName, 'title'])
+  const containerCls = buildClassName([ moduleName, 'container' ], className)
+  const descriptionCls = buildClassName([ moduleName, 'description' ])
+  const dividerCls = buildClassName([ moduleName, 'divider' ])
+  const imageCls = buildClassName([ moduleName, 'image' ])
+  const tileCls = buildClassName([ moduleName, 'tile' ])
+  const titleCls = buildClassName([ moduleName, 'title' ])
+
+  const stepElements = steps.map((step, index) => (
+    <section key={index}>
+      <div className={tileCls}>
+        <div className={imageCls}>
+          {step.image}
+        </div>
+        <div className={titleCls}>
+          <strong>{step.title}</strong>
+        </div>
+        <div className={descriptionCls}>
+          {step.description}
+        </div>
+      </div>
+      <div className={dividerCls} />
+    </section>
+  ))
 
   return (
     <div className={containerCls} {...passedProps}>
       <div className={wrapperCls}>
-        {
-          steps.map((step, index) => (
-            <React.Fragment key={index}>
-              <section>
-                <div className={tileCls}>
-                  <div className={imageCls}>
-                    { step.image }
-                  </div>
-                  <div className={titleCls}>
-                    <strong>{ step.title }</strong>
-                  </div>
-                  <div className={descriptionCls}>
-                    { step.description }
-                  </div>
-                </div>
-                <div className={dividerCls} />
-              </section>
-            </React.Fragment>
-          ))
-        }
+        {stepElements}
       </div>
     </div>
   )
