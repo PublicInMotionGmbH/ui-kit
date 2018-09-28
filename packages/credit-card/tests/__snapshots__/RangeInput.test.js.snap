@@ -46,7 +46,12 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
   className="talixo-range-input"
 >
   <div
+    aria-expanded={false}
+    aria-haspopup="listbox"
+    aria-labelledby="downshift-0-label"
+    aria-owns={null}
     className="talixo-combo-box"
+    role="combobox"
   >
     <div
       className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
@@ -54,7 +59,8 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
       <input
         aria-activedescendant={null}
         aria-autocomplete="list"
-        aria-expanded={false}
+        aria-controls={null}
+        aria-labelledby="downshift-0-label"
         autoComplete="off"
         className="talixo-text-input__input"
         disabled={false}
@@ -67,7 +73,6 @@ exports[`<RangeInput /> renders correctly mounted 1`] = `
         onKeyDown={[Function]}
         pattern="[0-9]*"
         readOnly={false}
-        role="combobox"
         style={null}
         type="text"
         value=""

@@ -1,0 +1,39 @@
+@import './config'
+
+@include module('columns')
+  display: flex
+  flex-wrap: wrap
+  padding: $columns-gutter
+  margin: #{-1 * $columns-gutter} 0
+
+@include module('columns-element')
+  position: relative
+  flex-basis: 0
+  flex-grow: 1
+  padding: 0 $columns-gutter
+  box-sizing: border-box
+
+  &__header
+    position: relative
+
+  &__header > h3
+    margin-top: 0
+    font-size: $columns-header-font-size
+    color: $columns-header-text-color
+    line-height: 1em
+  
+  &__icon
+    position: absolute
+    right: 100%
+    top: 50%
+    margin-top: -0.5em
+    font-size: $columns-header-icon-size
+    color: $columns-header-icon-color
+    margin-right: $columns-header-icon-margin
+    line-height: 1em
+
+    [dir=rtl] &
+      margin-right: 0
+      margin-left: $columns-header-icon-margin
+      right: auto
+      left: 100%

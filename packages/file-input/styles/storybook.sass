@@ -1,0 +1,40 @@
+@import './config'
+.talixo-file-input-storybook
+  &__icon
+    color: $color-talixo-light-gray
+    font-size: dp(12)
+    height: fit-content
+    padding: dp(4) 0 dp(6)
+    pointer-events: none
+    user-select: none
+
+  &__wrapper
+    display: flex
+    align-items: center
+    flex-direction: column
+    //text-align: center
+
+  &-render
+    display: inline-flex
+    padding: dp(5)
+    align-items: center
+
+    &__icon
+      display: inline-block
+      cursor: pointer
+      padding: dp(2)
+      font-size: dp(4)
+      color: red
+
+    &__details
+      display: inline-block
+
+    &__name
+      font-size: dp(2)
+      font-weight: 700
+
+    &__size
+      font-size: dp(1.5)
+
+    &__type
+      font-size: dp(1.8)

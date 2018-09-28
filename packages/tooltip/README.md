@@ -17,7 +17,7 @@ Your package should additionally have some extra dependencies:
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
-- `react-instantiable-stateless: ^1.0.3`
+- `react-instantiable-stateless: ^1.0.4`
 - `react-transition-group: ^2.2.1`
 
 These packages are required by `@talixo/tooltip`, but you have to install them manually,

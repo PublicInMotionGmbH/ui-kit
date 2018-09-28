@@ -12,7 +12,7 @@ using `npm install @talixo/inline-input --save` or `yarn add @talixo/inline-inpu
 Your package should additionally have some extra dependencies:
 
 - `@talixo/shared: ^1.0.0-alpha.27`
-- `@talixo/text-input: ^1.0.0-alpha.27`
+- `@talixo/text-input: ^1.0.0-alpha.29`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
