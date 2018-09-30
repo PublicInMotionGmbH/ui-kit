@@ -1,11 +1,10 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
-import debounce from 'lodash/debounce'
 
 import { buildClassName } from '@talixo/shared'
 
-export const moduleName = 'navigation'
+export const moduleName = 'navigation-element'
 
 function isEmpty (obj) {
   for (let key in obj) {
@@ -51,7 +50,7 @@ const propTypes = {
   subelements: PropTypes.array,
 
   /**  */
-  subtitle: PropTypes.array
+  subtitle: PropTypes.string
 }
 
 const defaultProps = {
@@ -148,7 +147,7 @@ class Element extends React.Component {
    * @param {Event} e
    */
   handleClick = (e) => {
-    const { hasChildren, onClick } = this.props
+    const { hasChildren, id, onClick } = this.props
     e.stopPropagation()
 
     // Toggle opening status when it could be open
@@ -174,22 +173,16 @@ class Element extends React.Component {
 
     // Propagate event to `onClick` property
     if (onClick) {
-      onClick(e)
+      onClick(id, e)
     }
   }
 
-  handleMouseEnter = (e) => {
-    this.close.cancel()
-    this.setState({ open: true })
+  handleMouseOver (e) {
+    const { id, onMouseOver } = this.props
+    if (onMouseOver) {
+      onMouseOver(id, e)
+    }
   }
-
-  handleMouseLeave = (e) => {
-    this.close()
-  }
-
-  close = debounce(() => {
-    this.setState({ open: false })
-  }, 100)
 
   attachListener () {
     // Ignore when there is no DOM element attached
@@ -230,24 +223,20 @@ class Element extends React.Component {
 
     const { active, open } = this.state
 
-    const elementCls = buildClassName([ moduleName, 'element' ], className, { active, disabled, open })
-    const contentCls = buildClassName([ moduleName, 'element-content' ])
-    const menuCls = buildClassName([ moduleName, 'element-menu' ])
-    const subtitleCls = buildClassName([ moduleName, 'element-subtitle' ])
+    const elementCls = buildClassName(moduleName, className, { active, disabled, open })
+    const buttonCls = buildClassName([ moduleName, 'button' ])
+    const menuCls = buildClassName([ moduleName, 'menu' ])
     const renderElement = render(this.props)
 
     return (
       <div
         className={elementCls}
         onClick={this.handleClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
         ref={this.saveRef}
         {...restProps}
       >
-        <div className={contentCls}>{ renderElement }</div>
+        <div className={buttonCls}>{ renderElement }</div>
         <div className={menuCls}>
-          <div className={subtitleCls}>{subtitle}</div>
           { children }
         </div>
       </div>

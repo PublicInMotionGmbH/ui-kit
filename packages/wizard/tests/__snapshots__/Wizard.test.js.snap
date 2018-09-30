@@ -5,7 +5,7 @@ exports[`<Wizard /> renders children correctly 1`] = `
   className="talixo-wizard"
 >
   <Step1 />
-  <Navigation
+  <NavigationWrapper
     type="pagination"
   >
     <Pagination
@@ -16,6 +16,6 @@ exports[`<Wizard /> renders children correctly 1`] = `
       pageCount={3}
       previousLabel="Previous"
     />
-  </Navigation>
+  </NavigationWrapper>
 </div>
 `;

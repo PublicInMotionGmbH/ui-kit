@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Navigation, ControlledPagination } from '@talixo/navigation'
+import { NavigationWrapper, ControlledPagination } from '@talixo/navigation'
 import { buildClassName } from '@talixo/shared'
 
 const propTypes = {
@@ -54,7 +54,7 @@ class Wizard extends React.PureComponent {
     return (
       <div className={buildClassName('wizard', className)} {...passedProps} >
         {children[currentStep - 1]}
-        <Navigation type='pagination' >
+        <NavigationWrapper type='pagination' >
           <ControlledPagination
             activePage={currentStep}
             displayedLimit={displayedLimit}
@@ -63,7 +63,7 @@ class Wizard extends React.PureComponent {
             pageCount={children.length}
             previousLabel={previousLabel}
           />
-        </Navigation>
+        </NavigationWrapper>
       </div>
     )
   }

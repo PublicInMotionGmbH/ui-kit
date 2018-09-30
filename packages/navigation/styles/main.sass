@@ -22,11 +22,11 @@
       display: block
       position: relative
       margin: $navigation-padding-vertical 0
-      font-weight: 600
+      font-weight: 800
       user-select: none
 
-    // Element content
-    #{$sel-nav-elem-content}
+    // Element button
+    #{$sel-nav-elem-button}
       padding: $navigation-padding-vertical $navigation-padding-horizontal
       cursor: pointer
 
@@ -34,8 +34,8 @@
     #{$sel-nav-elem-menu}
       display: flex
       position: absolute
-      z-index: 999
       flex-direction: column
+      z-index: 999
       height: 0
       top: 0
       left: 100% // calc(100% + #{$navigation-padding-horizontal})
@@ -43,10 +43,10 @@
       box-shadow: -3px 3px 6px rgba(0,0,0,0.16), -3px 3px 6px rgba(0,0,0,0.23)
 
     // Subtitle displayed at the top of each dropdown, specific for each.
-    #{$sel-nav-elem-subtitle}
+    #{$sel-nav-subtitle}
+      margin: $navigation-padding-vertical $navigation-padding-horizontal #{2 * $navigation-padding-vertical}
       font-size: $navigation-subtitle-font-size
       white-space: nowrap
-      margin: $navigation-padding-vertical $navigation-padding-horizontal #{2 * $navigation-padding-vertical}
 
     // Parent elements styles
     &#{$sel-nav-parent}
@@ -68,8 +68,8 @@
           padding: $navigation-padding-vertical $navigation-padding-horizontal
           overflow: visible
 
-  /***** Navigation type `navbar` specific rules *****/
-  &--navbar
+  /***** Navigation type `navbar` and 'sidebar rules *****/
+  &--navbar, &--sidebar
     &#{$sel-nav-parent}
       background-color: $navigation-background
       color: $navigation-text-color
@@ -79,7 +79,7 @@
 
     // Styles for active/open/hovered element
     #{$sel-nav-elem}
-      &:hover, &--active
+      &:hover, &--active, &--open
         background-color: $navigation-base-color
 
   /***** Navigation type `breadcrumbs` specific rules *****/
@@ -92,8 +92,55 @@
 
       // Styles for active/open/hovered element
       #{$sel-nav-elem}
-        &:hover, &--active
+        &:hover, &--active, &--open
           background-color: $navigation-breadcrumbs-element-active-color
+
+  /***** Navigation type `sidebar` specific rules *****/
+  &--sidebar
+    position: relative
+    display: block
+    height: 100%
+    background: $sidebar-background-color
+    box-shadow: $sidebar-box-shadow
+    color: $navigation-text-color
+    width: $sidebar-size
+
+    #{$sel-nav-elem},
+    #{$sel-nav-subtitle}
+      padding: $navigation-element-padding-vertical $navigation-element-padding-horizontal
+      border-bottom: 1px solid  $sidebar-button-border-color
+
+    #{$sel-nav-elem-menu}
+      position: relative
+      position: absolute
+      left: 100%
+      top: 0
+      width: 0
+      height: 100%
+      overflow: hidden
+      box-shadow: -3px 0 6px rgba(0,0,0,0.16), -3px 0 6px rgba(0,0,0,0.23)
+
+    & &
+      background: $sidebar-nested-background
+
+    & > #{$sel-nav-elem}
+      > #{$sel-nav-elem-button}
+        font-size: $sidebar-label-size
+        height: $sidebar-element-height
+        cursor: pointer
+
+    #{$sel-nav-elem}
+      &--open
+        > #{$sel-nav-elem-menu}
+          width: $sidebar-size
+          overflow: visible
+
+
+    //&--open > #{$sel-nav-elem} > #{$sel-nav-elem-button},
+    //&--active > #{$sel-nav-elem} > #{$sel-nav-elem-button},
+    //> #{$sel-nav-elem} > #{$sel-nav-elem-button}:hover
+    //  background-color: $sidebar-active-button-background
+    //  color: $sidebar-active-button-color
 
 @keyframes show-overflow
   0%, 100%

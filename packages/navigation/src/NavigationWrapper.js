@@ -34,13 +34,15 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function NavigationWrapper (props) {
-  const { children, className, divider, type, ...passedProps } = props
+  const { children, className, divider, subtitle, type, ...passedProps } = props
 
   const clsName = buildClassName(moduleName, className, [type])
+  const subtitleCls = buildClassName([ moduleName, 'subtitle' ])
 
   return (
     <nav className={clsName} {...passedProps}>
-      {children}
+      { subtitle && <div className={subtitleCls}>{subtitle}</div> }
+      { children }
     </nav>
   )
 }

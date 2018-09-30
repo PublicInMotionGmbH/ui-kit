@@ -7,24 +7,11 @@ import Element from './SimpleElement'
 
 export const moduleName = 'navigation'
 
-function clickHandler (element, e) {
-  const { id, onClick } = element
-  if (onClick) {
-    onClick(id, e)
-  }
-}
-function onMouseOverHandler (element, e) {
-  const { id, onMouseOver } = element
-  if (onMouseOver) {
-    onMouseOver(id, e)
-  }
-}
-
 function getElements (element, type) {
-  const { subelements } = element
+  const { subelements, subtitle } = element
 
   const children = Array.isArray(subelements) && subelements.length > 0
-    ? <NavigationWrapper type={type}>
+    ? <NavigationWrapper type={type} subtitle={subtitle}>
       { subelements.map(subelement => getElements(subelement, type)) }
     </NavigationWrapper>
     : null
@@ -36,8 +23,6 @@ function getElements (element, type) {
       key={element.id}
       hasChildren={hasChildren}
       {...element}
-      onClick={(e) => clickHandler(element, e)}
-      onMouseOver={(e) => onMouseOverHandler(element, e)}
     >
       { children }
     </Element>

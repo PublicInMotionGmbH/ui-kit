@@ -204,6 +204,12 @@ addStory('simple nav with subelements', readme, () => (
   </div>
 ))
 
+addStory('sidebar', readme, () => (
+  <div>
+    <SimpleNavigation elements={withSubelements} type='sidebar' />
+  </div>
+))
+
 addStory('initial', readme, () => (
   <NavigationWrapper>
     <Element>Home</Element>
