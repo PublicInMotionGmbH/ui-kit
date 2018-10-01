@@ -22,7 +22,7 @@ $navigation-transition-time: 100ms !default
 // Navigation elements
 $navigation-element-text-color: $typography-link-color !default
 $navigation-element-font-weight: $x-weight-bold !default
-$navigation-element-active-background: $x-color-secondary !default
+$navigation-element-active-background: $navigation-base-color !default
 $navigation-element-active-border-color: $navigation-element-active-background !default
 $navigation-element-active-text-color: $x-color-background !default
 $navigation-element-hover-background-color: $x-color-pastel !default
@@ -71,9 +71,15 @@ $navigation-breadcrumbs-base-color: $x-color-calmer !default
 $navigation-breadcrumbs-menu-background-color: $navigation-breadcrumbs-base-color !default
 $navigation-breadcrumbs-element-active-color: $x-color-calm !default
 
+// Tree
+$navigation-tree-subtree-offset: $navigation-padding-horizontal
+
 // Tabs
-$tabs-element-background: $x-color-pastel !default
-$tabs-element-text-color: $x-color-text !default
+$navigation-tabs-element-background-color: $navigation-menu-background !default
+$navigation-tabs-element-active-background-color: $navigation-element-active-background !default
+$navigation-tabs-element-text-color: $navigation-text-color !default
+$navigation-tabs-border: $x-border-width solid $color-tab-border !default
+$navigation-tabs-border-radius: $navigation-element-border-radius $navigation-element-border-radius 0 0 !default
 $tabs-active-element-background: $x-color-background !default
 $tabs-hover-element-background: $x-color-background !default
 

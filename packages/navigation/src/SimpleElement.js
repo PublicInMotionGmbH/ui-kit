@@ -50,7 +50,10 @@ const propTypes = {
   subelements: PropTypes.array,
 
   /**  */
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+
+  /**  */
+  type: PropTypes.string
 }
 
 const defaultProps = {
@@ -148,11 +151,11 @@ class Element extends React.Component {
    */
   handleClick = (e) => {
     const { hasChildren, id, onClick } = this.props
+    const open = !this.state.open
     e.stopPropagation()
 
     // Toggle opening status when it could be open
     if (hasChildren) {
-      const open = !this.state.open
       const state = {}
 
       if (this.props.open == null) {
@@ -164,7 +167,7 @@ class Element extends React.Component {
 
       this.setState(state)
 
-      if (open) {
+      if (open && this.shouldAttachListeners()) {
         this.attachListener()
       } else {
         this.detachListener()
@@ -173,7 +176,7 @@ class Element extends React.Component {
 
     // Propagate event to `onClick` property
     if (onClick) {
-      onClick(id, e)
+      onClick(id, open)
     }
   }
 
@@ -215,6 +218,11 @@ class Element extends React.Component {
     window.removeEventListener('close-sidebar', this.handleClose)
   }
 
+  shouldAttachListeners () {
+    const { type } = this.props
+    return type === 'navbar' || type === 'sidebar' || type === 'tabs'
+  }
+
   renderMenu () {
     const { children } = this.props
     const menuCls = buildClassName([ moduleName, 'menu' ])
@@ -228,14 +236,14 @@ class Element extends React.Component {
   render () {
     const {
       active: propsActive, className, disabled, hasChildren, id, name, onMouseOver,
-      onClick, open: propsOpen, panel, render, subelements, subtitle, ...restProps
+      onClick, open: propsOpen, panel, render, subelements, subtitle, type, ...restProps
     } = this.props
 
     const { active, open } = this.state
 
     const elementCls = buildClassName(moduleName, className, { active, disabled, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
-    const renderElement = render(this.props)
+    const renderElement = render(this.props, { open, active })
 
     return (
       <div

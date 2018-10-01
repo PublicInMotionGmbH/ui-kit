@@ -22,6 +22,7 @@ function getElements (element, type) {
     <Element
       key={element.id}
       hasChildren={hasChildren}
+      type={type}
       {...element}
     >
       { children }
@@ -102,10 +103,11 @@ class Navigation extends React.Component {
     const { className, divider, elements, type, ...passedProps } = this.props
 
     const wrapperCls = buildClassName([`${moduleName}-parent`])
+    const renderElements = this.buildElements()
 
     return (
       <NavigationWrapper className={wrapperCls} type={type} {...passedProps}>
-        { this.buildElements() }
+        { renderElements }
       </NavigationWrapper>
     )
   }

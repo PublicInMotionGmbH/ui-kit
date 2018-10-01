@@ -4,7 +4,7 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import ControlledPagination from './src/ControlledPagination'
 import ControlledTabs from './src/ControlledTabs'
-import Element from './src/Element'
+import Element from './src/SimpleElement'
 import NavigationWrapper from './src/NavigationWrapper'
 import SimpleNavigation from './src/Navigation'
 import Step from './src/Step'
@@ -148,7 +148,7 @@ const withSubelements = [
     panel: true,
     onClick: click,
     onMouseOver: hover,
-    render: x => x.name
+    render: (x, state) => <div style={state.open ? { color: 'red' } : {}}>{x.name}</div>
   }
 ]
 
@@ -193,21 +193,30 @@ addStory('simple nav with subelements', readme, () => (
     <br />
     <br />
     <SimpleNavigation elements={withSubelements} type={'breadcrumbs'} divider='/' />
-    {/* <br /> */}
-    {/* <br /> */}
-    {/* <SimpleNavigation elements={withSubelements} type={'pagination'} /> */}
-    {/* <br /> */}
-    {/* <br /> */}
-    {/* <SimpleNavigation elements={withSubelements} type={'steps'} /> */}
-    {/* <br /> */}
-    {/* <br /> */}
-    {/* <SimpleNavigation elements={withSubelements} type={'tabs'} /> */}
   </div>
 ))
 
 addStory('sidebar', readme, () => (
   <div>
     <SimpleNavigation elements={withSubelements} type='sidebar' />
+  </div>
+))
+
+addStory('tree view', readme, () => (
+  <div>
+    <SimpleNavigation elements={withSubelements} type='tree' />
+  </div>
+))
+
+addStory('tabs gen', readme, () => (
+  <div>
+    <SimpleNavigation elements={withSubelements} type='tabs' />
+  </div>
+))
+
+addStory('steps gen', readme, () => (
+  <div>
+    <SimpleNavigation elements={withSubelements} type='steps' />
   </div>
 ))
 

@@ -3,6 +3,11 @@
 @include module('navigation')
   box-sizing: border-box
   display: inline-block
+  position: relative
+
+  /***** Common elements styles *****/
+  #{$sel-nav-elem}
+    cursor: pointer
 
   &__divider
     padding: $navigation-padding-vertical 0
@@ -10,6 +15,8 @@
   /***** Common styles for navigation type: breadcrumbs, navbar *****/
   &--navbar,
   &--breadcrumbs
+    position: static
+
     // Parent elements styles
     &#{$sel-nav-parent}
       display: inline-flex
@@ -27,7 +34,6 @@
     // Element button
     #{$sel-nav-elem-button}
       padding: $navigation-padding-vertical $navigation-padding-horizontal
-      cursor: pointer
 
     // Dropdown which will be shown after element is clicked
     #{$sel-nav-elem-menu}
@@ -59,14 +65,6 @@
           top: 100% // calc(100% + #{$navigation-padding-vertical})
           left: 0
 
-    // Styles for active/open/hovered element
-    #{$sel-nav-elem}
-      &--open
-        > #{$sel-nav-elem-menu}
-          height: initial
-          padding: $navigation-padding-vertical $navigation-padding-horizontal
-          overflow: visible
-
   /***** Navigation type `navbar` and 'sidebar rules *****/
   &--navbar, &--sidebar
     &#{$sel-nav-parent}
@@ -81,7 +79,16 @@
       font-weight: $navigation-element-font-weight
 
       &:hover, &--active, &--open
-        background-color: $navigation-base-color
+        background-color: $navigation-element-active-background
+
+  &--navbar
+    // Show dropdown menu when opened
+    #{$sel-nav-elem}
+      &--open
+        > #{$sel-nav-elem-menu}
+          height: initial
+          padding: $navigation-padding-vertical $navigation-padding-horizontal
+          overflow: visible
 
   /***** Navigation type `breadcrumbs` specific rules *****/
   &--breadcrumbs
@@ -109,7 +116,6 @@
 
   /***** Navigation type `sidebar` specific rules *****/
   &--sidebar
-    position: relative
     display: block
     height: 100%
     background: $sidebar-background-color
@@ -139,7 +145,6 @@
       > #{$sel-nav-elem-button}
         font-size: $sidebar-label-size
         height: $sidebar-element-height
-        cursor: pointer
 
     #{$sel-nav-elem}
       &--open
@@ -162,6 +167,50 @@
         &:hover > #{$sel-nav-elem-button}
           font-weight: $navigation-element-font-weight
 
+  /***** Navigation type `tree` specific rules *****/
+  &--tree
+    #{$sel-nav-elem}
+      padding: $navigation-padding-vertical $navigation-padding-horizontal
+
+    #{$sel-nav-elem-menu}
+      position: relative
+      left: 3 * $navigation-tree-subtree-offset
+      padding: $navigation-padding-vertical $navigation-padding-horizontal
+      height: 0
+      overflow: hidden
+
+    #{$sel-nav-elem}
+      &--open > #{$sel-nav-elem-menu}
+        height: initial
+        overflow: visible
+
+  /***** Common rules for type `tabs` and `steps` *****/
+  &--tabs, &--steps
+    display: flex
+
+    #{$sel-nav-elem}
+      text-align: center
+
+    #{$sel-nav-elem-menu}
+      display: none
+
+  /***** Navigation type `tabs` specific rules *****/
+  &--tabs
+    #{$sel-nav-elem}
+      flex-grow: 1
+      border: $navigation-tabs-border
+      border-bottom: 0
+      border-radius: $navigation-tabs-border-radius
+      background-color: $navigation-tabs-element-background-color
+      color: $navigation-tabs-element-text-color
+      padding: $navigation-element-padding-vertical $navigation-element-padding-horizontal
+
+    #{$sel-nav-elem}
+      &:hover, &--active, &--open
+        background-color: $navigation-tabs-element-active-background-color
+
+  &--steps
+    justify-content: space-between
 @keyframes show-overflow
   0%, 100%
     overflow: hidden
