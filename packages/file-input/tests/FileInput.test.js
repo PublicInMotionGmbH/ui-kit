@@ -161,12 +161,12 @@ describe('<FileInput />', () => {
     afterEach(() => {
       global.document.addEventListener = prevAdd
       global.document.removeEventListener = prevRemove
-      wrapper.unmount()
     })
 
     it('should add event listeners to document after mounting', () => {
       expect(add).toHaveBeenCalledWith('drop', expect.anything())
       expect(add).toHaveBeenCalledWith('dragover', expect.anything())
+      wrapper.unmount()
     })
 
     it('should remove event listeners from document before unmounting', () => {
@@ -180,6 +180,7 @@ describe('<FileInput />', () => {
       event.preventDefault = jest.fn()
       global.document.dispatchEvent(event)
       expect(event.preventDefault).toHaveBeenCalled()
+      wrapper.unmount()
     })
   })
 
