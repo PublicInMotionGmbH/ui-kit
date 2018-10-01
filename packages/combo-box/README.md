@@ -14,7 +14,7 @@ Your package should additionally have some extra dependencies:
 - `@talixo/device-swap: ^1.0.0-alpha.28`
 - `@talixo/icon: ^1.0.0-alpha.27`
 - `@talixo/shared: ^1.0.0-alpha.27`
-- `downshift: ^1.31.11`
+- `downshift: ^2.1.1`
 - `prop-types: ^15.6.1`
 - `react: ^16.4.2`
 - `react-dom: ^16.4.2`

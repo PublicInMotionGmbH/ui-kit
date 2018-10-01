@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Price /> <Price /> comoponent should render children correctly 1`] = `
+<span
+  className="talixo-price"
+>
+  <React.Fragment>
+     
+    1,000.00
+     
+    <abbr
+      title="PLN"
+    >
+      PLN
+    </abbr>
+  </React.Fragment>
+</span>
+`;
+
+exports[`<Price /> <Price /> comoponent should render errorPlaceholder when wrong value is provided 1`] = `
+<span
+  className="talixo-price"
+>
+  <React.Fragment>
+    -
+  </React.Fragment>
+</span>
+`;
+
+exports[`<Price /> <Price /> comoponent should render prefix correctly 1`] = `
+<span
+  className="talixo-price"
+>
+  <small>
+    about
+  </small>
+  <React.Fragment>
+     
+    1,000.00
+     
+    <abbr
+      title="PLN"
+    >
+      PLN
+    </abbr>
+  </React.Fragment>
+</span>
+`;
+
+exports[`<Price /> <Price /> comoponent should render price with curency before price 1`] = `
+<span
+  className="talixo-price"
+>
+  <React.Fragment>
+    <abbr
+      title="GBP"
+    >
+      GBP
+    </abbr>
+     
+    1,000.00
+     
+  </React.Fragment>
+</span>
+`;

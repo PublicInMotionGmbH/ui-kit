@@ -1,0 +1,14 @@
+@import './config'
+
+@include module('price')
+  font-size: $price-font-size
+  font-weight: $price-font-weight
+
+  small 
+    font-size: $price-prefix-font-size
+    margin-right: $price-prefix-margin
+
+[dir=rtl] .price 
+  small 
+    margin-right: 0
+    margin-left: $price-prefix-margin

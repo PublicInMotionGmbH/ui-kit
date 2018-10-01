@@ -163,7 +163,7 @@ class SelectBox extends React.PureComponent {
    * @param {object} data
    * @returns {object}
    */
-  getStateProps (data) {
+  getStateProps (data = {}) {
     const { footer, icon, options, multi, tabIndex, placeholder, buildItemId, renderItem, renderValue, id } = this.props
     const { value } = this.state
 
@@ -368,9 +368,10 @@ class SelectBox extends React.PureComponent {
     const selectClsName = buildClassName([ moduleName, 'select' ])
 
     const valueProps = {
-      ...this.getStateProps({}),
+      ...this.getStateProps(),
       getToggleButtonProps: () => ({})
     }
+    delete valueProps.id
 
     const select = (
       <NativeSelect

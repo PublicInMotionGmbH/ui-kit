@@ -15,7 +15,7 @@ Your package should additionally have some extra dependencies:
 - `@talixo/form: ^1.0.0-alpha.28`
 - `@talixo/navigation: ^1.0.0-alpha.27`
 - `@talixo/shared: ^1.0.0-alpha.27`
-- `@talixo/text-input: ^1.0.0-alpha.27`
+- `@talixo/text-input: ^1.0.0-alpha.29`
 - `prop-types: ^15.6.1`
 - `react: ^16.4.2`
 - `react-dom: ^16.4.2`

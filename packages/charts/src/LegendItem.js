@@ -45,7 +45,7 @@ const defaultProps = {
  * @param {function} [props.onClick]
  * @param {string} [props.label]
  * @param {string|number} [props.value]
- * @returns {ReactElement}
+ * @returns {React.Element}
  */
 function LegendItem (props) {
   const { className, color, disabled, id, onClick, label, value } = props

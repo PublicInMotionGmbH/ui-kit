@@ -89,3 +89,18 @@ addStory('with label', readme, () => (
     />
   </div>
 ))
+
+addStory('with null value', readme, () => (
+  <div>
+    <label htmlFor='radio-group'>Click me</label>
+    <RadioGroup
+      id='radio-group'
+      name='RadioGroupNullValue'
+      options={[
+        { value: null, label: 'one' },
+        { value: 2, label: 'two' },
+        { value: 3, label: 'three' }
+      ]}
+    />
+  </div>
+))
