@@ -8,10 +8,10 @@ import Element from './SimpleElement'
 export const moduleName = 'navigation'
 
 function getElements (element, type) {
-  const { subelements, subtitle } = element
+  const { panel, subelements, subtitle } = element
 
   const children = Array.isArray(subelements) && subelements.length > 0
-    ? <NavigationWrapper type={type} subtitle={subtitle}>
+    ? <NavigationWrapper panel={panel} type={type} subtitle={subtitle}>
       { subelements.map(subelement => getElements(subelement, type)) }
     </NavigationWrapper>
     : null
@@ -27,6 +27,12 @@ function getElements (element, type) {
       { children }
     </Element>
   )
+}
+
+function buildDivider (divider) {
+  const dividerCls = buildClassName([moduleName, 'divider'])
+
+  return <div className={dividerCls}>{divider}</div>
 }
 
 const propTypes = {
@@ -77,19 +83,12 @@ const defaultProps = {
  *
  */
 class Navigation extends React.Component {
-  buildDivider () {
-    const { divider } = this.props
-    const dividerCls = buildClassName([moduleName, 'divider'])
-
-    return <div className={dividerCls}>{divider}</div>
-  }
-
   buildElements () {
     const { divider, elements, type } = this.props
     const elementsLastIndex = elements.length - 1
 
     const dividerElement = type === 'breadcrumbs' && divider != null
-      ? this.buildDivider()
+      ? buildDivider(divider)
       : null
 
     const renderElements = elements.map((element, index) => [

@@ -22,7 +22,6 @@
       display: block
       position: relative
       margin: $navigation-padding-vertical 0
-      font-weight: 800
       user-select: none
 
     // Element button
@@ -79,6 +78,8 @@
 
     // Styles for active/open/hovered element
     #{$sel-nav-elem}
+      font-weight: $navigation-element-font-weight
+
       &:hover, &--active, &--open
         background-color: $navigation-base-color
 
@@ -90,10 +91,21 @@
     #{$sel-nav-elem-menu}
       background-color: $navigation-breadcrumbs-menu-background-color
 
-      // Styles for active/open/hovered element
+    // Open navigation menu on hover
+    #{$sel-nav-elem}
+      &:hover
+        > #{$sel-nav-elem-menu}
+          height: initial
+          padding: $navigation-padding-vertical $navigation-padding-horizontal
+          overflow: visible
+
+    // Styles for active/open/hovered element
+    #{$sel-nav-elem-menu}
       #{$sel-nav-elem}
         &:hover, &--active, &--open
           background-color: $navigation-breadcrumbs-element-active-color
+
+
 
   /***** Navigation type `sidebar` specific rules *****/
   &--sidebar
@@ -135,12 +147,20 @@
           width: $sidebar-size
           overflow: visible
 
+    &#{$sel-nav}--panel
+      background: $sidebar-panel-background
+      color: $sidebar-panel-color
+      box-shadow: $sidebar-box-shadow
+      width: $sidebar-panel-width
 
-    //&--open > #{$sel-nav-elem} > #{$sel-nav-elem-button},
-    //&--active > #{$sel-nav-elem} > #{$sel-nav-elem-button},
-    //> #{$sel-nav-elem} > #{$sel-nav-elem-button}:hover
-    //  background-color: $sidebar-active-button-background
-    //  color: $sidebar-active-button-color
+      & > #{$sel-nav-elem}
+        > #{$sel-nav-elem-button}
+          font-weight: initial
+          height: initial
+
+        &--open >  #{$sel-nav-elem-button},
+        &:hover > #{$sel-nav-elem-button}
+          font-weight: $navigation-element-font-weight
 
 @keyframes show-overflow
   0%, 100%

@@ -34,9 +34,9 @@ const elemLvl3 = [
 const elemLvl2 = [
   {
     disabled: false,
-    // open: true,
     id: 20,
     name: 'Element 1 lvl 2',
+    panel: true,
     subelements: elemLvl3,
     subtitle: 'Subtitile of element 1 lvl 2',
     onClick: click,
@@ -145,6 +145,7 @@ const withSubelements = [
     name: 'Element 4',
     subelements: elemLvl1,
     subtitle: 'Subtitile of element 4',
+    panel: true,
     onClick: click,
     onMouseOver: hover,
     render: x => x.name

@@ -215,17 +215,26 @@ class Element extends React.Component {
     window.removeEventListener('close-sidebar', this.handleClose)
   }
 
+  renderMenu () {
+    const { children } = this.props
+    const menuCls = buildClassName([ moduleName, 'menu' ])
+    return !children
+      ? null
+      : <div className={menuCls}>
+        { children }
+      </div>
+  }
+
   render () {
     const {
-      active: propsActive, className, children, disabled, hasChildren, id, name, onMouseOver,
-      onClick, open: propsOpen, render, subelements, subtitle, ...restProps
+      active: propsActive, className, disabled, hasChildren, id, name, onMouseOver,
+      onClick, open: propsOpen, panel, render, subelements, subtitle, ...restProps
     } = this.props
 
     const { active, open } = this.state
 
     const elementCls = buildClassName(moduleName, className, { active, disabled, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
-    const menuCls = buildClassName([ moduleName, 'menu' ])
     const renderElement = render(this.props)
 
     return (
@@ -236,9 +245,7 @@ class Element extends React.Component {
         {...restProps}
       >
         <div className={buttonCls}>{ renderElement }</div>
-        <div className={menuCls}>
-          { children }
-        </div>
+        { this.renderMenu() }
       </div>
     )
   }
