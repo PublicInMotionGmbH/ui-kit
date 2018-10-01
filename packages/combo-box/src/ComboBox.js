@@ -279,14 +279,13 @@ class ComboBox extends React.PureComponent {
    * @returns {object|{ onClick: function }}
    */
   getInputProps (props) {
-    const { onFocus, onBlur, id } = this.props
+    const { onFocus, onBlur } = this.props
     const onKeyDown = props ? props.onKeyDown : null
 
     return {
       ...props,
       onFocus,
       onBlur,
-      id,
       disabled: this.isDisabled(),
       onKeyDown: event => {
         this.handleInputKeyDown(event)
@@ -435,9 +434,16 @@ class ComboBox extends React.PureComponent {
    */
   render () {
     const {
-      icon, multi, placeholder, value, options, onChange, readOnly, disabled,
+      id, icon, multi, placeholder, value, options, onChange, readOnly, disabled,
       buildItemId, renderItem, renderValue, children, ...passedProps
     } = this.props
+
+    const idProps = {}
+
+    if (id) {
+      idProps.id = 'container_' + id
+      idProps.inputId = id
+    }
 
     return (
       <Downshift
@@ -446,6 +452,7 @@ class ComboBox extends React.PureComponent {
         selectedItem={null}
         disabled={this.isDisabled()}
         {...passedProps}
+        {...idProps}
       >
         {this.renderComponent}
       </Downshift>

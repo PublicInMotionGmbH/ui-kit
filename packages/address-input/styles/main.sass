@@ -1,0 +1,101 @@
+@import './config'
+
+/** Address Input **/
+
+@include module('address-input')
+  #{prefix('address')}
+    align-items: center
+
+    &__airport 
+      margin-top: 0
+
+  @include module('combo-box') 
+    &__footer 
+      border-top: $combo-box-menu-separator-height solid $combo-box-menu-separator-color
+
+      img 
+        display: block
+        float: right
+        max-height: dp(1)
+
+  &__transition
+    &-enter-active 
+      animation: show-address-input-modal 200ms
+
+    &-exit-active 
+      animation: show-address-input-modal 200ms
+      animation-direction: alternate-reverse
+
+  &__mobile-modal 
+    box-sizing: content-box
+    position: fixed
+    display: flex
+    flex-direction: column
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 1000
+    background: $address-input-mobile-view-background-color
+
+    &-header 
+      > div 
+        padding: $x-input-padding-vertical 0 #{1.5 * $x-input-padding-vertical}
+        text-align: center
+        font-weight: $x-weight-bold
+
+      @include module('button')
+        position: absolute
+        right: #{.5 * $x-input-padding-vertical}
+        top: #{.5 * $x-input-padding-horizontal}
+
+    @include module('text-input') 
+      margin: 0 $x-input-padding-horizontal
+
+      @include module('icon')
+        cursor: pointer
+
+    @include module('combo-box') 
+      flex: 1 auto
+      display: flex
+      flex-direction: column
+
+      &__menu 
+        position: relative
+        max-height: initial
+        flex: 1 auto
+        border-left-width: 0
+        border-right-width: 0
+
+  &__fake-input 
+    display: flex
+    align-items: center
+    cursor: pointer
+    position: relative
+    box-sizing: border-box
+    width: 100%
+    color: $x-input-text-color
+    background-color: $x-input-background-color
+    border: $x-border-width solid $x-input-border-color
+    border-radius: $x-border-radius
+    font-size: $x-input-text-size
+    height: $x-input-height
+    line-height: $x-input-height
+    padding: 0 $x-input-padding-horizontal
+
+[dir=rtl] #{prefix('address-input')}
+  @include module('combo-box') 
+    &__footer img 
+      float: left
+
+  &__mobile-modal 
+    &-header 
+      @include module('button') 
+        left: #{.5 * $x-input-padding-vertical}
+        right: auto
+
+@keyframes show-address-input-modal 
+  0%
+    top: 100%
+  100%
+    top: 0
