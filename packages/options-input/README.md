@@ -11,10 +11,10 @@ using `npm install @talixo/options-input --save` or `yarn add @talixo/options-in
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.27`
-- `@talixo/number-input: ^1.0.0-alpha.27`
-- `@talixo/shared: ^1.0.0-alpha.27`
-- `@talixo/tooltip: ^1.0.0-alpha.27`
+- `@talixo/icon: ^1.0.0-alpha.30`
+- `@talixo/number-input: ^1.0.0-alpha.30`
+- `@talixo/shared: ^1.0.0-alpha.30`
+- `@talixo/tooltip: ^1.0.0-alpha.30`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

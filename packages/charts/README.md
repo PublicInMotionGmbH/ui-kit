@@ -11,8 +11,8 @@ using `npm install @talixo/charts --save` or `yarn add @talixo/charts`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/checkbox: ^1.0.0-alpha.27`
-- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/checkbox: ^1.0.0-alpha.30`
+- `@talixo/shared: ^1.0.0-alpha.30`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
