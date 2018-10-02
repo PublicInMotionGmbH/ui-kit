@@ -85,7 +85,6 @@ export function generatePrice (value, config = {}) {
 
       return { value: formattedValue, symbol: null }
     } catch (e) {
-      console.log(e)
       // Fallback if js Intl is not supported by a browser
       const price = fomatNumber(value, locale, precision)
       return { value: price, symbol: currency }
