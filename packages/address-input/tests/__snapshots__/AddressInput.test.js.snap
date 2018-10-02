@@ -26,7 +26,12 @@ exports[`<AddressInput /> mobile version rendering should render mobile input 1`
           </button>
         </div>
         <div
+          aria-expanded={true}
+          aria-haspopup="listbox"
+          aria-labelledby="downshift-16-label"
+          aria-owns="downshift-16-menu"
           className="talixo-combo-box"
+          role="combobox"
         >
           <div
             className="talixo-text-input talixo-text-input--with-right talixo-text-input--empty"
@@ -34,7 +39,8 @@ exports[`<AddressInput /> mobile version rendering should render mobile input 1`
             <input
               aria-activedescendant={null}
               aria-autocomplete="list"
-              aria-expanded={true}
+              aria-controls="downshift-16-menu"
+              aria-labelledby="downshift-16-label"
               autoComplete="nope"
               autoFocus={true}
               className="talixo-text-input__input"
@@ -43,7 +49,6 @@ exports[`<AddressInput /> mobile version rendering should render mobile input 1`
               onChange={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
-              role="combobox"
               spellCheck="false"
               style={null}
               type="text"
@@ -90,7 +95,12 @@ exports[`<AddressInput /> rendering renders children correctly 1`] = `
     className="talixo-masked-input"
   >
     <div
+      aria-expanded={false}
+      aria-haspopup="listbox"
+      aria-labelledby="downshift-0-label"
+      aria-owns={null}
       className="talixo-combo-box"
+      role="combobox"
     >
       <div
         className="talixo-text-input talixo-text-input--empty"
@@ -98,7 +108,8 @@ exports[`<AddressInput /> rendering renders children correctly 1`] = `
         <input
           aria-activedescendant={null}
           aria-autocomplete="list"
-          aria-expanded={false}
+          aria-controls={null}
+          aria-labelledby="downshift-0-label"
           autoComplete="nope"
           className="talixo-text-input__input"
           id="downshift-0-input"
@@ -106,7 +117,6 @@ exports[`<AddressInput /> rendering renders children correctly 1`] = `
           onChange={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
-          role="combobox"
           spellCheck="false"
           style={null}
           type="text"
