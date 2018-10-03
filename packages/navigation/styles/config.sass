@@ -10,6 +10,8 @@ $sel-nav-elem-menu: #{prefix('navigation-element', 'menu')}
 
 // Navigation
 $navigation-base-color: $x-color-primary !default
+$navigation-disabled-color: $x-color-calmer !default
+$navigation-text-disabled-color: $x-color-calm !default
 $navigation-background: darken($navigation-base-color, 20%) !default
 $navigation-menu-background: darken($navigation-base-color, 10%) !default
 $navigation-text-color: $x-color-primary-opposite !default
@@ -48,23 +50,8 @@ $sidebar-panel-background: $x-color-primary !default
 $sidebar-background-color: darken($sidebar-panel-background, 20%) !default
 $sidebar-nested-background: darken($sidebar-panel-background, 10%) !default
 $sidebar-panel-color: #eeeeee !default
-$sidebar-panel-icon-color: $sidebar-icon-color !default
-$sidebar-panel-header-color: $sidebar-panel-color !default
-$sidebar-panel-header-icon-color: $sidebar-panel-header-color !default
-$sidebar-active-button-background: $sidebar-panel-background !default
-$sidebar-active-button-color: $sidebar-panel-color !default
-$sidebar-active-button-icon-color: $sidebar-active-button-color !default
 $sidebar-button-text-color: lighten($x-color-primary, 35%) !default
-$sidebar-button-icon-color: $sidebar-button-text-color !default
 $sidebar-button-border-color: darken($sidebar-panel-background, 2%) !default
-
-$sidebar-transition-time: 400ms !default
-
-$sel-sidebar: #{prefix('sidebar')}
-$sel-sidebar-element: #{prefix('sidebar-element')}
-$sel-sidebar-button: #{prefix('sidebar-element', 'button')}
-$sel-sidebar-panel: #{prefix('sidebar-panel')}
-$sel-sidebar-panel-content: #{prefix('sidebar-panel', 'content')}
 
 // Breadcrumbs
 $navigation-breadcrumbs-base-color: $x-color-calmer !default
@@ -72,7 +59,7 @@ $navigation-breadcrumbs-menu-background-color: $navigation-breadcrumbs-base-colo
 $navigation-breadcrumbs-element-active-color: $x-color-calm !default
 
 // Tree
-$navigation-tree-subtree-offset: $navigation-padding-horizontal
+$navigation-tree-subtree-offset: $navigation-padding-horizontal !default
 
 // Tabs
 $navigation-tabs-element-background-color: $navigation-menu-background !default
@@ -80,15 +67,13 @@ $navigation-tabs-element-active-background-color: $navigation-element-active-bac
 $navigation-tabs-element-text-color: $navigation-text-color !default
 $navigation-tabs-border: $x-border-width solid $color-tab-border !default
 $navigation-tabs-border-radius: $navigation-element-border-radius $navigation-element-border-radius 0 0 !default
-$tabs-active-element-background: $x-color-background !default
-$tabs-hover-element-background: $x-color-background !default
 
-// Stepper
-$step-background: $x-color-secondary !default
-$step-border-color: $x-color-background !default
-$step-active-background: $x-color-background !default
-$step-active-border-color: $x-color-secondary !default
-$step-disabled-background-color: $color-talixo-light-gray !default
-$step-disabled-border-color: $x-color-background !default
-$step-completed-background-color: $x-color-secondary !default
-$step-completed-border-color: $step-completed-background-color !default
+// Steps
+$navigation-step-bullet-size: dp(1) !default
+$navigation-step-bullet-border-color: #fff !default
+$navigation-step-color: $x-color-calm !default
+$navigation-step-color-active: $x-color-secondary !default
+$navigation-step-color-error: $x-color-error !default
+$navigation-step-color-completed: green !default
+$navigation-step-color-disabled: $navigation-disabled-color !default
+$navigation-step-text-color-disabled: $navigation-text-disabled-color !default

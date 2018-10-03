@@ -9,6 +9,9 @@
   #{$sel-nav-elem}
     cursor: pointer
 
+  #{$sel-nav-subtitle}
+    cursor: default
+
   &__divider
     padding: $navigation-padding-vertical 0
 
@@ -190,6 +193,7 @@
 
     #{$sel-nav-elem}
       text-align: center
+      flex: 1 0
 
     #{$sel-nav-elem-menu}
       display: none
@@ -197,7 +201,6 @@
   /***** Navigation type `tabs` specific rules *****/
   &--tabs
     #{$sel-nav-elem}
-      flex-grow: 1
       border: $navigation-tabs-border
       border-bottom: 0
       border-radius: $navigation-tabs-border-radius
@@ -210,7 +213,70 @@
         background-color: $navigation-tabs-element-active-background-color
 
   &--steps
-    justify-content: space-between
+    #{$sel-nav-elem-button}
+      position: relative
+      top: #{2 * $navigation-step-bullet-size}
+      padding-bottom: #{2 * $navigation-step-bullet-size}
+
+    #{$sel-nav-elem}
+      position: relative
+      display: block
+
+    #{$sel-nav-elem}
+      // Step bullet
+      &:before
+        position: absolute
+        top: calc(0% - #{1.25 * $navigation-step-bullet-size})
+        left: calc(50% - #{$navigation-step-bullet-size})
+        z-index: 1
+        padding: $navigation-step-bullet-size
+        content: ''
+        border-width: #{.5 * $navigation-step-bullet-size}
+        border-style: solid
+        border-radius: #{2 * $navigation-step-bullet-size}
+        background: $navigation-step-color
+        border-color: $navigation-step-bullet-border-color
+
+      // Steps line
+      &:after
+        position: absolute
+        top: 0
+        width: 100%
+        height: dp(.25)
+        z-index: -1
+        background-color: $navigation-step-color
+        content: ''
+        pointer-events: none
+
+      // Do not show line after las step
+      &:last-of-type:after
+        display: none
+
+      &--completed
+        &:after
+          background-color: $navigation-step-color-completed
+        &:before
+          background-color: $navigation-step-color-completed
+
+      &--error
+        &:after
+          background-color: $navigation-step-color-error
+        &:before
+          background-color: $navigation-step-color-error
+
+      &--active
+        &:before
+          background-color: $navigation-step-color-active
+
+      &--disabled
+        cursor: not-allowed
+
+        &:before
+          background-color: $navigation-step-color-disabled
+
+        #{$sel-nav-elem-button}
+          color: $navigation-step-text-color-disabled
+
 @keyframes show-overflow
   0%, 100%
     overflow: hidden

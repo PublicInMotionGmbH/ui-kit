@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import flatMap from 'lodash/flatMap'
+
 import { buildClassName } from '@talixo/shared'
 
 import NavigationWrapper from './NavigationWrapper'
@@ -10,23 +12,19 @@ export const moduleName = 'navigation'
 function getElements (element, type) {
   const { panel, subelements, subtitle } = element
 
-  const children = Array.isArray(subelements) && subelements.length > 0
+  const subelement = Array.isArray(subelements) && subelements.length > 0
     ? <NavigationWrapper panel={panel} type={type} subtitle={subtitle}>
       { subelements.map(subelement => getElements(subelement, type)) }
     </NavigationWrapper>
     : null
 
-  const hasChildren = !!children
-
   return (
     <Element
-      key={element.id}
-      hasChildren={hasChildren}
-      type={type}
       {...element}
-    >
-      { children }
-    </Element>
+      key={element.id}
+      subelement={subelement}
+      type={type}
+    />
   )
 }
 
@@ -85,25 +83,29 @@ const defaultProps = {
  */
 class Navigation extends React.Component {
   buildElements () {
-    const { divider, elements, type } = this.props
+    const { elements, type } = this.props
+
+    return elements.map((element, index) => getElements(element, type))
+  }
+
+  addDivider (elements) {
+    const { divider } = this.props
     const elementsLastIndex = elements.length - 1
+    const dividerElement = buildDivider(divider)
 
-    const dividerElement = type === 'breadcrumbs' && divider != null
-      ? buildDivider(divider)
-      : null
-
-    const renderElements = elements.map((element, index) => [
-      getElements(element, type),
+    return flatMap(elements, (element, index) => [
+      element,
       index !== elementsLastIndex && dividerElement
     ])
-    return renderElements
   }
 
   render () {
-    const { className, divider, elements, type, ...passedProps } = this.props
-
+    const { className, children, divider, elements, type, ...passedProps } = this.props
     const wrapperCls = buildClassName([`${moduleName}-parent`])
-    const renderElements = this.buildElements()
+
+    const hasDivider = type === 'breadcrumbs' && divider != null
+    const generatedElements = children == null ? this.buildElements() : children
+    const renderElements = hasDivider ? this.addDivider(generatedElements) : generatedElements
 
     return (
       <NavigationWrapper className={wrapperCls} type={type} {...passedProps}>

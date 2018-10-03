@@ -20,13 +20,19 @@ const propTypes = {
   active: PropTypes.bool,
 
   /**  */
+  completed: PropTypes.bool,
+
+  /**  */
   children: PropTypes.node,
 
   /**  */
   disabled: PropTypes.bool,
 
   /**  */
-  hasChildren: PropTypes.bool,
+  error: PropTypes.bool,
+
+  /**  */
+  hasSubelements: PropTypes.bool,
 
   /**  */
   id: PropTypes.number,
@@ -57,7 +63,8 @@ const propTypes = {
 }
 
 const defaultProps = {
-  render: x => x.name
+  name: '',
+  render: x => x.label
 }
 
 class Element extends React.Component {
@@ -150,22 +157,24 @@ class Element extends React.Component {
    * @param {Event} e
    */
   handleClick = (e) => {
-    const { hasChildren, id, onClick } = this.props
+    const { disabled, subelement, id, onClick } = this.props
     const open = !this.state.open
+    const state = {}
+    const hasSubelement = !!subelement
     e.stopPropagation()
 
-    // Toggle opening status when it could be open
-    if (hasChildren) {
-      const state = {}
+    if (disabled) {
+      return
+    }
 
+    // Toggle opening status when it could be open
+    if (hasSubelement) {
       if (this.props.open == null) {
         state.open = open
       }
       if (this.props.active == null) {
         state.active = open
       }
-
-      this.setState(state)
 
       if (open && this.shouldAttachListeners()) {
         this.attachListener()
@@ -174,6 +183,7 @@ class Element extends React.Component {
       }
     }
 
+    this.setState(state)
     // Propagate event to `onClick` property
     if (onClick) {
       onClick(id, open)
@@ -224,24 +234,23 @@ class Element extends React.Component {
   }
 
   renderMenu () {
-    const { children } = this.props
+    const { subelement } = this.props
     const menuCls = buildClassName([ moduleName, 'menu' ])
-    return !children
+    return !subelement
       ? null
       : <div className={menuCls}>
-        { children }
+        { subelement }
       </div>
   }
 
   render () {
-    const {
-      active: propsActive, className, disabled, hasChildren, id, name, onMouseOver,
-      onClick, open: propsOpen, panel, render, subelements, subtitle, type, ...restProps
+    const { active: propsActive, className, completed, children, disabled, error, id, label, onMouseOver,
+      onClick, open: propsOpen, panel, render, subelement, subelements, subtitle, type, ...restProps
     } = this.props
 
     const { active, open } = this.state
 
-    const elementCls = buildClassName(moduleName, className, { active, disabled, open })
+    const elementCls = buildClassName(moduleName, className, { active, completed, disabled, error, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
     const renderElement = render(this.props, { open, active })
 
@@ -252,7 +261,7 @@ class Element extends React.Component {
         ref={this.saveRef}
         {...restProps}
       >
-        <div className={buttonCls}>{ renderElement }</div>
+        <div className={buttonCls}>{ renderElement || children }</div>
         { this.renderMenu() }
       </div>
     )
