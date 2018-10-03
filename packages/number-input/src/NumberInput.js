@@ -181,6 +181,7 @@ class NumberInput extends React.PureComponent {
         onDecrement={this.decrement}
         initialTime={initialTime}
         stepTime={stepTime}
+        error={error}
       />
     ) : null
 

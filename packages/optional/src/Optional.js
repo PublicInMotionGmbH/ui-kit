@@ -118,7 +118,7 @@ class Optional extends React.PureComponent {
   render () {
     const {
       className, label, children, onChange,
-      id, name, value: propValue, readOnly, disabled, onBlur, onFocus, ...passedProps
+      id, name, value: propValue, readOnly, disabled, error, onBlur, onFocus, ...passedProps
     } = this.props
     const { value, visible } = this.state
 
@@ -133,12 +133,13 @@ class Optional extends React.PureComponent {
         value={visible}
         disabled={disabled}
         readOnly={readOnly}
+        error={error}
       >
         <span className={clsLabelName}>{label}</span>
       </Checkbox>
     )
 
-    const inputProps = { id, readOnly, disabled, name, value, onBlur, onFocus }
+    const inputProps = { id, readOnly, disabled, error, name, value, onBlur, onFocus }
 
     for (let key in inputProps) {
       if (inputProps[key] === undefined) {

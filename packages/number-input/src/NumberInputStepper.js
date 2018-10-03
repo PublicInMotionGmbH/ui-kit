@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { prefix, buildClassName } from '@talixo/shared'
+import { buildClassName } from '@talixo/shared'
 
 import { Icon } from '@talixo/icon'
 
@@ -168,7 +168,8 @@ class NumberInputStepper extends React.PureComponent {
    * @returns {React.Element}
    */
   buildButton (icon, action) {
-    const buttonClsName = prefix(moduleName, 'button')
+    const { error } = this.props
+    const buttonClsName = buildClassName([moduleName, 'button'], null, { error })
 
     return (
       <button

@@ -1,8 +1,9 @@
 import React from 'react'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import { NumberInput } from '@talixo/number-input'
 import { Textarea } from '@talixo/textarea'
+import { TextInput } from '@talixo/number-input/node_modules/@talixo/text-input'
+import { NumberInput } from '@talixo/number-input'
 
 import Optional from './src/Optional'
 
@@ -13,6 +14,11 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Optional', module, {
   propTables: [ Optional ]
 })
+
+// Styles
+const style = {
+  marginBottom: 30
+}
 
 // Stories
 
@@ -60,6 +66,38 @@ addStory('read only', readme, () => (
   >
     <Textarea placeholder='Write your request here...' />
   </Optional>
+))
+
+addStory('with error', readme, () => (
+  <div>
+    <div style={style}>
+      <Optional
+        name='request'
+        label='I have a special request in textarea'
+        error
+      >
+        <Textarea placeholder='Write your request here...' />
+      </Optional>
+    </div>
+    <div style={style}>
+      <Optional
+        name='request'
+        label='I have a special request in text input'
+        error
+      >
+        <TextInput placeholder='Write your request here...' />
+      </Optional>
+    </div>
+    <div style={style}>
+      <Optional
+        name='request'
+        label='I have a special request in number input'
+        error
+      >
+        <NumberInput placeholder='Write your request here...' />
+      </Optional>
+    </div>
+  </div>
 ))
 
 addStory('controlled with static value', readme, () => (

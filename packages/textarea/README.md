@@ -28,6 +28,7 @@ Property name     | Type      | Default         | Description
 ------------------|-----------|:---------------:|--------------------------------
 className         | string    | n/a             | Additional class name passed to wrapper
 disabled          | bool      | n/a             | Read-only textarea
+error             | bool      | n/a             | Indicates that textarea has error
 placeholder       | string    | n/a             | Custom placeholder to show in textarea
 resize            | bool      | `true`          | Allow to resize textarea
 TextareaComponent | component | `'textarea'`    | Allow to use custom component
