@@ -14,6 +14,7 @@ exports[`<NumberInput /> renders correctly 1`] = `
   right={
     <NumberInputStepper
       disabled={false}
+      error={false}
       initialTime={700}
       onDecrement={[Function]}
       onIncrement={[Function]}
