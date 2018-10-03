@@ -1,6 +1,6 @@
 {
   "name": "@talixo/price",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.30",
   "description": "UI Component which represents Price",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.30",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.30",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
