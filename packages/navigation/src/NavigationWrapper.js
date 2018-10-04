@@ -37,9 +37,9 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function NavigationWrapper (props) {
-  const { children, className, divider, panel, subtitle, type, ...passedProps } = props
+  const { children, className, divider, parent, panel, subtitle, type, ...passedProps } = props
 
-  const clsName = buildClassName(moduleName, className, { panel }, [type])
+  const clsName = buildClassName(moduleName, className, { panel, parent }, [type])
   const subtitleCls = buildClassName([ moduleName, 'subtitle' ])
 
   return (

@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
 import ControlledPagination from './src/ControlledPagination'
-import Element from './src/SimpleElement'
+import Element from './src/Element'
 import Navigation from './src/Navigation'
 import NavigationWrapper from './src/NavigationWrapper'
 

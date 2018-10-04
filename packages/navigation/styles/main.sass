@@ -22,6 +22,7 @@
 
     // Parent elements styles
     &#{$sel-nav-parent}
+      @debug &
       display: inline-flex
       justify-content: space-between
       padding: $navigation-padding-vertical 0
@@ -99,7 +100,7 @@
       background-color: transparent
 
     #{$sel-nav-elem-menu}
-      background-color: $navigation-breadcrumbs-menu-background-color
+      background-color: $breadcrumbs-menu-background-color
 
     // Open navigation menu on hover
     #{$sel-nav-elem}
@@ -113,7 +114,7 @@
     #{$sel-nav-elem-menu}
       #{$sel-nav-elem}
         &:hover, &--active, &--open
-          background-color: $navigation-breadcrumbs-element-active-color
+          background-color: $breadcrumbs-element-active-color
 
 
 
@@ -177,7 +178,7 @@
 
     #{$sel-nav-elem-menu}
       position: relative
-      left: 3 * $navigation-tree-subtree-offset
+      left: 3 * $tree-subtree-offset
       padding: $navigation-padding-vertical $navigation-padding-horizontal
       height: 0
       overflow: hidden
@@ -201,22 +202,22 @@
   /***** Navigation type `tabs` specific rules *****/
   &--tabs
     #{$sel-nav-elem}
-      border: $navigation-tabs-border
+      border: $tabs-border
       border-bottom: 0
-      border-radius: $navigation-tabs-border-radius
-      background-color: $navigation-tabs-element-background-color
-      color: $navigation-tabs-element-text-color
+      border-radius: $tabs-border-radius
+      background-color: $tabs-element-background-color
+      color: $tabs-element-text-color
       padding: $navigation-element-padding-vertical $navigation-element-padding-horizontal
 
     #{$sel-nav-elem}
       &:hover, &--active, &--open
-        background-color: $navigation-tabs-element-active-background-color
+        background-color: $tabs-element-active-background-color
 
   &--steps
     #{$sel-nav-elem-button}
       position: relative
-      top: #{2 * $navigation-step-bullet-size}
-      padding-bottom: #{2 * $navigation-step-bullet-size}
+      top: #{2 * $step-bullet-size}
+      padding-bottom: #{2 * $step-bullet-size}
 
     #{$sel-nav-elem}
       position: relative
@@ -226,16 +227,16 @@
       // Step bullet
       &:before
         position: absolute
-        top: calc(0% - #{1.25 * $navigation-step-bullet-size})
-        left: calc(50% - #{$navigation-step-bullet-size})
+        top: calc(0% - #{1.25 * $step-bullet-size})
+        left: calc(50% - #{$step-bullet-size})
         z-index: 1
-        padding: $navigation-step-bullet-size
+        padding: $step-bullet-size
         content: ''
-        border-width: #{.5 * $navigation-step-bullet-size}
+        border-width: #{.5 * $step-bullet-size}
         border-style: solid
-        border-radius: #{2 * $navigation-step-bullet-size}
-        background: $navigation-step-color
-        border-color: $navigation-step-bullet-border-color
+        border-radius: #{2 * $step-bullet-size}
+        background: $step-background-color
+        border-color: $step-bullet-border-color
 
       // Steps line
       &:after
@@ -244,7 +245,7 @@
         width: 100%
         height: dp(.25)
         z-index: -1
-        background-color: $navigation-step-color
+        background-color: $step-background-color
         content: ''
         pointer-events: none
 
@@ -254,28 +255,44 @@
 
       &--completed
         &:after
-          background-color: $navigation-step-color-completed
+          background-color: $step-background-color-completed
         &:before
-          background-color: $navigation-step-color-completed
+          background-color: $step-background-color-completed
 
       &--error
         &:after
-          background-color: $navigation-step-color-error
+          background-color: $step-background-color-error
         &:before
-          background-color: $navigation-step-color-error
+          background-color: $step-background-color-error
 
       &--active
         &:before
-          background-color: $navigation-step-color-active
+          background-color: $step-background-color-active
 
       &--disabled
         cursor: not-allowed
 
         &:before
-          background-color: $navigation-step-color-disabled
+          background-color: $step-background-color-disabled
 
         #{$sel-nav-elem-button}
-          color: $navigation-step-text-color-disabled
+          color: $step-text-color-disabled
+
+  &--pagination
+    display: inline-flex
+
+    #{$sel-nav-elem}
+      min-width: $pagination-element-min-width
+      padding: $pagination-element-padding-vertical $pagination-element-padding-horizontal
+      border: $pagination-element-border-color solid $pagination-element-border-width
+      border-radius: $x-border-radius
+      user-select: none
+      text-align: center
+
+      &:hover, &--active
+        color: $pagination-element-active-text-color
+        background-color: $pagination-element-active-background-color
+
 
 @keyframes show-overflow
   0%, 100%

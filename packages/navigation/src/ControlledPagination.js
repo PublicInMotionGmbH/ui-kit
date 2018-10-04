@@ -46,6 +46,7 @@ const renderedNumbers = (numbers, activePage, onChange, passedProps) => {
   return numbers.map(page => (
     <Element
       key={page}
+      page={page}
       active={activePage === page + 1}
       onClick={() => onChange(page + 1)}
       {...passedProps}

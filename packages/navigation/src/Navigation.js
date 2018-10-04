@@ -5,7 +5,7 @@ import flatMap from 'lodash/flatMap'
 import { buildClassName } from '@talixo/shared'
 
 import NavigationWrapper from './NavigationWrapper'
-import Element from './SimpleElement'
+import Element from './Element'
 
 export const moduleName = 'navigation'
 
@@ -101,14 +101,13 @@ class Navigation extends React.Component {
 
   render () {
     const { className, children, divider, elements, type, ...passedProps } = this.props
-    const wrapperCls = buildClassName([`${moduleName}-parent`])
 
     const hasDivider = type === 'breadcrumbs' && divider != null
     const generatedElements = children == null ? this.buildElements() : children
     const renderElements = hasDivider ? this.addDivider(generatedElements) : generatedElements
 
     return (
-      <NavigationWrapper className={wrapperCls} type={type} {...passedProps}>
+      <NavigationWrapper parent type={type} {...passedProps}>
         { renderElements }
       </NavigationWrapper>
     )
