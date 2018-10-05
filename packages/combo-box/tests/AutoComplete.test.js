@@ -7,6 +7,26 @@ import { TextInput } from '@talixo/text-input'
 
 import AutoComplete from '../src/AutoComplete'
 
+const options = [
+  'abc',
+  'abcd',
+  'abcde',
+  'abb'
+]
+
+jest.mock('lodash/debounce', () => (fn, time) => {
+  let timeout
+
+  const debounced = (...args) => {
+    clearTimeout(timeout)
+
+    timeout = setTimeout(() => fn(...args), time)
+  }
+
+  debounced.cancel = () => clearTimeout(timeout)
+  return debounced
+})
+
 describe('<AutoComplete />', () => {
   beforeEach(() => resetIdCounter())
 
@@ -164,6 +184,70 @@ describe('<AutoComplete />', () => {
 
     expect(spy.mock.calls.length).toBe(1)
     expect(spy.mock.calls[0][0]).toBe('abcddd')
+
+    wrapper.unmount()
+  })
+
+  it('search with delay and invoke spyLoadRequest', () => {
+    const spy = jest.fn()
+    const spyLoadRequest = jest.fn(() => options)
+
+    const testValue = 'abc'
+
+    const wrapper = mount(
+      <AutoComplete
+        isOpen
+        options={[ 'abcdef', 'abcee', 'defeee' ]}
+        onInputValueChange={spy}
+        onLoadRequest={spyLoadRequest}
+      >
+        <TextInput type='text' />
+      </AutoComplete>
+    )
+
+    jest.useFakeTimers()
+
+    const input = wrapper.find(TextInput)
+
+    input.find('input').simulate('change', {target: {value: testValue}})
+
+    jest.runAllTimers()
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spyLoadRequest).toHaveBeenCalledTimes(1)
+
+    wrapper.unmount()
+  })
+
+  it('search with delay and invoke spyStopRequest', () => {
+    const spy = jest.fn()
+    const spyLoadRequest = jest.fn(() => options)
+    const spyStopRequest = jest.fn(() => [])
+
+    const testValue = 'abc'
+
+    const wrapper = mount(
+      <AutoComplete
+        isOpen
+        options={[ 'abcdef', 'abcee', 'defeee' ]}
+        onInputValueChange={spy}
+        onLoadRequest={spyLoadRequest}
+        onStopRequest={spyStopRequest}
+      >
+        <TextInput type='text' />
+      </AutoComplete>
+    )
+
+    jest.useFakeTimers()
+
+    const input = wrapper.find(TextInput)
+
+    input.find('input').simulate('change', { target: { value: testValue.slice(0, 2) } })
+
+    jest.runAllTimers()
+
+    expect(spy).toHaveBeenCalledTimes(1)
+    expect(spyStopRequest).toHaveBeenCalledTimes(1)
 
     wrapper.unmount()
   })

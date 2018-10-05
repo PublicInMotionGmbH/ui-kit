@@ -86,6 +86,10 @@ onChoose           | function  | n/a               | Handler fired when option i
 onBlur             | function  | n/a               | onBlur event passed from input
 onFocus            | function  | n/a               | onFocus event passed from input
 onChange           | function  | n/a               | onChange event passed from input
+onLoadRequest      | function  | n/a               | This function is called when changes input value, at has typed in at least 3 letters. It can be used to load locations from external API.
+onStopRequest      | function  | n/a               | This function is called when changes input value, at has typed less than 3 letters.
+minLetters         | number    | `3`               | Minimum number of letters to request load/stop procedure.
+writingDelay       | number    | `300`             | Debounce delay (in milliseconds) for writing, to not request `load` procedure.
 renderItem         | function  | `item => item`    | Function to render item in menu list
 buildItemId        | function  | item index        | Function to build unique ID of item
 itemToString       | function  | `item => item`    | Function to convert item to string

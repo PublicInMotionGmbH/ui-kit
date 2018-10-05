@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Price from '../src/Price'
-import { fomatNumber, generatePrice, valueToFixedPrecision } from '../src/formatters'
+import { formatNumber, generatePrice, valueToFixedPrecision } from '../src/formatters'
 
 // Helpers
 const currencyToSymbol = {
@@ -59,23 +59,23 @@ describe('<Price />', () => {
 
     describe('fomatNumber', () => {
       it('should return 1.222 given 1.2222321213', () => {
-        expect(fomatNumber('1.2222321213', 'en', 3)).toBe('1.222')
+        expect(formatNumber('1.2222321213', 'en', 3)).toBe('1.222')
       })
 
       it('should return 1,000,000 given 1000000000.2121', () => {
-        expect(fomatNumber('1000000000.2121', 'en', 0)).toBe('1,000,000,000')
+        expect(formatNumber('1000000000.2121', 'en', 0)).toBe('1,000,000,000')
       })
 
       it('should return 1,000,000 given 1000000000.2121', () => {
-        expect(fomatNumber('1000000000.2121', 'en', 3)).toBe('1,000,000,000.212')
+        expect(formatNumber('1000000000.2121', 'en', 3)).toBe('1,000,000,000.212')
       })
 
       it('should return 1000000000.2121 given 1000000000.2121 when locale is null', () => {
-        expect(fomatNumber('1000000000.2121', null, 3)).toBe('1000000000.2121')
+        expect(formatNumber('1000000000.2121', null, 3)).toBe('1000000000.2121')
       })
 
       it('should return 1000000000.2121 given 1000000000 when precision is null', () => {
-        expect(fomatNumber('1000000000.2121', 'en', null)).toBe('1,000,000,000')
+        expect(formatNumber('1000000000.2121', 'en', null)).toBe('1,000,000,000')
       })
     })
 

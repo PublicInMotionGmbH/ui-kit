@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 
-import debounce from 'lodash/debounce'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import { AutoComplete } from '@talixo/combo-box'
@@ -129,7 +128,7 @@ const propTypes = {
   placeholder: PropTypes.string,
 
   /** Address component which will be displayed inside autocomplete list. */
-  renderAddress: PropTypes.string,
+  renderAddress: PropTypes.func,
 
   /** Chosen location value. */
   value: PropTypes.shape(locationProp),
@@ -140,9 +139,7 @@ const propTypes = {
 
 const defaultProps = {
   renderAddress: _renderAddress,
-  mobileFriendly: true,
-  minLetters: 3,
-  writingDelay: 300
+  mobileFriendly: true
 }
 
 /**
@@ -196,34 +193,13 @@ class AddressInput extends React.PureComponent {
    * @param {string} value
    */
   onInputValueChange = value => {
-    const { onLoadRequest, onStopRequest, minLetters } = this.props
-
     if (value === this.state.inputValue) {
       return
     }
 
     this.setState({ inputValue: value })
     this.onChange(null)
-
-    // Invoke find request only when at least 3 chars are provided.
-    if (value.length < minLetters) {
-      this.load.cancel()
-
-      if (onStopRequest) {
-        onStopRequest()
-      }
-    } else if (onLoadRequest) {
-      this.load(value)
-    }
   }
-
-  /**
-   *
-   * @type {Function}
-   */
-  load = debounce(value => {
-    this.props.onLoadRequest(value)
-  }, this.props.writingDelay)
 
   /**
    * Handle choosing element from the autocomplete list on mobile devices.
@@ -241,7 +217,11 @@ class AddressInput extends React.PureComponent {
    */
   onChange = value => {
     if (this.props.value === undefined) {
-      this.setState({ value })
+      this.setState({value})
+    } else if (value) {
+      this.setState({
+        inputValue: value.address
+      })
     }
 
     if (this.props.onChange) {
@@ -345,6 +325,8 @@ class AddressInput extends React.PureComponent {
           renderItem={renderAddress}
           inputValue={this.state.inputValue}
           onInputValueChange={this.onInputValueChange}
+          onLoadRequest={onLoadRequest}
+          onStopRequest={onStopRequest}
           itemToString={itemToString}
           footer={footer}
         >
@@ -401,7 +383,9 @@ class AddressInput extends React.PureComponent {
             onFocus={this.focus}
             renderItem={renderAddress}
             inputValue={this.state.inputValue}
-            onInputValueChange={this.onInputValueChange}
+            onInputValueChange={this.handleInputChange}
+            onLoadRequest={this.props.onLoadRequest}
+            onStopRequest={this.props.onStopRequest}
             itemToString={itemToString}
             footer={footer}
           >

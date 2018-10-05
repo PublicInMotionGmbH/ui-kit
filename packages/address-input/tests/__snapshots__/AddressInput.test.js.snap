@@ -28,8 +28,8 @@ exports[`<AddressInput /> mobile version rendering should render mobile input 1`
         <div
           aria-expanded={true}
           aria-haspopup="listbox"
-          aria-labelledby="downshift-16-label"
-          aria-owns="downshift-16-menu"
+          aria-labelledby="downshift-14-label"
+          aria-owns="downshift-14-menu"
           className="talixo-combo-box"
           role="combobox"
         >
@@ -39,12 +39,12 @@ exports[`<AddressInput /> mobile version rendering should render mobile input 1`
             <input
               aria-activedescendant={null}
               aria-autocomplete="list"
-              aria-controls="downshift-16-menu"
-              aria-labelledby="downshift-16-label"
+              aria-controls="downshift-14-menu"
+              aria-labelledby="downshift-14-label"
               autoComplete="nope"
               autoFocus={true}
               className="talixo-text-input__input"
-              id="downshift-16-input"
+              id="downshift-14-input"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import debounce from 'lodash/debounce'
 import Downshift from 'downshift'
 
 import { buildClassName } from '@talixo/shared'
@@ -54,7 +55,28 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /** Should it be read-only? */
-  readOnly: PropTypes.bool
+  readOnly: PropTypes.bool,
+
+  /** Event called after input value has been changed */
+  onInputValueChange: PropTypes.func,
+
+  /**
+   * This function is called when changes input value, at has typed in at least 3 (minLetters) letters.
+   * It should be used to load locations from external API.
+   */
+  onLoadRequest: PropTypes.func,
+
+  /**
+   * This function is called when changes input value, at has typed less than 3 (minLetters) letters.
+   * It should be used to prevent request to API.
+   */
+  onStopRequest: PropTypes.func,
+
+  /** Minimum number of letters to run load/stop helpers */
+  minLetters: PropTypes.number,
+
+  /** Delay time for writing message */
+  writingDelay: PropTypes.number
 }
 
 const defaultProps = {
@@ -64,7 +86,9 @@ const defaultProps = {
   buildItemId: (item, index) => index,
   itemToString: item => item,
   disabled: false,
-  readOnly: false
+  readOnly: false,
+  minLetters: 3,
+  writingDelay: 300
 }
 
 /**
@@ -255,6 +279,40 @@ class AutoComplete extends React.PureComponent {
   }
 
   /**
+   * Handle user typing.
+   *
+   * @param {string} value
+   */
+  onInputValueChange = value => {
+    const { onInputValueChange, onLoadRequest, onStopRequest, minLetters } = this.props
+
+    if (value == null) return
+
+    if (onInputValueChange) {
+      onInputValueChange(value)
+    }
+
+    // Invoke find request only when at least 3 chars are provided.
+    if (value.length < minLetters) {
+      this.load.cancel()
+
+      if (onStopRequest) {
+        onStopRequest()
+      }
+    } else if (onLoadRequest) {
+      this.load(value)
+    }
+  }
+
+  /**
+   *
+   * @type {Function}
+   */
+  load = debounce(value => {
+    this.props.onLoadRequest(value)
+  }, this.props.writingDelay)
+
+  /**
    * Build external input with correct props.
    *
    * @param {object} data
@@ -325,7 +383,7 @@ class AutoComplete extends React.PureComponent {
   render () {
     const {
       id, icon, options, onChoose, buildItemId, renderItem, disabled, readOnly,
-      children, onFocus, onBlur, onChange, ...passedProps
+      children, onFocus, onBlur, onChange, onInputValueChange, onLoadRequest, onStopRequest, ...passedProps
     } = this.props
 
     const idProps = {}
@@ -343,6 +401,7 @@ class AutoComplete extends React.PureComponent {
         onChange={this.select}
         selectedItem={null}
         disabled={this.isDisabled()}
+        onInputValueChange={this.onInputValueChange}
         {...passedProps}
       >
         {this.renderComponent}

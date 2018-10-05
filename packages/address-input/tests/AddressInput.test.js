@@ -71,7 +71,6 @@ describe('<AddressInput />', () => {
     })
 
     afterEach(() => {
-      wrapper.unmount()
       jest.clearAllTimers()
       jest.useRealTimers()
     })
@@ -81,32 +80,21 @@ describe('<AddressInput />', () => {
       input.simulate('change', { target: { value: testValue } })
       expect(props.onChange).toHaveBeenCalledTimes(1)
       expect(props.onChange).toHaveBeenCalledWith(null)
+      wrapper.unmount()
     })
 
     it('should invoke onFocus', () => {
       props.onFocus.mockReset()
       input.simulate('focus')
       expect(props.onFocus).toHaveBeenCalledTimes(1)
+      wrapper.unmount()
     })
 
     it('should invoke onBlur', () => {
       props.onBlur.mockReset()
       input.simulate('blur')
       expect(props.onBlur).toHaveBeenCalledTimes(1)
-    })
-
-    it('should invoke onLoadRequest', () => {
-      props.onLoadRequest.mockReset()
-      input.simulate('change', { target: { value: testValue } })
-      jest.runAllTimers()
-      expect(props.onLoadRequest).toHaveBeenCalledTimes(1)
-      expect(props.onLoadRequest).toHaveBeenCalledWith(testValue)
-    })
-
-    it('should invoke onStopRequest', () => {
-      props.onStopRequest.mockReset()
-      input.simulate('change', { target: { value: testValue.slice(0, 2) } })
-      expect(props.onStopRequest).toHaveBeenCalledTimes(1)
+      wrapper.unmount()
     })
 
     it('should handle tab key pressing when only 1 location is available', () => {
@@ -117,6 +105,7 @@ describe('<AddressInput />', () => {
 
       expect(props.onChange).toHaveBeenCalledTimes(1)
       expect(props.onChange).toHaveBeenCalledWith(locations[0])
+      wrapper.unmount()
     })
 
     it('should not change inputValue when the smae value is passed', () => {
@@ -125,16 +114,19 @@ describe('<AddressInput />', () => {
       input.simulate('change', { target: { value: testValue } })
 
       expect(props.onChange).not.toHaveBeenCalled()
+      wrapper.unmount()
     })
 
     it('should set proper value when it is received', () => {
       wrapper.setProps({ value: locations[0] })
       expect(wrapper.state().value).toBe(locations[0])
+      wrapper.unmount()
     })
 
     it('should show loader when loading prop is true', () => {
       wrapper.setProps({ loading: true })
       expect(wrapper.find('ProgressRing').exists()).toBe(true)
+      wrapper.unmount()
     })
 
     describe('when input is blurred', () => {
@@ -142,6 +134,7 @@ describe('<AddressInput />', () => {
         props.onBlur.mockReset()
         input.simulate('blur')
         expect(props.onBlur).toHaveBeenCalledTimes(1)
+        wrapper.unmount()
       })
 
       it('should set first value from locations when input is blurred', () => {
@@ -154,6 +147,7 @@ describe('<AddressInput />', () => {
         expect(props.onChange).toHaveBeenCalledWith(locations[0])
 
         expect(props.onBlur).toHaveBeenCalledTimes(1)
+        wrapper.unmount()
       })
 
       it('should set proper search query when input is blurred', () => {
@@ -162,6 +156,7 @@ describe('<AddressInput />', () => {
         wrapper.setState({ value: locations[0] })
         input.simulate('blur')
         expect(wrapper.state().inputValue).toBe(location.address)
+        wrapper.unmount()
       })
     })
   })

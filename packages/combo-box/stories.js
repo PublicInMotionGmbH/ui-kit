@@ -50,6 +50,18 @@ const options = [
   { id: 'sk', name: 'Slovakia', language: 'Slovak' }
 ]
 
+function onLoadRequest (value) {
+  return new Promise(resolve => {
+    const _names = optionsSimple.filter(name => {
+      const query = value.toLowerCase()
+      const nameLowCase = name.toLowerCase()
+      return nameLowCase.indexOf(query) !== -1
+    })
+
+    setTimeout(() => resolve(_names), 500)
+  })
+}
+
 // Styles for autocomplete footer
 const footerStyles = {
   textAlign: 'right',
@@ -323,6 +335,29 @@ addStory.controlled('auto complete', readme, (setState, state) => (
     </AutoComplete>
   </div>
 ), () => ({ value: '' }))
+
+addStory.controlled('auto complete with delay', readme, (setState, state) => (
+  <div>
+    <div>Selected value: {JSON.stringify(state.value)}</div>
+    <AutoComplete
+      onChoose={value => setState({ value: 'Penguin ' + value })}
+      options={state.options}
+      onFocus={action('focus')}
+      onBlur={action('blur')}
+      onLoadRequest={(value) => {
+        setState({ loading: true })
+        return onLoadRequest(value).then((names) => setState({ loading: false, options: names }))
+      }}
+      onStopRequest={() => setState({ loading: false, options: [] })}
+    >
+      <TextInput value={state.value} right={state.loading ? <ProgressRing /> : null} onChange={value => setState({ value })} />
+    </AutoComplete>
+  </div>
+), () => ({
+  value: '',
+  loading: false,
+  options: []
+}))
 
 addStory.controlled('auto complete with footer', readme, (setState, state) => (
   <div>
