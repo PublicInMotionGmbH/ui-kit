@@ -25,14 +25,15 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default      | Description                    
---------------|-----------|:------------:|--------------------------------
-className     | string    | n/a          | Additional class name passed to wrapper.
-children      | node      | n/a          | Each children element is separate step of wizard.
-displayedLimit| number    | `10`         | Maximum number of displayed steps buttons.
-nextLabel     | node      | `'Next'`     | Next button label.
-previousLabel | node      | `'Previous'` | Previous button label
-step          | number    | n/a          | Custom starting step
+Property name | Type      | Required | Default      | Description                    
+--------------|-----------|----------|:------------:|--------------------------------
+className     | string    |  false   | n/a          | Additional class name passed to wrapper.
+children      | node      |  true    | n/a          | Each children element is separate step of wizard.
+displayedLimit| number    |  false   | `10`         | Maximum number of displayed steps buttons.
+nextLabel     | node      |  false   | `'Next'`     | Next button label.
+previousLabel | node      |  false   | `'Previous'` | Previous button label
+step          | number    |  false   | n/a          | Custom starting step
+pagination    | boolean   |  false   | `true`       | Show pagination in Wizard 
 
 ## Changelog
 

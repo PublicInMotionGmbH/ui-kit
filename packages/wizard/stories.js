@@ -16,12 +16,17 @@ const addStory = createStoriesFactory('Wizard', module, {
   propTables: [ Wizard ]
 })
 
+// Style for TextInput
+const style = {
+  marginBottom: 15
+}
+
 // Components for Wizard's steps
 function Step1 (props) {
   return (
     <Form>
       <h3>Step 1</h3>
-      <TextInput placeholder='First Step' />
+      <TextInput placeholder='First Step' style={style} />
       <Checkbox onChange={change} size='small'>Check</Checkbox>
       <Checkbox onChange={change} size='small'>Box</Checkbox>
     </Form>
@@ -32,7 +37,7 @@ function Step2 (props) {
   return (
     <Form>
       <h3>Step 2</h3>
-      <TextInput placeholder='Second Step' />
+      <TextInput placeholder='Second Step' style={style} />
       <Checkbox onChange={change} size='small'>Check</Checkbox>
       <Checkbox onChange={change} size='small'>Box</Checkbox>
     </Form>
@@ -43,7 +48,7 @@ function Step3 (props) {
   return (
     <Form>
       <h3>Step 3</h3>
-      <TextInput placeholder='Third Step' />
+      <TextInput placeholder='Third Step' style={style} />
       <Checkbox onChange={change} size='small'>Check</Checkbox>
       <Checkbox onChange={change} size='small'>Box</Checkbox>
     </Form>
@@ -54,7 +59,7 @@ function Step4 (props) {
   return (
     <Form>
       <h3>Step 4</h3>
-      <TextInput placeholder='Fourth Step' />
+      <TextInput placeholder='Fourth Step' style={style} />
       <Checkbox onChange={change} size='small'>Check</Checkbox>
       <Checkbox onChange={change} size='small'>Box</Checkbox>
     </Form>
@@ -88,5 +93,17 @@ addStory('with set starting step', readme, () => (
     <Step2 />
     <Step3 />
     <Step4 />
+  </Wizard>
+))
+
+addStory('with one children', readme, () => (
+  <Wizard>
+    <Step1 />
+  </Wizard>
+))
+
+addStory('without pagination', readme, () => (
+  <Wizard pagination={false}>
+    <Step1 />
   </Wizard>
 ))

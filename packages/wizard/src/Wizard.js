@@ -9,7 +9,7 @@ const propTypes = {
   className: PropTypes.string,
 
   /** Children inside Wizard. Each child is the next step in Wizard */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 
   /** Maximum number of displayed page buttons */
   displayedLimit: PropTypes.number,
@@ -21,7 +21,14 @@ const propTypes = {
   previousLabel: PropTypes.node,
 
   /** Step from which wizard should start */
-  step: PropTypes.number
+  step: PropTypes.number,
+
+  /** Show pagination in Wizard */
+  pagination: PropTypes.bool
+}
+
+const defaultProps = {
+  pagination: true
 }
 
 /**
@@ -37,40 +44,38 @@ const propTypes = {
  * @class {React.Element}
  */
 class Wizard extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      currentStep: props.step || 1
+    state = {
+      currentStep: this.props.step || 1
     }
-  }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
-  }
+    componentWillReceiveProps (nextProps) {
+      if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
+    }
 
-  render () {
-    const {children, className, displayedLimit, nextLabel, previousLabel, ...passedProps} = this.props
-    const {currentStep} = this.state
-    return (
-      <div className={buildClassName('wizard', className)} {...passedProps} >
-        {children[currentStep - 1]}
-        <Navigation type='pagination' >
-          <ControlledPagination
-            activePage={currentStep}
-            displayedLimit={displayedLimit}
-            nextLabel={nextLabel}
-            onChange={i => this.setState({ currentStep: i })}
-            pageCount={children.length}
-            previousLabel={previousLabel}
-          />
-        </Navigation>
-      </div>
-    )
-  }
+    render () {
+      const {children, className, displayedLimit, nextLabel, previousLabel, pagination, ...passedProps} = this.props
+      const {currentStep} = this.state
+      return (
+        <div className={buildClassName('wizard', className)} {...passedProps} >
+          {!children.length ? children : children[currentStep - 1]}
+          {pagination && <Navigation type='pagination' >
+            <ControlledPagination
+              activePage={currentStep}
+              displayedLimit={displayedLimit}
+              nextLabel={nextLabel}
+              onChange={i => this.setState({ currentStep: i })}
+              pageCount={!children.length ? 1 : children.length}
+              previousLabel={previousLabel}
+            />
+          </Navigation>}
+        </div>
+      )
+    }
 }
 
 Wizard.displayName = 'Wizard'
 
 Wizard.propTypes = propTypes
+Wizard.defaultProps = defaultProps
 
 export default Wizard
