@@ -53,7 +53,7 @@ export function generatePrice (value, config = {}) {
   // If user provides own mapping, use it.
   if (currencyToSymbol) {
     const symbol = currencyToSymbol[currency] || currency
-    const price = fomatNumber(value, locale, precision)
+    const price = formatNumber(value, locale, precision)
 
     return { value: price, symbol }
   } else if (locale && currency) {
