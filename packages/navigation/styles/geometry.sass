@@ -1,12 +1,13 @@
 @import './config'
 
+// FIXME: it should use own variables
+
 @include module('navigation')
-  $n: &
   display: inline-block
   list-style: none
 
   &--pagination
-    > #{$n}__element
+    > #{prefix('navigation')}__element
       display: inline-flex
       padding: dp(0.5) dp(1.5)
       border: $x-border-width solid
@@ -17,6 +18,7 @@
       align-items: center
       cursor: pointer
       user-select: none
+
       > *
         margin: 0 dp(0.5)
         display: inline-flex
@@ -30,7 +32,7 @@
         cursor: default
 
   &--tabs
-    > #{$n}__element
+    > #{prefix('navigation', 'element')}
       padding: dp(1) dp(1.5)
       border: $x-border-width solid $color-tab-border
       border-bottom-width: 0
@@ -40,7 +42,7 @@
       display: inline-flex
       align-items: center
 
-      & + &
+      & + #{prefix('navigation', 'element')}
         margin-left: $x-border-width
 
       > *
@@ -56,7 +58,7 @@
         font-weight: $x-weight-bold
 
   &--breadcrumbs
-    > #{$n}__element
+    > #{prefix('navigation')}__element
       display: inline-block
       margin: 0 dp(0.5) 0
 
@@ -65,7 +67,8 @@
         text-decoration: none
         cursor: pointer
 
-      &--active, &--active > a
+      &--active,
+      &--active > a
         color: #000
         font-weight: $x-weight-bold
 
@@ -91,7 +94,7 @@
       box-sizing: border-box
       z-index: -1
 
-    #{$n}__step
+    #{prefix('navigation')}__step
       position: relative
       padding: dp(0.5)
       cursor: pointer
@@ -100,14 +103,16 @@
       border-style: solid
       border-radius: dp(1)
 
-      &--active, &:active
+      &--active,
+      &:active
         font-weight: $x-weight-bold
 
-      &--disabled, &--disabled:active
+      &--disabled,
+      &--disabled:active
         font-weight: $x-weight-bold
 
   &--navigation
-    > #{$n}__element
+    > #{prefix('navigation')}__element
       display: inline-block
       margin: 0 dp(0.5) 0
 

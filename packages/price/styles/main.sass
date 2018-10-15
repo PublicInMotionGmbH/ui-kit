@@ -8,7 +8,7 @@
     font-size: $price-prefix-font-size
     margin-right: $price-prefix-margin
 
-[dir=rtl] .price 
-  small 
-    margin-right: 0
-    margin-left: $price-prefix-margin
+  @include rtl-only
+    small
+      margin-right: 0
+      margin-left: $price-prefix-margin

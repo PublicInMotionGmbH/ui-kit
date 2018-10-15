@@ -10,10 +10,10 @@
   color: $sidebar-button-text-color
 
   #{$sel-sidebar-button}
-    border-bottom: 1px solid  $sidebar-button-border-color
+    border-bottom: 1px solid $sidebar-button-border-color
 
   // Nested sidebars
-  & &
+  & #{prefix('sidebar')}
     background: $sidebar-nested-background
 
   // SidebarElement buttons which are directly inside of Sidebar
@@ -25,7 +25,7 @@
         color: $sidebar-button-icon-color
 
   // Set up width of sidebar
-  &, &__content
+  &, #{prefix('sidebar', 'content')}
     width: $sidebar-size
 
   // SidebarElement buttons which are directly inside of Sidebar
@@ -97,7 +97,7 @@
   color: $sidebar-panel-color
   box-shadow: $sidebar-box-shadow
 
-  &, &__content
+  &, #{prefix('sidebar-panel', 'content')}
     box-sizing: border-box
     width: $sidebar-panel-width
     height: 100%

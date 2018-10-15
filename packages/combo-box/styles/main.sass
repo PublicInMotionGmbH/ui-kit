@@ -39,7 +39,7 @@
   &__value--placeholder
     user-select: none
 
-  &--open &__value
+  &--open #{prefix('combo-box', 'value')}
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
@@ -116,10 +116,10 @@
     color: $combo-box-menu-item-hover-text-color
     background: $combo-box-menu-item-hover-background-color
 
-  &__item--highlighted &__item__tick
+  &__item--highlighted #{prefix('combo-box', 'item', 'tick')}
     color: $combo-box-tick-highlighted-color
 
-  &__item--selected &__item__tick
+  &__item--selected #{prefix('combo-box', 'item', 'tick')}
     color: $combo-box-tick-active-color
 
   &__tags
@@ -127,9 +127,9 @@
     margin: 0 $combo-box-tag-margin 0 0
     padding-top: $combo-box-tag-margin
 
-  [dir=rtl] &__tags
-    margin-right: 0
-    margin-left: $combo-box-tag-margin
+    @include rtl-only
+      margin-right: 0
+      margin-left: $combo-box-tag-margin
 
   &__tag
     box-sizing: border-box
@@ -171,7 +171,7 @@
     .tai
       display: block
 
-  &--simple-select &__select
+  &--simple-select #{prefix('combo-box', 'select')}
     position: absolute
     left: 0
     top: 0
@@ -180,35 +180,37 @@
     opacity: 0
     z-index: 0
 
-  &--simple-select &__value
+  &--simple-select #{prefix('combo-box', 'value')}
     z-index: 1
     pointer-events: none
 
-  &--simple-select &__remove
+  &--simple-select #{prefix('combo-box', 'remove')}
     pointer-events: all
 
-  &--multi &__item__tick
+  &--multi #{prefix('combo-box', 'item', 'tick')}
     display: inline-block
 
-  [dir=rtl] &__remove
-    margin-left: initial
-    margin-right: 0.3em
+  &__remove
+    @include rtl-only
+      margin-left: initial
+      margin-right: 0.3em
 
-  [dir=rtl] &__controls
-    margin-left: initial
-    margin-right: auto
+  &__controls
+    @include rtl-only
+      margin-left: initial
+      margin-right: auto
 
   // &--open is equivalent of :focus
-  &:not(&--open):hover &__value
+  &:not(#{prefix('combo-box')}--open):hover #{prefix('combo-box', 'value')}
     background-color: $combo-box-hover-background-color
     border-color: $combo-box-hover-border-color
 
-  &:not(&--open):hover &__value:not(&__value--placeholder)
+  &:not(#{prefix('combo-box')}--open):hover #{prefix('combo-box', 'value')}:not(#{prefix('combo-box', 'value')}--placeholder)
     color: $combo-box-hover-text-color
 
-  &--open &__value
+  &--open #{prefix('combo-box', 'value')}
     background-color: $combo-box-focus-background-color
     border-color: $combo-box-focus-border-color
 
-  &--open &__value:not(&__value--placeholder)
+  &--open #{prefix('combo-box', 'value')}:not(#{prefix('combo-box', 'value')}--placeholder)
     color: $combo-box-focus-text-color
