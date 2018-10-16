@@ -52,7 +52,11 @@ class Wizard extends React.PureComponent {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
+    if (nextProps.step && nextProps.step !== this.state.currentStep) {
+      this.setState({
+        currentStep: nextProps.step
+      })
+    }
   }
 
   render () {
