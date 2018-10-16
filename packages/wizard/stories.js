@@ -78,15 +78,6 @@ addStory('default', readme, () => (
   </Wizard>
 ))
 
-addStory('custom wizard', readme, () => (
-  <Wizard nextLabel='Next step' previousLabel='Previous step' displayedLimit={2}>
-    <Step1 />
-    <Step2 />
-    <Step3 />
-    <Step4 />
-  </Wizard>
-))
-
 addStory('with set starting step', readme, () => (
   <Wizard step={3}>
     <Step1 />
@@ -105,5 +96,18 @@ addStory('with one children', readme, () => (
 addStory('without pagination', readme, () => (
   <Wizard pagination={false}>
     <Step1 />
+  </Wizard>
+))
+
+addStory('with pagination props', readme, () => (
+  <Wizard paginationProps={{
+    displayedLimit: 9,
+    nextLabel: 'NEXT STEP >',
+    previousLabel: '< PREV STEP'
+  }}>
+    <Step1 />
+    <Step2 />
+    <Step3 />
+    <Step4 />
   </Wizard>
 ))

@@ -24,7 +24,10 @@ const propTypes = {
   step: PropTypes.number,
 
   /** Show pagination in Wizard */
-  pagination: PropTypes.bool
+  pagination: PropTypes.bool,
+
+  /** Pagination Props */
+  paginationProps: PropTypes.object
 }
 
 const defaultProps = {
@@ -44,33 +47,32 @@ const defaultProps = {
  * @class {React.Element}
  */
 class Wizard extends React.PureComponent {
-    state = {
-      currentStep: this.props.step || 1
-    }
+  state = {
+    currentStep: this.props.step || 1
+  }
 
-    componentWillReceiveProps (nextProps) {
-      if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
-    }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.step !== this.state.currentStep) this.setState({ currentStep: nextProps.step })
+  }
 
-    render () {
-      const {children, className, displayedLimit, nextLabel, previousLabel, pagination, ...passedProps} = this.props
-      const {currentStep} = this.state
-      return (
-        <div className={buildClassName('wizard', className)} {...passedProps} >
-          {!children.length ? children : children[currentStep - 1]}
-          {pagination && <Navigation type='pagination' >
-            <ControlledPagination
-              activePage={currentStep}
-              displayedLimit={displayedLimit}
-              nextLabel={nextLabel}
-              onChange={i => this.setState({ currentStep: i })}
-              pageCount={!children.length ? 1 : children.length}
-              previousLabel={previousLabel}
-            />
-          </Navigation>}
-        </div>
-      )
-    }
+  render () {
+    const {children, className, displayedLimit, nextLabel, previousLabel, pagination, paginationProps, ...passedProps} = this.props
+    const {currentStep} = this.state
+    const element = React.Children.toArray(children)
+    return (
+      <div className={buildClassName('wizard', className)} {...passedProps} >
+        {element[currentStep - 1]}
+        {pagination && <Navigation type='pagination' >
+          <ControlledPagination
+            activePage={currentStep}
+            onChange={i => this.setState({ currentStep: i })}
+            pageCount={element.length}
+            {...paginationProps}
+          />
+        </Navigation>}
+      </div>
+    )
+  }
 }
 
 Wizard.displayName = 'Wizard'
