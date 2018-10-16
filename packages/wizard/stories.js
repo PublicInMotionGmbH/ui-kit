@@ -3,9 +3,10 @@ import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story
 
 import { action } from '@storybook/addon-actions'
 
-import { Form } from '@talixo/form'
+import { Form, FormHandler, Field } from '@talixo/form'
 import { TextInput } from '@talixo/text-input'
 import { Checkbox } from '@talixo/checkbox'
+import { RadioGroup } from '@talixo/radio-group'
 import Wizard from './src/Wizard'
 
 // Load first paragraph from README file
@@ -89,4 +90,31 @@ addStory('with set starting step', readme, () => (
     <Step3 />
     <Step4 />
   </Wizard>
+))
+
+addStory('with formHandler', readme, () => (
+  <FormHandler>
+    <Wizard>
+      <Field name='name-one'>
+        <RadioGroup
+          name='RadioName1'
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      </Field>
+      <Field name='name-two'>
+        <RadioGroup
+          name='RadioName1'
+          options={[
+            { value: 1, label: 'one' },
+            { value: 2, label: 'two' },
+            { value: 3, label: 'three' }
+          ]}
+        />
+      </Field>
+    </Wizard>
+  </FormHandler>
 ))
