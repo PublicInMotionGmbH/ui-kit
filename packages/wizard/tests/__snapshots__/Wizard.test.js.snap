@@ -4,7 +4,9 @@ exports[`<Wizard /> renders children correctly 1`] = `
 <div
   className="talixo-wizard"
 >
-  <Step1 />
+  <Step1
+    key=".0"
+  />
   <Navigation
     type="pagination"
   >
