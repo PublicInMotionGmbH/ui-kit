@@ -10,7 +10,6 @@ exports[`<RangeInput /> renders correctly 1`] = `
     inputValue=""
     isOpen={false}
     itemToString={[Function]}
-    minLetters={3}
     onBlur={[Function]}
     onChoose={[Function]}
     onFocus={[Function]}
@@ -20,7 +19,6 @@ exports[`<RangeInput /> renders correctly 1`] = `
     readOnly={false}
     renderItem={[Function]}
     value={null}
-    writingDelay={300}
   >
     <TextInput
       InputComponent="input"
