@@ -280,6 +280,7 @@
 
   &--pagination
     display: inline-flex
+    margin: 0 #{.25 * $pagination-element-padding-horizontal}
 
     #{$sel-nav-elem}
       min-width: $pagination-element-min-width
@@ -293,6 +294,9 @@
         color: $pagination-element-active-text-color
         background-color: $pagination-element-active-background-color
 
+@include module('pagination')
+  display: inline-flex
+  justify-content: space-between
 
 @keyframes show-overflow
   0%, 100%

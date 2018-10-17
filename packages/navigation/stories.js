@@ -2,10 +2,9 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
-import ControlledPagination from './src/ControlledPagination'
 import Element from './src/Element'
 import Navigation from './src/Navigation'
-import NavigationWrapper from './src/NavigationWrapper'
+import Pagination from './src/Pagination'
 
 // Load first paragraph from README file
 const readme = getReadmeDescription(require('./README.md'))
@@ -107,7 +106,7 @@ const elemLvl1 = [
 
 const withSubelements = [
   {
-    disabled: true,
+    disabled: false,
     id: 0,
     label: 'Element 1',
     subelements: elemLvl1,
@@ -202,33 +201,23 @@ addStory('simple nav with subelements', readme, () => (
 ))
 
 addStory('sidebar', readme, () => (
-  <div>
-    <Navigation elements={withSubelements} type='sidebar' />
-  </div>
+  <Navigation elements={withSubelements} type='sidebar' />
 ))
 
 addStory('tree view', readme, () => (
-  <div>
-    <Navigation elements={withSubelements} type='tree' />
-  </div>
+  <Navigation elements={withSubelements} type='tree' />
 ))
 
 addStory('tabs gen', readme, () => (
-  <div>
-    <Navigation elements={withoutSubelements} type='tabs' />
-  </div>
+  <Navigation elements={withoutSubelements} type='tabs' />
 ))
 
 addStory('steps gen', readme, () => (
-  <div>
-    <Navigation elements={withoutSubelements} type='steps' />
-  </div>
+  <Navigation elements={withoutSubelements} type='steps' />
 ))
 
 addStory('pagination gen', readme, () => (
-  <div>
-    <Navigation elements={withoutSubelements} type='pagination' />
-  </div>
+  <Navigation elements={withoutSubelements} type='pagination' />
 ))
 
 addStory('initial', readme, () => (
@@ -245,20 +234,25 @@ addStory('pagination', readme, () => (
     <Element active onClick={action('click 1')}>1</Element>
     <Element onClick={action('click 2')}>2</Element>
     <Element onClick={action('click 3')}>3</Element>
-    <Element disabled onClick={action('click 3')}>...</Element>
+    <Element onClick={action('click 3')}>...</Element>
     <Element onClick={action('click Next')}>Next</Element>
   </Navigation>
 ))
 
+addStory('gen pagination', readme, () => (
+  <Pagination
+    displayedLimit={1}
+    pageCount={8}
+  />
+))
+
 addStory.controlled('controlled pagination', readme, (setState, state) => (
-  <NavigationWrapper type='pagination'>
-    <ControlledPagination
-      activePage={state.page}
-      displayedLimit={8}
-      onChange={i => setState({ page: i })}
-      pageCount={47}
-    />
-  </NavigationWrapper>
+  <Pagination
+    displayedLimit={4}
+    onChange={i => setState({ page: i })}
+    activePage={state.page}
+    pageCount={20}
+  />
 ), () => {
   return {
     page: 1

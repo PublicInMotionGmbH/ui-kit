@@ -34,6 +34,20 @@ function buildDivider (divider) {
   return <div className={dividerCls}>{divider}</div>
 }
 
+function buildElements (elements, type) {
+  return elements.map((element, index) => getElements(element, type))
+}
+
+function addDivider (elements, divider) {
+  const elementsLastIndex = elements.length - 1
+  const dividerElement = buildDivider(divider)
+
+  return flatMap(elements, (element, index) => [
+    element,
+    index !== elementsLastIndex && dividerElement
+  ])
+}
+
 const propTypes = {
   /**  */
   className: PropTypes.string,
@@ -50,7 +64,7 @@ const propTypes = {
     disabled: PropTypes.bool,
 
     /**  */
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
     /**  */
     name: PropTypes.string,
@@ -81,37 +95,18 @@ const defaultProps = {
  * Component which represents Simple Navigation.
  *
  */
-class Navigation extends React.Component {
-  buildElements () {
-    const { elements, type } = this.props
+function Navigation (props) {
+  const { className, children, divider, elements, type, ...passedProps } = props
 
-    return elements.map((element, index) => getElements(element, type))
-  }
+  const hasDivider = type === 'breadcrumbs' && divider != null
+  const generatedElements = children == null ? buildElements(elements, type) : children
+  const renderElements = hasDivider ? addDivider(generatedElements, divider) : generatedElements
 
-  addDivider (elements) {
-    const { divider } = this.props
-    const elementsLastIndex = elements.length - 1
-    const dividerElement = buildDivider(divider)
-
-    return flatMap(elements, (element, index) => [
-      element,
-      index !== elementsLastIndex && dividerElement
-    ])
-  }
-
-  render () {
-    const { className, children, divider, elements, type, ...passedProps } = this.props
-
-    const hasDivider = type === 'breadcrumbs' && divider != null
-    const generatedElements = children == null ? this.buildElements() : children
-    const renderElements = hasDivider ? this.addDivider(generatedElements) : generatedElements
-
-    return (
-      <NavigationWrapper parent type={type} {...passedProps}>
-        { renderElements }
-      </NavigationWrapper>
-    )
-  }
+  return (
+    <NavigationWrapper parent type={type} {...passedProps}>
+      { renderElements }
+    </NavigationWrapper>
+  )
 }
 
 Navigation.displayName = 'Navigation'

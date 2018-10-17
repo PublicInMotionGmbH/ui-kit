@@ -6,15 +6,6 @@ import { buildClassName } from '@talixo/shared'
 
 export const moduleName = 'navigation-element'
 
-function isEmpty (obj) {
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      return true
-    }
-  }
-  return false
-}
-
 const propTypes = {
   /**  */
   active: PropTypes.bool,
@@ -36,9 +27,6 @@ const propTypes = {
 
   /**  */
   id: PropTypes.number,
-
-  /**  */
-  name: PropTypes.string,
 
   /**  */
   onMouseOver: PropTypes.func,
@@ -63,7 +51,6 @@ const propTypes = {
 }
 
 const defaultProps = {
-  name: '',
   render: x => x.label
 }
 
@@ -74,18 +61,15 @@ class Element extends React.Component {
   }
   element = null
 
-  static getDerivedStateFromProps (nextProps, prevState) {
+  componentWillReceiveProps (nextProps) {
     const newState = {}
-    if (nextProps.open != null && nextProps.open !== prevState.open) {
+    if (nextProps.open != null && nextProps.open !== this.state.open) {
       newState.open = nextProps.open
     }
-    if (nextProps.active != null && nextProps.active !== prevState.active) {
+    if (nextProps.active != null && nextProps.active !== this.state.active) {
       newState.active = nextProps.active
     }
-    if (!isEmpty(newState)) {
-      return newState
-    }
-    return null
+    this.setState(newState)
   }
 
   /**
@@ -253,7 +237,6 @@ class Element extends React.Component {
     const elementCls = buildClassName(moduleName, className, { active, completed, disabled, error, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
     const renderElement = render(this.props, { open, active }) || children
-    console.log(this.props.page, active)
 
     return (
       <div
