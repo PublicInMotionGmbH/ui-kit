@@ -18,7 +18,7 @@ const runCommand = require('./runCommand')
 process.env.NODE_ENV = 'production'
 
 const nodePath = process.argv[0]
-const babelCliPath = path.join(__dirname, '..', 'node_modules', '.bin', 'babel')
+const babelCliPath = path.join(__dirname, '..', 'node_modules', 'babel-cli', 'bin', 'babel.js')
 
 /**
  * Build Rollup.js plugin for loading JSON files
@@ -128,4 +128,4 @@ async function main () {
 }
 
 // Run procedure
-main().catch(err => setTimeout(() => { throw err }))
+main().catch(err => { console.error(err); process.exit(1) })

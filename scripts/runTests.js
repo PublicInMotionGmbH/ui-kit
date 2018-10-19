@@ -4,7 +4,7 @@ const getPackages = require('../utils/getPackages')
 
 // Find 'jest' & 'node' paths
 const nodePath = process.argv[0]
-const jestPath = path.join(__dirname, '..', 'node_modules', '.bin', 'jest')
+const jestPath = path.join(__dirname, '..', 'node_modules', 'jest', 'bin', 'jest')
 
 const args = process.argv.slice(2)
 
