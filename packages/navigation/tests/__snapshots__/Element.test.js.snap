@@ -1,9 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Element /> renders correctly 1`] = `
-<li
-  className="talixo-navigation__element"
+<div
+  className="talixo-navigation-element"
+  onClick={[Function]}
 >
-  Home
-</li>
+  <div
+    className="talixo-navigation-element__button"
+  >
+    Home
+  </div>
+</div>
 `;

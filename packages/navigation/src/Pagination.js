@@ -11,6 +11,8 @@ import Navigation from './Navigation'
 
 const moduleName = 'pagination'
 
+const ellipsisId = 'talixo-pagination-ellipsis'
+
 const propTypes = {
   /** Active page */
   activePage: PropTypes.number,
@@ -21,16 +23,16 @@ const propTypes = {
   /** Maximum number of displayed page buttons on each side of active page. */
   displayedLimit: PropTypes.number,
 
-  /**  */
-  ellipsisPlaceholder: PropTypes.string,
+  /** Placeholder for the ellipsis. */
+  ellipsisPlaceholder: PropTypes.node,
 
-  /**  */
+  /** Allows to hide page from pagination. */
   hidePages: PropTypes.bool,
 
-  /**  */
+  /** Allows to hide pagination buttons (`Next` and `Previous`). */
   hideButtons: PropTypes.bool,
 
-  /**  */
+  /** Should `Next` button be disabled. */
   nextDisabled: PropTypes.bool,
 
   /** Next button label */
@@ -42,7 +44,7 @@ const propTypes = {
   /** The total number of pages */
   pageCount: PropTypes.number.isRequired,
 
-  /**  */
+  /** Should `Previous` button be disabled? */
   previousDisabled: PropTypes.bool,
 
   /** Previous button label */
@@ -50,7 +52,7 @@ const propTypes = {
 }
 
 const defaultProps = {
-  displayedLimit: 3,
+  displayedLimit: 1,
   ellipsisPlaceholder: '...',
   nextLabel: 'Next',
   previousLabel: 'Previous'
@@ -59,6 +61,12 @@ const defaultProps = {
 class Pagination extends React.Component {
   state = {
     activePage: this.props.activePage || 1
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.activePage != null && nextProps.activePage !== this.state.activePage) {
+      this.setState({ activePage: nextProps.activePage })
+    }
   }
 
   /**
@@ -76,12 +84,12 @@ class Pagination extends React.Component {
       return
     }
 
-    if (this.props.step == null) {
+    if (this.props.activePage == null) {
       this.handlePageChange(nextPage)
     }
 
-    if (this.props.onClickButton) {
-      this.props.onClickButton(nextPage)
+    if (this.props.onChange) {
+      this.props.onChange(nextPage)
     }
   }
 
@@ -105,7 +113,7 @@ class Pagination extends React.Component {
     const { activePage } = this.state
 
     return elements.map((page, index) => ({
-      id: page === ellipsisPlaceholder ? `${page}--${index}` : page,
+      id: page === ellipsisPlaceholder ? `${ellipsisId}--${index}` : page,
       label: page,
       active: page === activePage,
       disabled: page === ellipsisPlaceholder,
@@ -119,8 +127,10 @@ class Pagination extends React.Component {
    * @returns {object[]}
    */
   buildPages () {
-    const { displayedLimit: siblingsCount, ellipsisPlaceholder, pageCount } = this.props
+    const { displayedLimit, ellipsisPlaceholder, pageCount } = this.props
     const { activePage } = this.state
+
+    const siblingsCount = displayedLimit > -1 ? displayedLimit : 1
 
     // Current element + always visible sideelements + siblings from each side.
     const maxVisibleElements = 1 + 4 + 2 * siblingsCount

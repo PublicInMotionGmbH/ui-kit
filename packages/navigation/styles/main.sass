@@ -4,13 +4,11 @@
   box-sizing: border-box
   display: inline-block
   position: relative
+  cursor: default
 
   /***** Common elements styles *****/
   #{$sel-nav-elem}
     cursor: pointer
-
-  #{$sel-nav-subtitle}
-    cursor: default
 
   &__divider
     padding: $navigation-padding-vertical 0
@@ -22,7 +20,6 @@
 
     // Parent elements styles
     &#{$sel-nav-parent}
-      @debug &
       display: inline-flex
       justify-content: space-between
       padding: $navigation-padding-vertical 0
@@ -49,7 +46,7 @@
       top: 0
       left: 100% // calc(100% + #{$navigation-padding-horizontal})
       overflow: hidden
-      box-shadow: -3px 3px 6px rgba(0,0,0,0.16), -3px 3px 6px rgba(0,0,0,0.23)
+      box-shadow: -3px 0px 3px rgba(0,0,0,0.16), -3px 0px 3px rgba(0,0,0,0.23)
 
     // Subtitle displayed at the top of each dropdown, specific for each.
     #{$sel-nav-subtitle}
@@ -68,31 +65,6 @@
         > #{$sel-nav-elem-menu}
           top: 100% // calc(100% + #{$navigation-padding-vertical})
           left: 0
-
-  /***** Navigation type `navbar` and 'sidebar rules *****/
-  &--navbar, &--sidebar
-    &#{$sel-nav-parent}
-      background-color: $navigation-background
-      color: $navigation-text-color
-
-    #{$sel-nav-elem-menu}
-      background-color: $navigation-menu-background
-
-    // Styles for active/open/hovered element
-    #{$sel-nav-elem}
-      font-weight: $navigation-element-font-weight
-
-      &:hover, &--active, &--open
-        background-color: $navigation-element-active-background
-
-  &--navbar
-    // Show dropdown menu when opened
-    #{$sel-nav-elem}
-      &--open
-        > #{$sel-nav-elem-menu}
-          height: initial
-          padding: $navigation-padding-vertical $navigation-padding-horizontal
-          overflow: visible
 
   /***** Navigation type `breadcrumbs` specific rules *****/
   &--breadcrumbs
@@ -116,7 +88,32 @@
         &:hover, &--active, &--open
           background-color: $breadcrumbs-element-active-color
 
+  /***** Navigation type `navbar` and 'sidebar' rules *****/
+  &--navbar,
+  &--sidebar
+    &#{$sel-nav-parent}
+      background-color: $navigation-background
+      color: $navigation-text-color
 
+    #{$sel-nav-elem-menu}
+      background-color: $navigation-menu-background
+
+    // Styles for active/open/hovered element
+    #{$sel-nav-elem}
+      font-weight: $navigation-element-font-weight
+
+      &:hover, &--active, &--open
+        background-color: $navigation-element-active-background
+
+  /***** Navigation type `navbar` rules *****/
+  &--navbar
+    // Show dropdown menu when opened
+    #{$sel-nav-elem}
+      &--open
+        > #{$sel-nav-elem-menu}
+          height: initial
+          padding: $navigation-padding-vertical $navigation-padding-horizontal
+          overflow: visible
 
   /***** Navigation type `sidebar` specific rules *****/
   &--sidebar
@@ -140,7 +137,7 @@
       width: 0
       height: 100%
       overflow: hidden
-      box-shadow: -3px 0 6px rgba(0,0,0,0.16), -3px 0 6px rgba(0,0,0,0.23)
+      box-shadow: -1px 0 1px rgba(0,0,0,0.16), -3px 0 1px rgba(0,0,0,0.23)
 
     & &
       background: $sidebar-nested-background
@@ -171,10 +168,31 @@
         &:hover > #{$sel-nav-elem-button}
           font-weight: $navigation-element-font-weight
 
+    // Animations
+    #{$sel-nav-elem}
+      > #{$sel-nav-elem-menu}
+        transition: all $navigation-transition-time ease-out
+
+      > #{$sel-nav-elem-menu} > #{$sel-nav}
+        transform: translateX(-100%)
+        transition: transform $navigation-transition-time ease-out
+
+    #{$sel-nav-elem}
+      &--open
+        > #{$sel-nav-elem-menu}
+          animation: $navigation-transition-time show-overflow 1
+
+        > #{$sel-nav-elem-menu} > #{$sel-nav}
+          transform: translateX(0)
+
   /***** Navigation type `tree` specific rules *****/
   &--tree
     #{$sel-nav-elem}
       padding: $navigation-padding-vertical $navigation-padding-horizontal
+      overflow: hidden
+
+    #{$sel-nav-elem-button}
+      display: inline
 
     #{$sel-nav-elem-menu}
       position: relative
@@ -214,14 +232,15 @@
         background-color: $tabs-element-active-background-color
 
   &--steps
+    #{$sel-nav-elem}
+      position: relative
+      display: block
+      pointer-events: none
+
     #{$sel-nav-elem-button}
       position: relative
       top: #{2 * $step-bullet-size}
       padding-bottom: #{2 * $step-bullet-size}
-
-    #{$sel-nav-elem}
-      position: relative
-      display: block
 
     #{$sel-nav-elem}
       // Step bullet
@@ -235,8 +254,10 @@
         border-width: #{.5 * $step-bullet-size}
         border-style: solid
         border-radius: #{2 * $step-bullet-size}
-        background: $step-background-color
+        background: $step-color-bullet
+        box-shadow: inset $step-box-shadow $step-color
         border-color: $step-bullet-border-color
+        pointer-events: auto
 
       // Steps line
       &:after
@@ -245,39 +266,42 @@
         width: 100%
         height: dp(.25)
         z-index: -1
-        background-color: $step-background-color
+        background-color: $step-color-line
         content: ''
         pointer-events: none
 
-      // Do not show line after las step
+      // Do not show line after last step
       &:last-of-type:after
         display: none
 
       &--completed
-        &:after
-          background-color: $step-background-color-completed
         &:before
-          background-color: $step-background-color-completed
+          box-shadow: none
+          background: $step-color
+
+        &:after
+          background-color: $step-color-line-completed
 
       &--error
-        &:after
-          background-color: $step-background-color-error
         &:before
-          background-color: $step-background-color-error
+          box-shadow: inset $step-box-shadow $step-color-error
 
       &--active
         &:before
-          background-color: $step-background-color-active
+          background: $step-color
+          box-shadow: inset $step-box-shadow $step-color-bullet
+          border-color: $step-color
 
       &--disabled
         cursor: not-allowed
 
         &:before
-          background-color: $step-background-color-disabled
+          box-shadow: inset $step-box-shadow $step-color-disabled
 
         #{$sel-nav-elem-button}
-          color: $step-text-color-disabled
+          color: $step-color-disabled
 
+  /***** Navigation type `pagination` specific rules *****/
   &--pagination
     display: inline-flex
     margin: 0 #{.25 * $pagination-element-padding-horizontal}
@@ -293,6 +317,10 @@
       &:hover, &--active
         color: $pagination-element-active-text-color
         background-color: $pagination-element-active-background-color
+
+      &--disabled
+        background-color: transparent
+        pointer-events: none
 
 @include module('pagination')
   display: inline-flex

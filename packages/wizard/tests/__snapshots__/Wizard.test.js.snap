@@ -5,17 +5,5 @@ exports[`<Wizard /> renders children correctly 1`] = `
   className="talixo-wizard"
 >
   <Step1 />
-  <NavigationWrapper
-    type="pagination"
-  >
-    <Pagination
-      activePage={1}
-      displayedLimit={10}
-      nextLabel="Next"
-      onChange={[Function]}
-      pageCount={3}
-      previousLabel="Previous"
-    />
-  </NavigationWrapper>
 </div>
 `;

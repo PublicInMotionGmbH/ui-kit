@@ -2,6 +2,8 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { createStoriesFactory, getReadmeDescription } from '@talixo/shared/story'
 
+import { Icon } from '@talixo/icon'
+
 import Element from './src/Element'
 import Navigation from './src/Navigation'
 import Pagination from './src/Pagination'
@@ -13,7 +15,6 @@ const readme = getReadmeDescription(require('./README.md'))
 const addStory = createStoriesFactory('Navigation', module)
 
 const click = action('click')
-const hover = action('hover')
 
 const elemLvl3 = [
   {
@@ -21,9 +22,7 @@ const elemLvl3 = [
     id: 30,
     label: 'Element 1 lvl 3',
     subtitle: 'Subtitile of element 1 lvl 3',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   }
 ]
 
@@ -35,43 +34,34 @@ const elemLvl2 = [
     panel: true,
     subelements: elemLvl3,
     subtitle: 'Subtitile of element 1 lvl 2',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
-    id: 20,
+    id: 21,
     label: 'Element 2 lvl 2',
     subelements: elemLvl3,
     subtitle: 'Subtitile of element 2 lvl 2',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
-    id: 20,
+    id: 22,
     label: 'Element 3 lvl 2',
     subelements: elemLvl3,
     subtitle: 'Subtitile of element 3 lvl 2',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   }
 ]
 
 const elemLvl1 = [
   {
     disabled: false,
-    // open: true,
     id: 10,
     label: 'Element 1 lvl 1',
     subelements: elemLvl2,
     subtitle: 'Subtitile of element 1 lvl 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
@@ -79,9 +69,7 @@ const elemLvl1 = [
     label: 'Element 2 lvl 1',
     subelements: elemLvl2,
     subtitle: 'Subtitile of element 2 lvl 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
@@ -89,18 +77,14 @@ const elemLvl1 = [
     label: 'Element 3 lvl 1',
     subelements: elemLvl2,
     subtitle: 'Subtitile of element 3 lvl 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
     id: 13,
     label: 'Element 4 lvl 1',
     subtitle: 'Subtitile of element 4 lvl 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   }
 ]
 
@@ -111,9 +95,7 @@ const withSubelements = [
     label: 'Element 1',
     subelements: elemLvl1,
     subtitle: 'Subtitile of element 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
@@ -121,9 +103,7 @@ const withSubelements = [
     label: 'Element 2',
     subelements: elemLvl1,
     subtitle: 'Subtitile of element 2',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: false,
@@ -131,61 +111,42 @@ const withSubelements = [
     label: 'Element 3',
     subelements: elemLvl1,
     subtitle: 'Subtitile of element 3',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
     disabled: true,
     id: 3,
     label: 'Element 4',
-    subelements: elemLvl1,
     subtitle: 'Subtitile of element 4',
     panel: true,
-    onClick: click,
-    onMouseOver: hover,
-    render: (x, state) => <div style={state.open ? { color: 'red' } : {}}>{x.label}</div>
+    onClick: click
   }
 ]
 
 const withoutSubelements = [
   {
-    disabled: false,
     id: 0,
     label: 'Element 1',
     subtitle: 'Subtitile of element 1',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
-    completed: true,
-    disabled: false,
     id: 1,
     label: 'Element 2',
     subtitle: 'Subtitile of element 2',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
-    disabled: false,
-    error: true,
     id: 2,
     label: 'Element 3',
     subtitle: 'Subtitile of element 3',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   },
   {
-    disabled: false,
     id: 3,
     label: 'Element 4',
     subtitle: 'Subtitile of element 3',
-    onClick: click,
-    onMouseOver: hover,
-    render: x => x.label
+    onClick: click
   }
 ]
 
@@ -216,10 +177,6 @@ addStory('steps gen', readme, () => (
   <Navigation elements={withoutSubelements} type='steps' />
 ))
 
-addStory('pagination gen', readme, () => (
-  <Navigation elements={withoutSubelements} type='pagination' />
-))
-
 addStory('initial', readme, () => (
   <Navigation>
     <Element>Home</Element>
@@ -243,12 +200,13 @@ addStory('gen pagination', readme, () => (
   <Pagination
     displayedLimit={1}
     pageCount={8}
+    ellipsisPlaceholder={<Icon name='settings_ethernet' />}
   />
 ))
 
 addStory.controlled('controlled pagination', readme, (setState, state) => (
   <Pagination
-    displayedLimit={4}
+    displayedLimit={-1}
     onChange={i => setState({ page: i })}
     activePage={state.page}
     pageCount={20}
@@ -285,8 +243,8 @@ addStory('tabs', readme, () => (
 addStory('steps', readme, () => (
   <Navigation type='steps'>
     <Element completed>Cart</Element>
-    <Element disabled>Confirm</Element>
-    <Element error>Shipping</Element>
-    <Element active>Billing</Element>
+    <Element completed>Confirm</Element>
+    <Element active>Shipping</Element>
+    <Element>Billing</Element>
   </Navigation>
 ))

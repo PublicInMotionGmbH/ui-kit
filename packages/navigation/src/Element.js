@@ -2,58 +2,81 @@ import React from 'react'
 import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 
+import { Icon } from '@talixo/icon'
 import { buildClassName } from '@talixo/shared'
 
 export const moduleName = 'navigation-element'
 
+/**
+ * Default elements renderer.
+ *
+ * @param {object} props
+ * @param {object} options
+ * @returns {Element|ReactElement}
+ */
+const defaultRender = function (props, options) {
+  return props.type !== 'tree'
+    ? props.label
+    : <span>
+      <Icon
+        style={{ visibility: props.subelements ? 'visible' : 'hidden' }}
+        name={options.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}
+      />
+      { props.label }
+    </span>
+}
+
 const propTypes = {
-  /**  */
+  /** Is element active? */
   active: PropTypes.bool,
 
-  /**  */
-  completed: PropTypes.bool,
-
-  /**  */
+  /** Element children. */
   children: PropTypes.node,
 
-  /**  */
+  /** Additional class name passedto element wrapper */
+  className: PropTypes.string,
+
+  /** Is action related to this element completed (e.g. iniside a step)? */
+  completed: PropTypes.bool,
+
+  /** Is element disabled? */
   disabled: PropTypes.bool,
 
-  /**  */
+  /** Does it have ana error? */
   error: PropTypes.bool,
 
-  /**  */
-  hasSubelements: PropTypes.bool,
+  /** Element identifier. It will be passed to onChange and onHover functions as a first argument. */
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
-  /**  */
-  id: PropTypes.number,
+  /** Element label. */
+  label: PropTypes.string,
 
-  /**  */
-  onMouseOver: PropTypes.func,
-
-  /**  */
+  /** onClick callback. */
   onClick: PropTypes.func,
 
-  /**  */
+  /** Is this element open? */
   open: PropTypes.bool,
 
-  /**  */
+  /** Render method of each element. */
   render: PropTypes.func,
 
-  /**  */
-  subelements: PropTypes.array,
+  /** Array of subelements. Any of element prop can be passed to each object. */
+  subelements: PropTypes.arrayOf(PropTypes.object),
 
-  /**  */
+  /** Subtitle of element exapandable menu. */
   subtitle: PropTypes.string,
 
-  /**  */
+  /** Navigation type. */
   type: PropTypes.string
 }
 
 const defaultProps = {
-  render: x => x.label
+  render: defaultRender
 }
 
+/**
+ *
+ */
 class Element extends React.Component {
   state = {
     open: this.props.open,
@@ -92,7 +115,7 @@ class Element extends React.Component {
 
   /**
    * Handle click on any element,
-   * to check if sidebar element should be closed now.
+   * to check if element should be closed now.
    *
    * @param {Event} e
    */
@@ -119,12 +142,12 @@ class Element extends React.Component {
       return
     }
 
-    // Close current sidebar if it was clicked outside
+    // Close current element if it was clicked outside
     if (this.props.open == null) {
       state.open = false
     }
 
-    // Close current sidebar if it was clicked outside
+    // Remove active class from element if it was clicked outside
     if (this.props.active == null) {
       state.active = false
     }
@@ -135,7 +158,7 @@ class Element extends React.Component {
   }
 
   /**
-   * Handle click on SidebarElement button,
+   * Handle click on Element button,
    * To eventually toggle inner children.
    *
    * @param {Event} e
@@ -146,6 +169,7 @@ class Element extends React.Component {
     const state = {}
     const hasSubelement = !!subelement
     e.stopPropagation()
+    e.preventDefault()
 
     if (disabled) {
       return
@@ -174,13 +198,9 @@ class Element extends React.Component {
     }
   }
 
-  handleMouseOver (e) {
-    const { id, onMouseOver } = this.props
-    if (onMouseOver) {
-      onMouseOver(id, e)
-    }
-  }
-
+  /**
+   * Attach listeners which will check if element should be closed.
+   */
   attachListener () {
     // Ignore when there is no DOM element attached
     // As it may be running in Node.js environment
@@ -195,9 +215,11 @@ class Element extends React.Component {
     document.documentElement.addEventListener('click', this.handleClose)
     window.addEventListener('hashchange', this.handleClose)
     window.addEventListener('popstate', this.handleClose)
-    window.addEventListener('close-sidebar', this.handleClose)
   }
 
+  /**
+   * Detach all listeners.
+   */
   detachListener () {
     // Ignore when there is no DOM element attached
     // As it may be running in Node.js environment
@@ -209,26 +231,35 @@ class Element extends React.Component {
     document.documentElement.removeEventListener('click', this.handleClose)
     window.removeEventListener('hashchange', this.handleClose)
     window.removeEventListener('popstate', this.handleClose)
-    window.removeEventListener('close-sidebar', this.handleClose)
   }
 
+  /**
+   * Checks if listeners should be added.
+   *
+   * @returns {boolean}
+   */
   shouldAttachListeners () {
     const { type } = this.props
     return type === 'navbar' || type === 'sidebar' || type === 'tabs'
   }
 
+  /**
+   * Renders collapsible menu with subelements.
+   *
+   * @returns {null|Element|ReactElement}
+   */
   renderMenu () {
     const { subelement } = this.props
     const menuCls = buildClassName([ moduleName, 'menu' ])
-    return !subelement
-      ? null
-      : <div className={menuCls}>
+    return (
+      <div className={menuCls}>
         { subelement }
       </div>
+    )
   }
 
   render () {
-    const { active: propsActive, className, completed, children, disabled, error, id, label, onMouseOver,
+    const { active: propsActive, className, completed, children, disabled, error, id, label,
       onClick, open: propsOpen, panel, render, subelement, subelements, subtitle, type, ...restProps
     } = this.props
 
@@ -236,7 +267,9 @@ class Element extends React.Component {
 
     const elementCls = buildClassName(moduleName, className, { active, completed, disabled, error, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
+
     const renderElement = render(this.props, { open, active }) || children
+    const menuElement = subelements ? this.renderMenu() : null
 
     return (
       <div
@@ -246,7 +279,7 @@ class Element extends React.Component {
         {...restProps}
       >
         <div className={buttonCls}>{ renderElement }</div>
-        { this.renderMenu() }
+        { menuElement }
       </div>
     )
   }

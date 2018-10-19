@@ -1,17 +1,18 @@
 @import '~@talixo/shared/styles/config'
 
-// Elements
+// Element selectors
 $sel-nav: #{prefix('navigation')}
 $sel-nav-subtitle: #{prefix('navigation', 'subtitle')}
 $sel-nav-parent: #{prefix('navigation--parent')}
+
 $sel-nav-elem: #{prefix('navigation-element')}
 $sel-nav-elem-button: #{prefix('navigation-element', 'button')}
 $sel-nav-elem-menu: #{prefix('navigation-element', 'menu')}
 
-// Navigation
+// General
 $navigation-base-color: $x-color-primary !default
-$navigation-disabled-color: $x-color-calmer !default
-$navigation-text-disabled-color: $x-color-calm !default
+$navigation-disabled-color: $x-color-calm !default
+$navigation-text-disabled-color: $x-color-calmer !default
 $navigation-background: darken($navigation-base-color, 20%) !default
 $navigation-menu-background: darken($navigation-base-color, 10%) !default
 $navigation-text-color: $x-color-primary-opposite !default
@@ -19,7 +20,9 @@ $navigation-text-color: $x-color-primary-opposite !default
 $navigation-padding-horizontal: $x-padding-horizontal-small !default
 $navigation-padding-vertical: $x-padding-vertical-very-small !default
 
-$navigation-transition-time: 100ms !default
+$navigation-transition-time: 200ms !default
+
+$navigation-box-shadow: -1px 0 1px rgba(0,0,0,0.16), -3px 0 1px rgba(0,0,0,0.23) !default
 
 // Navigation elements
 $navigation-element-text-color: $typography-link-color !default
@@ -44,7 +47,7 @@ $sidebar-label-size: dp(1.5) !default
 $sidebar-icon-size: dp(3.4) !default
 $sidebar-icon-margin-bottom: dp(1) !default
 $sidebar-panel-width: dp(27) !default
-$sidebar-box-shadow: inset -1px 0 0 0 rgba(0, 0, 0, 0.2) !default
+$sidebar-box-shadow: $navigation-box-shadow !default
 
 $sidebar-panel-background: $x-color-primary !default
 $sidebar-background-color: darken($sidebar-panel-background, 20%) !default
@@ -70,13 +73,20 @@ $tabs-border-radius: $navigation-element-border-radius $navigation-element-borde
 
 // Steps
 $step-bullet-size: dp(1) !default
+$step-color: $x-color-primary !default
+$step-box-shadow: 0 0 0 dp(.375)
+
 $step-bullet-border-color: #fff !default
-$step-background-color: $x-color-calm !default
-$step-background-color-active: $x-color-secondary !default
-$step-background-color-error: $x-color-error !default
-$step-background-color-completed: green !default
-$step-background-color-disabled: $navigation-disabled-color !default
+$step-color-bullet: $x-color-background !default
+$step-color-active: $x-color-secondary !default
+$step-color-error: $x-color-error !default
+$step-color-completed: green !default
+$step-color-disabled: $navigation-disabled-color !default
+
 $step-text-color-disabled: $navigation-text-disabled-color !default
+
+$step-color-line: $x-color-calm
+$step-color-line-completed: $step-color
 
 // Pagination
 $pagination-element-min-width: dp(3)

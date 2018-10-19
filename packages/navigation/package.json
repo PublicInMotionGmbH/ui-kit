@@ -24,6 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/button": "^1.0.0-alpha.30",
+    "@talixo/icon": "^1.0.0-alpha.30",
     "@talixo/number-input": "^1.0.0-alpha.30",
     "@talixo/shared": "^1.0.0-alpha.30",
     "lodash": "^4.17.10",
@@ -33,6 +34,7 @@
   },
   "peerDependencies": {
     "@talixo/button": "^1.0.0-alpha.30",
+    "@talixo/icon": "^1.0.0-alpha.30",
     "@talixo/number-input": "^1.0.0-alpha.30",
     "@talixo/shared": "^1.0.0-alpha.30",
     "lodash": "^4.17.10",
