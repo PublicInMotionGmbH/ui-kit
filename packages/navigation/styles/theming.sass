@@ -1,9 +1,8 @@
 @import './config'
 
 @include module('navigation')
-  $n: &
   &--pagination
-    > #{$n}__element
+    > #{prefix('navigation')}__element
       background-color: $pagination-element-background
       border-color: $pagination-element-border-color
       color: $pagination-element-text-color
@@ -13,27 +12,21 @@
         border-color: $pagination-hover-element-border-color
         color: $pagination-element-text-color
 
-      &:active
-        background-color: $pagination-active-element-background
-        border-color: $pagination-active-element-border-color
-        color: $pagination-active-element-text-color
-
+      &:active,
       &--active
         background-color: $pagination-active-element-background
         border-color: $pagination-active-element-border-color
         color: $pagination-active-element-text-color
 
   &--tabs
-    > #{$n}__element
+    > #{prefix('navigation')}__element
       background-color: $tabs-element-background
       color: $tabs-element-text-color
 
       &:hover
         background-color: $tabs-hover-element-background
 
-      &:active
-        background-color: $tabs-active-element-background
-
+      &:active,
       &--active
         background-color: $tabs-active-element-background
 
@@ -41,18 +34,21 @@
     &:before
       background: $step-background
 
-    #{$n}__step
+    #{prefix('navigation')}__step
       background: $step-background
       border-color: $step-border-color
 
-      &--active, &:active
+      &--active,
+      &:active
         background-color: $step-active-background
         border-color: $step-active-border-color
 
-      &--disabled, &--disabled:active
+      &--disabled,
+      &--disabled:active
         background-color: $step-disabled-background-color
         border-color: $step-disabled-border-color
 
-      &--completed, &--completed:active
+      &--completed,
+      &--completed:active
         background-color: $step-completed-background-color
-        border-color: red
+        border-color: red // FIXME: it should use variable

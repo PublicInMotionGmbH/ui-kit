@@ -32,7 +32,8 @@
     margin-right: $columns-header-icon-margin
     line-height: 1em
 
-    [dir=rtl] &
+  @include rtl-only
+    &__icon
       margin-right: 0
       margin-left: $columns-header-icon-margin
       right: auto

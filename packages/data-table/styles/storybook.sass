@@ -7,7 +7,7 @@
   &__item
     padding: dp(3)
 
-    > .talixo-icon
+    > #{prefix('icon')}
       color: $x-color-calm
       padding: 0 dp(2)
       font-size: dp(4)
@@ -18,14 +18,14 @@
     top: 25%
     left: 25%
 
-    .talixo-notification__close
+    #{prefix('notification', 'close')}
       font-size: dp(6)
       padding-top: dp(1.5)
 
   &__details
     padding: dp(3) 0
 
-    > .talixo-icon
+    > #{prefix('icon')}
       color: $x-color-calm
       padding: 0 dp(3)
       font-size: dp(4)

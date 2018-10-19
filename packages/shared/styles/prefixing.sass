@@ -24,3 +24,25 @@
 @mixin module ($name...)
   #{prefix($name...)}
     @content
+
+/**
+ * Build code for RTL only
+ */
+@mixin rtl-only
+  @at-root [dir=rtl] &
+    @content
+
+@function rtl-only($selector: nil)
+  $acc: if($selector == nil, #{&}, $selector)
+  @return unquote('[dir=rtl] #{&}')
+
+/**
+ * Build code for LTR only
+ */
+@mixin ltr-only
+  @at-root [dir=ltr] &
+    @content
+
+@function ltr-only($selector: nil)
+  $acc: if($selector == nil, #{&}, $selector)
+  @return unquote('[dir=ltr] #{&}')
