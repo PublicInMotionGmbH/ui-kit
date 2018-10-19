@@ -13,7 +13,7 @@
     overflow: hidden
     position: relative
 
-  section
+  > section
     position: relative
     margin: 0 $how-it-works-divider-width
     flex-grow: 1
@@ -38,10 +38,8 @@
     .primary-color__fill
       fill: $x-color-primary
 
-
     .primary-color__stroke
       stroke: $x-color-primary
-
 
     img
       max-height: 100%
@@ -76,12 +74,10 @@
       background-image: -moz-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
       background-image: -o-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
 
-[dir=rtl] #{prefix('how-it-works')}
-  &__divider:before 
-    background-image: linear-gradient(to left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
-    background-image: -webkit-gradient(linear, 0 0, 100% 0, from($how-it-works-divider-gradient-to), to($how-it-works-divider-gradient-from))
-    background-image: -webkit-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
-    background-image: -moz-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
-    background-image: -o-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
-
-
+  @include rtl-only
+    &__divider:before
+      background-image: linear-gradient(to left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -webkit-gradient(linear, 0 0, 100% 0, from($how-it-works-divider-gradient-to), to($how-it-works-divider-gradient-from))
+      background-image: -webkit-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -moz-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
+      background-image: -o-linear-gradient(right, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)

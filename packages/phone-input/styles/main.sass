@@ -53,14 +53,18 @@
 
   &--hover input,
   &--hover #{prefix('combo-box')} #{prefix('combo-box', 'value')}
-    &, &:hover, &:focus
+    &,
+    &:hover,
+    &:focus
       background-color: $phone-input-hover-background-color
       border-color: $phone-input-hover-border-color
       color: $phone-input-hover-text-color
 
   &--focus input,
   &--focus #{prefix('combo-box')} #{prefix('combo-box', 'value')}
-    &, &:hover, &:focus
+    &,
+    &:hover,
+    &:focus
       background-color: $phone-input-focus-background-color
       border-color: $phone-input-focus-border-color
       color: $phone-input-focus-text-color
@@ -69,7 +73,8 @@
   &--error#{prefix('phone-input--hover')}:not(#{prefix('phone-input--focus')})
     input,
     #{prefix('combo-box')} #{prefix('combo-box', 'value')}
-      &, &:hover
+      &,
+      &:hover
         background-color: $phone-input-error-background-color
         border-color: $phone-input-error-border-color
         color: $phone-input-error-text-color
@@ -118,22 +123,21 @@
   @include module('country-flag')
     box-shadow: 0 0 dp(1.25) dp(0.25) rgba(0, 0, 0, .1)
 
+  @include rtl-only
+    #{prefix('combo-box', 'controls')}
+      margin-left: 0
+      margin-right: $phone-input-arrow-margin
 
-  [dir=rtl] #{prefix('combo-box', 'controls')}
-    margin-left: 0
-    margin-right: $phone-input-arrow-margin
+    &__country
+      @include module('country-flag')
+        margin-right: 0
+        margin-left: $phone-input-flag-margin
 
-  [dir=rtl] &__country
-    @include module('country-flag')
-      margin-right: 0
-      margin-left: $phone-input-flag-margin
+    input
+      border-width: $phone-input-border-width
+      border-right-width: 0
+      border-radius: $phone-input-border-radius 0 0 $phone-input-border-radius
 
-  [dir=rtl] & input
-    border-width: $phone-input-border-width
-    border-right-width: 0
-    border-radius: $phone-input-border-radius 0 0 $phone-input-border-radius
-
-  [dir=rtl] &
     @include module('combo-box')
       &__value
         border-right-width: $phone-input-border-width

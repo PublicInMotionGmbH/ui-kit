@@ -1,2 +1,89 @@
-@import './geometry'
-@import './theming'
+@import './config'
+@import './mixins/grid'
+@import './mixins/masonry'
+
+// Simple grid
+
+.masonry, .#{$group-class-name}, .#{$segment-class-name}
+  box-sizing: border-box
+
+.#{$group-class-name}
+  display: flex
+  flex-wrap: wrap
+
+  > .#{$segment-class-name}
+    flex: 1 0
+
+.#{$group-class-name}--fluid
+  > .#{$segment-class-name}
+    flex: 1 auto
+
+.#{$group-class-name}--spaced
+  > .#{$segment-class-name}
+    margin-right: $grid-gutter
+
+  > .#{$segment-class-name}:last-child
+    margin-right: 0
+
+@include grid($grid-columns, $grid-gutter)
+
+@media only screen and (min-width: $rwd-small-width)
+  @include grid($grid-columns, $grid-gutter, 'sm-')
+
+@media only screen and (min-width: $rwd-medium-width)
+  @include grid($grid-columns, $grid-gutter, 'md-')
+
+@media only screen and (min-width: $rwd-large-width)
+  @include grid($grid-columns, $grid-gutter, 'lg-')
+
+@media only screen and (min-width: $rwd-xlarge-width)
+  @include grid($grid-columns, $grid-gutter, 'xl-')
+
+// Masonry
+
+.masonry
+  position: relative
+  overflow: hidden
+
+  > .#{$group-class-name}
+    flex-wrap: wrap
+
+  > .#{$group-class-name}--spaced > .#{$segment-class-name}:not(:last-child)
+    margin-right: #{$grid-gutter}
+
+  > .#{$group-class-name}--spaced > .#{$segment-class-name}
+    margin-bottom: #{$grid-gutter}
+
+  > .#{$group-class-name}--spaced:not(:empty)
+    margin-bottom: -#{$grid-gutter}
+
+  > .#{$group-class-name}--spaced:not(:empty) + .#{$group-class-name}--spaced:not(:empty)
+    margin-top: #{$grid-gutter}
+
+[dir=rtl] .masonry,
+.masonry[dir=rtl]
+  > .#{$group-class-name}--spaced > .#{$segment-class-name}:not(:last-child)
+    margin-left: #{$grid-gutter}
+    margin-right: initial
+
+[dir=rtl] .#{$group-class-name}--spaced
+  > .#{$segment-class-name}
+    margin-right: 0
+    margin-left: $grid-gutter
+
+  > .#{$segment-class-name}:last-child
+    margin-left: 0
+
+@include masonry($grid-columns, $grid-gutter)
+
+@media only screen and (min-width: $rwd-small-width)
+  @include masonry($grid-columns, $grid-gutter, 'sm-')
+
+@media only screen and (min-width: $rwd-medium-width)
+  @include masonry($grid-columns, $grid-gutter, 'md-')
+
+@media only screen and (min-width: $rwd-large-width)
+  @include masonry($grid-columns, $grid-gutter, 'lg-')
+
+@media only screen and (min-width: $rwd-xlarge-width)
+  @include masonry($grid-columns, $grid-gutter, 'xl-')

@@ -27,9 +27,9 @@
     cursor: pointer
     margin-left: $notification-close-button-margin
 
-  [dir=rtl] &__close
-    margin-left: 0
-    margin-right: $notification-close-button-margin
+    @include rtl-only
+      margin-left: 0
+      margin-right: $notification-close-button-margin
 
 @include notification-color('primary', $notification-primary-background-color, $notification-primary-text-color, $notification-primary-border-color)
 @include notification-color('secondary', $notification-secondary-background-color, $notification-secondary-text-color, $notification-secondary-border-color)
@@ -40,54 +40,54 @@
 @include notification-color('error', $notification-error-background-color, $notification-error-text-color, $notification-error-border-color)
 @include notification-color('toast', $notification-toast-background-color, $notification-toast-text-color, $notification-toast-border-color)
 
-@include module('notifications-list')
+@include module('notification-list')
   &__content > #{prefix('notification')} + #{prefix('notification')}
-    margin-top: $notifications-list-margin
+    margin-top: $notification-list-margin
 
   &__content > #{prefix('notification')}
     transition: 300ms all linear
 
   &--sticky
     position: fixed
-    width: $notifications-list-sticky-width
+    width: $notification-list-sticky-width
     max-width: 100%
 
-  &--sticky#{prefix('notifications-list')}--start,
-  [dir=rtl] &--sticky#{prefix('notifications-list')}--end
+  &--sticky#{prefix('notification-list')}--start,
+  #{rtl-only(&--sticky#{prefix('notification-list')}--end)}
     left: 0
     right: auto
 
-  &--sticky#{prefix('notifications-list')}--end,
-  [dir=rtl] &--sticky#{prefix('notifications-list')}--start
+  &--sticky#{prefix('notification-list')}--end,
+  #{rtl-only(&--sticky#{prefix('notification-list')}--start)}
     right: 0
     left: auto
 
-  &--sticky#{prefix('notifications-list')}--center
+  &--sticky#{prefix('notification-list')}--center
     left: 50%
     right: auto
     transform: translateX(-50%)
 
-  &--sticky#{prefix('notifications-list')}--top
+  &--sticky#{prefix('notification-list')}--top
     bottom: 100%
 
-  &--sticky#{prefix('notifications-list')}--bottom
+  &--sticky#{prefix('notification-list')}--bottom
     bottom: 0
 
-  &--sticky &__content > #{prefix('notification')}
+  &--sticky #{prefix('notification-list', 'content')} > #{prefix('notification')}
     margin: 0
     position: absolute
     width: 100%
-    transform: translateY($notifications-list-sticky-sneak-size)
+    transform: translateY($notification-list-sticky-sneak-size)
     pointer-events: none
 
     #{prefix('notification')}__close
       opacity: 0
 
-  &--sticky#{prefix('notifications-list')}--top &__content > #{prefix('notification')}
-    transform: translateY(-100%) translateY(-$notifications-list-sticky-sneak-size)
+  &--sticky#{prefix('notification-list')}--top #{prefix('notification-list', 'content')} > #{prefix('notification')}
+    transform: translateY(-100%) translateY(-$notification-list-sticky-sneak-size)
 
   // Animation in normal list
-  &:not(&--sticky) &__content > #{prefix('notification')}
+  &:not(&--sticky) #{prefix('notification-list', 'content')} > #{prefix('notification')}
     opacity: 1
     overflow: hidden
 
@@ -96,26 +96,26 @@
 
   // Animation in list put on bottom
 
-  &--sticky#{prefix('notifications-list')}--bottom &__content
+  &--sticky#{prefix('notification-list')}--bottom #{prefix('notification-list', 'content')}
     > :first-child + .fade-enter:not(.fade-enter-active),
     > .fade-enter:not(.fade-enter-active):first-child
-      transform: translateY(-$notifications-list-margin)
+      transform: translateY(-$notification-list-margin)
 
     // Handle first element on list
 
     > :first-child,
     > .fade-exit.fade-exit-active + #{prefix('notification')}
       pointer-events: all
-      transform: translateY(-100%) translateY(-$notifications-list-margin) translateY(-$notifications-list-sticky-sneak-size)
+      transform: translateY(-100%) translateY(-$notification-list-margin) translateY(-$notification-list-sticky-sneak-size)
 
-      #{prefix('notification')}__close
+      #{prefix('notification', 'close')}
         opacity: 1
 
     // Handle second element on list
 
     > :first-child + #{prefix('notification')},
     > .fade-exit.fade-exit-active + #{prefix('notification')} + #{prefix('notification')}
-      transform: translateY(-$notifications-list-sticky-sneak-size)
+      transform: translateY(-$notification-list-sticky-sneak-size)
 
     // Handle fade out
 
@@ -123,31 +123,31 @@
       opacity: 1
 
     > .fade-exit.fade-exit-active
-      transform: translateY(-200%) translateY(-2 * $notifications-list-margin) translateY(-$notifications-list-sticky-sneak-size)
+      transform: translateY(-200%) translateY(-2 * $notification-list-margin) translateY(-$notification-list-sticky-sneak-size)
       opacity: 0
 
     // Handle the last element
 
     > :last-child:first-child,
     > .fade-exit.fade-exit-active + :last-child
-      transform: translateY(-100%) translateY(-$notifications-list-margin)
+      transform: translateY(-100%) translateY(-$notification-list-margin)
 
     > .fade-exit.fade-exit-active:last-child
-      transform: translateY(-200%) translateY(-2 * $notifications-list-margin)
+      transform: translateY(-200%) translateY(-2 * $notification-list-margin)
 
   // Animation in list put on top
 
-  &--sticky#{prefix('notifications-list')}--top &__content
+  &--sticky#{prefix('notification-list')}--top #{prefix('notification-list', 'content')}
     > :first-child + .fade-enter:not(.fade-enter-active),
     > .fade-enter:not(.fade-enter-active):first-child
-      transform: translateY(-100%) translateY($notifications-list-margin)
+      transform: translateY(-100%) translateY($notification-list-margin)
 
     // Handle first element on list
 
     > :first-child,
     > .fade-exit.fade-exit-active + #{prefix('notification')}
       pointer-events: all
-      transform: translateY($notifications-list-margin) translateY($notifications-list-sticky-sneak-size)
+      transform: translateY($notification-list-margin) translateY($notification-list-sticky-sneak-size)
 
       #{prefix('notification')}__close
         opacity: 1
@@ -156,7 +156,7 @@
 
     > :first-child + #{prefix('notification')},
     > .fade-exit.fade-exit-active + #{prefix('notification')} + #{prefix('notification')}
-      transform: translateY(-100%) translateY($notifications-list-sticky-sneak-size)
+      transform: translateY(-100%) translateY($notification-list-sticky-sneak-size)
 
     // Handle fade out
 
@@ -164,14 +164,14 @@
       opacity: 1
 
     > .fade-exit.fade-exit-active
-      transform: translateY(100%) translateY(2 * $notifications-list-margin) translateY($notifications-list-sticky-sneak-size)
+      transform: translateY(100%) translateY(2 * $notification-list-margin) translateY($notification-list-sticky-sneak-size)
       opacity: 0
 
     // Handle the last element
 
     > :last-child:first-child,
     > .fade-exit.fade-exit-active + :last-child
-      transform: translateY($notifications-list-margin)
+      transform: translateY($notification-list-margin)
 
     > .fade-exit.fade-exit-active:last-child
-      transform: translateY(100%) translateY(2 * $notifications-list-margin)
+      transform: translateY(100%) translateY(2 * $notification-list-margin)
