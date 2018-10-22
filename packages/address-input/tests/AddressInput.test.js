@@ -64,18 +64,16 @@ describe('<AddressInput />', () => {
     const testValue = 'ber'
     let wrapper, input
 
-    beforeEach(() => {
-      wrapper = createWrapper(props)
-      input = wrapper.find('input')
-      jest.useFakeTimers()
-    })
-
     afterEach(() => {
       jest.clearAllTimers()
       jest.useRealTimers()
     })
 
     it('should invoke onChange', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       props.onChange.mockReset()
       input.simulate('change', { target: { value: testValue } })
       expect(props.onChange).toHaveBeenCalledTimes(1)
@@ -84,6 +82,10 @@ describe('<AddressInput />', () => {
     })
 
     it('should invoke onFocus', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       props.onFocus.mockReset()
       input.simulate('focus')
       expect(props.onFocus).toHaveBeenCalledTimes(1)
@@ -91,6 +93,10 @@ describe('<AddressInput />', () => {
     })
 
     it('should invoke onBlur', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       props.onBlur.mockReset()
       input.simulate('blur')
       expect(props.onBlur).toHaveBeenCalledTimes(1)
@@ -98,6 +104,10 @@ describe('<AddressInput />', () => {
     })
 
     it('should handle tab key pressing when only 1 location is available', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       wrapper.setProps({ locations: locations.slice(0, 1) })
       props.onChange.mockReset()
 
@@ -108,7 +118,11 @@ describe('<AddressInput />', () => {
       wrapper.unmount()
     })
 
-    it('should not change inputValue when the smae value is passed', () => {
+    it('should not change inputValue when the same value is passed', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       props.onChange.mockReset()
       wrapper.setState({ inputValue: testValue })
       input.simulate('change', { target: { value: testValue } })
@@ -118,12 +132,20 @@ describe('<AddressInput />', () => {
     })
 
     it('should set proper value when it is received', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       wrapper.setProps({ value: locations[0] })
       expect(wrapper.state().value).toBe(locations[0])
       wrapper.unmount()
     })
 
     it('should show loader when loading prop is true', () => {
+      wrapper = createWrapper(props)
+      input = wrapper.find('input')
+      jest.useFakeTimers()
+
       wrapper.setProps({ loading: true })
       expect(wrapper.find('ProgressRing').exists()).toBe(true)
       wrapper.unmount()
@@ -131,6 +153,10 @@ describe('<AddressInput />', () => {
 
     describe('when input is blurred', () => {
       it('should invoke onBlur', () => {
+        wrapper = createWrapper(props)
+        input = wrapper.find('input')
+        jest.useFakeTimers()
+
         props.onBlur.mockReset()
         input.simulate('blur')
         expect(props.onBlur).toHaveBeenCalledTimes(1)
@@ -138,6 +164,10 @@ describe('<AddressInput />', () => {
       })
 
       it('should set first value from locations when input is blurred', () => {
+        wrapper = createWrapper(props)
+        input = wrapper.find('input')
+        jest.useFakeTimers()
+
         props.onBlur.mockReset()
         props.onChange.mockReset()
         wrapper.setProps({ locations })
@@ -151,6 +181,10 @@ describe('<AddressInput />', () => {
       })
 
       it('should set proper search query when input is blurred', () => {
+        wrapper = createWrapper(props)
+        input = wrapper.find('input')
+        jest.useFakeTimers()
+
         const location = locations[0]
         delete location.meta
         wrapper.setState({ value: locations[0] })
