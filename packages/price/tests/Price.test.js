@@ -57,7 +57,7 @@ describe('<Price />', () => {
       })
     })
 
-    describe('fomatNumber', () => {
+    describe('formatNumber', () => {
       it('should return 1.222 given 1.2222321213', () => {
         expect(formatNumber('1.2222321213', 'en', 3)).toBe('1.222')
       })

@@ -1,6 +1,0 @@
-@import './config'
-
-@mixin layer ($layers)
-  @for $i from 1 to $layers + 1
-    .Layer-#{$i}
-      box-shadow: 0 dp(0.25) dp(1.125 * $i) 0 rgba(0, 0, 0, 0.09 * $i)

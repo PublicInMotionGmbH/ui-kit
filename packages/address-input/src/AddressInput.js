@@ -437,6 +437,8 @@ class AddressInput extends React.PureComponent {
   }
 }
 
+AddressInput.displayName = 'AddressInput'
+
 AddressInput.propTypes = propTypes
 AddressInput.defaultProps = defaultProps
 

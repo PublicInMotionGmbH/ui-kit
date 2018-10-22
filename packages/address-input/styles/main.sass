@@ -19,10 +19,10 @@
         max-height: dp(1)
 
   &__transition
-    &-enter-active 
+    #{prefix('address-input')}-enter-active
       animation: show-address-input-modal 200ms
 
-    &-exit-active 
+    #{prefix('address-input')}-exit-active
       animation: show-address-input-modal 200ms
       animation-direction: alternate-reverse
 
@@ -83,16 +83,16 @@
     line-height: $x-input-height
     padding: 0 $x-input-padding-horizontal
 
-[dir=rtl] #{prefix('address-input')}
-  @include module('combo-box') 
-    &__footer img 
-      float: left
+  @include rtl-only
+    @include module('combo-box')
+      &__footer img
+        float: left
 
-  &__mobile-modal 
-    &-header 
-      @include module('button') 
-        left: #{.5 * $x-input-padding-vertical}
-        right: auto
+    &__mobile-modal
+      &-header
+        @include module('button')
+          left: #{.5 * $x-input-padding-vertical}
+          right: auto
 
 @keyframes show-address-input-modal 
   0%
