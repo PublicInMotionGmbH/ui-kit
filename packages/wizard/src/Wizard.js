@@ -21,7 +21,7 @@ const propTypes = {
   previousLabel: PropTypes.node,
 
   /** Step from which wizard should start */
-  step: PropTypes.number,
+  defaultStep: PropTypes.number,
 
   /** Show pagination in Wizard */
   pagination: PropTypes.bool,
@@ -80,7 +80,6 @@ class Wizard extends React.PureComponent {
 }
 
 Wizard.displayName = 'Wizard'
-
 Wizard.propTypes = propTypes
 Wizard.defaultProps = defaultProps
 
