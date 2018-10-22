@@ -212,7 +212,7 @@ class RangeInput extends React.PureComponent {
 
     // Build value
     value = buildEndValue(value, this.props.min, this.props.max)
-    let state = {
+    const state = {
       focus: false,
       inputValue: formatValue(value, this.props.minLength),
       value
