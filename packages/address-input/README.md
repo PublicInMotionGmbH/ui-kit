@@ -11,15 +11,15 @@ using `npm install @talixo/address-input --save` or `yarn add @talixo/address-in
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/address: ^1.0.0-alpha.30`
-- `@talixo/button: ^1.0.0-alpha.30`
-- `@talixo/combo-box: ^1.0.0-alpha.30`
-- `@talixo/device-swap: ^1.0.0-alpha.30`
-- `@talixo/icon: ^1.0.0-alpha.30`
-- `@talixo/masked-input: ^1.0.0-alpha.30`
-- `@talixo/progress-ring: ^1.0.0-alpha.30`
-- `@talixo/shared: ^1.0.0-alpha.30`
-- `@talixo/text-input: ^1.0.0-alpha.30`
+- `@talixo/address: ^1.0.0-alpha.31`
+- `@talixo/button: ^1.0.0-alpha.31`
+- `@talixo/combo-box: ^1.0.0-alpha.31`
+- `@talixo/device-swap: ^1.0.0-alpha.31`
+- `@talixo/icon: ^1.0.0-alpha.31`
+- `@talixo/masked-input: ^1.0.0-alpha.31`
+- `@talixo/progress-ring: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.31`
+- `@talixo/text-input: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
