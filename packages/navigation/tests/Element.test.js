@@ -1,74 +1,97 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
-import { buildClassName } from '@talixo/shared'
+import { buildClassName, prefix } from '@talixo/shared'
 
 import Element, { moduleName } from '../src/Element'
+import { withSubelements } from './fixtures/elements'
 
-describe('Module name', () => {
-  it('is passed correctly', () => {
-    const wrapper = shallow(<Element />)
-    const clsName = buildClassName([moduleName, 'element'])
-
-    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
-  })
-})
+const elementProps = withSubelements[0]
+const elementWithSubelement = {
+  ...withSubelements[0],
+  subelement: <Element {...withSubelements[1]} />
+}
+const buttonCls = `.${buildClassName([ moduleName, 'button' ])}`
+function createWrapper (props) {
+  return mount(<Element {...props} />)
+}
 
 describe('<Element />', () => {
-  it('renders correctly', () => {
-    const wrapper = shallow(
-      <Element>
-        Home
-      </Element>
-    )
+  describe('rendering', () => {
+    it('renders correctly when children are passed and render function return null or undefined', () => {
+      const wrapper = mount(<Element>Home</Element>)
+      expect(wrapper).toMatchSnapshot()
+      wrapper.unmount()
+    })
 
-    expect(wrapper).toMatchSnapshot()
+    it('should render correctly based on props', () => {
+      const wrapper = createWrapper(elementProps)
+      expect(wrapper).toMatchSnapshot()
+      wrapper.unmount()
+    })
   })
 
-  it('renders active correctly', () => {
-    const wrapper = shallow(
-      <Element active>
-        Home
-      </Element>
-    )
-    const clsName = buildClassName([moduleName, 'element'], null, 'active')
+  describe('props handling', () => {
+    it('should add proper classes according to passed props props', () => {
+      const keys = ['active', 'completed', 'disabled', 'error', 'open']
+      const getClsName = name => prefix(moduleName)
+      const wrapper = createWrapper({
+        ...elementProps,
+        active: true,
+        completed: true,
+        disabled: true,
+        error: true,
+        open: true
+      })
 
-    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
+      keys.forEach(key => {
+        const cls = getClsName(key)
+        expect(wrapper.children().hasClass(`${cls}--${key}`)).toEqual(true)
+        wrapper.setProps({ [key]: false })
+        expect(wrapper.children().hasClass(`${cls}--${key}`)).toEqual(false)
+      })
+
+      wrapper.unmount()
+    })
+
+    it('should handle invoke onClick function', () => {
+      const wrapper = createWrapper(elementProps)
+      const button = wrapper.find(buttonCls)
+
+      elementProps.onClick.mockReset()
+      button.simulate('click')
+      expect(elementProps.onClick).toHaveBeenCalledWith(elementProps.id, !wrapper.state().open)
+      wrapper.unmount()
+    })
   })
 
-  it('renders completed correctly', () => {
-    const wrapper = shallow(
-      <Element completed>
-        Home
-      </Element>
-    )
-    const clsName = buildClassName([moduleName, 'element'], null, 'completed')
+  describe('opening and closing menus', () => {
+    it('should set wrapper class to open when user clicks on a button ', () => {
+      const wrapper = createWrapper(elementWithSubelement)
+      const button = wrapper.find(buttonCls).at(0)
 
-    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
-  })
+      // Open
+      button.simulate('click')
+      expect(wrapper.state().open).toBe(true)
+      expect(wrapper.state().active).toBe(true)
 
-  it('renders disabled correctly', () => {
-    const wrapper = shallow(
-      <Element disabled>
-        Home
-      </Element>
-    )
-    const clsName = buildClassName([moduleName, 'element'], null, 'disabled')
+      // Close
+      button.simulate('click')
+      expect(wrapper.state().open).toBe(false)
+      expect(wrapper.state().active).toBe(false)
 
-    expect(wrapper.find('li').hasClass(clsName)).toEqual(true)
-  })
+      wrapper.unmount()
+    })
 
-  it('calls onClick when clicked', () => {
-    const onClick = jest.fn()
-    const wrapper = shallow(
-      <Element className='red' onClick={onClick}>
-        Home
-      </Element>
-    )
+    it('should not change state when props.disabled is set to true', () => {
+      const wrapper = createWrapper({ ...elementWithSubelement, disabled: true })
+      const button = wrapper.find(buttonCls).at(0)
 
-    wrapper
-      .find('.red')
-      .simulate('click')
-    expect(onClick).toHaveBeenCalledTimes(1)
+      button.simulate('click')
+      expect(wrapper.state().open).toBe(false)
+      expect(wrapper.state().active).toBe(false)
+
+      wrapper.unmount()
+    })
   })
 })

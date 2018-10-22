@@ -1,14 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Element /> renders correctly 1`] = `
+exports[`<Element /> rendering renders correctly when children are passed and render function return null or undefined 1`] = `
 <div
   className="talixo-navigation-element"
-  onClick={[Function]}
 >
   <div
     className="talixo-navigation-element__button"
+    onClick={[Function]}
   >
     Home
   </div>
+</div>
+`;
+
+exports[`<Element /> rendering should render correctly based on props 1`] = `
+<div
+  className="talixo-navigation-element"
+>
+  <div
+    className="talixo-navigation-element__button"
+    onClick={[Function]}
+  >
+    Element 1
+  </div>
+  <div
+    className="talixo-navigation-element__menu"
+  />
 </div>
 `;

@@ -18,6 +18,12 @@ const propTypes = {
   /** Should it be a panel? Applies only to Navigation type `sidebar`. */
   panel: PropTypes.bool,
 
+  /** Should it be a panel? Applies only to Navigation type `sidebar`. */
+  parent: PropTypes.bool,
+
+  /** Submenu title. */
+  subtitle: PropTypes.node,
+
   /** Type of navigation */
   type: PropTypes.oneOf(['breadcrumbs', 'navbar', 'pagination', 'sidebar', 'steps', 'tabs', 'tree'])
 }
@@ -30,17 +36,21 @@ const defaultProps = {
  * Component which represents Navigation.
  *
  * @param {object} props
- * @param {*} [props.children]
+ * @param {node} [props.children]
  * @param {string} [props.className]
- * @param {*} [props.divider]
+ * @param {node} [props.divider]
+ * @param {boolean} [props.panel]
+ * @param {boolean} [props.parent]
+ * @param {node} [props.subtitle]
  * @param {string} [props.type]
+ *
  * @returns {React.Element}
  */
 function NavigationWrapper (props) {
-  const { children, className, divider, parent, panel, subtitle, type, ...passedProps } = props
+  const { children, className, divider, panel, parent, subtitle, type, ...passedProps } = props
 
   const clsName = buildClassName(moduleName, className, { panel, parent }, [type])
-  const subtitleCls = buildClassName([ moduleName, 'subtitle' ])
+  const subtitleCls = buildClassName([moduleName, 'subtitle'])
 
   return (
     <nav className={clsName} {...passedProps}>

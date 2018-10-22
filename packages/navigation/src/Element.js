@@ -75,12 +75,36 @@ const defaultProps = {
 }
 
 /**
+ * Component which represents Navigation Element.
  *
+ * @property {object} props
+ * @property {boolean} [props.active]
+ * @property {node} [props.children]
+ * @property {string} [props.className]
+ * @property {boolean} [props.completed]
+ * @property {boolean} [props.disabled]
+ * @property {boolean} [props.error]
+ * @property {number|string} [props.id]
+ * @property {string} [props.label]
+ * @property {function} [props.onClick]
+ * @property {boolean} [props.open]
+ * @property {function} [props.render]
+ * @property {object[]} [props.subelements]
+ * @property {string} [props.subtitle]
+ * @property {string} [props.type]
+ *
+ * @property {object} state
+ * @property {string} state.active
+ * @property {string} state.open
+ *
+ * @property {node} element
+ *
+ * @class Element
  */
 class Element extends React.Component {
   state = {
-    open: this.props.open,
-    active: this.props.active || this.props.open
+    active: this.props.active || this.props.open || false,
+    open: this.props.open || false
   }
   element = null
 
@@ -115,7 +139,7 @@ class Element extends React.Component {
 
   /**
    * Handle click on any element,
-   * to check if element should be closed now.
+   * to check if it should be closed now.
    *
    * @param {Event} e
    */
@@ -274,16 +298,17 @@ class Element extends React.Component {
     return (
       <div
         className={elementCls}
-        onClick={this.handleClick}
         ref={this.saveRef}
         {...restProps}
       >
-        <div className={buttonCls}>{ renderElement }</div>
+        <div onClick={this.handleClick} className={buttonCls}>{ renderElement }</div>
         { menuElement }
       </div>
     )
   }
 }
+
+Element.displayName = 'NavigationElement'
 
 Element.propTypes = propTypes
 

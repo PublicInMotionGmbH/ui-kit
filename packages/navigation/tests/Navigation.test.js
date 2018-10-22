@@ -1,84 +1,54 @@
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
 
-import NavigationWrapper, { moduleName } from '../src/NavigationWrapper'
+import { buildClassName } from '@talixo/shared'
 
-const includesClassName = (wrapper, className) => {
-  const clsName = wrapper.props().className
-  expect(clsName.includes(className)).toEqual(true)
+import Navigation, { moduleName } from '../src/Navigation'
+import Element from '../src/Element'
+
+import { withSubelements, withoutSubelements } from './fixtures/elements'
+
+function createWrapper (props) {
+  return shallow(<Navigation {...props} />)
 }
 
-describe('Module name', () => {
-  it('is passed correctly', () => {
-    const wrapper = shallow(<NavigationWrapper />)
-
-    includesClassName(wrapper, moduleName)
-  })
-})
+const dividerCls = `.${buildClassName([moduleName, 'divider'])}`
 
 describe('<Navigation />', () => {
-  const customDivider = '#'
+  describe('rendering', () => {
+    it('should render properly when children are passed', () => {
+      const wrapper = shallow(
+        <Navigation>
+          <Element>test-element-0</Element>
+          <Element>test-element-1</Element>
+          <Element>test-element-2</Element>
+        </Navigation>
+      )
+      expect(wrapper).toMatchSnapshot()
+    })
 
-  it('renders children correctly', () => {
-    const wrapper = shallow(
-      <NavigationWrapper>
-        <span>Home</span>
-        <span>Issues</span>
-        <span>Major</span>
-      </NavigationWrapper>
-    )
-
-    expect(wrapper.props().className.includes('navigation')).toEqual(true)
-  })
-
-  it('renders types correctly', () => {
-    const wrappers = {
-      navigation: shallow(<NavigationWrapper type='navigation' />),
-      pagination: shallow(<NavigationWrapper type='pagination' />),
-      breadcrumbs: shallow(<NavigationWrapper type='breadcrumbs' />),
-      tabs: shallow(<NavigationWrapper type='tabs' />),
-      steps: shallow(<NavigationWrapper type='steps' />)
-    }
-
-    Object.keys(wrappers).forEach(key => {
-      includesClassName(wrappers[key], key)
+    it('should render properly when elements are passed via props', () => {
+      const wrapper = createWrapper({ elements: withSubelements })
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
-  it('inserts dividers correctly', () => {
-    const wrappers = {
-      empty: shallow(<NavigationWrapper divider={customDivider} />),
-      single: shallow(
-        <NavigationWrapper divider={customDivider}>
-          <span>Home</span>
-        </NavigationWrapper>
-      ),
-      multiple: shallow(
-        <NavigationWrapper divider={customDivider}>
-          <span>Home</span>
-          <span>Issues</span>
-        </NavigationWrapper>
-      )
-    }
+  describe('props handling', () => {
+    it('should render divider when it is passed and nav type is set to `breadcrumbs`', () => {
+      const divider = '/'
+      const wrapper = createWrapper({ elements: withSubelements, divider: divider, type: 'breadcrumbs' })
 
-    expect(wrappers.empty.contains(customDivider)).toEqual(false)
-    expect(wrappers.single.contains(customDivider)).toEqual(false)
-    // expect(wrappers.multiple.contains(customDivider)).toEqual(true)
-  })
+      const expectedDividersNumber = withoutSubelements.length - 1
+      const renderedDividersNumber = wrapper.find(dividerCls).length
 
-  it('inserts dividers between children elements', () => {
-    const wrapper = shallow(
-      <NavigationWrapper divider={customDivider}>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-      </NavigationWrapper>
-    )
-
-    expect(wrapper.childAt(0).contains(customDivider)).toEqual(false)
-    // expect(wrapper.childAt(1).contains(customDivider)).toEqual(true)
-    expect(wrapper.childAt(2).contains(customDivider)).toEqual(false)
-    // expect(wrapper.childAt(3).contains(customDivider)).toEqual(true)
-    expect(wrapper.childAt(4).contains(customDivider)).toEqual(false)
+      expect(renderedDividersNumber).toBe(expectedDividersNumber)
+      wrapper.children().forEach((node, index) => {
+        if (index % 2 === 1) {
+          expect(node.contains(divider)).toBe(true)
+        } else {
+          expect(node.contains(divider)).toBe(false)
+        }
+      })
+    })
   })
 })

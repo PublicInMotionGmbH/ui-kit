@@ -13,6 +13,17 @@
   &__divider
     padding: $navigation-padding-vertical 0
 
+  /***** Common styles for navigation type: breadcrumbs, navbar, breadcrumbs, tree *****/
+  &--navbar,
+  &--breadcrumbs,
+  &--sidebar,
+  &--tree
+    // Styles for active/open/hovered element
+    #{$sel-nav-elem}
+      &--disabled
+        opacity: 0.3
+        pointer-events: none
+
   /***** Common styles for navigation type: breadcrumbs, navbar *****/
   &--navbar,
   &--breadcrumbs
@@ -66,6 +77,23 @@
           top: 100% // calc(100% + #{$navigation-padding-vertical})
           left: 0
 
+  /***** Navigation type `navbar` and 'sidebar' rules *****/
+  &--navbar,
+  &--sidebar
+    &#{$sel-nav-parent}
+      background-color: $navigation-background
+      color: $navigation-text-color
+
+    #{$sel-nav-elem-menu}
+      background-color: $navigation-menu-background
+
+    // Styles for active/open/hovered element
+    #{$sel-nav-elem}
+      font-weight: $navigation-element-font-weight
+
+      &:hover, &--active, &--open
+        background-color: $navigation-element-active-background
+
   /***** Navigation type `breadcrumbs` specific rules *****/
   &--breadcrumbs
     &#{$sel-nav-parent}
@@ -87,23 +115,6 @@
       #{$sel-nav-elem}
         &:hover, &--active, &--open
           background-color: $breadcrumbs-element-active-color
-
-  /***** Navigation type `navbar` and 'sidebar' rules *****/
-  &--navbar,
-  &--sidebar
-    &#{$sel-nav-parent}
-      background-color: $navigation-background
-      color: $navigation-text-color
-
-    #{$sel-nav-elem-menu}
-      background-color: $navigation-menu-background
-
-    // Styles for active/open/hovered element
-    #{$sel-nav-elem}
-      font-weight: $navigation-element-font-weight
-
-      &:hover, &--active, &--open
-        background-color: $navigation-element-active-background
 
   /***** Navigation type `navbar` rules *****/
   &--navbar

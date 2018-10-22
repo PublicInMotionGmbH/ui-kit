@@ -58,6 +58,26 @@ const defaultProps = {
   previousLabel: 'Previous'
 }
 
+/**
+ * @property {object} props
+ * @property {number} [props.activePage]
+ * @property {number} [props.className]
+ * @property {number} [props.displayedLimit]
+ * @property {number} [props.ellipsisPlaceholder]
+ * @property {number} [props.hidePages]
+ * @property {number} [props.hideButtons]
+ * @property {number} [props.nextDisabled]
+ * @property {number} [props.nextLabel]
+ * @property {number} [props.onChange]
+ * @property {number} [props.pageCount]
+ * @property {number} [props.previousDisabled]
+ * @property {number} [props.previousLabel]
+ *
+ * @property {object} state
+ * @property {object} state.activePage
+ *
+ * @class Pagination
+ */
 class Pagination extends React.Component {
   state = {
     activePage: this.props.activePage || 1
@@ -87,10 +107,6 @@ class Pagination extends React.Component {
     if (this.props.activePage == null) {
       this.handlePageChange(nextPage)
     }
-
-    if (this.props.onChange) {
-      this.props.onChange(nextPage)
-    }
   }
 
   /**
@@ -99,6 +115,9 @@ class Pagination extends React.Component {
    * @param {number} page
    */
   handlePageChange = (page) => {
+    if (this.props.onChange) {
+      this.props.onChange(page)
+    }
     this.setState({ activePage: page })
   }
 
@@ -178,8 +197,8 @@ class Pagination extends React.Component {
     const wrapperCls = buildClassName(moduleName, className)
 
     // Handle buttons disable state.
-    const prevButtonDisabled = previousDisabled || activePage === 1
-    const nextButtonDisabled = nextDisabled || activePage === pageCount
+    const prevButtonDisabled = previousDisabled != null ? previousDisabled : activePage === 1
+    const nextButtonDisabled = nextDisabled != null ? nextDisabled : activePage === pageCount
 
     return (
       <div className={wrapperCls} {...restProps}>
@@ -189,7 +208,7 @@ class Pagination extends React.Component {
             { previousLabel }
           </Button>
         }
-        <Navigation elements={pageElements} type='pagination' />
+        { !hidePages && <Navigation elements={pageElements} type='pagination' /> }
         {
           !hideButtons &&
           <Button disabled={nextButtonDisabled} type='primary' onClick={() => this.handleNext(1)}>
@@ -200,6 +219,8 @@ class Pagination extends React.Component {
     )
   }
 }
+
+Pagination.displayNam = 'Pagination'
 
 Pagination.propTypes = propTypes
 

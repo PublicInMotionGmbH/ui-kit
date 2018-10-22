@@ -16,12 +16,12 @@ export const moduleName = 'navigation'
  * @param {string} type
  * @returns {Element|ReactElement}
  */
-function getElements (element, type) {
+export function buildElements (element, type) {
   const { panel, subelements, subtitle } = element
 
   const subelement = Array.isArray(subelements) && subelements.length > 0
     ? <NavigationWrapper panel={panel} type={type} subtitle={subtitle}>
-      { subelements.map(subelement => getElements(subelement, type)) }
+      { subelements.map(subelement => buildElements(subelement, type)) }
     </NavigationWrapper>
     : null
 
@@ -36,24 +36,13 @@ function getElements (element, type) {
 }
 
 /**
- * Build Navigation Elements.
- *
- * @param {object} elements
- * @param {string} type
- * @returns {Element|reactElement}
- */
-function buildElements (elements, type) {
-  return elements.map((element, index) => getElements(element, type))
-}
-
-/**
  * Add divider between elements.
  *
  * @param {node[]} elements
  * @param {node} divider
  * @returns {Element[]|ReactElement[]}
  */
-function addDivider (elements, divider) {
+export function addDivider (elements, divider) {
   const dividerCls = buildClassName([moduleName, 'divider'])
   const dividerElement = <div className={dividerCls}>{divider}</div>
   const elementsLastIndex = elements.length - 1
@@ -129,24 +118,25 @@ const defaultProps = {
  * Component which represents Simple Navigation.
  *
  * @param {object} props
- * @param {string} props.className
- * @param {node} props.divider
- * @param {object[]} props.elements
- * @param {boolean} props.elements.active
- * @param {node} props.elements.children
- * @param {string} props.elements.className
- * @param {boolean} props.elements.completed
- * @param {boolean} props.elements.disabled
- * @param {boolean} props.elements.error
- * @param {number|string} props.elements.id
- * @param {string} props.elements.label
- * @param {function} props.elements.onClick
- * @param {boolean} props.elements.open
- * @param {boolean} props.elements.panel
- * @param {function} props.elements.render
- * @param {object[]} props.elements.subelements
- * @param {string} props.elements.subtitle
- * @param {string} props.type
+ * @param {string} [props.className]
+ * @param {node} [props.divider]
+ *
+ * @param {object[]} [props.elements]
+ * @param {boolean} [props.elements.active]
+ * @param {node} [props.elements.children]
+ * @param {string} [props.elements.className]
+ * @param {boolean} [props.elements.completed]
+ * @param {boolean} [props.elements.disabled]
+ * @param {boolean} [props.elements.error]
+ * @param {number|string} [props.elements.id]
+ * @param {string} [props.elements.label]
+ * @param {function} [props.elements.onClick]
+ * @param {boolean} [props.elements.open]
+ * @param {boolean} [props.elements.panel]
+ * @param {function} [props.elements.render]
+ * @param {object[]} [props.elements.subelements]
+ * @param {string} [props.elements.subtitle]
+ * @param {string} [props.type]
  *
  * @returns {Element|ReactElement}
  */
@@ -155,7 +145,7 @@ function Navigation (props) {
   const hasDivider = type === 'breadcrumbs' && divider != null
 
   const generatedElements = children == null && Array.isArray(elements)
-    ? buildElements(elements, type)
+    ? elements.map((element, index) => buildElements(element, type))
     : children
 
   const renderElements = hasDivider

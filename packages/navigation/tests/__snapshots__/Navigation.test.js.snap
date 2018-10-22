@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> rendering should render properly when children are passed 1`] = `
+<NavigationWrapper
+  parent={true}
+  type="navbar"
+>
+  <NavigationElement
+    render={[Function]}
+  >
+    test-element-0
+  </NavigationElement>
+  <NavigationElement
+    render={[Function]}
+  >
+    test-element-1
+  </NavigationElement>
+  <NavigationElement
+    render={[Function]}
+  >
+    test-element-2
+  </NavigationElement>
+</NavigationWrapper>
+`;
+
+exports[`<Navigation /> rendering should render properly when elements are passed via props 1`] = `
+<NavigationWrapper
+  parent={true}
+  type="navbar"
+>
+  <NavigationElement
+    disabled={false}
+    id={0}
+    key="0"
+    label="Element 1"
+    onClick={[Function]}
+    render={[Function]}
+    subelement={
+      <NavigationWrapper
+        panel={undefined}
+        subtitle="Subtitile of element 1"
+        type="navbar"
+      >
+        <NavigationElement
+          disabled={false}
+          id={10}
+          label="Element 1 lvl 1"
+          onClick={[Function]}
+          render={[Function]}
+          subelement={
+            <NavigationWrapper
+              panel={undefined}
+              subtitle="Subtitile of element 1 lvl 1"
+              type="navbar"
+            >
+              <NavigationElement
+                disabled={false}
+                id={20}
+                label="Element 1 lvl 2"
+                onClick={[Function]}
+                panel={true}
+                render={[Function]}
+                subelement={
+                  <NavigationWrapper
+                    panel={true}
+                    subtitle="Subtitile of element 1 lvl 2"
+                    type="navbar"
+                  >
+                    <NavigationElement
+                      disabled={false}
+                      id={30}
+                      label="Element 1 lvl 3"
+                      onClick={[Function]}
+                      render={[Function]}
+                      subelement={null}
+                      subtitle="Subtitile of element 1 lvl 3"
+                      type="navbar"
+                    />
+                  </NavigationWrapper>
+                }
+                subelements={
+                  Array [
+                    Object {
+                      "disabled": false,
+                      "id": 30,
+                      "label": "Element 1 lvl 3",
+                      "onClick": [Function],
+                      "subtitle": "Subtitile of element 1 lvl 3",
+                    },
+                  ]
+                }
+                subtitle="Subtitile of element 1 lvl 2"
+                type="navbar"
+              />
+              <NavigationElement
+                disabled={false}
+                id={21}
+                label="Element 2 lvl 2"
+                onClick={[Function]}
+                render={[Function]}
+                subelement={null}
+                subtitle="Subtitile of element 2 lvl 2"
+                type="navbar"
+              />
+              <NavigationElement
+                disabled={false}
+                id={22}
+                label="Element 3 lvl 2"
+                onClick={[Function]}
+                render={[Function]}
+                subelement={null}
+                subtitle="Subtitile of element 3 lvl 2"
+                type="navbar"
+              />
+            </NavigationWrapper>
+          }
+          subelements={
+            Array [
+              Object {
+                "disabled": false,
+                "id": 20,
+                "label": "Element 1 lvl 2",
+                "onClick": [Function],
+                "panel": true,
+                "subelements": Array [
+                  Object {
+                    "disabled": false,
+                    "id": 30,
+                    "label": "Element 1 lvl 3",
+                    "onClick": [Function],
+                    "subtitle": "Subtitile of element 1 lvl 3",
+                  },
+                ],
+                "subtitle": "Subtitile of element 1 lvl 2",
+              },
+              Object {
+                "disabled": false,
+                "id": 21,
+                "label": "Element 2 lvl 2",
+                "onClick": [Function],
+                "subtitle": "Subtitile of element 2 lvl 2",
+              },
+              Object {
+                "disabled": false,
+                "id": 22,
+                "label": "Element 3 lvl 2",
+                "onClick": [Function],
+                "subtitle": "Subtitile of element 3 lvl 2",
+              },
+            ]
+          }
+          subtitle="Subtitile of element 1 lvl 1"
+          type="navbar"
+        />
+        <NavigationElement
+          disabled={false}
+          id={11}
+          label="Element 2 lvl 1"
+          onClick={[Function]}
+          render={[Function]}
+          subelement={null}
+          subtitle="Subtitile of element 2 lvl 1"
+          type="navbar"
+        />
+        <NavigationElement
+          disabled={false}
+          id={12}
+          label="Element 3 lvl 1"
+          onClick={[Function]}
+          render={[Function]}
+          subelement={null}
+          subtitle="Subtitile of element 3 lvl 1"
+          type="navbar"
+        />
+        <NavigationElement
+          disabled={false}
+          id={13}
+          label="Element 4 lvl 1"
+          onClick={[Function]}
+          render={[Function]}
+          subelement={null}
+          subtitle="Subtitile of element 4 lvl 1"
+          type="navbar"
+        />
+      </NavigationWrapper>
+    }
+    subelements={
+      Array [
+        Object {
+          "disabled": false,
+          "id": 10,
+          "label": "Element 1 lvl 1",
+          "onClick": [Function],
+          "subelements": Array [
+            Object {
+              "disabled": false,
+              "id": 20,
+              "label": "Element 1 lvl 2",
+              "onClick": [Function],
+              "panel": true,
+              "subelements": Array [
+                Object {
+                  "disabled": false,
+                  "id": 30,
+                  "label": "Element 1 lvl 3",
+                  "onClick": [Function],
+                  "subtitle": "Subtitile of element 1 lvl 3",
+                },
+              ],
+              "subtitle": "Subtitile of element 1 lvl 2",
+            },
+            Object {
+              "disabled": false,
+              "id": 21,
+              "label": "Element 2 lvl 2",
+              "onClick": [Function],
+              "subtitle": "Subtitile of element 2 lvl 2",
+            },
+            Object {
+              "disabled": false,
+              "id": 22,
+              "label": "Element 3 lvl 2",
+              "onClick": [Function],
+              "subtitle": "Subtitile of element 3 lvl 2",
+            },
+          ],
+          "subtitle": "Subtitile of element 1 lvl 1",
+        },
+        Object {
+          "disabled": false,
+          "id": 11,
+          "label": "Element 2 lvl 1",
+          "onClick": [Function],
+          "subtitle": "Subtitile of element 2 lvl 1",
+        },
+        Object {
+          "disabled": false,
+          "id": 12,
+          "label": "Element 3 lvl 1",
+          "onClick": [Function],
+          "subtitle": "Subtitile of element 3 lvl 1",
+        },
+        Object {
+          "disabled": false,
+          "id": 13,
+          "label": "Element 4 lvl 1",
+          "onClick": [Function],
+          "subtitle": "Subtitile of element 4 lvl 1",
+        },
+      ]
+    }
+    subtitle="Subtitile of element 1"
+    type="navbar"
+  />
+  <NavigationElement
+    disabled={false}
+    id={1}
+    key="1"
+    label="Element 2"
+    onClick={[Function]}
+    render={[Function]}
+    subelement={null}
+    subtitle="Subtitile of element 2"
+    type="navbar"
+  />
+  <NavigationElement
+    disabled={false}
+    id={2}
+    key="2"
+    label="Element 3"
+    onClick={[Function]}
+    render={[Function]}
+    subelement={null}
+    subtitle="Subtitile of element 3"
+    type="navbar"
+  />
+  <NavigationElement
+    disabled={true}
+    id={3}
+    key="3"
+    label="Element 4"
+    onClick={[Function]}
+    panel={true}
+    render={[Function]}
+    subelement={null}
+    subtitle="Subtitile of element 4"
+    type="navbar"
+  />
+</NavigationWrapper>
+`;
