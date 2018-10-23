@@ -192,6 +192,7 @@ class Element extends React.Component {
     const open = !this.state.open
     const state = {}
     const hasSubelement = !!subelement
+
     e.stopPropagation()
     e.preventDefault()
 
@@ -204,6 +205,7 @@ class Element extends React.Component {
       if (this.props.open == null) {
         state.open = open
       }
+
       if (this.props.active == null) {
         state.active = open
       }
@@ -264,7 +266,7 @@ class Element extends React.Component {
    */
   shouldAttachListeners () {
     const { type } = this.props
-    return type === 'navbar' || type === 'sidebar' || type === 'tabs'
+    return type === 'navbar' || type === 'sidebar'
   }
 
   /**

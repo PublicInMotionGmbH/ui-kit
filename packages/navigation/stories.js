@@ -170,7 +170,7 @@ addStory('tree view', readme, () => (
 ))
 
 addStory('tabs gen', readme, () => (
-  <Navigation elements={withoutSubelements} type='tabs' />
+  <Navigation elements={withSubelements} type='tabs' />
 ))
 
 addStory('steps gen', readme, () => (

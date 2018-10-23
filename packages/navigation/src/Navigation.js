@@ -8,6 +8,7 @@ import NavigationWrapper from './NavigationWrapper'
 import Element from './Element'
 
 export const moduleName = 'navigation'
+const multilevelElements = ['breadcrumbs', 'navbar', 'sidebar', 'tree']
 
 /**
  * Recursively generates Elements and wraps it into NavigationWrapper.
@@ -19,7 +20,9 @@ export const moduleName = 'navigation'
 export function buildElements (element, type) {
   const { panel, subelements, subtitle } = element
 
-  const subelement = Array.isArray(subelements) && subelements.length > 0
+  const subelement = Array.isArray(subelements) &&
+  subelements.length > 0 &&
+  multilevelElements.indexOf(type) > -1
     ? <NavigationWrapper panel={panel} type={type} subtitle={subtitle}>
       { subelements.map(subelement => buildElements(subelement, type)) }
     </NavigationWrapper>

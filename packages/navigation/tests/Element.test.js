@@ -11,10 +11,14 @@ const elementWithSubelement = {
   ...withSubelements[0],
   subelement: <Element {...withSubelements[1]} />
 }
-const buttonCls = `.${buildClassName([ moduleName, 'button' ])}`
+
 function createWrapper (props) {
   return mount(<Element {...props} />)
 }
+
+// Class name helpers
+const buttonCls = `.${buildClassName([ moduleName, 'button' ])}`
+const wrapperCls = `.${buildClassName(moduleName)}`
 
 describe('<Element />', () => {
   describe('rendering', () => {
@@ -65,7 +69,7 @@ describe('<Element />', () => {
     })
   })
 
-  describe('opening and closing menus', () => {
+  describe('clicking navigation elements', () => {
     it('should set wrapper class to open when user clicks on a button ', () => {
       const wrapper = createWrapper(elementWithSubelement)
       const button = wrapper.find(buttonCls).at(0)
@@ -83,15 +87,64 @@ describe('<Element />', () => {
       wrapper.unmount()
     })
 
+    it('should ignore clicking elements inside open element', () => {
+      const wrapper = createWrapper({ ...elementWithSubelement, type: 'navbar' })
+      const button = wrapper.find(buttonCls).at(0)
+      const insideElement = wrapper.find(wrapperCls).at(1)
+      const insideButton = insideElement.find(buttonCls)
+
+      button.simulate('click')
+      insideButton.simulate('click')
+      expect(wrapper.state().open).toBe(true)
+      insideElement.simulate('click')
+      expect(wrapper.state().open).toBe(true)
+    })
+
+    it('should open children of main element', () => {
+
+    })
+
     it('should not change state when props.disabled is set to true', () => {
       const wrapper = createWrapper({ ...elementWithSubelement, disabled: true })
       const button = wrapper.find(buttonCls).at(0)
 
+      elementWithSubelement.onClick.mockReset()
       button.simulate('click')
+
       expect(wrapper.state().open).toBe(false)
       expect(wrapper.state().active).toBe(false)
+      expect(elementWithSubelement.onClick).toHaveBeenCalledTimes(0)
 
       wrapper.unmount()
+    })
+  })
+
+  describe('events handling', () => {
+    it('should close element menu when clicking outside of it', () => {
+      const types = ['navbar', 'sidebar']
+      const wrapper = createWrapper(elementWithSubelement)
+      const button = wrapper.find(buttonCls).at(0)
+
+      for (const type of types) {
+        wrapper.setProps({ type: type })
+
+        button.simulate('click')
+        expect(wrapper.state().open).toBe(true)
+
+        document.documentElement.dispatchEvent(new window.Event('click'))
+        expect(wrapper.state().open).toBe(false)
+      }
+    })
+
+    it('should not close element menu when clicking outside of it', () => {
+      const wrapper = createWrapper({ ...elementWithSubelement, type: 'tree' })
+      const button = wrapper.find(buttonCls).at(0)
+
+      button.simulate('click')
+      expect(wrapper.state().open).toBe(true)
+
+      document.documentElement.dispatchEvent(new window.Event('click'))
+      expect(wrapper.state().open).toBe(true)
     })
   })
 })
