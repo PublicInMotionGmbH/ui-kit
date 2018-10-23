@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Pane from '../src/Pane'
+import { buildStyle } from '../utils/utils'
 
 describe('<Pane />', () => {
   it('renders children correctly', () => {
@@ -15,11 +16,6 @@ describe('<Pane />', () => {
   })
 
   it('should handle build styles', () => {
-    const wrapper = shallow(
-      <Pane>
-        <div>LEFT SIDE</div>
-      </Pane>
-    )
-    expect(wrapper.instance().buildStyle(20, 'vertical')).toEqual({ height: '20%', width: 'false%' })
+    expect(buildStyle(20, 'vertical')).toEqual({ height: '20%', width: 'false%' })
   })
 })

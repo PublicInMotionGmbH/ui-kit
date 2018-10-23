@@ -28,7 +28,6 @@ const propTypes = {
 class Resizer extends React.PureComponent {
   render () {
     const { children, className, split, ...passedProps } = this.props
-
     const clsName = buildClassName(moduleName, className, [split])
 
     return (

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
+import { buildStyle } from '../utils/utils'
 
 const moduleName = 'pane'
 
@@ -38,21 +39,12 @@ const defaultProps = {
  * @returns {React.Element}
  */
 class Pane extends React.PureComponent {
-  buildStyle (size, split) {
-    if (size === undefined) return {}
-
-    const height = split === 'vertical' && size
-    const width = split === 'horizontal' && size
-
-    return { height: `${height}%`, width: `${width}%` }
-  }
-
   render () {
     const { children, className, defaultSize, size, split, style, ...passedProps } = this.props
     const clsName = buildClassName(moduleName, className)
     const wrapperStyle = {
       ...style,
-      ...this.buildStyle(size, split)
+      ...buildStyle(size, split)
     }
 
     return (

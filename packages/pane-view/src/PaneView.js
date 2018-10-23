@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
+import { roundDecimals, convertToPercent } from '../utils/utils'
+
 import Resizer from './Resizer'
 
 const moduleName = 'pane-view'
@@ -76,11 +78,10 @@ class PaneView extends React.Component {
 
     if (children === undefined) return
 
-    const paneArr = []
     let defaultSizeAll = 0
     let numberOfNotDefaults = 0
 
-    children.map((el) => {
+    children.forEach((el) => {
       if (el.props.defaultSize !== undefined) {
         defaultSizeAll += el.props.defaultSize
       } else {
@@ -88,15 +89,14 @@ class PaneView extends React.Component {
       }
     })
 
-    const defaultSizeSingle = this.roundDecimals((100 - defaultSizeAll) / numberOfNotDefaults)
+    const defaultSizeSingle = roundDecimals((100 - defaultSizeAll) / numberOfNotDefaults)
 
-    children.map((el, i) => {
-      paneArr.push({
-        paneId: i,
-        size: el.props.defaultSize !== undefined
-          ? el.props.defaultSize
-          : defaultSizeSingle})
-    })
+    const paneArr = children.map((el, i) => ({
+      paneId: i,
+      size: el.props.defaultSize !== undefined
+        ? el.props.defaultSize
+        : defaultSizeSingle
+    }))
 
     this.setState({
       paneArr
@@ -115,6 +115,7 @@ class PaneView extends React.Component {
    */
   bindEventListeners () {
     document.addEventListener('mousemove', this.handleMouseMove)
+    document.addEventListener('mousedown', this.handleMouseDown)
     document.addEventListener('mouseup', this.handleMouseUp)
   }
 
@@ -123,6 +124,7 @@ class PaneView extends React.Component {
    */
   unbindEventListeners () {
     document.removeEventListener('mousemove', this.handleMouseMove)
+    document.removeEventListener('mousedown', this.handleMouseDown)
     document.removeEventListener('mouseup', this.handleMouseUp)
   }
 
@@ -165,33 +167,6 @@ class PaneView extends React.Component {
   }
 
   /**
-   * Convert to percent
-   *
-   * @param {number} size
-   * @param {number} paneViewDimension
-   * @returns {number}
-   */
-  convertToPercent (size, paneViewDimension) {
-    let result = size * 100 / paneViewDimension
-    if (result < 0) {
-      result = 0
-    } else if (result > 100) {
-      result = 100
-    }
-    return this.roundDecimals(result)
-  }
-
-  /**
-   * Round number
-   *
-   * @param {number} num
-   * @returns {number}
-   */
-  roundDecimals (num) {
-    return Math.round(num * 10000) / 10000
-  }
-
-  /**
    * Handle mouse move
    *
    * @param {*} e
@@ -217,41 +192,41 @@ class PaneView extends React.Component {
     const realPaneViewHeight = paneViewHeight - (resizersNumber * resizerHeight)
     const currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
     const currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
-    const activeOffsetWidthPercent = this.convertToPercent(activePane.offsetWidth, realPaneViewWidth)
-    const activeOffsetHeightPercent = this.convertToPercent(activePane.offsetHeight, realPaneViewHeight)
-    const widthCombined = this.roundDecimals(activeWidth) +
-      this.roundDecimals(nextWidth) -
-      this.roundDecimals(currentSizeHorizontal)
-    const heightCombined = this.roundDecimals(activeHeight) +
-      this.roundDecimals(nextHeight) -
-      this.roundDecimals(currentSizeVertical)
+    const activeOffsetWidthPercent = convertToPercent(activePane.offsetWidth, realPaneViewWidth)
+    const activeOffsetHeightPercent = convertToPercent(activePane.offsetHeight, realPaneViewHeight)
+    const widthCombined = roundDecimals(activeWidth) +
+      roundDecimals(nextWidth) -
+      roundDecimals(currentSizeHorizontal)
+    const heightCombined = roundDecimals(activeHeight) +
+      roundDecimals(nextHeight) -
+      roundDecimals(currentSizeVertical)
 
     if (current === null) return
 
     if (split === 'horizontal') {
-      newPaneArr.map((el, i) => {
+      newPaneArr.forEach((el, i) => {
         if (i === current) {
           el.size = currentSizeHorizontal > 0 ? currentSizeHorizontal : 0
-          el.size = this.convertToPercent(el.size, realPaneViewWidth)
+          el.size = convertToPercent(el.size, realPaneViewWidth)
           if (widthCombined <= 0) {
             el.size = activeOffsetWidthPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(widthCombined, realPaneViewWidth)
+          el.size = convertToPercent(widthCombined, realPaneViewWidth)
         }
       })
     }
 
     if (split === 'vertical') {
-      newPaneArr.map((el, i) => {
+      newPaneArr.forEach((el, i) => {
         if (i === current) {
           el.size = currentSizeVertical > 0 ? currentSizeVertical : 0
-          el.size = this.convertToPercent(el.size, realPaneViewHeight)
+          el.size = convertToPercent(el.size, realPaneViewHeight)
           if (heightCombined <= 0) {
             el.size = activeOffsetHeightPercent
           }
         } else if (i === current + 1) {
-          el.size = this.convertToPercent(heightCombined, realPaneViewHeight)
+          el.size = convertToPercent(heightCombined, realPaneViewHeight)
         }
       })
     }
@@ -302,7 +277,6 @@ class PaneView extends React.Component {
 }
 
 PaneView.displayName = 'PaneView'
-
 PaneView.propTypes = propTypes
 PaneView.defaultProps = defaultProps
 
