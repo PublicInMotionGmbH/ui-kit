@@ -14,7 +14,7 @@ const moduleName = 'pagination'
 const ellipsisId = 'talixo-pagination-ellipsis'
 
 const propTypes = {
-  /** Active page */
+  /** Active page. */
   activePage: PropTypes.number,
 
   /** Additional class name passed to wrapper. */
@@ -35,19 +35,19 @@ const propTypes = {
   /** Should `Next` button be disabled. */
   nextDisabled: PropTypes.bool,
 
-  /** Next button label */
+  /** Next button label. */
   nextLabel: PropTypes.node,
 
-  /** Function passed to page buttons */
+  /** Function passed to page buttons. */
   onChange: PropTypes.func,
 
-  /** The total number of pages */
+  /** The total number of pages. */
   pageCount: PropTypes.number.isRequired,
 
   /** Should `Previous` button be disabled? */
   previousDisabled: PropTypes.bool,
 
-  /** Previous button label */
+  /** Previous button label. */
   previousLabel: PropTypes.node
 }
 
@@ -127,7 +127,7 @@ class Pagination extends React.Component {
    * @param {array} elements
    * @returns {object[]}
    */
-  prepareElements = (elements) => {
+  prepareElements (elements) {
     const { ellipsisPlaceholder } = this.props
     const { activePage } = this.state
 
@@ -149,6 +149,7 @@ class Pagination extends React.Component {
     const { displayedLimit, ellipsisPlaceholder, pageCount } = this.props
     const { activePage } = this.state
 
+    // Middle element siblings.
     const siblingsCount = displayedLimit > -1 ? displayedLimit : 1
 
     // Current element + always visible sideelements + siblings from each side.
@@ -204,14 +205,22 @@ class Pagination extends React.Component {
       <div className={wrapperCls} {...restProps}>
         {
           !hideButtons &&
-          <Button disabled={prevButtonDisabled} type='primary' onClick={() => this.handleNext(-1)}>
+          <Button
+            disabled={prevButtonDisabled}
+            type='primary'
+            onClick={() => this.handleNext(-1)}
+          >
             { previousLabel }
           </Button>
         }
         { !hidePages && <Navigation elements={pageElements} type='pagination' /> }
         {
           !hideButtons &&
-          <Button disabled={nextButtonDisabled} type='primary' onClick={() => this.handleNext(1)}>
+          <Button
+            disabled={nextButtonDisabled}
+            type='primary'
+            onClick={() => this.handleNext(1)}
+          >
             { nextLabel }
           </Button>
         }

@@ -12,9 +12,6 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Divider */
-  divider: PropTypes.node,
-
   /** Should it be a panel? Applies only to Navigation type `sidebar`. */
   panel: PropTypes.bool,
 
@@ -38,7 +35,6 @@ const defaultProps = {
  * @param {object} props
  * @param {node} [props.children]
  * @param {string} [props.className]
- * @param {node} [props.divider]
  * @param {boolean} [props.panel]
  * @param {boolean} [props.parent]
  * @param {node} [props.subtitle]
@@ -47,7 +43,7 @@ const defaultProps = {
  * @returns {React.Element}
  */
 function NavigationWrapper (props) {
-  const { children, className, divider, panel, parent, subtitle, type, ...passedProps } = props
+  const { children, className, panel, parent, subtitle, type, ...passedProps } = props
 
   const clsName = buildClassName(moduleName, className, { panel, parent }, [type])
   const subtitleCls = buildClassName([moduleName, 'subtitle'])

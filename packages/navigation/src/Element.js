@@ -14,7 +14,7 @@ export const moduleName = 'navigation-element'
  * @param {object} options
  * @returns {Element|ReactElement}
  */
-const defaultRender = function (props, options) {
+function defaultRender (props, options) {
   return props.type !== 'tree'
     ? props.label
     : <span>
@@ -33,7 +33,7 @@ const propTypes = {
   /** Element children. */
   children: PropTypes.node,
 
-  /** Additional class name passedto element wrapper */
+  /** Additional class name passedto element wrapper. */
   className: PropTypes.string,
 
   /** Is action related to this element completed (e.g. iniside a step)? */
@@ -49,7 +49,7 @@ const propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /** Element label. */
-  label: PropTypes.string,
+  label: PropTypes.node,
 
   /** onClick callback. */
   onClick: PropTypes.func,
@@ -64,7 +64,7 @@ const propTypes = {
   subelements: PropTypes.arrayOf(PropTypes.object),
 
   /** Subtitle of element exapandable menu. */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /** Navigation type. */
   type: PropTypes.string
@@ -90,7 +90,7 @@ const defaultProps = {
  * @property {boolean} [props.open]
  * @property {function} [props.render]
  * @property {object[]} [props.subelements]
- * @property {string} [props.subtitle]
+ * @property {node} [props.subtitle]
  * @property {string} [props.type]
  *
  * @property {object} state

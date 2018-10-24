@@ -52,7 +52,6 @@ describe('<Navigation />', () => {
 
   it('should render subtitle when it is  passed', () => {
     const wrapper = createWrapper({ subtitle: 'test-subtitle' })
-    console.log(wrapper.find(subtitleCls).props())
     expect(wrapper.find(subtitleCls).exists()).toBe(true)
   })
 })

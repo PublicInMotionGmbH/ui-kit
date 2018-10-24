@@ -58,6 +58,9 @@ export function addDivider (elements, divider) {
 
 const propTypes = {
   /** Additional class name passed to wrapper. */
+  children: PropTypes.node,
+
+  /** Additional class name passed to wrapper. */
   className: PropTypes.string,
 
   /** Divider element. */
@@ -87,7 +90,7 @@ const propTypes = {
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
     /** Element label. */
-    label: PropTypes.string,
+    label: PropTypes.node,
 
     /** onClick callback. */
     onClick: PropTypes.func,
@@ -105,7 +108,7 @@ const propTypes = {
     subelements: PropTypes.arrayOf(PropTypes.object),
 
     /** Subtitle of element exapandable menu. */
-    subtitle: PropTypes.string
+    subtitle: PropTypes.node
   })),
 
   /** Type of navigation. Can beone of: `breadcrumbs`, `navbar`, `pagination`, `sidebar`, `steps`, `tabs`, `tree` */
@@ -138,16 +141,16 @@ const defaultProps = {
  * @param {boolean} [props.elements.panel]
  * @param {function} [props.elements.render]
  * @param {object[]} [props.elements.subelements]
- * @param {string} [props.elements.subtitle]
+ * @param {node} [props.elements.subtitle]
  * @param {string} [props.type]
  *
  * @returns {Element|ReactElement}
  */
 function Navigation (props) {
-  const { className, children, divider, elements, type, ...passedProps } = props
+  const { children, divider, elements, type, ...passedProps } = props
   const hasDivider = type === 'breadcrumbs' && divider != null
 
-  const generatedElements = children == null && Array.isArray(elements)
+  const generatedElements = Array.isArray(elements) && elements.length > 0
     ? elements.map((element, index) => buildElements(element, type))
     : children
 
@@ -156,7 +159,7 @@ function Navigation (props) {
     : generatedElements
 
   return (
-    <NavigationWrapper parent type={type} {...passedProps}>
+    <NavigationWrapper type={type} {...passedProps} parent>
       { renderElements }
     </NavigationWrapper>
   )

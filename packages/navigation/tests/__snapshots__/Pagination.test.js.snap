@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination /> rendring should render correctly even when wrong display number is passed 1`] = `
+<div
+  className="talixo-pagination"
+>
+  <Button
+    disabled={true}
+    fluid={false}
+    ghost={false}
+    onClick={[Function]}
+    small={false}
+    type="primary"
+  >
+    Previous
+  </Button>
+  <Navigation
+    elements={
+      Array [
+        Object {
+          "active": true,
+          "disabled": false,
+          "id": 1,
+          "label": 1,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 2,
+          "label": 2,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 3,
+          "label": 3,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 4,
+          "label": 4,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 5,
+          "label": 5,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": true,
+          "id": "talixo-pagination-ellipsis--5",
+          "label": "...",
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 10,
+          "label": 10,
+          "onClick": [Function],
+        },
+      ]
+    }
+    type="pagination"
+  />
+  <Button
+    disabled={false}
+    fluid={false}
+    ghost={false}
+    onClick={[Function]}
+    small={false}
+    type="primary"
+  >
+    Next
+  </Button>
+</div>
+`;
+
+exports[`<Pagination /> rendring should render properly 1`] = `
+<div
+  className="talixo-pagination"
+>
+  <Button
+    disabled={true}
+    fluid={false}
+    ghost={false}
+    onClick={[Function]}
+    small={false}
+    type="primary"
+  >
+    Previous
+  </Button>
+  <Navigation
+    elements={
+      Array [
+        Object {
+          "active": true,
+          "disabled": false,
+          "id": 1,
+          "label": 1,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 2,
+          "label": 2,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 3,
+          "label": 3,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 4,
+          "label": 4,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 5,
+          "label": 5,
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": true,
+          "id": "talixo-pagination-ellipsis--5",
+          "label": "...",
+          "onClick": [Function],
+        },
+        Object {
+          "active": false,
+          "disabled": false,
+          "id": 10,
+          "label": 10,
+          "onClick": [Function],
+        },
+      ]
+    }
+    type="pagination"
+  />
+  <Button
+    disabled={false}
+    fluid={false}
+    ghost={false}
+    onClick={[Function]}
+    small={false}
+    type="primary"
+  >
+    Next
+  </Button>
+</div>
+`;

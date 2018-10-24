@@ -25,89 +25,103 @@ to avoid having different versions of these in your application.
 
 ### Navigation
 
-It allows any props which are allowed for `ul`. Additionally, it handles some differently:
+It allows any props which are allowed for `nav`. Additionally, it handles some differently:
 
-Property name | Type           | Default        | Description
---------------|----------------|:--------------:|--------------------------------
-children      | node           | n/a            | Navigation items
-className     | string         | n/a            | Additional class name passed to wrapper
-divider       | node           | n/a            | Divider
-type          | NavigationType | `'navigation'` | Type of navigation
+Property name | Type            | Default        | Description
+--------------|-----------------|:--------------:|--------------------------------
+children      | node            | n/a            | Navigation items. Visible only when elements are not passed.
+className     | string          | n/a            | Additional class name passed to wrapper.
+elements      | ElementShape[]  | `[]`           | Divider
+panel         | boolean         | n/a            | Should it be a panel? Applies only to Navigation type `sidebar`.
+subtitle      | node            | n/a            | Submenu title.
+type          | NavigationType  | `'navbar'`     | Type of navigation.
 
 ### Element
 
-It allows any props which are allowed for `li`. Additionally, it handles some differently:
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
 Property name | Type           | Default        | Description
 --------------|----------------|:--------------:|--------------------------------
-active        | bool           | `false`        | Active state
-children      | node           | n/a            | Element items
-className     | string         | n/a            | Additional class name passed to element
-completed     | bool           | `false`        | Completed state
-disabled      | bool           | `false`        | Disabled state
-onClick       | func           | n/a            | Function passed to element
+active        | boolean        | n/a            | Is element active?
+children      | node           | n/a            | Element children.
+className     | string         | n/a            | Additional class name passedto element wrapper.
+completed     | boolean        | n/a            | Is action related to this element completed (e.g. iniside a step)?
+disabled      | boolean        | n/a            | Is element disabled?
+error         | boolean        | n/a            | Does it have ana error? 
+id            | number|string  | n/a            | Element identifier. It will be passed to onChange and onHover functions as a first argument.
+label         | node           | n/a            | Element label.
+onClick       | function       | n/a            | onClick callback.
+open          | boolean        | n/a            | Is this element open? 
+render        | function       | DefaultRender  | Render method of each element.
+subelements   | ElementShape[] | n/a            | Array of subelements. Any of element prop can be passed to each object.
+subtitle      | node           | n/a            | Subtitle of element exapandable menu.
+type          | node           | n/a            | Navigation type.
 
-### Step
+### Pagination
 
-It allows any props which are allowed for `li`. Additionally, it handles some differently:
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
 
-Property name | Type           | Default        | Description
---------------|----------------|:--------------:|--------------------------------
-active        | bool           | `false`        | Active state
-children      | node           | n/a            | Tooltips content
-className     | string         | n/a            | Additional class name passed to element
-completed     | bool           | `false`        | Completed state
-disabled      | bool           | `false`        | Disabled state
-onClick       | func           | n/a            | Function passed to element
+Property name       | Type      | Default     | Description
+--------------------|-----------|:-----------:|--------------------------------
+activePage          | number    | n/a         | Active page.
+className           | string    | n/a         | Additional class name passed to wrapper.
+displayedLimit      | number    | `1`         | Maximum number of displayed page buttons on each side of active page.
+ellipsisPlaceholder | node      | `...`       | Placeholder for the ellipsis.
+hidePages           | boolean   | n/a         | Allows to hide page from pagination.
+hideButtons         | boolean   | n/a         | Allows to hide pagination buttons (`Next` and `Previous`).
+nextDisabled        | boolean   | n/a         | Should `Next` button be disabled.
+nextLabel           | node      | `Next`      | Next button label.
+onChange            | function  | n/a         | Function passed to page buttons.
+pageCount           | number    | n/a         | The total number of pages.
+previousDisabled    | boolean   | n/a         | Should `Previous` button be disabled?
+previousLabel       | node      | `Previous`  | Previous button label.
 
-### ControlledPagination
 
-Property name  | Type   | Required | Default      | Description
----------------|--------|----------|:------------:|--------------------------------
-activePage     | number |          | `1`          | Active page
-displayedLimit | number |          | `10`         | Maximum number of displayed page buttons
-nextLabel      | node   |          | `'Next'`     | Next button label
-onChange       | func   |          | n/a          | Function passed to page buttons
-pageCount      | number | yes      | n/a          | The total number of pages
-previousLabel  | node   |          | `'Previous'` | Previous button label
-
-### ControlledTabs
-
-Property name  | Type    | Required | Default  | Description
----------------|---------|----------|:--------:|--------------------------------
-activeTab      | number  |          | `0`      | Active tab
-labels         | Label[] |          | `[]`     | List of tab labels
-onChange       | func    |          | n/a      | Function passed to page buttons
-
-### Steps
-
-Property name  | Type   | Required | Default  | Description
----------------|--------|----------|:--------:|--------------------------------
-current        | object |          | n/a      | Active step
-steps          | Step[] |          | `[]`     | List of steps
-onChange       | func   |          | n/a      | Function passed to step buttons
-
-#### Types
+## Types
 
 Type name      | Enum options
----------------|---------------------------------------------------
-NavigationType | 'navigation', 'pagination', 'breadcrumbs', 'tabs'
+---------------|---------------------------------------------------------------------------
+NavigationType | 'breadcrumbs', 'navbar', 'pagination', 'sidebar', 'steps', 'tabs', 'tree'
 
-### Property shapes
 
-#### Label
+## Property shapes
 
-Property name | Type      | Required | Default       | Description
---------------|-----------|----------|:-------------:|------------------------------------------------
-id            | number    | yes      | n/a           | Label's id
-name          | string    | yes      | n/a           | Label's name
+### ElementShape
 
-#### Step
+Property name | Type           | Default        | Description
+--------------|----------------|:--------------:|--------------------------------
+active        | boolean        | n/a            | Is element active?
+children      | node           | n/a            | Element children.
+className     | string         | n/a            | Additional class name passedto element wrapper.
+completed     | boolean        | n/a            | Is action related to this element completed (e.g. iniside a step)?
+disabled      | boolean        | n/a            | Is element disabled?
+error         | boolean        | n/a            | Does it have ana error? 
+id            | number|string  | n/a            | Element identifier. It will be passed to onChange and onHover functions as a first argument.
+label         | node           | n/a            | Element label.
+onClick       | function       | n/a            | onClick callback.
+open          | boolean        | n/a            | Is this element open? 
+render        | function       | DefaultRender  | Render method of each element.
+subelements   | ElementShape[] | n/a            | Array of subelements. Any of element prop can be passed to each object.
+subtitle      | node           | n/a            | Subtitle of element exapandable menu.
+type          | node           | n/a            | Navigation type.
 
-Property name | Type      | Required | Default       | Description
---------------|-----------|----------|:-------------:|------------------------------------------------
-name          | string    | yes      | n/a           | Step's name
-disabled      | boolean   | yes      | n/a           | Disabled state
+
+## Functions
+
+### DefaultRender
+```jsx harmony
+function defaultRender (props, options) {
+  return props.type !== 'tree'
+    ? props.label
+    : <span>
+      <Icon
+        style={{ visibility: props.subelements ? 'visible' : 'hidden' }}
+        name={options.open ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}
+      />
+      { props.label }
+    </span>
+}
+```
 
 ## Changelog
 

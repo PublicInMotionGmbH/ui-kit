@@ -187,12 +187,12 @@ addStory('initial', readme, () => (
 
 addStory('pagination', readme, () => (
   <Navigation type='pagination'>
-    <Element onClick={action('click Previous')}>Previous</Element>
-    <Element active onClick={action('click 1')}>1</Element>
-    <Element onClick={action('click 2')}>2</Element>
-    <Element onClick={action('click 3')}>3</Element>
-    <Element onClick={action('click 3')}>...</Element>
-    <Element onClick={action('click Next')}>Next</Element>
+    <Element id='previous' onClick={action('click Previous')}>Previous</Element>
+    <Element id={1} active onClick={action('click 1')}>1</Element>
+    <Element id={2} onClick={action('click 2')}>2</Element>
+    <Element id={3} onClick={action('click 3')}>3</Element>
+    <Element id={4} onClick={action('click 4')}>...</Element>
+    <Element id='next' onClick={action('click Next')}>Next</Element>
   </Navigation>
 ))
 
