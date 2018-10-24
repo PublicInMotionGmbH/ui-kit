@@ -4,7 +4,7 @@ import range from 'lodash/range'
 
 import { Button } from '@talixo/button'
 
-import { buildClassName } from '@talixo/shared/'
+import { buildClassName } from '@talixo/shared'
 
 // import Element from './Element'
 import Navigation from './Navigation'
@@ -104,9 +104,7 @@ class Pagination extends React.Component {
       return
     }
 
-    if (this.props.activePage == null) {
-      this.handlePageChange(nextPage)
-    }
+    this.handlePageChange(nextPage)
   }
 
   /**
@@ -118,7 +116,10 @@ class Pagination extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(page)
     }
-    this.setState({ activePage: page })
+
+    if (this.props.activePage == null) {
+      this.setState({ activePage: page })
+    }
   }
 
   /**

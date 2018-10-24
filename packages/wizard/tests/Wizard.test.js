@@ -73,12 +73,12 @@ describe('<Wizard />', () => {
 
     expect(wrapper.find('Step1').length).toBe(1)
 
-    wrapper.find('li').last().simulate('click')
+    wrapper.find('Button').last().simulate('click')
 
     expect(wrapper.find('Step1').length).toBe(0)
     expect(wrapper.find('Step2').length).toBe(1)
 
-    wrapper.find('li').first().simulate('click')
+    wrapper.find('Button').first().simulate('click')
 
     expect(wrapper.find('Step1').length).toBe(1)
     expect(wrapper.find('Step2').length).toBe(0)

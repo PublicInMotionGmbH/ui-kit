@@ -5,5 +5,14 @@ exports[`<Wizard /> renders children correctly 1`] = `
   className="talixo-wizard"
 >
   <Step1 />
+  <Pagination
+    activePage={1}
+    displayedLimit={1}
+    ellipsisPlaceholder="..."
+    nextLabel="Next"
+    onChange={[Function]}
+    pageCount={3}
+    previousLabel="Previous"
+  />
 </div>
 `;

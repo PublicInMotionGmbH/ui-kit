@@ -47,12 +47,12 @@ export function buildElements (element, type) {
  */
 export function addDivider (elements, divider) {
   const dividerCls = buildClassName([moduleName, 'divider'])
-  const dividerElement = <div className={dividerCls}>{divider}</div>
+  const dividerElement = key => (<div key={key} className={dividerCls}>{divider}</div>)
   const elementsLastIndex = elements.length - 1
 
   return flatMap(elements, (element, index) => [
     element,
-    index !== elementsLastIndex && dividerElement
+    index !== elementsLastIndex && dividerElement(index)
   ])
 }
 

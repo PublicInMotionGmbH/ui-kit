@@ -38,7 +38,7 @@ describe('<Navigation />', () => {
 
   it('renders types correctly', () => {
     const wrappers = {
-      navigation: createWrapper({ type: 'navigation' }),
+      navbar: createWrapper({ type: 'navbar' }),
       pagination: createWrapper({ type: 'pagination' }),
       breadcrumbs: createWrapper({ type: 'breadcrumbs' }),
       tabs: createWrapper({ type: 'tabs' }),

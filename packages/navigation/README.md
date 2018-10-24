@@ -11,8 +11,10 @@ using `npm install @talixo/navigation --save` or `yarn add @talixo/navigation`.
 
 Your package should additionally have some extra dependencies:
 
+- `@talixo/button: ^1.0.0-alpha.31`
+- `@talixo/icon: ^1.0.0-alpha.31`
+- `@talixo/number-input: ^1.0.0-alpha.31`
 - `@talixo/shared: ^1.0.0-alpha.31`
-- `@talixo/tooltip: ^1.0.0-alpha.31`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
