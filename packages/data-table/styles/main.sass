@@ -7,13 +7,13 @@
       user-select: none
 
   &__header
-    &__arrows
+    #{prefix('data-table')}__arrows
       display: inline-flex
       flex-direction: column
       font-size: dp(2.5)
       vertical-align: middle
 
-    &__arrow
+    #{prefix('data-table')}__arrow
       &-down, &-up
         margin: $data-table-sort-arrow-margin
         color: $data-table-color-inactive
@@ -24,15 +24,17 @@
 
   &__row
     &--even
-      #{prefix('data-table', 'cell')}, > #{prefix('table', 'actions')}
+      #{prefix('data-table', 'cell')},
+      > #{prefix('table', 'actions')}
         color: $data-table-even-row-text-color
         background: $data-table-even-row-background-color
 
       &:hover
-        #{prefix('data-table', 'cell')}, #{prefix('table', 'actions')}
+        #{prefix('data-table', 'cell')},
+        #{prefix('table', 'actions')}
           background: $data-table-even-row-background-hover-color
 
-  & &__collapse
+  & #{prefix('data-table')}__collapse
     transition: $data-table-transition
 
     #{prefix('data-table', 'collapse', 'cell')}

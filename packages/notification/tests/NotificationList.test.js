@@ -5,7 +5,7 @@ import { prefix } from '@talixo/shared'
 
 import NotificationList from '../src/NotificationList'
 
-const name = prefix('notifications-list')
+const name = prefix('notification-list')
 
 describe('<NotificationList />', () => {
   beforeEach(() => jest.useFakeTimers())

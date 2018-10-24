@@ -1,2 +1,175 @@
-@import './geometry'
-@import './theming'
+// Normalize CSS
+@import '~normalize.css/normalize.css'
+
+@import './config'
+
+// Setting up dp
+
+html
+  font-size: $base-px * 2
+
+html, body
+  margin: 0
+  padding: 0
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+body,
+input
+  font: #{$typography-base-font-size}/#{$typography-base-line-height} 'Open Sans', Arial, Tahoma, sans-serif
+  font-weight: $typography-base-font-weight
+  color: $typography-base-text-color
+
+// Simple stuff
+
+img
+  max-width: 100%
+
+// Anchors
+
+a
+  color: $typography-link-color
+  text-decoration: underline
+
+  &:hover
+    color: $typography-link-hover-color
+    text-decoration: none
+
+// Headers
+
+h1
+  font-size: $typography-h1-font-size
+  font-weight: $typography-h1-font-weight
+
+h2
+  font-size: $typography-h2-font-size
+  font-weight: $typography-h2-font-weight
+
+h3
+  font-size: $typography-h3-font-size
+  font-weight: $typography-h3-font-weight
+
+h4
+  font-size: $typography-h4-font-size
+  font-weight: $typography-h4-font-weight
+
+h5
+  font-size: $typography-h5-font-size
+  font-weight: $typography-h5-font-weight
+
+h6
+  font-size: $typography-h6-font-size
+  font-weight: $typography-h6-font-weight
+
+h1, h2, h3, h4, h5, h6
+  margin: 0.7em 0 0.8em
+  line-height: 1.5em
+
+  > small
+    display: block
+    margin-top: -0.7em
+    font-size: 0.6em
+    color: #aaa
+
+@include module('lead')
+  font-size: $typography-lead-font-size
+  line-height: 1.75em
+  color: $typography-lead-color
+  margin-bottom: dp(1)
+
+  h1 + #{prefix('lead')}
+    margin-top: dp(-2)
+
+  h2 + #{prefix('lead')}
+    margin-top: dp(-1.7)
+
+  h3 + #{prefix('lead')}
+    margin-top: dp(-1)
+
+  h4 + #{prefix('lead')}
+    margin-top: dp(-0.6)
+
+  h5 + #{prefix('lead')}
+
+// Text
+
+b, strong
+  font-weight: $x-weight-bold
+
+small
+  font-size: $x-font-size-small
+
+em, i
+  font-style: italic
+
+p
+  margin: dp(1.5) 0
+
+mark
+  display: inline
+  padding: dp(0.25) dp(0.75)
+  margin: 0 dp(0.25)
+  border-radius: dp(0.5)
+  background: $typography-mark-background-color
+  color: $typography-mark-text-color
+
+// Special text
+
+code
+  display: inline
+  padding: dp(0.5) dp(0.75)
+  margin: 0 dp(0.5)
+  border-radius: dp(0.5)
+  background: $typography-code-background-color
+  color: $typography-code-text-color
+
+kbd
+  display: inline
+  padding: dp(0.5) dp(0.75)
+  margin: 0 dp(0.5)
+  border-radius: dp(0.5)
+  color: $typography-kbd-text-color
+  background: $typography-kbd-background-color
+  border: $typography-kbd-border-width solid $typography-kbd-border-color
+
+  @if $typography-kbd-box-shadow
+    box-shadow: 1px 2px #{$typography-kbd-box-shadow-color}
+
+del, s
+  text-decoration: line-through
+
+abbr
+  cursor: help
+
+// Blocks
+
+blockquote
+  display: block
+  margin: 0 0 dp(2)
+  padding: dp(2)
+  border: 0 solid $typography-blockquote-border-color
+  border-left-width: dp(1)
+  background: $typography-blockquote-background-color
+  color: $typography-blockquote-text-color
+  font-style: italic
+
+  > footer
+    margin-top: dp(2)
+    color: $typography-blockquote-footer-text-color
+
+    &:before
+      content: '—'
+      margin-right: dp(1)
+
+blockquote
+  @include rtl-only
+    border-left-width: 0
+    border-right-width: dp(1)
+
+    > footer
+      &:before
+        display: none
+
+      &:after
+        content: '—'
+        margin-right: dp(1)

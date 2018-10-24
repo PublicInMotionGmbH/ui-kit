@@ -10,7 +10,7 @@
     line-height: $number-input-stepper-height
     width: $number-input-full-stepper-width
 
-  #{inside('#{&}-stepper', 'button')}
+  &-stepper__button
     display: inline-block
     box-sizing: border-box
     width: $number-input-stepper-width
@@ -33,7 +33,8 @@
     .tai
       font-weight: $number-input-stepper-weight
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       border-color: $number-input-stepper-hover-border-color
       color: $number-input-stepper-hover-text-color
       background-color: $number-input-stepper-hover-background-color
@@ -43,8 +44,11 @@
       color: $number-input-stepper-active-text-color
       background-color: $number-input-stepper-active-background-color
 
-  #{inside('#{&}-stepper--disabled', 'button')}
-    &, &:hover, &:focus, &:active
+  &-stepper--disabled #{prefix('number-input-stepper', 'button')}
+    &,
+    &:hover,
+    &:focus,
+    &:active
       border-color: $number-input-stepper-disabled-border-color
       color: $number-input-stepper-disabled-text-color
       background-color: $number-input-stepper-disabled-background-color

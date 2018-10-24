@@ -1,2 +1,17 @@
-@import './geometry'
-@import './theming'
+@import './config'
+
+@include module('map')
+  position: relative
+  display: block
+
+  &__element
+    height: 100%
+
+  &--non-interactive:before
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    z-index: 1
