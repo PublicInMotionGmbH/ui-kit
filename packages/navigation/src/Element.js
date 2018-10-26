@@ -188,10 +188,10 @@ class Element extends React.Component {
    * @param {Event} e
    */
   handleClick = (e) => {
-    const { disabled, subelement, id, onClick } = this.props
+    const { disabled, children, subelement, id, onClick } = this.props
     const open = !this.state.open
     const state = {}
-    const hasSubelement = !!subelement
+    const hasSubelement = !!subelement || !!children
 
     e.stopPropagation()
     e.preventDefault()
@@ -275,11 +275,11 @@ class Element extends React.Component {
    * @returns {null|Element|ReactElement}
    */
   renderMenu () {
-    const { subelement } = this.props
+    const { children, subelement } = this.props
     const menuCls = buildClassName([ moduleName, 'menu' ])
     return (
       <div className={menuCls}>
-        { subelement }
+        { subelement || children }
       </div>
     )
   }
@@ -294,8 +294,8 @@ class Element extends React.Component {
     const elementCls = buildClassName(moduleName, className, { active, completed, disabled, error, open })
     const buttonCls = buildClassName([ moduleName, 'button' ])
 
-    const renderElement = render(this.props, { open, active }) || children
-    const menuElement = subelements ? this.renderMenu() : null
+    const renderElement = render(this.props, { open, active })
+    const menuElement = subelements || children ? this.renderMenu() : null
 
     return (
       <div

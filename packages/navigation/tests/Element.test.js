@@ -23,7 +23,7 @@ const wrapperCls = `.${buildClassName(moduleName)}`
 describe('<Element />', () => {
   describe('rendering', () => {
     it('renders correctly when children are passed and render function return null or undefined', () => {
-      const wrapper = mount(<Element>Home</Element>)
+      const wrapper = mount(<Element label='Home' />)
       expect(wrapper).toMatchSnapshot()
       wrapper.unmount()
     })

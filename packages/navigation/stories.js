@@ -152,12 +152,35 @@ const withoutSubelements = [
 
 // Stories
 
-addStory('simple nav with subelements', readme, () => (
+addStory('navbar', readme, () => (
   <div>
+    <h2>Using element prop</h2>
     <Navigation elements={withSubelements} />
-    <br />
-    <br />
+
+    <h2>Using Element component</h2>
+    <Navigation>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation>
+          <Element label='Minorlabel' onClick={action('click home')} />
+        </Navigation>
+      </Element>
+    </Navigation>
+  </div>
+))
+
+addStory('breadcrumbs', readme, () => (
+  <div>
+    <h2>Using element prop</h2>
     <Navigation elements={withSubelements} type={'breadcrumbs'} divider='/' />
+
+    <h2>Using Element component</h2>
+    <Navigation type='breadcrumbs' divider='/'>
+      <Element onClick={action('click home')}>Home</Element>
+      <Element onClick={action('click issues')}>Issues</Element>
+      <Element onClick={action('click minor')}>Minor</Element>
+    </Navigation>
   </div>
 ))
 
@@ -169,8 +192,18 @@ addStory('tree view', readme, () => (
   <Navigation elements={withSubelements} type='tree' />
 ))
 
-addStory('tabs gen', readme, () => (
-  <Navigation elements={withSubelements} type='tabs' />
+addStory('tabs', readme, () => (
+  <div>
+    <h2>Using element prop</h2>
+    <Navigation elements={withSubelements} type='tabs' />
+
+    <h2>Using Element component</h2>
+    <Navigation type='tabs'>
+      <Element onClick={action('click home')}><a href='#'>Home</a></Element>
+      <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
+      <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
+    </Navigation>
+  </div>
 ))
 
 addStory('steps gen', readme, () => (
@@ -217,14 +250,6 @@ addStory.controlled('controlled pagination', readme, (setState, state) => (
   }
 })
 
-addStory('breadcrumbs', readme, () => (
-  <Navigation type='breadcrumbs'>
-    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
-    <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
-  </Navigation>
-))
-
 addStory('breadcrumbs with custom divider', readme, () => (
   <Navigation type='breadcrumbs' divider='>'>
     <Element onClick={action('click home')}><a href='#'>Home</a></Element>
@@ -233,13 +258,6 @@ addStory('breadcrumbs with custom divider', readme, () => (
   </Navigation>
 ))
 
-addStory('tabs', readme, () => (
-  <Navigation type='tabs'>
-    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
-    <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
-  </Navigation>
-))
 addStory('steps', readme, () => (
   <Navigation type='steps'>
     <Element completed>Cart</Element>
