@@ -68,6 +68,7 @@ exports[`<Pagination /> rendring should render correctly even when wrong display
         },
       ]
     }
+    parent={true}
     type="pagination"
   />
   <Button
@@ -151,6 +152,7 @@ exports[`<Pagination /> rendring should render properly 1`] = `
         },
       ]
     }
+    parent={true}
     type="pagination"
   />
   <Button

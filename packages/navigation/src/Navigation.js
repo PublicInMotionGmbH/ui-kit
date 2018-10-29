@@ -111,12 +111,16 @@ const propTypes = {
     subtitle: PropTypes.node
   })),
 
+  /** Is this a parent element? */
+  parent: PropTypes.bool,
+
   /** Type of navigation. Can beone of: `breadcrumbs`, `navbar`, `pagination`, `sidebar`, `steps`, `tabs`, `tree` */
   type: PropTypes.oneOf(['breadcrumbs', 'navbar', 'pagination', 'sidebar', 'steps', 'tabs', 'tree'])
 }
 
 const defaultProps = {
   elements: [],
+  parent: true,
   type: 'navbar'
 }
 
@@ -142,24 +146,25 @@ const defaultProps = {
  * @param {function} [props.elements.render]
  * @param {object[]} [props.elements.subelements]
  * @param {node} [props.elements.subtitle]
+ * @param {boolean} [props.parent]
  * @param {string} [props.type]
  *
  * @returns {Element|ReactElement}
  */
 function Navigation (props) {
-  const { children, divider, elements, type, ...passedProps } = props
+  const { children, divider, elements, parent, type, ...passedProps } = props
   const hasDivider = type === 'breadcrumbs' && divider != null
 
   const generatedElements = Array.isArray(elements) && elements.length > 0
     ? elements.map((element, index) => buildElements(element, type))
-    : children
+    : React.Children.map(children, child => React.cloneElement(child, { type: type }))
 
   const renderElements = hasDivider
     ? addDivider(generatedElements, divider)
     : generatedElements
 
   return (
-    <NavigationWrapper type={type} {...passedProps} parent>
+    <NavigationWrapper type={type} {...passedProps} parent={parent}>
       { renderElements }
     </NavigationWrapper>
   )

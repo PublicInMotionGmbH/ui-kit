@@ -44,6 +44,7 @@
     // Element button
     #{$sel-nav-elem-button}
       padding: $navigation-padding-vertical $navigation-padding-horizontal
+      white-space: nowrap
 
     // Dropdown which will be shown after element is clicked
     #{$sel-nav-elem-menu}
@@ -170,11 +171,13 @@
       color: $sidebar-panel-color
       box-shadow: $sidebar-box-shadow
       width: $sidebar-panel-width
+      padding: 2*$navigation-element-padding-vertical $navigation-element-padding-horizontal
 
       & > #{$sel-nav-elem}
         > #{$sel-nav-elem-button}
           font-weight: initial
           height: initial
+          display: block
 
         &--open >  #{$sel-nav-elem-button},
         &:hover > #{$sel-nav-elem-button}

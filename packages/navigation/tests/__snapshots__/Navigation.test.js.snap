@@ -6,19 +6,59 @@ exports[`<Navigation /> rendering should render properly when children are passe
   type="navbar"
 >
   <NavigationElement
+    key=".0"
+    label="test-element-0"
     render={[Function]}
-  >
-    test-element-0
-  </NavigationElement>
+    type="navbar"
+  />
   <NavigationElement
+    key=".1"
+    label="test-element-1"
     render={[Function]}
-  >
-    test-element-1
-  </NavigationElement>
+    type="navbar"
+  />
   <NavigationElement
+    key=".2"
+    label="test-element-2"
     render={[Function]}
+    type="navbar"
+  />
+</NavigationWrapper>
+`;
+
+exports[`<Navigation /> rendering should render properly when children are passed with own children 1`] = `
+<NavigationWrapper
+  parent={true}
+  type="tree"
+>
+  <NavigationElement
+    key=".0"
+    label="Home"
+    render={[Function]}
+    type="tree"
+  />
+  <NavigationElement
+    key=".1"
+    label="Issues"
+    render={[Function]}
+    type="tree"
+  />
+  <NavigationElement
+    key=".2"
+    label="Minor"
+    render={[Function]}
+    type="tree"
   >
-    test-element-2
+    <Navigation
+      elements={Array []}
+      parent={true}
+      type="navbar"
+    >
+      <NavigationElement
+        label="Minor label"
+        render={[Function]}
+      />
+    </Navigation>
   </NavigationElement>
 </NavigationWrapper>
 `;

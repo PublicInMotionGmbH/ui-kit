@@ -4,7 +4,10 @@ import { mount } from 'enzyme'
 import { buildClassName, prefix } from '@talixo/shared'
 
 import Element, { moduleName } from '../src/Element'
+import Navigation from '../src/Navigation'
+
 import { withSubelements } from './fixtures/elements'
+import { action } from '@storybook/addon-actions'
 
 const elementProps = withSubelements[0]
 const elementWithSubelement = {
@@ -32,6 +35,17 @@ describe('<Element />', () => {
       const wrapper = createWrapper(elementProps)
       expect(wrapper).toMatchSnapshot()
       wrapper.unmount()
+    })
+
+    it('should render children', () => {
+      const wrapper = mount(
+        <Element label='Minor'>
+          <Navigation>
+            <Element label='Minor label' />
+          </Navigation>
+        </Element>
+      )
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
@@ -66,6 +80,34 @@ describe('<Element />', () => {
       button.simulate('click')
       expect(elementProps.onClick).toHaveBeenCalledWith(elementProps.id, !wrapper.state().open)
       wrapper.unmount()
+    })
+
+    it('should pass proper type to navigation child', () => {
+      const wrapper = mount(
+        <Element type='breadcrumbs' label='label'>
+          <Navigation>
+            <Element label='Inner label' />
+          </Navigation>
+        </Element>
+      )
+
+      expect(wrapper.find('Navigation').props().type).toBe('breadcrumbs')
+    })
+
+    it('should not render elements children', () => {
+      const wrapper = mount(
+        <Navigation type='pagination'>
+          <Element label='Home' onClick={action('click home')} />
+          <Element label='Issues' onClick={action('click issues')} />
+          <Element label='Minor' onClick={action('click minor')}>
+            <Navigation>
+              <Element label='Minor label' onClick={action('click home')} />
+            </Navigation>
+          </Element>
+        </Navigation>
+      )
+
+      expect(wrapper.find('Element').length).toBe(3)
     })
   })
 

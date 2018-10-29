@@ -13,6 +13,37 @@ exports[`<Element /> rendering renders correctly when children are passed and re
 </div>
 `;
 
+exports[`<Element /> rendering should render children 1`] = `
+<div
+  className="talixo-navigation-element"
+>
+  <div
+    className="talixo-navigation-element__button"
+    onClick={[Function]}
+  >
+    Minor
+  </div>
+  <div
+    className="talixo-navigation-element__menu"
+  >
+    <nav
+      className="talixo-navigation talixo-navigation--navbar"
+    >
+      <div
+        className="talixo-navigation-element"
+      >
+        <div
+          className="talixo-navigation-element__button"
+          onClick={[Function]}
+        >
+          Minor label
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+`;
+
 exports[`<Element /> rendering should render correctly based on props 1`] = `
 <div
   className="talixo-navigation-element"
@@ -23,8 +54,5 @@ exports[`<Element /> rendering should render correctly based on props 1`] = `
   >
     Element 1
   </div>
-  <div
-    className="talixo-navigation-element__menu"
-  />
 </div>
 `;

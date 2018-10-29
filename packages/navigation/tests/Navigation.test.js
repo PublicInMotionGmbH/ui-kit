@@ -19,9 +19,23 @@ describe('<Navigation />', () => {
     it('should render properly when children are passed', () => {
       const wrapper = shallow(
         <Navigation>
-          <Element>test-element-0</Element>
-          <Element>test-element-1</Element>
-          <Element>test-element-2</Element>
+          <Element label='test-element-0' />
+          <Element label='test-element-1' />
+          <Element label='test-element-2' />
+        </Navigation>
+      )
+      expect(wrapper).toMatchSnapshot()
+    })
+    it('should render properly when children are passed with own children', () => {
+      const wrapper = shallow(
+        <Navigation type='tree'>
+          <Element label='Home' />
+          <Element label='Issues' />
+          <Element label='Minor'>
+            <Navigation>
+              <Element label='Minor label' />
+            </Navigation>
+          </Element>
         </Navigation>
       )
       expect(wrapper).toMatchSnapshot()

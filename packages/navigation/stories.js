@@ -125,12 +125,14 @@ const withSubelements = [
 
 const withoutSubelements = [
   {
+    completed: true,
     id: 0,
     label: 'Element 1',
     subtitle: 'Subtitile of element 1',
     onClick: click
   },
   {
+    active: true,
     id: 1,
     label: 'Element 2',
     subtitle: 'Subtitile of element 2',
@@ -154,16 +156,16 @@ const withoutSubelements = [
 
 addStory('navbar', readme, () => (
   <div>
-    <h2>Using element prop</h2>
+    <h2>Using element prop.</h2>
     <Navigation elements={withSubelements} />
 
-    <h2>Using Element component</h2>
+    <h2>Using Element components.</h2>
     <Navigation>
       <Element label='Home' onClick={action('click home')} />
       <Element label='Issues' onClick={action('click issues')} />
       <Element label='Minor' onClick={action('click minor')}>
         <Navigation>
-          <Element label='Minorlabel' onClick={action('click home')} />
+          <Element label='Minor label' onClick={action('click home')} />
         </Navigation>
       </Element>
     </Navigation>
@@ -172,97 +174,126 @@ addStory('navbar', readme, () => (
 
 addStory('breadcrumbs', readme, () => (
   <div>
-    <h2>Using element prop</h2>
-    <Navigation elements={withSubelements} type={'breadcrumbs'} divider='/' />
+    <h2>Using element prop.</h2>
+    <Navigation elements={withSubelements} type='breadcrumbs' />
 
-    <h2>Using Element component</h2>
-    <Navigation type='breadcrumbs' divider='/'>
-      <Element onClick={action('click home')}>Home</Element>
-      <Element onClick={action('click issues')}>Issues</Element>
-      <Element onClick={action('click minor')}>Minor</Element>
+    <h2>Using Element components.</h2>
+    <Navigation type='breadcrumbs'>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation>
+          <Element label='Minor label' onClick={action('click home')} />
+        </Navigation>
+      </Element>
+    </Navigation>
+  </div>
+))
+
+addStory('breadcrumbs with custom divider', readme, () => (
+  <div>
+    <h2>Using element prop.</h2>
+    <Navigation elements={withSubelements} type='breadcrumbs' divider='>>>' />
+
+    <h2>Using Element components.</h2>
+    <Navigation type='breadcrumbs' divider='>>>'>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation>
+          <Element label='Minor label' onClick={action('click home')} />
+        </Navigation>
+      </Element>
     </Navigation>
   </div>
 ))
 
 addStory('sidebar', readme, () => (
-  <Navigation elements={withSubelements} type='sidebar' />
-))
-
-addStory('tree view', readme, () => (
-  <Navigation elements={withSubelements} type='tree' />
-))
-
-addStory('tabs', readme, () => (
   <div>
-    <h2>Using element prop</h2>
-    <Navigation elements={withSubelements} type='tabs' />
+    <h2>Using element prop.</h2>
+    <Navigation elements={withSubelements} type='sidebar' />
 
-    <h2>Using Element component</h2>
-    <Navigation type='tabs'>
-      <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-      <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
-      <Element onClick={action('click minor')}><a href='#'>Minor</a></Element>
+    <h2>Using Element components.</h2>
+    <Navigation type='sidebar'>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation subtitle='This is a panel' panel>
+          <Element label='Minor label' onClick={action('click home')} />
+        </Navigation>
+      </Element>
     </Navigation>
   </div>
 ))
 
-addStory('steps gen', readme, () => (
-  <Navigation elements={withoutSubelements} type='steps' />
+addStory('tree view', readme, () => (
+  <div>
+    <h2>Using element prop.</h2>
+    <Navigation elements={withSubelements} type='tree' />
+
+    <h2>Using Element components.</h2>
+    <Navigation type='tree'>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation>
+          <Element label='Minor label' onClick={action('click home')} />
+        </Navigation>
+      </Element>
+    </Navigation>
+  </div>
 ))
 
-addStory('initial', readme, () => (
-  <Navigation>
-    <Element>Home</Element>
-    <Element>Issues</Element>
-    <Element>Minor</Element>
-  </Navigation>
-))
+addStory('tabs', readme, () => (
+  <div>
+    <h2>Using element prop.</h2>
+    <Navigation elements={withSubelements} type='tabs' />
 
-addStory('pagination', readme, () => (
-  <Navigation type='pagination'>
-    <Element id='previous' onClick={action('click Previous')}>Previous</Element>
-    <Element id={1} active onClick={action('click 1')}>1</Element>
-    <Element id={2} onClick={action('click 2')}>2</Element>
-    <Element id={3} onClick={action('click 3')}>3</Element>
-    <Element id={4} onClick={action('click 4')}>...</Element>
-    <Element id='next' onClick={action('click Next')}>Next</Element>
-  </Navigation>
-))
-
-addStory('gen pagination', readme, () => (
-  <Pagination
-    displayedLimit={1}
-    pageCount={8}
-    ellipsisPlaceholder={<Icon name='settings_ethernet' />}
-  />
-))
-
-addStory.controlled('controlled pagination', readme, (setState, state) => (
-  <Pagination
-    displayedLimit={-1}
-    onChange={i => setState({ page: i })}
-    activePage={state.page}
-    pageCount={20}
-  />
-), () => {
-  return {
-    page: 1
-  }
-})
-
-addStory('breadcrumbs with custom divider', readme, () => (
-  <Navigation type='breadcrumbs' divider='>'>
-    <Element onClick={action('click home')}><a href='#'>Home</a></Element>
-    <Element onClick={action('click issues')}><a href='#'>Issues</a></Element>
-    <Element active onClick={action('click minor')}><a href='#'>Minor</a></Element>
-  </Navigation>
+    <h2>Using Element components.</h2>
+    <Navigation type='tabs'>
+      <Element label='Home' onClick={action('click home')} />
+      <Element label='Issues' onClick={action('click issues')} />
+      <Element label='Minor' onClick={action('click minor')}>
+        <Navigation>
+          <Element label='Minor label' onClick={action('click home')} />
+        </Navigation>
+      </Element>
+    </Navigation>
+  </div>
 ))
 
 addStory('steps', readme, () => (
-  <Navigation type='steps'>
-    <Element completed>Cart</Element>
-    <Element completed>Confirm</Element>
-    <Element active>Shipping</Element>
-    <Element>Billing</Element>
-  </Navigation>
+  <div>
+    <h2>Using element prop.</h2>
+    <Navigation elements={withoutSubelements} type='steps' />
+
+    <h2>Using Element components.</h2>
+    <Navigation type='steps'>
+      <Element completed label='Cart' />
+      <Element active label='Confirm' />
+      <Element label='Shipping' />
+      <Element label='Billing' />
+    </Navigation>
+  </div>
+))
+
+addStory('pagination', readme, () => (
+  <div>
+    <h2>Using element prop.</h2>
+    <Pagination
+      displayedLimit={1}
+      pageCount={8}
+      ellipsisPlaceholder={<Icon name='settings_ethernet' />}
+    />
+
+    <h2>Using Element components.</h2>
+    <Navigation type='pagination'>
+      <Element id='previous' onClick={action('click Previous')} label='Previous' />
+      <Element id={1} active onClick={action('click 1')} label='1' />
+      <Element id={2} onClick={action('click 2')} label='2' />
+      <Element id={3} onClick={action('click 3')} label='3' />
+      <Element id={4} onClick={action('click 4')} label='...' />
+      <Element id='next' onClick={action('click Next')} label='Next' />
+    </Navigation>
+  </div>
 ))

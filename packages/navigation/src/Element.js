@@ -188,10 +188,10 @@ class Element extends React.Component {
    * @param {Event} e
    */
   handleClick = (e) => {
-    const { disabled, children, subelement, id, onClick } = this.props
+    const { disabled, id, onClick } = this.props
     const open = !this.state.open
     const state = {}
-    const hasSubelement = !!subelement || !!children
+    const hasSubelement = this.hasSubelement()
 
     e.stopPropagation()
     e.preventDefault()
@@ -270,16 +270,29 @@ class Element extends React.Component {
   }
 
   /**
+   * Check if elements has subelements.
+   * @returns {boolean}
+   */
+  hasSubelement () {
+    const { children, subelement, type } = this.props
+
+    return type !== 'tabs' && type !== 'pagination' && type !== 'steps' &&
+      (!!subelement || !!children)
+  }
+
+  /**
    * Renders collapsible menu with subelements.
    *
    * @returns {null|Element|ReactElement}
    */
-  renderMenu () {
-    const { children, subelement } = this.props
+  renderMenu = () => {
+    const { children, subelement, type } = this.props
     const menuCls = buildClassName([ moduleName, 'menu' ])
+    const menuElements = subelement || (children && React.cloneElement(children, { type: type, parent: false }))
+
     return (
       <div className={menuCls}>
-        { subelement || children }
+        { menuElements }
       </div>
     )
   }
@@ -295,7 +308,7 @@ class Element extends React.Component {
     const buttonCls = buildClassName([ moduleName, 'button' ])
 
     const renderElement = render(this.props, { open, active })
-    const menuElement = subelements || children ? this.renderMenu() : null
+    const menuElement = this.hasSubelement() ? this.renderMenu() : null
 
     return (
       <div
