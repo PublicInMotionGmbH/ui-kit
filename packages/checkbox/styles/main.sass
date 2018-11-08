@@ -92,10 +92,11 @@ $checkbox-box-focus-checked-shadow-size: ($checkbox-box-size - $checkbox-box-foc
   &--error > input:checked:not(:disabled) + span:before
     background-color: $checkbox-error-box-background-color
 
-  [dir=rtl] & > input + span
-    padding-left: $checkbox-box-margin
-    padding-right: $checkbox-box-margin + $checkbox-box-size
+  @include rtl-only
+    > input + span
+      padding-left: $checkbox-box-margin
+      padding-right: $checkbox-box-margin + $checkbox-box-size
 
-  [dir=rtl] & > input + span:before
+    > input + span:before
       left: auto
       right: 0

@@ -46,11 +46,11 @@
       background-color: $accordion-content-background-color
       padding: 0 $accordion-content-padding-vertical $accordion-content-padding-horizontal
 
-    &:first-child > &__toggle
+    &:first-child > #{prefix('accordion', 'toggle')}
       border-top-left-radius: $accordion-border-radius
       border-top-right-radius: $accordion-border-radius
 
-    &:last-child > &__toggle
+    &:last-child > #{prefix('accordion', 'toggle')}
       border-bottom-left-radius: $accordion-border-radius
       border-bottom-right-radius: $accordion-border-radius
 

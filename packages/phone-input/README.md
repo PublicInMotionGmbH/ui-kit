@@ -11,9 +11,9 @@ using `npm install @talixo/phone-input --save` or `yarn add @talixo/phone-input`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/combo-box: ^1.0.0-alpha.27`
-- `@talixo/country-flag: ^1.0.0-alpha.27`
-- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/combo-box: ^1.0.0-alpha.31`
+- `@talixo/country-flag: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.31`
 - `country-telephone-data: ^0.5.5`
 - `prop-types: ^15.6.1`
 - `react: ^16.4.2`

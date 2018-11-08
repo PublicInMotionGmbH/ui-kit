@@ -170,7 +170,7 @@ class NotificationList extends React.PureComponent {
   render () {
     const { className, sticky, autoClose, horizontal, vertical, items, ...passedProps } = this.props
 
-    const clsName = buildClassName('notifications-list', className, { sticky }, [ horizontal, vertical ])
+    const clsName = buildClassName('notification-list', className, { sticky }, [ horizontal, vertical ])
 
     const elements = this.getVisibleItems().map(item => {
       const { content, ...props } = item.item
@@ -185,8 +185,8 @@ class NotificationList extends React.PureComponent {
 
     return (
       <div className={clsName} {...passedProps}>
-        <div className={prefix('notifications-list__wrapper')}>
-          <TransitionGroup className={prefix('notifications-list__content')}>
+        <div className={prefix('notification-list__wrapper')}>
+          <TransitionGroup className={prefix('notification-list__content')}>
             {elements}
           </TransitionGroup>
         </div>

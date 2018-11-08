@@ -2,14 +2,14 @@
 
 exports[`<NotificationList /> renders correctly children 1`] = `
 <div
-  className="talixo-notifications-list talixo-notifications-list--start talixo-notifications-list--bottom"
+  className="talixo-notification-list talixo-notification-list--start talixo-notification-list--bottom"
 >
   <div
-    className="talixo-notifications-list__wrapper"
+    className="talixo-notification-list__wrapper"
   >
     <TransitionGroup
       childFactory={[Function]}
-      className="talixo-notifications-list__content"
+      className="talixo-notification-list__content"
       component="div"
     >
       <Fade
@@ -49,14 +49,14 @@ exports[`<NotificationList /> renders correctly children 1`] = `
 
 exports[`<NotificationList /> renders correctly one child 1`] = `
 <div
-  className="talixo-notifications-list talixo-notifications-list--start talixo-notifications-list--bottom"
+  className="talixo-notification-list talixo-notification-list--start talixo-notification-list--bottom"
 >
   <div
-    className="talixo-notifications-list__wrapper"
+    className="talixo-notification-list__wrapper"
   >
     <TransitionGroup
       childFactory={[Function]}
-      className="talixo-notifications-list__content"
+      className="talixo-notification-list__content"
       component="div"
     />
   </div>

@@ -1,6 +1,6 @@
 {
   "name": "@talixo/badge",
-  "version": "1.0.0-alpha.27",
+  "version": "1.0.0-alpha.31",
   "description": "UI component for badge",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,16 +23,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/button": "^1.0.0-alpha.27",
-    "@talixo/icon": "^1.0.0-alpha.27",
-    "@talixo/navigation": "^1.0.0-alpha.27",
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/button": "^1.0.0-alpha.31",
+    "@talixo/icon": "^1.0.0-alpha.31",
+    "@talixo/navigation": "^1.0.0-alpha.31",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "prop-types": "^15.6.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "prop-types": "^15.6.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"

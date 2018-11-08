@@ -15,7 +15,7 @@ $calculated-timeline-padding: $timeline-point-pointer-margin + $timeline-point-i
     &--special 
       color: $timeline-point-special-color
 
-    &--special .timeline-element 
+    &--special #{prefix('timeline-element')}
       color: $timeline-point-special-color
 
       &__pointer 
@@ -50,7 +50,8 @@ $calculated-timeline-padding: $timeline-point-pointer-margin + $timeline-point-i
         &:last-child 
           margin-left: 0
 
-    &__icon, &__time 
+    &__icon,
+    &__time
       position: absolute
       left: 50%
       transform: translateX(-50%)
@@ -72,11 +73,11 @@ $calculated-timeline-padding: $timeline-point-pointer-margin + $timeline-point-i
       border: $timeline-point-stroke solid $timeline-point-color
       border-radius: 50%
 
-[dir=rtl] .timeline 
-  &-element &__icon 
-    #{prefix('icon')}
-      margin-left: 0
-      margin-right: $timeline-point-icon-margin
+  @include rtl-only
+    &-element #{prefix('timeline', 'icon')}
+      #{prefix('icon')}
+        margin-left: 0
+        margin-right: $timeline-point-icon-margin
 
-      &:last-child 
-        margin-right: 0
+        &:last-child
+          margin-right: 0

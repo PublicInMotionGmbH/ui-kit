@@ -1,50 +1,5 @@
 @import './config'
 
-// Colors
-$progress-bar-empty-color: #ddd !default
-
-$progress-bar-base-color: $x-color-primary !default
-$progress-bar-base-empty-color: mix($progress-bar-empty-color, $progress-bar-base-color, 90%) !default
-$progress-bar-base-text-color: $x-color-primary-opposite !default
-
-$progress-bar-secondary-color: $x-color-secondary !default
-$progress-bar-secondary-empty-color: mix($progress-bar-empty-color, $progress-bar-secondary-color, 90%) !default
-$progress-bar-secondary-text-color: $x-color-secondary-opposite !default
-
-$progress-bar-tertiary-color: $x-color-tertiary !default
-$progress-bar-tertiary-empty-color: mix($progress-bar-empty-color, $progress-bar-tertiary-color, 90%) !default
-$progress-bar-tertiary-text-color: $x-color-tertiary-opposite !default
-
-$progress-bar-stripes-alpha: 0.1 !default
-$progress-bar-stripes-color: rgba(text-contrast($progress-bar-base-color), $progress-bar-stripes-alpha) !default
-
-$progress-bar-error-color: $x-color-error !default
-$progress-bar-error-empty-color: mix($progress-bar-empty-color, $progress-bar-error-color, 90%) !default
-$progress-bar-error-text-color: $x-color-error-opposite !default
-
-$progress-bar-success-color: $x-color-success !default
-$progress-bar-success-empty-color: mix($progress-bar-empty-color, $progress-bar-success-color, 90%) !default
-$progress-bar-success-text-color: $x-color-success-opposite !default
-
-$progress-bar-info-color: $x-color-info !default
-$progress-bar-info-empty-color: mix($progress-bar-empty-color, $progress-bar-info-color, 90%) !default
-$progress-bar-info-text-color: $x-color-info-opposite !default
-
-$progress-bar-warn-color: $x-color-warning !default
-$progress-bar-warn-empty-color: mix($progress-bar-empty-color, $progress-bar-warn-color, 90%) !default
-$progress-bar-warn-text-color: $x-color-warning-opposite !default
-
-$progress-bar-height: dp(2.5) !default
-$progress-bar-small-height: dp(1.675) !default
-$progress-bar-padding-horizontal: $progress-bar-height / 2 !default
-$progress-bar-stripes-scale: 2 !default
-$progress-bar-indeterminate-stripes-scale: $progress-bar-stripes-scale !default
-
-$progress-bar-stripes-speed: 0.15s !default // multiplied by scale
-
-$progress-bar-border-radius: $x-border-radius !default
-$progress-bar-text-shadow: true !default
-
 // Calculate helping variables
 
 $progress-bar-stripes-size: $progress-bar-height * $progress-bar-stripes-scale
@@ -92,8 +47,8 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
     @if $progress-bar-text-shadow
       text-shadow: text-shadow-smoothness($progress-bar-base-text-color, $progress-bar-base-color)
 
-  &--striped &__inner:after,
-  &--indeterminate &__inner:after
+  &--striped #{prefix('progress-bar', 'inner')}:after,
+  &--indeterminate #{prefix('progress-bar', 'inner')}:after
     content: ''
     position: absolute
     left: 0
@@ -106,7 +61,7 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
     background-repeat: repeat
     background-image: linear-gradient(45deg, $progress-bar-stripes-color 25%, transparent 0, transparent 50%, $progress-bar-stripes-color 0, $progress-bar-stripes-color 75%, transparent 0, transparent)
 
-  &--indeterminate &__inner
+  &--indeterminate #{prefix('progress-bar', 'inner')}
     width: 100%
     transform: none
     animation: none
@@ -115,7 +70,7 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
       background-size: $progress-bar-indeterminate-stripes-size $progress-bar-indeterminate-stripes-size
       animation: $progress-bar-stripes-time indeterminateProgressStripes infinite linear
 
-  &--smooth &__inner
+  &--smooth #{prefix('progress-bar', 'inner')}
     transition: 400ms width linear
 
 // Build mixins for progress bar variations
@@ -134,16 +89,16 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
     &--#{$type}
       background: $empty-color
 
-    &--#{$type} &__inner
+    &--#{$type} #{prefix('progress-bar', 'inner')}
       background: $color
 
-    &--#{$type} &__label
+    &--#{$type} #{prefix('progress-bar', 'label')}
       color: $text-color
 
       @if $progress-bar-text-shadow
         text-shadow: text-shadow-smoothness($text-color, $color)
 
-    &--#{$type} &__shadow
+    &--#{$type} #{prefix('progress-bar', 'shadow')}
       color: $shadow-color
 
 @mixin progress-bar-height ($type, $height)
@@ -151,8 +106,8 @@ $progress-bar-stripes-time: $progress-bar-stripes-speed * $progress-bar-indeterm
     &--#{$type}
       height: $height
 
-    &--#{$type} &__label,
-    &--#{$type} &__shadow
+    &--#{$type} #{prefix('progress-bar', 'label')},
+    &--#{$type} #{prefix('progress-bar', 'shadow')}
       font-size: $height * 0.6
       line-height: $height
 

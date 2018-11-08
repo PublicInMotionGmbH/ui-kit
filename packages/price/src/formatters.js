@@ -17,7 +17,7 @@ export function valueToFixedPrecision (value, precision = 2) {
  * @param {number} precision
  * @returns {string}
  */
-export function fomatNumber (value, locale, precision) {
+export function formatNumber (value, locale, precision) {
   try {
     const price = new Intl.NumberFormat(locale, {
       minimumFractionDigits: precision,
@@ -53,7 +53,7 @@ export function generatePrice (value, config = {}) {
   // If user provides own mapping, use it.
   if (currencyToSymbol) {
     const symbol = currencyToSymbol[currency] || currency
-    const price = fomatNumber(value, locale, precision)
+    const price = formatNumber(value, locale, precision)
 
     return { value: price, symbol }
   } else if (locale && currency) {
@@ -85,13 +85,12 @@ export function generatePrice (value, config = {}) {
 
       return { value: formattedValue, symbol: null }
     } catch (e) {
-      console.log(e)
       // Fallback if js Intl is not supported by a browser
-      const price = fomatNumber(value, locale, precision)
+      const price = formatNumber(value, locale, precision)
       return { value: price, symbol: currency }
     }
   } else {
-    const price = fomatNumber(value, locale, precision)
+    const price = formatNumber(value, locale, precision)
     return { value: price, symbol: currency }
   }
 }

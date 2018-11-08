@@ -1,6 +1,6 @@
 {
   "name": "@talixo/how-it-works",
-  "version": "0.0.0",
+  "version": "1.0.0-alpha.31",
   "description": "UI Component which represents 'how it works' element, to show step by step what will happen.",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,13 +23,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "peerDependencies": {
-    "@talixo/shared": "^1.0.0-alpha.27",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

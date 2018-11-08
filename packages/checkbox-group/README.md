@@ -11,8 +11,8 @@ using `npm install @talixo/checkbox-group --save` or `yarn add @talixo/checkbox-
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/checkbox: ^1.0.0-alpha.27`
-- `@talixo/shared: ^1.0.0-alpha.27`
+- `@talixo/checkbox: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
 - `react: ^16.4.2`
 - `react-dom: ^16.4.2`

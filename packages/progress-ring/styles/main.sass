@@ -2,17 +2,17 @@
 
 @mixin progress-ring-color ($name, $color, $text-color, $empty-color: mix($x-color-calmer, $color, 90%))
   @include module('progress-ring')
-    &--#{$name} &__circle-stroke
+    &--#{$name} #{prefix('progress-ring', 'circle-stroke')}
       stroke: $color
 
-    &--#{$name} &__circle-bg
+    &--#{$name} #{prefix('progress-ring', 'circle-bg')}
       stroke: $empty-color
 
     @if $progress-ring-fill-completed
-      &--#{$name}#{&}--completed &__circle-stroke
+      &--#{$name}#{prefix('progress-ring')}--completed #{prefix('progress-ring', 'circle-stroke')}
         fill: $color
 
-      &--#{$name}#{&}--completed &__content
+      &--#{$name}#{prefix('progress-ring')}--completed #{prefix('progress-ring', 'content')}
         color: $text-color
 
 @include module('progress-ring')
@@ -50,7 +50,7 @@
     .tai:first-child
       font-size: 1em * $progress-ring-content-icon-ratio
 
-  &--indeterminate &__progress &__circle-stroke
+  &--indeterminate #{prefix('progress-ring', 'progress')} #{prefix('progress-ring', 'circle-stroke')}
     animation: indeterminateProgressRing $progress-ring-indeterminate-animation-time infinite $progress-ring-indeterminate-animation-easing
 
 @keyframes indeterminateProgressRing
