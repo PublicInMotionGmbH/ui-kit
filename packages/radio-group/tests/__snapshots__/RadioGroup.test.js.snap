@@ -12,7 +12,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
     name="RadioGroup"
     onChange={[Function]}
     readOnly={false}
-    value={1}
+    value={0}
   >
     one
   </RadioInput>
@@ -24,7 +24,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
     name="RadioGroup"
     onChange={[Function]}
     readOnly={false}
-    value={2}
+    value={1}
   >
     two
   </RadioInput>
@@ -36,7 +36,7 @@ exports[`<RadioGroup /> renders children correctly 1`] = `
     name="RadioGroup"
     onChange={[Function]}
     readOnly={false}
-    value={3}
+    value={2}
   >
     three
   </RadioInput>

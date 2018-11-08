@@ -124,6 +124,13 @@ class NumberInputStepper extends React.PureComponent {
    * @param {string} name
    */
   callAction = name => {
+    const { disabled, readOnly } = this.props
+
+    // Ignore action when it's disabled
+    if (disabled || readOnly) {
+      return
+    }
+
     // Start listening for unpressed button
     this.start(name)
 

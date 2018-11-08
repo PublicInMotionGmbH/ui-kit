@@ -5,7 +5,7 @@
   box-sizing: border-box
   display: block
 
-  #{inside(&, 'suffix')}
+  &__suffix
     box-sizing: border-box
     display: block
     position: absolute
@@ -44,7 +44,7 @@
       border-color: $text-input-focus-border-color
       color: $text-input-focus-text-color
 
-  &--error #{inside(&, 'input')}
+  &--error #{prefix('text-input', 'input')}
     &, &:hover:not(:focus)
       background-color: $text-input-error-background-color
       border-color: $text-input-error-border-color
@@ -66,11 +66,11 @@
   &--with-left #{inside(&, 'input')}
    padding-left: $text-input-icon-with-padding
 
-  &--with-right #{inside(&, 'input')}
+  &--with-right #{prefix('text-input', 'input')}
     padding-right: $text-input-icon-with-padding
 
-  #{inside(&, 'left')},
-  #{inside(&, 'right')}
+  #{prefix('text-input', 'left')},
+  #{prefix('text-input', 'right')}
     position: absolute
     white-space: nowrap
     max-height: 100%
@@ -79,11 +79,12 @@
     font-size: $text-input-icon-size
     color: $text-input-icon-color
 
-  #{inside(&, 'left')}
+  #{prefix('text-input', 'left')}
     left: $text-input-padding-horizontal
 
-  #{inside(&, 'right')}
-    right: $text-input-padding-horizontal
+    @include rtl-only
+      left: auto
+      right: $text-input-padding-horizontal
 
   &--empty #{inside(&, 'suffix')}
     display: none
@@ -96,22 +97,23 @@
     left: auto
     right: $text-input-padding-horizontal
 
-  [dir=rtl] & #{inside(&, 'right')}
-    right: auto
-    left: $text-input-padding-horizontal
+    @include rtl-only
+      right: auto
+      left: $text-input-padding-horizontal
 
-  [dir=rtl] &--with-left #{inside(&, 'input')}
-    padding-left: $text-input-padding-horizontal
-    padding-right: $text-input-icon-with-padding
+  @include rtl-only
+    &--with-left #{prefix('text-input', 'input')}
+      padding-left: $text-input-padding-horizontal
+      padding-right: $text-input-icon-with-padding
 
-  [dir=rtl] &--with-right #{inside(&, 'input')}
-    padding-right: $text-input-padding-horizontal
-    padding-left: $text-input-icon-with-padding
+    &--with-right #{prefix('text-input', 'input')}
+      padding-right: $text-input-padding-horizontal
+      padding-left: $text-input-icon-with-padding
 
-  [dir=rtl] &--with-right#{&}--with-left #{inside(&, 'input')}
-    padding-right: $text-input-icon-with-padding
-    padding-left: $text-input-icon-with-padding
+    &--with-right#{prefix('text-input')}--with-left #{prefix('text-input', 'input')}
+      padding-right: $text-input-icon-with-padding
+      padding-left: $text-input-icon-with-padding
 
-  [dir=rtl] & #{inside(&, 'suffix')}
-    padding-left: 0
-    padding-right: $text-input-suffix-margin
+    & #{prefix('text-input', 'suffix')}
+      padding-left: 0
+      padding-right: $text-input-suffix-margin

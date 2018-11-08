@@ -1,5 +1,7 @@
 @import './config'
 
+// FIXME: this file should use variables!
+
 @include module('expiration-date-input')
   display: flex
   width: auto
@@ -10,9 +12,10 @@
   &__month
     min-width: dp(11)
 
-  .talixo-text-input__right
-    pointer-events: none
-    color: #999
+  @include module('text-input')
+    &__right
+      pointer-events: none
+      color: #999
 
 @include module('credit-card-input')
   border: 0
@@ -29,6 +32,6 @@
   &:not(:last-child)
     margin-right: dp(2)
 
-    &:hover .talixo-combo-box__value,
-    .talixo-combo-box--open .talixo-combo-box__value
-      border-color: #ccc
+    &:hover, #{prefix('combo-box')}--open
+      #{prefix('combo-box', 'value')}
+        border-color: #ccc

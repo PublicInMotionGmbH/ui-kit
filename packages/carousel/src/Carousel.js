@@ -315,6 +315,7 @@ class Carousel extends React.PureComponent {
     const { currentSlide, slides } = this.state
 
     const slide = currentSlide % children.length
+    const value = Math.ceil(slide / perPage)
 
     return {
       ...restProps,
@@ -322,7 +323,7 @@ class Carousel extends React.PureComponent {
       children: children,
       perPage: perPage,
       index: slide,
-      value: Math.floor(slide / perPage)
+      value: value
     }
   }
 

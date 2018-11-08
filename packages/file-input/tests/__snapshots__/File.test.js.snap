@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<File /> should render properly 1`] = `
+<div
+  className="talixo-file-input-file"
+>
+  <button
+    className="talixo-file-input-file__remove"
+    onClick={[Function]}
+  >
+    <Icon
+      name="clear"
+    />
+  </button>
+  <div
+    className="talixo-file-input-file__info"
+  >
+    <Icon
+      className="talixo-file-input-file__icon"
+      name="insert_drive_file"
+    />
+    <div
+      className="talixo-file-input-file__description"
+    >
+      <strong
+        className="talixo-file-input-file__name"
+      >
+        Test
+      </strong>
+      <span
+        className="talixo-file-input-file__size"
+      >
+        120.43 KB
+      </span>
+    </div>
+  </div>
+</div>
+`;

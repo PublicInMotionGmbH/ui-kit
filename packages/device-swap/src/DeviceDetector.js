@@ -1,6 +1,5 @@
 class DeviceDetector {
   constructor () {
-    window.dev = this
     Object.defineProperty(this, 'registeredListeners', {
       enumerable: false,
       configurable: false,

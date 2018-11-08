@@ -28,7 +28,7 @@ jobs:
       # run tests
       - run:
           name: Run tests
-          command: npm test -- --ci --coverage --testResultsProcessor="jest-junit"
+          command: npm test -- --maxWorkers=2 --ci --coverage --testResultsProcessor="jest-junit"
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit.xml"
 

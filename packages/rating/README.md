@@ -11,8 +11,8 @@ using `npm install @talixo/rating --save` or `yarn add @talixo/rating`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.24`
-- `@talixo/shared: ^1.0.0-alpha.24`
+- `@talixo/icon: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -22,14 +22,15 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
-Property name | Type      | Default  | Description
---------------|-----------|:--------:|--------------------------------
-className     | string    | n/a      | additional class name passed to wrapper
-value         | number    | `0`      | Rating to show, between 0 and 1
-size          | number    | `5`      | Number of visible icons
-icon          | string    | `'star'` | Icon name to use inside (from `@talixo/icon`)
-keyboard      | bool      | `true`   | Should handle keyboard events for change?
-onChange      | function  | n/a      | Handler for changing rating by user
+Property name   | Type      | Default  | Description
+----------------|-----------|:--------:|--------------------------------
+className       | string    | n/a      | Additional class name passed to wrapper.
+hidePlaceholder | boolean   | n/a      | Should icon placeholders be displayed?
+icon            | string    | `'star'` | Icon name to use inside (from `@talixo/icon`).
+keyboard        | bool      | `true`   | Should handle keyboard events for change?
+onChange        | function  | n/a      | Handler for changing rating by user.
+size            | number    | `5`      | Number of visible icons.
+value           | number    | `0`      | Rating to show, between 0 and 1.
 
 ## Changelog
 

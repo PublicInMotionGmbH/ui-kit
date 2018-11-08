@@ -23,7 +23,8 @@
     line-height: $options-input-height
     padding: 0 $options-input-padding-horizontal
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       background-color: $options-input-hover-background-color
       border-color: $options-input-hover-border-color
       color: $options-input-hover-text-color
@@ -40,7 +41,7 @@
       font-size: $options-input-icon-size
       margin-right: $options-input-icon-margin
 
-      [dir=rtl] &
+      @include rtl-only
         margin-right: 0
         margin-left: $options-input-icon-margin
 
@@ -60,7 +61,6 @@
     top: 100%
     margin-top: -$options-input-border-width
     display: none
-
     min-width: $options-input-minimum-width
     border: $options-input-border-width solid $options-input-focus-border-color
     background-color: $options-input-focus-background-color
@@ -132,12 +132,16 @@
     cursor: not-allowed
 
   @include module('text-input')
-    input, input:hover, input:focus
+    input,
+    input:hover,
+    input:focus
       border-color: transparent
       background-color: transparent
 
-  &--open &__toggle
-    &, &:hover, &:focus
+  &--open #{prefix('options-input', 'toggle')}
+    &,
+    &:hover,
+    &:focus
       position: relative
       background-color: $options-input-focus-background-color
       border-color: $options-input-focus-border-color
@@ -147,6 +151,6 @@
       border-bottom-right-radius: 0
       z-index: 333
 
-  &--open &-list
+  &--open #{prefix('options-input-list')}
     display: block
     z-index: 332

@@ -25,7 +25,26 @@ addStory('basic', readme, () => (
     <Rating value={0.7} /><br />
     <Rating value={0.8} /><br />
     <Rating value={0.9} /><br />
+    <Rating value={1} /><br />
+    <Rating value={100} /><br />
     <Rating value={1} />
+  </div>
+))
+
+addStory('without placeholders', readme, () => (
+  <div>
+    <Rating value={0.15} hidePlaceholder /><br />
+    <Rating value={0.25} hidePlaceholder /><br />
+    <Rating value={0.35} hidePlaceholder /><br />
+    <Rating value={0.45} hidePlaceholder /><br />
+    <Rating value={0.55} hidePlaceholder /><br />
+    <Rating value={0.6} hidePlaceholder /><br />
+    <Rating value={0.7} hidePlaceholder /><br />
+    <Rating value={0.8} hidePlaceholder /><br />
+    <Rating value={0.9} hidePlaceholder /><br />
+    <Rating value={1} hidePlaceholder /><br />
+    <Rating value={1000} hidePlaceholder /><br />
+    <Rating value={2} size={0} hidePlaceholder />
   </div>
 ))
 
@@ -72,6 +91,6 @@ addStory('different icons', readme, () => (
     <Rating value={0.7} icon='favorite' /><br />
     <Rating value={0.7} icon='favorite_border' /><br />
     <Rating value={0.7} icon='child' /><br />
-    <Rating value={0.7} icon='pets' />
+    <Rating value={0.73} icon='pets' />
   </div>
 ))

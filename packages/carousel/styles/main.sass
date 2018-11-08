@@ -10,15 +10,11 @@
   &__content
     position: relative
 
-    &--first
-      @include module('carousel-arrows')
-        &__arrow--back
-          display: none
+    &--first #{prefix('carousel-arrows', 'arrow')}--back
+      display: none
 
-    &--last
-      @include module('carousel-arrows')
-        &__arrow--forward
-          display: none
+    &--last #{prefix('carousel-arrows', 'arrow')}--forward
+      display: none
 
   &__wrapper
     position: relative
@@ -36,12 +32,12 @@
     height: 100%
     box-sizing: border-box
 
-  [dir=rtl] &
+  @include rtl-only
     transform: scaleX(-1)
 
-  [dir=rtl] &__inner,
-  [dir=rtl] &__content ~ * // Dots
-    transform: scaleX(-1)
+    &__inner,
+    &__content ~ * // Dots
+      transform: scaleX(-1)
 
 @include module('carousel-dots')
   position: absolute

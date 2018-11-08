@@ -174,7 +174,7 @@ addStory.controlled('controlled with 2 per page', readme, (setState, state) => (
     <div className='tx-slide tx-slide--2'>SLIDE 2</div>
     <div className='tx-slide tx-slide--3'>SLIDE 3</div>
   </Carousel>
-), () => ({ value: 2 }))
+), () => ({ value: 1 }))
 
 addStory('as a gallery', readme, () => (
   <div style={{ maxWidth: 1000, margin: '0 auto' }}>

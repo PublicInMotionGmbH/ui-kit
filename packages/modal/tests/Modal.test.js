@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 import { prefix } from '@talixo/shared'
 
@@ -85,7 +85,7 @@ describe('<Modal />', () => {
     expect(click).toHaveBeenCalledTimes(1)
   })
 
-  it('should invoke onOverlayClick when backdrop is clicked', () => {
+  it('should not invoke onOverlayClick when something else than backdrop is clicked', () => {
     const click = jest.fn()
     const wrapper = shallow(
       <Modal onOverlayClick={click} icon={<span id='test' />}>
@@ -97,5 +97,87 @@ describe('<Modal />', () => {
 
     backdrop.simulate('click', { target: backdrop, currentTarget: h2 })
     expect(click).toHaveBeenCalledTimes(0)
+  })
+
+  it('should invoke onEscKeyPress when modal is open and esc is pressed', () => {
+    const onEscKeyDown = jest.fn()
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    const event = new window.Event('keydown')
+    event.keyCode = 27
+    document.dispatchEvent(event)
+    expect(onEscKeyDown).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
+  it('should not invoke onEscKeyPress when modal is open and sth different then escape is pressed', () => {
+    const onEscKeyDown = jest.fn()
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    const event = new window.Event('keydown')
+    event.keyCode = 22
+    document.dispatchEvent(event)
+    expect(onEscKeyDown).toHaveBeenCalledTimes(0)
+    wrapper.unmount()
+  })
+
+  it('should not invoke onEscKeyPress when modal is open and sth different then escape is pressed', () => {
+    const onEscKeyDown = jest.fn()
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    const event = new window.Event('keydown')
+    event.keyCode = 22
+    document.dispatchEvent(event)
+    expect(onEscKeyDown).toHaveBeenCalledTimes(0)
+    wrapper.unmount()
+  })
+
+  it('should not invoke onEscKeyPress when modal is open and sth different then escape is pressed', () => {
+    const onEscKeyDown = jest.fn()
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    const event = new window.Event('keydown')
+    event.keyCode = 22
+    document.dispatchEvent(event)
+    expect(onEscKeyDown).toHaveBeenCalledTimes(0)
+    wrapper.unmount()
+  })
+
+  it('should add event listener when onEscDown prop is added', () => {
+    const onEscKeyDown = () => {}
+    const wrapper = mount(
+      <Modal open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    expect(wrapper.instance().escEventAdded).toBeFalsy()
+    wrapper.setProps({ onEscKeyDown })
+    expect(wrapper.instance().escEventAdded).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should remove event listener when onEscDown prop is removed', () => {
+    const onEscKeyDown = () => {}
+    const wrapper = mount(
+      <Modal onEscKeyDown={onEscKeyDown} open>
+        <h2>Modal</h2>
+      </Modal>
+    )
+    expect(wrapper.instance().escEventAdded).toBe(true)
+    wrapper.setProps({ onEscKeyDown: undefined })
+    expect(wrapper.instance().escEventAdded).toBeFalsy()
+    wrapper.unmount()
   })
 })

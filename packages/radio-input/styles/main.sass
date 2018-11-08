@@ -92,10 +92,11 @@ $radio-input-box-focus-checked-shadow-size: ($radio-input-box-size - $radio-inpu
   &--error > input:checked:not(:disabled) + span:before
     background-color: $radio-input-error-box-background-color
 
-  [dir=rtl] & > input + span
-    padding-left: $radio-input-box-margin
-    padding-right: $radio-input-box-margin + $radio-input-box-size
+  @include rtl-only
+    > input + span
+      padding-left: $radio-input-box-margin
+      padding-right: $radio-input-box-margin + $radio-input-box-size
 
-  [dir=rtl] & > input + span:before
-    left: auto
-    right: 0
+    > input + span:before
+      left: auto
+      right: 0
