@@ -25,6 +25,10 @@ to avoid having different versions of these in your application.
 
 ## Supported props
 
+### Wizard
+
+It allows any props which are allowed for `div`. Additionally, it handles some differently:
+
 Property name   | Type      | Required | Default      | Description                    
 ----------------|-----------|----------|:------------:|--------------------------------
 className       | string    |  false   | n/a          | Additional class name passed to wrapper.

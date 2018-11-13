@@ -23,7 +23,7 @@ const style = {
 }
 
 // Components for Wizard's steps
-function Step1 (props) {
+function Step1 () {
   return (
     <Form>
       <h3>Step 1</h3>
@@ -34,7 +34,7 @@ function Step1 (props) {
   )
 }
 
-function Step2 (props) {
+function Step2 () {
   return (
     <Form>
       <h3>Step 2</h3>
@@ -45,7 +45,7 @@ function Step2 (props) {
   )
 }
 
-function Step3 (props) {
+function Step3 () {
   return (
     <Form>
       <h3>Step 3</h3>
@@ -56,7 +56,7 @@ function Step3 (props) {
   )
 }
 
-function Step4 (props) {
+function Step4 () {
   return (
     <Form>
       <h3>Step 4</h3>
