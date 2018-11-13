@@ -25,45 +25,53 @@ const style = {
 // Components for Wizard's steps
 function Step1 () {
   return (
-    <Form>
-      <h3>Step 1</h3>
-      <TextInput placeholder='First Step' style={style} />
-      <Checkbox onChange={change} size='small'>Check</Checkbox>
-      <Checkbox onChange={change} size='small'>Box</Checkbox>
-    </Form>
+    <div>
+      <Form>
+        <h3>Step 1</h3>
+        <TextInput placeholder='First Step' style={style} />
+        <Checkbox onChange={change} size='small'>Check</Checkbox>
+        <Checkbox onChange={change} size='small'>Box</Checkbox>
+      </Form>
+    </div>
   )
 }
 
 function Step2 () {
   return (
-    <Form>
-      <h3>Step 2</h3>
-      <TextInput placeholder='Second Step' style={style} />
-      <Checkbox onChange={change} size='small'>Check</Checkbox>
-      <Checkbox onChange={change} size='small'>Box</Checkbox>
-    </Form>
+    <div>
+      <Form>
+        <h3>Step 2</h3>
+        <TextInput placeholder='Second Step' style={style} />
+        <Checkbox onChange={change} size='small'>Check</Checkbox>
+        <Checkbox onChange={change} size='small'>Box</Checkbox>
+      </Form>
+    </div>
   )
 }
 
 function Step3 () {
   return (
-    <Form>
-      <h3>Step 3</h3>
-      <TextInput placeholder='Third Step' style={style} />
-      <Checkbox onChange={change} size='small'>Check</Checkbox>
-      <Checkbox onChange={change} size='small'>Box</Checkbox>
-    </Form>
+    <div>
+      <Form>
+        <h3>Step 3</h3>
+        <TextInput placeholder='Third Step' style={style} />
+        <Checkbox onChange={change} size='small'>Check</Checkbox>
+        <Checkbox onChange={change} size='small'>Box</Checkbox>
+      </Form>
+    </div>
   )
 }
 
 function Step4 () {
   return (
-    <Form>
-      <h3>Step 4</h3>
-      <TextInput placeholder='Fourth Step' style={style} />
-      <Checkbox onChange={change} size='small'>Check</Checkbox>
-      <Checkbox onChange={change} size='small'>Box</Checkbox>
-    </Form>
+    <div>
+      <Form>
+        <h3>Step 4</h3>
+        <TextInput placeholder='Fourth Step' style={style} />
+        <Checkbox onChange={change} size='small'>Check</Checkbox>
+        <Checkbox onChange={change} size='small'>Box</Checkbox>
+      </Form>
+    </div>
   )
 }
 
@@ -73,43 +81,28 @@ const change = action('change')
 
 addStory('default', readme, () => (
   <Wizard>
-    <Step1 />
-    <Step2 />
-    <Step3 />
+    {Step1()}
+    {Step2()}
+    {Step3()}
+    {Step4()}
+  </Wizard>
+))
+
+addStory('custom wizard', readme, () => (
+  <Wizard nextLabel='Next step' previousLabel='Previous step' displayedLimit={2}>
+    {Step1()}
+    {Step2()}
+    {Step3()}
+    {Step4()}
   </Wizard>
 ))
 
 addStory('with set starting step', readme, () => (
   <Wizard step={3}>
-    <Step1 />
-    <Step2 />
-    <Step3 />
-    <Step4 />
-  </Wizard>
-))
-
-addStory('with one children', readme, () => (
-  <Wizard>
-    <Step1 />
-  </Wizard>
-))
-
-addStory('without pagination', readme, () => (
-  <Wizard pagination={false}>
-    <Step1 />
-  </Wizard>
-))
-
-addStory('with pagination props', readme, () => (
-  <Wizard paginationProps={{
-    displayedLimit: 9,
-    nextLabel: 'NEXT STEP >',
-    previousLabel: '< PREV STEP'
-  }}>
-    <Step1 />
-    <Step2 />
-    <Step3 />
-    <Step4 />
+    {Step1()}
+    {Step2()}
+    {Step3()}
+    {Step4()}
   </Wizard>
 ))
 
