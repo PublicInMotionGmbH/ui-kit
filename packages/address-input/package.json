@@ -1,6 +1,6 @@
 {
   "name": "@talixo/address-input",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.32",
   "description": "UI Component which represents AddressInput",
   "main": "dist/index.js",
   "module": "index.js",
