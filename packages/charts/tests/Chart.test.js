@@ -101,18 +101,25 @@ describe('<Chart>', () => {
 
     describe('when zomm area is selected', () => {
       const area = { top: 0, bottom: 0, left: 1495490400000, right: 1496008800000 }
-
-      beforeEach(() => {
-        wrapper.find(HIGHLIGHT).props().onBrushEnd(area)
-        wrapper.update()
-      })
+      const dragArea = { bottom: 2, left: 1495490400000, right: 1496008800000, top: 4 }
 
       it('should set state.lastDrawLocation to equal area', () => {
+        wrapper.find(HIGHLIGHT).props().onBrushEnd(area)
+        wrapper.update()
         expect(wrapper.state().lastDrawLocation).toEqual(area)
       })
 
       it('should set lastDrawLocation to given area', () => {
+        wrapper.find(HIGHLIGHT).props().onBrushEnd(area)
+        wrapper.update()
         expect(wrapper.find(PLOT).props().xDomain).toEqual([area.left, area.right])
+      })
+
+      it('should set lastDrawLocation to given area after onDrag event', () => {
+        wrapper.find(HIGHLIGHT).props().onBrushEnd(dragArea)
+        wrapper.update()
+        expect(wrapper.find(PLOT).props().xDomain).toEqual([dragArea.left, dragArea.right])
+        expect(wrapper.find(PLOT).props().yDomain).toEqual([dragArea.bottom, dragArea.top])
       })
     })
   })

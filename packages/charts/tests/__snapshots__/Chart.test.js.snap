@@ -8,6 +8,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
   timeSeries={false}
   xDomain={null}
   xType="linear"
+  yDomain={null}
 >
   <HorizontalGridLines
     attr="y"
@@ -16,11 +17,6 @@ exports[`<Chart> when rendered should render properly 1`] = `
   <VerticalGridLines
     attr="x"
     direction="vertical"
-  />
-  <XAxis
-    attr="x"
-    attrAxis="y"
-    orientation="bottom"
   />
   <LineSeries
     animate={true}
@@ -58,6 +54,35 @@ exports[`<Chart> when rendered should render properly 1`] = `
       }
     }
   />
+  <LabelSeries
+    animation={false}
+    className=""
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 5,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 2,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 2,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getLabel={[Function]}
+    key="Line 1-0"
+    rotation={0}
+    stack={false}
+    style={Object {}}
+  />
   <LineSeries
     animate={true}
     className="talixo-chart-series className talixo-chart-series--1"
@@ -94,10 +119,44 @@ exports[`<Chart> when rendered should render properly 1`] = `
       }
     }
   />
+  <LabelSeries
+    animation={false}
+    className=""
+    data={
+      Array [
+        Object {
+          "x": 1495490400000,
+          "y": 5,
+        },
+        Object {
+          "x": 1496008800000,
+          "y": 2,
+        },
+        Object {
+          "x": 1496181600000,
+          "y": 2,
+        },
+        Object {
+          "x": 1497304800000,
+          "y": 2,
+        },
+      ]
+    }
+    getLabel={[Function]}
+    key="Line 2-1"
+    rotation={0}
+    stack={false}
+    style={Object {}}
+  />
   <YAxis
     attr="y"
     attrAxis="x"
     orientation="left"
+  />
+  <XAxis
+    attr="x"
+    attrAxis="y"
+    orientation="bottom"
   />
 </FlexibleXYPlot>
 `;

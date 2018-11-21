@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  FlexibleXYPlot, XAxis, YAxis, LineSeries,
-  HorizontalGridLines, VerticalBarSeries, VerticalGridLines
+  FlexibleXYPlot, XAxis, YAxis, LineSeries, HorizontalBarSeries, LabelSeries,
+  HorizontalGridLines, VerticalBarSeries, VerticalGridLines, Highlight
 } from 'react-vis'
 
 import { buildClassName } from '@talixo/shared'
 
-import Highlight from './Highlight'
 import { generateSeriesClassName } from './utils'
 
 const moduleName = 'chart'
 
 const Components = {
-  bar: VerticalBarSeries,
-  line: LineSeries
+  'bar': VerticalBarSeries,
+  'bar-horizontal': HorizontalBarSeries,
+  'line': LineSeries
 }
 
 const propTypes = {
@@ -47,11 +47,23 @@ const propTypes = {
     })
   ),
 
+  /** Hide horizontal grid. */
+  hideHorizontalGrid: PropTypes.bool,
+
+  /** Hide vertical grid. */
+  hideVerticalGrid: PropTypes.bool,
+
+  /** Should series label be hidden? */
+  hideSeriesLabels: PropTypes.bool,
+
+  /** Props which will be applied to react-vis LabelSeries component. */
+  seriesLabelProps: PropTypes.object,
+
   /** Idicates if x axis should be displayed as date */
   timeSeries: PropTypes.bool,
 
   /** Type of chart (line or bar). */
-  type: PropTypes.oneOf(['line', 'bar']),
+  type: PropTypes.oneOf(['bar', 'bar-horizontal', 'line']),
 
   /** X axis title. */
   xAxisTitle: PropTypes.string,
@@ -76,6 +88,9 @@ const defaultProps = {
  *
  * @property {object} [props]
  * @property {string} [props.className]
+ * @property {boolean} [props.hideHorizontalGrid]
+ * @property {boolean} [props.hideVerticalGrid]
+ * @property {boolean} [props.hideSeriesLabels]
  * @property {string} [props.xAxisTitle]
  * @property {string} [props.yAxisTitle]
  * @property {bool} [props.timeSeries]
@@ -111,27 +126,52 @@ class Chart extends React.Component {
    */
   getChartType = () => {
     const { timeSeries, type } = this.props
-    return timeSeries
-      ? 'time'
-      : type === 'bar'
-        ? 'ordinal'
-        : 'linear'
+    if (timeSeries) {
+      return 'time'
+    }
+    if (type === 'bar') {
+      return 'ordinal'
+    }
+    return 'linear'
   }
 
   /**
-   * Returns props for data series
+   * Returns Data Series with its labels.
    *
    * @param item
    * @param index
-   * @returns {{data: *, color: *, className: string, key: string}}
+   * @returns ReactElement[]
    */
-  getSeriesProps = (item, index) => ({
-    data: item.dataItems,
-    color: item.color,
-    className: generateSeriesClassName(index, item.className),
-    key: `${item.title}-${index}`,
-    ...this.props.dataSeriesProps
-  })
+
+  getSeries = (item, index) => {
+    if (item.disabled) {
+      return null
+    }
+
+    const { hideSeriesLabels, dataSeriesProps, seriesLabelProps, type } = this.props
+    const RenderComponent = Components[type]
+    const isLineChart = type === 'line'
+
+    const itemProps = {
+      data: item.dataItems,
+      color: item.color,
+      className: generateSeriesClassName(index, item.className),
+      key: `${item.title}-${index}`,
+      ...dataSeriesProps
+    }
+
+    const series = <RenderComponent
+      animate
+      style={isLineChart ? {fill: 'none'} : {}}
+      {...itemProps}
+    />
+
+    const label = !hideSeriesLabels
+      ? <LabelSeries data={item.dataItems} key={itemProps.key} {...seriesLabelProps} />
+      : null
+
+    return [series, label]
+  }
 
   /**
    * Updates state when area is zoomed
@@ -146,17 +186,29 @@ class Chart extends React.Component {
     this.setState({ lastDrawLocation: area })
   }
 
+  onDrag = (area) => {
+    const defaultDrawLocation = { top: 0, bottom: 0, left: 0, right: 0 }
+    const { lastDrawLocation } = this.state
+    const location = lastDrawLocation || defaultDrawLocation
+    this.setState({
+      lastDrawLocation: {
+        bottom: location.bottom + (area.top - area.bottom),
+        left: location.left - (area.right - area.left),
+        right: location.right - (area.right - area.left),
+        top: location.top + (area.top - area.bottom)
+      }
+    })
+  }
+
   render () {
     const { lastDrawLocation } = this.state
-    const { onBrushEnd, getChartType, getSeriesProps } = this
+    const { onBrushEnd, getChartType, getSeries } = this
     const {
-      className, data, dataSeriesProps, lineProps, xAxisTitle,
-      yAxisTitle, type, zoomable, ...passedProps
+      className, data, dataSeriesProps, lineProps, xAxisTitle, yAxisTitle,
+      hideHorizontalGrid, hideVerticalGrid, type, zoomable, ...passedProps
     } = this.props
 
     const wrapperCls = buildClassName(moduleName, className)
-    const RenderComponent = Components[type]
-    const isLineChart = type === 'line'
     const xType = !passedProps.xType && getChartType()
 
     return (
@@ -165,31 +217,22 @@ class Chart extends React.Component {
         xType={xType}
         className={wrapperCls}
         xDomain={lastDrawLocation && [lastDrawLocation.left, lastDrawLocation.right]}
+        yDomain={lastDrawLocation && [lastDrawLocation.bottom, lastDrawLocation.top]}
         {...passedProps}
       >
-        <HorizontalGridLines />
-        <VerticalGridLines />
-        <XAxis title={xAxisTitle} />
-        {
-          data
-            .map((item, index) => {
-              return !item.disabled
-                ? <RenderComponent
-                  animate
-                  style={isLineChart ? {fill: 'none'} : {}}
-                  {...getSeriesProps(item, index)}
-                />
-                : null
-            })
-        }
+        { !hideHorizontalGrid && <HorizontalGridLines /> }
+        { !hideVerticalGrid && <VerticalGridLines /> }
+        { data.map((item, index) => getSeries(item, index))}
         {
           zoomable && type === 'line' &&
           <Highlight
             color={null}
             onBrushEnd={onBrushEnd}
+            onDrag={this.onDrag}
           />
         }
         <YAxis title={yAxisTitle} />
+        <XAxis title={xAxisTitle} />
       </FlexibleXYPlot>
     )
   }
