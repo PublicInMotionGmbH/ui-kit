@@ -209,7 +209,7 @@ class Chart extends React.Component {
         { data.map((item, index) => getSeries(item, index))}
         {
           zoomable && type === 'line' &&
-          <Highlight color={null} onBrushEnd={onBrushEnd} onDrag={onBrushEnd} />
+          <Highlight color={null} onBrushEnd={onBrushEnd} />
         }
         <YAxis title={yAxisTitle} />
         <XAxis title={xAxisTitle} />
