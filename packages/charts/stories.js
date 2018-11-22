@@ -227,12 +227,12 @@ addStory('Bar Chart', readme, () => (
 addStory('Bar Chart Horizontal', readme, () => (
   <div style={wrapperStyle}>
     <Chart
-      style={{ fontSize: 20 }}
       data={barDataHorizontal}
       type='bar-horizontal'
       margin={{left: 100, right: 100}}
       seriesLabelProps={{ labelAnchorX: 'start', labelAnchorY: 'middle' }}
       yType='ordinal'
+      hideHorizontalGrid
     />
   </div>
 ))

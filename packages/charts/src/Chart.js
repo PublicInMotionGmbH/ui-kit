@@ -156,15 +156,17 @@ class Chart extends React.Component {
       data: item.dataItems,
       color: item.color,
       className: generateSeriesClassName(index, item.className),
-      key: `${item.title}-${index}`,
+      key: `${item.title || item.label || item.x}-${index}`,
       ...dataSeriesProps
     }
 
-    const series = <RenderComponent
-      animate
-      style={isLineChart ? {fill: 'none'} : {}}
-      {...itemProps}
-    />
+    const series = (
+      <RenderComponent
+        animate
+        style={isLineChart ? {fill: 'none'} : {}}
+        {...itemProps}
+      />
+    )
 
     const label = !hideSeriesLabels
       ? <LabelSeries data={item.dataItems} key={itemProps.key} {...seriesLabelProps} />
