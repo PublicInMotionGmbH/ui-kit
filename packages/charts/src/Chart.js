@@ -161,15 +161,11 @@ class Chart extends React.Component {
     }
 
     const series = (
-      <RenderComponent
-        animate
-        style={isLineChart ? {fill: 'none'} : {}}
-        {...itemProps}
-      />
+      <RenderComponent animate style={isLineChart ? {fill: 'none'} : {}} {...itemProps} />
     )
 
     const label = !hideSeriesLabels
-      ? <LabelSeries data={item.dataItems} key={itemProps.key} {...seriesLabelProps} />
+      ? <LabelSeries data={item.dataItems} key={`${itemProps.key}-label`} {...seriesLabelProps} />
       : null
 
     return [series, label]
@@ -186,20 +182,6 @@ class Chart extends React.Component {
    */
   onBrushEnd = (area) => {
     this.setState({ lastDrawLocation: area })
-  }
-
-  onDrag = (area) => {
-    const defaultDrawLocation = { top: 0, bottom: 0, left: 0, right: 0 }
-    const { lastDrawLocation } = this.state
-    const location = lastDrawLocation || defaultDrawLocation
-    this.setState({
-      lastDrawLocation: {
-        bottom: location.bottom + (area.top - area.bottom),
-        left: location.left - (area.right - area.left),
-        right: location.right - (area.right - area.left),
-        top: location.top + (area.top - area.bottom)
-      }
-    })
   }
 
   render () {
@@ -227,11 +209,7 @@ class Chart extends React.Component {
         { data.map((item, index) => getSeries(item, index))}
         {
           zoomable && type === 'line' &&
-          <Highlight
-            color={null}
-            onBrushEnd={onBrushEnd}
-            onDrag={this.onDrag}
-          />
+          <Highlight color={null} onBrushEnd={onBrushEnd} onDrag={onBrushEnd} />
         }
         <YAxis title={yAxisTitle} />
         <XAxis title={xAxisTitle} />

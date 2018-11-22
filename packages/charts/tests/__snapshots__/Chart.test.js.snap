@@ -78,7 +78,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       ]
     }
     getLabel={[Function]}
-    key="Line 1-0"
+    key="Line 1-0-label"
     rotation={0}
     stack={false}
     style={Object {}}
@@ -143,7 +143,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       ]
     }
     getLabel={[Function]}
-    key="Line 2-1"
+    key="Line 2-1-label"
     rotation={0}
     stack={false}
     style={Object {}}
