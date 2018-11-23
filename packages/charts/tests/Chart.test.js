@@ -1,6 +1,6 @@
 import React from 'react'
 import Chart from '../src/Chart'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 const HIGHLIGHT = 'Highlight'
 const PLOT = 'FlexibleXYPlot'
@@ -52,7 +52,7 @@ const createWrapper = (props = defaultProps) => shallow(<Chart {...props} />)
 describe('<Chart>', () => {
   describe('when rendered', () => {
     it('should render properly', () => {
-      const wrapper = createWrapper()
+      const wrapper = mount(<Chart {...defaultProps} />)
       expect(wrapper).toMatchSnapshot()
     })
   })
