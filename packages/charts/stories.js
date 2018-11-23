@@ -193,6 +193,21 @@ const barData = [
   }
 ]
 
+const barDataHorizontal = [
+  {
+    className: 'className',
+    label: 'Bar Group 1',
+    disabled: false,
+    dataItems: [
+      { y: 'January', x: 3, label: '3 days' },
+      { y: 'February', x: 4, label: '4 days' },
+      { y: 'March', x: 1, label: '1 days' },
+      { y: 'April', x: 2, label: '2 days' },
+      { y: 'May', x: 5, label: '5 days' }
+    ]
+  }
+]
+
 // Stories
 
 const labelProps = {
@@ -205,6 +220,19 @@ addStory('Bar Chart', readme, () => (
       domainPadding={{x: 10}}
       data={barData}
       type='bar'
+    />
+  </div>
+))
+
+addStory('Bar Chart Horizontal', readme, () => (
+  <div style={wrapperStyle}>
+    <Chart
+      data={barDataHorizontal}
+      type='bar-horizontal'
+      margin={{left: 100, right: 100}}
+      seriesLabelProps={{ labelAnchorX: 'start', labelAnchorY: 'middle' }}
+      yType='ordinal'
+      hideHorizontalGrid
     />
   </div>
 ))
