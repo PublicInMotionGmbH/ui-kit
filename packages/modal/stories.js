@@ -50,6 +50,46 @@ addStory.controlled('closing modal after clicking on backdrop', readme, (setStat
   </div>
 ), () => ({ open: false }))
 
+addStory.controlled('closing modal after pressing escape', readme, (setState, state) => (
+  <div>
+    <button onClick={() => { setState({ open: !state.open }) }}>
+      Open Modal
+    </button>
+    <Modal open={state.open} attachTo={modalRoot} onEscKeyDown={() => { setState({ open: false }) }}
+    >
+      We would like to show you your own modal. Treat it well.
+
+      <ModalFooter>
+        <Button onClick={() => { setState({ open: false }) }}>
+          Close Modal
+        </Button>
+      </ModalFooter>
+    </Modal>
+  </div>
+), () => ({ open: false }))
+
+addStory.controlled('closing modal after clicking on backdrop or pressing escape', readme, (setState, state) => (
+  <div>
+    <button onClick={() => { setState({ open: !state.open }) }}>
+      Open Modal
+    </button>
+    <Modal
+      open={state.open}
+      attachTo={modalRoot}
+      onOverlayClick={() => { setState({ open: false }) }}
+      onEscKeyDown={() => { setState({ open: false }) }}
+    >
+      We would like to show you your own modal. Treat it well.
+
+      <ModalFooter>
+        <Button onClick={() => { setState({ open: false }) }}>
+          Close Modal
+        </Button>
+      </ModalFooter>
+    </Modal>
+  </div>
+), () => ({ open: false }))
+
 addStory('with header', readme, () => (
   <Modal open attachTo={modalRoot}>
     <ModalHeader>

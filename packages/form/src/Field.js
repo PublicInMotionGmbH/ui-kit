@@ -80,6 +80,10 @@ export function resetIdCounter () {
   counter = 1
 }
 
+const defaultCounter = {
+  generateUid: generateUid
+}
+
 /**
  * Component which represents form field.
  *
@@ -98,10 +102,14 @@ export function resetIdCounter () {
  * @property {object} state
  * @property {boolean} state.focus
  *
+ * @property {object} context
+ * @property {object} [context.formFieldCounter]
+ * @property {function} [context.formFieldCounter.generateUid]
+ *
  * @class {React.Element}
  */
 class Field extends React.Component {
-  uniqueId = `form_field_${generateUid().toString(36)}`
+  uniqueId = `form_field_${(this.context.formFieldCounter || defaultCounter).generateUid().toString(36)}`
   state = {
     focus: false
   }
@@ -266,6 +274,10 @@ class Field extends React.Component {
 }
 
 Field.displayName = 'Field'
+
+Field.contextTypes = {
+  formFieldCounter: PropTypes.object
+}
 
 Field.propTypes = propTypes
 Field.defaultProps = defaultProps

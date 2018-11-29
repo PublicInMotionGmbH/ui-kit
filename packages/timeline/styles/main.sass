@@ -1,0 +1,83 @@
+@import './config'
+
+$calculated-timeline-padding: $timeline-point-pointer-margin + $timeline-point-icon-size
+
+@include module('timeline') 
+  display: flex
+  align-items: center
+  margin: 0
+  padding: $calculated-timeline-padding 0
+
+  &-point 
+    flex-grow: 0
+    margin: 0 $timeline-point-margin
+
+    &--special 
+      color: $timeline-point-special-color
+
+    &--special #{prefix('timeline-element')}
+      color: $timeline-point-special-color
+
+      &__pointer 
+        border-color: $timeline-point-special-color
+
+    > #{prefix('icon')}
+      font-size: $timeline-point-icon-size
+
+  &-line 
+    flex: 1 1 0
+    border-top: $timeline-line-size $timeline-line-style $timeline-line-color
+
+    &--special 
+      border-top-color: $timeline-line-special-color
+
+    &--short 
+      flex: 1 0
+      flex-grow: 0
+      min-width: $timeline-short-line-size
+
+  &-element 
+    position: relative
+    text-align: center
+    color: $timeline-point-color
+
+    &__icon 
+      font-size: $timeline-point-icon-size
+
+      #{prefix('icon')}
+        margin-left: $timeline-point-icon-margin
+
+        &:last-child 
+          margin-left: 0
+
+    &__icon,
+    &__time
+      position: absolute
+      left: 50%
+      transform: translateX(-50%)
+      white-space: nowrap
+      line-height: 1em
+
+    &__icon 
+      margin-bottom: $timeline-point-pointer-margin
+      bottom: 100%
+    
+    &__time 
+      margin-top: $timeline-point-pointer-margin
+      top: 100%
+    
+    &__pointer 
+      display: inline-block
+      width: $timeline-point-radius * 2
+      height: $timeline-point-radius * 2
+      border: $timeline-point-stroke solid $timeline-point-color
+      border-radius: 50%
+
+  @include rtl-only
+    &-element #{prefix('timeline', 'icon')}
+      #{prefix('icon')}
+        margin-left: 0
+        margin-right: $timeline-point-icon-margin
+
+        &:last-child
+          margin-right: 0

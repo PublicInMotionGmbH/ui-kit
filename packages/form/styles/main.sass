@@ -51,13 +51,13 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
   &__message--warning
     color: $form-field-warning-color
 
-  &__message + &__message,
-  &--hint:not(&--horizontal) &__message
+  &__message + #{prefix('field')}__message,
+  &--hint:not(#{prefix('field')}--horizontal) #{prefix('field')}__message
     margin-top: 0
 
   &__message#{prefix('form-row')}--horizontal,
-  &__message + &__message,
-  &--hint:not(&--horizontal) &__message
+  &__message + #{prefix('field')}__message,
+  &--hint:not(#{prefix('field')}--horizontal) #{prefix('field')}__message
     #{prefix('form-row', 'start')},
     #{prefix('form-row', 'end')}
       margin-top: 0
@@ -66,7 +66,7 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
 @include module('field')
   position: relative
 
-  &--horizontal &__shallow-label
+  &--horizontal #{prefix('field')}__shallow-label
     box-sizing: border-box
     speak: none // FIXME: SHALLOW LABEL is a HACK!
     display: flex
@@ -88,28 +88,29 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
   &--horizontal #{prefix('form-row', 'start')}
     max-height: $form-field-base-height
 
-  &--horizontal &__input,
-  &--horizontal &__shallow-label
+  &--horizontal #{prefix('field')}__input,
+  &--horizontal #{prefix('field')}__shallow-label
     background: $form-field-background-color
 
-  &--horizontal &__input
+  &--horizontal #{prefix('field')}__input
     position: relative
     z-index: 1
 
-  &--focus &__input
+  &--focus #{prefix('field')}__input
     z-index: 2
 
 // RTL
 
 @include module('field')
-  [dir=rtl] &__shallow-label
-    right: 0
-    left: auto
-    text-align: left
+  @include rtl-only
+    &__shallow-label
+      right: 0
+      left: auto
+      text-align: left
 
-  [dir=rtl] &--horizontal &__shallow-label
-    padding-right: 0
-    padding-left: $form-field-gutter
+    &--horizontal #{prefix('field')}__shallow-label
+      padding-right: 0
+      padding-left: $form-field-gutter
 
 // Fieldset
 
@@ -118,6 +119,8 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
 
   & + #{prefix('fieldset')}
     margin-top: $form-legend-margin
+
+// Legend
 
 @include module('form-legend')
   display: block
@@ -140,8 +143,9 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
     display: table
     clear: both
 
-  [dir=rtl] &__aside
-    float: left
+  &__aside
+    @include rtl-only
+      float: left
 
 @include module('form-row')
   position: relative
@@ -161,37 +165,37 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
     justify-content: stretch
     width: 100%
 
-  &--horizontal &__end,
-  &--horizontal &__start,
-  &--horizontal &__wrapper
+  &--horizontal #{prefix('form-row')}__end,
+  &--horizontal #{prefix('form-row')}__start,
+  &--horizontal #{prefix('form-row')}__wrapper
     flex: 1 1 $form-field-label-width // FIXME: is it label width?
 
-  &--horizontal &__wrapper
+  &--horizontal #{prefix('form-row')}__wrapper
     flex: 1 1 $form-field-wrapper-width
     min-width: $form-field-minimum-input-width
 
-  &--horizontal &__wrapper
+  &--horizontal #{prefix('form-row')}__wrapper
     display: flex
     flex-wrap: wrap
     align-items: center
     justify-content: stretch
     width: 100%
 
-  &--horizontal &__end
+  &--horizontal #{prefix('form-row')}__end
     flex: 1 1 $form-field-relative-hint-width
     padding: 0 $form-field-gutter
 
   // FIXME: it's actually required to be set
-  &--horizontal &__end
+  &--horizontal #{prefix('form-row')}__end
     margin: 0
   //&--horizontal &__end:not(:empty)
     //margin: $form-field-label-margin 0
 
-  &--horizontal &__inner
+  &--horizontal #{prefix('form-row')}__inner
     flex: 1 1 $form-field-relative-input-width
     min-width: $form-field-relative-input-width
 
-  &--horizontal &__start
+  &--horizontal #{prefix('form-row')}__start
     display: flex
     flex-direction: column
     justify-content: center
@@ -199,26 +203,27 @@ $form-field-relative-shallow-label-width: 100% * $form-field-label-width / $form
     align-self: flex-start
     height: 100%
 
-  &--horizontal &__start:before,
-  &--horizontal &__end:before
+  &--horizontal #{prefix('form-row')}__start:before,
+  &--horizontal #{prefix('form-row')}__end:before
     content: ''
     display: block
     height: 0
 
-  &--horizontal &__start:before
+  &--horizontal #{prefix('form-row')}__start:before
     width: #{$form-field-label-minimum-width - $form-field-gutter} // FIXME: is it correct name?
 
-  &--horizontal &__end:before
+  &--horizontal #{prefix('form-row')}__end:before
     width: #{$form-field-hint-minimum-width - $form-field-gutter}
 
 @include module('form-row')
-  &--spread:not(&--end) &__end
+  &--spread:not(#{prefix('form-row')}--end) #{prefix('form-row')}__end
     display: none
 
 // RTL
 
 @include module('form-row')
   // Vertical
-  [dir=rtl] &__start
-    padding-right: 0
-    padding-left: $form-field-gutter
+  &__start
+    @include rtl-only
+      padding-right: 0
+      padding-left: $form-field-gutter

@@ -11,8 +11,8 @@ using `npm install @talixo/accordion --save` or `yarn add @talixo/accordion`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/collapse: ^1.0.0-alpha.24`
-- `@talixo/shared: ^1.0.0-alpha.24`
+- `@talixo/collapse: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`
@@ -27,7 +27,7 @@ Property name   | Type      | Default               | Description
 className       | string    | n/a                   | additional class name passed to wrapper
 smooth          | bool      | n/a                   | should elements be collapsed and opened smoothly?
 multi           | bool      | n/a                   | should allow opening many elements at once?
-animationSpeed  | number    | `300`                 | Animation speed (in px/ms)
+animationSpeed  | number    | `200`                 | Animation speed (in px/ms)
 options         | Option[]  | n/a                   | options to show in Accordion
 value           | any       | self-controlled       | ID of currently opened option
 onChange        | function  | n/a                   | Handler fired on possible change of opened container
@@ -41,10 +41,11 @@ buildId         | function  | `(x, index) => index` | Function to build unique I
 
 Option which should be shown in Accordion has few required properties:
 
-Property name | Type      | Default | Description
---------------|-----------|:-------:|--------------------------------
-label         | node      | n/a     | Label to show in button
-content       | nodes     | n/a     | Content to put inside collapsible element
+Property name        | Type      | Default         | Description
+---------------------|-----------|:---------------:|--------------------------------
+label                | node      | n/a             | Label to show in button
+content              | nodes     | n/a             | Content to put inside collapsible element
+animationSpeed       | number    | accordion speed | Animation speed (in px/ms)
 
 ## Changelog
 

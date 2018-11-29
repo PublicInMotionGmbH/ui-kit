@@ -21,7 +21,7 @@ const propTypes = {
     label: PropTypes.node.isRequired,
 
     /** Value it represents */
-    value: PropTypes.any.isRequired,
+    value: PropTypes.any,
 
     /** Is this option disabled? */
     disabled: PropTypes.bool
@@ -89,9 +89,13 @@ class RadioGroup extends React.PureComponent {
     } = this.props
     const _value = this.state.value
 
+    const selectedOption = options.filter(obj => _value === obj.value)[0]
+
+    const focusableOption = selectedOption || options[0]
+
     const optionsList = options.map((obj, index) => (
       <RadioInput
-        id={index === 0 ? id : undefined}
+        id={focusableOption === obj ? id : undefined}
         checked={_value === obj.value}
         disabled={obj.disabled || disabled}
         readOnly={obj.readOnly || readOnly}
@@ -99,7 +103,7 @@ class RadioGroup extends React.PureComponent {
         name={name}
         error={error}
         onChange={this.change.bind(this, obj.value)}
-        value={obj.value}
+        value={index}
       >
         {obj.label}
       </RadioInput>

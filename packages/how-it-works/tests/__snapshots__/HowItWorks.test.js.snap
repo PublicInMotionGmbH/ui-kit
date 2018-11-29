@@ -1,0 +1,404 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HowItWorks /> renders children correctly 1`] = `
+<div
+  className="talixo-how-it-works__container"
+>
+  <div
+    className="talixo-how-it-works"
+  >
+    <section
+      key="0"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 1
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="1"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 2
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="2"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 3
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="3"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 4
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="4"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 5
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="5"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 6
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="6"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 7
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="7"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 8
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="8"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 9
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="9"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 10
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="10"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 11
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="11"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 12
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="12"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 13
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+    <section
+      key="13"
+    >
+      <div
+        className="talixo-how-it-works__tile"
+      >
+        <div
+          className="talixo-how-it-works__image"
+        >
+          <img />
+        </div>
+        <div
+          className="talixo-how-it-works__title"
+        >
+          <strong>
+            Title 14
+          </strong>
+        </div>
+        <div
+          className="talixo-how-it-works__description"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur dignissimos laudantium nam saepe sunt suscipit?
+        </div>
+      </div>
+      <div
+        className="talixo-how-it-works__divider"
+      />
+    </section>
+  </div>
+</div>
+`;

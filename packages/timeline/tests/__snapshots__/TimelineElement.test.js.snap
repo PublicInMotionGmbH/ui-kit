@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TimelineLine /> renders children correctly 1`] = `
+<div
+  className="talixo-timeline-element"
+>
+  <div
+    className="talixo-timeline-element__icon"
+  />
+  <div
+    className="talixo-timeline-element__pointer"
+  />
+</div>
+`;
