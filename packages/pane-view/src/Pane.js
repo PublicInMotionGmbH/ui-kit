@@ -13,7 +13,10 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Size of the pane */
+  /** Default pane size */
+  defaultSize: PropTypes.number,
+
+  /** Size of the pane, for internal purposes only */
   size: PropTypes.number,
 
   /** Split direction */

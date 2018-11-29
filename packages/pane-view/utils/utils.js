@@ -1,14 +1,4 @@
 /**
-   * Round number
-   *
-   * @param {number} num
-   * @returns {number}
-   */
-export function roundDecimals (num) {
-  return Math.round(num * 10000) / 10000
-}
-
-/**
      * Convert to percent
      *
      * @param {number} size
@@ -22,9 +12,15 @@ export function convertToPercent (size, paneViewDimension) {
   } else if (result > 100) {
     result = 100
   }
-  return roundDecimals(result)
+  return result
 }
 
+/**
+ * Build styles
+ *
+ * @param {*} size
+ * @param {*} split
+ */
 export function buildStyle (size, split) {
   if (size === undefined) return {}
 
@@ -32,4 +28,24 @@ export function buildStyle (size, split) {
   const width = split === 'horizontal' && size
 
   return { height: `${height}%`, width: `${width}%` }
+}
+
+/**
+ * Compose new list of panes
+ */
+export function composeNewPaneList (paneArr, current, currentSize, realPaneView, combined, activeOffsetPercent) {
+  const newPaneArr = paneArr.map((el, i) => {
+    if (i === current) {
+      el.size = currentSize > 0 ? currentSize : 0
+      el.size = convertToPercent(el.size, realPaneView)
+      if (combined <= 0) {
+        el.size = activeOffsetPercent
+      }
+    } else if (i === current + 1) {
+      el.size = convertToPercent(combined, realPaneView)
+    }
+    return el
+  })
+
+  return newPaneArr
 }
