@@ -1,103 +1,487 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Chart> when rendered should render properly 1`] = `
-<FlexibleXYPlot
-  animation={true}
-  className="talixo-chart"
-  lineColors={Array []}
-  timeSeries={false}
-  xDomain={null}
-  xType="linear"
+<div
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
 >
-  <HorizontalGridLines
-    attr="y"
-    direction="horizontal"
-  />
-  <VerticalGridLines
-    attr="x"
-    direction="vertical"
-  />
-  <XAxis
-    attr="x"
-    attrAxis="y"
-    orientation="bottom"
-  />
-  <LineSeries
-    animate={true}
-    className="talixo-chart-series className talixo-chart-series--0"
-    color={null}
-    curve={null}
-    data={
-      Array [
-        Object {
-          "x": 1495490400000,
-          "y": 1,
-        },
-        Object {
-          "x": 1496008800000,
-          "y": 2,
-        },
-        Object {
-          "x": 1496181600000,
-          "y": 3,
-        },
-        Object {
-          "x": 1497304800000,
-          "y": 4,
-        },
-      ]
-    }
-    getNull={[Function]}
-    key="Line 1-0"
-    opacity={1}
-    stack={false}
-    strokeStyle="solid"
+  <div
+    className="rv-xy-plot talixo-chart"
     style={
       Object {
-        "fill": "none",
+        "height": "0px",
+        "width": "0px",
       }
     }
-  />
-  <LineSeries
-    animate={true}
-    className="talixo-chart-series className talixo-chart-series--1"
-    color={null}
-    curve={null}
-    data={
-      Array [
-        Object {
-          "x": 1495490400000,
-          "y": 5,
-        },
-        Object {
-          "x": 1496008800000,
-          "y": 6,
-        },
-        Object {
-          "x": 1496181600000,
-          "y": 7,
-        },
-        Object {
-          "x": 1497304800000,
-          "y": 8,
-        },
-      ]
-    }
-    getNull={[Function]}
-    key="Line 2-1"
-    opacity={1}
-    stack={false}
-    strokeStyle="solid"
-    style={
-      Object {
-        "fill": "none",
-      }
-    }
-  />
-  <YAxis
-    attr="y"
-    attrAxis="x"
-    orientation="left"
-  />
-</FlexibleXYPlot>
+  >
+    <svg
+      className="rv-xy-plot__inner"
+      height={0}
+      onClick={[Function]}
+      onDoubleClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      onMouseUp={[Function]}
+      onTouchCancel={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      onWheel={[Function]}
+      width={0}
+    >
+      <g
+        className="rv-xy-plot__grid-lines"
+        transform="translate(40,10)"
+      >
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="0"
+          x1={0}
+          x2={-50}
+          y1={-50}
+          y2={-50}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="1"
+          x1={0}
+          x2={-50}
+          y1={-41.66666666666667}
+          y2={-41.66666666666667}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="2"
+          x1={0}
+          x2={-50}
+          y1={-33.333333333333336}
+          y2={-33.333333333333336}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="3"
+          x1={0}
+          x2={-50}
+          y1={-25}
+          y2={-25}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="4"
+          x1={0}
+          x2={-50}
+          y1={-16.66666666666667}
+          y2={-16.66666666666667}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="5"
+          x1={0}
+          x2={-50}
+          y1={-8.333333333333329}
+          y2={-8.333333333333329}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="6"
+          x1={0}
+          x2={-50}
+          y1={0}
+          y2={0}
+        />
+      </g>
+      <g
+        className="rv-xy-plot__grid-lines"
+        transform="translate(40,10)"
+      >
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="0"
+          x1={-0.26455026455026454}
+          x2={-0.26455026455026454}
+          y1={0}
+          y2={-50}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="1"
+          x1={-14.04320987654321}
+          x2={-14.04320987654321}
+          y1={0}
+          y2={-50}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="2"
+          x1={-27.821869488536155}
+          x2={-27.821869488536155}
+          y1={0}
+          y2={-50}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="3"
+          x1={-41.6005291005291}
+          x2={-41.6005291005291}
+          y1={0}
+          y2={-50}
+        />
+      </g>
+      <path
+        className="rv-xy-plot__series rv-xy-plot__series--line talixo-chart-series className talixo-chart-series--0"
+        d="M0,0L-14.285714285714285,-50L-19.047619047619047,-50L-50,-50"
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "fill": "none",
+            "opacity": 1,
+            "stroke": null,
+            "strokeDasharray": undefined,
+            "strokeWidth": undefined,
+          }
+        }
+        transform="translate(40,10)"
+      />
+      <g
+        className="rv-xy-plot__series rv-xy-plot__series--label "
+        style={Object {}}
+        transform="translate(40,10)"
+      />
+      <path
+        className="rv-xy-plot__series rv-xy-plot__series--line talixo-chart-series className talixo-chart-series--1"
+        d="M0,0L-14.285714285714285,-50L-19.047619047619047,-50L-50,-50"
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onMouseOut={[Function]}
+        onMouseOver={[Function]}
+        style={
+          Object {
+            "fill": "none",
+            "opacity": 1,
+            "stroke": null,
+            "strokeDasharray": undefined,
+            "strokeWidth": undefined,
+          }
+        }
+        transform="translate(40,10)"
+      />
+      <g
+        className="rv-xy-plot__series rv-xy-plot__series--label "
+        style={Object {}}
+        transform="translate(40,10)"
+      />
+      <g
+        className="rv-xy-plot__axis rv-xy-plot__axis--vertical "
+        style={Object {}}
+        transform="translate(0,10)"
+      >
+        <line
+          className="rv-xy-plot__axis__line"
+          style={Object {}}
+          x1={40}
+          x2={40}
+          y1={0}
+          y2={-50}
+        />
+        <g
+          className="rv-xy-plot__axis__ticks"
+          transform="translate(40, 0)"
+        >
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="0"
+            style={Object {}}
+            transform="translate(0, -50)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              2.0
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="1"
+            style={Object {}}
+            transform="translate(0, -41.66666666666667)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              2.5
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="2"
+            style={Object {}}
+            transform="translate(0, -33.333333333333336)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              3.0
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="3"
+            style={Object {}}
+            transform="translate(0, -25)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              3.5
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="4"
+            style={Object {}}
+            transform="translate(0, -16.66666666666667)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              4.0
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="5"
+            style={Object {}}
+            transform="translate(0, -8.333333333333329)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              4.5
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="6"
+            style={Object {}}
+            transform="translate(0, 0)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              5.0
+            </text>
+          </g>
+        </g>
+      </g>
+      <g
+        className="rv-xy-plot__axis rv-xy-plot__axis--horizontal "
+        style={Object {}}
+        transform="translate(40,-40)"
+      >
+        <line
+          className="rv-xy-plot__axis__line"
+          style={Object {}}
+          x1={0}
+          x2={-50}
+          y1={0}
+          y2={0}
+        />
+        <g
+          className="rv-xy-plot__axis__ticks"
+          transform="translate(0, 0)"
+        >
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="0"
+            style={Object {}}
+            transform="translate(-0.26455026455026454, 0)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={0}
+              x2={0}
+              y1={-6}
+              y2={6}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.72em"
+              style={Object {}}
+              textAnchor="middle"
+              transform="translate(0, 14)"
+            >
+              1,495,500,000,000
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="1"
+            style={Object {}}
+            transform="translate(-14.04320987654321, 0)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={0}
+              x2={0}
+              y1={-6}
+              y2={6}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.72em"
+              style={Object {}}
+              textAnchor="middle"
+              transform="translate(0, 14)"
+            >
+              1,496,000,000,000
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="2"
+            style={Object {}}
+            transform="translate(-27.821869488536155, 0)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={0}
+              x2={0}
+              y1={-6}
+              y2={6}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.72em"
+              style={Object {}}
+              textAnchor="middle"
+              transform="translate(0, 14)"
+            >
+              1,496,500,000,000
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="3"
+            style={Object {}}
+            transform="translate(-41.6005291005291, 0)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={0}
+              x2={0}
+              y1={-6}
+              y2={6}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.72em"
+              style={Object {}}
+              textAnchor="middle"
+              transform="translate(0, 14)"
+            >
+              1,497,000,000,000
+            </text>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
 `;

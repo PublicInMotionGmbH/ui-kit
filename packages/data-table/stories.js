@@ -207,7 +207,7 @@ addStory.controlled('clickable row', readme, (setState, state) => (
     />
     {
       state.notify &&
-      <Notification className='storybook-data-table__notification' handleRemove={() => setState({notify: null})}>
+      <Notification className='storybook-data-table__notification' onClose={() => setState({notify: null})}>
         <h2>Details</h2>
         <div className='storybook-data-table__details'>
           <Icon name='avatar' /> Assignee: {state.notify.assignee}

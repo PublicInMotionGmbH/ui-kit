@@ -1,6 +1,6 @@
 {
   "name": "@talixo/charts",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.32",
   "description": "UI component for charts",
   "main": "dist/index.js",
   "module": "index.js",
@@ -29,7 +29,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-vis": "^1.10.8"
+    "react-vis": "1.11.5"
   },
   "peerDependencies": {
     "@talixo/checkbox": "^1.0.0-alpha.31",
@@ -38,6 +38,6 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-vis": "^1.10.8"
+    "react-vis": "1.11.5"
   }
 }
