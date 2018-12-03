@@ -17,7 +17,6 @@ exports[`<PaneView /> renders children correctly 1`] = `
       </div>
     </Pane>
     <Resizer
-      key="resizer_0"
       onMouseDown={[Function]}
       split="horizontal"
     />
