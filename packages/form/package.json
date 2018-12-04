@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/button": "^1.0.0-alpha.31",
-    "@talixo/calendar": "^1.0.0-alpha.32",
+    "@talixo/calendar": "^1.0.0-alpha.33",
     "@talixo/checkbox": "^1.0.0-alpha.31",
     "@talixo/combo-box": "^1.0.0-alpha.31",
     "@talixo/control-group": "^1.0.0-alpha.31",
