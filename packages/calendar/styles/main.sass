@@ -27,9 +27,7 @@
     outline: none
     font: inherit
     color: $calendar-text-color
-    background-color: $calendar-background-color
-    border: $calendar-border-width solid $calendar-border-color
-    border-radius: $calendar-border-radius
+    border: none
     font-size: $calendar-font-size
     height: $calendar-height
     line-height: $calendar-height
@@ -44,18 +42,25 @@
       color: $calendar-hover-text-color
 
     &__focused
-      background-color: $calendar-focus-background-color
-      border-color: $calendar-focus-border-color
       color: $calendar-focus-text-color
-      border-bottom-left-radius: 0
-      border-bottom-right-radius: 0
-      border-bottom-color: transparent
 
   &--error .DateInput_input:not(.DateInput_input__focused)
     &, &:hover
       background-color: $calendar-error-background-color
       border-color: $calendar-error-border-color
       color: $calendar-error-text-color
+
+  .SingleDatePickerInput
+    background-color: $calendar-background-color
+    border: $calendar-border-width solid $calendar-border-color
+    border-radius: $calendar-border-radius
+
+  &--focused .SingleDatePickerInput
+    background-color: $calendar-focus-background-color
+    border-color: $calendar-focus-border-color
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    border-bottom-color: transparent
 
   &--focused .SingleDatePicker,
   &--focused .SingleDatePickerInput
