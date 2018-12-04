@@ -52,44 +52,52 @@ exports[`<Chart> when rendered should render properly 1`] = `
           key="1"
           x1={0}
           x2={-50}
-          y1={-41.66666666666667}
-          y2={-41.66666666666667}
+          y1={-42.85714285714286}
+          y2={-42.85714285714286}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           key="2"
           x1={0}
           x2={-50}
-          y1={-33.333333333333336}
-          y2={-33.333333333333336}
+          y1={-35.714285714285715}
+          y2={-35.714285714285715}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           key="3"
           x1={0}
           x2={-50}
-          y1={-25}
-          y2={-25}
+          y1={-28.571428571428573}
+          y2={-28.571428571428573}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           key="4"
           x1={0}
           x2={-50}
-          y1={-16.66666666666667}
-          y2={-16.66666666666667}
+          y1={-21.42857142857143}
+          y2={-21.42857142857143}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           key="5"
           x1={0}
           x2={-50}
-          y1={-8.333333333333329}
-          y2={-8.333333333333329}
+          y1={-14.285714285714285}
+          y2={-14.285714285714285}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           key="6"
+          x1={0}
+          x2={-50}
+          y1={-7.142857142857146}
+          y2={-7.142857142857146}
+        />
+        <line
+          className="rv-xy-plot__grid-lines__line"
+          key="7"
           x1={0}
           x2={-50}
           y1={0}
@@ -135,7 +143,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       </g>
       <path
         className="rv-xy-plot__series rv-xy-plot__series--line talixo-chart-series className talixo-chart-series--0"
-        d="M0,0L-14.285714285714285,-50L-19.047619047619047,-50L-50,-50"
+        d="M0,-50L-14.285714285714285,-42.85714285714286L-19.047619047619047,-35.714285714285715L-50,-28.571428571428573"
         onClick={[Function]}
         onContextMenu={[Function]}
         onMouseOut={[Function]}
@@ -158,7 +166,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
       />
       <path
         className="rv-xy-plot__series rv-xy-plot__series--line talixo-chart-series className talixo-chart-series--1"
-        d="M0,0L-14.285714285714285,-50L-19.047619047619047,-50L-50,-50"
+        d="M0,-21.42857142857143L-14.285714285714285,-14.285714285714285L-19.047619047619047,-7.142857142857146L-50,0"
         onClick={[Function]}
         onContextMenu={[Function]}
         onMouseOut={[Function]}
@@ -217,14 +225,14 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              2.0
+              1
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="1"
             style={Object {}}
-            transform="translate(0, -41.66666666666667)"
+            transform="translate(0, -42.85714285714286)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -241,14 +249,14 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              2.5
+              2
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="2"
             style={Object {}}
-            transform="translate(0, -33.333333333333336)"
+            transform="translate(0, -35.714285714285715)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -265,14 +273,14 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              3.0
+              3
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="3"
             style={Object {}}
-            transform="translate(0, -25)"
+            transform="translate(0, -28.571428571428573)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -289,14 +297,14 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              3.5
+              4
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="4"
             style={Object {}}
-            transform="translate(0, -16.66666666666667)"
+            transform="translate(0, -21.42857142857143)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -313,14 +321,14 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              4.0
+              5
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="5"
             style={Object {}}
-            transform="translate(0, -8.333333333333329)"
+            transform="translate(0, -14.285714285714285)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -337,12 +345,36 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              4.5
+              6
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             key="6"
+            style={Object {}}
+            transform="translate(0, -7.142857142857146)"
+          >
+            <line
+              className="rv-xy-plot__axis__tick__line"
+              style={Object {}}
+              x1={6}
+              x2={-6}
+              y1={0}
+              y2={0}
+            />
+            <text
+              className="rv-xy-plot__axis__tick__text"
+              dy="0.32em"
+              style={Object {}}
+              textAnchor="end"
+              transform="translate(-14, 0)"
+            >
+              7
+            </text>
+          </g>
+          <g
+            className="rv-xy-plot__axis__tick"
+            key="7"
             style={Object {}}
             transform="translate(0, 0)"
           >
@@ -361,7 +393,7 @@ exports[`<Chart> when rendered should render properly 1`] = `
               textAnchor="end"
               transform="translate(-14, 0)"
             >
-              5.0
+              8
             </text>
           </g>
         </g>
