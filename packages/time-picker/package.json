@@ -30,8 +30,8 @@
     "@talixo/text-input": "^1.0.0-alpha.31",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "peerDependencies": {
     "@talixo/button": "^1.0.0-alpha.31",
@@ -41,7 +41,7 @@
     "@talixo/text-input": "^1.0.0-alpha.31",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   }
 }

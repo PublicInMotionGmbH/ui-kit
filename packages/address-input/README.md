@@ -22,8 +22,8 @@ Your package should additionally have some extra dependencies:
 - `@talixo/text-input: ^1.0.0-alpha.31`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
-- `react: ^16.2.0`
-- `react-dom: ^16.2.0`
+- `react: ^16.6.3`
+- `react-dom: ^16.6.3`
 - `react-transition-group: ^2.2.1`
 
 These packages are required by `@talixo/address-input`, but you have to install them manually,

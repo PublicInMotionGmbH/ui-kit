@@ -15,8 +15,8 @@ Your package should additionally have some extra dependencies:
 - `@talixo/shared: ^1.0.0-alpha.31`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
-- `react: ^16.4.2`
-- `react-dom: ^16.4.2`
+- `react: ^16.6.3`
+- `react-dom: ^16.6.3`
 - `react-vis: 1.11.5`
 
 These packages are required by `@talixo/charts`, but you have to install them manually,

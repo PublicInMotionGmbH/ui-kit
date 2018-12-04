@@ -15,8 +15,8 @@ Your package should additionally have some extra dependencies:
 - `@talixo/icon: ^1.0.0-alpha.31`
 - `@talixo/shared: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
-- `react: ^16.4.2`
-- `react-dom: ^16.4.2`
+- `react: ^16.6.3`
+- `react-dom: ^16.6.3`
 - `react-transition-group: ^2.2.1`
 
 These packages are required by `@talixo/notification`, but you have to install them manually,

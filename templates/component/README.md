@@ -12,8 +12,8 @@ using `npm install @talixo/__id__ --save` or `yarn add @talixo/__id__`.
 Your package should additionally have some extra dependencies:
 
 - `prop-types: ^15.6.1`
-- `react: ^16.2.0`
-- `react-dom: ^16.2.0`
+- `react: ^16.6.3`
+- `react-dom: ^16.6.3`
 - `@talixo/shared: ^0.1.0`
 
 These packages are required by `@talixo/__id__`, but you have to install them manually,
