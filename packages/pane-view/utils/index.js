@@ -33,19 +33,19 @@ export function buildStyle (size, split) {
 /**
  * Compose new list of panes
  */
-export function composeNewPaneList (paneArr, current, currentSize, realPaneView, combined, activeOffsetPercent) {
-  const newPaneArr = paneArr.map((el, i) => {
+export function composeNewPaneList (paneList, current, currentSize, realPaneView, combined) {
+  const newPaneList = paneList.map((el, i) => {
     if (i === current) {
       el.size = currentSize > 0 ? currentSize : 0
       el.size = convertToPercent(el.size, realPaneView)
-      if (combined <= 0) {
-        el.size = activeOffsetPercent
+      if (combined < currentSize) {
+        el.size = convertToPercent(combined, realPaneView)
       }
     } else if (i === current + 1) {
-      el.size = convertToPercent(combined, realPaneView)
+      el.size = convertToPercent(combined - currentSize, realPaneView)
     }
     return el
   })
 
-  return newPaneArr
+  return newPaneList
 }

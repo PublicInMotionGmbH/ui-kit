@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
-import { buildStyle } from '../utils/utils'
+import { buildStyle } from '../utils'
 
 const moduleName = 'pane'
 

@@ -91,7 +91,7 @@ addStory.controlled('with mode sent to parent', readme, (setState, state) => (
   <PaneView
     split='horizontal'
     onDragStart={(i) => setState({ index: i, mode: 'start' })}
-    onDragResize={(i) => setState({ index: i, mode: 'resize' })}
+    onResize={(i) => setState({ index: i, mode: 'resize' })}
     onDragStop={(i) => setState({ index: i, mode: 'stop' })}
   >
     <Pane>

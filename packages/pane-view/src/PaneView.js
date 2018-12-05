@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { convertToPercent, composeNewPaneList } from '../utils/utils'
+import { composeNewPaneList } from '../utils'
 
 import Resizer from './Resizer'
 
@@ -20,13 +20,10 @@ const propTypes = {
   /** Function fired when Pane is resized */
   onResize: PropTypes.func,
 
-  /** Function fired when Pane is started to drag */
+  /** Function fired when Pane is started to resize */
   onDragStart: PropTypes.func,
 
-  /** Function fired when Pane is dragged */
-  onDragResize: PropTypes.func,
-
-  /** Function fired when Pane is stopped to drag */
+  /** Function fired when Pane is stopped to resize */
   onDragStop: PropTypes.func,
 
   /** Split direction */
@@ -48,7 +45,6 @@ const defaultProps = {
  * @param {string} [props.className]
  * @param {function} [props.onResize]
  * @param {function} [props.onDragStart]
- * @param {function} [props.onDragResize]
  * @param {function} [props.onDragStop]
  * @param {string} [props.split]
  * @param {object} [props.style]
@@ -60,7 +56,7 @@ class PaneView extends React.Component {
 
     this.state = {
       current: null,
-      paneArr: []
+      paneList: []
     }
 
     this.resizers = []
@@ -93,7 +89,7 @@ class PaneView extends React.Component {
 
     const defaultSizeSingle = (100 - defaultSizeAll) / numberOfNotDefaults
 
-    const paneArr = children.map((el, i) => ({
+    const paneList = children.map((el, i) => ({
       paneId: i,
       size: el.props.defaultSize !== undefined
         ? el.props.defaultSize
@@ -101,7 +97,7 @@ class PaneView extends React.Component {
     }))
 
     this.setState({
-      paneArr
+      paneList
     })
   }
 
@@ -116,23 +112,23 @@ class PaneView extends React.Component {
    * Add event listeners
    */
   addEventListeners () {
-    document.addEventListener('mousemove', this.handleMouseMove)
-    document.addEventListener('mouseup', this.handleMouseUp)
+    window.addEventListener('mousemove', this.handleMouseMove)
+    window.addEventListener('mouseup', this.handleMouseUp)
   }
 
   /**
    * Remove event listeners
    */
   removeEventListeners () {
-    document.removeEventListener('mousemove', this.handleMouseMove)
-    document.removeEventListener('mouseup', this.handleMouseUp)
+    window.removeEventListener('mousemove', this.handleMouseMove)
+    window.removeEventListener('mouseup', this.handleMouseUp)
   }
 
   /**
    * Handle mouse down
    * @param {number} index
    */
-  handleMouseDown (index) {
+  handleMouseDown (e, index) {
     const { onDragStart } = this.props
 
     this.setState({
@@ -143,6 +139,7 @@ class PaneView extends React.Component {
       onDragStart(index)
     }
 
+    e.preventDefault()
     this.addEventListeners()
   }
 
@@ -173,8 +170,8 @@ class PaneView extends React.Component {
    */
   handleMouseMove (e) {
     const { current } = this.state
-    let { paneArr } = this.state
-    const { split, children, onDragResize, onResize } = this.props
+    let { paneList } = this.state
+    const { split, children, onResize } = this.props
     const paneView = ReactDOM.findDOMNode(this.paneView)
     const activePane = ReactDOM.findDOMNode(this.panes[current])
     const nextPane = ReactDOM.findDOMNode(this.panes[current + 1])
@@ -193,37 +190,27 @@ class PaneView extends React.Component {
     const realPaneViewHeight = paneViewHeight - (resizersNumber * resizerHeight)
     const currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
     const currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
-    const activeOffsetWidthPercent = convertToPercent(activePane.getBoundingClientRect().width,
-      realPaneViewWidth)
-    const activeOffsetHeightPercent = convertToPercent(activePane.getBoundingClientRect().height,
-      realPaneViewHeight)
-    const widthCombined = activeWidth + nextWidth - currentSizeHorizontal
-    const heightCombined = activeHeight + nextHeight - currentSizeVertical
+    const widthCombined = activeWidth + nextWidth
+    const heightCombined = activeHeight + nextHeight
 
-    if (current === null || !paneArr) return
+    if (current === null || !paneList) return
 
     if (split === 'horizontal') {
-      paneArr = composeNewPaneList(
-        paneArr,
+      paneList = composeNewPaneList(
+        paneList,
         current,
         currentSizeHorizontal,
         realPaneViewWidth,
-        widthCombined,
-        activeOffsetWidthPercent
+        widthCombined
       )
     } else if (split === 'vertical') {
-      paneArr = composeNewPaneList(
-        paneArr,
+      paneList = composeNewPaneList(
+        paneList,
         current,
         currentSizeVertical,
         realPaneViewHeight,
-        heightCombined,
-        activeOffsetHeightPercent
+        heightCombined
       )
-    }
-
-    if (onDragResize) {
-      onDragResize()
     }
 
     if (onResize) {
@@ -231,7 +218,7 @@ class PaneView extends React.Component {
     }
 
     this.setState({
-      paneArr,
+      paneList,
       currentSizeVertical,
       currentSizeHorizontal
     })
@@ -239,7 +226,7 @@ class PaneView extends React.Component {
 
   render () {
     const { children, className, split, style } = this.props
-    const { paneArr } = this.state
+    const { paneList } = this.state
     const clsName = buildClassName(moduleName, className, [split])
 
     return (
@@ -249,14 +236,14 @@ class PaneView extends React.Component {
             {React.cloneElement(child, {
               ref: node => { this.panes[i] = node },
               key: `pane_${i}`,
-              size: paneArr[i] && paneArr[i].size,
+              size: paneList[i] && paneList[i].size,
               split: split
             })}
             {(i < children.length - 1) &&
               <Resizer
                 ref={node => { this.resizers[i] = node }}
                 key={this.resizers[i]}
-                onMouseDown={() => this.handleMouseDown(i)}
+                onMouseDown={(e) => this.handleMouseDown(e, i)}
                 split={split}
               />}
           </React.Fragment>
