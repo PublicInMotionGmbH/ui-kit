@@ -32,6 +32,9 @@ children      | node      |    yes   | n/a     | Array of Pane components.
 onMouseDown   | function  |    no    | n/a     | Event fired when mouse button is clicked.
 split         | string    |    no    | n/a     | One of type `horizontal`, `vertical`.
 style         | object    |    no    | n/a     | Additional styles for wrapper.
+onResize      | function  |    no    | n/a     | Function fired when Pane is resized
+onDragStart   | function  |    no    | n/a     | Function fired when Pane is started to resize
+onDragStop    | function  |    no    | n/a     | Function fired when Pane is stopped to resize
 
 ### Pane
 
