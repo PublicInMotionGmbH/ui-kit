@@ -126,9 +126,10 @@ class PaneView extends React.Component {
 
   /**
    * Handle mouse down
+   * @param {*} e
    * @param {number} index
    */
-  handleMouseDown (e, index) {
+  handleMouseDown (event, index) {
     const { onDragStart } = this.props
 
     this.setState({
@@ -139,8 +140,8 @@ class PaneView extends React.Component {
       onDragStart(index)
     }
 
-    e.preventDefault()
     this.addEventListeners()
+    event.preventDefault()
   }
 
   /**

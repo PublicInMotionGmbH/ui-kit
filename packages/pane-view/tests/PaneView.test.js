@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme'
 
 import PaneView from '../src/PaneView'
 import Pane from '../src/Pane'
-import { convertToPercent } from '../utils/utils'
+import { convertToPercent } from '../utils'
 
 describe('<PaneView />', () => {
   it('renders children correctly', () => {
@@ -22,7 +22,7 @@ describe('<PaneView />', () => {
   })
 
   it('handle mouse down', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <PaneView>
         <Pane>
           <div>LEFT SIDE</div>
@@ -34,7 +34,6 @@ describe('<PaneView />', () => {
     )
 
     wrapper.find('Resizer').simulate('mousedown')
-
     expect(wrapper.state('current')).toBe(0)
   })
 
@@ -59,7 +58,7 @@ describe('<PaneView />', () => {
       }
     })
 
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 322,
       clientY: 322
     }))
@@ -70,7 +69,7 @@ describe('<PaneView />', () => {
   })
 
   it('should handle mouse up', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <PaneView>
         <Pane>
           <div>LEFT SIDE</div>
@@ -84,7 +83,7 @@ describe('<PaneView />', () => {
     wrapper.find('Resizer').simulate('mousedown')
     expect(wrapper.state('current')).toBe(0)
 
-    document.dispatchEvent(new window.MouseEvent('mouseup'))
+    window.dispatchEvent(new window.MouseEvent('mouseup'))
     expect(wrapper.state('current')).toBe(null)
   })
 
@@ -118,14 +117,14 @@ describe('<PaneView />', () => {
 
     expect(wrapper.state('currentSizeHorizontal')).toBe(undefined)
 
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 222,
       clientY: 222
     }))
 
     expect(wrapper.state('currentSizeHorizontal')).toBe(222)
 
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 270,
       clientY: 270
     }))
@@ -156,14 +155,14 @@ describe('<PaneView />', () => {
 
     expect(wrapper.state('currentSizeVertical')).toBe(undefined)
 
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 222,
       clientY: 222
     }))
 
     expect(wrapper.state('currentSizeVertical')).toBe(222)
 
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 299,
       clientY: 299
     }))
@@ -208,7 +207,7 @@ describe('<PaneView />', () => {
     )
 
     wrapper.find('Resizer').simulate('mousedown')
-    document.dispatchEvent(new window.MouseEvent('mouseup'))
+    window.dispatchEvent(new window.MouseEvent('mouseup'))
 
     expect(spy).toHaveBeenCalledTimes(1)
     expect(spy.mock.calls[0][0]).toBe(0)
@@ -219,7 +218,7 @@ describe('<PaneView />', () => {
   it('handle mouse move with onDragResize', () => {
     const spy = jest.fn()
     const wrapper = mount(
-      <PaneView onDragResize={spy} split='horizontal'>
+      <PaneView onResize={spy} split='horizontal'>
         <Pane>
           <div>LEFT SIDE</div>
         </Pane>
@@ -230,7 +229,7 @@ describe('<PaneView />', () => {
     )
 
     wrapper.find('Resizer').simulate('mousedown')
-    document.dispatchEvent(new window.MouseEvent('mousemove', {
+    window.dispatchEvent(new window.MouseEvent('mousemove', {
       clientX: 299,
       clientY: 299
     }))

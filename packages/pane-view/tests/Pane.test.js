@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Pane from '../src/Pane'
-import { buildStyle } from '../utils/utils'
+import { buildStyle } from '../utils'
 
 describe('<Pane />', () => {
   it('renders children correctly', () => {
