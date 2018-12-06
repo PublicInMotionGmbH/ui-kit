@@ -138,7 +138,7 @@ class PaneView extends React.Component {
    * Handle mouse down
    * @param {number} index
    */
-  handleMouseDown (index, e) {
+  handleMouseDown (index) {
     const { onStartResize } = this.props
 
     this.setState({
@@ -259,7 +259,7 @@ class PaneView extends React.Component {
                 ref={node => { this.resizers[i] = node }}
                 key={this.resizers[i]}
                 onMouseDown={() => this.handleMouseDown(i)}
-                onTouchStart={(e) => this.handleMouseDown(i, e)}
+                onTouchStart={() => this.handleMouseDown(i)}
                 split={split}
               />}
           </React.Fragment>
