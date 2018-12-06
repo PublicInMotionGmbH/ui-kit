@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { composeNewPaneList } from '../utils'
+import { composeNewPaneList, isTouchDevice } from '../utils'
 
 import Resizer from './Resizer'
 
@@ -17,14 +17,14 @@ const propTypes = {
   /** Additional class name */
   className: PropTypes.string,
 
-  /** Function fired when Pane is resized */
+  /** Function fired when Pane is resized, return resizer's index and current dimensions of pane */
   onResize: PropTypes.func,
 
   /** Function fired when Pane is started to resize */
-  onDragStart: PropTypes.func,
+  onStartResize: PropTypes.func,
 
   /** Function fired when Pane is stopped to resize */
-  onDragStop: PropTypes.func,
+  onStopResize: PropTypes.func,
 
   /** Split direction */
   split: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -112,49 +112,56 @@ class PaneView extends React.Component {
    * Add event listeners
    */
   addEventListeners () {
-    window.addEventListener('mousemove', this.handleMouseMove)
-    window.addEventListener('mouseup', this.handleMouseUp)
+    if (isTouchDevice()) {
+      window.addEventListener('touchmove', this.handleMouseMove)
+      window.addEventListener('touchend', this.handleMouseUp)
+    } else {
+      window.addEventListener('mousemove', this.handleMouseMove)
+      window.addEventListener('mouseup', this.handleMouseUp)
+    }
   }
 
   /**
    * Remove event listeners
    */
   removeEventListeners () {
-    window.removeEventListener('mousemove', this.handleMouseMove)
-    window.removeEventListener('mouseup', this.handleMouseUp)
+    if (isTouchDevice()) {
+      window.removeEventListener('touchmove', this.handleMouseMove)
+      window.removeEventListener('touchend', this.handleMouseUp)
+    } else {
+      window.removeEventListener('mousemove', this.handleMouseMove)
+      window.removeEventListener('mouseup', this.handleMouseUp)
+    }
   }
 
   /**
    * Handle mouse down
-   * @param {*} e
    * @param {number} index
    */
-  handleMouseDown (event, index) {
-    const { onDragStart } = this.props
+  handleMouseDown (index, e) {
+    const { onStartResize } = this.props
 
     this.setState({
       current: index
     })
 
-    if (onDragStart) {
-      onDragStart(index)
+    if (onStartResize) {
+      onStartResize(index)
     }
-
     this.addEventListeners()
-    event.preventDefault()
   }
 
   /**
    * Handle mouse up
    */
   handleMouseUp () {
-    const { onDragStop } = this.props
+    const { onStopResize } = this.props
     const { current } = this.state
 
     this.removeEventListeners()
 
-    if (onDragStop) {
-      onDragStop(current)
+    if (onStopResize) {
+      onStopResize(current)
     }
 
     this.setState({
@@ -189,10 +196,17 @@ class PaneView extends React.Component {
     const resizersNumber = children.length - 1
     const realPaneViewWidth = paneViewWidth - (resizersNumber * resizerWidth)
     const realPaneViewHeight = paneViewHeight - (resizersNumber * resizerHeight)
-    const currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
-    const currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
     const widthCombined = activeWidth + nextWidth
     const heightCombined = activeHeight + nextHeight
+    let currentSizeHorizontal
+    let currentSizeVertical
+    if (isTouchDevice()) {
+      currentSizeHorizontal = e.changedTouches[0].clientX - activeLeft <= 0 ? 0 : e.changedTouches[0].clientX - activeLeft
+      currentSizeVertical = e.changedTouches[0].clientY - activeTop <= 0 ? 0 : e.changedTouches[0].clientY - activeTop
+    } else {
+      currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
+      currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
+    }
 
     if (current === null || !paneList) return
 
@@ -244,7 +258,8 @@ class PaneView extends React.Component {
               <Resizer
                 ref={node => { this.resizers[i] = node }}
                 key={this.resizers[i]}
-                onMouseDown={(e) => this.handleMouseDown(e, i)}
+                onMouseDown={() => this.handleMouseDown(i)}
+                onTouchStart={(e) => this.handleMouseDown(i, e)}
                 split={split}
               />}
           </React.Fragment>

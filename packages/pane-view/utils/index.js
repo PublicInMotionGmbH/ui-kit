@@ -20,6 +20,8 @@ export function convertToPercent (size, paneViewDimension) {
  *
  * @param {*} size
  * @param {*} split
+ *
+ * @returns {object}
  */
 export function buildStyle (size, split) {
   if (size === undefined) return {}
@@ -32,6 +34,14 @@ export function buildStyle (size, split) {
 
 /**
  * Compose new list of panes
+ *
+ * @param {array} paneList
+ * @param {number} current
+ * @param {number} currentSize
+ * @param {number} realPaneView
+ * @param {number} combined
+ *
+ * @returns {array}
  */
 export function composeNewPaneList (paneList, current, currentSize, realPaneView, combined) {
   const newPaneList = paneList.map((el, i) => {
@@ -48,4 +58,20 @@ export function composeNewPaneList (paneList, current, currentSize, realPaneView
   })
 
   return newPaneList
+}
+
+/**
+ * Detect if the device is tactile
+ */
+export function isTouchDevice () {
+  if ((typeof window !== 'undefined' &&
+    ('ontouchstart' in window ||
+      (window.DocumentTouch &&
+        typeof document !== 'undefined' &&
+        document instanceof window.DocumentTouch))) ||
+    !!(typeof navigator !== 'undefined' &&
+    (navigator.maxTouchPoints || navigator.msMaxTouchPoints))) {
+    return true
+  }
+  return false
 }

@@ -90,9 +90,9 @@ addStory('with custom size', readme, () => (
 addStory.controlled('with mode sent to parent', readme, (setState, state) => (
   <PaneView
     split='horizontal'
-    onDragStart={(i) => setState({ index: i, mode: 'start' })}
+    onStartResize={(i) => setState({ index: i, mode: 'start' })}
     onResize={(i) => setState({ index: i, mode: 'resize' })}
-    onDragStop={(i) => setState({ index: i, mode: 'stop' })}
+    onStopResize={(i) => setState({ index: i, mode: 'stop' })}
   >
     <Pane>
       <div style={paneStyle}>hello world</div>

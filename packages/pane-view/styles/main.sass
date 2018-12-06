@@ -34,6 +34,7 @@
   opacity: $pane-view-resizer-opacity
   z-index: 1
   background-clip: padding-box
+  user-select: none
 
   &--vertical
     height: $pane-view-resizer-vertical-before-height
@@ -69,3 +70,7 @@
 
     &:active
       background: $pane-view-resizer-horizonatal-active-background-color
+
+.pane-resize-active
+  overflow: hidden
+  // background: red

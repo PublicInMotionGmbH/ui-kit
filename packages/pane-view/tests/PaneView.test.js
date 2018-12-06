@@ -172,10 +172,10 @@ describe('<PaneView />', () => {
     wrapper.unmount()
   })
 
-  it('handle mousedown with onDragStart', () => {
+  it('handle mousedown with onStartResize', () => {
     const spy = jest.fn()
     const wrapper = mount(
-      <PaneView onDragStart={spy} split='horizontal'>
+      <PaneView onStartResize={spy} split='horizontal'>
         <Pane>
           <div>LEFT SIDE</div>
         </Pane>
@@ -193,10 +193,10 @@ describe('<PaneView />', () => {
     wrapper.unmount()
   })
 
-  it('handle mouseup with onDragStop', () => {
+  it('handle mouseup with onStopResize', () => {
     const spy = jest.fn()
     const wrapper = mount(
-      <PaneView onDragStop={spy} split='horizontal'>
+      <PaneView onStopResize={spy} split='horizontal'>
         <Pane>
           <div>LEFT SIDE</div>
         </Pane>
@@ -215,7 +215,7 @@ describe('<PaneView />', () => {
     wrapper.unmount()
   })
 
-  it('handle mouse move with onDragResize', () => {
+  it('handle mouse move with onResize', () => {
     const spy = jest.fn()
     const wrapper = mount(
       <PaneView onResize={spy} split='horizontal'>
