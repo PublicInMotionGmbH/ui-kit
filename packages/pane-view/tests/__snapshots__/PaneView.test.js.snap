@@ -18,6 +18,7 @@ exports[`<PaneView /> renders children correctly 1`] = `
     </Pane>
     <Resizer
       onMouseDown={[Function]}
+      onTouchStart={[Function]}
       split="horizontal"
     />
   </React.Fragment>
