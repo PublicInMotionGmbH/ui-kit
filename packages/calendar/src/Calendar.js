@@ -159,7 +159,7 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      autoComplete, className, date: propsDate, focused: propsFocused, error, onChange,
+      autoComplete, className, date: propsDate, focused: propsFocused, error, onChange, name,
       onBlur, onFocus, onDateChange, onFocusChange, navNext, navPrev, value, style, ...passedProps
     } = this.props
     const { date, focused } = this.state
