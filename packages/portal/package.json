@@ -1,6 +1,6 @@
 {
   "name": "@talixo/portal",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.35",
   "description": "UI component which wraps Portals",
   "main": "dist/index.js",
   "module": "index.js",

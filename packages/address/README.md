@@ -11,8 +11,8 @@ using `npm install @talixo/address --save` or `yarn add @talixo/address`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/icon: ^1.0.0-alpha.31`
-- `@talixo/shared: ^1.0.0-alpha.31`
+- `@talixo/icon: ^1.0.0-alpha.35`
+- `@talixo/shared: ^1.0.0-alpha.35`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 

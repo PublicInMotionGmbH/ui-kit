@@ -11,8 +11,8 @@ using `npm install @talixo/wizard --save` or `yarn add @talixo/wizard`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/navigation: ^1.0.0-alpha.31`
-- `@talixo/shared: ^1.0.0-alpha.31`
+- `@talixo/navigation: ^1.0.0-alpha.35`
+- `@talixo/shared: ^1.0.0-alpha.35`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 
