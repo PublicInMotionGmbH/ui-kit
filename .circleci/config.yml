@@ -64,3 +64,8 @@ jobs:
       - run:
           name: Test package dependencies
           command: npm run compare-dependencies -- --all
+
+      # test missing or not used dependencies
+      - run:
+          name: Check missing dependencies
+          command: npm run check-missing-dependencies -- --all
