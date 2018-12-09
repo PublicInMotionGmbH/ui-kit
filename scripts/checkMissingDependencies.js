@@ -5,6 +5,12 @@ const chalk = require('chalk')
 const glob = require('glob')
 
 const getPackages = require('../utils/getPackages')
+const showTable = require('../utils/showTable')
+
+// Circle CI is not showing console.table, so we need to polyfill it
+if (!console.table || process.env.CIRCLECI) {
+  console.table = showTable
+}
 
 const jsImportRegexGlobal = /import\s+.*?from\s+(?:(?:'([^']+)')|(?:"([^"]+)"))/gm
 const jsImportRegex = /import\s+.*?from\s+(?:(?:'([^']+)')|(?:"([^"]+)"))/m
@@ -214,13 +220,17 @@ async function main () {
       })
     }
 
-    if (all) {
+    const hasWarnings = result.filter(x => x.Warnings).length > 0
+
+    if (hasWarnings) {
       hasProblems = true
+    }
+
+    if (all) {
       console.log(chalk.underline(chalk.bold(pkg.name)))
       console.table(result)
       console.log('')
-    } else if (result.filter(x => x.Warnings).length > 0) {
-      hasProblems = true
+    } else if (hasWarnings) {
       console.log(chalk.underline(chalk.bold(pkg.name)))
       console.table(result.filter(x => x.Warnings))
       console.log('')
