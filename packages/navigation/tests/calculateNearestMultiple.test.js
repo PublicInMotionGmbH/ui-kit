@@ -1,4 +1,4 @@
-import calculateNearestMultiple from '../utils/calculateNearestMultiple'
+import calculateNearestMultiple from '../src/utils/calculateNearestMultiple'
 
 describe('calculateNearestMultiple', () => {
   it('returns correct number', () => {

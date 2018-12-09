@@ -8,10 +8,10 @@ import { buildClassName } from '@talixo/shared'
 import { SelectBox } from '@talixo/combo-box'
 import { CountryFlag } from '@talixo/country-flag'
 
-import countriesList from '../utils/countriesList'
-import detectCountry from '../utils/detectCountry'
-import replaceCountryPrefix from '../utils/replaceCountryPrefix'
-import buildMaskForCountry from '../utils/buildMaskForCountry'
+import countriesList from './utils/countriesList'
+import detectCountry from './utils/detectCountry'
+import replaceCountryPrefix from './utils/replaceCountryPrefix'
+import buildMaskForCountry from './utils/buildMaskForCountry'
 
 export const moduleName = 'phone-input'
 

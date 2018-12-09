@@ -1,4 +1,4 @@
-import analyzeInput from '../utils/analyzeInput'
+import analyzeInput from '../src/utils/analyzeInput'
 
 describe('analyzeInput', () => {
   // we can't do better unit tests for analyze input on JSDOM,

@@ -4,7 +4,7 @@ import range from 'lodash/range'
 import includes from 'lodash/includes'
 
 import Element from './Element'
-import calculateNearestMultiple from '../utils/calculateNearestMultiple'
+import calculateNearestMultiple from './utils/calculateNearestMultiple'
 
 const propTypes = {
   /** Active page */
