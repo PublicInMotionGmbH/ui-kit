@@ -19,7 +19,6 @@ Your package should additionally have some extra dependencies:
 - `@talixo/text-input: ^1.0.0-alpha.31`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `react-dom: ^16.2.0`
 - `react-text-mask: 5.4.1`
 
 These packages are required by `@talixo/credit-card`, but you have to install them manually,

@@ -26,6 +26,9 @@ const mutedDependencies = [
 const mutedLocallyDependencies = {
   '@talixo/country-flag': [
     'flagkit-web' // Used to build sprites
+  ],
+  '@talixo/form': [
+    'yup' // To make sure that developer will use same version, which will work
   ]
 }
 
