@@ -27,7 +27,6 @@ exports[`<Chart> when rendered should render properly 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onMouseMove={[Function]}
-      onMouseUp={[Function]}
       onTouchCancel={[Function]}
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
