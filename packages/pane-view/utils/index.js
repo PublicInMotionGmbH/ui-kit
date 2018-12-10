@@ -3,6 +3,7 @@
      *
      * @param {number} size
      * @param {number} paneViewDimension
+     *
      * @returns {number}
      */
 export function convertToPercent (size, paneViewDimension) {
@@ -62,6 +63,8 @@ export function composeNewPaneList (paneList, current, currentSize, realPaneView
 
 /**
  * Detect if the device is tactile
+ *
+ * @returns {boolean}
  */
 export function isTouchDevice () {
   if ((typeof window !== 'undefined' &&

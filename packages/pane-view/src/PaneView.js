@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import { buildClassName } from '@talixo/shared'
+import { buildClassName, prefix } from '@talixo/shared'
 
 import { composeNewPaneList, isTouchDevice } from '../utils'
 
 import Resizer from './Resizer'
 
 const moduleName = 'pane-view'
+const prefixedModuleName = prefix(moduleName)
 
 const propTypes = {
   /** Array of Pane components */
@@ -148,6 +149,11 @@ class PaneView extends React.Component {
     if (onStartResize) {
       onStartResize(index)
     }
+
+    if (isTouchDevice()) {
+      document.body.classList.add(`${prefixedModuleName}--resize-active`)
+    }
+
     this.addEventListeners()
   }
 
@@ -169,6 +175,10 @@ class PaneView extends React.Component {
       currentSizeVertical: null,
       currentSizeHorizontal: null
     })
+
+    if (isTouchDevice()) {
+      document.body.classList.remove(`${prefixedModuleName}--resize-active`)
+    }
   }
 
   /**
@@ -194,18 +204,26 @@ class PaneView extends React.Component {
       height: activeHeight
     } = activePane.getBoundingClientRect()
     const resizersNumber = children.length - 1
-    const realPaneViewWidth = paneViewWidth - (resizersNumber * resizerWidth)
-    const realPaneViewHeight = paneViewHeight - (resizersNumber * resizerHeight)
+    const allPanesSummedWidth = paneViewWidth - (resizersNumber * resizerWidth)
+    const allPanesSummedHeight = paneViewHeight - (resizersNumber * resizerHeight)
     const widthCombined = activeWidth + nextWidth
     const heightCombined = activeHeight + nextHeight
     let currentSizeHorizontal
     let currentSizeVertical
     if (isTouchDevice()) {
-      currentSizeHorizontal = e.changedTouches[0].clientX - activeLeft <= 0 ? 0 : e.changedTouches[0].clientX - activeLeft
-      currentSizeVertical = e.changedTouches[0].clientY - activeTop <= 0 ? 0 : e.changedTouches[0].clientY - activeTop
+      currentSizeHorizontal = e.changedTouches[0].clientX - activeLeft <= 0
+        ? 0
+        : e.changedTouches[0].clientX - activeLeft
+      currentSizeVertical = e.changedTouches[0].clientY - activeTop <= 0
+        ? 0
+        : e.changedTouches[0].clientY - activeTop
     } else {
-      currentSizeHorizontal = e.clientX - activeLeft <= 0 ? 0 : e.clientX - activeLeft
-      currentSizeVertical = e.clientY - activeTop <= 0 ? 0 : e.clientY - activeTop
+      currentSizeHorizontal = e.clientX - activeLeft <= 0
+        ? 0
+        : e.clientX - activeLeft
+      currentSizeVertical = e.clientY - activeTop <= 0
+        ? 0
+        : e.clientY - activeTop
     }
 
     if (current === null || !paneList) return
@@ -215,7 +233,7 @@ class PaneView extends React.Component {
         paneList,
         current,
         currentSizeHorizontal,
-        realPaneViewWidth,
+        allPanesSummedWidth,
         widthCombined
       )
     } else if (split === 'vertical') {
@@ -223,7 +241,7 @@ class PaneView extends React.Component {
         paneList,
         current,
         currentSizeVertical,
-        realPaneViewHeight,
+        allPanesSummedHeight,
         heightCombined
       )
     }

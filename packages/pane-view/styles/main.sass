@@ -17,6 +17,9 @@
     flex-direction: column
     min-height: 100%
     top: 0
+  
+  &--resize-active
+    overflow: hidden
     
 @include module('pane')
   flex-grow: 1
@@ -70,7 +73,3 @@
 
     &:active
       background: $pane-view-resizer-horizonatal-active-background-color
-
-.pane-resize-active
-  overflow: hidden
-  // background: red
