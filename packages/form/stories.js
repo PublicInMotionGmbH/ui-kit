@@ -14,7 +14,7 @@ import { Calendar } from '@talixo/calendar'
 import { NumberInput } from '@talixo/number-input'
 import { SelectBox } from '@talixo/combo-box'
 import { CountryFlagsProvider } from '@talixo/country-flag'
-import yup from 'yup'
+import * as yup from 'yup'
 
 import Form from './src/Form'
 import FormHandler from './src/FormHandler'
