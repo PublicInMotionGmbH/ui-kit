@@ -31,8 +31,9 @@ export function getDescription (value) {
     } else if (value.address) {
       return value.address
     }
-    return ''
   }
+
+  return ''
 }
 
 /**
