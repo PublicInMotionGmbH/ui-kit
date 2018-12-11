@@ -1,4 +1,4 @@
-import isEvent from '../utils/isEvent'
+import isEvent from '../src/utils/isEvent'
 
 describe('isEvent', () => {
   it('should detect native event', () => {

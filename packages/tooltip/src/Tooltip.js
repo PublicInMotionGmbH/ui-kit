@@ -9,7 +9,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { buildClassName } from '@talixo/shared'
 import { Portal } from '@talixo/portal'
 
-import { getPositionNearElement } from '../utils/position'
+import { getPositionNearElement } from './utils/position'
 import createInstantiableElement from 'react-instantiable-stateless'
 
 const moduleName = 'tooltip'

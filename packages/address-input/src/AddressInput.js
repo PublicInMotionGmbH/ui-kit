@@ -129,7 +129,7 @@ const propTypes = {
   placeholder: PropTypes.string,
 
   /** Address component which will be displayed inside autocomplete list. */
-  renderAddress: PropTypes.string,
+  renderAddress: PropTypes.func,
 
   /** Chosen location value. */
   value: PropTypes.shape(locationProp),
