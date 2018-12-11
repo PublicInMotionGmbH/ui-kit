@@ -60,7 +60,11 @@ export function itemToString (item) {
  * @returns {React.Element}
  */
 function _renderAddress (props) {
-  return <Address {...props} />
+  const { address, details, formatDetails, type, short } = props
+
+  return React.createElement(Address, {
+    address, details, formatDetails, type, short
+  })
 }
 
 const locationProp = {
@@ -185,10 +189,13 @@ class AddressInput extends React.PureComponent {
 
   componentWillReceiveProps (props) {
     if (props.value !== this.props.value && props.value !== undefined) {
-      this.setState({
-        value: props.value,
-        inputValue: getDescription(props.value)
-      })
+      const state = { value: props.value }
+
+      if (props.value) {
+        state.inputValue = getDescription(props.value)
+      }
+
+      this.setState(state)
     }
   }
 
