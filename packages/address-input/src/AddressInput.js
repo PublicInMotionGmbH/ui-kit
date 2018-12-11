@@ -186,7 +186,8 @@ class AddressInput extends React.PureComponent {
   componentWillReceiveProps (props) {
     if (props.value !== this.props.value && props.value !== undefined) {
       this.setState({
-        value: props.value
+        value: props.value,
+        inputValue: getDescription(props.value)
       })
     }
   }
@@ -234,6 +235,7 @@ class AddressInput extends React.PureComponent {
   onChoose = value => {
     this.setState({ focus: false })
     this.onChange(value)
+    this.input.blur()
   }
 
   /**
@@ -319,6 +321,15 @@ class AddressInput extends React.PureComponent {
   }
 
   /**
+   * Get reference to mobile version of AddressInput
+   *
+   * @param {HTMLElement} node
+   */
+  setInputRef = (node) => {
+    this.input = findDOMNode(node)
+  }
+
+  /**
    * Render desktop version of AddressInput.
    *
    * @returns {React.Element}
@@ -340,7 +351,7 @@ class AddressInput extends React.PureComponent {
         <AutoComplete
           openOnFocus
           options={locations}
-          onChoose={this.onChange}
+          onChoose={this.onChoose}
           onFocus={this.focus}
           onBlur={this.blur}
           renderItem={renderAddress}
@@ -350,6 +361,7 @@ class AddressInput extends React.PureComponent {
           footer={footer}
         >
           <TextInput
+            inputRef={this.setInputRef}
             autoComplete='nope'
             spellCheck='false'
             onKeyDown={this.onKeyDown}
@@ -359,15 +371,6 @@ class AddressInput extends React.PureComponent {
         </AutoComplete>
       </MaskedInput>
     )
-  }
-
-  /**
-   * Get reference to mobile version of AddressInput
-   *
-   * @param {HTMLElement} node
-   */
-  getMobileInputRef = (node) => {
-    this.input = findDOMNode(node)
   }
 
   /**
@@ -412,7 +415,7 @@ class AddressInput extends React.PureComponent {
               onKeyDown={this.onKeyDown}
               placeholder={placeholder}
               right={loading ? <ProgressRing /> : <Icon name='clear' onClick={this.onInputClear} />}
-              inputRef={this.getMobileInputRef}
+              inputRef={this.setInputRef}
               autoFocus
             />
           </AutoComplete>
