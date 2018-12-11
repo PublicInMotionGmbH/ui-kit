@@ -204,8 +204,8 @@ class PaneView extends React.Component {
       height: activeHeight
     } = activePane.getBoundingClientRect()
     const resizersNumber = children.length - 1
-    const allPanesSummedWidth = paneViewWidth - (resizersNumber * resizerWidth)
-    const allPanesSummedHeight = paneViewHeight - (resizersNumber * resizerHeight)
+    const allPanesSummedWidth = paneViewWidth - (resizersNumber * (resizerWidth + 0.5))
+    const allPanesSummedHeight = paneViewHeight - (resizersNumber * (resizerHeight + 0.5))
     const widthCombined = activeWidth + nextWidth
     const heightCombined = activeHeight + nextHeight
     let currentSizeHorizontal
@@ -275,7 +275,7 @@ class PaneView extends React.Component {
             {(i < children.length - 1) &&
               <Resizer
                 ref={node => { this.resizers[i] = node }}
-                key={this.resizers[i]}
+                key={`resizer_${i}`}
                 onMouseDown={() => this.handleMouseDown(i)}
                 onTouchStart={() => this.handleMouseDown(i)}
                 split={split}

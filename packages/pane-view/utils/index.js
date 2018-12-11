@@ -36,24 +36,24 @@ export function buildStyle (size, split) {
 /**
  * Compose new list of panes
  *
- * @param {array} paneList
- * @param {number} current
+ * @param {array} panesList
+ * @param {number} currentIndex
  * @param {number} currentSize
- * @param {number} realPaneView
+ * @param {number} allPanesSummed
  * @param {number} combined
  *
  * @returns {array}
  */
-export function composeNewPaneList (paneList, current, currentSize, realPaneView, combined) {
-  const newPaneList = paneList.map((el, i) => {
-    if (i === current) {
+export function composeNewPaneList (panesList, currentIndex, currentSize, allPanesSummed, combined) {
+  const newPaneList = panesList.map((el, i) => {
+    if (i === currentIndex) {
       el.size = currentSize > 0 ? currentSize : 0
-      el.size = convertToPercent(el.size, realPaneView)
+      el.size = convertToPercent(el.size, allPanesSummed)
       if (combined < currentSize) {
-        el.size = convertToPercent(combined, realPaneView)
+        el.size = convertToPercent(combined, allPanesSummed)
       }
-    } else if (i === current + 1) {
-      el.size = convertToPercent(combined - currentSize, realPaneView)
+    } else if (i === currentIndex + 1) {
+      el.size = convertToPercent(combined - currentSize, allPanesSummed)
     }
     return el
   })
