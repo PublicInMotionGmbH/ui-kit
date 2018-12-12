@@ -16,6 +16,10 @@ const propTypes = {
   style: PropTypes.object
 }
 
+const defaultProps = {
+  split: 'horizontal'
+}
+
 /**
  * Component which represents Resizer View.
  *
@@ -37,7 +41,7 @@ class Resizer extends React.PureComponent {
 }
 
 Resizer.displayName = 'Resizer'
-
 Resizer.propTypes = propTypes
+Resizer.defaultProps = defaultProps
 
 export default Resizer
