@@ -2,6 +2,6 @@
 
 exports[`<Resizer /> renders children correctly 1`] = `
 <span
-  className="talixo-pane-view-resizer"
+  className="talixo-pane-view-resizer talixo-pane-view-resizer--horizontal"
 />
 `;
