@@ -35,6 +35,13 @@ addStory.controlled('controlled', readme, (setState, state) => (
   </div>
 ), () => ({ value: 0 }))
 
+addStory.controlled('disabled', readme, (setState, state) => (
+  <div style={{ width: 300 }}>
+    <h2>Disabled number input</h2>
+    <NumberInput disabled onChange={value => setState({ value })} value={state.value} />
+  </div>
+), () => ({ value: 0 }))
+
 addStory.controlled('min/max', readme, (setState, state) => (
   <div style={{ width: 300 }}>
     <h2>Number input with min/max</h2>

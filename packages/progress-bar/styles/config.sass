@@ -1,1 +1,47 @@
 @import '~@talixo/shared/styles/config'
+
+// Colors
+
+$progress-bar-empty-color: #ddd !default
+
+$progress-bar-base-color: $x-color-primary !default
+$progress-bar-base-empty-color: mix($progress-bar-empty-color, $progress-bar-base-color, 90%) !default
+$progress-bar-base-text-color: $x-color-primary-opposite !default
+
+$progress-bar-secondary-color: $x-color-secondary !default
+$progress-bar-secondary-empty-color: mix($progress-bar-empty-color, $progress-bar-secondary-color, 90%) !default
+$progress-bar-secondary-text-color: $x-color-secondary-opposite !default
+
+$progress-bar-tertiary-color: $x-color-tertiary !default
+$progress-bar-tertiary-empty-color: mix($progress-bar-empty-color, $progress-bar-tertiary-color, 90%) !default
+$progress-bar-tertiary-text-color: $x-color-tertiary-opposite !default
+
+$progress-bar-stripes-alpha: 0.1 !default
+$progress-bar-stripes-color: rgba(text-contrast($progress-bar-base-color), $progress-bar-stripes-alpha) !default
+
+$progress-bar-error-color: $x-color-error !default
+$progress-bar-error-empty-color: mix($progress-bar-empty-color, $progress-bar-error-color, 90%) !default
+$progress-bar-error-text-color: $x-color-error-opposite !default
+
+$progress-bar-success-color: $x-color-success !default
+$progress-bar-success-empty-color: mix($progress-bar-empty-color, $progress-bar-success-color, 90%) !default
+$progress-bar-success-text-color: $x-color-success-opposite !default
+
+$progress-bar-info-color: $x-color-info !default
+$progress-bar-info-empty-color: mix($progress-bar-empty-color, $progress-bar-info-color, 90%) !default
+$progress-bar-info-text-color: $x-color-info-opposite !default
+
+$progress-bar-warn-color: $x-color-warning !default
+$progress-bar-warn-empty-color: mix($progress-bar-empty-color, $progress-bar-warn-color, 90%) !default
+$progress-bar-warn-text-color: $x-color-warning-opposite !default
+
+$progress-bar-height: dp(2.5) !default
+$progress-bar-small-height: dp(1.675) !default
+$progress-bar-padding-horizontal: $progress-bar-height / 2 !default
+$progress-bar-stripes-scale: 2 !default
+$progress-bar-indeterminate-stripes-scale: $progress-bar-stripes-scale !default
+
+$progress-bar-stripes-speed: 0.15s !default // multiplied by scale
+
+$progress-bar-border-radius: $x-border-radius !default
+$progress-bar-text-shadow: true !default

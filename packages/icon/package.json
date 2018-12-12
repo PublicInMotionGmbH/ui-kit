@@ -1,6 +1,6 @@
 {
   "name": "@talixo/icon",
-  "version": "1.0.0-alpha.30",
+  "version": "1.0.0-alpha.31",
   "description": "UI component for icons",
   "main": "dist/index.js",
   "module": "index.js",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/icon-pack": "1.2.2",
-    "@talixo/shared": "^1.0.0-alpha.30",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "fs-extra": "^5.0.0",
     "progress": "^2.0.0",
     "prop-types": "^15.6.1",
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "@talixo/icon-pack": "1.2.2",
-    "@talixo/shared": "^1.0.0-alpha.30",
+    "@talixo/shared": "^1.0.0-alpha.31",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

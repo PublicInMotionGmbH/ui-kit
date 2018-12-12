@@ -41,7 +41,7 @@
   overflow: hidden
   padding: $file-input-file-padding-vertical $file-input-file-padding-horizontal
 
-  & + &
+  & + #{prefix('file-input-file')}
     border-top: $file-input-file-divider-size $file-input-file-divider-style $file-input-file-divider-color
 
   &__remove
@@ -73,14 +73,15 @@
   &__description
     padding-left: $file-input-file-description-margin
 
-    [dir=rtl] &
+    @include rtl-only
       padding-left: 0
       padding-right: $file-input-file-description-margin
 
   &__description > strong
     display: block
 
-  &__icon, &__remove
+  &__icon,
+  &__remove
     user-select: none
 
   &__icon
