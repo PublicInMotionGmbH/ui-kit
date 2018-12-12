@@ -12,7 +12,6 @@ exports[`<MaskedInput /> renders children correctly 1`] = `
     onBlur={[Function]}
     onChange={[Function]}
     onFocus={[Function]}
-    placeholder={null}
     readOnly={false}
     value={null}
   />
