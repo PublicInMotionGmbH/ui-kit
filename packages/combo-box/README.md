@@ -18,7 +18,6 @@ Your package should additionally have some extra dependencies:
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `react-dom: ^16.2.0`
 - `react-input-autosize: ^2.2.1`
 
 These packages are required by `@talixo/combo-box`, but you have to install them manually,

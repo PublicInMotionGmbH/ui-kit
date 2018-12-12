@@ -1,6 +1,6 @@
 import GoogleMapsMock from './utils/GoogleMapsMock'
 
-import getRoute from '../utils/getRoute'
+import getRoute from '../src/utils/getRoute'
 
 describe('getRoute', () => {
   let mock

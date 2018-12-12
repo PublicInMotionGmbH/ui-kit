@@ -6,7 +6,7 @@ import Downshift from 'downshift'
 
 import { buildClassName } from '@talixo/shared'
 
-import isEvent from '../utils/isEvent'
+import isEvent from './utils/isEvent'
 import Menu from './Menu'
 
 const moduleName = 'combo-box'

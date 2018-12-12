@@ -1,4 +1,4 @@
-import { getPositionNearElement } from '../utils/position'
+import { getPositionNearElement } from '../src/utils/position'
 
 describe('getPositionNearElement', () => {
   let getBoundingClientRect = window.Element.prototype.getBoundingClientRect

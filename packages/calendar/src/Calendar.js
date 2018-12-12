@@ -66,6 +66,7 @@ const defaultProps = {
   firstDayOfWeek: 1,
   error: false,
   disabled: false,
+  placeholder: null,
   readOnly: false
 }
 
@@ -158,35 +159,25 @@ class Calendar extends React.PureComponent {
 
   render () {
     const {
-      className, dayAriaLabelFormat, displayFormat, monthFormat, phrases, id, error, disabled, readOnly,
-      placeholder, weekDayFormat, onChange, onBlur, onFocus, firstDayOfWeek, value,
-      autoComplete, ...passedProps
+      autoComplete, className, date: propsDate, focused: propsFocused, error, onChange, name,
+      onBlur, onFocus, onDateChange, onFocusChange, navNext, navPrev, value, style, ...passedProps
     } = this.props
     const { date, focused } = this.state
 
     const clsName = buildClassName(moduleName, className, { focused, error })
 
     return (
-      <div className={clsName} {...passedProps}>
+      <div className={clsName} style={style}>
         <SingleDatePicker
           hideKeyboardShortcutsPanel
-          disabled={disabled}
-          readOnly={readOnly}
-          id={id}
           date={date}
-          dayAriaLabelFormat={dayAriaLabelFormat}
-          displayFormat={displayFormat}
           focused={focused}
-          firstDayOfWeek={firstDayOfWeek}
-          monthFormat={monthFormat}
           onDateChange={this.onDateChange}
           onFocusChange={this.onFocusChange}
-          phrases={phrases}
-          placeholder={placeholder || null}
           transitionDuration={0}
-          weekDayFormat={weekDayFormat}
           navPrev={<Icon name='keyboard_arrow_left' />}
           navNext={<Icon name='keyboard_arrow_right' />}
+          {...passedProps}
         />
       </div>
     )

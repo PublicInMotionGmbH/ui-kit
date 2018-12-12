@@ -11,13 +11,11 @@ using `npm install @talixo/charts --save` or `yarn add @talixo/charts`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/checkbox: ^1.0.0-alpha.31`
-- `@talixo/shared: ^1.0.0-alpha.31`
+- `@talixo/shared: ^1.0.0-alpha.35`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `react-dom: ^16.2.0`
-- `react-vis: 1.10.1`
+- `react-vis: 1.11.5`
 
 These packages are required by `@talixo/charts`, but you have to install them manually,
 to avoid having different versions of these in your application.
@@ -27,15 +25,19 @@ to avoid having different versions of these in your application.
 ### Chart
 It allows any props which are allowed for react-vis 'FlexibleXYPlot'. Additionally, it handles some differently:
 
-Property name | Type            | Default               | Description                    
---------------|-----------------|:---------------------:|-----------------------------------------
-className     | string          | n/a                   | Additional class name passed to wrapper.
-data          | ChartData       | `[{ dataItems: [] }]` | Line chart data.
-timeSeries    | boolean         | `false`               | Idicates if x axis should be displayed as date 
-type          | `line` or `bar` | `line`                | Type of chart (line or bar).
-xAxisTitle    | string          | n/a                   | X axis title.
-yAxisTitle    | string          | n/a                   | Y axis title.
-zoomable      | boolean         | `false`               | Indicates if chart is zoomable, can be applied to chart.
+Property name       | Type                            | Default               | Description                    
+--------------------|---------------------------------|:---------------------:|-----------------------------------------
+className           | string                          | n/a                   | Additional class name passed to wrapper.
+data                | ChartData                       | `[{ dataItems: [] }]` | Line chart data.
+timeSeries          | boolean                         | `false`               | Idicates if x axis should be displayed as date 
+type                | `line`, `bar`, `bar-horizontal` | `line`                | Type of chart (line or bar).
+hideHorizontalGrid  | boolean                         | n/a                   | Hide horizontal grid.
+hideVerticalGrid    | boolean                         | n/a                   | Hide vertical grid.
+hideSeriesLabels    | boolean                         | n/a                   | Should series label be hidden? 
+seriesLabelProps    | object                          | n/a                   | Props which will be applied to react-vis LabelSeries component.
+xAxisTitle          | string                          | n/a                   | X axis title.
+yAxisTitle          | string                          | n/a                   | Y axis title.
+zoomable            | boolean                         | `false`               | Indicates if chart is zoomable, can be applied to chart.
 
 ### PieChart
 It allows any props which are allowed for react-vis 'FlexibleXYPlot'. Additionally, it handles some differently:

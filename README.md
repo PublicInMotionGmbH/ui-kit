@@ -26,6 +26,7 @@ You can run scripts using `npm run NAME` or `yarn run NAME` commands.
 - `compare-own-versions` - compare local package versions with NPM ones, able to fix them by `--fix` param
 - `compare-dependencies` - compare dependencies in packages, able to fix some problems by `--fix` or update external dependencies by `--update`
 - `readme-dependencies` - list differences or update (`--fix`) peer dependencies in README files
+- `check-missing-dependencies` - check missing or not used dependencies in JS/SCSS/SASS files
 
 Last 3 commands can also use `--all` flag, which will list everything, not only problems and differences.
 Also, both these commands, `build` and `test` allow `--only` flag, where you can list packages which should be taken in action.
@@ -203,3 +204,5 @@ Compare and list our dependencies (list all)                 | `npm run compare-
 List our dependencies and fix local problems                 | `npm run compare-dependencies -- --fix`
 List our dependencies and update external to our newest deps | `npm run compare-dependencies -- --update`
 Fix peer dependencies in README.md file                      | `npm run readme-dependencies -- --fix`
+Check missing or not used dependencies (with problems)       | `npm run check-missing-dependencies`
+Check missing or not used dependencies (list all)            | `npm run check-missing-dependencies -- --all`

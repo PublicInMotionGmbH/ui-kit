@@ -1,6 +1,6 @@
 {
   "name": "@talixo/credit-card",
-  "version": "1.0.0-alpha.31",
+  "version": "1.0.0-alpha.35",
   "description": "UI Component which represents Credit Card",
   "main": "dist/index.js",
   "module": "index.js",
@@ -23,27 +23,25 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@talixo/combo-box": "^1.0.0-alpha.31",
-    "@talixo/device-swap": "^1.0.0-alpha.31",
-    "@talixo/form": "^1.0.0-alpha.31",
-    "@talixo/icon": "^1.0.0-alpha.31",
-    "@talixo/shared": "^1.0.0-alpha.31",
-    "@talixo/text-input": "^1.0.0-alpha.31",
+    "@talixo/combo-box": "^1.0.0-alpha.35",
+    "@talixo/device-swap": "^1.0.0-alpha.35",
+    "@talixo/form": "^1.0.0-alpha.35",
+    "@talixo/icon": "^1.0.0-alpha.35",
+    "@talixo/shared": "^1.0.0-alpha.35",
+    "@talixo/text-input": "^1.0.0-alpha.35",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "react-text-mask": "5.4.1"
   },
   "peerDependencies": {
-    "@talixo/combo-box": "^1.0.0-alpha.31",
-    "@talixo/device-swap": "^1.0.0-alpha.31",
-    "@talixo/form": "^1.0.0-alpha.31",
-    "@talixo/icon": "^1.0.0-alpha.31",
-    "@talixo/shared": "^1.0.0-alpha.31",
-    "@talixo/text-input": "^1.0.0-alpha.31",
+    "@talixo/combo-box": "^1.0.0-alpha.35",
+    "@talixo/device-swap": "^1.0.0-alpha.35",
+    "@talixo/form": "^1.0.0-alpha.35",
+    "@talixo/icon": "^1.0.0-alpha.35",
+    "@talixo/shared": "^1.0.0-alpha.35",
+    "@talixo/text-input": "^1.0.0-alpha.35",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "react-text-mask": "5.4.1"
   }
 }
