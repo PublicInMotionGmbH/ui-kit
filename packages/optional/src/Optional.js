@@ -122,7 +122,9 @@ class Optional extends React.PureComponent {
     } = this.props
     const { value, visible } = this.state
 
-    const clsName = buildClassName(moduleName, className)
+    const clsName = buildClassName(moduleName, className, {
+      [`${moduleName}--visible`]: visible
+    })
     const clsLabelName = buildClassName([ moduleName, 'label' ])
     const clsCheckboxName = buildClassName([ moduleName, 'checkbox' ])
 
