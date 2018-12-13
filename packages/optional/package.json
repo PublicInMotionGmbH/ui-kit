@@ -1,6 +1,6 @@
 {
   "name": "@talixo/optional",
-  "version": "1.0.0-alpha.36",
+  "version": "1.0.0-alpha.37",
   "description": "UI Component which represents Optional",
   "main": "dist/index.js",
   "module": "index.js",
@@ -26,7 +26,7 @@
     "@talixo/checkbox": "^1.0.0-alpha.35",
     "@talixo/number-input": "^1.0.0-alpha.35",
     "@talixo/shared": "^1.0.0-alpha.35",
-    "@talixo/textarea": "^1.0.0-alpha.35",
+    "@talixo/textarea": "^1.0.0-alpha.36",
     "prop-types": "^15.6.1",
     "react": "^16.2.0"
   },
