@@ -1,6 +1,6 @@
 {
   "name": "@talixo/optional",
-  "version": "1.0.0-alpha.38",
+  "version": "1.0.0-alpha.39",
   "description": "UI Component which represents Optional",
   "main": "dist/index.js",
   "module": "index.js",
