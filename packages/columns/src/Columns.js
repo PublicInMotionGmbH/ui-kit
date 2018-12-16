@@ -30,7 +30,7 @@ function Columns (props) {
 
   const childrenWithProps = React.Children.map(
     children,
-    child => React.cloneElement(child, { maxColumns })
+    child => child && React.cloneElement(child, { maxColumns })
   )
 
   return (
