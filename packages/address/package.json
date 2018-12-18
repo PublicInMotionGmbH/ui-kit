@@ -1,6 +1,6 @@
 {
   "name": "@talixo/address",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "UI component which represents address and path of waypoints",
   "main": "dist/index.js",
   "module": "index.js",
