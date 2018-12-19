@@ -3,14 +3,17 @@
 @include module('columns')
   display: flex
   flex-wrap: wrap
-  padding: $columns-gutter
-  margin: #{-1 * $columns-gutter} 0
+  padding: 0
+  margin: 0 #{-1 * $columns-gutter} #{-1 * $columns-gutter}
+
+  &--empty
+    margin: 0
 
 @include module('columns-element')
   position: relative
   flex-basis: 0
   flex-grow: 1
-  padding: 0 $columns-gutter
+  padding: 0 $columns-gutter $columns-gutter
   box-sizing: border-box
 
   &__header

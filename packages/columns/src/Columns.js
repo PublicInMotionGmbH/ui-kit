@@ -33,8 +33,12 @@ function Columns (props) {
     child => child && React.cloneElement(child, { maxColumns })
   )
 
+  const clsName = buildClassName(moduleName, className, {
+    empty: [].concat(children).filter(Boolean).length === 0
+  })
+
   return (
-    <div className={buildClassName(moduleName, className)} {...passedProps}>
+    <div className={clsName} {...passedProps}>
       {childrenWithProps}
     </div>
   )
