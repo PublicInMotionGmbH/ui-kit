@@ -11,7 +11,7 @@ using `npm install @talixo/address-input --save` or `yarn add @talixo/address-in
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/address: ^1.0.0-alpha.35`
+- `@talixo/address: ^1.0.0-alpha.36`
 - `@talixo/button: ^1.0.0-alpha.35`
 - `@talixo/combo-box: ^1.0.0-alpha.35`
 - `@talixo/device-swap: ^1.0.0-alpha.35`
