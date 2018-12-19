@@ -75,6 +75,9 @@
       background-image: -o-linear-gradient(left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
 
   @include rtl-only
+    margin-right: -$how-it-works-divider-width
+    margin-left: initial
+      
     &__divider:before
       background-image: linear-gradient(to left, $how-it-works-divider-gradient-from, $how-it-works-divider-gradient-to)
       background-image: -webkit-gradient(linear, 0 0, 100% 0, from($how-it-works-divider-gradient-to), to($how-it-works-divider-gradient-from))
