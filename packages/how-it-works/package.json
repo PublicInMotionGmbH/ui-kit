@@ -1,6 +1,6 @@
 {
   "name": "@talixo/how-it-works",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "UI Component which represents 'how it works' element, to show step by step what will happen.",
   "main": "dist/index.js",
   "module": "index.js",
