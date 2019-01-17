@@ -1,6 +1,6 @@
 {
   "name": "@talixo/data-table",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "UI Component which represents DataTable",
   "main": "dist/index.js",
   "module": "index.js",
