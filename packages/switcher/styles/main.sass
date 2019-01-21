@@ -46,6 +46,11 @@
     background: $switcher-selected-background-color
     color: $switcher-selected-text-color
 
+  #{prefix('switcher', 'no')}
+    background: $switcher-selected-no-background-color
+    color: $switcher-selected-no-text-color
+    box-shadow: inset 0 0 0 $switcher-border-width $switcher-border-color
+
   > input:checked + span > span
     transform: translateX(100%)
     border-radius: 0 $switcher-border-radius $switcher-border-radius 0
