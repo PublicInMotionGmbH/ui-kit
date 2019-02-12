@@ -11,12 +11,12 @@ using `npm install @talixo/credit-card --save` or `yarn add @talixo/credit-card`
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/combo-box: ^1.0.0-alpha.31`
-- `@talixo/device-swap: ^1.0.0-alpha.31`
-- `@talixo/form: ^1.0.0-alpha.31`
-- `@talixo/icon: ^1.0.0-alpha.31`
-- `@talixo/shared: ^1.0.0-alpha.31`
-- `@talixo/text-input: ^1.0.0-alpha.31`
+- `@talixo/combo-box: ^1.0.0-alpha.35`
+- `@talixo/device-swap: ^1.0.0-alpha.35`
+- `@talixo/form: ^1.0.0-alpha.35`
+- `@talixo/icon: ^1.0.0-alpha.35`
+- `@talixo/shared: ^1.0.0-alpha.35`
+- `@talixo/text-input: ^1.0.0-alpha.35`
 - `prop-types: ^15.6.1`
 - `react: ^16.6.3`
 - `react-dom: ^16.6.3`

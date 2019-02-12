@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import calculateInputStyles from '../utils/calculateInputStyles'
+import calculateInputStyles from './utils/calculateInputStyles'
 
 // Check if we are currently in environment which supports browser
 const isBrowser = typeof document !== 'undefined' && typeof window !== 'undefined'

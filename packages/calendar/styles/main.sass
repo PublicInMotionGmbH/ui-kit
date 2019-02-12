@@ -27,9 +27,7 @@
     outline: none
     font: inherit
     color: $calendar-text-color
-    background-color: $calendar-background-color
-    border: $calendar-border-width solid $calendar-border-color
-    border-radius: $calendar-border-radius
+    border: none
     font-size: $calendar-font-size
     height: $calendar-height
     line-height: $calendar-height
@@ -44,18 +42,25 @@
       color: $calendar-hover-text-color
 
     &__focused
-      background-color: $calendar-focus-background-color
-      border-color: $calendar-focus-border-color
       color: $calendar-focus-text-color
-      border-bottom-left-radius: 0
-      border-bottom-right-radius: 0
-      border-bottom-color: transparent
 
   &--error .DateInput_input:not(.DateInput_input__focused)
     &, &:hover
       background-color: $calendar-error-background-color
       border-color: $calendar-error-border-color
       color: $calendar-error-text-color
+
+  .SingleDatePickerInput
+    background-color: $calendar-background-color
+    border: $calendar-border-width solid $calendar-border-color
+    border-radius: $calendar-border-radius
+
+  &--focused .SingleDatePickerInput
+    background-color: $calendar-focus-background-color
+    border-color: $calendar-focus-border-color
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    border-bottom-color: transparent
 
   &--focused .SingleDatePicker,
   &--focused .SingleDatePickerInput
@@ -101,6 +106,7 @@
     width: calc(50% - #{$calendar-picker-padding-horizontal})
     max-width: calc(50% - #{$calendar-picker-padding-horizontal})
     min-width: calc(50% - #{$calendar-picker-padding-horizontal})
+    padding: 0 !important
 
   .DayPicker_weekHeader_ul
     display: flex
@@ -126,6 +132,7 @@
 
   .CalendarMonth
     position: relative
+    padding: 0 !important
 
   .CalendarMonth_caption
     text-align: center
@@ -189,8 +196,7 @@
   .DayPicker_focusRegion:focus
     outline: none
 
-  .DayPickerNavigation_leftButton__horizontal,
-  .DayPickerNavigation_rightButton__horizontal
+  .DayPickerNavigation_button__horizontal_2
     display: flex
     position: absolute
     color: $calendar-picker-arrow-color
@@ -211,10 +217,10 @@
       opacity: 1
       color: $calendar-picker-hover-arrow-color
 
-  .DayPickerNavigation_leftButton__horizontal
+  .DayPickerNavigation_button__horizontal_2:not(:last-child)
     left: $calendar-picker-padding-vertical
-
-  .DayPickerNavigation_rightButton__horizontal
+    
+  .DayPickerNavigation_button__horizontal_2:last-child
     right: $calendar-picker-padding-vertical
 
   .CalendarMonthGrid

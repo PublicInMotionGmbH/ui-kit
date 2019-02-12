@@ -4,8 +4,8 @@ import { DirectionsRenderer } from 'react-google-maps'
 
 import { Location } from './PropTypes'
 
-import getRoute from '../utils/getRoute'
-import hasPropsChanged from '../utils/hasPropsChanged'
+import getRoute from './utils/getRoute'
+import hasPropsChanged from './utils/hasPropsChanged'
 
 const propTypes = {
   /** Start point */

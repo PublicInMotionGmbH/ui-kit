@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { buildClassName } from '@talixo/shared'
 import { Icon } from '@talixo/icon'
 
-import { mutuallyExclusiveOfType } from '../propTypes/mutuallyExclusiveProps'
+import { mutuallyExclusiveOfType } from './propTypes/mutuallyExclusiveProps'
 
 const propTypes = {
   /** Alt attribute for the rendered `img` element. */

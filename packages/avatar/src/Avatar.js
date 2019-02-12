@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { buildClassName } from '@talixo/shared'
 
-import { mutuallyExclusiveOfType } from '../propTypes/mutuallyExclusiveProps'
+import { mutuallyExclusiveOfType } from './propTypes/mutuallyExclusiveProps'
 
 import AvatarChildRenderer from './AvatarChildRenderer'
 

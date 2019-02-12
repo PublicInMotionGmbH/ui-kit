@@ -16,6 +16,7 @@
     "compare-own-versions": "node ./scripts/fixLocalVersions.js",
     "compare-dependencies": "node ./scripts/fixDependenciesVersions.js",
     "readme-dependencies": "node ./scripts/fixReadmeVersions.js",
+    "check-missing-dependencies": "node ./scripts/checkMissingDependencies.js",
     "gh-pages": "cross-env-shell \"npm run build-storybook -- -o _gh-pages && gh-pages -d _gh-pages && rm -rf _gh-pages\"",
     "postinstall": "cross-env-shell \"lerna bootstrap --hoist && lerna link && npm run build\"",
     "prepublishOnly": "npm test",

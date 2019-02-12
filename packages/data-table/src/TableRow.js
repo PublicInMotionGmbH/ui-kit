@@ -161,6 +161,7 @@ class TableRow extends React.Component {
           displayedActions.map(action => (
             <Action
               key={action.label}
+              {...action}
               icon={action.icon}
               label={action.label}
               onClick={e => click(action.onClick, e)}
