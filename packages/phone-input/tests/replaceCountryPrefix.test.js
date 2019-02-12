@@ -1,4 +1,4 @@
-import replaceCountryPrefix from '../utils/replaceCountryPrefix'
+import replaceCountryPrefix from '../src/utils/replaceCountryPrefix'
 
 describe('replaceCountryPrefix', () => {
   it('should return same phone number when there is no country detected', () => {

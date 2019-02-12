@@ -156,3 +156,13 @@ addStory('address path', readme, () => (
     ))}
   </AddressPath>
 ))
+
+addStory('RTL: address path', readme, () => (
+  <div dir='rtl'>
+    <AddressPath>
+      {locations.map((location, index) => (
+        <Address key={index} {...location} />
+      ))}
+    </AddressPath>
+  </div>
+))

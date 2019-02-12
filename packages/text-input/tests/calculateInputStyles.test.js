@@ -1,4 +1,4 @@
-import calculateInputStyles from '../utils/calculateInputStyles'
+import calculateInputStyles from '../src/utils/calculateInputStyles'
 /*
 
   'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',

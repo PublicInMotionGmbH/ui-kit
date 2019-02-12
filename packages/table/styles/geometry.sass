@@ -5,10 +5,13 @@
   border-spacing: 0
   border: 1px solid $table-border-color
 
-  &, td, th
+  &,
+  td,
+  th
     box-sizing: border-box
 
-  td, th
+  td,
+  th
     text-align: inherit // fallback for IE <10
     text-align: start
     padding: dp(1) dp(1.5)
@@ -87,17 +90,19 @@
       &:last-child
         border-bottom-width: 0
 
-[dir=rtl]
-  @include module('table', 'action')
+@include module('table', 'action')
+  @include rtl-only
     border-left-width: 0
     border-right-width: 1px
 
-  @include module('table', 'actions')
+@include module('table', 'actions')
+  @include rtl-only
     &:last-child
       padding-left: 0
       padding-right: dp(1.5)
 
-  #{prefix('table')}--condensed #{prefix('table', 'action')} > .tai,
-  #{prefix('table', 'actions')}--vertical #{prefix('table', 'action')} > .tai
+#{prefix('table')}--condensed #{prefix('table', 'action')} > .tai,
+#{prefix('table', 'actions')}--vertical #{prefix('table', 'action')} > .tai
+  @include rtl-only
     margin-right: 0
     margin-left: dp(0.5)

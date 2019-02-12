@@ -1,4 +1,4 @@
-import createInvisibleElement from '../utils/createInvisibleElement'
+import createInvisibleElement from '../src/utils/createInvisibleElement'
 
 describe('createInvisibleElement', () => {
   it('should return DOM element', () => {

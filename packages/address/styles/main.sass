@@ -37,15 +37,18 @@
       color: $address-description-color
       margin-top: $address-title-margin
 
-[dir=rtl] #{prefix('address')}
-  &__icon 
-    margin-right: 0
-    margin-left: $address-icon-margin
+  @include rtl-only
+    &__short
+      margin-right: 0
+      margin-left: $address-airport-margin
 
+    &__icon
+      margin-right: 0
+      margin-left: $address-icon-margin
 
-  &__airport 
-    margin-right: 0
-    margin-left: $address-airport-margin
+    &__airport
+      margin-right: 0
+      margin-left: $address-airport-margin
 
 /** Address path **/
 
@@ -56,14 +59,11 @@
   &__point 
     position: relative
 
-
   #{prefix('address')}, &__path
     height: $address-path-height
 
-
   &__point:last-child #{prefix('address')}
     height: auto
-
 
   &__path 
     position: absolute
@@ -103,26 +103,22 @@
       border-style: solid
       border-width: #{$address-path-pointer-width / 2} 0 #{$address-path-pointer-width / 2} #{$address-path-pointer-height}
       border-color: transparent transparent transparent $address-path-arrow-color
-  
 
-
-
-[dir=rtl] #{prefix(address-path)}
-  &__path 
-    left: auto
-    right: -1 * $address-path-offset
-
-    // Arrow
-    &:before 
-      left: -200%
-      right: 0
-  
-
-    // Arrow cursor
-    &:after 
+  @include rtl-only
+    &__path
       left: auto
-      right: 100%
-      transform: rotate(#{$address-path-rotation + 90deg})
-      // FIXME: calculate position correctly (according to size and rotation)
-      margin-left: auto
-      margin-right: dp(-0.6)
+      right: -1 * $address-path-offset
+
+      // Arrow
+      &:before
+        left: -200%
+        right: 0
+
+      // Arrow cursor
+      &:after
+        left: auto
+        right: 100%
+        transform: rotate(#{$address-path-rotation + 90deg})
+        // FIXME: calculate position correctly (according to size and rotation)
+        margin-left: auto
+        margin-right: dp(-0.6)

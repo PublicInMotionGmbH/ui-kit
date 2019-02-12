@@ -11,7 +11,6 @@ using `npm install @talixo/portal --save` or `yarn add @talixo/portal`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.30`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
 - `react-dom: ^16.2.0`

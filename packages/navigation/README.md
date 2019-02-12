@@ -11,12 +11,11 @@ using `npm install @talixo/navigation --save` or `yarn add @talixo/navigation`.
 
 Your package should additionally have some extra dependencies:
 
-- `@talixo/shared: ^1.0.0-alpha.30`
-- `@talixo/tooltip: ^1.0.0-alpha.30`
+- `@talixo/shared: ^1.0.0-alpha.35`
+- `@talixo/tooltip: ^1.0.0-alpha.35`
 - `lodash: ^4.17.10`
 - `prop-types: ^15.6.1`
 - `react: ^16.2.0`
-- `react-dom: ^16.2.0`
 
 These packages are required by `@talixo/navigation`, but you have to install them manually,
 to avoid having different versions of these in your application.

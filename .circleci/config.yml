@@ -28,7 +28,7 @@ jobs:
       # run tests
       - run:
           name: Run tests
-          command: npm test -- --ci --coverage --testResultsProcessor="jest-junit"
+          command: npm test -- --maxWorkers=2 --ci --coverage --testResultsProcessor="jest-junit"
           environment:
             JEST_JUNIT_OUTPUT: "reports/junit.xml"
 
@@ -64,3 +64,8 @@ jobs:
       - run:
           name: Test package dependencies
           command: npm run compare-dependencies -- --all
+
+      # test missing or not used dependencies
+      - run:
+          name: Check missing dependencies
+          command: npm run check-missing-dependencies -- --all
