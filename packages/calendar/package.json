@@ -28,7 +28,7 @@
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dates": "^16.5.0"
+    "react-dates": "^18.3.0"
   },
   "peerDependencies": {
     "@talixo/icon": "^1.0.0-alpha.35",
@@ -36,6 +36,6 @@
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
-    "react-dates": "^16.5.0"
+    "react-dates": "^18.3.0"
   }
 }

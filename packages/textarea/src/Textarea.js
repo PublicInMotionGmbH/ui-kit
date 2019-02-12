@@ -75,7 +75,7 @@ class Textarea extends React.PureComponent {
 
   render () {
     const {
-      className, disabled, placeholder, resize,
+      className, disabled, placeholder, resize, error,
       TextareaComponent, value, onChange, ...passedProps
     } = this.props
 

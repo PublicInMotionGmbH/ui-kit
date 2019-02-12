@@ -1,6 +1,6 @@
 {
   "name": "@talixo/data-table",
-  "version": "1.0.0-alpha.35",
+  "version": "1.0.0-alpha.36",
   "description": "UI Component which represents DataTable",
   "main": "dist/index.js",
   "module": "index.js",
@@ -24,7 +24,7 @@
   "license": "MIT",
   "devDependencies": {
     "@talixo/icon": "^1.0.0-alpha.35",
-    "@talixo/notification": "^1.0.0-alpha.35",
+    "@talixo/notification": "^1.0.0-alpha.36",
     "@talixo/shared": "^1.0.0-alpha.35",
     "@talixo/table": "^1.0.0-alpha.35",
     "lodash": "^4.17.10",
