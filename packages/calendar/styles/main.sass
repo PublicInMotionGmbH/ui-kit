@@ -106,6 +106,7 @@
     width: calc(50% - #{$calendar-picker-padding-horizontal})
     max-width: calc(50% - #{$calendar-picker-padding-horizontal})
     min-width: calc(50% - #{$calendar-picker-padding-horizontal})
+    padding: 0 !important
 
   .DayPicker_weekHeader_ul
     display: flex
@@ -131,6 +132,7 @@
 
   .CalendarMonth
     position: relative
+    padding: 0 !important
 
   .CalendarMonth_caption
     text-align: center
@@ -194,8 +196,7 @@
   .DayPicker_focusRegion:focus
     outline: none
 
-  .DayPickerNavigation_leftButton__horizontal,
-  .DayPickerNavigation_rightButton__horizontal
+  .DayPickerNavigation_button__horizontal_2
     display: flex
     position: absolute
     color: $calendar-picker-arrow-color
@@ -216,10 +217,10 @@
       opacity: 1
       color: $calendar-picker-hover-arrow-color
 
-  .DayPickerNavigation_leftButton__horizontal
+  .DayPickerNavigation_button__horizontal_2:not(:last-child)
     left: $calendar-picker-padding-vertical
-
-  .DayPickerNavigation_rightButton__horizontal
+    
+  .DayPickerNavigation_button__horizontal_2:last-child
     right: $calendar-picker-padding-vertical
 
   .CalendarMonthGrid
