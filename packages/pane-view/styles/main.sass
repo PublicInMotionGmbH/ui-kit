@@ -1,0 +1,73 @@
+@import './config'
+
+@include module('pane-view')
+  display: flex
+  height: 100%
+  outline: none
+  overflow: hidden
+  user-select: text
+  
+  &--horizontal
+    flex-direction: row
+    left: 0
+    right: 0
+
+  &--vertical
+    bottom: 0
+    flex-direction: column
+    min-height: 100%
+    top: 0
+  
+  &--resize-active
+    overflow: hidden
+    
+@include module('pane')
+  flex-grow: 1
+  flex-shrink: 1
+  position: relative
+  outline: none
+  overflow: hidden
+  
+@include module('pane-view-resizer')
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative
+  box-sizing: border-box
+  opacity: $pane-view-resizer-opacity
+  z-index: 1
+  background-clip: padding-box
+  user-select: none
+
+  &--vertical
+    border-top: $pane-view-resizer-vertical-border-width solid $pane-view-resizer-vertical-border-color
+    border-bottom: $pane-view-resizer-vertical-border-width solid $pane-view-resizer-vertical-border-color
+    cursor: row-resize
+    width: 100%
+
+    &:before
+      content: ''
+      position: absolute
+      display: block
+      height: $pane-view-resizer-vertical-before-height
+      width: 100%
+      background-color: $pane-view-resizer-vertical-before-background-color
+
+    &:active
+      background: $pane-view-resizer-vertical-active-background-color
+
+  &--horizontal
+    border-left: $pane-view-resizer-horizontal-border-width solid $pane-view-resizer-horizontal-border-color
+    border-right: $pane-view-resizer-horizontal-border-width solid $pane-view-resizer-horizontal-border-color
+    cursor: col-resize
+
+    &:before
+      content: ''
+      position: absolute
+      display: block
+      width: $pane-view-resizer-horizontal-before-width
+      height: 100%
+      background-color: $pane-view-resizer-horizontal-before-background-color
+
+    &:active
+      background: $pane-view-resizer-horizonatal-active-background-color

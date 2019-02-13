@@ -1,0 +1,18 @@
+@import './config'
+
+@include module('pane-view')
+  border: dp(0.125) solid #000000
+  margin: dp(2.5)
+
+  & > div
+    text-align: center
+
+  &--vertical
+    height: dp(75)
+
+@include module('pane')
+  background-color: #efefef
+
+  & > div
+    margin: 0 auto
+    margin-top: dp(1.25)
